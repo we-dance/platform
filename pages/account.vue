@@ -61,16 +61,40 @@ export default {
         disabled: true
       },
       {
+        name: 'username',
+        label: 'Username',
+        required: true,
+        placeholder: '(Required)'
+      },
+      {
         name: 'name',
         label: 'Name',
         required: true,
         placeholder: '(Required)'
       },
       {
-        name: 'city',
-        label: 'City',
+        name: 'location',
+        label: 'Location',
         required: true,
         placeholder: '(Required)'
+      },
+      {
+        name: 'summary',
+        label: 'Summary',
+        type: 'textarea',
+        placeholder: 'A short bio'
+      },
+      {
+        name: 'skills',
+        label: 'Dance Skills',
+        type: 'textarea',
+        placeholder: 'What dances are you most experienced with?'
+      },
+      {
+        name: 'learning',
+        label: 'I am getting into',
+        type: 'textarea',
+        placeholder: 'What are you learning right now?'
       }
     ]
   }),

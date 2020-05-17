@@ -50,7 +50,7 @@ export default (name) => {
     }
 
     state.doc = doc.data()
-    state.slug = state.doc.slug
+    state.doc.id = id
 
     state.exists = true
     state.loading = false

@@ -8,18 +8,23 @@
       :map="map"
     >
       <template v-slot:default="{ item }">
-        <div class="card-item p-4">
+        <div v-if="item" class="card-item p-4 border">
           <div>
-            <div class="font-bold text-xl mb-2">
+            <TSignature :item="item" />
+
+            <router-link
+              :to="`/posts/${item.id}`"
+              class="font-bold text-xl mb-2"
+            >
               {{ item.title }}
-            </div>
+            </router-link>
             <TPreview class="mb-2" :content="item.description" />
           </div>
           <div class="flex leading-none">
             <div class="text-green-500 flex">
               <button
                 class="text-center hover:text-green-500"
-                :class="{ 'text-green-300': item.response === 'up' }"
+                :class="{ 'text-green-700': item.response === 'up' }"
                 @click="updateRsvp(item.id, collection, 'up')"
               >
                 <TIcon name="up" class="h-6 w-6" />
@@ -31,7 +36,7 @@
             <div class="text-red-500 flex ml-2">
               <button
                 class="text-center hover:text-primary"
-                :class="{ 'text-red-300': item.response === 'down' }"
+                :class="{ 'text-red-700': item.response === 'down' }"
                 @click="updateRsvp(item.id, collection, 'down')"
               >
                 <TIcon name="down" class="h-6 w-6 hover:text-primary" />
@@ -56,6 +61,7 @@
 import TCardList from '~/components/TCardList'
 import TPreview from '~/components/TPreview'
 import TIcon from '~/components/TIcon'
+import TSignature from '~/components/TSignature'
 import useRSVP from '~/use/rsvp'
 import useComments from '~/use/comments'
 
@@ -63,7 +69,8 @@ export default {
   components: {
     TCardList,
     TPreview,
-    TIcon
+    TIcon,
+    TSignature
   },
   setup() {
     const collection = 'posts'
