@@ -1,0 +1,75 @@
+/* purgecss start ignore */
+html {
+  font-size: 19px;
+}
+.typo {
+  @apply leading-normal break-words text-black;
+}
+.typo li + li {
+  @apply mt-1;
+}
+.typo li > p + p {
+  @apply mt-6;
+}
+.typo strong {
+  @apply font-semibold;
+}
+.typo a {
+  @apply text-blue-600 underline;
+}
+.typo a:hover {
+  @apply text-blue-800 no-underline;
+}
+.typo strong a {
+  @apply font-bold;
+}
+.typo p {
+  @apply my-4;
+}
+.typo h1 {
+  @apply leading-tight border-b text-4xl font-sans font-extrabold mb-4 mt-6 pb-2;
+}
+.typo h2 {
+  @apply leading-tight border-b text-2xl font-sans font-semibold mb-4 mt-6 pb-2;
+}
+.typo h3 {
+  @apply leading-snug text-lg font-sans font-semibold mb-4 mt-6;
+}
+.typo h4 {
+  @apply leading-none text-base font-sans font-semibold mb-4 mt-6;
+}
+.typo h5 {
+  @apply leading-tight text-sm font-sans font-semibold mb-4 mt-6;
+}
+.typo h6 {
+  @apply leading-tight text-sm font-sans font-semibold text-gray-600 mb-4 mt-6;
+}
+.typo blockquote {
+  @apply text-base border-l-4 border-gray-300 pl-4 pr-4 text-gray-600;
+}
+.typo ul {
+  @apply text-base pl-8 list-disc;
+}
+.typo ol {
+  @apply text-base pl-8 list-decimal;
+}
+.typo table {
+  @apply text-base border-gray-600;
+}
+.typo th {
+  @apply border py-1 px-3;
+}
+.typo td {
+  @apply border py-1 px-3;
+}
+.typo img,
+.typo iframe {
+  @apply mx-auto block;
+}
+.typo figcaption {
+  @apply font-semibold text-center text-gray-800 mt-2;
+}
+.details {
+  @apply p-2;
+}
+/* purgecss end ignore */

@@ -1,0 +1,16 @@
+/* purgecss start ignore */
+@import 'codemirror/lib/codemirror.css';
+@import 'codemirror/theme/base16-light.css';
+
+.CodeMirror {
+  border: 1px solid #eee;
+  height: auto;
+  padding: 1em;
+}
+
+$hamburger-layer-width: 32px;
+$hamburger-layer-color: #fff;
+$hamburger-layer-height: 2px;
+
+@import 'hamburgers/_sass/hamburgers/hamburgers.scss';
+/* purgecss end ignore */

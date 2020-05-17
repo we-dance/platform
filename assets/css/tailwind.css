@@ -1,0 +1,83 @@
+/* purgecss start ignore */
+@tailwind base;
+
+html {
+  scroll-behavior: smooth;
+}
+
+@tailwind components;
+
+.hero {
+  @apply p-2 text-center;
+}
+
+.card {
+  @apply bg-white w-full shadow-md rounded px-8 pb-8 pt-2;
+}
+
+.card-item {
+  @apply rounded bg-white mb-4 overflow-hidden shadow-lg w-full;
+}
+
+.divider {
+  display: table;
+  white-space: nowrap;
+  height: auto;
+  line-height: 1;
+  text-align: center;
+  margin: 1rem 0;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: rgba(0, 0, 0, 0.85);
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.divider:before {
+  background-position: right 1em top 50%;
+}
+
+.divider:after {
+  background-position: left 1em top 50%;
+}
+
+.divider:after,
+.divider:before {
+  background-image: url(/img/divider.png);
+  content: '';
+  display: table-cell;
+  position: relative;
+  top: 50%;
+  width: 50%;
+  background-repeat: no-repeat;
+}
+
+.aspect-ratio {
+  overflow: hidden;
+  /* Calculated from the aspect ratio of the content (in case of 16:9 it is 9/16= 0.5625) */
+  padding-top: 56.25%;
+  position: relative;
+  z-index: -1;
+}
+
+.aspect-ratio iframe {
+  border: 0;
+  height: 100%;
+  left: 0;
+  position: absolute;
+  top: 0;
+  width: 100%;
+  z-index: -1;
+}
+
+.menu .nuxt-link-exact-active {
+  @apply font-bold;
+}
+
+@tailwind utilities;
+
+/* purgecss end ignore */
