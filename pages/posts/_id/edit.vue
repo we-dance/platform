@@ -5,7 +5,7 @@
       :fields="fields"
       show-cancel
       :show-remove="can('remove', collection, item)"
-      class="card-item p-4"
+      class="card-item border p-4"
       @save="saveItem"
       @cancel="cancelItem"
       @remove="removeItem"
