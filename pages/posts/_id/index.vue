@@ -46,8 +46,11 @@
             {{ item.downVotes }}
           </div>
         </div>
-        <div class="text-gray-500 flex ml-4">
-          {{ getCommentsCount(item.id) }} comments
+        <div class="text-gray-700 flex md:ml-4 justify-center">
+          <div class="flex">
+            <TIcon name="chat" class="h-6 w-6 hover:text-primary" />
+            <span>{{ item.commentsCount }}</span>
+          </div>
         </div>
         <div class="flex-grow flex justify-end">
           <TSignature :item="item" />
@@ -204,9 +207,11 @@ export default {
       const response = getRsvpResponse(item.id)
       const multi = !response ? 3 : response === 'up' ? 2 : 1
       const order = multi * 100 + votes
+      const commentsCount = getCommentsCount(item.id)
 
       return {
         ...item,
+        commentsCount,
         upVotes,
         downVotes,
         votes,
