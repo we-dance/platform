@@ -1,20 +1,21 @@
 <template>
   <div class="p-4">
-    <div v-if="!loading && item" class="card-item p-4 border">
-      <div>
-        <TSignature :item="item" />
-
-        <div class="font-bold text-xl mb-2">
+    <div v-if="!loading && item" class="card-item border">
+      <div class="p-4">
+        <router-link :to="`/posts/${item.id}`" class="font-bold text-2xl mt-2">
           {{ item.title }}
-        </div>
-        <TPreview class="mb-2" :content="item.description" />
+        </router-link>
+
+        <TPreview class="mt-2" :content="item.description" />
+
+        <Microlink class="mt-2" :url="item.link" />
       </div>
-      <div class="flex leading-none">
+      <div class="bg-gray-200 border-t px-4 py-4 flex items-center">
         <div class="text-green-500 flex">
           <button
             class="text-center hover:text-green-500"
             :class="{ 'text-green-700': item.response === 'up' }"
-            @click="updateRsvp(item.id, collection, 'up')"
+            @click="updateRsvp(item.id, 'posts', 'up')"
           >
             <TIcon name="up" class="h-6 w-6" />
           </button>
@@ -26,13 +27,21 @@
           <button
             class="text-center hover:text-primary"
             :class="{ 'text-red-700': item.response === 'down' }"
-            @click="updateRsvp(item.id, collection, 'down')"
+            @click="updateRsvp(item.id, 'posts', 'down')"
           >
             <TIcon name="down" class="h-6 w-6 hover:text-primary" />
           </button>
           <div>
             {{ item.downVotes }}
           </div>
+        </div>
+        <div class="text-gray-500 flex ml-4 underline">
+          <router-link :to="`/posts/${item.id}`"
+            >{{ getCommentsCount(item.id) }} comments</router-link
+          >
+        </div>
+        <div class="flex-grow flex justify-end">
+          <TSignature :item="item" />
         </div>
       </div>
     </div>
@@ -48,10 +57,11 @@
       :filters="filters"
     >
       <template v-slot:default="{ item }">
-        <div class="card-item p-4 border">
-          <TSignature :item="item" />
-          <TPreview class="mb-2" :content="item.body" />
-          <div class="flex leading-none">
+        <div class="card-item border">
+          <div class="p-4">
+            <TPreview class="mt-2" :content="item.body" />
+          </div>
+          <div class="bg-gray-200 border-t px-4 py-4 flex items-center">
             <div class="text-green-500 flex">
               <button
                 class="text-center hover:text-green-500"
@@ -76,6 +86,9 @@
                 {{ item.downVotes }}
               </div>
             </div>
+            <div class="flex-grow flex justify-end">
+              <TSignature :item="item" />
+            </div>
           </div>
         </div>
       </template>
@@ -84,6 +97,7 @@
 </template>
 
 <script>
+import { Microlink } from '@microlink/vue'
 import { computed } from '@vue/composition-api'
 import TCardList from '~/components/TCardList'
 import TPreview from '~/components/TPreview'
@@ -99,7 +113,8 @@ export default {
     TCardList,
     TPreview,
     TIcon,
-    TSignature
+    TSignature,
+    Microlink
   },
   setup() {
     const { params } = useRouter()

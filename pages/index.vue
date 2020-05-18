@@ -8,19 +8,20 @@
       :map="map"
     >
       <template v-slot:default="{ item }">
-        <div v-if="item" class="card-item p-4 border">
-          <div>
-            <TSignature :item="item" />
-
+        <div v-if="item" class="card-item border">
+          <div class="p-4">
             <router-link
               :to="`/posts/${item.id}`"
-              class="font-bold text-xl mb-2"
+              class="font-bold text-2xl mt-2"
             >
               {{ item.title }}
             </router-link>
-            <TPreview class="mb-2" :content="item.description" />
+
+            <TPreview class="mt-2" :content="item.description" />
+
+            <Microlink class="mt-2" :url="item.link" />
           </div>
-          <div class="flex leading-none">
+          <div class="bg-gray-200 border-t px-4 py-4 flex items-center">
             <div class="text-green-500 flex">
               <button
                 class="text-center hover:text-green-500"
@@ -50,6 +51,9 @@
                 >{{ getCommentsCount(item.id) }} comments</router-link
               >
             </div>
+            <div class="flex-grow flex justify-end">
+              <TSignature :item="item" />
+            </div>
           </div>
         </div>
       </template>
@@ -58,6 +62,7 @@
 </template>
 
 <script>
+import { Microlink } from '@microlink/vue'
 import TCardList from '~/components/TCardList'
 import TPreview from '~/components/TPreview'
 import TIcon from '~/components/TIcon'
@@ -70,7 +75,8 @@ export default {
     TCardList,
     TPreview,
     TIcon,
-    TSignature
+    TSignature,
+    Microlink
   },
   setup() {
     const collection = 'posts'
@@ -84,6 +90,10 @@ export default {
         name: 'description',
         label: 'Description',
         type: 'markdown'
+      },
+      {
+        name: 'link',
+        label: 'Link'
       }
     ]
 

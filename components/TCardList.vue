@@ -194,7 +194,7 @@ export default {
     },
     async saveItem(data) {
       this.cancelItem()
-      await this.update(data)
+      await this.update(data.id, data)
     },
     async removeItem(id) {
       this.cancelItem()
