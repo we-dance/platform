@@ -33,6 +33,7 @@
     "@vue/composition-api": "^0.4.0",
     "core-js": "2",
     "date-fns": "^2.10.0",
+    "excerpt-html": "^1.2.1",
     "firebase": "^7.10.0",
     "generate-google-calendar-url": "^0.0.2",
     "hamburgers": "^1.1.3",

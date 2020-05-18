@@ -8,7 +8,7 @@
 
         <TPreview class="mt-2" :content="item.description" />
 
-        <Microlink class="mt-2" :url="item.link" />
+        <Microlink v-if="item.link" class="mt-2" :url="item.link" />
       </div>
       <div class="bg-gray-200 border-t px-4 py-4 flex items-center">
         <div class="text-green-500 flex">

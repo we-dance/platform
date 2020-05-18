@@ -7,6 +7,7 @@ import MarkdownIt from 'markdown-it'
 import MarkdownContainer from 'markdown-it-container'
 import VRuntimeTemplate from 'v-runtime-template'
 import MarkdownAttrs from 'markdown-it-attrs'
+import excerptHtml from 'excerpt-html'
 
 const md = new MarkdownIt({
   html: true,
@@ -56,11 +57,21 @@ export default {
     content: {
       type: String,
       default: ''
+    },
+    excerpt: {
+      type: Boolean,
+      default: false
     }
   },
   computed: {
     raw() {
-      return '<div class="typo">' + md.render(this.content) + '</div>'
+      let html = md.render(this.content)
+
+      if (this.excerpt) {
+        html = excerptHtml(html)
+      }
+
+      return '<div class="typo">' + html + '</div>'
     }
   }
 }
