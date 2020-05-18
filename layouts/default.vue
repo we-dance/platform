@@ -1,7 +1,7 @@
 <template>
   <div class="font-sans leading-normal tracking-normal antialiased">
     <header>
-      <nav class="flex items-center justify-between flex-wrap p-6">
+      <nav class="md:flex items-center justify-between flex-wrap p-6">
         <router-link
           to="/"
           class="no-underline flex items-center justify-center leading-none hover:no-underline font-bold"
@@ -9,19 +9,20 @@
           <TIcon name="logo-text" />
         </router-link>
 
-        <div class="menu flex md:mt-0 items-center">
-          <router-link
-            v-for="nav in app.nav"
-            :key="nav.link"
-            :to="localePath(nav.link)"
-            class="px-4 py-2 mx-4 md:block hidden"
+        <div class="mt-6 md:flex md:mt-0 items-center">
+          <TButton type="primary" class="md:mr-4" to="/posts/-/edit"
+            >Write a post</TButton
           >
-            {{ nav.name }}
-          </router-link>
-          <router-link v-if="!uid" to="/signin">Sign In</router-link>
-          <router-link v-if="uid && account" to="/account">{{
-            account.name
-          }}</router-link>
+          <TButton v-if="!uid" type="link" class="mt-4 md:mt-0" to="/signin"
+            >Sign In</TButton
+          >
+          <TButton
+            v-if="uid && account"
+            type="link"
+            class="mt-4 md:mt-0"
+            to="/account"
+            >{{ account.name }}</TButton
+          >
         </div>
       </nav>
     </header>
@@ -71,10 +72,12 @@
 <script>
 import useAuth from '~/use/auth'
 import TIcon from '~/components/TIcon'
+import TButton from '~/components/TButton'
 
 export default {
   components: {
-    TIcon
+    TIcon,
+    TButton
   },
   data: () => ({
     isMenuOpen: false

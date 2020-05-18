@@ -101,19 +101,20 @@
     <div v-if="error" class="text-red-500 py-4 text-right">
       {{ error.message }}
     </div>
-    <div class="flex justify-end">
+    <div class="flex justify-between">
       <TButton
         v-if="showRemove"
-        type="secondary"
+        icon="delete"
         color="red-500"
         @click="remove"
-      >
-        Delete
-      </TButton>
-      <TButton v-if="showCancel" type="link" @click="cancel">
-        Cancel
-      </TButton>
-      <TButton type="primary" @click="save">{{ submitLabel }}</TButton>
+      />
+
+      <div class="flex">
+        <TButton v-if="showCancel" type="link" @click="cancel">
+          Cancel
+        </TButton>
+        <TButton type="primary" @click="save">{{ submitLabel }}</TButton>
+      </div>
     </div>
   </div>
 </template>

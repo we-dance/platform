@@ -1,9 +1,7 @@
 <template>
   <TLoader v-if="loading" />
-  <main v-else class="p-4 bg-white">
-    <portal to="title">
-      <div class="text-lg">Your Account</div>
-    </portal>
+  <main v-else class="card-item border p-4 bg-white">
+    <div class="font-bold text-xl mb-4 pb-4 border-b">Your Account</div>
 
     <TForm
       v-model="account"
@@ -12,8 +10,8 @@
       @save="save"
     />
 
-    <div class="border-t p-4 bg-red-100 -mx-8 mt-4 -mb-8">
-      <TButton to="/signout">
+    <div class="border-t mt-4 pt-4">
+      <TButton color="red-500" to="/signout">
         Logout
       </TButton>
     </div>

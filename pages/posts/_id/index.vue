@@ -1,10 +1,17 @@
 <template>
   <div class="p-4">
+    <div
+      v-if="can('edit', 'posts', item)"
+      class="flex justify-end mb-2 hover:text-blue-500"
+    >
+      <TButton icon="edit" :to="`/posts/${item.id}/edit`" />
+    </div>
+
     <div v-if="!loading && item" class="card-item border">
       <div class="p-4">
-        <router-link :to="`/posts/${item.id}`" class="font-bold text-2xl mt-2">
+        <h1 class="font-bold text-2xl mt-2">
           {{ item.title }}
-        </router-link>
+        </h1>
 
         <TPreview class="mt-2" :content="item.description" />
 
@@ -35,10 +42,8 @@
             {{ item.downVotes }}
           </div>
         </div>
-        <div class="text-gray-500 flex ml-4 underline">
-          <router-link :to="`/posts/${item.id}`"
-            >{{ getCommentsCount(item.id) }} comments</router-link
-          >
+        <div class="text-gray-500 flex ml-4">
+          {{ getCommentsCount(item.id) }} comments
         </div>
         <div class="flex-grow flex justify-end">
           <TSignature :item="item" />
@@ -101,22 +106,27 @@ import { Microlink } from '@microlink/vue'
 import { computed } from '@vue/composition-api'
 import TCardList from '~/components/TCardList'
 import TPreview from '~/components/TPreview'
+import TButton from '~/components/TButton'
 import TIcon from '~/components/TIcon'
 import TSignature from '~/components/TSignature'
+import useAuth from '~/use/auth'
 import useDoc from '~/use/doc'
 import useRSVP from '~/use/rsvp'
 import useRouter from '~/use/router'
 import useComments from '~/use/comments'
 
 export default {
+  name: 'PostView',
   components: {
     TCardList,
     TPreview,
+    TButton,
     TIcon,
     TSignature,
     Microlink
   },
   setup() {
+    const { can } = useAuth()
     const { params } = useRouter()
 
     const collection = 'comments'
@@ -184,7 +194,8 @@ export default {
       getCount,
       getRsvpResponse,
       updateRsvp,
-      getCommentsCount
+      getCommentsCount,
+      can
     }
   }
 }
