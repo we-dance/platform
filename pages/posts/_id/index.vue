@@ -29,7 +29,7 @@
             <button
               class="text-center hover:text-green-500"
               :class="{ 'text-green-700': item.response === 'up' }"
-              @click="updateRsvp(item.id, collection, 'up')"
+              @click="updateRsvp(item.id, 'posts', 'up')"
             >
               <TIcon name="up" class="h-6 w-6" />
             </button>
@@ -41,7 +41,7 @@
             <button
               class="text-center hover:text-primary"
               :class="{ 'text-red-700': item.response === 'down' }"
-              @click="updateRsvp(item.id, collection, 'down')"
+              @click="updateRsvp(item.id, 'posts', 'down')"
             >
               <TIcon name="down" class="h-6 w-6 hover:text-primary" />
             </button>
