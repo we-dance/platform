@@ -138,6 +138,18 @@ export default {
     TSignature,
     Microlink
   },
+  head() {
+    return {
+      title: this.item?.title,
+      meta: [
+        {
+          hid: 'description',
+          name: 'description',
+          content: this.item?.description
+        }
+      ]
+    }
+  },
   setup() {
     const { can } = useAuth()
     const { params } = useRouter()
