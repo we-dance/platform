@@ -4,7 +4,7 @@
       <div class="p-4">
         <router-link
           :to="`/posts/${item.id}`"
-          class="font-bold text-2xl mt-2 leading-tight"
+          class="font-bold text-2xl mt-2 leading-tight underline hover:no-underline"
         >
           {{ item.title }}
         </router-link>
