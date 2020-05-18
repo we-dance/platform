@@ -6,7 +6,7 @@
           to="/"
           class="no-underline flex items-center justify-center leading-none hover:no-underline font-bold"
         >
-          WeDance
+          <TIcon name="logo-text" />
         </router-link>
 
         <div class="menu flex md:mt-0 items-center">
@@ -70,8 +70,12 @@
 
 <script>
 import useAuth from '~/use/auth'
+import TIcon from '~/components/TIcon'
 
 export default {
+  components: {
+    TIcon
+  },
   data: () => ({
     isMenuOpen: false
   }),
