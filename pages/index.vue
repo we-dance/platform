@@ -2,7 +2,10 @@
   <div class="p-4">
     <div v-for="item in items" :key="item.id" class="card-item border">
       <div class="p-4">
-        <router-link :to="`/posts/${item.id}`" class="font-bold text-2xl mt-2">
+        <router-link
+          :to="`/posts/${item.id}`"
+          class="font-bold text-2xl mt-2 leading-tight"
+        >
           {{ item.title }}
         </router-link>
 

@@ -11,9 +11,9 @@
       <TButton icon="edit" :to="`/posts/${item.id}/edit`" />
     </div>
 
-    <div v-if="!loading && item" class="card-item border">
+    <div class="card-item border">
       <div class="p-4">
-        <h1 class="font-bold text-2xl mt-2">
+        <h1 class="font-bold text-2xl mt-2 leading-tight">
           {{ item.title }}
         </h1>
 
@@ -21,38 +21,42 @@
 
         <Microlink v-if="item.link" class="mt-2" :url="item.link" />
       </div>
-      <div class="bg-gray-200 border-t px-4 py-4 flex items-center">
-        <div class="text-green-500 flex">
-          <button
-            class="text-center hover:text-green-500"
-            :class="{ 'text-green-700': item.response === 'up' }"
-            @click="updateRsvp(item.id, 'posts', 'up')"
-          >
-            <TIcon name="up" class="h-6 w-6" />
-          </button>
-          <div>
-            {{ item.upVotes }}
+      <div
+        class="bg-gray-200 border-t px-4 py-4 flex items-center justify-between"
+      >
+        <div class="md:flex">
+          <div class="text-green-500 flex justify-center">
+            <button
+              class="text-center hover:text-green-500"
+              :class="{ 'text-green-700': item.response === 'up' }"
+              @click="updateRsvp(item.id, collection, 'up')"
+            >
+              <TIcon name="up" class="h-6 w-6" />
+            </button>
+            <div>
+              {{ item.upVotes }}
+            </div>
+          </div>
+          <div class="text-red-500 flex md:ml-2 justify-center">
+            <button
+              class="text-center hover:text-primary"
+              :class="{ 'text-red-700': item.response === 'down' }"
+              @click="updateRsvp(item.id, collection, 'down')"
+            >
+              <TIcon name="down" class="h-6 w-6 hover:text-primary" />
+            </button>
+            <div>
+              {{ item.downVotes }}
+            </div>
+          </div>
+          <div class="text-gray-700 flex md:ml-4 justify-center">
+            <div class="flex">
+              <TIcon name="chat" class="h-6 w-6 hover:text-primary" />
+              <span>{{ item.commentsCount }}</span>
+            </div>
           </div>
         </div>
-        <div class="text-red-500 flex ml-2">
-          <button
-            class="text-center hover:text-primary"
-            :class="{ 'text-red-700': item.response === 'down' }"
-            @click="updateRsvp(item.id, 'posts', 'down')"
-          >
-            <TIcon name="down" class="h-6 w-6 hover:text-primary" />
-          </button>
-          <div>
-            {{ item.downVotes }}
-          </div>
-        </div>
-        <div class="text-gray-700 flex md:ml-4 justify-center">
-          <div class="flex">
-            <TIcon name="chat" class="h-6 w-6 hover:text-primary" />
-            <span>{{ item.commentsCount }}</span>
-          </div>
-        </div>
-        <div class="flex-grow flex justify-end">
+        <div class="flex-grow mt-4 md:mt-0 flex justify-center md:justify-end">
           <TSignature :item="item" />
         </div>
       </div>
