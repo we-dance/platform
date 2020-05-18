@@ -21,6 +21,7 @@ import TForm from '~/components/TForm'
 
 export default {
   name: 'PostEdit',
+  middleware: ['auth'],
   components: {
     TForm
   },

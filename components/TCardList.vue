@@ -1,10 +1,14 @@
 <template>
   <div>
     <div class="md:flex items-baseline justify-between">
-      <h1 v-if="title" class="text-3xl font-bold">{{ title }}</h1>
+      <h1 v-if="title" class="text-xl font-bold">{{ title }}</h1>
       <TButton v-if="add && can('add', collection)" @click="currentId = 'add'">
         {{ add }}
       </TButton>
+    </div>
+
+    <div v-if="!can('add', collection)">
+      <slot name="auth" />
     </div>
 
     <slot name="header" />
@@ -35,6 +39,10 @@
     </div>
 
     <div class="mt-4" />
+
+    <div v-if="!items.length">
+      <slot name="empty" />
+    </div>
 
     <div v-for="(item, itemId) in items" :key="item.id">
       <TForm

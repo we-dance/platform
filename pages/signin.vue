@@ -1,6 +1,6 @@
 <template>
   <div class="container mx-auto md:max-w-lg md:mb-16">
-    <main class="card">
+    <main class="card border">
       <div v-if="error">
         <div class="typo">
           <h2>Oops</h2>

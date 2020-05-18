@@ -61,6 +61,19 @@
       :map="map"
       :filters="filters"
     >
+      <template v-slot:auth>
+        <div class="text-center mt-4">
+          <div class="mb-4">
+            Sign in to write a comment.
+          </div>
+          <TButton to="/signin">Sign in</TButton>
+        </div>
+      </template>
+      <template v-slot:empty>
+        <div class="text-center mt-4">
+          There are no comments yet.
+        </div>
+      </template>
       <template v-slot:default="{ item }">
         <div class="card-item border">
           <div class="p-4">

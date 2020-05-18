@@ -127,10 +127,10 @@ export default () => {
       return !!state.uid
     }
     if (action === 'add' && collection === 'posts') {
-      return true
+      return !!state.uid
     }
     if (action === 'add' && collection === 'comments') {
-      return true
+      return !!state.uid
     }
     if (action === 'edit') {
       return !object || object.createdBy === state.uid
