@@ -5,7 +5,11 @@
       :src="getAccount(item.createdBy).photo"
     />
     <div>
-      <div class="font-bold">{{ getAccount(item.createdBy).name }}</div>
+      <router-link
+        :to="`/u/${getAccount(item.createdBy).username}`"
+        class="font-bold"
+        >{{ getAccount(item.createdBy).name }}</router-link
+      >
       <div class="text-gray-600">{{ getDateTime(item.createdAt) }}</div>
     </div>
   </div>

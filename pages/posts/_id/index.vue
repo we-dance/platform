@@ -1,5 +1,9 @@
 <template>
-  <div class="p-4">
+  <TLoader v-if="loading" />
+  <div v-else-if="!exists" class="text-center">
+    Post not found
+  </div>
+  <div v-else class="p-4">
     <div
       v-if="can('edit', 'posts', item)"
       class="flex justify-end mb-2 hover:text-blue-500"
@@ -120,6 +124,7 @@ import { computed } from '@vue/composition-api'
 import TCardList from '~/components/TCardList'
 import TPreview from '~/components/TPreview'
 import TButton from '~/components/TButton'
+import TLoader from '~/components/TLoader'
 import TIcon from '~/components/TIcon'
 import TSignature from '~/components/TSignature'
 import useAuth from '~/use/auth'
@@ -131,6 +136,7 @@ import useComments from '~/use/comments'
 export default {
   name: 'PostView',
   components: {
+    TLoader,
     TCardList,
     TPreview,
     TButton,
@@ -178,9 +184,11 @@ export default {
       }
     ]
 
-    const { doc, load, loading } = useDoc('posts')
+    const { doc, load, exists, loading } = useDoc('posts')
 
-    load(params.id)
+    if (params.id) {
+      load(params.id)
+    }
 
     const { getCount, getRsvpResponse, updateRsvp } = useRSVP()
     const { getCommentsCount } = useComments()
@@ -210,6 +218,7 @@ export default {
     const item = computed(() => map(doc.value))
 
     return {
+      exists,
       loading,
       filters,
       item,
