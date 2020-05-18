@@ -65,7 +65,11 @@ export default {
   },
   methods: {
     cancelItem() {
-      this.$router.push(`/posts/${this.id}`)
+      if (this.id) {
+        this.$router.push(`/posts/${this.id}`)
+      } else {
+        this.$router.push(`/`)
+      }
     },
     async saveItem(data) {
       if (data.id) {
@@ -78,7 +82,7 @@ export default {
     },
     async removeItem(id) {
       await this.remove(id)
-      this.$router.push(`/posts`)
+      this.cancelItem()
     }
   }
 }

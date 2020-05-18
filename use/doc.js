@@ -113,6 +113,7 @@ export default (name) => {
 
     const result = await collection.doc(id).delete()
 
+    state.id = null
     state.saving = false
 
     return result

@@ -101,13 +101,15 @@
     <div v-if="error" class="text-red-500 py-4 text-right">
       {{ error.message }}
     </div>
-    <div class="flex justify-between">
-      <TButton
-        v-if="showRemove"
-        icon="delete"
-        color="red-500"
-        @click="remove"
-      />
+    <div class="flex justify-between items-center">
+      <div>
+        <TButton
+          v-if="showRemove"
+          icon="delete"
+          color="red-500"
+          @click="remove"
+        />
+      </div>
 
       <div class="flex">
         <TButton v-if="showCancel" type="link" @click="cancel">
