@@ -5,6 +5,7 @@
       title="Endorsements"
       add="Add a dance"
       :fields="fields"
+      :filters="filters"
     >
       <template v-slot:empty>
         <div class="text-center mt-4">
@@ -28,6 +29,7 @@
 import TCardList from '~/components/TCardList'
 import TFieldTag from '~/components/TFieldTag'
 import { getDateTime } from '~/utils'
+import useAuth from '~/use/auth'
 
 export default {
   name: 'EndorsementIndex',
@@ -59,10 +61,21 @@ export default {
       }
     ]
 
+    const { uid } = useAuth()
+
+    const filters = [
+      {
+        name: 'mine',
+        default: true,
+        filter: (item) => item.createdBy === uid.value
+      }
+    ]
+
     return {
       collection,
       fields,
-      getDateTime
+      getDateTime,
+      filters
     }
   }
 }
