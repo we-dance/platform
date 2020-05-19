@@ -54,6 +54,18 @@
     </nav>
     <main class="flex-grow max-w-lg">
       <div class="p-4">
+        <div class="rounded bg-orange-200 p-4 mb-4">
+          <div class="uppercase font-bold">New Challenge</div>
+          <div>
+            Share your favourite music of your favourite dance
+            <span class="text-blue-500">#FavouriteMusic</span>
+          </div>
+          <div class="flex justify-end mt-4">
+            <TButton to="/posts/-/edit?tag=FavouriteMusic"
+              >Accept Challenge</TButton
+            >
+          </div>
+        </div>
         <div v-if="!filteredItems.length">
           No posts found
         </div>

@@ -70,6 +70,12 @@ export default {
       create
     }
   },
+  mounted() {
+    if (this.$route.query.tag) {
+      this.item = this.item || { tags: {} }
+      this.item.tags[this.$route.query.tag] = true
+    }
+  },
   methods: {
     cancelItem() {
       if (this.id) {
