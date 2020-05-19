@@ -1,4 +1,5 @@
 import format from 'date-fns/format'
+import formatDistance from 'date-fns/formatDistance'
 
 export const sortBy = (_key) => {
   let key = _key
@@ -31,6 +32,11 @@ export const getDateObect = (val) => {
   }
 
   return date
+}
+
+export const dateDiff = (val) => {
+  if (!val) return ''
+  return formatDistance(getDateObect(val), new Date())
 }
 
 export const getDateTime = (val) => {

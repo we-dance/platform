@@ -3,7 +3,7 @@
     class="container mx-auto font-sans leading-normal tracking-normal antialiased"
   >
     <header>
-      <nav class="md:flex items-center justify-between flex-wrap p-6">
+      <nav class="md:flex items-center justify-between flex-wrap p-4">
         <router-link
           to="/"
           class="no-underline flex items-center justify-center leading-none hover:no-underline font-bold"

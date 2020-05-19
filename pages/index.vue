@@ -1,7 +1,7 @@
 <template>
   <div class="md:flex">
     <nav class="p-4 md:w-64">
-      <TButton v-if="!uid" class="mt-4 md:mt-0" to="/signin">Sign In</TButton>
+      <TButton v-if="!uid" to="/signin">Sign In</TButton>
       <router-link
         v-if="uid && account"
         class="flex hover:bg-gray-300 p-2"
@@ -14,33 +14,45 @@
         </div>
       </router-link>
 
-      <router-link
-        to="/posts/hpHquGrQKthCaGBizAZB"
-        class="block p-2 hover:bg-gray-300"
-      >
-        About
-      </router-link>
-      <h4 class="p-2 font-bold mt-4 border-b">Filter</h4>
-      <router-link
-        to="/"
-        class="block p-2 hover:bg-gray-300"
-        :class="!$route.query.tag ? 'font-bold' : ''"
-      >
-        All
-      </router-link>
-      <router-link
-        v-for="tag in tags"
-        :key="tag.key"
-        :to="`?tag=${tag.key}`"
-        class="block p-2 hover:bg-gray-300"
-        :class="$route.query.tag === tag.key ? 'font-bold' : ''"
-        >#{{ tag.label }}
-      </router-link>
+      <div class="mt-4">
+        <router-link to="/endorsements" class="block p-2 hover:bg-gray-300">
+          🌶 Endorsements
+        </router-link>
+        <router-link
+          to="/posts/hpHquGrQKthCaGBizAZB"
+          class="block p-2 hover:bg-gray-300"
+        >
+          🍓About
+        </router-link>
+      </div>
+
+      <details>
+        <summary class="p-2 font-bold mt-4 border-b">
+          Tags
+        </summary>
+        <div>
+          <router-link
+            to="/"
+            class="block p-2 hover:bg-gray-300"
+            :class="!$route.query.tag ? 'font-bold' : ''"
+          >
+            All
+          </router-link>
+          <router-link
+            v-for="tag in tags"
+            :key="tag.key"
+            :to="`?tag=${tag.key}`"
+            class="block p-2 hover:bg-gray-300"
+            :class="$route.query.tag === tag.key ? 'font-bold' : ''"
+            >#{{ tag.label }}
+          </router-link>
+        </div>
+      </details>
     </nav>
     <main class="flex-grow max-w-lg">
       <div class="p-4">
         <div v-if="!filteredItems.length">
-          No posts find
+          No posts found
         </div>
         <div
           v-for="item in filteredItems"

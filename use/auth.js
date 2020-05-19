@@ -126,10 +126,7 @@ export default () => {
     if (isAdmin) {
       return !!state.uid
     }
-    if (action === 'add' && collection === 'posts') {
-      return !!state.uid
-    }
-    if (action === 'add' && collection === 'comments') {
+    if (action === 'add') {
       return !!state.uid
     }
     if (action === 'edit') {
