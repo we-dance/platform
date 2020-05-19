@@ -13,7 +13,14 @@
           <div>@{{ account.username }}</div>
         </div>
       </router-link>
-      <h4 class="p-2 font-bold mt-4">Tags</h4>
+
+      <router-link
+        to="/posts/hpHquGrQKthCaGBizAZB"
+        class="block p-2 hover:bg-gray-300"
+      >
+        About
+      </router-link>
+      <h4 class="p-2 font-bold mt-4 border-b">Filter</h4>
       <router-link
         to="/"
         class="block p-2 hover:bg-gray-300"

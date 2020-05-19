@@ -3,7 +3,7 @@
   <div v-else-if="!exists" class="text-center">
     Post not found
   </div>
-  <div v-else class="p-4">
+  <div v-else class="p-4 mx-auto max-w-2xl">
     <div
       v-if="can('edit', 'posts', item)"
       class="flex justify-end mb-2 hover:text-blue-500"
@@ -11,7 +11,7 @@
       <TButton icon="edit" :to="`/posts/${item.id}/edit`" />
     </div>
 
-    <div class="card-item border">
+    <div>
       <div class="p-4">
         <TTagsPreview :value="item.tags" />
 
