@@ -14,15 +14,18 @@
         </div>
       </router-link>
 
-      <div class="mt-4">
+      <div class="mt-4 text-sm">
+        <router-link to="/trips" class="block p-2 hover:bg-gray-300">
+          <span class="w-2">🚕</span> Trips
+        </router-link>
         <router-link to="/endorsements" class="block p-2 hover:bg-gray-300">
-          🌶 Endorsements
+          <span class="w-2">🌶</span> Endorsements
         </router-link>
         <router-link
           to="/posts/hpHquGrQKthCaGBizAZB"
           class="block p-2 hover:bg-gray-300"
         >
-          🍓About
+          <span class="w-2">🍓</span> About
         </router-link>
       </div>
 
