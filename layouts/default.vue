@@ -1,5 +1,7 @@
 <template>
-  <div class="font-sans leading-normal tracking-normal antialiased">
+  <div
+    class="container mx-auto font-sans leading-normal tracking-normal antialiased"
+  >
     <header>
       <nav class="md:flex items-center justify-between flex-wrap p-6">
         <router-link
@@ -10,25 +12,11 @@
         </router-link>
 
         <div class="mt-6 md:flex md:mt-0 items-center">
-          <TButton type="primary" class="md:mr-4" to="/posts/-/edit"
-            >Write a post</TButton
-          >
-          <TButton v-if="!uid" type="link" class="mt-4 md:mt-0" to="/signin"
-            >Sign In</TButton
-          >
-          <TButton
-            v-if="uid && account"
-            type="link"
-            class="mt-4 md:mt-0"
-            to="/account"
-            >{{ account.name }}</TButton
-          >
+          <TButton type="primary" to="/posts/-/edit">Write a post</TButton>
         </div>
       </nav>
     </header>
-    <div class="container mx-auto md:max-w-lg">
-      <nuxt />
-    </div>
+    <nuxt />
     <footer class="md:flex text-center p-4 justify-between items-center">
       <div class="md:flex mt-8 md:mt-0">
         <div v-if="Object.keys(social).length" class="m-3 text-md font-bold">
@@ -70,7 +58,6 @@
 </template>
 
 <script>
-import useAuth from '~/use/auth'
 import TIcon from '~/components/TIcon'
 import TButton from '~/components/TButton'
 
@@ -83,14 +70,10 @@ export default {
     isMenuOpen: false
   }),
   setup() {
-    const { uid, account } = useAuth()
-
     const app = process.env.app
     const social = app.social
 
     return {
-      uid,
-      account,
       app,
       social
     }

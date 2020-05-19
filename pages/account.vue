@@ -1,21 +1,36 @@
 <template>
-  <TLoader v-if="loading" />
-  <main v-else class="card-item border p-4 bg-white">
-    <div class="font-bold text-xl mb-4 pb-4 border-b">Your Account</div>
+  <div class="md:flex">
+    <nav class="p-4 md:w-64">
+      <router-link
+        v-for="tab in tabs"
+        :key="tab.key"
+        :to="`?tab=${tab.key}`"
+        class="block p-2 hover:bg-gray-300"
+        :class="$route.query.tab === tab.key ? 'bg-gray-300' : ''"
+      >
+        {{ tab.label }}
+      </router-link>
+    </nav>
+    <main class="p-4 flex-grow max-w-lg">
+      <TLoader v-if="loading" />
+      <div v-else class="card-item border p-4 bg-white">
+        <div class="font-bold text-xl mb-4 pb-4 border-b">Your Account</div>
 
-    <TForm
-      v-model="account"
-      :fields="fields"
-      :submit-label="`${confirmedAccount ? 'Save' : 'Confirm'}`"
-      @save="save"
-    />
+        <TForm
+          v-model="account"
+          :fields="fields"
+          :submit-label="`${confirmedAccount ? 'Save' : 'Confirm'}`"
+          @save="save"
+        />
 
-    <div class="border-t mt-4 pt-4">
-      <TButton color="red-500" to="/signout">
-        Logout
-      </TButton>
-    </div>
-  </main>
+        <div class="border-t mt-4 pt-4">
+          <TButton color="red-500" to="/signout">
+            Logout
+          </TButton>
+        </div>
+      </div>
+    </main>
+  </div>
 </template>
 
 <script>
@@ -53,6 +68,12 @@ export default {
     }
   },
   data: () => ({
+    tabs: [
+      {
+        key: 'settings',
+        label: 'Settings'
+      }
+    ],
     fields: [
       {
         name: 'email',
