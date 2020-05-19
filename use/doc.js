@@ -101,7 +101,13 @@ export default (name) => {
   async function set(id, data) {
     state.saving = true
 
-    const result = await collection.doc(id).set(data)
+    const result = await collection.doc(id).set({
+      createdAt: +new Date(),
+      updatedAt: +new Date(),
+      createdBy: uid.value,
+      updatedBy: uid.value,
+      ...data
+    })
 
     state.saving = false
 

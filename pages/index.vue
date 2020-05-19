@@ -2,6 +2,7 @@
   <div class="p-4">
     <div v-for="item in items" :key="item.id" class="card-item border">
       <div class="p-4">
+        <TTagsPreview :value="item.tags" />
         <router-link
           :to="`/posts/${item.id}`"
           class="font-bold text-2xl mt-2 leading-tight underline hover:no-underline"
@@ -62,6 +63,7 @@ import { Microlink } from '@microlink/vue'
 import TPreview from '~/components/TPreview'
 import TIcon from '~/components/TIcon'
 import TSignature from '~/components/TSignature'
+import TTagsPreview from '~/components/TTagsPreview'
 import useRSVP from '~/use/rsvp'
 import useComments from '~/use/comments'
 import useCollection from '~/use/collection'
@@ -72,7 +74,8 @@ export default {
     TPreview,
     TIcon,
     TSignature,
-    Microlink
+    Microlink,
+    TTagsPreview
   },
   setup() {
     const { getCount, getRsvpResponse, updateRsvp } = useRSVP()

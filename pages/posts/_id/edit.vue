@@ -18,6 +18,7 @@ import useAuth from '~/use/auth'
 import useDoc from '~/use/doc'
 import useRouter from '~/use/router'
 import TForm from '~/components/TForm'
+import TFieldTag from '~/components/TFieldTag'
 
 export default {
   name: 'PostEdit',
@@ -43,13 +44,18 @@ export default {
         label: 'Title'
       },
       {
+        name: 'link',
+        label: 'Link'
+      },
+      {
         name: 'description',
         label: 'Description',
         type: 'markdown'
       },
       {
-        name: 'link',
-        label: 'Link'
+        name: 'tags',
+        label: 'Tags',
+        component: TFieldTag
       }
     ]
 

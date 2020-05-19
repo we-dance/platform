@@ -13,6 +13,8 @@
 
     <div class="card-item border">
       <div class="p-4">
+        <TTagsPreview :value="item.tags" />
+
         <h1 class="font-bold text-2xl mt-2 leading-tight">
           {{ item.title }}
         </h1>
@@ -130,6 +132,7 @@ import { Microlink } from '@microlink/vue'
 import { computed } from '@vue/composition-api'
 import TCardList from '~/components/TCardList'
 import TPreview from '~/components/TPreview'
+import TTagsPreview from '~/components/TTagsPreview'
 import TButton from '~/components/TButton'
 import TLoader from '~/components/TLoader'
 import TIcon from '~/components/TIcon'
@@ -149,7 +152,8 @@ export default {
     TButton,
     TIcon,
     TSignature,
-    Microlink
+    Microlink,
+    TTagsPreview
   },
   head() {
     return {

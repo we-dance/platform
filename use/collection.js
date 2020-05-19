@@ -40,7 +40,7 @@ export default (name, filter) => {
 
   function getById(id) {
     if (!state[hash]) {
-      return {}
+      return false
     }
 
     return state[hash][id]
