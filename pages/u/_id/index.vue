@@ -19,6 +19,9 @@
         </dl>
       </div>
     </div>
+    <div v-if="uid === id" class="p-4">
+      <TButton to="/account">Edit Profile</TButton>
+    </div>
     <div class="p-4">
       <div>{{ account.summary }}</div>
       <dl v-if="account.skills" class="mt-2 md:flex">
@@ -35,26 +38,32 @@
 
 <script>
 import TLoader from '~/components/TLoader'
+import TButton from '~/components/TButton'
 import useRouter from '~/use/router'
 import useDoc from '~/use/doc'
+import useAuth from '~/use/auth'
 import { getDateTime } from '~/utils'
 
 export default {
   components: {
-    TLoader
+    TLoader,
+    TButton
   },
   setup() {
     const { params } = useRouter()
+    const { uid } = useAuth()
     const username = params.id
 
-    const { doc: account, loading, exists, find } = useDoc('accounts')
+    const { doc: account, id, loading, exists, find } = useDoc('accounts')
     find('username', username)
 
     return {
       account,
       getDateTime,
       exists,
-      loading
+      loading,
+      uid,
+      id
     }
   }
 }

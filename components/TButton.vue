@@ -84,7 +84,7 @@ export default {
       let classes = 'cursor-pointer outline-none focus:outline-none'
 
       if (!this.icon) {
-        classes = map[this.type] + ' block text-center'
+        classes = map[this.type] + ' inline-block text-center'
       }
 
       if (this.color) {

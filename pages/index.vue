@@ -5,7 +5,7 @@
       <router-link
         v-if="uid && account"
         class="flex hover:bg-gray-300 p-2"
-        to="/account"
+        :to="`/u/${account.username}`"
       >
         <img class="w-10 h-10 rounded-full" :src="account.photo" />
         <div class="ml-2">
