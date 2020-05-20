@@ -7,7 +7,7 @@ export default () => {
   const { uid, account, confirmedAccount } = useAuth()
   const { router, route } = useRouter()
 
-  const { docs } = useCollection('participants')
+  const { docs, loading } = useCollection('participants')
   const { update, create } = useDoc('participants')
 
   const getRsvp = (eventId) =>
@@ -99,6 +99,7 @@ export default () => {
     getList,
     getEvents,
     getFeedback,
-    getListRsvps
+    getListRsvps,
+    loading
   }
 }

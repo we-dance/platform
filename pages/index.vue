@@ -14,7 +14,8 @@
           >
         </div>
       </div>
-      <div v-if="!filteredItems.length">
+      <TLoader v-if="loading" />
+      <div v-else-if="!filteredItems.length">
         No posts found
       </div>
       <div
@@ -110,18 +111,20 @@ import TPreview from '~/components/TPreview'
 import TButton from '~/components/TButton'
 import TPresentation from '~/components/TPresentation'
 import TIcon from '~/components/TIcon'
+import TLoader from '~/components/TLoader'
 import TTagsPreview from '~/components/TTagsPreview'
 import useRSVP from '~/use/rsvp'
 import useComments from '~/use/comments'
 import useCollection from '~/use/collection'
 import useAccounts from '~/use/accounts'
-import { dateDiff } from '~/utils'
+import { dateDiff, sortBy } from '~/utils'
 
 export default {
   name: 'PostsIndex',
   components: {
     TButton,
     TPreview,
+    TLoader,
     TIcon,
     Microlink,
     TTagsPreview,
@@ -132,11 +135,13 @@ export default {
   }),
   computed: {
     filteredItems() {
-      return this.items.filter((item) =>
-        this.$route.query.tag
-          ? item.tags && item.tags[this.$route.query.tag]
-          : true
-      )
+      return this.items
+        .filter((item) =>
+          this.$route.query.tag
+            ? item.tags && item.tags[this.$route.query.tag]
+            : true
+        )
+        .sort(sortBy('-createdAt'))
     }
   },
   watch: {
@@ -148,9 +153,14 @@ export default {
     this.showIntro = !!this.$route.query.tour || !ls('sawIntro')
   },
   setup() {
-    const { getCount, getRsvpResponse, updateRsvp } = useRSVP()
-    const { getCommentsCount } = useComments()
-    const { docs } = useCollection('posts')
+    const {
+      getCount,
+      getRsvpResponse,
+      updateRsvp,
+      loading: loadingLikes
+    } = useRSVP()
+    const { getCommentsCount, loading: loadingComments } = useComments()
+    const { docs, loading: loadingPosts } = useCollection('posts')
 
     const map = (item) => {
       if (!item.id) {
@@ -177,6 +187,9 @@ export default {
     }
 
     const items = computed(() => docs.value.map(map))
+    const loading = computed(
+      () => loadingLikes.value && loadingComments.value && loadingPosts.value
+    )
 
     const { getAccount } = useAccounts()
 
@@ -185,7 +198,8 @@ export default {
       getRsvpResponse,
       updateRsvp,
       dateDiff,
-      getAccount
+      getAccount,
+      loading
     }
   }
 }

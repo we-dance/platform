@@ -15,6 +15,7 @@ export default (name, filter) => {
   }
 
   const hash = `${name}-${field}-${value}`
+  const loadingHash = `${name}-${field}-${value}-loading`
 
   if (!state[hash]) {
     const firestore = firebase.firestore()
@@ -26,8 +27,11 @@ export default (name, filter) => {
       collection = collection.where(field, '==', value)
     }
 
+    Vue.set(state, loadingHash, true)
+
     collection.onSnapshot({ includeMetadataChanges: true }, (snapshot) => {
       snapshot.docChanges().forEach((change) => {
+        Vue.set(state, loadingHash, false)
         if (change.type === 'modified' || change.type === 'added') {
           Vue.set(state[hash], change.doc.id, change.doc.data())
         }
@@ -46,6 +50,10 @@ export default (name, filter) => {
     return state[hash][id]
   }
 
+  const loading = computed(() => {
+    return state[loadingHash]
+  })
+
   const docs = computed(() => {
     if (!state[hash]) {
       return []
@@ -60,6 +68,7 @@ export default (name, filter) => {
   return {
     ...toRefs(state),
     getById,
-    docs
+    docs,
+    loading
   }
 }

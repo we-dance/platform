@@ -2,7 +2,7 @@ import useDoc from '~/use/doc'
 import useCollection from '~/use/collection'
 
 export default () => {
-  const { docs } = useCollection('comments')
+  const { docs, loading } = useCollection('comments')
   const { create } = useDoc('comments')
 
   function getComments(postId) {
@@ -21,6 +21,7 @@ export default () => {
   return {
     addComment,
     getComments,
-    getCommentsCount
+    getCommentsCount,
+    loading
   }
 }
