@@ -11,7 +11,9 @@
           <TIcon name="logo-text" />
         </router-link>
 
-        <div class="mt-6 md:flex md:mt-0 items-center">
+        <div
+          class="mt-6 flex md:mt-0 items-center justify-center md:justify-end"
+        >
           <TButton to="/posts/-/edit">Write a post</TButton>
         </div>
       </nav>
