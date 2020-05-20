@@ -2,7 +2,7 @@
   <div class="md:flex">
     <nav class="p-4 md:w-64">
       <TButton v-if="!uid" to="/signin">Sign In</TButton>
-      <TButton v-if="!account.username" to="/account?tab=settings"
+      <TButton v-if="!account || !account.username" to="/account?tab=settings"
         >Create Profile</TButton
       >
       <router-link
@@ -54,6 +54,16 @@
           </router-link>
         </div>
       </details>
+
+      <div class="p-4 text-xs text-gray-700">
+        Content on this site is licensed under a
+        <a
+          rel="license"
+          class="underline"
+          href="http://creativecommons.org/licenses/by/4.0/"
+          >Creative Commons Attribution 4.0 International license</a
+        >.
+      </div>
     </nav>
     <main class="flex-grow max-w-lg">
       <div class="p-4">
