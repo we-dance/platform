@@ -36,18 +36,10 @@
 <script>
 import ls from 'local-storage'
 import useAuth from '~/use/auth'
-import TForm from '~/components/TForm'
-import TLoader from '~/components/TLoader'
-import TButton from '~/components/TButton'
 
 export default {
   middleware: ['auth'],
   layout: 'minimal',
-  components: {
-    TButton,
-    TForm,
-    TLoader
-  },
   setup() {
     const {
       uid,

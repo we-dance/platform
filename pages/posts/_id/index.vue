@@ -160,13 +160,6 @@
 <script>
 import { Microlink } from '@microlink/vue'
 import { computed } from '@vue/composition-api'
-import TCardList from '~/components/TCardList'
-import TPreview from '~/components/TPreview'
-import TTagsPreview from '~/components/TTagsPreview'
-import TButton from '~/components/TButton'
-import TLoader from '~/components/TLoader'
-import TIcon from '~/components/TIcon'
-import TSignature from '~/components/TSignature'
 import useAuth from '~/use/auth'
 import useDoc from '~/use/doc'
 import useRSVP from '~/use/rsvp'
@@ -179,14 +172,7 @@ export default {
   name: 'PostView',
   layout: 'minimal',
   components: {
-    TLoader,
-    TCardList,
-    TPreview,
-    TButton,
-    TIcon,
-    TSignature,
-    Microlink,
-    TTagsPreview
+    Microlink
   },
   computed: {
     tweetUrl() {

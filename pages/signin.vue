@@ -37,18 +37,10 @@
 
 <script>
 import ls from 'local-storage'
-import TLoader from '~/components/TLoader'
 import useAuth from '~/use/auth'
-import TButton from '~/components/TButton'
-import TIcon from '~/components/TIcon'
 
 export default {
   layout: 'empty',
-  components: {
-    TLoader,
-    TButton,
-    TIcon
-  },
   data: () => ({
     email: '',
     emailSent: false

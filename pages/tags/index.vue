@@ -23,13 +23,8 @@
 </template>
 
 <script>
-import TCardList from '~/components/TCardList'
-
 export default {
   name: 'TagsIndex',
-  components: {
-    TCardList
-  },
   setup() {
     const collection = 'tags'
 

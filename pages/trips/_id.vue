@@ -28,7 +28,6 @@
 </template>
 
 <script>
-import TButton from '~/components/TButton'
 import useDoc from '~/use/doc'
 import useCollection from '~/use/collection'
 import useRouter from '~/use/router'
@@ -36,9 +35,6 @@ import { dateDiff } from '~/utils'
 
 export default {
   layout: 'empty',
-  components: {
-    TButton
-  },
   setup() {
     const { params } = useRouter()
     const { doc: item, load, exists, loading } = useDoc('endorsements')

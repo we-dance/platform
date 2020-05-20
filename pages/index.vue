@@ -107,12 +107,6 @@
 import { computed } from '@vue/composition-api'
 import ls from 'local-storage'
 import { Microlink } from '@microlink/vue'
-import TPreview from '~/components/TPreview'
-import TButton from '~/components/TButton'
-import TPresentation from '~/components/TPresentation'
-import TIcon from '~/components/TIcon'
-import TLoader from '~/components/TLoader'
-import TTagsPreview from '~/components/TTagsPreview'
 import useRSVP from '~/use/rsvp'
 import useComments from '~/use/comments'
 import useCollection from '~/use/collection'
@@ -122,13 +116,7 @@ import { dateDiff, sortBy } from '~/utils'
 export default {
   name: 'PostsIndex',
   components: {
-    TButton,
-    TPreview,
-    TLoader,
-    TIcon,
-    Microlink,
-    TTagsPreview,
-    TPresentation
+    Microlink
   },
   data: () => ({
     showIntro: false

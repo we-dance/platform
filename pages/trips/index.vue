@@ -27,16 +27,12 @@
 </template>
 
 <script>
-import TCardList from '~/components/TCardList'
 import TFieldTag from '~/components/TFieldTag'
 import { getDateTime } from '~/utils'
 import useAuth from '~/use/auth'
 
 export default {
   name: 'TripsIndex',
-  components: {
-    TCardList
-  },
   setup() {
     const collection = 'events'
 

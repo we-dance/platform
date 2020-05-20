@@ -24,6 +24,7 @@ export default {
    ** Customize the progress-bar color
    */
   loading: { color: '#2a1b3c' },
+  components: true,
   /*
    ** Global CSS
    */
@@ -51,6 +52,8 @@ export default {
     '@nuxtjs/stylelint-module',
     // Doc: https://github.com/nuxt-community/nuxt-tailwindcss
     '@nuxtjs/tailwindcss'
+    // Doc: https://composition-api.now.sh/
+    // 'nuxt-composition-api'
   ],
   /*
    ** Nuxt.js modules

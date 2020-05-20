@@ -37,8 +37,6 @@
 </template>
 
 <script>
-import TLoader from '~/components/TLoader'
-import TButton from '~/components/TButton'
 import useRouter from '~/use/router'
 import useDoc from '~/use/doc'
 import useAuth from '~/use/auth'
@@ -46,10 +44,6 @@ import { getDateTime } from '~/utils'
 
 export default {
   layout: 'minimal',
-  components: {
-    TLoader,
-    TButton
-  },
   setup() {
     const { params } = useRouter()
     const { uid } = useAuth()

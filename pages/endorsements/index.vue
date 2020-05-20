@@ -26,16 +26,12 @@
 </template>
 
 <script>
-import TCardList from '~/components/TCardList'
 import TFieldTag from '~/components/TFieldTag'
 import { getDateTime } from '~/utils'
 import useAuth from '~/use/auth'
 
 export default {
   name: 'EndorsementIndex',
-  components: {
-    TCardList
-  },
   setup() {
     const collection = 'endorsements'
 
