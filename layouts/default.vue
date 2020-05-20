@@ -5,14 +5,11 @@
     <header>
       <THamburger
         v-model="isMenuOpen"
-        class="absolute top-0 right-0 mr-4 mt-4 z-50 md:hidden"
+        class="absolute top-0 right-0 mr-2 mt-4 z-50 md:hidden"
       />
       <nav class="md:flex items-center justify-between flex-wrap p-4">
-        <div class="md:flex items-center">
-          <router-link
-            to="/"
-            class="no-underline flex items-center justify-center leading-none hover:no-underline font-bold"
-          >
+        <div class="flex items-center justify-start">
+          <router-link to="/">
             <TIcon name="logo-text" />
           </router-link>
         </div>
