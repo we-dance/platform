@@ -4,7 +4,7 @@
   >
     <header>
       <nav class="md:flex items-center justify-between flex-wrap p-4">
-        <div class="flex items-center">
+        <div class="md:flex items-center">
           <router-link
             to="/"
             class="no-underline flex items-center justify-center leading-none hover:no-underline font-bold"
