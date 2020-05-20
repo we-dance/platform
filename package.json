@@ -31,6 +31,7 @@
     "@nuxtjs/robots": "^2.4.2",
     "@nuxtjs/sentry": "^4.0.1",
     "@nuxtjs/sitemap": "^2.2.1",
+    "@voerro/vue-tagsinput": "^2.2.0",
     "@vue/composition-api": "^0.4.0",
     "core-js": "2",
     "date-fns": "^2.10.0",
