@@ -20,7 +20,7 @@
       </div>
     </div>
     <div v-if="uid === id" class="p-4">
-      <TButton to="/account">Edit Profile</TButton>
+      <TButton to="/account?tab=settings">Edit Profile</TButton>
     </div>
     <div class="p-4">
       <div>{{ account.summary }}</div>
