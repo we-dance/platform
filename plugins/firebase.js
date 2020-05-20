@@ -9,5 +9,8 @@ export default ({ env: { firebase } }) => {
   }
 
   Firebase.initializeApp(firebase.config)
-  Firebase.analytics()
+
+  if (firebase.services.analytics) {
+    Firebase.analytics()
+  }
 }

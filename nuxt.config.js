@@ -139,7 +139,7 @@ export default {
       services: {
         auth: true,
         firestore: true,
-        analytics: true
+        analytics: isProd
       }
     }
   },
