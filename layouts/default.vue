@@ -11,13 +11,6 @@
           >
             <TIcon name="logo-text" />
           </router-link>
-
-          <div class="flex ml-4 text-xs">
-            <div class="px-4 py-1 bg-orange-200 rounded-l-full border">
-              Global
-            </div>
-            <div class="px-4 py-1 rounded-r-full border border-l-0">Local</div>
-          </div>
         </div>
 
         <div
