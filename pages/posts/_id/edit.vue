@@ -1,5 +1,5 @@
 <template>
-  <div class="max-w-md mx-auto">
+  <div class="mx-auto w-full max-w-lg">
     <div class="flex">
       <button
         v-for="type in types"
@@ -39,6 +39,7 @@ import TFieldTag from '~/components/TFieldTag'
 
 export default {
   name: 'PostEdit',
+  layout: 'minimal',
   middleware: ['auth'],
   components: {
     TForm

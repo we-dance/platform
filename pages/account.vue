@@ -42,7 +42,7 @@ import TButton from '~/components/TButton'
 
 export default {
   middleware: ['auth'],
-  layout: (ctx) => (ctx.isMobile ? 'mobile' : 'desktop'),
+  layout: 'minimal',
   components: {
     TButton,
     TForm,

@@ -1,5 +1,5 @@
 <template>
-  <div class="p-4 max-w-lg mx-auto">
+  <div class="flex-grow p-4 bg-gray-200 rounded mr-4">
     <TCardList
       :collection="collection"
       title="Endorsements"

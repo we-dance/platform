@@ -177,6 +177,7 @@ import { getDateTime } from '~/utils'
 
 export default {
   name: 'PostView',
+  layout: 'minimal',
   components: {
     TLoader,
     TCardList,

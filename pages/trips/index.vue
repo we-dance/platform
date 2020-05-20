@@ -1,5 +1,5 @@
 <template>
-  <div class="p-4 max-w-lg mx-auto">
+  <div class="flex-grow p-4 bg-gray-200 rounded mr-4">
     <TCardList
       :collection="collection"
       title="Trips"
@@ -15,10 +15,11 @@
       <template v-slot:default="{ item }">
         <div class="rounded bg-white mb-4 shadow border p-4">
           <router-link
-            :to="`/endorsements/${item.id}`"
+            :to="`/trips/${item.id}`"
             class="underline hover:no-underline"
-            >{{ item.event }} on {{ getDateTime(item.when) }}</router-link
           >
+            {{ getDateTime(item.start) }} to {{ item.event }}
+          </router-link>
         </div>
       </template>
     </TCardList>

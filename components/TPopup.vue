@@ -7,8 +7,12 @@
       @click="$emit('close')"
     ></div>
     <transition appear name="slide-up">
-      <div class="bg-white p-4 rounded w-full md:w-auto z-50 overflow-hidden">
-        <slot />
+      <div
+        class="bg-white p-4 rounded w-full md:w-auto z-50 overflow-hidden flex justify-center items-center"
+      >
+        <div>
+          <slot />
+        </div>
       </div>
     </transition>
   </div>

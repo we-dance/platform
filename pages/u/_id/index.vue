@@ -45,6 +45,7 @@ import useAuth from '~/use/auth'
 import { getDateTime } from '~/utils'
 
 export default {
+  layout: 'minimal',
   components: {
     TLoader,
     TButton

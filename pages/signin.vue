@@ -1,6 +1,9 @@
 <template>
-  <div class="container mx-auto md:max-w-lg md:mb-16">
-    <main class="rounded bg-white mb-4 shadow border">
+  <div class="flex items-center justify-center h-screen bg-gray-300">
+    <main class="rounded bg-white mb-4 shadow border p-8">
+      <router-link to="/">
+        <TIcon name="logo" class="mb-4" />
+      </router-link>
       <div v-if="error">
         <div class="typo">
           <h2>Oops</h2>
@@ -40,6 +43,7 @@ import TButton from '~/components/TButton'
 import TIcon from '~/components/TIcon'
 
 export default {
+  layout: 'empty',
   components: {
     TLoader,
     TButton,
