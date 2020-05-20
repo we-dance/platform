@@ -104,6 +104,7 @@
               </div>
 
               <TPreview
+                v-if="!item.link"
                 class="mt-2"
                 :content="item.description"
                 :excerpt="true"

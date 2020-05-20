@@ -28,7 +28,7 @@
         @focus="showTypeHead = true"
       />
     </div>
-    <div class="my-2" v-if="showTypeHead">
+    <div v-if="showTypeHead" class="my-2">
       <div
         v-for="(tag, tagIndex) in filteredTags"
         :key="tag.value"

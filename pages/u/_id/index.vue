@@ -19,7 +19,7 @@
         </dl>
       </div>
     </div>
-    <div>
+    <div class="p-4">
       <div>{{ account.summary }}</div>
       <dl v-if="account.skills" class="mt-2 md:flex">
         <dt class="font-bold mr-1">Dance Skills:</dt>
