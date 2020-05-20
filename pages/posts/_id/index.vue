@@ -17,7 +17,7 @@
 
           <TPreview class="mt-2" :content="item.description" />
 
-          <Microlink v-if="item.link" class="mt-2" :url="item.link" />
+          <Microlink v-if="item.link" class="mt-2 z-0" :url="item.link" />
 
           <div v-if="can('edit', 'posts', item)" class="my-2 flex items-start">
             <TButton

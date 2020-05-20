@@ -24,9 +24,8 @@
 
     <div class="md:flex">
       <nav
-        v-if="!hideMenu"
-        class="p-4 md:w-64 bg-white absolute left-0 top-0 w-full h-screen md:block md:relative"
-        :class="isMenuOpen ? '' : 'hidden'"
+        class="p-4 md:w-64 bg-white absolute z-40 left-0 top-0 w-full h-screen md:block md:relative"
+        :class="{ hidden: !isMenuOpen, 'md:hidden': hideMenu }"
       >
         <TButton v-if="!uid" to="/signin">Sign In</TButton>
         <TButton
