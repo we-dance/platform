@@ -12,12 +12,28 @@
         </router-link>
 
         <div class="mt-6 md:flex md:mt-0 items-center">
-          <TButton type="primary" to="/posts/-/edit">Write a post</TButton>
+          <TButton to="/posts/-/edit">Write a post</TButton>
         </div>
       </nav>
     </header>
     <nuxt />
-    <footer class="md:flex text-center p-4 justify-between items-center">
+    <footer
+      class="flex text-center p-4 justify-between items-center mt-4 border-t"
+    >
+      <div class="text-center text-sm text-gray-600">
+        <a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/"
+          ><img
+            alt="Creative Commons License"
+            class="mr-2 inline-block"
+            src="https://i.creativecommons.org/l/by-sa/4.0/88x31.png"/></a
+        >WeDance is licensed under a
+        <a
+          rel="license"
+          class="underline"
+          href="http://creativecommons.org/licenses/by-sa/4.0/"
+          >Creative Commons Attribution-ShareAlike 4.0 International License</a
+        >.
+      </div>
       <div class="md:flex mt-8 md:mt-0">
         <div v-if="Object.keys(social).length" class="m-3 text-md font-bold">
           Follow us

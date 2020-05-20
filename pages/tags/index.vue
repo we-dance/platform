@@ -12,7 +12,7 @@
         </div>
       </template>
       <template v-slot:default="{ item }">
-        <div class="card-item border">
+        <div class="rounded bg-white mb-4 shadow border">
           <div class="p-4">
             {{ item.label }}
           </div>

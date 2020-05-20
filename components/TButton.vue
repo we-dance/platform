@@ -8,17 +8,26 @@
     v-on="$listeners"
   >
     <slot>
-      <TIcon v-if="icon" :name="icon" />
+      <div class="flex">
+        <TIcon v-if="icon" :name="icon" />
+        <span v-if="label" class="ml-1">{{ label }}</span>
+      </div>
     </slot>
   </a>
   <router-link v-else-if="to" :class="classes" :to="to" v-on="$listeners">
     <slot>
-      <TIcon v-if="icon" :name="icon" />
+      <div class="flex">
+        <TIcon v-if="icon" :name="icon" />
+        <span v-if="label" class="ml-1">{{ label }}</span>
+      </div>
     </slot>
   </router-link>
   <button v-else type="button" :class="classes" v-on="$listeners">
     <slot>
-      <TIcon v-if="icon" :name="icon" />
+      <div class="flex">
+        <TIcon v-if="icon" :name="icon" />
+        <span v-if="label" class="ml-1">{{ label }}</span>
+      </div>
     </slot>
   </button>
 </template>
@@ -46,6 +55,10 @@ export default {
     type: {
       type: String,
       default: 'simple'
+    },
+    label: {
+      type: String,
+      default: ''
     },
     color: {
       type: String,

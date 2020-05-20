@@ -13,7 +13,7 @@
 
     <slot name="header" />
 
-    <div v-if="currentId === 'add'" class="mt-4 card-item">
+    <div v-if="currentId === 'add'" class="mt-4 rounded bg-white mb-4 shadow">
       <TForm
         class="px-6 py-4"
         :fields="fields"
@@ -51,7 +51,7 @@
         :fields="fields"
         show-cancel
         :show-remove="can('remove', collection, item)"
-        class="card-item p-4"
+        class="rounded bg-white mb-4 shadow p-4"
         @save="saveItem"
         @cancel="cancelItem"
         @remove="removeItem"
@@ -128,7 +128,7 @@ export default {
     },
     itemClass: {
       type: String,
-      default: 'px-6 py-4 card-item'
+      default: 'px-6 py-4 rounded bg-white mb-4 shadow'
     }
   },
   data: () => ({

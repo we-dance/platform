@@ -13,7 +13,7 @@
     </nav>
     <main class="p-4 flex-grow max-w-lg">
       <TLoader v-if="loading" />
-      <div v-else class="card-item border p-4 bg-white">
+      <div v-else class="rounded bg-white mb-4 shadow border p-4 bg-white">
         <div class="font-bold text-xl mb-4 pb-4 border-b">Your Account</div>
 
         <TForm

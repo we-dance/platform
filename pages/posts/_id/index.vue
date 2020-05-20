@@ -3,127 +3,157 @@
   <div v-else-if="!exists" class="text-center">
     Post not found
   </div>
-  <div v-else class="p-4 mx-auto max-w-2xl">
-    <div
-      v-if="can('edit', 'posts', item)"
-      class="flex justify-end mb-2 hover:text-blue-500"
-    >
-      <TButton icon="edit" :to="`/posts/${item.id}/edit`" />
-    </div>
+  <div v-else class="p-4 mx-auto container">
+    <div class="md:grid grid-cols-12 gap-6">
+      <div class="col-span-8">
+        <div>
+          <TTagsPreview :value="item.tags" />
 
-    <div>
-      <div class="p-4">
-        <TTagsPreview :value="item.tags" />
+          <h1 class="font-bold text-2xl mb-2 leading-tight">
+            {{ item.title }}
+          </h1>
 
-        <h1 class="font-bold text-2xl mt-2 leading-tight">
-          {{ item.title }}
-        </h1>
+          <TSignature small :item="item" />
 
-        <TPreview class="mt-2" :content="item.description" />
+          <TPreview class="mt-2" :content="item.description" />
 
-        <Microlink v-if="item.link" class="mt-2" :url="item.link" />
-      </div>
-      <div
-        class="bg-gray-200 border-t px-4 py-4 flex items-center justify-between"
-      >
-        <div class="md:flex">
-          <div class="text-green-500 flex justify-center">
-            <button
-              class="text-center hover:text-green-500"
-              :class="{ 'text-green-700': item.response === 'up' }"
-              @click="updateRsvp(item.id, 'posts', 'up')"
-            >
-              <TIcon name="up" class="h-6 w-6" />
-            </button>
-            <div>
-              {{ item.upVotes }}
-            </div>
+          <Microlink v-if="item.link" class="mt-2" :url="item.link" />
+
+          <div v-if="can('edit', 'posts', item)" class="my-2 flex items-start">
+            <TButton
+              icon="edit"
+              :to="`/posts/${item.id}/edit`"
+              class="hover:text-blue-500"
+              label="Edit"
+            />
           </div>
-          <div class="text-red-500 flex md:ml-2 justify-center">
-            <button
-              class="text-center hover:text-primary"
-              :class="{ 'text-red-700': item.response === 'down' }"
-              @click="updateRsvp(item.id, 'posts', 'down')"
-            >
-              <TIcon name="down" class="h-6 w-6 hover:text-primary" />
-            </button>
-            <div>
-              {{ item.downVotes }}
-            </div>
-          </div>
-          <div class="text-gray-700 flex md:ml-4 justify-center">
+
+          <div class="flex justify-between items-center border p-4 my-4">
             <div class="flex">
-              <TIcon name="chat" class="h-6 w-6 hover:text-primary" />
-              <span>{{ item.commentsCount }}</span>
+              <div class="text-green-500 flex justify-center">
+                <button
+                  class="text-center hover:text-green-500"
+                  :class="{ 'text-green-700': item.response === 'up' }"
+                  @click="updateRsvp(item.id, 'posts', 'up')"
+                >
+                  <TIcon name="up" class="h-6 w-6" />
+                </button>
+                <div>
+                  {{ item.upVotes }}
+                </div>
+              </div>
+              <div class="text-red-500 flex ml-2 justify-center">
+                <button
+                  class="text-center hover:text-primary"
+                  :class="{ 'text-red-700': item.response === 'down' }"
+                  @click="updateRsvp(item.id, 'posts', 'down')"
+                >
+                  <TIcon name="down" class="h-6 w-6 hover:text-primary" />
+                </button>
+                <div>
+                  {{ item.downVotes }}
+                </div>
+              </div>
+            </div>
+            <div>
+              <TButton :href="tweetUrl">Share</TButton>
             </div>
           </div>
-        </div>
-        <div class="flex-grow mt-4 md:mt-0 flex justify-center md:justify-end">
-          <TSignature :item="item" />
         </div>
       </div>
+
+      <div class="col-span-4 col-start-9 row-start-1">
+        <div class="mb-4 rounded border shadow p-4">
+          <router-link
+            :to="`/u/${getAccount(item.createdBy).username}`"
+            class="text-sm flex items-center"
+          >
+            <img
+              class="rounded-full mr-2 w-10 h-10"
+              :src="getAccount(item.createdBy).photo"
+            />
+            <div>
+              <div class="font-bold">
+                {{ getAccount(item.createdBy).name }}
+              </div>
+              <div class="text-gray-600">
+                @{{ getAccount(item.createdBy).username }}
+              </div>
+            </div>
+          </router-link>
+          <div class="text-sm mt-2">
+            <div>{{ getAccount(item.createdBy).summary }}</div>
+            <dl class="mt-2">
+              <dt class="font-bold mr-1">Location:</dt>
+              <dd>{{ getAccount(item.createdBy).location }}</dd>
+            </dl>
+            <dl class="mt-2">
+              <dt class="font-bold mr-1">Joined:</dt>
+              <dd>{{ getDateTime(getAccount(item.createdBy).createdAt) }}</dd>
+            </dl>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-span-8">
+        <TCardList
+          :collection="collection"
+          title="Discussion"
+          add="Add to the discussion"
+          :fields="fields"
+          :map="map"
+          :filters="filters"
+        >
+          <template v-slot:auth>
+            <div class="text-center mt-4">
+              <div class="mb-4">
+                Sign in to write a comment.
+              </div>
+              <TButton to="/signin">Sign in</TButton>
+            </div>
+          </template>
+          <template v-slot:empty>
+            <div class="text-center mt-4">
+              There are no comments yet.
+            </div>
+          </template>
+          <template v-slot:default="{ item }">
+            <div class="rounded bg-white mb-4 shadow border">
+              <div class="p-4">
+                <TSignature small :item="item" />
+                <TPreview class="ml-6 mt-2" :content="item.body" />
+              </div>
+              <div class="px-4 pb-4 flex items-center">
+                <div class="text-green-500 flex">
+                  <button
+                    class="text-center hover:text-green-500"
+                    :class="{ 'text-green-700': item.response === 'up' }"
+                    @click="updateRsvp(item.id, collection, 'up')"
+                  >
+                    <TIcon name="up" class="h-6 w-6" />
+                  </button>
+                  <div>
+                    {{ item.upVotes }}
+                  </div>
+                </div>
+                <div class="text-red-500 flex ml-2">
+                  <button
+                    class="text-center hover:text-primary"
+                    :class="{ 'text-red-700': item.response === 'down' }"
+                    @click="updateRsvp(item.id, collection, 'down')"
+                  >
+                    <TIcon name="down" class="h-6 w-6 hover:text-primary" />
+                  </button>
+                  <div>
+                    {{ item.downVotes }}
+                  </div>
+                </div>
+              </div>
+            </div>
+          </template>
+        </TCardList>
+      </div>
     </div>
-
-    <div class="mt-8"></div>
-
-    <TCardList
-      :collection="collection"
-      title="Comments"
-      add="Add a comment"
-      :fields="fields"
-      :map="map"
-      :filters="filters"
-    >
-      <template v-slot:auth>
-        <div class="text-center mt-4">
-          <div class="mb-4">
-            Sign in to write a comment.
-          </div>
-          <TButton to="/signin">Sign in</TButton>
-        </div>
-      </template>
-      <template v-slot:empty>
-        <div class="text-center mt-4">
-          There are no comments yet.
-        </div>
-      </template>
-      <template v-slot:default="{ item }">
-        <div class="card-item border">
-          <div class="p-4">
-            <TPreview class="mt-2" :content="item.body" />
-          </div>
-          <div class="bg-gray-200 border-t px-4 py-4 flex items-center">
-            <div class="text-green-500 flex">
-              <button
-                class="text-center hover:text-green-500"
-                :class="{ 'text-green-700': item.response === 'up' }"
-                @click="updateRsvp(item.id, collection, 'up')"
-              >
-                <TIcon name="up" class="h-6 w-6" />
-              </button>
-              <div>
-                {{ item.upVotes }}
-              </div>
-            </div>
-            <div class="text-red-500 flex ml-2">
-              <button
-                class="text-center hover:text-primary"
-                :class="{ 'text-red-700': item.response === 'down' }"
-                @click="updateRsvp(item.id, collection, 'down')"
-              >
-                <TIcon name="down" class="h-6 w-6 hover:text-primary" />
-              </button>
-              <div>
-                {{ item.downVotes }}
-              </div>
-            </div>
-            <div class="flex-grow flex justify-end">
-              <TSignature :item="item" />
-            </div>
-          </div>
-        </div>
-      </template>
-    </TCardList>
   </div>
 </template>
 
@@ -142,6 +172,8 @@ import useDoc from '~/use/doc'
 import useRSVP from '~/use/rsvp'
 import useRouter from '~/use/router'
 import useComments from '~/use/comments'
+import useAccounts from '~/use/accounts'
+import { getDateTime } from '~/utils'
 
 export default {
   name: 'PostView',
@@ -154,6 +186,18 @@ export default {
     TSignature,
     Microlink,
     TTagsPreview
+  },
+  computed: {
+    tweetUrl() {
+      const app = process.env.app
+
+      const author = this.getAccount(this.item.createdBy).name
+      const url = app.url + this.$route.fullPath
+
+      const text = encodeURI(`"${this.item.title}" by ${author}`)
+
+      return `https://twitter.com/intent/tweet?text=${text} %23WeDance ${url}`
+    }
   },
   head() {
     return {
@@ -170,6 +214,7 @@ export default {
   setup() {
     const { can } = useAuth()
     const { params } = useRouter()
+    const { getAccount } = useAccounts()
 
     const collection = 'comments'
 
@@ -242,7 +287,9 @@ export default {
       getRsvpResponse,
       updateRsvp,
       getCommentsCount,
-      can
+      can,
+      getAccount,
+      getDateTime
     }
   }
 }

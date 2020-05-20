@@ -54,7 +54,7 @@
     </nav>
     <main class="flex-grow max-w-lg">
       <div class="p-4">
-        <div class="rounded bg-orange-200 p-4 mb-4">
+        <div v-if="false" class="rounded bg-orange-200 p-4 mb-4">
           <div class="uppercase font-bold">New Challenge</div>
           <div>
             Share your favourite music of your favourite dance
@@ -72,29 +72,50 @@
         <div
           v-for="item in filteredItems"
           :key="item.id"
-          class="card-item border"
+          class="rounded bg-white mb-4 shadow border"
         >
           <div class="p-4">
-            <TTagsPreview :value="item.tags" />
-            <router-link
-              :to="`/posts/${item.id}`"
-              class="font-bold text-2xl mt-2 leading-tight underline hover:no-underline"
-            >
-              {{ item.title }}
-            </router-link>
+            <div>
+              <div class="flex justify-between">
+                <router-link
+                  :to="`/posts/${item.id}`"
+                  class="font-bold leading-tight"
+                >
+                  {{ item.title }}
+                </router-link>
+                <router-link
+                  :to="`/posts/${item.id}`"
+                  class="text-xs text-gray-600 hover:underline text-right"
+                >
+                  {{ dateDiff(item.createdAt) }} ago
+                </router-link>
+              </div>
 
-            <TPreview
-              class="mt-2"
-              :content="item.description"
-              :excerpt="true"
-            />
+              <div class="text-xs my-1 flex items-center">
+                <img
+                  class="rounded-full mr-1 w-4 h-4"
+                  :src="getAccount(item.createdBy).photo"
+                />
+                <router-link
+                  class="hover:underline"
+                  :to="`/u/${getAccount(item.createdBy).username}`"
+                  >{{ getAccount(item.createdBy).name }}</router-link
+                >
+              </div>
 
-            <Microlink v-if="item.link" class="mt-2" :url="item.link" />
+              <TPreview
+                class="mt-2"
+                :content="item.description"
+                :excerpt="true"
+              />
+
+              <Microlink v-if="item.link" class="mt-2" :url="item.link" />
+            </div>
           </div>
-          <div
-            class="bg-gray-200 border-t px-4 py-4 flex items-center justify-between"
-          >
-            <div class="md:flex">
+          <div class="px-4 pb-4 flex items-center justify-between">
+            <TTagsPreview :value="item.tags" />
+
+            <div class="flex">
               <div class="text-green-500 flex justify-center">
                 <button
                   class="text-center hover:text-green-500"
@@ -107,7 +128,7 @@
                   {{ item.upVotes }}
                 </div>
               </div>
-              <div class="text-red-500 flex md:ml-2 justify-center">
+              <div class="text-red-500 flex ml-2 justify-center">
                 <button
                   class="text-center hover:text-primary"
                   :class="{ 'text-red-700': item.response === 'down' }"
@@ -119,17 +140,12 @@
                   {{ item.downVotes }}
                 </div>
               </div>
-              <div class="text-gray-700 flex md:ml-4 justify-center">
+              <div class="text-gray-700 flex ml-4 justify-center">
                 <router-link :to="`/posts/${item.id}`" class="flex">
                   <TIcon name="chat" class="h-6 w-6 hover:text-primary" />
                   <span>{{ item.commentsCount }}</span>
                 </router-link>
               </div>
-            </div>
-            <div
-              class="flex-grow mt-4 md:mt-0 flex justify-center md:justify-end"
-            >
-              <TSignature :item="item" />
             </div>
           </div>
         </div>
@@ -144,12 +160,13 @@ import { Microlink } from '@microlink/vue'
 import TPreview from '~/components/TPreview'
 import TButton from '~/components/TButton'
 import TIcon from '~/components/TIcon'
-import TSignature from '~/components/TSignature'
 import TTagsPreview from '~/components/TTagsPreview'
 import useAuth from '~/use/auth'
 import useRSVP from '~/use/rsvp'
 import useComments from '~/use/comments'
 import useCollection from '~/use/collection'
+import useAccounts from '~/use/accounts'
+import { dateDiff } from '~/utils'
 
 export default {
   name: 'PostsIndex',
@@ -157,9 +174,17 @@ export default {
     TButton,
     TPreview,
     TIcon,
-    TSignature,
     Microlink,
     TTagsPreview
+  },
+  computed: {
+    filteredItems() {
+      return this.items.filter((item) =>
+        this.$route.query.tag
+          ? item.tags && item.tags[this.$route.query.tag]
+          : true
+      )
+    }
   },
   setup() {
     const { uid, account } = useAuth()
@@ -198,22 +223,17 @@ export default {
 
     const items = computed(() => docs.value.map(map))
 
+    const { getAccount } = useAccounts()
+
     return {
       items,
       getRsvpResponse,
       updateRsvp,
       account,
       uid,
-      tags
-    }
-  },
-  computed: {
-    filteredItems() {
-      return this.items.filter((item) =>
-        this.$route.query.tag
-          ? item.tags && item.tags[this.$route.query.tag]
-          : true
-      )
+      tags,
+      dateDiff,
+      getAccount
     }
   }
 }

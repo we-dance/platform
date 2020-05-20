@@ -1,11 +1,28 @@
 <template>
-  <div>
+  <div class="max-w-md mx-auto">
+    <div class="flex">
+      <button
+        v-for="type in types"
+        :key="type.value"
+        class="border border-gray-200 w-full rounded-t focus:outline-none hover:bg-gray-100"
+        @click="selectedType = type.value"
+      >
+        <div class="p-2">
+          {{ type.label }}
+        </div>
+        <div
+          v-if="selectedType === type.value"
+          class="border-b-2 border-blue-500"
+        ></div>
+      </button>
+    </div>
     <TForm
       v-model="item"
       :fields="fields"
+      vertical
       show-cancel
       :show-remove="can('remove', collection, item)"
-      class="card-item border p-4"
+      class="rounded bg-white mb-4 shadow border p-4 rounded-t-none"
       @save="saveItem"
       @cancel="cancelItem"
       @remove="removeItem"
@@ -26,6 +43,60 @@ export default {
   components: {
     TForm
   },
+  data: () => ({
+    selectedType: 'post',
+    types: [
+      {
+        label: 'Post',
+        value: 'post',
+        fields: [
+          {
+            name: 'title',
+            hideLabel: true,
+            placeholder: 'Title'
+          },
+          {
+            name: 'description',
+            hideLabel: true,
+            type: 'markdown'
+          },
+          {
+            name: 'tags',
+            hideLabel: true,
+            placeholder: 'Tags',
+            component: TFieldTag
+          }
+        ]
+      },
+      {
+        label: 'Link',
+        value: 'link',
+        fields: [
+          {
+            name: 'title',
+            hideLabel: true,
+            placeholder: 'Title'
+          },
+          {
+            name: 'link',
+            hideLabel: true,
+            placeholder: 'Link'
+          },
+          {
+            name: 'tags',
+            hideLabel: true,
+            placeholder: 'Tags',
+            component: TFieldTag
+          }
+        ]
+      }
+    ]
+  }),
+  computed: {
+    fields() {
+      return this.types.find((f) => f.value === this.selectedType).fields
+    }
+  },
   setup() {
     const { can } = useAuth()
     const { params } = useRouter()
@@ -38,32 +109,10 @@ export default {
       load(params.id)
     }
 
-    const fields = [
-      {
-        name: 'title',
-        label: 'Title'
-      },
-      {
-        name: 'link',
-        label: 'Link'
-      },
-      {
-        name: 'description',
-        label: 'Description',
-        type: 'markdown'
-      },
-      {
-        name: 'tags',
-        label: 'Tags',
-        component: TFieldTag
-      }
-    ]
-
     return {
       item,
       id,
       can,
-      fields,
       collection,
       update,
       remove,

@@ -1,13 +1,11 @@
 <template>
-  <div>
-    <VueTagsInput
-      v-model="tag"
-      :tags="val"
-      :autocomplete-items="filteredItems"
-      class="border px-2 py-1 rounded"
-      @tags-changed="onTagsChanged"
-    />
-  </div>
+  <VueTagsInput
+    v-model="tag"
+    :tags="val"
+    :autocomplete-items="filteredItems"
+    class="border px-2 py-1 rounded w-full"
+    @tags-changed="onTagsChanged"
+  />
 </template>
 
 <script>

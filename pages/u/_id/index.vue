@@ -17,10 +17,10 @@
           <dt class="font-bold mr-1">Joined:</dt>
           <dd>{{ getDateTime(account.createdAt) }}</dd>
         </dl>
-        <div>{{ account.summary }}</div>
       </div>
     </div>
     <div>
+      <div>{{ account.summary }}</div>
       <dl v-if="account.skills" class="mt-2 md:flex">
         <dt class="font-bold mr-1">Dance Skills:</dt>
         <dd>{{ account.skills }}</dd>

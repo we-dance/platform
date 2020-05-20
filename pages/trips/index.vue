@@ -13,7 +13,7 @@
         </div>
       </template>
       <template v-slot:default="{ item }">
-        <div class="card-item border p-4">
+        <div class="rounded bg-white mb-4 shadow border p-4">
           <router-link
             :to="`/endorsements/${item.id}`"
             class="underline hover:no-underline"
