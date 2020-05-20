@@ -26,12 +26,9 @@
         <router-link to="/endorsements" class="block p-2 hover:bg-gray-300">
           <span class="w-2">🌶</span> Endorsements
         </router-link>
-        <router-link
-          to="/posts/hpHquGrQKthCaGBizAZB"
-          class="block p-2 hover:bg-gray-300"
-        >
-          <span class="w-2">🍓</span> About
-        </router-link>
+        <button class="block p-2 hover:bg-gray-300" @click="showIntro = true">
+          <span class="w-2">🍓</span> Show Tour
+        </button>
       </div>
 
       <details>
@@ -67,7 +64,7 @@
         >.
       </div>
     </nav>
-    <TPresentation name="intro" />
+    <TPresentation v-if="showIntro" name="intro" @close="showIntro = false" />
     <main class="flex-grow max-w-lg">
       <div class="p-4">
         <div v-if="false" class="rounded bg-orange-200 p-4 mb-4">
@@ -173,6 +170,7 @@
 
 <script>
 import { computed } from '@vue/composition-api'
+import ls from 'local-storage'
 import { Microlink } from '@microlink/vue'
 import TPreview from '~/components/TPreview'
 import TButton from '~/components/TButton'
@@ -196,6 +194,9 @@ export default {
     TTagsPreview,
     TPresentation
   },
+  data: () => ({
+    showIntro: false
+  }),
   computed: {
     filteredItems() {
       return this.items.filter((item) =>
@@ -204,6 +205,9 @@ export default {
           : true
       )
     }
+  },
+  mounted() {
+    this.showIntro = !ls('sawIntro')
   },
   setup() {
     const { uid, account } = useAuth()

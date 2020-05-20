@@ -1,5 +1,5 @@
 <template>
-  <TPopup v-if="slide == 1" @close="slide = 0">
+  <TPopup v-if="slide == 1" @close="close">
     <div class="p-4 text-center">
       <TIcon class="w-64" name="logo" />
       <div class="mt-8 w-64">
@@ -13,7 +13,7 @@
     </div>
   </TPopup>
 
-  <TPopup v-else-if="slide == 2" @close="slide = 0">
+  <TPopup v-else-if="slide == 2" @close="close">
     <div class="p-4 text-center">
       <TIcon class="w-64" name="undraw_newspaper" />
       <div class="mt-8 w-64">
@@ -28,7 +28,7 @@
     </div>
   </TPopup>
 
-  <TPopup v-else-if="slide == 2" @close="slide = 0">
+  <TPopup v-else-if="slide == 2" @close="close">
     <div class="p-4 text-center">
       <TIcon class="w-64" name="undraw_work_chat" />
       <div class="mt-8 w-64">
@@ -42,7 +42,7 @@
     </div>
   </TPopup>
 
-  <TPopup v-else-if="slide == 3" @close="slide = 0">
+  <TPopup v-else-if="slide == 3" @close="close">
     <div class="p-4 text-center">
       <TIcon class="w-64" name="undraw_video_files" />
       <div class="mt-8 w-64">
@@ -56,7 +56,7 @@
     </div>
   </TPopup>
 
-  <TPopup v-else-if="slide == 4" @close="slide = 0">
+  <TPopup v-else-if="slide == 4" @close="close">
     <div class="p-4 text-center">
       <TIcon class="w-64" name="undraw_dua_lipa" />
       <div class="mt-8 w-64">
@@ -64,16 +64,18 @@
           Upcoming events and festivals
         </p>
         <div class="mt-8 flex justify-end">
-          <TButton @click="slide = 0">Finish</TButton>
+          <TButton to="/posts/hpHquGrQKthCaGBizAZB" class="mr-2"
+            >Read more</TButton
+          >
+          <TButton @click="close">Close</TButton>
         </div>
       </div>
     </div>
   </TPopup>
-
-  <div v-else></div>
 </template>
 
 <script>
+import ls from 'local-storage'
 import TPopup from '~/components/TPopup'
 import TIcon from '~/components/TIcon'
 import TButton from '~/components/TButton'
@@ -86,6 +88,16 @@ export default {
   },
   data: () => ({
     slide: 1
-  })
+  }),
+  mounted() {
+    this.slide = 1
+
+    ls('sawIntro', true)
+  },
+  methods: {
+    close() {
+      this.$emit('close')
+    }
+  }
 }
 </script>

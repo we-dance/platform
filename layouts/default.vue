@@ -4,12 +4,14 @@
   >
     <header>
       <nav class="md:flex items-center justify-between flex-wrap p-4">
-        <router-link
-          to="/"
-          class="no-underline flex items-center justify-center leading-none hover:no-underline font-bold"
-        >
-          <TIcon name="logo-text" />
-        </router-link>
+        <div class="flex items-center">
+          <router-link
+            to="/"
+            class="no-underline flex items-center justify-center leading-none hover:no-underline font-bold"
+          >
+            <TIcon name="logo-text" />
+          </router-link>
+        </div>
 
         <div
           class="mt-6 flex md:mt-0 items-center justify-center md:justify-end"
