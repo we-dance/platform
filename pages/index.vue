@@ -65,6 +65,7 @@
         >.
       </div>
     </nav>
+    <TPresentation name="intro" />
     <main class="flex-grow max-w-lg">
       <div class="p-4">
         <div v-if="false" class="rounded bg-orange-200 p-4 mb-4">
@@ -173,6 +174,7 @@ import { computed } from '@vue/composition-api'
 import { Microlink } from '@microlink/vue'
 import TPreview from '~/components/TPreview'
 import TButton from '~/components/TButton'
+import TPresentation from '~/components/TPresentation'
 import TIcon from '~/components/TIcon'
 import TTagsPreview from '~/components/TTagsPreview'
 import useAuth from '~/use/auth'
@@ -189,7 +191,8 @@ export default {
     TPreview,
     TIcon,
     Microlink,
-    TTagsPreview
+    TTagsPreview,
+    TPresentation
   },
   computed: {
     filteredItems() {
