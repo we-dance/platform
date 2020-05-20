@@ -2,7 +2,9 @@
   <div class="md:flex">
     <nav class="p-4 md:w-64">
       <TButton v-if="!uid" to="/signin">Sign In</TButton>
-      <TButton v-if="!account || !account.username" to="/account?tab=settings"
+      <TButton
+        v-else-if="!account || !account.username"
+        to="/account?tab=settings"
         >Create Profile</TButton
       >
       <router-link
