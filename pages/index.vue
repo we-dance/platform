@@ -33,7 +33,7 @@
         />
         <TField v-model="reportReason" class="mt-2" label="Reason" />
         <div class="mt-4 flex justify-end">
-          <TButton @click="cancelReport" class="mr-2">Cancel</TButton>
+          <TButton class="mr-2" @click="cancelReport">Cancel</TButton>
           <TButton type="danger" @click="report">Report</TButton>
         </div>
       </TPopup>
