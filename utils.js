@@ -80,3 +80,17 @@ export const getExcerpt = (markdown) => {
 
   return excerptHtml(html)
 }
+
+export const imageExists = async (url) => {
+  let result = {}
+
+  try {
+    result = await fetch(url, { method: 'HEAD' })
+
+    if (result.ok) {
+      return true
+    }
+  } catch (e) {}
+
+  return false
+}

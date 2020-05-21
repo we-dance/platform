@@ -17,21 +17,19 @@ export default (name, filter) => {
   const hash = `${name}-${field}-${value}`
   const loadingHash = `${name}-${field}-${value}-loading`
 
+  const firestore = firebase.firestore()
+  let collection = firestore.collection(name)
+
+  if (field) {
+    collection = collection.where(field, '==', value)
+  }
+
   if (!state[hash]) {
-    const firestore = firebase.firestore()
-    let collection = firestore.collection(name)
-
     Vue.set(state, hash, {})
-
-    if (field) {
-      collection = collection.where(field, '==', value)
-    }
-
     Vue.set(state, loadingHash, true)
 
     collection.onSnapshot({ includeMetadataChanges: true }, (snapshot) => {
       snapshot.docChanges().forEach((change) => {
-        Vue.set(state, loadingHash, false)
         if (change.type === 'modified' || change.type === 'added') {
           Vue.set(state[hash], change.doc.id, change.doc.data())
         }
@@ -39,7 +37,21 @@ export default (name, filter) => {
           Vue.delete(state[hash], change.doc.id)
         }
       })
+
+      Vue.set(state, loadingHash, false)
     })
+  }
+
+  async function load() {
+    const docs = await collection.get()
+
+    Vue.set(state, loadingHash, true)
+
+    docs.forEach((doc) => {
+      Vue.set(state[hash], doc.id, doc.data())
+    })
+
+    Vue.set(state, loadingHash, false)
   }
 
   function getById(id) {
@@ -69,6 +81,7 @@ export default (name, filter) => {
     ...toRefs(state),
     getById,
     docs,
-    loading
+    loading,
+    load
   }
 }
