@@ -23,6 +23,20 @@
       <div v-else-if="!filteredItems.length">
         No posts found
       </div>
+      <TPopup v-if="reportId">
+        <div class="font-bold mb-4">Report a post</div>
+        <TSelect
+          v-model="reportCategory"
+          label="Category"
+          type="select"
+          :options="['other', 'spam']"
+        />
+        <TField v-model="reportReason" class="mt-2" label="Reason" />
+        <div class="mt-4 flex justify-end">
+          <TButton @click="cancelReport" class="mr-2">Cancel</TButton>
+          <TButton type="danger" @click="report">Report</TButton>
+        </div>
+      </TPopup>
       <div
         v-for="item in filteredItems"
         :key="item.id"
@@ -30,19 +44,33 @@
       >
         <div class="p-4">
           <div>
-            <div class="flex justify-between">
+            <div>
               <router-link
                 :to="`/posts/${item.id}`"
                 class="font-bold leading-tight"
               >
                 {{ item.title }}
               </router-link>
-              <router-link
-                :to="`/posts/${item.id}`"
-                class="text-xs text-gray-600 hover:underline text-right"
-              >
-                {{ dateDiff(item.createdAt) }} ago
-              </router-link>
+              <div class="float-right -mr-2">
+                <TMenu>
+                  <template v-slot:button>
+                    <TIcon
+                      class="cursor-pointer rounded-full hover:bg-gray-200 p-1"
+                      name="more_vert"
+                    />
+                  </template>
+                  <template v-slot:menu="{ closeMenu }">
+                    <TButton
+                      type="nav"
+                      @click="
+                        reportId = item.id
+                        closeMenu()
+                      "
+                      >Report</TButton
+                    >
+                  </template>
+                </TMenu>
+              </div>
             </div>
 
             <div class="text-xs my-1 flex items-center">
@@ -55,6 +83,13 @@
                 :to="`/u/${getAccount(item.createdBy).username}`"
                 >{{ getAccount(item.createdBy).name }}</router-link
               >
+              <span class="mx-1">•</span>
+              <router-link
+                :to="`/posts/${item.id}`"
+                class="text-xs text-gray-600 hover:underline text-right"
+              >
+                {{ dateDiff(item.createdAt) }} ago
+              </router-link>
             </div>
 
             <TPreview
@@ -116,6 +151,7 @@ import useRSVP from '~/use/rsvp'
 import useComments from '~/use/comments'
 import useCollection from '~/use/collection'
 import useAccounts from '~/use/accounts'
+import useDoc from '~/use/doc'
 import { dateDiff, sortBy } from '~/utils'
 
 export default {
@@ -124,7 +160,10 @@ export default {
     Microlink
   },
   data: () => ({
-    showIntro: false
+    showIntro: false,
+    reportId: 0,
+    reportReason: '',
+    reportCategory: 'other'
   }),
   computed: {
     filteredItems() {
@@ -145,6 +184,24 @@ export default {
   mounted() {
     this.showIntro = !!this.$route.query.tour || !ls('sawIntro')
   },
+  methods: {
+    cancelReport() {
+      this.reportId = 0
+      this.reportReason = ''
+      this.reportCategory = 'other'
+    },
+    report(item) {
+      this.createReport({
+        state: 'open',
+        documentId: this.reportId,
+        category: this.reportCategory,
+        collection: 'posts',
+        reason: this.reportReason,
+        documentData: this.getById(this.reportId)
+      })
+      this.cancelReport()
+    }
+  },
   setup() {
     const {
       getCount,
@@ -153,7 +210,8 @@ export default {
       loading: loadingLikes
     } = useRSVP()
     const { getCommentsCount, loading: loadingComments } = useComments()
-    const { docs, loading: loadingPosts } = useCollection('posts')
+    const { docs, loading: loadingPosts, getById } = useCollection('posts')
+    const { create: createReport } = useDoc('reports')
 
     const map = (item) => {
       if (!item.id) {
@@ -192,7 +250,9 @@ export default {
       updateRsvp,
       dateDiff,
       getAccount,
-      loading
+      loading,
+      createReport,
+      getById
     }
   }
 }

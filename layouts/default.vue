@@ -50,6 +50,14 @@
         </router-link>
 
         <div class="mt-4 text-sm">
+          <div v-if="isAdmin" class="border border-red-500 mb-4">
+            <router-link to="/reports" class="block p-2 hover:bg-gray-300">
+              <span class="w-2">🚩</span> Reports
+            </router-link>
+            <router-link to="/tags" class="block p-2 hover:bg-gray-300">
+              <span class="w-2">🏷</span> Tags
+            </router-link>
+          </div>
           <router-link to="/" class="block p-2 hover:bg-gray-300">
             <span class="w-2">📰</span> Feed
           </router-link>
@@ -154,7 +162,7 @@ export default {
     }
   },
   setup() {
-    const { uid, account } = useAuth()
+    const { uid, account, isAdmin } = useAuth()
     const { docs: tagDocs } = useCollection('tags')
     const tags = computed(() =>
       tagDocs.value.map((doc) => ({ key: doc.id, label: doc.id }))
@@ -163,7 +171,8 @@ export default {
     return {
       account,
       uid,
-      tags
+      tags,
+      isAdmin
     }
   }
 }

@@ -25,15 +25,11 @@ const state = Vue.observable({
 export default () => {
   const { router, route } = useRouter()
 
-  let isAdmin = false
-
   if (window) {
-    isAdmin = false
-
     setMarketing()
   }
 
-  const budgetId = computed(() => state.account?.budgetId)
+  const isAdmin = computed(() => state.account?.admin)
 
   if (!state.initialized) {
     firebase.auth().onAuthStateChanged(setUser)
@@ -369,7 +365,6 @@ export default () => {
     getAccount,
     can,
     signInAnonymously,
-    signInWithEmailLink,
-    budgetId
+    signInWithEmailLink
   }
 }
