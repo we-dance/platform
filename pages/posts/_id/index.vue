@@ -187,13 +187,34 @@ export default {
     }
   },
   head() {
+    if (!this.item) {
+      return {}
+    }
+
+    const item = this.item
+
     return {
-      title: this.item?.title,
+      title: item.title,
       meta: [
         {
           hid: 'description',
           name: 'description',
-          content: this.item?.description
+          content: item.description
+        },
+        {
+          name: 'keywords',
+          content: Object.keys(this.item.tags).join(', '),
+          hid: 'keywords'
+        },
+        {
+          property: 'og:title',
+          content: item.title,
+          hid: 'og:title'
+        },
+        {
+          property: 'og:description',
+          content: item.description,
+          hid: 'og:description'
         }
       ]
     }
