@@ -14,7 +14,7 @@ export default {
 
 <template>
   <div v-if="!uid" class="mt-4 mx-auto max-w-md p-4 text-sm">
-    <TIcon name="undraw_modern_art" class="p-4" />
+    <TIcon name="undraw_having_fun" class="p-4" />
     <div>
       List of dancers communities.
     </div>
