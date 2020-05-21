@@ -3,7 +3,9 @@ const isProd = process.env.NODE_ENV === 'production'
 const app = {
   name: 'WeDance',
   description: 'We bring dancers together',
-  social: {},
+  social: {
+    twitter: 'WeDanceApp'
+  },
   url: 'https://wedance.netlify.app',
   cover: '/cover/wide.png'
 }

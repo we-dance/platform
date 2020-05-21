@@ -166,7 +166,7 @@ import useRSVP from '~/use/rsvp'
 import useRouter from '~/use/router'
 import useComments from '~/use/comments'
 import useAccounts from '~/use/accounts'
-import { getDateTime } from '~/utils'
+import { getDateTime, getExcerpt } from '~/utils'
 
 export default {
   name: 'PostView',
@@ -199,11 +199,11 @@ export default {
         {
           hid: 'description',
           name: 'description',
-          content: item.description
+          content: item.excerpt
         },
         {
           name: 'keywords',
-          content: Object.keys(item.tags).join(', '),
+          content: item.keywords,
           hid: 'keywords'
         },
         {
@@ -213,7 +213,7 @@ export default {
         },
         {
           property: 'og:description',
-          content: item.description,
+          content: item.excerpt,
           hid: 'og:description'
         }
       ]
@@ -269,9 +269,22 @@ export default {
       const multi = !response ? 3 : response === 'up' ? 2 : 1
       const order = multi * 100 + votes
       const commentsCount = getCommentsCount(item.id)
+      const excerpt = getExcerpt(item.description)
+
+      let tags = item.tags || {}
+
+      tags = {
+        ...tags,
+        WeDance: true,
+        Dance: true
+      }
+
+      const keywords = Object.keys(tags).join(', ')
 
       return {
         ...item,
+        excerpt,
+        keywords,
         commentsCount,
         upVotes,
         downVotes,

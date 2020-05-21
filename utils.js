@@ -1,5 +1,7 @@
 import format from 'date-fns/format'
 import formatDistance from 'date-fns/formatDistance'
+import MarkdownIt from 'markdown-it'
+import excerptHtml from 'excerpt-html'
 
 export const sortBy = (_key) => {
   let key = _key
@@ -61,4 +63,20 @@ export const getTime = (val) => {
 
 export const openURL = (url) => {
   window.open(url, '_blank')
+}
+
+export const getExcerpt = (markdown) => {
+  if (!markdown) {
+    return ''
+  }
+
+  const md = new MarkdownIt({
+    html: true,
+    linkify: true,
+    typographer: true
+  })
+
+  const html = md.render(markdown)
+
+  return excerptHtml(html)
 }
