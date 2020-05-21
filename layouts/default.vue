@@ -24,7 +24,7 @@
 
     <div class="md:flex">
       <nav
-        class="p-4 md:w-64 bg-white absolute left-0 top-0 w-full h-screen md:block md:relative"
+        class="p-4 md:w-64 bg-white absolute left-0 top-0 w-full min-h-screen h-full md:block md:relative"
         :class="{
           hidden: !isMenuOpen,
           'md:hidden': hideMenu,
