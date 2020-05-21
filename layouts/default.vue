@@ -56,8 +56,17 @@
           <router-link to="/people" class="block p-2 hover:bg-gray-300">
             <span class="w-2">🕺🏼</span> People
           </router-link>
+          <router-link to="/groups" class="block p-2 hover:bg-gray-300">
+            <span class="w-2">👯‍♀️</span> Groups
+          </router-link>
           <router-link to="/events" class="block p-2 hover:bg-gray-300">
             <span class="w-2">🎷</span> Events
+          </router-link>
+          <router-link to="/artists" class="block p-2 hover:bg-gray-300">
+            <span class="w-2">👩‍🎨</span> Artists
+          </router-link>
+          <router-link to="/venues" class="block p-2 hover:bg-gray-300">
+            <span class="w-2">🏘</span> Venues
           </router-link>
           <router-link to="/videos" class="block p-2 hover:bg-gray-300">
             <span class="w-2">📺</span> Videos
