@@ -203,7 +203,7 @@ export default {
         },
         {
           name: 'keywords',
-          content: Object.keys(this.item.tags).join(', '),
+          content: Object.keys(item.tags).join(', '),
           hid: 'keywords'
         },
         {
