@@ -11,12 +11,17 @@
         <div class="mt-4 mx-auto max-w-md p-4 text-sm">
           <TIcon name="undraw_online_dating" class="p-4" />
           <div>
-            Endorsements will be added to your profile so that people will see
-            them.
+            Endorsements help other dancers know what to expect from you both on
+            and off the floor.
           </div>
           <div class="mt-2">
-            Receive endorsements from other dancers by giving them your
-            endorsement first.
+            Write an endorsement for another dancer and they’ll be prompted to
+            write one for you.
+          </div>
+          <div class="mt-2">
+            Once you have both completed your endorsements, they will be
+            displayed on your profile so that other users know how awesome you
+            are!
           </div>
           <div v-if="!uid" class="mt-8 bg-gray-400 p-4 rounded text-center">
             <div>Sign in to continue</div>
