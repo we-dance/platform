@@ -7,7 +7,7 @@
         v-model="isMenuOpen"
         class="absolute top-0 right-0 mr-2 mt-4 z-50 md:hidden"
       />
-      <nav class="md:flex items-center justify-between flex-wrap p-4">
+      <div class="md:flex items-center justify-between flex-wrap p-4">
         <div class="flex items-center justify-start">
           <router-link to="/">
             <TIcon name="logo-text" />
@@ -19,7 +19,7 @@
         >
           <TButton to="/posts/-/edit">Write a post</TButton>
         </div>
-      </nav>
+      </div>
     </header>
 
     <div class="md:flex">

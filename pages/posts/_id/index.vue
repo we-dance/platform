@@ -3,9 +3,9 @@
   <div v-else-if="!exists" class="text-center">
     Post not found
   </div>
-  <div v-else class="p-4 mx-auto container">
+  <div v-else>
     <div class="md:grid grid-cols-12 gap-6">
-      <div class="col-span-8">
+      <div class="col-span-8 bg-white rounded p-4">
         <div>
           <TTagsPreview :value="item.tags" />
 
@@ -63,7 +63,7 @@
       </div>
 
       <div class="col-span-4 col-start-9 row-start-1">
-        <div class="mb-4 rounded border shadow p-4">
+        <div class="mb-4 rounded border shadow p-4 bg-white">
           <router-link
             :to="`/u/${getAccount(item.createdBy).username}`"
             class="text-sm flex items-center"
