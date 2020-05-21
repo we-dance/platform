@@ -1,5 +1,9 @@
 <template>
-  <div class="m-4 p-4">
+  <div>
+    <div class="md:flex items-baseline justify-between mb-4">
+      <h1 class="text-xl font-bold">Events</h1>
+    </div>
+
     <TLoader v-if="loading" />
     <div v-else-if="eventsTotal > 0">
       Found {{ eventsTotal }} events in
@@ -61,7 +65,7 @@ export default {
   },
 
   data: () => ({
-    eventsTotal: 0,
+    eventsTotal: -1,
     events: [],
     mode: 'list',
     selectedGenres: [],

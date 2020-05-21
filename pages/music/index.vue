@@ -1,6 +1,12 @@
 <template>
-  <div class="flex-grow p-4 bg-gray-200 rounded mx-4">
+  <div>
+    <div class="md:flex items-baseline justify-between mb-4">
+      <h1 class="text-xl font-bold">Music</h1>
+    </div>
+
     <div class="mt-4 mx-auto max-w-md p-4 text-sm">
+      <TIcon name="undraw_compose_music" class="p-4" />
+
       <div>
         Dance music directory.
       </div>

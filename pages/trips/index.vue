@@ -1,5 +1,5 @@
 <template>
-  <div class="flex-grow p-4 bg-gray-200 rounded mx-4">
+  <div>
     <TCardList
       :collection="collection"
       title="Trips"
@@ -46,7 +46,7 @@ import useAuth from '~/use/auth'
 export default {
   name: 'TripsIndex',
   setup() {
-    const collection = 'events'
+    const collection = 'trips'
 
     const fields = [
       {

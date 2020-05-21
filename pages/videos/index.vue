@@ -1,6 +1,11 @@
 <template>
-  <div class="flex-grow p-4 bg-gray-200 rounded mx-4">
+  <div>
+    <div class="md:flex items-baseline justify-between mb-4">
+      <h1 class="text-xl font-bold">Videos</h1>
+    </div>
+
     <div class="mt-4 mx-auto max-w-md p-4 text-sm">
+      <TIcon name="undraw_video_files" class="p-4" />
       <div>
         Dance videos directory.
       </div>

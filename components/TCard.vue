@@ -1,10 +1,10 @@
 <template>
   <pre v-if="$route.query.debug" class="border p-4 m-4 rounded">{{ item }}</pre>
-  <div v-else class="rounded bg-white mb-4 shadow border w-64">
+  <div v-else class="rounded bg-white mb-4 shadow border max-w-sm">
     <div>
       <img class="rounded-t" :src="item.cover" :alt="item.name" />
     </div>
-    <div class="font-bold leading-tight px-4 mt-2">
+    <div class="font-bold leading-tight px-4 my-2">
       {{ item.name }}
     </div>
     <div class="flex justify-between px-4 mb-4 items-center">

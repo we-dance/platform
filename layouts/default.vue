@@ -109,7 +109,9 @@
           >.
         </div>
       </nav>
-      <nuxt />
+      <div class="flex-grow p-4 bg-gray-200 rounded mx-4">
+        <nuxt />
+      </div>
     </div>
   </div>
 </template>
@@ -157,3 +159,9 @@ export default {
   }
 }
 </script>
+
+<style>
+nav .nuxt-link-exact-active {
+  @apply font-bold bg-gray-200;
+}
+</style>

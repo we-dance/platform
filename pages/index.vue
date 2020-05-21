@@ -1,7 +1,12 @@
 <template>
-  <main class="flex-grow max-w-lg">
+  <main>
+    <div class="md:flex items-baseline justify-between mb-4">
+      <h1 class="text-xl font-bold">Feed</h1>
+    </div>
+
     <TPresentation v-if="showIntro" name="intro" @close="showIntro = false" />
-    <div class="p-4">
+
+    <div>
       <div v-if="false" class="rounded bg-orange-200 p-4 mb-4">
         <div class="uppercase font-bold">New Challenge</div>
         <div>
@@ -21,7 +26,7 @@
       <div
         v-for="item in filteredItems"
         :key="item.id"
-        class="rounded bg-white mb-4 shadow border"
+        class="rounded bg-white mb-4 shadow border max-w-sm"
       >
         <div class="p-4">
           <div>
