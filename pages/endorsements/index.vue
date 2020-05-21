@@ -1,5 +1,5 @@
 <template>
-  <div class="flex-grow p-4 bg-gray-200 rounded mr-4">
+  <div class="flex-grow p-4 bg-gray-200 rounded mx-4">
     <TCardList
       :collection="collection"
       title="Endorsements"
@@ -8,8 +8,20 @@
       :filters="filters"
     >
       <template v-slot:empty>
-        <div class="text-center mt-4">
-          Create your first endorsement.
+        <div class="mt-4 mx-auto max-w-md p-4 text-sm">
+          <TIcon name="undraw_online_dating" class="p-4" />
+          <div>
+            Endorsements will be added to your profile so that people will see
+            them.
+          </div>
+          <div class="mt-2">
+            Receive endorsements from other dancers by giving them your
+            endorsement first.
+          </div>
+          <div v-if="!uid" class="mt-8 bg-gray-400 p-4 rounded text-center">
+            <div>Sign in to continue</div>
+            <TButton class="mt-2" to="/signin?target=/trips">Sign in</TButton>
+          </div>
         </div>
       </template>
       <template v-slot:default="{ item }">
@@ -71,7 +83,8 @@ export default {
       collection,
       fields,
       getDateTime,
-      filters
+      filters,
+      uid
     }
   }
 }

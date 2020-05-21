@@ -1,5 +1,5 @@
 <template>
-  <div class="flex-grow p-4 bg-gray-200 rounded mr-4">
+  <div class="flex-grow p-4 bg-gray-200 rounded mx-4">
     <TCardList
       :collection="collection"
       title="Trips"
@@ -8,8 +8,20 @@
       :filters="filters"
     >
       <template v-slot:empty>
-        <div class="text-center mt-4">
-          Create your first trip.
+        <div class="mt-4 mx-auto max-w-md p-4 text-sm">
+          <TIcon name="undraw_travel_plans" class="p-4" />
+          <div>
+            Trips allow you to share dance-related travel plans with other users
+            to find partners, travel companions, and new friends!
+          </div>
+          <div class="mt-2">
+            Create a trip to let others see where you're going, or browse
+            existing trips to see if you want to tag along.
+          </div>
+          <div v-if="!uid" class="mt-8 bg-gray-400 p-4 rounded text-center">
+            <div>Sign in to continue</div>
+            <TButton class="mt-2" to="/signin?target=/trips">Sign in</TButton>
+          </div>
         </div>
       </template>
       <template v-slot:default="{ item }">
@@ -90,7 +102,8 @@ export default {
       collection,
       fields,
       getDateTime,
-      filters
+      filters,
+      uid
     }
   }
 }

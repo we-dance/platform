@@ -57,7 +57,7 @@
             <span class="w-2">🌶</span> Endorsements
           </router-link>
           <router-link to="/?tour=intro" class="block p-2 hover:bg-gray-300">
-            <span class="w-2">🍓</span> Show Tour
+            <span class="w-2">🍓</span> What is WeDance?
           </router-link>
         </div>
 
