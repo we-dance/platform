@@ -50,6 +50,21 @@
         </router-link>
 
         <div class="mt-4 text-sm">
+          <router-link to="/" class="block p-2 hover:bg-gray-300">
+            <span class="w-2">📰</span> Feed
+          </router-link>
+          <router-link to="/people" class="block p-2 hover:bg-gray-300">
+            <span class="w-2">🕺🏼</span> People
+          </router-link>
+          <router-link to="/events" class="block p-2 hover:bg-gray-300">
+            <span class="w-2">🎷</span> Events
+          </router-link>
+          <router-link to="/videos" class="block p-2 hover:bg-gray-300">
+            <span class="w-2">📺</span> Videos
+          </router-link>
+          <router-link to="/music" class="block p-2 hover:bg-gray-300">
+            <span class="w-2">🎶</span> Music
+          </router-link>
           <router-link to="/trips" class="block p-2 hover:bg-gray-300">
             <span class="w-2">🚕</span> Trips
           </router-link>
@@ -63,7 +78,7 @@
 
         <details>
           <summary class="p-2 font-bold mt-4 border-b">
-            Tags
+            Musical Genres
           </summary>
           <div>
             <router-link
