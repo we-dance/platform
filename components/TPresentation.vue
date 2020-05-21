@@ -4,7 +4,7 @@
       <TIcon class="w-64" name="logo" />
       <div class="mt-8 w-64">
         <p>
-          Welcome to community platform for dancers.
+          Welcome to open source, non-profit, democratic dance community.
         </p>
         <div class="mt-8 flex justify-end">
           <TButton @click="slide = 2">Next</TButton>
