@@ -2,7 +2,8 @@
   <div v-if="!uid" class="mt-4 mx-auto max-w-md p-4 text-sm">
     <TIcon name="undraw_having_fun" class="p-4" />
     <div>
-      List of dancers communities.
+      Join a community within a community! Find others that move the same way
+      you move. Great for meeting new friends and dance partners.
     </div>
     <div v-if="!uid" class="mt-8 bg-gray-400 p-4 rounded text-center">
       <div>Sign in to access</div>

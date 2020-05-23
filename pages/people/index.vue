@@ -5,7 +5,8 @@
         <div class="mt-4 mx-auto max-w-md p-4 text-sm">
           <TIcon name="undraw_work_chat" class="p-4" />
           <div>
-            Access list of dancers in any city.
+            People are great, but people near you are even better. Find other
+            dancers in your area by publishing your own profile first!
           </div>
           <div v-if="!uid" class="mt-8 bg-gray-400 p-4 rounded text-center">
             <div>Sign in to continue</div>
