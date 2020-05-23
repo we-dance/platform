@@ -166,5 +166,11 @@ export default {
   sitemap: {
     hostname: app.url,
     routes: ['/']
+  },
+  watchers: {
+    webpack: {
+      poll: 5000,
+      ignored: ['node_modules']
+    }
   }
 }

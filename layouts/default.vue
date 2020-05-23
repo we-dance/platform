@@ -24,7 +24,7 @@
 
     <div class="md:flex">
       <nav
-        class="p-4 md:w-64 bg-white absolute left-0 top-0 w-full min-h-screen h-full md:block md:relative"
+        class="p-4 md:w-64 pr-16 md:pr-4 bg-white absolute left-0 top-0 bottom-0 w-full min-h-screen h-full md:block md:relative overflow-scroll"
         :class="{
           hidden: !isMenuOpen,
           'md:hidden': hideMenu,
@@ -39,7 +39,7 @@
         >
         <router-link
           v-else
-          class="flex hover:bg-gray-300 p-2 w-56"
+          class="flex hover:bg-gray-300 p-2"
           :to="`/u/${account.username}`"
         >
           <img class="w-10 h-10 rounded-full" :src="account.photo" />
