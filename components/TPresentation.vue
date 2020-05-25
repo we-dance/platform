@@ -4,7 +4,7 @@
       <TIcon class="w-64" name="logo" />
       <div class="mt-8 w-64">
         <p>
-          Welcome to open source, non-profit, democratic dance community.
+          Welcome to open source, democratic dance community.
         </p>
         <div class="mt-8 flex justify-end">
           <TButton @click="slide = 2">Next</TButton>
@@ -64,10 +64,7 @@
           Upcoming events and festivals
         </p>
         <div class="mt-8 flex justify-end">
-          <TButton to="/posts/hpHquGrQKthCaGBizAZB" class="mr-2"
-            >Read more</TButton
-          >
-          <TButton @click="close">Close</TButton>
+          <TButton to="/posts/hpHquGrQKthCaGBizAZB">About WeDance</TButton>
         </div>
       </div>
     </div>

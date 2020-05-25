@@ -126,7 +126,7 @@
           >.
         </div>
       </nav>
-      <div class="flex-grow p-4 bg-gray-200 rounded mx-4">
+      <div class="flex-grow p-4 bg-gray-200 rounded mb-4 md:mr-4">
         <nuxt />
       </div>
     </div>

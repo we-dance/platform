@@ -63,7 +63,7 @@
       </div>
 
       <div class="col-span-4 col-start-9 row-start-1">
-        <div class="mb-4 rounded border shadow p-4 bg-white">
+        <div class="mt-4 md:mt-0 mb-4 rounded border shadow p-4 bg-white">
           <router-link
             :to="`/u/${getAccount(item.createdBy).username}`"
             class="text-sm flex items-center"
@@ -113,7 +113,7 @@
             </div>
           </template>
           <template v-slot:empty>
-            <div class="text-center mt-4">
+            <div class="text-center my-8">
               There are no comments yet.
             </div>
           </template>
