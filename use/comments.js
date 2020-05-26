@@ -14,7 +14,7 @@ export default () => {
   async function addComment(postId, comment) {
     await create({
       postId,
-      comment
+      body: comment
     })
   }
 

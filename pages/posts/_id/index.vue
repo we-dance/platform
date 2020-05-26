@@ -96,10 +96,29 @@
       </div>
 
       <div class="col-span-8">
+        <div>
+          <textarea
+            v-model="comment"
+            :placeholder="
+              `Say something nice to ${getAccount(item.createdBy).username}...`
+            "
+            class="border rounded p-4 w-full overflow-hidden h-auto"
+          />
+
+          <div class="flex justify-end">
+            <TButton
+              @click="
+                addComment(item.id, comment)
+                comment = ''
+              "
+            >
+              Post comment
+            </TButton>
+          </div>
+        </div>
+
         <TCardList
           :collection="collection"
-          title="Discussion"
-          add="Add to the discussion"
           :fields="fields"
           :map="map"
           :filters="filters"
@@ -118,34 +137,29 @@
             </div>
           </template>
           <template v-slot:default="{ item }">
-            <div class="rounded bg-white mb-4 shadow border">
-              <div class="p-4">
-                <TSignature small :item="item" />
-                <TPreview class="ml-6 mt-2" :content="item.body" />
-              </div>
-              <div class="px-4 pb-4 flex items-center">
-                <div class="text-green-500 flex">
-                  <button
-                    class="text-center hover:text-green-500"
-                    :class="{ 'text-green-700': item.response === 'up' }"
-                    @click="updateRsvp(item.id, collection, 'up')"
-                  >
-                    <TIcon name="up" class="h-6 w-6" />
-                  </button>
-                  <div>
-                    {{ item.upVotes }}
-                  </div>
-                </div>
-                <div class="text-red-500 flex ml-2">
-                  <button
-                    class="text-center hover:text-primary"
-                    :class="{ 'text-red-700': item.response === 'down' }"
-                    @click="updateRsvp(item.id, collection, 'down')"
-                  >
-                    <TIcon name="down" class="h-6 w-6 hover:text-primary" />
-                  </button>
-                  <div>
-                    {{ item.downVotes }}
+            <div class="mb-4">
+              <div>
+                <TPreview :content="item.body" />
+                <div>
+                  <div class="text-sm flex items-center">
+                    <img
+                      class="rounded-full mr-2 w-4 h-4"
+                      :src="getAccount(item.createdBy).photo"
+                    />
+                    <div class="flex w-full items-center">
+                      <router-link
+                        class="hover:underline"
+                        :to="`/u/${getAccount(item.createdBy).username}`"
+                      >
+                        {{ getAccount(item.createdBy).username }}
+                      </router-link>
+                      <span class="mx-1">•</span>
+                      <div class="text-gray-600">
+                        {{ dateDiff(item.createdAt) }}
+                      </div>
+                      <span class="mx-1">•</span>
+                      <TButton type="link">Reply</TButton>
+                    </div>
                   </div>
                 </div>
               </div>
@@ -166,14 +180,16 @@ import useRSVP from '~/use/rsvp'
 import useRouter from '~/use/router'
 import useComments from '~/use/comments'
 import useAccounts from '~/use/accounts'
-import { getDateTime, getExcerpt } from '~/utils'
+import { getDateTime, getExcerpt, dateDiff } from '~/utils'
 
 export default {
-  name: 'PostView',
   layout: 'minimal',
   components: {
     Microlink
   },
+  data: () => ({
+    comment: ''
+  }),
   computed: {
     tweetUrl() {
       const app = process.env.app
@@ -230,7 +246,8 @@ export default {
       {
         name: 'body',
         label: 'Comment',
-        type: 'markdown'
+        type: 'markdown',
+        hideLabel: true
       },
       {
         name: 'postId',
@@ -255,7 +272,7 @@ export default {
     }
 
     const { getCount, getRsvpResponse, updateRsvp } = useRSVP()
-    const { getCommentsCount } = useComments()
+    const { getCommentsCount, addComment } = useComments()
 
     const map = (item) => {
       if (!item) {
@@ -310,7 +327,9 @@ export default {
       getCommentsCount,
       can,
       getAccount,
-      getDateTime
+      getDateTime,
+      dateDiff,
+      addComment
     }
   }
 }

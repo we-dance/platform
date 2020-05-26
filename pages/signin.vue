@@ -83,7 +83,7 @@ export default {
     }
   },
   mounted() {
-    const target = this.$router.query.target
+    const target = this.$route.query.target
     if (target) {
       ls('target', target)
     }

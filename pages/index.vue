@@ -1,6 +1,6 @@
 <template>
   <main>
-    <div class="md:flex items-baseline justify-between mb-4">
+    <div class="flex items-baseline justify-between mb-4 pb-4 border-b">
       <h1 class="text-xl font-bold">News</h1>
       <TButton to="/posts/-/edit">New post</TButton>
     </div>

@@ -1,21 +1,6 @@
 <template>
   <div class="mx-auto w-full max-w-lg">
-    <div class="flex">
-      <button
-        v-for="type in types"
-        :key="type.value"
-        class="border border-gray-200 w-full rounded-t focus:outline-none hover:bg-gray-100"
-        @click="selectedType = type.value"
-      >
-        <div class="p-2">
-          {{ type.label }}
-        </div>
-        <div
-          v-if="selectedType === type.value"
-          class="border-b-2 border-blue-500"
-        ></div>
-      </button>
-    </div>
+    <TTabs v-model="selectedType" :tabs="types" />
     <TForm
       v-model="item"
       :fields="fields"

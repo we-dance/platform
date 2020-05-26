@@ -1,6 +1,10 @@
 <template>
   <div>
-    <TCardList :collection="collection" title="People" :filters="filters">
+    <div class="flex items-baseline justify-between mb-2 border-b">
+      <TTabs v-model="tab" :tabs="tabs" />
+    </div>
+
+    <TCardList :collection="collection" :filters="filters">
       <template v-slot:empty>
         <div class="mt-4 mx-auto max-w-md p-4 text-sm">
           <TIcon name="undraw_work_chat" class="p-4" />
@@ -68,6 +72,27 @@ import useAuth from '~/use/auth'
 import useProfiles from '~/use/profiles'
 
 export default {
+  data: () => ({
+    tabs: [
+      {
+        value: 'members',
+        label: 'Members'
+      },
+      {
+        value: 'groups',
+        label: 'Groups'
+      },
+      {
+        value: 'artists',
+        label: 'Artists'
+      },
+      {
+        value: 'teachers',
+        label: 'Teachers'
+      }
+    ],
+    tab: 'members'
+  }),
   setup() {
     const collection = 'profiles'
 

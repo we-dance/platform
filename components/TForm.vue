@@ -112,7 +112,12 @@
       </div>
 
       <div class="flex">
-        <TButton v-if="showCancel" type="link" @click="cancel">
+        <TButton
+          v-if="showCancel"
+          type="secondary"
+          class="mr-2"
+          @click="cancel"
+        >
           Cancel
         </TButton>
         <TButton type="primary" @click="save">{{ submitLabel }}</TButton>
