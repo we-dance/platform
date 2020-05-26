@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div class="md:flex items-baseline justify-between">
+    <div class="flex items-baseline justify-between">
       <h1 v-if="title" class="text-xl font-bold">{{ title }}</h1>
       <TButton v-if="add && can('add', collection)" @click="currentId = 'add'">
         {{ add }}

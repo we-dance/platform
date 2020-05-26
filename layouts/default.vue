@@ -5,44 +5,89 @@
     <header>
       <div class="md:flex items-center justify-between flex-wrap p-4">
         <div class="flex items-center justify-start">
-          <router-link to="/">
-            <TIcon name="logo-text" />
+          <router-link to="/" class="flex items-center">
+            <TIcon class="w-8 h-8 mt-2 mr-2" name="icon" />
+            <TIcon class="h-8 w-56" name="logo-text" />
           </router-link>
         </div>
 
-        <div
-          class="mt-6 flex md:mt-0 items-center justify-center md:justify-end"
+        <nav
+          class="fixed bottom-0 left-0 right-0 md:relative md:mt-6 flex md:mt-0 items-center justify-evenly md:justify-end p-2 md:p-0 border-t shadow-lg md:shadow-none md:border-0 text-gray-700 bg-white"
         >
-          <router-link to="/" class="block p-2">
-            <span class="w-2">📰</span>
-            <span>News</span>
-          </router-link>
-          <router-link to="/people" class="block p-2">
-            <span class="w-2">🕺🏼</span>
-            <span>People</span>
-          </router-link>
-          <router-link to="/events" class="block p-2">
-            <span class="w-2">🎷</span>
-            <span>Events</span>
-          </router-link>
-          <router-link to="/trips" class="block p-2">
-            <span class="w-2">🚕</span>
-            <span>Trips</span>
-          </router-link>
-          <TButton v-if="!uid" to="/signin">Sign In</TButton>
           <router-link
-            v-else
-            class="flex rounded-full border-2 border-gray-200 hover:border-blue-500 p-1"
-            :to="`/u/${account.username}`"
+            to="/"
+            class="block p-2 md:px-4 flex flex-col justify-center"
           >
-            <img class="w-8 h-8 rounded-full" :src="account.photo" />
+            <TIcon class="w-8 h-8" name="news" />
+            <span class="hidden md:block">News</span>
           </router-link>
-        </div>
+          <router-link
+            to="/people"
+            class="block p-2 md:px-4 flex flex-col justify-center"
+          >
+            <TIcon class="w-8 h-8" name="friends" />
+            <span class="hidden md:block">People</span>
+          </router-link>
+          <router-link
+            to="/events"
+            class="block p-2 md:px-4 flex flex-col justify-center"
+          >
+            <TIcon class="w-8 h-8" name="ticket" />
+            <span class="hidden md:block">Events</span>
+          </router-link>
+          <router-link
+            to="/trips"
+            class="block p-2 md:px-4 flex flex-col justify-center"
+          >
+            <TIcon class="w-8 h-8" name="directions" />
+            <span class="hidden md:block">Trips</span>
+          </router-link>
+
+          <TButton v-if="!uid" to="/signin">Sign In</TButton>
+          <TMenu v-else>
+            <template slot="button">
+              <div
+                class="flex rounded-full border-2 border-gray-200 hover:border-blue-500 p-1"
+              >
+                <img class="w-8 h-8 rounded-full" :src="account.photo" />
+              </div>
+            </template>
+            <template slot="menu">
+              <div v-if="isAdmin()" class="text-red">
+                <TButton to="/reports" type="nav-admin">
+                  Reports
+                </TButton>
+                <TButton to="/tags" type="nav-admin">
+                  Tags
+                </TButton>
+                <TButton to="/profiles" type="nav-admin">
+                  Profiles
+                </TButton>
+              </div>
+              <TButton
+                v-if="getProfile(uid).username"
+                type="nav"
+                :to="`/u/${getProfile(uid).username}`"
+              >
+                My Profile
+              </TButton>
+              <TButton type="nav" to="/settings">
+                Settings
+              </TButton>
+              <TButton type="nav" to="/?tour=intro">
+                About
+              </TButton>
+              <TButton type="nav" to="/signout">
+                Logout
+              </TButton>
+            </template>
+          </TMenu>
+        </nav>
       </div>
     </header>
 
     <div class="md:flex">
-      <div class="flex-grow p-4 bg-gray-200 rounded mb-4 md:mr-4">
+      <div class="flex-grow p-4 bg-gray-200 rounded mb-16 md:mr-4">
         <nuxt />
       </div>
     </div>
@@ -53,6 +98,7 @@
 import { computed } from '@vue/composition-api'
 import useAuth from '~/use/auth'
 import useCollection from '~/use/collection'
+import useProfiles from '~/use/profiles'
 
 export default {
   props: {
@@ -64,6 +110,11 @@ export default {
   data: () => ({
     isMenuOpen: false
   }),
+  computed: {
+    isHome() {
+      return this.$route.name === 'index'
+    }
+  },
   watch: {
     $route() {
       this.updateMenu()
@@ -80,12 +131,14 @@ export default {
   setup() {
     const { uid, account, isAdmin } = useAuth()
     const { docs: tagDocs } = useCollection('tags')
+    const { getProfile } = useProfiles()
     const tags = computed(() =>
       tagDocs.value.map((doc) => ({ key: doc.id, label: doc.id }))
     )
 
     return {
       account,
+      getProfile,
       uid,
       tags,
       isAdmin
@@ -96,6 +149,6 @@ export default {
 
 <style>
 nav .nuxt-link-exact-active {
-  @apply font-bold bg-gray-200;
+  @apply text-blue-500;
 }
 </style>

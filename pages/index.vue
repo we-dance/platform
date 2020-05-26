@@ -1,7 +1,7 @@
 <template>
   <main>
     <div class="md:flex items-baseline justify-between mb-4">
-      <h1 class="text-xl font-bold">Newest</h1>
+      <h1 class="text-xl font-bold">News</h1>
     </div>
 
     <TPresentation v-if="showIntro" name="intro" @close="showIntro = false" />

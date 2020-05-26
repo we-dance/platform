@@ -81,10 +81,13 @@ export default {
         link: 'underline font-semibold py-2 px-4 hover:no-underline',
         nav:
           'block text-left w-full px-4 py-2 text-gray-800 hover:bg-indigo-500 hover:text-white',
+        'nav-admin':
+          'block text-left w-full px-4 py-2 text-red-500 hover:bg-gray-500',
+
         icon: ''
       }
 
-      let classes = 'cursor-pointer outline-none focus:outline-none'
+      let classes = 'btn cursor-pointer outline-none focus:outline-none'
 
       if (!this.icon) {
         classes = map[this.type] + ' inline-block text-center'

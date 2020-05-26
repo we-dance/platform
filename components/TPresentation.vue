@@ -64,7 +64,7 @@
           Upcoming events and festivals
         </p>
         <div class="mt-8 flex justify-end">
-          <TButton to="/posts/hpHquGrQKthCaGBizAZB">About WeDance</TButton>
+          <TButton to="/posts/hpHquGrQKthCaGBizAZB">Read more</TButton>
         </div>
       </div>
     </div>

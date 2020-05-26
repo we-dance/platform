@@ -4,11 +4,16 @@
     User not found
   </div>
   <div v-else>
-    <div class="flex p-4">
-      <img class="rounded-full w-32 h-32 mr-8 mb-2" :src="profile.photo" />
+    <div class="md:flex p-4">
+      <img
+        class="mx-auto md:m-0 md:mr-8 mb-2 rounded-full w-32 h-32 "
+        :src="profile.photo"
+      />
       <div>
-        <div class="font-bold text-2xl leading-none">{{ profile.name }}</div>
-        <div>@{{ profile.username }}</div>
+        <div class="text-center md:text-left">
+          <div class="font-bold text-2xl leading-none">{{ profile.name }}</div>
+          <div>@{{ profile.username }}</div>
+        </div>
         <dl class="mt-2 md:flex">
           <dt class="font-bold mr-1">City:</dt>
           <dd>{{ profile.city }}</dd>
