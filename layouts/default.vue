@@ -3,10 +3,6 @@
     class="container mx-auto font-sans leading-normal tracking-normal antialiased"
   >
     <header>
-      <THamburger
-        v-model="isMenuOpen"
-        class="absolute top-0 right-0 mr-2 mt-4 z-50 md:hidden"
-      />
       <div class="md:flex items-center justify-between flex-wrap p-4">
         <div class="flex items-center justify-start">
           <router-link to="/">
