@@ -201,9 +201,6 @@ export default {
       }
     ]
   }),
-  watch: {
-    account: 'load'
-  },
   computed: {
     profileUrl() {
       const username = this.profile.username
@@ -217,6 +214,9 @@ export default {
     currentTab() {
       return this.$route.query.tab || 'welcome'
     }
+  },
+  watch: {
+    account: 'load'
   },
   mounted() {
     this.load()
