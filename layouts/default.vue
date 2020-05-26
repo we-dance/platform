@@ -34,7 +34,7 @@
         <TButton v-if="!uid" to="/signin">Sign In</TButton>
         <TButton
           v-else-if="!account || !account.username"
-          to="/account?tab=settings"
+          to="/settings?tab=welcome"
           >Create Profile</TButton
         >
         <router-link
@@ -50,12 +50,15 @@
         </router-link>
 
         <div class="mt-4 text-sm">
-          <div v-if="isAdmin" class="border border-red-500 mb-4">
+          <div v-if="isAdmin()" class="border border-red-500 mb-4">
             <router-link to="/reports" class="block p-2 hover:bg-gray-300">
               <span class="w-2">🚩</span> Reports
             </router-link>
             <router-link to="/tags" class="block p-2 hover:bg-gray-300">
               <span class="w-2">🏷</span> Tags
+            </router-link>
+            <router-link to="/profiles" class="block p-2 hover:bg-gray-300">
+              <span class="w-2">🕺🏼</span> Profiles
             </router-link>
           </div>
           <router-link to="/" class="block p-2 hover:bg-gray-300">

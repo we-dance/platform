@@ -5,32 +5,32 @@
   </div>
   <div v-else>
     <div class="flex p-4">
-      <img class="rounded-full w-32 h-32 mr-8 mb-2" :src="account.photo" />
+      <img class="rounded-full w-32 h-32 mr-8 mb-2" :src="profile.photo" />
       <div>
-        <div class="font-bold text-2xl leading-none">{{ account.name }}</div>
-        <div>@{{ account.username }}</div>
+        <div class="font-bold text-2xl leading-none">{{ profile.name }}</div>
+        <div>@{{ profile.username }}</div>
         <dl class="mt-2 md:flex">
           <dt class="font-bold mr-1">Location:</dt>
-          <dd>{{ account.location }}</dd>
+          <dd>{{ profile.location }}</dd>
         </dl>
         <dl class="mt-2 md:flex">
           <dt class="font-bold mr-1">Joined:</dt>
-          <dd>{{ getDateTime(account.createdAt) }}</dd>
+          <dd>{{ getDateTime(profile.createdAt) }}</dd>
         </dl>
       </div>
     </div>
     <div v-if="uid === id" class="p-4">
-      <TButton to="/account?tab=settings">Edit Profile</TButton>
+      <TButton to="/settings?tab=profile">Edit Profile</TButton>
     </div>
     <div class="p-4">
-      <div>{{ account.summary }}</div>
-      <dl v-if="account.skills" class="mt-2 md:flex">
+      <div>{{ profile.summary }}</div>
+      <dl v-if="profile.skills" class="mt-2 md:flex">
         <dt class="font-bold mr-1">Dance Skills:</dt>
-        <dd>{{ account.skills }}</dd>
+        <dd>{{ profile.skills }}</dd>
       </dl>
-      <dl v-if="account.learning" class="mt-2 md:flex">
+      <dl v-if="profile.learning" class="mt-2 md:flex">
         <dt class="font-bold mr-1">I am getting into:</dt>
-        <dd>{{ account.learning }}</dd>
+        <dd>{{ profile.learning }}</dd>
       </dl>
     </div>
   </div>
@@ -49,11 +49,11 @@ export default {
     const { uid } = useAuth()
     const username = params.id
 
-    const { doc: account, id, loading, exists, find } = useDoc('accounts')
+    const { doc: profile, id, loading, exists, find } = useDoc('profiles')
     find('username', username)
 
     return {
-      account,
+      profile,
       getDateTime,
       exists,
       loading,

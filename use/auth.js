@@ -3,7 +3,7 @@ import features from 'platform-detect'
 import ls from 'local-storage'
 import { utm } from 'url-utm-params'
 import { isSameDay } from 'date-fns'
-import { toRefs, computed } from '@vue/composition-api'
+import { toRefs } from '@vue/composition-api'
 import firebase from 'firebase/app'
 import 'firebase/auth'
 import 'firebase/firestore'
@@ -27,9 +27,15 @@ export default () => {
 
   if (window) {
     setMarketing()
+
+    const uid = ls('uid')
+
+    if (uid) {
+      state.uid = uid
+    }
   }
 
-  const isAdmin = computed(() => state.account?.admin)
+  const isAdmin = () => !!state.uid && !!state.account && !!state.account.admin
 
   if (!state.initialized) {
     firebase.auth().onAuthStateChanged(setUser)
@@ -41,9 +47,8 @@ export default () => {
     state.initialized = true
   }
 
-  const confirmedAccount = computed(
-    () => !!state.uid && !!state.account && !!state.account.confirmed
-  )
+  const isAccountConfirmed = () =>
+    !!state.uid && !!state.account && !!state.account.confirmed
 
   const firestore = firebase.firestore()
 
@@ -119,8 +124,8 @@ export default () => {
   }
 
   function can(action, collection, object) {
-    if (isAdmin) {
-      return !!state.uid
+    if (isAdmin()) {
+      return true
     }
     if (action === 'add') {
       return !!state.uid
@@ -136,12 +141,14 @@ export default () => {
   async function setUser(user) {
     if (user) {
       state.uid = user.uid
+      ls('uid', user.uid)
     } else {
       state.loading = false
       state.uid = null
     }
 
     if (!state.uid) {
+      ls.remove('uid')
       state.account = null
       state.profile = null
       return
@@ -360,7 +367,7 @@ export default () => {
     signInWithGoogle,
     sendSignInLinkToEmail,
     signOut,
-    confirmedAccount,
+    isAccountConfirmed,
     isAdmin,
     getAccount,
     can,

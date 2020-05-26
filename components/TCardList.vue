@@ -45,17 +45,33 @@
     </div>
 
     <div v-for="(item, itemId) in items" :key="item.id">
-      <TForm
-        v-if="currentId === itemId"
-        v-model="items[itemId]"
-        :fields="fields"
-        show-cancel
-        :show-remove="can('remove', collection, item)"
-        class="rounded bg-white mb-4 shadow p-4"
-        @save="saveItem"
-        @cancel="cancelItem"
-        @remove="removeItem"
-      />
+      <div v-if="currentId === itemId">
+        <div
+          v-if="itemLabel(item)"
+          class="font-bold border-b mb-4 flex justify-between"
+        >
+          <div>
+            {{ itemLabel(item) }}
+          </div>
+          <button
+            class="rounded p-2 hover:text-primary"
+            @click="cancelItem(item)"
+          >
+            <TIcon name="close" />
+          </button>
+        </div>
+        <slot name="editor-header" :item="item" />
+        <TForm
+          v-model="items[itemId]"
+          :fields="fields"
+          show-cancel
+          :show-remove="can('remove', collection, item)"
+          class="rounded bg-white mb-4 shadow p-4"
+          @save="saveItem"
+          @cancel="cancelItem"
+          @remove="removeItem"
+        />
+      </div>
       <template v-else>
         <div class="flex justify-end">
           <slot name="card-toolbar" :item="item" />
@@ -75,7 +91,9 @@
             Delete
           </button>
         </div>
-        <slot :item="item" />
+        <slot :item="item">
+          {{ itemLabel(item) }}
+        </slot>
       </template>
     </div>
   </div>
@@ -129,6 +147,12 @@ export default {
     itemClass: {
       type: String,
       default: 'px-6 py-4 rounded bg-white mb-4 shadow'
+    },
+    itemLabel: {
+      type: Function,
+      default: (item) => {
+        return item.name
+      }
     }
   },
   data: () => ({

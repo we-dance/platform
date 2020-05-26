@@ -2,12 +2,12 @@ import ls from 'local-storage'
 import useAuth from '~/use/auth'
 
 export default async ({ route, redirect }) => {
-  const { getAccount, confirmedAccount } = useAuth()
+  const { getAccount, isAccountConfirmed } = useAuth()
 
   await getAccount()
 
-  if (!confirmedAccount.value) {
+  if (!isAccountConfirmed() && route.name !== 'settings') {
     ls('target', route.fullPath)
-    redirect('/account')
+    redirect('/settings')
   }
 }

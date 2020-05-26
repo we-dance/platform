@@ -169,7 +169,8 @@ export default {
     }
   },
   watch: {
-    value: 'load'
+    value: 'load',
+    fields: 'load'
   },
   mounted() {
     this.load()

@@ -25,31 +25,33 @@
         <div>
           <div class="bg-white mb-4 rounded border shadow p-4 max-w-sm">
             <router-link
-              :to="`/u/${getAccount(item.createdBy).username}`"
+              :to="`/u/${getProfile(item.createdBy).username}`"
               class="text-sm flex items-center"
             >
               <img
                 class="rounded-full mr-2 w-10 h-10"
-                :src="getAccount(item.createdBy).photo"
+                :src="getProfile(item.createdBy).photo"
               />
               <div>
                 <div class="font-bold">
-                  {{ getAccount(item.createdBy).name }}
+                  {{ getProfile(item.createdBy).name }}
                 </div>
                 <div class="text-gray-600">
-                  @{{ getAccount(item.createdBy).username }}
+                  @{{ getProfile(item.createdBy).username }}
                 </div>
               </div>
             </router-link>
             <div class="text-sm mt-2">
-              <div>{{ getAccount(item.createdBy).summary }}</div>
-              <dl class="mt-2">
+              <div v-if="getProfile(item.createdBy).summary">
+                {{ getProfile(item.createdBy).summary }}
+              </div>
+              <dl v-if="getProfile(item.createdBy).location" class="mt-2">
                 <dt class="font-bold mr-1">Location:</dt>
-                <dd>{{ getAccount(item.createdBy).location }}</dd>
+                <dd>{{ getProfile(item.createdBy).location }}</dd>
               </dl>
               <dl class="mt-2">
                 <dt class="font-bold mr-1">Joined:</dt>
-                <dd>{{ getDateTime(getAccount(item.createdBy).createdAt) }}</dd>
+                <dd>{{ getDateTime(getProfile(item.createdBy).createdAt) }}</dd>
               </dl>
             </div>
           </div>
@@ -60,36 +62,24 @@
 </template>
 
 <script>
-import { computed } from '@vue/composition-api'
 import { getDateTime } from '~/utils'
 import useAuth from '~/use/auth'
-import useAccounts from '~/use/accounts'
+import useProfiles from '~/use/profiles'
 
 export default {
-  methods: {
-    publish() {
-      if (!this.account.summary || this.account.username) {
-        this.$router.push('/account?tab=settings')
-      } else {
-        this.updateAccount({
-          published: true
-        })
-      }
-    }
-  },
   setup() {
-    const collection = 'accounts'
+    const collection = 'profiles'
 
-    const { uid, account, updateAccount } = useAuth()
-    const { getAccount } = useAccounts()
+    const { uid } = useAuth()
+    const { getProfile } = useProfiles()
 
-    const published = computed(() => account.value?.published)
+    const published = true
 
     const filters = [
       {
         name: 'all',
         default: true,
-        filter: (item) => item.published && published.value
+        filter: (item) => item.username
       }
     ]
 
@@ -98,10 +88,8 @@ export default {
       getDateTime,
       filters,
       uid,
-      account,
-      getAccount,
-      published,
-      updateAccount
+      getProfile,
+      published
     }
   }
 }

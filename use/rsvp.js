@@ -4,7 +4,7 @@ import useRouter from '~/use/router'
 import useCollection from '~/use/collection'
 
 export default () => {
-  const { uid, account, confirmedAccount } = useAuth()
+  const { uid, account, isAccountConfirmed } = useAuth()
   const { router, route } = useRouter()
 
   const { docs, loading } = useCollection('participants')
@@ -59,7 +59,7 @@ export default () => {
   const getCount = (eventId, rsvp) => getList(eventId, rsvp).length
 
   async function updateRsvp(eventId, collection, rsvp, extra) {
-    if (!confirmedAccount.value) {
+    if (!isAccountConfirmed()) {
       router.push(
         `/rsvp/${eventId}/?rsvp=${rsvp}&back=${route.fullPath}&collection=${collection}`
       )
