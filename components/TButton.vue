@@ -82,7 +82,7 @@ export default {
         nav:
           'block text-left w-full px-4 py-2 text-gray-800 hover:bg-indigo-500 hover:text-white',
         'nav-admin':
-          'block text-left w-full px-4 py-2 text-red-500 hover:bg-gray-500',
+          'block text-left w-full px-4 py-2 text-red-500 hover:bg-gray-200',
 
         icon: ''
       }
