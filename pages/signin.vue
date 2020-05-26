@@ -82,6 +82,12 @@ export default {
       }
     }
   },
+  mounted() {
+    const target = this.$router.query.target
+    if (target) {
+      ls('target', target)
+    }
+  },
   methods: {
     submit(e) {
       e.preventDefault()
