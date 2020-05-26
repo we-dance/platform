@@ -17,39 +17,28 @@
         <div
           class="mt-6 flex md:mt-0 items-center justify-center md:justify-end"
         >
-          <TButton to="/posts/-/edit">Write a post</TButton>
+          <TButton v-if="!uid" to="/signin">Sign In</TButton>
+          <router-link
+            v-else
+            class="flex rounded-full border-2 border-gray-200 hover:border-blue-500 p-1"
+            :to="`/u/${account.username}`"
+          >
+            <img class="w-8 h-8 rounded-full" :src="account.photo" />
+          </router-link>
         </div>
       </div>
     </header>
 
     <div class="md:flex">
       <nav
-        class="p-4 md:w-64 pr-16 md:pr-4 bg-white absolute left-0 top-0 bottom-0 w-full min-h-screen h-full md:block md:relative overflow-scroll"
+        class="p-4 md:pt-0 md:w-64 pr-16 md:pr-4 bg-white absolute left-0 top-0 bottom-0 w-full min-h-screen h-full md:block md:relative overflow-scroll"
         :class="{
           hidden: !isMenuOpen,
           'md:hidden': hideMenu,
           'z-40': isMenuOpen
         }"
       >
-        <TButton v-if="!uid" to="/signin">Sign In</TButton>
-        <TButton
-          v-else-if="!account || !account.username"
-          to="/settings?tab=welcome"
-          >Create Profile</TButton
-        >
-        <router-link
-          v-else
-          class="flex hover:bg-gray-300 p-2"
-          :to="`/u/${account.username}`"
-        >
-          <img class="w-10 h-10 rounded-full" :src="account.photo" />
-          <div class="ml-2">
-            <div class="font-bold">{{ account.name }}</div>
-            <div>@{{ account.username }}</div>
-          </div>
-        </router-link>
-
-        <div class="mt-4 text-sm">
+        <div class="text-sm">
           <div v-if="isAdmin()" class="border border-red-500 mb-4">
             <router-link to="/reports" class="block p-2 hover:bg-gray-300">
               <span class="w-2">🚩</span> Reports
@@ -67,23 +56,8 @@
           <router-link to="/people" class="block p-2 hover:bg-gray-300">
             <span class="w-2">🕺🏼</span> People
           </router-link>
-          <router-link to="/groups" class="block p-2 hover:bg-gray-300">
-            <span class="w-2">👯‍♀️</span> Groups
-          </router-link>
           <router-link to="/events" class="block p-2 hover:bg-gray-300">
             <span class="w-2">🎷</span> Events
-          </router-link>
-          <router-link to="/artists" class="block p-2 hover:bg-gray-300">
-            <span class="w-2">👩‍🎨</span> Artists
-          </router-link>
-          <router-link to="/venues" class="block p-2 hover:bg-gray-300">
-            <span class="w-2">🏘</span> Venues
-          </router-link>
-          <router-link to="/videos" class="block p-2 hover:bg-gray-300">
-            <span class="w-2">📺</span> Videos
-          </router-link>
-          <router-link to="/music" class="block p-2 hover:bg-gray-300">
-            <span class="w-2">🎶</span> Music
           </router-link>
           <router-link to="/trips" class="block p-2 hover:bg-gray-300">
             <span class="w-2">🚕</span> Trips
