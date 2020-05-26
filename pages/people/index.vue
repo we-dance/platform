@@ -42,16 +42,17 @@
               </div>
             </router-link>
             <div class="text-sm mt-2">
-              <div v-if="getProfile(item.createdBy).summary">
-                {{ getProfile(item.createdBy).summary }}
+              <div v-if="getProfile(item.createdBy).bio">
+                {{ getProfile(item.createdBy).bio }}
               </div>
-              <dl v-if="getProfile(item.createdBy).location" class="mt-2">
-                <dt class="font-bold mr-1">Location:</dt>
-                <dd>{{ getProfile(item.createdBy).location }}</dd>
-              </dl>
-              <dl class="mt-2">
-                <dt class="font-bold mr-1">Joined:</dt>
-                <dd>{{ getDateTime(getProfile(item.createdBy).createdAt) }}</dd>
+              <dl
+                v-if="getProfile(item.createdBy).city"
+                class="mt-2 flex items-center"
+              >
+                <dt>
+                  <TIcon class="w-4 h-4 mr-1 text-blue-500" name="place" />
+                </dt>
+                <dd>{{ getProfile(item.createdBy).city }}</dd>
               </dl>
             </div>
           </div>

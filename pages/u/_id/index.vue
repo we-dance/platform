@@ -10,8 +10,8 @@
         <div class="font-bold text-2xl leading-none">{{ profile.name }}</div>
         <div>@{{ profile.username }}</div>
         <dl class="mt-2 md:flex">
-          <dt class="font-bold mr-1">Location:</dt>
-          <dd>{{ profile.location }}</dd>
+          <dt class="font-bold mr-1">City:</dt>
+          <dd>{{ profile.city }}</dd>
         </dl>
         <dl class="mt-2 md:flex">
           <dt class="font-bold mr-1">Joined:</dt>
@@ -32,6 +32,14 @@
         <dt class="font-bold mr-1">I am getting into:</dt>
         <dd>{{ profile.learning }}</dd>
       </dl>
+      <div class="mt-2 md:flex">
+        <router-link to="/endorsements">
+          <span class="w-2">🌶</span>
+          <span class="font-bold underline hover:no-underline">
+            Endorsements
+          </span>
+        </router-link>
+      </div>
     </div>
   </div>
 </template>
