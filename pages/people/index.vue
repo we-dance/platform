@@ -47,18 +47,6 @@ export default {
       {
         value: 'members',
         label: 'Members'
-      },
-      {
-        value: 'groups',
-        label: 'Groups'
-      },
-      {
-        value: 'artists',
-        label: 'Artists'
-      },
-      {
-        value: 'teachers',
-        label: 'Teachers'
       }
     ],
     tab: 'members'

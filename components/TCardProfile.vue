@@ -14,13 +14,21 @@
     </router-link>
     <div class="text-sm mt-2">
       <div>{{ profile.bio }}</div>
-      <dl v-if="profile.city" class="mt-2">
+      <dl class="mt-2 md:flex">
+        <dt class="font-bold mr-1">Joined:</dt>
+        <dd>{{ getDateTime(profile.createdAt) }}</dd>
+      </dl>
+      <dl v-if="profile.city" class="mt-1 md:flex">
         <dt class="font-bold mr-1">City:</dt>
         <dd>{{ profile.city }}</dd>
       </dl>
-      <dl class="mt-2">
-        <dt class="font-bold mr-1">Joined:</dt>
-        <dd>{{ getDateTime(profile.createdAt) }}</dd>
+      <dl v-if="profile.skills" class="mt-1 md:flex">
+        <dt class="font-bold mr-1">Dance Skills:</dt>
+        <dd>{{ profile.skills }}</dd>
+      </dl>
+      <dl v-if="profile.learning" class="mt-1 md:flex">
+        <dt class="font-bold mr-1">I am getting into:</dt>
+        <dd>{{ profile.learning }}</dd>
       </dl>
     </div>
   </div>

@@ -5,7 +5,7 @@
   </div>
   <div v-else>
     <div class="md:flex p-4">
-      <TProfilePhoto size="xl" class="mx-auto md:m-0 md:mr-8 mb-2" :uid="uid" />
+      <TProfilePhoto size="xl" class="mx-auto md:m-0 md:mr-8 mb-2" :uid="id" />
       <div>
         <div class="text-center md:text-left">
           <div class="font-bold text-2xl leading-none">{{ profile.name }}</div>
@@ -34,14 +34,6 @@
         <dt class="font-bold mr-1">I am getting into:</dt>
         <dd>{{ profile.learning }}</dd>
       </dl>
-      <div class="mt-2 md:flex">
-        <router-link to="/endorsements">
-          <span class="w-2">🌶</span>
-          <span class="font-bold underline hover:no-underline">
-            Endorsements
-          </span>
-        </router-link>
-      </div>
     </div>
   </div>
 </template>
