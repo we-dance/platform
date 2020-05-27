@@ -43,7 +43,7 @@
         :key="item.id"
         class="mb-4 flex items-center"
       >
-        <TAvatar photo middle :uid="item.createdBy" />
+        <TAvatar photo size="sm" :uid="item.createdBy" />
 
         <div
           class="px-2 text-gray-500 flex justify-center text-center leading-none"

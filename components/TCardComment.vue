@@ -3,17 +3,12 @@
     <TPreview :content="item.body" />
     <div>
       <div class="text-sm flex items-center">
-        <TAvatar photo :uid="item.createdBy" />
-
-        <div class="flex w-full items-center">
-          <TAvatar name :uid="item.createdBy" />
-          <span class="mx-1">•</span>
-          <div class="text-gray-600">
-            {{ dateDiff(item.createdAt) }}
-          </div>
-          <span class="mx-1">•</span>
-          <TButton type="link" @click="onShowForm">Reply</TButton>
-        </div>
+        <TAvatar photo size="xs" :uid="item.createdBy" class="mr-2 mb-1" />
+        <TAvatar name :uid="item.createdBy" />
+        <span class="mx-1">•</span>
+        <div class="text-gray-600">{{ dateDiff(item.createdAt) }} ago</div>
+        <span class="mx-1">•</span>
+        <TButton type="link" @click="onShowForm">Reply</TButton>
       </div>
     </div>
 

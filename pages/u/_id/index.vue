@@ -5,10 +5,7 @@
   </div>
   <div v-else>
     <div class="md:flex p-4">
-      <img
-        class="mx-auto md:m-0 md:mr-8 mb-2 rounded-full w-32 h-32 "
-        :src="profile.photo"
-      />
+      <TProfilePhoto size="xl" class="mx-auto md:m-0 md:mr-8 mb-2" :uid="uid" />
       <div>
         <div class="text-center md:text-left">
           <div class="font-bold text-2xl leading-none">{{ profile.name }}</div>

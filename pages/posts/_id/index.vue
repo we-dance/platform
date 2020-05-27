@@ -13,7 +13,10 @@
             {{ item.title }}
           </h1>
 
-          <TAvatar photo name :uid="item.createdBy" />
+          <div class="flex items-center">
+            <TAvatar photo size="sm" :uid="item.createdBy" class="mr-2" />
+            <TAvatar name :uid="item.createdBy" />
+          </div>
 
           <TPreview class="mt-2" :content="item.description" />
 

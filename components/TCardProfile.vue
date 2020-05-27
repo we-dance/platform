@@ -4,12 +4,7 @@
       :to="`/u/${profile.username}`"
       class="text-sm flex items-center"
     >
-      <img
-        v-if="profile.photo"
-        :class="`rounded-full mr-2 w-10 h-10`"
-        :src="profile.photo"
-      />
-      <div v-else :class="`rounded-full mr-2 w-10 h-10 bg-orange-500`"></div>
+      <TProfilePhoto size="lg" :uid="uid" class="mr-2" />
       <div>
         <div class="font-bold">
           {{ profile.name }}
@@ -36,7 +31,7 @@ import { getDateTime } from '~/utils'
 import useProfiles from '~/use/profiles'
 
 export default {
-  name: 'TAvatar',
+  name: 'TCardProfile',
   props: {
     uid: {
       type: String,

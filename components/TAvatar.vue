@@ -1,29 +1,10 @@
 <template>
   <div class="flex items-center">
     <div v-if="photo">
-      <router-link v-if="noHover" :to="`/u/${profile.username}`">
-        <img
-          v-if="profile.photo"
-          :class="`rounded-full mr-2 w-${size} h-${size}`"
-          :src="profile.photo"
-        />
-        <div
-          v-else
-          :class="`rounded-full mr-2 w-${size} h-${size} bg-orange-500`"
-        ></div>
-      </router-link>
-      <TMenu v-else hover>
+      <TMenu hover>
         <template v-slot:button>
           <router-link :to="`/u/${profile.username}`">
-            <img
-              v-if="profile.photo"
-              :class="`rounded-full mr-2 w-${size} h-${size}`"
-              :src="profile.photo"
-            />
-            <div
-              v-else
-              :class="`rounded-full mr-2 w-${size} h-${size} bg-orange-500`"
-            ></div>
+            <TProfilePhoto :uid="uid" :size="size" />
           </router-link>
         </template>
         <template v-slot:menu>
@@ -43,6 +24,7 @@
 import useProfiles from '~/use/profiles'
 
 export default {
+  name: 'TAvatar',
   props: {
     uid: {
       type: String,
@@ -56,30 +38,9 @@ export default {
       type: Boolean,
       default: false
     },
-    middle: {
-      type: Boolean,
-      default: false
-    },
-    big: {
-      type: Boolean,
-      default: false
-    },
-    noHover: {
-      type: Boolean,
-      default: false
-    }
-  },
-  computed: {
-    size() {
-      if (this.middle) {
-        return 6
-      }
-
-      if (this.big) {
-        return 10
-      }
-
-      return 4
+    size: {
+      type: String,
+      default: 'xs'
     }
   },
   setup(props) {
