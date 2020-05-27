@@ -95,7 +95,7 @@
         </div>
       </div>
 
-      <div class="col-span-8">
+      <div class="col-span-8" id="comment" @click="checkAuth">
         <div>
           <textarea
             v-model="comment"
@@ -123,14 +123,6 @@
           :map="map"
           :filters="filters"
         >
-          <template v-slot:auth>
-            <div class="text-center mt-4">
-              <div class="mb-4">
-                Sign in to write a comment.
-              </div>
-              <TButton to="/signin">Sign in</TButton>
-            </div>
-          </template>
           <template v-slot:empty>
             <div class="text-center my-8">
               There are no comments yet.
@@ -235,8 +227,33 @@ export default {
       ]
     }
   },
+  watch: {
+    item() {
+      this.$nextTick(() => {
+        this.load()
+      })
+    }
+  },
+  methods: {
+    load() {
+      const hash = this.$route.hash.replace('#', '')
+
+      if (hash) {
+        const el = document.getElementById(hash)
+
+        if (el) {
+          el.scrollIntoView()
+        }
+      }
+    },
+    checkAuth() {
+      if (!this.uid) {
+        this.$router.push(`/signin?target=${this.$route.fullPath}%23comment`)
+      }
+    }
+  },
   setup() {
-    const { can } = useAuth()
+    const { uid, can } = useAuth()
     const { params } = useRouter()
     const { getAccount } = useAccounts()
 
@@ -315,6 +332,7 @@ export default {
 
     return {
       exists,
+      uid,
       loading,
       filters,
       item,
