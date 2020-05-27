@@ -95,7 +95,7 @@
         </div>
       </div>
 
-      <div class="col-span-8" id="comment" @click="checkAuth">
+      <div id="comment" class="col-span-8" @click="checkAuth">
         <div>
           <textarea
             v-model="comment"
@@ -194,6 +194,31 @@ export default {
       return `https://twitter.com/intent/tweet?text=${text} %23WeDance ${url}`
     }
   },
+  watch: {
+    item() {
+      this.$nextTick(() => {
+        this.load()
+      })
+    }
+  },
+  methods: {
+    load() {
+      const hash = this.$route.hash.replace('#', '')
+
+      if (hash) {
+        const el = document.getElementById(hash)
+
+        if (el) {
+          el.scrollIntoView()
+        }
+      }
+    },
+    checkAuth() {
+      if (!this.uid) {
+        this.$router.push(`/signin?target=${this.$route.fullPath}%23comment`)
+      }
+    }
+  },
   head() {
     if (!this.item) {
       return {}
@@ -225,31 +250,6 @@ export default {
           hid: 'og:description'
         }
       ]
-    }
-  },
-  watch: {
-    item() {
-      this.$nextTick(() => {
-        this.load()
-      })
-    }
-  },
-  methods: {
-    load() {
-      const hash = this.$route.hash.replace('#', '')
-
-      if (hash) {
-        const el = document.getElementById(hash)
-
-        if (el) {
-          el.scrollIntoView()
-        }
-      }
-    },
-    checkAuth() {
-      if (!this.uid) {
-        this.$router.push(`/signin?target=${this.$route.fullPath}%23comment`)
-      }
     }
   },
   setup() {

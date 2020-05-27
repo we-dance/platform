@@ -94,3 +94,21 @@ export const imageExists = async (url) => {
 
   return false
 }
+
+export const camelcase = (text) => {
+  if (!text) {
+    return ''
+  }
+
+  const result = text.replace(/([A-Z])/g, ' $1')
+  const finalResult = result.charAt(0).toUpperCase() + result.slice(1)
+  return finalResult
+}
+
+export const getId = (text) => {
+  if (!text) {
+    return ''
+  }
+
+  return text.replace(' ', '')
+}

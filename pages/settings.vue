@@ -12,51 +12,76 @@
       </router-link>
     </nav>
     <main class="p-4 flex-grow max-w-lg">
-      <TLoader v-if="loading" />
+      <TLoader v-if="loading || !profile || !account" />
       <div v-else>
         <div v-if="currentTab === 'welcome'">
           <div class="font-bold text-xl mb-4 pb-4 border-b">Let's start!</div>
+
           <div>
             <div class="block mb-2">
-              <TButton to="/settings?tab=profile"
-                ><span
+              <TButton to="/settings?tab=profile">
+                <span
+                  v-if="!profile.username"
                   class="rounded-full w-6 h-6 bg-blue-500 text-white mr-1 inline-block"
-                  >1</span
                 >
+                  1
+                </span>
+                <TIcon
+                  v-else
+                  name="check_circle"
+                  class="w-6 h-6 rounded-full bg-white text-green-500 mr-1 inline-block -mb-1"
+                />
                 Create your profile</TButton
               >
             </div>
             <div class="block mb-2">
-              <TButton to="/settings?tab=contacts"
-                ><span
+              <TButton to="/settings?tab=preferences">
+                <span
+                  v-if="!profile.tags"
                   class="rounded-full w-6 h-6 bg-blue-500 text-white mr-1 inline-block"
-                  >2</span
                 >
-                Add your contacts</TButton
+                  2
+                </span>
+                <TIcon
+                  v-else
+                  name="check_circle"
+                  class="w-6 h-6 rounded-full bg-white text-green-500 mr-1 inline-block -mb-1"
+                />
+                Add your interests</TButton
               >
             </div>
             <div class="block mb-2">
-              <TButton to="/posts/74zve0dQqtdwaSXq7RDf"
-                ><span
+              <TButton @click="intro">
+                <span
+                  v-if="!profile.intro"
                   class="rounded-full w-6 h-6 bg-blue-500 text-white mr-1 inline-block"
-                  >3</span
                 >
+                  3
+                </span>
+                <TIcon
+                  v-else
+                  name="check_circle"
+                  class="w-6 h-6 rounded-full bg-white text-green-500 mr-1 inline-block -mb-1"
+                />
                 Introduce yourself</TButton
               >
             </div>
           </div>
         </div>
         <div
-          v-if="currentTab === 'availability'"
+          v-if="currentTab === 'preferences'"
           class="rounded bg-white mb-4 shadow border p-4 bg-white"
         >
-          <div class="font-bold text-xl">Availability</div>
+          <div class="font-bold text-xl">Preferences</div>
+          <div class="text-sm text-gray-700 mb-4 pb-2 border-b">
+            Let us help you find and highlight the most relevant things for you.
+          </div>
 
           <TForm
-            v-model="account"
-            :fields="availabilityFields"
+            v-model="profile"
+            :fields="preferencesFields"
             submit-label="Save"
-            @save="saveAccount"
+            @save="saveProfile"
           />
         </div>
         <div
@@ -174,8 +199,8 @@ export default {
         label: 'Contacts'
       },
       {
-        key: 'availability',
-        label: 'Availability'
+        key: 'preferences',
+        label: 'Preferences'
       },
       {
         key: 'account',
@@ -222,6 +247,13 @@ export default {
     this.load()
   },
   methods: {
+    async intro() {
+      await this.saveProfile({
+        intro: true
+      })
+
+      this.$router.push('/posts/74zve0dQqtdwaSXq7RDf')
+    },
     load() {
       this.profileFields.find(
         (f) => f.name === 'name'
@@ -229,7 +261,16 @@ export default {
     },
     async saveProfile(data) {
       await this.updateProfile(data)
-      this.$router.push('/settings')
+
+      if (
+        this.profile.username &&
+        this.profile.tags &&
+        !this.account.confirmed
+      ) {
+        await this.finish()
+      } else {
+        this.$router.push('/settings')
+      }
     },
     async saveAccount(data) {
       await this.updateAccount(data)

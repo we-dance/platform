@@ -115,7 +115,6 @@ export default {
 </template>
 
 <script>
-import TFieldTag from '~/components/TFieldTag'
 import { getDateTime } from '~/utils'
 import useAuth from '~/use/auth'
 import useRSVP from '~/use/rsvp'
@@ -136,7 +135,7 @@ export default {
       {
         name: 'tags',
         label: 'Tags',
-        component: TFieldTag
+        type: 'tags'
       },
       {
         name: 'phone',

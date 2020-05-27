@@ -19,7 +19,6 @@
 import useAuth from '~/use/auth'
 import useDoc from '~/use/doc'
 import useRouter from '~/use/router'
-import TFieldTag from '~/components/TFieldTag'
 
 export default {
   name: 'PostEdit',
@@ -46,7 +45,7 @@ export default {
             name: 'tags',
             hideLabel: true,
             placeholder: 'Tags',
-            component: TFieldTag
+            type: 'tags'
           }
         ]
       },
@@ -67,8 +66,7 @@ export default {
           {
             name: 'tags',
             hideLabel: true,
-            placeholder: 'Tags',
-            component: TFieldTag
+            type: 'tags'
           }
         ]
       }

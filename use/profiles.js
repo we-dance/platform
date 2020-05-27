@@ -1,19 +1,57 @@
+import { computed } from '@vue/composition-api'
 import useCollection from '~/use/collection'
-import TFieldTag from '~/components/TFieldTag'
+import useTags from '~/use/tags'
 
 export default () => {
   const { getById } = useCollection('profiles')
+  const { tagsOptions, addTag } = useTags()
 
-  const preferencesFields = [
+  const preferencesFields = computed(() => [
     {
       name: 'tags',
-      label: 'Which Days'
+      label: 'Tags',
+      type: 'tags',
+      description: 'Choose your interests',
+      options: tagsOptions.value,
+      'v-on:add': addTag
     },
     {
       name: 'days',
-      label: 'Which Days'
+      label: 'Days',
+      type: 'tags',
+      description: 'Choose best days for you to dance',
+      options: [
+        {
+          label: 'Monday',
+          value: 'Monday'
+        },
+        {
+          label: 'Tuesday',
+          value: 'Tuesday'
+        },
+        {
+          label: 'Wednesday',
+          value: 'Wednesday'
+        },
+        {
+          label: 'Thursday',
+          value: 'Thursday'
+        },
+        {
+          label: 'Friday',
+          value: 'Friday'
+        },
+        {
+          label: 'Saturday',
+          value: 'Saturday'
+        },
+        {
+          label: 'Sunday',
+          value: 'Sunday'
+        }
+      ]
     }
-  ]
+  ])
 
   const profileFields = [
     {
@@ -21,6 +59,7 @@ export default () => {
       label: 'Username',
       required: true,
       placeholder: '(Required)',
+      trim: '[^a-z0-9]+',
       description:
         'It will be used for members to mention you and as a url to your profile'
     },
@@ -52,12 +91,6 @@ export default () => {
       label: 'Bio',
       type: 'textarea',
       placeholder: "Say a few words about who you are and why you're here!"
-    },
-    {
-      name: 'tags',
-      label: 'Tags',
-      component: TFieldTag,
-      description: 'Select tags that can help others find you'
     },
     {
       name: 'skills',

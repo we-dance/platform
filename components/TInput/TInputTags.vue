@@ -43,33 +43,15 @@
 </template>
 
 <script>
-import { computed } from '@vue/composition-api'
-import useCollection from '~/use/collection'
-import useDoc from '~/use/doc'
-import TIcon from '~/components/TIcon'
-
 export default {
-  components: {
-    TIcon
-  },
-  setup() {
-    const { docs, getById } = useCollection('tags')
-    const { set } = useDoc('tags')
-
-    const tags = computed(() =>
-      docs.value.map((doc) => ({ value: doc.id, label: doc.id }))
-    )
-
-    return {
-      tags,
-      set,
-      getById
-    }
-  },
   props: {
     value: {
-      type: Object,
-      default: () => ({})
+      type: [Object, String],
+      default: ''
+    },
+    options: {
+      type: Array,
+      default: () => []
     }
   },
   data: () => ({
@@ -88,7 +70,7 @@ export default {
       }))
     },
     filteredTags() {
-      const result = this.tags.filter((tag) => {
+      const result = this.options.filter((tag) => {
         return (
           tag.value.toLowerCase().includes(this.escapedInput.toLowerCase()) &&
           !this.value[tag.value]
@@ -97,7 +79,7 @@ export default {
 
       if (
         this.escapedInput &&
-        !this.tags.find(
+        !this.options.find(
           (tag) => tag.value.toLowerCase() === this.escapedInput.toLowerCase()
         )
       ) {
@@ -141,22 +123,21 @@ export default {
 
       result[val] = true
 
-      if (!this.getById(val)) {
-        this.set(val, {
-          label: val
-        })
-      }
-
-      this.$emit('input', result)
       this.input = ''
       this.selectedIndex = 0
+
+      this.$emit('add', val)
+      this.$emit('input', result)
     },
     remove(val) {
       const result = { ...this.value }
+
       delete result[val]
 
-      this.$emit('input', result)
       this.selectedIndex = 0
+
+      this.$emit('remove', val)
+      this.$emit('input', result)
     }
   }
 }

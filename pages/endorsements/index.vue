@@ -43,7 +43,6 @@
 </template>
 
 <script>
-import TFieldTag from '~/components/TFieldTag'
 import { getDateTime } from '~/utils'
 import useAuth from '~/use/auth'
 
@@ -65,12 +64,12 @@ export default {
       {
         name: 'genre',
         label: 'What did you dance?',
-        component: TFieldTag
+        type: 'tags'
       },
       {
         name: 'like',
         label: 'What did you like?',
-        component: TFieldTag
+        type: 'tags'
       }
     ]
 

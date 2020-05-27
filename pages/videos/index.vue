@@ -64,8 +64,6 @@
 </template>
 
 <script>
-// allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
-import TFieldTag from '~/components/TFieldTag'
 import { getDateTime } from '~/utils'
 import useAuth from '~/use/auth'
 import useRSVP from '~/use/rsvp'
@@ -82,7 +80,7 @@ export default {
       {
         name: 'tags',
         label: 'Tags',
-        component: TFieldTag
+        type: 'tags'
       }
     ]
 

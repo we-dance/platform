@@ -39,7 +39,6 @@
 </template>
 
 <script>
-import TFieldTag from '~/components/TFieldTag'
 import { getDateTime } from '~/utils'
 import useAuth from '~/use/auth'
 
@@ -78,7 +77,7 @@ export default {
       {
         name: 'genre',
         label: 'Genres',
-        component: TFieldTag
+        type: 'tags'
       },
       {
         name: 'car',

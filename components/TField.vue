@@ -1,6 +1,7 @@
 <template>
-  <div :class="wrapperClasses" class="w-full justify-start items-top">
-    <div v-if="label" :class="labelClasses">
+  <div v-if="hidden"></div>
+  <div v-else :class="wrapperClasses" class="w-full grid gap-4">
+    <div v-if="!hideLabel" :class="labelClasses">
       <label :for="elementId">
         <div class="text-gray-700 font-bold">{{ label }}</div>
       </label>
@@ -8,28 +9,15 @@
     <div :class="inputWrapperClasses">
       <slot name="top" />
       <slot>
-        <textarea
-          v-if="type === 'textarea'"
+        <component
+          :is="getComponent()"
           :id="elementId"
-          ref="input"
           v-bind="$attrs"
-          autocomplete="off"
           :value.sync="value"
-          :class="inputClasses"
-          class="w-full block bg-gray-200 appearance-none font-mono border-2 border-gray-200 rounded py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-purple-500"
-          @input="input($event)"
-        />
-        <input
-          v-else
-          :id="elementId"
-          ref="input"
-          v-bind="$attrs"
-          autocomplete="off"
           :type="type"
-          :value.sync="value"
-          :class="inputClasses"
-          class="w-full block bg-gray-200 appearance-none font-mono border-2 border-gray-200 rounded py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-purple-500"
-          @input="input($event)"
+          :auto-focus="autoFocus"
+          :hide-label="hideLabel"
+          @input="(val) => $emit('input', val)"
         />
       </slot>
       <div v-if="description" class="text-gray-500 text-sm mt-1">
@@ -41,13 +29,20 @@
 </template>
 
 <script>
-const getId = (text) => {
-  return text.replace(' ', '')
-}
+import { getId } from '~/utils'
+import TInput from '~/components/TInput/TInput'
+import TInputMarkdown from '~/components/TInput/TInputMarkdown'
+import TInputSelect from '~/components/TInput/TInputSelect'
+import TInputTags from '~/components/TInput/TInputTags'
+import TInputTextarea from '~/components/TInput/TInputTextarea'
 
 export default {
   inheritAttrs: false,
   props: {
+    value: {
+      type: [String, Object, Array, Number],
+      default: ''
+    },
     label: {
       type: String,
       default: ''
@@ -60,15 +55,23 @@ export default {
       type: String,
       default: 'left'
     },
-    value: {
-      type: [String, Number],
-      default: ''
-    },
     type: {
       type: String,
       default: 'text'
     },
     autoFocus: {
+      type: Boolean,
+      default: false
+    },
+    default: {
+      type: String,
+      default: ''
+    },
+    data: {
+      type: Object,
+      default: () => ({})
+    },
+    hideLabel: {
       type: Boolean,
       default: false
     }
@@ -77,48 +80,53 @@ export default {
     elementId: ''
   }),
   computed: {
+    hidden() {
+      return this.type === 'hidden'
+    },
     wrapperClasses() {
       const map = {
-        top: '',
-        left: 'flex'
+        top: 'grid-cols-1',
+        left: 'grid-cols-12'
       }
 
       return map[this.labelPosition]
     },
     labelClasses() {
       const map = {
-        top: 'w-full mb-2',
-        left: 'w-1/3 pr-4 mb-0 text-right pt-2'
+        top: 'col-span-12',
+        left: 'text-right col-span-4'
       }
 
       return map[this.labelPosition]
     },
     inputWrapperClasses() {
       const map = {
-        top: '',
-        left: 'w-2/3'
+        top: 'col-span-12',
+        left: 'col-span-8'
       }
 
-      return map[this.labelPosition]
-    },
-    inputClasses() {
-      return ''
+      const labelPosition = this.hideLabel ? 'top' : this.labelPosition
+
+      return map[labelPosition]
     }
   },
   mounted() {
     this.elementId = getId(this.label)
 
-    if (this.autoFocus) {
-      this.$nextTick(() => {
-        if (this.$refs.input) {
-          this.$refs.input.focus()
-        }
-      })
+    if (!this.value && this.default) {
+      this.$emit('input', this.default)
     }
   },
   methods: {
-    input(event) {
-      this.$emit('input', event.target.value)
+    getComponent() {
+      const map = {
+        tags: TInputTags,
+        select: TInputSelect,
+        markdown: TInputMarkdown,
+        textarea: TInputTextarea
+      }
+
+      return map[this.type] || TInput
     }
   }
 }
