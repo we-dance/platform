@@ -12,7 +12,7 @@
             {{ dateDiff(item.createdAt) }}
           </div>
           <span class="mx-1">•</span>
-          <TButton type="link" @click="showForm = !showForm">Reply</TButton>
+          <TButton type="link" @click="onShowForm">Reply</TButton>
         </div>
       </div>
     </div>
@@ -33,6 +33,7 @@
 <script>
 import ChildComments from '~/components/TListComments'
 import { dateDiff } from '~/utils'
+import useAuth from '~/use/auth'
 
 export default {
   name: 'TCardComment',
@@ -52,9 +53,22 @@ export default {
   data: () => ({
     showForm: false
   }),
+  methods: {
+    onShowForm() {
+      if (!this.uid) {
+        this.$router.push(`/signin?target=${this.$route.fullPath}%23comment`)
+        return
+      }
+
+      this.showForm = !this.showForm
+    }
+  },
   setup() {
+    const { uid } = useAuth()
+
     return {
-      dateDiff
+      dateDiff,
+      uid
     }
   }
 }

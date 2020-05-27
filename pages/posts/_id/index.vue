@@ -42,18 +42,6 @@
                   {{ item.upVotes }}
                 </div>
               </div>
-              <div class="text-red-500 flex ml-2 justify-center">
-                <button
-                  class="text-center hover:text-primary"
-                  :class="{ 'text-red-700': item.response === 'down' }"
-                  @click="updateRsvp(item.id, 'posts', 'down')"
-                >
-                  <TIcon name="down" class="h-6 w-6 hover:text-primary" />
-                </button>
-                <div>
-                  {{ item.downVotes }}
-                </div>
-              </div>
             </div>
             <div>
               <TButton :href="tweetUrl">Share</TButton>
@@ -88,7 +76,6 @@ import useAuth from '~/use/auth'
 import useDoc from '~/use/doc'
 import useRSVP from '~/use/rsvp'
 import useRouter from '~/use/router'
-import useComments from '~/use/comments'
 import useProfiles from '~/use/profiles'
 import useReactions from '~/use/reactions'
 import { getDateTime, dateDiff } from '~/utils'
@@ -180,7 +167,6 @@ export default {
     const { map } = useReactions()
 
     const { updateRsvp } = useRSVP()
-    const { addComment } = useComments()
 
     if (params.id) {
       load(params.id)
@@ -198,8 +184,7 @@ export default {
       can,
       getProfile,
       getDateTime,
-      dateDiff,
-      addComment
+      dateDiff
     }
   }
 }
