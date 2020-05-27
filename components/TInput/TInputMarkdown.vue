@@ -8,6 +8,8 @@
       lineWrapping: true
     }"
     class="z-0"
+    :value.sync="value"
+    @input="(val) => $emit('input', val)"
   />
 </template>
 
@@ -18,6 +20,12 @@ import 'codemirror/mode/markdown/markdown.js'
 export default {
   components: {
     codemirror
+  },
+  props: {
+    value: {
+      type: String,
+      default: ''
+    }
   }
 }
 </script>

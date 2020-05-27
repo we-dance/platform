@@ -16,8 +16,10 @@
 </template>
 
 <script>
+import { computed } from '@vue/composition-api'
 import useAuth from '~/use/auth'
 import useDoc from '~/use/doc'
+import useTags from '~/use/tags'
 import useRouter from '~/use/router'
 
 export default {
@@ -25,78 +27,11 @@ export default {
   layout: 'minimal',
   middleware: ['auth'],
   data: () => ({
-    selectedType: 'post',
-    types: [
-      {
-        label: 'Post',
-        value: 'post',
-        fields: [
-          {
-            name: 'title',
-            hideLabel: true,
-            placeholder: 'Title'
-          },
-          {
-            name: 'description',
-            hideLabel: true,
-            type: 'markdown'
-          },
-          {
-            name: 'tags',
-            hideLabel: true,
-            placeholder: 'Tags',
-            type: 'tags'
-          }
-        ]
-      },
-      {
-        label: 'Link',
-        value: 'link',
-        fields: [
-          {
-            name: 'title',
-            hideLabel: true,
-            placeholder: 'Title'
-          },
-          {
-            name: 'link',
-            hideLabel: true,
-            placeholder: 'Link'
-          },
-          {
-            name: 'tags',
-            hideLabel: true,
-            type: 'tags'
-          }
-        ]
-      }
-    ]
+    selectedType: 'post'
   }),
   computed: {
     fields() {
       return this.types.find((f) => f.value === this.selectedType).fields
-    }
-  },
-  setup() {
-    const { can } = useAuth()
-    const { params } = useRouter()
-
-    const collection = 'posts'
-
-    const { doc: item, id, load, update, remove, create } = useDoc(collection)
-
-    if (params.id !== '-') {
-      load(params.id)
-    }
-
-    return {
-      item,
-      id,
-      can,
-      collection,
-      update,
-      remove,
-      create
     }
   },
   mounted() {
@@ -125,6 +60,78 @@ export default {
     async removeItem(id) {
       await this.remove(id)
       this.cancelItem()
+    }
+  },
+  setup() {
+    const { can } = useAuth()
+    const { params } = useRouter()
+
+    const collection = 'posts'
+
+    const { doc: item, id, load, update, remove, create } = useDoc(collection)
+    const { tagsOptions, addTag } = useTags()
+
+    const types = computed(() => [
+      {
+        label: 'Post',
+        value: 'post',
+        fields: [
+          {
+            name: 'title',
+            hideLabel: true,
+            placeholder: 'Title'
+          },
+          {
+            name: 'description',
+            hideLabel: true,
+            type: 'markdown'
+          },
+          {
+            name: 'tags',
+            hideLabel: true,
+            placeholder: 'Tags',
+            type: 'tags',
+            options: tagsOptions,
+            'v-on:add': addTag
+          }
+        ]
+      },
+      {
+        label: 'Link',
+        value: 'link',
+        fields: [
+          {
+            name: 'title',
+            hideLabel: true,
+            placeholder: 'Title'
+          },
+          {
+            name: 'link',
+            hideLabel: true,
+            placeholder: 'Link'
+          },
+          {
+            name: 'tags',
+            hideLabel: true,
+            type: 'tags'
+          }
+        ]
+      }
+    ])
+
+    if (params.id !== '-') {
+      load(params.id)
+    }
+
+    return {
+      item,
+      id,
+      can,
+      collection,
+      update,
+      remove,
+      create,
+      types
     }
   }
 }

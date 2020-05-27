@@ -65,31 +65,31 @@
       <div class="col-span-4 col-start-9 row-start-1">
         <div class="mt-4 md:mt-0 mb-4 rounded border shadow p-4 bg-white">
           <router-link
-            :to="`/u/${getAccount(item.createdBy).username}`"
+            :to="`/u/${getProfile(item.createdBy).username}`"
             class="text-sm flex items-center"
           >
             <img
               class="rounded-full mr-2 w-10 h-10"
-              :src="getAccount(item.createdBy).photo"
+              :src="getProfile(item.createdBy).photo"
             />
             <div>
               <div class="font-bold">
-                {{ getAccount(item.createdBy).name }}
+                {{ getProfile(item.createdBy).name }}
               </div>
               <div class="text-gray-600">
-                @{{ getAccount(item.createdBy).username }}
+                @{{ getProfile(item.createdBy).username }}
               </div>
             </div>
           </router-link>
           <div class="text-sm mt-2">
-            <div>{{ getAccount(item.createdBy).summary }}</div>
+            <div>{{ getProfile(item.createdBy).summary }}</div>
             <dl class="mt-2">
               <dt class="font-bold mr-1">Location:</dt>
-              <dd>{{ getAccount(item.createdBy).location }}</dd>
+              <dd>{{ getProfile(item.createdBy).location }}</dd>
             </dl>
             <dl class="mt-2">
               <dt class="font-bold mr-1">Joined:</dt>
-              <dd>{{ getDateTime(getAccount(item.createdBy).createdAt) }}</dd>
+              <dd>{{ getDateTime(getProfile(item.createdBy).createdAt) }}</dd>
             </dl>
           </div>
         </div>
@@ -100,7 +100,7 @@
           <textarea
             v-model="comment"
             :placeholder="
-              `Say something nice to ${getAccount(item.createdBy).username}...`
+              `Say something nice to ${getProfile(item.createdBy).username}...`
             "
             class="border rounded p-4 w-full overflow-hidden h-auto"
           />
@@ -135,15 +135,20 @@
                 <div>
                   <div class="text-sm flex items-center">
                     <img
+                      v-if="getProfile(item.createdBy).photo"
                       class="rounded-full mr-2 w-4 h-4"
-                      :src="getAccount(item.createdBy).photo"
+                      :src="getProfile(item.createdBy).photo"
                     />
+                    <div
+                      v-else
+                      class="rounded-full mr-2 w-4 h-4 bg-orange-500"
+                    ></div>
                     <div class="flex w-full items-center">
                       <router-link
                         class="hover:underline"
-                        :to="`/u/${getAccount(item.createdBy).username}`"
+                        :to="`/u/${getProfile(item.createdBy).username}`"
                       >
-                        {{ getAccount(item.createdBy).username }}
+                        {{ getProfile(item.createdBy).username }}
                       </router-link>
                       <span class="mx-1">•</span>
                       <div class="text-gray-600">
@@ -171,7 +176,7 @@ import useDoc from '~/use/doc'
 import useRSVP from '~/use/rsvp'
 import useRouter from '~/use/router'
 import useComments from '~/use/comments'
-import useAccounts from '~/use/accounts'
+import useProfiles from '~/use/profiles'
 import { getDateTime, getExcerpt, dateDiff } from '~/utils'
 
 export default {
@@ -186,7 +191,7 @@ export default {
     tweetUrl() {
       const app = process.env.app
 
-      const author = this.getAccount(this.item.createdBy).name
+      const author = this.getProfile(this.item.createdBy).name
       const url = app.url + this.$route.fullPath
 
       const text = encodeURI(`"${this.item.title}" by ${author}`)
@@ -255,7 +260,7 @@ export default {
   setup() {
     const { uid, can } = useAuth()
     const { params } = useRouter()
-    const { getAccount } = useAccounts()
+    const { getProfile } = useProfiles()
 
     const collection = 'comments'
 
@@ -344,7 +349,7 @@ export default {
       updateRsvp,
       getCommentsCount,
       can,
-      getAccount,
+      getProfile,
       getDateTime,
       dateDiff,
       addComment
