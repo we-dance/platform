@@ -16,7 +16,7 @@
     </div>
 
     <TPopup v-if="showPopup" class="p-4">
-      <div :class="!croppa.getChosenFile() ? 'cursor-pointer' : ''">
+      <div :class="!editing ? 'cursor-pointer' : ''">
         <croppa
           v-model="croppa"
           :width="300"
@@ -27,7 +27,7 @@
         />
       </div>
 
-      <div v-if="croppa.getChosenFile()" class="mt-4 flex justify-center">
+      <div v-if="editing" class="mt-4 flex justify-center">
         <button class="cursor-pointer" @click="rotate()">
           <TIcon name="rotate_right" class="h-8 w-8" />
         </button>
@@ -80,6 +80,15 @@ export default {
     progress: 0,
     croppa: {}
   }),
+  computed: {
+    editing() {
+      return (
+        this.croppa &&
+        this.croppa.getChosenFile &&
+        !!this.croppa.getChosenFile()
+      )
+    }
+  },
   methods: {
     rotate() {
       this.croppa.rotate(1)
