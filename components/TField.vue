@@ -94,7 +94,7 @@ export default {
     labelClasses() {
       const map = {
         top: 'col-span-12',
-        left: 'text-right col-span-4'
+        left: 'col-span-12 text-left lg:text-right lg:col-span-4'
       }
 
       return map[this.labelPosition]
@@ -102,7 +102,7 @@ export default {
     inputWrapperClasses() {
       const map = {
         top: 'col-span-12',
-        left: 'col-span-8'
+        left: 'col-span-12 lg:col-span-8'
       }
 
       const labelPosition = this.hideLabel ? 'top' : this.labelPosition
