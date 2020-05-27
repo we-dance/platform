@@ -16,18 +16,22 @@
     </div>
 
     <TPopup v-if="showPopup" class="p-4">
-      <label
-        class="w-full flex flex-col items-center px-4 py-6 bg-white text-blue-500 rounded shadow-lg tracking-wide uppercase border border-blue-500 cursor-pointer hover:bg-blue-500 hover:text-white"
-      >
-        <TIcon name="upload" class="w-8 h-8" />
-        <span class="mt-2 text-base leading-normal">{{ selectLabel }}</span>
-        <input
-          type="file"
-          class="hidden"
-          accept="image/jpeg, image/png"
-          @change="uploadPhoto"
+      <div :class="!croppa.getChosenFile() ? 'cursor-pointer' : ''">
+        <croppa
+          v-model="croppa"
+          :width="300"
+          :height="300"
+          prevent-white-space
+          :show-remove-button="false"
+          :placeholder="selectLabel"
         />
-      </label>
+      </div>
+
+      <div v-if="croppa.getChosenFile()" class="mt-4 flex justify-center">
+        <button class="cursor-pointer" @click="rotate()">
+          <TIcon name="rotate_right" class="h-8 w-8" />
+        </button>
+      </div>
 
       <div class="mt-4 bg-gray-200">
         <div
@@ -36,17 +40,23 @@
         ></div>
       </div>
 
-      <div class="mt-4 flex justify-center">
+      <div class="mt-4 flex justify-between">
         <TButton @click="showPopup = false">Cancel</TButton>
+        <TButton type="primary" @click="save()">Save</TButton>
       </div>
     </TPopup>
   </div>
 </template>
 
 <script>
+import Croppa from 'vue-croppa'
 import useUpload from '~/use/upload'
+import 'vue-croppa/dist/vue-croppa.css'
 
 export default {
+  components: {
+    croppa: Croppa.component
+  },
   props: {
     value: {
       type: String,
@@ -67,12 +77,17 @@ export default {
   },
   data: () => ({
     showPopup: false,
-    progress: 0
+    progress: 0,
+    croppa: {}
   }),
   methods: {
-    async uploadPhoto(event) {
-      const file = event.target.files[0]
-
+    rotate() {
+      this.croppa.rotate(1)
+    },
+    save() {
+      this.croppa.generateBlob(this.uploadPhoto, 'image/jpeg', 0.8)
+    },
+    async uploadPhoto(file) {
       const result = await this.upload(file, this.updateProgress)
 
       this.$emit('input', result.url)
