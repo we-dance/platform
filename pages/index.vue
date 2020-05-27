@@ -43,10 +43,8 @@
         :key="item.id"
         class="mb-4 flex items-center"
       >
-        <img
-          class="rounded-full w-6 h-6"
-          :src="getAccount(item.createdBy).photo"
-        />
+        <TAvatar photo middle :uid="item.createdBy" />
+
         <div
           class="px-2 text-gray-500 flex justify-center text-center leading-none"
         >
@@ -68,7 +66,7 @@
             </router-link>
           </div>
           <div class="text-xs flex text-gray-700">
-            <div>{{ getAccount(item.createdBy).username }}</div>
+            <TAvatar name :uid="item.createdBy" />
             <div class="mx-1">•</div>
             <div>
               <router-link :to="`/posts/${item.id}`" class="hover:bg-gray-200">

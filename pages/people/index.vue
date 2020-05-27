@@ -32,10 +32,7 @@
               :to="`/u/${getProfile(item.createdBy).username}`"
               class="text-sm flex items-center"
             >
-              <img
-                class="rounded-full mr-2 w-10 h-10"
-                :src="getProfile(item.createdBy).photo"
-              />
+              <TAvatar photo big :uid="item.createdBy" />
               <div>
                 <div class="font-bold">
                   {{ getProfile(item.createdBy).name }}

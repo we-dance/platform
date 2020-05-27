@@ -13,7 +13,7 @@
             {{ item.title }}
           </h1>
 
-          <TSignature small :item="item" />
+          <TAvatar photo name :uid="item.createdBy" />
 
           <TPreview class="mt-2" :content="item.description" />
 
@@ -134,22 +134,10 @@
                 <TPreview :content="item.body" />
                 <div>
                   <div class="text-sm flex items-center">
-                    <img
-                      v-if="getProfile(item.createdBy).photo"
-                      class="rounded-full mr-2 w-4 h-4"
-                      :src="getProfile(item.createdBy).photo"
-                    />
-                    <div
-                      v-else
-                      class="rounded-full mr-2 w-4 h-4 bg-orange-500"
-                    ></div>
+                    <TAvatar photo :uid="item.createdBy" />
+
                     <div class="flex w-full items-center">
-                      <router-link
-                        class="hover:underline"
-                        :to="`/u/${getProfile(item.createdBy).username}`"
-                      >
-                        {{ getProfile(item.createdBy).username }}
-                      </router-link>
+                      <TAvatar name :uid="item.createdBy" />
                       <span class="mx-1">•</span>
                       <div class="text-gray-600">
                         {{ dateDiff(item.createdAt) }}
