@@ -56,7 +56,8 @@ export default () => {
   const profileFields = [
     {
       name: 'photo',
-      label: 'Photo'
+      label: 'Photo',
+      type: 'photo'
     },
     {
       name: 'username',

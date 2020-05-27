@@ -49,7 +49,10 @@
               <div
                 class="flex cursor-pointer rounded-full border-2 border-gray-200 hover:border-blue-500 p-1"
               >
-                <img class="w-8 h-8 rounded-full" :src="account.photo" />
+                <img
+                  class="w-8 h-8 rounded-full"
+                  :src="getProfile(uid).photo"
+                />
               </div>
             </template>
             <template slot="menu">

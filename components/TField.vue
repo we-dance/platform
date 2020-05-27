@@ -35,6 +35,7 @@ import TInputMarkdown from '~/components/TInput/TInputMarkdown'
 import TInputSelect from '~/components/TInput/TInputSelect'
 import TInputTags from '~/components/TInput/TInputTags'
 import TInputTextarea from '~/components/TInput/TInputTextarea'
+import TInputPhoto from '~/components/TInput/TInputPhoto'
 
 export default {
   inheritAttrs: false,
@@ -123,7 +124,8 @@ export default {
         tags: TInputTags,
         select: TInputSelect,
         markdown: TInputMarkdown,
-        textarea: TInputTextarea
+        textarea: TInputTextarea,
+        photo: TInputPhoto
       }
 
       return map[this.type] || TInput
