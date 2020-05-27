@@ -38,8 +38,6 @@
       </button>
     </div>
 
-    <div class="mt-4" />
-
     <div v-if="!items.length">
       <slot name="empty" />
     </div>
@@ -60,7 +58,9 @@
             <TIcon name="close" />
           </button>
         </div>
+
         <slot name="editor-header" :item="item" />
+
         <TForm
           v-model="items[itemId]"
           :fields="fields"

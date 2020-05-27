@@ -67,61 +67,15 @@
       </div>
 
       <div id="comment" class="col-span-8" @click="checkAuth">
-        <div>
-          <textarea
-            v-model="comment"
-            :placeholder="
-              `Say something nice to ${getProfile(item.createdBy).username}...`
-            "
-            class="border rounded p-4 w-full overflow-hidden h-auto"
-          />
+        <TFormComment :post-id="item.id" :reply-to="item.createdBy" />
 
-          <div class="flex justify-end">
-            <TButton
-              @click="
-                addComment(item.id, comment)
-                comment = ''
-              "
-            >
-              Post comment
-            </TButton>
-          </div>
-        </div>
-
-        <TCardList
-          :collection="collection"
-          :fields="fields"
-          :map="map"
-          :filters="filters"
-        >
+        <TListComments :post-id="item.id">
           <template v-slot:empty>
             <div class="text-center my-8">
               There are no comments yet.
             </div>
           </template>
-          <template v-slot:default="{ item }">
-            <div class="mb-4">
-              <div>
-                <TPreview :content="item.body" />
-                <div>
-                  <div class="text-sm flex items-center">
-                    <TAvatar photo :uid="item.createdBy" />
-
-                    <div class="flex w-full items-center">
-                      <TAvatar name :uid="item.createdBy" />
-                      <span class="mx-1">•</span>
-                      <div class="text-gray-600">
-                        {{ dateDiff(item.createdAt) }}
-                      </div>
-                      <span class="mx-1">•</span>
-                      <TButton type="link">Reply</TButton>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </template>
-        </TCardList>
+        </TListComments>
       </div>
     </div>
   </div>
@@ -136,7 +90,8 @@ import useRSVP from '~/use/rsvp'
 import useRouter from '~/use/router'
 import useComments from '~/use/comments'
 import useProfiles from '~/use/profiles'
-import { getDateTime, getExcerpt, dateDiff } from '~/utils'
+import useReactions from '~/use/reactions'
+import { getDateTime, dateDiff } from '~/utils'
 
 export default {
   layout: 'minimal',
@@ -221,75 +176,14 @@ export default {
     const { params } = useRouter()
     const { getProfile } = useProfiles()
 
-    const collection = 'comments'
-
-    const fields = [
-      {
-        name: 'body',
-        label: 'Comment',
-        type: 'markdown',
-        hideLabel: true
-      },
-      {
-        name: 'postId',
-        default: params.id,
-        type: 'hidden'
-      }
-    ]
-
-    const filters = [
-      {
-        name: 'all',
-        default: true,
-        filter: (item) => item.postId === params.id,
-        sort: 'createdAt'
-      }
-    ]
-
     const { doc, load, exists, loading } = useDoc('posts')
+    const { map } = useReactions()
+
+    const { updateRsvp } = useRSVP()
+    const { addComment } = useComments()
 
     if (params.id) {
       load(params.id)
-    }
-
-    const { getCount, getRsvpResponse, updateRsvp } = useRSVP()
-    const { getCommentsCount, addComment } = useComments()
-
-    const map = (item) => {
-      if (!item) {
-        return {}
-      }
-
-      const upVotes = getCount(item.id, 'up')
-      const downVotes = getCount(item.id, 'down')
-      const votes = upVotes - downVotes
-      const response = getRsvpResponse(item.id)
-      const multi = !response ? 3 : response === 'up' ? 2 : 1
-      const order = multi * 100 + votes
-      const commentsCount = getCommentsCount(item.id)
-      const excerpt = getExcerpt(item.description)
-
-      let tags = item.tags || {}
-
-      tags = {
-        ...tags,
-        WeDance: true,
-        Dance: true
-      }
-
-      const keywords = Object.keys(tags).join(', ')
-
-      return {
-        ...item,
-        excerpt,
-        keywords,
-        commentsCount,
-        upVotes,
-        downVotes,
-        votes,
-        response,
-        order
-      }
     }
 
     const item = computed(() => map(doc.value))
@@ -298,15 +192,9 @@ export default {
       exists,
       uid,
       loading,
-      filters,
       item,
-      collection,
-      fields,
       map,
-      getCount,
-      getRsvpResponse,
       updateRsvp,
-      getCommentsCount,
       can,
       getProfile,
       getDateTime,

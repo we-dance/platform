@@ -11,10 +11,11 @@ export default () => {
 
   const getCommentsCount = (postId) => getComments(postId).length
 
-  async function addComment(postId, comment) {
+  async function addComment(postId, commentId, body) {
     await create({
       postId,
-      body: comment
+      commentId,
+      body
     })
   }
 
