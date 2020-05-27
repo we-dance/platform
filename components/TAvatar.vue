@@ -1,24 +1,39 @@
 <template>
   <div class="flex items-center">
     <div v-if="photo">
-      <router-link :to="`/u/${getProfile(uid).username}`">
+      <router-link v-if="noHover" :to="`/u/${profile.username}`">
         <img
-          v-if="getProfile(uid).photo"
+          v-if="profile.photo"
           :class="`rounded-full mr-2 w-${size} h-${size}`"
-          :src="getProfile(uid).photo"
+          :src="profile.photo"
         />
         <div
           v-else
           :class="`rounded-full mr-2 w-${size} h-${size} bg-orange-500`"
         ></div>
       </router-link>
+      <TMenu v-else hover>
+        <template v-slot:button>
+          <router-link :to="`/u/${profile.username}`">
+            <img
+              v-if="profile.photo"
+              :class="`rounded-full mr-2 w-${size} h-${size}`"
+              :src="profile.photo"
+            />
+            <div
+              v-else
+              :class="`rounded-full mr-2 w-${size} h-${size} bg-orange-500`"
+            ></div>
+          </router-link>
+        </template>
+        <template v-slot:menu>
+          <TCardProfile class="w-64" :uid="uid" />
+        </template>
+      </TMenu>
     </div>
     <div v-if="name">
-      <router-link
-        class="hover:underline"
-        :to="`/u/${getProfile(uid).username}`"
-      >
-        {{ getProfile(uid).username }}
+      <router-link class="hover:underline" :to="`/u/${profile.username}`">
+        {{ profile.username }}
       </router-link>
     </div>
   </div>
@@ -48,6 +63,10 @@ export default {
     big: {
       type: Boolean,
       default: false
+    },
+    noHover: {
+      type: Boolean,
+      default: false
     }
   },
   computed: {
@@ -63,11 +82,13 @@ export default {
       return 4
     }
   },
-  setup() {
+  setup(props) {
     const { getProfile } = useProfiles()
 
+    const profile = getProfile(props.uid)
+
     return {
-      getProfile
+      profile
     }
   }
 }

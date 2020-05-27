@@ -53,33 +53,35 @@
               </div>
             </template>
             <template slot="menu">
-              <div v-if="isAdmin()" class="text-red">
-                <TButton to="/reports" type="nav-admin">
-                  Reports
+              <div class="w-32 py-2 bg-white rounded-lg shadow-xl border">
+                <div v-if="isAdmin()" class="text-red">
+                  <TButton to="/reports" type="nav-admin">
+                    Reports
+                  </TButton>
+                  <TButton to="/tags" type="nav-admin">
+                    Tags
+                  </TButton>
+                  <TButton to="/profiles" type="nav-admin">
+                    Profiles
+                  </TButton>
+                </div>
+                <TButton
+                  v-if="getProfile(uid).username"
+                  type="nav"
+                  :to="`/u/${getProfile(uid).username}`"
+                >
+                  My Profile
                 </TButton>
-                <TButton to="/tags" type="nav-admin">
-                  Tags
+                <TButton type="nav" to="/settings">
+                  Settings
                 </TButton>
-                <TButton to="/profiles" type="nav-admin">
-                  Profiles
+                <TButton type="nav" to="/?tour=intro">
+                  About
+                </TButton>
+                <TButton type="nav" to="/signout">
+                  Logout
                 </TButton>
               </div>
-              <TButton
-                v-if="getProfile(uid).username"
-                type="nav"
-                :to="`/u/${getProfile(uid).username}`"
-              >
-                My Profile
-              </TButton>
-              <TButton type="nav" to="/settings">
-                Settings
-              </TButton>
-              <TButton type="nav" to="/?tour=intro">
-                About
-              </TButton>
-              <TButton type="nav" to="/signout">
-                Logout
-              </TButton>
             </template>
           </TMenu>
         </nav>

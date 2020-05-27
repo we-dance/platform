@@ -4,7 +4,11 @@
       <TTabs v-model="tab" :tabs="tabs" />
     </div>
 
-    <TCardList :collection="collection" :filters="filters">
+    <TCardList
+      :collection="collection"
+      :filters="filters"
+      class="max-w-md mx-auto"
+    >
       <template v-slot:empty>
         <div class="mt-4 mx-auto max-w-md p-4 text-sm">
           <TIcon name="undraw_work_chat" class="p-4" />
@@ -26,38 +30,7 @@
         </div>
       </template>
       <template v-slot:default="{ item }">
-        <div>
-          <div class="bg-white mb-4 rounded border shadow p-4 max-w-sm">
-            <router-link
-              :to="`/u/${getProfile(item.createdBy).username}`"
-              class="text-sm flex items-center"
-            >
-              <TAvatar photo big :uid="item.createdBy" />
-              <div>
-                <div class="font-bold">
-                  {{ getProfile(item.createdBy).name }}
-                </div>
-                <div class="text-gray-600">
-                  @{{ getProfile(item.createdBy).username }}
-                </div>
-              </div>
-            </router-link>
-            <div class="text-sm mt-2">
-              <div v-if="getProfile(item.createdBy).bio">
-                {{ getProfile(item.createdBy).bio }}
-              </div>
-              <dl
-                v-if="getProfile(item.createdBy).city"
-                class="mt-2 flex items-center"
-              >
-                <dt>
-                  <TIcon class="w-4 h-4 mr-1 text-blue-500" name="place" />
-                </dt>
-                <dd>{{ getProfile(item.createdBy).city }}</dd>
-              </dl>
-            </div>
-          </div>
-        </div>
+        <TCardProfile class="mb-4" :uid="item.createdBy" />
       </template>
     </TCardList>
   </div>

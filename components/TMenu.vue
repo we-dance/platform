@@ -1,13 +1,9 @@
 <template>
-  <div class="relative">
-    <div ref="btn" @click="show = !show">
+  <div class="relative" @mouseover="onHover(true)" @mouseleave="onHover(false)">
+    <div ref="btn" @click="onClick">
       <slot name="button" />
     </div>
-    <div
-      v-if="show"
-      class="absolute border right-0 text-left -mt-1 w-32 py-2 bg-white rounded-lg shadow-xl z-30"
-      :class="position === 'top' ? 'bottom-0 mb-12' : ''"
-    >
+    <div v-if="show" class="absolute text-left z-30" :class="classes">
       <slot name="menu" :closeMenu="closeMenu" />
     </div>
   </div>
@@ -15,24 +11,52 @@
 
 <script>
 export default {
+  props: {
+    hover: {
+      type: Boolean,
+      default: false
+    }
+  },
   data: () => ({
     show: false,
-    position: 'bottom'
+    isTop: true,
+    isLett: true
   }),
+  computed: {
+    classes() {
+      let result
+
+      result += this.isTop ? '' : ' bottom-0'
+      result += this.isLeft ? ' left-0' : ' right-0'
+
+      return result
+    }
+  },
   watch: {
     $route() {
       this.show = false
     },
     show() {
-      const isTop =
-        this.$refs.btn.getBoundingClientRect().top > window.innerHeight / 2
+      this.isTop =
+        this.$refs.btn.getBoundingClientRect().top < window.innerHeight / 2
 
-      this.position = isTop ? 'top' : 'bottom'
+      this.isLeft =
+        this.$refs.btn.getBoundingClientRect().left < window.innerWidth / 2
     }
   },
   methods: {
     closeMenu() {
       this.show = false
+    },
+    onClick() {
+      if (!this.hover) {
+        this.show = !this.show
+      }
+    },
+    onHover(val) {
+      if (this.hover) {
+        this.show = val
+      }
     }
   }
 }

@@ -63,36 +63,7 @@
       </div>
 
       <div class="col-span-4 col-start-9 row-start-1">
-        <div class="mt-4 md:mt-0 mb-4 rounded border shadow p-4 bg-white">
-          <router-link
-            :to="`/u/${getProfile(item.createdBy).username}`"
-            class="text-sm flex items-center"
-          >
-            <img
-              class="rounded-full mr-2 w-10 h-10"
-              :src="getProfile(item.createdBy).photo"
-            />
-            <div>
-              <div class="font-bold">
-                {{ getProfile(item.createdBy).name }}
-              </div>
-              <div class="text-gray-600">
-                @{{ getProfile(item.createdBy).username }}
-              </div>
-            </div>
-          </router-link>
-          <div class="text-sm mt-2">
-            <div>{{ getProfile(item.createdBy).summary }}</div>
-            <dl class="mt-2">
-              <dt class="font-bold mr-1">Location:</dt>
-              <dd>{{ getProfile(item.createdBy).location }}</dd>
-            </dl>
-            <dl class="mt-2">
-              <dt class="font-bold mr-1">Joined:</dt>
-              <dd>{{ getDateTime(getProfile(item.createdBy).createdAt) }}</dd>
-            </dl>
-          </div>
-        </div>
+        <TCardProfile class="mt-4 md:mt-0 mb-4" :uid="item.createdBy" />
       </div>
 
       <div id="comment" class="col-span-8" @click="checkAuth">
