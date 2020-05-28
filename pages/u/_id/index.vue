@@ -11,9 +11,11 @@
           <div class="font-bold text-2xl leading-none">{{ profile.name }}</div>
           <div>@{{ profile.username }}</div>
         </div>
-        <dl class="mt-2 md:flex">
+        <dl v-if="profile.location" class="mt-2 md:flex">
           <dt class="font-bold mr-1">City:</dt>
-          <dd>{{ profile.city }}</dd>
+          <dd>
+            {{ profile.location.locality }}, {{ profile.location.country }}
+          </dd>
         </dl>
         <dl class="mt-2 md:flex">
           <dt class="font-bold mr-1">Joined:</dt>

@@ -18,9 +18,9 @@
         <dt class="font-bold mr-1">Joined:</dt>
         <dd>{{ getDateTime(profile.createdAt) }}</dd>
       </dl>
-      <dl v-if="profile.city" class="mt-1 md:flex">
+      <dl v-if="profile.location" class="mt-1 md:flex">
         <dt class="font-bold mr-1">City:</dt>
-        <dd>{{ profile.city }}</dd>
+        <dd>{{ profile.location.locality }}, {{ profile.location.country }}</dd>
       </dl>
       <dl v-if="profile.skills" class="mt-1 md:flex">
         <dt class="font-bold mr-1">Dance Skills:</dt>
