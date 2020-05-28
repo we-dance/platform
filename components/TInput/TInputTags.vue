@@ -100,7 +100,7 @@ export default {
   },
   methods: {
     removeLast() {
-      if (this.selectedTags.length) {
+      if (!this.input && this.selectedTags.length) {
         this.remove(this.selectedTags[this.selectedTags.length - 1].value)
       }
     },

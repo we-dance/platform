@@ -116,7 +116,8 @@ export default () => {
       name: 'jobs',
       label: 'Other Skills',
       type: 'tags',
-      description: 'What other skills do you have?',
+      description:
+        'What other skills would you like to share with dance community?',
       options: skillsOptions.value,
       listeners: {
         add: addSkill
