@@ -48,9 +48,11 @@ import Vue from 'vue'
 import * as VueGoogleMaps from 'vue2-google-maps'
 import { getLocation } from '~/utils'
 
+const key = process.env.GOOGLE_API_KEY
+
 Vue.use(VueGoogleMaps, {
   load: {
-    key: process.env.GOOGLE_API_KEY,
+    key,
     libraries: 'places'
   }
 })
@@ -116,6 +118,8 @@ export default {
 
   async mounted() {
     this.input = ''
+
+    console.log('GOOGLE_API_KEY', key)
 
     await this.$gmapApiPromiseLazy()
   },
