@@ -234,7 +234,9 @@ export default {
         return ''
       }
 
-      return `https://wedance.netlify.com/u/${username}`
+      const url = process.env.app.url
+
+      return `${url}/u/${username}`
     },
     currentTab() {
       return this.$route.query.tab || 'welcome'
