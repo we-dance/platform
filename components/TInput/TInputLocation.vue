@@ -87,7 +87,8 @@ export default {
     input: '',
     predictions: [],
     gpsIsBlocked: false,
-    showPopup: false
+    showPopup: false,
+    loading: false
   }),
 
   computed: {
