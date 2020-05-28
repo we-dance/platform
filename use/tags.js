@@ -2,9 +2,11 @@ import { computed } from '@vue/composition-api'
 import useCollection from '~/use/collection'
 import useDoc from '~/use/doc'
 
-export default () => {
-  const { docs, getById } = useCollection('tags')
-  const { set } = useDoc('tags')
+export default (selectedCollection) => {
+  const collection = selectedCollection || 'tags'
+
+  const { docs, getById } = useCollection(collection)
+  const { set } = useDoc(collection)
 
   const tagsOptions = computed(() =>
     docs.value.map((doc) => ({ value: doc.id, label: doc.id }))

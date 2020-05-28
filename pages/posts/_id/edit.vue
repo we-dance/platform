@@ -92,7 +92,9 @@ export default {
             placeholder: 'Tags',
             type: 'tags',
             options: tagsOptions.value,
-            'v-on:add': addTag
+            listeners: {
+              add: addTag
+            }
           }
         ]
       },
@@ -115,7 +117,9 @@ export default {
             hideLabel: true,
             type: 'tags',
             options: tagsOptions.value,
-            'v-on:add': addTag
+            listeners: {
+              add: addTag
+            }
           }
         ]
       }

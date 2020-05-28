@@ -10,11 +10,9 @@
     <TPopup v-if="showPopup">
       <div class="flex justify-between border-b pb-2 mb-4">
         <div class="font-bold">{{ popupTitle }}</div>
-        <TIcon
-          name="close"
-          class="cursor-pointer w-4 h-4"
-          @click="showPopup = false"
-        />
+        <button class="cursor-pointer" @click="showPopup = false">
+          <TIcon name="close" class="cursor-pointer w-4 h-4" />
+        </button>
       </div>
 
       <TLoader v-if="loading" />

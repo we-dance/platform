@@ -5,6 +5,7 @@ import useTags from '~/use/tags'
 export default () => {
   const { getById } = useCollection('profiles')
   const { tagsOptions, addTag } = useTags()
+  const { tagsOptions: skillsOptions, addTag: addSkill } = useTags('skills')
 
   const preferencesFields = computed(() => [
     {
@@ -13,7 +14,9 @@ export default () => {
       type: 'tags',
       description: 'Choose your interests',
       options: tagsOptions.value,
-      'v-on:add': addTag
+      listeners: {
+        add: addTag
+      }
     },
     {
       name: 'days',
@@ -108,6 +111,16 @@ export default () => {
       label: 'I am getting into',
       type: 'textarea',
       placeholder: 'What are you learning right now?'
+    },
+    {
+      name: 'jobs',
+      label: 'Other Skills',
+      type: 'tags',
+      description: 'What other skills do you have?',
+      options: skillsOptions.value,
+      listeners: {
+        add: addSkill
+      }
     }
   ]
 

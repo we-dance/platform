@@ -17,6 +17,7 @@
           :type="type"
           :auto-focus="autoFocus"
           :hide-label="hideLabel"
+          v-on="$attrs.listeners"
           @input="(val) => $emit('input', val)"
         />
       </slot>

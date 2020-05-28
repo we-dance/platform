@@ -27,7 +27,7 @@
       <TButton to="/settings?tab=profile">Edit Profile</TButton>
     </div>
     <div class="p-4">
-      <div>{{ profile.summary }}</div>
+      <div>{{ profile.bio }}</div>
       <dl v-if="profile.skills" class="mt-2 md:flex">
         <dt class="font-bold mr-1">Dance Skills:</dt>
         <dd>{{ profile.skills }}</dd>
