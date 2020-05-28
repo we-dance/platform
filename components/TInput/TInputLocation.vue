@@ -119,8 +119,6 @@ export default {
   async mounted() {
     this.input = ''
 
-    console.log('GOOGLE_API_KEY', key)
-
     await this.$gmapApiPromiseLazy()
   },
 
