@@ -75,10 +75,10 @@ export default () => {
       placeholder: '(Required)'
     },
     {
-      name: 'city',
+      name: 'location',
       label: 'City',
       required: true,
-      description: 'Search based on the name of your city.'
+      type: 'location'
     },
     {
       name: 'birthday',

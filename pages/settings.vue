@@ -11,7 +11,7 @@
         {{ tab.label }}
       </router-link>
     </nav>
-    <main class="p-4 flex-grow max-w-lg">
+    <main class="flex-grow max-w-lg">
       <TLoader v-if="loading || !profile || !account" />
       <div v-else>
         <div v-if="currentTab === 'welcome'">

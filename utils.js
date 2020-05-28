@@ -2,6 +2,7 @@ import format from 'date-fns/format'
 import formatDistance from 'date-fns/formatDistance'
 import MarkdownIt from 'markdown-it'
 import excerptHtml from 'excerpt-html'
+import _ from 'lodash'
 
 export const sortBy = (_key) => {
   let key = _key
@@ -112,3 +113,25 @@ export const getId = (text) => {
 
   return text.replace(' ', '')
 }
+
+export const addressPart = (result, type) => {
+  if (!result) {
+    return ''
+  }
+
+  const part = _.find(result.address_components, (o) => o.types.includes(type))
+  if (!part) {
+    return ''
+  }
+
+  return part.long_name
+}
+
+export const getLocation = (result, usedGps) => ({
+  locality: addressPart(result, 'locality'),
+  country: addressPart(result, 'country'),
+  place_id: result.place_id,
+  latitude: result.geometry.location.lat(),
+  longitude: result.geometry.location.lng(),
+  usedGps
+})
