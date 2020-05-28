@@ -113,7 +113,9 @@ export default {
           {
             name: 'tags',
             hideLabel: true,
-            type: 'tags'
+            type: 'tags',
+            options: tagsOptions.value,
+            'v-on:add': addTag
           }
         ]
       }
