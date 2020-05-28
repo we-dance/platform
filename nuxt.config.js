@@ -133,6 +133,10 @@ export default {
   },
   env: {
     app,
+    varA: process.env.VAR_A,
+    varB: process.env.VUE_APP_VAR_B,
+    varC: process.env.VAR_C,
+    varD: process.env.VUE_APP_VAR_D,
     firebase: {
       config: {
         apiKey: '***REMOVED***',
