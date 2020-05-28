@@ -48,11 +48,9 @@ import Vue from 'vue'
 import * as VueGoogleMaps from 'vue2-google-maps'
 import { getLocation } from '~/utils'
 
-const key = process.env.GOOGLE_API_KEY
-
 Vue.use(VueGoogleMaps, {
   load: {
-    key,
+    key: process.env.api.google,
     libraries: 'places'
   }
 })
