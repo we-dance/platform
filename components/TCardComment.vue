@@ -26,14 +26,13 @@
 </template>
 
 <script>
-import ChildComments from '~/components/TListComments'
 import { dateDiff } from '~/utils'
 import useAuth from '~/use/auth'
 
 export default {
   name: 'TCardComment',
   components: {
-    ChildComments
+    ChildComments: () => import('./TListComments.vue')
   },
   props: {
     postId: {
