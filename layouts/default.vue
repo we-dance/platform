@@ -19,28 +19,28 @@
             class="block p-2 md:px-4 flex flex-col justify-center"
           >
             <TIcon class="w-8 h-8" name="news" />
-            <span class="hidden md:block">News</span>
+            <span class="hidden md:block">Inbox</span>
           </router-link>
           <router-link
             to="/people"
             class="block p-2 md:px-4 flex flex-col justify-center"
           >
             <TIcon class="w-8 h-8" name="friends" />
-            <span class="hidden md:block">People</span>
+            <span class="hidden md:block">Network</span>
           </router-link>
           <router-link
             to="/events"
             class="block p-2 md:px-4 flex flex-col justify-center"
           >
-            <TIcon class="w-8 h-8" name="ticket" />
-            <span class="hidden md:block">Events</span>
+            <TIcon class="w-8 h-8" name="calendar" />
+            <span class="hidden md:block">Calendar</span>
           </router-link>
           <router-link
-            to="/trips"
+            to="/posts/-/edit"
             class="block p-2 md:px-4 flex flex-col justify-center"
           >
-            <TIcon class="w-8 h-8" name="directions" />
-            <span class="hidden md:block">Trips</span>
+            <TIcon class="w-8 h-8" name="plus" />
+            <span class="hidden md:block">Add</span>
           </router-link>
 
           <TButton v-if="!uid" to="/signin" class="md:ml-2">Sign In</TButton>

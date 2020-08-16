@@ -1,17 +1,37 @@
 <template>
   <div class="mx-auto w-full max-w-lg">
-    <TTabs v-model="selectedType" :tabs="types" />
     <TForm
       v-model="item"
       :fields="fields"
       vertical
-      show-cancel
-      :show-remove="can('remove', collection, item)"
-      class="rounded bg-white mb-4 shadow border p-4 rounded-t-none"
+      :show-cancel="id"
+      :show-remove="id"
+      :submit-label="id ? 'Save' : 'Add'"
+      class="bg-white p-4"
       @save="saveItem"
       @cancel="cancelItem"
       @remove="removeItem"
     />
+    <div class="p-4 bg-white rounded shadow border">
+      <TButton type="nav" @click="selectedType = 'event'">
+        <div class="flex justify-center align-middle">
+          <TIcon name="calendar" class="w-4 h-4 mr-1" />
+          <span>Add event</span>
+        </div>
+      </TButton>
+      <TButton type="nav" @click="selectedType = 'profile'">
+        <div class="flex justify-center align-middle">
+          <TIcon name="store" class="w-4 h-4 mr-1" />
+          <span>Create page</span>
+        </div>
+      </TButton>
+      <TButton type="nav" @click="selectedType = 'dance'">
+        <div class="flex justify-center align-middle">
+          <TIcon name="search" class="w-4 h-4 mr-1" />
+          <span>Find dance partner</span>
+        </div>
+      </TButton>
+    </div>
   </div>
 </template>
 
@@ -19,12 +39,12 @@
 import { computed } from '@vue/composition-api'
 import useAuth from '~/use/auth'
 import useDoc from '~/use/doc'
-import useTags from '~/use/tags'
+// import useTags from '~/use/tags'
 import useRouter from '~/use/router'
 
 export default {
   name: 'PostEdit',
-  layout: 'minimal',
+  layout: 'empty',
   middleware: ['auth'],
   data: () => ({
     selectedType: 'post'
@@ -69,7 +89,7 @@ export default {
     const collection = 'posts'
 
     const { doc: item, id, load, update, remove, create } = useDoc(collection)
-    const { tagsOptions, addTag } = useTags()
+    // const { tagsOptions, addTag } = useTags()
 
     const types = computed(() => [
       {
@@ -77,49 +97,10 @@ export default {
         value: 'post',
         fields: [
           {
-            name: 'title',
+            name: 'body',
             hideLabel: true,
-            placeholder: 'Title'
-          },
-          {
-            name: 'description',
-            hideLabel: true,
-            type: 'markdown'
-          },
-          {
-            name: 'tags',
-            hideLabel: true,
-            placeholder: 'Tags',
-            type: 'tags',
-            options: tagsOptions.value,
-            listeners: {
-              add: addTag
-            }
-          }
-        ]
-      },
-      {
-        label: 'Link',
-        value: 'link',
-        fields: [
-          {
-            name: 'title',
-            hideLabel: true,
-            placeholder: 'Title'
-          },
-          {
-            name: 'link',
-            hideLabel: true,
-            placeholder: 'Link'
-          },
-          {
-            name: 'tags',
-            hideLabel: true,
-            type: 'tags',
-            options: tagsOptions.value,
-            listeners: {
-              add: addTag
-            }
+            placeholder: 'What do you want to talk about?',
+            type: 'textarea'
           }
         ]
       }
