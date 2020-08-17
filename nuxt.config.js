@@ -134,11 +134,11 @@ export default {
   env: {
     app,
     api: {
-      google: process.env.GOOGLE_API_KEY
+      google: process.env.NUXT_ENV_GOOGLE_API_KEY
     },
     firebase: {
       config: {
-        apiKey: process.env.GOOGLE_FIREBASE_API_KEY,
+        apiKey: process.env.NUXT_ENV_GOOGLE_FIREBASE_API_KEY,
         authDomain: '***REMOVED***.firebaseapp.com',
         databaseURL: '***REMOVED***',
         projectId: '***REMOVED***',
