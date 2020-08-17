@@ -138,7 +138,7 @@ export default {
     },
     firebase: {
       config: {
-        apiKey: '***REMOVED***',
+        apiKey: process.env.GOOGLE_FIREBASE_API_KEY,
         authDomain: '***REMOVED***.firebaseapp.com',
         databaseURL: '***REMOVED***',
         projectId: '***REMOVED***',
