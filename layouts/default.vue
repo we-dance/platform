@@ -5,9 +5,9 @@
     <header>
       <div class="md:flex items-center justify-between flex-wrap p-4">
         <div class="flex items-center justify-start">
-          <router-link to="/" class="flex items-center">
-            <TIcon class="w-8 h-8 mt-2 mr-2" name="icon" />
-            <TIcon class="h-8 w-56" name="logo-text" />
+          <router-link to="/feed" class="flex items-center">
+            <TIcon class="w-6 h-6 mt-2 mr-2" name="icon" />
+            <TIcon class="h-4 w-32" name="logo-text" />
           </router-link>
         </div>
 
@@ -15,11 +15,11 @@
           class="fixed bottom-0 left-0 right-0 md:relative md:mt-6 flex md:mt-0 items-center justify-evenly md:justify-end p-2 md:p-0 border-t shadow-lg md:shadow-none md:border-0 text-gray-700 bg-white"
         >
           <router-link
-            to="/"
+            to="/feed"
             class="block p-2 md:px-4 flex flex-col justify-center"
           >
             <TIcon class="w-8 h-8" name="news" />
-            <span class="hidden md:block">Inbox</span>
+            <span class="hidden md:block">Feed</span>
           </router-link>
           <router-link
             to="/people"

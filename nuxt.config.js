@@ -4,9 +4,9 @@ const app = {
   name: 'WeDance',
   description: 'We bring dancers together',
   social: {
-    twitter: 'WeDanceApp'
+    twitter: 'WeDanceHQ'
   },
-  url: 'https://wedance.netlify.app',
+  url: 'https://we-dance.app',
   cover: '/cover/wide.png'
 }
 

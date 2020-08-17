@@ -8,7 +8,12 @@
             <TIcon class="h-4 w-32" name="logo-text" />
           </router-link>
         </div>
-        <TButton class="mt-4" type="secondary" to="/signin">Log in</TButton>
+        <TButton v-if="uid" class="mt-4" type="secondary" to="/feed"
+          >Open</TButton
+        >
+        <TButton v-else class="mt-4" type="secondary" to="/signin"
+          >Log in</TButton
+        >
       </div>
     </header>
 
@@ -104,9 +109,18 @@
 </template>
 
 <script>
+import useAuth from '~/use/auth'
+
 export default {
   name: 'PostsIndex',
   layout: 'empty',
+  setup() {
+    const { uid } = useAuth()
+
+    return {
+      uid
+    }
+  },
   computed: {
     cityList() {
       return [
