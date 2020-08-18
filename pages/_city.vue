@@ -131,7 +131,7 @@
       </div>
     </div>
 
-    <div class="p-4 max-w-2xl mx-auto">
+    <div class="p-4 pb-8 max-w-2xl mx-auto">
       <div class="my-6 text-3xl font-serif leading-tight text-center">
         Join chat with 300+ dancers
       </div>
@@ -140,10 +140,62 @@
       </div>
     </div>
 
-    <div class="mt-8 bg-black text-white text-sm">
-      <div class="p-4 container mx-auto">
-        <p>Connect with us and hit up #wedance</p>
-        <p>© WeDance 2020</p>
+    <div class="bg-black text-white text-sm">
+      <div
+        class="p-4 py-8 container mx-auto grid grid-flow-col grid-cols-2 gap-4"
+      >
+        <div class="flex items-center">
+          <p>
+            © WeDance 2020 – All rights reserved. Created by
+            <a
+              class="underline hover:no-underline"
+              target="_blank"
+              rel="noopener noreferrer"
+              href="https://razbakov.com/"
+              >Aleksey Razbakov</a
+            >.
+            <a
+              class="underline hover:no-underline"
+              rel="noopener noreferrer"
+              href="mailto:WeDanceMunich@razbakov.com"
+              >Contact us</a
+            >.
+          </p>
+        </div>
+        <div class="grid grid-flow-col grid-cols-4 grid-rows-1 gap-4">
+          <a
+            target="_blank"
+            class="flex justify-center hover:opacity-50"
+            href="https://instagram.com/WeDanceMunich"
+            rel="noopener noreferrer"
+          >
+            <TIcon name="instagram" class="h-10 w-10" />
+          </a>
+          <a
+            target="_blank"
+            class="flex justify-center hover:opacity-50"
+            href="https://fb.com/WeDanceMunich"
+            rel="noopener noreferrer"
+          >
+            <TIcon name="facebook" class="h-10 w-10" />
+          </a>
+          <a
+            target="_blank"
+            class="flex justify-center hover:opacity-50"
+            href="https://www.youtube.com/channel/UCcoW0f6TqLrGJRUubcaemLw"
+            rel="noopener noreferrer"
+          >
+            <TIcon name="youtube" class="h-10 w-10" />
+          </a>
+          <a
+            target="_blank"
+            class="flex justify-center hover:opacity-50"
+            href="https://twitter.com/WeDanceMunich"
+            rel="noopener noreferrer"
+          >
+            <TIcon name="twitter" class="h-10 w-10" />
+          </a>
+        </div>
       </div>
     </div>
   </div>
