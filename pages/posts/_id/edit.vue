@@ -65,7 +65,7 @@ export default {
       if (this.id) {
         this.$router.push(`/posts/${this.id}`)
       } else {
-        this.$router.push(`/`)
+        this.$router.push(`/feed`)
       }
     },
     async saveItem(data) {

@@ -10,7 +10,7 @@
           <TTagsPreview :value="item.tags" />
 
           <h1 class="font-bold text-2xl mb-2 leading-tight">
-            {{ item.title }}
+            {{ item.title || item.body }}
           </h1>
 
           <div class="flex items-center">
