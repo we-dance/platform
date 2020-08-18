@@ -69,26 +69,32 @@ export default {
   watch: {
     uid: {
       handler(val) {
-        if (val) {
-          let target = ls('target')
-          ls.remove('target')
-
-          if (!target) {
-            target = '/feed'
-          }
-
-          this.$router.push(target)
-        }
+        this.redirect()
       }
     }
   },
   mounted() {
     const target = this.$route.query.target
+
     if (target) {
       ls('target', target)
     }
+
+    this.redirect()
   },
   methods: {
+    redirect() {
+      if (this.uid) {
+        let target = ls('target')
+        ls.remove('target')
+
+        if (!target) {
+          target = '/feed'
+        }
+
+        this.$router.push(target)
+      }
+    },
     submit(e) {
       e.preventDefault()
 

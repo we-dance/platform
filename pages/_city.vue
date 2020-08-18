@@ -31,8 +31,10 @@
             </div>
           </h1>
           <p class="mt-2 text-xl leading-tight">
-            Connect with dancers and plan activities easier. Salsa, Bachata,
-            Kizomba, Zouk and more!
+            Salsa, Bachata, Kizomba, Tango, Zouk and more!
+          </p>
+          <p class="text-xl leading-tight">
+            Connect with dancers and plan activities easier.
           </p>
           <div class="md:flex text-center">
             <TButton class="mt-4 md:mr-4" type="primary" to="/signin"
@@ -50,6 +52,9 @@
     </div>
 
     <div class="p-4 max-w-2xl mx-auto">
+      <h2 class="mt-4 mb-10 text-3xl font-serif leading-tight text-center">
+        We help you with your dance journey
+      </h2>
       <div class="mt-4 flex min-w-full justify-end">
         <div class="w-1/3">
           <TIcon name="undraw_i_can_fly" class="pr-4" />
@@ -126,8 +131,17 @@
       </div>
     </div>
 
+    <div class="p-4 max-w-2xl mx-auto">
+      <div class="my-6 text-3xl font-serif leading-tight text-center">
+        Join chat with 300+ dancers
+      </div>
+      <div class="flex justify-center">
+        <TButton type="primary" to="/signin">Join now</TButton>
+      </div>
+    </div>
+
     <div class="mt-8 bg-black text-white text-sm">
-      <div class="p-4 container mx-auto ">
+      <div class="p-4 container mx-auto">
         <p>Connect with us and hit up #wedance</p>
         <p>© WeDance 2020</p>
       </div>

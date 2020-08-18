@@ -82,7 +82,7 @@
 
 <script>
 import { computed } from '@vue/composition-api'
-import ls from 'local-storage'
+// import ls from 'local-storage'
 import useRSVP from '~/use/rsvp'
 import useComments from '~/use/comments'
 import useCollection from '~/use/collection'
@@ -115,7 +115,7 @@ export default {
     }
   },
   mounted() {
-    this.showIntro = !!this.$route.query.tour || !ls('sawIntro')
+    this.showIntro = !!this.$route.query.tour
   },
   methods: {
     cancelReport() {

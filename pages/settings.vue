@@ -16,6 +16,10 @@
       <div v-else>
         <div v-if="currentTab === 'welcome'">
           <div class="font-bold text-xl mb-4 pb-4 border-b">Let's start!</div>
+          <div class="my-4">
+            Complete all 3 steps to get access to all the features of the
+            platform.
+          </div>
 
           <div>
             <div class="block mb-2">

@@ -57,20 +57,6 @@ export default () => {
 
   const profileFields = [
     {
-      name: 'photo',
-      label: 'Photo',
-      type: 'photo'
-    },
-    {
-      name: 'username',
-      label: 'Username',
-      required: true,
-      placeholder: '(Required)',
-      trim: '[^a-z0-9]+',
-      description:
-        'It is a way to remain anonym, but still be able to differentiate between different people'
-    },
-    {
       name: 'name',
       label: 'Name',
       required: true,
@@ -79,10 +65,24 @@ export default () => {
         "Be careful when using your full name, it's only recommended for public figures. If you want to remain anonym use only your first name."
     },
     {
+      name: 'username',
+      label: 'Username',
+      required: true,
+      placeholder: '(Required)',
+      trim: '[^a-z0-9]+',
+      description:
+        'Create a unique username, which will be a link to your profile. Allowed only letters and numbers.'
+    },
+    {
       name: 'bio',
       label: 'About you',
       type: 'textarea',
       placeholder: "Say a few words about who you are and why you're here!"
+    },
+    {
+      name: 'photo',
+      label: 'Photo',
+      type: 'photo'
     },
     {
       name: 'location',
@@ -106,14 +106,14 @@ export default () => {
       label: 'Your dance style and level',
       type: 'textarea',
       description:
-        'For example: Salsa On2 Novice or Bachata Sensual Intermediate, Salsa Cubana Advanced, Urban Kiz Novice, Zouk Intermediate, Bachata Sensual Novice, Hip Hop Novice, etc.'
+        'For example: Salsa On2 Novice, Bachata Sensual Intermediate, Salsa Cubana Advanced, Urban Kiz Novice, Zouk Intermediate, Bachata Sensual Novice, Hip Hop Novice, etc.'
     },
     {
       name: 'learning',
       label: 'Which dance topics you are interested in?',
       type: 'textarea',
       description:
-        'For example: Musicality in Salsa or Men Styling, etc. Leave blank if you are not interested in any sort of classes and workshops.'
+        'For example: Musicality in Salsa, Men Styling, etc. Leave blank if you are not interested in any sort of classes and workshops.'
     },
     {
       name: 'newsletter',
@@ -153,7 +153,7 @@ export default () => {
     },
     {
       name: 'jobs',
-      label: 'Other Skills',
+      label: 'Non-dancing skills',
       type: 'textarea',
       description:
         'What other skills would you like to share with dance community? For example: video editing, photography, copywriting, etc. It might be useful to exchange your skills for free passes.'
@@ -176,11 +176,11 @@ export default () => {
     },
     {
       name: 'height',
-      label: 'Height (cm)'
+      label: 'Your height (cm)'
     },
     {
       name: 'weight',
-      label: 'Weight (kg)',
+      label: 'Your weight (kg)',
       description: "Leave this field blank if you think it's irrelevant."
     },
     {
