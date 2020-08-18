@@ -62,7 +62,7 @@
         <div>
           <div>
             <router-link :to="`/posts/${item.id}`" class="leading-none text-sm">
-              {{ item.title }}
+              {{ item.title || item.body }}
             </router-link>
           </div>
           <div class="text-xs flex text-gray-700">
