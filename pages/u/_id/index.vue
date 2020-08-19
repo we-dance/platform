@@ -27,15 +27,22 @@
       <TButton to="/settings?tab=profile">Edit Profile</TButton>
     </div>
     <div class="p-4">
-      <div>{{ profile.bio }}</div>
-      <dl v-if="profile.skills" class="mt-2 md:flex">
-        <dt class="font-bold mr-1">Dance Skills:</dt>
-        <dd>{{ profile.skills }}</dd>
-      </dl>
-      <dl v-if="profile.learning" class="mt-2 md:flex">
-        <dt class="font-bold mr-1">I am getting into:</dt>
-        <dd>{{ profile.learning }}</dd>
-      </dl>
+      <div v-if="profile.bio" class="mt-2">
+        <h2 class="font-bold">About me:</h2>
+        <div>{{ profile.bio }}</div>
+      </div>
+      <div v-if="profile.skills" class="mt-2">
+        <h2 class="font-bold">Dance skills:</h2>
+        <div>{{ profile.skills }}</div>
+      </div>
+      <div v-if="profile.learning" class="mt-2">
+        <h2 class="font-bold">I am getting into:</h2>
+        <div>{{ profile.learning }}</div>
+      </div>
+      <div v-if="profile.story" class="mt-2">
+        <h2 class="font-bold">My dance story:</h2>
+        <div>{{ profile.story }}</div>
+      </div>
     </div>
   </div>
 </template>

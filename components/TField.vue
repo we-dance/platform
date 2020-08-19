@@ -34,6 +34,7 @@ import { getId } from '~/utils'
 import TInput from '~/components/TInput/TInput'
 import TInputMarkdown from '~/components/TInput/TInputMarkdown'
 import TInputSelect from '~/components/TInput/TInputSelect'
+import TInputMulti from '~/components/TInput/TInputMulti'
 import TInputTags from '~/components/TInput/TInputTags'
 import TInputTextarea from '~/components/TInput/TInputTextarea'
 import TInputPhoto from '~/components/TInput/TInputPhoto'
@@ -128,7 +129,8 @@ export default {
         markdown: TInputMarkdown,
         textarea: TInputTextarea,
         photo: TInputPhoto,
-        location: TInputLocation
+        location: TInputLocation,
+        multi: TInputMulti
       }
 
       return map[this.type] || TInput

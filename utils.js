@@ -4,6 +4,16 @@ import MarkdownIt from 'markdown-it'
 import excerptHtml from 'excerpt-html'
 import _ from 'lodash'
 
+export const getObjectKeysFromArray = (arr) => {
+  const obj = {}
+
+  arr.forEach((element) => {
+    obj[element] = true
+  })
+
+  return obj
+}
+
 export const sortBy = (_key) => {
   let key = _key
   let multi = 1

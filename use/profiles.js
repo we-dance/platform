@@ -109,6 +109,12 @@ export default () => {
         'For example: Salsa On2 Novice, Bachata Sensual Intermediate, Salsa Cubana Advanced, Urban Kiz Novice, Zouk Intermediate, Bachata Sensual Novice, Hip Hop Novice, etc.'
     },
     {
+      name: 'story',
+      label: 'Your dance story',
+      type: 'textarea',
+      description: 'Where did you learn dancing and why did you start?'
+    },
+    {
       name: 'learning',
       label: 'Which dance topics you are interested in?',
       type: 'textarea',
@@ -118,12 +124,8 @@ export default () => {
     {
       name: 'newsletter',
       label: 'What kind of updated would you like to receive weekly?',
-      type: 'select',
+      type: 'multi',
       options: [
-        {
-          value: 'nothing',
-          label: 'Nothing'
-        },
         {
           value: 'party',
           label: 'Social/party events'
