@@ -100,9 +100,7 @@
             <div>
               <h2 class="font-bold text-xl">Share your passion</h2>
               <p>
-                Share your dance story and inspire others! We offer
-                collaborative youtube, twitter and instagram channels and aiming
-                to bring more creators talk about dance.
+                Share your dance story and inspire others!
               </p>
             </div>
           </div>
