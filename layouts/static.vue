@@ -1,5 +1,7 @@
 <template>
-  <div class="font-sans leading-normal tracking-normal antialiased">
+  <div
+    class="font-sans leading-normal tracking-normal antialiased flex flex-col min-h-screen"
+  >
     <header class="container mx-auto bg-white">
       <div class="flex items-center justify-between flex-wrap p-4">
         <div class="flex items-center justify-start">
@@ -17,7 +19,9 @@
       </div>
     </header>
 
-    <nuxt />
+    <div class="flex-grow">
+      <nuxt />
+    </div>
 
     <div class="bg-black text-white text-sm">
       <div
