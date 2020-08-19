@@ -1,14 +1,21 @@
 <template>
-  <City />
+  <div class="p-4 pb-8 max-w-2xl mx-auto">
+    <div class="my-6 text-3xl font-serif leading-tight text-center">
+      Find dance community in your city
+    </div>
+    <div class="flex justify-center">
+      <TInputCity @input="selectCity" />
+    </div>
+  </div>
 </template>
 
 <script>
-import City from './_city'
-
 export default {
-  components: {
-    City
-  },
-  layout: 'empty'
+  layout: 'static',
+  methods: {
+    selectCity(val) {
+      this.$router.push(`/${val.locality}`)
+    }
+  }
 }
 </script>

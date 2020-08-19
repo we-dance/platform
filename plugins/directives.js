@@ -11,6 +11,6 @@ Vue.directive('focus', {
 Vue.use(Vue2TouchEvents)
 Vue.use(VueTour)
 
-document.oncontextmenu = () => {
-  return false
-}
+// document.oncontextmenu = () => {
+//   return false
+// }
