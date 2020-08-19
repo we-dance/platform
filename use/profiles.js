@@ -1,26 +1,14 @@
 import { computed } from '@vue/composition-api'
 import useCollection from '~/use/collection'
-import useTags from '~/use/tags'
 
 export default () => {
   const { getById } = useCollection('profiles')
-  const { tagsOptions, addTag } = useTags()
 
   const preferencesFields = computed(() => [
     {
-      name: 'tags',
-      label: 'Tags',
-      type: 'tags',
-      description: 'Choose your interests',
-      options: tagsOptions.value,
-      listeners: {
-        add: addTag
-      }
-    },
-    {
       name: 'days',
       label: 'Days',
-      type: 'tags',
+      type: 'multi',
       description: 'Choose best days for you to dance',
       options: [
         {
@@ -52,6 +40,68 @@ export default () => {
           value: 'Sunday'
         }
       ]
+    },
+    {
+      name: 'learning',
+      label: 'Which dance topics you are interested in?',
+      type: 'textarea',
+      description:
+        'For example: Musicality in Salsa, Men Styling, etc. Leave blank if you are not interested in any sort of classes and workshops.'
+    },
+    {
+      name: 'newsletter',
+      label: 'What kind of updated would you like to receive weekly?',
+      type: 'multi',
+      options: [
+        {
+          value: 'party',
+          label: 'Social/party events'
+        },
+        {
+          value: 'class',
+          label: 'Dance classes'
+        },
+        {
+          value: 'workshop',
+          label: 'Workshops and bootcamps'
+        },
+        {
+          value: 'online',
+          label: 'Online dance classes'
+        },
+        {
+          value: 'festival',
+          label: 'International festivals'
+        }
+      ]
+    },
+    {
+      name: 'partner',
+      label: 'Are you looking for a dance partner?',
+      type: 'select',
+      options: ['Yes', 'No'],
+      description:
+        'Fill the fields below and you will get a dance partner recommendation as soon as we find a match for you.'
+    },
+    {
+      name: 'height',
+      label: 'Your height (cm)'
+    },
+    {
+      name: 'weight',
+      label: 'Your weight (kg)',
+      description: "Leave this field blank if you think it's irrelevant."
+    },
+    {
+      name: 'partnerBio',
+      label: 'About your partner',
+      type: 'textarea',
+      description: 'What is important in your partner?'
+    },
+    {
+      name: 'photoFull',
+      label: 'Your full height photo',
+      type: 'photo'
     }
   ])
 
@@ -115,42 +165,9 @@ export default () => {
       description: 'Where did you learn dancing and why did you start?'
     },
     {
-      name: 'learning',
-      label: 'Which dance topics you are interested in?',
-      type: 'textarea',
-      description:
-        'For example: Musicality in Salsa, Men Styling, etc. Leave blank if you are not interested in any sort of classes and workshops.'
-    },
-    {
-      name: 'newsletter',
-      label: 'What kind of updated would you like to receive weekly?',
-      type: 'multi',
-      options: [
-        {
-          value: 'party',
-          label: 'Social/party events'
-        },
-        {
-          value: 'class',
-          label: 'Dance classes'
-        },
-        {
-          value: 'workshop',
-          label: 'Workshops and bootcamps'
-        },
-        {
-          value: 'online',
-          label: 'Online dance classes'
-        },
-        {
-          value: 'festival',
-          label: 'International festivals'
-        }
-      ]
-    },
-    {
       name: 'languages',
       label: 'Your languages',
+      type: 'textarea',
       description: 'For example: English, German, etc.'
     },
     {
@@ -167,34 +184,6 @@ export default () => {
       options: ['Public', 'Members', 'Unlisted'],
       description:
         'Public profiles will be searchable in Google. Members profile are only visible for logged-in users. Unlisted profiles are possible to open with exact link, but they are not listed in members lists and search.'
-    },
-    {
-      name: 'partner',
-      label: 'Are you looking for a dance partner?',
-      type: 'select',
-      options: ['Yes', 'No'],
-      description:
-        'Fill the fields below and you will get a dance partner recommendation as soon as we find a match for you.'
-    },
-    {
-      name: 'height',
-      label: 'Your height (cm)'
-    },
-    {
-      name: 'weight',
-      label: 'Your weight (kg)',
-      description: "Leave this field blank if you think it's irrelevant."
-    },
-    {
-      name: 'partnerBio',
-      label: 'About your partner',
-      type: 'textarea',
-      description: 'What is important in your partner?'
-    },
-    {
-      name: 'photoFull',
-      label: 'Your full height photo',
-      type: 'photo'
     }
   ]
 

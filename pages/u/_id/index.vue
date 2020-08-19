@@ -41,7 +41,7 @@
       </div>
       <div v-if="profile.story" class="mt-2">
         <h2 class="font-bold">My dance story:</h2>
-        <div>{{ profile.story }}</div>
+        <TPreview :content="profile.story" />
       </div>
     </div>
   </div>
