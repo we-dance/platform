@@ -40,8 +40,8 @@
             <div>
               <h2 class="font-bold text-xl">Start dancing</h2>
               <p>
-                Discover all dance styles in your city, find your passion, get
-                inspired and plan your first workshop.
+                Discover all dance styles in your city, get inspired and plan
+                your first workshop.
               </p>
             </div>
           </div>
