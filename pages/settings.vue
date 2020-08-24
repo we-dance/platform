@@ -41,7 +41,7 @@
             <div class="block mb-2">
               <TButton to="/settings?tab=preferences">
                 <span
-                  v-if="!profile.tags"
+                  v-if="!profile.days"
                   class="rounded-full w-6 h-6 bg-blue-500 text-white mr-1 inline-block"
                 >
                   2
@@ -270,7 +270,7 @@ export default {
 
       if (
         this.profile.username &&
-        this.profile.tags &&
+        this.profile.days &&
         !this.account.confirmed
       ) {
         await this.finish()
@@ -283,6 +283,7 @@ export default {
       this.$router.push('/settings')
     },
     async finish() {
+      console.log('finish')
       await this.updateAccount({
         confirmed: true
       })
