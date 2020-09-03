@@ -1,9 +1,6 @@
 <template>
-  <div class="flex items-center justify-center h-screen bg-gray-300">
-    <main class="rounded bg-white mb-4 shadow border p-8">
-      <router-link to="/">
-        <TIcon name="logo" class="mb-4" />
-      </router-link>
+  <div class="container mx-auto md:max-w-lg md:mb-16">
+    <main class="card">
       <div v-if="error">
         <div class="typo">
           <h2>Oops</h2>
@@ -14,22 +11,48 @@
         </TButton>
       </div>
       <TLoader v-else-if="loading || signingIn" />
+      <div v-else-if="emailSent" class="typo">
+        <h2>Almost there</h2>
+        <p>Check your email and click the invitation link.</p>
+        <p class="text-brand-fail">
+          We currently do not support web.de emails.
+        </p>
+        <p>
+          We are in beta now, please report if you have any issues to
+          <a href="mailto:moneydo@razbakov.com">moneydo@razbakov.com</a> and we
+          will fix them ASAP.
+        </p>
+      </div>
       <div v-else>
         <div class="typo">
           <h2>Sign in with</h2>
         </div>
         <div class="text-center">
           <TButton
-            class="w-full flex items-center justify-center"
+            class="flex items-center justify-center"
             @click="signInWithGoogle"
           >
             <TIcon name="google" />
             Google
           </TButton>
         </div>
-        <div class="pt-4 text-sm text-center">
-          We require social login to prevent abuse.
-        </div>
+        <div class="divider">or</div>
+        <form class="md:flex items-end" @submit="submit">
+          <TField
+            v-model="email"
+            type="email"
+            placeholder="name@email.com"
+            label="Email"
+            label-position="top"
+          />
+          <TButton
+            type="primary"
+            class="mt-2 w-full md:mt-0 md:w-32 md:ml-4"
+            @click="submit"
+          >
+            {{ $t('auth.signin') }}
+          </TButton>
+        </form>
       </div>
     </main>
   </div>
@@ -37,10 +60,20 @@
 
 <script>
 import ls from 'local-storage'
+import TLoader from '~/components/TLoader'
 import useAuth from '~/use/auth'
+import TButton from '~/components/TButton'
+import TIcon from '~/components/TIcon'
+import TField from '~/components/TField'
 
 export default {
-  layout: 'empty',
+  layout: 'static',
+  components: {
+    TLoader,
+    TButton,
+    TIcon,
+    TField
+  },
   data: () => ({
     email: '',
     emailSent: false
@@ -69,32 +102,20 @@ export default {
   watch: {
     uid: {
       handler(val) {
-        this.redirect()
+        if (val) {
+          let target = ls('target')
+          ls.remove('target')
+
+          if (!target) {
+            target = '/feed'
+          }
+
+          this.$router.push(target)
+        }
       }
     }
-  },
-  mounted() {
-    const target = this.$route.query.target
-
-    if (target) {
-      ls('target', target)
-    }
-
-    this.redirect()
   },
   methods: {
-    redirect() {
-      if (this.uid) {
-        let target = ls('target')
-        ls.remove('target')
-
-        if (!target) {
-          target = '/feed'
-        }
-
-        this.$router.push(target)
-      }
-    },
     submit(e) {
       e.preventDefault()
 
