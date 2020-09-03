@@ -4,7 +4,8 @@
       <TInput v-model="input" :placeholder="searchPlaceholder" />
       <div class="flex justify-center items-center">
         <TIcon
-          name="gps_fixed"
+          v-if="!gpsIsBlocked"
+          :name="loading ? 'coffee' : 'gps_fixed'"
           class="h-4 w-4 ml-2 cursor-pointer"
           @click="requestBrowserLocation()"
         />
@@ -15,7 +16,7 @@
       <div
         v-for="prediction in predictions"
         :key="prediction.place_id"
-        class="p-2 hover:bg-indigo-500 hover:text-white cursor-pointer"
+        class="p-2 hover:bg-indigo-500 text-black hover:text-white cursor-pointer"
         @click="select(prediction.place_id)"
       >
         {{ prediction.description }}
@@ -44,7 +45,7 @@ export default {
       type: [Object, String],
       default: ''
     },
-    autoLoad: {
+    autoSelect: {
       type: Boolean,
       default: false
     },
@@ -75,6 +76,10 @@ export default {
         return
       }
 
+      if (!this.google) {
+        return
+      }
+
       const autocomplete = new this.google.maps.places.AutocompleteService()
       autocomplete.getPlacePredictions(
         {
@@ -89,7 +94,7 @@ export default {
   async mounted() {
     this.input = ''
 
-    if (this.autoLoad) {
+    if (this.autoSelect) {
       this.requestBrowserLocation()
     }
 

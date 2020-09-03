@@ -5,10 +5,10 @@
     <header class="container mx-auto bg-white">
       <div class="flex items-center justify-between flex-wrap p-4">
         <div class="flex items-center justify-start">
-          <router-link to="/" class="flex items-center">
+          <router-link to="/?noredirect=1" class="flex items-center">
             <TIcon class="w-6 h-6 mt-2 mr-2" name="icon" />
-            <TIcon class="h-4 w-32" name="logo-text" />
           </router-link>
+          <div class="absolute block text-sm -mt-8 ml-8">WeDance</div>
           <portal-target name="logo"></portal-target>
         </div>
         <TButton v-if="uid" class="mt-4" type="secondary" to="/feed"

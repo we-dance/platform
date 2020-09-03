@@ -1,121 +1,81 @@
 <template>
   <div>
-    <div class="bg-hero">
-      <div class="bg-black bg-opacity-75">
-        <div class="text-white py-40 px-4 mx-auto max-w-2xl">
-          <h1 class="text-4xl font-serif leading-tight">
-            Dance community in {{ citySelected }}
-          </h1>
-          <p class="mt-2 text-xl leading-tight">
-            Salsa, Bachata, Kizomba, Tango, Zouk and more!
-          </p>
-          <p class="text-xl leading-tight">
-            Connect with dancers and plan activities easier.
-          </p>
-          <div class="flex">
-            <TButton class="mt-4 mr-4" type="primary" to="/signin"
-              >Join now</TButton
-            >
-            <TButton
-              class="mt-4"
-              type="secondary"
-              href="https://www.notion.so/WeDance-d8a81e56732e4c10958073a8b887a673"
-              >About WeDance</TButton
-            >
-          </div>
+    <portal to="logo">
+      <div class="flex items-center mt-2">
+        <div class="font-bold text-3xl">{{ currentCity }}</div>
+      </div>
+    </portal>
+
+    <div class="bg-dark text-real-white py-16">
+      <div class="mt-8 px-4 mx-auto max-w-2xl text-center">
+        <h1 class="text-4xl font-bold leading-tight">
+          Exclusive content only for dancers
+        </h1>
+        <p class="mt-2 text-xl">
+          Become a member of WeDance Community to get unlimited access to
+        </p>
+        <ul class="font-bold">
+          <li class="inline-block p-2">
+            <span class="mr-2">💬</span>Dance Chat
+          </li>
+          <li class="inline-block p-2">
+            <span class="mr-2">🕵️‍♂️</span>Partner Search
+          </li>
+          <li class="inline-block p-2">
+            <span class="mr-2">🗓</span>Events Schedule
+          </li>
+        </ul>
+        <div>
+          <TButton class="mt-4 mr-4" type="primary" to="/signin"
+            >Join now</TButton
+          >
         </div>
       </div>
     </div>
 
-    <div class="p-4 max-w-2xl mx-auto">
-      <h2 class="mt-8 mb-10 text-3xl font-serif leading-tight text-center">
-        We help you with your dance journey
-      </h2>
-      <div>
-        <div class="flex my-20 flex-row ">
-          <div class="w-1/2 flex justify-center align-middle">
-            <TIcon class="w-32" name="undraw_i_can_fly" />
-          </div>
-          <div class="px-8 flex items-center">
-            <div>
-              <h2 class="font-bold text-xl">Start dancing</h2>
-              <p>
-                Discover all dance styles in your city, get inspired and plan
-                your first workshop.
-              </p>
-            </div>
-          </div>
+    <div class="mt-8 max-w-2xl mx-auto">
+      <div class="px-4 flex content-center justify-center text-center">
+        <div class="p-8">
+          <div class="text-5xl font-bold">400</div>
+          <div class="uppercase">dancers in chat</div>
         </div>
-
-        <div class="flex my-20 flex-row-reverse">
-          <div class="w-1/2 flex justify-center align-middle">
-            <TIcon class="w-32" name="undraw_together" />
-          </div>
-          <div class="px-8 flex items-center">
-            <div>
-              <h2 class="font-bold text-xl">Find dance partner</h2>
-              <p>
-                Let us know who you are looking for and we will recommend you
-                someone.
-              </p>
-            </div>
-          </div>
+        <div class="p-8">
+          <div class="text-5xl font-bold">52</div>
+          <div class="uppercase">looking for partner</div>
         </div>
-
-        <div class="flex my-20 flex-row">
-          <div class="w-1/2 flex justify-center align-middle">
-            <TIcon class="w-32" name="undraw_events" />
-          </div>
-          <div class="px-8 flex items-center">
-            <div>
-              <h2 class="font-bold text-xl">Find parties</h2>
-              <p>
-                We monitor all activities in dance scene and provide you with
-                event calendar, which will highlight the best party for you.
-              </p>
-            </div>
-          </div>
-        </div>
-
-        <div class="flex my-20 flex-row-reverse">
-          <div class="w-1/2 flex justify-center align-middle">
-            <TIcon class="w-32" name="undraw_super_woman" />
-          </div>
-          <div class="px-8 flex items-center">
-            <div>
-              <h2 class="font-bold text-xl">Improve dancing</h2>
-              <p>
-                Find and connect with dance instructors, dance schools and
-                festivals.
-              </p>
-            </div>
-          </div>
-        </div>
-
-        <div class="flex my-20 flex-row">
-          <div class="w-1/2 flex justify-center align-middle">
-            <TIcon class="w-32" name="undraw_compose_music" />
-          </div>
-          <div class="px-8 flex items-center">
-            <div>
-              <h2 class="font-bold text-xl">Share your passion</h2>
-              <p>
-                Share your dance story and inspire others!
-              </p>
-            </div>
-          </div>
+        <div class="p-8">
+          <div class="text-5xl font-bold">27</div>
+          <div class="uppercase">events this week</div>
         </div>
       </div>
     </div>
 
-    <div class="p-4 pb-8 my-16 max-w-2xl mx-auto">
-      <div class="my-6 text-3xl font-serif leading-tight text-center">
-        Join chat with 300+ dancers
-      </div>
-      <div class="flex justify-center">
-        <TButton type="primary" to="/signin">Join now</TButton>
-      </div>
+    <div class="mt-10 px-4 mx-auto max-w-2xl text-center">
+      <p class="text-xl font-bold">
+        There are 5 dance events today, 3 september
+      </p>
+      <ul class="p-4 text-left list-disc">
+        <li>
+          <span class="font-bold">19:00 🎉 </span>
+          <router-link
+            class="underline hover:no-underline text-blue-700"
+            to="/SalsaCubanaMunich"
+          >
+            Salsa Cubana at Pinathek der Moderne</router-link
+          >
+        </li>
+        <li class="leading-tight">
+          Other 4 events are visible only for members<sup class="text-primary"
+            >*</sup
+          ><br /><span class="text-xs"
+            ><span class="text-primary">*</span> – some organisers restrict
+            visibility to avoid too much exposure</span
+          >
+        </li>
+      </ul>
     </div>
+
+    <div class="mt-20"></div>
   </div>
 </template>
 
@@ -123,8 +83,7 @@
 import useAuth from '~/use/auth'
 
 export default {
-  name: 'PostsIndex',
-  layout: 'static',
+  layout: 'public',
   setup() {
     const { uid } = useAuth()
 
@@ -133,23 +92,7 @@ export default {
     }
   },
   computed: {
-    cityList() {
-      return [
-        {
-          value: '',
-          label: 'Your city'
-        },
-        {
-          value: 'Munich',
-          label: 'Munich'
-        },
-        {
-          value: 'new',
-          label: 'New city'
-        }
-      ]
-    },
-    citySelected() {
+    currentCity() {
       return this.$route.params.city
     }
   }

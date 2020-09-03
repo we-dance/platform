@@ -13,7 +13,8 @@ module.exports = {
         light: '#F1F692',
         dark: '#3C3348',
         black: '#2A1B3C',
-        white: '#FFFFF4'
+        white: '#FFFFF4',
+        'real-white': '#FFFFFF'
       }
     }
   },
