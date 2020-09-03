@@ -178,5 +178,25 @@ export default {
       poll: 5000,
       ignored: ['node_modules']
     }
+  },
+  i18n: {
+    locales: [
+      { code: 'en', name: 'English', file: 'en.yml' },
+      { code: 'de', name: 'Deutsch', file: 'de.yml' },
+      { code: 'ru', name: 'Русский', file: 'ru.yml' },
+      { code: 'es', name: 'Español', file: 'es.yml' }
+    ],
+    defaultLocale: 'en',
+    langDir: 'langs/',
+    lazy: true,
+    vueI18n: {
+      fallbackLocale: 'en'
+    },
+    detectBrowserLanguage: {
+      useCookie: true,
+      cookieKey: 'i18n_redirected',
+      fallbackLocale: 'en',
+      alwaysRedirect: true
+    }
   }
 }
