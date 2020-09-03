@@ -64,10 +64,10 @@ export default () => {
     if (payload.includes('localhost')) {
       return ''
     }
-    if (payload.includes('gutenabend.netlify.app')) {
+    if (payload.includes('we-dance.app')) {
       return ''
     }
-    if (payload.includes('gutenabend.netlify.com')) {
+    if (payload.includes('wedance.netlify.app')) {
       return ''
     }
 
@@ -314,8 +314,6 @@ export default () => {
     state.loading = false
     state.signingIn = false
     state.error = null
-
-    router.replace('/')
   }
 
   async function signInAnonymously() {

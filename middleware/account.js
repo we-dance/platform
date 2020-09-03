@@ -6,9 +6,9 @@ export default async ({ route, redirect }) => {
 
   await getAccount()
 
-  const routes = ['settings', 'signout']
+  const routes = ['/settings', '/signout']
 
-  if (!isAccountConfirmed() && !routes.includes(route.name)) {
+  if (!isAccountConfirmed() && !routes.includes(route.path)) {
     ls('target', route.fullPath)
     redirect('/settings')
   }
