@@ -1,64 +1,62 @@
 <template>
-  <div class="bg-dark flex justify-center items-center min-h-screen">
-    <main class="bg-white rounded p-4 max-w-sm">
-      <div class="flex justify-center mb-8">
-        <router-link to="/" class="flex items-center">
-          <TIcon class="w-6 h-6 mt-2 mr-2" name="icon" />
-          <TIcon class="h-4 w-32" name="logo-text" />
-        </router-link>
+  <div>
+    <div class="flex justify-center mb-8">
+      <router-link to="/" class="flex items-center">
+        <TIcon class="w-6 h-6 mt-2 mr-2" name="icon" />
+        <TIcon class="h-4 w-32" name="logo-text" />
+      </router-link>
+    </div>
+    <div v-if="error">
+      <div class="typo">
+        <h2>Oops</h2>
+        <p class="text-brand-fail">{{ error }}</p>
       </div>
-      <div v-if="error">
-        <div class="typo">
-          <h2>Oops</h2>
-          <p class="text-brand-fail">{{ error }}</p>
-        </div>
-        <TButton type="secondary" @click="reload">
-          Try Again
+      <TButton type="secondary" @click="reload">
+        Try Again
+      </TButton>
+    </div>
+    <TLoader v-else-if="loading || signingIn" />
+    <div v-else-if="emailSent" class="typo">
+      <h2>Almost there</h2>
+      <p>Check your email and click the invitation link.</p>
+      <p class="text-brand-fail">
+        We currently do not support
+        <span class="font-bold">web.de</span> emails.
+      </p>
+      <p>
+        We are in beta now, please report if you have any issues to
+        <a href="mailto:wedance@razbakov.com">wedance@razbakov.com</a> and we
+        will fix them ASAP.
+      </p>
+    </div>
+    <div v-else>
+      <h2 class="font-bold mb-2">Sign in with</h2>
+      <div class="flex justify-center">
+        <TButton
+          class="flex items-center justify-center"
+          @click="signInWithGoogle"
+        >
+          <TIcon name="google" />
+          Google
         </TButton>
       </div>
-      <TLoader v-else-if="loading || signingIn" />
-      <div v-else-if="emailSent" class="typo">
-        <h2>Almost there</h2>
-        <p>Check your email and click the invitation link.</p>
-        <p class="text-brand-fail">
-          We currently do not support
-          <span class="font-bold">web.de</span> emails.
-        </p>
-        <p>
-          We are in beta now, please report if you have any issues to
-          <a href="mailto:wedance@razbakov.com">wedance@razbakov.com</a> and we
-          will fix them ASAP.
-        </p>
-      </div>
-      <div v-else>
-        <h2 class="font-bold mb-2">Sign in with</h2>
-        <div class="flex justify-center">
-          <TButton
-            class="flex items-center justify-center"
-            @click="signInWithGoogle"
-          >
-            <TIcon name="google" />
-            Google
-          </TButton>
-        </div>
-        <div class="divider">or</div>
-        <form class="md:flex items-end" @submit="submit">
-          <TField
-            v-model="email"
-            type="email"
-            label="Email"
-            label-position="top"
-          />
-          <TButton
-            type="primary"
-            class="mt-2 w-full md:mt-0 md:w-32 md:ml-4"
-            @click="submit"
-          >
-            {{ $t('auth.signin') }}
-          </TButton>
-        </form>
-      </div>
-    </main>
+      <div class="divider">or</div>
+      <form class="md:flex items-end" @submit="submit">
+        <TField
+          v-model="email"
+          type="email"
+          label="Email"
+          label-position="top"
+        />
+        <TButton
+          type="primary"
+          class="mt-2 w-full md:mt-0 md:w-32 md:ml-4"
+          @click="submit"
+        >
+          {{ $t('auth.signin') }}
+        </TButton>
+      </form>
+    </div>
   </div>
 </template>
 
@@ -71,7 +69,7 @@ import TIcon from '~/components/TIcon'
 import TField from '~/components/TField'
 
 export default {
-  layout: 'empty',
+  layout: 'popup',
   components: {
     TLoader,
     TButton,

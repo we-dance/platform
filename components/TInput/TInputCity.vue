@@ -1,27 +1,78 @@
 <template>
   <div>
-    <div class="flex">
-      <TInput v-model="input" :placeholder="searchPlaceholder" />
-      <div class="flex justify-center items-center">
-        <TIcon
-          v-if="!gpsIsBlocked"
-          :name="loading ? 'coffee' : 'gps_fixed'"
-          class="h-4 w-4 ml-2 cursor-pointer"
-          @click="requestBrowserLocation()"
-        />
+    <div class="inline-block w-full relative cursor-pointer">
+      <div
+        class="block appearance-none w-full bg-white border border-gray-400 hover:border-gray-500 px-4 py-2 pr-8 rounded shadow leading-tight focus:outline-none focus:shadow-outline"
+        @click="showPopup = true"
+      >
+        <div v-if="!loading">
+          {{ getLabel(value) }}
+          <span
+            v-if="gpsIsBlocked"
+            class="w-2 h-2 rounded-full bg-red-500"
+          ></span>
+        </div>
+        <div v-else>Locating...</div>
+      </div>
+      <div
+        class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700"
+      >
+        <svg
+          class="fill-current h-4 w-4"
+          xmlns="http://www.w3.org/2000/svg"
+          viewBox="0 0 20 20"
+        >
+          <path
+            d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z"
+          />
+        </svg>
       </div>
     </div>
 
-    <div v-if="predictions" class="border absolute bg-white rounded">
-      <div
-        v-for="prediction in predictions"
-        :key="prediction.place_id"
-        class="p-2 hover:bg-indigo-500 text-black hover:text-white cursor-pointer"
-        @click="select(prediction.place_id)"
-      >
-        {{ prediction.description }}
+    <TPopup v-if="showPopup">
+      <div class="flex justify-between border-b pb-2 mb-4">
+        <div class="font-bold">{{ popupTitle }}</div>
+        <button class="cursor-pointer" @click="showPopup = false">
+          <TIcon name="close" class="cursor-pointer w-4 h-4" />
+        </button>
       </div>
-    </div>
+
+      <div class="flex">
+        <TInput v-model="input" :placeholder="searchPlaceholder" />
+        <div class="flex justify-center items-center">
+          <TIcon
+            v-if="!gpsIsBlocked"
+            :name="loading ? 'coffee' : 'gps_fixed'"
+            class="h-4 w-4 ml-2 cursor-pointer"
+            @click="locate"
+          />
+        </div>
+      </div>
+
+      <div
+        v-if="predictions.length"
+        class="border absolute bg-real-white rounded"
+      >
+        <div
+          v-for="prediction in predictions"
+          :key="prediction.place_id"
+          class="p-2 hover:bg-indigo-500 text-black hover:text-white cursor-pointer"
+          @click="select(prediction.place_id)"
+        >
+          {{ prediction.description }}
+        </div>
+      </div>
+      <div v-else>
+        <div
+          v-for="city in cities"
+          :key="city.locality"
+          class="p-2 hover:bg-indigo-500 text-black hover:text-white cursor-pointer"
+          @click="change(city)"
+        >
+          {{ city.locality }}
+        </div>
+      </div>
+    </TPopup>
   </div>
 </template>
 
@@ -52,6 +103,14 @@ export default {
     searchPlaceholder: {
       type: String,
       default: 'Search city'
+    },
+    emptyLabel: {
+      type: String,
+      default: 'Select city'
+    },
+    popupTitle: {
+      type: String,
+      default: 'Change city'
     }
   },
 
@@ -59,7 +118,30 @@ export default {
     input: '',
     predictions: [],
     gpsIsBlocked: false,
-    loading: false
+    loading: false,
+    showPopup: false,
+    cities: [
+      {
+        locality: 'Berlin',
+        country: 'Germany',
+        label: 'Berlin'
+      },
+      {
+        locality: 'Munich',
+        country: 'Germany',
+        label: 'Munich'
+      },
+      {
+        locality: 'Frankfurt',
+        country: 'Germany',
+        label: 'Frankfurt'
+      },
+      {
+        locality: 'Stuttgart',
+        country: 'Germany',
+        label: 'Stuttgart'
+      }
+    ]
   }),
 
   computed: {
@@ -94,14 +176,20 @@ export default {
   async mounted() {
     this.input = ''
 
-    if (this.autoSelect) {
+    await this.$gmapApiPromiseLazy()
+
+    if (this.autoSelect && !this.value) {
       this.requestBrowserLocation()
     }
-
-    await this.$gmapApiPromiseLazy()
   },
 
   methods: {
+    locate() {
+      console.log('locate')
+
+      this.showPopup = false
+      this.requestBrowserLocation()
+    },
     open() {
       this.predictions = []
       this.showPopup = true
@@ -111,7 +199,7 @@ export default {
         return this.emptyLabel
       }
 
-      return `${location.locality}, ${location.country}`
+      return location.locality
     },
     change(location) {
       this.showPopup = false
@@ -144,6 +232,7 @@ export default {
     },
 
     async requestBrowserLocation() {
+      console.log('locating...')
       this.loading = true
 
       window.navigator.geolocation.getCurrentPosition(

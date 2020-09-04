@@ -5,18 +5,16 @@
     <header class="container mx-auto bg-white">
       <div class="flex items-center justify-between flex-wrap p-4">
         <div class="flex items-center justify-start">
-          <router-link to="/?noredirect=1" class="flex items-center">
-            <TIcon class="w-6 h-6 mt-2 mr-2" name="icon" />
+          <router-link to="/" class="flex items-center pb-2">
+            <TIcon class="w-6 h-6 pt-1 mr-2" name="icon" />
+            <TIcon class="h-4 w-32 hidden md:block" name="logo-text" />
           </router-link>
-          <div class="absolute block text-sm -mt-8 ml-8">WeDance</div>
-          <portal-target name="logo"></portal-target>
+          <portal-target name="top-left"></portal-target>
         </div>
-        <TButton v-if="uid" class="mt-4" type="secondary" to="/feed"
-          >Sign in</TButton
-        >
-        <TButton v-else class="mt-4" type="secondary" to="/signin"
-          >Sign in</TButton
-        >
+        <div>
+          <TButton v-if="uid" type="secondary" to="/feed">Sign in</TButton>
+          <TButton v-else type="secondary" to="/signin">Sign in</TButton>
+        </div>
       </div>
     </header>
 
