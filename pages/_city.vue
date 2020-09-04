@@ -33,26 +33,26 @@
       </div>
     </div>
 
-    <div class="mt-8 max-w-2xl mx-auto">
-      <div class="px-4 flex content-center justify-center text-center">
-        <div class="p-8">
-          <div class="text-5xl font-bold">400</div>
-          <div class="uppercase">dancers in chat</div>
+    <div class="mt-16 max-w-2xl mx-auto">
+      <div class="px-4 grid gap-4 grid-cols-3 text-center">
+        <div>
+          <div class="text-3xl font-bold">400</div>
+          <div class="">dancers in chat</div>
         </div>
-        <div class="p-8">
-          <div class="text-5xl font-bold">52</div>
-          <div class="uppercase">looking for partner</div>
+        <div>
+          <div class="text-3xl font-bold">52</div>
+          <div class="">looking for partner</div>
         </div>
-        <div class="p-8">
-          <div class="text-5xl font-bold">27</div>
-          <div class="uppercase">events this week</div>
+        <div>
+          <div class="text-3xl font-bold">27</div>
+          <div class="">events this week</div>
         </div>
       </div>
     </div>
 
-    <div class="mt-10 px-4 mx-auto max-w-2xl text-center">
-      <p class="text-xl font-bold">
-        There are 5 dance events today, 3 september
+    <div class="border rounded mx-4 mt-16 p-4 md:mx-auto max-w-2xl text-center">
+      <p class="text-xl font-bold leading-tight">
+        There are 5 dance events today, 4th of september
       </p>
       <ul class="p-4 text-left list-disc">
         <li>
@@ -73,9 +73,17 @@
           >
         </li>
       </ul>
+      <div>
+        Full weekly schedule is available for members only.
+        <router-link
+          class="underline hover:no-underline text-blue-700"
+          to="/signin"
+          >Sign in</router-link
+        >.
+      </div>
     </div>
 
-    <div class="mt-20"></div>
+    <div class="mt-16"></div>
   </div>
 </template>
 

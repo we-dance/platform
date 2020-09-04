@@ -12,7 +12,7 @@
           <portal-target name="logo"></portal-target>
         </div>
         <TButton v-if="uid" class="mt-4" type="secondary" to="/feed"
-          >Open</TButton
+          >Sign in</TButton
         >
         <TButton v-else class="mt-4" type="secondary" to="/signin"
           >Sign in</TButton
