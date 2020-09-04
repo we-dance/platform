@@ -13,7 +13,10 @@
             <span class="mr-2">💬</span>Dance Chat
           </li>
           <li class="inline-block p-2">
-            <span class="mr-2">🕵️‍♂️</span>Partner Search
+            <span class="mr-2">🕵️‍♂️</span
+            ><router-link to="/partner" class="underline hover:no-underline"
+              >Partner Search</router-link
+            >
           </li>
           <li class="inline-block p-2">
             <span class="mr-2">🗓</span>Event Schedule
@@ -92,7 +95,8 @@
 
     <div v-else>
       <div class="mt-16 max-w-2xl mx-auto text-center">
-        Select city to see more information.
+        <div>Select city to see more information.</div>
+        <TInputCity class="ml-2" :value="currentCity" @input="selectCity" />
       </div>
     </div>
 
