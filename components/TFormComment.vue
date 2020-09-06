@@ -39,6 +39,10 @@ export default {
   }),
   methods: {
     submit() {
+      if (!this.comment) {
+        return
+      }
+
       this.addComment(this.postId, this.commentId, this.comment)
       this.comment = ''
 

@@ -76,6 +76,10 @@ export default {
       }
     },
     async saveItem(data) {
+      if (!data.title || !data.description) {
+        return
+      }
+
       if (data.id) {
         await this.update(data.id, data)
       } else {
