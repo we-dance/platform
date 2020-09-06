@@ -72,7 +72,8 @@ export default {
     '@nuxtjs/sitemap',
     'portal-vue/nuxt',
     '@nuxtjs/device',
-    'nuxt-i18n'
+    'nuxt-i18n',
+    '@nuxtjs/amp'
   ],
   purgeCSS: {
     enabled: false

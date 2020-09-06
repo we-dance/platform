@@ -24,6 +24,7 @@
     "@johmun/vue-tags-input": "^2.1.0",
     "@microlink/vue": "^5.2.1",
     "@nuxt/markdown": "^0.0.21",
+    "@nuxtjs/amp": "^0.4.0",
     "@nuxtjs/device": "^1.2.7",
     "@nuxtjs/dotenv": "^1.4.0",
     "@nuxtjs/firebase": "^4.2.2",
