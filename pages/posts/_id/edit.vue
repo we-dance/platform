@@ -1,5 +1,12 @@
 <template>
   <div class="mx-auto w-full max-w-lg">
+    <div class="flex justify-between m-4">
+      <div class="font-bold">Write a new post</div>
+      <button class="cursor-pointer" @click="$router.back()">
+        <TIcon name="close" class="cursor-pointer w-4 h-4" />
+      </button>
+    </div>
+
     <TForm
       v-model="item"
       :fields="fields"
@@ -7,12 +14,12 @@
       :show-cancel="id"
       :show-remove="id"
       :submit-label="id ? 'Save' : 'Add'"
-      class="bg-white p-4"
+      class="bg-real-white p-4"
       @save="saveItem"
       @cancel="cancelItem"
       @remove="removeItem"
     />
-    <div class="p-4 bg-white rounded shadow border">
+    <div v-if="false" class="p-4 bg-white rounded shadow border">
       <TButton type="nav" @click="selectedType = 'event'">
         <div class="flex justify-center align-middle">
           <TIcon name="calendar" class="w-4 h-4 mr-1" />
@@ -39,7 +46,7 @@
 import { computed } from '@vue/composition-api'
 import useAuth from '~/use/auth'
 import useDoc from '~/use/doc'
-// import useTags from '~/use/tags'
+import useTags from '~/use/tags'
 import useRouter from '~/use/router'
 
 export default {
@@ -89,7 +96,7 @@ export default {
     const collection = 'posts'
 
     const { doc: item, id, load, update, remove, create } = useDoc(collection)
-    // const { tagsOptions, addTag } = useTags()
+    const { tagsOptions, addTag } = useTags()
 
     const types = computed(() => [
       {
@@ -97,10 +104,50 @@ export default {
         value: 'post',
         fields: [
           {
-            name: 'body',
+            name: 'title',
             hideLabel: true,
-            placeholder: 'What do you want to talk about?',
-            type: 'textarea'
+            placeholder: 'Title'
+          },
+          {
+            name: 'description',
+            hideLabel: true,
+            type: 'textarea',
+            placeholder: 'Description'
+          },
+          {
+            name: 'tags',
+            hideLabel: true,
+            placeholder: 'Tags',
+            type: 'tags',
+            options: tagsOptions.value,
+            listeners: {
+              add: addTag
+            }
+          }
+        ]
+      },
+      {
+        label: 'Link',
+        value: 'link',
+        fields: [
+          {
+            name: 'title',
+            hideLabel: true,
+            placeholder: 'Title'
+          },
+          {
+            name: 'link',
+            hideLabel: true,
+            placeholder: 'Link'
+          },
+          {
+            name: 'tags',
+            hideLabel: true,
+            type: 'tags',
+            options: tagsOptions.value,
+            listeners: {
+              add: addTag
+            }
           }
         ]
       }

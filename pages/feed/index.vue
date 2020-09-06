@@ -5,8 +5,6 @@
       <TButton to="/posts/-/edit">New post</TButton>
     </div>
 
-    <TPresentation v-if="showIntro" name="intro" @close="showIntro = false" />
-
     <div>
       <div v-if="false" class="rounded bg-orange-200 p-4 mb-4">
         <div class="uppercase font-bold">New Challenge</div>
@@ -41,36 +39,92 @@
       <div
         v-for="item in filteredItems"
         :key="item.id"
-        class="mb-4 flex items-center"
+        class="rounded bg-white mb-4 shadow border max-w-sm"
       >
-        <TAvatar photo size="sm" :uid="item.createdBy" />
-
-        <div
-          class="px-2 text-gray-500 flex justify-center text-center leading-none"
-        >
+        <div class="p-4">
           <div>
-            <button
-              class="text-center text-xs block hover:text-green-500"
-              :class="{ 'text-green-700': item.response === 'up' }"
-              @click="updateRsvp(item.id, 'posts', 'up')"
-            >
-              <TIcon name="arrow_drop_up" class="h-6 w-6 -mb-1" />
-              <div>{{ item.upVotes }}</div>
-            </button>
+            <div>
+              <router-link
+                :to="`/posts/${item.id}`"
+                class="font-bold leading-tight"
+              >
+                {{ item.title }}
+              </router-link>
+              <div class="float-right -mr-2">
+                <TMenu>
+                  <template v-slot:button>
+                    <TIcon
+                      class="cursor-pointer rounded-full hover:bg-gray-200 p-1"
+                      name="more_vert"
+                    />
+                  </template>
+                  <template v-slot:menu="{ closeMenu }">
+                    <TButton
+                      type="nav"
+                      @click="
+                        reportId = item.id
+                        closeMenu()
+                      "
+                      >Report</TButton
+                    >
+                  </template>
+                </TMenu>
+              </div>
+            </div>
+
+            <div class="text-xs my-1 flex items-center">
+              <TAvatar class="mr-2" photo size="sm" :uid="item.createdBy" />
+              <TAvatar class="mr-2" name :uid="item.createdBy" />
+              <router-link
+                :to="`/posts/${item.id}`"
+                class="text-xs text-gray-600 hover:underline text-right"
+              >
+                {{ dateDiff(item.createdAt) }} ago
+              </router-link>
+            </div>
+
+            <TPreview
+              v-if="!item.link"
+              class="mt-2"
+              :content="item.description"
+              :excerpt="true"
+            />
+
+            <Microlink v-if="item.link" class="mt-2 z-0" :url="item.link" />
           </div>
         </div>
-        <div>
-          <div>
-            <router-link :to="`/posts/${item.id}`" class="leading-none text-sm">
-              {{ item.title || item.body }}
-            </router-link>
-          </div>
-          <div class="text-xs flex text-gray-700">
-            <TAvatar name :uid="item.createdBy" />
-            <div class="mx-1">•</div>
-            <div>
-              <router-link :to="`/posts/${item.id}`" class="hover:bg-gray-200">
-                {{ item.commentsCount }} comments
+        <div class="px-4 pb-4 flex items-center justify-between">
+          <TTagsPreview :value="item.tags" />
+
+          <div class="flex">
+            <div class="text-green-500 flex justify-center">
+              <button
+                class="text-center hover:text-green-500"
+                :class="{ 'text-green-700': item.response === 'up' }"
+                @click="updateRsvp(item.id, 'posts', 'up')"
+              >
+                <TIcon name="up" class="h-6 w-6" />
+              </button>
+              <div>
+                {{ item.upVotes }}
+              </div>
+            </div>
+            <div class="text-red-500 flex ml-2 justify-center">
+              <button
+                class="text-center hover:text-primary"
+                :class="{ 'text-red-700': item.response === 'down' }"
+                @click="updateRsvp(item.id, 'posts', 'down')"
+              >
+                <TIcon name="down" class="h-6 w-6 hover:text-primary" />
+              </button>
+              <div>
+                {{ item.downVotes }}
+              </div>
+            </div>
+            <div class="text-gray-700 flex ml-4 justify-center">
+              <router-link :to="`/posts/${item.id}`" class="flex">
+                <TIcon name="chat" class="h-6 w-6 hover:text-primary" />
+                <span>{{ item.commentsCount }}</span>
               </router-link>
             </div>
           </div>
@@ -82,7 +136,8 @@
 
 <script>
 import { computed } from '@vue/composition-api'
-// import ls from 'local-storage'
+import ls from 'local-storage'
+import { Microlink } from '@microlink/vue'
 import useRSVP from '~/use/rsvp'
 import useComments from '~/use/comments'
 import useCollection from '~/use/collection'
@@ -92,6 +147,9 @@ import { dateDiff, sortBy } from '~/utils'
 
 export default {
   name: 'PostsIndex',
+  components: {
+    Microlink
+  },
   data: () => ({
     showIntro: false,
     reportId: 0,
@@ -115,7 +173,7 @@ export default {
     }
   },
   mounted() {
-    this.showIntro = !!this.$route.query.tour
+    this.showIntro = !!this.$route.query.tour || !ls('sawIntro')
   },
   methods: {
     cancelReport() {

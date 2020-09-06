@@ -10,7 +10,7 @@
           <TTagsPreview :value="item.tags" />
 
           <h1 class="font-bold text-2xl mb-2 leading-tight">
-            {{ item.title || item.body }}
+            {{ item.title }}
           </h1>
 
           <div class="flex items-center">
@@ -43,6 +43,18 @@
                 </button>
                 <div>
                   {{ item.upVotes }}
+                </div>
+              </div>
+              <div class="text-red-500 flex ml-2 justify-center">
+                <button
+                  class="text-center hover:text-primary"
+                  :class="{ 'text-red-700': item.response === 'down' }"
+                  @click="updateRsvp(item.id, 'posts', 'down')"
+                >
+                  <TIcon name="down" class="h-6 w-6 hover:text-primary" />
+                </button>
+                <div>
+                  {{ item.downVotes }}
                 </div>
               </div>
             </div>
