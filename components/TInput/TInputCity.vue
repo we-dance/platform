@@ -39,24 +39,21 @@
 
       <div class="flex">
         <TInput v-model="input" :placeholder="searchPlaceholder" />
-        <div class="flex justify-center items-center">
-          <TIcon
-            v-if="!gpsIsBlocked"
-            :name="loading ? 'coffee' : 'gps_fixed'"
-            class="h-4 w-4 ml-2 cursor-pointer"
-            @click="locate"
-          />
-        </div>
       </div>
 
       <div
-        v-if="predictions.length"
-        class="border absolute bg-real-white rounded"
+        v-if="!gpsIsBlocked"
+        class="p-2 hover:bg-indigo-500 text-black hover:text-white cursor-pointer flex items-center"
+        @click="locate"
       >
+        <TIcon :name="loading ? 'coffee' : 'gps_fixed'" class="h-4 w-4 mr-2" />
+        <span>Locate me</span>
+      </div>
+      <div v-if="predictions.length">
         <div
           v-for="prediction in predictions"
           :key="prediction.place_id"
-          class="p-2 hover:bg-indigo-500 text-black hover:text-white cursor-pointer"
+          class="p-2 hover:bg-indigo-500 text-black hover:text-white cursor-pointer text-left"
           @click="select(prediction.place_id)"
         >
           {{ prediction.description }}
@@ -66,7 +63,7 @@
         <div
           v-for="city in cities"
           :key="city.locality"
-          class="p-2 hover:bg-indigo-500 text-black hover:text-white cursor-pointer"
+          class="p-2 hover:bg-indigo-500 text-black hover:text-white cursor-pointer text-left"
           @click="change(city)"
         >
           {{ city.locality }}
