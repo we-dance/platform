@@ -1,20 +1,17 @@
 <template>
   <div>
     <div class="bg-dark-gradient text-real-white py-16">
-      <div class="mt-8 px-4 mx-auto max-w-2xl text-center">
-        <h1 class="text-5xl font-bold leading-tight">
+      <div class="mt-8 px-4 mx-auto container">
+        <p class="uppercase font-bold">
+          Salsa, Bachata, Kizomba, Tango, Zouk and more
+        </p>
+        <h1 class="text-6xl font-black leading-none">
           Exclusive for <span class="text-light">Dancers.</span>
         </h1>
-        <p class="mt-2 text-xl">
-          Salsa, Bachata, Kizomba, Tango, Zouk and more.
-        </p>
-        <p class="mt-2 text-xl">
+        <p class="mt-2 text-xl font-bold">
           Become a member of WeDance Community to get unlimited access to
         </p>
         <ul class="font-bold">
-          <li class="inline-block p-2">
-            <span class="mr-2">🗓</span>Event Schedule
-          </li>
           <li class="inline-block p-2">
             <span class="mr-2">💬</span>Dance Chat
           </li>
@@ -24,9 +21,15 @@
               >Partner Search</router-link
             >
           </li>
+          <li class="inline-block p-2">
+            <span class="mr-2">🗓</span>Event Schedule
+          </li>
         </ul>
         <div>
-          <TButton class="mt-4 mr-4" type="primary" to="/signin"
+          <TButton
+            class="mt-4 mr-4 text-xl font-bold"
+            type="primary"
+            to="/signin"
             >Join now</TButton
           >
         </div>
@@ -41,16 +44,16 @@
       <div class="mt-16 max-w-2xl mx-auto">
         <div class="px-4 grid gap-4 grid-cols-3 text-center">
           <div>
-            <div class="text-3xl font-bold">27</div>
-            <div class="">events this week</div>
-          </div>
-          <div>
             <div class="text-3xl font-bold">400</div>
             <div class="">dancers in chat</div>
           </div>
           <div>
             <div class="text-3xl font-bold">52</div>
             <div class="">looking for partner</div>
+          </div>
+          <div>
+            <div class="text-3xl font-bold">27</div>
+            <div class="">events this week</div>
           </div>
         </div>
       </div>

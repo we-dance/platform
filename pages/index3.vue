@@ -1,20 +1,14 @@
 <template>
   <div>
-    <div class="bg-dark-gradient text-real-white py-16">
+    <div class="bg-dark text-real-white py-16">
       <div class="mt-8 px-4 mx-auto max-w-2xl text-center">
-        <h1 class="text-5xl font-bold leading-tight">
-          Exclusive for <span class="text-light">Dancers.</span>
+        <h1 class="text-4xl font-bold leading-tight">
+          Exclusive content only for dancers
         </h1>
-        <p class="mt-2 text-xl">
-          Salsa, Bachata, Kizomba, Tango, Zouk and more.
-        </p>
         <p class="mt-2 text-xl">
           Become a member of WeDance Community to get unlimited access to
         </p>
         <ul class="font-bold">
-          <li class="inline-block p-2">
-            <span class="mr-2">🗓</span>Event Schedule
-          </li>
           <li class="inline-block p-2">
             <span class="mr-2">💬</span>Dance Chat
           </li>
@@ -23,6 +17,9 @@
             ><router-link to="/partner" class="underline hover:no-underline"
               >Partner Search</router-link
             >
+          </li>
+          <li class="inline-block p-2">
+            <span class="mr-2">🗓</span>Event Schedule
           </li>
         </ul>
         <div>
@@ -41,16 +38,16 @@
       <div class="mt-16 max-w-2xl mx-auto">
         <div class="px-4 grid gap-4 grid-cols-3 text-center">
           <div>
-            <div class="text-3xl font-bold">27</div>
-            <div class="">events this week</div>
-          </div>
-          <div>
             <div class="text-3xl font-bold">400</div>
             <div class="">dancers in chat</div>
           </div>
           <div>
             <div class="text-3xl font-bold">52</div>
             <div class="">looking for partner</div>
+          </div>
+          <div>
+            <div class="text-3xl font-bold">27</div>
+            <div class="">events this week</div>
           </div>
         </div>
       </div>
