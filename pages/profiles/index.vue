@@ -24,7 +24,13 @@
         <div class="font-bold">
           {{ item.name }}
         </div>
-        <div>@{{ item.username }}</div>
+        <div @click="selectedId = item.id">@{{ item.username }}</div>
+        <div v-if="selectedId === item.id">
+          <h2 class="font-bold">Profile</h2>
+          <pre>{{ item }}</pre>
+          <h2 class="font-bold">Account</h2>
+          <pre>{{ getAccount(item.id) }}</pre>
+        </div>
       </div>
     </template>
   </TCardList>
@@ -85,6 +91,9 @@ export default {
       getAccount,
       getLabel
     }
-  }
+  },
+  data: () => ({
+    selectedId: ''
+  })
 }
 </script>

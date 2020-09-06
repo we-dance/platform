@@ -61,8 +61,14 @@ export default {
 
     const filters = [
       {
-        name: 'all',
+        name: 'partner',
+        label: 'Looking for partner',
         default: true,
+        filter: (item) => item.username && item.partner === 'Yes'
+      },
+      {
+        name: 'all',
+        label: 'All members',
         filter: (item) => item.username
       }
     ]
