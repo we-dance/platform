@@ -5,7 +5,7 @@
     </div>
 
     <div>
-      <TInputSelect class="mb-4" v-model="tab" :options="tabs" />
+      <TInputSelect v-model="tab" class="mb-4" :options="tabs" />
 
       <div v-if="!uid" class="my-4 border rounded bg-white text-sm text-center">
         <TIcon name="undraw_work_chat" class="p-4" />
