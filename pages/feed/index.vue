@@ -58,14 +58,16 @@
                     />
                   </template>
                   <template v-slot:menu="{ closeMenu }">
-                    <TButton
-                      type="nav"
-                      @click="
-                        reportId = item.id
-                        closeMenu()
-                      "
-                      >Report</TButton
-                    >
+                    <div class="w-32 py-2 bg-white rounded-lg shadow-xl border">
+                      <TButton
+                        type="nav"
+                        @click="
+                          reportId = item.id
+                          closeMenu()
+                        "
+                        >Report</TButton
+                      >
+                    </div>
                   </template>
                 </TMenu>
               </div>

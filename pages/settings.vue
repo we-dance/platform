@@ -1,17 +1,8 @@
 <template>
-  <div class="md:flex">
-    <nav class="p-4 md:w-64">
-      <router-link
-        v-for="tab in tabs"
-        :key="tab.key"
-        :to="`?tab=${tab.key}`"
-        class="block p-2 hover:bg-gray-300"
-        :class="currentTab === tab.key ? 'bg-gray-400 font-bold' : ''"
-      >
-        {{ tab.label }}
-      </router-link>
-    </nav>
-    <main class="flex-grow max-w-lg">
+  <div>
+    <TInputSelect v-model="currentTab" :options="tabs" />
+
+    <main class="mt-8">
       <TLoader v-if="loading || !profile || !account" />
       <div v-else>
         <div v-if="currentTab === 'welcome'">
@@ -191,23 +182,23 @@ export default {
   data: () => ({
     tabs: [
       {
-        key: 'welcome',
+        value: 'welcome',
         label: 'Welcome'
       },
       {
-        key: 'profile',
+        value: 'profile',
         label: 'Profile'
       },
       {
-        key: 'contacts',
+        value: 'contacts',
         label: 'Contacts'
       },
       {
-        key: 'preferences',
+        value: 'preferences',
         label: 'Preferences'
       },
       {
-        key: 'account',
+        value: 'account',
         label: 'Account'
       }
     ],
@@ -242,8 +233,17 @@ export default {
 
       return `${url}/u/${username}`
     },
-    currentTab() {
-      return this.$route.query.tab || 'welcome'
+    currentTab: {
+      get() {
+        return this.$route.query.tab || 'welcome'
+      },
+      set(tab) {
+        this.$router.push({
+          query: {
+            tab
+          }
+        })
+      }
     }
   },
   watch: {

@@ -3,7 +3,16 @@
 </template>
 
 <script>
+import ls from 'local-storage'
+
 export default {
-  layout: 'default'
+  layout: 'default',
+  mounted() {
+    const city = ls('city')
+
+    if (city) {
+      this.$router.push('/people')
+    }
+  }
 }
 </script>

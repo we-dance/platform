@@ -3,11 +3,7 @@
     <div ref="btn" @click="onClick">
       <slot name="button" />
     </div>
-    <div
-      v-if="show"
-      class="absolute text-left z-30 border rounded py-2 bg-real-white"
-      :class="classes"
-    >
+    <div v-if="show" class="absolute text-left z-30" :class="classes">
       <slot name="menu" :closeMenu="closeMenu" />
     </div>
   </div>
