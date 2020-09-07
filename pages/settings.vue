@@ -283,7 +283,6 @@ export default {
       this.$router.push('/settings')
     },
     async finish() {
-      console.log('finish')
       await this.updateAccount({
         confirmed: true
       })

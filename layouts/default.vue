@@ -226,8 +226,8 @@ export default {
     city(city) {
       ls('city', city)
 
-      if (city) {
-        this.$router.replace('/people')
+      if (city && this.$route.path === '/') {
+        this.$router.push('/people')
       }
     }
   },
