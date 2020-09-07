@@ -1,7 +1,7 @@
 <template>
   <div>
-    <div class="flex items-baseline justify-between mb-2 border-b">
-      <div class="mr-2 font-bold">Filter</div>
+    <div class="flex items-baseline justify-between mb-2 pb-4 border-b">
+      <h1 class="text-xl font-bold mr-2">Members</h1>
       <TInputSelect v-model="tab" :options="tabs" />
     </div>
 

@@ -88,10 +88,8 @@
       </div>
     </header>
 
-    <div class="md:flex">
-      <div class="flex-grow p-4 bg-gray-200 rounded mb-16 md:mr-4">
-        <nuxt />
-      </div>
+    <div class="p-4 mx-auto max-w-xl mb-16">
+      <nuxt />
     </div>
   </div>
 </template>

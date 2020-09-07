@@ -1,8 +1,7 @@
 <template>
   <main>
     <div class="flex items-baseline justify-between mb-4 pb-4 border-b">
-      <h1 class="text-xl font-bold">News</h1>
-      <TButton to="/posts/-/edit">New post</TButton>
+      <h1 class="text-xl font-bold">Feed</h1>
     </div>
 
     <div>
@@ -39,7 +38,7 @@
       <div
         v-for="item in filteredItems"
         :key="item.id"
-        class="rounded bg-white mb-4 shadow border max-w-sm"
+        class="rounded bg-white mb-4 shadow border"
       >
         <div class="p-4">
           <div>

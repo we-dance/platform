@@ -5,7 +5,7 @@
   </div>
   <div v-else>
     <div class="md:grid grid-cols-12 gap-6">
-      <div class="col-span-8 bg-white rounded p-4">
+      <div class="col-span-12 bg-white rounded p-4">
         <div>
           <TTagsPreview :value="item.tags" />
 
@@ -65,11 +65,7 @@
         </div>
       </div>
 
-      <div class="col-span-4 col-start-9 row-start-1">
-        <TCardProfile class="mt-4 md:mt-0 mb-4" :uid="item.createdBy" />
-      </div>
-
-      <div id="comment" class="col-span-8" @click="checkAuth">
+      <div id="comment" class="col-span-12" @click="checkAuth">
         <TFormComment :post-id="item.id" :reply-to="item.createdBy" />
 
         <TListComments :post-id="item.id">
