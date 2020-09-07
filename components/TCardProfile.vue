@@ -1,5 +1,19 @@
 <template>
   <div class="rounded border shadow p-4 bg-white">
+    <TPopup v-if="showPopup">
+      <div class="flex justify-between border-b pb-2 mb-4">
+        <div class="font-bold">Members only</div>
+        <button class="cursor-pointer" @click="showPopup = false">
+          <TIcon name="close" class="cursor-pointer w-4 h-4" />
+        </button>
+      </div>
+      <div class="my-4 flex flex-col justify-center">
+        <div>You need a profile to send requests</div>
+        <TButton class="mt-2" to="/signin?target=/people"
+          >Create Profile</TButton
+        >
+      </div>
+    </TPopup>
     <div class="flex items-center">
       <router-link
         :to="`/u/${profile.username}`"
@@ -14,6 +28,7 @@
         </div>
       </router-link>
       <TButton
+        v-if="myUid"
         :href="
           `mailto:wedance@razbakov.com?subject=Dance Partner Request&body=Connect ${
             getProfile(myUid).username
@@ -21,6 +36,7 @@
         "
         >Send Request</TButton
       >
+      <TButton v-else @click="showPopup = true">Send Request</TButton>
     </div>
     <div class="text-sm mt-2">
       <dl v-if="profile.learning" class="mt-1">
@@ -75,6 +91,7 @@
 </template>
 
 <script>
+import { ref } from '@vue/composition-api'
 import { getDateTime } from '~/utils'
 import useProfiles from '~/use/profiles'
 import useAuth from '~/use/auth'
@@ -92,13 +109,16 @@ export default {
 
     const { uid: myUid } = useAuth()
 
+    const showPopup = ref(false)
+
     const profile = getProfile(props.uid)
 
     return {
       getProfile,
       getDateTime,
       profile,
-      myUid
+      myUid,
+      showPopup
     }
   }
 }

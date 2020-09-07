@@ -1,85 +1,130 @@
 <template>
   <div>
     <div class="flex items-baseline justify-between mb-2 border-b">
-      <TTabs v-model="tab" :tabs="tabs" />
+      <div class="mr-2 font-bold">Filter</div>
+      <TInputSelect v-model="tab" :options="tabs" />
     </div>
 
-    <TCardList
-      :collection="collection"
-      :filters="filters"
-      class="max-w-md mx-auto"
-    >
-      <template v-slot:empty>
-        <div class="mt-4 mx-auto max-w-md p-4 text-sm">
-          <TIcon name="undraw_work_chat" class="p-4" />
-          <div>
-            People are great, but people near you are even better. Find other
-            dancers in your area by publishing your own profile first!
-          </div>
-          <div v-if="!uid" class="mt-8 bg-gray-400 p-4 rounded text-center">
-            <div>Sign in to continue</div>
-            <TButton class="mt-2" to="/signin?target=/trips">Sign in</TButton>
-          </div>
-          <div
-            v-else-if="!published"
-            class="mt-8 bg-gray-400 p-4 rounded text-center"
-          >
-            <div>Publish your profile to get access</div>
-            <TButton class="mt-2" @click="publish">Publish</TButton>
-          </div>
+    <div class="max-w-md mx-auto">
+      <div
+        v-if="!uid"
+        class="my-4 border rounded p-4 mx-auto max-w-md bg-white text-sm text-center"
+      >
+        <TIcon name="undraw_work_chat" class="p-4" />
+        <div>
+          <h1 class="font-bold">
+            {{ itemsPartner.length }} people are looking for a dance partner in
+            {{ city }}
+          </h1>
+          <p>Publish your profile so that others can find you as well</p>
         </div>
-      </template>
-      <template v-slot:default="{ item }">
-        <TCardProfile class="mb-4" :uid="item.createdBy" />
-      </template>
-    </TCardList>
+        <div class="flex justify-center">
+          <TButton class="mt-2" type="primary" to="/signin?target=/people"
+            >Create profile</TButton
+          >
+        </div>
+      </div>
+      <TCardProfile
+        v-for="item in items"
+        :key="item.id"
+        class="mb-4"
+        :uid="item.createdBy"
+      />
+      <div v-if="!uid" class="m-4 font-bold text-center">
+        {{ itemsPartner.length - itemsPartnerPublic.length }} other dancers show
+        their profiles only for members
+      </div>
+      <div
+        v-if="!uid"
+        class="mt-4 bg-dark-gradient text-white p-4 rounded text-center"
+      >
+        <div>Become a member of WeDance Community to get full access.</div>
+        <TButton class="mt-2" type="primary" to="/signin?target=/people"
+          >Join Now</TButton
+        >
+      </div>
+    </div>
   </div>
 </template>
 
 <script>
-import { getDateTime } from '~/utils'
+import { ref, computed } from '@vue/composition-api'
 import useAuth from '~/use/auth'
-import useProfiles from '~/use/profiles'
+import useCollection from '~/use/collection'
 
 export default {
-  data: () => ({
-    tabs: [
-      {
-        value: 'members',
-        label: 'Members'
-      }
-    ],
-    tab: 'members'
-  }),
   setup() {
-    const collection = 'profiles'
-
     const { uid } = useAuth()
-    const { getProfile } = useProfiles()
 
-    const published = true
+    const city = 'Munich'
 
-    const filters = [
+    const { docs } = useCollection('profiles')
+
+    const tabs = [
       {
-        name: 'partner',
-        label: 'Looking for partner',
-        default: true,
-        filter: (item) => item.username && item.partner === 'Yes'
+        value: 'partner',
+        label: 'Looking for dance partner'
       },
       {
-        name: 'all',
-        label: 'All members',
-        filter: (item) => item.username
+        value: 'community',
+        label: 'All members'
       }
     ]
 
+    const tab = ref('partner')
+
+    const itemsAll = computed(() => {
+      return docs.value.filter((item) => item.username)
+    })
+
+    const itemsAllPublic = computed(() => {
+      return docs.value.filter(
+        (item) => item.username && item.visibility === 'Public'
+      )
+    })
+
+    const itemsPartner = computed(() => {
+      return docs.value.filter(
+        (item) => item.username && item.partner === 'Yes'
+      )
+    })
+
+    const itemsPartnerPublic = computed(() => {
+      return docs.value.filter(
+        (item) =>
+          item.username &&
+          item.partner === 'Yes' &&
+          item.visibility === 'Public'
+      )
+    })
+
+    const items = computed(() => {
+      if (tab.value === 'partner') {
+        return docs.value.filter(
+          (item) =>
+            item.username &&
+            item.partner === 'Yes' &&
+            (uid.value || item.visibility === 'Public')
+        )
+      }
+
+      if (tab.value === 'community') {
+        return docs.value.filter(
+          (item) => item.username && (uid.value || item.visibility === 'Public')
+        )
+      }
+    })
+
     return {
-      collection,
-      getDateTime,
-      filters,
+      city,
+      items,
       uid,
-      getProfile,
-      published
+      tabs,
+      tab,
+      itemsAll,
+      itemsAllPublic,
+      itemsPartner,
+      itemsPartnerPublic
     }
   }
 }

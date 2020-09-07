@@ -24,7 +24,7 @@
     </div>
 
     <div
-      v-if="filters && filters.length > 1"
+      v-if="!hideFilters && filters && filters.length > 1"
       class="mt-4 md:flex bg-orange-100 rounded shadow"
     >
       <button
@@ -100,7 +100,7 @@
 </template>
 
 <script>
-import { computed, ref } from '@vue/composition-api'
+import { computed } from '@vue/composition-api'
 import { sortBy } from '~/utils'
 import useAuth from '~/use/auth'
 import useDoc from '~/use/doc'
@@ -136,6 +136,14 @@ export default {
       type: Array,
       default: () => []
     },
+    hideFilters: {
+      type: Boolean,
+      default: false
+    },
+    selectedFilter: {
+      type: String,
+      default: ''
+    },
     map: {
       type: [Function, Boolean],
       default: false
@@ -166,8 +174,9 @@ export default {
     const { update, remove, create } = useDoc(props.collection)
     const { can } = useAuth()
 
-    const activeFilter = ref(
-      props.filters.find((filter) => !!filter.default)?.name
+    const activeFilter = computed(
+      props.selectedFilter ||
+        props.filters.find((filter) => !!filter.default)?.name
     )
 
     const items = computed(() => {
