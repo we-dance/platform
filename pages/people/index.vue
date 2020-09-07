@@ -1,15 +1,13 @@
 <template>
   <div>
-    <div class="flex items-baseline justify-between mb-2 pb-4 border-b">
-      <h1 class="text-xl font-bold mr-2">Members</h1>
-      <TInputSelect v-model="tab" :options="tabs" />
+    <div class="flex items-baseline justify-between mb-8">
+      <h1 class="text-4xl font-bold">Community</h1>
     </div>
 
-    <div class="max-w-md mx-auto">
-      <div
-        v-if="!uid"
-        class="my-4 border rounded p-4 mx-auto max-w-md bg-white text-sm text-center"
-      >
+    <div>
+      <TInputSelect class="mb-4" v-model="tab" :options="tabs" />
+
+      <div v-if="!uid" class="my-4 border rounded bg-white text-sm text-center">
         <TIcon name="undraw_work_chat" class="p-4" />
         <div>
           <h1 class="font-bold">

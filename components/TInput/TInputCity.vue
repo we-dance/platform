@@ -49,6 +49,12 @@
         <TIcon :name="loading ? 'coffee' : 'gps_fixed'" class="h-4 w-4 mr-2" />
         <span>Locate me</span>
       </div>
+      <div
+        class="p-2 hover:bg-indigo-500 text-black hover:text-white cursor-pointer flex items-center"
+        @click="change('')"
+      >
+        <span>(Empty)</span>
+      </div>
       <div v-if="predictions.length">
         <div
           v-for="prediction in predictions"

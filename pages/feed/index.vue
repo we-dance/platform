@@ -1,7 +1,7 @@
 <template>
   <main>
-    <div class="flex items-baseline justify-between mb-4 pb-4 border-b">
-      <h1 class="text-xl font-bold">Feed</h1>
+    <div class="flex items-baseline justify-between mb-8">
+      <h1 class="text-4xl font-bold">Feed</h1>
     </div>
 
     <div>

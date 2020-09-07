@@ -1,7 +1,7 @@
 <template>
   <div>
-    <div class="flex items-baseline justify-between mb-4 pb-4 border-b">
-      <h1 class="text-xl font-bold">Events</h1>
+    <div class="flex items-baseline justify-between mb-8">
+      <h1 class="text-4xl font-bold">Events</h1>
     </div>
 
     <TLoader v-if="loading" />
@@ -11,7 +11,13 @@
       ><template v-else>the world</template>
     </div>
     <div v-else-if="eventsTotal === 0">
-      No events found.
+      <p class="font-bold">Coming soon!</p>
+      <p>
+        For now you can find event calendar in our Telegram channel
+        <a class="underline" href="https://t.me/WeDanceMunich"
+          >@WeDanceMunich</a
+        >
+      </p>
     </div>
 
     <div class="mt-4">
@@ -23,13 +29,6 @@
         type="event"
       />
     </div>
-
-    <button
-      v-if="eventsTotal && searchOffset < eventsTotal"
-      @click="startSearch(true)"
-    >
-      Load More
-    </button>
   </div>
 </template>
 
@@ -65,7 +64,7 @@ export default {
   },
 
   data: () => ({
-    eventsTotal: -1,
+    eventsTotal: 0,
     events: [],
     mode: 'list',
     selectedGenres: [],
@@ -96,18 +95,19 @@ export default {
     searchOffset: 0
   }),
 
-  async mounted() {
-    this.searchLocation = {
-      name: 'Munich',
-      latitude: 48.1351253,
-      longitude: 11.581980499999986
-    }
-
-    await this.load()
-    this.startSearch()
-  },
+  mounted() {},
 
   methods: {
+    async initElastic() {
+      this.searchLocation = {
+        name: 'Munich',
+        latitude: 48.1351253,
+        longitude: 11.581980499999986
+      }
+
+      await this.load()
+      this.startSearch()
+    },
     async startSearch(loadMore) {
       let bool
       const must = []
