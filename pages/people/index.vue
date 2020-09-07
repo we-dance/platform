@@ -53,6 +53,7 @@ import useAuth from '~/use/auth'
 import useCollection from '~/use/collection'
 
 export default {
+  name: 'PeopleIndex',
   setup() {
     const { uid } = useAuth()
 

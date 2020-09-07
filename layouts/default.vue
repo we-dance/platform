@@ -103,6 +103,7 @@ import useCollection from '~/use/collection'
 import useProfiles from '~/use/profiles'
 
 export default {
+  name: 'DefaultLayout',
   props: {
     hideMenu: {
       type: Boolean,
