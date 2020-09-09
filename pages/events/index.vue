@@ -9,12 +9,19 @@
       ><template v-else>the world</template>
     </div>
     <div v-else-if="eventsTotal === 0">
-      <p class="font-bold">Coming soon!</p>
+      <h2 class="font-bold text-lg">Coming soon!</h2>
       <p>
         For now you can find event calendar in our Telegram channel
         <a class="underline" href="https://t.me/WeDanceMunich"
           >@WeDanceMunich</a
         >
+      </p>
+      <h2 class="font-bold mt-8 text-lg">Upcoming</h2>
+      <p>
+        <router-link class="underline" to="/SalsaCubanaMunich"
+          >Salsa Cubana at Pinakothek</router-link
+        >
+        every Wednesday and Friday!
       </p>
     </div>
 

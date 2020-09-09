@@ -11,7 +11,7 @@ export default {
     const city = ls('city')
 
     if (city) {
-      this.$router.push('/people')
+      this.$router.push('/feed')
     }
   }
 }
