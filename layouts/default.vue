@@ -70,14 +70,20 @@
             <template slot="menu">
               <div class="w-32 py-2 bg-white rounded-lg shadow-xl border">
                 <div v-if="isAdmin()" class="text-red">
-                  <TButton to="/reports" type="nav-admin">
+                  <TButton to="/admin/reports" type="nav-admin">
                     Reports
                   </TButton>
-                  <TButton to="/tags" type="nav-admin">
+                  <TButton to="/admin/tags" type="nav-admin">
                     Tags
                   </TButton>
-                  <TButton to="/profiles" type="nav-admin">
+                  <TButton to="/admin/profiles" type="nav-admin">
                     Profiles
+                  </TButton>
+                  <TButton to="/admin/accounts" type="nav-admin">
+                    Accounts
+                  </TButton>
+                  <TButton to="/admin/emails" type="nav-admin">
+                    Emails
                   </TButton>
                 </div>
                 <TButton

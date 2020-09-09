@@ -42,6 +42,15 @@ export default {
     value: {
       type: [String, Number],
       default: ''
+    },
+    defaultValue: {
+      type: [String, Number],
+      default: ''
+    }
+  },
+  mounted() {
+    if (!this.value) {
+      this.$emit('input', this.defaultValue)
     }
   },
   methods: {

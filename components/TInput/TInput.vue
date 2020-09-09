@@ -49,7 +49,7 @@ export default {
     }
   },
   mounted() {
-    this.input = this.value
+    this.input = this.value || this.defaultValue
 
     if (this.autoFocus) {
       this.$nextTick(() => {

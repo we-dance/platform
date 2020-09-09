@@ -11,6 +11,17 @@
         class="bg-white p-4 rounded w-full md:w-auto z-50 overflow-hidden flex justify-center items-center"
       >
         <div>
+          <div v-if="title" class="flex justify-between border-b pb-2">
+            <div class="font-bold">{{ title }}</div>
+            <button
+              v-if="!noClose"
+              class="cursor-pointer"
+              @click="$emit('close')"
+            >
+              <TIcon name="close" class="cursor-pointer w-4 h-4" />
+            </button>
+          </div>
+
           <slot />
         </div>
       </div>
@@ -24,6 +35,10 @@ export default {
     title: {
       type: String,
       default: ''
+    },
+    noClose: {
+      type: Boolean,
+      default: false
     }
   },
   mounted() {

@@ -13,12 +13,12 @@
           :is="getComponent()"
           :id="elementId"
           v-bind="$attrs"
-          :value.sync="value"
+          :value.sync="computedValue"
           :type="type"
           :auto-focus="autoFocus"
           :hide-label="hideLabel"
           v-on="$attrs.listeners"
-          @input="(val) => $emit('input', val)"
+          @input="(val) => $emit('input', set(val))"
         />
       </slot>
       <div v-if="description" class="text-gray-500 text-sm mt-1">
@@ -39,12 +39,13 @@ import TInputTags from '~/components/TInput/TInputTags'
 import TInputTextarea from '~/components/TInput/TInputTextarea'
 import TInputPhoto from '~/components/TInput/TInputPhoto'
 import TInputLocation from '~/components/TInput/TInputLocation'
+import TAccountSelector from '~/components/TAccountSelector'
 
 export default {
   inheritAttrs: false,
   props: {
     value: {
-      type: [String, Object, Array, Number],
+      type: [String, Object, Array, Number, Date],
       default: ''
     },
     label: {
@@ -78,12 +79,23 @@ export default {
     hideLabel: {
       type: Boolean,
       default: false
+    },
+    get: {
+      type: Function,
+      default: (val) => val
+    },
+    set: {
+      type: Function,
+      default: (val) => val
     }
   },
   data: () => ({
     elementId: ''
   }),
   computed: {
+    computedValue() {
+      return this.get(this.value)
+    },
     hidden() {
       return this.type === 'hidden'
     },
@@ -130,7 +142,8 @@ export default {
         textarea: TInputTextarea,
         photo: TInputPhoto,
         location: TInputLocation,
-        multi: TInputMulti
+        multi: TInputMulti,
+        accounts: TAccountSelector
       }
 
       return map[this.type] || TInput
