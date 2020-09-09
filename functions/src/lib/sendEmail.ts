@@ -32,10 +32,12 @@ export default async (data: any) => {
     const job = mg.messages().send({
       from: data.from,
       to: `${data.recipients[uid].name} <${data.recipients[uid].email}>`,
+      bcc: data.bcc,
       subject: data.subject,
       html: getHtml(data.content),
       'v:uid': uid,
-      'v:campaignId': data.id
+      'v:campaignId': data.id,
+      'v:type': data.type
     })
 
     jobs.push(job)

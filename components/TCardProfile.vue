@@ -38,14 +38,30 @@
       </router-link>
       <TButton
         v-if="myUid"
-        :href="
-          `mailto:support@wedance.vip?subject=Dance Partner Request&body=Connect ${
-            getProfile(myUid).username
-          } and ${profile.username}`
+        @click="
+          message = ''
+          isWritingMessage = true
         "
-        >Send Request</TButton
+        >Chat</TButton
       >
-      <TButton v-else @click="showPopup = true">Send Request</TButton>
+      <TButton v-else @click="showPopup = true">Chat</TButton>
+    </div>
+    <div v-if="isWritingMessage">
+      <div class="my-4 flex flex-col justify-center">
+        <TInputTextarea
+          v-model="message"
+          :placeholder="
+            `Say something nice to ${profile.name} and let them know to contact you.`
+          "
+        />
+
+        <div class="flex mt-2 justify-end">
+          <TButton class="mr-2" @click="isWritingMessage = false"
+            >Cancel</TButton
+          >
+          <TButton type="primary" @click="sendMessage">Send</TButton>
+        </div>
+      </div>
     </div>
     <div class="text-sm mt-2">
       <dl v-if="profile.bio" class="mt-2">
@@ -80,6 +96,7 @@ import { ref } from '@vue/composition-api'
 import { getDateTime } from '~/utils'
 import useProfiles from '~/use/profiles'
 import useAuth from '~/use/auth'
+import useDoc from '~/use/doc'
 
 export default {
   name: 'TCardProfile',
@@ -91,19 +108,41 @@ export default {
   },
   setup(props) {
     const { getProfile } = useProfiles()
+    const { create } = useDoc('matches')
 
     const { uid: myUid } = useAuth()
 
     const showPopup = ref(false)
+    const message = ref('')
+    const isWritingMessage = ref(false)
 
     const profile = getProfile(props.uid)
+
+    const sendMessage = () => {
+      if (!message.value) {
+        return
+      }
+
+      create({
+        from: myUid.value,
+        to: props.uid,
+        message: message.value,
+        status: 'open',
+        auto: 'No'
+      })
+
+      isWritingMessage.value = false
+    }
 
     return {
       getProfile,
       getDateTime,
       profile,
       myUid,
-      showPopup
+      showPopup,
+      message,
+      isWritingMessage,
+      sendMessage
     }
   }
 }

@@ -1,5 +1,6 @@
 <template>
   <div
+    ref="wrapper"
     class="absolute w-full h-full top-0 left-0 flex items-end md:items-center justify-center"
   >
     <div
@@ -39,16 +40,24 @@ export default {
     noClose: {
       type: Boolean,
       default: false
+    },
+    noScroll: {
+      type: Boolean,
+      default: false
     }
   },
   mounted() {
-    document.documentElement.scrollTop = 0
-    const el = document.getElementsByTagName('body')[0]
-    el.classList.add('overflow-y-hidden')
+    if (!this.noScroll) {
+      document.documentElement.scrollTop = 0
+      const el = document.getElementsByTagName('body')[0]
+      el.classList.add('overflow-y-hidden')
+    }
   },
   beforeDestroy() {
-    const el = document.getElementsByTagName('body')[0]
-    el.classList.remove('overflow-y-hidden')
+    if (!this.noScroll) {
+      const el = document.getElementsByTagName('body')[0]
+      el.classList.remove('overflow-y-hidden')
+    }
   }
 }
 </script>

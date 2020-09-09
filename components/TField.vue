@@ -39,6 +39,7 @@ import TInputTags from '~/components/TInput/TInputTags'
 import TInputTextarea from '~/components/TInput/TInputTextarea'
 import TInputPhoto from '~/components/TInput/TInputPhoto'
 import TInputLocation from '~/components/TInput/TInputLocation'
+import TAccountListSelector from '~/components/TAccountListSelector'
 import TAccountSelector from '~/components/TAccountSelector'
 
 export default {
@@ -143,7 +144,8 @@ export default {
         photo: TInputPhoto,
         location: TInputLocation,
         multi: TInputMulti,
-        accounts: TAccountSelector
+        accounts: TAccountListSelector,
+        account: TAccountSelector
       }
 
       return map[this.type] || TInput

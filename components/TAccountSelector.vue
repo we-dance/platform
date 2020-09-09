@@ -1,20 +1,21 @@
 <template>
   <div>
     <div class="flex">
-      <TButton type="secondary" class="mr-2" @click="showPopup = true"
-        >Select accounts ({{ count }})</TButton
+      <TButton
+        v-if="!value"
+        type="secondary"
+        class="mr-2"
+        @click="showPopup = true"
+        >Select account</TButton
       >
-      <TButton type="secondary" @click="showImport = true">Import</TButton>
+      <div v-else class="flex">
+        <TAvatar :uid.sync="value" name />
+        <button class="px-2 hover:text-primary" @click="showPopup = true">
+          <TIcon name="edit" />
+        </button>
+      </div>
     </div>
-    <template v-if="showImport">
-      <TField v-model="csv" type="textarea" class="mb-2" />
-      <TButton @click="startImport">Import</TButton>
-    </template>
-    <TPopup
-      v-if="showPopup"
-      :title="`Select accounts (${count})`"
-      @close="save"
-    >
+    <TPopup v-if="showPopup" title="Select account" @close="save">
       <TGridAccounts v-model="selected" vertical-scroll class="max-h-screen" />
     </TPopup>
   </div>
@@ -22,8 +23,13 @@
 
 <script>
 import { ref } from '@vue/composition-api'
+import TAvatar from '~/components/TAvatar'
 
 export default {
+  name: 'TAccountSelector',
+  components: {
+    TAvatar
+  },
   props: {
     value: {
       type: [Object, String],
@@ -42,11 +48,6 @@ export default {
       selected
     }
   },
-  computed: {
-    count() {
-      return Object.keys(this.selected).length
-    }
-  },
   watch: {
     value: 'load'
   },
@@ -55,38 +56,18 @@ export default {
   },
   methods: {
     load() {
+      this.selected = {}
+
       if (!this.value) {
-        this.selected = {}
         return
       }
 
-      this.selected = this.value
+      this.selected[this.value] = true
     },
     save() {
       this.showPopup = false
-      this.$emit('input', this.selected)
-    },
-    sanitize(value) {
-      return value.replace(/[^a-z0-9]/gim, '')
-    },
-    startImport() {
-      this.showImport = false
-
-      const lines = this.csv.split('\n').map((l) => {
-        const [name, email] = l.split('\t')
-        return {
-          name,
-          email
-        }
-      })
-
-      const result = {}
-
-      lines.forEach((line) => {
-        result[this.sanitize(line.email)] = line
-      })
-
-      this.$emit('input', result)
+      const uid = Object.keys(this.selected)[0]
+      this.$emit('input', uid)
     }
   }
 }

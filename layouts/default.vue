@@ -70,6 +70,9 @@
             <template slot="menu">
               <div class="w-32 py-2 bg-white rounded-lg shadow-xl border">
                 <div v-if="isAdmin()" class="text-red">
+                  <TButton to="/admin/matches" type="nav-admin">
+                    Matches
+                  </TButton>
                   <TButton to="/admin/reports" type="nav-admin">
                     Reports
                   </TButton>
