@@ -1,23 +1,22 @@
 <template>
   <div>
-    <div class="flex items-baseline justify-between mb-8">
-      <h1 class="text-4xl font-bold">Community</h1>
-    </div>
+    <TTitle>Community</TTitle>
 
     <div>
       <TInputSelect v-model="tab" class="mb-4" :options="tabs" />
 
-      <div v-if="!uid" class="my-4 border rounded bg-white text-sm text-center">
-        <TIcon name="undraw_work_chat" class="p-4" />
+      <div
+        v-if="!uid"
+        class="mb-4 rounded bg-dark-gradient text-white text-sm text-center p-4"
+      >
         <div>
-          <h1 class="font-bold">
-            {{ itemsPartner.length }} people are looking for a dance partner in
-            {{ city }}
+          <h1 class="font-bold text-lg">
+            Publish your profile
           </h1>
-          <p>Publish your profile so that others can find you as well</p>
+          <p>so that others can find you as well</p>
         </div>
         <div class="flex justify-center">
-          <TButton class="mt-2" type="primary" to="/signin?target=/people"
+          <TButton class="my-2" type="primary" to="/signin?target=/people"
             >Create profile</TButton
           >
         </div>
@@ -59,17 +58,6 @@ export default {
 
     const { docs } = useCollection('profiles')
 
-    const tabs = [
-      {
-        value: 'partner',
-        label: 'Looking for dance partner'
-      },
-      {
-        value: 'community',
-        label: 'All members'
-      }
-    ]
-
     const tab = ref('partner')
 
     const itemsAll = computed(() => {
@@ -96,6 +84,17 @@ export default {
           item.visibility === 'Public'
       )
     })
+
+    const tabs = computed(() => [
+      {
+        value: 'partner',
+        label: `Looking for dance partner (${itemsPartner.value.length})`
+      },
+      {
+        value: 'community',
+        label: `All members (${itemsAll.value.length})`
+      }
+    ])
 
     const items = computed(() => {
       if (tab.value === 'partner') {

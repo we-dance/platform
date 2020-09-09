@@ -30,7 +30,7 @@
       <TButton
         v-if="myUid"
         :href="
-          `mailto:wedance@razbakov.com?subject=Dance Partner Request&body=Connect ${
+          `mailto:support@wedance.vip?subject=Dance Partner Request&body=Connect ${
             getProfile(myUid).username
           } and ${profile.username}`
         "

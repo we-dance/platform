@@ -1,8 +1,6 @@
 <template>
   <div>
-    <div class="flex items-baseline justify-between mb-8">
-      <h1 class="text-4xl font-bold">Events</h1>
-    </div>
+    <TTitle>Events</TTitle>
 
     <TLoader v-if="loading" />
     <div v-else-if="eventsTotal > 0">

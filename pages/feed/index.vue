@@ -1,8 +1,6 @@
 <template>
   <main>
-    <div class="flex items-baseline justify-between mb-8">
-      <h1 class="text-4xl font-bold">Feed</h1>
-    </div>
+    <TTitle>Feed</TTitle>
 
     <div>
       <div v-if="false" class="rounded bg-orange-200 p-4 mb-4">
