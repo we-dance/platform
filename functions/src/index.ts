@@ -22,7 +22,7 @@ app.post('/track/:action', async (req, res) => {
   }
 
   await db
-    .collection('campaigns')
+    .collection('emails')
     .doc(campaignId)
     .update({
       [`recipients.${uid}.${action}`]: admin.firestore.Timestamp.now()
@@ -43,7 +43,7 @@ export const taskRunner = functions
     const now = admin.firestore.Timestamp.now()
 
     const query = db
-      .collection('campaigns')
+      .collection('emails')
       .where('scheduledAt', '<=', now)
       .where('status', '==', 'scheduled')
 

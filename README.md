@@ -1,12 +1,19 @@
-# GutenAbend
+# WeDance
 
-Online Kantine - https://gutenabend.netlify.com/
+Online Kantine - https://wedance.vip/
 
 - Sign in (Google or magic link)
-- Create an account
-- Manage meetups (add, edit, remove)
-- Manage ideas (add, edit, remove)
-- RSVP (record a response, see list)
+- Create profile
+- Feed (list of posts)
+- Community (list of profiles)
+
+Admin:
+
+- Reports
+- Tags
+- Profiles
+- Accounts
+- Emails
 
 ## Built with
 
