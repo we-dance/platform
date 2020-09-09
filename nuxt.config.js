@@ -96,7 +96,7 @@ export default {
       name: app.name,
       short_name: app.name,
       start_url: '/?standalone=true',
-      background_color: '#ece3f7',
+      background_color: '#3C3348',
       lang: 'en'
     }
   },
