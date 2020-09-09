@@ -13,10 +13,16 @@ const getHtml = (content: any) => {
 }
 
 export default async (data: any) => {
+  const mailgunConfig = config().mailgun
+
+  if (!mailgunConfig) {
+    throw Error('Mailgun is not configured')
+  }
+
   const mg = mailgun({
-    apiKey: config().mailgun.key,
-    domain: config().mailgun.domain,
-    host: config().mailgun.host
+    apiKey: mailgunConfig.key,
+    domain: mailgunConfig.domain,
+    host: mailgunConfig.host
   })
 
   const jobs: Promise<any>[] = []

@@ -57,8 +57,10 @@ export const taskRunner = functions
         id: snapshot.id
       }
       const job = sendEmail(data)
-        .then(() => snapshot.ref.update({ status: 'sent' }))
-        .catch((err) => snapshot.ref.update({ status: 'error' }))
+        .then(() => snapshot.ref.update({ status: 'sent', error: '' }))
+        .catch((err) =>
+          snapshot.ref.update({ status: 'error', error: err.message })
+        )
 
       jobs.push(job)
     })

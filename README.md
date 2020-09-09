@@ -22,7 +22,7 @@ Admin:
 - [Nuxt.js](https://nuxtjs.org)
 - [Tailwind CSS](https://tailwindcss.com/)
 
-## Installation
+## Setup
 
 ```bash
 # install dependencies
@@ -32,9 +32,26 @@ yarn install
 yarn dev
 ```
 
-## Configuration
+## Deploy
 
-Mailgun
+### App
+
+- Enable Maps API in Google API
+- Deploy to Netlify with env:
+
+  NUXT_ENV_GOOGLE_API_KEY
+  NUXT_ENV_GOOGLE_FIREBASE_API_KEY
+
+### Mailgun
+
+- Create mailgun account
+- Create domain and setup DNS
+- Create API key
+- Init Firebase
+- Deploy Firebase
+- Enable Pub/Sub, Scheduler, Build API in cloud.google.com
+- Setup hooks in Mailgun
+- Create firestore index (send test mail, see logs, find link to create index)
 
 ```bash
 firebase functions:config:set mailgun.key="" mailgun.domain="" mailgun.host=""

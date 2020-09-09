@@ -9,11 +9,13 @@
       <template v-slot:card-toolbar="{ item }">
         <button
           v-if="can('analytics', collection, item)"
-          class="p-2 hover:text-primary"
+          class="p-2 hover:text-primary flex"
           @click="
             peopleId !== item.id ? (peopleId = item.id) : (peopleId = false)
           "
         >
+          <span class="mr-1">{{ Object.keys(item.recipients).length }}</span>
+
           <TIcon
             name="people"
             :class="peopleId === item.id ? 'text-primary' : ''"
@@ -49,18 +51,38 @@
           </div>
         </TPopup>
 
-        <div class="p-4 border rounded mb-4">
-          <div class="font-bold text-xl">
-            {{ item.name }}
+        <div class="p-4 border rounded mb-4 bg-real-white">
+          <div class="flex justify-between items-start">
+            <div>
+              <div class="flex text-xs">
+                <div class="mb-2 text-gray-500 mr-2">
+                  <span class="font-bold">Created</span> at
+                  {{ getDate(item.createdAt) }} at
+                  {{ getTime(item.createdAt) }}
+                </div>
+                <div class="mb-2 text-gray-500">
+                  <span class="font-bold">Scheduled</span> for
+                  {{ getDate(item.scheduledAt) }} at
+                  {{ getTime(item.scheduledAt) }}
+                </div>
+              </div>
+              <div class="font-bold text-lg">
+                {{ item.subject }}
+              </div>
+              <div class="mb-2 text-gray-500 text-xs">{{ item.name }}</div>
+            </div>
+            <div>
+              <div
+                class="text-xs text-white font-bold px-2 py-1 rounded-full"
+                :class="emailStatusClass[item.status]"
+              >
+                {{ item.status }}
+              </div>
+            </div>
           </div>
-          <div class="mb-2 text-gray-500 font-bold">{{ item.status }}</div>
-          <div class="mb-2 text-gray-500">Subject: {{ item.subject }}</div>
-          <div class="mb-2 text-gray-500">
-            Scheduled for {{ getDate(item.scheduledAt) }} at
-            {{ getTime(item.scheduledAt) }}
-          </div>
-          <div v-if="item.recipients" class="mb-2 text-gray-500">
-            {{ Object.keys(item.recipients).length }} recipients
+
+          <div v-if="item.status === 'error'" class="text-red-500 text-xs">
+            <span class="font-bold">Error:</span> {{ item.error }}
           </div>
         </div>
       </template>
@@ -90,6 +112,13 @@ export default {
       failedAt: 'bg-red-500',
       spammedAt: 'bg-orange-500',
       unsubscribedAt: 'bg-orange-500'
+    },
+    emailStatusClass: {
+      draft: 'bg-orange-500',
+      scheduled: 'bg-blue-500',
+      sent: 'bg-green-500',
+      canceled: 'bg-red-900',
+      error: 'bg-red-500'
     }
   }),
   setup() {

@@ -167,7 +167,15 @@ export default {
     },
     {
       UserAgent: '*',
-      Disallow: '/account'
+      Disallow: '/settings'
+    },
+    {
+      UserAgent: '*',
+      Disallow: '/admin'
+    },
+    {
+      UserAgent: '*',
+      Disallow: '/signin'
     }
   ],
   sitemap: {
