@@ -42,18 +42,22 @@
           message = ''
           isWritingMessage = true
         "
-        >Chat</TButton
+        >Contact</TButton
       >
-      <TButton v-else @click="showPopup = true">Chat</TButton>
+      <TButton v-else @click="showPopup = true">Contact</TButton>
     </div>
     <div v-if="isWritingMessage">
       <div class="my-4 flex flex-col justify-center">
         <TInputTextarea
           v-model="message"
           :placeholder="
-            `Say something nice to ${profile.name} and let them know to contact you.`
+            `Say something nice to ${profile.name} and let them know how to contact you.`
           "
         />
+        <p>
+          {{ profile.name }} won't be able to reply directly. Don't forget to
+          mention your contacts in the message.
+        </p>
 
         <div class="flex mt-2 justify-end">
           <TButton class="mr-2" @click="isWritingMessage = false"
