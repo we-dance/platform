@@ -1,7 +1,7 @@
 <template>
   <div
     ref="wrapper"
-    class="absolute w-full h-full top-0 left-0 flex items-end md:items-center justify-center"
+    class="fixed w-full h-full top-0 left-0 flex items-end md:items-center justify-center"
   >
     <div
       class="fixed w-full h-full top-0 left-0 bg-black opacity-50 z-40"
@@ -40,26 +40,15 @@ export default {
     noClose: {
       type: Boolean,
       default: false
-    },
-    noScroll: {
-      type: Boolean,
-      default: false
     }
   },
   mounted() {
-    if (!this.noScroll) {
-      document.documentElement.scrollTop = 0
-      const el = document.getElementsByTagName('body')[0]
-      el.classList.add('overflow-y-hidden')
-    }
+    const el = document.getElementsByTagName('body')[0]
+    el.classList.add('overflow-y-hidden')
   },
   beforeDestroy() {
-    if (!this.noScroll) {
-      const el = document.getElementsByTagName('body')[0]
-      el.classList.remove('overflow-y-hidden')
-    }
+    const el = document.getElementsByTagName('body')[0]
+    el.classList.remove('overflow-y-hidden')
   }
 }
 </script>
-
-<style></style>

@@ -102,55 +102,69 @@ export const matchNotification = functions.firestore
       throw Error('toProfile not found')
     }
 
-    let intro = ''
+    let subject = ''
 
-    if (match.auto === 'Yes') {
-      intro = '## Message from WeDance:'
-    } else {
-      intro = `## Message from ${fromProfile.name}:`
+    type RecipientList = {
+      [key: string]: {
+        name: string
+        email: string
+      }
     }
 
-    const message =
-      intro +
-      `
+    const recipients: RecipientList = {}
 
-${match.message}
+    recipients[match.to] = {
+      name: toAccount.name || toProfile.name,
+      email: toAccount.email
+    }
 
-## Your Dance Profiles:
+    if (match.auto === 'Yes') {
+      subject = 'Recommendation from WeDance'
 
-[${fromProfile.name}](https://wedance.vip/u/${fromProfile.username})
+      recipients[match.from] = {
+        name: fromAccount.name || fromProfile.name,
+        email: fromAccount.email
+      }
+    } else {
+      subject = `Message from ${fromProfile.name}`
+    }
 
-[${toProfile.name}](https://wedance.vip/u/${toProfile.username})
+    const content = `${match.message}
 
+---
+
+**Your Dance Profiles**: [${fromProfile.name}](https://wedance.vip/u/${fromProfile.username}) & [${toProfile.name}](https://wedance.vip/u/${toProfile.username})
+
+Unite dancers worldwide with **[WeDance.vip](https://wedance.vip/)**
 `
 
     const from = 'WeDance <automated@wedance.vip>'
-
-    const recipients = {
-      [toAccount.id]: {
-        name: toProfile.name,
-        email: toAccount.email
-      },
-      [fromAccount.id]: {
-        name: fromAccount.name,
-        email: fromAccount.email
-      }
-    }
 
     const data = {
       ...snapshot.data(),
       from,
       recipients,
-      subject: 'Dance Partner Request',
-      content: message,
+      subject,
+      content,
       type: 'matchNotification',
       id: snapshot.id
     }
 
     return await sendEmail(data)
-      .then(() => snapshot.ref.update({ status: 'sent', error: '' }))
+      .then(() =>
+        snapshot.ref.update({
+          status: 'sent',
+          recipients,
+          processedAt: admin.firestore.Timestamp.now(),
+          error: ''
+        })
+      )
       .catch((err) =>
-        snapshot.ref.update({ status: 'error', error: err.message })
+        snapshot.ref.update({
+          status: 'error',
+          processedAt: admin.firestore.Timestamp.now(),
+          error: err.message
+        })
       )
   })
 
@@ -175,9 +189,19 @@ export const taskRunner = functions
         id: snapshot.id
       }
       const job = sendEmail(data)
-        .then(() => snapshot.ref.update({ status: 'sent', error: '' }))
+        .then(() =>
+          snapshot.ref.update({
+            status: 'sent',
+            processedAt: admin.firestore.Timestamp.now(),
+            error: ''
+          })
+        )
         .catch((err) =>
-          snapshot.ref.update({ status: 'error', error: err.message })
+          snapshot.ref.update({
+            status: 'error',
+            processedAt: admin.firestore.Timestamp.now(),
+            error: err.message
+          })
         )
 
       jobs.push(job)

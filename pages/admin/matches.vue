@@ -9,9 +9,66 @@
       :add="add"
       :fields="fields"
     >
+      <template v-slot:card-toolbar="{ item }">
+        <button
+          v-if="can('analytics', collection, item)"
+          class="p-2 hover:text-primary flex"
+          @click="
+            peopleId !== item.id ? (peopleId = item.id) : (peopleId = false)
+          "
+        >
+          <span class="mr-1">{{ Object.keys(item.recipients).length }}</span>
+
+          <TIcon
+            name="people"
+            :class="peopleId === item.id ? 'text-primary' : ''"
+          />
+        </button>
+      </template>
       <template v-slot="{ item }">
+        <TPopup
+          v-if="peopleId === item.id"
+          :title="`Recipients of ${item.id}`"
+          class="p-4 border rounded mb-4"
+          @close="peopleId = false"
+        >
+          <div
+            v-for="(recipient, uid) in item.recipients"
+            :key="uid"
+            class="flex items-center"
+          >
+            <div class="mr-4">
+              <div>{{ recipient.name }}</div>
+              <div class="text-sm text-gray-500">{{ recipient.email }}</div>
+            </div>
+            <div class="flex">
+              <div v-for="(styles, field) in states" :key="field">
+                <div
+                  v-if="recipient[field]"
+                  :class="styles"
+                  :title="field + ' ' + getDateTime(recipient[field])"
+                  class="rounded-full w-4 h-4 mr-2"
+                ></div>
+              </div>
+            </div>
+          </div>
+        </TPopup>
+
         <div class="p-4 border rounded mb-4 bg-real-white">
-          <div class="flex justify-between items-start">
+          <div class="flex justify-between">
+            <div class="flex">
+              <TAvatar :uid="item.from" photo size="xs" class="mr-2" />
+              <TAvatar :uid="item.from" name class="text-sm" />
+            </div>
+            <div class="flex">
+              <TAvatar :uid="item.to" photo size="xs" class="mr-2" />
+              <TAvatar :uid="item.to" name class="text-sm" />
+            </div>
+          </div>
+
+          <TPreview class="mt-4 px-4 rounded border" :content="item.message" />
+
+          <div class="flex justify-between items-start mt-4">
             <div>
               <div class="flex text-xs">
                 <div class="mb-2 text-gray-500 mr-2">
@@ -29,16 +86,6 @@
                 {{ item.status }}
               </div>
             </div>
-          </div>
-
-          <div class="flex mt-4">
-            <div class="mt-6 mr-4 flex flex-col justify-start items-center">
-              <TAvatar :uid="item.from" photo size="md" />
-              <TAvatar :uid="item.from" name class="text-sm mb-4" />
-              <TAvatar :uid="item.to" photo size="md" />
-              <TAvatar :uid="item.to" name class="text-sm" />
-            </div>
-            <TPreview class="px-4 rounded border" :content="item.message" />
           </div>
 
           <div v-if="item.status === 'error'" class="text-red-500 text-xs">
@@ -69,7 +116,7 @@ export default {
     }
   }),
   setup() {
-    const { isAdmin } = useAuth()
+    const { can, isAdmin } = useAuth()
     const title = 'Matches'
     const collection = 'matches'
     const add = 'Add'
@@ -108,7 +155,8 @@ export default {
       add,
       getDate,
       getTime,
-      isAdmin
+      isAdmin,
+      can
     }
   }
 }
