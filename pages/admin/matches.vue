@@ -1,5 +1,8 @@
 <template>
-  <main class="p-4">
+  <main v-if="!isAdmin" class="mt-4 mx-auto max-w-md p-4 text-sm text-center">
+    Only admin can access this area.
+  </main>
+  <main v-else class="p-4">
     <TCardList
       :collection="collection"
       :title="title"
@@ -49,8 +52,7 @@
 
 <script>
 import useAuth from '~/use/auth'
-
-import { getDate, getDateTime, getTime } from '~/utils'
+import { getDate, getTime } from '~/utils'
 
 export default {
   data: () => ({
@@ -67,7 +69,7 @@ export default {
     }
   }),
   setup() {
-    const { can } = useAuth()
+    const { isAdmin } = useAuth()
     const title = 'Matches'
     const collection = 'matches'
     const add = 'Add'
@@ -106,8 +108,7 @@ export default {
       add,
       getDate,
       getTime,
-      getDateTime,
-      can
+      isAdmin
     }
   }
 }
