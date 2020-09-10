@@ -144,8 +144,7 @@ ${match.message}
       subject: 'Dance Partner Request',
       content: message,
       type: 'matchNotification',
-      id: snapshot.id,
-      bcc: 'bcc@wedance.vip'
+      id: snapshot.id
     }
 
     return await sendEmail(data)
