@@ -42,6 +42,7 @@ export default {
       if (val !== oldVal) {
         this.sanitize()
       }
+
       this.$emit('input', val)
     },
     value(val) {
@@ -49,7 +50,7 @@ export default {
     }
   },
   mounted() {
-    this.input = this.value || this.defaultValue
+    this.input = this.value
 
     if (this.autoFocus) {
       this.$nextTick(() => {

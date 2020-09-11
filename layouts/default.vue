@@ -85,6 +85,12 @@
                   <TButton to="/admin/accounts" type="nav-admin">
                     Accounts
                   </TButton>
+                  <TButton to="/admin/cities" type="nav-admin">
+                    Cities
+                  </TButton>
+                  <TButton to="/admin/templates" type="nav-admin">
+                    Templates
+                  </TButton>
                   <TButton to="/admin/emails" type="nav-admin">
                     Emails
                   </TButton>

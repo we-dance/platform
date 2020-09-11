@@ -83,6 +83,7 @@
 import Vue from 'vue'
 import * as VueGoogleMaps from 'vue2-google-maps'
 import { getLocation } from '~/utils'
+import useDoc from '~/use/doc'
 
 Vue.use(VueGoogleMaps, {
   load: {
@@ -94,6 +95,17 @@ Vue.use(VueGoogleMaps, {
 const gmapApi = VueGoogleMaps.gmapApi
 
 export default {
+  setup() {
+    const { find, create, id, update, doc } = useDoc('cities')
+
+    return {
+      find,
+      create,
+      update,
+      id,
+      doc
+    }
+  },
   props: {
     value: {
       type: [Object, String],
@@ -188,8 +200,6 @@ export default {
 
   methods: {
     locate() {
-      console.log('locate')
-
       this.showPopup = false
       this.requestBrowserLocation()
     },
@@ -229,9 +239,27 @@ export default {
       const geocoder = new this.google.maps.Geocoder()
       geocoder.geocode({ region: 'us', placeId }, (response, status) => {
         const location = getLocation(response[0], false)
-
-        this.change(location)
+        this.selectLocation(location)
       })
+    },
+
+    async selectLocation(location) {
+      await this.find('location.place_id', location.place_id)
+
+      if (!this.id) {
+        this.create({
+          name: location.locality,
+          location,
+          status: 'requested',
+          hits: 1
+        })
+      } else {
+        this.update(this.id, {
+          hits: parseInt(this.doc.hits || 0) + 1
+        })
+      }
+
+      this.change(location)
     },
 
     async requestBrowserLocation() {

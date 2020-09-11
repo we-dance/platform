@@ -14,7 +14,9 @@
             peopleId !== item.id ? (peopleId = item.id) : (peopleId = false)
           "
         >
-          <span class="mr-1">{{ Object.keys(item.recipients).length }}</span>
+          <span v-if="item.recipients" class="mr-1">{{
+            Object.keys(item.recipients).length
+          }}</span>
 
           <TIcon
             name="people"
@@ -54,35 +56,12 @@
         <div class="p-4 border rounded mb-4 bg-real-white">
           <div class="flex justify-between items-start">
             <div>
-              <div class="flex text-xs">
-                <div class="mb-2 text-gray-500 mr-2">
-                  <span class="font-bold">Created</span> at
-                  {{ getDate(item.createdAt) }} at
-                  {{ getTime(item.createdAt) }}
-                </div>
-                <div class="mb-2 text-gray-500">
-                  <span class="font-bold">Scheduled</span> for
-                  {{ getDate(item.scheduledAt) }} at
-                  {{ getTime(item.scheduledAt) }}
-                </div>
+              <div class="font-bold text-xs">
+                {{ item.name }}
               </div>
-              <div class="font-bold text-lg">
-                {{ item.subject }}
-              </div>
-              <div class="mb-2 text-gray-500 text-xs">{{ item.name }}</div>
+              <div class="text-sm">{{ item.from }}</div>
+              <div class="font-bold">{{ item.subject }}</div>
             </div>
-            <div>
-              <div
-                class="text-xs text-white font-bold px-2 py-1 rounded-full"
-                :class="emailStatusClass[item.status]"
-              >
-                {{ item.status }}
-              </div>
-            </div>
-          </div>
-
-          <div v-if="item.status === 'error'" class="text-red-500 text-xs">
-            <span class="font-bold">Error:</span> {{ item.error }}
           </div>
         </div>
       </template>
@@ -93,13 +72,7 @@
 <script>
 import useAuth from '~/use/auth'
 
-import {
-  getDate,
-  getDateTime,
-  getTime,
-  getDateObect,
-  toDatetimeLocal
-} from '~/utils'
+import { getDate, getDateTime, getTime } from '~/utils'
 
 export default {
   data: () => ({
@@ -112,30 +85,26 @@ export default {
       failedAt: 'bg-red-500',
       spammedAt: 'bg-orange-500',
       unsubscribedAt: 'bg-orange-500'
-    },
-    emailStatusClass: {
-      draft: 'bg-orange-500',
-      scheduled: 'bg-blue-500',
-      sent: 'bg-green-500',
-      canceled: 'bg-red-900',
-      error: 'bg-red-500'
     }
   }),
   setup() {
     const { can } = useAuth()
-    const title = 'Emails'
-    const collection = 'emails'
+    const title = 'Templates'
+    const collection = 'templates'
     const add = 'Add'
 
     const fields = [
       {
-        name: 'name'
+        name: 'name',
+        labelPosition: 'top'
       },
       {
-        name: 'subject'
+        name: 'subject',
+        labelPosition: 'top'
       },
       {
         name: 'from',
+        labelPosition: 'top',
         type: 'select',
         options: [
           {
@@ -149,30 +118,9 @@ export default {
         ]
       },
       {
-        name: 'status',
-        type: 'select',
-        defaultValue: 'draft',
-        options: ['draft', 'scheduled', 'sent', 'canceled']
-      },
-      {
-        name: 'scheduledAt',
-        type: 'datetime-local',
-        set: (val) => {
-          if (!val) return ''
-          return new Date(val)
-        },
-        get: (val) => {
-          if (!val) return ''
-          return toDatetimeLocal(getDateObect(val))
-        }
-      },
-      {
-        name: 'recipients',
-        type: 'accounts'
-      },
-      {
         name: 'content',
-        hideLabel: true,
+        label: 'Content',
+        labelPosition: 'top',
         type: 'textarea'
       }
     ]
@@ -183,8 +131,8 @@ export default {
       collection,
       add,
       getDate,
-      getTime,
       getDateTime,
+      getTime,
       can
     }
   }
