@@ -51,12 +51,21 @@
             <span class="hidden md:block">Calendar</span>
           </router-link>
           <router-link
+            v-if="uid"
             to="/posts/-/edit"
             class="block p-2 md:px-4 flex flex-col justify-center"
           >
             <TIcon class="w-8 h-8 mx-auto" name="plus" />
             <span class="hidden md:block">Add</span>
           </router-link>
+          <button
+            v-else
+            @click="showAuthPopup = true"
+            class="block p-2 md:px-4 flex flex-col justify-center"
+          >
+            <TIcon class="w-8 h-8 mx-auto" name="plus" />
+            <span class="hidden md:block">Add</span>
+          </button>
 
           <TButton v-if="!uid" to="/signin" class="md:ml-2">Sign In</TButton>
           <TMenu v-else>
@@ -117,6 +126,19 @@
         </nav>
       </div>
     </header>
+
+    <TPopup v-if="showAuthPopup">
+      <div class="flex justify-between border-b pb-2 mb-4">
+        <div class="font-bold">Members only</div>
+        <button class="cursor-pointer" @click="showAuthPopup = false">
+          <TIcon name="close" class="cursor-pointer w-4 h-4" />
+        </button>
+      </div>
+      <div class="my-4 flex flex-col justify-center">
+        <div>You need a profile to write posts</div>
+        <TButton class="mt-2" to="/signin">Create Profile</TButton>
+      </div>
+    </TPopup>
 
     <div v-if="city" class="container p-4 mx-auto max-w-xl mb-16">
       <nuxt />
@@ -227,6 +249,7 @@ export default {
   },
   data: () => ({
     isMenuOpen: false,
+    showAuthPopup: false,
     city: ''
   }),
   computed: {

@@ -1,13 +1,36 @@
 <template>
   <main>
+    <TPopup v-if="showAuthPopup">
+      <div class="flex justify-between border-b pb-2 mb-4">
+        <div class="font-bold">Members only</div>
+        <button class="cursor-pointer" @click="showAuthPopup = false">
+          <TIcon name="close" class="cursor-pointer w-4 h-4" />
+        </button>
+      </div>
+      <div class="my-4 flex flex-col justify-center">
+        <div>Chat is available only for members</div>
+        <TButton class="mt-2" to="/signin?target=/feed">Become Member</TButton>
+      </div>
+    </TPopup>
+
     <TTitle>
       Feed
       <template slot="right">
-        <div v-if="city" class="my-4 flex justify-center">
-          <TButton :href="city.telegram" class="flex items-center">
-            <TIcon name="telegram" class="w-4 h-4 text-black mr-2" />
-            Join {{ city.name }} Dance Chat
-          </TButton>
+        <div v-if="city">
+          <div class="my-4 flex justify-center">
+            <TButton v-if="uid" :href="city.telegram" class="flex items-center">
+              <TIcon name="telegram" class="w-4 h-4 text-black mr-2" />
+              Join {{ city.name }} Dance Chat
+            </TButton>
+            <TButton
+              v-else
+              class="flex items-center"
+              @click="showAuthPopup = true"
+            >
+              <TIcon name="telegram" class="w-4 h-4 text-black mr-2" />
+              Join {{ city.name }} Dance Chat
+            </TButton>
+          </div>
         </div>
       </template>
     </TTitle>
@@ -151,6 +174,7 @@ import useRSVP from '~/use/rsvp'
 import useComments from '~/use/comments'
 import useCollection from '~/use/collection'
 import useAccounts from '~/use/accounts'
+import useAuth from '~/use/auth'
 import useDoc from '~/use/doc'
 import { dateDiff, sortBy } from '~/utils'
 
@@ -169,6 +193,7 @@ export default {
     const { getCommentsCount, loading: loadingComments } = useComments()
     const { docs, loading: loadingPosts, getById } = useCollection('posts')
     const { create: createReport } = useDoc('reports')
+    const { uid } = useAuth()
 
     const map = (item) => {
       if (!item.id) {
@@ -207,7 +232,6 @@ export default {
 
     return {
       city,
-
       items,
       getRsvpResponse,
       updateRsvp,
@@ -215,11 +239,12 @@ export default {
       getAccount,
       loading,
       createReport,
-      getById
+      getById,
+      uid
     }
   },
   data: () => ({
-    showIntro: false,
+    showAuthPopup: false,
     reportId: 0,
     reportReason: '',
     reportCategory: 'other'
