@@ -60,8 +60,8 @@
           </router-link>
           <button
             v-else
-            @click="showAuthPopup = true"
             class="block p-2 md:px-4 flex flex-col justify-center"
+            @click="showAuthPopup = true"
           >
             <TIcon class="w-8 h-8 mx-auto" name="plus" />
             <span class="hidden md:block">Add</span>

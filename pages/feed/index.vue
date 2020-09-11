@@ -16,7 +16,7 @@
     <TTitle>
       Feed
       <template slot="right">
-        <div v-if="city">
+        <div v-if="city && city.telegram">
           <div class="my-4 flex justify-center">
             <TButton v-if="uid" :href="city.telegram" class="flex items-center">
               <TIcon name="telegram" class="w-4 h-4 text-black mr-2" />
@@ -125,8 +125,8 @@
             <Microlink v-if="item.link" class="mt-2 z-0" :url="item.link" />
           </div>
         </div>
-        <div class="px-4 pb-4 flex items-center justify-between">
-          <TTagsPreview :value="item.tags" />
+        <div class="px-4 pb-4 md:flex items-center justify-between">
+          <TTagsPreview :value="item.tags" class="mb-4 md:mb-0" />
 
           <div class="flex">
             <div class="text-green-500 flex justify-center">
