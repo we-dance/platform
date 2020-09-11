@@ -1,7 +1,8 @@
 <template>
   <div
     ref="wrapper"
-    class="fixed z-50 w-full h-full top-0 left-0 flex items-end md:items-center justify-center"
+    class="fixed w-full h-full top-0 left-0 flex items-end md:items-center justify-center"
+    style="z-index: 100"
   >
     <div
       class="fixed w-full h-full top-0 left-0 bg-black opacity-50 z-40"
@@ -9,7 +10,7 @@
     ></div>
     <transition appear name="slide-up">
       <div
-        class="bg-white p-4 rounded w-full md:w-auto z-50 overflow-hidden flex justify-center items-center"
+        class="bg-white p-4 rounded w-full md:w-auto z-50 overflow-y-scroll mt-4 flex justify-center items-center max-h-screen"
       >
         <div>
           <div v-if="title" class="flex justify-between border-b pb-2">

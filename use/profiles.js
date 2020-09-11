@@ -136,9 +136,16 @@ export default () => {
     },
     {
       name: 'location',
-      label: 'City',
+      label: 'Hometown',
       required: true,
       type: 'location'
+    },
+    {
+      name: 'community',
+      label: 'Community',
+      required: true,
+      type: 'city',
+      description: 'Dance community of which city would you like to join?'
     },
     {
       name: 'birthday',

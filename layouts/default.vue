@@ -252,12 +252,18 @@ export default {
     const routedCity = this.$route.query.city
 
     if (routedCity) {
-      this.city = {
-        locality: routedCity
-      }
-    } else {
-      this.city = ls('city')
+      this.city = routedCity
+      return
     }
+
+    const cachedCity = ls('city')
+
+    if (typeof cachedCity === 'object' && cachedCity.locality) {
+      this.city = cachedCity.locality
+      return
+    }
+
+    this.city = cachedCity
   },
   methods: {
     updateMenu() {

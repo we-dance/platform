@@ -38,9 +38,10 @@ import TInputMulti from '~/components/TInput/TInputMulti'
 import TInputTags from '~/components/TInput/TInputTags'
 import TInputTextarea from '~/components/TInput/TInputTextarea'
 import TInputPhoto from '~/components/TInput/TInputPhoto'
-import TInputLocation from '~/components/TInput/TInputLocation'
+import TInputLocationSelect from '~/components/TInput/TInputLocationSelect'
 import TAccountListSelector from '~/components/TAccountListSelector'
 import TAccountSelector from '~/components/TAccountSelector'
+import TInputCity from '~/components/TInput/TInputCity'
 
 export default {
   inheritAttrs: false,
@@ -142,7 +143,8 @@ export default {
         markdown: TInputMarkdown,
         textarea: TInputTextarea,
         photo: TInputPhoto,
-        location: TInputLocation,
+        location: TInputLocationSelect,
+        city: TInputCity,
         multi: TInputMulti,
         accounts: TAccountListSelector,
         account: TAccountSelector

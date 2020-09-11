@@ -55,12 +55,9 @@
               {{ item.profile.jobs }}
             </div>
             <div>{{ item.name }} &lt;{{ item.email }}&gt;</div>
-            <div v-if="item.profile.location" class="text-xs text-orange-500">
-              {{ item.profile.location.locality }}
+            <div class="text-xs text-orange-500">
+              {{ item.profile.community }}
             </div>
-          </div>
-          <div>
-            <TInputSelect :options="accountStates" />
           </div>
         </div>
       </div>
@@ -97,17 +94,6 @@ export default {
     const activeFilter = ref('')
     const selectedAll = ref(false)
     const selected = ref({})
-
-    const accountStates = [
-      {
-        value: '',
-        label: 'New'
-      },
-      {
-        value: 'test',
-        label: 'Test'
-      }
-    ]
 
     const filterOptions = [
       {
@@ -171,8 +157,7 @@ export default {
       items,
       getTime,
       selected,
-      getDate,
-      accountStates
+      getDate
     }
   },
   computed: {

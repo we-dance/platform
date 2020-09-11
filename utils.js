@@ -145,3 +145,9 @@ export const getLocation = (result, usedGps) => ({
   longitude: result.geometry.location.lng(),
   usedGps
 })
+
+export const sanitize = (input, trim) => {
+  const val = input
+  const expression = new RegExp(trim, 'gi')
+  return val.replace(expression, '').trim()
+}

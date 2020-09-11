@@ -1,6 +1,16 @@
 <template>
   <main>
-    <TTitle>Feed</TTitle>
+    <TTitle>
+      Feed
+      <template slot="right">
+        <div v-if="city" class="my-4 flex justify-center">
+          <TButton :href="city.telegram" class="flex items-center">
+            <TIcon name="telegram" class="w-4 h-4 text-black mr-2" />
+            Join {{ city.name }} Dance Chat
+          </TButton>
+        </div>
+      </template>
+    </TTitle>
 
     <div>
       <div v-if="false" class="rounded bg-orange-200 p-4 mb-4">
@@ -149,49 +159,6 @@ export default {
   components: {
     Microlink
   },
-  data: () => ({
-    showIntro: false,
-    reportId: 0,
-    reportReason: '',
-    reportCategory: 'other'
-  }),
-  computed: {
-    filteredItems() {
-      return this.items
-        .filter((item) =>
-          this.$route.query.tag
-            ? item.tags && item.tags[this.$route.query.tag]
-            : true
-        )
-        .sort(sortBy('-createdAt'))
-    }
-  },
-  watch: {
-    $route() {
-      this.showIntro = !!this.$route.query.tour
-    }
-  },
-  mounted() {
-    this.showIntro = !!this.$route.query.tour || !ls('sawIntro')
-  },
-  methods: {
-    cancelReport() {
-      this.reportId = 0
-      this.reportReason = ''
-      this.reportCategory = 'other'
-    },
-    report(item) {
-      this.createReport({
-        state: 'open',
-        documentId: this.reportId,
-        category: this.reportCategory,
-        collection: 'posts',
-        reason: this.reportReason,
-        documentData: this.getById(this.reportId)
-      })
-      this.cancelReport()
-    }
-  },
   setup() {
     const {
       getCount,
@@ -234,7 +201,13 @@ export default {
 
     const { getAccount } = useAccounts()
 
+    const { doc: city, find: findCity } = useDoc('cities')
+
+    findCity('name', ls('city'))
+
     return {
+      city,
+
       items,
       getRsvpResponse,
       updateRsvp,
@@ -243,6 +216,41 @@ export default {
       loading,
       createReport,
       getById
+    }
+  },
+  data: () => ({
+    showIntro: false,
+    reportId: 0,
+    reportReason: '',
+    reportCategory: 'other'
+  }),
+  computed: {
+    filteredItems() {
+      return this.items
+        .filter((item) =>
+          this.$route.query.tag
+            ? item.tags && item.tags[this.$route.query.tag]
+            : true
+        )
+        .sort(sortBy('-createdAt'))
+    }
+  },
+  methods: {
+    cancelReport() {
+      this.reportId = 0
+      this.reportReason = ''
+      this.reportCategory = 'other'
+    },
+    report(item) {
+      this.createReport({
+        state: 'open',
+        documentId: this.reportId,
+        category: this.reportCategory,
+        collection: 'posts',
+        reason: this.reportReason,
+        documentData: this.getById(this.reportId)
+      })
+      this.cancelReport()
     }
   }
 }

@@ -10,6 +10,8 @@
 </template>
 
 <script>
+import { sanitize } from '~/utils'
+
 export default {
   inheritAttrs: false,
   props: {
@@ -63,9 +65,7 @@ export default {
   methods: {
     sanitize() {
       if (this.trim) {
-        const val = this.input
-        const expression = new RegExp(this.trim, 'gi')
-        this.input = val.replace(expression, '').trim()
+        this.input = sanitize(this.input, this.trim)
       }
     }
   }

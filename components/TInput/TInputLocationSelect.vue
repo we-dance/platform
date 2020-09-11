@@ -68,11 +68,11 @@
       <div v-else>
         <div
           v-for="city in cities"
-          :key="city.name"
+          :key="city.locality"
           class="p-2 hover:bg-indigo-500 text-black hover:text-white cursor-pointer text-left"
-          @click="change(city.name)"
+          @click="change(city)"
         >
-          {{ city.name }}, {{ city.location.country }}
+          {{ city.locality }}
         </div>
       </div>
     </TPopup>
@@ -82,10 +82,8 @@
 <script>
 import Vue from 'vue'
 import * as VueGoogleMaps from 'vue2-google-maps'
-import { computed } from '@vue/composition-api'
 import { getLocation, sanitize } from '~/utils'
 import useDoc from '~/use/doc'
-import useCollection from '~/use/collection'
 
 Vue.use(VueGoogleMaps, {
   load: {
@@ -100,18 +98,13 @@ const gmapApi = VueGoogleMaps.gmapApi
 export default {
   setup() {
     const { find, create, id, update, doc } = useDoc('cities')
-    const { docs } = useCollection('cities')
-    const cities = computed(() =>
-      docs.value.filter((city) => city.status === 'active')
-    )
 
     return {
       find,
       create,
       update,
       id,
-      doc,
-      cities
+      doc
     }
   },
   props: {
@@ -142,7 +135,29 @@ export default {
     predictions: [],
     gpsIsBlocked: false,
     loading: false,
-    showPopup: false
+    showPopup: false,
+    cities: [
+      {
+        locality: 'Berlin',
+        country: 'Germany',
+        label: 'Berlin'
+      },
+      {
+        locality: 'Munich',
+        country: 'Germany',
+        label: 'Munich'
+      },
+      {
+        locality: 'Frankfurt',
+        country: 'Germany',
+        label: 'Frankfurt'
+      },
+      {
+        locality: 'Stuttgart',
+        country: 'Germany',
+        label: 'Stuttgart'
+      }
+    ]
   }),
 
   computed: {
@@ -193,16 +208,16 @@ export default {
       this.predictions = []
       this.showPopup = true
     },
-    getLabel(city) {
-      if (!city) {
+    getLabel(location) {
+      if (!location) {
         return this.emptyLabel
       }
 
-      return city
+      return location.locality
     },
-    change(city) {
+    change(location) {
       this.showPopup = false
-      this.$emit('input', city)
+      this.$emit('input', location)
     },
 
     updateList(predictions, status) {
@@ -223,7 +238,9 @@ export default {
       }
 
       const geocoder = new this.google.maps.Geocoder()
-      geocoder.geocode({ placeId }, (response, status) => {
+      geocoder.geocode({ region: 'us', placeId }, (response, status) => {
+        this.loading = false
+
         const location = getLocation(response[0], false)
         this.selectLocation(location)
       })
@@ -232,11 +249,9 @@ export default {
     async selectLocation(location) {
       await this.find('location.place_id', location.place_id)
 
-      let cityName = this.doc.name
+      const cityName = sanitize(location.locality, ' ')
 
       if (!this.id) {
-        cityName = sanitize(location.locality, ' ')
-
         this.create({
           name: cityName,
           location,
@@ -249,7 +264,7 @@ export default {
         })
       }
 
-      this.change(cityName)
+      this.change(location)
     },
 
     async requestBrowserLocation() {
@@ -272,14 +287,13 @@ export default {
       const geocoder = new this.google.maps.Geocoder()
       geocoder.geocode(
         {
+          region: 'us',
           location: {
             lat: position.coords.latitude,
             lng: position.coords.longitude
           }
         },
         (response, status) => {
-          this.loading = false
-
           const location = getLocation(response[5], true)
           this.selectLocation(location)
         }

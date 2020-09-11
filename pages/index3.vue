@@ -31,7 +31,11 @@
     </div>
 
     <portal to="top-left">
-      <TInputCity class="ml-2" :value="currentCity" @input="selectCity" />
+      <TInputLocationSelect
+        class="ml-2"
+        :value="currentCity"
+        @input="selectCity"
+      />
     </portal>
 
     <div v-if="currentCity">
@@ -92,7 +96,11 @@
       <div class="mt-16 max-w-2xl mx-auto text-center">
         <div>Select city to see more information.</div>
         <div class="flex justify-center mt-2">
-          <TInputCity class="ml-2" :value="currentCity" @input="selectCity" />
+          <TInputLocationSelect
+            class="ml-2"
+            :value="currentCity"
+            @input="selectCity"
+          />
         </div>
       </div>
     </div>

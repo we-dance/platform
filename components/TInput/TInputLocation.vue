@@ -51,7 +51,8 @@ import { getLocation } from '~/utils'
 Vue.use(VueGoogleMaps, {
   load: {
     key: process.env.api.google,
-    libraries: 'places'
+    libraries: 'places',
+    language: 'en'
   }
 })
 
