@@ -19,14 +19,10 @@
     <div v-else-if="emailSent" class="typo">
       <h2>Almost there</h2>
       <p>Check your email and click the invitation link.</p>
-      <p class="text-brand-fail">
-        We currently do not support
-        <span class="font-bold">web.de</span> emails.
-      </p>
+      <p>Email might come in 5-10 minutes and might land in Spam.</p>
       <p>
-        We are in beta now, please report if you have any issues to
-        <a href="mailto:wedance@razbakov.com">wedance@razbakov.com</a> and we
-        will fix them ASAP.
+        Please report if you have any issues to
+        <a href="mailto:support@wedance.vip">support@wedance.vip</a>.
       </p>
     </div>
     <div v-else>
