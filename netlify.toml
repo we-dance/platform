@@ -6,3 +6,18 @@
   from = "/*"
   to = "/index.html"
   status = 200
+
+[context.production.environment]
+  APP_ENV = "production"
+
+[[redirects]]
+  from = "https://we-dance.app/*"
+  to = "https://wedance.vip/:splat"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "https://wedance.netlify.app/*"
+  to = "https://wedance.vip/:splat"
+  status = 301
+  force = true
