@@ -8,6 +8,7 @@
       :title="title"
       :add="add"
       :fields="fields"
+      :filters="filters"
     >
       <template v-slot:card-toolbar="{ item }">
         <button
@@ -17,7 +18,9 @@
             peopleId !== item.id ? (peopleId = item.id) : (peopleId = false)
           "
         >
-          <span class="mr-1">{{ Object.keys(item.recipients).length }}</span>
+          <span v-if="item.recipients" class="mr-1">{{
+            Object.keys(item.recipients).length
+          }}</span>
 
           <TIcon
             name="people"
@@ -42,7 +45,7 @@
               <div class="text-sm text-gray-500">{{ recipient.email }}</div>
             </div>
             <div class="flex">
-              <div v-for="(styles, field) in states" :key="field">
+              <div v-for="(styles, field) in recipientStates" :key="field">
                 <div
                   v-if="recipient[field]"
                   :class="styles"
@@ -78,7 +81,14 @@
                 </div>
               </div>
             </div>
-            <div>
+            <div class="flex">
+              <button
+                v-if="item.status === 'sent'"
+                class="mr-2"
+                @click="update(item.id, { status: 'confirmed' })"
+              >
+                <TIcon name="done" class="w-4 h-4" />
+              </button>
               <div
                 class="text-xs text-white font-bold px-2 py-1 rounded-full"
                 :class="statusClass[item.status]"
@@ -99,12 +109,21 @@
 
 <script>
 import useAuth from '~/use/auth'
-import { getDate, getTime } from '~/utils'
+import useDoc from '~/use/doc'
+import { getDate, getDateTime, getTime } from '~/utils'
 
 export default {
   data: () => ({
     data: '',
     peopleId: false,
+    recipientStates: {
+      deliveredAt: 'bg-green-500',
+      openedAt: 'bg-green-500',
+      clickedAt: 'bg-green-500',
+      failedAt: 'bg-red-500',
+      spammedAt: 'bg-orange-500',
+      unsubscribedAt: 'bg-orange-500'
+    },
     statusClass: {
       draft: 'bg-gray-500',
       open: 'bg-blue-500',
@@ -117,9 +136,50 @@ export default {
   }),
   setup() {
     const { can, isAdmin } = useAuth()
+    const { update } = useDoc('matches')
     const title = 'Matches'
     const collection = 'matches'
     const add = 'Add'
+
+    const filters = [
+      {
+        name: 'open',
+        label: 'Open',
+        filter: (item) => item.status === 'open',
+        sort: 'createdAt'
+      },
+      {
+        name: 'sent',
+        default: true,
+        label: 'Sent',
+        filter: (item) => item.status === 'sent',
+        sort: 'createdAt'
+      },
+      {
+        name: 'confirmed',
+        label: 'Confirmed',
+        filter: (item) => item.status === 'confirmed',
+        sort: '-createdAt'
+      },
+      {
+        name: 'failed',
+        label: 'Failed',
+        filter: (item) => item.status === 'failed',
+        sort: '-createdAt'
+      },
+      {
+        name: 'closed',
+        label: 'Closed',
+        filter: (item) => item.status === 'confirmed',
+        sort: '-createdAt'
+      },
+      {
+        name: 'all',
+        label: 'All',
+        filter: (item) => item.id,
+        sort: '-createdAt'
+      }
+    ]
 
     const fields = [
       {
@@ -155,8 +215,11 @@ export default {
       add,
       getDate,
       getTime,
+      getDateTime,
       isAdmin,
-      can
+      can,
+      filters,
+      update
     }
   }
 }

@@ -1,7 +1,7 @@
 <template>
   <div
     ref="wrapper"
-    class="fixed w-full h-full top-0 left-0 flex items-end md:items-center justify-center"
+    class="fixed z-50 w-full h-full top-0 left-0 flex items-end md:items-center justify-center"
   >
     <div
       class="fixed w-full h-full top-0 left-0 bg-black opacity-50 z-40"
