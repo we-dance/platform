@@ -1,0 +1,5 @@
+http://wedance.vip/* https://wedance.vip/:splat 301!
+http://we-dance.app/* https://wedance.vip/:splat 301!
+https://we-dance.app/* https://wedance.vip/:splat 301!
+http://wedance.netlify.app/* https://wedance.vip/:splat 301!
+https://wedance.netlify.app/* https://wedance.vip/:splat 301!
