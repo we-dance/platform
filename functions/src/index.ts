@@ -1,8 +1,9 @@
 import * as functions from 'firebase-functions'
 import * as admin from 'firebase-admin'
-import sendEmail from './lib/sendEmail'
 import * as express from 'express'
 import * as cors from 'cors'
+import * as Handlebars from 'handlebars'
+import sendEmail from './lib/sendEmail'
 
 admin.initializeApp()
 const db = admin.firestore()
@@ -29,6 +30,13 @@ app.post('/track/:action', async (req, res) => {
       .update({
         [`recipients.${uid}.${action}`]: admin.firestore.Timestamp.now()
       })
+  } else if (type === 'welcomeEmail') {
+    await db
+      .collection('templates')
+      .doc(campaignId)
+      .update({
+        [`recipients.${uid}.${action}`]: admin.firestore.Timestamp.now()
+      })
   } else {
     await db
       .collection('emails')
@@ -46,7 +54,104 @@ app.post('/track/:action', async (req, res) => {
 
 export const hooks = functions.https.onRequest(app)
 
-// export const welcomeEmail =
+const render = (templateString: string, data: Object) => {
+  const templator = Handlebars.compile(templateString)
+  return templator(data)
+}
+
+export const welcomeEmail = functions.firestore
+  .document('profile/{profileId}')
+  .onWrite(async (change, context) => {
+    const snapshot = change.after
+    const oldProfile = change.before.data()
+    const profile = snapshot.data()
+
+    if (
+      !profile ||
+      !profile.username ||
+      !profile.community ||
+      oldProfile?.community === profile.community
+    ) {
+      return
+    }
+
+    let city
+
+    const account = (
+      await db
+        .collection('accounts')
+        .doc(profile.id)
+        .get()
+    ).data()
+
+    if (!account) {
+      throw Error(`Account ${profile.id} not found`)
+    }
+
+    const cities = await db
+      .collection('cities')
+      .where('name', '==', profile.community)
+      .get()
+
+    cities.forEach((currentCity) => {
+      city = currentCity
+    })
+
+    if (!city) {
+      throw Error(`City ${profile.community} not found`)
+    }
+
+    let emailTemplate: any
+
+    const emailTemplates = await db
+      .collection('templates')
+      .where('name', '==', 'welcome')
+      .get()
+
+    emailTemplates.forEach((currentEmailTemplate) => {
+      emailTemplate = currentEmailTemplate
+    })
+
+    if (
+      !emailTemplate ||
+      !emailTemplate.from ||
+      !emailTemplate.subject ||
+      !emailTemplate.content
+    ) {
+      throw Error(`Email template welcome not found`)
+    }
+
+    const data = {
+      profile,
+      account,
+      city
+    }
+
+    const recipients = {
+      [profile.id]: {
+        name: account.name || account.name,
+        email: account.email
+      }
+    }
+
+    const emailData = {
+      from: render(emailTemplate.from, data),
+      subject: render(emailTemplate.subject, data),
+      content: render(emailTemplate.content, data),
+      recipients,
+      type: 'welcomeEmail',
+      id: emailTemplate.id
+    }
+
+    await db
+      .collection('templates')
+      .doc(emailTemplate.id)
+      .update({
+        [`recipients.${profile.id}`]: recipients[profile.id]
+      })
+
+    return await sendEmail(emailData)
+  })
 
 export const matchNotification = functions.firestore
   .document('matches/{matchId}')
@@ -141,7 +246,6 @@ Unite dancers worldwide with **[WeDance.vip](https://wedance.vip/)**
     const from = 'WeDance <automated@wedance.vip>'
 
     const data = {
-      ...snapshot.data(),
       from,
       recipients,
       subject,
