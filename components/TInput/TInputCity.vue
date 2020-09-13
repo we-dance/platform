@@ -40,21 +40,6 @@
       <div class="flex">
         <TInput v-model="input" :placeholder="searchPlaceholder" />
       </div>
-
-      <div
-        v-if="!gpsIsBlocked"
-        class="p-2 hover:bg-indigo-500 text-black hover:text-white cursor-pointer flex items-center"
-        @click="locate"
-      >
-        <TIcon :name="loading ? 'coffee' : 'gps_fixed'" class="h-4 w-4 mr-2" />
-        <span>Locate me</span>
-      </div>
-      <div
-        class="p-2 hover:bg-indigo-500 text-black hover:text-white cursor-pointer flex items-center"
-        @click="change('')"
-      >
-        <span>(Empty)</span>
-      </div>
       <div v-if="predictions.length">
         <div
           v-for="prediction in predictions"
@@ -230,9 +215,13 @@ export default {
     },
 
     async selectLocation(location) {
+      if (!location) {
+        return
+      }
+
       await this.find('location.place_id', location.place_id)
 
-      let cityName = this.doc.name
+      let cityName
 
       if (!this.id) {
         cityName = sanitize(location.locality, ' ')
@@ -244,6 +233,8 @@ export default {
           hits: 1
         })
       } else {
+        cityName = this.doc.name
+
         this.update(this.id, {
           hits: parseInt(this.doc.hits || 0) + 1
         })
