@@ -139,7 +139,8 @@ export default {
     firebase: {
       config: {
         apiKey: process.env.NUXT_ENV_GOOGLE_FIREBASE_API_KEY,
-        authDomain: '***REMOVED***',
+        authDomain: '***REMOVED***.firebaseapp.com',
+        // authDomain: '***REMOVED***',
         databaseURL: '***REMOVED***',
         projectId: '***REMOVED***',
         storageBucket: '***REMOVED***.appspot.com',
