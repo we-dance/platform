@@ -6,7 +6,7 @@ const app = {
   social: {
     twitter: 'WeDanceHQ'
   },
-  url: 'https://we-dance.app',
+  url: 'https://wedance.vip',
   cover: '/cover/wide.png'
 }
 
