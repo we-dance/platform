@@ -10,10 +10,6 @@
       <div class="typo">
         <h2>Oops</h2>
         <p class="text-brand-fail">{{ error }}</p>
-        <p>
-          Please report to
-          <a href="mailto:support@wedance.vip">support@wedance.vip</a>.
-        </p>
       </div>
       <TButton type="secondary" @click="reload">
         Try Again
