@@ -1,7 +1,7 @@
 <template>
   <main>
     <TTitle>Accounts</TTitle>
-    <TGridAccounts v-model="accounts" />
+    <TGridAccounts v-model="accounts" editable />
   </main>
 </template>
 

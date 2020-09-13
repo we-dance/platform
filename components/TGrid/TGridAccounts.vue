@@ -1,8 +1,9 @@
 <template>
   <div class="flex flex-col">
-    <div
-      class="sticky top-0 bg-white py-4 flex flex-col md:flex-row mb-4 items-center z-50 border-b"
-    >
+    <div v-if="editable" class="flex justify-end mb-4">
+      <TButton @click="removeSelected">Delete</TButton>
+    </div>
+    <div class="bg-white py-4 flex flex-row mb-4 items-center z-50 border-b">
       <input
         v-model="selectedAll"
         type="checkbox"
@@ -56,7 +57,14 @@
             </div>
             <div>{{ item.name }} &lt;{{ item.email }}&gt;</div>
             <div class="text-xs text-orange-500">
-              {{ item.profile.community }}
+              {{ item.profile.community
+              }}<span v-if="item.profile.city"> • {{ item.profile.city }}</span>
+              <span v-if="item.profile.location">
+                • {{ item.profile.location.locality }}</span
+              >
+            </div>
+            <div class="text-xs">
+              {{ item.profile.contacts }}
             </div>
           </div>
         </div>
@@ -69,6 +77,7 @@
 import Vue from 'vue'
 import { computed, ref } from '@vue/composition-api'
 import useCollection from '~/use/collection'
+import useDoc from '~/use/doc'
 import { sortBy, getTime, getDate } from '~/utils'
 import useProfiles from '~/use/profiles'
 
@@ -85,10 +94,16 @@ export default {
     multi: {
       type: Boolean,
       default: false
+    },
+    editable: {
+      type: Boolean,
+      default: false
     }
   },
   setup() {
     const { docs } = useCollection('accounts')
+    const { remove: removeProfile } = useDoc('profiles')
+    const { remove: removeAccount } = useDoc('accounts')
     const { getProfile } = useProfiles()
     const nameFilter = ref('')
     const activeFilter = ref('')
@@ -119,7 +134,7 @@ export default {
       {
         value: 'no_city',
         label: 'No city',
-        filter: (account) => !account.profile.location
+        filter: (account) => !account.profile.community
       },
       {
         value: 'no_username',
@@ -132,6 +147,14 @@ export default {
       filterOptions.find((item) => item.value === activeFilter.value)
     )
 
+    const matchString = (str, match) => {
+      if (!str) {
+        return false
+      }
+
+      return str.toLowerCase().includes(match)
+    }
+
     const items = computed(() =>
       docs.value
         .map((item) => ({
@@ -139,13 +162,20 @@ export default {
           profile: getProfile(item.id)
         }))
         .filter(activeFilterItem.value.filter)
-        .filter(
-          (item) =>
-            item.name?.includes(nameFilter.value) ||
-            item.profile?.name?.includes(nameFilter.value) ||
-            item.profile?.username?.includes(nameFilter.value) ||
-            item.email?.includes(nameFilter.value)
-        )
+        .filter((item) => {
+          if (!nameFilter.value) {
+            return true
+          }
+
+          const search = nameFilter.value.toLowerCase()
+
+          return (
+            matchString(item.name, search) ||
+            matchString(item.profile?.name, search) ||
+            matchString(item.profile?.username, search) ||
+            matchString(item.email, search)
+          )
+        })
         .sort(sortBy('-createdAt'))
     )
 
@@ -157,7 +187,9 @@ export default {
       items,
       getTime,
       selected,
-      getDate
+      getDate,
+      removeProfile,
+      removeAccount
     }
   },
   computed: {
@@ -182,6 +214,14 @@ export default {
       }
 
       this.selected = this.value
+    },
+    removeSelected() {
+      Object.keys(this.selected).forEach((uid) => {
+        this.removeAccount(uid)
+        this.removeProfile(uid)
+      })
+
+      this.selected = {}
     },
     select(item, mark) {
       if (typeof mark === 'undefined') {
