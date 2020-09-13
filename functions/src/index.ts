@@ -56,15 +56,16 @@ export const hooks = functions.https.onRequest(app)
 
 const render = (templateString: string, data: Object) => {
   const templator = Handlebars.compile(templateString)
-  return templator(data)
+  return templator({ data })
 }
 
 export const welcomeEmail = functions.firestore
-  .document('profile/{profileId}')
+  .document('profiles/{profileId}')
   .onWrite(async (change, context) => {
     const snapshot = change.after
     const oldProfile = change.before.data()
     const profile = snapshot.data()
+    const profileId = context.params.profileId
 
     if (
       !profile ||
@@ -75,17 +76,17 @@ export const welcomeEmail = functions.firestore
       return
     }
 
-    let city
+    let city: any
 
     const account = (
       await db
         .collection('accounts')
-        .doc(profile.id)
+        .doc(profileId)
         .get()
     ).data()
 
     if (!account) {
-      throw Error(`Account ${profile.id} not found`)
+      throw Error(`Account ${profileId} not found`)
     }
 
     const cities = await db
@@ -94,14 +95,15 @@ export const welcomeEmail = functions.firestore
       .get()
 
     cities.forEach((currentCity) => {
-      city = currentCity
+      city = currentCity.data()
     })
 
-    if (!city) {
+    if (!city || !city.name || !city.telegram) {
       throw Error(`City ${profile.community} not found`)
     }
 
     let emailTemplate: any
+    let emailTemplateId: any
 
     const emailTemplates = await db
       .collection('templates')
@@ -109,7 +111,8 @@ export const welcomeEmail = functions.firestore
       .get()
 
     emailTemplates.forEach((currentEmailTemplate) => {
-      emailTemplate = currentEmailTemplate
+      emailTemplate = currentEmailTemplate.data()
+      emailTemplateId = currentEmailTemplate.id
     })
 
     if (
@@ -128,7 +131,7 @@ export const welcomeEmail = functions.firestore
     }
 
     const recipients = {
-      [profile.id]: {
+      [profileId]: {
         name: account.name || account.name,
         email: account.email
       }
@@ -140,14 +143,14 @@ export const welcomeEmail = functions.firestore
       content: render(emailTemplate.content, data),
       recipients,
       type: 'welcomeEmail',
-      id: emailTemplate.id
+      id: emailTemplateId
     }
 
     await db
       .collection('templates')
       .doc(emailTemplate.id)
       .update({
-        [`recipients.${profile.id}`]: recipients[profile.id]
+        [`recipients.${profileId}`]: recipients[profileId]
       })
 
     return await sendEmail(emailData)
