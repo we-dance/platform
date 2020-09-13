@@ -11,8 +11,8 @@
       v-model="item"
       :fields="fields"
       vertical
-      :show-cancel="id"
-      :show-remove="id"
+      :show-cancel="!!id"
+      :show-remove="!!id"
       :submit-label="id ? 'Save' : 'Add'"
       class="bg-real-white p-4"
       @save="saveItem"
@@ -101,6 +101,11 @@ export default {
             hideLabel: true,
             type: 'textarea',
             placeholder: 'Description'
+          },
+          {
+            name: 'artists',
+            hideLabel: true,
+            type: 'accounts'
           },
           {
             name: 'city',

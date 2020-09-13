@@ -1,263 +1,123 @@
 <template>
-  <div>
-    <TTitle>Events</TTitle>
+  <main>
+    <TTitle>
+      Events
+    </TTitle>
 
-    <TLoader v-if="loading" />
-    <div v-else-if="eventsTotal > 0">
-      Found {{ eventsTotal }} events in
-      <template v-if="searchLocation">{{ searchLocation.name }}</template
-      ><template v-else>the world</template>
-    </div>
-    <div v-else-if="eventsTotal === 0">
-      <h2 class="font-bold text-lg">Coming soon!</h2>
-      <p>
-        For now you can find event calendar in our Telegram channel
-        <a class="underline" href="https://t.me/WeDanceMunich"
-          >@WeDanceMunich</a
+    <div>
+      <TLoader v-if="loading" />
+      <div v-else-if="!filteredItems.length">
+        No events found
+      </div>
+      <div>
+        <h2 class="font-bold">Monday, 14 September</h2>
+        <div
+          v-for="item in filteredItems"
+          :key="item.id"
+          class="bg-white px-4 mt-4 flex"
         >
-      </p>
-      <h2 class="font-bold mt-8 text-lg">Upcoming</h2>
-      <p>
-        <router-link class="underline" to="/SalsaCubanaMunich"
-          >Salsa Cubana at Pinakothek</router-link
-        >
-        every Wednesday and Friday!
-      </p>
+          <div class="mr-2">
+            {{ getTime(item.startDate) }}
+          </div>
+          <div class="mr-2">
+            🎉
+          </div>
+          <div>
+            <router-link
+              :to="`/events/${item.id}`"
+              class="font-bold leading-tight underline hover:no-underline"
+            >
+              {{ item.name }}
+            </router-link>
+            <TTagsPreview :value="item.tags" />
+          </div>
+        </div>
+      </div>
     </div>
-
-    <div class="mt-4">
-      <TCard
-        v-for="event in events"
-        :id="event.id"
-        :key="event.id"
-        :item="event"
-        type="event"
-      />
-    </div>
-  </div>
+  </main>
 </template>
 
 <script>
-import axios from 'axios'
-import useAuth from '~/use/auth'
+import { computed } from '@vue/composition-api'
+import ls from 'local-storage'
+import useRSVP from '~/use/rsvp'
+import useComments from '~/use/comments'
 import useCollection from '~/use/collection'
+import useAccounts from '~/use/accounts'
+import useAuth from '~/use/auth'
 import useDoc from '~/use/doc'
-import { imageExists } from '~/utils'
+import { dateDiff, sortBy, getTime } from '~/utils'
 
 export default {
-  props: {
-    city: {
-      type: String,
-      default: null
-    },
-    genre: {
-      type: String,
-      default: null
-    },
-    entity: {
-      type: String,
-      default: ''
-    },
-    type: {
-      type: String,
-      default: ''
-    },
-    day: {
-      type: String,
-      default: ''
-    }
-  },
-
-  data: () => ({
-    eventsTotal: 0,
-    events: [],
-    mode: 'list',
-    selectedGenres: [],
-    selectedTypes: [],
-    types: [],
-    genres: [],
-    selectedItem: 0,
-    showMap: false,
-    showCover: true,
-    search: '',
-    searchLocation: undefined,
-    showFilter: false,
-    radius: 25,
-    radiusSteps: [5, 10, 25, 50, 100, 500, 1000, 5000, 10000],
-    infoOptions: {
-      pixelOffset: {
-        width: 0,
-        height: -35
-      }
-    },
-    infoWindowPos: null,
-    infoWinOpen: false,
-    left: true,
-    right: false,
-    loading: false,
-    filterDescription: '',
-    mainNavigation: true,
-    searchOffset: 0
-  }),
-
-  mounted() {},
-
-  methods: {
-    async initElastic() {
-      this.searchLocation = {
-        name: 'Munich',
-        latitude: 48.1351253,
-        longitude: 11.581980499999986
-      }
-
-      await this.load()
-      this.startSearch()
-    },
-    async startSearch(loadMore) {
-      let bool
-      const must = []
-      let filter
-      let query
-
-      const now = new Date()
-
-      must.push({
-        range: {
-          startTime: {
-            gt: now
-          }
-        }
-      })
-
-      if (this.selectedGenres.length) {
-        must.push({
-          terms: {
-            genres: this.selectedGenres
-          }
-        })
-      }
-
-      if (this.selectedTypes.length) {
-        must.push({
-          terms: {
-            types: this.selectedTypes
-          }
-        })
-      }
-
-      if (this.searchLocation) {
-        filter = {
-          geo_distance: {
-            distance: `${this.radius}km`,
-            geolocation: {
-              lat: this.searchLocation.latitude,
-              lon: this.searchLocation.longitude
-            }
-          }
-        }
-      }
-
-      if (filter) {
-        bool = bool || {}
-        bool.filter = filter
-      }
-
-      if (must.length) {
-        bool = bool || {}
-        bool.must = must
-      }
-
-      if (bool) {
-        query = {
-          bool
-        }
-      }
-
-      const result = await axios.post(
-        `https://elastic.api.dancecard.id/events/_search`,
-        {
-          sort: [
-            {
-              startTime: { order: 'asc' }
-            }
-          ],
-          from: this.searchOffset,
-          query
-        }
-      )
-
-      const foundEvents = this.filterEvents(
-        result.data.hits.hits.map((item) => item._source)
-      )
-
-      const filteredEvents = []
-
-      async function asyncForEach(array, callback) {
-        for (let index = 0; index < array.length; index++) {
-          await callback(array[index], index, array)
-        }
-      }
-
-      const filterEvents = async () => {
-        await asyncForEach(foundEvents, async (event) => {
-          const exists = await imageExists(event.cover)
-
-          if (exists) {
-            filteredEvents.push(event)
-          } else {
-            this.report(event.id)
-          }
-        })
-      }
-
-      if (foundEvents) {
-        await filterEvents()
-      }
-
-      if (!loadMore) {
-        this.events = []
-        this.searchOffset = 0
-      }
-
-      this.events = [...this.events, ...filteredEvents]
-
-      this.searchOffset += result.data.hits.hits.length
-      // this.eventsTotal = result.data.hits.total.value
-      this.eventsTotal = filteredEvents.length
-    },
-
-    toggleMap() {
-      this.showMap = !this.showMap
-    },
-
-    selectItem(index) {
-      this.selectedItem = index
-      this.infoWinOpen = true
-    }
-  },
+  name: 'EventsIndex',
   setup() {
-    const { uid, account } = useAuth()
-    const { create } = useDoc('reportedEvents')
-    const { docs, load, loading } = useCollection('reportedEvents')
+    const {
+      getCount,
+      getRsvpResponse,
+      updateRsvp,
+      loading: loadingLikes
+    } = useRSVP()
+    const { getCommentsCount, loading: loadingComments } = useComments()
+    const { docs, loading: loadingPosts, getById } = useCollection('events')
+    const { uid } = useAuth()
 
-    const filterEvents = (events) => {
-      return events.filter((e) => !docs.value.find((r) => r.eventId === e.id))
+    const map = (item) => {
+      if (!item.id) {
+        return {}
+      }
+
+      const upVotes = getCount(item.id, 'up')
+      const downVotes = getCount(item.id, 'down')
+      const votes = upVotes - downVotes
+      const response = getRsvpResponse(item.id)
+      const multi = !response ? 3 : response === 'up' ? 2 : 1
+      const order = multi * 100 + votes
+      const commentsCount = getCommentsCount(item.id)
+
+      return {
+        ...item,
+        commentsCount,
+        upVotes,
+        downVotes,
+        votes,
+        response,
+        order
+      }
     }
 
-    const report = (id) => {
-      create({
-        eventId: id,
-        reason: 'missing_cover'
-      })
-    }
+    const items = computed(() => docs.value.map(map))
+    const loading = computed(
+      () => loadingLikes.value && loadingComments.value && loadingPosts.value
+    )
+
+    const { getAccount } = useAccounts()
+
+    const { doc: city, find: findCity } = useDoc('cities')
+
+    findCity('name', ls('city'))
 
     return {
+      city,
+      items,
+      getRsvpResponse,
+      updateRsvp,
+      dateDiff,
+      getAccount,
+      loading,
+      getById,
       uid,
-      account,
-      report,
-      filterEvents,
-      load,
-      loading
+      getTime
+    }
+  },
+  computed: {
+    filteredItems() {
+      return this.items
+        .filter((item) =>
+          this.$route.query.tag
+            ? item.tags && item.tags[this.$route.query.tag]
+            : true
+        )
+        .sort(sortBy('-createdAt'))
     }
   }
 }
