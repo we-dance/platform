@@ -337,8 +337,10 @@ export default () => {
   }
 
   async function sendSignInLinkToEmail(email) {
+    const connector = window.location.href.includes('?') ? '&' : '?'
+    const url = window.location.href + connector + 'email=' + email
     const actionCodeSettings = {
-      url: window.location.href + '?email=' + email,
+      url,
       handleCodeInApp: true
     }
 
