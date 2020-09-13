@@ -15,7 +15,7 @@
             <div>@{{ profile.username }}</div>
           </div>
 
-          <TProfileContact :uid="uid" />
+          <TProfileContact :uid="id" />
         </div>
         <dl v-if="profile.city" class="mt-2 md:flex">
           <dt class="font-bold mr-1">City:</dt>
