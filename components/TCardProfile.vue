@@ -37,7 +37,7 @@
         <dd>{{ profile.languages }}</dd>
       </dl>
       <dl
-        v-if="profile.partner"
+        v-if="profile.partner === 'Yes'"
         class="mt-2 bg-primary text-white px-2 py-1 rounded-full"
       >
         <dt class="font-bold mr-1">I am looking for partner</dt>

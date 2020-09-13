@@ -50,7 +50,7 @@
         <div>{{ profile.learning }}</div>
       </div>
       <dl
-        v-if="profile.partner"
+        v-if="profile.partner === 'Yes'"
         class="mt-4 bg-primary text-white px-4 py-1 rounded-full"
       >
         <dt class="font-bold mr-1">I am looking for partner</dt>
