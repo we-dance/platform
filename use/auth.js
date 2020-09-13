@@ -325,20 +325,23 @@ export default () => {
 
     state.signingIn = true
 
-    const email = route.query.email
+    const email = ls('email') || route.query.email
 
     try {
       await firebase.auth().signInWithEmailLink(email, link)
     } catch (e) {
       state.error = e
+
+      throw e
     }
 
     state.signingIn = false
   }
 
   async function sendSignInLinkToEmail(email) {
-    const connector = window.location.href.includes('?') ? '&' : '?'
-    const url = window.location.href + connector + 'email=' + email
+    ls('email', email)
+
+    const url = window.location.origin + '/signin?email=' + email
     const actionCodeSettings = {
       url,
       handleCodeInApp: true

@@ -11,16 +11,21 @@
         <h2>Oops</h2>
         <p class="text-brand-fail">{{ error }}</p>
       </div>
+      <p>
+        Please contact support:
+        <a href="mailto:support@wedance.vip">support@wedance.vip</a>.
+      </p>
       <TButton type="secondary" @click="reload">
         Try Again
       </TButton>
     </div>
     <TLoader v-else-if="loading || signingIn" />
     <div v-else-if="emailSent" class="typo">
-      <h2>Almost there</h2>
-      <p>Check your email and click the invitation link.</p>
-      <p>Email might come in 5-10 minutes and might land in Spam.</p>
-      <p>
+      <h2>Check your email</h2>
+      <p class="text-xs">
+        Email might come in 5-10 minutes and might land in spam.
+      </p>
+      <p class="text-xs">
         Please report if you have any issues to
         <a href="mailto:support@wedance.vip">support@wedance.vip</a>.
       </p>
