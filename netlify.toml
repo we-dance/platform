@@ -2,10 +2,45 @@
   publish = "dist"
   command = "yarn build"
 
+[context.production.environment]
+  APP_ENV = "production"
+
+[[redirects]]
+  from = "http://wedance.vip/"
+  to = "https://wedance.vip/:splat"
+  status = 301
+  force = false
+  query = {path = ":path"}
+
+[[redirects]]
+  from = "http://we-dance.app/*"
+  to = "https://wedance.vip/:splat"
+  status = 301
+  force = false
+  query = {path = ":path"}
+
+[[redirects]]
+  from = "https://we-dance.app/*"
+  to = "https://wedance.vip/:splat"
+  status = 301
+  force = false
+  query = {path = ":path"}
+
+[[redirects]]
+  from = "hhttp://wedance.netlify.app/*"
+  to = "https://wedance.vip/:splat"
+  status = 301
+  force = false
+  query = {path = ":path"}
+
+[[redirects]]
+  from = "https://wedance.netlify.app/*"
+  to = "https://wedance.vip/:splat"
+  status = 301
+  force = false
+  query = {path = ":path"}
+
 [[redirects]]
   from = "/*"
   to = "/index.html"
   status = 200
-
-[context.production.environment]
-  APP_ENV = "production"
