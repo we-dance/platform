@@ -1,7 +1,7 @@
 <template>
   <div class="mx-auto w-full max-w-lg">
     <div class="flex justify-between m-4">
-      <div class="font-bold">Write a new post</div>
+      <div class="font-bold">Add event</div>
       <button class="cursor-pointer" @click="$router.back()">
         <TIcon name="close" class="cursor-pointer w-4 h-4" />
       </button>
@@ -11,51 +11,32 @@
       v-model="item"
       :fields="fields"
       vertical
-      :show-cancel="!!id"
-      :show-remove="!!id"
+      :show-cancel="id"
+      :show-remove="id"
       :submit-label="id ? 'Save' : 'Add'"
       class="bg-real-white p-4"
       @save="saveItem"
       @cancel="cancelItem"
       @remove="removeItem"
     />
-    <div class="mt-4">
-      <TButton type="secondary" to="/events/-/edit">
-        <div class="flex justify-center items-center">
-          <TIcon name="calendar" class="w-4 h-4 mr-1" />
-          <span>Add event</span>
-        </div>
-      </TButton>
-      <TButton v-if="false" type="nav" @click="selectedType = 'profile'">
-        <div class="flex justify-center align-middle">
-          <TIcon name="store" class="w-4 h-4 mr-1" />
-          <span>Create page</span>
-        </div>
-      </TButton>
-      <TButton v-if="false" type="nav" @click="selectedType = 'dance'">
-        <div class="flex justify-center align-middle">
-          <TIcon name="search" class="w-4 h-4 mr-1" />
-          <span>Find dance partner</span>
-        </div>
-      </TButton>
-    </div>
   </div>
 </template>
 
 <script>
-import { computed } from '@nuxtjs/composition-api'
+import { computed } from '@vue/composition-api'
 import ls from 'local-storage'
+import { getDateObect, toDatetimeLocal } from '~/utils'
 import useAuth from '~/use/auth'
 import useDoc from '~/use/doc'
 import useTags from '~/use/tags'
 import useRouter from '~/use/router'
 
 export default {
-  name: 'PostEdit',
+  name: 'EventEdit',
   layout: 'empty',
   middleware: ['auth'],
   data: () => ({
-    selectedType: 'post'
+    selectedType: 'event'
   }),
   computed: {
     fields() {
@@ -64,11 +45,7 @@ export default {
   },
   mounted() {
     const city = ls('city')
-
-    this.item = this.item || {
-      tags: {},
-      community: city
-    }
+    this.item = this.item || { city }
 
     if (this.$route.query.tag) {
       this.item.tags[this.$route.query.tag] = true
@@ -77,13 +54,13 @@ export default {
   methods: {
     cancelItem() {
       if (this.id) {
-        this.$router.push(`/posts/${this.id}`)
+        this.$router.push(`/events/${this.id}`)
       } else {
-        this.$router.push(`/feed`)
+        this.$router.push(`/events`)
       }
     },
     async saveItem(data) {
-      if (!data.title || !data.description) {
+      if (!data.name) {
         return
       }
 
@@ -104,59 +81,58 @@ export default {
     const { can } = useAuth()
     const { params } = useRouter()
 
-    const collection = 'posts'
+    const collection = 'events'
 
     const { doc: item, id, load, update, remove, create } = useDoc(collection)
     const { tagsOptions, addTag } = useTags()
 
     const types = computed(() => [
       {
-        label: 'Post',
-        value: 'post',
+        label: 'Event',
+        value: 'event',
         fields: [
           {
-            name: 'title',
+            name: 'name',
             hideLabel: true,
-            placeholder: 'Title'
+            placeholder: 'Name'
           },
           {
             name: 'description',
             hideLabel: true,
             type: 'textarea',
-            placeholder: 'Body'
+            placeholder: 'Description'
           },
           {
-            name: 'community',
+            name: 'city',
             type: 'city'
+          },
+          {
+            name: 'startDate',
+            type: 'datetime-local',
+            set: (val) => {
+              if (!val) return ''
+              return new Date(val)
+            },
+            get: (val) => {
+              if (!val) return ''
+              return toDatetimeLocal(getDateObect(val))
+            }
+          },
+          {
+            name: 'endDate',
+            type: 'datetime-local',
+            set: (val) => {
+              if (!val) return ''
+              return new Date(val)
+            },
+            get: (val) => {
+              if (!val) return ''
+              return toDatetimeLocal(getDateObect(val))
+            }
           },
           {
             name: 'tags',
             placeholder: 'Tags',
-            type: 'tags',
-            options: tagsOptions.value,
-            listeners: {
-              add: addTag
-            }
-          }
-        ]
-      },
-      {
-        label: 'Link',
-        value: 'link',
-        fields: [
-          {
-            name: 'title',
-            hideLabel: true,
-            placeholder: 'Title'
-          },
-          {
-            name: 'link',
-            hideLabel: true,
-            placeholder: 'Link'
-          },
-          {
-            name: 'tags',
-            hideLabel: true,
             type: 'tags',
             options: tagsOptions.value,
             listeners: {
