@@ -38,11 +38,13 @@ export default () => {
   const isAdmin = () => !!state.uid && !!state.account && !!state.account.admin
 
   if (!state.initialized) {
-    firebase.auth().onAuthStateChanged(setUser)
+    getRedirectResult().then(() => {
+      firebase.auth().onAuthStateChanged(setUser)
 
-    if (firebase.auth().isSignInWithEmailLink(window.location.href)) {
-      signInWithEmailLink()
-    }
+      if (firebase.auth().isSignInWithEmailLink(window.location.href)) {
+        signInWithEmailLink()
+      }
+    })
 
     state.initialized = true
   }
@@ -65,6 +67,9 @@ export default () => {
       return ''
     }
     if (payload.includes('we-dance.app')) {
+      return ''
+    }
+    if (payload.includes('wedance.vip')) {
       return ''
     }
     if (payload.includes('wedance.netlify.app')) {
@@ -249,7 +254,8 @@ export default () => {
     if (!doc.exists) {
       const profile = {
         createdBy: state.uid,
-        createdAt: +new Date()
+        createdAt: +new Date(),
+        community: ls('city')
       }
 
       await firestore
@@ -260,6 +266,10 @@ export default () => {
       state.profile = profile
     } else {
       state.profile = doc.data()
+
+      if (!ls('city')) {
+        ls('city', state.profile.community)
+      }
     }
 
     state.loading = false
@@ -362,8 +372,19 @@ export default () => {
     firebase.auth().signInWithRedirect(provider)
   }
 
+  async function getRedirectResult() {
+    try {
+      const result = await firebase.auth().getRedirectResult()
+      setUser(result.user)
+    } catch (error) {
+      state.error = error
+      throw error
+    }
+  }
+
   return {
     ...toRefs(state),
+    getRedirectResult,
     updateProfile,
     updateAccount,
     setUser,

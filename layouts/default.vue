@@ -281,7 +281,7 @@ export default {
 
     const cachedCity = ls('city')
 
-    if (typeof cachedCity === 'object' && cachedCity.locality) {
+    if (typeof cachedCity === 'object' && cachedCity?.locality) {
       this.city = cachedCity.locality
       return
     }

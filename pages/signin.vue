@@ -9,25 +9,40 @@
     <div v-if="error">
       <div class="typo">
         <h2>Oops</h2>
-        <p class="text-brand-fail">{{ error }}</p>
+        <p class="text-red-500">
+          <span class="font-bold">Error:</span> {{ error.message }}
+        </p>
+        <p v-if="error.code === 'auth/web-storage-unsupported'">
+          Go to your browser Settings -> Site settings -> Cookies and switch the
+          setting on. To allow third-party cookies, check the box next to "Allow
+          third-party cookies."
+        </p>
       </div>
       <p>
         Please contact support:
-        <a href="mailto:support@wedance.vip">support@wedance.vip</a>.
+        <a
+          class="text-blue-500 underline hover:no-underline"
+          href="mailto:support@wedance.vip"
+          >support@wedance.vip</a
+        >.
       </p>
-      <TButton type="secondary" @click="reload">
+      <TButton class="mt-4" type="secondary" @click="reload">
         Try Again
       </TButton>
     </div>
     <TLoader v-else-if="loading || signingIn" />
     <div v-else-if="emailSent" class="typo">
       <h2>Check your email</h2>
-      <p class="text-xs">
+      <p>
         Email might come in 5-10 minutes and might land in spam.
       </p>
-      <p class="text-xs">
+      <p>
         Please report if you have any issues to
-        <a href="mailto:support@wedance.vip">support@wedance.vip</a>.
+        <a
+          class="text-blue-500 underline hover:no-underline"
+          href="mailto:support@wedance.vip"
+          >support@wedance.vip</a
+        >.
       </p>
     </div>
     <div v-else>
