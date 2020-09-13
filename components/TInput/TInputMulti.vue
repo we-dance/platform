@@ -22,6 +22,7 @@
 import { camelcase, getObjectKeysFromArray } from '~/utils'
 
 export default {
+  name: 'TInputMulti',
   inheritAttrs: false,
   props: {
     options: {

@@ -3,7 +3,7 @@
     <div v-if="editable" class="flex justify-end mb-4">
       <TButton @click="removeSelected">Delete</TButton>
     </div>
-    <div class="bg-white py-4 flex flex-row mb-4 items-center z-50 border-b">
+    <div class="bg-white py-4 flex flex-row mb-4 items-center border-b">
       <input
         v-model="selectedAll"
         type="checkbox"
@@ -31,7 +31,7 @@
         class="p-4 mb-4 border border-gray-500 rounded"
       >
         <div class="flex flex-col md:flex-row">
-          <div class="">
+          <div>
             <div
               class="border w-4 h-4 rounded-full border-gray-500 mr-2"
               :class="selected[item.id] ? 'bg-green-500 border-green-500' : ''"
@@ -42,12 +42,36 @@
             <TProfilePhoto size="lg" :uid="item.id" class="mr-2" />
           </div>
           <div class="flex-grow">
+            <div class="float-right -mr-2">
+              <TMenu>
+                <template v-slot:button>
+                  <TIcon
+                    class="cursor-pointer rounded-full hover:bg-gray-200 p-1"
+                    name="more_vert"
+                  />
+                </template>
+                <template v-slot:menu="{ closeMenu }">
+                  <div class="p-4 bg-white rounded-lg shadow-xl border">
+                    <TField
+                      v-model="item.lists"
+                      hide-label
+                      type="multi"
+                      :options="list"
+                      @input="(val) => applyList(item.id, val, closeMenu)"
+                    />
+                  </div>
+                </template>
+              </TMenu>
+            </div>
             <div
               v-if="item.profile.username"
               class="font-bold"
               :class="{ 'text-green-500': item.profile.partner === 'Yes' }"
             >
-              {{ item.profile.name }} @{{ item.profile.username }}
+              {{ item.profile.name }}
+              <router-link target="_blank" :to="`/u/${item.profile.username}`"
+                >@{{ item.profile.username }}</router-link
+              >
             </div>
             <div
               v-if="item.profile.jobs"
@@ -63,9 +87,12 @@
                 • {{ item.profile.location.locality }}</span
               >
             </div>
-            <div class="text-xs">
-              {{ item.profile.contacts }}
-            </div>
+          </div>
+        </div>
+
+        <div class="flex justify-end">
+          <div v-if="item.lists" class="text-xs">
+            {{ Object.keys(item.lists).join(', ') }}
           </div>
         </div>
       </div>
@@ -82,6 +109,7 @@ import { sortBy, getTime, getDate } from '~/utils'
 import useProfiles from '~/use/profiles'
 
 export default {
+  name: 'TGridAccounts',
   props: {
     value: {
       type: [Object, String],
@@ -103,12 +131,36 @@ export default {
   setup() {
     const { docs } = useCollection('accounts')
     const { remove: removeProfile } = useDoc('profiles')
-    const { remove: removeAccount } = useDoc('accounts')
+    const { remove: removeAccount, update: updateAccount } = useDoc('accounts')
     const { getProfile } = useProfiles()
     const nameFilter = ref('')
     const activeFilter = ref('')
     const selectedAll = ref(false)
     const selected = ref({})
+    const list = ref([
+      {
+        value: 'PartnerForm',
+        label: 'PartnerForm'
+      },
+      {
+        value: 'PartnerChat',
+        label: 'PartnerChat'
+      },
+      {
+        value: 'MontunoClub',
+        label: 'MontunoClub'
+      },
+      {
+        value: 'NoProfile',
+        label: 'NoProfile'
+      }
+    ])
+    const applyList = (id, lists, closeMenu) => {
+      updateAccount(id, {
+        lists
+      })
+      closeMenu()
+    }
 
     const filterOptions = [
       {
@@ -189,7 +241,9 @@ export default {
       selected,
       getDate,
       removeProfile,
-      removeAccount
+      removeAccount,
+      list,
+      applyList
     }
   },
   computed: {

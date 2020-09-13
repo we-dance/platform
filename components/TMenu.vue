@@ -3,7 +3,12 @@
     <div ref="btn" @click="onClick">
       <slot name="button" />
     </div>
-    <div v-if="show" class="absolute text-left z-30" :class="classes">
+    <div
+      v-if="show"
+      class="fixed w-full h-full top-0 left-0 bg-black opacity-0 z-40"
+      @click="closeMenu"
+    ></div>
+    <div v-if="show" class="absolute text-left z-50" :class="classes">
       <slot name="menu" :closeMenu="closeMenu" />
     </div>
   </div>
@@ -47,6 +52,7 @@ export default {
   methods: {
     closeMenu() {
       this.show = false
+      this.$emit('close')
     },
     onClick() {
       if (!this.hover) {
