@@ -81,10 +81,14 @@
             </div>
             <div>{{ item.name }} &lt;{{ item.email }}&gt;</div>
             <div class="text-xs text-orange-500">
-              {{ item.profile.community
-              }}<span v-if="item.profile.city"> • {{ item.profile.city }}</span>
+              <span>{{ item.daysUsed }}</span>
+              <span v-if="item.profile.community"
+                >• Com: {{ item.profile.community }}</span
+              ><span v-if="item.profile.city">
+                • City: {{ item.profile.city }}</span
+              >
               <span v-if="item.profile.location">
-                • {{ item.profile.location.locality }}</span
+                • Loc: {{ item.profile.location.locality }}</span
               >
             </div>
           </div>
