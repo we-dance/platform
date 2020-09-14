@@ -48,6 +48,7 @@
 import { ref, computed } from '@vue/composition-api'
 import useAuth from '~/use/auth'
 import useCollection from '~/use/collection'
+import { sortBy } from '~/utils'
 
 export default {
   name: 'PeopleIndex',
@@ -98,18 +99,23 @@ export default {
 
     const items = computed(() => {
       if (tab.value === 'partner') {
-        return docs.value.filter(
-          (item) =>
-            item.username &&
-            item.partner === 'Yes' &&
-            (uid.value || item.visibility === 'Public')
-        )
+        return docs.value
+          .filter(
+            (item) =>
+              item.username &&
+              item.partner === 'Yes' &&
+              (uid.value || item.visibility === 'Public')
+          )
+          .sort(sortBy('-createdAt'))
       }
 
       if (tab.value === 'community') {
-        return docs.value.filter(
-          (item) => item.username && (uid.value || item.visibility === 'Public')
-        )
+        return docs.value
+          .filter(
+            (item) =>
+              item.username && (uid.value || item.visibility === 'Public')
+          )
+          .sort(sortBy('-createdAt'))
       }
     })
 
