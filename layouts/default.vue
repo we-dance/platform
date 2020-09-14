@@ -114,8 +114,19 @@
                 <TButton type="nav" to="/settings">
                   Settings
                 </TButton>
-                <TButton type="nav" to="/?tour=intro">
+                <TButton
+                  type="nav"
+                  href="http://bit.ly/we-dance-concept"
+                  target="_blank"
+                >
                   About
+                </TButton>
+                <TButton
+                  type="nav"
+                  href="mailto:support@wedance.vip"
+                  target="_blank"
+                >
+                  Support
                 </TButton>
                 <TButton type="nav" to="/signout">
                   Logout
