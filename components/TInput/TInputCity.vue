@@ -40,6 +40,13 @@
       <div class="flex">
         <TInput v-model="input" :placeholder="searchPlaceholder" />
       </div>
+
+      <div
+        class="p-2 hover:bg-indigo-500 text-black hover:text-white cursor-pointer flex items-center"
+        @click="change('')"
+      >
+        <span>Global</span>
+      </div>
       <div v-if="predictions.length">
         <div
           v-for="prediction in predictions"

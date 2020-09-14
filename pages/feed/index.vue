@@ -251,7 +251,10 @@ export default {
   }),
   computed: {
     filteredItems() {
+      const city = ls('city')
+
       return this.items
+        .filter((item) => !item.community || item.community === city)
         .filter((item) =>
           this.$route.query.tag
             ? item.tags && item.tags[this.$route.query.tag]

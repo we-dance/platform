@@ -44,6 +44,7 @@
 
 <script>
 import { computed } from '@vue/composition-api'
+import ls from 'local-storage'
 import useAuth from '~/use/auth'
 import useDoc from '~/use/doc'
 import useTags from '~/use/tags'
@@ -62,8 +63,14 @@ export default {
     }
   },
   mounted() {
+    const city = ls('city')
+
+    this.item = this.item || {
+      tags: {},
+      community: city
+    }
+
     if (this.$route.query.tag) {
-      this.item = this.item || { tags: {} }
       this.item.tags[this.$route.query.tag] = true
     }
   },
@@ -119,8 +126,11 @@ export default {
             placeholder: 'Description'
           },
           {
+            name: 'community',
+            type: 'city'
+          },
+          {
             name: 'tags',
-            hideLabel: true,
             placeholder: 'Tags',
             type: 'tags',
             options: tagsOptions.value,
