@@ -46,6 +46,7 @@
 
 <script>
 import { ref, computed } from '@vue/composition-api'
+import ls from 'local-storage'
 import useAuth from '~/use/auth'
 import useCollection from '~/use/collection'
 import { sortBy } from '~/utils'
@@ -55,11 +56,17 @@ export default {
   setup() {
     const { uid } = useAuth()
 
-    const city = 'Munich'
+    const { docs: docsProfiles } = useCollection('profiles')
 
-    const { docs } = useCollection('profiles')
+    const city = ls('city')
 
     const tab = ref('partner')
+
+    const docs = computed(() => {
+      return docsProfiles.value
+        .filter((item) => item.community === city)
+        .sort(sortBy('-createdAt'))
+    })
 
     const itemsAll = computed(() => {
       return docs.value.filter((item) => item.username)
@@ -99,23 +106,18 @@ export default {
 
     const items = computed(() => {
       if (tab.value === 'partner') {
-        return docs.value
-          .filter(
-            (item) =>
-              item.username &&
-              item.partner === 'Yes' &&
-              (uid.value || item.visibility === 'Public')
-          )
-          .sort(sortBy('-createdAt'))
+        return docs.value.filter(
+          (item) =>
+            item.username &&
+            item.partner === 'Yes' &&
+            (uid.value || item.visibility === 'Public')
+        )
       }
 
       if (tab.value === 'community') {
-        return docs.value
-          .filter(
-            (item) =>
-              item.username && (uid.value || item.visibility === 'Public')
-          )
-          .sort(sortBy('-createdAt'))
+        return docs.value.filter(
+          (item) => item.username && (uid.value || item.visibility === 'Public')
+        )
       }
     })
 
