@@ -1,78 +1,65 @@
 <template>
-  <div>
-    <div class="flex justify-center mb-8">
-      <router-link to="/" class="flex items-center">
-        <TIcon class="w-6 h-6 mt-2 mr-2" name="icon" />
-        <TIcon class="h-4 w-32" name="logo-text" />
-      </router-link>
-    </div>
-    <div v-if="error">
-      <div class="typo">
-        <h2>Oops</h2>
-        <p class="text-red-500">
-          <span class="font-bold">Error:</span> {{ error.message }}
-        </p>
-        <p v-if="error.code === 'auth/web-storage-unsupported'">
-          Go to your browser Settings -> Site settings -> Cookies and switch the
-          setting on. To allow third-party cookies, check the box next to "Allow
-          third-party cookies."
-        </p>
-      </div>
-      <p>
-        Please contact support:
-        <a
-          class="text-blue-500 underline hover:no-underline"
-          href="mailto:support@wedance.vip"
-          >support@wedance.vip</a
-        >.
+  <div v-if="error">
+    <div class="typo">
+      <h2>Oops</h2>
+      <p class="text-red-500">
+        <span class="font-bold">Error:</span> {{ error.message }}
       </p>
-      <TButton class="mt-4" type="secondary" @click="reload">
-        Try Again
+      <p v-if="error.code === 'auth/web-storage-unsupported'">
+        Go to your browser Settings -> Site settings -> Cookies and switch the
+        setting on. To allow third-party cookies, check the box next to "Allow
+        third-party cookies."
+      </p>
+    </div>
+    <p>
+      Please contact support:
+      <a
+        class="text-blue-500 underline hover:no-underline"
+        href="mailto:support@wedance.vip"
+        >support@wedance.vip</a
+      >.
+    </p>
+    <TButton class="mt-4" type="secondary" @click="reload">
+      Try Again
+    </TButton>
+  </div>
+  <TLoader v-else-if="loading || signingIn" />
+  <div v-else-if="emailSent" class="typo">
+    <h2>Check your email</h2>
+    <p>
+      Email might come in 5-10 minutes and might land in spam.
+    </p>
+    <p>
+      Please report if you have any issues to
+      <a
+        class="text-blue-500 underline hover:no-underline"
+        href="mailto:support@wedance.vip"
+        >support@wedance.vip</a
+      >.
+    </p>
+  </div>
+  <div v-else>
+    <h2 class="font-bold mb-2">Sign in with</h2>
+    <div class="flex justify-center">
+      <TButton
+        class="flex items-center justify-center"
+        @click="signInWithGoogle"
+      >
+        <TIcon name="google" />
+        Google
       </TButton>
     </div>
-    <TLoader v-else-if="loading || signingIn" />
-    <div v-else-if="emailSent" class="typo">
-      <h2>Check your email</h2>
-      <p>
-        Email might come in 5-10 minutes and might land in spam.
-      </p>
-      <p>
-        Please report if you have any issues to
-        <a
-          class="text-blue-500 underline hover:no-underline"
-          href="mailto:support@wedance.vip"
-          >support@wedance.vip</a
-        >.
-      </p>
-    </div>
-    <div v-else>
-      <h2 class="font-bold mb-2">Sign in with</h2>
-      <div class="flex justify-center">
-        <TButton
-          class="flex items-center justify-center"
-          @click="signInWithGoogle"
-        >
-          <TIcon name="google" />
-          Google
-        </TButton>
-      </div>
-      <div class="divider">or</div>
-      <form class="md:flex items-end" @submit="submit">
-        <TField
-          v-model="email"
-          type="email"
-          label="Email"
-          label-position="top"
-        />
-        <TButton
-          type="primary"
-          class="mt-2 w-full md:mt-0 md:w-32 md:ml-4"
-          @click="submit"
-        >
-          {{ $t('auth.signin') }}
-        </TButton>
-      </form>
-    </div>
+    <div class="divider">or</div>
+    <form class="md:flex items-end" @submit="submit">
+      <TField v-model="email" type="email" label="Email" label-position="top" />
+      <TButton
+        type="primary"
+        class="mt-2 w-full md:mt-0 md:w-32 md:ml-4"
+        @click="submit"
+      >
+        {{ $t('auth.signin') }}
+      </TButton>
+    </form>
   </div>
 </template>
 

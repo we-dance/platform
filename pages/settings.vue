@@ -6,60 +6,20 @@
       <TLoader v-if="loading || !profile || !account" />
       <div v-else>
         <div v-if="currentTab === 'welcome'">
-          <div class="font-bold text-xl mb-4 pb-4 border-b">Let's start!</div>
-          <div class="my-4">
-            Complete all 3 steps to get access to all the features of the
-            platform.
-          </div>
+          <div class="font-bold text-xl mb-4 pb-4 border-b">Settings</div>
 
           <div>
             <div class="block mb-2">
-              <TButton to="/settings?tab=profile">
-                <span
-                  v-if="!profile.username"
-                  class="rounded-full w-6 h-6 bg-blue-500 text-white mr-1 inline-block"
-                >
-                  1
-                </span>
-                <TIcon
-                  v-else
-                  name="check_circle"
-                  class="w-6 h-6 rounded-full bg-white text-green-500 mr-1 inline-block -mb-1"
-                />
-                Create your profile</TButton
-              >
+              <TButton to="/settings?tab=profile">Profile</TButton>
             </div>
             <div class="block mb-2">
-              <TButton to="/settings?tab=preferences">
-                <span
-                  v-if="!profile.days"
-                  class="rounded-full w-6 h-6 bg-blue-500 text-white mr-1 inline-block"
-                >
-                  2
-                </span>
-                <TIcon
-                  v-else
-                  name="check_circle"
-                  class="w-6 h-6 rounded-full bg-white text-green-500 mr-1 inline-block -mb-1"
-                />
-                Add your interests</TButton
-              >
+              <TButton to="/settings?tab=contacts">Contacts</TButton>
             </div>
             <div class="block mb-2">
-              <TButton @click="intro">
-                <span
-                  v-if="!profile.intro"
-                  class="rounded-full w-6 h-6 bg-blue-500 text-white mr-1 inline-block"
-                >
-                  3
-                </span>
-                <TIcon
-                  v-else
-                  name="check_circle"
-                  class="w-6 h-6 rounded-full bg-white text-green-500 mr-1 inline-block -mb-1"
-                />
-                Introduce yourself</TButton
-              >
+              <TButton to="/settings?tab=preferences">Preferences</TButton>
+            </div>
+            <div class="block mb-2">
+              <TButton to="/settings?tab=account">Account</TButton>
             </div>
           </div>
         </div>
@@ -183,7 +143,7 @@ export default {
     tabs: [
       {
         value: 'welcome',
-        label: 'Welcome'
+        label: 'Settings'
       },
       {
         value: 'profile',
