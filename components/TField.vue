@@ -42,6 +42,7 @@ import TInputLocationSelect from '~/components/TInput/TInputLocationSelect'
 import TAccountListSelector from '~/components/TAccountListSelector'
 import TAccountSelector from '~/components/TAccountSelector'
 import TInputCity from '~/components/TInput/TInputCity'
+import TInputStyles from '~/components/TInput/TInputStyles'
 
 export default {
   inheritAttrs: false,
@@ -147,7 +148,8 @@ export default {
         city: TInputCity,
         multi: TInputMulti,
         accounts: TAccountListSelector,
-        account: TAccountSelector
+        account: TAccountSelector,
+        styles: TInputStyles
       }
 
       return map[this.type] || TInput

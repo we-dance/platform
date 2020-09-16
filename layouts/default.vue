@@ -103,6 +103,9 @@
                   <TButton to="/admin/emails" type="nav-admin">
                     Emails
                   </TButton>
+                  <TButton to="/admin/styles" type="nav-admin">
+                    Styles
+                  </TButton>
                 </div>
                 <TButton
                   v-if="getProfile(uid).username"

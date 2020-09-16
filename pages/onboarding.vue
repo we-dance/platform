@@ -37,6 +37,7 @@
         label="Tell us what you're interested in"
         label-position="vertical"
         placeholder="Salsa, Bachata, Kizomba, etc."
+        type="styles"
       />
     </div>
 
