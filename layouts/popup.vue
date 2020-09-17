@@ -11,7 +11,7 @@
         <TButton to="/signout">Log out</TButton>
       </div>
     </div>
-    <main class="bg-white rounded p-4 max-w-sm my-4">
+    <main class="bg-white rounded p-4 max-w-sm mt-20">
       <nuxt />
     </main>
   </div>
