@@ -50,7 +50,7 @@
       />
     </div>
 
-    <div class="flex justify-end mt-4">
+    <div v-if="step !== 'finish'" class="flex justify-end mt-4">
       <TButton type="primary" @click="next">Next</TButton>
     </div>
   </form>
@@ -61,6 +61,7 @@ import ls from 'local-storage'
 import useAuth from '~/use/auth'
 
 export default {
+  name: 'Onboarding',
   layout: 'popup',
 
   setup() {

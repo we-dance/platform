@@ -37,9 +37,9 @@
         <h2 class="font-bold">About me:</h2>
         <div>{{ profile.bio }}</div>
       </div>
-      <div v-if="profile.skills" class="mt-4">
-        <h2 class="font-bold">Dance skills:</h2>
-        <div>{{ profile.skills }}</div>
+      <div v-if="profile.styles" class="mt-4">
+        <h2 class="font-bold">Dance styles:</h2>
+        <TStyles :value.sync="profile.styles" />
       </div>
       <dl v-if="profile.languages" class="mt-4">
         <dt class="font-bold mr-1">My languages:</dt>

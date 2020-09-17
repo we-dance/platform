@@ -3,7 +3,7 @@
     <div v-for="category in categories" :key="category" class="mb-4">
       <h4 class="font-bold text-lg">{{ category }}</h4>
       <div class="text-center">
-        <template v-for="style in styles(category)">
+        <template v-for="style in subStyles(category)">
           <div
             :key="style.id"
             :class="{ 'bg-primary text-white': contains(style.id) }"
@@ -31,15 +31,15 @@
 </template>
 
 <script>
-import _ from 'lodash'
-import useCollection from '~/use/collection'
+import useStyles from '~/use/styles'
 
 export default {
   setup() {
-    const { docs: data } = useCollection('styles')
+    const { styles, categories } = useStyles()
 
     return {
-      data
+      styles,
+      categories
     }
   },
   props: {
@@ -51,30 +51,19 @@ export default {
   data: () => ({
     showPopup: false
   }),
-  computed: {
-    categories() {
-      return _.chain(this.data)
-        .map((item) => item.danceStyleRegion)
-        .uniq()
-        .value()
-    }
-  },
   methods: {
-    styles(category) {
-      return _.values(this.data).filter(
+    subStyles(category) {
+      return this.styles.filter(
         (item) =>
-          item &&
-          item.danceStyleRegion &&
-          item.danceStyleRegion === category &&
-          item.root === 'yes'
+          item && item.region && item.region === category && item.root === 'yes'
       )
     },
     children(parentName) {
-      return _.values(this.data).filter(
+      return this.styles.filter(
         (item) =>
           item &&
-          item.danceStyleFamily &&
-          item.danceStyleFamily === parentName &&
+          item.family &&
+          item.family === parentName &&
           parentName !== item.name
       )
     },
@@ -86,7 +75,16 @@ export default {
     },
     trigger(val) {
       const newValue = { ...this.value }
-      newValue[val] = !newValue[val]
+
+      if (newValue[val]?.selected) {
+        delete newValue[val]
+      } else {
+        newValue[val] = {
+          selected: true,
+          level: 'Interested'
+        }
+      }
+
       this.$emit('input', newValue)
     }
   }

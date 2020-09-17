@@ -1,110 +1,112 @@
 <template>
-  <div>
-    <TInputSelect v-model="currentTab" :options="tabs" />
-
-    <main class="mt-8">
-      <TLoader v-if="loading || !profile || !account" />
-      <div v-else>
-        <div v-if="currentTab === 'welcome'">
-          <div class="font-bold text-xl mb-4 pb-4 border-b">Settings</div>
-
-          <div>
-            <div class="block mb-2">
-              <TButton to="/settings?tab=profile">Profile</TButton>
-            </div>
-            <div class="block mb-2">
-              <TButton to="/settings?tab=contacts">Contacts</TButton>
-            </div>
-            <div class="block mb-2">
-              <TButton to="/settings?tab=preferences">Preferences</TButton>
-            </div>
-            <div class="block mb-2">
-              <TButton to="/settings?tab=account">Account</TButton>
-            </div>
-          </div>
-        </div>
-        <div
-          v-if="currentTab === 'preferences'"
-          class="rounded bg-white mb-4 shadow border p-4 bg-white"
-        >
-          <div class="font-bold text-xl">Preferences</div>
-          <div class="text-sm text-gray-700 mb-4 pb-2 border-b">
-            Let us help you find and highlight the most relevant things for you.
-          </div>
-
-          <TForm
-            v-model="profile"
-            :fields="preferencesFields"
-            submit-label="Save"
-            @save="saveProfile"
-          />
-        </div>
-        <div
-          v-if="currentTab === 'account'"
-          class="rounded bg-white mb-4 shadow border p-4 bg-white"
-        >
-          <div class="font-bold text-xl">Account</div>
-          <div class="text-sm text-gray-700 mb-4 pb-2 border-b">
-            This information will be used for notifications and purchases. It
-            will be shared with service providers or sellers only with your
-            agreement.
-          </div>
-
-          <TForm
-            v-model="account"
-            :fields="accountFields"
-            submit-label="Save"
-            @save="saveAccount"
-          />
-        </div>
-        <div
-          v-if="currentTab === 'profile'"
-          class="rounded bg-white mb-4 shadow border p-4 bg-white"
-        >
-          <div class="font-bold text-xl">Profile</div>
-          <div class="text-sm text-gray-700 mb-4 pb-2 border-b">
-            <div>
-              What do you want other dancers to know about you? That's a place
-              to share your passion to dance. Present yourself, don't be shy!
-            </div>
-            <div v-if="profileUrl">
-              Your profile is available at
-              <a :href="profileUrl">{{ profileUrl }}</a>
-            </div>
-          </div>
-
-          <TForm
-            v-model="profile"
-            :fields="profileFields"
-            submit-label="Save"
-            @save="saveProfile"
-          />
-        </div>
-        <div
-          v-if="currentTab === 'contacts'"
-          class="rounded bg-white mb-4 shadow border p-4 bg-white"
-        >
-          <div class="font-bold text-xl">Contacts</div>
-          <div class="text-sm text-gray-700 mb-4 pb-2 border-b">
-            This information will be publicly available. Share your contacts
-            only if you want to be contacted by members. It's also nice place to
-            share your social media to get some attention.
-          </div>
-
-          <TForm
-            v-model="profile"
-            :fields="contactFields"
-            submit-label="Save"
-            @save="saveProfile"
-          />
-        </div>
+  <main class="mt-8">
+    <TLoader v-if="loading || !profile || !account" />
+    <div v-else>
+      <div>
+        <div class="font-bold text-xl mb-4 pb-4 border-b">Settings</div>
       </div>
-    </main>
-  </div>
+      <div class="rounded bg-white mb-4 shadow border p-4 bg-white">
+        <div class="flex items-center">
+          <div>
+            <router-link
+              v-if="currentTab !== 'account'"
+              to="/settings?tab=account"
+            >
+              <TIcon class="h-8 w-8" name="arrow_right" />
+            </router-link>
+            <router-link v-else to="/settings">
+              <TIcon class="h-8 w-8" name="arrow_drop_down" />
+            </router-link>
+          </div>
+          <div class="ml-2">
+            <div class="font-bold text-xl">Account</div>
+            <div class="text-sm text-gray-700">
+              This information will be used for notifications and purchases. It
+              will be shared with service providers or sellers only with your
+              agreement.
+            </div>
+          </div>
+        </div>
+
+        <TForm
+          v-if="currentTab === 'account'"
+          v-model="account"
+          :fields="accountFields"
+          submit-label="Save"
+          class="border-t mt-4 pt-4"
+          @save="saveAccount"
+        />
+      </div>
+      <div class="rounded bg-white mb-4 shadow border p-4 bg-white">
+        <div class="flex items-center">
+          <div>
+            <router-link
+              v-if="currentTab !== 'profile'"
+              to="/settings?tab=profile"
+            >
+              <TIcon class="h-8 w-8" name="arrow_right" />
+            </router-link>
+            <router-link v-else to="/settings">
+              <TIcon class="h-8 w-8" name="arrow_drop_down" />
+            </router-link>
+          </div>
+          <div class="ml-2">
+            <div class="font-bold text-xl">Profile</div>
+            <div class="text-sm text-gray-700">
+              <div>
+                What do you want other dancers to know about you? That's a place
+                to share your passion to dance. Present yourself, don't be shy!
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <TForm
+          v-if="currentTab === 'profile'"
+          v-model="profile"
+          :fields="profileFields"
+          submit-label="Save"
+          class="border-t mt-4 pt-4"
+          @save="saveProfile"
+        />
+      </div>
+      <div class="rounded bg-white mb-4 shadow border p-4 bg-white">
+        <div class="flex items-center">
+          <div>
+            <router-link
+              v-if="currentTab !== 'contacts'"
+              to="/settings?tab=contacts"
+            >
+              <TIcon class="h-8 w-8" name="arrow_right" />
+            </router-link>
+            <router-link v-else to="/settings">
+              <TIcon class="h-8 w-8" name="arrow_drop_down" />
+            </router-link>
+          </div>
+          <div class="ml-2">
+            <div class="font-bold text-xl">Contacts</div>
+            <div class="text-sm text-gray-700">
+              This information will be publicly available. Share your contacts
+              only if you want to be contacted by members. It's also nice place
+              to share your social media to get some attention.
+            </div>
+          </div>
+        </div>
+
+        <TForm
+          v-if="currentTab === 'contacts'"
+          v-model="profile"
+          :fields="contactFields"
+          submit-label="Save"
+          class="border-t mt-4 pt-4"
+          @save="saveProfile"
+        />
+      </div>
+    </div>
+  </main>
 </template>
 
 <script>
-import ls from 'local-storage'
 import useAuth from '~/use/auth'
 import useProfiles from '~/use/profiles'
 
@@ -123,7 +125,7 @@ export default {
       loading
     } = useAuth()
 
-    const { preferencesFields, profileFields, contactFields } = useProfiles()
+    const { profileFields, contactFields } = useProfiles()
 
     return {
       loading,
@@ -134,35 +136,11 @@ export default {
       updateAccount,
       updateProfile,
       isAccountConfirmed,
-      preferencesFields,
       profileFields,
       contactFields
     }
   },
   data: () => ({
-    tabs: [
-      {
-        value: 'welcome',
-        label: 'Settings'
-      },
-      {
-        value: 'profile',
-        label: 'Profile'
-      },
-      {
-        value: 'contacts',
-        label: 'Contacts'
-      },
-      {
-        value: 'preferences',
-        label: 'Preferences'
-      },
-      {
-        value: 'account',
-        label: 'Account'
-      }
-    ],
-
     accountFields: [
       {
         name: 'name',
@@ -206,55 +184,14 @@ export default {
       }
     }
   },
-  watch: {
-    account: 'load'
-  },
-  mounted() {
-    this.load()
-  },
   methods: {
-    async intro() {
-      await this.saveProfile({
-        intro: true
-      })
-
-      this.$router.push('/posts/74zve0dQqtdwaSXq7RDf')
-    },
-    load() {
-      this.profileFields.find(
-        (f) => f.name === 'name'
-      ).default = this.account?.name
-    },
     async saveProfile(data) {
       await this.updateProfile(data)
-
-      if (
-        this.profile.username &&
-        this.profile.days &&
-        !this.account.confirmed
-      ) {
-        await this.finish()
-      } else {
-        this.$router.push('/settings')
-      }
+      this.$router.push('/settings')
     },
     async saveAccount(data) {
       await this.updateAccount(data)
       this.$router.push('/settings')
-    },
-    async finish() {
-      await this.updateAccount({
-        confirmed: true
-      })
-
-      const target = ls('target')
-      ls.remove('target')
-
-      if (!target) {
-        return
-      }
-
-      this.$router.push(target)
     }
   }
 }

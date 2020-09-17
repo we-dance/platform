@@ -30,7 +30,7 @@
 </template>
 
 <script>
-import { getId } from '~/utils'
+import { camelize } from '~/utils'
 import TInput from '~/components/TInput/TInput'
 import TInputMarkdown from '~/components/TInput/TInputMarkdown'
 import TInputSelect from '~/components/TInput/TInputSelect'
@@ -43,6 +43,7 @@ import TAccountListSelector from '~/components/TAccountListSelector'
 import TAccountSelector from '~/components/TAccountSelector'
 import TInputCity from '~/components/TInput/TInputCity'
 import TInputStyles from '~/components/TInput/TInputStyles'
+import TInputStylesSelect from '~/components/TInput/TInputStylesSelect'
 
 export default {
   inheritAttrs: false,
@@ -130,7 +131,7 @@ export default {
     }
   },
   mounted() {
-    this.elementId = getId(this.label)
+    this.elementId = camelize(this.label)
 
     if (!this.value && this.default) {
       this.$emit('input', this.default)
@@ -149,7 +150,8 @@ export default {
         multi: TInputMulti,
         accounts: TAccountListSelector,
         account: TAccountSelector,
-        styles: TInputStyles
+        styles: TInputStyles,
+        stylesSelect: TInputStylesSelect
       }
 
       return map[this.type] || TInput

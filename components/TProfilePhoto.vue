@@ -1,14 +1,10 @@
 <template>
-  <img
-    v-if="profile.photo"
-    :class="`rounded-full w-${dim} h-${dim}`"
-    :src="profile.photo"
-  />
   <TIcon
-    v-else
+    v-if="loading || !photo"
     name="undraw_profile_pic"
     :class="`rounded-full w-${dim} h-${dim}`"
   />
+  <img v-else :class="`rounded-full w-${dim} h-${dim}`" :src="photo" />
 </template>
 
 <script>
@@ -27,6 +23,9 @@ export default {
     }
   },
   computed: {
+    photo() {
+      return this.profile?.photo
+    },
     dim() {
       const sizes = {
         xs: 4,
@@ -40,12 +39,13 @@ export default {
     }
   },
   setup(props) {
-    const { getProfile } = useProfiles()
+    const { getProfile, loading } = useProfiles()
 
     const profile = getProfile(props.uid)
 
     return {
-      profile
+      profile,
+      loading
     }
   }
 }

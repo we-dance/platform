@@ -28,9 +28,9 @@
         <dd></dd>
         <dd>{{ profile.bio }}</dd>
       </dl>
-      <dl v-if="profile.skills" class="mt-1">
-        <dt class="font-bold mr-1">Dance skills:</dt>
-        <dd>{{ profile.skills }}</dd>
+      <dl v-if="profile.styles" class="mt-1">
+        <dt class="font-bold mr-1">Dance styles:</dt>
+        <dd><TStyles :value="profile.styles" /></dd>
       </dl>
       <dl v-if="profile.languages" class="mt-2">
         <dt class="font-bold mr-1">My languages:</dt>
