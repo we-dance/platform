@@ -41,6 +41,10 @@
         <h2 class="font-bold">Dance styles:</h2>
         <TStyles :value.sync="profile.styles" />
       </div>
+      <div v-else-if="profile.skills" class="mt-4">
+        <h2 class="font-bold">Dance styles:</h2>
+        <div>{{ profile.skills }}</div>
+      </div>
       <dl v-if="profile.languages" class="mt-4">
         <dt class="font-bold mr-1">My languages:</dt>
         <dd>{{ profile.languages }}</dd>

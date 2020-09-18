@@ -66,8 +66,13 @@ export default () => {
     },
     {
       name: 'styles',
-      label: 'Your dance styles',
+      label: 'Your dance styles and level',
       type: 'stylesSelect'
+    },
+    {
+      name: 'skills',
+      label: 'You dance skills (old)',
+      type: 'textarea'
     },
     {
       name: 'story',

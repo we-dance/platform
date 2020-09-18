@@ -30,7 +30,11 @@
       </dl>
       <dl v-if="profile.styles" class="mt-1">
         <dt class="font-bold mr-1">Dance styles:</dt>
-        <dd><TStyles :value="profile.styles" /></dd>
+        <dd v-if="profile.styles"><TStyles :value="profile.styles" /></dd>
+      </dl>
+      <dl v-else-if="profile.skills" class="mt-1">
+        <dt class="font-bold mr-1">Dance styles:</dt>
+        <dd>{{ profile.skills }}</dd>
       </dl>
       <dl v-if="profile.languages" class="mt-2">
         <dt class="font-bold mr-1">My languages:</dt>
