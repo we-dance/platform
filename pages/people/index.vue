@@ -2,8 +2,73 @@
   <div>
     <TTitle>Community</TTitle>
 
+    <div v-if="uid" class="border rounded p-4 mb-4">
+      <TField
+        v-model="lookingForPartner"
+        label="Are you looking for dance partner?"
+        type="buttons"
+        label-position="vertical"
+        :options="['Yes', 'No']"
+      />
+
+      <div
+        v-if="
+          lookingForPartner === 'Yes' &&
+            (!myProfile.bio ||
+              !myProfile.photo ||
+              !myProfile.languages ||
+              !myProfile.partnerBio)
+        "
+        class="mt-4 p-4 rounded border"
+      >
+        <p class="font-bold">
+          You have better chances to find dance partner by improving your own
+          profile:
+        </p>
+        <ul class="list-disc ml-4">
+          <li
+            class="text-red-500"
+            :class="{ 'text-green-500': myProfile.photo }"
+          >
+            Photo
+          </li>
+          <li class="text-red-500" :class="{ 'text-green-500': myProfile.bio }">
+            About me
+          </li>
+
+          <li
+            class="text-red-500"
+            :class="{ 'text-green-500': myProfile.languages }"
+          >
+            Languages
+          </li>
+          <li
+            class="text-red-500"
+            :class="{ 'text-green-500': myProfile.partnerBio }"
+          >
+            About my partner
+          </li>
+          <li
+            class="text-red-500"
+            :class="{ 'text-green-500': myProfile.weight }"
+          >
+            Weight
+          </li>
+          <li
+            class="text-red-500"
+            :class="{ 'text-green-500': myProfile.height }"
+          >
+            Height
+          </li>
+        </ul>
+        <TButton class="mt-4" to="/settings?tab=profile"
+          >Edit my profile</TButton
+        >
+      </div>
+    </div>
+
     <div>
-      <TInputSelect v-model="tab" class="mb-4" :options="tabs" />
+      <TInputButtons v-model="tab" class="mb-4" :options="tabs" />
 
       <div
         v-if="!uid"
@@ -54,13 +119,15 @@ import { sortBy } from '~/utils'
 export default {
   name: 'PeopleIndex',
   setup() {
-    const { uid } = useAuth()
+    const { uid, updateProfile, profile: myProfile } = useAuth()
 
     const { docs: docsProfiles } = useCollection('profiles')
 
     const city = ls('city')
 
     const tab = ref('partner')
+
+    const lookingForPartner = ref('')
 
     const docs = computed(() => {
       return docsProfiles.value
@@ -70,6 +137,12 @@ export default {
 
     const itemsAll = computed(() => {
       return docs.value.filter((item) => item.username)
+    })
+
+    const teachersAll = computed(() => {
+      return docs.value.filter(
+        (item) => item.username && item.teacher === 'Yes'
+      )
     })
 
     const itemsAllPublic = computed(() => {
@@ -99,6 +172,10 @@ export default {
         label: `Looking for dance partner (${itemsPartner.value.length})`
       },
       {
+        value: 'teachers',
+        label: `Teachers (${teachersAll.value.length})`
+      },
+      {
         value: 'community',
         label: `All members (${itemsAll.value.length})`
       }
@@ -119,6 +196,12 @@ export default {
           (item) => item.username && (uid.value || item.visibility === 'Public')
         )
       }
+
+      if (tab.value === 'teachers') {
+        return docs.value.filter(
+          (item) => item.username && item.teacher === 'Yes'
+        )
+      }
     })
 
     return {
@@ -130,7 +213,15 @@ export default {
       itemsAll,
       itemsAllPublic,
       itemsPartner,
-      itemsPartnerPublic
+      itemsPartnerPublic,
+      lookingForPartner,
+      updateProfile,
+      myProfile
+    }
+  },
+  watch: {
+    lookingForPartner(partner) {
+      this.updateProfile({ partner })
     }
   }
 }

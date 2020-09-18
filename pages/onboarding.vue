@@ -1,5 +1,6 @@
 <template>
-  <form class="max-w-md" @submit.prevent="next">
+  <TLoader v-if="loading" />
+  <form v-else class="max-w-md" @submit.prevent="next">
     <div v-if="step == 'name'">
       <TField
         ref="name"
@@ -26,7 +27,7 @@
         v-model="profile.gender"
         label="How do you identify?"
         label-position="vertical"
-        type="select"
+        type="buttons"
         :options="genderOptions"
       />
     </div>
@@ -50,7 +51,7 @@
       />
     </div>
 
-    <div v-if="step !== 'finish'" class="flex justify-end mt-4">
+    <div class="flex justify-end mt-4">
       <TButton type="primary" @click="next">Next</TButton>
     </div>
   </form>
@@ -61,15 +62,23 @@ import ls from 'local-storage'
 import useAuth from '~/use/auth'
 
 export default {
+  middleware: ['auth'],
   name: 'Onboarding',
   layout: 'popup',
 
   setup() {
-    const { updateProfile, updateAccount } = useAuth()
+    const {
+      profile: loadedProfile,
+      loading: loadingAuth,
+      updateProfile,
+      updateAccount
+    } = useAuth()
 
     return {
       updateProfile,
-      updateAccount
+      updateAccount,
+      loadingAuth,
+      loadedProfile
     }
   },
 
@@ -94,12 +103,28 @@ export default {
       }
     ]
   }),
+
+  computed: {
+    loading() {
+      return this.step === 'finish' || (this.loadingAuth && !this.loadedProfile)
+    }
+  },
+
+  watch: {
+    loadedProfile: 'load'
+  },
+
   mounted() {
     const city = ls('city')
 
     this.profile.community = city
   },
   methods: {
+    load() {
+      if (this.loadedProfile && !this.profile.name) {
+        this.profile = this.loadedProfile
+      }
+    },
     next() {
       if (this.profile[this.step]) {
         this.updateProfile({

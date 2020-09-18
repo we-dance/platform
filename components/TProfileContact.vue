@@ -16,6 +16,36 @@
       @close="isWritingMessage = false"
     >
       <div class="my-4 flex flex-col justify-center">
+        <div
+          v-if="!myProfile.bio || !myProfile.photo || !myProfile.languages"
+          class="mb-4 p-4 rounded border"
+        >
+          <p class="font-bold">Your profile is the best introduction:</p>
+          <ul class="list-disc ml-4">
+            <li
+              class="text-red-500"
+              :class="{ 'text-green-500': myProfile.photo }"
+            >
+              Photo
+            </li>
+            <li
+              class="text-red-500"
+              :class="{ 'text-green-500': myProfile.bio }"
+            >
+              About me
+            </li>
+            <li
+              class="text-red-500"
+              :class="{ 'text-green-500': myProfile.languages }"
+            >
+              Languages
+            </li>
+          </ul>
+          <TButton class="mt-4" to="/settings?tab=profile"
+            >Edit my profile</TButton
+          >
+        </div>
+
         <TInputTextarea v-model="message" placeholder="Write a message" />
 
         <div class="flex mt-2 justify-end">
@@ -63,7 +93,7 @@ export default {
     const profile = getProfile(props.uid)
 
     const { create } = useDoc('matches')
-    const { uid: myUid } = useAuth()
+    const { uid: myUid, profile: myProfile } = useAuth()
     const showPopup = ref(false)
     const message = ref('')
     const isWritingMessage = ref(false)
@@ -90,7 +120,8 @@ export default {
       showPopup,
       message,
       isWritingMessage,
-      sendMessage
+      sendMessage,
+      myProfile
     }
   }
 }

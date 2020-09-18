@@ -158,6 +158,12 @@ export default () => {
       ]
     },
     {
+      name: 'teacher',
+      label: 'Are you teaching?',
+      type: 'select',
+      options: ['Yes', 'No']
+    },
+    {
       name: 'partner',
       label: 'Are you looking for a dance partner?',
       type: 'select',
