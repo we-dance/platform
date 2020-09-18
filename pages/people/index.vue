@@ -4,16 +4,17 @@
 
     <div v-if="uid" class="border rounded p-4 mb-4">
       <TField
-        v-model="lookingForPartner"
+        :value.sync="myProfile.partner"
         label="Are you looking for dance partner?"
         type="buttons"
         label-position="vertical"
         :options="['Yes', 'No']"
+        @input="(partner) => updateProfile({ partner })"
       />
 
       <div
         v-if="
-          lookingForPartner === 'Yes' &&
+          myProfile.partner === 'Yes' &&
             (!myProfile.bio ||
               !myProfile.photo ||
               !myProfile.languages ||
@@ -127,8 +128,6 @@ export default {
 
     const tab = ref('partner')
 
-    const lookingForPartner = ref('')
-
     const docs = computed(() => {
       return docsProfiles.value
         .filter((item) => item.community === city)
@@ -214,14 +213,8 @@ export default {
       itemsAllPublic,
       itemsPartner,
       itemsPartnerPublic,
-      lookingForPartner,
       updateProfile,
       myProfile
-    }
-  },
-  watch: {
-    lookingForPartner(partner) {
-      this.updateProfile({ partner })
     }
   }
 }
