@@ -123,7 +123,7 @@ export default {
             name: 'description',
             hideLabel: true,
             type: 'textarea',
-            placeholder: 'Description'
+            placeholder: 'Body'
           },
           {
             name: 'community',
