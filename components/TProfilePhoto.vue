@@ -8,6 +8,7 @@
 </template>
 
 <script>
+import { computed } from '@vue/composition-api'
 import useProfiles from '~/use/profiles'
 
 export default {
@@ -41,7 +42,7 @@ export default {
   setup(props) {
     const { getProfile, loading } = useProfiles()
 
-    const profile = getProfile(props.uid)
+    const profile = computed(() => getProfile(props.uid))
 
     return {
       profile,
