@@ -76,6 +76,10 @@ export default () => {
       return ''
     }
 
+    if (payload.includes('***REMOVED***.firebaseapp.com')) {
+      return ''
+    }
+
     return payload
   }
 
