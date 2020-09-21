@@ -24,6 +24,7 @@
     </div>
 
     <div :class="{ 'overflow-y-scroll h-64': verticalScroll }">
+      <div class="mb-4 text-center text-xs">{{ items.length }} users</div>
       <div
         v-for="item in items"
         :key="item.id"
@@ -59,6 +60,8 @@
                       :options="list"
                       @input="(val) => applyList(item.id, val, closeMenu)"
                     />
+
+                    <TButtonEditProfile :uid="item.id" class="mt-4" />
                   </div>
                 </template>
               </TMenu>
@@ -81,16 +84,25 @@
             </div>
             <div>{{ item.name }} &lt;{{ item.email }}&gt;</div>
             <div class="text-xs text-orange-500">
-              <span>{{ item.daysUsed }}</span>
-              <span v-if="item.profile.community"
-                >• Com: {{ item.profile.community }}</span
+              <span>Community: {{ item.profile.community }}</span
               ><span v-if="item.profile.city">
                 • City: {{ item.profile.city }}</span
               >
               <span v-if="item.profile.location">
-                • Loc: {{ item.profile.location.locality }}</span
+                • Location: {{ item.profile.location.locality }}</span
               >
             </div>
+            <pre v-if="item.marketing.ref" class="text-xs">
+ref: {{ item.marketing.ref }}</pre
+            >
+            <pre v-if="item.marketing.referrer" class="text-xs">
+referrer: {{ item.marketing.referrer }}</pre
+            >
+            <pre v-if="Object.keys(item.marketing.utms).length" class="text-xs">
+utms: {{ item.marketing.utms }}</pre
+            >
+            <pre class="text-xs">joined: {{ getDate(item.createdAt) }}</pre>
+            <pre class="text-xs">used: {{ item.daysUsed }} days</pre>
           </div>
         </div>
 
@@ -166,15 +178,15 @@ export default {
       closeMenu()
     }
 
-    const filterOptions = [
+    const filterOptions = computed(() => [
       {
         value: '',
-        label: 'Everyone',
+        label: `Everyone (${docs.value.length})`,
         filter: (account) => true
       },
       {
         value: 'selected',
-        label: 'Selected',
+        label: `Selected (${Object.keys(selected.value).length})`,
         filter: (account) => selected.value[account.id]
       },
       {
@@ -188,19 +200,34 @@ export default {
         filter: (account) => account.profile.partner !== 'Yes'
       },
       {
-        value: 'no_city',
-        label: 'No city',
+        value: 'no_community',
+        label: 'No community',
         filter: (account) => !account.profile.community
+      },
+      {
+        value: 'used_more_10d',
+        label: 'More than 10 days',
+        filter: (account) => account.daysUsed > 10
+      },
+      {
+        value: 'used_more_1d',
+        label: 'More than 1 day',
+        filter: (account) => account.daysUsed > 1
+      },
+      {
+        value: 'used_less_2d',
+        label: 'Less than 2 day',
+        filter: (account) => account.daysUsed < 2
       },
       {
         value: 'no_username',
         label: 'No username',
         filter: (account) => !account.profile.username
       }
-    ]
+    ])
 
     const activeFilterItem = computed(() =>
-      filterOptions.find((item) => item.value === activeFilter.value)
+      filterOptions.value.find((item) => item.value === activeFilter.value)
     )
 
     const matchString = (str, match) => {
@@ -219,7 +246,7 @@ export default {
         }))
         .filter(activeFilterItem.value.filter)
         .filter((item) => {
-          if (!nameFilter.value) {
+          if (!nameFilter.value || !nameFilter.value.toLowerCase) {
             return true
           }
 

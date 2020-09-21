@@ -39,6 +39,7 @@
 import { camelcase } from '~/utils'
 
 export default {
+  name: 'TForm',
   props: {
     fields: {
       type: Array,

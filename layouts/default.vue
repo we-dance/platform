@@ -86,9 +86,6 @@
                     >Reports</TButton
                   >
                   <TButton to="/admin/tags" type="nav-admin">Tags</TButton>
-                  <TButton to="/admin/profiles" type="nav-admin"
-                    >Profiles</TButton
-                  >
                   <TButton to="/admin/accounts" type="nav-admin"
                     >Accounts</TButton
                   >

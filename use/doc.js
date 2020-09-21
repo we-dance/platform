@@ -61,6 +61,10 @@ export default (name) => {
   async function find(param, value) {
     state.loading = true
 
+    if (!value) {
+      return
+    }
+
     const filteredCollection = await collection.where(param, '==', value).get()
 
     if (filteredCollection.docs.length === 0) {
