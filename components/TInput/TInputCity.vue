@@ -38,7 +38,11 @@
       </div>
 
       <div class="flex">
-        <TInput v-model="input" :placeholder="searchPlaceholder" />
+        <TInput
+          v-model="input"
+          :placeholder="searchPlaceholder"
+          @focus="focused = true"
+        />
       </div>
 
       <div
@@ -57,7 +61,7 @@
           {{ prediction.description }}
         </div>
       </div>
-      <div v-else>
+      <div v-else-if="!focused">
         <div
           v-for="city in cities"
           :key="city.name"
@@ -134,7 +138,8 @@ export default {
     predictions: [],
     gpsIsBlocked: false,
     loading: false,
-    showPopup: false
+    showPopup: false,
+    focused: false
   }),
 
   computed: {
@@ -145,6 +150,8 @@ export default {
     value(val) {
       this.input = ''
     },
+
+    showPopup: 'reset',
 
     input(val) {
       if (!val) {
@@ -167,7 +174,7 @@ export default {
   },
 
   async mounted() {
-    this.input = ''
+    this.reset()
 
     await this.$gmapApiPromiseLazy()
 
@@ -177,6 +184,11 @@ export default {
   },
 
   methods: {
+    reset() {
+      this.input = ''
+      this.focused = false
+      this.predictions = []
+    },
     locate() {
       this.showPopup = false
       this.requestBrowserLocation()
