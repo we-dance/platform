@@ -49,9 +49,7 @@
         </div>
       </div>
       <TLoader v-if="loading" />
-      <div v-else-if="!filteredItems.length">
-        No posts found
-      </div>
+      <div v-else-if="!filteredItems.length">No posts found</div>
       <TPopup v-if="reportId">
         <div class="font-bold mb-4">Report a post</div>
         <TSelect
@@ -77,9 +75,8 @@
               <router-link
                 :to="`/posts/${item.id}`"
                 class="font-bold leading-tight"
+                >{{ item.title }}</router-link
               >
-                {{ item.title }}
-              </router-link>
               <div class="float-right -mr-2">
                 <TMenu>
                   <template v-slot:button>
@@ -110,9 +107,8 @@
               <router-link
                 :to="`/posts/${item.id}`"
                 class="text-xs text-gray-600 hover:underline text-right"
+                >{{ dateDiff(item.createdAt) }} ago</router-link
               >
-                {{ dateDiff(item.createdAt) }} ago
-              </router-link>
             </div>
 
             <TPreview
@@ -137,9 +133,7 @@
               >
                 <TIcon name="up" class="h-6 w-6" />
               </button>
-              <div>
-                {{ item.upVotes }}
-              </div>
+              <div>{{ item.upVotes }}</div>
             </div>
             <div class="text-red-500 flex ml-2 justify-center">
               <button
@@ -149,9 +143,7 @@
               >
                 <TIcon name="down" class="h-6 w-6 hover:text-primary" />
               </button>
-              <div>
-                {{ item.downVotes }}
-              </div>
+              <div>{{ item.downVotes }}</div>
             </div>
             <div class="text-gray-700 flex ml-4 justify-center">
               <router-link :to="`/posts/${item.id}`" class="flex">
@@ -168,12 +160,12 @@
 
 <script>
 import { computed } from '@vue/composition-api'
-import ls from 'local-storage'
 import { Microlink } from '@microlink/vue'
 import useRSVP from '~/use/rsvp'
 import useComments from '~/use/comments'
 import useCollection from '~/use/collection'
 import useAccounts from '~/use/accounts'
+import useCities from '~/use/cities'
 import useAuth from '~/use/auth'
 import useDoc from '~/use/doc'
 import { dateDiff, sortBy } from '~/utils'
@@ -191,6 +183,7 @@ export default {
       loading: loadingLikes
     } = useRSVP()
     const { getCommentsCount, loading: loadingComments } = useComments()
+    const { currentCity, city } = useCities()
     const { docs, loading: loadingPosts, getById } = useCollection('posts')
     const { create: createReport } = useDoc('reports')
     const { uid } = useAuth()
@@ -226,10 +219,6 @@ export default {
 
     const { getAccount } = useAccounts()
 
-    const { doc: city, find: findCity } = useDoc('cities')
-
-    findCity('name', ls('city'))
-
     return {
       city,
       items,
@@ -240,7 +229,8 @@ export default {
       loading,
       createReport,
       getById,
-      uid
+      uid,
+      currentCity
     }
   },
   data: () => ({
@@ -251,10 +241,10 @@ export default {
   }),
   computed: {
     filteredItems() {
-      const city = ls('city')
-
       return this.items
-        .filter((item) => !item.community || item.community === city)
+        .filter(
+          (item) => !item.community || item.community === this.currentCity
+        )
         .filter((item) =>
           this.$route.query.tag
             ? item.tags && item.tags[this.$route.query.tag]

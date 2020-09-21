@@ -74,6 +74,7 @@ export default (name) => {
     const doc = filteredCollection.docs[0]
 
     state.doc = doc.data()
+
     state.id = doc.id
 
     state.exists = true

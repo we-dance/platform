@@ -2,7 +2,7 @@
   <div>
     <TTitle>Community</TTitle>
 
-    <div v-if="uid" class="border rounded p-4 mb-4">
+    <div v-if="myProfile" class="border rounded p-4 mb-4">
       <TField
         :value.sync="myProfile.partner"
         label="Are you looking for dance partner?"
@@ -76,9 +76,7 @@
         class="mb-4 rounded bg-dark-gradient text-white text-sm text-center p-4"
       >
         <div>
-          <h1 class="font-bold text-lg">
-            Publish your profile
-          </h1>
+          <h1 class="font-bold text-lg">Publish your profile</h1>
           <p>so that others can find you as well</p>
         </div>
         <div class="flex justify-center">
@@ -112,9 +110,9 @@
 
 <script>
 import { ref, computed } from '@vue/composition-api'
-import ls from 'local-storage'
 import useAuth from '~/use/auth'
 import useCollection from '~/use/collection'
+import useCities from '~/use/cities'
 import { sortBy } from '~/utils'
 
 export default {
@@ -123,14 +121,13 @@ export default {
     const { uid, updateProfile, profile: myProfile } = useAuth()
 
     const { docs: docsProfiles } = useCollection('profiles')
-
-    const city = ls('city')
+    const { currentCity } = useCities()
 
     const tab = ref('partner')
 
     const docs = computed(() => {
       return docsProfiles.value
-        .filter((item) => item.community === city)
+        .filter((item) => item.community === currentCity.value)
         .sort(sortBy('-createdAt'))
     })
 
@@ -204,7 +201,6 @@ export default {
     })
 
     return {
-      city,
       items,
       uid,
       tabs,

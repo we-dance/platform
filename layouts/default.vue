@@ -11,7 +11,7 @@
             <TIcon class="w-6 h-6 pt-1 mr-2" name="icon" />
             <TIcon
               :class="
-                city
+                currentCity
                   ? 'text-white h-4 w-32 hidden md:block'
                   : 'h-4 w-32 text-white'
               "
@@ -19,10 +19,9 @@
             />
           </router-link>
           <TInputCity
-            v-if="city"
+            v-if="currentCity"
+            v-model="currentCity"
             class="text-black ml-2"
-            :value="city"
-            @input="selectCity"
           />
         </div>
 
@@ -79,61 +78,46 @@
             <template slot="menu">
               <div class="w-32 py-2 bg-white rounded-lg shadow-xl border">
                 <div v-if="isAdmin()" class="text-red">
-                  <TButton to="/admin/matches" type="nav-admin">
-                    Matches
-                  </TButton>
-                  <TButton to="/admin/reports" type="nav-admin">
-                    Reports
-                  </TButton>
-                  <TButton to="/admin/tags" type="nav-admin">
-                    Tags
-                  </TButton>
-                  <TButton to="/admin/profiles" type="nav-admin">
-                    Profiles
-                  </TButton>
-                  <TButton to="/admin/accounts" type="nav-admin">
-                    Accounts
-                  </TButton>
-                  <TButton to="/admin/cities" type="nav-admin">
-                    Cities
-                  </TButton>
-                  <TButton to="/admin/templates" type="nav-admin">
-                    Templates
-                  </TButton>
-                  <TButton to="/admin/emails" type="nav-admin">
-                    Emails
-                  </TButton>
-                  <TButton to="/admin/styles" type="nav-admin">
-                    Styles
-                  </TButton>
+                  <TButton to="/admin/matches" type="nav-admin"
+                    >Matches</TButton
+                  >
+                  <TButton to="/admin/reports" type="nav-admin"
+                    >Reports</TButton
+                  >
+                  <TButton to="/admin/tags" type="nav-admin">Tags</TButton>
+                  <TButton to="/admin/profiles" type="nav-admin"
+                    >Profiles</TButton
+                  >
+                  <TButton to="/admin/accounts" type="nav-admin"
+                    >Accounts</TButton
+                  >
+                  <TButton to="/admin/cities" type="nav-admin">Cities</TButton>
+                  <TButton to="/admin/templates" type="nav-admin"
+                    >Templates</TButton
+                  >
+                  <TButton to="/admin/emails" type="nav-admin">Emails</TButton>
+                  <TButton to="/admin/styles" type="nav-admin">Styles</TButton>
                 </div>
                 <TButton
                   v-if="getProfile(uid).username"
                   type="nav"
                   :to="`/u/${getProfile(uid).username}`"
+                  >My Profile</TButton
                 >
-                  My Profile
-                </TButton>
-                <TButton type="nav" to="/settings">
-                  Settings
-                </TButton>
+                <TButton type="nav" to="/settings">Settings</TButton>
                 <TButton
                   type="nav"
                   href="http://bit.ly/we-dance-concept"
                   target="_blank"
+                  >About</TButton
                 >
-                  About
-                </TButton>
                 <TButton
                   type="nav"
                   href="mailto:support@wedance.vip"
                   target="_blank"
+                  >Support</TButton
                 >
-                  Support
-                </TButton>
-                <TButton type="nav" to="/signout">
-                  Logout
-                </TButton>
+                <TButton type="nav" to="/signout">Logout</TButton>
               </div>
             </template>
           </TMenu>
@@ -154,7 +138,7 @@
       </div>
     </TPopup>
 
-    <div v-if="city" class="container p-4 mx-auto max-w-xl mb-16">
+    <div v-if="currentCity" class="container p-4 mx-auto max-w-xl mb-16">
       <nuxt />
     </div>
     <div v-else class="flex-grow flex flex-col">
@@ -163,14 +147,15 @@
       >
         <div class="p-4 mx-auto max-w-2xl text-center">
           <h1 class="text-5xl font-bold leading-tight">
-            Exclusive for <span class="text-light">Dancers.</span>
+            Exclusive for
+            <span class="text-light">Dancers.</span>
           </h1>
           <p class="mt-2 text-xl">
             Salsa, Bachata, Kizomba, Tango, Zouk and more.
           </p>
           <div class="text-black mt-4 flex justify-center text-xl">
             <div>
-              <TInputCity :value="city" @input="selectCity" />
+              <TInputCity v-model="currentCity" />
             </div>
           </div>
         </div>
@@ -247,11 +232,11 @@
 </template>
 
 <script>
-import ls from 'local-storage'
 import { computed } from '@vue/composition-api'
 import useAuth from '~/use/auth'
 import useCollection from '~/use/collection'
 import useProfiles from '~/use/profiles'
+import useCities from '~/use/cities'
 
 export default {
   name: 'DefaultLayout',
@@ -263,8 +248,7 @@ export default {
   },
   data: () => ({
     isMenuOpen: false,
-    showAuthPopup: false,
-    city: ''
+    showAuthPopup: false
   }),
   computed: {
     isHome() {
@@ -274,13 +258,6 @@ export default {
   watch: {
     $route() {
       this.updateMenu()
-    },
-    city(city) {
-      ls('city', city)
-
-      if (city && this.$route.path === '/') {
-        this.$router.push('/people')
-      }
     }
   },
   mounted() {
@@ -290,30 +267,18 @@ export default {
 
     if (routedCity) {
       this.city = routedCity
-      return
     }
-
-    const cachedCity = ls('city')
-
-    if (typeof cachedCity === 'object' && cachedCity?.locality) {
-      this.city = cachedCity.locality
-      return
-    }
-
-    this.city = cachedCity
   },
   methods: {
     updateMenu() {
       this.isMenuOpen = false
-    },
-    selectCity(val) {
-      this.city = val
     }
   },
   setup() {
     const { uid, account, isAdmin } = useAuth()
     const { docs: tagDocs } = useCollection('tags')
     const { getProfile } = useProfiles()
+    const { currentCity } = useCities()
     const tags = computed(() =>
       tagDocs.value.map((doc) => ({ key: doc.id, label: doc.id }))
     )
@@ -323,7 +288,8 @@ export default {
       getProfile,
       uid,
       tags,
-      isAdmin
+      isAdmin,
+      currentCity
     }
   }
 }
