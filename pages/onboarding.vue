@@ -49,6 +49,17 @@
         label-position="vertical"
         type="photo"
       />
+
+      <TButton
+        v-if="!profile.photo"
+        class="mt-4"
+        type="secondary"
+        @click="
+          skip.photo = true
+          next()
+        "
+        >Skip for now</TButton
+      >
     </div>
 
     <div class="flex justify-end mt-4">
@@ -85,6 +96,7 @@ export default {
   data: () => ({
     step: 'name',
     profile: {},
+    skip: {},
     nextSteps: {
       name: 'username',
       username: 'gender',
@@ -126,7 +138,7 @@ export default {
       }
     },
     next() {
-      if (this.profile[this.step]) {
+      if (this.profile[this.step] || this.skip[this.step]) {
         this.updateProfile({
           step: this.step,
           ...this.profile
