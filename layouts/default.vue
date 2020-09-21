@@ -26,6 +26,7 @@
         </div>
 
         <nav
+          v-if="currentCity"
           class="fixed z-40 bottom-0 left-0 right-0 md:relative md:mt-6 flex md:mt-0 items-center justify-evenly md:justify-end p-2 md:p-0 border-t shadow-lg md:shadow-none md:border-0 text-gray-700 bg-white md:bg-dark md:text-white"
         >
           <router-link
