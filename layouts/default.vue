@@ -264,6 +264,12 @@ export default {
   mounted() {
     this.updateMenu()
 
+    window &&
+      window.addEventListener('beforeinstallprompt', (event) => {
+        event.preventDefault()
+        window.deferredPrompt = event
+      })
+
     const routedCity = this.$route.query.city
 
     if (routedCity) {
