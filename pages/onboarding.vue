@@ -167,12 +167,7 @@ export default {
         confirmed: true
       })
 
-      let target = ls('target')
-      ls.remove('target')
-
-      if (!target) {
-        target = `/u/${this.profile.username}`
-      }
+      const target = `/posts/74zve0dQqtdwaSXq7RDf`
 
       this.$router.push(target)
     }
