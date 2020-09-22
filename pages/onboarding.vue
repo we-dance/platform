@@ -32,6 +32,16 @@
       />
     </div>
 
+    <div v-if="step == 'community'">
+      <TField
+        ref="community"
+        v-model="profile.community"
+        label="Dance community of which city would you like to join?"
+        label-position="vertical"
+        type="city"
+      />
+    </div>
+
     <div v-if="step == 'styles'">
       <TField
         v-model="profile.styles"
@@ -100,7 +110,8 @@ export default {
     nextSteps: {
       name: 'username',
       username: 'gender',
-      gender: 'styles',
+      gender: 'community',
+      community: 'styles',
       styles: 'photo',
       photo: 'finish'
     },
@@ -145,6 +156,7 @@ export default {
         })
 
         this.step = this.nextSteps[this.step]
+
         if (this.step === 'finish') {
           this.finish()
         }
