@@ -54,24 +54,29 @@ export const dateDiff = (val) => {
   return formatDistance(getDateObect(val), new Date())
 }
 
-export const getDateTime = (val) => {
+export const formatDate = (val, formatStr) => {
   if (!val) return ''
-  return format(getDateObect(val), "d MMM' at 'H:mm")
+  return format(getDateObect(val), formatStr)
+}
+
+export const getDateTime = (val) => {
+  return formatDate(val, "d MMM' at 'H:mm")
+}
+
+export const getYmd = (val) => {
+  return formatDate(val, 'yyyy-MM-dd')
 }
 
 export const getDate = (val) => {
-  if (!val) return ''
-  return format(getDateObect(val), 'd MMM')
+  return formatDate(val, 'd MMM')
 }
 
 export const getDay = (val) => {
-  if (!val) return ''
-  return format(getDateObect(val), 'iiii')
+  return formatDate(val, 'iiii')
 }
 
 export const getTime = (val) => {
-  if (!val) return ''
-  return format(getDateObect(val), 'H:mm')
+  return formatDate(val, 'H:mm')
 }
 
 export const openURL = (url) => {

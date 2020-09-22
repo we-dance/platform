@@ -72,6 +72,8 @@ export default {
           'bg-white hover:bg-gray-100 text-gray-800 font-semibold py-2 px-4 border border-gray-400 rounded shadow',
         primary:
           'bg-primary no-underline text-white font-semibold py-2 px-4 rounded hover:text-white hover:bg-black shadow',
+        success:
+          'bg-green-500 no-underline text-white font-semibold py-2 px-4 rounded hover:text-white hover:bg-green-700 shadow',
         danger:
           'bg-red-500 no-underline text-white font-semibold py-2 px-4 rounded hover:text-white hover:bg-red-700 shadow',
         base:

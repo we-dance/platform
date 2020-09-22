@@ -6,21 +6,35 @@
 
     <div>
       <TLoader v-if="loading" />
-      <div v-else-if="!filteredItems.length">
+      <div v-else-if="!count">
         No events found
       </div>
-      <div>
-        <h2 class="font-bold">Monday, 14 September</h2>
+      <div v-for="(items, date) in itemsByDate" :key="date" class="mb-8">
+        <h2 class="font-bold bg-dark text-white py-2 px-4 rounded">
+          {{ getDay(date) }}, {{ getDate(date) }}
+        </h2>
         <div
-          v-for="item in filteredItems"
+          v-for="item in items"
           :key="item.id"
           class="bg-white px-4 mt-4 flex"
         >
+          <div class="mr-2 flex justify-center items-start pt-1">
+            <button
+              v-if="item.response === 'up'"
+              class="text-green-500"
+              @click="updateRsvp(item.id, 'events', 'down')"
+            >
+              <TIcon name="check_circle" class="w-4 h-4" />
+            </button>
+            <button v-else @click="updateRsvp(item.id, 'events', 'up')">
+              <TIcon name="check" class="w-4 h-4" />
+            </button>
+          </div>
           <div class="mr-2">
             {{ getTime(item.startDate) }}
           </div>
           <div class="mr-2">
-            🎉
+            {{ item.type === 'Party' ? '🎉' : '👣' }}
           </div>
           <div>
             <router-link
@@ -29,7 +43,8 @@
             >
               {{ item.name }}
             </router-link>
-            <TTagsPreview :value="item.tags" />
+            <div class="text-xs">{{ item.address }}</div>
+            <TStyles class="text-xs" :value="item.styles" />
           </div>
         </div>
       </div>
@@ -39,14 +54,14 @@
 
 <script>
 import { computed } from '@vue/composition-api'
-import ls from 'local-storage'
+import { startOfWeek, endOfWeek } from 'date-fns'
 import useRSVP from '~/use/rsvp'
-import useComments from '~/use/comments'
 import useCollection from '~/use/collection'
 import useAccounts from '~/use/accounts'
 import useAuth from '~/use/auth'
-import useDoc from '~/use/doc'
-import { dateDiff, sortBy, getTime } from '~/utils'
+import useCities from '~/use/cities'
+import useRouter from '~/use/router'
+import { dateDiff, sortBy, getTime, getDate, getDay, getYmd } from '~/utils'
 
 export default {
   name: 'EventsIndex',
@@ -55,9 +70,8 @@ export default {
       getCount,
       getRsvpResponse,
       updateRsvp,
-      loading: loadingLikes
+      loading: loadingRsvps
     } = useRSVP()
-    const { getCommentsCount, loading: loadingComments } = useComments()
     const { docs, loading: loadingPosts, getById } = useCollection('events')
     const { uid } = useAuth()
 
@@ -72,11 +86,9 @@ export default {
       const response = getRsvpResponse(item.id)
       const multi = !response ? 3 : response === 'up' ? 2 : 1
       const order = multi * 100 + votes
-      const commentsCount = getCommentsCount(item.id)
 
       return {
         ...item,
-        commentsCount,
         upVotes,
         downVotes,
         votes,
@@ -85,20 +97,48 @@ export default {
       }
     }
 
-    const items = computed(() => docs.value.map(map))
-    const loading = computed(
-      () => loadingLikes.value && loadingComments.value && loadingPosts.value
-    )
+    const startOfWeekDate = getYmd(startOfWeek(new Date()))
+    const endOfWeekDate = getYmd(endOfWeek(new Date()))
+
+    const thisWeekFilter = (item) =>
+      getYmd(item.startDate) >= startOfWeekDate &&
+      getYmd(item.startDate) <= endOfWeekDate
+
+    const count = computed(() => items.value.length)
+    const { route } = useRouter()
+
+    const items = computed(() => {
+      let result = docs.value.map(map)
+
+      if (!route.query.all) {
+        result = result.filter(thisWeekFilter)
+      }
+
+      return result.sort(sortBy('startDate'))
+    })
+
+    const itemsByDate = computed(() => {
+      const result = {}
+      items.value.forEach((item) => {
+        const date = getYmd(item.startDate)
+
+        result[date] = result[date] || []
+        result[date].push(item)
+      })
+
+      return result
+    })
+
+    const loading = computed(() => loadingRsvps.value && loadingPosts.value)
 
     const { getAccount } = useAccounts()
 
-    const { doc: city, find: findCity } = useDoc('cities')
-
-    findCity('name', ls('city'))
+    const { currentCity } = useCities()
 
     return {
-      city,
-      items,
+      currentCity,
+      count,
+      itemsByDate,
       getRsvpResponse,
       updateRsvp,
       dateDiff,
@@ -106,18 +146,11 @@ export default {
       loading,
       getById,
       uid,
-      getTime
-    }
-  },
-  computed: {
-    filteredItems() {
-      return this.items
-        .filter((item) =>
-          this.$route.query.tag
-            ? item.tags && item.tags[this.$route.query.tag]
-            : true
-        )
-        .sort(sortBy('-createdAt'))
+      getTime,
+      getDay,
+      getDate,
+      startOfWeekDate,
+      endOfWeekDate
     }
   }
 }

@@ -50,22 +50,30 @@
             <TIcon class="w-8 h-8 mx-auto" name="calendar" />
             <span class="hidden md:block">Calendar</span>
           </router-link>
-          <router-link
-            v-if="uid"
-            to="/posts/-/edit"
-            class="block p-2 md:px-4 flex flex-col justify-center"
-          >
-            <TIcon class="w-8 h-8 mx-auto" name="plus" />
-            <span class="hidden md:block">Add</span>
-          </router-link>
           <button
-            v-else
+            v-if="!uid"
             class="block p-2 md:px-4 flex flex-col justify-center"
             @click="showAuthPopup = true"
           >
             <TIcon class="w-8 h-8 mx-auto" name="plus" />
             <span class="hidden md:block">Add</span>
           </button>
+          <TMenu v-else>
+            <template slot="button">
+              <div
+                class="block p-2 md:px-4 flex flex-col justify-center cursor-pointer"
+              >
+                <TIcon class="w-8 h-8 mx-auto" name="plus" />
+                <span class="hidden md:block">Add</span>
+              </div>
+            </template>
+            <template slot="menu">
+              <div class="w-32 py-2 bg-white rounded-lg shadow-xl border">
+                <TButton type="nav" to="/posts/-/edit">Add post</TButton>
+                <TButton type="nav" to="/events/-/edit">Add event</TButton>
+              </div>
+            </template>
+          </TMenu>
 
           <TButton v-if="!uid" to="/signin" class="md:ml-2">Sign In</TButton>
           <TMenu v-else>

@@ -19,26 +19,6 @@
       @cancel="cancelItem"
       @remove="removeItem"
     />
-    <div class="mt-4">
-      <TButton type="secondary" to="/events/-/edit">
-        <div class="flex justify-center items-center">
-          <TIcon name="calendar" class="w-4 h-4 mr-1" />
-          <span>Add event</span>
-        </div>
-      </TButton>
-      <TButton v-if="false" type="nav" @click="selectedType = 'profile'">
-        <div class="flex justify-center align-middle">
-          <TIcon name="store" class="w-4 h-4 mr-1" />
-          <span>Create page</span>
-        </div>
-      </TButton>
-      <TButton v-if="false" type="nav" @click="selectedType = 'dance'">
-        <div class="flex justify-center align-middle">
-          <TIcon name="search" class="w-4 h-4 mr-1" />
-          <span>Find dance partner</span>
-        </div>
-      </TButton>
-    </div>
   </div>
 </template>
 

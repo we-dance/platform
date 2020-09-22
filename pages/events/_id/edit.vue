@@ -28,7 +28,6 @@ import ls from 'local-storage'
 import { getDateObect, toDatetimeLocal } from '~/utils'
 import useAuth from '~/use/auth'
 import useDoc from '~/use/doc'
-import useTags from '~/use/tags'
 import useRouter from '~/use/router'
 
 export default {
@@ -46,10 +45,6 @@ export default {
   mounted() {
     const city = ls('city')
     this.item = this.item || { city }
-
-    if (this.$route.query.tag) {
-      this.item.tags[this.$route.query.tag] = true
-    }
   },
   methods: {
     cancelItem() {
@@ -84,7 +79,6 @@ export default {
     const collection = 'events'
 
     const { doc: item, id, load, update, remove, create } = useDoc(collection)
-    const { tagsOptions, addTag } = useTags()
 
     const types = computed(() => [
       {
@@ -92,24 +86,22 @@ export default {
         value: 'event',
         fields: [
           {
-            name: 'name',
-            hideLabel: true,
-            placeholder: 'Name'
+            name: 'type',
+            type: 'select',
+            options: ['Party', 'Course']
           },
           {
-            name: 'description',
-            hideLabel: true,
-            type: 'textarea',
-            placeholder: 'Description'
+            name: 'styles',
+            type: 'stylesSelect'
           },
           {
-            name: 'artists',
-            hideLabel: true,
-            type: 'accounts'
+            name: 'address',
+            type: 'address',
+            description: "Leave empty if it's online"
           },
           {
-            name: 'city',
-            type: 'city'
+            name: 'link',
+            description: 'URL of your registration form'
           },
           {
             name: 'startDate',
@@ -136,13 +128,21 @@ export default {
             }
           },
           {
-            name: 'tags',
-            placeholder: 'Tags',
-            type: 'tags',
-            options: tagsOptions.value,
-            listeners: {
-              add: addTag
-            }
+            name: 'price'
+          },
+          {
+            name: 'organiser'
+          },
+          {
+            name: 'name',
+            hideLabel: true,
+            placeholder: 'Name'
+          },
+          {
+            name: 'description',
+            hideLabel: true,
+            type: 'textarea',
+            placeholder: 'Description'
           }
         ]
       }

@@ -12,7 +12,9 @@
           <portal-target name="top-left"></portal-target>
         </div>
         <div>
-          <TButton v-if="uid" type="secondary" to="/feed">Sign in</TButton>
+          <TButton v-if="uid" type="link" to="/events"
+            >See other events</TButton
+          >
           <TButton v-else type="secondary" to="/signin">Sign in</TButton>
         </div>
       </div>
