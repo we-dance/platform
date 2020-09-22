@@ -34,6 +34,7 @@
 import useStyles from '~/use/styles'
 
 export default {
+  name: 'TInputStyles',
   setup() {
     const { styles, categories } = useStyles()
 

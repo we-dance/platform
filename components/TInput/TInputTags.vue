@@ -44,6 +44,7 @@
 
 <script>
 export default {
+  name: 'TInputTags',
   props: {
     value: {
       type: [Object, String],

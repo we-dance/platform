@@ -29,6 +29,7 @@
 import useStyles from '~/use/styles'
 
 export default {
+  name: 'TInputStylesSelect',
   setup(props) {
     const { getStyles, levels } = useStyles()
 

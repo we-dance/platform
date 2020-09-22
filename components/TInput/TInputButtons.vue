@@ -16,6 +16,7 @@
 import { camelcase } from '~/utils'
 
 export default {
+  name: 'TInputButtons',
   inheritAttrs: false,
   props: {
     options: {

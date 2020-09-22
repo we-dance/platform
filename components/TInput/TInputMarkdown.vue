@@ -18,6 +18,7 @@ import { codemirror } from 'vue-codemirror'
 import 'codemirror/mode/markdown/markdown.js'
 
 export default {
+  name: 'TInputMarkdown',
   components: {
     codemirror
   },

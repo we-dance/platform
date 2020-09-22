@@ -47,6 +47,7 @@ import TInputStylesSelect from '~/components/TInput/TInputStylesSelect'
 import TInputButtons from '~/components/TInput/TInputButtons'
 
 export default {
+  name: 'TField',
   inheritAttrs: false,
   props: {
     value: {

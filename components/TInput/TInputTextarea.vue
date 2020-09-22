@@ -10,6 +10,7 @@
 
 <script>
 export default {
+  name: 'TInputTextarea',
   props: {
     value: {
       type: String,

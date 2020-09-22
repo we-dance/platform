@@ -59,6 +59,7 @@ Vue.use(VueGoogleMaps, {
 const gmapApi = VueGoogleMaps.gmapApi
 
 export default {
+  name: 'TInputLocation',
   props: {
     value: {
       type: [Object, String],

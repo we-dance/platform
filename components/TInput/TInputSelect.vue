@@ -33,6 +33,7 @@
 import { camelcase } from '~/utils'
 
 export default {
+  name: 'TInputSelect',
   inheritAttrs: false,
   props: {
     options: {

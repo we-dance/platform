@@ -96,6 +96,7 @@ Vue.use(VueGoogleMaps, {
 const gmapApi = VueGoogleMaps.gmapApi
 
 export default {
+  name: 'TInputLocationSelect',
   setup() {
     const { find, create, id, update, doc } = useDoc('cities')
 

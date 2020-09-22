@@ -54,6 +54,7 @@ import useUpload from '~/use/upload'
 import 'vue-croppa/dist/vue-croppa.css'
 
 export default {
+  name: 'TInputPhoto',
   components: {
     croppa: Croppa.component
   },
