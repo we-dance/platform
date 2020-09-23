@@ -37,12 +37,11 @@
 
 <script>
 import { camelcase } from '~/utils'
-import TField from '~/components/TField'
 
 export default {
   name: 'TForm',
   components: {
-    TField
+    TField: () => import('~/components/TField')
   },
   props: {
     fields: {
