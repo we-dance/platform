@@ -41,15 +41,15 @@ export default {
     computedValue: '',
     error: ''
   }),
-  mounted() {
-    this.computedValue = this.value
-  },
   watch: {
     value(val) {
       if (val) {
         this.computedValue = this.value
       }
     }
+  },
+  mounted() {
+    this.computedValue = this.value
   },
   methods: {
     async save(newName) {

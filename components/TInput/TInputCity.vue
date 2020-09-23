@@ -41,7 +41,7 @@
         <TInput
           v-model="input"
           :placeholder="searchPlaceholder"
-          @focus="focused = true"
+          @click.native="focused = true"
         />
       </div>
 
@@ -79,7 +79,7 @@
 import Vue from 'vue'
 import * as VueGoogleMaps from 'vue2-google-maps'
 import { computed } from '@vue/composition-api'
-import { getLocation, sanitize } from '~/utils'
+import { getLocation, sanitize, sortBy } from '~/utils'
 import useDoc from '~/use/doc'
 import useCollection from '~/use/collection'
 
@@ -99,7 +99,7 @@ export default {
     const { find, create, id, update, doc } = useDoc('cities')
     const { docs } = useCollection('cities')
     const cities = computed(() =>
-      docs.value.filter((city) => city.status === 'active')
+      docs.value.filter((city) => city.status === 'active').sort(sortBy('name'))
     )
 
     return {
