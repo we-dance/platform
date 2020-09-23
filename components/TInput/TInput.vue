@@ -35,6 +35,10 @@ export default {
     defaultValue: {
       type: String,
       default: ''
+    },
+    item: {
+      type: Object,
+      default: () => ({})
     }
   },
   data: () => ({

@@ -26,6 +26,10 @@ export default {
     value: {
       type: String,
       default: ''
+    },
+    item: {
+      type: Object,
+      default: () => ({})
     }
   }
 }

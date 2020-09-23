@@ -47,6 +47,10 @@ export default {
     defaultValue: {
       type: [String, Number],
       default: ''
+    },
+    item: {
+      type: Object,
+      default: () => ({})
     }
   },
   mounted() {

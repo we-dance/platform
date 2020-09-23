@@ -17,6 +17,7 @@
           :type="type"
           :auto-focus="autoFocus"
           :hide-label="hideLabel"
+          :item="item"
           v-on="$attrs.listeners"
           @input="(val) => $emit('input', set(val))"
         />
@@ -54,6 +55,10 @@ export default {
     value: {
       type: [String, Object, Array, Number, Date],
       default: ''
+    },
+    item: {
+      type: Object,
+      default: () => ({})
     },
     label: {
       type: String,

@@ -34,6 +34,10 @@ export default {
     target: {
       type: String,
       default: ''
+    },
+    item: {
+      type: Object,
+      default: () => ({})
     }
   },
   data: () => ({

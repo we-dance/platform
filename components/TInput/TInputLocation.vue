@@ -80,6 +80,10 @@ export default {
     buttonLabel: {
       type: String,
       default: 'Change'
+    },
+    item: {
+      type: Object,
+      default: () => ({})
     }
   },
 

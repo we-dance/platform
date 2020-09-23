@@ -87,6 +87,7 @@
 import useAuth from '~/use/auth'
 
 export default {
+  name: 'PublicLayout',
   setup() {
     const { uid } = useAuth()
 

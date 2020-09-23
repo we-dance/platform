@@ -45,6 +45,7 @@ export default (name) => {
       state.exists = false
       state.loading = false
       state.doc = {}
+      state.id = null
 
       return false
     }
@@ -71,6 +72,7 @@ export default (name) => {
       state.exists = false
       state.loading = false
       state.doc = {}
+      state.id = null
 
       return false
     }

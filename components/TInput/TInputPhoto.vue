@@ -74,6 +74,10 @@ export default {
     selectLabel: {
       type: String,
       default: 'Upload photo'
+    },
+    item: {
+      type: Object,
+      default: () => ({})
     }
   },
   data: () => ({

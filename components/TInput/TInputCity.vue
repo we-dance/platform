@@ -131,6 +131,10 @@ export default {
     popupTitle: {
       type: String,
       default: 'Change city'
+    },
+    item: {
+      type: Object,
+      default: () => ({})
     }
   },
 

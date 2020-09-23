@@ -53,6 +53,10 @@ export default {
     options: {
       type: Array,
       default: () => []
+    },
+    item: {
+      type: Object,
+      default: () => ({})
     }
   },
   data: () => ({
