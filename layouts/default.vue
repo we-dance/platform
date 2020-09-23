@@ -230,7 +230,7 @@
 </template>
 
 <script>
-import { computed } from '@vue/composition-api'
+import { computed } from '@nuxtjs/composition-api'
 import useAuth from '~/use/auth'
 import useCollection from '~/use/collection'
 import useProfiles from '~/use/profiles'

@@ -82,7 +82,12 @@
 
 <script>
 import { Microlink } from '@microlink/vue'
-import { computed } from '@vue/composition-api'
+import {
+  computed,
+  defineComponent,
+  useMeta,
+  watchEffect
+} from '@nuxtjs/composition-api'
 import useAuth from '~/use/auth'
 import useDoc from '~/use/doc'
 import useRSVP from '~/use/rsvp'
@@ -91,7 +96,7 @@ import useProfiles from '~/use/profiles'
 import useReactions from '~/use/reactions'
 import { getDateTime, dateDiff } from '~/utils'
 
-export default {
+export default defineComponent({
   layout: 'minimal',
   components: {
     Microlink
@@ -136,40 +141,8 @@ export default {
       }
     }
   },
-  head() {
-    if (!this.item) {
-      return {}
-    }
-
-    const item = this.item
-
-    return {
-      title: item.title,
-      meta: [
-        {
-          hid: 'description',
-          name: 'description',
-          content: item.excerpt
-        },
-        {
-          name: 'keywords',
-          content: item.keywords,
-          hid: 'keywords'
-        },
-        {
-          property: 'og:title',
-          content: item.title,
-          hid: 'og:title'
-        },
-        {
-          property: 'og:description',
-          content: item.excerpt,
-          hid: 'og:description'
-        }
-      ]
-    }
-  },
-  setup() {
+  head() {},
+  setup(_, { root }) {
     const { uid, can } = useAuth()
     const { params } = useRouter()
     const { getProfile } = useProfiles()
@@ -184,6 +157,35 @@ export default {
     }
 
     const item = computed(() => map(doc.value))
+    const { title, meta } = useMeta()
+
+    watchEffect(() => {
+      title.value = item.value.title
+      meta.value = [
+        {
+          hid: 'description',
+          name: 'description',
+          content: item.value.excerpt
+        },
+        {
+          name: 'keywords',
+          content: item.value.keywords,
+          hid: 'keywords'
+        },
+        {
+          property: 'og:title',
+          content: item.value.title,
+          hid: 'og:title'
+        },
+        {
+          property: 'og:description',
+          content: item.value.excerpt,
+          hid: 'og:description'
+        }
+      ]
+
+      root.$meta().refresh()
+    })
 
     return {
       exists,
@@ -198,5 +200,5 @@ export default {
       dateDiff
     }
   }
-}
+})
 </script>

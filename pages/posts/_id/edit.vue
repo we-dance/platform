@@ -43,7 +43,7 @@
 </template>
 
 <script>
-import { computed } from '@vue/composition-api'
+import { computed } from '@nuxtjs/composition-api'
 import ls from 'local-storage'
 import useAuth from '~/use/auth'
 import useDoc from '~/use/doc'

@@ -18,7 +18,7 @@
 </template>
 
 <script>
-import { onMounted, ref } from '@vue/composition-api'
+import { onMounted, ref } from '@nuxtjs/composition-api'
 import useProfiles from '~/use/profiles'
 import useDoc from '~/use/doc'
 

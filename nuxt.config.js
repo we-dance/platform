@@ -40,12 +40,7 @@ export default {
   /*
    ** Plugins to load before mounting the App
    */
-  plugins: [
-    '~/plugins/composition-api',
-    '~/plugins/firebase',
-    '~/plugins/router',
-    '~/plugins/directives'
-  ],
+  plugins: ['~/plugins/firebase', '~/plugins/router', '~/plugins/directives'],
   /*
    ** Nuxt.js dev-modules
    */
@@ -55,9 +50,9 @@ export default {
     // Doc: https://github.com/nuxt-community/stylelint-module
     '@nuxtjs/stylelint-module',
     // Doc: https://github.com/nuxt-community/nuxt-tailwindcss
-    '@nuxtjs/tailwindcss'
-    // Doc: https://composition-api.now.sh/
-    // 'nuxt-composition-api'
+    '@nuxtjs/tailwindcss',
+    // Doc: https://composition-api.nuxtjs.org/
+    '@nuxtjs/composition-api'
   ],
   /*
    ** Nuxt.js modules
@@ -207,5 +202,8 @@ export default {
       fallbackLocale: 'en',
       alwaysRedirect: true
     }
+  },
+  generate: {
+    interval: 2000
   }
 }

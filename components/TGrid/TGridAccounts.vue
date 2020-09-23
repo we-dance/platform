@@ -118,7 +118,7 @@ utms: {{ item.marketing.utms }}</pre
 
 <script>
 import Vue from 'vue'
-import { computed, ref } from '@vue/composition-api'
+import { computed, ref } from '@nuxtjs/composition-api'
 import useCollection from '~/use/collection'
 import useDoc from '~/use/doc'
 import { sortBy, getTime, getDate } from '~/utils'

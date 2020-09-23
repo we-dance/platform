@@ -159,7 +159,7 @@
 </template>
 
 <script>
-import { computed } from '@vue/composition-api'
+import { computed } from '@nuxtjs/composition-api'
 import { Microlink } from '@microlink/vue'
 import useRSVP from '~/use/rsvp'
 import useComments from '~/use/comments'

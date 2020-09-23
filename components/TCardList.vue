@@ -100,7 +100,7 @@
 </template>
 
 <script>
-import { computed, ref } from '@vue/composition-api'
+import { computed, ref } from '@nuxtjs/composition-api'
 import { sortBy } from '~/utils'
 import useAuth from '~/use/auth'
 import useDoc from '~/use/doc'

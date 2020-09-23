@@ -1,4 +1,4 @@
-import { computed } from '@vue/composition-api'
+import { computed } from '@nuxtjs/composition-api'
 import useDoc from '~/use/doc'
 import { sortBy } from '~/utils'
 

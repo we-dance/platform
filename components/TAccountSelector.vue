@@ -22,7 +22,7 @@
 </template>
 
 <script>
-import { ref } from '@vue/composition-api'
+import { ref } from '@nuxtjs/composition-api'
 import TAvatar from '~/components/TAvatar'
 
 export default {

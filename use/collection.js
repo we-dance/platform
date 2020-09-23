@@ -1,5 +1,5 @@
 import Vue from 'vue'
-import { computed, toRefs } from '@vue/composition-api'
+import { computed, toRefs } from '@nuxtjs/composition-api'
 import firebase from 'firebase/app'
 import 'firebase/firestore'
 

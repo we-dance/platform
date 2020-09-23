@@ -109,7 +109,7 @@
 </template>
 
 <script>
-import { ref, computed } from '@vue/composition-api'
+import { ref, computed } from '@nuxtjs/composition-api'
 import useAuth from '~/use/auth'
 import useCollection from '~/use/collection'
 import useCities from '~/use/cities'

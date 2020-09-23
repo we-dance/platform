@@ -1,4 +1,4 @@
-import { reactive, toRefs, computed } from '@vue/composition-api'
+import { reactive, toRefs, computed } from '@nuxtjs/composition-api'
 import firebase from 'firebase/app'
 import 'firebase/firestore'
 import useAuth from '~/use/auth'

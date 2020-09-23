@@ -1,5 +1,5 @@
 import Vue from 'vue'
-import { watch, toRefs, computed } from '@vue/composition-api'
+import { watch, toRefs, computed } from '@nuxtjs/composition-api'
 import ls from 'local-storage'
 import useDoc from '~/use/doc'
 

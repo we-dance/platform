@@ -21,7 +21,7 @@
 </template>
 
 <script>
-import { ref } from '@vue/composition-api'
+import { ref } from '@nuxtjs/composition-api'
 
 export default {
   props: {

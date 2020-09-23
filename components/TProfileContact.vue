@@ -75,7 +75,7 @@
 </template>
 
 <script>
-import { ref } from '@vue/composition-api'
+import { ref } from '@nuxtjs/composition-api'
 import useAuth from '~/use/auth'
 import useDoc from '~/use/doc'
 import useProfiles from '~/use/profiles'

@@ -8,7 +8,7 @@
 </template>
 
 <script>
-import { computed } from '@vue/composition-api'
+import { computed } from '@nuxtjs/composition-api'
 import useProfiles from '~/use/profiles'
 
 export default {
