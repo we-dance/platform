@@ -25,7 +25,7 @@ export default () => {
       label: 'Username',
       required: true,
       placeholder: '(Required)',
-      trim: '[^a-z0-9]+',
+      type: 'username',
       description:
         'Create a unique username, which will be a link to your profile. Allowed only letters and numbers.'
     },

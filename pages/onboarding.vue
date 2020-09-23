@@ -15,7 +15,7 @@
         ref="username"
         v-model="profile.username"
         label="Pick a username"
-        trim="[^a-z0-9]+"
+        type="username"
         label-position="vertical"
         description="There might be lot of people with the same name, so username will help others to differentiate who is who. Also link to your profile will be wedance.vip/u/username"
       />
@@ -64,10 +64,7 @@
         v-if="!profile.photo"
         class="mt-4"
         type="secondary"
-        @click="
-          skip.photo = true
-          next()
-        "
+        @click="skipPhoto"
         >Skip for now</TButton
       >
     </div>
@@ -92,14 +89,16 @@ export default {
       profile: loadedProfile,
       loading: loadingAuth,
       updateProfile,
-      updateAccount
+      updateAccount,
+      uid
     } = useAuth()
 
     return {
       updateProfile,
       updateAccount,
       loadingAuth,
-      loadedProfile
+      loadedProfile,
+      uid
     }
   },
 
@@ -143,6 +142,10 @@ export default {
     this.profile.community = city
   },
   methods: {
+    skipPhoto() {
+      this.skip.photo = true
+      this.next()
+    },
     load() {
       if (this.loadedProfile && !this.profile.name) {
         this.profile = this.loadedProfile

@@ -45,6 +45,7 @@ import TInputCity from '~/components/TInput/TInputCity'
 import TInputStyles from '~/components/TInput/TInputStyles'
 import TInputStylesSelect from '~/components/TInput/TInputStylesSelect'
 import TInputButtons from '~/components/TInput/TInputButtons'
+import TInputUsername from '~/components/TInput/TInputUsername'
 
 export default {
   name: 'TField',
@@ -154,7 +155,8 @@ export default {
         account: TAccountSelector,
         styles: TInputStyles,
         stylesSelect: TInputStylesSelect,
-        buttons: TInputButtons
+        buttons: TInputButtons,
+        username: TInputUsername
       }
 
       return map[this.type] || TInput
