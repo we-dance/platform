@@ -3,6 +3,8 @@ import formatDistance from 'date-fns/formatDistance'
 import MarkdownIt from 'markdown-it'
 import excerptHtml from 'excerpt-html'
 import _ from 'lodash'
+import saveAs from 'file-saver'
+import { dsvFormat } from 'd3'
 
 export const getObjectKeysFromArray = (arr) => {
   const obj = {}
@@ -158,4 +160,13 @@ export const sanitize = (input, trim) => {
   const val = input
   const expression = new RegExp(trim, 'gi')
   return val.replace(expression, '').trim()
+}
+
+export const saveCSV = (data, filename) => {
+  const csvFile = dsvFormat(',').format(data)
+  const blob = new Blob([csvFile], {
+    type: 'text/csv;charset=utf-8'
+  })
+
+  saveAs(blob, filename)
 }

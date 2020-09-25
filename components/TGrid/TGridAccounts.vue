@@ -1,6 +1,7 @@
 <template>
   <div class="flex flex-col">
     <div v-if="editable" class="flex justify-end mb-4">
+      <TButton class="mr-2" @click="download">Download</TButton>
       <TButton @click="removeSelected">Delete</TButton>
     </div>
     <div class="bg-white py-4 flex flex-row mb-4 items-center border-b">
@@ -121,7 +122,7 @@ import Vue from 'vue'
 import { computed, ref } from '@nuxtjs/composition-api'
 import useCollection from '~/use/collection'
 import useDoc from '~/use/doc'
-import { sortBy, getTime, getDate } from '~/utils'
+import { sortBy, getTime, getDate, saveCSV } from '~/utils'
 import useProfiles from '~/use/profiles'
 
 export default {
@@ -299,6 +300,9 @@ export default {
       }
 
       this.selected = this.value
+    },
+    download() {
+      saveCSV(this.items)
     },
     removeSelected() {
       Object.keys(this.selected).forEach((uid) => {
