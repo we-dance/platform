@@ -82,7 +82,7 @@
 </template>
 
 <script>
-import { computed } from '@vue/composition-api'
+import { computed } from '@nuxtjs/composition-api'
 import useAuth from '~/use/auth'
 import useDoc from '~/use/doc'
 import useRSVP from '~/use/rsvp'

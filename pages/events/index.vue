@@ -53,7 +53,7 @@
 </template>
 
 <script>
-import { computed } from '@vue/composition-api'
+import { computed } from '@nuxtjs/composition-api'
 import { startOfWeek, endOfWeek } from 'date-fns'
 import useRSVP from '~/use/rsvp'
 import useCollection from '~/use/collection'
