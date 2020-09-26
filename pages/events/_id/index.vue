@@ -4,6 +4,46 @@
     Event not found
   </div>
   <div v-else>
+    <TPopup
+      v-if="reservationPopup"
+      title="Reserve a spot"
+      @close="reservationPopup = false"
+    >
+      <div class="my-4 flex flex-col justify-center max-w-sm w-full">
+        <div v-if="reservationPopup === 'reserve'">
+          <div v-if="!uid" class="flex justify-center">
+            <TButton type="secondary" class="my-2" to="/signin"
+              >Sign In with WeDance</TButton
+            >
+          </div>
+          <div v-if="!uid" class="divider">or</div>
+          <div>
+            <h2 v-if="!uid" class="font-bold">Register as Guest</h2>
+            <p class="text-xs">
+              Organiser of the event requires the following information:
+            </p>
+            <TForm
+              v-model="account"
+              :fields="reservationFields"
+              submit-label="Reserve"
+              class="mt-4"
+              @save="reserve"
+            />
+          </div>
+        </div>
+        <div v-if="reservationPopup === 'finish'">
+          <h2 class="font-bold mb-4">Your spot is reserved</h2>
+          <p>
+            You will receive a confirmation email during next 10 minutes. It
+            might land into Spam folder. If you don't receive email please
+            contact support@wedance.vip
+          </p>
+          <TButton type="primary" class="mt-4" @click="reservationPopup = false"
+            >Finish</TButton
+          >
+        </div>
+      </div>
+    </TPopup>
     <div class="bg-dark text-real-white pt-16">
       <div class="mt-8 px-4 mx-auto max-w-2xl text-center">
         <TStyles :value="item.styles" />
@@ -15,18 +55,18 @@
         </p>
         <div>
           <TButton
-            v-if="item.response === 'up'"
+            v-if="!uid || item.response !== 'up'"
             class="mt-4 mr-4"
-            type="success"
-            @click="updateRsvp(item.id, 'events', 'down')"
-            >You are going</TButton
+            type="danger"
+            @click="reservationPopup = 'reserve'"
+            >Reserve a spot</TButton
           >
           <TButton
             v-else
             class="mt-4 mr-4"
-            type="danger"
-            @click="updateRsvp(item.id, 'events', 'up')"
-            >Register</TButton
+            type="success"
+            @click="updateRsvp(item.id, 'events', 'down')"
+            >You are going</TButton
           >
         </div>
         <div class="mt-8 pb-4">
@@ -51,30 +91,6 @@
               label="Edit"
             />
           </div>
-
-          <div class="flex justify-between items-center border p-4 my-4">
-            <div class="flex">
-              <div class="text-green-500 flex justify-center">
-                <TButton
-                  v-if="item.response === 'up'"
-                  type="success"
-                  @click="updateRsvp(item.id, 'events', 'down')"
-                >
-                  You are going
-                </TButton>
-                <TButton
-                  v-else
-                  type="danger"
-                  @click="updateRsvp(item.id, 'events', 'up')"
-                >
-                  Register
-                </TButton>
-              </div>
-            </div>
-            <div>
-              <TButton :href="tweetUrl">Share</TButton>
-            </div>
-          </div>
         </div>
       </div>
     </div>
@@ -82,13 +98,14 @@
 </template>
 
 <script>
-import { computed } from '@nuxtjs/composition-api'
+import { computed, ref } from '@nuxtjs/composition-api'
 import useAuth from '~/use/auth'
 import useDoc from '~/use/doc'
 import useRSVP from '~/use/rsvp'
 import useRouter from '~/use/router'
 import useProfiles from '~/use/profiles'
 import useReactions from '~/use/reactions'
+import useAccounts from '~/use/accounts'
 import { getDateTime, dateDiff } from '~/utils'
 
 export default {
@@ -105,31 +122,6 @@ export default {
       const text = encodeURI(`"${this.item.name}"`)
 
       return `https://twitter.com/intent/tweet?text=${text} %23WeDance ${url}`
-    }
-  },
-  watch: {
-    item() {
-      this.$nextTick(() => {
-        this.load()
-      })
-    }
-  },
-  methods: {
-    load() {
-      const hash = this.$route.hash.replace('#', '')
-
-      if (hash) {
-        const el = document.getElementById(hash)
-
-        if (el) {
-          el.scrollIntoView()
-        }
-      }
-    },
-    checkAuth() {
-      if (!this.uid) {
-        this.$router.push(`/signin?target=${this.$route.fullPath}%23comment`)
-      }
     }
   },
   head() {
@@ -166,14 +158,15 @@ export default {
     }
   },
   setup() {
-    const { uid, can } = useAuth()
+    const { uid, can, account, updateAccount } = useAuth()
     const { params } = useRouter()
     const { getProfile } = useProfiles()
+    const { accountFields } = useAccounts()
 
     const { doc, load, exists, loading } = useDoc('events')
     const { map } = useReactions()
 
-    const { updateRsvp } = useRSVP()
+    const { updateRsvp, createGuestRsvp } = useRSVP()
 
     if (params.id) {
       load(params.id)
@@ -181,7 +174,33 @@ export default {
 
     const item = computed(() => map(doc.value))
 
+    const reservationFields = accountFields
+
+    const reservationPopup = ref(false)
+    const isCreatingProfile = ref(false)
+
+    const finishReservation = () => {
+      reservationPopup.value = false
+    }
+
+    const reserve = async (participant) => {
+      if (!uid.value) {
+        createGuestRsvp(params.id, 'events', 'up', participant)
+      } else {
+        await updateAccount(participant)
+        updateRsvp(params.id, 'events', 'up')
+      }
+
+      reservationPopup.value = 'finish'
+    }
+
     return {
+      isCreatingProfile,
+      finishReservation,
+      account,
+      reservationPopup,
+      reservationFields,
+      reserve,
       exists,
       uid,
       loading,

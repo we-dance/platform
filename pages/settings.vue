@@ -109,6 +109,7 @@
 <script>
 import useAuth from '~/use/auth'
 import useProfiles from '~/use/profiles'
+import useAccounts from '~/use/accounts'
 
 export default {
   middleware: ['auth'],
@@ -126,8 +127,10 @@ export default {
     } = useAuth()
 
     const { profileFields, contactFields } = useProfiles()
+    const { accountFields } = useAccounts()
 
     return {
+      accountFields,
       loading,
       uid,
       account,
@@ -140,25 +143,6 @@ export default {
       contactFields
     }
   },
-  data: () => ({
-    accountFields: [
-      {
-        name: 'name',
-        label: 'Full Name',
-        required: true,
-        placeholder: '(Required)'
-      },
-      {
-        name: 'email',
-        label: 'Email',
-        disabled: true
-      },
-      {
-        name: 'phone',
-        label: 'Phone'
-      }
-    ]
-  }),
   computed: {
     profileUrl() {
       const username = this.profile.username

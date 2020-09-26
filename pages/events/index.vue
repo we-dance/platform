@@ -54,7 +54,7 @@
 
 <script>
 import { computed } from '@nuxtjs/composition-api'
-import { startOfWeek, endOfWeek } from 'date-fns'
+import { startOfWeek, addDays } from 'date-fns'
 import useRSVP from '~/use/rsvp'
 import useCollection from '~/use/collection'
 import useAccounts from '~/use/accounts'
@@ -97,12 +97,13 @@ export default {
       }
     }
 
-    const startOfWeekDate = getYmd(startOfWeek(new Date()))
-    const endOfWeekDate = getYmd(endOfWeek(new Date()))
+    const startOfWeekDate = startOfWeek(new Date(), { weekStartsOn: 0 })
+    const startOfWeekString = getYmd(startOfWeekDate)
+    const endOfWeekString = getYmd(addDays(startOfWeekDate, 7))
 
     const thisWeekFilter = (item) =>
-      getYmd(item.startDate) >= startOfWeekDate &&
-      getYmd(item.startDate) <= endOfWeekDate
+      getYmd(item.startDate) >= startOfWeekString &&
+      getYmd(item.startDate) <= endOfWeekString
 
     const count = computed(() => items.value.length)
     const { route } = useRouter()
@@ -149,8 +150,8 @@ export default {
       getTime,
       getDay,
       getDate,
-      startOfWeekDate,
-      endOfWeekDate
+      startOfWeekString,
+      endOfWeekString
     }
   }
 }

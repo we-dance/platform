@@ -58,6 +58,24 @@ export default () => {
 
   const getCount = (eventId, rsvp) => getList(eventId, rsvp).length
 
+  async function createGuestRsvp(
+    eventId,
+    collection,
+    rsvp,
+    participant,
+    extra
+  ) {
+    const rsvpObject = {
+      participant,
+      rsvp,
+      eventId,
+      collection,
+      ...extra
+    }
+
+    await create(rsvpObject)
+  }
+
   async function updateRsvp(eventId, collection, rsvp, extra) {
     if (!isAccountConfirmed()) {
       router.push(
@@ -92,6 +110,7 @@ export default () => {
   }
 
   return {
+    createGuestRsvp,
     getRsvp,
     getRsvpResponse,
     updateRsvp,
