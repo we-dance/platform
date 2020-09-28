@@ -12,6 +12,8 @@ export default () => {
 
   const currentCity = computed(() => state.currentCity)
 
+  find('name', currentCity.value)
+
   watch(currentCity, (currentCity) => {
     if (currentCity) {
       ls('city', currentCity)
