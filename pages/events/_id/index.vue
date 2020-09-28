@@ -66,9 +66,15 @@
           <div v-if="item.address">
             <div class="flex items-center">
               <TIcon name="place" class="w-4 h-4 mr-1" />
-              <p>
+              <a
+                :href="
+                  `https://maps.google.com/?q=${item.address},${item.city}`
+                "
+                class="underline hover:no-underline"
+                target="_blank"
+              >
                 {{ item.address }}
-              </p>
+              </a>
             </div>
           </div>
           <div v-if="item.organiser" class="ml-2">
