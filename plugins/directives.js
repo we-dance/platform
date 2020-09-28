@@ -4,6 +4,7 @@ import VueTour from 'vue-tour'
 import WTelegram from '~/components/WTelegram'
 import WInstagram from '~/components/WInstagram'
 import WYoutube from '~/components/WYoutube'
+import WProfile from '~/components/WProfile'
 
 Vue.directive('focus', {
   inserted: (el) => {
@@ -17,6 +18,7 @@ Vue.use(VueTour)
 Vue.component('WTelegram', WTelegram)
 Vue.component('WInstagram', WInstagram)
 Vue.component('WYoutube', WYoutube)
+Vue.component('WProfile', WProfile)
 
 // document.oncontextmenu = () => {
 //   return false
