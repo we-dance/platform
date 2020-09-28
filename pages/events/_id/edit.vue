@@ -113,8 +113,10 @@ export default {
           },
           {
             name: 'address',
+            label: 'Street, house',
             type: 'address',
-            description: "Leave empty if it's online"
+            description:
+              'Please do not include here anything else except street and house number. You can add all additional information in the description.'
           },
           {
             name: 'link',
