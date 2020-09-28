@@ -124,6 +124,12 @@
         />
       </div>
     </div>
+
+    <div class="mx-auto max-w-md flex justify-end my-4 text-xs">
+      <span class="mr-1">Added by</span>
+      <TAvatar :uid="item.createdBy" name />
+      <span class="ml-1">on {{ getDateTime(item.createdAt) }}</span>
+    </div>
   </div>
 </template>
 
