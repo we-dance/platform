@@ -5,20 +5,23 @@
   </div>
   <div v-else>
     <TPopup
-      v-if="reservationPopup"
+      v-if="reservationPopup && !uid"
+      title="Members only"
+      @close="reservationPopup = false"
+    >
+      <div class="mt-4 flex flex-col justify-center">
+        <div>Sign in to participate in events</div>
+        <TButton type="primary" class="mt-2" to="/signin">Sign In</TButton>
+      </div>
+    </TPopup>
+    <TPopup
+      v-if="reservationPopup && uid"
       title="Reserve a spot"
       @close="reservationPopup = false"
     >
       <div class="my-4 flex flex-col justify-center max-w-sm w-full">
         <div v-if="reservationPopup === 'reserve'">
-          <div v-if="!uid" class="flex justify-center">
-            <TButton type="secondary" class="my-2" to="/signin"
-              >Sign In with WeDance</TButton
-            >
-          </div>
-          <div v-if="!uid" class="divider">or</div>
           <div>
-            <h2 v-if="!uid" class="font-bold">Register as Guest</h2>
             <p class="text-xs">
               Organiser of the event requires the following information:
             </p>
