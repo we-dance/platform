@@ -42,6 +42,10 @@ export default (name, filter) => {
     })
   }
 
+  function reset() {
+    Vue.set(state, hash, {})
+  }
+
   async function load() {
     const docs = await collection.get()
 
@@ -82,6 +86,7 @@ export default (name, filter) => {
     getById,
     docs,
     loading,
-    load
+    load,
+    reset
   }
 }

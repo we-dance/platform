@@ -5,7 +5,8 @@
         v-if="value"
         :src="value"
         :alt="name"
-        class="rounded-full h-32 h-32"
+        class="h-32"
+        :class="{ 'rounded-full': circle }"
       />
       <button
         class="underline text-blue-500 p-4 hover:no-underline"
@@ -19,8 +20,8 @@
       <div :class="!editing ? 'cursor-pointer' : ''">
         <croppa
           v-model="croppa"
-          :width="300"
-          :height="300"
+          :width="width"
+          :height="height"
           prevent-white-space
           :show-remove-button="false"
           :placeholder="selectLabel"
@@ -42,6 +43,7 @@
 
       <div class="mt-4 flex justify-between">
         <TButton @click="showPopup = false">Cancel</TButton>
+        <TButton type="secondary" @click="clear()">Clear</TButton>
         <TButton type="primary" @click="save()">Save</TButton>
       </div>
     </TPopup>
@@ -78,6 +80,18 @@ export default {
     item: {
       type: Object,
       default: () => ({})
+    },
+    width: {
+      type: Number,
+      default: 300
+    },
+    height: {
+      type: Number,
+      default: 300
+    },
+    circle: {
+      type: Boolean,
+      default: true
     }
   },
   data: () => ({
@@ -106,6 +120,11 @@ export default {
 
       this.$emit('input', result.url)
 
+      this.showPopup = false
+      this.progress = 0
+    },
+    clear() {
+      this.$emit('input', '')
       this.showPopup = false
       this.progress = 0
     },

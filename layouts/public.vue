@@ -30,55 +30,14 @@
       >
         <div class="flex items-center">
           <p>
-            © WeDance 2020 – All rights reserved. Created by
-            <a
-              class="underline hover:no-underline"
-              target="_blank"
-              rel="noopener noreferrer"
-              href="https://razbakov.com/"
-              >Aleksey Razbakov</a
-            >.
+            © WeDance 2020 – All rights reserved.
             <a
               class="underline hover:no-underline"
               rel="noopener noreferrer"
-              href="mailto:WeDanceMunich@razbakov.com"
+              href="mailto:contact@wedance.vip"
               >Contact&nbsp;us</a
             >.
           </p>
-        </div>
-        <div class="grid grid-flow-col grid-cols-4 grid-rows-1 gap-4">
-          <a
-            target="_blank"
-            class="flex justify-center hover:opacity-50"
-            href="https://instagram.com/WeDanceMunich"
-            rel="noopener noreferrer"
-          >
-            <TIcon name="instagram" class="h-10 w-10" />
-          </a>
-          <a
-            target="_blank"
-            class="flex justify-center hover:opacity-50"
-            href="https://fb.com/WeDanceMunich"
-            rel="noopener noreferrer"
-          >
-            <TIcon name="facebook" class="h-10 w-10" />
-          </a>
-          <a
-            target="_blank"
-            class="flex justify-center hover:opacity-50"
-            href="https://www.youtube.com/channel/UCcoW0f6TqLrGJRUubcaemLw"
-            rel="noopener noreferrer"
-          >
-            <TIcon name="youtube" class="h-10 w-10" />
-          </a>
-          <a
-            target="_blank"
-            class="flex justify-center hover:opacity-50"
-            href="https://twitter.com/WeDanceMunich"
-            rel="noopener noreferrer"
-          >
-            <TIcon name="twitter" class="h-10 w-10" />
-          </a>
         </div>
       </div>
     </div>

@@ -47,18 +47,49 @@
         </div>
       </div>
     </TPopup>
-    <div class="bg-dark text-real-white pt-16">
-      <div class="mt-8 px-4 mx-auto max-w-2xl text-center">
-        <TStyles :value="item.styles" />
-        <h1 class="mt-4 text-4xl font-bold leading-tight">
+    <div class="mx-auto max-w-md bg-real-white p-4">
+      <img v-if="item.cover" :src="item.cover" :alt="item.name" class="mb-2" />
+      <div class="px-4 mx-auto max-w-2xl text-center">
+        <div class="uppercase text-red-600">
+          <span>{{ getDate(item.startDate) }}</span>
+          <span>{{ getTime(item.startDate) }}</span>
+          –
+          <span v-if="getDate(item.startDate) !== getDate(item.endDate)">{{
+            getDate(item.endDate)
+          }}</span>
+          {{ getTime(item.endDate) }}
+        </div>
+        <h1 class="text-4xl font-bold leading-none">
           {{ item.name }}
         </h1>
-        <p v-if="item.organiser" class="mt-2 text-xl">
-          by {{ item.organiser }}
-        </p>
+        <div class="flex justify-center mt-2">
+          <div v-if="item.address">
+            <div class="flex items-center">
+              <TIcon name="place" class="w-4 h-4 mr-1" />
+              <p>
+                {{ item.address }}
+              </p>
+            </div>
+          </div>
+          <div v-if="item.organiser" class="ml-2">
+            <div class="flex items-center">
+              <TIcon name="store" class="w-4 h-4 mr-1" />
+              <p>
+                {{ item.organiser }}
+              </p>
+            </div>
+          </div>
+        </div>
         <div>
           <TButton
-            v-if="!uid || item.response !== 'up'"
+            v-if="item.link"
+            class="mt-4 mr-4"
+            type="danger"
+            :href="item.link"
+            >Register</TButton
+          >
+          <TButton
+            v-else-if="!uid || item.response !== 'up'"
             class="mt-4 mr-4"
             type="danger"
             @click="reservationPopup = 'reserve'"
@@ -72,29 +103,19 @@
             >You are going</TButton
           >
         </div>
-        <div class="mt-8 pb-4">
-          <p v-if="item.address">Address: {{ item.address }}</p>
-          <p v-else>Online Event</p>
-          <p v-if="item.price">Price: {{ item.price }}</p>
-          <p>Start: {{ getDateTime(item.startDate) }}</p>
-          <p>End: {{ getDateTime(item.endDate) }}</p>
-        </div>
       </div>
-    </div>
-    <div class="mx-auto max-w-md">
-      <div class="bg-white p-4">
-        <div>
-          <TPreview class="mt-2" :content="item.description" />
 
-          <div v-if="can('edit', 'events', item)" class="my-2 flex items-start">
-            <TButton
-              icon="edit"
-              :to="`/events/${item.id}/edit`"
-              class="hover:text-blue-500"
-              label="Edit"
-            />
-          </div>
-        </div>
+      <TStyles class="text-center text-xs mt-4" :value="item.styles" />
+
+      <TPreview class="mt-4" :content="item.description" />
+
+      <div v-if="can('edit', 'events', item)" class="my-2 flex items-start">
+        <TButton
+          icon="edit"
+          :to="`/events/${item.id}/edit`"
+          class="hover:text-blue-500"
+          label="Edit"
+        />
       </div>
     </div>
   </div>
@@ -109,7 +130,7 @@ import useRouter from '~/use/router'
 import useProfiles from '~/use/profiles'
 import useReactions from '~/use/reactions'
 import useAccounts from '~/use/accounts'
-import { getDateTime, dateDiff } from '~/utils'
+import { getDateTime, getDate, getTime, dateDiff } from '~/utils'
 
 export default {
   layout: 'public',
@@ -213,7 +234,9 @@ export default {
       can,
       getProfile,
       getDateTime,
-      dateDiff
+      dateDiff,
+      getDate,
+      getTime
     }
   }
 }

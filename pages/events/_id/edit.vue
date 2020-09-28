@@ -86,13 +86,30 @@ export default {
         value: 'event',
         fields: [
           {
-            name: 'type',
-            type: 'select',
-            options: ['Party', 'Course']
+            name: 'name',
+            hideLabel: true,
+            placeholder: 'Name'
           },
           {
-            name: 'styles',
-            type: 'stylesSelect'
+            name: 'description',
+            hideLabel: true,
+            type: 'textarea',
+            placeholder: 'Description'
+          },
+
+          {
+            name: 'city',
+            type: 'city'
+          },
+          {
+            name: 'cover',
+            type: 'photo',
+            width: 500,
+            height: 500,
+            circle: false
+          },
+          {
+            name: 'organiser'
           },
           {
             name: 'address',
@@ -102,6 +119,11 @@ export default {
           {
             name: 'link',
             description: 'URL of your registration form'
+          },
+          {
+            name: 'type',
+            type: 'select',
+            options: ['Party', 'Course']
           },
           {
             name: 'startDate',
@@ -128,21 +150,8 @@ export default {
             }
           },
           {
-            name: 'price'
-          },
-          {
-            name: 'organiser'
-          },
-          {
-            name: 'name',
-            hideLabel: true,
-            placeholder: 'Name'
-          },
-          {
-            name: 'description',
-            hideLabel: true,
-            type: 'textarea',
-            placeholder: 'Description'
+            name: 'styles',
+            type: 'stylesSelect'
           }
         ]
       }

@@ -18,7 +18,7 @@
           :key="item.id"
           class="bg-white px-4 mt-4 flex"
         >
-          <div class="mr-2 flex justify-center items-start pt-1">
+          <div v-if="false" class="mr-2 flex justify-center items-start pt-1">
             <button
               v-if="item.response === 'up'"
               class="text-green-500"
@@ -43,8 +43,24 @@
             >
               {{ item.name }}
             </router-link>
-            <div class="text-xs">{{ item.address }}</div>
-            <TStyles class="text-xs" :value="item.styles" />
+            <div class="flex text-xs">
+              <div v-if="item.organiser">
+                <div class="flex items-center">
+                  <TIcon name="store" class="w-4 h-4 mr-1" />
+                  <p>
+                    {{ item.organiser }}
+                  </p>
+                </div>
+              </div>
+              <div v-if="item.address" class="ml-2">
+                <div class="flex items-center">
+                  <TIcon name="place" class="w-4 h-4 mr-1" />
+                  <p>
+                    {{ item.address }}
+                  </p>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </div>
@@ -72,7 +88,9 @@ export default {
       updateRsvp,
       loading: loadingRsvps
     } = useRSVP()
+    const { currentCity } = useCities()
     const { docs, loading: loadingPosts, getById } = useCollection('events')
+
     const { uid } = useAuth()
 
     const map = (item) => {
@@ -103,7 +121,8 @@ export default {
 
     const thisWeekFilter = (item) =>
       getYmd(item.startDate) >= startOfWeekString &&
-      getYmd(item.startDate) <= endOfWeekString
+      getYmd(item.startDate) <= endOfWeekString &&
+      item.city === currentCity.value
 
     const count = computed(() => items.value.length)
     const { route } = useRouter()
@@ -133,8 +152,6 @@ export default {
     const loading = computed(() => loadingRsvps.value && loadingPosts.value)
 
     const { getAccount } = useAccounts()
-
-    const { currentCity } = useCities()
 
     return {
       currentCity,
