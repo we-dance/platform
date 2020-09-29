@@ -96,9 +96,6 @@
             <pre v-if="item.marketing.ref" class="text-xs">
 ref: {{ item.marketing.ref }}</pre
             >
-            <pre v-if="item.marketing.referrer" class="text-xs">
-referrer: {{ item.marketing.referrer }}</pre
-            >
             <pre v-if="Object.keys(item.marketing.utms).length" class="text-xs">
 utms: {{ item.marketing.utms }}</pre
             >
