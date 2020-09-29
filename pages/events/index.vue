@@ -120,10 +120,13 @@ export default {
       }
     }
 
-    const startOfWeekDate = startOfWeek(new Date(), { weekStartsOn: 0 })
+    const now = new Date()
+    const startOfWeekDate = startOfWeek(now, { weekStartsOn: 1 })
     const startOfWeekString = getYmd(startOfWeekDate)
+    const startOfTodayString = getYmd(now)
     const endOfWeekString = getYmd(addDays(startOfWeekDate, 7))
-    const endOfYearString = getYmd(endOfYear(new Date()))
+    const in7DaysString = getYmd(addDays(now, 7))
+    const endOfYearString = getYmd(endOfYear(now))
 
     const count = computed(() => items.value.length)
     const { route } = useRouter()
@@ -132,15 +135,15 @@ export default {
 
     const { getAccount } = useAccounts()
 
-    const activeFilter = ref('thisWeek')
+    const activeFilter = ref('next7days')
 
     const filterOptions = computed(() => [
       {
-        value: 'thisWeek',
-        label: 'This Week',
+        value: 'next7days',
+        label: 'Next 7 days',
         filter: (item) =>
-          getYmd(item.startDate) >= startOfWeekString &&
-          getYmd(item.startDate) <= endOfWeekString
+          getYmd(item.startDate) >= startOfTodayString &&
+          getYmd(item.startDate) <= in7DaysString
       },
       {
         value: 'thisYear',
