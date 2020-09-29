@@ -241,9 +241,7 @@ export const matchNotification = functions.firestore
 
 ---
 
-**Your Dance Profiles**: [${fromProfile.name}](https://wedance.vip/u/${fromProfile.username}) & [${toProfile.name}](https://wedance.vip/u/${toProfile.username})
-
-Unite dancers worldwide with **[WeDance.vip](https://wedance.vip/)**
+[Reply to ${fromProfile.name}](https://wedance.vip/u/${fromProfile.username})
 `
 
     const from = 'WeDance <automated@wedance.vip>'
