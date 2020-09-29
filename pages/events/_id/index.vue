@@ -135,7 +135,7 @@
       <TPreview class="mt-4" :content="item.description" />
     </div>
 
-    <div class="mx-auto max-w-md flex justify-end my-4 text-xs mr-4">
+    <div class="mx-auto max-w-md flex justify-end my-4 text-xs pr-4">
       <span class="mr-1">Added by</span>
       <TAvatar :uid="item.createdBy" name />
       <span class="ml-1">on {{ getDateTime(item.createdAt) }}</span>
