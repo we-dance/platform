@@ -16,7 +16,9 @@ export default {
   },
   mounted() {
     const script = document.createElement('script')
-    script.src = 'https://gumroad.com/js/gumroad.js'
+    script.setAttribute('src', 'https://gumroad.com/js/gumroad.js')
+    script.async = true
+
     document.head.appendChild(script)
   }
 }
