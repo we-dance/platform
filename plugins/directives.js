@@ -5,6 +5,7 @@ import WTelegram from '~/components/WTelegram'
 import WInstagram from '~/components/WInstagram'
 import WYoutube from '~/components/WYoutube'
 import WProfile from '~/components/WProfile'
+import WGumroad from '~/components/WGumroad'
 
 Vue.directive('focus', {
   inserted: (el) => {
@@ -19,6 +20,7 @@ Vue.component('WTelegram', WTelegram)
 Vue.component('WInstagram', WInstagram)
 Vue.component('WYoutube', WYoutube)
 Vue.component('WProfile', WProfile)
+Vue.component('WGumroad', WGumroad)
 
 // document.oncontextmenu = () => {
 //   return false
