@@ -47,7 +47,26 @@
         </div>
       </div>
     </TPopup>
+
     <div class="mx-auto max-w-md bg-real-white p-4">
+      <div
+        v-if="can('edit', 'events', item)"
+        class="mb-2 flex items-start justify-center"
+      >
+        <TButton
+          icon="people"
+          :to="`/events/${item.id}/dashboard`"
+          class="hover:text-blue-500 mr-2"
+          label="Dashboard"
+        />
+        <TButton
+          icon="edit"
+          :to="`/events/${item.id}/edit`"
+          class="hover:text-blue-500"
+          label="Edit"
+        />
+      </div>
+
       <img v-if="item.cover" :src="item.cover" :alt="item.name" class="mb-2" />
       <div class="px-4 mx-auto max-w-2xl text-center">
         <div class="uppercase text-red-600">
@@ -114,15 +133,6 @@
       <TStyles class="text-center text-xs mt-4" :value="item.styles" />
 
       <TPreview class="mt-4" :content="item.description" />
-
-      <div v-if="can('edit', 'events', item)" class="my-2 flex items-start">
-        <TButton
-          icon="edit"
-          :to="`/events/${item.id}/edit`"
-          class="hover:text-blue-500"
-          label="Edit"
-        />
-      </div>
     </div>
 
     <div class="mx-auto max-w-md flex justify-end my-4 text-xs">
