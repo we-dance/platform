@@ -2,6 +2,11 @@
   <main>
     <TTitle>
       Events
+      <template slot="right">
+        <div>
+          <TInputSelect v-model="activeFilter" :options="filterOptions" />
+        </div>
+      </template>
     </TTitle>
 
     <div>
@@ -69,8 +74,8 @@
 </template>
 
 <script>
-import { computed } from '@nuxtjs/composition-api'
-import { startOfWeek, addDays } from 'date-fns'
+import { computed, ref } from '@nuxtjs/composition-api'
+import { startOfWeek, addDays, endOfYear } from 'date-fns'
 import useRSVP from '~/use/rsvp'
 import useCollection from '~/use/collection'
 import useAccounts from '~/use/accounts'
@@ -118,20 +123,57 @@ export default {
     const startOfWeekDate = startOfWeek(new Date(), { weekStartsOn: 0 })
     const startOfWeekString = getYmd(startOfWeekDate)
     const endOfWeekString = getYmd(addDays(startOfWeekDate, 7))
-
-    const thisWeekFilter = (item) =>
-      getYmd(item.startDate) >= startOfWeekString &&
-      getYmd(item.startDate) <= endOfWeekString &&
-      item.city === currentCity.value
+    const endOfYearString = getYmd(endOfYear(new Date()))
 
     const count = computed(() => items.value.length)
     const { route } = useRouter()
+
+    const loading = computed(() => loadingRsvps.value && loadingPosts.value)
+
+    const { getAccount } = useAccounts()
+
+    const activeFilter = ref('thisWeek')
+
+    const filterOptions = computed(() => [
+      {
+        value: 'thisWeek',
+        label: 'This Week',
+        filter: (item) =>
+          getYmd(item.startDate) >= startOfWeekString &&
+          getYmd(item.startDate) <= endOfWeekString
+      },
+      {
+        value: 'thisYear',
+        label: 'This Year',
+        filter: (item) =>
+          getYmd(item.startDate) >= startOfWeekString &&
+          getYmd(item.startDate) <= endOfYearString
+      },
+      {
+        value: 'createdByMe',
+        label: 'Created by me',
+        filter: (item) => item.createdBy === uid.value
+      },
+      {
+        value: 'schedule',
+        label: 'My schedule',
+        filter: (item) => item.response === 'up'
+      }
+    ])
+
+    const activeFilterItem = computed(() =>
+      filterOptions.value.find((item) => item.value === activeFilter.value)
+    )
+
+    const thisCityFilter = (item) => item.city === currentCity.value
 
     const items = computed(() => {
       let result = docs.value.map(map)
 
       if (!route.query.all) {
-        result = result.filter(thisWeekFilter)
+        result = result
+          .filter(thisCityFilter)
+          .filter(activeFilterItem.value.filter)
       }
 
       return result.sort(sortBy('startDate'))
@@ -149,10 +191,6 @@ export default {
       return result
     })
 
-    const loading = computed(() => loadingRsvps.value && loadingPosts.value)
-
-    const { getAccount } = useAccounts()
-
     return {
       currentCity,
       count,
@@ -168,7 +206,9 @@ export default {
       getDay,
       getDate,
       startOfWeekString,
-      endOfWeekString
+      endOfWeekString,
+      activeFilter,
+      filterOptions
     }
   }
 }
