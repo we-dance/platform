@@ -81,8 +81,8 @@
         <h1 class="text-4xl font-bold leading-none">
           {{ item.name }}
         </h1>
-        <div class="flex justify-center mt-2">
-          <div v-if="item.address">
+        <div class="flex flex-wrap justify-center mt-2">
+          <div v-if="item.address" class="mr-2">
             <div class="flex items-center">
               <TIcon name="place" class="w-4 h-4 mr-1" />
               <a
@@ -96,7 +96,7 @@
               </a>
             </div>
           </div>
-          <div v-if="item.organiser" class="ml-2">
+          <div v-if="item.organiser">
             <div class="flex items-center">
               <TIcon name="store" class="w-4 h-4 mr-1" />
               <p>

@@ -44,20 +44,20 @@
           <div>
             <router-link
               :to="`/events/${item.id}`"
-              class="font-bold leading-tight underline hover:no-underline"
+              class="font-bold leading-none hover:underline hover:text-primary"
             >
               {{ item.name }}
             </router-link>
-            <div class="flex text-xs">
-              <div v-if="item.organiser">
-                <div class="flex items-center">
+            <div class="text-xs flex flex-wrap">
+              <div v-if="item.organiser" class="hidden md:block">
+                <div class="flex items-center mr-2">
                   <TIcon name="store" class="w-4 h-4 mr-1" />
                   <p>
                     {{ item.organiser }}
                   </p>
                 </div>
               </div>
-              <div v-if="item.address" class="ml-2">
+              <div v-if="item.address">
                 <div class="flex items-center">
                   <TIcon name="place" class="w-4 h-4 mr-1" />
                   <p>
