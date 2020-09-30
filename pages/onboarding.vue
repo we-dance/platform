@@ -170,7 +170,12 @@ export default {
         confirmed: true
       })
 
-      const target = `/posts/74zve0dQqtdwaSXq7RDf`
+      let target = ls('target')
+      ls.remove('target')
+
+      if (!target) {
+        target = `/feed`
+      }
 
       this.$router.push(target)
     }

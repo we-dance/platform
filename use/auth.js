@@ -7,7 +7,6 @@ import { toRefs } from '@nuxtjs/composition-api'
 import firebase from 'firebase/app'
 import 'firebase/auth'
 import 'firebase/firestore'
-import clean from 'lodash-clean'
 import useRouter from '~/use/router'
 import { getDateObect } from '~/utils'
 
@@ -117,7 +116,6 @@ export default () => {
       language,
       locale,
       languages,
-      mode: clean(features),
       screen: {
         width,
         height

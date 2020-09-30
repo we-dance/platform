@@ -112,12 +112,19 @@ export default {
           ls.remove('target')
 
           if (!target) {
-            target = '/feed'
+            target = '/posts/74zve0dQqtdwaSXq7RDf'
           }
 
           this.$router.push(target)
         }
       }
+    }
+  },
+  mounted() {
+    const target = this.$route.query.target
+
+    if (target) {
+      ls('target', target)
     }
   },
   methods: {

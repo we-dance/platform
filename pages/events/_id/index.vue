@@ -11,7 +11,12 @@
     >
       <div class="mt-4 flex flex-col justify-center">
         <div>Sign in to participate in events</div>
-        <TButton type="primary" class="mt-2" to="/signin">Sign In</TButton>
+        <TButton
+          type="primary"
+          class="mt-2"
+          :to="`/signin?target=${this.$route.fullPath}`"
+          >Sign In</TButton
+        >
       </div>
     </TPopup>
     <TPopup
