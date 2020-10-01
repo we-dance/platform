@@ -174,7 +174,7 @@ export default {
       ls.remove('target')
 
       if (!target) {
-        target = `/feed`
+        target = `/posts/74zve0dQqtdwaSXq7RDf`
       }
 
       this.$router.push(target)

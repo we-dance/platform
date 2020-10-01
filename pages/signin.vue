@@ -108,14 +108,7 @@ export default {
     uid: {
       handler(val) {
         if (val) {
-          let target = ls('target')
-          ls.remove('target')
-
-          if (!target) {
-            target = '/posts/74zve0dQqtdwaSXq7RDf'
-          }
-
-          this.$router.push(target)
+          this.redirect()
         }
       }
     }
@@ -126,8 +119,22 @@ export default {
     if (target) {
       ls('target', target)
     }
+
+    if (this.uid) {
+      this.redirect()
+    }
   },
   methods: {
+    redirect() {
+      let target = ls('target')
+      ls.remove('target')
+
+      if (!target) {
+        target = '/feed'
+      }
+
+      this.$router.push(target)
+    },
     async reload() {
       await this.signOut()
     },
