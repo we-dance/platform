@@ -10,8 +10,17 @@
     Only event owner can access this area.
   </main>
   <div v-else>
+    <TPopup v-if="addingGuest" title="Add Guest" @close="addingGuest = false">
+      <TForm class="mt-4" :fields="reservationFields" @save="addGuest" />
+    </TPopup>
     <div class="mx-auto max-w-md bg-real-white p-4">
-      <div class="mb-2 flex items-start justify-end">
+      <div class="mb-2 flex items-start justify-between">
+        <TButton
+          class="hover:text-blue-500"
+          type="link"
+          label="Add participant"
+          @click="addingGuest = true"
+        />
         <TButton
           :to="`/events/${item.id}/`"
           class="hover:text-blue-500"
@@ -34,7 +43,29 @@
         </h1>
       </div>
       <div>
-        <TGridParticipants :items="participants" />
+        <TGridParticipants :items="participants" :filters="filters">
+          <template v-slot="{ item }">
+            <div class="mt-4 flex justify-between">
+              <TButton
+                v-if="item.state !== 'in'"
+                type="danger"
+                @click="update(item.id, { rsvp: 'up', state: 'in' })"
+                >Check In</TButton
+              >
+              <TButton
+                v-else
+                type="success"
+                @click="update(item.id, { rsvp: 'up', state: 'out' })"
+                >Checked In</TButton
+              >
+              <TButton
+                icon="delete"
+                color="red-500"
+                @click="update(item.id, { rsvp: 'down', state: 'out' })"
+              />
+            </div>
+          </template>
+        </TGridParticipants>
       </div>
     </div>
   </div>
@@ -49,12 +80,13 @@ import useRouter from '~/use/router'
 import useProfiles from '~/use/profiles'
 import useReactions from '~/use/reactions'
 import useAccounts from '~/use/accounts'
-import { getDateTime, getDate, getTime, dateDiff } from '~/utils'
+import { getDateTime, getDate, getTime, dateDiff, sortBy } from '~/utils'
 
 export default {
   layout: 'public',
   setup() {
-    const { uid, can, account, updateAccount } = useAuth()
+    const addingGuest = ref(false)
+    const { uid, can, account } = useAuth()
     const { params } = useRouter()
     const { getProfile } = useProfiles()
     const { accountFields } = useAccounts()
@@ -62,21 +94,28 @@ export default {
     const { doc, load, exists, loading } = useDoc('events')
     const { map } = useReactions()
 
-    const { updateRsvp, createGuestRsvp, getListRsvps } = useRSVP()
+    const { update, updateRsvp, createGuestRsvp, getListRsvps } = useRSVP()
 
     if (params.id) {
       load(params.id)
     }
 
     const participants = computed(() =>
-      getListRsvps(params.id, 'up').map((item) => ({
-        name: item.participant.name,
-        email: item.participant.email,
-        phone: item.participant.phone,
-        createdAt: item.createdAt,
-        updatedAt: item.updatedAt,
-        id: item.createdBy
-      }))
+      getListRsvps(params.id)
+        .map((item) => ({
+          name: item.participant.name,
+          email: item.participant.email,
+          phone: item.participant.phone,
+          createdAt: item.createdAt,
+          updatedAt: item.updatedAt,
+          createdBy: item.createdBy,
+          uid: item.uid,
+          id: item.id,
+          state: item.state,
+          rsvp: item.rsvp,
+          search: item.participant.name + item.participant.email
+        }))
+        .sort(sortBy('name'))
     )
 
     const item = computed(() => map(doc.value))
@@ -90,18 +129,42 @@ export default {
       reservationPopup.value = false
     }
 
-    const reserve = async (participant) => {
-      if (!uid.value) {
-        createGuestRsvp(params.id, 'events', 'up', participant)
-      } else {
-        await updateAccount(participant)
-        updateRsvp(params.id, 'events', 'up')
+    const filters = computed(() => [
+      {
+        value: '',
+        label: 'Attending',
+        filter: (item) => item.rsvp === 'up'
+      },
+      {
+        value: 'in',
+        label: 'Checked in',
+        filter: (item) => item.rsvp === 'up' && item.state === 'in'
+      },
+      {
+        value: 'out',
+        label: 'Not checked in',
+        filter: (item) => item.rsvp === 'up' && item.state !== 'in'
+      },
+      {
+        value: 'canceled',
+        label: 'Canceled',
+        filter: (item) => item.rsvp === 'down'
       }
+    ])
 
-      reservationPopup.value = 'finish'
+    const reserve = async (participant) => {
+      await createGuestRsvp(params.id, 'events', 'up', participant)
+    }
+
+    const addGuest = async (participant) => {
+      await reserve(participant)
+      addingGuest.value = false
     }
 
     return {
+      addGuest,
+      addingGuest,
+      filters,
       isCreatingProfile,
       finishReservation,
       account,
@@ -114,6 +177,7 @@ export default {
       item,
       map,
       updateRsvp,
+      update,
       can,
       getProfile,
       getDateTime,

@@ -27,10 +27,14 @@ export default () => {
       .map((item) => item.participant)
   }
 
-  function getListRsvps(eventId, rsvp = 'yes') {
-    return docs.value.filter(
-      (item) => item.eventId === eventId && item.rsvp === rsvp
-    )
+  function getListRsvps(eventId, rsvp) {
+    if (rsvp) {
+      return docs.value.filter(
+        (item) => item.eventId === eventId && item.rsvp === rsvp
+      )
+    }
+
+    return docs.value.filter((item) => item.eventId === eventId)
   }
 
   const getEvents = (userId, collection, rsvp = 'yes') => {
@@ -114,6 +118,7 @@ export default () => {
     getRsvp,
     getRsvpResponse,
     updateRsvp,
+    update,
     getCount,
     getList,
     getEvents,

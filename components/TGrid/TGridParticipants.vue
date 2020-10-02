@@ -1,20 +1,10 @@
 <template>
   <div class="flex flex-col">
-    <div class="flex justify-end mt-4">
-      <TButton class="mr-2" @click="download">Export CSV</TButton>
-    </div>
-    <div class="py-4 flex flex-row mb-4 items-center border-b">
-      <input
-        v-model="selectedAll"
-        type="checkbox"
-        class="mb-2 md:ml-2 md:mb-0"
-        @click="selectAll(!selectedAll)"
-      />
-
+    <div class="py-4 mb-4 items-center border-b">
       <TInputSelect
         v-model="activeFilter"
         class="mb-2 md:ml-2 md:mb-0"
-        :options="filterOptions"
+        :options="filters"
       />
 
       <TInput
@@ -25,11 +15,16 @@
     </div>
 
     <div :class="{ 'overflow-y-scroll h-64': verticalScroll }">
-      <div class="mb-4 text-center text-xs">{{ items.length }} users</div>
       <div
-        v-for="item in items"
+        class="underline mb-4 text-center text-xs"
+        @click="selectAll(!selectedAll)"
+      >
+        {{ filteredItems.length }} users
+      </div>
+      <div
+        v-for="item in filteredItems"
         :key="item.id"
-        :class="{ 'border-green-500': item.selected }"
+        :class="{ 'border-green-500': selected[item.id] }"
         class="p-4 mb-4 border border-gray-500 rounded"
       >
         <div class="flex flex-col md:flex-row">
@@ -41,16 +36,25 @@
             ></div>
           </div>
           <div>
-            <TProfilePhoto size="lg" :uid="item.id" class="mr-2" />
+            <TProfilePhoto size="lg" :uid="item.uid" class="mr-2" />
           </div>
           <div class="flex-grow">
             <div class="font-bold">{{ item.name }}</div>
             <div>{{ item.email }}</div>
             <div>{{ item.phone }}</div>
-            <pre class="text-xs">Updated: {{ getDate(item.updatedAt) }}</pre>
+            <pre class="text-xs">
+Updated: {{ getDateTime(item.updatedAt) }}</pre
+            >
+            <slot :item="item" />
           </div>
         </div>
       </div>
+    </div>
+
+    <div class="mt-4 justify-end flex">
+      <a href="#" class="underline text-blue-500" @click="download"
+        >Export CSV</a
+      >
     </div>
   </div>
 </template>
@@ -58,7 +62,7 @@
 <script>
 import Vue from 'vue'
 import { computed, ref } from '@nuxtjs/composition-api'
-import { getTime, getDate, saveCSV } from '~/utils'
+import { getTime, getDate, getDateTime, saveCSV } from '~/utils'
 
 export default {
   name: 'TGridParticipants',
@@ -71,11 +75,19 @@ export default {
       type: Array,
       default: () => []
     },
+    filters: {
+      type: Array,
+      default: () => []
+    },
     multi: {
       type: Boolean,
       default: false
     },
     editable: {
+      type: Boolean,
+      default: false
+    },
+    verticalScroll: {
       type: Boolean,
       default: false
     }
@@ -86,34 +98,39 @@ export default {
     const selectedAll = ref(false)
     const selected = ref({})
 
-    const filterOptions = computed(() => [
-      {
-        value: '',
-        label: `Everyone (${props.items.length})`,
-        filter: (item) => true
+    const activeFilterItem = computed(() =>
+      props.filters.find((item) => item.value === activeFilter.value)
+    )
+
+    const matchString = (str, match) => {
+      if (!str) {
+        return false
       }
-    ])
 
-    // const activeFilterItem = computed(() =>
-    //   filterOptions.value.find((item) => item.value === activeFilter.value)
-    // )
+      return str.toLowerCase().includes(match)
+    }
 
-    // const matchString = (str, match) => {
-    //   if (!str) {
-    //     return false
-    //   }
+    const filteredItems = computed(() =>
+      props.items.filter(activeFilterItem.value.filter).filter((item) => {
+        if (!nameFilter.value || !nameFilter.value.toLowerCase) {
+          return true
+        }
 
-    //   return str.toLowerCase().includes(match)
-    // }
+        const search = nameFilter.value.toLowerCase()
+
+        return matchString(item.search, search)
+      })
+    )
 
     return {
       nameFilter,
       activeFilter,
-      filterOptions,
       selectedAll,
       getTime,
       selected,
-      getDate
+      getDate,
+      getDateTime,
+      filteredItems
     }
   },
   computed: {
@@ -157,6 +174,8 @@ export default {
       }
     },
     selectAll(mark) {
+      this.selectedAll = !this.selectedAll
+
       this.items.forEach((item) => {
         this.select(item, mark)
       })
