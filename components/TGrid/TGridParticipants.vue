@@ -1,6 +1,6 @@
 <template>
   <div class="flex flex-col">
-    <div class="py-4 mb-4 items-center border-b">
+    <div class="py-4 mb-4 md:flex items-center border-b">
       <TInputSelect
         v-model="activeFilter"
         class="mb-2 md:ml-2 md:mb-0"
