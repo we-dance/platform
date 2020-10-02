@@ -42,9 +42,8 @@
         <div v-if="reservationPopup === 'finish'">
           <h2 class="font-bold mb-4">Your spot is reserved</h2>
           <p>
-            You will receive a confirmation email during next 10 minutes. It
-            might land into Spam folder. If you don't receive email please
-            contact support@wedance.vip
+            See you soon! Don't forget to check-in by the organiser when you
+            come!
           </p>
           <TButton type="primary" class="mt-4" @click="reservationPopup = false"
             >Finish</TButton
