@@ -42,6 +42,7 @@
             <div class="font-bold">{{ item.name }}</div>
             <div>{{ item.email }}</div>
             <div>{{ item.phone }}</div>
+            <div>With partner? {{ item.withPartner }}</div>
             <pre class="text-xs">
 Updated: {{ getDateTime(item.updatedAt) }}</pre
             >

@@ -113,6 +113,7 @@ export default {
           id: item.id,
           state: item.state,
           rsvp: item.rsvp,
+          withPartner: item.participant.withPartner,
           search: item.participant.name + item.participant.email
         }))
         .sort(sortBy('name'))

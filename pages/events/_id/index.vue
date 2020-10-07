@@ -5,27 +5,26 @@
   </div>
   <div v-else>
     <TPopup
-      v-if="reservationPopup && !uid"
-      title="Members only"
-      @close="reservationPopup = false"
-    >
-      <div class="mt-4 flex flex-col justify-center">
-        <div>Sign in to participate in events</div>
-        <TButton
-          type="primary"
-          class="mt-2"
-          :to="`/signin?target=${this.$route.fullPath}`"
-          >Sign In</TButton
-        >
-      </div>
-    </TPopup>
-    <TPopup
-      v-if="reservationPopup && uid"
+      v-if="reservationPopup"
       title="Reserve a spot"
       @close="reservationPopup = false"
     >
-      <div class="my-4 flex flex-col justify-center max-w-sm w-full">
+      <div class="mt-4 flex flex-col justify-center">
         <div v-if="reservationPopup === 'reserve'">
+          <div v-if="!uid" class="mb-4">
+            <h2 class="text-center">
+              Do you already have WeDance profile?
+            </h2>
+            <div class="flex justify-center">
+              <TButton
+                v-if="!uid"
+                type="primary"
+                class="mt-2"
+                :to="`/signin?target=${this.$route.fullPath}`"
+                >Sign In</TButton
+              >
+            </div>
+          </div>
           <div>
             <p class="text-xs">
               Organiser of the event requires the following information:
@@ -41,9 +40,12 @@
         </div>
         <div v-if="reservationPopup === 'finish'">
           <h2 class="font-bold mb-4">Your spot is reserved</h2>
-          <p>
+          <p v-if="uid">
             See you soon! Don't forget to check-in by the organiser when you
             come!
+          </p>
+          <p v-else>
+            Check your email to finish creation of the WeDance profile.
           </p>
           <TButton type="primary" class="mt-4" @click="reservationPopup = false"
             >Finish</TButton
@@ -208,7 +210,13 @@ export default {
     }
   },
   setup() {
-    const { uid, can, account, updateAccount } = useAuth()
+    const {
+      uid,
+      can,
+      account,
+      updateAccount,
+      sendSignInLinkToEmail
+    } = useAuth()
     const { params } = useRouter()
     const { getProfile } = useProfiles()
     const { accountFields } = useAccounts()
@@ -224,7 +232,15 @@ export default {
 
     const item = computed(() => map(doc.value))
 
-    const reservationFields = accountFields
+    const reservationFields = [
+      ...accountFields,
+      {
+        name: 'withPartner',
+        type: 'select',
+        label: 'Do you have a partner?',
+        options: ['Yes', 'No']
+      }
+    ]
 
     const reservationPopup = ref(false)
     const isCreatingProfile = ref(false)
@@ -235,7 +251,8 @@ export default {
 
     const reserve = async (participant) => {
       if (!uid.value) {
-        createGuestRsvp(params.id, 'events', 'up', participant)
+        await createGuestRsvp(params.id, 'events', 'up', participant)
+        sendSignInLinkToEmail(participant.email)
       } else {
         await updateAccount(participant)
         updateRsvp(params.id, 'events', 'up')
