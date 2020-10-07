@@ -9,7 +9,9 @@
       title="Reserve a spot"
       @close="reservationPopup = false"
     >
-      <div class="mt-4 flex flex-col justify-center">
+      <div
+        class="mt-4 flex flex-col justify-center max-h-screen overflow-y-scroll"
+      >
         <div v-if="reservationPopup === 'reserve'">
           <div v-if="!uid" class="mb-4">
             <h2 class="text-center">
