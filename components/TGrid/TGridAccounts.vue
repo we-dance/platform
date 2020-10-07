@@ -203,6 +203,11 @@ export default {
         filter: (account) => !account.profile.community
       },
       {
+        value: 'munich',
+        label: 'Munich',
+        filter: (account) => account.profile.community === 'Munich'
+      },
+      {
         value: 'used_more_10d',
         label: 'More than 10 days',
         filter: (account) => account.daysUsed > 10
