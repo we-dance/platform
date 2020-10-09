@@ -38,14 +38,37 @@
             <div v-if="tab === 'couples'" class="flex justify-between">
               <div>
                 <TProfilePhoto size="lg" :uid="item.uid" />
-                <div class="font-bold mt-2">{{ item.name }}</div>
+                <div
+                  class="font-bold mt-2"
+                  :class="{ 'text-red-500': item.rsvp === 'down' }"
+                >
+                  {{ item.name }}
+                </div>
+                <TButton
+                  v-if="item.partnerId"
+                  type="link"
+                  class="mt-4 text-red-500"
+                  @click="
+                    update(item.partnerId, { partnerId: '' })
+                    update(item.id, { partnerId: '' })
+                  "
+                  >Unlink</TButton
+                >
               </div>
-              <div v-if="item.partnerId" class="flex flex-col items-end">
+              <div
+                v-if="item.partnerId"
+                class="flex flex-col items-end text-right"
+              >
                 <TProfilePhoto size="lg" :uid="item.partner.uid" />
-                <div class="font-bold mt-2">{{ item.partner.name }}</div>
+                <div
+                  class="font-bold mt-2"
+                  :class="{ 'text-red-500': item.partner.rsvp === 'down' }"
+                >
+                  {{ item.partner.name }}
+                </div>
               </div>
-              <div v-if="item.couple === 'Yes'">
-                Unregistered Partner
+              <div v-else-if="item.couple === 'Yes'" class="text-right">
+                <TButton label="Add" @click="addingGuest = item.id" />
               </div>
             </div>
             <div v-if="tab !== 'couples'" class="flex flex-col md:flex-row">
@@ -53,11 +76,40 @@
                 <TProfilePhoto size="lg" :uid="item.uid" class="mr-2" />
               </div>
               <div class="flex-grow">
+                <div class="float-right">
+                  <TButton
+                    v-if="tab === 'in'"
+                    type="round"
+                    @click="update(item.id, { rsvp: 'up', state: 'out' })"
+                  >
+                    <TIcon name="rotate_right" class="text-red-500 w-4 h-4" />
+                  </TButton>
+                </div>
                 <div
                   class="font-bold"
                   :class="{ 'text-green-500': !!item.uid }"
                 >
                   {{ item.name }}
+                </div>
+                <div v-if="tab === 'in'">
+                  <div class="flex flex-wrap space-x-2">
+                    <div
+                      v-for="(note, noteId) in item.notesArray"
+                      :key="noteId"
+                      class="p-2 bg-gray-200 rounded"
+                    >
+                      {{ note }}
+                    </div>
+                  </div>
+                  <TMenu2 wrapped label="Add note" type="link">
+                    <TButton
+                      v-for="(note, noteId) in notes"
+                      :key="noteId"
+                      type="nav"
+                      @click="addNote(item, note)"
+                      >{{ note }}</TButton
+                    >
+                  </TMenu2>
                 </div>
                 <div v-if="view === 'contacts'">
                   <div>{{ item.email }}</div>
@@ -122,7 +174,19 @@
                 </div>
               </div>
             </div>
-            <div class="mt-4 flex justify-between">
+            <div class="mt-4 flex justify-start space-x-2">
+              <TButton
+                v-if="tab === ''"
+                type="danger"
+                @click="update(item.id, { rsvp: 'down', state: 'out' })"
+                >Cancel</TButton
+              >
+              <TButton
+                v-if="tab === 'canceled'"
+                type="danger"
+                @click="update(item.id, { rsvp: 'up', state: 'out' })"
+                >RSVP</TButton
+              >
               <TButton
                 v-if="item.state !== 'in' && tab === 'out'"
                 type="danger"
@@ -130,10 +194,22 @@
                 >Check In</TButton
               >
               <TButton
-                v-if="item.state === 'in' && tab === 'in'"
-                type="success"
-                @click="update(item.id, { rsvp: 'up', state: 'out' })"
-                >Checked In</TButton
+                v-if="tab === 'payment'"
+                :type="item.package === 'Subscribed' ? 'success' : 'base'"
+                @click="update(item.id, { package: 'Subscribed' })"
+                >Subscribed</TButton
+              >
+              <TButton
+                v-if="tab === 'payment'"
+                :type="item.package === 'Paid' ? 'success' : 'base'"
+                @click="update(item.id, { package: 'Paid' })"
+                >Paid</TButton
+              >
+              <TButton
+                v-if="tab === 'payment'"
+                :type="!item.package ? 'success' : 'base'"
+                @click="update(item.id, { package: '' })"
+                >Didn't pay</TButton
               >
             </div>
           </template>
@@ -186,7 +262,10 @@ export default {
           state: item.state,
           rsvp: item.rsvp,
           gender: item.gender,
+          package: item.package,
           partnerId: item.partnerId,
+          notes: item.notes,
+          notesArray: item.notes ? Object.keys(item.notes) : [],
           couple:
             item.couple || item.withPartner || item.participant.withPartner,
           search: item.participant.name + item.participant.email
@@ -230,29 +309,37 @@ export default {
     const filters = computed(() => [
       {
         value: '',
-        label: 'Prepare event (list of registered)',
+        label: 'Registered',
         filter: (item) => item.rsvp === 'up'
       },
       {
         value: 'out',
-        label: 'Check in (list of not checked in)',
+        label: 'Check in',
         filter: (item) => item.rsvp === 'up' && item.state !== 'in'
       },
       {
         value: 'in',
-        label: 'During event (list of checked in)',
+        label: 'Present',
+        filter: (item) => item.rsvp === 'up' && item.state === 'in'
+      },
+      {
+        value: 'payment',
+        label: 'Payment',
         filter: (item) => item.rsvp === 'up' && item.state === 'in'
       },
       {
         value: 'couples',
         label: 'Couples',
         filter: (item) =>
-          (!!item.partnerId && item.gender === 'Male') || item.couple === 'Yes'
+          ((!!item.partnerId && item.gender === 'Male') ||
+            item.couple === 'Yes') &&
+          item.rsvp === 'up'
       },
       {
         value: 'no_couple',
         label: 'No couple',
-        filter: (item) => !item.partnerId && item.couple === 'No'
+        filter: (item) =>
+          !item.partnerId && item.couple === 'No' && item.rsvp === 'up'
       },
       {
         value: 'canceled',
@@ -261,16 +348,51 @@ export default {
       }
     ])
 
-    const reserve = async (participant) => {
-      await createGuestRsvp(params.id, 'events', 'up', participant)
-    }
-
     const addGuest = async (participant) => {
-      await reserve(participant)
+      if (addingGuest.value && addingGuest.value !== true) {
+        const rsvp = await createGuestRsvp(
+          params.id,
+          'events',
+          'up',
+          participant,
+          { partnerId: addingGuest.value }
+        )
+        update(addingGuest.value, { partnerId: rsvp.id })
+      } else {
+        await createGuestRsvp(params.id, 'events', 'up', participant)
+      }
+
       addingGuest.value = false
     }
 
+    const notes = [
+      'Steps+',
+      'Steps-',
+      'Rhythm+',
+      'Rhythm-',
+      'Turns+',
+      'Turns-',
+      'NoEnglish',
+      'Russian',
+      'German',
+      'Spanish'
+    ]
+
+    const addNote = (item, note) => {
+      const notes = item.notes || {}
+
+      if (notes[note]) {
+        delete notes[note]
+      } else {
+        notes[note] = true
+      }
+
+      update(item.id, { notes })
+    }
+
     return {
+      notes,
+      addNote,
       getCandidates,
       addGuest,
       addingGuest,
@@ -280,7 +402,6 @@ export default {
       account,
       reservationPopup,
       reservationFields,
-      reserve,
       exists,
       uid,
       loading,

@@ -77,7 +77,7 @@ export default () => {
       ...extra
     }
 
-    await create(rsvpObject)
+    return await create(rsvpObject)
   }
 
   async function updateRsvp(eventId, collection, rsvp, extra) {
