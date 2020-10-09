@@ -1,15 +1,10 @@
 <template>
   <main>
-    <TTitle>
-      Events
-      <template slot="right">
-        <div>
-          <TInputSelect v-model="activeFilter" :options="filterOptions" />
-        </div>
-      </template>
-    </TTitle>
+    <TTitle>Events</TTitle>
 
-    <div>
+    <TTabs v-model="activeFilter" :tabs="filterOptions" />
+
+    <div class="mt-4">
       <TLoader v-if="loading" />
       <div v-else-if="!count">
         No events found
@@ -135,7 +130,7 @@ export default {
 
     const { getAccount } = useAccounts()
 
-    const activeFilter = ref('next7days')
+    const activeFilter = ref('thisYear')
 
     const filterOptions = computed(() => [
       {
@@ -160,7 +155,8 @@ export default {
       {
         value: 'schedule',
         label: 'My schedule',
-        filter: (item) => item.response === 'up'
+        filter: (item) =>
+          item.response === 'up' && getYmd(item.startDate) >= startOfWeekString
       }
     ])
 
