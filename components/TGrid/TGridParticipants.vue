@@ -1,66 +1,35 @@
 <template>
   <div class="flex flex-col">
-    <div class="py-4 mb-4 md:flex items-center border-b">
-      <TInputSelect
-        v-model="activeFilter"
-        class="mb-2 md:ml-2 md:mb-0"
-        :options="filters"
-      />
+    <TInputSelect v-model="activeFilter" class="mt-4" :options="filters" />
 
-      <TInput
-        v-model="nameFilter"
-        class="mb-2 md:ml-2 md:mb-0"
-        placeholder="Search"
-      />
-    </div>
+    <TInput v-model="nameFilter" class="mt-4" placeholder="Search" />
 
-    <div>
-      <TInputSelect
-        v-model="view"
-        class="mb-2 md:ml-2"
-        :options="['name', 'contacts']"
-      />
-    </div>
-
-    <div :class="{ 'overflow-y-scroll h-64': verticalScroll }">
-      <div
-        class="underline mb-4 text-center text-xs"
-        @click="selectAll(!selectedAll)"
-      >
-        {{ filteredItems.length }} users
+    <div :class="{ 'overflow-y-scroll h-64': verticalScroll }" class="mt-4">
+      <div class="flex justify-center mb-4 text-xs space-x-2">
+        <div class="underline cursor-pointer" @click="selectAll(!selectedAll)">
+          {{ filteredItems.length }} shown
+        </div>
+        <div>{{ coupleCount * 2 + femaleCount + maleCount }} total</div>
+        <div>{{ coupleCount }} couples</div>
+        <div>{{ femaleCount }} female</div>
+        <div>{{ maleCount }} male</div>
       </div>
       <div
         v-for="item in filteredItems"
         :key="item.id"
-        :class="{ 'border-green-500': selected[item.id] }"
         class="p-4 mb-4 border border-gray-500 rounded"
       >
-        <div class="flex flex-col md:flex-row">
-          <div>
-            <div
-              class="border w-4 h-4 rounded-full border-gray-500 mr-2"
-              :class="selected[item.id] ? 'bg-green-500 border-green-500' : ''"
-              @click="select(item)"
-            ></div>
-          </div>
-          <div>
-            <TProfilePhoto size="lg" :uid="item.uid" class="mr-2" />
-          </div>
-          <div class="flex-grow">
-            <div class="font-bold">{{ item.name }}</div>
-            <div>With partner? {{ item.withPartner }}</div>
-            <div v-if="view === 'contacts'">
-              <div>{{ item.email }}</div>
-              <div>{{ item.phone }}</div>
-              <pre class="text-xs">
-  Updated: {{ getDateTime(item.updatedAt) }}</pre
-              >
-            </div>
-            <slot :item="item" />
-          </div>
-        </div>
+        <slot :item="item" :tab="activeFilter" :view="view" />
       </div>
     </div>
+
+    <TField
+      v-model="view"
+      type="select"
+      label="Cards View"
+      class="mt-4"
+      :options="['name', 'contacts']"
+    />
 
     <div class="mt-4 justify-end flex">
       <a href="#" class="underline text-blue-500" @click="download"
@@ -134,6 +103,24 @@ export default {
       })
     )
 
+    const coupleCount = computed(
+      () => filteredItems.value.filter((item) => item.couple === 'Yes').length
+    )
+
+    const femaleCount = computed(
+      () =>
+        filteredItems.value.filter(
+          (item) => item.couple === 'No' && item.gender === 'Female'
+        ).length
+    )
+
+    const maleCount = computed(
+      () =>
+        filteredItems.value.filter(
+          (item) => item.couple === 'No' && item.gender === 'Male'
+        ).length
+    )
+
     return {
       view,
       nameFilter,
@@ -143,7 +130,10 @@ export default {
       selected,
       getDate,
       getDateTime,
-      filteredItems
+      filteredItems,
+      coupleCount,
+      femaleCount,
+      maleCount
     }
   },
   computed: {

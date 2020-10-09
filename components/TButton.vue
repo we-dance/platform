@@ -68,6 +68,8 @@ export default {
   computed: {
     classes() {
       const map = {
+        round:
+          'bg-real-white hover:bg-gray-100 text-gray-800 font-semibold py-1 px-4 border border-gray-400 rounded-full shadow',
         simple:
           'bg-white hover:bg-gray-100 text-gray-800 font-semibold py-2 px-4 border border-gray-400 rounded shadow',
         primary:
@@ -77,7 +79,7 @@ export default {
         danger:
           'bg-red-500 no-underline text-white font-semibold py-2 px-4 rounded hover:text-white hover:bg-red-700 shadow',
         base:
-          'bg-white hover:bg-gray-100 text-gray-800 font-semibold py-1 px-4 border border-gray-400 rounded shadow',
+          'bg-real-white hover:bg-gray-100 text-gray-800 font-semibold py-1 px-4 border border-gray-400 rounded shadow',
         secondary:
           'bg-transparent text-primary font-semibold py-2 px-4 border border-primary rounded no-underline hover:bg-primary hover:text-white hover:border-transparent',
         link: 'underline font-semibold hover:no-underline',
