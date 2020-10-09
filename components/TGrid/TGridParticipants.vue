@@ -14,6 +14,14 @@
       />
     </div>
 
+    <div>
+      <TInputSelect
+        v-model="view"
+        class="mb-2 md:ml-2"
+        :options="['name', 'contacts']"
+      />
+    </div>
+
     <div :class="{ 'overflow-y-scroll h-64': verticalScroll }">
       <div
         class="underline mb-4 text-center text-xs"
@@ -40,12 +48,14 @@
           </div>
           <div class="flex-grow">
             <div class="font-bold">{{ item.name }}</div>
-            <div>{{ item.email }}</div>
-            <div>{{ item.phone }}</div>
             <div>With partner? {{ item.withPartner }}</div>
-            <pre class="text-xs">
-Updated: {{ getDateTime(item.updatedAt) }}</pre
-            >
+            <div v-if="view === 'contacts'">
+              <div>{{ item.email }}</div>
+              <div>{{ item.phone }}</div>
+              <pre class="text-xs">
+  Updated: {{ getDateTime(item.updatedAt) }}</pre
+              >
+            </div>
             <slot :item="item" />
           </div>
         </div>
@@ -98,6 +108,7 @@ export default {
     const activeFilter = ref('')
     const selectedAll = ref(false)
     const selected = ref({})
+    const view = ref('name')
 
     const activeFilterItem = computed(() =>
       props.filters.find((item) => item.value === activeFilter.value)
@@ -124,6 +135,7 @@ export default {
     )
 
     return {
+      view,
       nameFilter,
       activeFilter,
       selectedAll,
