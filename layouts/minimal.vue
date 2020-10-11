@@ -1,5 +1,5 @@
 <template>
-  <DefaultLayout hide-menu />
+  <DefaultLayout no-container />
 </template>
 
 <script>

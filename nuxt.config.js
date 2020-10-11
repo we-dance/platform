@@ -67,7 +67,8 @@ export default {
     'portal-vue/nuxt',
     '@nuxtjs/device',
     'nuxt-i18n',
-    '@nuxtjs/amp'
+    '@nuxtjs/amp',
+    '@nuxt/content'
   ],
   purgeCSS: {
     enabled: false

@@ -1,0 +1,63 @@
+# WeDanceCommunity
+
+Local dance community, represented by WeDance Ambassador.
+
+**We plan activities to:**
+
+- unite dancers, dance teachers and dance schools to cooperate and collaborate
+- make dance affordable and easier to organize and participate
+- spread peace and love
+- change mind of society and make a positive impact on local cultures to accept dance
+- change governments regulations
+
+## **Activities by channel**
+
+- **Telegram**
+  - Social dance chat.
+  - We help to find a dance partner.
+  - See weekly dance schedule per dance style.
+  - We engage dancers to talk and connect.
+- **Instagram**
+  - We help local dance teachers to get noticed by reposting their posts and stories where they mention `@WeDance<City>`
+  - We inspire people to start dancing.
+  - We help dancers to find partners.
+  - We curate a weekly digest of dance events.
+  - We share dancers stories in posts.
+  - We run ads to boost attention.
+  - Our aim to connect dancers on WeDance platform.
+- **Facebook**
+  - Repost Instagram.
+- **TikTok**
+  - TBD
+- **Youtube**
+  - We provide shared channel to help local creators and artists to boost their art and subscribers.
+  - We help to get license for music, provide technical support and devices, create network of collaborators and supporters, including writers, translators, video editors, video operators, musicians, etc.
+  - We produce overviews and news about dancing in Munich.
+  - We share dancers stories as interviews or short movies.
+
+## What should Ambassador do?
+
+Ambassador provides communication bridge between Foundation, Platform and local dance community.
+
+You can launch community in your city and become Ambassador.
+
+**Responsibilities:**
+
+- Maintain dance events calendar
+- Get more people in Telegram chat
+- Get more followers in Instagram
+- Get more followers in Facebook
+
+## How to become WeDance Ambassador?
+
+1. Create profile at [wedance.vip](https://wedance.vip/).
+2. Drop message to [@razbakov](https://t.me/razbakov) that you would like to become ambassador with link to your profile – and you will get invitation to our special ambassador chat.
+3. Write there in which city and how do you see your first steps in starting community and we will exchange our experiences and help each other.
+
+## Communities by cities
+
+[**WeDanceMunich**](https://www.notion.so/WeDanceMunich-90fe7406f0204d0cbd481246dfc96b9c)
+
+## What is WeDance?
+
+[**Read more about WeDance**](https://www.notion.so/WeDance-d8a81e56732e4c10958073a8b887a673).

@@ -111,10 +111,7 @@
                   >My Profile</TButton
                 >
                 <TButton type="nav" to="/settings">Settings</TButton>
-                <TButton
-                  type="nav"
-                  href="http://bit.ly/we-dance-concept"
-                  target="_blank"
+                <TButton type="nav" href="/about" target="_blank"
                   >About</TButton
                 >
                 <TButton
@@ -144,93 +141,75 @@
       </div>
     </TPopup>
 
-    <div v-if="currentCity" class="container p-4 mx-auto max-w-xl mb-16">
+    <div
+      class="flex-grow flex flex-col"
+      :class="noContainer ? '' : 'p-4 mx-auto max-w-xl mb-16'"
+    >
       <nuxt />
     </div>
-    <div v-else class="flex-grow flex flex-col">
-      <div
-        class="bg-dark-gradient text-real-white py-16 flex-grow items-center justify-center"
-      >
-        <div class="p-4 mx-auto max-w-2xl text-center">
-          <h1 class="text-5xl font-bold leading-tight">
-            Exclusive for
-            <span class="text-light">Dancers.</span>
-          </h1>
-          <p class="mt-2 text-xl">
-            Salsa, Bachata, Kizomba, Tango, Zouk and more.
-          </p>
-          <div class="text-black mt-4 flex justify-center text-xl">
-            <div>
-              <TInputCity v-model="currentCity" />
-            </div>
-          </div>
-        </div>
-      </div>
-      <div
-        class="border rounded mx-4 my-16 p-4 md:mx-auto max-w-2xl text-center"
-      >
-        <p>
-          Become a member of WeDance Community to get unlimited access to full
-          dance events calendar, dance partner search, dance chat.
-        </p>
-      </div>
 
-      <div class="bg-black pb-16 md:pb-0 text-white text-sm">
-        <div
-          class="p-4 py-8 container mx-auto grid grid-flow-cols grid-cols-1 md:grid-cols-2 gap-8"
-        >
-          <div class="flex items-center">
-            <p>
-              © WeDance 2020 – All rights reserved. Created by
-              <a
-                class="underline hover:no-underline"
-                target="_blank"
-                rel="noopener noreferrer"
-                href="https://razbakov.com/"
-                >Aleksey Razbakov</a
-              >.
-              <a
-                class="underline hover:no-underline"
-                rel="noopener noreferrer"
-                href="mailto:WeDanceMunich@razbakov.com"
-                >Contact&nbsp;us</a
-              >.
-            </p>
-          </div>
-          <div class="grid grid-flow-col grid-cols-4 grid-rows-1 gap-4">
-            <a
-              target="_blank"
-              class="flex justify-center hover:opacity-50"
-              href="https://instagram.com/WeDanceMunich"
-              rel="noopener noreferrer"
+    <div class="bg-black pb-16 md:pb-0 text-white text-sm">
+      <div
+        class="p-4 py-8 container mx-auto grid grid-flow-cols grid-cols-1 md:grid-cols-2 gap-8"
+      >
+        <div class="flex flex-col">
+          <p>
+            © WeDance 2020 – All rights reserved.
+          </p>
+          <p class="flex space-x-2">
+            <router-link class="underline hover:no-underline" to="/about"
+              >About</router-link
             >
-              <TIcon name="instagram" class="h-10 w-10" />
-            </a>
-            <a
-              target="_blank"
-              class="flex justify-center hover:opacity-50"
-              href="https://fb.com/WeDanceMunich"
-              rel="noopener noreferrer"
+            <router-link class="underline hover:no-underline" to="/support"
+              >Support</router-link
             >
-              <TIcon name="facebook" class="h-10 w-10" />
-            </a>
-            <a
-              target="_blank"
-              class="flex justify-center hover:opacity-50"
-              href="https://www.youtube.com/channel/UCcoW0f6TqLrGJRUubcaemLw"
-              rel="noopener noreferrer"
+            <router-link class="underline hover:no-underline" to="/privacy"
+              >Privacy Policy</router-link
             >
-              <TIcon name="youtube" class="h-10 w-10" />
-            </a>
-            <a
-              target="_blank"
-              class="flex justify-center hover:opacity-50"
-              href="https://twitter.com/WeDanceMunich"
-              rel="noopener noreferrer"
+            <router-link class="underline hover:no-underline" to="/terms"
+              >Terms of use</router-link
             >
-              <TIcon name="twitter" class="h-10 w-10" />
-            </a>
-          </div>
+            <router-link class="underline hover:no-underline" to="/coc"
+              >Code of Conduct</router-link
+            >
+            <router-link class="underline hover:no-underline" to="/faq"
+              >FAQ</router-link
+            >
+          </p>
+        </div>
+        <div class="grid grid-flow-col grid-cols-4 grid-rows-1 gap-4">
+          <a
+            target="_blank"
+            class="flex justify-center hover:opacity-50"
+            href="https://instagram.com/WeDanceMunich"
+            rel="noopener noreferrer"
+          >
+            <TIcon name="instagram" class="h-10 w-10" />
+          </a>
+          <a
+            target="_blank"
+            class="flex justify-center hover:opacity-50"
+            href="https://fb.com/WeDanceMunich"
+            rel="noopener noreferrer"
+          >
+            <TIcon name="facebook" class="h-10 w-10" />
+          </a>
+          <a
+            target="_blank"
+            class="flex justify-center hover:opacity-50"
+            href="https://www.youtube.com/channel/UCcoW0f6TqLrGJRUubcaemLw"
+            rel="noopener noreferrer"
+          >
+            <TIcon name="youtube" class="h-10 w-10" />
+          </a>
+          <a
+            target="_blank"
+            class="flex justify-center hover:opacity-50"
+            href="https://twitter.com/WeDanceMunich"
+            rel="noopener noreferrer"
+          >
+            <TIcon name="twitter" class="h-10 w-10" />
+          </a>
         </div>
       </div>
     </div>
@@ -247,7 +226,7 @@ import useCities from '~/use/cities'
 export default {
   name: 'DefaultLayout',
   props: {
-    hideMenu: {
+    noContainer: {
       type: Boolean,
       default: false
     }
