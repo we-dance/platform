@@ -182,7 +182,7 @@
           <a
             target="_blank"
             class="flex justify-center hover:opacity-50"
-            href="https://instagram.com/WeDanceMunich"
+            href="https://instagram.com/WeDanceVIP"
             rel="noopener noreferrer"
           >
             <TIcon name="instagram" class="h-10 w-10" />
@@ -190,15 +190,15 @@
           <a
             target="_blank"
             class="flex justify-center hover:opacity-50"
-            href="https://fb.com/WeDanceMunich"
+            href="https://t.me/wedancevip"
             rel="noopener noreferrer"
           >
-            <TIcon name="facebook" class="h-10 w-10" />
+            <TIcon name="telegram" class="h-10 w-10" />
           </a>
           <a
             target="_blank"
             class="flex justify-center hover:opacity-50"
-            href="https://www.youtube.com/channel/UCcoW0f6TqLrGJRUubcaemLw"
+            href="https://www.youtube.com/channel/UC1pdWS3nCLrd8LnQyNNSNUw"
             rel="noopener noreferrer"
           >
             <TIcon name="youtube" class="h-10 w-10" />
@@ -206,7 +206,7 @@
           <a
             target="_blank"
             class="flex justify-center hover:opacity-50"
-            href="https://twitter.com/WeDanceMunich"
+            href="https://twitter.com/WeDanceVIP"
             rel="noopener noreferrer"
           >
             <TIcon name="twitter" class="h-10 w-10" />
