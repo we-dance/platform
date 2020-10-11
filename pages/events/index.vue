@@ -144,7 +144,7 @@ export default {
         value: 'thisYear',
         label: 'This Year',
         filter: (item) =>
-          getYmd(item.startDate) >= startOfWeekString &&
+          getYmd(item.startDate) >= startOfTodayString &&
           getYmd(item.startDate) <= endOfYearString
       },
       {
