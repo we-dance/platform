@@ -24,16 +24,6 @@ const state = Vue.observable({
 export default () => {
   const { router, route } = useRouter()
 
-  if (window) {
-    setMarketing()
-
-    const uid = ls('uid')
-
-    if (uid) {
-      state.uid = uid
-    }
-  }
-
   const isAdmin = () => !!state.uid && !!state.account && !!state.account.admin
 
   if (!state.initialized) {
@@ -46,6 +36,16 @@ export default () => {
     })
 
     state.initialized = true
+
+    if (window) {
+      setMarketing()
+
+      const uid = ls('uid')
+
+      if (uid) {
+        state.uid = uid
+      }
+    }
   }
 
   const isAccountConfirmed = () =>
@@ -83,6 +83,7 @@ export default () => {
   }
 
   function setMarketing() {
+    console.log('marketing')
     state.marketing = ls('marketing')
 
     const languages = window?.navigator?.languages || []

@@ -54,10 +54,6 @@ You can launch community in your city and become Ambassador.
 2. Drop message to [@razbakov](https://t.me/razbakov) that you would like to become ambassador with link to your profile – and you will get invitation to our special ambassador chat.
 3. Write there in which city and how do you see your first steps in starting community and we will exchange our experiences and help each other.
 
-## Communities by cities
-
-[**WeDanceMunich**](https://www.notion.so/WeDanceMunich-90fe7406f0204d0cbd481246dfc96b9c)
-
 ## What is WeDance?
 
-[**Read more about WeDance**](https://www.notion.so/WeDance-d8a81e56732e4c10958073a8b887a673).
+[Read more about WeDance](/about).

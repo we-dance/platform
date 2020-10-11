@@ -46,6 +46,7 @@
       </div>
 
       <div
+        v-if="!hideGlobal"
         class="p-2 hover:bg-indigo-500 text-black hover:text-white cursor-pointer flex items-center"
         @click="change('')"
       >
@@ -117,6 +118,10 @@ export default {
       default: ''
     },
     autoSelect: {
+      type: Boolean,
+      default: false
+    },
+    hideGlobal: {
       type: Boolean,
       default: false
     },

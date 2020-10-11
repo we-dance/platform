@@ -21,6 +21,7 @@
           <TInputCity
             v-if="currentCity"
             v-model="currentCity"
+            hide-global
             class="text-black ml-2"
           />
         </div>
@@ -30,11 +31,11 @@
           class="fixed z-40 bottom-0 left-0 right-0 md:relative md:mt-6 flex md:mt-0 items-center justify-evenly md:justify-end p-2 md:p-0 border-t shadow-lg md:shadow-none md:border-0 text-gray-700 bg-white md:bg-dark md:text-white"
         >
           <router-link
-            to="/feed"
+            to="/events"
             class="block p-2 md:px-4 flex flex-col justify-center"
           >
-            <TIcon class="w-8 h-8 mx-auto" name="news" />
-            <span class="hidden md:block">Feed</span>
+            <TIcon class="w-8 h-8 mx-auto" name="calendar" />
+            <span class="hidden md:block">Calendar</span>
           </router-link>
           <router-link
             to="/people"
@@ -44,11 +45,11 @@
             <span class="hidden md:block">Community</span>
           </router-link>
           <router-link
-            to="/events"
+            to="/feed"
             class="block p-2 md:px-4 flex flex-col justify-center"
           >
-            <TIcon class="w-8 h-8 mx-auto" name="calendar" />
-            <span class="hidden md:block">Calendar</span>
+            <TIcon class="w-8 h-8 mx-auto" name="news" />
+            <span class="hidden md:block">News</span>
           </router-link>
           <button
             v-if="!uid"
@@ -164,10 +165,10 @@
               >Support</router-link
             >
             <router-link class="underline hover:no-underline" to="/privacy"
-              >Privacy Policy</router-link
+              >Privacy</router-link
             >
             <router-link class="underline hover:no-underline" to="/terms"
-              >Terms of use</router-link
+              >Terms</router-link
             >
             <router-link class="underline hover:no-underline" to="/coc"
               >Code of Conduct</router-link
@@ -257,7 +258,11 @@ export default {
     const routedCity = this.$route.query.city
 
     if (routedCity) {
-      this.city = routedCity
+      this.currentCity = routedCity
+    }
+
+    if (!this.currentCity && this.$route.fullPath !== '/') {
+      this.$router.push('/')
     }
   },
   methods: {

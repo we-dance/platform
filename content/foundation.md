@@ -18,4 +18,4 @@ Main idea and inspiration is taken from Apache Foundation:
 
 **WeDance Here** - partnership program for venues (dance places, studios, bars). Venues show that it's a place to dance and help dancers to find other dancers by having a sticker on the door. WeDance highlight places in the city listing and promote non-competitive events.
 
-[Read more about WeDance](/).
+[Read more about WeDance](/about).

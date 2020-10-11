@@ -60,6 +60,16 @@
         {{ $t('auth.signin') }}
       </TButton>
     </form>
+    <div class="mt-4 text-xs">
+      By clicking the button, you agree to our
+      <router-link class="underline hover:no-underline" to="/terms"
+        >Terms of service</router-link
+      >
+      and have read and acknowledge our
+      <router-link class="underline hover:no-underline" to="/privacy"
+        >Privacy policy</router-link
+      >.
+    </div>
   </div>
 </template>
 
