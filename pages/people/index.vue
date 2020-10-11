@@ -69,15 +69,15 @@
     </div>
 
     <div>
-      <TInputButtons v-model="tab" class="mb-4" :options="tabs" />
+      <TInputButtons v-if="uid" v-model="tab" class="mb-4" :options="tabs" />
 
       <div
-        v-if="!uid"
+        v-if="!uid && itemsPartnerPublic.length > 0"
         class="mb-4 rounded bg-dark-gradient text-white text-sm text-center p-4"
       >
         <div>
           <h1 class="font-bold text-lg">Publish your profile</h1>
-          <p>so that others can find you as well</p>
+          <p>so that others can contact you</p>
         </div>
         <div class="flex justify-center">
           <TButton class="my-2" type="primary" to="/signin?target=/people"
@@ -91,7 +91,10 @@
         class="mb-4"
         :uid="item.createdBy"
       />
-      <div v-if="!uid" class="m-4 font-bold text-center">
+      <div
+        v-if="!uid && itemsPartnerPublic.length > 0"
+        class="m-4 font-bold text-center"
+      >
         {{ itemsPartner.length - itemsPartnerPublic.length }} other dancers show
         their profiles only for members
       </div>

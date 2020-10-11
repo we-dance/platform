@@ -2,66 +2,88 @@
   <main>
     <TTitle>Events</TTitle>
 
-    <TTabs v-model="activeFilter" :tabs="filterOptions" />
+    <TTabs v-if="uid" v-model="activeFilter" :tabs="filterOptions" />
 
     <div class="mt-4">
       <TLoader v-if="loading" />
       <div v-else-if="!count">
-        No events found
-      </div>
-      <div v-for="(items, date) in itemsByDate" :key="date" class="mb-8">
-        <h2 class="font-bold bg-dark text-white py-2 px-4 rounded">
-          {{ getDay(date) }}, {{ getDate(date) }}
-        </h2>
+        <div v-if="uid">
+          No events found
+        </div>
         <div
-          v-for="item in items"
-          :key="item.id"
-          class="bg-white px-4 mt-4 flex"
+          v-else
+          class="mt-4 bg-dark-gradient text-white p-4 rounded text-center"
         >
-          <div v-if="false" class="mr-2 flex justify-center items-start pt-1">
-            <button
-              v-if="item.response === 'up'"
-              class="text-green-500"
-              @click="updateRsvp(item.id, 'events', 'down')"
-            >
-              <TIcon name="check_circle" class="w-4 h-4" />
-            </button>
-            <button v-else @click="updateRsvp(item.id, 'events', 'up')">
-              <TIcon name="check" class="w-4 h-4" />
-            </button>
-          </div>
-          <div class="mr-2">
-            {{ getTime(item.startDate) }}
-          </div>
-          <div class="mr-2">
-            {{ item.type === 'Party' ? '🎉' : '👣' }}
-          </div>
-          <div>
-            <router-link
-              :to="`/events/${item.id}`"
-              class="font-bold leading-none hover:underline hover:text-primary"
-            >
-              {{ item.name }}
-            </router-link>
-            <div class="text-xs flex flex-wrap">
-              <div v-if="item.organiser" class="hidden md:block">
-                <div class="flex items-center mr-2">
-                  <TIcon name="store" class="w-4 h-4 mr-1" />
-                  <p>
-                    {{ item.organiser }}
-                  </p>
+          <div>Become a member of WeDance Community to get full access.</div>
+          <TButton class="mt-2" type="primary" to="/signin?target=/events"
+            >Join Now</TButton
+          >
+        </div>
+      </div>
+      <div>
+        <div v-for="(items, date) in itemsByDate" :key="date" class="mb-8">
+          <h2 class="font-bold bg-dark text-white py-2 px-4 rounded">
+            {{ getDay(date) }}, {{ getDate(date) }}
+          </h2>
+          <div
+            v-for="item in items"
+            :key="item.id"
+            class="bg-white px-4 mt-4 flex"
+          >
+            <div v-if="false" class="mr-2 flex justify-center items-start pt-1">
+              <button
+                v-if="item.response === 'up'"
+                class="text-green-500"
+                @click="updateRsvp(item.id, 'events', 'down')"
+              >
+                <TIcon name="check_circle" class="w-4 h-4" />
+              </button>
+              <button v-else @click="updateRsvp(item.id, 'events', 'up')">
+                <TIcon name="check" class="w-4 h-4" />
+              </button>
+            </div>
+            <div class="mr-2">
+              {{ getTime(item.startDate) }}
+            </div>
+            <div class="mr-2">
+              {{ item.type === 'Party' ? '🎉' : '👣' }}
+            </div>
+            <div>
+              <router-link
+                :to="`/events/${item.id}`"
+                class="font-bold leading-none hover:underline hover:text-primary"
+              >
+                {{ item.name }}
+              </router-link>
+              <div class="text-xs flex flex-wrap">
+                <div v-if="item.organiser" class="hidden md:block">
+                  <div class="flex items-center mr-2">
+                    <TIcon name="store" class="w-4 h-4 mr-1" />
+                    <p>
+                      {{ item.organiser }}
+                    </p>
+                  </div>
                 </div>
-              </div>
-              <div v-if="item.address">
-                <div class="flex items-center">
-                  <TIcon name="place" class="w-4 h-4 mr-1" />
-                  <p>
-                    {{ item.address }}
-                  </p>
+                <div v-if="item.address">
+                  <div class="flex items-center">
+                    <TIcon name="place" class="w-4 h-4 mr-1" />
+                    <p>
+                      {{ item.address }}
+                    </p>
+                  </div>
                 </div>
               </div>
             </div>
           </div>
+        </div>
+        <div
+          v-if="!uid"
+          class="mt-4 bg-dark-gradient text-white p-4 rounded text-center"
+        >
+          <div>Become a member of WeDance Community to see more.</div>
+          <TButton class="mt-2" type="primary" to="/signin?target=/events"
+            >Join Now</TButton
+          >
         </div>
       </div>
     </div>
@@ -130,7 +152,7 @@ export default {
 
     const { getAccount } = useAccounts()
 
-    const activeFilter = ref('thisYear')
+    const activeFilter = ref('next7days')
 
     const filterOptions = computed(() => [
       {
