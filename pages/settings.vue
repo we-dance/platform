@@ -113,7 +113,6 @@ import useAccounts from '~/use/accounts'
 
 export default {
   middleware: ['auth'],
-  layout: 'minimal',
   setup() {
     const {
       uid,

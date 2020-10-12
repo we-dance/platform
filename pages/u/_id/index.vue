@@ -79,7 +79,6 @@ import useAuth from '~/use/auth'
 import { getDateTime } from '~/utils'
 
 export default {
-  layout: 'minimal',
   setup() {
     const { params } = useRouter()
     const { uid } = useAuth()

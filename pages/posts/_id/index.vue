@@ -97,7 +97,6 @@ import useReactions from '~/use/reactions'
 import { getDateTime, dateDiff } from '~/utils'
 
 export default defineComponent({
-  layout: 'minimal',
   components: {
     Microlink
   },
