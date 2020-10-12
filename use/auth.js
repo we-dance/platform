@@ -83,7 +83,6 @@ export default () => {
   }
 
   function setMarketing() {
-    console.log('marketing')
     state.marketing = ls('marketing')
 
     const languages = window?.navigator?.languages || []
