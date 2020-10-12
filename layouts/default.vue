@@ -144,7 +144,7 @@
 
     <div
       class="flex-grow flex flex-col"
-      :class="noContainer ? '' : 'p-4 mx-auto max-w-xl mb-16'"
+      :class="noContainer ? '' : 'p-4 mx-auto container max-w-xl mb-16'"
     >
       <nuxt />
     </div>
