@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div v-for="field in fields" :key="field.name" class="mb-4">
+    <div v-for="field in visibleFields" :key="field.name" class="mb-4">
       <TField
         v-model="data[field.name]"
         :item="data"
@@ -70,6 +70,11 @@ export default {
     data: {},
     error: false
   }),
+  computed: {
+    visibleFields() {
+      return this.fields.filter((field) => !field.when || field.when(this.data))
+    }
+  },
   watch: {
     value: 'load',
     fields: 'load'

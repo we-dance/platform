@@ -44,7 +44,12 @@ export default {
   },
   mounted() {
     const city = ls('city')
-    this.item = this.item || { city }
+    this.item = this.item || {
+      city,
+      visibility: 'Public',
+      form: 'No',
+      type: 'Course'
+    }
   },
   methods: {
     cancelItem() {
@@ -119,8 +124,15 @@ export default {
               'Please do not include here anything else except street and house number. You can add all additional information in the description.'
           },
           {
+            name: 'form',
+            label: 'External registration?',
+            type: 'select',
+            options: ['Yes', 'No']
+          },
+          {
             name: 'link',
-            description: 'URL of your registration form'
+            description: 'URL of your registration form',
+            when: (answers) => answers.form === 'Yes'
           },
           {
             name: 'type',
@@ -154,6 +166,13 @@ export default {
           {
             name: 'styles',
             type: 'stylesSelect'
+          },
+          {
+            name: 'visibility',
+            type: 'select',
+            options: ['Public', 'Members', 'Unlisted'],
+            description:
+              'Public - searchable in Google. Members - visible for logged-in users. Unlisted - possible to open with exact link, but they are not listed and not shown in search.'
           }
         ]
       }
