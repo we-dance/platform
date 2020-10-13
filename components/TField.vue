@@ -47,6 +47,7 @@ import TInputStyles from '~/components/TInput/TInputStyles'
 import TInputStylesSelect from '~/components/TInput/TInputStylesSelect'
 import TInputButtons from '~/components/TInput/TInputButtons'
 import TInputUsername from '~/components/TInput/TInputUsername'
+import TInputDateTime from '~/components/TInput/TInputDateTime'
 
 export default {
   name: 'TField',
@@ -161,7 +162,8 @@ export default {
         styles: TInputStyles,
         stylesSelect: TInputStylesSelect,
         buttons: TInputButtons,
-        username: TInputUsername
+        username: TInputUsername,
+        datetime: TInputDateTime
       }
 
       return map[this.type] || TInput

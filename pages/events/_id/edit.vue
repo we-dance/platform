@@ -129,7 +129,7 @@ export default {
           },
           {
             name: 'startDate',
-            type: 'datetime-local',
+            type: 'datetime',
             set: (val) => {
               if (!val) return ''
               return new Date(val)
@@ -141,7 +141,7 @@ export default {
           },
           {
             name: 'endDate',
-            type: 'datetime-local',
+            type: 'datetime',
             set: (val) => {
               if (!val) return ''
               return new Date(val)

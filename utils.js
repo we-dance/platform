@@ -63,6 +63,10 @@ export const getDateTime = (val) => {
   return formatDate(val, "d MMM' at 'H:mm")
 }
 
+export const getYmdHms = (val) => {
+  return formatDate(val, 'yyyy-MM-dd HH:mm:ss')
+}
+
 export const getYmd = (val) => {
   return formatDate(val, 'yyyy-MM-dd')
 }
