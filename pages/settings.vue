@@ -28,14 +28,38 @@
           </div>
         </div>
 
-        <TForm
-          v-if="currentTab === 'account'"
-          v-model="account"
-          :fields="accountFields"
-          submit-label="Save"
-          class="border-t mt-4 pt-4"
-          @save="saveAccount"
-        />
+        <div v-if="currentTab === 'account'" class="border-t mt-4 pt-4">
+          <TForm
+            v-model="account"
+            :fields="accountFields"
+            submit-label="Save"
+            @save="saveAccount"
+          />
+          <TButton to="/settings?tab=password">Change Password</TButton>
+        </div>
+        <div v-if="currentTab === 'password'" class="border-t mt-4 pt-4">
+          <div
+            v-if="passwordError"
+            class="text-red-500 rounded border border-red-500 p-2"
+          >
+            <p>{{ passwordError.message }}</p>
+            <div class="flex justify-end">
+              <TButton
+                v-if="passwordError.code === 'auth/requires-recent-login'"
+                type="primary"
+                to="/signout"
+                class="float-right mt-4"
+                >Sign out</TButton
+              >
+            </div>
+          </div>
+          <div v-else>
+            <TField v-model="password" type="password" label="New Password" />
+            <div class="flex justify-end mt-4">
+              <TButton @click="changePassword">Save</TButton>
+            </div>
+          </div>
+        </div>
       </div>
       <div class="rounded bg-white mb-4 shadow border p-4 bg-white">
         <div class="flex items-center">
@@ -107,9 +131,11 @@
 </template>
 
 <script>
+import { ref } from '@nuxtjs/composition-api'
 import useAuth from '~/use/auth'
 import useProfiles from '~/use/profiles'
 import useAccounts from '~/use/accounts'
+import useRouter from '~/use/router'
 
 export default {
   middleware: ['auth'],
@@ -122,13 +148,31 @@ export default {
       updateAccount,
       updateProfile,
       isAccountConfirmed,
-      loading
+      loading,
+      updatePassword
     } = useAuth()
 
     const { profileFields, contactFields } = useProfiles()
     const { accountFields } = useAccounts()
+    const password = ref('')
+    const passwordError = ref(false)
+    const { router } = useRouter()
+
+    const changePassword = async () => {
+      try {
+        await updatePassword(password.value)
+        router.push({
+          query: {
+            tab: 'account'
+          }
+        })
+      } catch (e) {
+        passwordError.value = e
+      }
+    }
 
     return {
+      passwordError,
       accountFields,
       loading,
       uid,
@@ -139,7 +183,9 @@ export default {
       updateProfile,
       isAccountConfirmed,
       profileFields,
-      contactFields
+      contactFields,
+      password,
+      changePassword
     }
   },
   computed: {

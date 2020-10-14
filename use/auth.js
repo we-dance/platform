@@ -297,6 +297,11 @@ export default () => {
     loadProfile()
   }
 
+  async function updatePassword(password) {
+    const user = firebase.auth().currentUser
+    await user.updatePassword(password)
+  }
+
   async function updateAccount(data) {
     if (!state.uid) {
       return
@@ -366,6 +371,14 @@ export default () => {
     }
   }
 
+  async function signUserIn(email, password) {
+    try {
+      await firebase.auth().signInWithEmailAndPassword(email, password)
+    } catch (e) {
+      state.error = e
+    }
+  }
+
   function signInWithGoogle() {
     state.signingIn = true
 
@@ -390,14 +403,16 @@ export default () => {
     updateProfile,
     updateAccount,
     setUser,
-    signInWithGoogle,
-    sendSignInLinkToEmail,
     signOut,
     isAccountConfirmed,
     isAdmin,
     getAccount,
     can,
     signInAnonymously,
-    signInWithEmailLink
+    signUserIn,
+    signInWithGoogle,
+    sendSignInLinkToEmail,
+    signInWithEmailLink,
+    updatePassword
   }
 }

@@ -121,7 +121,7 @@
                   target="_blank"
                   >Support</TButton
                 >
-                <TButton type="nav" to="/signout">Logout</TButton>
+                <TButton type="nav" to="/signout">Log out</TButton>
               </div>
             </template>
           </TMenu>

@@ -39,59 +39,122 @@
     </p>
   </div>
   <div v-else>
-    <h2 class="font-bold mb-2">Sign in with</h2>
-    <div class="flex justify-center">
-      <TButton
-        class="flex items-center justify-center"
-        @click="signInWithGoogle"
-      >
-        <TIcon name="google" />
-        Google
-      </TButton>
-    </div>
-    <div class="divider">or</div>
-    <form class="md:flex items-end" @submit="submit">
-      <TField v-model="email" type="email" label="Email" label-position="top" />
-      <TButton
-        type="primary"
-        class="mt-2 w-full md:mt-0 md:w-32 md:ml-4"
-        @click="submit"
-      >
-        {{ $t('auth.signin') }}
-      </TButton>
+    <TPopup
+      v-if="noPasswordPopup"
+      title="How to login without password?"
+      @close="noPasswordPopup = false"
+    >
+      <div class="p-4">
+        <p>
+          Use login and leave password field empty and we will send a magic link
+          to your inbox.
+        </p>
+        <p class="mt-4">
+          To change password go to Settings → Account → Change password.
+        </p>
+      </div>
+
+      <div class="flex justify-end">
+        <TButton @click="noPasswordPopup = false">Close</TButton>
+      </div>
+    </TPopup>
+    <TTabs v-model="tab" :tabs="tabs" />
+    <form class="mt-4" @submit="submit">
+      <TField
+        id="email"
+        v-model="email"
+        type="email"
+        label="Email"
+        label-position="top"
+      />
+      <TField
+        v-if="tab === 'login'"
+        id="password"
+        v-model="password"
+        type="password"
+        label="Password"
+        label-position="top"
+        class="mt-4"
+      />
+      <div class="mt-4 text-xs">
+        By signing in, you agree to
+        <router-link class="underline hover:no-underline" to="/terms"
+          >Terms of service</router-link
+        >
+        and
+        <router-link class="underline hover:no-underline" to="/privacy"
+          >Privacy policy</router-link
+        >.
+      </div>
+      <div class="mt-4 flex justify-end">
+        <TButton
+          type="primary"
+          class="mt-2 w-full md:mt-0 md:w-32 md:ml-4"
+          @click="submit"
+        >
+          {{ tab === 'login' ? 'Login' : 'Register' }}
+        </TButton>
+      </div>
+      <div class="mt-4 text-xs">
+        <p v-if="tab === 'login'">
+          Don't have an account yet?
+          <button
+            class="underline hover:no-underline"
+            @click="tab = 'register'"
+          >
+            Register</button
+          >.
+        </p>
+        <p v-if="tab === 'login'">
+          Forgot password or don't have one?
+          <button
+            class="underline hover:no-underline"
+            @click="noPasswordPopup = true"
+          >
+            How to login?</button
+          >.
+        </p>
+        <p v-if="tab === 'register'">
+          Already have an account?
+          <button class="underline hover:no-underline" @click="tab = 'login'">
+            Login</button
+          >.
+        </p>
+        <div class="mt-4 border-t pt-4">
+          <button
+            class=" text-xs underline hover:no-underline"
+            @click="signInWithGoogle"
+          >
+            Sign in with Google
+          </button>
+        </div>
+      </div>
     </form>
-    <div class="mt-4 text-xs">
-      By clicking the button, you agree to our
-      <router-link class="underline hover:no-underline" to="/terms"
-        >Terms of service</router-link
-      >
-      and have read and acknowledge our
-      <router-link class="underline hover:no-underline" to="/privacy"
-        >Privacy policy</router-link
-      >.
-    </div>
   </div>
 </template>
 
 <script>
 import ls from 'local-storage'
-import TLoader from '~/components/TLoader'
 import useAuth from '~/use/auth'
-import TButton from '~/components/TButton'
-import TIcon from '~/components/TIcon'
-import TField from '~/components/TField'
 
 export default {
   layout: 'popup',
-  components: {
-    TLoader,
-    TButton,
-    TIcon,
-    TField
-  },
   data: () => ({
     email: '',
-    emailSent: false
+    password: '',
+    emailSent: false,
+    noPasswordPopup: false,
+    tab: 'login',
+    tabs: [
+      {
+        value: 'login',
+        label: 'Log in'
+      },
+      {
+        value: 'register',
+        label: 'Register'
+      }
+    ]
   }),
   setup() {
     const {
@@ -100,6 +163,7 @@ export default {
       signingIn,
       signInWithGoogle,
       sendSignInLinkToEmail,
+      signUserIn,
       signOut,
       error
     } = useAuth()
@@ -109,6 +173,7 @@ export default {
       loading,
       signingIn,
       signInWithGoogle,
+      signUserIn,
       sendSignInLinkToEmail,
       signOut,
       error
@@ -155,8 +220,12 @@ export default {
         return
       }
 
-      this.sendSignInLinkToEmail(this.email)
-      this.emailSent = true
+      if (this.password) {
+        this.signUserIn(this.email, this.password)
+      } else {
+        this.sendSignInLinkToEmail(this.email)
+        this.emailSent = true
+      }
     }
   }
 }
