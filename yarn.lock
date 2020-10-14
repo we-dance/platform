@@ -5518,6 +5518,13 @@ detab@^2.0.0, detab@^2.0.2, detab@^2.0.3:
   dependencies:
     repeat-string "^1.5.4"
 
+detect-inapp@^1.4.0:
+  version "1.4.0"
+  resolved "https://registry.yarnpkg.com/detect-inapp/-/detect-inapp-1.4.0.tgz#9cc42c837495aeba98b57914cf88e266b9dab944"
+  integrity sha1-nMQsg3SVrrqYtXkUz4jiZrnauUQ=
+  dependencies:
+    lodash "^4.17.5"
+
 detect-indent@^5.0.0:
   version "5.0.0"
   resolved "https://registry.yarnpkg.com/detect-indent/-/detect-indent-5.0.0.tgz#3871cc0a6a002e8c3e5b3cf7f336264675f06b9d"
