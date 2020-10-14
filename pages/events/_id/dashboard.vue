@@ -10,6 +10,21 @@
     Only event owner can access this area.
   </main>
   <div v-else>
+    <TPopup v-if="compose" title="Compose email" @close="compose = false">
+      <div class="max-w-lg">
+        <div class="text-xs mt-4">
+          {{ selectedParticipantsList.length }} recipients:
+          {{ selectedParticipantsList.join(', ') }}
+        </div>
+        <TForm
+          class="mt-4"
+          :value="{ subject: item.name }"
+          :fields="emailFields"
+          submit-label="Send"
+          @save="sendEmail"
+        />
+      </div>
+    </TPopup>
     <TPopup v-if="addingGuest" title="Add Guest" @close="addingGuest = false">
       <TForm class="mt-4" :fields="reservationFields" @save="addGuest" />
     </TPopup>
@@ -30,11 +45,16 @@
       </div>
       <div class="my-2 flex items-start justify-between">
         <TButton label="Add participant" @click="addingGuest = true" />
+        <TButton label="Email" @click="compose = true" />
         <TButton :to="`/events/${item.id}/`" label="View Event" />
       </div>
       <div>
-        <TGridParticipants :items="participants" :filters="filters">
-          <template v-slot="{ item, tab, view }">
+        <TGridParticipants
+          v-model="selectedParticipants"
+          :items="participants"
+          :filters="filters"
+        >
+          <template v-slot="{ item, tab, view, select }">
             <div v-if="tab === 'couples'" class="flex justify-between">
               <div>
                 <TProfilePhoto size="lg" :uid="item.uid" />
@@ -72,8 +92,18 @@
               </div>
             </div>
             <div v-if="tab !== 'couples'" class="flex flex-col md:flex-row">
-              <div>
-                <TProfilePhoto size="lg" :uid="item.uid" class="mr-2" />
+              <div class="mr-2 cursor-pointer" @click="select(item)">
+                <TIcon
+                  v-if="selectedParticipants[item.id]"
+                  name="check"
+                  class="w-10 h-10 border-2 rounded-full bg-green-500 text-real-white"
+                />
+                <TProfilePhoto
+                  v-else
+                  size="lg"
+                  :uid="item.uid"
+                  class="border-2"
+                />
               </div>
               <div class="flex-grow">
                 <div class="float-right">
@@ -240,7 +270,9 @@ export default {
     const { accountFields } = useAccounts()
 
     const { doc, load, exists, loading } = useDoc('events')
+    const { create } = useDoc('emails')
     const { map } = useReactions()
+    const selectedParticipants = ref({})
 
     const { update, updateRsvp, createGuestRsvp, getListRsvps } = useRSVP()
 
@@ -306,6 +338,28 @@ export default {
       )
     }
 
+    const compose = ref(false)
+
+    const selectedParticipantsList = computed(() =>
+      Object.keys(selectedParticipants.value).map(
+        (i) => selectedParticipants.value[i].name
+      )
+    )
+
+    const emailFields = [
+      {
+        name: 'subject'
+      },
+      {
+        name: 'content',
+        hideLabel: true,
+        type: 'textarea',
+        placeholder: 'Your message',
+        rows: '5',
+        cols: '50'
+      }
+    ]
+
     const filters = computed(() => [
       {
         value: '',
@@ -347,6 +401,21 @@ export default {
         filter: (item) => item.rsvp === 'down'
       }
     ])
+
+    const sendEmail = (data) => {
+      const email = {
+        from: `${account.value.name} <${account.value.email}>`,
+        subject: data.subject,
+        recipients: selectedParticipants.value,
+        scheduledAt: new Date(),
+        status: 'scheduled',
+        content: data.content
+      }
+
+      compose.value = false
+
+      create(email)
+    }
 
     const addGuest = async (participant) => {
       if (addingGuest.value && addingGuest.value !== true) {
@@ -391,6 +460,10 @@ export default {
     }
 
     return {
+      create,
+      compose,
+      emailFields,
+      sendEmail,
       notes,
       addNote,
       getCandidates,
@@ -415,7 +488,9 @@ export default {
       dateDiff,
       getDate,
       getTime,
-      participants
+      participants,
+      selectedParticipants,
+      selectedParticipantsList
     }
   }
 }

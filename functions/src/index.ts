@@ -89,6 +89,35 @@ export const welcomeEmail = functions.firestore
       throw Error(`Account ${profileId} not found`)
     }
 
+    const rsvps = await db
+      .collection('participants')
+      .where('participant.email', '==', account.email)
+      .get()
+
+    const accountInfo = {
+      name: '',
+      phone: ''
+    }
+
+    rsvps.forEach(async (currentRsvp) => {
+      const rsvp = currentRsvp.data()
+
+      if (rsvp && rsvp.participant && rsvp.participant.name) {
+        accountInfo.name = rsvp.participant.name
+      }
+
+      if (rsvp && rsvp.participant && rsvp.participant.phone) {
+        accountInfo.phone = rsvp.participant.phone
+      }
+
+      await currentRsvp.ref.update({ uid: profileId })
+    })
+
+    await db
+      .collection('accounts')
+      .doc(profileId)
+      .update(accountInfo)
+
     const cities = await db
       .collection('cities')
       .where('name', '==', profile.community)

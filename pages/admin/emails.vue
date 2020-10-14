@@ -69,7 +69,6 @@
               <div class="font-bold text-lg">
                 {{ item.subject }}
               </div>
-              <div class="mb-2 text-gray-500 text-xs">{{ item.name }}</div>
             </div>
             <div>
               <div
@@ -128,9 +127,6 @@ export default {
     const add = 'Add'
 
     const fields = [
-      {
-        name: 'name'
-      },
       {
         name: 'subject'
       },

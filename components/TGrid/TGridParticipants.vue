@@ -17,9 +17,10 @@
       <div
         v-for="item in filteredItems"
         :key="item.id"
-        class="p-4 mb-4 border border-gray-500 rounded"
+        class="p-4 mb-4 border rounded"
+        :class="selected[item.id] ? 'border-green-500' : 'border-gray-500'"
       >
-        <slot :item="item" :tab="activeFilter" :view="view" />
+        <slot :item="item" :tab="activeFilter" :view="view" :select="select" />
       </div>
     </div>
 
@@ -163,6 +164,10 @@ export default {
       saveCSV(this.items)
     },
     select(item, mark) {
+      if (!item.email) {
+        return
+      }
+
       if (typeof mark === 'undefined') {
         mark = !this.selected[item.id]
       }
@@ -170,7 +175,7 @@ export default {
       if (mark) {
         Vue.set(this.selected, item.id, {
           email: item.email,
-          name: item.name
+          name: item.name || item.email
         })
       } else {
         Vue.delete(this.selected, item.id)
@@ -179,7 +184,7 @@ export default {
     selectAll(mark) {
       this.selectedAll = !this.selectedAll
 
-      this.items.forEach((item) => {
+      this.filteredItems.forEach((item) => {
         this.select(item, mark)
       })
     }
