@@ -1,6 +1,6 @@
-# WeDance
+# WeDancePlatform
 
-Online Kantine - https://wedance.vip/
+https://wedance.vip/
 
 - Sign in (Google or magic link)
 - Create profile
@@ -39,8 +39,10 @@ yarn dev
 - Enable Maps API in Google API
 - Deploy to Netlify with env:
 
-  NUXT_ENV_GOOGLE_API_KEY
-  NUXT_ENV_GOOGLE_FIREBASE_API_KEY
+```
+NUXT_ENV_GOOGLE_API_KEY=
+NUXT_ENV_GOOGLE_FIREBASE_API_KEY=
+```
 
 ### Mailgun
 
