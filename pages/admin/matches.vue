@@ -29,33 +29,11 @@
         </button>
       </template>
       <template v-slot="{ item }">
-        <TPopup
+        <TRecipients
           v-if="peopleId === item.id"
-          :title="`Recipients of ${item.id}`"
-          class="p-4 border rounded mb-4"
+          :recipients="item.recipients"
           @close="peopleId = false"
-        >
-          <div
-            v-for="(recipient, uid) in item.recipients"
-            :key="uid"
-            class="flex items-center"
-          >
-            <div class="mr-4">
-              <div>{{ recipient.name }}</div>
-              <div class="text-sm text-gray-500">{{ recipient.email }}</div>
-            </div>
-            <div class="flex">
-              <div v-for="(styles, field) in recipientStates" :key="field">
-                <div
-                  v-if="recipient[field]"
-                  :class="styles"
-                  :title="field + ' ' + getDateTime(recipient[field])"
-                  class="rounded-full w-4 h-4 mr-2"
-                ></div>
-              </div>
-            </div>
-          </div>
-        </TPopup>
+        />
 
         <div class="p-4 border rounded mb-4 bg-real-white">
           <div class="flex justify-between">
@@ -116,14 +94,6 @@ export default {
   data: () => ({
     data: '',
     peopleId: false,
-    recipientStates: {
-      deliveredAt: 'bg-green-500',
-      openedAt: 'bg-green-500',
-      clickedAt: 'bg-green-500',
-      failedAt: 'bg-red-500',
-      spammedAt: 'bg-orange-500',
-      unsubscribedAt: 'bg-orange-500'
-    },
     statusClass: {
       draft: 'bg-gray-500',
       open: 'bg-blue-500',

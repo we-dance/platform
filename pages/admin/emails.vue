@@ -5,6 +5,7 @@
       :title="title"
       :add="add"
       :fields="fields"
+      :filters="filters"
     >
       <template v-slot:card-toolbar="{ item }">
         <button
@@ -23,33 +24,11 @@
         </button>
       </template>
       <template v-slot="{ item }">
-        <TPopup
+        <TRecipients
           v-if="peopleId === item.id"
-          :title="`Recipients of ${item.name}`"
-          class="p-4 border rounded mb-4"
+          :recipients="item.recipients"
           @close="peopleId = false"
-        >
-          <div
-            v-for="(recipient, uid) in item.recipients"
-            :key="uid"
-            class="flex items-center"
-          >
-            <div class="mr-4">
-              <div>{{ recipient.name }}</div>
-              <div class="text-sm text-gray-500">{{ recipient.email }}</div>
-            </div>
-            <div class="flex">
-              <div v-for="(styles, field) in states" :key="field">
-                <div
-                  v-if="recipient[field]"
-                  :class="styles"
-                  :title="field + ' ' + getDateTime(recipient[field])"
-                  class="rounded-full w-4 h-4 mr-2"
-                ></div>
-              </div>
-            </div>
-          </div>
-        </TPopup>
+        />
 
         <div class="p-4 border rounded mb-4 bg-real-white">
           <div class="flex justify-between items-start">
@@ -104,14 +83,6 @@ export default {
   data: () => ({
     data: '',
     peopleId: false,
-    states: {
-      deliveredAt: 'bg-green-500',
-      openedAt: 'bg-green-500',
-      clickedAt: 'bg-green-500',
-      failedAt: 'bg-red-500',
-      spammedAt: 'bg-orange-500',
-      unsubscribedAt: 'bg-orange-500'
-    },
     emailStatusClass: {
       draft: 'bg-orange-500',
       scheduled: 'bg-blue-500',
@@ -125,6 +96,14 @@ export default {
     const title = 'Emails'
     const collection = 'emails'
     const add = 'Add'
+
+    const filters = [
+      {
+        name: 'all',
+        default: true,
+        sort: '-createdAt'
+      }
+    ]
 
     const fields = [
       {
@@ -174,6 +153,7 @@ export default {
     ]
 
     return {
+      filters,
       fields,
       title,
       collection,
