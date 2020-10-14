@@ -1,9 +1,10 @@
 import useCollection from '~/use/collection'
 
 export default () => {
-  const { getById } = useCollection('accounts')
+  const { getById, find } = useCollection('accounts')
 
   const getAccount = (uid) => getById(uid) || {}
+  const getAccountByEmail = (email) => find('email', email)
 
   const accountFields = [
     {
@@ -28,6 +29,7 @@ export default () => {
 
   return {
     getAccount,
-    accountFields
+    accountFields,
+    getAccountByEmail
   }
 }

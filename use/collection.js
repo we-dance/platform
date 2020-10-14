@@ -81,9 +81,18 @@ export default (name, filter) => {
     }))
   })
 
+  function find(field, value) {
+    return docs.value.find(
+      (item) =>
+        (item[field] || '').trim().toLowerCase() ===
+        (value || '').trim().toLowerCase()
+    )
+  }
+
   return {
     ...toRefs(state),
     getById,
+    find,
     docs,
     loading,
     load,

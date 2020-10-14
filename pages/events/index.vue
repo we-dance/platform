@@ -154,20 +154,24 @@ export default {
 
     const activeFilter = ref('next7days')
 
+    const isPublic = (item) => item.visibility !== 'Unlisted'
+
     const filterOptions = computed(() => [
       {
         value: 'next7days',
         label: 'Next 7 days',
         filter: (item) =>
           getYmd(item.startDate) >= startOfTodayString &&
-          getYmd(item.startDate) <= in7DaysString
+          getYmd(item.startDate) <= in7DaysString &&
+          isPublic(item)
       },
       {
         value: 'thisYear',
         label: 'This Year',
         filter: (item) =>
           getYmd(item.startDate) >= startOfTodayString &&
-          getYmd(item.startDate) <= endOfYearString
+          getYmd(item.startDate) <= endOfYearString &&
+          isPublic(item)
       },
       {
         value: 'createdByMe',
