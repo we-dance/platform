@@ -1,6 +1,6 @@
-# WeDance
+# WeDancePlatform
 
-Online Kantine - https://wedance.vip/
+https://wedance.vip/
 
 - Sign in (Google or magic link)
 - Create profile
