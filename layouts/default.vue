@@ -197,7 +197,11 @@ export default {
       this.currentCity = routedCity
     }
 
-    if (!this.currentCity && this.$route.fullPath !== '/') {
+    if (
+      !this.currentCity &&
+      this.$route.fullPath !== '/' &&
+      !this.$route.params.slug
+    ) {
       this.$router.push('/')
     }
   },
