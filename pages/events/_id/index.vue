@@ -157,6 +157,7 @@ import useRouter from '~/use/router'
 import useProfiles from '~/use/profiles'
 import useReactions from '~/use/reactions'
 import useAccounts from '~/use/accounts'
+import useCities from '~/use/cities'
 import { getDay, getDateTime, getDate, getTime, dateDiff } from '~/utils'
 
 export default {
@@ -173,6 +174,13 @@ export default {
       const text = encodeURI(`"${this.item.name}"`)
 
       return `https://twitter.com/intent/tweet?text=${text} %23WeDance ${url}`
+    }
+  },
+  watch: {
+    item() {
+      if (this.item && this.item.city) {
+        this.currentCity = this.item.city
+      }
     }
   },
   mounted() {
@@ -221,6 +229,7 @@ export default {
       updateAccount,
       sendSignInLinkToEmail
     } = useAuth()
+    const { currentCity } = useCities()
 
     const { params } = useRouter()
     const { getProfile } = useProfiles()
@@ -277,6 +286,7 @@ export default {
     }
 
     return {
+      currentCity,
       isCreatingProfile,
       finishReservation,
       account,
