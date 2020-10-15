@@ -90,7 +90,8 @@ export default {
             item.deliveredAt &&
             !item.openedAt &&
             !item.unsubscribedAt &&
-            !item.spammedAt
+            !item.spammedAt &&
+            !item.clickedAt
         )
       }
     }
