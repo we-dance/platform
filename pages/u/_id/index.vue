@@ -17,10 +17,10 @@
 
           <TProfileContact :uid="id" />
         </div>
-        <dl v-if="profile.city" class="mt-2 md:flex">
-          <dt class="font-bold mr-1">City:</dt>
+        <dl v-if="profile.community" class="mt-2 md:flex">
+          <dt class="font-bold mr-1">Community:</dt>
           <dd>
-            {{ profile.city }}
+            {{ profile.community }}
           </dd>
         </dl>
         <dl class="mt-2 md:flex">
@@ -44,6 +44,10 @@
       <div v-else-if="profile.skills" class="mt-4">
         <h2 class="font-bold">Dance styles:</h2>
         <div>{{ profile.skills }}</div>
+      </div>
+      <div v-if="profile.jobs" class="mt-4">
+        <h2 class="font-bold">Professional skills:</h2>
+        <div>{{ profile.jobs }}</div>
       </div>
       <dl v-if="profile.languages" class="mt-4">
         <dt class="font-bold mr-1">My languages:</dt>

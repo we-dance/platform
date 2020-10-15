@@ -49,7 +49,7 @@
           <a
             target="_blank"
             class="flex justify-center hover:opacity-50"
-            href="https://www.youtube.com/channel/UC1pdWS3nCLrd8LnQyNNSNUw"
+            href="https://www.youtube.com/channel/UC1pdWS3nCLrd8LnQyNNSNUw?sub_confirmation=1"
             rel="noopener noreferrer"
           >
             <TIcon name="youtube" class="h-10 w-10" />
