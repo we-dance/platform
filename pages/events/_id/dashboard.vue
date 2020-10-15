@@ -157,7 +157,7 @@
                         })
                       "
                     >
-                      {{ item.couple || 'Not set' }}
+                      {{ item.couple || 'Not set' }} {{ item.partnerName }}
                     </button>
                   </div>
                   <div>
@@ -261,7 +261,6 @@ import useAccounts from '~/use/accounts'
 import { getDateTime, getDate, getTime, dateDiff, sortBy } from '~/utils'
 
 export default {
-  layout: 'public',
   setup() {
     const addingGuest = ref(false)
     const { uid, can, account } = useAuth()
@@ -300,6 +299,8 @@ export default {
           notesArray: item.notes ? Object.keys(item.notes) : [],
           couple:
             item.couple || item.withPartner || item.participant.withPartner,
+          partnerName: item.participant.partnerName,
+          partnerEmail: item.participant.partnerEmail,
           search: item.participant.name + item.participant.email
         }))
         .sort(sortBy('name'))

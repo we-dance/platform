@@ -6,38 +6,34 @@
   <div v-else>
     <TPopup
       v-if="reservationPopup"
-      title="Reserve a spot"
+      title="Register"
       @close="reservationPopup = false"
     >
       <div
         class="mt-4 flex flex-col justify-center max-h-screen overflow-y-scroll"
       >
         <div v-if="reservationPopup === 'reserve'">
-          <div v-if="!uid" class="mb-4">
-            <h2 class="text-center">
-              Do you already have WeDance profile?
-            </h2>
-            <div class="flex justify-center">
-              <TButton
-                v-if="!uid"
-                type="primary"
-                class="mt-2"
-                :to="`/signin?target=${this.$route.fullPath}`"
-                >Sign In</TButton
-              >
-            </div>
-          </div>
           <div>
-            <p class="text-xs">
+            <p>
               Organiser of the event requires the following information:
             </p>
             <TForm
               v-model="account"
               :fields="reservationFields"
-              submit-label="Reserve"
+              submit-label="Submit"
               class="mt-4"
               @save="reserve"
             />
+          </div>
+          <div v-if="!uid" class="mt-4 pt-4 border-t">
+            <h2 class="text-center text-base">
+              Do you already have WeDance account?
+              <router-link
+                :to="`/signin?target=${this.$route.fullPath}`"
+                class="underline hover:no-underline fon"
+                >Log In</router-link
+              >
+            </h2>
           </div>
         </div>
         <div v-if="reservationPopup === 'finish'">
@@ -78,6 +74,7 @@
       <img v-if="item.cover" :src="item.cover" :alt="item.name" class="mb-2" />
       <div class="px-4 mx-auto max-w-2xl text-center">
         <div class="uppercase text-red-600">
+          <span>{{ getDay(item.startDate) }},</span>
           <span>{{ getDate(item.startDate) }}</span>
           <span>{{ getTime(item.startDate) }}</span>
           –
@@ -126,14 +123,14 @@
             class="mt-4 mr-4"
             type="danger"
             @click="reservationPopup = 'reserve'"
-            >Reserve a spot</TButton
+            >Register</TButton
           >
           <TButton
             v-else
             class="mt-4 mr-4"
             type="success"
             @click="updateRsvp(item.id, 'events', 'down')"
-            >You are going</TButton
+            >You are registered</TButton
           >
         </div>
       </div>
@@ -160,7 +157,7 @@ import useRouter from '~/use/router'
 import useProfiles from '~/use/profiles'
 import useReactions from '~/use/reactions'
 import useAccounts from '~/use/accounts'
-import { getDateTime, getDate, getTime, dateDiff } from '~/utils'
+import { getDay, getDateTime, getDate, getTime, dateDiff } from '~/utils'
 
 export default {
   layout: 'public',
@@ -176,6 +173,11 @@ export default {
       const text = encodeURI(`"${this.item.name}"`)
 
       return `https://twitter.com/intent/tweet?text=${text} %23WeDance ${url}`
+    }
+  },
+  mounted() {
+    if (this.uid) {
+      this.$nuxt.setLayout('default')
     }
   },
   head() {
@@ -219,6 +221,7 @@ export default {
       updateAccount,
       sendSignInLinkToEmail
     } = useAuth()
+
     const { params } = useRouter()
     const { getProfile } = useProfiles()
     const { accountFields } = useAccounts()
@@ -241,6 +244,16 @@ export default {
         type: 'select',
         label: 'Do you have a partner?',
         options: ['Yes', 'No']
+      },
+      {
+        name: 'partnerName',
+        label: "Partner's name",
+        when: (answers) => answers.withPartner === 'Yes'
+      },
+      {
+        name: 'partnerEmail',
+        label: "Partner's email",
+        when: (answers) => answers.withPartner === 'Yes'
       }
     ]
 
@@ -281,7 +294,8 @@ export default {
       getDateTime,
       dateDiff,
       getDate,
-      getTime
+      getTime,
+      getDay
     }
   }
 }
