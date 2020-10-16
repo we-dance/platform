@@ -4,54 +4,6 @@
     Event not found
   </div>
   <div v-else>
-    <TPopup
-      v-if="reservationPopup"
-      title="Register"
-      @close="reservationPopup = false"
-    >
-      <div
-        class="mt-4 flex flex-col justify-center max-h-screen overflow-y-scroll"
-      >
-        <div v-if="reservationPopup === 'reserve'">
-          <div>
-            <p>
-              Organiser of the event requires the following information:
-            </p>
-            <TForm
-              v-model="account"
-              :fields="reservationFields"
-              submit-label="Submit"
-              class="mt-4"
-              @save="reserve"
-            />
-          </div>
-          <div v-if="!uid" class="mt-4 pt-4 border-t">
-            <h2 class="text-center text-base">
-              Do you already have WeDance account?
-              <router-link
-                :to="`/signin?target=${this.$route.fullPath}`"
-                class="underline hover:no-underline fon"
-                >Log In</router-link
-              >
-            </h2>
-          </div>
-        </div>
-        <div v-if="reservationPopup === 'finish'">
-          <h2 class="font-bold mb-4">Your spot is reserved</h2>
-          <p v-if="uid">
-            See you soon! Don't forget to check-in by the organiser when you
-            come!
-          </p>
-          <p v-else>
-            Check your email to finish creation of the WeDance profile.
-          </p>
-          <TButton type="primary" class="mt-4" @click="reservationPopup = false"
-            >Finish</TButton
-          >
-        </div>
-      </div>
-    </TPopup>
-
     <div class="mx-auto max-w-md bg-real-white p-4">
       <div
         v-if="can('edit', 'events', item)"
@@ -145,6 +97,54 @@
       <TAvatar :uid="item.createdBy" name />
       <span class="ml-1">on {{ getDateTime(item.createdAt) }}</span>
     </div>
+
+    <TPopup
+      v-if="reservationPopup"
+      title="Register"
+      @close="reservationPopup = false"
+    >
+      <div
+        class="mt-4 flex flex-col justify-center max-h-screen overflow-y-scroll"
+      >
+        <div v-if="reservationPopup === 'reserve'">
+          <div>
+            <p>
+              Organiser of the event requires the following information:
+            </p>
+            <TForm
+              v-model="account"
+              :fields="reservationFields"
+              submit-label="Submit"
+              class="mt-4"
+              @save="reserve"
+            />
+          </div>
+          <div v-if="!uid" class="mt-4 pt-4 border-t">
+            <h2 class="text-center text-base">
+              Do you already have WeDance account?
+              <router-link
+                :to="`/signin?target=${this.$route.fullPath}`"
+                class="underline hover:no-underline fon"
+                >Log In</router-link
+              >
+            </h2>
+          </div>
+        </div>
+        <div v-if="reservationPopup === 'finish'">
+          <h2 class="font-bold mb-4">Your spot is reserved</h2>
+          <p v-if="uid">
+            See you soon! Don't forget to check-in by the organiser when you
+            come!
+          </p>
+          <p v-else>
+            Check your email to finish creation of the WeDance profile.
+          </p>
+          <TButton type="primary" class="mt-4" @click="reservationPopup = false"
+            >Finish</TButton
+          >
+        </div>
+      </div>
+    </TPopup>
   </div>
 </template>
 

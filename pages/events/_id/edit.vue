@@ -13,8 +13,10 @@
       vertical
       :show-cancel="!!id"
       :show-remove="!!id"
+      :show-copy="!!id"
       :submit-label="id ? 'Save' : 'Add'"
       class="bg-real-white p-4"
+      @copy="copyItem"
       @save="saveItem"
       @cancel="cancelItem"
       @remove="removeItem"
@@ -58,6 +60,15 @@ export default {
       } else {
         this.$router.push(`/events`)
       }
+    },
+    async copyItem(data) {
+      if (!data.name) {
+        return
+      }
+
+      const doc = await this.create(data)
+
+      this.$router.push(`/events/${doc.id}`)
     },
     async saveItem(data) {
       if (!data.name) {

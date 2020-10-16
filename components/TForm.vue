@@ -30,6 +30,11 @@
         >
           Cancel
         </TButton>
+
+        <TButton v-if="showCopy" type="secondary" class="mr-2" @click="copy">
+          Copy
+        </TButton>
+
         <TButton type="primary" @click="save">{{ submitLabel }}</TButton>
       </div>
     </div>
@@ -58,6 +63,10 @@ export default {
       default: 'Save'
     },
     showCancel: {
+      type: Boolean,
+      default: false
+    },
+    showCopy: {
       type: Boolean,
       default: false
     },
@@ -106,6 +115,15 @@ export default {
     },
     validate() {
       return true
+    },
+    copy() {
+      this.error = false
+
+      if (!this.validate()) {
+        return
+      }
+
+      this.$emit('copy', this.data)
     },
     save() {
       this.error = false
