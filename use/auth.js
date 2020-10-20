@@ -75,7 +75,7 @@ export default () => {
       return ''
     }
 
-    if (payload.includes('***REMOVED***.firebaseapp.com')) {
+    if (payload.includes('wedance-4abe3.firebaseapp.com')) {
       return ''
     }
 

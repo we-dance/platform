@@ -87,7 +87,7 @@ import useDoc from '~/use/doc'
 
 Vue.use(VueGoogleMaps, {
   load: {
-    key: process.env.api.google,
+    key: process.env.firebase.config.apiKey,
     libraries: 'places',
     language: 'en'
   }
