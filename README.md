@@ -27,8 +27,8 @@
 
 ### Setup
 
-1. Fork this repository, e.g. https://github.com/razbakov/wedance/fork
-2. Clone your forked repository with `git clone https://github.com/<your-username>/wedance.git`
+1. Fork this repository, e.g. https://github.com/we-dance/platform/fork
+2. Clone your forked repository with `git clone https://github.com/<your-username>/platform.git`
 3. Install dependencies with `yarn install`
 4. Set up keys for your local instance of WeDance, you'll need to create an `.env` file. Take a look at `.env.example`. This file lists all the `ENV` variables we use and provides a fake default for any missing keys.
 5. Run `yarn dev` to serve site with hot reload at https://localhost:3000/
@@ -111,7 +111,7 @@ We are all humans trying to work together to improve the community. Always be ki
 
 A great way to contribute to the project is to send a detailed report when you encounter an issue.
 
-[See issues](https://github.com/razbakov/wedance/issues) or [Create an issue](https://github.com/razbakov/wedance/issues/new).
+[See issues](https://github.com/we-dance/platform/issues) or [Create an issue](https://github.com/we-dance/platform/issues/new).
 
 #### Bug Report
 
