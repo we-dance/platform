@@ -1,6 +1,6 @@
 <script>
 export default {
-  name: 'ResizeAuto',
+  name: 'TResizable',
   mounted() {
     this.$nextTick(() => {
       this.$el.setAttribute('style', 'height', `${this.$el.scrollHeight}px`)
