@@ -1,10 +1,8 @@
 import { computed } from '@nuxtjs/composition-api'
-import useDoc from '~/use/doc'
 import { sortBy } from '~/utils'
+import stylesAsset from '~/assets/content/styles'
 
 export default () => {
-  const { doc, load } = useDoc('settings')
-
   const getStyles = (selected) => {
     return Object.keys(selected).map((id) => {
       return {
@@ -34,11 +32,13 @@ export default () => {
   ]
 
   const getStyle = (id) => {
-    if (!doc.value) {
+    const values = stylesAsset
+
+    if (!values) {
       return {}
     }
 
-    return doc.value[id]
+    return values[id]
   }
 
   const getStyleName = (id) => {
@@ -52,13 +52,17 @@ export default () => {
   }
 
   const styles = computed(() => {
-    if (!doc.value) {
-      return []
+    const values = stylesAsset
+    const result = []
+
+    for (const [key, value] of Object.entries(values)) {
+      result.push({
+        id: key,
+        ...value
+      })
     }
 
-    return Object.values(doc.value)
-      .filter((item) => item?.id)
-      .sort(sortBy('id'))
+    return result.sort(sortBy('id'))
   })
 
   const categories = computed(() => {
@@ -70,8 +74,6 @@ export default () => {
     const uniqueCategories = [...new Set(result)]
     return uniqueCategories.sort()
   })
-
-  load('styles')
 
   return {
     categories,
