@@ -1,23 +1,18 @@
 <template>
-  <Datetime
-    v-model="input"
-    type="datetime"
-    :minute-step="15"
-    input-class="w-full block bg-gray-200 appearance-none font-mono border-2 border-gray-200 rounded py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-purple-500"
-  />
+  <FlatPickr v-model="input" :config="config" />
 </template>
 
 <script>
-import { Datetime } from 'vue-datetime'
-import 'vue-datetime/dist/vue-datetime.css'
+import FlatPickr from 'vue-flatpickr-component'
+import 'flatpickr/dist/flatpickr.css'
 
 export default {
   components: {
-    Datetime
+    FlatPickr
   },
   props: {
     value: {
-      type: String,
+      type: [String, Object, Date],
       default: ''
     },
     item: {
@@ -27,7 +22,17 @@ export default {
   },
   data: () => ({
     input: '',
-    mounted: false
+    mounted: false,
+    config: {
+      inline: true,
+      time_24hr: true,
+      enableTime: true,
+      altInput: true,
+      altFormat: 'H:i D, j M Y',
+      defaultHour: 19,
+      minuteIncrement: 15,
+      dateFormat: 'Z'
+    }
   }),
   watch: {
     input(val) {
@@ -42,12 +47,23 @@ export default {
         return
       }
 
-      this.input = val
+      this.updateValue()
     }
   },
   mounted() {
-    this.input = this.value
+    this.updateValue()
     this.mounted = true
+  },
+  methods: {
+    updateValue() {
+      let val = this.value
+
+      if (val.toDate) {
+        val = val.toDate()
+      }
+
+      this.input = val
+    }
   }
 }
 </script>

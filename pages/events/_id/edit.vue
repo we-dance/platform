@@ -25,9 +25,9 @@
 </template>
 
 <script>
+import { addMinutes, parseISO } from 'date-fns'
 import { computed } from '@nuxtjs/composition-api'
 import ls from 'local-storage'
-import { getDateObect, toDatetimeLocal } from '~/utils'
 import useAuth from '~/use/auth'
 import useDoc from '~/use/doc'
 import useRouter from '~/use/router'
@@ -50,7 +50,8 @@ export default {
       city,
       visibility: 'Public',
       form: 'No',
-      type: 'Course'
+      type: 'Course',
+      duration: 60
     }
   },
   methods: {
@@ -95,6 +96,14 @@ export default {
     const collection = 'events'
 
     const { doc: item, id, load, update, remove, create } = useDoc(collection)
+
+    const updateEndDate = (e) => {
+      if (!e.duration || e.duration === 'custom') {
+        return
+      }
+
+      e.endDate = addMinutes(parseISO(e.startDate), e.duration)
+    }
 
     const types = computed(() => [
       {
@@ -153,26 +162,40 @@ export default {
           {
             name: 'startDate',
             type: 'datetime',
-            set: (val) => {
-              if (!val) return ''
-              return new Date(val)
-            },
-            get: (val) => {
-              if (!val) return ''
-              return toDatetimeLocal(getDateObect(val))
-            }
+            onChange: updateEndDate
+          },
+          {
+            name: 'duration',
+            label: 'Duration',
+            onChange: updateEndDate,
+            type: 'select',
+            options: [
+              {
+                value: 30,
+                label: '30 min'
+              },
+              {
+                value: 60,
+                label: '1 hour'
+              },
+              {
+                value: 90,
+                label: '1.5 hour'
+              },
+              {
+                value: 120,
+                label: '2 hours'
+              },
+              {
+                value: 'custom',
+                label: 'Custom'
+              }
+            ]
           },
           {
             name: 'endDate',
             type: 'datetime',
-            set: (val) => {
-              if (!val) return ''
-              return new Date(val)
-            },
-            get: (val) => {
-              if (!val) return ''
-              return toDatetimeLocal(getDateObect(val))
-            }
+            when: (e) => e.duration === 'custom'
           },
           {
             name: 'styles',

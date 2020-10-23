@@ -6,6 +6,7 @@
         :item="data"
         v-bind="field"
         :label="getLabel(field)"
+        @input="(val) => onFieldChange(field, val)"
       />
     </div>
     <div v-if="error" class="text-red-500 py-4 text-right">
@@ -133,6 +134,11 @@ export default {
       }
 
       this.$emit('save', this.data)
+    },
+    onFieldChange(field, value) {
+      if (field && field.onChange) {
+        field.onChange(this.data)
+      }
     }
   }
 }

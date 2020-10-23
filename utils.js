@@ -30,7 +30,9 @@ export const sortBy = (_key) => {
 }
 
 export const toDatetimeLocal = (date) => {
-  return format(date, "yyyy-MM-dd'T'HH:mm", { awareOfUnicodeTokens: true })
+  return format(date, "yyyy-MM-dd'T'HH:mm", {
+    awareOfUnicodeTokens: true
+  })
 }
 
 export const getDateObect = (val) => {
