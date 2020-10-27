@@ -99,7 +99,15 @@ import useAccounts from '~/use/accounts'
 import useAuth from '~/use/auth'
 import useCities from '~/use/cities'
 import useRouter from '~/use/router'
-import { dateDiff, sortBy, getTime, getDate, getDay, getYmd } from '~/utils'
+import {
+  dateDiff,
+  sortBy,
+  getTime,
+  getDate,
+  getDay,
+  getYmd,
+  getDateObect
+} from '~/utils'
 
 export default {
   name: 'EventsIndex',
@@ -126,9 +134,11 @@ export default {
       const response = getRsvpResponse(item.id)
       const multi = !response ? 3 : response === 'up' ? 2 : 1
       const order = multi * 100 + votes
+      const startDate = getDateObect(item.startDate)
 
       return {
         ...item,
+        startDate,
         upVotes,
         downVotes,
         votes,
