@@ -1,8 +1,23 @@
-import { computed } from '@nuxtjs/composition-api'
-import { sortBy } from '~/utils'
-import stylesAsset from '~/assets/content/styles'
+import Vue from 'vue'
+import { computed, useContext } from '@nuxtjs/composition-api'
+
+const state = Vue.observable({
+  collection: []
+})
 
 export default () => {
+  const { $content } = useContext()
+
+  const load = async () => {
+    state.collection = await $content('styles')
+      .sortBy('id')
+      .fetch()
+  }
+
+  if (!state.collection.length) {
+    load()
+  }
+
   const getStyles = (selected) => {
     return Object.keys(selected).map((id) => {
       return {
@@ -32,13 +47,7 @@ export default () => {
   ]
 
   const getStyle = (id) => {
-    const values = stylesAsset
-
-    if (!values) {
-      return {}
-    }
-
-    return values[id]
+    return state.collection.find((item) => item.id === id)
   }
 
   const getStyleName = (id) => {
@@ -52,17 +61,7 @@ export default () => {
   }
 
   const styles = computed(() => {
-    const values = stylesAsset
-    const result = []
-
-    for (const [key, value] of Object.entries(values)) {
-      result.push({
-        id: key,
-        ...value
-      })
-    }
-
-    return result.sort(sortBy('id'))
+    return state.collection
   })
 
   const categories = computed(() => {
