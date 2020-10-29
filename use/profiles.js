@@ -5,6 +5,12 @@ export default () => {
 
   const profileFields = [
     {
+      name: 'type',
+      label: 'Type',
+      type: 'select',
+      options: ['Dancer', 'Artist', 'Organiser', 'Venue', 'City']
+    },
+    {
       name: 'visibility',
       label: 'Your profile visibility',
       type: 'select',
