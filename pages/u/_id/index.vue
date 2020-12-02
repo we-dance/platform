@@ -4,8 +4,8 @@
     User not found
   </div>
   <div v-else class="mx-auto max-w-md bg-real-white p-4">
-    <TProfileDancer v-if="profile.type === 'Dancer'" :profile="profile" />
     <TProfileOrganiser v-if="profile.type === 'Organiser'" :profile="profile" />
+    <TProfileDancer v-else :profile="profile" />
   </div>
 </template>
 
