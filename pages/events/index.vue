@@ -1,6 +1,11 @@
 <template>
   <main>
-    <TTitle>Events</TTitle>
+    <TTitle>
+      Events
+      <template slot="right">
+        <TButton to="/events/-/edit">Add event</TButton>
+      </template>
+    </TTitle>
 
     <TTabs v-if="uid" v-model="activeFilter" :tabs="filterOptions" />
 

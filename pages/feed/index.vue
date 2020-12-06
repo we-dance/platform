@@ -16,22 +16,7 @@
     <TTitle>
       Feed
       <template slot="right">
-        <div v-if="city && city.telegram">
-          <div class="my-4 flex justify-center">
-            <TButton v-if="uid" :href="city.telegram" class="flex items-center">
-              <TIcon name="telegram" class="w-4 h-4 text-black mr-2" />
-              Join {{ city.name }} Dance Chat
-            </TButton>
-            <TButton
-              v-else
-              class="flex items-center"
-              @click="showAuthPopup = true"
-            >
-              <TIcon name="telegram" class="w-4 h-4 text-black mr-2" />
-              Join {{ city.name }} Dance Chat
-            </TButton>
-          </div>
-        </div>
+        <TButton to="/posts/-/edit">Add post</TButton>
       </template>
     </TTitle>
 

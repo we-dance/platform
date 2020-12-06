@@ -31,50 +31,36 @@
           class="fixed z-40 bottom-0 left-0 right-0 md:relative md:mt-6 flex md:mt-0 items-center justify-evenly md:justify-end p-2 md:p-0 border-t shadow-lg md:shadow-none md:border-0 text-gray-700 bg-white md:bg-dark md:text-white"
         >
           <router-link
-            to="/events"
+            to="/"
             class="block p-2 md:px-4 flex flex-col justify-center"
           >
-            <TIcon class="w-8 h-8 mx-auto" name="calendar" />
-            <span class="hidden md:block">Calendar</span>
+            <TIcon class="w-8 h-8 mx-auto" name="directions" />
+            <span class="hidden md:block">Home</span>
           </router-link>
-          <router-link
-            to="/people"
-            class="block p-2 md:px-4 flex flex-col justify-center"
-          >
-            <TIcon class="w-8 h-8 mx-auto" name="friends" />
-            <span class="hidden md:block">Community</span>
-          </router-link>
+
           <router-link
             to="/feed"
             class="block p-2 md:px-4 flex flex-col justify-center"
           >
             <TIcon class="w-8 h-8 mx-auto" name="news" />
-            <span class="hidden md:block">News</span>
+            <span class="hidden md:block">Feed</span>
           </router-link>
-          <button
-            v-if="!uid"
+
+          <router-link
+            to="/people"
             class="block p-2 md:px-4 flex flex-col justify-center"
-            @click="showAuthPopup = true"
           >
-            <TIcon class="w-8 h-8 mx-auto" name="plus" />
-            <span class="hidden md:block">Add</span>
-          </button>
-          <TMenu v-else>
-            <template slot="button">
-              <div
-                class="block p-2 md:px-4 flex flex-col justify-center cursor-pointer"
-              >
-                <TIcon class="w-8 h-8 mx-auto" name="plus" />
-                <span class="hidden md:block">Add</span>
-              </div>
-            </template>
-            <template slot="menu">
-              <div class="w-32 py-2 bg-white rounded-lg shadow-xl border">
-                <TButton type="nav" to="/posts/-/edit">Add post</TButton>
-                <TButton type="nav" to="/events/-/edit">Add event</TButton>
-              </div>
-            </template>
-          </TMenu>
+            <TIcon class="w-8 h-8 mx-auto" name="friends" />
+            <span class="hidden md:block">People</span>
+          </router-link>
+
+          <router-link
+            to="/events"
+            class="block p-2 md:px-4 flex flex-col justify-center"
+          >
+            <TIcon class="w-8 h-8 mx-auto" name="calendar" />
+            <span class="hidden md:block">Events</span>
+          </router-link>
 
           <TButton v-if="!uid" to="/signin" class="md:ml-2">Sign In</TButton>
           <TMenu v-else>

@@ -21,86 +21,56 @@
   <div v-else class="p-4 mx-auto max-w-xl mb-16">
     <h1 class="font-bold text-4xl">Welcome to {{ city.name }}!</h1>
 
-    <router-link
-      to="/events"
-      class="mt-4 flex items-center rounded-full border p-4 bg-real-white cursor-pointer hover:border-primary"
-    >
-      <TIcon name="calendar" class="h-8 w-8 mr-2" />
-      <div>
-        <h2 class="text-sm uppercase text-primary leading-tight">
-          Find workshop or party
-        </h2>
+    <div class="my-4 space-y-2">
+      <div v-if="city && city.telegram">
+        <TButton v-if="uid" :href="city.telegram" class="flex items-center">
+          <TIcon name="telegram" class="w-4 h-4 text-black mr-2" />
+          Join {{ city.name }} Dance Chat
+        </TButton>
+        <TButton v-else class="flex items-center" @click="showAuthPopup = true">
+          <TIcon name="telegram" class="w-4 h-4 text-black mr-2" />
+          Join {{ city.name }} Dance Chat
+        </TButton>
       </div>
-    </router-link>
 
-    <router-link
-      to="/people"
-      class="mt-4 flex items-center rounded-full border p-4 bg-real-white cursor-pointer hover:border-primary"
-    >
-      <TIcon name="friends" class="h-8 w-8 mr-2" />
       <div>
-        <h2 class="text-sm uppercase text-primary leading-tight">
-          Find a partner
-        </h2>
-        <h3 v-if="partnersCount > 0" class="font-bold text-xl">
-          {{ partnersCount }} want to dance
-        </h3>
+        <TButton to="/feed" class="flex items-center">
+          <TIcon name="news" class="w-4 h-4 text-black mr-2" />
+          Discuss dance topics
+        </TButton>
       </div>
-    </router-link>
 
-    <router-link
-      to="/feed"
-      class="mt-4 flex items-center rounded-full border p-4 bg-real-white cursor-pointer hover:border-primary"
-    >
-      <TIcon name="news" class="h-8 w-8 mr-2" />
       <div>
-        <h2 class="text-sm uppercase text-primary leading-tight">
-          Read news
-        </h2>
+        <TButton to="/people" class="flex items-center">
+          <TIcon name="friends" class="w-4 h-4 text-black mr-2" />
+          Find dance partners
+        </TButton>
       </div>
-    </router-link>
+
+      <div>
+        <TButton to="/events" class="flex items-center">
+          <TIcon name="calendar" class="w-4 h-4 text-black mr-2" />
+          Discover workshops and parties
+        </TButton>
+      </div>
+    </div>
   </div>
 </template>
 
 <script>
-import { computed } from '@nuxtjs/composition-api'
 import useCities from '~/use/cities'
-import useCollection from '~/use/collection'
-import { sortBy } from '~/utils'
+import useAuth from '~/use/auth'
 
 export default {
   layout: 'minimal',
   setup() {
     const { currentCity, city } = useCities()
-
-    const { docs: docsProfiles } = useCollection('profiles')
-
-    const docs = computed(() => {
-      return docsProfiles.value
-        .filter((item) => item.community === currentCity.value)
-        .sort(sortBy('-createdAt'))
-    })
-
-    const partnersCount = computed(() => {
-      return docs.value.filter(
-        (item) => item.username && item.partner === 'Yes'
-      ).length
-    })
-
-    const partnersPublic = computed(() => {
-      return docs.value.filter(
-        (item) =>
-          item.username &&
-          item.partner === 'Yes' &&
-          item.visibility === 'Public'
-      )
-    })
+    const { uid } = useAuth()
 
     return {
       currentCity,
       city,
-      partnersCount,
-      partnersPublic
+      uid
     }
   }
 }
