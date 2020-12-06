@@ -1,42 +1,37 @@
 <template>
-  <div>
-    <div class="md:flex p-4">
-      <TProfilePhoto
-        size="xl"
-        class="mx-auto md:m-0 md:mr-8 mb-4"
-        :uid="profile.createdBy"
-      />
-      <div class="w-full">
-        <div class="flex justify-between">
-          <div class="text-center md:text-left">
-            <div class="font-bold text-2xl leading-none">
-              {{ profile.name }}
-            </div>
-            <div>@{{ profile.username }}</div>
-          </div>
-
-          <TProfileContact :uid="profile.createdBy" />
-        </div>
-        <dl v-if="profile.community" class="mt-2 md:flex">
-          <dt class="font-bold mr-1">Community:</dt>
-          <dd>
-            {{ profile.community }}
-          </dd>
-        </dl>
-        <dl class="mt-2 md:flex">
-          <dt class="font-bold mr-1">Joined:</dt>
-          <dd>{{ getDateTime(profile.createdAt) }}</dd>
-        </dl>
+  <div class="p-4">
+    <div class="flex flex-col items-center">
+      <TProfilePhoto size="xl" :uid="profile.createdBy" />
+      <div class="font-bold text-lg leading-none mt-4">
+        {{ profile.name }}
       </div>
-    </div>
-    <div v-if="uid === profile.id" class="p-4">
-      <TButton to="/settings?tab=profile">Edit Profile</TButton>
-    </div>
-    <div class="p-4">
+      <div class="text-gray-700 text-sm">@{{ profile.username }}</div>
       <div v-if="profile.bio" class="mt-4">
-        <h2 class="font-bold">About me:</h2>
         <div>{{ profile.bio }}</div>
       </div>
+      <div
+        v-if="profile.partner === 'Yes'"
+        class="mt-4 border border-primary p-2 rounded"
+      >
+        <div class="font-bold text-primary">
+          I am looking for a dance partner
+        </div>
+        <div v-if="profile.partnerBio">{{ profile.partnerBio }}</div>
+      </div>
+      <div class="mt-4">
+        <TButton v-if="uid === profile.id" to="/settings?tab=profile"
+          >Edit Profile</TButton
+        >
+        <TProfileContact v-else :uid="profile.createdBy" />
+      </div>
+    </div>
+    <div>
+      <dl v-if="profile.community" class="mt-4 md:flex">
+        <dt class="font-bold mr-1">Community:</dt>
+        <dd>
+          {{ profile.community }}
+        </dd>
+      </dl>
       <div v-if="profile.styles" class="mt-4">
         <h2 class="font-bold">Dance styles:</h2>
         <TStyles :value.sync="profile.styles" />
@@ -46,32 +41,27 @@
         <div>{{ profile.skills }}</div>
       </div>
       <div v-if="profile.jobs" class="mt-4">
-        <h2 class="font-bold">Professional skills:</h2>
+        <h2 class="font-bold">Skills:</h2>
         <div>{{ profile.jobs }}</div>
       </div>
       <dl v-if="profile.languages" class="mt-4">
-        <dt class="font-bold mr-1">My languages:</dt>
+        <dt class="font-bold mr-1">Languages:</dt>
         <dd>{{ profile.languages }}</dd>
       </dl>
       <div v-if="profile.learning" class="mt-4">
         <h2 class="font-bold">Which dance topics you are interested in?</h2>
         <div>{{ profile.learning }}</div>
       </div>
-      <dl
-        v-if="profile.partner === 'Yes'"
-        class="mt-4 bg-primary text-white px-4 py-1 rounded-full"
-      >
-        <dt class="font-bold mr-1">I am looking for partner</dt>
-      </dl>
-      <dl v-if="profile.partnerBio" class="mt-4">
-        <dt class="font-bold mr-1">About my partner:</dt>
-        <dd>{{ profile.partnerBio }}</dd>
-      </dl>
 
       <div v-if="profile.story" class="mt-4">
         <h2 class="font-bold">My dance story:</h2>
         <TPreview :content="profile.story" />
       </div>
+
+      <dl class="mt-4 md:flex">
+        <dt class="font-bold mr-1">Joined:</dt>
+        <dd>{{ getDateTime(profile.createdAt) }}</dd>
+      </dl>
     </div>
   </div>
 </template>

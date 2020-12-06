@@ -2,13 +2,14 @@
   <div>
     <TButton
       v-if="myUid"
+      type="primary"
       @click="
         message = ''
         isWritingMessage = true
       "
-      >Contact</TButton
+      >Message</TButton
     >
-    <TButton v-else @click="showPopup = true">Contact</TButton>
+    <TButton v-else @click="showPopup = true">Message</TButton>
 
     <TPopup
       v-if="isWritingMessage"
