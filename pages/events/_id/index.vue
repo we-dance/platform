@@ -166,14 +166,16 @@ export default {
     comment: ''
   }),
   computed: {
-    tweetUrl() {
+    eventUrl() {
       const app = process.env.app
-
       const url = app.url + this.$route.fullPath
 
+      return url
+    },
+    tweetUrl() {
       const text = encodeURI(`"${this.item.name}"`)
 
-      return `https://twitter.com/intent/tweet?text=${text} %23WeDance ${url}`
+      return `https://twitter.com/intent/tweet?text=${text} %23WeDance ${this.eventUrl}`
     }
   },
   watch: {
@@ -196,7 +198,8 @@ export default {
     const item = this.item
 
     return {
-      title: item.title,
+      title: item.name,
+      canonical: this.eventUrl,
       meta: [
         {
           hid: 'description',
@@ -204,13 +207,33 @@ export default {
           content: item.excerpt
         },
         {
+          hid: 'author',
+          name: 'author',
+          content: item.organiser
+        },
+        {
+          hid: 'publisher',
+          name: 'publisher',
+          content: item.createdBy
+        },
+        {
           name: 'keywords',
           content: item.keywords,
           hid: 'keywords'
         },
         {
+          property: 'og:image',
+          content: item.cover,
+          hid: 'og:image'
+        },
+        {
+          property: 'og:type',
+          content: 'event',
+          hid: 'og:type'
+        },
+        {
           property: 'og:title',
-          content: item.title,
+          content: item.name,
           hid: 'og:title'
         },
         {

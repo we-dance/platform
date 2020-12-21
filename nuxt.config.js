@@ -4,9 +4,10 @@ const app = {
   name: 'WeDance',
   description: 'We bring dancers together',
   social: {
-    twitter: 'WeDanceHQ'
+    twitter: 'WeDanceVIP'
   },
   url: process.env.URL,
+  author: 'WeDance',
   cover: '/cover/wide.png'
 }
 
