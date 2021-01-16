@@ -174,7 +174,7 @@ export default {
       ls.remove('target')
 
       if (!target) {
-        target = `/posts/74zve0dQqtdwaSXq7RDf`
+        target = `/settings`
       }
 
       this.$router.push(target)

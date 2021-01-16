@@ -1,16 +1,6 @@
 <template>
   <div>
-    <textarea
-      v-model="comment"
-      :placeholder="`Say something nice to ${getProfile(replyTo).username}...`"
-      class="border rounded p-4 w-full overflow-hidden h-auto"
-    />
-
-    <div class="flex justify-end">
-      <TButton @click="submit">
-        Post comment
-      </TButton>
-    </div>
+    Comments are temporarily not working.
   </div>
 </template>
 

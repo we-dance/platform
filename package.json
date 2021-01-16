@@ -1,8 +1,8 @@
 {
   "name": "we-dance",
   "version": "1.0.0",
-  "description": "Dancers Community",
-  "author": "Aleksey Razbakov",
+  "description": "Uniting dancers worldwide",
+  "author": "WeDance",
   "private": true,
   "scripts": {
     "dev": "nuxt",

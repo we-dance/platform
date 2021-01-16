@@ -1,18 +1,5 @@
 <template>
   <main>
-    <TPopup v-if="showAuthPopup">
-      <div class="flex justify-between border-b pb-2 mb-4">
-        <div class="font-bold">Members only</div>
-        <button class="cursor-pointer" @click="showAuthPopup = false">
-          <TIcon name="close" class="cursor-pointer w-4 h-4" />
-        </button>
-      </div>
-      <div class="my-4 flex flex-col justify-center">
-        <div>Chat is available only for members</div>
-        <TButton class="mt-2" to="/signin?target=/feed">Become Member</TButton>
-      </div>
-    </TPopup>
-
     <TTitle>
       Feed
       <template slot="right">
