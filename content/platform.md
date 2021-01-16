@@ -1,8 +1,6 @@
-wedance.vip – is a WeDancePlatform aka LinkedIn for dancers.
-
 ## We bring dancers together
 
-WeDance is a community platform for dancers:
+WeDance.vip is a community platform for dancers:
 
 - Ask questions and participate in discussions about dancing
 - Find trends in dancing (podcasts, music, artists, fusion, DJs, genres) and get inspiration
@@ -31,3 +29,5 @@ So as a dancer you don't need additional account in Facebook to connect with oth
 Provide communication platform to announce events, build plans with dancers, share ideas of upcoming activities, find and connect with other dancers, share your progress, find answer to your question.
 
 For this introduce City Chats which has a principle of SnapChat/Instagram Stories. You post a story, which will be active for one day. If your story gets enough attention it will get its way to Week, Month, Year highlights. Your story can get promoted by moderator to International and appear in all cities.
+
+[Read more about WeDance](/about).

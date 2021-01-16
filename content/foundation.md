@@ -10,9 +10,11 @@ Main idea and inspiration is taken from Apache Foundation:
 
 ## Projects
 
-**[Awesome Dance](https://github.com/we-dance/awesome-dance)** - a curated list of awesome dance apps and services
+**[Awesome Dance](https://github.com/we-dance/awesome-dance)** - a curated list of awesome dance apps and services.
 
-**[InstaFest](https://razbakov.com/projects/instantfest/)** - website builder for dance organisers (festivals, studios, indie teachers), which is using Platform widgets to transform any static website to a social network (so to say).
+**[WeDance Platform](https://wedance.vip/)** – community platform for dancers.
+
+**[InstaFest](https://razbakov.com/projects/instafest/)** - website builder for dance organisers (festivals, studios, indie teachers), which is using Platform widgets to transform any static website to a social network (so to say).
 
 **WeDance Hackathon** - organised gathering of programmers and makers to brainstorm and try out ideas for dance industry.
 
