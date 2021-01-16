@@ -2,7 +2,7 @@
 
 **Effective date: October 11, 2020**
 
-Please read these Terms and Conditions ("Terms", "Terms and Conditions") carefully before using the [https://wedance.vip/](https://wedance.vip/) website (the "Service") operated by MoneyDo ("us", "we", or "our").
+Please read these Terms and Conditions ("Terms", "Terms and Conditions") carefully before using the [https://wedance.vip/](https://wedance.vip/) website (the "Service") operated by WeDanceHQ ("us", "we", or "our").
 
 Your access to and use of the Service is conditioned on your acceptance of and compliance with these Terms. These Terms apply to all visitors, users and others who access or use the Service.
 
