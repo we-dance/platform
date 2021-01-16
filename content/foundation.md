@@ -1,12 +1,8 @@
 # WeDanceFoundation
 
-Non-government organisation to support and spread dancing around the world by enabling collaboration and development and bringing experts from different fields to create and support dance infrastructure.
+Non-government organisation to support and spread dancing around the world by enabling collaboration and development and bringing experts from different fields to create and support dance infrastructure. Inspired by [Apache Foundation](https://youtu.be/JUt2nb0mgwg).
 
 [**Join Foundation**](https://github.com/we-dance/foundation)
-
-Main idea and inspiration is taken from Apache Foundation:
-
-[https://youtu.be/JUt2nb0mgwg](https://youtu.be/JUt2nb0mgwg)
 
 ## Projects
 
