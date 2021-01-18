@@ -76,11 +76,6 @@ export default () => {
       type: 'stylesSelect'
     },
     {
-      name: 'skills',
-      label: 'You dance skills (old)',
-      type: 'textarea'
-    },
-    {
       name: 'story',
       label: 'Your dance story',
       type: 'textarea',
