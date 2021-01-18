@@ -143,7 +143,7 @@ export default {
 
     const { getAccount } = useAccounts()
 
-    const activeFilter = ref('next7days')
+    const activeFilter = ref('thisYear')
 
     const isPublic = (item) => item.visibility !== 'Unlisted'
 
