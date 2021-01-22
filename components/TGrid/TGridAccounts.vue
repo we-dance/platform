@@ -119,7 +119,7 @@ import Vue from 'vue'
 import { computed, ref } from '@nuxtjs/composition-api'
 import useCollection from '~/use/collection'
 import useDoc from '~/use/doc'
-import { sortBy, getTime, getDate, saveCSV } from '~/utils'
+import { sortBy, getTime, getDate, getDateTime, saveCSV } from '~/utils'
 import useProfiles from '~/use/profiles'
 
 export default {
@@ -304,7 +304,48 @@ export default {
       this.selected = this.value
     },
     download() {
-      saveCSV(this.items)
+      const flatItems = this.items.map((item) => {
+        const flatItem = item
+
+        Object.keys(item.profile).forEach((key) => {
+          flatItem[`profile_${key}`] = item.profile[key]
+        })
+        delete flatItem.profile
+
+        Object.keys(item.marketing).forEach((key) => {
+          flatItem[`marketing_${key}`] = item.marketing[key]
+        })
+        delete flatItem.marketing
+
+        flatItem.createdAt = getDateTime(flatItem.createdAt)
+        flatItem.updatedAt = getDateTime(flatItem.updatedAt)
+        flatItem.lastLoginAt = getDateTime(flatItem.lastLoginAt)
+        flatItem.profile_styles = flatItem.profile_styles
+          ? Object.keys(flatItem.profile_styles)
+          : ''
+
+        Object.keys(item.marketing_utms).forEach((key) => {
+          flatItem[`marketing_utms_${key}`] = item.marketing_utms[key]
+        })
+        delete flatItem.marketing_utms
+
+        if (item.profile_newsletter) {
+          Object.keys(item.profile_newsletter).forEach((key) => {
+            flatItem[`profile_newsletter_${key}`] = item.profile_newsletter[key]
+          })
+          delete flatItem.profile_newsletter
+        }
+
+        flatItem.profile_location = flatItem.profile_location
+          ? flatItem.profile_location.locality
+          : ''
+
+        delete flatItem.marketing_screen
+
+        return flatItem
+      })
+
+      saveCSV(flatItems)
     },
     removeSelected() {
       Object.keys(this.selected).forEach((uid) => {
