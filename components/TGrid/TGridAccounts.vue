@@ -101,6 +101,14 @@ utms: {{ item.marketing.utms }}</pre
             >
             <pre class="text-xs">joined: {{ getDate(item.createdAt) }}</pre>
             <pre class="text-xs">used: {{ item.daysUsed }} days</pre>
+            <pre class="text-xs">visibility: {{ item.profile.visibility }}</pre>
+            <pre
+              v-for="contactField in contactFields"
+              :key="`${item.id}_${contactField.name}`"
+              class="text-xs"
+            ><span v-if="item.profile[contactField.name]">{{ contactField.name }}: {{
+                item.profile[contactField.name]
+              }}</span></pre>
           </div>
         </div>
 
@@ -146,7 +154,7 @@ export default {
     const { docs } = useCollection('accounts')
     const { remove: removeProfile } = useDoc('profiles')
     const { remove: removeAccount, update: updateAccount } = useDoc('accounts')
-    const { getProfile } = useProfiles()
+    const { getProfile, contactFields } = useProfiles()
     const nameFilter = ref('')
     const activeFilter = ref('')
     const selectedAll = ref(false)
@@ -277,7 +285,8 @@ export default {
       removeProfile,
       removeAccount,
       list,
-      applyList
+      applyList,
+      contactFields
     }
   },
   computed: {
