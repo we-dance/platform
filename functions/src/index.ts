@@ -279,7 +279,7 @@ Contact via website and share your contacts to continue conversation in a proper
 The goal of WeDance is to connect you with dancers, not to provide chatting platform.
 `
 
-    const from = 'WeDance <automated@wedance.vip>'
+    const from = 'WeDance <noreply@wedance.vip>'
 
     const data = {
       from,
