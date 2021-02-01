@@ -257,7 +257,8 @@ export default () => {
       const profile = {
         createdBy: state.uid,
         createdAt: +new Date(),
-        community: ls('city')
+        community: ls('city'),
+        visibility: 'Public'
       }
 
       await firestore

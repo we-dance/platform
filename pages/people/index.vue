@@ -158,7 +158,7 @@ export default {
       //   value: 'competition'
       // }
     ]
-    const rolesList = ['Leader', 'Follower', 'Instructor']
+    const rolesList = ['Male', 'Female', 'Instructor']
     const dancesList = computed(() =>
       myProfile.value ? Object.keys(myProfile.value.styles) : []
     )
@@ -171,10 +171,7 @@ export default {
 
     const items = computed(() => {
       let result = docs.value.filter(
-        (item) =>
-          item.username &&
-          item.photo &&
-          (uid.value || item.visibility === 'Public')
+        (item) => item.username && (uid.value || item.visibility === 'Public')
       )
 
       if (Object.keys(dances.value).length) {
@@ -187,11 +184,11 @@ export default {
         )
       }
 
-      if (roles.value.Leader) {
+      if (roles.value.Male) {
         result = result.filter((item) => item.gender === 'Male')
       }
 
-      if (roles.value.Follower) {
+      if (roles.value.Female) {
         result = result.filter((item) => item.gender === 'Female')
       }
 
