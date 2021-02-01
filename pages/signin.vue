@@ -61,14 +61,22 @@
     <TTabs v-model="tab" :tabs="tabs" />
     <form class="mt-4" @submit="submit">
       <TField
+        v-if="tab === 'register'"
+        id="username"
+        v-model="username"
+        label="Username"
+        label-position="top"
+        class="mt-4"
+      />
+      <TField
         id="email"
         v-model="email"
         type="email"
         label="Email"
         label-position="top"
+        class="mt-4"
       />
       <TField
-        v-if="tab === 'login'"
         id="password"
         v-model="password"
         type="password"
@@ -76,6 +84,15 @@
         label-position="top"
         class="mt-4"
       />
+      <TField
+        v-if="tab === 'register'"
+        v-model="community"
+        label="I dance in"
+        label-position="vertical"
+        type="city"
+        class="mt-4"
+      />
+
       <div class="mt-4 text-xs">
         By signing in, you agree to
         <router-link class="underline hover:no-underline" to="/terms"
@@ -142,6 +159,8 @@ export default {
   data: () => ({
     email: '',
     password: '',
+    username: '',
+    community: '',
     emailSent: false,
     noPasswordPopup: false,
     tab: 'login',
@@ -163,6 +182,7 @@ export default {
       signingIn,
       signInWithGoogle,
       sendSignInLinkToEmail,
+      createUserWithEmailAndPassword,
       signUserIn,
       signOut,
       error
@@ -175,6 +195,7 @@ export default {
       signInWithGoogle,
       signUserIn,
       sendSignInLinkToEmail,
+      createUserWithEmailAndPassword,
       signOut,
       error
     }
@@ -195,6 +216,8 @@ export default {
       ls('target', target)
     }
 
+    this.community = ls('city')
+
     if (this.uid) {
       this.redirect()
     }
@@ -205,7 +228,7 @@ export default {
       ls.remove('target')
 
       if (!target) {
-        target = '/feed'
+        target = '/settings'
       }
 
       this.$router.push(target)
@@ -220,11 +243,20 @@ export default {
         return
       }
 
-      if (this.password) {
-        this.signUserIn(this.email, this.password)
+      if (this.tab === 'login') {
+        if (this.password) {
+          this.signUserIn(this.email, this.password)
+        } else {
+          this.sendSignInLinkToEmail(this.email)
+          this.emailSent = true
+        }
       } else {
-        this.sendSignInLinkToEmail(this.email)
-        this.emailSent = true
+        this.createUserWithEmailAndPassword(
+          this.email,
+          this.password,
+          this.username,
+          this.community
+        )
       }
     }
   }

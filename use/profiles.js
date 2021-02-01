@@ -16,7 +16,7 @@ export default () => {
       type: 'select',
       options: ['Public', 'Members', 'Unlisted'],
       description:
-        'Public profiles will be searchable in Google. Members profile are only visible for logged-in users. Unlisted profiles are possible to open with exact link, but they are not listed in members lists and search.'
+        'Public profiles are searchable in Google and used in our social media to attract new members. Members profile are only visible for logged-in users. Unlisted profiles are possible to open with exact link, but they are not listed in members lists and search.'
     },
     {
       name: 'name',

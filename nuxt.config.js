@@ -27,9 +27,6 @@ export default {
    */
   loading: { color: '#2a1b3c' },
   components: true,
-  router: {
-    middleware: 'onboarding'
-  },
   /*
    ** Global CSS
    */

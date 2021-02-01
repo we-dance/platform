@@ -9,6 +9,7 @@ import 'firebase/auth'
 import 'firebase/firestore'
 import useRouter from '~/use/router'
 import { getDateObect } from '~/utils'
+import useDoc from '~/use/doc'
 
 const state = Vue.observable({
   loading: true,
@@ -258,13 +259,19 @@ export default () => {
         createdBy: state.uid,
         createdAt: +new Date(),
         community: ls('city'),
-        visibility: 'Public'
+        username: ls('username'),
+        visibility: 'Public',
+        type: 'Dancer',
+        name: ls('username')
       }
 
       await firestore
         .collection('profiles')
         .doc(state.uid)
         .set(profile)
+
+      ls.remove('city')
+      ls.remove('username')
 
       state.profile = profile
     } else {
@@ -323,6 +330,16 @@ export default () => {
     await loadAccount()
   }
 
+  async function deleteAccount() {
+    const { remove: removeAccount } = useDoc('accounts')
+    const { remove: removeProfile } = useDoc('profiles')
+
+    await removeProfile(state.uid)
+    await removeAccount(state.uid)
+    await firebase.auth().deleteUser(state.uid)
+    await signOut()
+  }
+
   async function signOut() {
     state.loading = true
 
@@ -372,6 +389,22 @@ export default () => {
     }
   }
 
+  async function createUserWithEmailAndPassword(
+    email,
+    password,
+    username,
+    community
+  ) {
+    try {
+      ls('username', username)
+      ls('city', community)
+      await firebase.auth().createUserWithEmailAndPassword(email, password)
+      updateProfile()
+    } catch (e) {
+      state.error = e
+    }
+  }
+
   async function signUserIn(email, password) {
     try {
       await firebase.auth().signInWithEmailAndPassword(email, password)
@@ -414,6 +447,8 @@ export default () => {
     signInWithGoogle,
     sendSignInLinkToEmail,
     signInWithEmailLink,
-    updatePassword
+    updatePassword,
+    createUserWithEmailAndPassword,
+    deleteAccount
   }
 }

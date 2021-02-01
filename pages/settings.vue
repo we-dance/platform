@@ -36,6 +36,11 @@
             @save="saveAccount"
           />
           <TButton to="/settings?tab=password">Change Password</TButton>
+          <div class="bg-red-200 mt-4 -mb-4 -mx-4 p-4">
+            <TButton type="danger" @click="deleteAccount()"
+              >Delete Account</TButton
+            >
+          </div>
         </div>
         <div v-if="currentTab === 'password'" class="border-t mt-4 pt-4">
           <div
@@ -149,7 +154,8 @@ export default {
       updateProfile,
       isAccountConfirmed,
       loading,
-      updatePassword
+      updatePassword,
+      deleteAccount
     } = useAuth()
 
     const { profileFields, contactFields } = useProfiles()
@@ -185,7 +191,8 @@ export default {
       profileFields,
       contactFields,
       password,
-      changePassword
+      changePassword,
+      deleteAccount
     }
   },
   computed: {
