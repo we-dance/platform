@@ -1,9 +1,12 @@
 <template>
   <router-link
     :to="`/u/${profile.username}`"
-    class="border rounded shadow text-sm bg-real-white overflow-ellipsis"
+    class="border rounded shadow text-sm bg-real-white overflow-hidden"
   >
-    <img :src="profile.photo" />
+    <div class="bg-gray-300">
+      <TIcon v-if="!profile.photo" name="undraw_profile_pic" />
+      <img v-else :src="profile.photo" />
+    </div>
     <div>
       <div class="p-2 relative">
         <div>
