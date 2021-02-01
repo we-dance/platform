@@ -228,7 +228,7 @@ export default {
       ls.remove('target')
 
       if (!target) {
-        target = '/settings?tab=profile'
+        target = '/people'
       }
 
       this.$router.push(target)
