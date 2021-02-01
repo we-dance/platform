@@ -270,7 +270,6 @@ export default () => {
         .doc(state.uid)
         .set(profile)
 
-      ls.remove('city')
       ls.remove('username')
 
       state.profile = profile
@@ -399,7 +398,6 @@ export default () => {
       ls('username', username)
       ls('city', community)
       await firebase.auth().createUserWithEmailAndPassword(email, password)
-      updateProfile()
     } catch (e) {
       state.error = e
     }
