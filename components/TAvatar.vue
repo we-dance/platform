@@ -1,16 +1,9 @@
 <template>
   <div class="flex items-center">
     <div v-if="photo">
-      <TMenu hover>
-        <template v-slot:button>
-          <router-link :to="`/u/${profile.username}`">
-            <TProfilePhoto :uid="uid" :size="size" />
-          </router-link>
-        </template>
-        <template v-slot:menu>
-          <TCardProfile class="w-64" :uid="uid" />
-        </template>
-      </TMenu>
+      <router-link :to="`/u/${profile.username}`">
+        <TProfilePhoto :uid="uid" :size="size" />
+      </router-link>
     </div>
     <div v-if="name">
       <router-link class="hover:underline" :to="`/u/${profile.username}`">

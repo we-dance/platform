@@ -1,28 +1,9 @@
 <template>
-  <TLoader v-if="loading" />
-  <div v-else-if="!exists" class="text-center">
-    Post not found
-  </div>
-  <div v-else>
-    <div class="md:grid grid-cols-12 gap-6">
-      <div class="col-span-12 bg-white rounded p-4">
-        <div>
-          <TTagsPreview :value="item.tags" />
-
-          <h1 class="font-bold text-2xl mb-2 leading-tight">
-            {{ item.title }}
-          </h1>
-
-          <div class="flex items-center">
-            <TAvatar photo size="sm" :uid="item.createdBy" class="mr-2" />
-            <TAvatar name :uid="item.createdBy" />
-          </div>
-
-          <TPreview class="mt-2" :content="item.description" />
-
-          <Microlink v-if="item.link" class="mt-2 z-0" :url="item.link" />
-
-          <div v-if="can('edit', 'posts', item)" class="my-2 flex items-start">
+  <div class="md:grid grid-cols-12 gap-6">
+    <div class="col-span-12">
+      <div>
+        <div class="bg-real-white p-4 border rounded shadow">
+          <div v-if="can('edit', 'posts', item)" class="mb-2 flex items-start">
             <TButton
               icon="edit"
               :to="`/posts/${item.id}/edit`"
@@ -31,95 +12,109 @@
             />
           </div>
 
-          <div class="flex justify-between items-center border p-4 my-4">
-            <div class="flex">
-              <div class="text-green-500 flex justify-center">
-                <button
-                  class="text-center hover:text-green-500"
-                  :class="{ 'text-green-700': item.response === 'up' }"
-                  @click="updateRsvp(item.id, 'posts', 'up')"
-                >
-                  <TIcon name="up" class="h-6 w-6" />
-                </button>
-                <div>
-                  {{ item.upVotes }}
+          <TTagsPreview :value="item.tags" />
+
+          <h1 class="font-bold text-2xl leading-tight">
+            {{ item.title }}
+          </h1>
+
+          <TPreview :content="item.description" />
+
+          <div class="border-t mt-4 p-4 -mx-4 -mb-4 bg-gray-100">
+            <div class="flex justify-between items-center">
+              <div class="flex">
+                <div class="text-gray-700 flex justify-center">
+                  <button
+                    class="text-center hover:text-red-500"
+                    :class="{ 'text-primary': richItem.response === 'up' }"
+                    @click="updateRsvp(item.id, 'posts', 'up')"
+                  >
+                    <TIcon name="favorite" />
+                  </button>
+                  <div class="ml-1">
+                    {{ richItem.upVotes }}
+                  </div>
                 </div>
               </div>
-              <div class="text-red-500 flex ml-2 justify-center">
-                <button
-                  class="text-center hover:text-primary"
-                  :class="{ 'text-red-700': item.response === 'down' }"
-                  @click="updateRsvp(item.id, 'posts', 'down')"
-                >
-                  <TIcon name="down" class="h-6 w-6 hover:text-primary" />
-                </button>
-                <div>
-                  {{ item.downVotes }}
-                </div>
+              <div>
+                <TButton :href="tweetUrl">Share</TButton>
               </div>
             </div>
-            <div>
-              <TButton :href="tweetUrl">Share</TButton>
+
+            <div class="mt-4">
+              <TProfileCard3
+                :label="`Published on ${publishedAt} by`"
+                :profile="author"
+              />
             </div>
           </div>
         </div>
       </div>
+    </div>
 
-      <div id="comment" class="col-span-12" @click="checkAuth">
-        <TFormComment :post-id="item.id" :reply-to="item.createdBy" />
+    <div id="comment" class="col-span-12 mt-8" @click="checkAuth">
+      <TFormComment :post-id="item.id" :reply-to="item.createdBy" />
 
-        <TListComments :post-id="item.id">
-          <template v-slot:empty>
-            <div class="text-center my-8">
-              There are no comments yet.
-            </div>
-          </template>
-        </TListComments>
-      </div>
+      <TListComments :post-id="item.id">
+        <template v-slot:empty>
+          <div class="text-center my-8">
+            There are no comments yet.
+          </div>
+        </template>
+      </TListComments>
     </div>
   </div>
 </template>
 
 <script>
-import { Microlink } from '@microlink/vue'
-import {
-  computed,
-  defineComponent,
-  useMeta,
-  watchEffect
-} from '@nuxtjs/composition-api'
-import useAuth from '~/use/auth'
-import useDoc from '~/use/doc'
 import useRSVP from '~/use/rsvp'
-import useRouter from '~/use/router'
 import useProfiles from '~/use/profiles'
+import useAuth from '~/use/auth'
 import useReactions from '~/use/reactions'
-import { getDateTime, dateDiff } from '~/utils'
+import { getExcerpt, getDateTime } from '~/utils'
 
-export default defineComponent({
-  components: {
-    Microlink
+export default {
+  async asyncData({ app, params, error }) {
+    const postRef = app.$fire.firestore.collection('posts').doc(params.id)
+
+    const snapshot = await postRef.get()
+    const doc = snapshot.data()
+
+    if (!doc) {
+      error({ statusCode: 404 })
+    }
+
+    return {
+      exists: true,
+      loading: false,
+      item: doc
+    }
   },
   data: () => ({
-    comment: ''
+    comment: '',
+    item: {},
+    loading: true,
+    exists: true
   }),
   computed: {
+    publishedAt() {
+      return getDateTime(this.item.createdAt)
+    },
+    author() {
+      return this.getProfile(this.item.createdBy)
+    },
+    richItem() {
+      return this.map(this.item)
+    },
     tweetUrl() {
       const app = process.env.app
 
-      const author = this.getProfile(this.item.createdBy).name
+      const author = this.author.username
       const url = app.url + this.$route.fullPath
 
       const text = encodeURI(`"${this.item.title}" by ${author}`)
 
       return `https://twitter.com/intent/tweet?text=${text} %23WeDance ${url}`
-    }
-  },
-  watch: {
-    item() {
-      this.$nextTick(() => {
-        this.load()
-      })
     }
   },
   methods: {
@@ -140,64 +135,46 @@ export default defineComponent({
       }
     }
   },
-  head() {},
-  setup(_, { root }) {
-    const { uid, can } = useAuth()
-    const { params } = useRouter()
-    const { getProfile } = useProfiles()
-
-    const { doc, load, exists, loading } = useDoc('posts')
-    const { map } = useReactions()
-
-    const { updateRsvp } = useRSVP()
-
-    if (params.id) {
-      load(params.id)
-    }
-
-    const item = computed(() => map(doc.value))
-    const { title, meta } = useMeta()
-
-    watchEffect(() => {
-      title.value = item.value.title
-      meta.value = [
+  head() {
+    return {
+      title: this.item.title,
+      meta: [
         {
-          hid: 'description',
+          vmid: 'description',
           name: 'description',
-          content: item.value.excerpt
+          content: getExcerpt(this.item.description)
         },
         {
+          vmid: 'keywords',
           name: 'keywords',
-          content: item.value.keywords,
-          hid: 'keywords'
+          content: this.item.keywords
         },
         {
+          vmid: 'og:title',
           property: 'og:title',
-          content: item.value.title,
-          hid: 'og:title'
+          content: this.item.title
         },
         {
+          vmid: 'og:description',
           property: 'og:description',
-          content: item.value.excerpt,
-          hid: 'og:description'
+          content: getExcerpt(this.item.description)
         }
       ]
-
-      root.$meta().refresh()
-    })
+    }
+  },
+  setup() {
+    const { getProfile } = useProfiles()
+    const { uid, can } = useAuth()
+    const { updateRsvp } = useRSVP()
+    const { map } = useReactions()
 
     return {
-      exists,
-      uid,
-      loading,
-      item,
-      map,
-      updateRsvp,
-      can,
       getProfile,
-      getDateTime,
-      dateDiff
+      uid,
+      can,
+      updateRsvp,
+      map
     }
   }
-})
+}
 </script>

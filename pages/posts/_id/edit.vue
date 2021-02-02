@@ -110,13 +110,9 @@ export default {
             type: 'city'
           },
           {
-            name: 'tags',
-            placeholder: 'Tags',
-            type: 'tags',
-            options: tagsOptions.value,
-            listeners: {
-              add: addTag
-            }
+            name: 'styles',
+            label: 'Dance styles',
+            type: 'stylesSelect'
           }
         ]
       },

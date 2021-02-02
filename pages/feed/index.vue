@@ -39,7 +39,7 @@
       <div
         v-for="item in filteredItems"
         :key="item.id"
-        class="rounded bg-white mb-4 shadow border"
+        class="rounded bg-real-white mb-4 shadow border"
       >
         <div class="p-4">
           <div>
@@ -84,38 +84,25 @@
             </div>
 
             <TPreview
-              v-if="!item.link"
               class="mt-2"
               :content="item.description"
               :excerpt="true"
             />
-
-            <Microlink v-if="item.link" class="mt-2 z-0" :url="item.link" />
           </div>
         </div>
         <div class="px-4 pb-4 md:flex items-center justify-between">
           <TTagsPreview :value="item.tags" class="mb-4 md:mb-0" />
 
           <div class="flex">
-            <div class="text-green-500 flex justify-center">
+            <div class="text-gray-700 flex justify-center">
               <button
-                class="text-center hover:text-green-500"
-                :class="{ 'text-green-700': item.response === 'up' }"
+                class="text-center hover:text-red-500"
+                :class="{ 'text-primary': item.response === 'up' }"
                 @click="updateRsvp(item.id, 'posts', 'up')"
               >
-                <TIcon name="up" class="h-6 w-6" />
+                <TIcon name="favorite" />
               </button>
-              <div>{{ item.upVotes }}</div>
-            </div>
-            <div class="text-red-500 flex ml-2 justify-center">
-              <button
-                class="text-center hover:text-primary"
-                :class="{ 'text-red-700': item.response === 'down' }"
-                @click="updateRsvp(item.id, 'posts', 'down')"
-              >
-                <TIcon name="down" class="h-6 w-6 hover:text-primary" />
-              </button>
-              <div>{{ item.downVotes }}</div>
+              <div class="ml-1">{{ item.upVotes }}</div>
             </div>
             <div class="text-gray-700 flex ml-4 justify-center">
               <router-link :to="`/posts/${item.id}`" class="flex">
@@ -132,7 +119,6 @@
 
 <script>
 import { computed } from '@nuxtjs/composition-api'
-import { Microlink } from '@microlink/vue'
 import useRSVP from '~/use/rsvp'
 import useComments from '~/use/comments'
 import useCollection from '~/use/collection'
@@ -144,9 +130,6 @@ import { dateDiff, sortBy } from '~/utils'
 
 export default {
   name: 'PostsIndex',
-  components: {
-    Microlink
-  },
   setup() {
     const {
       getCount,
