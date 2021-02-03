@@ -15,6 +15,9 @@ module.exports = {
         black: '#2A1B3C',
         white: '#FFFFF4',
         'real-white': '#FFFFFF'
+      },
+      fontFamily: {
+        lato: 'Lato'
       }
     }
   },

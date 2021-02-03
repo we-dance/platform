@@ -1,5 +1,6 @@
 import Vue from 'vue'
 import { computed, useContext } from '@nuxtjs/composition-api'
+import { sortBy } from '~/utils'
 
 const state = Vue.observable({
   collection: []
@@ -18,33 +19,52 @@ export default () => {
     load()
   }
 
-  const getStyles = (selected) => {
-    return Object.keys(selected).map((id) => {
-      return {
-        ...getStyle(id),
-        ...selected[id]
-      }
-    })
-  }
-
   const levels = [
     {
       value: 'Interested',
-      label: 'Interested'
+      label: 'Interested',
+      weight: 0
     },
     {
       value: 'Beginner',
-      label: 'Beginner'
+      label: 'Beginner',
+      weight: 1
     },
     {
       value: 'Intermediate',
-      label: 'Intermediate'
+      label: 'Intermediate',
+      weight: 2
     },
     {
       value: 'Advanced',
-      label: 'Advanced'
+      label: 'Advanced',
+      weight: 3
     }
   ]
+
+  const getStyles = (selected, level = 0, onlyRoot = false, limit = 0) => {
+    if (!selected) {
+      return []
+    }
+
+    let result = Object.keys(selected).map((id) => {
+      return {
+        ...getStyle(id),
+        ...selected[id],
+        levelMeta: levels.find((item) => item.value === selected[id].level)
+      }
+    })
+
+    result = result.filter(
+      (item) =>
+        item.levelMeta.weight >= level &&
+        (onlyRoot ? item.root === 'yes' : true)
+    )
+
+    result = result.sort(sortBy('name'))
+
+    return result
+  }
 
   const getStyle = (id) => {
     return state.collection.find((item) => item.id === id)

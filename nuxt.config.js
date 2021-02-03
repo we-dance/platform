@@ -68,7 +68,8 @@ export default {
     // Doc: https://github.com/nuxt-community/nuxt-tailwindcss
     '@nuxtjs/tailwindcss',
     // Doc: https://composition-api.nuxtjs.org/
-    '@nuxtjs/composition-api'
+    '@nuxtjs/composition-api',
+    '@nuxtjs/google-fonts'
   ],
   /*
    ** Nuxt.js modules
@@ -87,6 +88,12 @@ export default {
     '@nuxt/content',
     '@nuxtjs/firebase'
   ],
+  googleFonts: {
+    display: 'swap',
+    families: {
+      Lato: true
+    }
+  },
   purgeCSS: {
     enabled: false
   },
