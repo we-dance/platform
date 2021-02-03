@@ -3,36 +3,36 @@
     <div class="col-span-12">
       <div>
         <div class="bg-real-white p-4 border rounded shadow">
-          <div v-if="can('edit', 'posts', item)" class="mb-2 flex items-start">
+          <div v-if="can('edit', 'posts', post)" class="mb-2 flex posts-start">
             <TButton
               icon="edit"
-              :to="`/posts/${item.id}/edit`"
+              :to="`/posts/${postId}/edit`"
               class="hover:text-blue-500"
               label="Edit"
             />
           </div>
 
-          <TTagsPreview :value="item.tags" />
+          <TTagsPreview :value="fullPost.tags" />
 
           <h1 class="font-bold text-2xl leading-tight">
-            {{ item.title }}
+            {{ post.title }}
           </h1>
 
-          <TPreview :content="item.description" />
+          <TPreview :content="post.description" />
 
           <div class="border-t mt-4 p-4 -mx-4 -mb-4 bg-gray-100">
-            <div class="flex justify-between items-center">
+            <div class="flex justify-between posts-center">
               <div class="flex">
-                <div class="text-gray-700 flex justify-center">
+                <div class="text-gray-700 flex items-center justify-center">
                   <button
                     class="text-center hover:text-red-500"
-                    :class="{ 'text-primary': richItem.response === 'up' }"
-                    @click="updateRsvp(item.id, 'posts', 'up')"
+                    :class="{ 'text-primary': fullPost.response === 'up' }"
+                    @click="updateRsvp(postId, 'posts', 'up')"
                   >
                     <TIcon name="favorite" />
                   </button>
                   <div class="ml-1">
-                    {{ richItem.upVotes }}
+                    {{ fullPost.upVotes }}
                   </div>
                 </div>
               </div>
@@ -53,9 +53,9 @@
     </div>
 
     <div id="comment" class="col-span-12 mt-8" @click="checkAuth">
-      <TFormComment :post-id="item.id" :reply-to="item.createdBy" />
+      <TFormComment :post-id="postId" :reply-to="post.createdBy" />
 
-      <TListComments :post-id="item.id">
+      <TListComments :post-id="postId">
         <template v-slot:empty>
           <div class="text-center my-8">
             There are no comments yet.
@@ -85,26 +85,28 @@ export default {
     }
 
     return {
+      postId: params.id,
       exists: true,
       loading: false,
-      item: doc
+      post: doc
     }
   },
   data: () => ({
+    postId: '',
     comment: '',
-    item: {},
+    post: {},
     loading: true,
     exists: true
   }),
   computed: {
     publishedAt() {
-      return getDateTime(this.item.createdAt)
+      return getDateTime(this.post.createdAt)
     },
     author() {
-      return this.getProfile(this.item.createdBy)
+      return this.getProfile(this.post.createdBy)
     },
-    richItem() {
-      return this.map(this.item)
+    fullPost() {
+      return this.map(this.post)
     },
     tweetUrl() {
       const app = process.env.app
@@ -112,7 +114,7 @@ export default {
       const author = this.author.username
       const url = app.url + this.$route.fullPath
 
-      const text = encodeURI(`"${this.item.title}" by ${author}`)
+      const text = encodeURI(`"${this.post.title}" by ${author}`)
 
       return `https://twitter.com/intent/tweet?text=${text} %23WeDance ${url}`
     }
@@ -137,27 +139,27 @@ export default {
   },
   head() {
     return {
-      title: this.item.title,
+      title: this.post.title,
       meta: [
         {
           vmid: 'description',
           name: 'description',
-          content: getExcerpt(this.item.description)
+          content: getExcerpt(this.post.description)
         },
         {
           vmid: 'keywords',
           name: 'keywords',
-          content: this.item.keywords
+          content: this.post.keywords
         },
         {
           vmid: 'og:title',
           property: 'og:title',
-          content: this.item.title
+          content: this.post.title
         },
         {
           vmid: 'og:description',
           property: 'og:description',
-          content: getExcerpt(this.item.description)
+          content: getExcerpt(this.post.description)
         }
       ]
     }

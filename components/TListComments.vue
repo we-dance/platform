@@ -5,7 +5,9 @@
     :map="map"
     :filters="filters"
   >
-    <slot v-slot:empty name="empty" />
+    <template v-slot:empty>
+      <slot name="empty" />
+    </template>
 
     <template v-slot:default="{ item }">
       <TCardComment :post-id="postId" :item="item" class="mb-4" />

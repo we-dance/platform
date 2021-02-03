@@ -1,6 +1,16 @@
 <template>
   <div>
-    Comments are temporarily not working.
+    <textarea
+      v-model="comment"
+      :placeholder="`Say something nice to ${getProfile(replyTo).username}...`"
+      class="border rounded p-4 w-full overflow-hidden h-auto"
+    />
+
+    <div class="flex justify-end">
+      <TButton @click="submit">
+        Post comment
+      </TButton>
+    </div>
   </div>
 </template>
 
@@ -28,12 +38,12 @@ export default {
     comment: ''
   }),
   methods: {
-    submit() {
+    async submit() {
       if (!this.comment) {
         return
       }
 
-      this.addComment(this.postId, this.commentId, this.comment)
+      await this.addComment(this.postId, this.commentId, this.comment)
       this.comment = ''
 
       this.$emit('submit')
