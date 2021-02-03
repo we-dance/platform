@@ -4,6 +4,10 @@
     User not found
   </div>
   <div v-else class="mx-auto max-w-md bg-real-white p-4">
+    <div class="flex justify-end mb-4">
+      <TButton icon="share" :to="`/u/${profile.username}/share`" />
+    </div>
+
     <TProfileOrganiser v-if="profile.type === 'Organiser'" :profile="profile" />
     <TProfileDancer v-else :profile="profile" />
   </div>
