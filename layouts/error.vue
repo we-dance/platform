@@ -1,6 +1,6 @@
 <template>
   <div
-    class="flex-grow flex flex-col justify-center items-center bg-real-white"
+    class="flex-grow flex flex-col justify-center items-center bg-real-white min-h-screen"
   >
     <h1
       v-if="error.statusCode === 404"

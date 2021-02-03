@@ -4,6 +4,7 @@ import * as express from 'express'
 import * as cors from 'cors'
 import * as Handlebars from 'handlebars'
 import sendEmail from './lib/sendEmail'
+import screenshot from './lib/screenshot'
 
 admin.initializeApp()
 const db = admin.firestore()
@@ -58,6 +59,28 @@ const render = (templateString: string, data: Object) => {
   const templator = Handlebars.compile(templateString)
   return templator({ data })
 }
+
+export const shareProfile = functions
+  .runWith({ memory: '1GB' })
+  .firestore.document('profiles/{profileId}')
+  .onWrite(async (change, context) => {
+    const snapshot = change.after
+    const oldProfile = change.before.data()
+    const profile = snapshot.data()
+
+    if (
+      !profile ||
+      !profile.username ||
+      !profile.photo ||
+      !profile.community ||
+      !profile.share ||
+      oldProfile?.share === profile.share
+    ) {
+      return
+    }
+
+    await screenshot(profile.username)
+  })
 
 export const welcomeEmail = functions.firestore
   .document('profiles/{profileId}')
