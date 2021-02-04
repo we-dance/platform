@@ -8,6 +8,7 @@ import MarkdownContainer from 'markdown-it-container'
 import VRuntimeTemplate from 'v-runtime-template'
 import MarkdownAttrs from 'markdown-it-attrs'
 import excerptHtml from 'excerpt-html'
+import mila from 'markdown-it-link-attributes'
 
 const md = new MarkdownIt({
   html: true,
@@ -16,6 +17,13 @@ const md = new MarkdownIt({
 })
 
 md.use(MarkdownAttrs)
+md.use(mila, {
+  pattern: /^https:/,
+  attrs: {
+    target: '_blank',
+    rel: 'noopener'
+  }
+})
 
 md.use(MarkdownContainer, 'details', {
   validate: (params) => {

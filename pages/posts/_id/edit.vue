@@ -19,6 +19,8 @@
       @cancel="cancelItem"
       @remove="removeItem"
     />
+
+    <nuxt-content :document="newPostWidget" class="my-8 typo" />
   </div>
 </template>
 
@@ -34,6 +36,18 @@ export default {
   name: 'PostEdit',
   layout: 'empty',
   middleware: ['auth'],
+  async asyncData({ $content }) {
+    let newPostWidget = ''
+    try {
+      newPostWidget = await $content('widgets/newpost').fetch()
+    } catch (e) {
+      console.error(e)
+    }
+
+    return {
+      newPostWidget
+    }
+  },
   data: () => ({
     selectedType: 'post'
   }),
@@ -91,7 +105,7 @@ export default {
 
     const types = computed(() => [
       {
-        label: 'Post',
+        label: 'Text',
         value: 'post',
         fields: [
           {
@@ -103,7 +117,7 @@ export default {
             name: 'description',
             hideLabel: true,
             type: 'textarea',
-            placeholder: 'Body'
+            placeholder: 'Text (markdown)'
           },
           {
             name: 'community',

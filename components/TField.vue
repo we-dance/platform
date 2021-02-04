@@ -22,9 +22,11 @@
           @input="(val) => $emit('input', set(val))"
         />
       </slot>
-      <div v-if="description" class="text-gray-500 text-sm mt-1">
-        {{ description }}
-      </div>
+      <TPreview
+        v-if="description"
+        :content="description"
+        class="text-gray-500 text-sm px-2 py-1"
+      />
       <slot name="bottom" />
     </div>
   </div>

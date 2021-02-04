@@ -38,14 +38,12 @@
         <h1 class="text-4xl font-bold leading-none">
           {{ item.name }}
         </h1>
-        <div class="flex flex-wrap justify-center mt-2">
-          <div v-if="item.address" class="mr-2">
+        <div class="flex flex-wrap justify-center space-x-2 mt-2">
+          <div v-if="item.address">
             <div class="flex items-center">
               <TIcon name="place" class="w-4 h-4 mr-1" />
               <a
-                :href="
-                  `https://maps.google.com/?q=${item.address},${item.city}`
-                "
+                :href="`https://maps.google.com/?q=${item.address}`"
                 class="underline hover:no-underline"
                 target="_blank"
               >
@@ -58,6 +56,14 @@
               <TIcon name="store" class="w-4 h-4 mr-1" />
               <p>
                 {{ item.organiser }}
+              </p>
+            </div>
+          </div>
+          <div v-if="item.price">
+            <div class="flex items-center">
+              <TIcon name="ticket" class="w-4 h-4 mr-1" />
+              <p>
+                {{ item.price }}
               </p>
             </div>
           </div>

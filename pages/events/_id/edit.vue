@@ -51,7 +51,10 @@ export default {
       visibility: 'Public',
       form: 'No',
       type: 'Course',
-      duration: 60
+      duration: 60,
+      price: 'FREE',
+      cover: this.profile.photo,
+      organiser: this.profile.username
     }
   },
   methods: {
@@ -90,7 +93,7 @@ export default {
     }
   },
   setup() {
-    const { can } = useAuth()
+    const { can, profile } = useAuth()
     const { params } = useRouter()
 
     const collection = 'events'
@@ -111,62 +114,43 @@ export default {
         value: 'event',
         fields: [
           {
+            name: 'cover',
+            type: 'photo',
+            width: 500,
+            height: 500,
+            circle: false,
+            hideLabel: true
+          },
+          {
             name: 'name',
             hideLabel: true,
-            placeholder: 'Name'
+            placeholder: 'Event Name'
           },
           {
             name: 'description',
             hideLabel: true,
             type: 'textarea',
-            placeholder: 'Description'
-          },
-
-          {
-            name: 'city',
-            type: 'city'
+            placeholder: 'Event Description (markdown)',
+            description:
+              '[Markdown cheatsheet](https://simplemde.com/markdown-guide)'
           },
           {
-            name: 'cover',
-            type: 'photo',
-            width: 500,
-            height: 500,
-            circle: false
-          },
-          {
-            name: 'organiser'
+            name: 'price'
           },
           {
             name: 'address',
-            label: 'Street, house',
-            type: 'address',
-            description:
-              'Please do not include here anything else except street and house number. You can add all additional information in the description.'
-          },
-          {
-            name: 'form',
-            label: 'External registration?',
-            type: 'select',
-            options: ['Yes', 'No']
-          },
-          {
-            name: 'link',
-            description: 'URL of your registration form',
-            when: (answers) => answers.form === 'Yes'
-          },
-          {
-            name: 'type',
-            type: 'select',
-            options: ['Party', 'Course']
+            label: 'Where?',
+            type: 'address'
           },
           {
             name: 'startDate',
             type: 'datetime',
+            label: 'When?',
             onChange: updateEndDate
           },
           {
             name: 'duration',
-            label: 'Duration',
+            label: 'How long?',
             onChange: updateEndDate,
             type: 'select',
             options: [
@@ -199,14 +183,38 @@ export default {
           },
           {
             name: 'styles',
+            label: 'What?',
             type: 'stylesSelect'
+          },
+          {
+            name: 'type',
+            type: 'select',
+            options: ['Party', 'Course']
           },
           {
             name: 'visibility',
             type: 'select',
             options: ['Public', 'Members', 'Unlisted'],
-            description:
-              'Public - searchable in Google. Members - visible for logged-in users. Unlisted - possible to open with exact link, but they are not listed and not shown in search.'
+            tip: `- Public - searchable in Google.\n- Members - visible only for logged-in users.\n- Unlisted - possible to open with exact link, but they are not listed nor not shown in the search.`
+          },
+          {
+            name: 'form',
+            label: 'Do you have a link?',
+            type: 'select',
+            options: ['Yes', 'No']
+          },
+          {
+            name: 'link',
+            description: 'URL of your registration form',
+            when: (answers) => answers.form === 'Yes'
+          },
+          {
+            name: 'organiser'
+          },
+          {
+            name: 'city',
+            label: 'Community',
+            type: 'city'
           }
         ]
       }
@@ -224,7 +232,8 @@ export default {
       update,
       remove,
       create,
-      types
+      types,
+      profile
     }
   }
 }
