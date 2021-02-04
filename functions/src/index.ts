@@ -53,34 +53,64 @@ app.post('/track/:action', async (req, res) => {
   })
 })
 
-export const hooks = functions.https.onRequest(app)
+app.get('/share/:id/:username', async (req, res) => {
+  const id = req.params.id
+  const username = req.params.username
+
+  const profile = (
+    await db
+      .collection('profiles')
+      .doc(id)
+      .get()
+  ).data()
+
+  if (profile?.username !== username) {
+    return res.json({
+      success: false,
+      error: 'Profile not found'
+    })
+  }
+
+  if (profile.socialCover) {
+    return res.json({
+      success: true,
+      socialCover: profile.socialCover
+    })
+  }
+
+  const imageBuffer = await screenshot(
+    `https://wedance.vip/u/${username}/share`
+  )
+
+  const bucket = admin.storage().bucket()
+  const url = `share/profile/${username}.png`
+  const file = bucket.file(url)
+
+  await file.save(imageBuffer, {
+    public: true
+  })
+
+  const [metadata] = await file.getMetadata()
+
+  const socialCover = metadata.mediaLink
+
+  await db
+    .collection('profiles')
+    .doc(id)
+    .update({ socialCover })
+
+  return res.json({
+    success: true,
+    socialCover
+  })
+})
+
+export const hooks = functions.runWith({ memory: '1GB' }).https.onRequest(app)
 
 const render = (templateString: string, data: Object) => {
   const templator = Handlebars.compile(templateString)
   return templator({ data })
 }
-
-export const shareProfile = functions
-  .runWith({ memory: '1GB' })
-  .firestore.document('profiles/{profileId}')
-  .onWrite(async (change, context) => {
-    const snapshot = change.after
-    const oldProfile = change.before.data()
-    const profile = snapshot.data()
-
-    if (
-      !profile ||
-      !profile.username ||
-      !profile.photo ||
-      !profile.community ||
-      !profile.share ||
-      oldProfile?.share === profile.share
-    ) {
-      return
-    }
-
-    await screenshot(profile.username)
-  })
 
 export const welcomeEmail = functions.firestore
   .document('profiles/{profileId}')

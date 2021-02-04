@@ -38,9 +38,6 @@
         </div>
       </div>
     </div>
-    <div class="m-4">
-      <TButton @click="download">Download</TButton>
-    </div>
   </div>
 </template>
 
@@ -66,19 +63,6 @@ export default {
   computed: {
     dances() {
       return this.getStyles(this.profile.styles, 0, true, 5)
-    }
-  },
-  methods: {
-    async download() {
-      await this.$fire.firestore
-        .collection('profiles')
-        .doc(this.profile.id)
-        .update({ share: false })
-
-      await this.$fire.firestore
-        .collection('profiles')
-        .doc(this.profile.id)
-        .update({ share: true })
     }
   }
 }
