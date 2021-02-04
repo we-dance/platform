@@ -132,31 +132,31 @@ export default {
       {
         label: 'Dance practice',
         value: 'practice'
+      },
+      {
+        label: 'Learn a dance',
+        value: 'learn'
+      },
+      {
+        label: 'Socialize',
+        value: 'socialize'
+      },
+      {
+        label: 'Go out dancing',
+        value: 'dancing'
+      },
+      {
+        label: 'Dance outside',
+        value: 'outside'
+      },
+      {
+        label: 'Talk dance',
+        value: 'talk'
+      },
+      {
+        label: 'Dance competition',
+        value: 'competition'
       }
-      // {
-      //   label: 'Learn a dance',
-      //   value: 'learn'
-      // },
-      // {
-      //   label: 'Socialize',
-      //   value: 'socialize'
-      // },
-      // {
-      //   label: 'Go out dancing',
-      //   value: 'dancing'
-      // },
-      // {
-      //   label: 'Dance outside',
-      //   value: 'outside'
-      // },
-      // {
-      //   label: 'Talk dance',
-      //   value: 'talk'
-      // },
-      // {
-      //   label: 'Dance competition',
-      //   value: 'competition'
-      // }
     ]
     const rolesList = ['Male', 'Female', 'Instructor']
     const dancesList = computed(() =>
@@ -171,7 +171,10 @@ export default {
 
     const items = computed(() => {
       let result = docs.value.filter(
-        (item) => item.username && (uid.value || item.visibility === 'Public')
+        (item) =>
+          item.username &&
+          (uid.value || item.visibility === 'Public') &&
+          item.visibility !== 'Unlisted'
       )
 
       if (Object.keys(dances.value).length) {

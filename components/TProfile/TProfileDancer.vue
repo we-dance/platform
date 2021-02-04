@@ -62,6 +62,11 @@
         <dt class="font-bold mr-1">Joined:</dt>
         <dd>{{ getDateTime(profile.createdAt) }}</dd>
       </dl>
+
+      <dl class="mt-4 md:flex">
+        <dt class="font-bold mr-1">Visibility:</dt>
+        <dd>{{ profile.visibility || 'N/A' }}</dd>
+      </dl>
     </div>
   </div>
 </template>
