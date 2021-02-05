@@ -23,7 +23,7 @@
         class="cursor-pointer"
         @click="download()"
       />
-      <TButton type="link" @click="cleanup()" class="mt-4">Delete Post</TButton>
+      <TButton type="link" class="mt-4" @click="cleanup()">Delete Post</TButton>
     </div>
   </div>
 </template>
@@ -88,7 +88,7 @@ export default {
       }
 
       const response = await fetch(this.profile.socialCover)
-      const blob = response.blob()
+      const blob = await response.blob()
       const file = new File([blob], `${this.profile.username}.png`, {
         type: 'image/png'
       })
@@ -103,11 +103,13 @@ export default {
         return
       }
 
-      navigator.share({
+      const shareData = {
         title: `WeDance: ${this.profile.username} is looking for a dance partner`,
         url: `https://wedance.vip/u/${this.profile.username}`,
         files: filesArray
-      })
+      }
+
+      navigator.share(shareData)
     },
     async generate() {
       if (this.generating) {
