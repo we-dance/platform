@@ -88,7 +88,8 @@ export default {
       }
 
       const response = await fetch(this.profile.socialCover)
-      const file = new File([response.blob], `${this.profile.username}.png`, {
+      const blob = response.blob()
+      const file = new File([blob], `${this.profile.username}.png`, {
         type: 'image/png'
       })
 
