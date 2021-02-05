@@ -87,8 +87,8 @@ export default {
         await this.generate()
       }
 
-      const blob = await fetch(this.profile.socialCover)
-      const file = new File([blob], `${this.profile.username}.png`, {
+      const response = await fetch(this.profile.socialCover)
+      const file = new File([response.blob], `${this.profile.username}.png`, {
         type: 'image/png'
       })
 
@@ -109,6 +109,10 @@ export default {
       })
     },
     async generate() {
+      if (this.generating) {
+        return
+      }
+
       this.generating = true
       this.$nuxt.$loading.start()
 
