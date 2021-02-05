@@ -34,6 +34,7 @@
     "@nuxtjs/robots": "^2.4.2",
     "@nuxtjs/sentry": "^4.0.1",
     "@nuxtjs/sitemap": "^2.2.1",
+    "@nuxtjs/toast": "^3.3.1",
     "@voerro/vue-tagsinput": "^2.2.0",
     "axios": "^0.19.2",
     "core-js": "2",

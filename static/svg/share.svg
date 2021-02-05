@@ -3,6 +3,7 @@
   height="24"
   viewBox="0 0 24 24"
   width="24"
+  class="fill-current"
 >
   <path d="M0 0h24v24H0z" fill="none" />
   <path

@@ -1,8 +1,10 @@
 <template>
   <div class="mx-auto max-w-md bg-real-white px-4">
-    <div class="flex justify-end mb-4">
-      <TButton icon="share" @click="share()" />
-    </div>
+    <TButtonShare
+      :url="`https://wedance.vip/u/${profile.username}`"
+      :text="`WeDance: ${profile.username} is looking for a dance partner`"
+    />
+
     <TProfileOrganiser v-if="profile.type === 'Organiser'" :profile="profile" />
     <TProfileDancer v-else :profile="profile" />
 
@@ -56,6 +58,7 @@ export default {
   },
   data: () => ({
     generating: false,
+    sharing: false,
     profile: {}
   }),
   setup() {
@@ -81,35 +84,6 @@ export default {
     },
     download() {
       saveAs(this.profile.socialCover, `${this.profile.username}.png`)
-    },
-    async share() {
-      if (!this.profile.socialCover) {
-        await this.generate()
-      }
-
-      const response = await fetch(this.profile.socialCover)
-      const blob = await response.blob()
-      const file = new File([blob], `${this.profile.username}.png`, {
-        type: 'image/png'
-      })
-
-      const filesArray = [file]
-
-      if (
-        !navigator.share ||
-        !navigator.canShare ||
-        !navigator.canShare({ files: filesArray })
-      ) {
-        return
-      }
-
-      const shareData = {
-        title: `WeDance: ${this.profile.username} is looking for a dance partner`,
-        url: `https://wedance.vip/u/${this.profile.username}`,
-        files: filesArray
-      }
-
-      navigator.share(shareData)
     },
     async generate() {
       if (this.generating) {

@@ -86,13 +86,18 @@ export default {
     'nuxt-i18n',
     '@nuxtjs/amp',
     '@nuxt/content',
-    '@nuxtjs/firebase'
+    '@nuxtjs/firebase',
+    '@nuxtjs/toast'
   ],
   googleFonts: {
     display: 'swap',
     families: {
       Lato: true
     }
+  },
+  toast: {
+    position: 'top-center',
+    duration: 2000
   },
   purgeCSS: {
     enabled: false
