@@ -1,5 +1,8 @@
 <template>
   <div class="mx-auto max-w-md bg-real-white px-4">
+    <div class="flex justify-end mb-4">
+      <TButton icon="share" @click="share()" />
+    </div>
     <TProfileOrganiser v-if="profile.type === 'Organiser'" :profile="profile" />
     <TProfileDancer v-else :profile="profile" />
 
@@ -15,7 +18,11 @@
       </div>
     </div>
     <div v-else class="pb-4">
-      <img :src="profile.socialCover" class="cursor-pointer" @click="share()" />
+      <img
+        :src="profile.socialCover"
+        class="cursor-pointer"
+        @click="download()"
+      />
       <TButton type="link" @click="cleanup()" class="mt-4">Delete Post</TButton>
     </div>
   </div>
@@ -72,22 +79,38 @@ export default {
 
       this.profile.socialCover = ''
     },
-    share() {
+    download() {
+      saveAs(this.profile.socialCover, `${this.profile.username}.png`)
+    },
+    async share() {
       if (!this.profile.socialCover) {
+        await this.generate()
+      }
+
+      const blob = await fetch(this.profile.socialCover)
+      const file = new File([blob], `${this.profile.username}.png`, {
+        type: 'image/png'
+      })
+
+      const filesArray = [file]
+
+      if (
+        !navigator.share ||
+        !navigator.canShare ||
+        !navigator.canShare({ files: filesArray })
+      ) {
         return
       }
 
-      if (navigator.share) {
-        navigator.share({
-          title: `${this.profile.username} is looking for dance partner at WeDance`,
-          url: this.profile.socialCover
-        })
-      } else {
-        saveAs(this.profile.socialCover, `${this.profile.username}.png`)
-      }
+      navigator.share({
+        title: `WeDance: ${this.profile.username} is looking for a dance partner`,
+        url: `https://wedance.vip/u/${this.profile.username}`,
+        files: filesArray
+      })
     },
     async generate() {
       this.generating = true
+      this.$nuxt.$loading.start()
 
       try {
         const result = await axios.get(
@@ -104,6 +127,7 @@ export default {
       }
 
       this.generating = false
+      this.$nuxt.$loading.finish()
     }
   }
 }
