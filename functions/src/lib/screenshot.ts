@@ -17,6 +17,10 @@ export default async (
   await page.setViewport({ width: 1080, height: 1080 })
   await page.goto(url, { waitUntil: 'networkidle2' })
 
+  await page.waitForSelector('#canvas', {
+    visible: true
+  })
+
   await page.evaluate(async () => {
     const selectors = Array.from(document.querySelectorAll('img'))
     await Promise.all(

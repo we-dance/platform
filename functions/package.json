@@ -3,6 +3,7 @@
   "scripts": {
     "lint": "tslint --project tsconfig.json",
     "build": "tsc",
+    "test": "npm run build && node dist/test.js",
     "serve": "npm run build && firebase emulators:start --only functions",
     "shell": "npm run build && firebase functions:shell",
     "start": "npm run shell",
@@ -12,7 +13,7 @@
   "engines": {
     "node": "10"
   },
-  "main": "lib/index.js",
+  "main": "dist/index.js",
   "dependencies": {
     "@types/cors": "^2.8.6",
     "@types/mailgun-js": "^0.22.4",
