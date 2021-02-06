@@ -53,8 +53,8 @@ app.post('/track/:action', async (req, res) => {
   })
 })
 
-app.get('/share/:path', async (req, res) => {
-  const path = req.params.path
+app.get('/share/*', async (req, res) => {
+  const path = req.params[0]
 
   const imageBuffer = await screenshot(`https://wedance.vip/${path}/share`)
 

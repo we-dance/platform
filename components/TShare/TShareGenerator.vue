@@ -49,48 +49,46 @@ export default {
     this.socialCover = this.value
   },
   methods: {
-    methods: {
-      async cleanup() {
+    async cleanup() {
+      await this.$fire.firestore
+        .collection(this.collection)
+        .doc(this.id)
+        .update({ socialCover: '' })
+
+      this.socialCover = ''
+    },
+    download() {
+      saveAs(this.socialCover, `${this.title}.png`)
+    },
+    async generate() {
+      if (this.generating) {
+        return
+      }
+
+      this.generating = true
+      this.$nuxt.$loading.start()
+
+      try {
+        const result = await axios.get(
+          `https://us-central1-wedance-4abe3.cloudfunctions.net/hooks/share${this.$route.path}/share`
+        )
+
+        if (!result.data.success) {
+          throw new Error(result.data.error)
+        }
+
+        this.socialCover = result.data.socialCover
+
         await this.$fire.firestore
           .collection(this.collection)
           .doc(this.id)
-          .update({ socialCover: '' })
-
-        this.socialCover = ''
-      },
-      download() {
-        saveAs(this.socialCover, `${this.title}.png`)
-      },
-      async generate() {
-        if (this.generating) {
-          return
-        }
-
-        this.generating = true
-        this.$nuxt.$loading.start()
-
-        try {
-          const result = await axios.get(
-            `https://us-central1-wedance-4abe3.cloudfunctions.net/hooks/share${this.$route.path}/share`
-          )
-
-          if (!result.data.success) {
-            throw new Error(result.data.error)
-          }
-
-          this.socialCover = result.data.socialCover
-
-          await this.$fire.firestore
-            .collection(this.collection)
-            .doc(this.id)
-            .update({ socialCover: result.data.socialCover })
-        } catch (e) {
-          console.error(e)
-        }
-
-        this.generating = false
-        this.$nuxt.$loading.finish()
+          .update({ socialCover: result.data.socialCover })
+      } catch (e) {
+        console.error(e)
       }
+
+      this.generating = false
+      this.$nuxt.$loading.finish()
     }
   }
 }
