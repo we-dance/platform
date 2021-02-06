@@ -56,24 +56,31 @@ app.post('/track/:action', async (req, res) => {
 app.get('/share/*', async (req, res) => {
   const path = req.params[0]
 
-  const imageBuffer = await screenshot(`https://wedance.vip/${path}/share`)
+  try {
+    const imageBuffer = await screenshot(`https://wedance.vip/${path}/share`)
 
-  const bucket = admin.storage().bucket()
-  const filePath = 'share/' + path + '.png'
-  const file = bucket.file(filePath)
+    const bucket = admin.storage().bucket()
+    const filePath = 'share/' + path + '.png'
+    const file = bucket.file(filePath)
 
-  await file.save(imageBuffer, {
-    public: true
-  })
+    await file.save(imageBuffer, {
+      public: true
+    })
 
-  const [metadata] = await file.getMetadata()
+    const [metadata] = await file.getMetadata()
 
-  const url = metadata.mediaLink
+    const url = metadata.mediaLink
 
-  return res.json({
-    success: true,
-    url
-  })
+    return res.json({
+      success: true,
+      url
+    })
+  } catch (e) {
+    return res.json({
+      success: false,
+      error: e.message
+    })
+  }
 })
 
 export const hooks = functions.runWith({ memory: '1GB' }).https.onRequest(app)

@@ -70,19 +70,19 @@ export default {
 
       try {
         const result = await axios.get(
-          `https://us-central1-wedance-4abe3.cloudfunctions.net/hooks/share${this.$route.path}/share`
+          `https://us-central1-wedance-4abe3.cloudfunctions.net/hooks/share${this.$route.path}`
         )
 
         if (!result.data.success) {
-          throw new Error(result.data.error)
+          throw new Error('Failed to make a screenshot')
         }
 
-        this.socialCover = result.data.socialCover
+        this.socialCover = result.data.url
 
         await this.$fire.firestore
           .collection(this.collection)
           .doc(this.id)
-          .update({ socialCover: result.data.socialCover })
+          .update({ socialCover: result.data.url })
       } catch (e) {
         console.error(e)
       }
