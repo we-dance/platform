@@ -1,5 +1,11 @@
 <template>
-  <TShareProfile :profile="profile" />
+  <TShareProfile
+    :type="profile.type"
+    :username="profile.username"
+    :description="profile.bio"
+    :photo="profile.photo"
+    :styles="profile.styles"
+  />
 </template>
 
 <script>

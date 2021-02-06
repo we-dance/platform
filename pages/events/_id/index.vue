@@ -5,6 +5,11 @@
   </div>
   <div v-else>
     <div class="mx-auto max-w-md bg-real-white p-4">
+      <TButtonShare
+        :url="`https://wedance.vip/events/${item.id}`"
+        :text="item.name"
+      />
+
       <div
         v-if="can('edit', 'events', item)"
         class="mb-2 flex items-start justify-center"
@@ -96,6 +101,13 @@
       <TStyles class="text-center text-xs mt-4" :value="item.styles" />
 
       <TPreview class="mt-4" :content="item.description" />
+
+      <TShareGenerator
+        :id="item.id"
+        collection="events"
+        :title="item.name"
+        :value="item.socialCover"
+      />
     </div>
 
     <div class="mx-auto max-w-md flex justify-end my-4 text-xs pr-4">

@@ -53,38 +53,14 @@ app.post('/track/:action', async (req, res) => {
   })
 })
 
-app.get('/share/:id/:username', async (req, res) => {
-  const id = req.params.id
-  const username = req.params.username
+app.get('/share/:path', async (req, res) => {
+  const path = req.params.path
 
-  const profile = (
-    await db
-      .collection('profiles')
-      .doc(id)
-      .get()
-  ).data()
-
-  if (profile?.username !== username) {
-    return res.json({
-      success: false,
-      error: 'Profile not found'
-    })
-  }
-
-  if (profile.socialCover) {
-    return res.json({
-      success: true,
-      socialCover: profile.socialCover
-    })
-  }
-
-  const imageBuffer = await screenshot(
-    `https://wedance.vip/u/${username}/share`
-  )
+  const imageBuffer = await screenshot(`https://wedance.vip/${path}/share`)
 
   const bucket = admin.storage().bucket()
-  const url = `share/profile/${username}.png`
-  const file = bucket.file(url)
+  const filePath = 'share/' + path + '.png'
+  const file = bucket.file(filePath)
 
   await file.save(imageBuffer, {
     public: true
@@ -92,16 +68,11 @@ app.get('/share/:id/:username', async (req, res) => {
 
   const [metadata] = await file.getMetadata()
 
-  const socialCover = metadata.mediaLink
-
-  await db
-    .collection('profiles')
-    .doc(id)
-    .update({ socialCover })
+  const url = metadata.mediaLink
 
   return res.json({
     success: true,
-    socialCover
+    url
   })
 })
 
