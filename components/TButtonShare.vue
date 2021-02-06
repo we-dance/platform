@@ -78,6 +78,19 @@ export default {
       this.$toast.success('Link copied to clipboard')
     },
     async share() {
+      if (!this.file) {
+        if (!navigator.share) {
+          this.sharing = true
+        } else {
+          navigator.share({
+            title: this.text,
+            url: this.url
+          })
+        }
+
+        return
+      }
+
       const response = await fetch(this.file)
       const blob = await response.blob()
       const file = new File([blob], `${this.fileName}.png`, {
@@ -96,13 +109,11 @@ export default {
         return
       }
 
-      const shareData = {
+      navigator.share({
         title: this.text,
         url: this.url,
         files: filesArray
-      }
-
-      navigator.share(shareData)
+      })
     }
   }
 }
