@@ -61,7 +61,8 @@ export default {
 
     this.item = this.item || {
       tags: {},
-      community: city
+      community: city,
+      cover: this.profile.photo
     }
 
     if (this.$route.query.tag) {
@@ -95,7 +96,7 @@ export default {
     }
   },
   setup() {
-    const { can } = useAuth()
+    const { can, profile } = useAuth()
     const { params } = useRouter()
 
     const collection = 'posts'
@@ -108,6 +109,14 @@ export default {
         label: 'Text',
         value: 'post',
         fields: [
+          {
+            name: 'cover',
+            type: 'photo',
+            width: 500,
+            height: 500,
+            circle: false,
+            hideLabel: true
+          },
           {
             name: 'title',
             hideLabel: true,
@@ -169,7 +178,8 @@ export default {
       update,
       remove,
       create,
-      types
+      types,
+      profile
     }
   }
 }

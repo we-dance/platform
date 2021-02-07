@@ -3,6 +3,11 @@
     <div class="col-span-12">
       <div>
         <div class="bg-real-white p-4 border rounded shadow">
+          <TButtonShare
+            :url="`https://wedance.vip/posts/${postId}`"
+            :text="post.title"
+          />
+
           <div v-if="can('edit', 'posts', post)" class="mb-2 flex posts-start">
             <TButton
               icon="edit"
@@ -11,6 +16,13 @@
               label="Edit"
             />
           </div>
+
+          <img
+            v-if="post.cover"
+            :src="post.cover"
+            :alt="post.title"
+            class="mb-2"
+          />
 
           <TTagsPreview :value="fullPost.tags" />
 
@@ -63,6 +75,14 @@
         </template>
       </TListComments>
     </div>
+
+    <TShareGenerator
+      :id="post.id"
+      class="col-span-12"
+      collection="posts"
+      :title="post.title"
+      :value="post.socialCover"
+    />
   </div>
 </template>
 
