@@ -39,7 +39,13 @@
               <TIcon class="w-8 h-8 mr-2" name="icon" />
               <div class="text-4xl font-bold">{{ username }}</div>
             </div>
-            <div class="text-3xl">{{ price }}</div>
+            <div v-if="price" class="text-3xl">{{ price }}</div>
+            <div
+              v-if="objective"
+              class="bg-primary text-2xl font-bold text-real-white rounded-full px-4 py-2 leading-none"
+            >
+              {{ objective }}
+            </div>
           </div>
         </div>
       </div>
@@ -74,6 +80,10 @@ export default {
       default: ''
     },
     price: {
+      type: String,
+      default: ''
+    },
+    objective: {
       type: String,
       default: ''
     },
