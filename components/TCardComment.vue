@@ -1,5 +1,5 @@
 <template>
-  <div class="bg-real-white rounded shadow px-4 py-2">
+  <div class="bg-white rounded shadow px-4 py-2">
     <TPreview :content="item.body" />
     <div>
       <div class="text-sm flex items-center">

@@ -1,7 +1,7 @@
 <template>
   <router-link
     :to="`/u/${profile.username}`"
-    class="border rounded shadow text-sm bg-real-white overflow-hidden"
+    class="border rounded shadow text-sm bg-white overflow-hidden"
   >
     <div class="bg-gray-300">
       <TIcon v-if="!profile.photo" name="undraw_profile_pic" />

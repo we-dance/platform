@@ -7,7 +7,7 @@
     >
       <TCover :width="size" :height="size" :src="photo" />
       <div
-        class="relative p-8 text-real-white flex flex-col bg-gradient-to-t from-black via-transparent to-transparent"
+        class="relative p-8 text-white flex flex-col bg-gradient-to-t from-black via-transparent to-transparent"
         :style="`margin-top: -${size}px; width: ${size}px; height: ${size}px;`"
       >
         <div class="flex-grow-0 flex flex-col items-end">
@@ -42,7 +42,7 @@
             <div v-if="price" class="text-3xl">{{ price }}</div>
             <div
               v-if="objective"
-              class="bg-primary text-2xl font-bold text-real-white rounded-full px-4 py-2 leading-none"
+              class="bg-primary text-2xl font-bold text-white rounded-full px-4 py-2 leading-none"
             >
               {{ objective }}
             </div>

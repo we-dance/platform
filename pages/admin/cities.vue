@@ -8,7 +8,7 @@
       :filters="filters"
     >
       <template v-slot="{ item }">
-        <div class="p-4 border rounded mb-4 bg-real-white">
+        <div class="p-4 border rounded mb-4 bg-white">
           <div class="flex justify-between items-start">
             <div>
               <div class="text-xs">Hits: {{ item.hits || 0 }}</div>

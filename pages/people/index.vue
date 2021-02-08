@@ -1,27 +1,24 @@
 <template>
   <div>
     <TTitle>
-      People
-      <template slot="right">
-        <div class="flex space-x-2 mb-2 overflow-x-scroll">
-          <TInputMultiDropdown
-            v-model="objectives"
-            :options="objectivesList"
-            label="Objectives"
-          />
-          <TInputMultiDropdown
-            v-model="roles"
-            :options="rolesList"
-            label="Roles"
-          />
-          <TInputMultiDropdown
-            v-model="dances"
-            :options="dancesList"
-            label="Dances"
-          />
-        </div>
-      </template>
+      Community
+      <template slot="right"> </template>
     </TTitle>
+
+    <div class="flex space-x-2 my-2 overflow-x-scroll">
+      <TInputCity v-model="currentCity" hide-global />
+      <TInputMultiDropdown
+        v-model="objectives"
+        :options="objectivesList"
+        label="Objectives"
+      />
+      <TInputMultiDropdown v-model="roles" :options="rolesList" label="Roles" />
+      <TInputMultiDropdown
+        v-model="dances"
+        :options="dancesList"
+        label="Dances"
+      />
+    </div>
 
     <div>
       <div
@@ -47,7 +44,7 @@
                 !myProfile.languages ||
                 !myProfile.partnerBio)
           "
-          class="border rounded p-4 bg-real-white"
+          class="border rounded p-4 bg-white"
         >
           <div>
             <p class="font-bold">
@@ -217,7 +214,8 @@ export default {
       dances,
       objectivesList,
       rolesList,
-      dancesList
+      dancesList,
+      currentCity
     }
   }
 }

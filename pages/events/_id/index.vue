@@ -4,7 +4,7 @@
     Event not found
   </div>
   <div v-else>
-    <div class="mx-auto max-w-md bg-real-white p-4">
+    <div class="mx-auto max-w-md bg-white p-4">
       <TButtonShare
         :url="`https://wedance.vip/events/${item.id}`"
         :text="item.name"

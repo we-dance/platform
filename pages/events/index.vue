@@ -7,6 +7,15 @@
       </template>
     </TTitle>
 
+    <div class="flex space-x-2 my-2 overflow-x-scroll">
+      <TInputCity v-model="currentCity" hide-global />
+      <TInputMultiDropdown
+        v-model="dances"
+        :options="dancesList"
+        label="Dances"
+      />
+    </div>
+
     <TTabs v-if="uid" v-model="activeFilter" :tabs="filterOptions" />
 
     <div class="mt-4">
@@ -126,7 +135,11 @@ export default {
     const { currentCity } = useCities()
     const { docs, loading: loadingPosts, getById } = useCollection('events')
 
-    const { uid } = useAuth()
+    const { uid, profile: myProfile } = useAuth()
+    const dances = ref({})
+    const dancesList = computed(() =>
+      myProfile.value ? Object.keys(myProfile.value.styles) : []
+    )
 
     const map = (item) => {
       if (!item.id) {
@@ -248,7 +261,9 @@ export default {
       startOfWeekString,
       endOfWeekString,
       activeFilter,
-      filterOptions
+      filterOptions,
+      dances,
+      dancesList
     }
   }
 }

@@ -10,11 +10,10 @@ module.exports = {
       colors: {
         primary: '#F1023D',
         secondary: '#FA9169',
-        light: '#F1F692',
-        dark: '#3C3348',
-        black: '#2A1B3C',
-        white: '#FFFFF4',
-        'real-white': '#FFFFFF'
+        light: '#F4F1F1',
+        dark: '#210309',
+        black: '#000000',
+        white: '#FFFFFF'
       },
       fontFamily: {
         lato: 'Lato'

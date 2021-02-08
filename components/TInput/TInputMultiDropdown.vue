@@ -2,14 +2,14 @@
   <div>
     <div class="inline-block relative">
       <div
-        class="block cursor-pointer w-full bg-real-white text-black border border-gray-400 hover:border-gray-500 px-4 py-2 pr-8 rounded shadow leading-tight focus:outline-none focus:shadow-outline"
+        class="block cursor-pointer w-full bg-white text-black border border-gray-400 hover:border-gray-500 px-4 py-2 pr-8 rounded shadow leading-tight focus:outline-none focus:shadow-outline"
         @click="editing = true"
       >
         <div class="text-sm flex">
           <div>{{ label }}</div>
           <div
             v-if="count"
-            class="ml-1 rounded-full bg-primary text-real-white w-4 h-4 text-center text-xs"
+            class="ml-1 rounded-full bg-primary text-white w-4 h-4 text-center text-xs"
           >
             {{ count }}
           </div>

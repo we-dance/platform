@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div class="bg-dark text-real-white py-16">
+    <div class="bg-dark text-white py-16">
       <div class="mt-8 px-4 mx-auto max-w-2xl text-center">
         <h1 class="text-4xl font-bold leading-tight">
           Salsa Cubana Munich

@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div class="bg-dark-gradient text-real-white py-16">
+    <div class="bg-dark-gradient text-white py-16">
       <div class="mt-8 px-4 mx-auto container">
         <p class="uppercase font-bold">
           Salsa, Bachata, Kizomba, Tango, Zouk and more

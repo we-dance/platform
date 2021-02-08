@@ -1,5 +1,5 @@
 <template>
-  <div class="mx-auto max-w-md bg-real-white px-4">
+  <div class="mx-auto max-w-md bg-white px-4">
     <TButtonShare
       :url="`https://wedance.vip/u/${profile.username}`"
       :text="`WeDance: ${profile.username} is looking for a dance partner`"

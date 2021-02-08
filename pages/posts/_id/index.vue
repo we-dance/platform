@@ -2,7 +2,7 @@
   <div class="md:grid grid-cols-12 gap-6">
     <div class="col-span-12">
       <div>
-        <div class="bg-real-white p-4 border rounded shadow">
+        <div class="bg-white p-4 border rounded shadow">
           <TButtonShare
             :url="`https://wedance.vip/posts/${postId}`"
             :text="post.title"

@@ -2,72 +2,48 @@
   <div
     class="font-sans leading-normal tracking-normal antialiased min-h-screen flex flex-col"
   >
-    <header class="bg-dark text-white">
-      <div
-        class="container mx-auto md:flex items-center justify-between flex-wrap p-4"
-      >
-        <div class="flex items-center justify-start">
-          <router-link to="/" class="flex items-center pb-2">
-            <TIcon class="w-6 h-6 pt-1 mr-2" name="icon" />
-            <TIcon
-              :class="
-                currentCity
-                  ? 'text-white h-4 w-32 hidden md:block'
-                  : 'h-4 w-32 text-white'
-              "
-              name="logo-text"
-            />
-          </router-link>
-          <TInputCity
-            v-if="currentCity"
-            v-model="currentCity"
-            hide-global
-            class="text-black ml-2"
+    <header class="border-b p-4">
+      <div class="flex items-center justify-start">
+        <THamburger v-model="isMenuOpen" class="md:hidden" />
+        <router-link to="/">
+          <TIcon name="logo-horizontal-dark" />
+        </router-link>
+        <div class="flex-grow mx-4">
+          <TInput
+            v-model="query"
+            placeholder="Search dancers, workshops, parties and more"
+            class="rounded-full"
           />
         </div>
+        <div v-if="!uid">
+          <TButton to="/signin">Sign in</TButton>
+        </div>
+      </div>
+    </header>
 
-        <nav
-          v-if="currentCity"
-          class="fixed z-40 bottom-0 left-0 right-0 md:relative md:mt-6 flex md:mt-0 items-center justify-evenly md:justify-end p-2 md:p-0 border-t shadow-lg md:shadow-none md:border-0 text-gray-700 bg-white md:bg-dark md:text-white"
-        >
-          <router-link
-            to="/"
-            class="block p-2 md:px-4 flex flex-col justify-center"
-          >
-            <TIcon class="w-8 h-8 mx-auto" name="directions" />
-            <span class="hidden md:block">Home</span>
-          </router-link>
+    <TPopup v-if="showAuthPopup">
+      <div class="flex justify-between border-b pb-2 mb-4">
+        <div class="font-bold">Members only</div>
+        <button class="cursor-pointer" @click="showAuthPopup = false">
+          <TIcon name="close" class="cursor-pointer w-6 h-6" />
+        </button>
+      </div>
+      <div class="my-4 flex flex-col justify-center">
+        <div>You need a profile to write posts</div>
+        <TButton class="mt-2" to="/signin">Create Profile</TButton>
+      </div>
+    </TPopup>
 
-          <router-link
-            to="/feed"
-            class="block p-2 md:px-4 flex flex-col justify-center"
-          >
-            <TIcon class="w-8 h-8 mx-auto" name="news" />
-            <span class="hidden md:block">Feed</span>
-          </router-link>
+    <!-- :class="noContainer ? '' : 'p-4 mx-auto container max-w-xl mb-16'" -->
 
-          <router-link
-            to="/people"
-            class="block p-2 md:px-4 flex flex-col justify-center"
-          >
-            <TIcon class="w-8 h-8 mx-auto" name="friends" />
-            <span class="hidden md:block">People</span>
-          </router-link>
+    <div class="flex-grow flex">
+      <nav class="w-20 flex-initial border-r text-xs">
+        <!-- :class="isMenuOpen ? '' : 'hidden'" -->
 
-          <router-link
-            to="/events"
-            class="block p-2 md:px-4 flex flex-col justify-center"
-          >
-            <TIcon class="w-8 h-8 mx-auto" name="calendar" />
-            <span class="hidden md:block">Events</span>
-          </router-link>
-
-          <TButton v-if="!uid" to="/signin" class="md:ml-2">Sign In</TButton>
-          <TMenu v-else>
+        <div class="block p-2 items-center flex flex-col justify-center my-1">
+          <TMenu v-if="uid">
             <template slot="button">
-              <div
-                class="flex cursor-pointer rounded-full border-2 border-gray-200 hover:border-blue-500 p-1"
-              >
+              <div class="flex cursor-pointer rounded-full">
                 <TProfilePhoto size="lg" :uid="uid" />
               </div>
             </template>
@@ -110,28 +86,37 @@
               </div>
             </template>
           </TMenu>
-        </nav>
-      </div>
-    </header>
+        </div>
 
-    <TPopup v-if="showAuthPopup">
-      <div class="flex justify-between border-b pb-2 mb-4">
-        <div class="font-bold">Members only</div>
-        <button class="cursor-pointer" @click="showAuthPopup = false">
-          <TIcon name="close" class="cursor-pointer w-4 h-4" />
-        </button>
-      </div>
-      <div class="my-4 flex flex-col justify-center">
-        <div>You need a profile to write posts</div>
-        <TButton class="mt-2" to="/signin">Create Profile</TButton>
-      </div>
-    </TPopup>
+        <router-link
+          to="/"
+          class="block p-2 items-center flex flex-col justify-center"
+        >
+          <TIcon class="w-6 h-6 mx-auto" name="fire" />
+          <span class="hidden md:block">Trends</span>
+        </router-link>
 
-    <div
-      class="flex-grow flex flex-col"
-      :class="noContainer ? '' : 'p-4 mx-auto container max-w-xl mb-16'"
-    >
-      <nuxt />
+        <router-link
+          to="/people"
+          class="block p-2 items-center flex flex-col justify-center"
+        >
+          <TIcon class="w-6 h-6 mx-auto" name="friends" />
+          <span class="hidden md:block">Community</span>
+        </router-link>
+
+        <router-link
+          to="/events"
+          class="block p-2 items-center flex flex-col justify-center"
+        >
+          <TIcon class="w-6 h-6 mx-auto" name="calendar" />
+          <span class="hidden md:block">Events</span>
+        </router-link>
+      </nav>
+      <div class="p-4 flex-initial flex-grow">
+        <div class="mx-auto max-w-xl">
+          <nuxt />
+        </div>
+      </div>
     </div>
 
     <TFooter />
@@ -155,7 +140,8 @@ export default {
   },
   data: () => ({
     isMenuOpen: false,
-    showAuthPopup: false
+    showAuthPopup: false,
+    query: ''
   }),
   computed: {
     isHome() {
@@ -218,6 +204,6 @@ export default {
 
 <style>
 nav .nuxt-link-exact-active {
-  @apply text-secondary;
+  @apply text-primary;
 }
 </style>

@@ -31,7 +31,7 @@
           @close="peopleId = false"
         />
 
-        <div class="p-4 border rounded mb-4 bg-real-white">
+        <div class="p-4 border rounded mb-4 bg-white">
           <div class="flex justify-between items-start">
             <div>
               <div class="font-bold text-xs">

@@ -69,19 +69,19 @@ export default {
     classes() {
       const map = {
         round:
-          'bg-real-white hover:bg-gray-100 text-gray-800 font-semibold py-1 px-4 border border-gray-400 rounded-full shadow',
+          'bg-white hover:bg-gray-100 text-gray-800 font-semibold py-1 px-4 border border-gray-400 rounded-full shadow',
         simple:
-          'bg-white hover:bg-gray-100 text-gray-800 font-semibold py-2 px-4 border border-gray-400 rounded shadow',
+          'bg-white hover:bg-gray-100 text-gray-800 font-semibold py-2 px-4 border border-gray-400 rounded-full shadow',
         primary:
-          'bg-primary no-underline text-white font-semibold py-2 px-4 rounded hover:text-white hover:bg-black shadow',
+          'bg-primary no-underline text-white font-semibold py-2 px-4 rounded-full hover:text-white hover:bg-black shadow',
         success:
-          'bg-green-500 no-underline text-white font-semibold py-2 px-4 rounded hover:text-white hover:bg-green-700 shadow',
+          'bg-green-500 no-underline text-white font-semibold py-2 px-4 rounded-full hover:text-white hover:bg-green-700 shadow',
         danger:
-          'bg-red-500 no-underline text-white font-semibold py-2 px-4 rounded hover:text-white hover:bg-red-700 shadow',
+          'bg-red-500 no-underline text-white font-semibold py-2 px-4 rounded-full hover:text-white hover:bg-red-700 shadow',
         base:
-          'bg-real-white hover:bg-gray-100 text-gray-800 font-semibold py-1 px-4 border border-gray-400 rounded shadow',
+          'bg-white hover:bg-gray-100 text-gray-800 font-semibold py-1 px-4 border border-gray-400 rounded-full shadow',
         secondary:
-          'bg-transparent text-primary font-semibold py-2 px-4 border border-primary rounded no-underline hover:bg-primary hover:text-white hover:border-transparent',
+          'bg-transparent text-primary font-semibold py-2 px-4 border border-primary rounded-full no-underline hover:bg-primary hover:text-white hover:border-transparent',
         link: 'underline font-semibold hover:no-underline',
         nav:
           'block text-left w-full px-4 py-2 text-gray-800 hover:bg-indigo-500 hover:text-white',

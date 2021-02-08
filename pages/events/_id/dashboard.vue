@@ -28,7 +28,7 @@
     <TPopup v-if="addingGuest" title="Add Guest" @close="addingGuest = false">
       <TForm class="mt-4" :fields="reservationFields" @save="addGuest" />
     </TPopup>
-    <div class="mx-auto max-w-md bg-real-white p-4">
+    <div class="mx-auto max-w-md bg-white p-4">
       <div class="px-4 mx-auto max-w-2xl text-center">
         <div class="uppercase text-red-600">
           <span>{{ getDate(item.startDate) }}</span>
@@ -96,7 +96,7 @@
                 <TIcon
                   v-if="selectedParticipants[item.id]"
                   name="check"
-                  class="w-10 h-10 border-2 rounded-full bg-green-500 text-real-white"
+                  class="w-10 h-10 border-2 rounded-full bg-green-500 text-white"
                 />
                 <TProfilePhoto
                   v-else

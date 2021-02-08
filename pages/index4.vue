@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div class="bg-dark-gradient text-real-white py-16">
+    <div class="bg-dark-gradient text-white py-16">
       <div class="mt-8 px-4 mx-auto max-w-2xl text-center">
         <h1 class="text-5xl font-bold leading-tight">
           Exclusive for <span class="text-light">Dancers.</span>

@@ -35,7 +35,7 @@
           @close="peopleId = false"
         />
 
-        <div class="p-4 border rounded mb-4 bg-real-white">
+        <div class="p-4 border rounded mb-4 bg-white">
           <div class="flex justify-between">
             <div class="flex">
               <TAvatar :uid="item.from" photo size="xs" class="mr-2" />
