@@ -21,18 +21,7 @@
     <div class="mt-4">
       <TLoader v-if="loading" />
       <div v-else-if="!count">
-        <div v-if="uid">
-          No events found
-        </div>
-        <div
-          v-else
-          class="mt-4 bg-dark-gradient text-white p-4 rounded text-center"
-        >
-          <div>Become a member of WeDance Community to get full access.</div>
-          <TButton class="mt-2" type="primary" to="/signin?target=/events"
-            >Join Now</TButton
-          >
-        </div>
+        No events found
       </div>
       <div>
         <div v-for="(items, date) in itemsByDate" :key="date" class="mb-8">
