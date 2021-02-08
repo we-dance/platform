@@ -8,6 +8,7 @@
     </TTitle>
 
     <div class="flex space-x-2 my-2 overflow-x-scroll">
+      <TInputSelect v-model="sorting" :options="sortingList" />
       <TInputCity v-model="currentCity" hide-global />
       <TInputMultiDropdown
         v-model="dances"
@@ -156,6 +157,18 @@ export default {
       myProfile.value ? Object.keys(myProfile.value.styles) : []
     )
 
+    const sorting = ref('popular')
+    const sortingList = [
+      {
+        value: 'popular',
+        label: 'Popular'
+      },
+      {
+        value: 'newest',
+        label: 'Newest'
+      }
+    ]
+
     const map = (item) => {
       if (!item.id) {
         return {}
@@ -200,7 +213,9 @@ export default {
       uid,
       currentCity,
       dances,
-      dancesList
+      dancesList,
+      sorting,
+      sortingList
     }
   },
   data: () => ({

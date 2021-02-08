@@ -1,5 +1,5 @@
 <template>
-  <div class="mx-auto w-full max-w-lg">
+  <div class="mx-auto w-full max-w-lg rounded border shadow my-4">
     <div class="flex justify-between m-4">
       <div class="font-bold">Write a new post</div>
       <button class="cursor-pointer" @click="$router.back()">
@@ -20,7 +20,7 @@
       @remove="removeItem"
     />
 
-    <nuxt-content :document="newPostWidget" class="my-8 typo" />
+    <nuxt-content :document="newPostWidget" class="m-4 typo" />
   </div>
 </template>
 
