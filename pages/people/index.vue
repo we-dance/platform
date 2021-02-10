@@ -95,11 +95,7 @@
           </div>
         </div>
 
-        <TCardProfile2
-          v-for="item in items"
-          :key="item.id"
-          :uid="item.createdBy"
-        />
+        <TCardProfile2 v-for="item in items" :key="item.id" :uid="item.id" />
       </div>
     </div>
   </div>

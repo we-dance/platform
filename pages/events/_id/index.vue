@@ -179,7 +179,7 @@ import useCities from '~/use/cities'
 import { getDay, getDateTime, getDate, getTime, dateDiff } from '~/utils'
 
 export default {
-  layout: 'public',
+  layout: 'default',
   data: () => ({
     comment: ''
   }),
@@ -201,11 +201,6 @@ export default {
       if (this.item && this.item.city) {
         this.currentCity = this.item.city
       }
-    }
-  },
-  mounted() {
-    if (this.uid) {
-      this.$nuxt.setLayout('default')
     }
   },
   head() {

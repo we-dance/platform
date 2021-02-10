@@ -15,8 +15,9 @@ export default () => {
   find('name', currentCity.value)
 
   watch(currentCity, (currentCity) => {
+    ls('city', currentCity)
+
     if (currentCity) {
-      ls('city', currentCity)
       find('name', currentCity)
     }
   })

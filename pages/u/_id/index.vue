@@ -30,7 +30,7 @@
 import useAuth from '~/use/auth'
 
 export default {
-  layout: 'public',
+  layout: 'default',
   async asyncData({ app, params, error }) {
     const collection = await app.$fire.firestore
       .collection('profiles')
@@ -55,11 +55,6 @@ export default {
 
     return {
       uid
-    }
-  },
-  mounted() {
-    if (this.uid) {
-      this.$nuxt.setLayout('default')
     }
   }
 }
