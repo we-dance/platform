@@ -1,9 +1,9 @@
 <template>
   <main>
     <TTitle>
-      Trends
+      Pins
       <template slot="right">
-        <TButton to="/posts/-/edit">Add post</TButton>
+        <TButton to="/posts/-/edit">Add pin</TButton>
       </template>
     </TTitle>
 

@@ -3,18 +3,36 @@
     class="font-sans leading-normal tracking-normal antialiased min-h-screen flex flex-col"
   >
     <header class="border-b p-4">
-      <div class="flex items-center justify-start">
-        <THamburger v-model="isMenuOpen" class="md:hidden" />
-        <router-link to="/">
-          <TIcon name="logo-horizontal-dark" />
-        </router-link>
-        <div class="flex-grow mx-4">
-          <TInput
-            v-model="query"
-            placeholder="Search dancers, workshops, parties and more"
-            class="rounded-full"
+      <div v-if="isSearchShown" class="flex">
+        <TInput
+          v-model="query"
+          auto-focus
+          placeholder="Search dancers, workshops, parties and more"
+          class="w-full"
+        />
+        <button class="-ml-8" @click="isSearchShown = false">
+          <TIcon
+            name="close"
+            class="w-8 h-8 rounded-full cursor-pointer hover:text-primary p-1 mr-1"
           />
+        </button>
+      </div>
+      <div v-else class="flex items-center justify-between">
+        <div class="flex flex-no-wrap items-center">
+          <div class="mt-1 md:hidden">
+            <THamburger v-model="isMenuOpen" />
+          </div>
+          <router-link to="/">
+            <TIcon name="logo-horizontal-dark" />
+          </router-link>
         </div>
+        <div class="flex-grow"></div>
+        <button class="mr-2" @click="showSearch()">
+          <TIcon
+            name="search"
+            class="w-8 h-8 rounded-full cursor-pointer hover:text-primary p-1"
+          />
+        </button>
         <div v-if="!uid">
           <TButton to="/signin">Sign in</TButton>
         </div>
@@ -34,88 +52,33 @@
       </div>
     </TPopup>
 
-    <!-- :class="noContainer ? '' : 'p-4 mx-auto container max-w-xl mb-16'" -->
+    <div
+      v-if="isMenuOpen"
+      class="fixed w-full h-full top-0 left-0 bg-black opacity-50 z-20"
+      @click="isMenuOpen = false"
+    />
+    <transition name="slide">
+      <div
+        v-if="isMenuOpen"
+        class="bg-white fixed left-0 w-56 bottom-0 top-0 z-30 shadow-lg md:hidden"
+      >
+        <MainNavigation
+          :uid="uid"
+          :username="getProfile(uid).username"
+          :is-admin="isAdmin()"
+        />
+      </div>
+    </transition>
 
     <div class="flex-grow flex">
-      <nav class="w-20 flex-initial border-r text-xs">
-        <!-- :class="isMenuOpen ? '' : 'hidden'" -->
-
-        <div class="block p-2 items-center flex flex-col justify-center my-1">
-          <TMenu v-if="uid">
-            <template slot="button">
-              <div class="flex cursor-pointer rounded-full">
-                <TProfilePhoto size="lg" :uid="uid" />
-              </div>
-            </template>
-            <template slot="menu">
-              <div class="w-32 py-2 bg-white rounded-lg shadow-xl border">
-                <div v-if="isAdmin()" class="text-red">
-                  <TButton to="/admin/matches" type="nav-admin"
-                    >Matches</TButton
-                  >
-                  <TButton to="/admin/reports" type="nav-admin"
-                    >Reports</TButton
-                  >
-                  <TButton to="/admin/tags" type="nav-admin">Tags</TButton>
-                  <TButton to="/admin/accounts" type="nav-admin"
-                    >Accounts</TButton
-                  >
-                  <TButton to="/admin/cities" type="nav-admin">Cities</TButton>
-                  <TButton to="/admin/templates" type="nav-admin"
-                    >Templates</TButton
-                  >
-                  <TButton to="/admin/emails" type="nav-admin">Emails</TButton>
-                </div>
-                <TButton
-                  v-if="getProfile(uid).username"
-                  type="nav"
-                  :to="`/u/${getProfile(uid).username}`"
-                  >My Profile</TButton
-                >
-                <TButton type="nav" to="/settings">Settings</TButton>
-                <TButton type="nav" href="/about" target="_blank"
-                  >About</TButton
-                >
-                <TButton
-                  type="nav"
-                  href="mailto:support@wedance.vip"
-                  target="_blank"
-                  >Support</TButton
-                >
-                <TButton type="nav" to="/signout">Log out</TButton>
-              </div>
-            </template>
-          </TMenu>
-        </div>
-
-        <router-link
-          to="/"
-          class="block p-2 items-center flex flex-col justify-center"
-        >
-          <TIcon class="w-6 h-6 mx-auto" name="fire" />
-          <span class="hidden md:block">Trends</span>
-        </router-link>
-
-        <router-link
-          to="/people"
-          class="block p-2 items-center flex flex-col justify-center"
-        >
-          <TIcon class="w-6 h-6 mx-auto" name="friends" />
-          <span class="hidden md:block">Community</span>
-        </router-link>
-
-        <router-link
-          to="/events"
-          class="block p-2 items-center flex flex-col justify-center"
-        >
-          <TIcon class="w-6 h-6 mx-auto" name="calendar" />
-          <span class="hidden md:block">Events</span>
-        </router-link>
-      </nav>
-      <div class="p-4 flex-initial flex-grow">
-        <div class="mx-auto max-w-xl">
-          <nuxt />
-        </div>
+      <MainNavigation
+        :uid="uid"
+        :username="getProfile(uid).username"
+        :is-admin="isAdmin()"
+        class="hidden md:block flex-initial"
+      />
+      <div class="flex-grow p-4 mx-auto max-w-xl">
+        <nuxt />
       </div>
     </div>
 
@@ -140,6 +103,7 @@ export default {
   },
   data: () => ({
     isMenuOpen: false,
+    isSearchShown: false,
     showAuthPopup: false,
     query: ''
   }),
@@ -177,6 +141,9 @@ export default {
     }
   },
   methods: {
+    showSearch() {
+      this.isSearchShown = true
+    },
     updateMenu() {
       this.isMenuOpen = false
     }
@@ -201,9 +168,3 @@ export default {
   }
 }
 </script>
-
-<style>
-nav .nuxt-link-exact-active {
-  @apply text-primary;
-}
-</style>
