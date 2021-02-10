@@ -62,7 +62,7 @@ export default {
     this.item = this.item || {
       tags: {},
       community: city,
-      cover: this.profile.photo
+      cover: this.profile?.photo
     }
 
     if (this.$route.query.tag) {
