@@ -29,14 +29,7 @@
       </div>
     </div>
 
-    <TPopup v-if="showPopup">
-      <div class="flex justify-between border-b pb-2 mb-4">
-        <div class="font-bold">{{ popupTitle }}</div>
-        <button class="cursor-pointer" @click="showPopup = false">
-          <TIcon name="close" class="cursor-pointer w-4 h-4" />
-        </button>
-      </div>
-
+    <TPopup v-if="showPopup" :title="popupTitle" @close="showPopup = false">
       <div class="flex">
         <TInput
           v-model="input"
@@ -45,31 +38,33 @@
         />
       </div>
 
-      <div
-        v-if="!hideGlobal"
-        class="p-2 hover:bg-indigo-500 text-black hover:text-white cursor-pointer flex items-center"
-        @click="change('')"
-      >
-        <span>{{ globalLabel }}</span>
-      </div>
-      <div v-if="predictions.length">
+      <div class="max-w-md h-64 overflow-y-scroll">
         <div
-          v-for="prediction in predictions"
-          :key="prediction.place_id"
-          class="p-2 hover:bg-indigo-500 text-black hover:text-white cursor-pointer text-left"
-          @click="select(prediction.place_id)"
+          v-if="!hideGlobal"
+          class="p-2 hover:bg-indigo-500 text-black hover:text-white cursor-pointer flex items-center"
+          @click="change('')"
         >
-          {{ prediction.description }}
+          <span>{{ globalLabel }}</span>
         </div>
-      </div>
-      <div v-else-if="!focused">
-        <div
-          v-for="city in cities"
-          :key="city.name"
-          class="p-2 hover:bg-indigo-500 text-black hover:text-white cursor-pointer text-left"
-          @click="change(city.name)"
-        >
-          {{ city.name }}, {{ city.location.country }}
+        <div v-if="predictions.length">
+          <div
+            v-for="prediction in predictions"
+            :key="prediction.place_id"
+            class="p-2 hover:bg-indigo-500 text-black hover:text-white cursor-pointer text-left"
+            @click="select(prediction.place_id)"
+          >
+            {{ prediction.description }}
+          </div>
+        </div>
+        <div v-else>
+          <div
+            v-for="city in cities"
+            :key="city.name"
+            class="p-2 hover:bg-indigo-500 text-black hover:text-white cursor-pointer text-left"
+            @click="change(city.name)"
+          >
+            {{ city.name }}, {{ city.location.country }}
+          </div>
         </div>
       </div>
     </TPopup>

@@ -69,6 +69,7 @@ import ls from 'local-storage'
 import useAuth from '~/use/auth'
 
 export default {
+  name: 'RegisterPage',
   layout: 'popup',
   data: () => ({
     email: '',
