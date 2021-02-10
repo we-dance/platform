@@ -125,6 +125,14 @@
 
         <TCardProfile2 v-for="item in items" :key="item.id" :uid="item.id" />
       </div>
+
+      <WTeaser
+        v-if="uid && !items.length"
+        title="We need your help"
+        description="We are non-profit international dance community. We want you go to any city in any country and find dance events and dancers. It all starts with the local community."
+        button="Get Involved"
+        href="http://bit.ly/wedance-start"
+      />
     </div>
   </div>
 </template>

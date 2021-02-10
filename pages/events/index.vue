@@ -22,8 +22,8 @@
 
     <div class="mt-4">
       <TLoader v-if="loading" />
-      <div v-else-if="!count">
-        No events found
+      <div v-else-if="!count" class="p-4">
+        No events found. Would you like to add one?
       </div>
       <div>
         <div v-for="(items, date) in itemsByDate" :key="date" class="mb-8">
