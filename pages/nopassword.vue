@@ -1,20 +1,27 @@
 <template>
   <TAuthError v-if="error" :error="error" />
   <TLoader v-else-if="loading || signingIn" />
+  <div v-else-if="emailSent" class="typo">
+    <h2>Check your email</h2>
+    <p>
+      Email might come in 5-10 minutes and might land in spam.
+    </p>
+    <p>
+      Please report if you have any issues to
+      <a
+        class="text-blue-500 underline hover:no-underline"
+        href="mailto:support@wedance.vip"
+        >support@wedance.vip</a
+      >.
+    </p>
+  </div>
   <div v-else>
-    <form class="space-y-4" @submit="submit">
+    <form @submit="submit">
       <TField
         id="email"
         v-model="email"
         type="email"
         label="Email"
-        label-position="top"
-      />
-      <TField
-        id="password"
-        v-model="password"
-        type="password"
-        label="Password"
         label-position="top"
       />
 
@@ -29,22 +36,21 @@
         >.
       </div>
       <div class="mt-4 flex justify-end">
-        <TButton
-          type="primary"
-          class="mt-2 w-full md:mt-0 md:w-32 md:ml-4"
-          @click="submit"
-        >
-          Login
+        <TButton type="primary" @click="submit">
+          Send a magic link
         </TButton>
       </div>
       <div class="mt-4 text-xs">
         <div class="mt-4 border-t pt-4 flex space-x-2 text-xs">
-          <router-link to="/register" class="underline hover:no-underline"
-            >Create Account</router-link
+          <router-link to="/signin" class="underline hover:no-underline"
+            >I have a password</router-link
           >
-          <router-link to="/nopassword" class="underline hover:no-underline"
-            >Forgot password</router-link
+          <button
+            class="underline hover:no-underline"
+            @click="signInWithGoogle"
           >
+            Sign in with Google
+          </button>
         </div>
       </div>
     </form>
@@ -59,7 +65,7 @@ export default {
   layout: 'popup',
   data: () => ({
     email: '',
-    password: ''
+    emailSent: false
   }),
   setup() {
     const {
@@ -67,7 +73,7 @@ export default {
       loading,
       signingIn,
       signInWithGoogle,
-      signUserIn,
+      sendSignInLinkToEmail,
       signOut,
       error
     } = useAuth()
@@ -77,7 +83,7 @@ export default {
       loading,
       signingIn,
       signInWithGoogle,
-      signUserIn,
+      sendSignInLinkToEmail,
       signOut,
       error
     }
@@ -120,7 +126,8 @@ export default {
         return
       }
 
-      this.signUserIn(this.email, this.password)
+      this.sendSignInLinkToEmail(this.email)
+      this.emailSent = true
     }
   }
 }

@@ -4,10 +4,19 @@
   <div v-else>
     <form class="space-y-4" @submit="submit">
       <TField
+        id="username"
+        v-model="username"
+        label="Username"
+        type="username"
+        required
+        label-position="top"
+      />
+      <TField
         id="email"
         v-model="email"
         type="email"
         label="Email"
+        required
         label-position="top"
       />
       <TField
@@ -15,7 +24,14 @@
         v-model="password"
         type="password"
         label="Password"
+        required
         label-position="top"
+      />
+      <TField
+        v-model="community"
+        label="I dance in"
+        label-position="vertical"
+        type="city"
       />
 
       <div class="mt-4 text-xs">
@@ -34,16 +50,13 @@
           class="mt-2 w-full md:mt-0 md:w-32 md:ml-4"
           @click="submit"
         >
-          Login
+          Register
         </TButton>
       </div>
       <div class="mt-4 text-xs">
         <div class="mt-4 border-t pt-4 flex space-x-2 text-xs">
-          <router-link to="/register" class="underline hover:no-underline"
-            >Create Account</router-link
-          >
-          <router-link to="/nopassword" class="underline hover:no-underline"
-            >Forgot password</router-link
+          <router-link to="/signin" class="underline hover:no-underline"
+            >Login</router-link
           >
         </div>
       </div>
@@ -59,15 +72,16 @@ export default {
   layout: 'popup',
   data: () => ({
     email: '',
-    password: ''
+    password: '',
+    username: '',
+    community: ''
   }),
   setup() {
     const {
       uid,
       loading,
       signingIn,
-      signInWithGoogle,
-      signUserIn,
+      createUserWithEmailAndPassword,
       signOut,
       error
     } = useAuth()
@@ -76,8 +90,7 @@ export default {
       uid,
       loading,
       signingIn,
-      signInWithGoogle,
-      signUserIn,
+      createUserWithEmailAndPassword,
       signOut,
       error
     }
@@ -98,6 +111,8 @@ export default {
       ls('target', target)
     }
 
+    this.community = ls('city')
+
     if (this.uid) {
       this.redirect()
     }
@@ -116,11 +131,24 @@ export default {
     submit(e) {
       e.preventDefault()
 
-      if (!this.email.trim()) {
+      if (
+        !this.email.trim() ||
+        !this.username.trim() ||
+        !this.password.trim()
+      ) {
+        this.error = {
+          message: 'Please fill all the fields'
+        }
+
         return
       }
 
-      this.signUserIn(this.email, this.password)
+      this.createUserWithEmailAndPassword(
+        this.email,
+        this.password,
+        this.username,
+        this.community
+      )
     }
   }
 }
