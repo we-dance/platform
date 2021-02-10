@@ -84,9 +84,9 @@ export default {
           'bg-transparent text-primary font-semibold py-2 px-4 border border-primary rounded-full no-underline hover:bg-primary hover:text-white hover:border-transparent',
         link: 'underline font-semibold hover:no-underline',
         nav:
-          'block text-left w-full px-4 py-2 text-gray-800 hover:bg-indigo-500 hover:text-white',
+          'w-full px-4 py-2 items-center flex rounded-full border hover:border-purple-500 hover:text-purple-500',
         'nav-admin':
-          'block text-left w-full px-4 py-2 text-red-500 hover:bg-gray-200',
+          'w-full px-4 py-2 items-center text-gray-200 flex rounded-full border border-gray-200 hover:border-purple-500 hover:text-purple-500',
 
         icon: ''
       }
