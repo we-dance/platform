@@ -13,9 +13,6 @@
               <div class="font-bold text-2xl leading-none">
                 {{ profile.name }}
               </div>
-              <div v-if="uid === profile.createdBy" class="ml-2 text-primary">
-                <TButton icon="edit" to="/settings?tab=profile" />
-              </div>
             </div>
             <div class="text-xs">
               {{ profile.community }}
@@ -24,6 +21,12 @@
           </div>
         </div>
       </div>
+    </div>
+    <div class="flex justify-center">
+      <div v-if="uid === profile.createdBy" class="text-primary">
+        <TButton icon="edit" to="/settings?tab=profile" />
+      </div>
+      <TProfileContact v-else :uid="profile.createdBy" />
     </div>
     <div class="px-4">
       <div v-if="profile.story" class="mt-4">
