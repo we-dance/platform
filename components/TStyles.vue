@@ -6,7 +6,7 @@
       class="inline-block rounded-full px-2 py-1 border m-1"
       :class="levelClass[style.level]"
     >
-      {{ style.name }} – {{ style.level }}
+      {{ style.name }}<span v-if="!hideLevel"> – {{ style.level }}</span>
     </div>
   </div>
 </template>
@@ -26,6 +26,10 @@ export default {
     value: {
       type: [Object, String],
       default: () => ({})
+    },
+    hideLevel: {
+      type: Boolean,
+      default: false
     }
   },
   data: () => ({

@@ -11,6 +11,9 @@
       <div class="p-2 relative">
         <div>
           <span class="font-bold">{{ profile.name }}</span>
+          <span v-if="profile.community" class="text-xs"
+            >• {{ profile.community }}</span
+          >
           <span v-if="profile.height" class="text-xs"
             >• {{ profile.height }}cm</span
           >

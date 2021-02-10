@@ -162,7 +162,9 @@ export default {
 
     const docs = computed(() => {
       return docsProfiles.value
-        .filter((item) => item.community === currentCity.value)
+        .filter((item) =>
+          currentCity.value ? item.community === currentCity.value : true
+        )
         .sort(sortBy('-createdAt'))
     })
 

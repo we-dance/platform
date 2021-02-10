@@ -86,6 +86,9 @@
             <div class="text-xs my-1 flex items-center">
               <TAvatar class="mr-2" photo size="sm" :uid="item.createdBy" />
               <TAvatar class="mr-2" name :uid="item.createdBy" />
+              <span class="text-xs text-primary mr-2">{{
+                item.community || 'Global'
+              }}</span>
               <router-link
                 :to="`/posts/${item.id}`"
                 class="text-xs text-gray-600 hover:underline text-right"
@@ -101,7 +104,7 @@
           </div>
         </div>
         <div class="px-4 pb-4 md:flex items-center justify-between">
-          <TTagsPreview :value="item.tags" class="mb-4 md:mb-0" />
+          <TStyles class="text-xs" hide-level :value="item.styles" />
 
           <div class="flex">
             <div class="text-gray-700 flex justify-center">
@@ -227,8 +230,10 @@ export default {
   computed: {
     filteredItems() {
       return this.items
-        .filter(
-          (item) => !item.community || item.community === this.currentCity
+        .filter((item) =>
+          this.currentCity
+            ? !item.community || item.community === this.currentCity
+            : true
         )
         .filter((item) =>
           this.$route.query.tag

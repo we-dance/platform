@@ -72,6 +72,7 @@
                     <TIcon name="place" class="w-4 h-4 mr-1" />
                     <p>
                       {{ item.address }}
+                      <span v-if="item.city">• {{ item.city }}</span>
                     </p>
                   </div>
                 </div>
@@ -207,7 +208,8 @@ export default {
       filterOptions.value.find((item) => item.value === activeFilter.value)
     )
 
-    const thisCityFilter = (item) => item.city === currentCity.value
+    const thisCityFilter = (item) =>
+      currentCity.value ? item.city === currentCity.value : true
 
     const items = computed(() => {
       let result = docs.value.map(map)
