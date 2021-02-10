@@ -2,39 +2,67 @@
   <div>
     <TTitle>
       Community
-      <template slot="right"> </template>
+      <template slot="right">
+        <TButton type="primary" @click="isAddingProfile = true"
+          >Add profile</TButton
+        >
+      </template>
     </TTitle>
 
-    <div class="flex space-x-2 my-2 overflow-x-scroll">
-      <TInputCity v-model="currentCity" />
-      <TInputMultiDropdown
-        v-model="objectives"
-        :options="objectivesList"
-        label="Objectives"
-      />
-      <TInputMultiDropdown v-model="roles" :options="rolesList" label="Roles" />
-      <TInputMultiDropdown
-        v-model="dances"
-        :options="dancesList"
-        label="Dances"
-      />
+    <TPopup
+      v-if="isAddingProfile"
+      title="Coming soon"
+      @close="isAddingProfile = false"
+    >
+      <div class="max-w-md mx-auto overflow-y-scroll typo">
+        <p>
+          You will be able to create community profiles for your favourite dance
+          academies, artists, DJs, musicians, venues.
+        </p>
+        <p>
+          Community profiles will be possible to claim by verifying ownership.
+        </p>
+        <p>
+          In meantime you can contact support:
+          <a
+            class="text-blue-500 underline hover:no-underline"
+            href="mailto:support@wedance.vip"
+            >support@wedance.vip</a
+          >.
+        </p>
+      </div>
+    </TPopup>
+
+    <div class="overflow-x-scroll my-2">
+      <div class="flex flex-no-wrap space-x-2">
+        <TInputCity v-model="currentCity" />
+        <TInputMultiDropdown
+          v-model="objectives"
+          :options="objectivesList"
+          label="Objective"
+        />
+        <TInputMultiDropdown
+          v-model="roles"
+          :options="rolesList"
+          label="Role"
+        />
+        <TInputMultiDropdown
+          v-model="dances"
+          :options="dancesList"
+          label="Style"
+        />
+      </div>
     </div>
 
     <div>
-      <div
+      <WTeaser
         v-if="!uid"
-        class="mb-4 rounded bg-dark-gradient text-white text-sm text-center p-4"
-      >
-        <div>
-          <h1 class="font-bold text-lg">Publish your profile</h1>
-          <p>so that others can contact you</p>
-        </div>
-        <div class="flex justify-center">
-          <TButton class="my-2" type="primary" to="/signin?target=/people"
-            >Create profile</TButton
-          >
-        </div>
-      </div>
+        title="Publish your profile"
+        description="so that others can contact you"
+        button="Join for free"
+        url="/signin?target=/people"
+      />
+
       <div class="grid grid-cols-1 md:grid-cols-2 gap-2">
         <div
           v-if="
@@ -110,6 +138,9 @@ import { sortBy } from '~/utils'
 
 export default {
   name: 'PeopleIndex',
+  data: () => ({
+    isAddingProfile: false
+  }),
   setup() {
     const { uid, updateProfile, profile: myProfile } = useAuth()
 

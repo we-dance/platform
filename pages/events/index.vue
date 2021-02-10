@@ -3,17 +3,19 @@
     <TTitle>
       Events
       <template slot="right">
-        <TButton to="/events/-/edit">Add event</TButton>
+        <TButton to="/events/-/edit" type="primary">Add event</TButton>
       </template>
     </TTitle>
 
-    <div class="flex space-x-2 my-2 overflow-x-scroll">
-      <TInputCity v-model="currentCity" />
-      <TInputMultiDropdown
-        v-model="dances"
-        :options="dancesList"
-        label="Dances"
-      />
+    <div class="overflow-x-scroll my-2">
+      <div class="flex flex-no-wrap space-x-2">
+        <TInputCity v-model="currentCity" />
+        <TInputMultiDropdown
+          v-model="dances"
+          :options="dancesList"
+          label="Style"
+        />
+      </div>
     </div>
 
     <TTabs v-if="uid" v-model="activeFilter" :tabs="filterOptions" />

@@ -134,7 +134,7 @@ export default {
           },
           {
             name: 'styles',
-            label: 'Dance styles',
+            label: 'Styles',
             type: 'stylesSelect'
           }
         ]

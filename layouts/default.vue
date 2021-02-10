@@ -79,7 +79,7 @@
         :is-admin="isAdmin()"
         class="hidden md:block flex-initial"
       />
-      <div class="flex-grow p-4 mx-auto max-w-xl">
+      <div class="flex-grow p-4 mx-auto w-full max-w-xl">
         <nuxt />
       </div>
     </div>

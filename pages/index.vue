@@ -3,18 +3,20 @@
     <TTitle>
       Trends
       <template slot="right">
-        <TButton to="/posts/-/edit">Add post</TButton>
+        <TButton to="/posts/-/edit" type="primary">Add post</TButton>
       </template>
     </TTitle>
 
-    <div class="flex space-x-2 my-2 overflow-x-scroll">
-      <TInputCity v-model="currentCity" />
-      <TInputSelect v-model="sorting" :options="sortingList" />
-      <TInputMultiDropdown
-        v-model="dances"
-        :options="dancesList"
-        label="Dances"
-      />
+    <div class="overflow-x-scroll my-2">
+      <div class="flex flex-no-wrap space-x-2">
+        <TInputCity v-model="currentCity" />
+        <TInputSelect v-model="sorting" :options="sortingList" />
+        <TInputMultiDropdown
+          v-model="dances"
+          :options="dancesList"
+          label="Style"
+        />
+      </div>
     </div>
 
     <div>
@@ -46,6 +48,23 @@
           <TButton type="danger" @click="report">Report</TButton>
         </div>
       </TPopup>
+      <div v-if="!uid" class="md:flex space-x-2">
+        <WTeaser
+          title="Need a partner?"
+          description="Dancers worldwide create their profiles to find dance partners"
+          button="See Community"
+          url="/people"
+          class="flex-1"
+        />
+        <WTeaser
+          title="Where to dance?"
+          description="All dance courses, parties and festivals in one place"
+          button="See Events"
+          url="/events"
+          class="flex-1"
+        />
+      </div>
+
       <div
         v-for="item in filteredItems"
         :key="item.id"
@@ -104,7 +123,11 @@
           </div>
         </div>
         <div class="px-4 pb-4 md:flex items-center justify-between">
-          <TStyles class="text-xs" hide-level :value="item.styles" />
+          <TStyles
+            class="text-xs mb-4 md:mb-0"
+            hide-level
+            :value="item.styles"
+          />
 
           <div class="flex">
             <div class="text-gray-700 flex justify-center">
