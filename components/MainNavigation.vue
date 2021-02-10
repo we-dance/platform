@@ -26,11 +26,7 @@
       </TButton>
 
       <TButton to="/settings" type="nav">Settings</TButton>
-      <TButton to="/about" type="nav">About</TButton>
-      <TButton href="mailto:support@wedance.vip" target="_blank" type="nav"
-        >Support</TButton
-      >
-      <TButton type="nav" to="/signout">Log out</TButton>
+      <TButton to="/signout" type="nav">Log out</TButton>
     </template>
 
     <template v-if="isAdmin">
