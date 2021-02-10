@@ -19,6 +19,8 @@ export default () => {
 
     if (currentCity) {
       find('name', currentCity)
+    } else {
+      city.value = {}
     }
   })
 
