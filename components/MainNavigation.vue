@@ -5,13 +5,13 @@
     </router-link>
 
     <TButton to="/" type="nav">
-      <TIcon class="w-4 h-4 mr-2" name="pin" />
-      <span>Pins</span>
+      <TIcon class="w-4 h-4 mr-2" name="fire" />
+      <span>Trends</span>
     </TButton>
 
     <TButton to="/people" type="nav">
-      <TIcon class="w-4 h-4 mr-2" name="spotlight" />
-      <span>Scene</span>
+      <TIcon class="w-4 h-4 mr-2" name="people" />
+      <span>Community</span>
     </TButton>
 
     <TButton to="/events" type="nav">

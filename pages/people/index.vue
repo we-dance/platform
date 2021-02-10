@@ -6,7 +6,7 @@
     </TTitle>
 
     <div class="flex space-x-2 my-2 overflow-x-scroll">
-      <TInputCity v-model="currentCity" hide-global />
+      <TInputCity v-model="currentCity" />
       <TInputMultiDropdown
         v-model="objectives"
         :options="objectivesList"

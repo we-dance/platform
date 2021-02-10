@@ -50,7 +50,7 @@
         class="p-2 hover:bg-indigo-500 text-black hover:text-white cursor-pointer flex items-center"
         @click="change('')"
       >
-        <span>Global</span>
+        <span>{{ globalLabel }}</span>
       </div>
       <div v-if="predictions.length">
         <div
@@ -129,9 +129,13 @@ export default {
       type: String,
       default: 'Search city'
     },
+    globalLabel: {
+      type: String,
+      default: 'Anywhere'
+    },
     emptyLabel: {
       type: String,
-      default: 'Select city'
+      default: 'Anywhere'
     },
     popupTitle: {
       type: String,

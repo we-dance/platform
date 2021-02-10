@@ -1,15 +1,15 @@
 <template>
   <main>
     <TTitle>
-      Pins
+      Trends
       <template slot="right">
-        <TButton to="/posts/-/edit">Add pin</TButton>
+        <TButton to="/posts/-/edit">Add post</TButton>
       </template>
     </TTitle>
 
     <div class="flex space-x-2 my-2 overflow-x-scroll">
+      <TInputCity v-model="currentCity" />
       <TInputSelect v-model="sorting" :options="sortingList" />
-      <TInputCity v-model="currentCity" hide-global />
       <TInputMultiDropdown
         v-model="dances"
         :options="dancesList"
