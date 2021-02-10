@@ -5,7 +5,6 @@
       <div class="font-bold text-lg leading-none mt-4">
         {{ profile.name }}
       </div>
-      <div class="text-gray-700 text-sm">@{{ profile.username }}</div>
       <div v-if="profile.bio" class="mt-4">
         <div>{{ profile.bio }}</div>
       </div>

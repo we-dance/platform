@@ -22,9 +22,11 @@
           <div class="mt-1 md:hidden">
             <THamburger v-model="isMenuOpen" />
           </div>
-          <router-link to="/">
-            <TIcon name="logo-horizontal-dark" />
-          </router-link>
+          <portal-target name="title">
+            <router-link to="/">
+              <TIcon name="logo-horizontal-dark" />
+            </router-link>
+          </portal-target>
         </div>
         <div class="flex-grow"></div>
         <button class="mr-2" @click="showSearch()">
@@ -130,14 +132,6 @@ export default {
 
     if (routedCity) {
       this.currentCity = routedCity
-    }
-
-    if (
-      !this.currentCity &&
-      this.$route.fullPath !== '/' &&
-      !this.$route.params.slug
-    ) {
-      this.$router.push('/')
     }
   },
   methods: {

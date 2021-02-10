@@ -1,5 +1,12 @@
 <template>
   <div class="mx-auto max-w-md bg-white px-4">
+    <portal to="title">
+      <router-link to="/" class="flex">
+        <TIcon name="icon" class="h-6 w-6 mr-1" />
+        <h1 class="font-lato font-bold">{{ profile.username }}</h1>
+      </router-link>
+    </portal>
+
     <TButtonShare
       :url="`https://wedance.vip/u/${profile.username}`"
       :text="`WeDance: ${profile.username} is looking for a dance partner`"

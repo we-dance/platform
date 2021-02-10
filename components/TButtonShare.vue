@@ -6,7 +6,7 @@
       @click="share()"
     />
     <TPopup v-if="sharing" title="Share" @close="sharing = false">
-      <div class="w-64">
+      <div class="w-64 space-y-2 py-4">
         <TButton type="nav" @click="copyToClipboard">
           Copy Link
         </TButton>
