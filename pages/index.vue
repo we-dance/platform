@@ -229,7 +229,7 @@ export default {
   }),
   computed: {
     filteredItems() {
-      return this.items
+      const result = this.items
         .filter((item) =>
           this.currentCity
             ? !item.community || item.community === this.currentCity
@@ -240,7 +240,11 @@ export default {
             ? item.tags && item.tags[this.$route.query.tag]
             : true
         )
-        .sort(sortBy('-createdAt'))
+      if (this.sorting === 'popular') {
+        return result.sort(sortBy('-upVotes'))
+      } else {
+        return result.sort(sortBy('-createdAt'))
+      }
     }
   },
   methods: {
