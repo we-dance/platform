@@ -64,6 +64,22 @@
           class="flex-1"
         />
       </div>
+      <div v-if="uid">
+        <WTeaser
+          v-if="city && city.telegram"
+          title="Need to talk?"
+          description="We have dance chats in every city"
+          :button="`Join ${city.name} Chat`"
+          :href="city.telegram"
+        />
+        <WTeaser
+          v-else-if="currentCity"
+          title="Need to talk?"
+          description="We have dance chats in every city"
+          :button="`Join ${currentCity} Chat`"
+          href="https://t.me/joinchat/Iqif2X0FCXCpqHDj"
+        />
+      </div>
 
       <div
         v-for="item in filteredItems"
