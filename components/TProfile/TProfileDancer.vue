@@ -1,5 +1,5 @@
 <template>
-  <div class="p-4">
+  <div>
     <div class="flex flex-col items-center">
       <TProfilePhoto size="xl" :uid="profile.createdBy" />
       <div class="font-bold text-lg leading-none mt-4">
@@ -18,8 +18,15 @@
         class="w-full mt-4"
       />
       <div
-        class="mt-4 flex space-x-4 items-center justify-end border p-4 w-full"
+        class="mt-4 flex space-x-2 items-center justify-end border p-2 w-full"
       >
+        <TButton
+          v-if="profile.website"
+          :href="profile.website"
+          icon="house"
+          type="round"
+          icon-size="6"
+        />
         <TButton
           v-if="profile.instagram"
           icon="instagram"
@@ -32,6 +39,7 @@
           icon="tiktok"
           type="round"
           icon-size="6"
+          class="hidden md:block"
           :href="`https://tiktok.com/${profile.tiktok}`"
         />
         <TButton
@@ -39,6 +47,7 @@
           icon="youtube"
           type="round"
           icon-size="6"
+          class="hidden md:block"
           :href="`https://youtube.com/${profile.youtube}`"
         />
         <TButton
@@ -46,6 +55,7 @@
           icon="twitter"
           type="round"
           icon-size="6"
+          class="hidden md:block"
           :href="`https://twitter.com/${profile.twitter}`"
         />
         <TButton
@@ -53,13 +63,8 @@
           icon="facebook"
           type="round"
           icon-size="6"
+          class="hidden md:block"
           :href="`https://fb.com/${profile.facebook}`"
-        />
-        <TButton
-          v-if="profile.website"
-          :href="profile.website"
-          label="Visit website"
-          type="round"
         />
         <TButton v-if="uid === profile.id" to="/settings?tab=profile"
           >Edit Profile</TButton
@@ -68,7 +73,7 @@
       </div>
     </div>
     <TPreview v-if="profile.story" :content="profile.story" class="mt-4" />
-    <div class="rounded border shadow p-4 space-y-4 mt-4">
+    <div class="iconed border shadow p-4 space-y-4 mt-4">
       <dl v-if="profile.languages">
         <dt class="font-bold mr-1">Languages:</dt>
         <dd>{{ profile.languages }}</dd>

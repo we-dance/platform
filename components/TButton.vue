@@ -74,7 +74,7 @@ export default {
       const map = {
         round:
           'bg-white hover:bg-gray-100 text-gray-800 font-semibold py-1 px-4 border border-gray-400 rounded-full shadow',
-        icon: 'rounded-full hover:text-indigo-500 p-1',
+        icon: 'rounded-full hover:text-primary p-2',
         simple:
           'bg-white hover:bg-gray-100 text-gray-800 font-semibold py-2 px-4 border border-gray-400 rounded-full shadow',
         primary:

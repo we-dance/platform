@@ -1,9 +1,9 @@
 <template>
-  <div class="mx-auto max-w-md bg-white px-4">
+  <div class="mx-auto max-w-md bg-white">
     <portal to="title">
-      <router-link to="/" class="flex">
+      <router-link to="/" class="flex items-center">
         <TIcon name="icon" size="8" />
-        <h1 class="ml-1 font-lato font-bold">{{ profile.username }}</h1>
+        <h1 class="ml-1 font-lato text-lg font-bold">{{ profile.username }}</h1>
       </router-link>
     </portal>
 
@@ -21,6 +21,7 @@
       collection="profiles"
       :title="profile.username"
       :value="profile.socialCover"
+      class="mt-4"
     />
   </div>
 </template>
