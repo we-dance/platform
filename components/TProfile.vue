@@ -49,6 +49,13 @@
           icon-size="6"
         />
         <TButton
+          v-if="profile.telegram"
+          icon="telegram"
+          type="round"
+          icon-size="6"
+          :href="`https://t.me/${profile.telegram}`"
+        />
+        <TButton
           v-if="profile.instagram"
           icon="instagram"
           type="round"

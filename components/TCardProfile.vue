@@ -44,7 +44,7 @@
         v-if="profile.partner === 'Yes'"
         class="mt-2 bg-primary text-white px-2 py-1 rounded-full"
       >
-        <dt class="font-bold mr-1">I am looking for partner</dt>
+        <dt class="font-bold mr-1">I am looking for a partner</dt>
       </dl>
       <dl v-if="profile.partnerBio" class="mt-2">
         <dt class="font-bold mr-1">About my partner:</dt>

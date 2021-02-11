@@ -11,12 +11,21 @@ export default () => {
       options: ['Dancer', 'Artist', 'Organiser', 'Venue', 'City']
     },
     {
-      name: 'visibility',
-      label: 'Your profile visibility',
+      name: 'gender',
+      label: 'Gender',
       type: 'select',
-      options: ['Public', 'Members', 'Unlisted'],
-      description:
-        'Public profiles are searchable in Google and used in our social media to attract new members. Members profile are only visible for logged-in users. Unlisted profiles are possible to open with exact link, but they are not listed in members lists and search.'
+      options: ['Male', 'Female', 'Other']
+    },
+    {
+      name: 'teacher',
+      label: 'Are you teaching?',
+      type: 'select',
+      options: ['Yes', 'No']
+    },
+    {
+      name: 'photo',
+      label: 'Photo',
+      type: 'photo'
     },
     {
       name: 'name',
@@ -37,14 +46,18 @@ export default () => {
     },
     {
       name: 'bio',
-      label: 'About you',
+      label: 'Teaser',
       type: 'textarea',
-      placeholder: "Say a few words about who you are and why you're here!"
+      description:
+        'Introduce yourself. Make it simple, short, unique, narative and attractive.',
+      placeholder: '280 symbols'
     },
     {
-      name: 'photo',
-      label: 'Photo',
-      type: 'photo'
+      name: 'story',
+      label: 'Description',
+      type: 'textarea',
+      placeholder: 'Description (markdown)',
+      description: '[Markdown cheatsheet](https://simplemde.com/markdown-guide)'
     },
     {
       name: 'location',
@@ -60,26 +73,9 @@ export default () => {
       description: 'Dance community of which city would you like to join?'
     },
     {
-      name: 'birthday',
-      label: 'Birthday',
-      type: 'date'
-    },
-    {
-      name: 'gender',
-      label: 'Gender',
-      type: 'select',
-      options: ['Male', 'Female', 'Other']
-    },
-    {
       name: 'styles',
       label: 'Your dance styles and level',
       type: 'stylesSelect'
-    },
-    {
-      name: 'story',
-      label: 'Your dance story',
-      type: 'textarea',
-      description: 'Where did you learn dancing and why did you start?'
     },
     {
       name: 'languages',
@@ -93,6 +89,47 @@ export default () => {
       type: 'textarea',
       description:
         'What other skills would you like to share with dance community? For example: video editing, photography, copywriting, etc. It might be useful to exchange your skills for free passes.'
+    },
+    {
+      name: 'learning',
+      label: 'Which dance topics you are interested in?',
+      type: 'textarea',
+      description: 'For example: Musicality in Salsa, Men Styling, etc.'
+    },
+    {
+      name: 'newsletter',
+      label: 'What kind of updated would you like to receive weekly?',
+      type: 'multi',
+      options: [
+        {
+          value: 'party',
+          label: 'Social/party events'
+        },
+        {
+          value: 'class',
+          label: 'Dance classes'
+        },
+        {
+          value: 'workshop',
+          label: 'Workshops and bootcamps'
+        },
+        {
+          value: 'online',
+          label: 'Online dance classes'
+        },
+        {
+          value: 'festival',
+          label: 'International festivals'
+        }
+      ]
+    },
+    {
+      name: 'partner',
+      label: 'Are you looking for a dance partner?',
+      type: 'select',
+      options: ['Yes', 'No'],
+      description:
+        'Fill the fields below and you will get a dance partner recommendation as soon as we find a match for you.'
     },
     {
       name: 'days',
@@ -131,60 +168,24 @@ export default () => {
       ]
     },
     {
-      name: 'learning',
-      label: 'Which dance topics you are interested in?',
-      type: 'textarea',
-      description: 'For example: Musicality in Salsa, Men Styling, etc.'
-    },
-    {
-      name: 'newsletter',
-      label: 'What kind of updated would you like to receive weekly?',
-      type: 'multi',
-      options: [
-        {
-          value: 'party',
-          label: 'Social/party events'
-        },
-        {
-          value: 'class',
-          label: 'Dance classes'
-        },
-        {
-          value: 'workshop',
-          label: 'Workshops and bootcamps'
-        },
-        {
-          value: 'online',
-          label: 'Online dance classes'
-        },
-        {
-          value: 'festival',
-          label: 'International festivals'
-        }
-      ]
-    },
-    {
-      name: 'teacher',
-      label: 'Are you teaching?',
-      type: 'select',
-      options: ['Yes', 'No']
-    },
-    {
-      name: 'partner',
-      label: 'Are you looking for a dance partner?',
-      type: 'select',
-      options: ['Yes', 'No'],
-      description:
-        'Fill the fields below and you will get a dance partner recommendation as soon as we find a match for you.'
+      name: 'birthday',
+      label: 'Birthday',
+      type: 'date',
+      description: 'We will show only your age'
     },
     {
       name: 'height',
-      label: 'Your height (cm)'
+      label: 'Height (cm)'
     },
     {
       name: 'weight',
-      label: 'Your weight (kg)',
+      label: 'Weight (kg)',
       description: "Leave this field blank if you think it's irrelevant."
+    },
+    {
+      name: 'photoFull',
+      label: 'Full height photo',
+      type: 'photo'
     },
     {
       name: 'partnerBio',
@@ -193,9 +194,12 @@ export default () => {
       description: 'What is important in your partner?'
     },
     {
-      name: 'photoFull',
-      label: 'Your full height photo',
-      type: 'photo'
+      name: 'visibility',
+      label: 'Visibility',
+      type: 'select',
+      options: ['Public', 'Members', 'Unlisted'],
+      description:
+        'Public profiles are searchable in Google and used in our social media to attract new members. Members profile are only visible for logged-in users. Unlisted profiles are possible to open with exact link, but they are not listed in members lists and search.'
     }
   ]
 

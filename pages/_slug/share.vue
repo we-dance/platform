@@ -5,7 +5,7 @@
     :description="profile.bio"
     :photo="profile.photo"
     :styles="profile.styles"
-    :objective="profile.partner === 'Yes' ? 'Looking for dance partner' : ''"
+    :objective="profile.partner === 'Yes' ? 'Looking for a dance partner' : ''"
   />
 </template>
 

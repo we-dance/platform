@@ -6,7 +6,7 @@
           Find dance partner
         </h1>
         <p class="mt-2 text-xl">
-          There are 52 other dancers looking for partner
+          There are 52 other dancers looking for a partner
         </p>
         <div>
           <TButton class="mt-4 mr-4" type="primary" to="/signin"
