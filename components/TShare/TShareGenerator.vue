@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div v-if="$route.query.admin">
     <div
       v-if="!socialCover"
       class="flex justify-center items-center border h-64 p-4 mt-4"
@@ -16,6 +16,7 @@
       <TButton type="link" class="mt-4" @click="cleanup()">Delete Post</TButton>
     </div>
   </div>
+  <div v-else></div>
 </template>
 
 <script>

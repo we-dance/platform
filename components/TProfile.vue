@@ -10,7 +10,23 @@
         </router-link>
       </portal>
 
-      <div class="flex justify-end w-full">
+      <img
+        v-if="profile.socialCover"
+        :src="profile.socialCover"
+        class="cursor-pointer"
+        @click="download()"
+      />
+      <img v-else-if="profile.photo" :src="profile.photo" />
+
+      <div class="flex w-full justify-between items-center p-2">
+        <div>
+          <div class="font-bold text-lg leading-none">
+            {{ profile.name }}
+          </div>
+          <div class="text-sm text-gray-700">
+            {{ profile.community }}
+          </div>
+        </div>
         <TButtonShare
           :url="`https://wedance.vip/${profile.username}`"
           :text="`WeDance: ${profile.username} is looking for a dance partner`"
@@ -19,15 +35,7 @@
         />
       </div>
 
-      <TProfilePhoto size="xl" :uid="profile.createdBy" />
-
-      <div class="font-bold text-lg leading-none mt-4">
-        {{ profile.name }}
-      </div>
-      <div class="text-sm text-gray-700">
-        {{ profile.community }}
-      </div>
-      <div v-if="profile.bio" class="mt-4">
+      <div v-if="profile.bio && !profile.socialCover" class="mt-4">
         <div>{{ profile.bio }}</div>
       </div>
 
@@ -164,6 +172,7 @@
 </template>
 
 <script>
+import { saveAs } from 'file-saver'
 import useAuth from '~/use/auth'
 import { getDateTime } from '~/utils'
 
@@ -180,6 +189,11 @@ export default {
     return {
       uid,
       getDateTime
+    }
+  },
+  methods: {
+    download() {
+      saveAs(this.profile.socialCover, `${this.profile.username}.png`)
     }
   }
 }
