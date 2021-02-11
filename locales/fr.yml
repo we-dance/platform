@@ -76,12 +76,15 @@ teaser.partner.title: Besoin d'un partenaire?
 teaser.partner.description: Des danseurs du monde entier créent leur profil pour
   trouver des partenaires de danse
 teaser.partner.btn: Voir la communauté
-teaser.events.title: Publiez votre profil
-teaser.events.description: pour que d'autres puissent vous contacter
-teaser.events.btn: Rejoignez gratuitement
-teaser.profiles.title: null
-teaser.profiles.description: Devenez membre de la communauté WeDance pour en savoir plus
-teaser.profiles.btn: Adhérer maintenant
+teaser.events.title: Où danser?
+teaser.events.description: Tous les cours de danse, fêtes et festivals en un seul endroit
+teaser.events.btn: Voir les événements
+teaser.profile.title: Publiez votre profil
+teaser.profile.description: pour que d'autres puissent vous contacter
+teaser.profile.btn: Rejoignez gratuitement
+teaser.allevents.title: null
+teaser.allevents.description: Devenez membre de la communauté WeDance pour en savoir plus
+teaser.allevents.btn: Adhérer maintenant
 teaser.chat.title: Besoin de parler?
 teaser.chat.description: Nous avons des discussions de danse dans chaque ville
 teaser.chat.btn: Rejoignez le chat de {city}

@@ -1,5 +1,5 @@
 posts.title: Eğilimler
-nav.signin: oturum aç
+nav.signin: Oturum aç
 profiles.title: Topluluk
 events.title: Etkinlikler
 myprofile.title: Benim profilim
@@ -47,7 +47,7 @@ settings.account.delete: Hesabı sil
 contacts.email: E-posta adresi
 contacts.instagram: Instagram
 contacts.facebook: Facebook
-contacts.telegram: Telgraf
+contacts.telegram: Telegram
 contacts.twitter: Twitter
 contacts.tiktok: Tik Tok
 contacts.youtube: Youtube
@@ -75,15 +75,18 @@ teaser.partner.title: Bir ortağa mı ihtiyacınız var?
 teaser.partner.description: Dünyanın her yerinden dansçılar, dans partneri
   bulmak için profillerini oluşturur
 teaser.partner.btn: Topluluğu Gör
-teaser.events.title: Profilinizi yayınlayın
-teaser.events.description: böylece diğerleri sizinle iletişim kurabilir
-teaser.events.btn: Ücretsiz katılın
-teaser.profiles.title: null
-teaser.profiles.description: Daha fazlasını görmek için WeDance Topluluğu'nun bir üyesi olun
-teaser.profiles.btn: Şimdi Katıl
+teaser.events.title: Nerede dans edilir?
+teaser.events.description: Tüm dans kursları, partiler ve festivaller tek bir yerde
+teaser.events.btn: Olayları Gör
+teaser.profile.title: Profilinizi yayınlayın
+teaser.profile.description: böylece diğerleri sizinle iletişim kurabilir
+teaser.profile.btn: Ücretsiz katılın
+teaser.allevents.title: null
+teaser.allevents.description: Daha fazlasını görmek için WeDance Topluluğu'nun bir üyesi olun
+teaser.allevents.btn: Şimdi Katıl
 teaser.chat.title: Konuşmak lazım?
 teaser.chat.description: Her şehirde dans sohbetlerimiz var
-teaser.chat.btn: "{City} Sohbetine Katılın"
+teaser.chat.btn: "{city} Sohbetine Katılın"
 teaser.involve.title: Yardımına ihtiyacımız var
 teaser.involve.description: Kar amacı gütmeyen uluslararası dans topluluğuyuz.
   Herhangi bir ülkedeki herhangi bir şehre gitmenizi ve dans etkinlikleri ve

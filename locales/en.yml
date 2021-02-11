@@ -73,12 +73,15 @@ profile.photoFull: Your full height photo
 teaser.partner.title: Need a partner?
 teaser.partner.description: Dancers worldwide create their profiles to find dance partners
 teaser.partner.btn: See Community
-teaser.events.title: Publish your profile
-teaser.events.description: so that others can contact you
-teaser.events.btn: Join for free
-teaser.profiles.title: null
-teaser.profiles.description: Become a member of WeDance Community to see more
-teaser.profiles.btn: Join Now
+teaser.events.title: Where to dance?
+teaser.events.description: All dance courses, parties and festivals in one place
+teaser.events.btn: See Events
+teaser.profile.title: Publish your profile
+teaser.profile.description: so that others can contact you
+teaser.profile.btn: Join for free
+teaser.allevents.title: null
+teaser.allevents.description: Become a member of WeDance Community to see more
+teaser.allevents.btn: Join Now
 teaser.chat.title: Need to talk?
 teaser.chat.description: We have dance chats in every city
 teaser.chat.btn: Join {city} Chat

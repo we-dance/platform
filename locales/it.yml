@@ -1,9 +1,9 @@
 posts.title: Tendenze
-nav.signin: registrati
+nav.signin: Registrati
 profiles.title: Comunità
 events.title: Eventi
 myprofile.title: Il mio profilo
-settings.title: impostazioni
+settings.title: Impostazioni
 signout: Disconnettersi
 posts.add: Aggiungi post
 profiles.add: Aggiungi profilo
@@ -76,12 +76,15 @@ teaser.partner.title: Hai bisogno di un partner?
 teaser.partner.description: I ballerini di tutto il mondo creano i loro profili
   per trovare partner di ballo
 teaser.partner.btn: Vedi Community
-teaser.events.title: Pubblica il tuo profilo
-teaser.events.description: in modo che altri possano contattarti
-teaser.events.btn: Entra gratuitamente
-teaser.profiles.title: null
-teaser.profiles.description: Diventa un membro della comunità WeDance per vedere di più
-teaser.profiles.btn: Iscriviti adesso
+teaser.events.title: Dove ballare?
+teaser.events.description: Tutti i corsi di ballo, feste e festival in un unico luogo
+teaser.events.btn: Vedi Eventi
+teaser.profile.title: Pubblica il tuo profilo
+teaser.profile.description: in modo che altri possano contattarti
+teaser.profile.btn: Entra gratuitamente
+teaser.allevents.title: null
+teaser.allevents.description: Diventa un membro della comunità WeDance per vedere di più
+teaser.allevents.btn: Iscriviti adesso
 teaser.chat.title: Bisogno di parlare?
 teaser.chat.description: Abbiamo chat di ballo in ogni città
 teaser.chat.btn: Entra nella chat di {city}

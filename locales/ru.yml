@@ -75,12 +75,15 @@ profile.photoFull: Ваше фото в полный рост
 teaser.partner.title: Нужен партнер?
 teaser.partner.description: Танцоры со всего мира создают свои профили, чтобы найти танцевальных партнеров
 teaser.partner.btn: Посмотреть сообщество
-teaser.events.title: Опубликуйте свой профиль
-teaser.events.description: чтобы другие могли связаться с вами
-teaser.events.btn: Присоединись бесплатно
-teaser.profiles.title: null
-teaser.profiles.description: Станьте участником сообщества WeDance, чтобы увидеть больше
-teaser.profiles.btn: Присоединяйся сейчас
+teaser.events.title: Где танцевать?
+teaser.events.description: Все танцевальные курсы, вечеринки и фестивали в одном месте
+teaser.events.btn: Посмотреть события
+teaser.profile.title: Опубликуйте свой профиль
+teaser.profile.description: чтобы другие могли связаться с вами
+teaser.profile.btn: Присоединись бесплатно
+teaser.allevents.title: null
+teaser.allevents.description: Станьте участником сообщества WeDance, чтобы увидеть больше
+teaser.allevents.btn: Присоединяйся сейчас
 teaser.chat.title: Нужно поговорить?
 teaser.chat.description: У нас есть танцевальные чаты в каждом городе
 teaser.chat.btn: Присоединяйтесь к чату {city}

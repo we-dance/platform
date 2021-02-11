@@ -84,15 +84,14 @@
             </div>
           </div>
         </div>
-        <div
+
+        <WTeaser
           v-if="!uid"
-          class="mt-4 bg-dark-gradient text-white p-4 rounded text-center"
-        >
-          <div>Become a member of WeDance Community to see more.</div>
-          <TButton class="mt-2" type="primary" to="/signin?target=/events"
-            >Join Now</TButton
-          >
-        </div>
+          :title="$t('teaser.allevents.title')"
+          :description="$t('teaser.allevents.description')"
+          :button="$t('teaser.allevents.btn')"
+          url="/register"
+        />
       </div>
     </div>
   </main>

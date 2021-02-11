@@ -75,12 +75,15 @@ profile.photoFull: Tu foto de altura completa
 teaser.partner.title: ¿Necesitas un socio?
 teaser.partner.description: Bailarines de todo el mundo crean sus perfiles para encontrar parejas de baile
 teaser.partner.btn: Ver comunidad
-teaser.events.title: Publica tu perfil
-teaser.events.description: para que otros puedan contactarte
-teaser.events.btn: Únete gratis
-teaser.profiles.title: null
-teaser.profiles.description: Hágase miembro de WeDance Community para ver más
-teaser.profiles.btn: Únete ahora
+teaser.events.title: Donde bailar
+teaser.events.description: Todos los cursos de baile, fiestas y festivales en un solo lugar
+teaser.events.btn: Ver eventos
+teaser.profile.title: Publica tu perfil
+teaser.profile.description: para que otros puedan contactarte
+teaser.profile.btn: Únete gratis
+teaser.allevents.title: null
+teaser.allevents.description: Hágase miembro de WeDance Community para ver más
+teaser.allevents.btn: Únete ahora
 teaser.chat.title: ¿Necesito hablar?
 teaser.chat.description: Tenemos charlas de baile en todas las ciudades
 teaser.chat.btn: Únete al chat de {city}

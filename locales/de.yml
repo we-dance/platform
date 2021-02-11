@@ -75,12 +75,15 @@ profile.photoFull: Dein Foto in voller Höhe
 teaser.partner.title: Benötigen Sie einen Partner?
 teaser.partner.description: Tänzer weltweit erstellen ihre Profile, um Tanzpartner zu finden
 teaser.partner.btn: Siehe Community
-teaser.events.title: Veröffentlichen Sie Ihr Profil
-teaser.events.description: damit andere Sie kontaktieren können
-teaser.events.btn: Kostenlos beitreten
-teaser.profiles.title: null
-teaser.profiles.description: Werden Sie Mitglied der WeDance Community, um mehr zu sehen
-teaser.profiles.btn: Jetzt beitreten
+teaser.events.title: Wo kann man tanzen?
+teaser.events.description: Alle Tanzkurse, Partys und Festivals an einem Ort
+teaser.events.btn: Siehe Ereignisse
+teaser.profile.title: Veröffentlichen Sie Ihr Profil
+teaser.profile.description: damit andere Sie kontaktieren können
+teaser.profile.btn: Kostenlos beitreten
+teaser.allevents.title: null
+teaser.allevents.description: Werden Sie Mitglied der WeDance Community, um mehr zu sehen
+teaser.allevents.btn: Jetzt beitreten
 teaser.chat.title: Müssen reden?
 teaser.chat.description: Wir haben in jeder Stadt Tanzchats
 teaser.chat.btn: Tritt dem {city} Chat bei

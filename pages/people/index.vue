@@ -57,9 +57,9 @@
     <div>
       <WTeaser
         v-if="!uid"
-        :title="$t('teaser.events.title')"
-        :description="$t('teaser.events.description')"
-        :button="$t('teaser.events.btn')"
+        :title="$t('teaser.profile.title')"
+        :description="$t('teaser.profile.description')"
+        :button="$t('teaser.profile.btn')"
         url="/register"
       />
 

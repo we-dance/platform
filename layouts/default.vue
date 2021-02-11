@@ -36,7 +36,7 @@
           />
         </button>
         <div v-if="!uid">
-          <TButton to="/signin">Sign in</TButton>
+          <TButton to="/signin">{{ $t('nav.signin') }}</TButton>
         </div>
       </div>
     </header>
