@@ -45,14 +45,14 @@ settings.contacts.description: Эта информация будет общед
   сетями, чтобы привлечь внимание.
 settings.account.changepassword: Изменить пароль
 settings.account.delete: Удалить аккаунт
-contacts.email: Эл. адрес
+contacts.email: Электронная почта
 contacts.instagram: Instagram
 contacts.facebook: Facebook
 contacts.telegram: Telegram
 contacts.twitter: Twitter
 contacts.tiktok: Tik Tok
 contacts.youtube: YouTube
-contacts.website: Интернет сайт
+contacts.website: Веб-сайт
 save: Сохранить
 profile.name: Имя
 profile.bio: Тизер
@@ -81,7 +81,7 @@ teaser.events.btn: Посмотреть события
 teaser.profile.title: Опубликуйте свой профиль
 teaser.profile.description: чтобы другие могли связаться с вами
 teaser.profile.btn: Присоединись бесплатно
-teaser.allevents.title: null
+teaser.allevents.title: Закрытые мероприятия
 teaser.allevents.description: Станьте участником сообщества WeDance, чтобы увидеть больше
 teaser.allevents.btn: Присоединяйся сейчас
 teaser.chat.title: Нужно поговорить?
@@ -97,6 +97,6 @@ share.copy: Копировать ссылку
 footer.about: О нас
 footer.support: Поддержка
 footer.privacy: Конфиденциальность
-footer.terms: термины
+footer.terms: Условия
 footer.coc: Нормы поведения
 footer.faq: Вопросы-Ответы

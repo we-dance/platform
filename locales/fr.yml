@@ -82,7 +82,7 @@ teaser.events.btn: Voir les événements
 teaser.profile.title: Publiez votre profil
 teaser.profile.description: pour que d'autres puissent vous contacter
 teaser.profile.btn: Rejoignez gratuitement
-teaser.allevents.title: null
+teaser.allevents.title: Événements privés
 teaser.allevents.description: Devenez membre de la communauté WeDance pour en savoir plus
 teaser.allevents.btn: Adhérer maintenant
 teaser.chat.title: Besoin de parler?
@@ -99,6 +99,6 @@ share.copy: Copier le lien
 footer.about: À propos de nous
 footer.support: Soutien
 footer.privacy: Intimité
-footer.terms: termes
+footer.terms: Termes
 footer.coc: Code de conduite
 footer.faq: FAQ
