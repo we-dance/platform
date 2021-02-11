@@ -22,34 +22,6 @@
     </div>
 
     <div>
-      <div v-if="false" class="rounded bg-orange-200 p-4 mb-4">
-        <div class="uppercase font-bold">New Challenge</div>
-        <div>
-          Share your favourite music of your favourite dance
-          <span class="text-blue-500">#FavouriteMusic</span>
-        </div>
-        <div class="flex justify-end mt-4">
-          <TButton to="/posts/-/edit?tag=FavouriteMusic"
-            >Accept Challenge</TButton
-          >
-        </div>
-      </div>
-      <TLoader v-if="loading" />
-      <div v-else-if="!filteredItems.length">No posts found</div>
-      <TPopup v-if="reportId">
-        <div class="font-bold mb-4">Report a post</div>
-        <TSelect
-          v-model="reportCategory"
-          label="Category"
-          type="select"
-          :options="['other', 'spam']"
-        />
-        <TField v-model="reportReason" class="mt-2" label="Reason" />
-        <div class="mt-4 flex justify-end">
-          <TButton class="mr-2" @click="cancelReport">Cancel</TButton>
-          <TButton type="danger" @click="report">Report</TButton>
-        </div>
-      </TPopup>
       <div v-if="!uid" class="md:flex space-x-2">
         <WTeaser
           :title="$t('teaser.partner.title')"
@@ -83,6 +55,9 @@
         />
       </div>
 
+      <TLoader v-if="loading" />
+      <div v-else-if="!filteredItems.length">No posts found</div>
+
       <div
         v-for="item in filteredItems"
         :key="item.id"
@@ -96,28 +71,7 @@
                 class="font-bold leading-tight"
                 >{{ item.title }}</router-link
               >
-              <div class="float-right -mr-2">
-                <TMenu>
-                  <template v-slot:button>
-                    <TIcon
-                      class="cursor-pointer rounded-full hover:bg-gray-200 p-1"
-                      name="more_vert"
-                    />
-                  </template>
-                  <template v-slot:menu="{ closeMenu }">
-                    <div class="w-32 py-2 bg-white rounded-lg shadow-xl border">
-                      <TButton
-                        type="nav"
-                        @click="
-                          reportId = item.id
-                          closeMenu()
-                        "
-                        >Report</TButton
-                      >
-                    </div>
-                  </template>
-                </TMenu>
-              </div>
+              <TCardActions :id="item.id" collection="posts" :item="item" />
             </div>
 
             <div class="text-xs my-1 flex items-center">
@@ -179,7 +133,6 @@ import useCollection from '~/use/collection'
 import useAccounts from '~/use/accounts'
 import useCities from '~/use/cities'
 import useAuth from '~/use/auth'
-import useDoc from '~/use/doc'
 import { dateDiff, sortBy } from '~/utils'
 
 export default {
@@ -194,7 +147,7 @@ export default {
     const { getCommentsCount, loading: loadingComments } = useComments()
     const { currentCity, city } = useCities()
     const { docs, loading: loadingPosts, getById } = useCollection('posts')
-    const { create: createReport } = useDoc('reports')
+
     const { uid, profile: myProfile } = useAuth()
     const dances = ref({})
     const dancesList = computed(() =>
@@ -252,7 +205,6 @@ export default {
       dateDiff,
       getAccount,
       loading,
-      createReport,
       getById,
       uid,
       currentCity,
@@ -263,10 +215,7 @@ export default {
     }
   },
   data: () => ({
-    showAuthPopup: false,
-    reportId: 0,
-    reportReason: '',
-    reportCategory: 'other'
+    showAuthPopup: false
   }),
   computed: {
     filteredItems() {
@@ -286,24 +235,6 @@ export default {
       } else {
         return result.sort(sortBy('-createdAt'))
       }
-    }
-  },
-  methods: {
-    cancelReport() {
-      this.reportId = 0
-      this.reportReason = ''
-      this.reportCategory = 'other'
-    },
-    report(item) {
-      this.createReport({
-        state: 'open',
-        documentId: this.reportId,
-        category: this.reportCategory,
-        collection: 'posts',
-        reason: this.reportReason,
-        documentData: this.getById(this.reportId)
-      })
-      this.cancelReport()
     }
   }
 }

@@ -8,7 +8,7 @@
     v-on="$listeners"
   >
     <slot>
-      <div class="flex">
+      <div class="flex items-center">
         <TIcon v-if="icon" :name="icon" />
         <span v-if="label" class="ml-1">{{ label }}</span>
       </div>
@@ -16,7 +16,7 @@
   </a>
   <router-link v-else-if="to" :class="classes" :to="to" v-on="$listeners">
     <slot>
-      <div class="flex">
+      <div class="flex items-center">
         <TIcon v-if="icon" :name="icon" />
         <span v-if="label" class="ml-1">{{ label }}</span>
       </div>
@@ -24,7 +24,7 @@
   </router-link>
   <button v-else type="button" :class="classes" v-on="$listeners">
     <slot>
-      <div class="flex">
+      <div class="flex items-center">
         <TIcon v-if="icon" :name="icon" />
         <span v-if="label" class="ml-1">{{ label }}</span>
       </div>
@@ -70,6 +70,7 @@ export default {
       const map = {
         round:
           'bg-white hover:bg-gray-100 text-gray-800 font-semibold py-1 px-4 border border-gray-400 rounded-full shadow',
+        icon: 'rounded-full hover:bg-gray-200 p-1',
         simple:
           'bg-white hover:bg-gray-100 text-gray-800 font-semibold py-2 px-4 border border-gray-400 rounded-full shadow',
         primary:
@@ -83,19 +84,17 @@ export default {
         secondary:
           'bg-transparent text-primary font-semibold py-2 px-4 border border-primary rounded-full no-underline hover:bg-primary hover:text-white hover:border-transparent',
         link: 'underline font-semibold hover:no-underline',
+        context:
+          'text-left w-full px-4 py-2 text-gray-800 hover:bg-indigo-500 hover:text-white',
         nav:
-          'w-full px-4 py-2 items-center flex rounded-full border hover:border-purple-500 hover:text-purple-500',
+          'w-full px-4 py-2 items-center flex rounded-full border hover:border-indigo-500 hover:text-indigo-500',
         'nav-admin':
-          'w-full px-4 py-2 items-center text-gray-200 flex rounded-full border border-gray-200 hover:border-purple-500 hover:text-purple-500',
-
-        icon: ''
+          'w-full px-4 py-2 items-center text-gray-200 flex rounded-full border border-gray-200 hover:border-indigo-500 hover:text-indigo-500'
       }
 
-      let classes = 'btn cursor-pointer outline-none focus:outline-none'
-
-      if (!this.icon) {
-        classes = map[this.type] + ' inline-block text-center'
-      }
+      let classes =
+        map[this.type] +
+        'cursor-pointer outline-none focus:outline-none inline-block'
 
       if (this.color) {
         classes += ` text-${this.color} border-${this.color} hover:bg-${this.color} hover:text-white`

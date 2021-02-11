@@ -3,11 +3,6 @@
     <div class="col-span-12">
       <div>
         <div class="bg-white p-4 border rounded shadow">
-          <TButtonShare
-            :url="`https://wedance.vip/posts/${postId}`"
-            :text="post.title"
-          />
-
           <div v-if="can('edit', 'posts', post)" class="mb-2 flex posts-start">
             <TButton
               icon="edit"
@@ -49,7 +44,12 @@
                 </div>
               </div>
               <div>
-                <TButton :href="tweetUrl">Share</TButton>
+                <TButtonShare
+                  :url="`https://wedance.vip/posts/${postId}`"
+                  :text="post.title"
+                  type="base"
+                  label="Share"
+                />
               </div>
             </div>
 

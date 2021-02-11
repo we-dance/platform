@@ -1,10 +1,6 @@
 <template>
   <div class="flex justify-end mb-4">
-    <TButton
-      icon="share"
-      class="rounded-full cursor-pointer hover:bg-gray-200 p-1"
-      @click="share()"
-    />
+    <TButton :icon="icon" :type="type" :label="label" @click="share()" />
     <TPopup v-if="sharing" title="Share" @close="sharing = false">
       <div class="w-64 space-y-2 py-4">
         <TButton type="nav" @click="copyToClipboard">
@@ -66,6 +62,18 @@ export default {
     fileName: {
       type: String,
       default: ''
+    },
+    label: {
+      type: String,
+      default: ''
+    },
+    icon: {
+      type: String,
+      default: 'share'
+    },
+    type: {
+      type: String,
+      default: 'round'
     }
   },
   data: () => ({
