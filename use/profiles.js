@@ -135,17 +135,16 @@ export default () => {
         'Tips for effective pitch:\n- Uncomplicated: It should be catchy and roll off the tongue\n- Concise: It shouldn’t take more than a minute to say or read\n- Unique: It reflects your skills, goals, and desires\n- Storyline: It covers who you are, what you offer, and where you want to be\n- Appealing: Your elevator pitch is essentially a persuasive sales pitch; the emphasis should be on what you offer\n- Use [Markdown](https://simplemde.com/markdown-guide)'
     },
     {
+      name: 'community',
+      label: 'I dance in',
+      required: true,
+      type: 'city'
+    },
+    {
       name: 'location',
       label: 'Hometown',
       required: true,
       type: 'location'
-    },
-    {
-      name: 'community',
-      label: 'Community',
-      required: true,
-      type: 'city',
-      description: 'Dance community of which city would you like to join?'
     },
     {
       name: 'styles',
@@ -172,12 +171,6 @@ export default () => {
       description: 'For example: Musicality in Salsa, Men Styling, etc.'
     },
     {
-      name: 'partner',
-      label: 'Are you looking for a dance partner?',
-      type: 'select',
-      options: ['Yes', 'No']
-    },
-    {
       name: 'birthday',
       label: 'Birthday',
       type: 'date',
@@ -191,6 +184,12 @@ export default () => {
       name: 'weight',
       label: 'Weight (kg)',
       description: "Leave this field blank if you think it's irrelevant."
+    },
+    {
+      name: 'partner',
+      label: 'Are you looking for a dance partner?',
+      type: 'select',
+      options: ['Yes', 'No']
     },
     {
       name: 'partnerBio',
