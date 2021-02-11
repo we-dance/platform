@@ -11,12 +11,14 @@
       <div v-if="profile.bio" class="mt-4">
         <div>{{ profile.bio }}</div>
       </div>
+
       <WTeaser
         v-if="profile.partner === 'Yes'"
         title="I am looking for a dance partner"
         :description="profile.partnerBio"
         class="w-full mt-4"
       />
+
       <div
         class="mt-4 flex space-x-2 items-center justify-end border p-2 w-full"
       >
@@ -72,8 +74,15 @@
         <TProfileContact v-else :uid="profile.createdBy" />
       </div>
     </div>
-    <TPreview v-if="profile.story" :content="profile.story" class="mt-4" />
-    <div class="iconed border shadow p-4 space-y-4 mt-4">
+
+    <TEventList
+      :filter="{ createdBy: profile.createdBy }"
+      class="mt-4 w-full"
+    />
+
+    <TPreview v-if="profile.story" :content="profile.story" class="mt-8 px-4" />
+
+    <div class="iconed border shadow p-4 space-y-4 mt-8">
       <dl v-if="profile.languages">
         <dt class="font-bold mr-1">Languages:</dt>
         <dd>{{ profile.languages }}</dd>

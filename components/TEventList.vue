@@ -1,57 +1,56 @@
 <template>
   <div>
-    <div class="mt-4">
-      <TLoader v-if="loading" />
-      <div v-else-if="!count">
-        No scheduled events
-      </div>
-      <div>
-        <div v-for="(items, date) in itemsByDate" :key="date" class="mb-8">
-          <h2 class="font-bold bg-dark text-white py-2 px-4 rounded">
-            {{ getDay(date) }}, {{ getDate(date) }}
-          </h2>
-          <div v-for="item in items" :key="item.id" class="px-4 mt-4 flex">
-            <div v-if="false" class="mr-2 flex justify-center items-start pt-1">
-              <button
-                v-if="item.response === 'up'"
-                class="text-green-500"
-                @click="updateRsvp(item.id, 'events', 'down')"
-              >
-                <TIcon name="check_circle" class="w-4 h-4" />
-              </button>
-              <button v-else @click="updateRsvp(item.id, 'events', 'up')">
-                <TIcon name="check" class="w-4 h-4" />
-              </button>
-            </div>
-            <div class="mr-2">
-              {{ getTime(item.startDate) }}
-            </div>
-            <div class="mr-2">
-              {{ item.type === 'Party' ? '🎉' : '👣' }}
-            </div>
-            <div>
-              <router-link
-                :to="`/events/${item.id}`"
-                class="font-bold leading-none hover:underline hover:text-primary"
-              >
-                {{ item.name }}
-              </router-link>
-              <div class="text-xs flex flex-wrap">
-                <div v-if="item.organiser" class="hidden md:block">
-                  <div class="flex items-center mr-2">
-                    <TIcon name="store" class="w-4 h-4 mr-1" />
-                    <p>
-                      {{ item.organiser }}
-                    </p>
-                  </div>
+    <TLoader v-if="loading" />
+    <div v-else-if="!count && showEmpty">
+      {{ emptyLabel }}
+    </div>
+    <h2 v-if="title" class="font-bold text-lg">{{ title }}</h2>
+    <div v-if="items.length" class="space-y-8 mt-4">
+      <div v-for="(items, date) in itemsByDate" :key="date">
+        <h2 class="font-bold bg-dark text-white py-2 px-4 rounded">
+          {{ getDay(date) }}, {{ getDate(date) }}
+        </h2>
+        <div v-for="item in items" :key="item.id" class="px-4 mt-4 flex">
+          <div v-if="false" class="mr-2 flex justify-center items-start pt-1">
+            <button
+              v-if="item.response === 'up'"
+              class="text-green-500"
+              @click="updateRsvp(item.id, 'events', 'down')"
+            >
+              <TIcon name="check_circle" class="w-4 h-4" />
+            </button>
+            <button v-else @click="updateRsvp(item.id, 'events', 'up')">
+              <TIcon name="check" class="w-4 h-4" />
+            </button>
+          </div>
+          <div class="mr-2">
+            {{ getTime(item.startDate) }}
+          </div>
+          <div class="mr-2">
+            {{ item.type === 'Party' ? '🎉' : '👣' }}
+          </div>
+          <div>
+            <router-link
+              :to="`/events/${item.id}`"
+              class="font-bold leading-none hover:underline hover:text-primary"
+            >
+              {{ item.name }}
+            </router-link>
+            <div class="text-xs flex flex-wrap">
+              <div v-if="item.organiser" class="hidden md:block">
+                <div class="flex items-center mr-2">
+                  <TIcon name="store" class="w-4 h-4 mr-1" />
+                  <p>
+                    {{ item.organiser }}
+                  </p>
                 </div>
-                <div v-if="item.address">
-                  <div class="flex items-center">
-                    <TIcon name="place" class="w-4 h-4 mr-1" />
-                    <p>
-                      {{ item.address }}
-                    </p>
-                  </div>
+              </div>
+              <div v-if="item.address">
+                <div class="flex items-center">
+                  <TIcon name="place" class="w-4 h-4 mr-1" />
+                  <p>
+                    {{ item.address }}
+                  </p>
                 </div>
               </div>
             </div>
@@ -87,6 +86,18 @@ export default {
     filter: {
       type: Object,
       default: null
+    },
+    title: {
+      type: String,
+      default: ''
+    },
+    emptyLabel: {
+      type: String,
+      default: 'No scheduled events'
+    },
+    showEmpty: {
+      type: Boolean,
+      default: false
     }
   },
   setup(params) {
@@ -211,6 +222,7 @@ export default {
       currentCity,
       count,
       itemsByDate,
+      items,
       getRsvpResponse,
       updateRsvp,
       dateDiff,
