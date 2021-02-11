@@ -114,6 +114,8 @@
         <dd>{{ profile.visibility || 'N/A' }}</dd>
       </dl>
     </div>
+
+    <TPostList :filter="{ createdBy: profile.createdBy }" class="mt-4 w-full" />
   </div>
 </template>
 
