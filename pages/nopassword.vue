@@ -21,35 +21,39 @@
         id="email"
         v-model="email"
         type="email"
-        label="Email"
+        :label="$t('account.email')"
         label-position="top"
       />
 
       <div class="mt-4 text-xs">
-        By signing in, you agree to
-        <router-link class="underline hover:no-underline" to="/terms"
-          >Terms of service</router-link
-        >
-        and
-        <router-link class="underline hover:no-underline" to="/privacy"
-          >Privacy policy</router-link
-        >.
+        <i18n path="agreement" tag="p">
+          <template v-slot:privacy>
+            <router-link class="underline hover:no-underline" to="/privacy">{{
+              $t('privacy')
+            }}</router-link>
+          </template>
+          <template v-slot:terms>
+            <router-link class="underline hover:no-underline" to="/terms">{{
+              $t('terms')
+            }}</router-link>
+          </template>
+        </i18n>
       </div>
       <div class="mt-4 flex justify-end">
         <TButton type="primary" @click="submit">
-          Send a magic link
+          {{ $t('nopassword.submit') }}
         </TButton>
       </div>
       <div class="mt-4 text-xs">
         <div class="mt-4 border-t pt-4 flex space-x-2 text-xs">
-          <router-link to="/signin" class="underline hover:no-underline"
-            >I have a password</router-link
-          >
+          <router-link to="/signin" class="underline hover:no-underline">{{
+            $t('nopassword.signin')
+          }}</router-link>
           <button
             class="underline hover:no-underline"
             @click="signInWithGoogle"
           >
-            Sign in with Google
+            {{ $t('nopassword.google') }}
           </button>
         </div>
       </div>

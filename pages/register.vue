@@ -6,7 +6,7 @@
       <TField
         id="username"
         v-model="username"
-        label="Username"
+        :label="$t('profile.username')"
         type="username"
         required
         label-position="top"
@@ -15,7 +15,7 @@
         id="email"
         v-model="email"
         type="email"
-        label="Email"
+        :label="$t('account.email')"
         required
         label-position="top"
       />
@@ -23,26 +23,30 @@
         id="password"
         v-model="password"
         type="password"
-        label="Password"
+        :label="$t('account.password')"
         required
         label-position="top"
       />
       <TField
         v-model="community"
-        label="I dance in"
+        :label="$t('profile.community')"
         label-position="vertical"
         type="city"
       />
 
       <div class="mt-4 text-xs">
-        By signing in, you agree to
-        <router-link class="underline hover:no-underline" to="/terms"
-          >Terms of service</router-link
-        >
-        and
-        <router-link class="underline hover:no-underline" to="/privacy"
-          >Privacy policy</router-link
-        >.
+        <i18n path="agreement" tag="p">
+          <template v-slot:privacy>
+            <router-link class="underline hover:no-underline" to="/privacy">{{
+              $t('privacy')
+            }}</router-link>
+          </template>
+          <template v-slot:terms>
+            <router-link class="underline hover:no-underline" to="/terms">{{
+              $t('terms')
+            }}</router-link>
+          </template>
+        </i18n>
       </div>
       <div class="mt-4 flex justify-end">
         <TButton
@@ -50,14 +54,14 @@
           class="mt-2 w-full md:mt-0 md:w-32 md:ml-4"
           @click="submit"
         >
-          Register
+          {{ $t('register.submit') }}
         </TButton>
       </div>
       <div class="mt-4 text-xs">
         <div class="mt-4 border-t pt-4 flex space-x-2 text-xs">
-          <router-link to="/signin" class="underline hover:no-underline"
-            >Login</router-link
-          >
+          <router-link to="/signin" class="underline hover:no-underline">{{
+            $t('register.login')
+          }}</router-link>
         </div>
       </div>
     </form>

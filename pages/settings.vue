@@ -3,7 +3,9 @@
     <TLoader v-if="loading || !profile || !account" />
     <div v-else>
       <div>
-        <div class="font-bold text-xl mb-4 pb-4 border-b">Settings</div>
+        <div class="font-bold text-xl mb-4 pb-4 border-b">
+          {{ $t('settings.title') }}
+        </div>
       </div>
       <div class="rounded bg-white mb-4 shadow border p-4 bg-white">
         <div class="flex items-center">
@@ -19,11 +21,11 @@
             </router-link>
           </div>
           <div class="ml-2">
-            <div class="font-bold text-xl">Account</div>
+            <div class="font-bold text-xl">
+              {{ $t('settings.account.title') }}
+            </div>
             <div class="text-sm text-gray-700">
-              This information will be used for notifications and purchases. It
-              will be shared with service providers or sellers only with your
-              agreement.
+              {{ $t('settings.account.description') }}
             </div>
           </div>
         </div>
@@ -32,14 +34,16 @@
           <TForm
             v-model="account"
             :fields="accountFields"
-            submit-label="Save"
+            :submit-label="$t('save')"
             @save="saveAccount"
           />
-          <TButton to="/settings?tab=password">Change Password</TButton>
+          <TButton to="/settings?tab=password">{{
+            $t('settings.account.changepassword')
+          }}</TButton>
           <div class="bg-red-200 mt-4 -mb-4 -mx-4 p-4">
-            <TButton type="danger" @click="deleteAccount()"
-              >Delete Account</TButton
-            >
+            <TButton type="danger" @click="deleteAccount()">{{
+              $t('settings.account.delete')
+            }}</TButton>
           </div>
         </div>
         <div v-if="currentTab === 'password'" class="border-t mt-4 pt-4">
@@ -54,14 +58,14 @@
                 type="primary"
                 to="/signout"
                 class="float-right mt-4"
-                >Sign out</TButton
+                >{{ $t('signout') }}</TButton
               >
             </div>
           </div>
           <div v-else>
             <TField v-model="password" type="password" label="New Password" />
             <div class="flex justify-end mt-4">
-              <TButton @click="changePassword">Save</TButton>
+              <TButton @click="changePassword">{{ $t('save') }}</TButton>
             </div>
           </div>
         </div>
@@ -80,11 +84,12 @@
             </router-link>
           </div>
           <div class="ml-2">
-            <div class="font-bold text-xl">Profile</div>
+            <div class="font-bold text-xl">
+              {{ $t('settings.profile.title') }}
+            </div>
             <div class="text-sm text-gray-700">
               <div>
-                What do you want other dancers to know about you? That's a place
-                to share your passion to dance. Present yourself, don't be shy!
+                {{ $t('settings.profile.description') }}
               </div>
             </div>
           </div>
@@ -94,7 +99,7 @@
           v-if="currentTab === 'profile'"
           v-model="profile"
           :fields="profileFields"
-          submit-label="Save"
+          :submit-label="$t('save')"
           class="border-t mt-4 pt-4"
           @save="saveProfile"
         />
@@ -113,11 +118,11 @@
             </router-link>
           </div>
           <div class="ml-2">
-            <div class="font-bold text-xl">Contacts</div>
+            <div class="font-bold text-xl">
+              {{ $t('settings.contact.title') }}
+            </div>
             <div class="text-sm text-gray-700">
-              This information will be publicly available. Share your contacts
-              only if you want to be contacted by members. It's also nice place
-              to share your social media to get some attention.
+              {{ $t('settings.contact.description') }}
             </div>
           </div>
         </div>
@@ -126,7 +131,7 @@
           v-if="currentTab === 'contacts'"
           v-model="profile"
           :fields="contactFields"
-          submit-label="Save"
+          :submit-label="$t('save')"
           class="border-t mt-4 pt-4"
           @save="saveProfile"
         />

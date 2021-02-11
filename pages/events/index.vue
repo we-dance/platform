@@ -1,9 +1,11 @@
 <template>
   <main>
     <TTitle>
-      Events
+      {{ $t('events.title') }}
       <template slot="right">
-        <TButton to="/events/-/edit" type="primary">Add event</TButton>
+        <TButton to="/events/-/edit" type="primary">{{
+          $t('events.add')
+        }}</TButton>
       </template>
     </TTitle>
 
@@ -13,7 +15,7 @@
         <TInputMultiDropdown
           v-model="dances"
           :options="dancesList"
-          label="Style"
+          :label="$t('style.label')"
         />
       </div>
     </div>

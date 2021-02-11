@@ -1,0 +1,91 @@
+posts.title: Trends
+nav.signin: Sign in
+profiles.title: Community
+events.title: Events
+myprofile.title: My Profile
+settings.title: Settings
+signout: Log out
+posts.add: Add post
+profiles.add: Add profile
+city.anywhere: Anywhere
+city.change: Change city
+objective.label: Objective
+role.label: Role
+sort.popular: Popular
+sort.newest: Newest
+style.label: Style
+profile.username: Username
+account.email: Email
+account.password: Password
+account.name: Full Name
+profile.community: I dance in
+agreement: By signing in, you agree to {terms} and {privacy}.
+terms: Terms of service
+privacy: Privacy policy
+register.login: Login
+register.submit: Register
+signin.register: Create Account
+signin.nopassword: Forgot password
+nopassword.signin: I have a password
+nopassword.google: Sign in with Google
+nopassword.submit: Send a magic link
+signin.submit: Login
+settings.account.title: Account
+settings.account.description: This information will be used for notifications
+  and purchases. It will be shared with service providers or sellers only with
+  your agreement.
+settings.profile.title: Profile
+settings.profile.description: What do you want other dancers to know about you?
+  That's a place to share your passion to dance. Present yourself, don't be shy!
+settings.contacts.title: Contacts
+settings.contacts.description: This information will be publicly available.
+  Share your contacts only if you want to be contacted by members. It's also
+  nice place to share your social media to get some attention.
+settings.account.changepassword: Change Password
+settings.account.delete: Delete Account
+contacts.email: Email
+contacts.instagram: Instagram
+contacts.facebook: Facebook
+contacts.telegram: Telegram
+contacts.twitter: Twitter
+contacts.tiktok: Tik Tok
+contacts.youtube: Youtube
+contacts.website: Website
+save: Save
+profile.name: Name
+profile.bio: Teaser
+profile.hometown: Hometown
+profile.birthday: Birthday
+profile.gender: Gender
+profile.styles: Your dance styles and level
+profile.story: Your dance story
+profile.languages: Your languages
+profile.skills: Non-dancing skills
+profile.days: Days
+profile.topics: Which dance topics you are interested in?
+profile.newsletter: What kind of updated would you like to receive weekly?
+profile.teacher: Are you teaching?
+profile.partner: Are you looking for a dance partner?
+profile.height: Your height (cm)
+profile.weight: Your weight (kg)
+profile.partnerBio: About your partner
+profile.photoFull: Your full height photo
+teaser.partner.title: Need a partner?
+teaser.partner.description: Dancers worldwide create their profiles to find dance partners
+teaser.partner.btn: See Community
+teaser.events.title: Publish your profile
+teaser.events.description: so that others can contact you
+teaser.events.btn: Join for free
+teaser.profiles.title: null
+teaser.profiles.description: Become a member of WeDance Community to see more
+teaser.profiles.btn: Join Now
+teaser.chat.title: Need to talk?
+teaser.chat.description: We have dance chats in every city
+teaser.chat.btn: Join {city} Chat
+teaser.involve.title: We need your help
+teaser.involve.description: We are non-profit international dance community. We
+  want you go to any city in any country and find dance events and dancers. It
+  all starts with the local community.
+teaser.involve.btn: Get Involved
+share.title: Share
+share.copy: Copy Link

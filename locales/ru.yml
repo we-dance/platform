@@ -1,0 +1,93 @@
+posts.title: Тренды
+nav.signin: Вход
+profiles.title: Сообщество
+events.title: События
+myprofile.title: Мой профайл
+settings.title: Настройки
+signout: Выйти
+posts.add: Добавить сообщение
+profiles.add: Добавить профиль
+city.anywhere: Куда угодно
+city.change: Сменить город
+objective.label: Задача
+role.label: Роль
+sort.popular: Популярные
+sort.newest: Новые
+style.label: Стиль
+profile.username: Имя пользователя
+account.email: Электронная почта
+account.password: Пароль
+account.name: Полное имя
+profile.community: Я танцую в
+agreement: Выполняя вход, вы соглашаетесь с {terms} и {privacy}.
+terms: Условиями использования
+privacy: Политики конфиденциальности
+register.login: Вход
+register.submit: Зарегистрироваться
+signin.register: Создать учётную запись
+signin.nopassword: Забыли пароль
+nopassword.signin: У меня есть пароль
+nopassword.google: Войти через Google
+nopassword.submit: Отправить волшебную ссылку
+signin.submit: Войти
+settings.account.title: Учетная запись
+settings.account.description: Эта информация будет использоваться для
+  уведомлений и покупок. Он будет передан поставщикам услуг или продавцам только
+  с вашего согласия.
+settings.profile.title: Профиль
+settings.profile.description: Что вы хотите, чтобы другие танцоры знали о вас?
+  Это место, где можно поделиться своей страстью к танцам. Представь себя, не
+  стесняйся!
+settings.contacts.title: Контакты
+settings.contacts.description: Эта информация будет общедоступной. Делитесь
+  своими контактами только в том случае, если вы хотите, чтобы с вами связались
+  участники. Это также хорошее место, чтобы поделиться своими социальными
+  сетями, чтобы привлечь внимание.
+settings.account.changepassword: Изменить пароль
+settings.account.delete: Удалить аккаунт
+contacts.email: Эл. адрес
+contacts.instagram: Instagram
+contacts.facebook: Facebook
+contacts.telegram: Телеграмма
+contacts.twitter: Twitter
+contacts.tiktok: ТИК Так
+contacts.youtube: YouTube
+contacts.website: Интернет сайт
+save: Сохранить
+profile.name: Имя
+profile.bio: Тизер
+profile.hometown: Родной город
+profile.birthday: День рождения
+profile.gender: Пол
+profile.styles: Ваши танцевальные стили и уровень
+profile.story: Ваша танцевальная история
+profile.languages: Ваши языки
+profile.skills: Не танцевальные навыки
+profile.days: Дни
+profile.topics: Какие танцевальные темы вас интересуют?
+profile.newsletter: Какие обновления вы хотите получать еженедельно?
+profile.teacher: Вы преподаете?
+profile.partner: Вы ищете партнера для танцев?
+profile.height: Ваш рост (см)
+profile.weight: Ваш вес (кг)
+profile.partnerBio: О вашем партнере
+profile.photoFull: Ваше фото в полный рост
+teaser.partner.title: Нужен партнер?
+teaser.partner.description: Танцоры со всего мира создают свои профили, чтобы найти танцевальных партнеров
+teaser.partner.btn: Посмотреть сообщество
+teaser.events.title: Опубликуйте свой профиль
+teaser.events.description: чтобы другие могли связаться с вами
+teaser.events.btn: Присоединись бесплатно
+teaser.profiles.title: null
+teaser.profiles.description: Станьте участником сообщества WeDance, чтобы увидеть больше
+teaser.profiles.btn: Присоединяйся сейчас
+teaser.chat.title: Нужно поговорить?
+teaser.chat.description: У нас есть танцевальные чаты в каждом городе
+teaser.chat.btn: Присоединяйтесь к чату {city}
+teaser.involve.title: Нам нужна твоя помощь
+teaser.involve.description: Мы некоммерческое международное танцевальное
+  сообщество. Мы хотим, чтобы вы побывали в любом городе любой страны и нашли
+  танцевальные мероприятия и танцоров. Все начинается с местного сообщества.
+teaser.involve.btn: Увлекаться
+share.title: доля
+share.copy: Копировать ссылку

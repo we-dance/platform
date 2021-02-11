@@ -1,11 +1,11 @@
 <template>
   <div>
     <TTitle>
-      Community
+      {{ $t('profiles.title') }}
       <template slot="right">
-        <TButton type="primary" @click="isAddingProfile = true"
-          >Add profile</TButton
-        >
+        <TButton type="primary" @click="isAddingProfile = true">{{
+          $t('profiles.add')
+        }}</TButton>
       </template>
     </TTitle>
 
@@ -39,17 +39,17 @@
         <TInputMultiDropdown
           v-model="objectives"
           :options="objectivesList"
-          label="Objective"
+          :label="$t('objective.label')"
         />
         <TInputMultiDropdown
           v-model="roles"
           :options="rolesList"
-          label="Role"
+          :label="$t('role.label')"
         />
         <TInputMultiDropdown
           v-model="dances"
           :options="dancesList"
-          label="Style"
+          :label="$t('style.label')"
         />
       </div>
     </div>
@@ -57,10 +57,10 @@
     <div>
       <WTeaser
         v-if="!uid"
-        title="Publish your profile"
-        description="so that others can contact you"
-        button="Join for free"
-        url="/signin?target=/people"
+        :title="$t('teaser.events.title')"
+        :description="$t('teaser.events.description')"
+        :button="$t('teaser.events.btn')"
+        url="/register"
       />
 
       <div class="grid grid-cols-1 md:grid-cols-2 gap-2">
@@ -128,9 +128,9 @@
 
       <WTeaser
         v-if="uid && !items.length"
-        title="We need your help"
-        description="We are non-profit international dance community. We want you go to any city in any country and find dance events and dancers. It all starts with the local community."
-        button="Get Involved"
+        :title="$t('teaser.involve.title')"
+        :description="$t('teaser.involve.description')"
+        :button="$t('teaser.involve.btn')"
         href="http://bit.ly/wedance-start"
       />
     </div>

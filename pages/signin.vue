@@ -7,26 +7,30 @@
         id="email"
         v-model="email"
         type="email"
-        label="Email"
+        :label="$t('account.email')"
         label-position="top"
       />
       <TField
         id="password"
         v-model="password"
         type="password"
-        label="Password"
+        :label="$t('account.password')"
         label-position="top"
       />
 
       <div class="mt-4 text-xs">
-        By signing in, you agree to
-        <router-link class="underline hover:no-underline" to="/terms"
-          >Terms of service</router-link
-        >
-        and
-        <router-link class="underline hover:no-underline" to="/privacy"
-          >Privacy policy</router-link
-        >.
+        <i18n path="agreement" tag="p">
+          <template v-slot:privacy>
+            <router-link class="underline hover:no-underline" to="/privacy">{{
+              $t('privacy')
+            }}</router-link>
+          </template>
+          <template v-slot:terms>
+            <router-link class="underline hover:no-underline" to="/terms">{{
+              $t('terms')
+            }}</router-link>
+          </template>
+        </i18n>
       </div>
       <div class="mt-4 flex justify-end">
         <TButton
@@ -34,17 +38,17 @@
           class="mt-2 w-full md:mt-0 md:w-32 md:ml-4"
           @click="submit"
         >
-          Login
+          {{ $t('signin.submit') }}
         </TButton>
       </div>
       <div class="mt-4 text-xs">
         <div class="mt-4 border-t pt-4 flex space-x-2 text-xs">
-          <router-link to="/register" class="underline hover:no-underline"
-            >Create Account</router-link
-          >
-          <router-link to="/nopassword" class="underline hover:no-underline"
-            >Forgot password</router-link
-          >
+          <router-link to="/register" class="underline hover:no-underline">{{
+            $t('signin.register')
+          }}</router-link>
+          <router-link to="/nopassword" class="underline hover:no-underline">{{
+            $t('signin.nopassword')
+          }}</router-link>
         </div>
       </div>
     </form>

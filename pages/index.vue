@@ -1,9 +1,11 @@
 <template>
   <main>
     <TTitle>
-      Trends
+      {{ $t('posts.title') }}
       <template slot="right">
-        <TButton to="/posts/-/edit" type="primary">Add post</TButton>
+        <TButton to="/posts/-/edit" type="primary">{{
+          $t('posts.add')
+        }}</TButton>
       </template>
     </TTitle>
 
@@ -14,7 +16,7 @@
         <TInputMultiDropdown
           v-model="dances"
           :options="dancesList"
-          label="Style"
+          :label="$t('style.label')"
         />
       </div>
     </div>
@@ -50,16 +52,16 @@
       </TPopup>
       <div v-if="!uid" class="md:flex space-x-2">
         <WTeaser
-          title="Need a partner?"
-          description="Dancers worldwide create their profiles to find dance partners"
-          button="See Community"
+          :title="$t('teaser.partner.title')"
+          :description="$t('teaser.partner.description')"
+          :button="$t('teaser.partner.btn')"
           url="/people"
           class="flex-1"
         />
         <WTeaser
-          title="Where to dance?"
-          description="All dance courses, parties and festivals in one place"
-          button="See Events"
+          :title="$t('teaser.events.title')"
+          :description="$t('teaser.events.description')"
+          :button="$t('teaser.events.btn')"
           url="/events"
           class="flex-1"
         />
@@ -67,16 +69,16 @@
       <div v-if="uid">
         <WTeaser
           v-if="city && city.telegram"
-          title="Need to talk?"
-          description="We have dance chats in every city"
-          :button="`Join ${city.name} Chat`"
+          :title="$t('teaser.chat.title')"
+          :description="$t('teaser.chat.description')"
+          :button="$t('teaser.chat.btn', { city: city.name })"
           :href="city.telegram"
         />
         <WTeaser
           v-else-if="currentCity"
-          title="Need to talk?"
-          description="We have dance chats in every city"
-          :button="`Join ${currentCity} Chat`"
+          :title="$t('teaser.chat.title')"
+          :description="$t('teaser.chat.description')"
+          :button="$t('teaser.chat.btn', { city: currentCity })"
           href="https://t.me/joinchat/Iqif2X0FCXCpqHDj"
         />
       </div>

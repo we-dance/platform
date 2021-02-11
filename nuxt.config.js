@@ -43,7 +43,7 @@ export default {
   /*
    ** Customize the progress-bar color
    */
-  loading: { color: '#2a1b3c' },
+  loading: { color: '#210309' },
   components: true,
   /*
    ** Global CSS
@@ -186,12 +186,6 @@ export default {
     hostname: app.url,
     routes: ['/']
   },
-  watchers: {
-    webpack: {
-      poll: 5000,
-      ignored: ['node_modules']
-    }
-  },
   i18n: {
     locales: [
       { code: 'en', name: 'English', file: 'en.yml' },
@@ -200,8 +194,9 @@ export default {
       { code: 'es', name: 'Español', file: 'es.yml' }
     ],
     defaultLocale: 'en',
-    langDir: 'langs/',
+    strategy: 'no_prefix',
     lazy: true,
+    langDir: 'locales/',
     vueI18n: {
       fallbackLocale: 'en'
     },
@@ -211,8 +206,5 @@ export default {
       fallbackLocale: 'en',
       alwaysRedirect: true
     }
-  },
-  generate: {
-    interval: 2000
   }
 }
