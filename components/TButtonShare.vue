@@ -73,7 +73,7 @@ export default {
     },
     type: {
       type: String,
-      default: 'round'
+      default: 'icon'
     }
   },
   data: () => ({

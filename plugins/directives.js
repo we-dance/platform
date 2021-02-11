@@ -6,6 +6,7 @@ import WInstagram from '~/components/WInstagram'
 import WYoutube from '~/components/WYoutube'
 import WProfile from '~/components/WProfile'
 import WGumroad from '~/components/WGumroad'
+import WTeaser from '~/components/WTeaser'
 
 Vue.directive('focus', {
   inserted: (el) => {
@@ -21,6 +22,7 @@ Vue.component('WInstagram', WInstagram)
 Vue.component('WYoutube', WYoutube)
 Vue.component('WProfile', WProfile)
 Vue.component('WGumroad', WGumroad)
+Vue.component('WTeaser', WTeaser)
 
 // document.oncontextmenu = () => {
 //   return false

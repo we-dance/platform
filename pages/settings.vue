@@ -119,10 +119,10 @@
           </div>
           <div class="ml-2">
             <div class="font-bold text-xl">
-              {{ $t('settings.contact.title') }}
+              {{ $t('settings.contacts.title') }}
             </div>
             <div class="text-sm text-gray-700">
-              {{ $t('settings.contact.description') }}
+              {{ $t('settings.contacts.description') }}
             </div>
           </div>
         </div>
