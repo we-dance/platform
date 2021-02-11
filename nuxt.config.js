@@ -191,6 +191,9 @@ export default {
       { code: 'en', name: 'English', file: 'en.yml' },
       { code: 'de', name: 'Deutsch', file: 'de.yml' },
       { code: 'ru', name: 'Русский', file: 'ru.yml' },
+      { code: 'fr', name: 'Français', file: 'fr.yml' },
+      { code: 'it', name: 'Italiano', file: 'it.yml' },
+      { code: 'tr', name: 'Türkçe', file: 'tr.yml' },
       { code: 'es', name: 'Español', file: 'es.yml' }
     ],
     defaultLocale: 'en',
