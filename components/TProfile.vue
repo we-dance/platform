@@ -25,6 +25,8 @@
           </div>
           <div class="text-sm text-gray-700">
             {{ profile.community }}
+            <span v-if="profile.height">• {{ profile.height }}cm</span>
+            <span v-if="profile.weight">• {{ profile.weight }}kg</span>
           </div>
         </div>
         <TButtonShare

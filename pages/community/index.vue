@@ -36,17 +36,14 @@
     <div class="overflow-x-scroll my-2">
       <div class="flex flex-no-wrap space-x-2">
         <TInputCity v-model="currentCity" />
-        <TInputMultiDropdown
-          v-model="objectives"
-          :options="objectivesList"
+        <TInputSelect v-model="profileType" :options="typeList" />
+        <TInputSelect
+          v-model="objective"
+          :options="objectivesOptions"
           :label="$t('objective.label')"
         />
-        <TInputMultiDropdown
-          v-model="roles"
-          :options="rolesList"
-          :label="$t('role.label')"
-        />
-        <TInputMultiDropdown
+        <TInputSelect v-model="roles" :options="rolesList" label="Gender" />
+        <TInputSelect
           v-model="dances"
           :options="dancesList"
           :label="$t('style.label')"
@@ -61,10 +58,9 @@
         :description="$t('teaser.profile.description')"
         :button="$t('teaser.profile.btn')"
         url="/register"
-        class="mb-4"
       />
 
-      <div class="grid grid-cols-1 md:grid-cols-2 gap-2">
+      <div class="mt-4 grid grid-cols-1 md:grid-cols-2 gap-2">
         <div
           v-if="
             myProfile &&
@@ -133,6 +129,7 @@
         :description="$t('teaser.involve.description')"
         :button="$t('teaser.involve.btn')"
         href="http://bit.ly/wedance-start"
+        class="mt-4"
       />
     </div>
   </div>
@@ -144,6 +141,7 @@ import useAuth from '~/use/auth'
 import useCollection from '~/use/collection'
 import useCities from '~/use/cities'
 import { sortBy } from '~/utils'
+import useProfiles from '~/use/profiles'
 
 export default {
   name: 'PeopleIndex',
@@ -155,46 +153,48 @@ export default {
 
     const { docs: docsProfiles } = useCollection('profiles')
     const { currentCity } = useCities()
+    const { objectivesList, typeList } = useProfiles()
+
+    const objectivesOptions = [
+      {
+        label: 'Objective',
+        value: ''
+      },
+      ...objectivesList
+    ]
 
     const tab = ref('partner')
-    const objectives = ref({})
-    const roles = ref({})
-    const dances = ref({})
+    const objective = ref('')
+    const profileType = ref('Dancer')
+    const roles = ref('')
+    const dances = ref('')
 
-    const objectivesList = [
+    const rolesList = [
       {
-        label: 'Dance practice',
-        value: 'practice'
+        label: 'Gender',
+        value: ''
       },
       {
-        label: 'Learn a dance',
-        value: 'learn'
+        label: 'Female',
+        value: 'Female'
       },
       {
-        label: 'Socialize',
-        value: 'socialize'
-      },
-      {
-        label: 'Go out dancing',
-        value: 'dancing'
-      },
-      {
-        label: 'Dance outside',
-        value: 'outside'
-      },
-      {
-        label: 'Talk dance',
-        value: 'talk'
-      },
-      {
-        label: 'Dance competition',
-        value: 'competition'
+        label: 'Male',
+        value: 'Male'
       }
     ]
-    const rolesList = ['Male', 'Female', 'Instructor']
-    const dancesList = computed(() =>
-      myProfile.value ? Object.keys(myProfile.value.styles) : []
-    )
+
+    const dancesList = computed(() => {
+      const list = myProfile.value ? Object.keys(myProfile.value.styles) : []
+
+      return [
+        {
+          label: 'Style',
+          value: ''
+        },
+        ...list
+      ]
+    })
 
     const docs = computed(() => {
       return docsProfiles.value
@@ -212,31 +212,28 @@ export default {
           item.visibility !== 'Unlisted'
       )
 
-      if (Object.keys(dances.value).length) {
+      if (dances.value) {
         result = result.filter(
           (item) =>
-            Object.keys(dances.value).filter(
-              (dance) =>
-                item.styles && item.styles[dance] && item.styles[dance].selected
-            ).length > 0
+            item.styles &&
+            item.styles[dances.value] &&
+            item.styles[dances.value].selected
         )
       }
 
-      if (roles.value.Male) {
-        result = result.filter((item) => item.gender === 'Male')
+      if (roles.value) {
+        result = result.filter((item) => item.gender === roles.value)
       }
 
-      if (roles.value.Female) {
-        result = result.filter((item) => item.gender === 'Female')
+      if (objective.value) {
+        result = result.filter(
+          (item) => item.objectives && item.objectives[objective.value]
+        )
       }
 
-      if (roles.value.Instructor) {
-        result = result.filter((item) => item.teacher === 'Yes')
-      }
-
-      if (objectives.value.practice) {
-        result = result.filter((item) => item.partner === 'Yes')
-      }
+      result = result.filter(
+        (item) => item.type && item.type === profileType.value
+      )
 
       return result
     })
@@ -247,13 +244,15 @@ export default {
       tab,
       updateProfile,
       myProfile,
-      objectives,
+      objective,
       roles,
       dances,
-      objectivesList,
+      objectivesOptions,
       rolesList,
       dancesList,
-      currentCity
+      currentCity,
+      typeList,
+      profileType
     }
   }
 }

@@ -24,6 +24,33 @@ export default () => {
       label: 'Phone',
       required: true,
       placeholder: '(Required)'
+    },
+    {
+      name: 'newsletter',
+      label: 'What kind of updated would you like to receive weekly?',
+      type: 'multi',
+      options: [
+        {
+          value: 'party',
+          label: 'Social/party events'
+        },
+        {
+          value: 'class',
+          label: 'Dance classes'
+        },
+        {
+          value: 'workshop',
+          label: 'Workshops and bootcamps'
+        },
+        {
+          value: 'online',
+          label: 'Online dance classes'
+        },
+        {
+          value: 'festival',
+          label: 'International festivals'
+        }
+      ]
     }
   ]
 

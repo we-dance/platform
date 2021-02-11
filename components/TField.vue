@@ -3,6 +3,14 @@
   <div v-else :class="wrapperClasses" class="w-full grid gap-4">
     <div v-if="!hideLabel" :class="labelClasses">
       <label :for="elementId">
+        <div v-if="tips" class="float-right">
+          <TButton
+            icon="help"
+            type="icon"
+            class="text-blue-500"
+            @click="showTips = true"
+          />
+        </div>
         <div class="text-gray-700 font-bold">{{ label }}</div>
       </label>
     </div>
@@ -29,6 +37,9 @@
       />
       <slot name="bottom" />
     </div>
+    <TPopup v-if="showTips" :title="label" @close="showTips = false">
+      <TPreview :content="tips" class="mt-4" />
+    </TPopup>
   </div>
 </template>
 
@@ -71,6 +82,10 @@ export default {
       type: String,
       default: ''
     },
+    tips: {
+      type: String,
+      default: ''
+    },
     labelPosition: {
       type: String,
       default: 'left'
@@ -105,7 +120,8 @@ export default {
     }
   },
   data: () => ({
-    elementId: ''
+    elementId: '',
+    showTips: false
   }),
   computed: {
     computedValue() {

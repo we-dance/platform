@@ -3,12 +3,85 @@ import useCollection from '~/use/collection'
 export default () => {
   const { getById, loading } = useCollection('profiles')
 
+  const meetingPlaces = [
+    {
+      label: 'My place',
+      value: 'myPlace'
+    },
+    {
+      label: 'Your place',
+      value: 'yourPlace'
+    },
+    {
+      label: 'Somewhere private',
+      value: 'private'
+    },
+    {
+      label: 'Somewhere public',
+      value: 'public'
+    },
+    {
+      label: "Doesn't matter",
+      value: 'anywhere'
+    }
+  ]
+
+  const typeList = [
+    {
+      label: 'Dancer',
+      value: 'Dancer'
+    },
+    {
+      label: 'Artist',
+      value: 'Artist'
+    },
+    {
+      label: 'Organiser',
+      value: 'Organiser'
+    },
+    {
+      label: 'Venue',
+      value: 'Venue'
+    },
+    {
+      label: 'City',
+      value: 'City'
+    }
+  ]
+
+  const objectivesList = [
+    {
+      label: 'Talk about dance',
+      value: 'talk'
+    },
+    {
+      label: 'Learn together',
+      value: 'learn'
+    },
+    {
+      label: 'Dance outdoors',
+      value: 'outdoors'
+    },
+    {
+      label: 'Dance indoors',
+      value: 'indoors'
+    },
+    {
+      label: 'Teach together',
+      value: 'teach'
+    },
+    {
+      label: 'Dance project',
+      value: 'project'
+    }
+  ]
+
   const profileFields = [
     {
       name: 'type',
       label: 'Type',
       type: 'select',
-      options: ['Dancer', 'Artist', 'Organiser', 'Venue', 'City']
+      options: typeList
     },
     {
       name: 'gender',
@@ -49,7 +122,7 @@ export default () => {
       label: 'Teaser',
       type: 'textarea',
       description:
-        'Introduce yourself. Make it simple, short, unique, narative and attractive.',
+        'Introduce yourself. Make it short and attractive. Max 280 symbols.',
       placeholder: '280 symbols'
     },
     {
@@ -57,7 +130,9 @@ export default () => {
       label: 'Description',
       type: 'textarea',
       placeholder: 'Description (markdown)',
-      description: '[Markdown cheatsheet](https://simplemde.com/markdown-guide)'
+      description: 'Who are you? What do you offer? What do you want?',
+      tips:
+        'Tips for effective pitch:\n- Uncomplicated: It should be catchy and roll off the tongue\n- Concise: It shouldn’t take more than a minute to say or read\n- Unique: It reflects your skills, goals, and desires\n- Storyline: It covers who you are, what you offer, and where you want to be\n- Appealing: Your elevator pitch is essentially a persuasive sales pitch; the emphasis should be on what you offer\n- Use [Markdown](https://simplemde.com/markdown-guide)'
     },
     {
       name: 'location',
@@ -97,45 +172,48 @@ export default () => {
       description: 'For example: Musicality in Salsa, Men Styling, etc.'
     },
     {
-      name: 'newsletter',
-      label: 'What kind of updated would you like to receive weekly?',
-      type: 'multi',
-      options: [
-        {
-          value: 'party',
-          label: 'Social/party events'
-        },
-        {
-          value: 'class',
-          label: 'Dance classes'
-        },
-        {
-          value: 'workshop',
-          label: 'Workshops and bootcamps'
-        },
-        {
-          value: 'online',
-          label: 'Online dance classes'
-        },
-        {
-          value: 'festival',
-          label: 'International festivals'
-        }
-      ]
-    },
-    {
       name: 'partner',
       label: 'Are you looking for a dance partner?',
       type: 'select',
-      options: ['Yes', 'No'],
-      description:
-        'Fill the fields below and you will get a dance partner recommendation as soon as we find a match for you.'
+      options: ['Yes', 'No']
+    },
+    {
+      name: 'birthday',
+      label: 'Birthday',
+      type: 'date',
+      description: 'We will show only your age'
+    },
+    {
+      name: 'height',
+      label: 'Height (cm)'
+    },
+    {
+      name: 'weight',
+      label: 'Weight (kg)',
+      description: "Leave this field blank if you think it's irrelevant."
+    },
+    {
+      name: 'partnerBio',
+      label: 'About your partner',
+      type: 'textarea',
+      description: 'What is important in your partner?'
+    },
+    {
+      name: 'objectives',
+      label: 'Objectives',
+      type: 'multi',
+      options: objectivesList
+    },
+    {
+      name: 'place',
+      label: 'Where to meet?',
+      type: 'multi',
+      options: meetingPlaces
     },
     {
       name: 'days',
-      label: 'Days',
+      label: 'Days?',
       type: 'multi',
-      description: 'Choose best days for you to dance',
       options: [
         {
           label: 'Monday',
@@ -168,38 +246,12 @@ export default () => {
       ]
     },
     {
-      name: 'birthday',
-      label: 'Birthday',
-      type: 'date',
-      description: 'We will show only your age'
-    },
-    {
-      name: 'height',
-      label: 'Height (cm)'
-    },
-    {
-      name: 'weight',
-      label: 'Weight (kg)',
-      description: "Leave this field blank if you think it's irrelevant."
-    },
-    {
-      name: 'photoFull',
-      label: 'Full height photo',
-      type: 'photo'
-    },
-    {
-      name: 'partnerBio',
-      label: 'About your partner',
-      type: 'textarea',
-      description: 'What is important in your partner?'
-    },
-    {
       name: 'visibility',
       label: 'Visibility',
       type: 'select',
       options: ['Public', 'Members', 'Unlisted'],
-      description:
-        'Public profiles are searchable in Google and used in our social media to attract new members. Members profile are only visible for logged-in users. Unlisted profiles are possible to open with exact link, but they are not listed in members lists and search.'
+      tips:
+        '- Public profiles are searchable in Google and used in our social media to attract new members.\n- Members profile are only visible for logged-in users.\n- Unlisted profiles are possible to open with exact link, but they are not listed in members lists and search.'
     }
   ]
 
@@ -236,6 +288,8 @@ export default () => {
     getProfile,
     profileFields,
     contactFields,
-    loading
+    loading,
+    objectivesList,
+    typeList
   }
 }
