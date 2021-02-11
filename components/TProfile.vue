@@ -148,7 +148,7 @@
 
       <dl class="mt-4 md:flex">
         <dt class="font-bold mr-1">Joined:</dt>
-        <dd>{{ getDateTime(profile.createdAt) }}</dd>
+        <dd>{{ getDateTimeYear(profile.createdAt) }}</dd>
       </dl>
 
       <dl class="mt-4 md:flex">
@@ -176,7 +176,7 @@
 <script>
 import { saveAs } from 'file-saver'
 import useAuth from '~/use/auth'
-import { getDateTime } from '~/utils'
+import { getDateTimeYear } from '~/utils'
 
 export default {
   props: {
@@ -190,7 +190,7 @@ export default {
 
     return {
       uid,
-      getDateTime
+      getDateTimeYear
     }
   },
   methods: {
