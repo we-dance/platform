@@ -209,9 +209,6 @@ export default {
             when: (answers) => answers.form === 'Yes'
           },
           {
-            name: 'organiser'
-          },
-          {
             name: 'city',
             label: 'Community',
             type: 'city'

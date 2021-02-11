@@ -37,14 +37,6 @@
               {{ item.name }}
             </router-link>
             <div class="text-xs flex flex-wrap">
-              <div v-if="item.organiser" class="hidden md:block">
-                <div class="flex items-center mr-2">
-                  <TIcon name="store" class="w-4 h-4 mr-1" />
-                  <p>
-                    {{ item.organiser }}
-                  </p>
-                </div>
-              </div>
               <div v-if="item.address">
                 <div class="flex items-center">
                   <TIcon name="place" class="w-4 h-4 mr-1" />
