@@ -9,24 +9,24 @@
             © WeDance 2021 – All rights reserved.
           </p>
           <p class="md:flex space-x-2">
-            <router-link class="underline hover:no-underline" to="/about"
-              >About</router-link
-            >
-            <router-link class="underline hover:no-underline" to="/support"
-              >Support</router-link
-            >
-            <router-link class="underline hover:no-underline" to="/privacy"
-              >Privacy</router-link
-            >
-            <router-link class="underline hover:no-underline" to="/terms"
-              >Terms</router-link
-            >
-            <router-link class="underline hover:no-underline" to="/coc"
-              >Code of Conduct</router-link
-            >
-            <router-link class="underline hover:no-underline" to="/faq"
-              >FAQ</router-link
-            >
+            <router-link class="underline hover:no-underline" to="/about">{{
+              $t('footer.about')
+            }}</router-link>
+            <router-link class="underline hover:no-underline" to="/support">{{
+              $t('footer.support')
+            }}</router-link>
+            <router-link class="underline hover:no-underline" to="/privacy">{{
+              $t('footer.privacy')
+            }}</router-link>
+            <router-link class="underline hover:no-underline" to="/terms">{{
+              $t('footer.terms')
+            }}</router-link>
+            <router-link class="underline hover:no-underline" to="/coc">{{
+              $t('footer.coc')
+            }}</router-link>
+            <router-link class="underline hover:no-underline" to="/faq">{{
+              $t('footer.faq')
+            }}</router-link>
           </p>
         </div>
 
