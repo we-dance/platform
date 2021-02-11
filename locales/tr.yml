@@ -1,4 +1,4 @@
-posts.title: Eğilimler
+posts.title: Popüler
 nav.signin: Oturum aç
 profiles.title: Topluluk
 events.title: Etkinlikler
@@ -6,7 +6,7 @@ events.add: Etkinlik ekle
 myprofile.title: Benim profilim
 settings.title: Ayarlar
 signout: Çıkış Yap
-posts.add: Gönderi ekleyin
+posts.add: Gönderi ekle
 profiles.add: Profil ekle
 city.anywhere: Herhangi bir yer
 city.change: Şehri değiştir
@@ -14,7 +14,7 @@ objective.label: Amaç
 role.label: Rol
 sort.popular: Popüler
 sort.newest: En yeni
-style.label: Tarzı
+style.label: Tarz
 profile.username: Kullanıcı adı
 account.email: E-posta adresi
 account.password: Parola
@@ -26,23 +26,23 @@ privacy: Gizlilik Politikası
 register.login: Oturum aç
 register.submit: Kayıt ol
 signin.register: Hesap oluştur
-signin.nopassword: Parolanızı mı unuttunuz
+signin.nopassword: Parolamı unuttum
 nopassword.signin: Bir şifrem var
 nopassword.google: Google ile giriş yap
 nopassword.submit: Sihirli bağlantı gönder
 signin.submit: Oturum aç
 settings.account.title: Hesap
 settings.account.description: Bu bilgiler, bildirimler ve satın alımlar için
-  kullanılacaktır. Yalnızca sözleşmenizle hizmet sağlayıcılarla veya satıcılarla
+  kullanılacaktır. Yalnızca onayınla hizmet sağlayıcılarla veya satıcılarla
   paylaşılacaktır.
 settings.profile.title: Profil
-settings.profile.description: Diğer dansçıların hakkınızda ne bilmesini
-  istiyorsunuz? Dans tutkunuzu paylaşabileceğiniz bir yer. Kendinizi tanıtın,
-  utanmayın!
+settings.profile.description: Diğer dansçıların hakkında ne bilmesini
+  istiyorsun? Burası dans tutkunu paylaşabileceğin bir yer. Kendini tanıt,
+  utanma!
 settings.contacts.title: Kişiler
 settings.contacts.description: Bu bilgiler halka açık olacaktır. Kişilerinizi
-  yalnızca üyelerin sizinle iletişime geçmesini istiyorsanız paylaşın. Dikkat
-  çekmek için sosyal medyanızı paylaşmak için de güzel bir yer.
+  yalnızca üyelerin sizinle iletişime geçmesini istiyorsan paylaş. Dikkat çekmek
+  ve sosyal medyanı paylaşmak için iyi bir imkan olabilir.
 settings.account.changepassword: Şifre değiştir
 settings.account.delete: Hesabı sil
 contacts.email: E-posta adresi
@@ -56,43 +56,43 @@ contacts.website: İnternet sitesi
 save: Kayıt etmek
 profile.name: İsim
 profile.bio: Tanıtım
-profile.hometown: Memleket
+profile.hometown: Yer
 profile.birthday: Doğum günü
 profile.gender: Cinsiyet
-profile.styles: Dans stilleriniz ve seviyeniz
+profile.styles: Dans stillerin ve seviyen
 profile.story: Dans hikayen
-profile.languages: Dilleriniz
-profile.skills: Dans etmeme becerileri
+profile.languages: Dillerin
+profile.skills: Baska beceriler
 profile.days: Günler
-profile.topics: Hangi dans konularıyla ilgileniyorsunuz?
-profile.newsletter: Haftalık ne tür bir güncelleme almak istersiniz?
-profile.teacher: Öğretiyor musun
-profile.partner: Bir dans partneri mi arıyorsunuz?
-profile.height: Boyunuz (cm)
-profile.weight: Kilonuz (kg)
-profile.partnerBio: Partnerin hakkında
-profile.photoFull: Tam boy fotoğrafınız
-teaser.partner.title: Bir ortağa mı ihtiyacınız var?
+profile.topics: Hangi dans konularıyla ilgileniyorsun?
+profile.newsletter: Haftalık ne tür bir güncelleme almak istersin?
+profile.teacher: Ders veriyormusun?
+profile.partner: Bir dans arkadası mı arıyorsun?
+profile.height: Boyun (cm)
+profile.weight: Kilon (kg)
+profile.partnerBio: Dans arkadasın hakkında
+profile.photoFull: Tam boy fotoğrafın
+teaser.partner.title: Bir dans arkadasına mı ihtiyacın var?
 teaser.partner.description: Dünyanın her yerinden dansçılar, dans partneri
   bulmak için profillerini oluşturur
 teaser.partner.btn: Topluluğu Gör
 teaser.events.title: Nerede dans edilir?
 teaser.events.description: Tüm dans kursları, partiler ve festivaller tek bir yerde
 teaser.events.btn: Olayları Gör
-teaser.profile.title: Profilinizi yayınlayın
-teaser.profile.description: böylece diğerleri sizinle iletişim kurabilir
-teaser.profile.btn: Ücretsiz katılın
+teaser.profile.title: Profilini yayınla
+teaser.profile.description: böylece diğerleri seninle iletişim kurabilir
+teaser.profile.btn: Ücretsiz katıl
 teaser.allevents.title: Özel etkinlikler
-teaser.allevents.description: Daha fazlasını görmek için WeDance Topluluğu'nun bir üyesi olun
+teaser.allevents.description: Daha fazlasını görmek için WeDance Topluluğu'nun bir üyesi ol
 teaser.allevents.btn: Şimdi Katıl
-teaser.chat.title: Konuşmak lazım?
-teaser.chat.description: Her şehirde dans sohbetlerimiz var
-teaser.chat.btn: "{city} Sohbetine Katılın"
+teaser.chat.title: Konuşmak mı istiyorsun?
+teaser.chat.description: Her şehirde dans sohbetleri var
+teaser.chat.btn: "{city} Sohbetine Katıl"
 teaser.involve.title: Yardımına ihtiyacımız var
 teaser.involve.description: Kar amacı gütmeyen uluslararası dans topluluğuyuz.
-  Herhangi bir ülkedeki herhangi bir şehre gitmenizi ve dans etkinlikleri ve
-  dansçılar bulmanızı istiyoruz. Her şey yerel toplulukla başlar.
-teaser.involve.btn: Katılın
+  Herhangi bir ülke ve şehre gitmeni ve dans etkinlikleri ve dansçılar bulmanı
+  sağlıyoruz. Her şey yerel toplulukla başlar.
+teaser.involve.btn: Katıl
 share.title: Paylaş
 share.copy: Bağlantıyı kopyala
 footer.about: Hakkımızda

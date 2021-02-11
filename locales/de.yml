@@ -1,8 +1,8 @@
 posts.title: Trends
 nav.signin: Einloggen
-profiles.title: Gemeinschaft
+profiles.title: Community
 events.title: Veranstaltungen
-events.add: Ereignis hinzufügen
+events.add: Veranstaltung hinzufügen
 myprofile.title: Mein Profil
 settings.title: Einstellungen
 signout: Ausloggen
@@ -10,7 +10,7 @@ posts.add: Beitrag hinzufügen
 profiles.add: Profil hinzufügen
 city.anywhere: Irgendwo
 city.change: Stadt wechseln
-objective.label: Zielsetzung
+objective.label: Zweck
 role.label: Rolle
 sort.popular: Beliebt
 sort.newest: Neueste
@@ -19,8 +19,8 @@ profile.username: Nutzername
 account.email: Email
 account.password: Passwort
 account.name: Vollständiger Name
-profile.community: Ich tanze hinein
-agreement: Mit Ihrer Anmeldung stimmen Sie {terms} und {privacy} zu.
+profile.community: Ich tanze in
+agreement: Mit Deiner Anmeldung stimmst Du {terms} und {privacy} zu.
 terms: Nutzungsbedingungen
 privacy: Datenschutz-Bestimmungen
 register.login: Anmeldung
@@ -29,27 +29,27 @@ signin.register: Benutzerkonto erstellen
 signin.nopassword: Passwort vergessen
 nopassword.signin: Ich habe ein Passwort
 nopassword.google: Anmeldung mit Google
-nopassword.submit: Senden Sie einen magischen Link
+nopassword.submit: Sende einen magischen Link
 signin.submit: Anmelden
 settings.account.title: Konto
 settings.account.description: Diese Informationen werden für Benachrichtigungen
   und Käufe verwendet. Sie werden nur mit Ihrer Zustimmung an Dienstleister oder
   Verkäufer weitergegeben.
 settings.profile.title: Profil
-settings.profile.description: Was sollen andere Tänzer über dich wissen? Hier
-  können Sie Ihre Leidenschaft für das Tanzen teilen. Präsentieren Sie sich,
-  seien Sie nicht schüchtern!
+settings.profile.description: Was sollen andere Tänzer über Dich wissen? Hier
+  kannst Du Deine Leidenschaft für das Tanzen teilen. Präsentiere Dich, sei
+  nicht schüchtern!
 settings.contacts.title: Kontakte
 settings.contacts.description: Diese Informationen werden öffentlich zugänglich
-  sein. Teilen Sie Ihre Kontakte nur, wenn Sie von Mitgliedern kontaktiert
-  werden möchten. Es ist auch ein schöner Ort, um Ihre sozialen Medien zu teilen
+  sein. Teile Deine Kontakte nur, wenn Du von Mitgliedern kontaktiert werden
+  möchtest. Es ist eine schöne Gelegenheit, um Deine sozialen Medien zu teilen
   und Aufmerksamkeit zu erregen.
 settings.account.changepassword: Ändere das Passwort
 settings.account.delete: Konto löschen
 contacts.email: Email
 contacts.instagram: Instagram
 contacts.facebook: Facebook
-contacts.telegram: Telegramm
+contacts.telegram: Telegram
 contacts.twitter: Twitter
 contacts.tiktok: Tik Tok
 contacts.youtube: Youtube
@@ -60,40 +60,40 @@ profile.bio: Teaser
 profile.hometown: Heimatort
 profile.birthday: Geburtstag
 profile.gender: Geschlecht
-profile.styles: Deine Tanzstile und Level
+profile.styles: Deine Tanzstile und Dein Level
 profile.story: Deine Tanzgeschichte
 profile.languages: Deine Sprachen
-profile.skills: Nicht tanzende Fähigkeiten
+profile.skills: Sonstige Fähigkeiten
 profile.days: Tage
-profile.topics: Für welche Tanzthemen interessieren Sie sich?
-profile.newsletter: Welche Art von Update möchten Sie wöchentlich erhalten?
-profile.teacher: Unterrichten Sie?
-profile.partner: Suchst du einen Tanzpartner?
+profile.topics: Für welche Tanzthemen interessierst Du Dich?
+profile.newsletter: Welche Art von Update möchtest Du wöchentlich erhalten?
+profile.teacher: Unterrichtest Du?
+profile.partner: Suchst Du einen Tanzpartner?
 profile.height: Deine Größe (cm)
 profile.weight: Dein Gewicht (kg)
-profile.partnerBio: Über Ihren Partner
-profile.photoFull: Dein Foto in voller Höhe
-teaser.partner.title: Benötigen Sie einen Partner?
+profile.partnerBio: Über Deinen Partner
+profile.photoFull: Dein Foto in voller Größe
+teaser.partner.title: Benötigst Du einen Partner?
 teaser.partner.description: Tänzer weltweit erstellen ihre Profile, um Tanzpartner zu finden
 teaser.partner.btn: Siehe Community
 teaser.events.title: Wo kann man tanzen?
 teaser.events.description: Alle Tanzkurse, Partys und Festivals an einem Ort
 teaser.events.btn: Siehe Ereignisse
-teaser.profile.title: Veröffentlichen Sie Ihr Profil
-teaser.profile.description: damit andere Sie kontaktieren können
+teaser.profile.title: Veröffentliche Dein Profil
+teaser.profile.description: damit andere Dich kontaktieren können
 teaser.profile.btn: Kostenlos beitreten
 teaser.allevents.title: Private Veranstaltungen
-teaser.allevents.description: Werden Sie Mitglied der WeDance Community, um mehr zu sehen
+teaser.allevents.description: Werde Mitglied der WeDance Community, um mehr zu sehen
 teaser.allevents.btn: Jetzt beitreten
-teaser.chat.title: Müssen reden?
+teaser.chat.title: Möchtest Du reden?
 teaser.chat.description: Wir haben in jeder Stadt Tanzchats
 teaser.chat.btn: Tritt dem {city} Chat bei
-teaser.involve.title: Wir brauchen deine Hilfe
+teaser.involve.title: Wir brauchen Deine Hilfe
 teaser.involve.description: Wir sind eine gemeinnützige internationale
   Tanzgemeinschaft. Wir möchten, dass Sie in jede Stadt in jedem Land gehen und
   Tanzveranstaltungen und Tänzer finden. Alles beginnt mit der örtlichen
   Gemeinde.
-teaser.involve.btn: Machen Sie mit
+teaser.involve.btn: Mach mit
 share.title: Teilen
 share.copy: Link kopieren
 footer.about: Über uns
