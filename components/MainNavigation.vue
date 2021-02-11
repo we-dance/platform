@@ -9,7 +9,7 @@
       <span>{{ $t('posts.title') }}</span>
     </TButton>
 
-    <TButton to="/people" type="nav">
+    <TButton to="/community" type="nav">
       <TIcon class="w-4 h-4 mr-2" name="people" />
       <span>{{ $t('profiles.title') }}</span>
     </TButton>

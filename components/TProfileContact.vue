@@ -67,7 +67,7 @@
       </div>
       <div class="my-4 flex flex-col justify-center">
         <div>You need a profile to send requests</div>
-        <TButton class="mt-2" to="/signin?target=/people"
+        <TButton class="mt-2" to="/signin?target=/community"
           >Create Profile</TButton
         >
       </div>

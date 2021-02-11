@@ -33,7 +33,7 @@ Principles are based on [Sociocracy 3.0](https://sociocracy30.org/the-details/pr
 
 ## **WeDance is**
 
-- [WeDanceCommunity](/community)
+- [WeDanceCommunity](/wedance-community)
 - [WeDancePlatform](/platform)
 - [WeDanceFoundation](/foundation)
 

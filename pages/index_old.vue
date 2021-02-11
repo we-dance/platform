@@ -58,7 +58,7 @@
       </div>
 
       <div>
-        <TButton to="/people" class="flex items-center">
+        <TButton to="/community" class="flex items-center">
           <TIcon name="friends" class="w-4 h-4 text-black mr-2" />
           Find dance partners
         </TButton>

@@ -55,7 +55,7 @@
           :title="$t('teaser.partner.title')"
           :description="$t('teaser.partner.description')"
           :button="$t('teaser.partner.btn')"
-          url="/people"
+          url="/community"
           class="flex-1"
         />
         <WTeaser
