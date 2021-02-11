@@ -1,5 +1,5 @@
 <template>
-  <TShareProfile
+  <TSharePreview
     type="Feed"
     :username="getProfile(post.createdBy).username"
     :title="post.title"

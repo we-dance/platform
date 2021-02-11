@@ -1,7 +1,7 @@
 <template>
   <div :class="classes">
     <nuxt-content v-if="page" :document="page" />
-    <TProfileDancer v-else-if="profile" :profile="profile" />
+    <TProfile v-else-if="profile" :profile="profile" />
   </div>
 </template>
 

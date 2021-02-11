@@ -1,5 +1,5 @@
 <template>
-  <TShareProfile
+  <TSharePreview
     :type="event.type"
     :username="event.organiser"
     :price="event.price"

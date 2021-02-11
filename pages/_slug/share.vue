@@ -1,5 +1,5 @@
 <template>
-  <TShareProfile
+  <TSharePreview
     :type="profile.type"
     :username="profile.username"
     :description="profile.bio"
