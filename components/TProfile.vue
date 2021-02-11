@@ -94,6 +94,12 @@
       </div>
     </div>
 
+    <div v-if="uid === profile.id" class="w-full flex justify-center p-4 mt-4">
+      <TButton to="/events/-/edit" type="primary">{{
+        $t('events.add')
+      }}</TButton>
+    </div>
+
     <TEventList
       :filter="{ createdBy: profile.createdBy }"
       class="mt-4 w-full"
@@ -132,6 +138,10 @@
         <dt class="font-bold mr-1">Visibility:</dt>
         <dd>{{ profile.visibility || 'N/A' }}</dd>
       </dl>
+    </div>
+
+    <div v-if="uid === profile.id" class="w-full flex justify-center p-4 mt-4">
+      <TButton to="/posts/-/edit" type="primary">{{ $t('posts.add') }}</TButton>
     </div>
 
     <TPostList :filter="{ createdBy: profile.createdBy }" class="mt-4 w-full" />
