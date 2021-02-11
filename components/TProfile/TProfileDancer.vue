@@ -1,6 +1,22 @@
 <template>
   <div>
     <div class="flex flex-col items-center">
+      <portal to="title">
+        <router-link to="/" class="flex items-center">
+          <TIcon name="icon" size="8" />
+          <h1 class="ml-1 font-lato text-lg font-bold">
+            {{ profile.username }}
+          </h1>
+        </router-link>
+      </portal>
+
+      <TButtonShare
+        :url="`https://wedance.vip/${profile.username}`"
+        :text="`WeDance: ${profile.username} is looking for a dance partner`"
+        :file="profile.socialCover"
+        :file-name="profile.username"
+      />
+
       <TProfilePhoto size="xl" :uid="profile.createdBy" />
       <div class="font-bold text-lg leading-none mt-4">
         {{ profile.name }}
@@ -116,6 +132,14 @@
     </div>
 
     <TPostList :filter="{ createdBy: profile.createdBy }" class="mt-4 w-full" />
+
+    <TShareGenerator
+      :id="profile.id"
+      collection="profiles"
+      :title="profile.username"
+      :value="profile.socialCover"
+      class="mt-4"
+    />
   </div>
 </template>
 

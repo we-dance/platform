@@ -2,7 +2,7 @@
   <div class="rounded border shadow p-4 bg-white">
     <div class="flex items-center">
       <router-link
-        :to="`/u/${profile.username}`"
+        :to="`/${profile.username}`"
         class="text-sm flex items-center flex-grow mr-2"
       >
         <TProfilePhoto size="lg" :uid="uid" class="mr-2" />

@@ -4,13 +4,13 @@
       {{ label }}
     </div>
     <div class="flex mt-4">
-      <router-link :to="`/u/${profile.username}`">
+      <router-link :to="`/${profile.username}`">
         <TProfilePhoto2 size="lg" :src="profile.photo" />
       </router-link>
       <div class="ml-2">
         <router-link
           class="font-bold hover:underline"
-          :to="`/u/${profile.username}`"
+          :to="`/${profile.username}`"
         >
           {{ profile.username }}
         </router-link>

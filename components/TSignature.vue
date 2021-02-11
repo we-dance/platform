@@ -8,7 +8,7 @@
     <div :class="small ? 'flex justify-between w-full' : ''">
       <router-link
         class="hover:underline"
-        :to="`/u/${getProfile(item.createdBy).username}`"
+        :to="`/${getProfile(item.createdBy).username}`"
         >{{ getProfile(item.createdBy).name }}</router-link
       >
       <div class="text-gray-600">{{ getDateTime(item.createdAt) }}</div>

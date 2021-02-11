@@ -1,61 +1,25 @@
 <template>
-  <div class="mx-auto max-w-md bg-white">
-    <portal to="title">
-      <router-link to="/" class="flex items-center">
-        <TIcon name="icon" size="8" />
-        <h1 class="ml-1 font-lato text-lg font-bold">{{ profile.username }}</h1>
-      </router-link>
-    </portal>
-
-    <TButtonShare
-      :url="`https://wedance.vip/u/${profile.username}`"
-      :text="`WeDance: ${profile.username} is looking for a dance partner`"
-      :file="profile.socialCover"
-      :file-name="profile.username"
-    />
-
-    <TProfileDancer :profile="profile" />
-
-    <TShareGenerator
-      :id="profile.id"
-      collection="profiles"
-      :title="profile.username"
-      :value="profile.socialCover"
-      class="mt-4"
-    />
+  <div>
+    Redirecting to
+    <router-link
+      class="underline hover:no-underline text-blue-700"
+      :to="redirectUrl"
+      >{{ redirectUrl }}</router-link
+    >...
   </div>
 </template>
 
 <script>
-import useAuth from '~/use/auth'
-
 export default {
-  layout: 'default',
-  async asyncData({ app, params, error }) {
-    const collection = await app.$fire.firestore
-      .collection('profiles')
-      .where('username', '==', params.id)
-      .get()
-
-    if (!collection.docs.length) {
-      error({ statusCode: 404 })
-    }
-
-    const doc = collection.docs[0]
-
-    const profile = doc.data()
-    profile.id = doc.id
-
-    return {
-      profile
+  layout: 'popup',
+  name: 'UIdIndexRedirect',
+  computed: {
+    redirectUrl() {
+      return `/${this.$route.params.id}`
     }
   },
-  setup() {
-    const { uid } = useAuth()
-
-    return {
-      uid
-    }
+  mounted() {
+    this.$router.replace(this.redirectUrl)
   }
 }
 </script>

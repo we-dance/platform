@@ -73,7 +73,7 @@
               :class="{ 'text-green-500': item.profile.partner === 'Yes' }"
             >
               {{ item.profile.name }}
-              <router-link target="_blank" :to="`/u/${item.profile.username}`"
+              <router-link target="_blank" :to="`/${item.profile.username}`"
                 >@{{ item.profile.username }}</router-link
               >
             </div>

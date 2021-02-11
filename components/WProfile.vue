@@ -7,7 +7,7 @@
   </div>
   <router-link
     v-else
-    :to="`/u/${profile.username}`"
+    :to="`/${profile.username}`"
     class="rounded border hover:border-black shadow p-4 bg-dark-gradient text-sm flex items-start justify-start flex-grow my-2 no-underline"
   >
     <TProfilePhoto size="xl" :uid="id" />

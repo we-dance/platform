@@ -1,12 +1,12 @@
 <template>
   <div class="flex items-center">
     <div v-if="photo">
-      <router-link :to="`/u/${profile.username}`">
+      <router-link :to="`/${profile.username}`">
         <TProfilePhoto :uid="uid" :size="size" />
       </router-link>
     </div>
     <div v-if="name">
-      <router-link class="hover:underline" :to="`/u/${profile.username}`">
+      <router-link class="hover:underline" :to="`/${profile.username}`">
         {{ profile.username }}
       </router-link>
     </div>

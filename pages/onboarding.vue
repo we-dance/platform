@@ -17,7 +17,7 @@
         label="Pick a username"
         type="username"
         label-position="vertical"
-        description="There might be lot of people with the same name, so username will help others to differentiate who is who. Also link to your profile will be wedance.vip/u/username"
+        description="There might be lot of people with the same name, so username will help others to differentiate who is who. Also link to your profile will be wedance.vip/username"
       />
     </div>
 

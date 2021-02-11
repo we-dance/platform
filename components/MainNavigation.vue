@@ -17,7 +17,7 @@
     <TButton to="/events" icon="event" :label="$t('events.title')" type="nav" />
 
     <template v-if="uid">
-      <TButton :to="`/u/${username}`" type="nav">
+      <TButton :to="`/${username}`" type="nav">
         <TProfilePhoto size="xs" :uid="uid" class="mr-1" />
         <span>{{ $t('myprofile.title') }}</span>
       </TButton>

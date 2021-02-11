@@ -210,7 +210,7 @@ export default {
 
       const url = process.env.app.url
 
-      return `${url}/u/${username}`
+      return `${url}/${username}`
     },
     currentTab: {
       get() {

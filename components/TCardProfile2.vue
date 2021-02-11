@@ -1,6 +1,6 @@
 <template>
   <router-link
-    :to="`/u/${profile.username}`"
+    :to="`/${profile.username}`"
     class="border rounded shadow text-sm bg-white overflow-hidden"
   >
     <div class="bg-gray-300">
