@@ -1,5 +1,5 @@
 <template>
-  <div class="mb-4 rounded bg-dark-gradient text-white text-sm text-center p-4">
+  <div class="rounded bg-dark-gradient text-white text-sm text-center p-4">
     <div>
       <h1 class="font-bold text-lg">{{ title }}</h1>
       <p>{{ description }}</p>

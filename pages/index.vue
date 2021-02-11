@@ -9,7 +9,7 @@
       </template>
     </TTitle>
 
-    <div class="overflow-x-scroll my-2">
+    <div class="overflow-x-scroll my-4">
       <div class="flex flex-no-wrap space-x-2">
         <TInputCity v-model="currentCity" />
         <TInputSelect v-model="sorting" :options="sortingList" />
@@ -22,7 +22,7 @@
     </div>
 
     <div>
-      <div v-if="!uid" class="md:flex space-x-2">
+      <div v-if="!uid" class="md:flex space-y-4 md:space-y-0 md:space-x-4 mb-4">
         <WTeaser
           :title="$t('teaser.partner.title')"
           :description="$t('teaser.partner.description')"
@@ -38,7 +38,7 @@
           class="flex-1"
         />
       </div>
-      <div v-if="uid">
+      <div v-if="uid" class="mb-4">
         <WTeaser
           v-if="city && city.telegram"
           :title="$t('teaser.chat.title')"
