@@ -24,35 +24,35 @@
           v-if="profile.instagram"
           icon="instagram"
           type="round"
-          iconSize="6"
+          icon-size="6"
           :href="`https://instagram.com/${profile.instagram}`"
         />
         <TButton
           v-if="profile.tiktok"
           icon="tiktok"
           type="round"
-          iconSize="6"
+          icon-size="6"
           :href="`https://tiktok.com/${profile.tiktok}`"
         />
         <TButton
           v-if="profile.youtube"
           icon="youtube"
           type="round"
-          iconSize="6"
+          icon-size="6"
           :href="`https://youtube.com/${profile.youtube}`"
         />
         <TButton
           v-if="profile.twitter"
           icon="twitter"
           type="round"
-          iconSize="6"
+          icon-size="6"
           :href="`https://twitter.com/${profile.twitter}`"
         />
         <TButton
           v-if="profile.facebook"
           icon="facebook"
           type="round"
-          iconSize="6"
+          icon-size="6"
           :href="`https://fb.com/${profile.facebook}`"
         />
         <TButton
