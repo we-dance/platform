@@ -15,7 +15,7 @@ export default {
   async asyncData({ app, params, error }) {
     const collection = await app.$fire.firestore
       .collection('profiles')
-      .where('username', '==', params.id)
+      .where('username', '==', params.slug)
       .get()
 
     if (!collection.docs.length) {
@@ -25,6 +25,7 @@ export default {
     const doc = collection.docs[0]
 
     const profile = doc.data()
+    profile.type = profile.type || 'Dancer'
     profile.id = doc.id
 
     return {
