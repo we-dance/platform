@@ -10,14 +10,17 @@
         </router-link>
       </portal>
 
-      <TButtonShare
-        :url="`https://wedance.vip/${profile.username}`"
-        :text="`WeDance: ${profile.username} is looking for a dance partner`"
-        :file="profile.socialCover"
-        :file-name="profile.username"
-      />
+      <div class="flex justify-end w-full">
+        <TButtonShare
+          :url="`https://wedance.vip/${profile.username}`"
+          :text="`WeDance: ${profile.username} is looking for a dance partner`"
+          :file="profile.socialCover"
+          :file-name="profile.username"
+        />
+      </div>
 
       <TProfilePhoto size="xl" :uid="profile.createdBy" />
+
       <div class="font-bold text-lg leading-none mt-4">
         {{ profile.name }}
       </div>
