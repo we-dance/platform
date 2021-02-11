@@ -9,7 +9,7 @@
   >
     <slot>
       <div class="flex items-center">
-        <TIcon v-if="icon" :name="icon" />
+        <TIcon v-if="icon" :size="iconSize" :name="icon" />
         <span v-if="label" class="ml-1">{{ label }}</span>
       </div>
     </slot>
@@ -17,7 +17,7 @@
   <router-link v-else-if="to" :class="classes" :to="to" v-on="$listeners">
     <slot>
       <div class="flex items-center">
-        <TIcon v-if="icon" :name="icon" />
+        <TIcon v-if="icon" :size="iconSize" :name="icon" />
         <span v-if="label" class="ml-1">{{ label }}</span>
       </div>
     </slot>
@@ -25,7 +25,7 @@
   <button v-else type="button" :class="classes" v-on="$listeners">
     <slot>
       <div class="flex items-center">
-        <TIcon v-if="icon" :name="icon" />
+        <TIcon v-if="icon" :size="iconSize" :name="icon" />
         <span v-if="label" class="ml-1">{{ label }}</span>
       </div>
     </slot>
@@ -43,6 +43,10 @@ export default {
     icon: {
       type: String,
       default: ''
+    },
+    iconSize: {
+      type: String,
+      default: '4'
     },
     to: {
       type: String,
@@ -89,7 +93,8 @@ export default {
         nav:
           'w-full px-4 py-2 items-center flex rounded-full border hover:border-indigo-500 hover:text-indigo-500',
         'nav-admin':
-          'w-full px-4 py-2 items-center text-gray-200 flex rounded-full border border-gray-200 hover:border-indigo-500 hover:text-indigo-500'
+          'w-full px-4 py-2 items-center text-gray-200 flex rounded-full border border-gray-200 hover:border-indigo-500 hover:text-indigo-500',
+        void: ''
       }
 
       let classes =

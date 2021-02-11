@@ -115,8 +115,10 @@ export default {
     }
   },
   watch: {
-    $route() {
-      this.updateMenu()
+    '$route.path': {
+      handler() {
+        this.updateMenu()
+      }
     }
   },
   mounted() {
