@@ -1,0 +1,93 @@
+posts.title: Eğilimler
+nav.signin: oturum aç
+profiles.title: Topluluk
+events.title: Etkinlikler
+myprofile.title: Benim profilim
+settings.title: Ayarlar
+signout: Çıkış Yap
+posts.add: Gönderi ekleyin
+profiles.add: Profil ekle
+city.anywhere: Herhangi bir yer
+city.change: Şehri değiştir
+objective.label: Amaç
+role.label: Rol
+sort.popular: Popüler
+sort.newest: En yeni
+style.label: Tarzı
+profile.username: Kullanıcı adı
+account.email: E-posta adresi
+account.password: Parola
+account.name: Ad Soyad
+profile.community: Dans ediyorum
+agreement: Oturum açarak, {terms} ve {privacy} 'nı kabul etmiş olursunuz.
+terms: Kullanım Şartları
+privacy: Gizlilik Politikası
+register.login: Oturum aç
+register.submit: Kayıt ol
+signin.register: Hesap oluştur
+signin.nopassword: Parolanızı mı unuttunuz
+nopassword.signin: Bir şifrem var
+nopassword.google: Google ile giriş yap
+nopassword.submit: Sihirli bağlantı gönder
+signin.submit: Oturum aç
+settings.account.title: Hesap
+settings.account.description: Bu bilgiler, bildirimler ve satın alımlar için
+  kullanılacaktır. Yalnızca sözleşmenizle hizmet sağlayıcılarla veya satıcılarla
+  paylaşılacaktır.
+settings.profile.title: Profil
+settings.profile.description: Diğer dansçıların hakkınızda ne bilmesini
+  istiyorsunuz? Dans tutkunuzu paylaşabileceğiniz bir yer. Kendinizi tanıtın,
+  utanmayın!
+settings.contacts.title: Kişiler
+settings.contacts.description: Bu bilgiler halka açık olacaktır. Kişilerinizi
+  yalnızca üyelerin sizinle iletişime geçmesini istiyorsanız paylaşın. Dikkat
+  çekmek için sosyal medyanızı paylaşmak için de güzel bir yer.
+settings.account.changepassword: Şifre değiştir
+settings.account.delete: Hesabı sil
+contacts.email: E-posta adresi
+contacts.instagram: Instagram
+contacts.facebook: Facebook
+contacts.telegram: Telgraf
+contacts.twitter: Twitter
+contacts.tiktok: Tik Tok
+contacts.youtube: Youtube
+contacts.website: İnternet sitesi
+save: Kayıt etmek
+profile.name: İsim
+profile.bio: Tanıtım
+profile.hometown: Memleket
+profile.birthday: Doğum günü
+profile.gender: Cinsiyet
+profile.styles: Dans stilleriniz ve seviyeniz
+profile.story: Dans hikayen
+profile.languages: Dilleriniz
+profile.skills: Dans etmeme becerileri
+profile.days: Günler
+profile.topics: Hangi dans konularıyla ilgileniyorsunuz?
+profile.newsletter: Haftalık ne tür bir güncelleme almak istersiniz?
+profile.teacher: Öğretiyor musun
+profile.partner: Bir dans partneri mi arıyorsunuz?
+profile.height: Boyunuz (cm)
+profile.weight: Kilonuz (kg)
+profile.partnerBio: Partnerin hakkında
+profile.photoFull: Tam boy fotoğrafınız
+teaser.partner.title: Bir ortağa mı ihtiyacınız var?
+teaser.partner.description: Dünyanın her yerinden dansçılar, dans partneri
+  bulmak için profillerini oluşturur
+teaser.partner.btn: Topluluğu Gör
+teaser.events.title: Profilinizi yayınlayın
+teaser.events.description: böylece diğerleri sizinle iletişim kurabilir
+teaser.events.btn: Ücretsiz katılın
+teaser.profiles.title: null
+teaser.profiles.description: Daha fazlasını görmek için WeDance Topluluğu'nun bir üyesi olun
+teaser.profiles.btn: Şimdi Katıl
+teaser.chat.title: Konuşmak lazım?
+teaser.chat.description: Her şehirde dans sohbetlerimiz var
+teaser.chat.btn: "{City} Sohbetine Katılın"
+teaser.involve.title: Yardımına ihtiyacımız var
+teaser.involve.description: Kar amacı gütmeyen uluslararası dans topluluğuyuz.
+  Herhangi bir ülkedeki herhangi bir şehre gitmenizi ve dans etkinlikleri ve
+  dansçılar bulmanızı istiyoruz. Her şey yerel toplulukla başlar.
+teaser.involve.btn: Katılın
+share.title: Paylaş
+share.copy: Bağlantıyı kopyala

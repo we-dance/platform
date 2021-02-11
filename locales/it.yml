@@ -1,0 +1,94 @@
+posts.title: Tendenze
+nav.signin: registrati
+profiles.title: Comunità
+events.title: Eventi
+myprofile.title: Il mio profilo
+settings.title: impostazioni
+signout: Disconnettersi
+posts.add: Aggiungi post
+profiles.add: Aggiungi profilo
+city.anywhere: Dovunque
+city.change: Cambia città
+objective.label: Obbiettivo
+role.label: Ruolo
+sort.popular: Popolare
+sort.newest: Più recente
+style.label: Stile
+profile.username: Nome utente
+account.email: E-mail
+account.password: Parola d'ordine
+account.name: Nome e cognome
+profile.community: Ballo dentro
+agreement: Eseguendo l'accesso, accetti i {terms} e la {privacy}.
+terms: Termini di servizio
+privacy: Politica sulla riservatezza
+register.login: Login
+register.submit: Registrati
+signin.register: Creare un account
+signin.nopassword: Ha dimenticato la password
+nopassword.signin: Ho una password
+nopassword.google: Accedi con Google
+nopassword.submit: Invia un collegamento magico
+signin.submit: Login
+settings.account.title: account
+settings.account.description: Queste informazioni verranno utilizzate per
+  notifiche e acquisti. Sarà condiviso con fornitori di servizi o venditori solo
+  con il tuo accordo.
+settings.profile.title: Profilo
+settings.profile.description: Cosa vuoi che gli altri ballerini sappiano di te?
+  È un posto dove condividere la tua passione per la danza. Presentati, non
+  essere timido!
+settings.contacts.title: Contatti
+settings.contacts.description: Queste informazioni saranno disponibili
+  pubblicamente. Condividi i tuoi contatti solo se vuoi essere contattato dai
+  membri. È anche un bel posto per condividere i tuoi social media per attirare
+  l'attenzione.
+settings.account.changepassword: Cambia la password
+settings.account.delete: Eliminare l'account
+contacts.email: E-mail
+contacts.instagram: Instagram
+contacts.facebook: Facebook
+contacts.telegram: Telegram
+contacts.twitter: Twitter
+contacts.tiktok: Tik Tok
+contacts.youtube: Youtube
+contacts.website: Sito web
+save: Salva
+profile.name: Nome
+profile.bio: Teaser
+profile.hometown: Città natale
+profile.birthday: Compleanno
+profile.gender: Genere
+profile.styles: I tuoi stili di danza e il tuo livello
+profile.story: La tua storia di danza
+profile.languages: Le tue lingue
+profile.skills: Abilità non danzanti
+profile.days: Giorni
+profile.topics: Quali argomenti di danza ti interessano?
+profile.newsletter: Che tipo di aggiornamento vorresti ricevere settimanalmente?
+profile.teacher: Stai insegnando?
+profile.partner: Cerchi un compagno di ballo?
+profile.height: La tua altezza (cm)
+profile.weight: Il tuo peso (kg)
+profile.partnerBio: Sul tuo partner
+profile.photoFull: La tua foto a tutta altezza
+teaser.partner.title: Hai bisogno di un partner?
+teaser.partner.description: I ballerini di tutto il mondo creano i loro profili
+  per trovare partner di ballo
+teaser.partner.btn: Vedi Community
+teaser.events.title: Pubblica il tuo profilo
+teaser.events.description: in modo che altri possano contattarti
+teaser.events.btn: Entra gratuitamente
+teaser.profiles.title: null
+teaser.profiles.description: Diventa un membro della comunità WeDance per vedere di più
+teaser.profiles.btn: Iscriviti adesso
+teaser.chat.title: Bisogno di parlare?
+teaser.chat.description: Abbiamo chat di ballo in ogni città
+teaser.chat.btn: Entra nella chat di {city}
+teaser.involve.title: Abbiamo bisogno del tuo aiuto
+teaser.involve.description: Siamo una comunità di danza internazionale senza
+  scopo di lucro. Vogliamo che tu vada in qualsiasi città di qualsiasi paese e
+  trovi eventi di danza e ballerini. Tutto inizia con la comunità locale.
+teaser.involve.btn: Mettersi in gioco
+share.title: Condividere
+share.copy: Copia link
