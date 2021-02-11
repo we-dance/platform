@@ -14,8 +14,7 @@
       :file-name="profile.username"
     />
 
-    <TProfileOrganiser v-if="profile.type === 'Organiser'" :profile="profile" />
-    <TProfileDancer v-else :profile="profile" />
+    <TProfileDancer :profile="profile" />
 
     <TShareGenerator
       :id="profile.id"
