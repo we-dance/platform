@@ -30,15 +30,12 @@
           </portal-target>
         </div>
         <div class="flex-grow"></div>
-        <button class="mr-2" @click="showSearch()">
+        <button @click="showSearch()">
           <TIcon
             name="search"
             class="w-8 h-8 rounded-full cursor-pointer hover:text-primary p-1"
           />
         </button>
-        <div v-if="!uid">
-          <TButton to="/signin">{{ $t('nav.signin') }}</TButton>
-        </div>
       </div>
     </header>
 

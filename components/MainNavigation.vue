@@ -25,6 +25,15 @@
       <TButton to="/settings" type="nav" :label="$t('settings.title')" />
       <TButton to="/signout" type="nav" :label="$t('signout')" />
     </template>
+    <template v-else>
+      <TButton to="/signin" type="nav" :label="$t('nav.signin')" />
+      <TButton
+        to="/register"
+        type="nav"
+        :label="$t('nav.signup')"
+        class="bg-primary border-none text-white hover:bg-dark"
+      />
+    </template>
 
     <template v-if="isAdmin">
       <div class="h-8"></div>
