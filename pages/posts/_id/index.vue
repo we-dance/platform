@@ -2,32 +2,34 @@
   <div class="md:grid grid-cols-12 gap-6">
     <div class="col-span-12">
       <div>
-        <div class="bg-white p-4 border rounded shadow">
-          <div v-if="can('edit', 'posts', post)" class="mb-2 flex posts-start">
-            <TButton
-              icon="edit"
-              :to="`/posts/${postId}/edit`"
-              class="hover:text-blue-500"
-              label="Edit"
+        <div v-if="can('edit', 'posts', post)" class="mb-2 flex posts-start">
+          <TButton
+            icon="edit"
+            :to="`/posts/${postId}/edit`"
+            class="hover:text-blue-500"
+            label="Edit"
+          />
+        </div>
+
+        <div class="md:p-4 md:border md:rounded md:shadow overflow-hidden">
+          <div class="-mt-4 -mx-4">
+            <img
+              v-if="post.cover"
+              :src="post.cover"
+              :alt="post.title"
+              class="w-full"
             />
           </div>
 
-          <img
-            v-if="post.cover"
-            :src="post.cover"
-            :alt="post.title"
-            class="mb-2"
-          />
-
-          <TTagsPreview :value="fullPost.tags" />
-
-          <h1 class="font-bold text-2xl leading-tight">
+          <h1 class="font-bold text-2xl leading-tight mt-4">
             {{ post.title }}
           </h1>
 
-          <TPreview :content="post.description" />
+          <TStyles class="text-xs mt-4" hide-level :value="post.styles" />
 
-          <div class="border-t mt-4 p-4 -mx-4 -mb-4 bg-gray-100">
+          <TPreview :content="post.description" class="mt-4" />
+
+          <div class="border-t mt-4 p-4 md:-mx-4 md:-mb-4 bg-gray-100">
             <div class="flex justify-between posts-center">
               <div class="flex">
                 <div class="text-gray-700 flex items-center justify-center">
