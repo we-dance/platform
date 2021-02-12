@@ -1,5 +1,5 @@
 <template>
-  <div class="flex justify-end mb-4">
+  <div>
     <TButton :icon="icon" :type="type" :label="label" @click="share()" />
     <TPopup v-if="sharing" title="Share" @close="sharing = false">
       <div class="w-64 space-y-2 py-4">

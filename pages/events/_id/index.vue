@@ -5,10 +5,15 @@
   </div>
   <div v-else>
     <div class="mx-auto max-w-md bg-white p-4">
-      <TButtonShare
-        :url="`https://wedance.vip/events/${item.id}`"
-        :text="item.name"
-      />
+      <div class="flex space-x-2 items-center justify-end mb-4">
+        <TButtonShare
+          :url="`https://wedance.vip/events/${item.id}`"
+          :text="item.name"
+          :file="item.socialCover"
+          :file-name="item.name"
+        />
+        <TCardActions :id="item.id" collection="events" :item="item" />
+      </div>
 
       <div
         v-if="can('edit', 'events', item)"

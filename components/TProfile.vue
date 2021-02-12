@@ -29,12 +29,19 @@
             <span v-if="profile.weight">• {{ profile.weight }}kg</span>
           </div>
         </div>
-        <TButtonShare
-          :url="`https://wedance.vip/${profile.username}`"
-          :text="`WeDance: ${profile.username} is looking for a dance partner`"
-          :file="profile.socialCover"
-          :file-name="profile.username"
-        />
+        <div class="flex space-x-2 items-center">
+          <TButtonShare
+            :url="`https://wedance.vip/${profile.username}`"
+            :text="`${profile.username} at WeDance`"
+            :file="profile.socialCover"
+            :file-name="profile.username"
+          />
+          <TCardActions
+            :id="profile.id"
+            collection="profiles"
+            :item="profile"
+          />
+        </div>
       </div>
 
       <div v-if="profile.bio && !profile.socialCover" class="mt-4">

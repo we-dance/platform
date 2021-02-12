@@ -269,7 +269,10 @@ export default {
   },
   methods: {
     async skipBoosting() {
-      await this.updateProfile({ skipBoosting: true })
+      await this.updateProfile({
+        socialCoverAt: +new Date(),
+        socialCoverPublish: 'No'
+      })
 
       this.isBoosting = false
     },
@@ -309,7 +312,12 @@ export default {
 
         const socialCover = result.data.url
 
-        await this.updateProfile({ socialCover })
+        await this.updateProfile({
+          socialCover,
+          socialCoverBy: this.uid,
+          socialCoverAt: +new Date(),
+          socialCoverPublish: 'Yes'
+        })
       } catch (e) {
         console.error(e)
       }

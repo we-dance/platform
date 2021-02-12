@@ -2,7 +2,7 @@
   <div class="rounded bg-white mb-4 shadow border">
     <div class="p-4">
       <div>
-        <div>
+        <div class="flex justify-between">
           <router-link
             :to="`/posts/${item.id}`"
             class="font-bold leading-tight"

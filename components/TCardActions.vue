@@ -1,11 +1,8 @@
 <template>
-  <div class="float-right -mr-2">
+  <div>
     <TMenu>
       <template v-slot:button>
-        <TIcon
-          class="cursor-pointer rounded-full hover:bg-gray-200 p-1"
-          name="more_vert"
-        />
+        <TButton icon="more_vert" type="icon" />
       </template>
       <template v-slot:menu="{ closeMenu }">
         <div class="w-32 py-2 bg-white rounded-lg shadow-xl border">
@@ -20,17 +17,24 @@
         </div>
       </template>
     </TMenu>
-    <TPopup v-if="isReportShown" title="Report a post">
-      <TSelect
-        v-model="reportCategory"
-        label="Category"
-        type="select"
-        :options="['other', 'spam']"
-      />
-      <TField v-model="reportReason" class="mt-2" label="Reason" />
-      <div class="mt-4 flex justify-end">
-        <TButton class="mr-2" @click="cancelReport">Cancel</TButton>
-        <TButton type="danger" @click="report">Report</TButton>
+    <TPopup v-if="isReportShown" title="Report" @close="isReportShown = false">
+      <div class="p-4">
+        <TField
+          v-model="reportCategory"
+          label="Reason"
+          type="select"
+          :options="['spam', 'other']"
+        />
+        <TField
+          v-model="reportReason"
+          class="mt-2"
+          label="Comments"
+          type="textarea"
+        />
+        <div class="mt-4 flex justify-end">
+          <TButton class="mr-2" @click="cancelReport">Cancel</TButton>
+          <TButton type="danger" @click="report">Report</TButton>
+        </div>
       </div>
     </TPopup>
   </div>
@@ -71,8 +75,9 @@ export default {
       this.reportId = 0
       this.reportReason = ''
       this.reportCategory = 'other'
+      this.isReportShown = false
     },
-    report(item) {
+    report() {
       this.createReport({
         state: 'open',
         documentId: this.id,
