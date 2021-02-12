@@ -1,14 +1,16 @@
-posts.title: Popüler
 signin: Oturum aç
 signup: Kayıt ol
-profiles.title: Topluluk
-events.title: Etkinlikler
-events.add: Etkinlik ekle
-myprofile.title: Benim profilim
-settings.title: Ayarlar
 signout: Çıkış Yap
+events.add: Etkinlik ekle
 posts.add: Gönderi ekle
 profiles.add: Profil ekle
+myprofile.events.add: Etkinlik ekle
+myprofile.posts.add: Bir gönderi yazın
+posts.title: Popüler
+profiles.title: Topluluk
+events.title: Etkinlikler
+myprofile.title: Benim profilim
+settings.title: Ayarlar
 city.anywhere: Herhangi bir yer
 city.change: Şehri değiştir
 objective.label: Amaç
@@ -20,6 +22,8 @@ profile.username: Kullanıcı adı
 account.email: E-posta adresi
 account.password: Parola
 account.name: Ad Soyad
+account.phone: Telefon
+account.newsletter: Haftalık ne tür bir güncelleme almak istersin?
 profile.community: Dans ediyorum
 agreement: Oturum açarak, {terms} ve {privacy} 'nı kabul etmiş olursunuz.
 terms: Kullanım Şartları
@@ -47,14 +51,9 @@ settings.contacts.description: Bu bilgiler halka açık olacaktır. Kişileriniz
 settings.account.changepassword: Şifre değiştir
 settings.account.delete: Hesabı sil
 contacts.email: E-posta adresi
-contacts.instagram: Instagram
-contacts.facebook: Facebook
-contacts.telegram: Telegram
-contacts.twitter: Twitter
-contacts.tiktok: Tik Tok
-contacts.youtube: Youtube
 contacts.website: İnternet sitesi
 save: Kayıt etmek
+profile.type: Tip
 profile.name: İsim
 profile.bio: Tanıtım
 profile.hometown: Yer
@@ -66,13 +65,15 @@ profile.languages: Dillerin
 profile.skills: Baska beceriler
 profile.days: Günler
 profile.topics: Hangi dans konularıyla ilgileniyorsun?
-profile.newsletter: Haftalık ne tür bir güncelleme almak istersin?
 profile.teacher: Ders veriyormusun?
 profile.partner: Bir dans arkadası mı arıyorsun?
 profile.height: Boyun (cm)
 profile.weight: Kilon (kg)
 profile.partnerBio: Dans arkadasın hakkında
-profile.photoFull: Tam boy fotoğrafın
+profile.objectives: Hedefler
+profile.place: Nerede buluşulur?
+profile.visibility: Görünürlük
+profile.photo: Fotoğraf
 teaser.partner.title: Bir dans arkadasına mı ihtiyacın var?
 teaser.partner.description: Dünyanın her yerinden dansçılar, dans partneri
   bulmak için profillerini oluşturur

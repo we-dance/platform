@@ -1,14 +1,16 @@
-posts.title: Les tendances
 signin: Se connecter
 signup: S'inscrire
+signout: Se déconnecter
+events.add: Ajouter
+posts.add: Ajouter
+profiles.add: Ajouter
+myprofile.events.add: Ajouter un évènement
+myprofile.posts.add: Rédiger un post
+posts.title: Les tendances
 profiles.title: Communauté
 events.title: Événements
-events.add: Ajouter un évènement
 myprofile.title: Mon profil
 settings.title: Paramètres
-signout: Se déconnecter
-posts.add: Ajouter un post
-profiles.add: Ajouter un profil
 city.anywhere: Nulle part
 city.change: Changer de ville
 objective.label: Objectif
@@ -20,6 +22,8 @@ profile.username: Nom d'utilisateur
 account.email: Email
 account.password: Mot de passe
 account.name: Nom et prénom
+account.phone: Téléphone
+account.newsletter: Quel type de mise à jour souhaitez-vous recevoir chaque semaine?
 profile.community: Je danse dans
 agreement: En vous connectant, vous acceptez les {terms} et la {privacy}.
 terms: Conditions d'utilisation
@@ -48,32 +52,29 @@ settings.contacts.description: Ces informations seront accessibles au public.
 settings.account.changepassword: Changer le mot de passe
 settings.account.delete: Supprimer le compte
 contacts.email: Email
-contacts.instagram: Instagram
-contacts.facebook: Facebook
-contacts.telegram: Telegram
-contacts.twitter: Twitter
-contacts.tiktok: Tik Tok
-contacts.youtube: Youtube
 contacts.website: Site Internet
 save: sauver
+profile.type: Type
 profile.name: Nom
 profile.bio: Taquin
 profile.hometown: Ville natale
 profile.birthday: Anniversaire
 profile.gender: Le sexe
 profile.styles: Vos styles de danse et votre niveau
-profile.story: Votre histoire de danse
+profile.story: Description
 profile.languages: Vos langues
 profile.skills: Compétences non dansantes
 profile.days: Journées
 profile.topics: Quels sujets de danse vous intéressent?
-profile.newsletter: Quel type de mise à jour souhaitez-vous recevoir chaque semaine?
 profile.teacher: Enseignez-vous?
 profile.partner: Cherchez-vous un partenaire de danse?
 profile.height: Votre taille (cm)
 profile.weight: Votre poids (kg)
 profile.partnerBio: À propos de votre partenaire
-profile.photoFull: Votre photo pleine hauteur
+profile.objectives: Objectifs
+profile.place: Où est ce que l'on se rencontre?
+profile.visibility: Visibilité
+profile.photo: Photo
 teaser.partner.title: Besoin d'un partenaire?
 teaser.partner.description: Des danseurs du monde entier créent leur profil pour
   trouver des partenaires de danse

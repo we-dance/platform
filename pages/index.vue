@@ -64,9 +64,9 @@
         class="mt-4 grid grid-cols-1 md:grid-cols-2 gap-2"
       >
         <router-link
-          :to="`/posts/${post.id}`"
           v-for="post in filteredItems"
           :key="post.id"
+          :to="`/posts/${post.id}`"
           class="hover:opacity-75"
         >
           <TSharePreviewPost

@@ -1,5 +1,5 @@
 <template>
-  <div class="flex items-start leading-none justify-between mb-4">
+  <div class="flex items-center leading-none justify-between mb-4">
     <h1 class="text-md font-bold">
       <slot />
     </h1>

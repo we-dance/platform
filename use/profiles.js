@@ -79,30 +79,30 @@ export default () => {
   const profileFields = [
     {
       name: 'type',
-      label: 'Type',
+      key: 'profile.type',
       type: 'select',
       options: typeList
     },
     {
       name: 'gender',
-      label: 'Gender',
+      key: 'profile.gender',
       type: 'select',
       options: ['Male', 'Female', 'Other']
     },
     {
       name: 'teacher',
-      label: 'Are you teaching?',
+      key: 'profile.teacher',
       type: 'select',
       options: ['Yes', 'No']
     },
     {
       name: 'photo',
-      label: 'Photo',
+      key: 'profile.photo',
       type: 'photo'
     },
     {
       name: 'name',
-      label: 'Name',
+      key: 'profile.name',
       required: true,
       placeholder: '(Required)',
       description:
@@ -110,7 +110,7 @@ export default () => {
     },
     {
       name: 'username',
-      label: 'Username',
+      key: 'profile.username',
       required: true,
       placeholder: '(Required)',
       type: 'username',
@@ -119,7 +119,7 @@ export default () => {
     },
     {
       name: 'bio',
-      label: 'Teaser',
+      key: 'profile.bio',
       type: 'textarea',
       description:
         'Introduce yourself. Make it short and attractive. Max 280 symbols.',
@@ -127,7 +127,7 @@ export default () => {
     },
     {
       name: 'story',
-      label: 'Description',
+      key: 'profile.story',
       type: 'textarea',
       placeholder: 'Description (markdown)',
       description: 'Who are you? What do you offer? What do you want?',
@@ -136,82 +136,82 @@ export default () => {
     },
     {
       name: 'community',
-      label: 'I dance in',
+      key: 'profile.community',
       required: true,
       type: 'city'
     },
     {
       name: 'location',
-      label: 'Hometown',
+      key: 'profile.hometown',
       required: true,
       type: 'location'
     },
     {
       name: 'styles',
-      label: 'Your dance styles and level',
+      key: 'profile.styles',
       type: 'stylesSelect'
     },
     {
       name: 'languages',
-      label: 'Your languages',
+      key: 'profile.languages',
       type: 'textarea',
       description: 'For example: English, German, etc.'
     },
     {
       name: 'jobs',
-      label: 'Non-dancing skills',
+      key: 'profile.skills',
       type: 'textarea',
       description:
         'What other skills would you like to share with dance community? For example: video editing, photography, copywriting, etc. It might be useful to exchange your skills for free passes.'
     },
     {
       name: 'learning',
-      label: 'Which dance topics you are interested in?',
+      key: 'profile.topics',
       type: 'textarea',
       description: 'For example: Musicality in Salsa, Men Styling, etc.'
     },
     {
       name: 'birthday',
-      label: 'Birthday',
+      key: 'profile.birthday',
       type: 'date',
       description: 'We will show only your age'
     },
     {
       name: 'height',
-      label: 'Height (cm)'
+      key: 'profile.height'
     },
     {
       name: 'weight',
-      label: 'Weight (kg)',
+      key: 'profile.weight',
       description: "Leave this field blank if you think it's irrelevant."
     },
     {
       name: 'partner',
-      label: 'Are you looking for a dance partner?',
+      key: 'profile.partner',
       type: 'select',
       options: ['Yes', 'No']
     },
     {
       name: 'partnerBio',
-      label: 'About your partner',
+      key: 'profile.partnerBio',
       type: 'textarea',
       description: 'What is important in your partner?'
     },
     {
       name: 'objectives',
-      label: 'Objectives',
+      key: 'profile.objectives',
       type: 'multi',
       options: objectivesList
     },
     {
       name: 'place',
-      label: 'Where to meet?',
+      key: 'profile.place',
       type: 'multi',
       options: meetingPlaces
     },
     {
       name: 'days',
-      label: 'Days?',
+      key: 'profile.days',
       type: 'multi',
       options: [
         {
@@ -246,7 +246,7 @@ export default () => {
     },
     {
       name: 'visibility',
-      label: 'Visibility',
+      key: 'profile.visibility',
       type: 'select',
       options: ['Public', 'Members', 'Unlisted'],
       tips:

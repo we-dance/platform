@@ -12,7 +12,9 @@
     <div v-if="error" class="text-red-500 py-4 text-right">
       {{ error.message }}
     </div>
-    <div class="flex justify-between items-center">
+    <div
+      class="flex justify-between bg-white p-4 -mb-4 -mx-4 border-t z-10 items-center bottom-0 sticky"
+    >
       <div>
         <TButton
           v-if="showRemove"
@@ -106,6 +108,10 @@ export default {
     getLabel(field) {
       if (typeof field === 'string') {
         return camelcase(field)
+      }
+
+      if (field.key) {
+        return this.$t(field.key)
       }
 
       if (field.label) {

@@ -1,7 +1,7 @@
 <template>
   <TSharePreview
     :type="event.type"
-    :username="event.organiser"
+    :username="author.username"
     :price="event.price"
     :title="event.name"
     :description="eventDate"
@@ -23,12 +23,21 @@ export default {
 
     if (!ref.exists) {
       error({ statusCode: 404 })
+      return
     }
 
     const event = ref.data()
 
+    const authorRef = await app.$fire.firestore
+      .collection('profiles')
+      .doc(event.createdBy)
+      .get()
+
+    const author = authorRef.data()
+
     return {
-      event
+      event,
+      author
     }
   },
   computed: {

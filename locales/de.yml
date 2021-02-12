@@ -1,14 +1,16 @@
-posts.title: Trends
 signin: Einloggen
 signup: Registrieren
+signout: Ausloggen
+events.add: Hinzufügen
+posts.add: Hinzufügen
+profiles.add: Hinzufügen
+myprofile.events.add: Veranstaltung hinzufügen
+myprofile.posts.add: Beitrag hinzufügen
+posts.title: Trends
 profiles.title: Community
 events.title: Veranstaltungen
-events.add: Veranstaltung hinzufügen
 myprofile.title: Mein Profil
 settings.title: Einstellungen
-signout: Ausloggen
-posts.add: Beitrag hinzufügen
-profiles.add: Profil hinzufügen
 city.anywhere: Irgendwo
 city.change: Stadt wechseln
 objective.label: Zweck
@@ -20,6 +22,8 @@ profile.username: Nutzername
 account.email: Email
 account.password: Passwort
 account.name: Vollständiger Name
+account.phone: Telefon
+account.newsletter: Welche Art von Update möchtest Du wöchentlich erhalten?
 profile.community: Ich tanze in
 agreement: Mit Deiner Anmeldung stimmst Du {terms} und {privacy} zu.
 terms: Nutzungsbedingungen
@@ -48,32 +52,29 @@ settings.contacts.description: Diese Informationen werden öffentlich zugänglic
 settings.account.changepassword: Ändere das Passwort
 settings.account.delete: Konto löschen
 contacts.email: Email
-contacts.instagram: Instagram
-contacts.facebook: Facebook
-contacts.telegram: Telegram
-contacts.twitter: Twitter
-contacts.tiktok: Tik Tok
-contacts.youtube: Youtube
 contacts.website: Webseite
 save: Speichern
+profile.type: Art
 profile.name: Name
 profile.bio: Teaser
 profile.hometown: Heimatort
 profile.birthday: Geburtstag
 profile.gender: Geschlecht
 profile.styles: Deine Tanzstile und Dein Level
-profile.story: Deine Tanzgeschichte
+profile.story: Beschreibung
 profile.languages: Deine Sprachen
 profile.skills: Sonstige Fähigkeiten
 profile.days: Tage
 profile.topics: Für welche Tanzthemen interessierst Du Dich?
-profile.newsletter: Welche Art von Update möchtest Du wöchentlich erhalten?
 profile.teacher: Unterrichtest Du?
 profile.partner: Suchst Du einen Tanzpartner?
 profile.height: Deine Größe (cm)
 profile.weight: Dein Gewicht (kg)
 profile.partnerBio: Über Deinen Partner
-profile.photoFull: Dein Foto in voller Größe
+profile.objectives: Ziele
+profile.place: Wo kann man sich treffen?
+profile.visibility: Sichtbarkeit
+profile.photo: Foto
 teaser.partner.title: Benötigst Du einen Partner?
 teaser.partner.description: Tänzer weltweit erstellen ihre Profile, um Tanzpartner zu finden
 teaser.partner.btn: Siehe Community

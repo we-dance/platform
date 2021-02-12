@@ -1,14 +1,16 @@
-posts.title: Тренды
 signin: Войти
 signup: Зарегистрироваться
-profiles.title: Сообщество
-events.title: События
-events.add: Добавить мероприятие
-myprofile.title: Мой профайл
-settings.title: Настройки
 signout: Выйти
-posts.add: Добавить сообщение
-profiles.add: Добавить профиль
+events.add: Добавить
+posts.add: Добавить
+profiles.add: Добавить
+myprofile.events.add: Добавить мероприятие
+myprofile.posts.add: Написать пост
+posts.title: Тренды
+profiles.title: Сообщество
+events.title: Мероприятия
+myprofile.title: Мой профиль
+settings.title: Настройки
 city.anywhere: Куда угодно
 city.change: Сменить город
 objective.label: Задача
@@ -20,6 +22,8 @@ profile.username: Имя пользователя
 account.email: Электронная почта
 account.password: Пароль
 account.name: Полное имя
+account.phone: Телефон
+account.newsletter: Какие обновления вы хотите получать еженедельно?
 profile.community: Я танцую в
 agreement: Выполняя вход, вы соглашаетесь с {terms} и {privacy}.
 terms: Условиями использования
@@ -48,32 +52,29 @@ settings.contacts.description: Эта информация будет общед
 settings.account.changepassword: Изменить пароль
 settings.account.delete: Удалить аккаунт
 contacts.email: Электронная почта
-contacts.instagram: Instagram
-contacts.facebook: Facebook
-contacts.telegram: Telegram
-contacts.twitter: Twitter
-contacts.tiktok: Tik Tok
-contacts.youtube: YouTube
 contacts.website: Веб-сайт
 save: Сохранить
+profile.type: Тип
 profile.name: Имя
 profile.bio: Тизер
 profile.hometown: Родной город
 profile.birthday: День рождения
 profile.gender: Пол
 profile.styles: Ваши танцевальные стили и уровень
-profile.story: Ваша танцевальная история
+profile.story: Описание
 profile.languages: Ваши языки
 profile.skills: Не танцевальные навыки
 profile.days: Дни
 profile.topics: Какие танцевальные темы вас интересуют?
-profile.newsletter: Какие обновления вы хотите получать еженедельно?
 profile.teacher: Вы преподаете?
 profile.partner: Вы ищете партнера для танцев?
 profile.height: Ваш рост (см)
 profile.weight: Ваш вес (кг)
 profile.partnerBio: О вашем партнере
-profile.photoFull: Ваше фото в полный рост
+profile.objectives: Цели
+profile.place: Где встретиться?
+profile.visibility: Видимость
+profile.photo: Фото
 teaser.partner.title: Нужен партнер?
 teaser.partner.description: Танцоры со всего мира создают свои профили, чтобы найти танцевальных партнеров
 teaser.partner.btn: Посмотреть сообщество

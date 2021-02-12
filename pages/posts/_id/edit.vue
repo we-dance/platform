@@ -1,26 +1,30 @@
 <template>
-  <div class="mx-auto w-full max-w-lg rounded border shadow my-4">
-    <div class="flex justify-between m-4">
-      <div class="font-bold">Write a new post</div>
-      <button class="cursor-pointer" @click="$router.back()">
-        <TIcon name="close" class="cursor-pointer w-4 h-4" />
-      </button>
+  <div class="bg-dark md:py-4">
+    <div
+      class="mx-auto w-full max-w-lg md:rounded md:border md:shadow bg-white"
+    >
+      <div class="flex justify-between m-4">
+        <div class="font-bold">Write a new post</div>
+        <button class="cursor-pointer" @click="$router.back()">
+          <TIcon name="close" class="cursor-pointer w-4 h-4" />
+        </button>
+      </div>
+
+      <TForm
+        v-model="item"
+        :fields="fields"
+        vertical
+        :show-cancel="!!id"
+        :show-remove="!!id"
+        :submit-label="id ? 'Save' : 'Add'"
+        class="bg-white p-4"
+        @save="saveItem"
+        @cancel="cancelItem"
+        @remove="removeItem"
+      />
+
+      <nuxt-content :document="newPostWidget" class="m-4 typo" />
     </div>
-
-    <TForm
-      v-model="item"
-      :fields="fields"
-      vertical
-      :show-cancel="!!id"
-      :show-remove="!!id"
-      :submit-label="id ? 'Save' : 'Add'"
-      class="bg-white p-4"
-      @save="saveItem"
-      @cancel="cancelItem"
-      @remove="removeItem"
-    />
-
-    <nuxt-content :document="newPostWidget" class="m-4 typo" />
   </div>
 </template>
 

@@ -1,14 +1,16 @@
-posts.title: Tendencias
 signin: Ingresar
 signup: Registrarse
+signout: Cerrar sesión
+events.add: Añadir
+posts.add: Añadir
+profiles.add: Añadir
+myprofile.events.add: Añadir evento
+myprofile.posts.add: Escribir una publicación
+posts.title: Tendencias
 profiles.title: Comunidad
 events.title: Eventos
-events.add: Añadir evento
 myprofile.title: Mi perfil
 settings.title: Configuraciones
-signout: Cerrar sesión
-posts.add: Agregar publicación
-profiles.add: Agregar perfil
 city.anywhere: En cualquier sitio
 city.change: Cambiar de ciudad
 objective.label: Objetivo
@@ -20,6 +22,8 @@ profile.username: Nombre de usuario
 account.email: Email
 account.password: Contraseña
 account.name: Nombre completo
+account.phone: Teléfono
+account.newsletter: ¿Qué tipo de actualización le gustaría recibir semanalmente?
 profile.community: Yo bailo en
 agreement: Al iniciar sesión, acepta las {terms} y la {privacy}.
 terms: Términos de servicio
@@ -48,32 +52,29 @@ settings.contacts.description: Esta información estará disponible públicament
 settings.account.changepassword: Cambia la contraseña
 settings.account.delete: Borrar cuenta
 contacts.email: Email
-contacts.instagram: Instagram
-contacts.facebook: Facebook
-contacts.telegram: Telegram
-contacts.twitter: Twitter
-contacts.tiktok: Tik Tok
-contacts.youtube: Youtube
 contacts.website: Sitio web
 save: Salvar
+profile.type: Tipo
 profile.name: Nombre
 profile.bio: Rompecabezas
 profile.hometown: Pueblo natal
 profile.birthday: Cumpleaños
 profile.gender: Género
 profile.styles: Tus estilos de baile y tu nivel
-profile.story: Tu historia de baile
+profile.story: Descripción
 profile.languages: Tus idiomas
 profile.skills: Habilidades para no bailar
 profile.days: Dias
 profile.topics: ¿Qué temas de baile te interesan?
-profile.newsletter: ¿Qué tipo de actualización le gustaría recibir semanalmente?
 profile.teacher: Estas enseñando
 profile.partner: ¿Buscas pareja de baile?
 profile.height: Tu altura (cm)
 profile.weight: Tu peso (kg)
 profile.partnerBio: Sobre tu pareja
-profile.photoFull: Tu foto de altura completa
+profile.objectives: Objetivos
+profile.place: ¿Dónde nos vemos?
+profile.visibility: Visibilidad
+profile.photo: Foto
 teaser.partner.title: ¿Necesitas un socio?
 teaser.partner.description: Bailarines de todo el mundo crean sus perfiles para encontrar parejas de baile
 teaser.partner.btn: Ver comunidad

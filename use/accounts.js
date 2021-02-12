@@ -9,25 +9,25 @@ export default () => {
   const accountFields = [
     {
       name: 'name',
-      label: 'Full Name',
+      key: 'account.name',
       required: true,
       placeholder: '(Required)'
     },
     {
       name: 'email',
-      label: 'Email',
+      key: 'account.email',
       required: true,
       placeholder: '(Required)'
     },
     {
       name: 'phone',
-      label: 'Phone',
+      key: 'account.phone',
       required: true,
       placeholder: '(Required)'
     },
     {
       name: 'newsletter',
-      label: 'What kind of updated would you like to receive weekly?',
+      key: 'account.newsletter',
       type: 'multi',
       options: [
         {

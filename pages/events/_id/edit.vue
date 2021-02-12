@@ -1,26 +1,30 @@
 <template>
-  <div class="mx-auto w-full max-w-lg">
-    <div class="flex justify-between m-4">
-      <div class="font-bold">Add event</div>
-      <button class="cursor-pointer" @click="$router.back()">
-        <TIcon name="close" class="cursor-pointer w-4 h-4" />
-      </button>
-    </div>
+  <div class="bg-dark md:py-4">
+    <div
+      class="mx-auto w-full max-w-lg md:rounded md:border md:shadow bg-white"
+    >
+      <div class="flex justify-between m-4">
+        <div class="font-bold">Add event</div>
+        <button class="cursor-pointer" @click="$router.back()">
+          <TIcon name="close" class="cursor-pointer w-4 h-4" />
+        </button>
+      </div>
 
-    <TForm
-      v-model="item"
-      :fields="fields"
-      vertical
-      :show-cancel="!!id"
-      :show-remove="!!id"
-      :show-copy="!!id"
-      :submit-label="id ? 'Save' : 'Add'"
-      class="bg-white p-4"
-      @copy="copyItem"
-      @save="saveItem"
-      @cancel="cancelItem"
-      @remove="removeItem"
-    />
+      <TForm
+        v-model="item"
+        :fields="fields"
+        vertical
+        :show-cancel="!!id"
+        :show-remove="!!id"
+        :show-copy="!!id"
+        :submit-label="id ? 'Save' : 'Add'"
+        class="bg-white p-4"
+        @copy="copyItem"
+        @save="saveItem"
+        @cancel="cancelItem"
+        @remove="removeItem"
+      />
+    </div>
   </div>
 </template>
 

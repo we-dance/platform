@@ -73,7 +73,7 @@
             :submit-label="$t('save')"
             @save="saveAccount"
           />
-          <TButton to="/settings?tab=password">{{
+          <TButton to="/settings?tab=password" class="mt-4">{{
             $t('settings.account.changepassword')
           }}</TButton>
           <div class="bg-red-200 mt-4 -mb-4 -mx-4 p-4">

@@ -120,7 +120,7 @@
 
     <div v-if="uid === profile.id" class="w-full flex justify-center p-4 mt-4">
       <TButton to="/events/-/edit" type="primary">{{
-        $t('events.add')
+        $t('myprofile.events.add')
       }}</TButton>
     </div>
 
@@ -165,7 +165,9 @@
     </div>
 
     <div v-if="uid === profile.id" class="w-full flex justify-center p-4 mt-4">
-      <TButton to="/posts/-/edit" type="primary">{{ $t('posts.add') }}</TButton>
+      <TButton to="/posts/-/edit" type="primary">{{
+        $t('myprofile.posts.add')
+      }}</TButton>
     </div>
 
     <TPostList :filter="{ createdBy: profile.createdBy }" class="mt-4 w-full" />
