@@ -26,7 +26,7 @@
       <TButton to="/signout" type="nav" :label="$t('signout')" />
     </template>
     <template v-else>
-      <TButton to="/signin" type="nav" :label="$t('nav.signin')" />
+      <TButton to="/signin" type="nav" :label="$t('signin')" />
       <TButton
         to="/register"
         type="nav"

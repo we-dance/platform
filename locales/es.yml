@@ -1,5 +1,6 @@
 posts.title: Tendencias
-nav.signin: Registrarse
+signin: Ingresar
+signup: Registrarse
 profiles.title: Comunidad
 events.title: Eventos
 events.add: Añadir evento

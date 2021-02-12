@@ -8,7 +8,7 @@
         <TIcon class="h-4 w-32 text-white" name="logo-text" />
       </div>
       <div>
-        <TButton to="/signout">Log out</TButton>
+        <TButton to="/signout">{{ $t('signout') }}</TButton>
       </div>
     </div>
     <main class="bg-white rounded p-4 max-w-sm mt-20">

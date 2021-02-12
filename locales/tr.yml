@@ -1,5 +1,6 @@
 posts.title: Popüler
-nav.signin: Oturum aç
+signin: Oturum aç
+signup: Kayıt ol
 profiles.title: Topluluk
 events.title: Etkinlikler
 events.add: Etkinlik ekle

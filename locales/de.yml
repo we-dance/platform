@@ -1,5 +1,6 @@
 posts.title: Trends
-nav.signin: Einloggen
+signin: Einloggen
+signup: Registrieren
 profiles.title: Community
 events.title: Veranstaltungen
 events.add: Veranstaltung hinzufügen
@@ -22,7 +23,7 @@ account.name: Vollständiger Name
 profile.community: Ich tanze in
 agreement: Mit Deiner Anmeldung stimmst Du {terms} und {privacy} zu.
 terms: Nutzungsbedingungen
-privacy: Datenschutz-Bestimmungen
+privacy: Datenschutz
 register.login: Anmeldung
 register.submit: Registrieren
 signin.register: Benutzerkonto erstellen

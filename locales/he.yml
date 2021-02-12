@@ -1,5 +1,6 @@
 ? posts.title
-? nav.signin
+? signin
+? signup
 ? profiles.title
 ? events.title
 ? events.add

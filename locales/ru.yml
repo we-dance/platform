@@ -1,5 +1,6 @@
 posts.title: Тренды
-nav.signin: Вход
+signin: Войти
+signup: Зарегистрироваться
 profiles.title: Сообщество
 events.title: События
 events.add: Добавить мероприятие
