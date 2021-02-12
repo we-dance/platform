@@ -30,7 +30,7 @@
       <TButton
         to="/register"
         type="nav"
-        :label="$t('nav.signup')"
+        :label="$t('signup')"
         class="bg-primary border-none text-white hover:bg-dark"
       />
     </template>
