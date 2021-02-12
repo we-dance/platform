@@ -64,7 +64,7 @@
 </template>
 
 <script>
-import { ref, computed } from '@nuxtjs/composition-api'
+import { ref, computed, watch } from '@nuxtjs/composition-api'
 import useRSVP from '~/use/rsvp'
 import useComments from '~/use/comments'
 import useCollection from '~/use/collection'
@@ -87,7 +87,12 @@ export default {
       myProfile.value ? Object.keys(myProfile.value.styles) : []
     )
 
-    const sorting = ref('-upVotes')
+    const sorting = ref(uid.value ? '-createdAt' : '-upVotes')
+
+    watch(uid, (uid) => {
+      sorting.value = uid ? '-createdAt' : '-upVotes'
+    })
+
     const sortingList = [
       {
         value: '-upVotes',
