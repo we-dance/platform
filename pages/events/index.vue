@@ -208,7 +208,7 @@ export default {
     )
 
     const thisCityFilter = (item) =>
-      currentCity.value ? item.city === currentCity.value : true
+      item.city && currentCity.value ? item.city === currentCity.value : true
 
     const items = computed(() => {
       let result = docs.value.map(map)

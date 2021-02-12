@@ -61,13 +61,9 @@
               </a>
             </div>
           </div>
-          <div v-if="item.organiser">
-            <div class="flex items-center">
-              <TIcon name="store" class="w-4 h-4 mr-1" />
-              <p>
-                {{ item.organiser }}
-              </p>
-            </div>
+          <div class="flex items-center">
+            <TIcon name="icon" class="w-4 h-4 mr-1" />
+            <TAvatar class="mr-2" name :uid="item.createdBy" />
           </div>
           <div v-if="item.price">
             <div class="flex items-center">

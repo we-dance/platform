@@ -55,7 +55,7 @@ app.post('/track/:action', async (req, res) => {
 
 app.get('/share/*', async (req, res) => {
   const path = req.params[0]
-  const timezone = '' + req.query.timezone || 'Europe/Berlin'
+  const timezone = req.query.timezone as string
 
   try {
     const imageBuffer = await screenshot(
