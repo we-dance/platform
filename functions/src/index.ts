@@ -55,9 +55,13 @@ app.post('/track/:action', async (req, res) => {
 
 app.get('/share/*', async (req, res) => {
   const path = req.params[0]
+  const timezone = '' + req.query.timezone || 'Europe/Berlin'
 
   try {
-    const imageBuffer = await screenshot(`https://wedance.vip/${path}/share`)
+    const imageBuffer = await screenshot(
+      `https://wedance.vip/${path}/share`,
+      timezone
+    )
 
     const bucket = admin.storage().bucket()
     const filePath = 'share/' + path + '.png'

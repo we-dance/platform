@@ -11,7 +11,7 @@
 </template>
 
 <script>
-import { getDay, getDate, getTime } from '~/utils'
+import { getDay, getDate, getTime, getTimeZone } from '~/utils'
 
 export default {
   layout: 'empty',
@@ -54,7 +54,9 @@ export default {
         result += getDate(this.event.endDate) + ' '
       }
 
-      result += getTime(this.event.endDate)
+      result += getTime(this.event.endDate) + ' '
+
+      result += getTimeZone(this.event.startDate)
 
       return result
     }

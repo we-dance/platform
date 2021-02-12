@@ -9,12 +9,14 @@ function getBrowser() {
 
 export default async (
   url: string,
+  timezone: string,
   config?: puppeteer.BinaryScreenShotOptions
 ) => {
   const browser = await getBrowser()
 
   const page = await browser.newPage()
   await page.setViewport({ width: 1080, height: 1080 })
+  await page.emulateTimezone(timezone)
   await page.goto(url, { waitUntil: 'networkidle2' })
 
   await page.waitForSelector('#canvas', {

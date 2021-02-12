@@ -89,6 +89,10 @@ export const getTime = (val) => {
   return formatDate(val, 'H:mm')
 }
 
+export const getTimeZone = (val) => {
+  return formatDate(val, '(z)')
+}
+
 export const openURL = (url) => {
   window.open(url, '_blank')
 }

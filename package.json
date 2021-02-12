@@ -40,6 +40,7 @@
     "core-js": "2",
     "d3": "^6.2.0",
     "date-fns": "^2.10.0",
+    "date-fns-timezone": "^0.1.4",
     "detect-inapp": "^1.4.0",
     "excerpt-html": "^1.2.1",
     "file-saver": "^2.0.2",
