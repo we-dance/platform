@@ -1,5 +1,7 @@
 <template>
-  <nav class="p-4 flex flex-col space-y-2 text-dark">
+  <nav
+    class="p-4 flex flex-col space-y-2 text-dark h-screen overflow-y-scroll sticky top-0"
+  >
     <TButton
       to="/"
       icon="logo-horizontal-dark"
