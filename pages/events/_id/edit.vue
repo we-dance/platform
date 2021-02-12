@@ -97,7 +97,7 @@ export default {
     }
   },
   setup() {
-    const { can, profile } = useAuth()
+    const { can, profile, isAdmin } = useAuth()
     const { params } = useRouter()
 
     const collection = 'events'
@@ -216,6 +216,12 @@ export default {
             name: 'city',
             label: 'Community',
             type: 'city'
+          },
+          {
+            name: 'createdBy',
+            label: 'Owner',
+            type: 'account',
+            when: () => isAdmin()
           }
         ]
       }

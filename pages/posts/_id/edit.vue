@@ -100,7 +100,7 @@ export default {
     }
   },
   setup() {
-    const { can, profile } = useAuth()
+    const { can, profile, isAdmin } = useAuth()
     const { params } = useRouter()
 
     const collection = 'posts'
@@ -140,6 +140,12 @@ export default {
             name: 'styles',
             label: 'Styles',
             type: 'stylesSelect'
+          },
+          {
+            name: 'createdBy',
+            label: 'Author',
+            type: 'account',
+            when: () => isAdmin()
           }
         ]
       },
