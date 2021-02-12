@@ -256,25 +256,31 @@ export default () => {
 
   const contactFields = [
     {
+      name: 'instagram',
+      label: 'instagram.com/'
+    },
+    {
+      name: 'facebook',
+      label: 'fb.com/'
+    },
+    {
+      name: 'telegram',
+      label: 't.me/'
+    },
+    {
+      name: 'twitter',
+      label: 'twitter.com/'
+    },
+    {
+      name: 'tiktok',
+      label: 'tiktok.com/'
+    },
+    {
+      name: 'youtube',
+      label: 'youtube.com/'
+    },
+    {
       name: 'email'
-    },
-    {
-      name: 'instagram'
-    },
-    {
-      name: 'facebook'
-    },
-    {
-      name: 'telegram'
-    },
-    {
-      name: 'twitter'
-    },
-    {
-      name: 'tiktok'
-    },
-    {
-      name: 'youtube'
     },
     {
       name: 'website'
