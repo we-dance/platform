@@ -2,6 +2,42 @@
   <main class="mt-8">
     <TLoader v-if="loading || !profile || !account" />
     <div v-else>
+      <TPopup v-if="isBoosting" title="Bonus" @click="skipBoosting()">
+        <div class="max-w-md">
+          <div v-if="generating" class="p-4">
+            Generating image... Please wait...
+          </div>
+          <div v-else>
+            <div class="p-4">
+              Would you like your profile to be published in our social media?
+              <div class="mt-4 flex flex-col items-center space-y-2">
+                <TButton
+                  icon="instagram"
+                  icon-size="6"
+                  :href="`https://instagram.com/WeDance${profile.community}`"
+                  :label="`WeDance${profile.community}`"
+                />
+                <TButton
+                  icon="facebook"
+                  icon-size="6"
+                  :href="`https://fb.com/WeDance${profile.community}`"
+                  :label="`WeDance${profile.community}`"
+                />
+                <TButton
+                  icon="telegram"
+                  icon-size="6"
+                  :href="`https://t.me/WeDance${profile.community}`"
+                  :label="`WeDance${profile.community}`"
+                />
+              </div>
+            </div>
+            <div class="flex justify-end mt-4 space-x-2">
+              <TButton @click="skipBoosting()">No, thank you</TButton>
+              <TButton type="primary" @click="generate()">Yes!</TButton>
+            </div>
+          </div>
+        </div>
+      </TPopup>
       <div>
         <div class="font-bold text-xl mb-4 pb-4 border-b">
           {{ $t('settings.title') }}
@@ -141,6 +177,7 @@
 </template>
 
 <script>
+import axios from 'axios'
 import { ref } from '@nuxtjs/composition-api'
 import useAuth from '~/use/auth'
 import useProfiles from '~/use/profiles'
@@ -149,6 +186,11 @@ import useRouter from '~/use/router'
 
 export default {
   middleware: ['auth'],
+  data: () => ({
+    canBoost: false,
+    isBoosting: false,
+    generating: false
+  }),
   setup() {
     const {
       uid,
@@ -226,13 +268,57 @@ export default {
     }
   },
   methods: {
+    async skipBoosting() {
+      await this.updateProfile({ skipBoosting: true })
+
+      this.isBoosting = false
+    },
     async saveProfile(data) {
       await this.updateProfile(data)
-      this.$router.push('/settings')
+
+      const canBoost =
+        data.photo && data.styles && data.community && data.bio && data.type
+
+      if (canBoost) {
+        this.isBoosting = true
+      } else {
+        this.$router.push('/settings')
+      }
     },
     async saveAccount(data) {
       await this.updateAccount(data)
       this.$router.push('/settings')
+    },
+
+    async generate() {
+      if (this.generating) {
+        return
+      }
+
+      this.generating = true
+      this.$nuxt.$loading.start()
+
+      try {
+        const result = await axios.get(
+          `https://us-central1-wedance-4abe3.cloudfunctions.net/hooks/share/${this.profile.username}`
+        )
+
+        if (!result.data.success) {
+          throw new Error('Failed to make a screenshot')
+        }
+
+        const socialCover = result.data.url
+
+        await this.updateProfile({ socialCover })
+      } catch (e) {
+        console.error(e)
+      }
+
+      this.generating = false
+      this.isBoosting = false
+      this.$nuxt.$loading.finish()
+
+      this.$router.push(`/${this.profile.username}`)
     }
   }
 }
