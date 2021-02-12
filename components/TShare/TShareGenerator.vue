@@ -71,7 +71,7 @@ export default {
 
       try {
         const result = await axios.get(
-          `https://us-central1-wedance-4abe3.cloudfunctions.net/hooks/share${this.$route.path}`
+          `https://us-central1-wedance-4abe3.cloudfunctions.net/hooks/share${this.$route.path}?timezone=Europe/Berlin`
         )
 
         if (!result.data.success) {

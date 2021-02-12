@@ -303,7 +303,7 @@ export default {
 
       try {
         const result = await axios.get(
-          `https://us-central1-wedance-4abe3.cloudfunctions.net/hooks/share/${this.profile.username}`
+          `https://us-central1-wedance-4abe3.cloudfunctions.net/hooks/share/${this.profile.username}?timezone=Europe/Berlin`
         )
 
         if (!result.data.success) {
