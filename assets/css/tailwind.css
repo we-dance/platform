@@ -48,6 +48,11 @@ html {
   background-repeat: no-repeat;
 }
 
+.square {
+  width: 100%;
+  padding-top: 100%;
+}
+
 .aspect-ratio {
   overflow: hidden;
   /* Calculated from the aspect ratio of the content (in case of 16:9 it is 9/16= 0.5625) */

@@ -12,20 +12,33 @@
         </div>
 
         <div class="md:p-4 md:border md:rounded md:shadow overflow-hidden">
-          <div class="-mt-4 -mx-4">
-            <img
-              v-if="post.cover"
-              :src="post.cover"
-              :alt="post.title"
-              class="w-full"
-            />
-          </div>
+          <template v-if="false">
+            <div class="-mt-4 -mx-4">
+              <img
+                v-if="post.cover"
+                :src="post.cover"
+                :alt="post.title"
+                class="w-full"
+              />
+            </div>
 
-          <h1 class="font-bold text-2xl leading-tight mt-4">
-            {{ post.title }}
-          </h1>
+            <h1 class="font-bold text-2xl leading-tight mt-4">
+              {{ post.title }}
+            </h1>
 
-          <TStyles class="text-xs mt-4" hide-level :value="post.styles" />
+            <TStyles class="text-xs mt-4" hide-level :value="post.styles" />
+          </template>
+
+          <TSharePreviewPost
+            type="News"
+            :username="author.username"
+            :title="post.title"
+            :description="fullPost.excerpt"
+            :photo="post.cover || author.photo"
+            :styles="post.styles"
+            align="center"
+            class="md:-mt-4 md:-mx-4"
+          />
 
           <TPreview :content="post.description" class="mt-4" />
 

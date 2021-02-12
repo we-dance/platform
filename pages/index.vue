@@ -13,6 +13,7 @@
       <div class="flex flex-no-wrap space-x-2">
         <TInputCity v-model="currentCity" />
         <TInputSelect v-model="sorting" :options="sortingList" />
+        <TInputSelect v-model="view" :options="viewOptions" />
         <TInputMultiDropdown
           v-model="dances"
           :options="dancesList"
@@ -58,7 +59,30 @@
       <TLoader v-if="loading" />
       <div v-else-if="!filteredItems.length">No posts found</div>
 
-      <TPost v-for="item in filteredItems" :key="item.id" :item="item" />
+      <div
+        v-if="view === 'covers'"
+        class="mt-4 grid grid-cols-1 md:grid-cols-2 gap-2"
+      >
+        <router-link
+          :to="`/posts/${post.id}`"
+          v-for="post in filteredItems"
+          :key="post.id"
+          class="hover:opacity-75"
+        >
+          <TSharePreviewPost
+            :username="post.author"
+            :title="post.title"
+            :photo="post.cover"
+            :styles="post.styles"
+            align="center"
+            size="sm"
+          />
+        </router-link>
+      </div>
+
+      <div v-else>
+        <TPost v-for="item in filteredItems" :key="item.id" :item="item" />
+      </div>
     </div>
   </main>
 </template>
@@ -71,6 +95,7 @@ import useCollection from '~/use/collection'
 import useAccounts from '~/use/accounts'
 import useCities from '~/use/cities'
 import useAuth from '~/use/auth'
+import useProfiles from '~/use/profiles'
 import { sortBy } from '~/utils'
 
 export default {
@@ -80,6 +105,7 @@ export default {
     const { getCommentsCount, loading: loadingComments } = useComments()
     const { currentCity, city } = useCities()
     const { docs, loading: loadingPosts, getById } = useCollection('posts')
+    const { getProfile } = useProfiles()
 
     const { uid, profile: myProfile } = useAuth()
     const dances = ref({})
@@ -92,6 +118,18 @@ export default {
     watch(uid, (uid) => {
       sorting.value = uid ? '-createdAt' : '-upVotes'
     })
+
+    const view = ref('covers')
+    const viewOptions = [
+      {
+        value: 'covers',
+        label: 'Covers'
+      },
+      {
+        value: 'text',
+        label: 'Text'
+      }
+    ]
 
     const sortingList = [
       {
@@ -116,6 +154,9 @@ export default {
       const multi = !response ? 3 : response === 'up' ? 2 : 1
       const order = multi * 100 + votes
       const commentsCount = getCommentsCount(item.id)
+      const profile = getProfile(item.createdBy)
+      const author = profile.username
+      const cover = item.cover || profile.photo
 
       return {
         ...item,
@@ -124,7 +165,9 @@ export default {
         downVotes,
         votes,
         response,
-        order
+        order,
+        author,
+        cover
       }
     }
 
@@ -147,7 +190,9 @@ export default {
       dances,
       dancesList,
       sorting,
-      sortingList
+      sortingList,
+      view,
+      viewOptions
     }
   },
   data: () => ({
