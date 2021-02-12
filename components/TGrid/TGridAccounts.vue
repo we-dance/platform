@@ -196,6 +196,21 @@ export default {
         filter: (account) => selected.value[account.id]
       },
       {
+        value: 'socialCover',
+        label: 'Social Cover',
+        filter: (account) => !!account.profile.socialCover
+      },
+      {
+        value: 'boosting',
+        label: 'Boosting',
+        filter: (account) => account.profile.socialCoverPublish === 'Yes'
+      },
+      {
+        value: 'noboosting',
+        label: 'Not boosting',
+        filter: (account) => account.profile.socialCoverPublish === 'No'
+      },
+      {
         value: 'looking',
         label: 'Looking',
         filter: (account) => account.profile.partner === 'Yes'

@@ -39,13 +39,13 @@
 
     <template v-if="isAdmin">
       <div class="h-8"></div>
-      <TButton to="/admin/matches" type="nav-admin" label="Matches" />
-      <TButton to="/admin/reports" type="nav-admin" label="Reports" />
-      <TButton to="/admin/tags" type="nav-admin" label="Tags" />
       <TButton to="/admin/accounts" type="nav-admin" label="Accounts" />
       <TButton to="/admin/cities" type="nav-admin" label="Cities" />
-      <TButton to="/admin/templates" type="nav-admin" label="Templates" />
+      <TButton to="/admin/reports" type="nav-admin" label="Reports" />
+      <TButton to="/admin/matches" type="nav-admin" label="Matches" />
       <TButton to="/admin/emails" type="nav-admin" label="Emails" />
+      <TButton to="/admin/templates" type="nav-admin" label="Templates" />
+      <TButton to="/admin/tags" type="nav-admin" label="Tags" />
     </template>
   </nav>
 </template>
