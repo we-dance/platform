@@ -17,78 +17,61 @@
           :options="dancesList"
           :label="$t('style.label')"
         />
+        <TInputSelect
+          v-if="uid"
+          v-model="activeFilter"
+          :options="filterOptions"
+        />
+        <TInputSelect v-model="view" :options="viewOptions" />
       </div>
     </div>
-
-    <TTabs v-if="uid" v-model="activeFilter" :tabs="filterOptions" />
 
     <div class="mt-4">
       <TLoader v-if="loading" />
       <div v-else-if="!count" class="p-4">
         No events found. Would you like to add one?
       </div>
-      <div>
+
+      <div
+        v-if="view === 'covers'"
+        class="mt-4 grid grid-cols-1 md:grid-cols-2 gap-2"
+      >
+        <router-link
+          v-for="event in events"
+          :key="event.id"
+          :to="`/events/${event.id}`"
+          class="hover:opacity-75"
+        >
+          <TSharePreviewPost
+            :username="event.organiser"
+            :title="event.name"
+            :description="getDescription(event)"
+            :extra="event.price"
+            :photo="event.cover"
+            :styles="event.styles"
+            size="sm"
+          />
+        </router-link>
+      </div>
+
+      <div v-else>
         <div v-for="(items, date) in itemsByDate" :key="date" class="mb-8">
           <h2 class="font-bold bg-dark text-white py-2 px-4 rounded">
             {{ getDay(date) }}, {{ getDate(date) }}
           </h2>
-          <div
-            v-for="item in items"
-            :key="item.id"
-            class="bg-white px-4 mt-4 flex"
-          >
-            <div v-if="false" class="mr-2 flex justify-center items-start pt-1">
-              <button
-                v-if="item.response === 'up'"
-                class="text-green-500"
-                @click="updateRsvp(item.id, 'events', 'down')"
-              >
-                <TIcon name="check_circle" class="w-4 h-4" />
-              </button>
-              <button v-else @click="updateRsvp(item.id, 'events', 'up')">
-                <TIcon name="check" class="w-4 h-4" />
-              </button>
-            </div>
-            <div class="mr-2">
-              {{ getTime(item.startDate) }}
-            </div>
-            <div class="mr-2">
-              {{ item.type === 'Party' ? '🎉' : '👣' }}
-            </div>
-            <div>
-              <router-link
-                :to="`/events/${item.id}`"
-                class="font-bold leading-none hover:underline hover:text-primary"
-              >
-                {{ item.name }}
-              </router-link>
-              <div class="text-xs flex flex-wrap">
-                <div class="flex items-center mr-2">
-                  <TIcon name="icon" class="w-4 h-4 mr-1" />
-                  <TAvatar class="mr-2" name :uid="item.createdBy" />
-                </div>
-                <div v-if="item.address">
-                  <div class="flex items-center">
-                    <TIcon name="place" class="w-4 h-4 mr-1" />
-                    <p>
-                      {{ item.address }}
-                      <span v-if="item.city">• {{ item.city }}</span>
-                    </p>
-                  </div>
-                </div>
-              </div>
-            </div>
+          <div v-for="item in items" :key="item.id" class="px-4 mt-4">
+            <TEventText :item="item" />
           </div>
         </div>
-
-        <WTeaser
-          v-if="!uid"
-          :title="$t('teaser.allevents.title')"
-          :description="$t('teaser.allevents.description')"
-          :button="$t('teaser.allevents.btn')"
-          url="/register"
-        />
       </div>
+
+      <WTeaser
+        v-if="!uid"
+        :title="$t('teaser.allevents.title')"
+        :description="$t('teaser.allevents.description')"
+        :button="$t('teaser.allevents.btn')"
+        url="/register"
+      />
     </div>
   </main>
 </template>
@@ -102,27 +85,37 @@ import useAccounts from '~/use/accounts'
 import useAuth from '~/use/auth'
 import useCities from '~/use/cities'
 import useRouter from '~/use/router'
+import useProfiles from '~/use/profiles'
 import {
   dateDiff,
   sortBy,
-  getTime,
   getDate,
   getDay,
   getYmd,
+  getTime,
+  getTimeZone,
   getDateObect
 } from '~/utils'
 
 export default {
   name: 'EventsIndex',
   setup() {
-    const {
-      getCount,
-      getRsvpResponse,
-      updateRsvp,
-      loading: loadingRsvps
-    } = useRSVP()
+    const { getCount, getRsvpResponse, loading: loadingRsvps } = useRSVP()
     const { currentCity } = useCities()
     const { docs, loading: loadingPosts, getById } = useCollection('events')
+    const { getProfile } = useProfiles()
+
+    const view = ref('covers')
+    const viewOptions = [
+      {
+        value: 'covers',
+        label: 'Covers'
+      },
+      {
+        value: 'text',
+        label: 'Calendar'
+      }
+    ]
 
     const { uid, profile: myProfile } = useAuth()
     const dances = ref({})
@@ -142,6 +135,7 @@ export default {
       const multi = !response ? 3 : response === 'up' ? 2 : 1
       const order = multi * 100 + votes
       const startDate = getDateObect(item.startDate)
+      const organiser = getProfile(item.createdBy).username
 
       return {
         ...item,
@@ -150,7 +144,8 @@ export default {
         downVotes,
         votes,
         response,
-        order
+        order,
+        organiser
       }
     }
 
@@ -228,15 +223,14 @@ export default {
     return {
       currentCity,
       count,
+      events: items,
       itemsByDate,
       getRsvpResponse,
-      updateRsvp,
       dateDiff,
       getAccount,
       loading,
       getById,
       uid,
-      getTime,
       getDay,
       getDate,
       startOfWeekString,
@@ -244,7 +238,30 @@ export default {
       activeFilter,
       filterOptions,
       dances,
-      dancesList
+      dancesList,
+      view,
+      viewOptions
+    }
+  },
+  methods: {
+    getDescription(event) {
+      let result =
+        getDay(event.startDate) +
+        ', ' +
+        getDate(event.startDate) +
+        ' ' +
+        getTime(event.startDate) +
+        ' – '
+
+      if (getDate(event.startDate) !== getDate(event.endDate)) {
+        result += getDate(event.endDate) + ' '
+      }
+
+      result += getTime(event.endDate) + ' '
+
+      result += getTimeZone(event.startDate)
+
+      return result
     }
   }
 }
