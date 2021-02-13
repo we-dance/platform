@@ -1,6 +1,7 @@
 <template>
   <div class="flex flex-col">
     <div v-if="editable" class="flex justify-end mb-4">
+      <TButton class="mr-2" @click="proccess">Proccess</TButton>
       <TButton class="mr-2" @click="download">Download</TButton>
       <TButton @click="removeSelected">Delete</TButton>
     </div>
@@ -101,6 +102,7 @@ utms: {{ item.marketing.utms }}</pre
             >
             <pre class="text-xs">joined: {{ getDate(item.createdAt) }}</pre>
             <pre class="text-xs">used: {{ item.daysUsed }} days</pre>
+            <pre class="text-xs">type: {{ item.profile.type }}</pre>
             <pre class="text-xs">visibility: {{ item.profile.visibility }}</pre>
             <pre
               v-for="contactField in contactFields"
@@ -152,7 +154,7 @@ export default {
   },
   setup() {
     const { docs } = useCollection('accounts')
-    const { remove: removeProfile } = useDoc('profiles')
+    const { remove: removeProfile, update: updateProfile } = useDoc('profiles')
     const { remove: removeAccount, update: updateAccount } = useDoc('accounts')
     const { getProfile, contactFields } = useProfiles()
     const nameFilter = ref('')
@@ -194,6 +196,16 @@ export default {
         value: 'selected',
         label: `Selected (${Object.keys(selected.value).length})`,
         filter: (account) => selected.value[account.id]
+      },
+      {
+        value: 'notype',
+        label: 'No Type',
+        filter: (account) => !account.profile.type
+      },
+      {
+        value: 'visibility',
+        label: 'No visibility',
+        filter: (account) => !account.profile.visibility
       },
       {
         value: 'socialCover',
@@ -301,7 +313,8 @@ export default {
       removeAccount,
       list,
       applyList,
-      contactFields
+      contactFields,
+      updateProfile
     }
   },
   computed: {
@@ -326,6 +339,15 @@ export default {
       }
 
       this.selected = this.value
+    },
+    proccess() {
+      this.items.forEach(async (item) => {
+        // try {
+        //   await this.updateProfile(item.id, { visibility: 'Members' })
+        // } catch (e) {
+        //   console.error(e)
+        // }
+      })
     },
     download() {
       const flatItems = this.items.map((item) => {

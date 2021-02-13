@@ -36,7 +36,7 @@
     <div class="overflow-x-scroll my-2">
       <div class="flex flex-no-wrap space-x-2">
         <TInputCity v-model="currentCity" />
-        <TInputSelect v-model="profileType" :options="typeList" />
+        <TInputSelect v-model="profileType" :options="typeOptions" />
         <TInputSelect
           v-model="objective"
           :options="objectivesOptions"
@@ -155,6 +155,14 @@ export default {
     const { currentCity } = useCities()
     const { objectivesList, typeList } = useProfiles()
 
+    const typeOptions = [
+      {
+        label: 'Type',
+        value: ''
+      },
+      ...typeList
+    ]
+
     const objectivesOptions = [
       {
         label: 'Objective',
@@ -165,7 +173,7 @@ export default {
 
     const tab = ref('partner')
     const objective = ref('')
-    const profileType = ref('Dancer')
+    const profileType = ref('')
     const roles = ref('')
     const dances = ref('')
 
@@ -231,8 +239,8 @@ export default {
         )
       }
 
-      result = result.filter(
-        (item) => item.type && item.type === profileType.value
+      result = result.filter((item) =>
+        profileType.value ? item.type && item.type === profileType.value : true
       )
 
       return result
@@ -251,7 +259,7 @@ export default {
       rolesList,
       dancesList,
       currentCity,
-      typeList,
+      typeOptions,
       profileType
     }
   }

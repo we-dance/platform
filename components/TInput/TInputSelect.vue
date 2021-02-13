@@ -1,5 +1,5 @@
 <template>
-  <div class="inline-block relative">
+  <div class="flex-shrink-0 relative">
     <select
       :value="value"
       v-bind="$attrs"

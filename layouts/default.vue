@@ -24,8 +24,7 @@
           </div>
           <portal-target name="title">
             <router-link to="/">
-              <TIcon name="logo-horizontal-dark" class="hidden md:block" />
-              <TIcon name="icon" size="8" class="block md:hidden" />
+              <TIcon name="logo-horizontal-dark" />
             </router-link>
           </portal-target>
         </div>

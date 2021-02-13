@@ -159,7 +159,6 @@ export default {
     const startOfWeekString = getYmd(startOfWeekDate)
     const startOfTodayString = getYmd(now)
     const endOfWeekString = getYmd(addDays(startOfWeekDate, 7))
-    const in7DaysString = getYmd(addDays(now, 7))
     const endOfYearString = getYmd(endOfYear(now))
 
     const count = computed(() => items.value.length)
@@ -169,19 +168,11 @@ export default {
 
     const { getAccount } = useAccounts()
 
-    const activeFilter = ref('next7days')
+    const activeFilter = ref('thisYear')
 
     const isPublic = (item) => item.visibility !== 'Unlisted'
 
     const filterOptions = computed(() => [
-      {
-        value: 'next7days',
-        label: 'Next 7 days',
-        filter: (item) =>
-          getYmd(item.startDate) >= startOfTodayString &&
-          getYmd(item.startDate) <= in7DaysString &&
-          isPublic(item)
-      },
       {
         value: 'thisYear',
         label: 'This Year',
