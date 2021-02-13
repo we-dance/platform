@@ -71,6 +71,7 @@
         :description="$t('teaser.allevents.description')"
         :button="$t('teaser.allevents.btn')"
         url="/register"
+        class="mt-4"
       />
     </div>
   </main>

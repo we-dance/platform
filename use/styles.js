@@ -65,7 +65,7 @@ export default () => {
 
     const count = result.length
 
-    if (count > limit) {
+    if (limit && count > limit) {
       result = result.slice(0, limit - 1)
 
       const newCount = result.length
