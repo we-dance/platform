@@ -63,6 +63,22 @@ export default () => {
 
     result = result.sort(sortBy('name'))
 
+    const count = result.length
+
+    if (count > limit) {
+      result = result.slice(0, limit - 1)
+
+      const newCount = result.length
+      const diff = count - newCount
+
+      if (newCount < count) {
+        result.push({
+          id: 'more',
+          name: `and ${diff} more`
+        })
+      }
+    }
+
     return result
   }
 

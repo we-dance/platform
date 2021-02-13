@@ -120,7 +120,22 @@
           </div>
         </div>
 
-        <TCardProfile2 v-for="item in items" :key="item.id" :uid="item.id" />
+        <router-link
+          v-for="profile in items"
+          :key="profile.id"
+          :to="`/${profile.username}`"
+          class="hover:opacity-75"
+        >
+          <TSharePreviewPost
+            :type="profile.type"
+            :username="profile.username"
+            :description="getExcerpt(profile.bio)"
+            :extra="profile.height ? `${profile.height}cm` : ''"
+            :photo="profile.photo"
+            :styles="profile.styles"
+            size="sm"
+          />
+        </router-link>
       </div>
 
       <WTeaser
@@ -140,7 +155,7 @@ import { ref, computed } from '@nuxtjs/composition-api'
 import useAuth from '~/use/auth'
 import useCollection from '~/use/collection'
 import useCities from '~/use/cities'
-import { sortBy } from '~/utils'
+import { sortBy, getExcerpt } from '~/utils'
 import useProfiles from '~/use/profiles'
 
 export default {
@@ -260,7 +275,8 @@ export default {
       dancesList,
       currentCity,
       typeOptions,
-      profileType
+      profileType,
+      getExcerpt
     }
   }
 }

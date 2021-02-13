@@ -14,18 +14,18 @@
           >
             {{ type }}
           </div>
-          <div class="mt-8 text-shadow-md text-right space-y-2">
+          <div class="mt-2 text-shadow-md text-right space-y-2">
             <div
               v-for="dance in dances"
               :key="dance.id"
-              class="uppercase text-base"
+              class="uppercase text-xs"
             >
               {{ dance.name }}
             </div>
           </div>
         </div>
-        <div class="flex-grow text-center flex items-center justify-center p-8">
-          <div v-if="align === 'center'">
+        <div class="flex-grow text-center flex items-center justify-center">
+          <div v-if="align === 'center'" class="p-8">
             <div
               v-if="title"
               class="text-xl font-bold leading-tight"
@@ -43,15 +43,16 @@
             <div v-if="title" class="text-lg font-bold leading-tight">
               {{ title }}
             </div>
-            <div class="text-base leading-tight">
+            <div class="text-sm leading-tight">
               {{ description }}
             </div>
           </template>
           <div class="flex justify-between items-end">
-            <div class="flex items-center mt-4">
-              <TIcon class="w-8 h-8 mr-2" name="icon" />
-              <div class="text-base font-bold">{{ username }}</div>
+            <div class="flex items-center mt-2">
+              <TIcon class="w-4 h-4 mr-1" name="icon" />
+              <div class="text-sm font-bold">{{ username }}</div>
             </div>
+            <div v-if="extra" class="text-sm">{{ extra }}</div>
             <div
               v-if="objective"
               class="bg-primary text-base font-bold text-white rounded-full px-4 py-2 leading-none"
@@ -95,7 +96,7 @@ export default {
       type: String,
       default: ''
     },
-    price: {
+    extra: {
       type: String,
       default: ''
     },
