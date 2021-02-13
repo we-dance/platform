@@ -128,7 +128,7 @@ export default {
       ls.remove('target')
 
       if (!target) {
-        target = '/'
+        target = `/${this.username}`
       }
 
       this.$router.push(target)

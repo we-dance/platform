@@ -275,6 +275,11 @@ export default {
       })
 
       this.isBoosting = false
+
+      this.goToProfile()
+    },
+    goToProfile() {
+      this.$router.push(`/${this.profile.username}`)
     },
     async saveProfile(data) {
       await this.updateProfile(data)
@@ -284,9 +289,10 @@ export default {
 
       if (canBoost) {
         this.isBoosting = true
-      } else {
-        this.$router.push('/settings')
+        return
       }
+
+      this.goToProfile()
     },
     async saveAccount(data) {
       await this.updateAccount(data)
@@ -326,7 +332,7 @@ export default {
       this.isBoosting = false
       this.$nuxt.$loading.finish()
 
-      this.$router.push(`/${this.profile.username}`)
+      this.goToProfile()
     }
   }
 }

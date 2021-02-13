@@ -2,7 +2,7 @@
   <div>
     <TInput
       v-model="computedValue"
-      trim="[^a-z0-9]+"
+      trim="[^a-z0-9._]+"
       v-bind="$attrs"
       @input="save"
     />

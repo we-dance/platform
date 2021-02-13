@@ -136,6 +136,10 @@
         <dt class="font-bold mr-1">Languages:</dt>
         <dd>{{ profile.languages }}</dd>
       </dl>
+      <div v-if="profile.objectives">
+        <h2 class="font-bold">Objectives:</h2>
+        <div>{{ getObjectives(profile.objectives) }}</div>
+      </div>
       <div v-if="profile.learning">
         <h2 class="font-bold">Which dance topics you are interested in?</h2>
         <div>{{ profile.learning }}</div>
@@ -160,7 +164,7 @@
 
       <dl class="mt-4 md:flex">
         <dt class="font-bold mr-1">Visibility:</dt>
-        <dd>{{ profile.visibility || 'N/A' }}</dd>
+        <dd>{{ profile.visibility }}</dd>
       </dl>
     </div>
 
@@ -185,6 +189,7 @@
 <script>
 import { saveAs } from 'file-saver'
 import useAuth from '~/use/auth'
+import useProfiles from '~/use/profiles'
 import { getDateTimeYear } from '~/utils'
 
 export default {
@@ -196,15 +201,22 @@ export default {
   },
   setup() {
     const { uid } = useAuth()
+    const { objectivesList } = useProfiles()
 
     return {
       uid,
-      getDateTimeYear
+      getDateTimeYear,
+      objectivesList
     }
   },
   methods: {
     download() {
       saveAs(this.profile.socialCover, `${this.profile.username}.png`)
+    },
+    getObjectives(objectives) {
+      return Object.keys(objectives)
+        .map((o) => this.objectivesList.find((i) => i.value === o).label)
+        .join(', ')
     }
   }
 }
