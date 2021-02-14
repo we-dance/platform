@@ -177,6 +177,7 @@ import useCities from '~/use/cities'
 import { getDay, getDateTime, getDate, getTime, dateDiff } from '~/utils'
 
 export default {
+  name: 'EventView',
   layout: 'default',
   data: () => ({
     comment: ''

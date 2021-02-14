@@ -42,6 +42,11 @@ export default {
   data: () => ({
     selectedType: 'event'
   }),
+  computed: {
+    fields() {
+      return this.types.find((f) => f.value === this.selectedType).fields
+    }
+  },
   watch: {
     loading(loading) {
       if (!loading && this.item) {
@@ -49,11 +54,6 @@ export default {
           this.$nuxt.error({ statusCode: 405 })
         }
       }
-    }
-  },
-  computed: {
-    fields() {
-      return this.types.find((f) => f.value === this.selectedType).fields
     }
   },
   mounted() {

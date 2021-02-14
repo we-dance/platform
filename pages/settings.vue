@@ -90,7 +90,7 @@
         </div>
         <TPopup v-if="passwordError" title="Error" @close="passwordError = ''">
           <div class="py-4 max-w-md">{{ passwordError.message }}</div>
-          <div class="flex justify-end">
+          <div class="flex justify-end mb-4">
             <TButton
               v-if="passwordError.code === 'auth/requires-recent-login'"
               type="primary"
