@@ -14,6 +14,7 @@
 import useDoc from '~/use/doc'
 
 export default {
+  name: 'TInputUsername',
   setup() {
     const { find, id } = useDoc('profiles')
 

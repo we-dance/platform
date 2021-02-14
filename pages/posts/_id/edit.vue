@@ -60,13 +60,22 @@ export default {
       return this.types.find((f) => f.value === this.selectedType).fields
     }
   },
+  watch: {
+    loading(loading) {
+      if (!loading && this.item) {
+        if (!this.can('edit', 'posts', this.item)) {
+          this.$nuxt.error({ statusCode: 405 })
+        }
+      }
+    }
+  },
   mounted() {
     const city = ls('city')
 
     this.item = this.item || {
       tags: {},
       community: city,
-      cover: this.profile?.photo
+      cover: this.profile?.photo || ''
     }
 
     if (this.$route.query.tag) {
@@ -82,7 +91,7 @@ export default {
       }
     },
     async saveItem(data) {
-      if (!data.title || !data.description) {
+      if (!data.title) {
         return
       }
 
@@ -105,7 +114,9 @@ export default {
 
     const collection = 'posts'
 
-    const { doc: item, id, load, update, remove, create } = useDoc(collection)
+    const { doc: item, id, load, update, remove, create, loading } = useDoc(
+      collection
+    )
     const { tagsOptions, addTag } = useTags()
 
     const types = computed(() => [
@@ -181,6 +192,7 @@ export default {
     }
 
     return {
+      loading,
       item,
       id,
       can,

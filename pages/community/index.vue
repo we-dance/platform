@@ -2,36 +2,7 @@
   <div>
     <TTitle>
       {{ $t('profiles.title') }}
-      <template slot="right">
-        <TButton type="primary" @click="isAddingProfile = true">{{
-          $t('profiles.add')
-        }}</TButton>
-      </template>
     </TTitle>
-
-    <TPopup
-      v-if="isAddingProfile"
-      title="Coming soon"
-      @close="isAddingProfile = false"
-    >
-      <div class="max-w-md mx-auto overflow-y-scroll typo">
-        <p>
-          You will be able to create community profiles for your favourite dance
-          academies, artists, DJs, musicians, venues.
-        </p>
-        <p>
-          Community profiles will be possible to claim by verifying ownership.
-        </p>
-        <p>
-          In meantime you can contact support:
-          <a
-            class="text-blue-500 underline hover:no-underline"
-            href="mailto:support@wedance.vip"
-            >support@wedance.vip</a
-          >.
-        </p>
-      </div>
-    </TPopup>
 
     <div class="overflow-x-scroll my-2">
       <div class="flex flex-no-wrap space-x-2">
@@ -154,19 +125,19 @@
 import { ref, computed } from '@nuxtjs/composition-api'
 import useAuth from '~/use/auth'
 import useCollection from '~/use/collection'
+import useDoc from '~/use/doc'
 import useCities from '~/use/cities'
 import { sortBy, getExcerpt } from '~/utils'
 import useProfiles from '~/use/profiles'
 
 export default {
   name: 'PeopleIndex',
-  data: () => ({
-    isAddingProfile: false
-  }),
   setup() {
     const { uid, updateProfile, profile: myProfile } = useAuth()
 
     const { docs: docsProfiles } = useCollection('profiles')
+    const { create: createProfile } = useDoc('profiles')
+
     const { currentCity } = useCities()
     const { objectivesList, typeList } = useProfiles()
 
@@ -278,7 +249,8 @@ export default {
       currentCity,
       typeOptions,
       profileType,
-      getExcerpt
+      getExcerpt,
+      createProfile
     }
   }
 }

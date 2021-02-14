@@ -42,12 +42,25 @@ export default {
   data: () => ({
     selectedType: 'event'
   }),
+  watch: {
+    loading(loading) {
+      if (!loading && this.item) {
+        if (!this.can('edit', 'events', this.item)) {
+          this.$nuxt.error({ statusCode: 405 })
+        }
+      }
+    }
+  },
   computed: {
     fields() {
       return this.types.find((f) => f.value === this.selectedType).fields
     }
   },
   mounted() {
+    if (!this.can('edit', 'events', this.item)) {
+      this.error({ statusCode: 405 })
+    }
+
     const city = ls('city')
     this.item = this.item || {
       city,
@@ -56,8 +69,8 @@ export default {
       type: 'Course',
       duration: 60,
       price: 'FREE',
-      cover: this.profile.photo,
-      organiser: this.profile.username
+      cover: this.profile?.photo || '',
+      organiser: this.profile?.username || ''
     }
   },
   methods: {
@@ -101,7 +114,9 @@ export default {
 
     const collection = 'events'
 
-    const { doc: item, id, load, update, remove, create } = useDoc(collection)
+    const { doc: item, id, load, update, remove, create, loading } = useDoc(
+      collection
+    )
 
     const updateEndDate = (e) => {
       if (!e.duration || e.duration === 'custom') {
@@ -231,6 +246,7 @@ export default {
     }
 
     return {
+      loading,
       item,
       id,
       can,

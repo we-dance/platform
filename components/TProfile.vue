@@ -1,5 +1,25 @@
 <template>
   <div>
+    <div
+      v-if="can('edit', 'profiles', profile)"
+      class="mb-2 flex items-start justify-center"
+    >
+      <TButton
+        v-if="isAdmin()"
+        icon="edit"
+        :to="`/${profile.username}/edit`"
+        class="hover:text-blue-500"
+        label="Edit"
+      />
+      <TButton
+        v-else
+        icon="edit"
+        to="/settings?tab=profile"
+        class="hover:text-blue-500"
+        label="Edit"
+      />
+    </div>
+
     <div class="flex flex-col items-center">
       <portal to="title">
         <router-link to="/" class="flex items-center">
@@ -111,10 +131,7 @@
           class="hidden md:block"
           :href="`https://fb.com/${profile.facebook}`"
         />
-        <TButton v-if="uid === profile.id" to="/settings?tab=profile"
-          >Edit Profile</TButton
-        >
-        <TProfileContact v-else :uid="profile.createdBy" />
+        <TProfileContact :uid="profile.createdBy" />
       </div>
     </div>
 
@@ -200,13 +217,15 @@ export default {
     }
   },
   setup() {
-    const { uid } = useAuth()
+    const { uid, can, isAdmin } = useAuth()
     const { objectivesList } = useProfiles()
 
     return {
       uid,
       getDateTimeYear,
-      objectivesList
+      objectivesList,
+      can,
+      isAdmin
     }
   },
   methods: {
