@@ -12,7 +12,7 @@
     <div class="overflow-x-scroll my-2">
       <div class="flex flex-no-wrap space-x-2">
         <TInputCity v-model="currentCity" />
-        <TInputMultiDropdown
+        <TInputSelect
           v-model="dances"
           :options="dancesList"
           :label="$t('style.label')"
@@ -119,10 +119,20 @@ export default {
     ]
 
     const { uid, profile: myProfile } = useAuth()
-    const dances = ref({})
-    const dancesList = computed(() =>
-      myProfile.value ? Object.keys(myProfile.value.styles) : []
-    )
+    const dances = ref('')
+    const dancesList = computed(() => {
+      const list = myProfile.value?.styles
+        ? Object.keys(myProfile.value.styles)
+        : []
+
+      return [
+        {
+          label: 'Style',
+          value: ''
+        },
+        ...list
+      ]
+    })
 
     const map = (item) => {
       if (!item.id) {
@@ -199,6 +209,15 @@ export default {
 
     const items = computed(() => {
       let result = docs.value.map(map)
+
+      if (dances.value) {
+        result = result.filter(
+          (item) =>
+            item.styles &&
+            item.styles[dances.value] &&
+            item.styles[dances.value].selected
+        )
+      }
 
       if (!route.query.all) {
         result = result

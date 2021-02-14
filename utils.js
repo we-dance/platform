@@ -176,7 +176,7 @@ export const getLocation = (result, usedGps) => ({
 })
 
 export const sanitize = (input, trim) => {
-  const val = input
+  const val = input || ''
   const expression = new RegExp(trim, 'gi')
   return val.replace(expression, '').trim()
 }

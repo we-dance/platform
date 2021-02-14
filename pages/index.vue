@@ -14,7 +14,7 @@
         <TInputCity v-model="currentCity" />
         <TInputSelect v-model="sorting" :options="sortingList" />
         <TInputSelect v-model="view" :options="viewOptions" />
-        <TInputMultiDropdown
+        <TInputSelect
           v-model="dances"
           :options="dancesList"
           :label="$t('style.label')"
@@ -108,10 +108,20 @@ export default {
     const { getProfile } = useProfiles()
 
     const { uid, profile: myProfile } = useAuth()
-    const dances = ref({})
-    const dancesList = computed(() =>
-      myProfile.value ? Object.keys(myProfile.value.styles) : []
-    )
+    const dances = ref('')
+    const dancesList = computed(() => {
+      const list = myProfile.value?.styles
+        ? Object.keys(myProfile.value.styles)
+        : []
+
+      return [
+        {
+          label: 'Style',
+          value: ''
+        },
+        ...list
+      ]
+    })
 
     const sorting = ref(uid.value ? '-createdAt' : '-upVotes')
 
@@ -171,7 +181,20 @@ export default {
       }
     }
 
-    const items = computed(() => docs.value.map(map))
+    const items = computed(() => {
+      let result = docs.value.map(map)
+
+      if (dances.value) {
+        result = result.filter(
+          (item) =>
+            item.styles &&
+            item.styles[dances.value] &&
+            item.styles[dances.value].selected
+        )
+      }
+
+      return result
+    })
     const loading = computed(
       () => loadingLikes.value && loadingComments.value && loadingPosts.value
     )

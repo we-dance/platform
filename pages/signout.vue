@@ -14,8 +14,11 @@ export default {
     }
   },
   async mounted() {
+    const target = this.$route.query.target || '/'
+
     await this.signOut()
-    this.$router.replace('/')
+
+    this.$router.replace(target)
   }
 }
 </script>

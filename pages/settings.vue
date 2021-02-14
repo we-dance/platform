@@ -77,34 +77,29 @@
             $t('settings.account.changepassword')
           }}</TButton>
           <div class="bg-red-200 mt-4 -mb-4 -mx-4 p-4">
-            <TButton type="danger" @click="deleteAccount()">{{
+            <TButton type="danger" @click.native="deleteAccountAction()">{{
               $t('settings.account.delete')
             }}</TButton>
           </div>
         </div>
         <div v-if="currentTab === 'password'" class="border-t mt-4 pt-4">
-          <div
-            v-if="passwordError"
-            class="text-red-500 rounded border border-red-500 p-2"
-          >
-            <p>{{ passwordError.message }}</p>
-            <div class="flex justify-end">
-              <TButton
-                v-if="passwordError.code === 'auth/requires-recent-login'"
-                type="primary"
-                to="/signout"
-                class="float-right mt-4"
-                >{{ $t('signout') }}</TButton
-              >
-            </div>
-          </div>
-          <div v-else>
-            <TField v-model="password" type="password" label="New Password" />
-            <div class="flex justify-end mt-4">
-              <TButton @click="changePassword">{{ $t('save') }}</TButton>
-            </div>
+          <TField v-model="password" type="password" label="New Password" />
+          <div class="flex justify-end mt-4">
+            <TButton @click="changePassword">{{ $t('save') }}</TButton>
           </div>
         </div>
+        <TPopup v-if="passwordError" title="Error" @close="passwordError = ''">
+          <div class="py-4 max-w-md">{{ passwordError.message }}</div>
+          <div class="flex justify-end">
+            <TButton
+              v-if="passwordError.code === 'auth/requires-recent-login'"
+              type="primary"
+              to="/signout?target=/signin"
+              class="float-right mt-4"
+              >{{ $t('signout') }}</TButton
+            >
+          </div>
+        </TPopup>
       </div>
       <div class="rounded bg-white mb-4 shadow border p-4 bg-white">
         <div class="flex items-center">
@@ -183,8 +178,10 @@ import useAuth from '~/use/auth'
 import useProfiles from '~/use/profiles'
 import useAccounts from '~/use/accounts'
 import useRouter from '~/use/router'
+import TPopup from '~/components/TPopup.vue'
 
 export default {
+  components: { TPopup },
   middleware: ['auth'],
   data: () => ({
     canBoost: false,
@@ -268,6 +265,15 @@ export default {
     }
   },
   methods: {
+    async deleteAccountAction() {
+      try {
+        await this.deleteAccount()
+        this.$toast.success('Your account has been deleted')
+        this.$router.push('/')
+      } catch (e) {
+        this.passwordError = e
+      }
+    },
     async skipBoosting() {
       await this.updateProfile({
         socialCoverAt: +new Date(),

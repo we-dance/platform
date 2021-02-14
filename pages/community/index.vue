@@ -208,7 +208,9 @@ export default {
     ]
 
     const dancesList = computed(() => {
-      const list = myProfile.value ? Object.keys(myProfile.value.styles) : []
+      const list = myProfile.value?.styles
+        ? Object.keys(myProfile.value.styles)
+        : []
 
       return [
         {

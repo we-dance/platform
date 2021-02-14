@@ -85,6 +85,7 @@ export default {
     const {
       uid,
       loading,
+      profile,
       signingIn,
       createUserWithEmailAndPassword,
       signOut,
@@ -93,6 +94,7 @@ export default {
 
     return {
       uid,
+      profile,
       loading,
       signingIn,
       createUserWithEmailAndPassword,
@@ -101,9 +103,9 @@ export default {
     }
   },
   watch: {
-    uid: {
+    loading: {
       handler(val) {
-        if (val) {
+        if (!val && this.profile) {
           this.redirect()
         }
       }
@@ -124,16 +126,9 @@ export default {
   },
   methods: {
     redirect() {
-      let target = ls('target')
-      ls.remove('target')
-
-      if (!target) {
-        target = `/${this.username}`
-      }
-
-      this.$router.push(target)
+      this.$router.push(`/${this.username}`)
     },
-    submit(e) {
+    async submit(e) {
       e.preventDefault()
 
       if (
@@ -148,7 +143,7 @@ export default {
         return
       }
 
-      this.createUserWithEmailAndPassword(
+      await this.createUserWithEmailAndPassword(
         this.email,
         this.password,
         this.username,

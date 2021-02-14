@@ -335,7 +335,8 @@ export default () => {
 
     await removeProfile(state.uid)
     await removeAccount(state.uid)
-    await firebase.auth().deleteUser(state.uid)
+    const user = firebase.auth().currentUser
+    await user.delete()
     await signOut()
   }
 
