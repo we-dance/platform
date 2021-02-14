@@ -13,35 +13,13 @@
       {{ error.message }}
     </div>
     <div
-      class="flex justify-between bg-white py-4 border-t z-10 items-center bottom-0 sticky"
+      class="flex justify-end space-x-2 bg-white py-4 border-t z-10 items-center bottom-0 sticky"
     >
-      <div>
-        <TButton
-          v-if="showRemove"
-          icon="delete"
-          color="red-500"
-          @click="remove"
-        />
-      </div>
-
-      <div class="flex">
-        <TButton
-          v-if="showCancel"
-          type="secondary"
-          class="mr-2"
-          @click="cancel"
-        >
-          Cancel
-        </TButton>
-
-        <TButton v-if="showCopy" type="secondary" class="mr-2" @click="copy">
-          Copy
-        </TButton>
-
-        <slot name="buttons" />
-
-        <TButton type="primary" @click="save">{{ submitLabel }}</TButton>
-      </div>
+      <TButton v-if="showRemove" label="Delete" @click="remove" />
+      <TButton v-if="showCancel" label="Cancel" @click="cancel" />
+      <TButton v-if="showCopy" label="Copy" @click="copy" />
+      <slot name="buttons" />
+      <TButton type="primary" :label="submitLabel" @click="save" />
     </div>
   </div>
 </template>

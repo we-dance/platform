@@ -137,7 +137,7 @@
               class="mt-4"
               @save="reserve"
             >
-              <template slot="buttons" v-if="!uid">
+              <template v-if="!uid" slot="buttons">
                 <TButton
                   :to="`/signin?target=${this.$route.fullPath}`"
                   label="Login"

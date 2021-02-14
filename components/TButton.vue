@@ -99,7 +99,7 @@ export default {
 
       let classes =
         map[this.type] +
-        'cursor-pointer outline-none focus:outline-none inline-block'
+        ' cursor-pointer outline-none focus:outline-none inline-block'
 
       if (this.color) {
         classes += ` text-${this.color} border-${this.color} hover:bg-${this.color} hover:text-white`

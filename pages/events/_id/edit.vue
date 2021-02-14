@@ -14,7 +14,6 @@
         v-model="item"
         :fields="fields"
         vertical
-        :show-cancel="!!id"
         :show-remove="!!id"
         :show-copy="!!id"
         :submit-label="id ? 'Save' : 'Add'"
