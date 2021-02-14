@@ -123,33 +123,30 @@
       @close="reservationPopup = false"
     >
       <div
-        class="mt-4 flex flex-col justify-center max-h-screen overflow-y-scroll"
+        class="flex flex-col justify-center max-w-md max-h-screen overflow-y-scroll"
       >
         <div v-if="reservationPopup === 'reserve'">
           <div>
-            <p>
+            <div class="text-dark text-sm font-bold my-4 text-left">
               Organiser of the event requires the following information:
-            </p>
+            </div>
             <TForm
               v-model="account"
               :fields="reservationFields"
-              submit-label="Submit"
+              submit-label="Register"
               class="mt-4"
               @save="reserve"
-            />
-          </div>
-          <div v-if="!uid" class="mt-4 pt-4 border-t">
-            <h2 class="text-center text-base">
-              Do you already have WeDance account?
-              <router-link
-                :to="`/signin?target=${this.$route.fullPath}`"
-                class="underline hover:no-underline fon"
-                >Log In</router-link
-              >
-            </h2>
+            >
+              <template slot="buttons" v-if="!uid">
+                <TButton
+                  :to="`/signin?target=${this.$route.fullPath}`"
+                  label="Login"
+                />
+              </template>
+            </TForm>
           </div>
         </div>
-        <div v-if="reservationPopup === 'finish'">
+        <div v-if="reservationPopup === 'finish'" class="p-4">
           <h2 class="font-bold mb-4">Your spot is reserved</h2>
           <p v-if="uid">
             See you soon! Don't forget to check-in by the organiser when you
@@ -283,25 +280,7 @@ export default {
 
     const item = computed(() => map(doc.value))
 
-    const reservationFields = [
-      ...accountFields,
-      {
-        name: 'withPartner',
-        type: 'select',
-        label: 'Do you have a partner?',
-        options: ['Yes', 'No']
-      },
-      {
-        name: 'partnerName',
-        label: "Partner's name",
-        when: (answers) => answers.withPartner === 'Yes'
-      },
-      {
-        name: 'partnerEmail',
-        label: "Partner's email",
-        when: (answers) => answers.withPartner === 'Yes'
-      }
-    ]
+    const reservationFields = accountFields.filter((f) => f.event)
 
     const reservationPopup = ref(false)
     const isCreatingProfile = ref(false)

@@ -11,19 +11,22 @@ export default () => {
       name: 'name',
       key: 'account.name',
       required: true,
-      placeholder: '(Required)'
+      placeholder: '(Required)',
+      event: true
     },
     {
       name: 'email',
       key: 'account.email',
       required: true,
-      placeholder: '(Required)'
+      placeholder: '(Required)',
+      event: true
     },
     {
       name: 'phone',
       key: 'account.phone',
       required: true,
-      placeholder: '(Required)'
+      placeholder: '(Required)',
+      event: true
     },
     {
       name: 'newsletter',
@@ -51,6 +54,25 @@ export default () => {
           label: 'International festivals'
         }
       ]
+    },
+    {
+      name: 'withPartner',
+      type: 'select',
+      label: 'Do you have a partner?',
+      options: ['Yes', 'No'],
+      event: true
+    },
+    {
+      name: 'partnerName',
+      label: "Partner's name",
+      when: (answers) => answers.withPartner === 'Yes',
+      event: true
+    },
+    {
+      name: 'partnerEmail',
+      label: "Partner's email",
+      when: (answers) => answers.withPartner === 'Yes',
+      event: true
     }
   ]
 

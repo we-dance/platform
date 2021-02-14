@@ -13,7 +13,7 @@
       {{ error.message }}
     </div>
     <div
-      class="flex justify-between bg-white p-4 -mb-4 -mx-4 border-t z-10 items-center bottom-0 sticky"
+      class="flex justify-between bg-white py-4 border-t z-10 items-center bottom-0 sticky"
     >
       <div>
         <TButton
@@ -37,6 +37,8 @@
         <TButton v-if="showCopy" type="secondary" class="mr-2" @click="copy">
           Copy
         </TButton>
+
+        <slot name="buttons" />
 
         <TButton type="primary" @click="save">{{ submitLabel }}</TButton>
       </div>
