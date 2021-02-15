@@ -12,6 +12,7 @@
     <div class="overflow-x-scroll my-2">
       <div class="flex flex-no-wrap space-x-2">
         <TInputCity v-model="currentCity" />
+        <TInputSelect v-model="eventType" :options="eventTypeOptions" />
         <TInputSelect
           v-model="dances"
           :options="dancesList"
@@ -87,6 +88,8 @@ import useAuth from '~/use/auth'
 import useCities from '~/use/cities'
 import useRouter from '~/use/router'
 import useProfiles from '~/use/profiles'
+import useEvents from '~/use/events'
+
 import {
   dateDiff,
   sortBy,
@@ -95,22 +98,27 @@ import {
   getYmd,
   getTime,
   getTimeZone,
-  getDateObect
+  getDateObect,
+  getOptions
 } from '~/utils'
 
 export default {
   name: 'EventsIndex',
   setup() {
+    const { eventTypeList } = useEvents()
     const { getCount, getRsvpResponse, loading: loadingRsvps } = useRSVP()
     const { currentCity } = useCities()
     const { docs, loading: loadingPosts, getById } = useCollection('events')
     const { getProfile } = useProfiles()
 
+    const eventType = ref('')
+    const eventTypeOptions = getOptions(eventTypeList, 'Type')
+
     const view = ref('covers')
     const viewOptions = [
       {
         value: 'covers',
-        label: 'Covers'
+        label: 'Grid View'
       },
       {
         value: 'text',
@@ -219,6 +227,10 @@ export default {
         )
       }
 
+      if (eventType.value) {
+        result = result.filter((item) => item.type === eventType.value)
+      }
+
       if (!route.query.all) {
         result = result
           .filter(thisCityFilter)
@@ -260,7 +272,9 @@ export default {
       dances,
       dancesList,
       view,
-      viewOptions
+      viewOptions,
+      eventTypeOptions,
+      eventType
     }
   },
   methods: {

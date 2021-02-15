@@ -34,6 +34,7 @@ import ls from 'local-storage'
 import useAuth from '~/use/auth'
 import useDoc from '~/use/doc'
 import useRouter from '~/use/router'
+import useEvents from '~/use/events'
 
 export default {
   name: 'EventEdit',
@@ -111,6 +112,7 @@ export default {
   setup() {
     const { can, profile, isAdmin } = useAuth()
     const { params } = useRouter()
+    const { eventTypeList } = useEvents()
 
     const collection = 'events'
 
@@ -207,7 +209,7 @@ export default {
           {
             name: 'type',
             type: 'select',
-            options: ['Party', 'Course']
+            options: eventTypeList
           },
           {
             name: 'visibility',

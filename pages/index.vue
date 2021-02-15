@@ -133,11 +133,11 @@ export default {
     const viewOptions = [
       {
         value: 'covers',
-        label: 'Covers'
+        label: 'Grid View'
       },
       {
         value: 'text',
-        label: 'Text'
+        label: 'List View'
       }
     ]
 

@@ -189,3 +189,13 @@ export const saveCSV = (data, filename) => {
 
   saveAs(blob, filename)
 }
+
+export const getOptions = (items, label) => {
+  return [
+    {
+      label,
+      value: ''
+    },
+    ...items
+  ]
+}
