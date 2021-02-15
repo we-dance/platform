@@ -7,6 +7,8 @@
     <div class="mx-auto max-w-md bg-white p-4">
       <div class="flex space-x-2 items-center justify-end mb-4">
         <TButtonShare
+          :id="item.id"
+          collection="events"
           :url="`https://wedance.vip/events/${item.id}`"
           :text="item.name"
           :file="item.socialCover"
@@ -102,13 +104,6 @@
       <TStyles class="text-center text-xs mt-4" :value="item.styles" />
 
       <TPreview class="mt-4" :content="item.description" />
-
-      <TShareGenerator
-        :id="item.id"
-        collection="events"
-        :title="item.name"
-        :value="item.socialCover"
-      />
     </div>
 
     <div class="mx-auto max-w-md flex justify-end my-4 text-xs pr-4">

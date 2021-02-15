@@ -51,6 +51,8 @@
         </div>
         <div class="flex space-x-2 items-center">
           <TButtonShare
+            :id="profile.id"
+            collection="profiles"
             :url="`https://wedance.vip/${profile.username}`"
             :text="`${profile.username} at WeDance`"
             :file="profile.socialCover"
@@ -192,14 +194,6 @@
     </div>
 
     <TPostList :filter="{ createdBy: profile.createdBy }" class="mt-4 w-full" />
-
-    <TShareGenerator
-      :id="profile.id"
-      collection="profiles"
-      :title="profile.username"
-      :value="profile.socialCover"
-      class="mt-4"
-    />
   </div>
 </template>
 

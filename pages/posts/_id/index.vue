@@ -60,6 +60,10 @@
               </div>
               <div>
                 <TButtonShare
+                  :id="post.id"
+                  collection="posts"
+                  :file="post.socialCover"
+                  :file-name="post.title"
                   :url="`https://wedance.vip/posts/${postId}`"
                   :text="post.title"
                   type="base"
@@ -90,14 +94,6 @@
         </template>
       </TListComments>
     </div>
-
-    <TShareGenerator
-      :id="post.id"
-      class="col-span-12"
-      collection="posts"
-      :title="post.title"
-      :value="post.socialCover"
-    />
   </div>
 </template>
 
