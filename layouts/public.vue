@@ -21,7 +21,7 @@
         <div class="flex space-x-2">
           <TButton type="link" to="/events">Event Calendar</TButton>
           <TButton type="link" to="/community">Find a partner</TButton>
-          <TButton type="link" to="/feed">Dance News</TButton>
+          <TButton type="link" to="/">Dance News</TButton>
         </div>
       </div>
     </TFooter>

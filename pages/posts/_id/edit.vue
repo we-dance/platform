@@ -73,13 +73,7 @@ export default {
     const city = ls('city')
 
     this.item = this.item || {
-      tags: {},
-      community: city,
-      cover: this.profile?.photo || ''
-    }
-
-    if (this.$route.query.tag) {
-      this.item.tags[this.$route.query.tag] = true
+      community: city
     }
   },
   methods: {
@@ -87,7 +81,7 @@ export default {
       if (this.id) {
         this.$router.push(`/posts/${this.id}`)
       } else {
-        this.$router.push(`/feed`)
+        this.$router.push(`/`)
       }
     },
     async saveItem(data) {

@@ -70,7 +70,7 @@ export default {
       type: 'Course',
       duration: 60,
       price: 'FREE',
-      cover: this.profile?.photo || '',
+      cover: '',
       organiser: this.profile?.username || ''
     }
   },

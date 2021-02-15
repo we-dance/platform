@@ -166,7 +166,7 @@ export default {
       const commentsCount = getCommentsCount(item.id)
       const profile = getProfile(item.createdBy)
       const author = profile.username
-      const cover = item.cover || profile.photo
+      const cover = item.cover
 
       return {
         ...item,

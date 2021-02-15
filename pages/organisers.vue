@@ -8,9 +8,7 @@
             <TIcon class="h-4 w-32" name="logo-text" />
           </router-link>
         </div>
-        <TButton v-if="uid" class="mt-4" type="secondary" to="/feed"
-          >Open</TButton
-        >
+        <TButton v-if="uid" class="mt-4" type="secondary" to="/">Open</TButton>
         <TButton v-else class="mt-4" type="secondary" to="/signin"
           >Log in</TButton
         >

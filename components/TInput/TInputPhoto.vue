@@ -16,35 +16,36 @@
       </button>
     </div>
 
-    <TPopup v-if="showPopup" class="p-4">
-      <div :class="!editing ? 'cursor-pointer' : ''">
-        <croppa
-          v-model="croppa"
-          :width="width"
-          :height="height"
-          prevent-white-space
-          :show-remove-button="false"
-          :placeholder="selectLabel"
-        />
-      </div>
+    <TPopup v-if="showPopup" :title="selectLabel" @close="showPopup = false">
+      <div class="p-4 overflow-hidden">
+        <div :class="!editing ? 'cursor-pointer' : ''" class="mx-auto">
+          <croppa
+            v-model="croppa"
+            :width="320"
+            :height="320"
+            prevent-white-space
+            :show-remove-button="false"
+            :placeholder="selectLabel"
+          />
+        </div>
 
-      <div v-if="editing" class="mt-4 flex justify-center">
-        <button class="cursor-pointer" @click="rotate()">
-          <TIcon name="rotate_right" class="h-8 w-8" />
-        </button>
-      </div>
+        <div v-if="editing" class="mt-4 flex justify-center">
+          <button class="cursor-pointer" @click="rotate()">
+            <TIcon name="rotate_right" class="h-8 w-8" />
+          </button>
+        </div>
 
-      <div class="mt-4 bg-gray-200">
-        <div
-          class="border-b border-blue-500"
-          :style="{ width: `${progress}%` }"
-        ></div>
-      </div>
+        <div class="mt-4 bg-gray-200">
+          <div
+            class="border-b border-blue-500"
+            :style="{ width: `${progress}%` }"
+          ></div>
+        </div>
 
-      <div class="mt-4 flex justify-between">
-        <TButton @click="showPopup = false">Cancel</TButton>
-        <TButton type="secondary" @click="clear()">Clear</TButton>
-        <TButton type="primary" @click="save()">Save</TButton>
+        <div class="mt-4 flex justify-end space-x-2">
+          <TButton @click="clear()">Clear</TButton>
+          <TButton type="primary" @click="save()">Save</TButton>
+        </div>
       </div>
     </TPopup>
   </div>

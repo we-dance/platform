@@ -34,7 +34,7 @@
             :username="author.username"
             :title="post.title"
             :description="fullPost.excerpt"
-            :photo="post.cover || author.photo"
+            :photo="post.cover"
             :styles="post.styles"
             align="center"
             class="md:-mt-4 md:-mx-4"
@@ -60,7 +60,7 @@
               </div>
               <div>
                 <TButtonShare
-                  :id="post.id"
+                  :id="postId"
                   collection="posts"
                   :file="post.socialCover"
                   :file-name="post.title"
@@ -138,16 +138,6 @@ export default {
     },
     fullPost() {
       return this.map(this.post)
-    },
-    tweetUrl() {
-      const app = process.env.app
-
-      const author = this.author.username
-      const url = app.url + this.$route.fullPath
-
-      const text = encodeURI(`"${this.post.title}" by ${author}`)
-
-      return `https://twitter.com/intent/tweet?text=${text} %23WeDance ${url}`
     }
   },
   methods: {
