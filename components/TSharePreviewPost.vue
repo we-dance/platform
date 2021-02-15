@@ -25,7 +25,7 @@
           </div>
         </div>
         <div class="flex-grow text-center flex items-center justify-center">
-          <div v-if="align === 'center'" class="p-8">
+          <div v-if="align === 'center'" class="px-8">
             <div
               v-if="title"
               class="text-xl font-bold leading-tight"
@@ -48,10 +48,11 @@
             </div>
           </template>
           <div class="flex justify-between items-end">
-            <div class="flex items-center mt-2">
+            <div class="flex items-center">
               <TIcon class="w-4 h-4 mr-1" name="icon" />
               <div class="text-sm font-bold">{{ username }}</div>
             </div>
+            <TButtonLike v-if="likes !== false" :count="likes" :value="true" />
             <div v-if="extra" class="text-sm">{{ extra }}</div>
             <div
               v-if="objective"
@@ -79,6 +80,10 @@ export default {
     align: {
       type: String,
       default: 'bottom'
+    },
+    likes: {
+      type: [Number, Boolean],
+      default: false
     },
     type: {
       type: String,

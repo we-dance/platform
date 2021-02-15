@@ -76,6 +76,7 @@
             :styles="post.styles"
             align="center"
             size="sm"
+            :likes="post.upVotes"
           />
         </router-link>
       </div>

@@ -8,25 +8,25 @@
     v-on="$listeners"
   >
     <slot>
-      <div class="flex items-center">
+      <div class="flex items-center space-x-2">
         <TIcon v-if="icon" :size="iconSize" :name="icon" />
-        <span v-if="label" class="ml-1">{{ label }}</span>
+        <span v-if="label !== false">{{ label }}</span>
       </div>
     </slot>
   </a>
   <router-link v-else-if="to" :class="classes" :to="to" v-on="$listeners">
     <slot>
-      <div class="flex items-center">
+      <div class="flex items-center space-x-2">
         <TIcon v-if="icon" :size="iconSize" :name="icon" />
-        <span v-if="label" class="ml-1">{{ label }}</span>
+        <span v-if="label !== false">{{ label }}</span>
       </div>
     </slot>
   </router-link>
   <button v-else type="button" :class="classes" v-on="$listeners">
     <slot>
-      <div class="flex items-center">
+      <div class="flex items-center space-x-2">
         <TIcon v-if="icon" :size="iconSize" :name="icon" />
-        <span v-if="label" class="ml-1">{{ label }}</span>
+        <span v-if="label !== false">{{ label }}</span>
       </div>
     </slot>
   </button>
@@ -61,8 +61,8 @@ export default {
       default: 'simple'
     },
     label: {
-      type: String,
-      default: ''
+      type: [String, Number, Boolean],
+      default: false
     },
     color: {
       type: String,
@@ -74,7 +74,7 @@ export default {
       const map = {
         round:
           'bg-white hover:bg-gray-100 text-gray-800 font-semibold py-1 px-4 border border-gray-400 rounded-full shadow',
-        icon: 'rounded-full hover:text-primary p-2',
+        icon: 'rounded-full hover:text-primary',
         simple:
           'bg-white hover:bg-gray-100 text-gray-800 font-semibold py-2 px-4 border border-gray-400 rounded-full shadow',
         primary:

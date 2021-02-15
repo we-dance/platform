@@ -31,22 +31,17 @@
       <TStyles class="text-xs mb-4 md:mb-0" hide-level :value="item.styles" />
 
       <div class="flex">
-        <div class="text-gray-700 flex justify-center">
-          <button
-            class="text-center hover:text-red-500"
-            :class="{ 'text-primary': item.response === 'up' }"
-            @click="updateRsvp(item.id, 'posts', 'up')"
-          >
-            <TIcon name="favorite" />
-          </button>
-          <div class="ml-1">{{ item.upVotes }}</div>
-        </div>
-        <div class="text-gray-700 flex ml-4 justify-center">
-          <router-link :to="`/posts/${item.id}`" class="flex">
-            <TIcon name="chat" class="h-6 w-6 hover:text-primary" />
-            <span>{{ item.commentsCount }}</span>
-          </router-link>
-        </div>
+        <TButton
+          :to="`/posts/${item.id}`"
+          icon="chat"
+          type="icon"
+          :label="item.commentsCount"
+        />
+        <TButtonLike
+          :value="item.response === 'up'"
+          :count="item.upVotes"
+          @change="updateRsvp(item.id, 'posts', 'up')"
+        />
       </div>
     </div>
   </div>
