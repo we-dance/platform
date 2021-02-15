@@ -196,7 +196,6 @@ export default {
       signOut,
       updateAccount,
       updateProfile,
-      isAccountConfirmed,
       loading,
       updatePassword,
       deleteAccount
@@ -231,7 +230,6 @@ export default {
       signOut,
       updateAccount,
       updateProfile,
-      isAccountConfirmed,
       profileFields,
       contactFields,
       password,
