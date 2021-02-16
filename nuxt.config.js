@@ -189,12 +189,13 @@ export default {
   i18n: {
     locales: [
       { code: 'en', name: 'English', file: 'en.yml' },
+      { code: 'es', name: 'Español', file: 'es.yml' },
       { code: 'de', name: 'Deutsch', file: 'de.yml' },
-      { code: 'ru', name: 'Русский', file: 'ru.yml' },
       { code: 'fr', name: 'Français', file: 'fr.yml' },
       { code: 'it', name: 'Italiano', file: 'it.yml' },
       { code: 'tr', name: 'Türkçe', file: 'tr.yml' },
-      { code: 'es', name: 'Español', file: 'es.yml' }
+      { code: 'ru', name: 'Русский', file: 'ru.yml' },
+      { code: 'sr', name: 'Српски', file: 'sr.yml' }
     ],
     defaultLocale: 'en',
     strategy: 'no_prefix',
