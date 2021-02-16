@@ -14,9 +14,9 @@
           :label="$t('objective.label')"
         />
         <TInputSelect v-model="roles" :options="rolesList" label="Gender" />
-        <TInputSelect
+        <TStylesFilter
           v-model="dances"
-          :options="dancesList"
+          :selected="myStyles"
           :label="$t('style.label')"
         />
       </div>
@@ -162,6 +162,7 @@ export default {
     const profileType = ref('')
     const roles = ref('')
     const dances = ref('')
+    const myStyles = computed(() => myProfile.value?.styles)
 
     const rolesList = [
       {
@@ -250,7 +251,8 @@ export default {
       typeOptions,
       profileType,
       getExcerpt,
-      createProfile
+      createProfile,
+      myStyles
     }
   }
 }

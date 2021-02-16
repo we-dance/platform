@@ -13,14 +13,11 @@
       <div class="flex flex-no-wrap space-x-2">
         <TInputCity v-model="currentCity" />
         <TInputSelect v-model="eventType" :options="eventTypeOptions" />
-        <TInputSelect
-          v-model="dances"
-          :options="dancesList"
-          :label="$t('style.label')"
-        />
+        <TStylesFilter v-model="dances" :label="$t('style.label')" />
         <TInputSelect
           v-if="uid"
           v-model="activeFilter"
+          :selected="myStyles"
           :options="filterOptions"
         />
         <TInputSelect v-model="view" :options="viewOptions" />
@@ -128,19 +125,7 @@ export default {
 
     const { uid, profile: myProfile } = useAuth()
     const dances = ref('')
-    const dancesList = computed(() => {
-      const list = myProfile.value?.styles
-        ? Object.keys(myProfile.value.styles)
-        : []
-
-      return [
-        {
-          label: 'Style',
-          value: ''
-        },
-        ...list
-      ]
-    })
+    const myStyles = computed(() => myProfile.value?.styles)
 
     const map = (item) => {
       if (!item.id) {
@@ -270,11 +255,11 @@ export default {
       activeFilter,
       filterOptions,
       dances,
-      dancesList,
       view,
       viewOptions,
       eventTypeOptions,
-      eventType
+      eventType,
+      myStyles
     }
   },
   methods: {

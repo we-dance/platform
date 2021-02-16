@@ -100,6 +100,15 @@ export default () => {
     return state.collection
   })
 
+  const getAllStyles = () => {
+    return state.collection
+      .filter((item) => item.root === 'yes')
+      .map((item) => ({
+        value: item.id,
+        label: item.name
+      }))
+  }
+
   const categories = computed(() => {
     if (!styles.value) {
       return []
@@ -116,6 +125,7 @@ export default () => {
     getStyle,
     getStyleName,
     levels,
-    getStyles
+    getStyles,
+    getAllStyles
   }
 }

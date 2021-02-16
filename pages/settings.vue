@@ -77,9 +77,31 @@
             $t('settings.account.changepassword')
           }}</TButton>
           <div class="bg-red-200 mt-4 -mb-4 -mx-4 p-4">
-            <TButton type="danger" @click.native="deleteAccountAction()">{{
-              $t('settings.account.delete')
-            }}</TButton>
+            <TButton
+              type="danger"
+              @click.native="deleteAccountPopupVisible = true"
+              >{{ $t('settings.account.delete') }}</TButton
+            >
+            <TPopup
+              title="Confirm account deletion"
+              @click="deleteAccountPopupVisible = false"
+            >
+              <div class="py-4">
+                <TField
+                  v-model="usernameConfirmation"
+                  label-position="vertical"
+                  :placeholder="profile.username"
+                  label="Enter username"
+                />
+                <div class="flex justify-end mt-4">
+                  <TButton
+                    type="danger"
+                    @click.native="deleteAccountAction()"
+                    >{{ $t('settings.account.delete') }}</TButton
+                  >
+                </div>
+              </div>
+            </TPopup>
           </div>
         </div>
         <div v-if="currentTab === 'password'" class="border-t mt-4 pt-4">
@@ -186,7 +208,9 @@ export default {
   data: () => ({
     canBoost: false,
     isBoosting: false,
-    generating: false
+    generating: false,
+    deleteAccountPopupVisible: false,
+    usernameConfirmation: ''
   }),
   setup() {
     const {
@@ -264,6 +288,10 @@ export default {
   },
   methods: {
     async deleteAccountAction() {
+      if (this.usernameConfirmation !== this.profile.username) {
+        return
+      }
+
       try {
         await this.deleteAccount()
         this.$toast.success('Your account has been deleted')

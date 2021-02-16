@@ -14,9 +14,9 @@
         <TInputCity v-model="currentCity" />
         <TInputSelect v-model="sorting" :options="sortingList" />
         <TInputSelect v-model="view" :options="viewOptions" />
-        <TInputSelect
+        <TStylesFilter
           v-model="dances"
-          :options="dancesList"
+          :selected="myStyles"
           :label="$t('style.label')"
         />
       </div>
@@ -110,19 +110,7 @@ export default {
 
     const { uid, profile: myProfile } = useAuth()
     const dances = ref('')
-    const dancesList = computed(() => {
-      const list = myProfile.value?.styles
-        ? Object.keys(myProfile.value.styles)
-        : []
-
-      return [
-        {
-          label: 'Style',
-          value: ''
-        },
-        ...list
-      ]
-    })
+    const myStyles = computed(() => myProfile.value?.styles)
 
     const sorting = ref(uid.value ? '-createdAt' : '-upVotes')
 
@@ -212,11 +200,11 @@ export default {
       uid,
       currentCity,
       dances,
-      dancesList,
       sorting,
       sortingList,
       view,
-      viewOptions
+      viewOptions,
+      myStyles
     }
   },
   data: () => ({
