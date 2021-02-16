@@ -11,7 +11,7 @@
           />
         </div>
 
-        <div class="md:p-4 md:border md:rounded md:shadow overflow-hidden">
+        <div class="md:p-4 md:border md:rounded md:shadow">
           <template v-if="false">
             <div class="-mt-4 -mx-4">
               <img
@@ -42,42 +42,31 @@
 
           <TPreview :content="post.description" class="mt-4" />
 
-          <div class="border-t mt-4 p-4 md:-mx-4 md:-mb-4 bg-gray-100">
-            <div class="flex justify-between posts-center">
-              <div class="flex">
-                <div class="text-gray-700 flex items-center justify-center">
-                  <button
-                    class="text-center hover:text-red-500"
-                    :class="{ 'text-primary': fullPost.response === 'up' }"
-                    @click="updateRsvp(postId, 'posts', 'up')"
-                  >
-                    <TIcon name="favorite" />
-                  </button>
-                  <div class="ml-1">
-                    {{ fullPost.upVotes }}
-                  </div>
-                </div>
-              </div>
-              <div>
-                <TButtonShare
-                  :id="postId"
-                  collection="posts"
-                  :file="post.socialCover"
-                  :file-name="post.title"
-                  :url="`https://wedance.vip/posts/${postId}`"
-                  :text="post.title"
-                  type="base"
-                  label="Share"
-                />
-              </div>
-            </div>
+          <div
+            class="border-t mt-4 p-4 bg-white flex justify-between posts-center sticky bottom-0"
+          >
+            <TButtonLike
+              :value="fullPost.response === 'up'"
+              :count="fullPost.upVotes"
+              @change="updateRsvp(postId, 'posts', 'up')"
+            />
+            <TButtonShare
+              :id="postId"
+              collection="posts"
+              :file="post.socialCover"
+              :file-name="post.title"
+              :url="`https://wedance.vip/posts/${postId}`"
+              :text="post.title"
+              type="base"
+              label="Share"
+            />
+          </div>
 
-            <div class="mt-4">
-              <TProfileCard3
-                :label="`Published on ${publishedAt} by`"
-                :profile="author"
-              />
-            </div>
+          <div class="p-4 md:-mx-4 md:-mb-4 bg-gray-100">
+            <TProfileCard3
+              :label="`Published on ${publishedAt} by`"
+              :profile="author"
+            />
           </div>
         </div>
       </div>
