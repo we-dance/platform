@@ -179,20 +179,6 @@ export default {
       }
     ]
 
-    const dancesList = computed(() => {
-      const list = myProfile.value?.styles
-        ? Object.keys(myProfile.value.styles)
-        : []
-
-      return [
-        {
-          label: 'Style',
-          value: ''
-        },
-        ...list
-      ]
-    })
-
     const docs = computed(() => {
       return docsProfiles.value
         .filter((item) =>
@@ -246,7 +232,6 @@ export default {
       dances,
       objectivesOptions,
       rolesList,
-      dancesList,
       currentCity,
       typeOptions,
       profileType,
