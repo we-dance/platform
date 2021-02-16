@@ -15,37 +15,12 @@
           Download Image
         </TButton>
         <TButton
-          :href="`whatsapp://send?text=${text} ${url}`"
-          data-action="share/whatsapp/share"
+          v-for="(_, platform) in platforms"
+          :key="platform"
           type="nav"
+          @click="shareTo(platform)"
         >
-          Whatsapp
-        </TButton>
-        <TButton
-          :href="`https://t.me/share/url?url=${url}&text=${text}`"
-          target="_blank"
-          rel="nofollow noreferrer"
-          type="nav"
-        >
-          Telegram
-        </TButton>
-        <TButton
-          :href="
-            `https://www.facebook.com/share.php?display=page&u=${url}&t=${text}`
-          "
-          target="_blank"
-          rel="nofollow noreferrer"
-          type="nav"
-        >
-          Facebook
-        </TButton>
-        <TButton
-          :href="`https://twitter.com/intent/tweet?text=${text} ${url}`"
-          target="_blank"
-          rel="nofollow noreferrer"
-          type="nav"
-        >
-          Twitter
+          {{ platform }}
         </TButton>
         <TButton type="nav" @click="refresh()">
           Refresh image
@@ -58,6 +33,7 @@
 <script>
 import { saveAs } from 'file-saver'
 import axios from 'axios'
+import { openURL } from '~/utils'
 
 export default {
   props: {
@@ -103,16 +79,54 @@ export default {
     generating: false,
     downloadUrl: ''
   }),
+  computed: {
+    platforms() {
+      const text = this.text
+      const url = this.url
+
+      return {
+        Whatsapp: `whatsapp://send?text=${text} ${url}`,
+        Telegram: `https://t.me/share/url?url=${url}&text=${text}`,
+        Facebook: `https://www.facebook.com/share.php?display=page&u=${url}&t=${text}`,
+        Twitter: `https://twitter.com/intent/tweet?text=${text} ${url}`
+      }
+    }
+  },
   methods: {
+    shareTo(platform) {
+      if (!this.platforms[platform]) {
+        return
+      }
+
+      this.$fire.analytics.logEvent('share', {
+        method: platform,
+        content_type: this.collection,
+        content_id: this.id
+      })
+
+      openURL(this.platforms[platform])
+    },
     async refresh() {
       this.sharing = false
       await this.generate()
       await this.share()
     },
     download() {
+      this.$fire.analytics.logEvent('share', {
+        method: 'Download',
+        content_type: this.collection,
+        content_id: this.id
+      })
+
       saveAs(this.downloadUrl, `${this.fileName}.png`)
     },
     async copyToClipboard() {
+      this.$fire.analytics.logEvent('share', {
+        method: 'Link',
+        content_type: this.collection,
+        content_id: this.id
+      })
+
       await navigator.clipboard.writeText(this.url)
       this.sharing = false
       this.$toast.success('Link copied to clipboard')
@@ -121,6 +135,10 @@ export default {
       if (this.generating) {
         return
       }
+
+      this.$fire.analytics.logEvent('create_poster', {
+        collection: this.collection
+      })
 
       this.generating = true
       this.$nuxt.$loading.start()
@@ -167,10 +185,17 @@ export default {
         !navigator.canShare ||
         !navigator.canShare({ files: filesArray })
       ) {
+        this.$fire.analytics.logEvent('popup_share')
         this.sharing = true
 
         return
       }
+
+      this.$fire.analytics.logEvent('share', {
+        method: 'Native',
+        content_type: this.collection,
+        content_id: this.id
+      })
 
       navigator.share({
         title: this.text,

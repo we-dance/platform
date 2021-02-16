@@ -39,20 +39,12 @@
           class="flex-1"
         />
       </div>
-      <div v-if="uid" class="mb-4">
+      <div v-if="uid && currentCity" class="mb-4">
         <WTeaser
-          v-if="city && city.telegram"
-          :title="$t('teaser.chat.title')"
-          :description="$t('teaser.chat.description')"
-          :button="$t('teaser.chat.btn', { city: city.name })"
-          :href="city.telegram"
-        />
-        <WTeaser
-          v-else-if="currentCity"
           :title="$t('teaser.chat.title')"
           :description="$t('teaser.chat.description')"
           :button="$t('teaser.chat.btn', { city: currentCity })"
-          href="https://t.me/joinchat/Iqif2X0FCXCpqHDj"
+          @click="joinChat()"
         />
       </div>
 
@@ -97,7 +89,7 @@ import useAccounts from '~/use/accounts'
 import useCities from '~/use/cities'
 import useAuth from '~/use/auth'
 import useProfiles from '~/use/profiles'
-import { sortBy } from '~/utils'
+import { sortBy, openURL } from '~/utils'
 
 export default {
   name: 'PostsIndex',
@@ -108,7 +100,7 @@ export default {
     const { docs, loading: loadingPosts, getById } = useCollection('posts')
     const { getProfile } = useProfiles()
 
-    const { uid, profile: myProfile } = useAuth()
+    const { uid, profile: myProfile, updateAccount } = useAuth()
     const dances = ref('')
     const myStyles = computed(() => myProfile.value?.styles)
 
@@ -204,7 +196,8 @@ export default {
       sortingList,
       view,
       viewOptions,
-      myStyles
+      myStyles,
+      updateAccount
     }
   },
   data: () => ({
@@ -225,6 +218,23 @@ export default {
         )
 
       return result.sort(sortBy(this.sorting))
+    }
+  },
+  methods: {
+    async joinChat() {
+      await this.$fire.firestore.collection('city_chats').add({
+        city: this.currentCity
+      })
+
+      this.$fire.analytics.logEvent('join_chat', {
+        city: this.currentCity
+      })
+
+      if (this.city?.telegram) {
+        openURL(this.city.telegram)
+      } else {
+        openURL('https://t.me/joinchat/Iqif2X0FCXCpqHDj')
+      }
     }
   }
 }

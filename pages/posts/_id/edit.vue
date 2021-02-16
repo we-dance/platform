@@ -90,14 +90,17 @@ export default {
       }
 
       if (data.id) {
+        this.$fire.analytics.logEvent('update_post')
         await this.update(data.id, data)
       } else {
+        this.$fire.analytics.logEvent('create_post')
         await this.create(data)
       }
 
       this.cancelItem()
     },
     async removeItem(id) {
+      this.$fire.analytics.logEvent('delete_post')
       await this.remove(id)
       this.cancelItem()
     }

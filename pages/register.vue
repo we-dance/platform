@@ -143,6 +143,14 @@ export default {
         return
       }
 
+      this.$fire.analytics.logEvent('sign_up', {
+        method: 'Password'
+      })
+
+      this.$fire.analytics.logEvent('join_group', {
+        group_id: this.community
+      })
+
       await this.createUserWithEmailAndPassword(
         this.email,
         this.password,

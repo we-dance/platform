@@ -49,10 +49,7 @@
           <router-link to="/signin" class="underline hover:no-underline">{{
             $t('nopassword.signin')
           }}</router-link>
-          <button
-            class="underline hover:no-underline"
-            @click="signInWithGoogle"
-          >
+          <button class="underline hover:no-underline" @click="signGoogle">
             {{ $t('nopassword.google') }}
           </button>
         </div>
@@ -124,15 +121,26 @@ export default {
 
       this.$router.push(target)
     },
-    submit(e) {
+    async submit(e) {
       e.preventDefault()
 
       if (!this.email.trim()) {
         return
       }
 
-      this.sendSignInLinkToEmail(this.email)
+      this.$fire.analytics.logEvent('login', {
+        method: 'NoPassword'
+      })
+
+      await this.sendSignInLinkToEmail(this.email)
       this.emailSent = true
+    },
+    async signGoogle() {
+      this.$fire.analytics.logEvent('login', {
+        method: 'Google'
+      })
+
+      await this.signInWithGoogle()
     }
   }
 }

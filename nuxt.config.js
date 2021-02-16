@@ -1,5 +1,3 @@
-const isProd = process.env.NODE_ENV === 'production'
-
 const app = {
   name: 'WeDance',
   description: 'We bring dancers together',
@@ -25,7 +23,9 @@ const firebase = {
   services: {
     auth: true,
     firestore: true,
-    analytics: isProd
+    analytics: {
+      collectionEnabled: process.env.FIREBASE_ANALYTICS_ENABLED
+    }
   }
 }
 

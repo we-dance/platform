@@ -90,6 +90,7 @@ export default {
   },
   methods: {
     draftMessage() {
+      this.$fire.analytics.logEvent('popup_message')
       this.message = `Hi ${this.profile.name}!\n\nI am looking for a dance partner to practice.\n\nIf you are interested please contact me via Whatsapp: +XX (XXX) XXX-XX-XXX`
       this.isWritingMessage = true
     },
@@ -99,6 +100,8 @@ export default {
       }
 
       try {
+        this.$fire.analytics.logEvent('send_message')
+
         await this.create({
           from: this.myUid,
           to: this.uid,

@@ -118,14 +118,18 @@ export default {
 
       this.$router.push(target)
     },
-    submit(e) {
+    async submit(e) {
       e.preventDefault()
 
       if (!this.email.trim()) {
         return
       }
 
-      this.signUserIn(this.email, this.password)
+      this.$fire.analytics.logEvent('login', {
+        method: 'Password'
+      })
+
+      await this.signUserIn(this.email, this.password)
     }
   }
 }

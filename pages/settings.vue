@@ -2,7 +2,7 @@
   <main class="mt-8">
     <TLoader v-if="loading || !profile || !account" />
     <div v-else>
-      <TPopup v-if="isBoosting" title="Bonus" @click="skipBoosting()">
+      <TPopup v-if="isBoosting" title="Bonus" @close="skipBoosting()">
         <div class="max-w-md">
           <div v-if="generating" class="p-4">
             Generating image... Please wait...
@@ -31,7 +31,7 @@
                 />
               </div>
             </div>
-            <div class="flex justify-end mt-4 space-x-2">
+            <div class="flex justify-end my-4 space-x-2">
               <TButton @click="skipBoosting()">No, thank you</TButton>
               <TButton type="primary" @click="generate()">Yes!</TButton>
             </div>
@@ -206,6 +206,7 @@ import useRouter from '~/use/router'
 import TPopup from '~/components/TPopup.vue'
 
 export default {
+  name: 'PageSettings',
   components: { TPopup },
   middleware: ['auth'],
   data: () => ({
@@ -298,7 +299,9 @@ export default {
       }
 
       try {
-        await this.$fire.firestore.collection('suspended').create({
+        this.$fire.analytics.logEvent('delete_account')
+
+        await this.$fire.firestore.collection('suspended').add({
           reason: this.deleteReason,
           username: this.profile.username,
           email: this.account.email
@@ -312,6 +315,8 @@ export default {
       }
     },
     async skipBoosting() {
+      this.$fire.analytics.logEvent('skip_boosting')
+
       await this.updateProfile({
         socialCoverAt: +new Date(),
         socialCoverPublish: 'No'
@@ -325,12 +330,21 @@ export default {
       this.$router.push(`/${this.profile.username}`)
     },
     async saveProfile(data) {
+      this.$fire.analytics.logEvent('save_profile')
+
+      if (data.community !== this.profile.community) {
+        this.$fire.analytics.logEvent('join_group', {
+          group_id: data.community
+        })
+      }
+
       await this.updateProfile(data)
 
       const canBoost =
         data.photo && data.styles && data.community && data.bio && data.type
 
       if (canBoost) {
+        this.$fire.analytics.logEvent('popup_profile_boosting')
         this.isBoosting = true
         return
       }
@@ -338,6 +352,8 @@ export default {
       this.goToProfile()
     },
     async saveAccount(data) {
+      this.$fire.analytics.logEvent('save_account')
+
       await this.updateAccount(data)
       this.$router.push('/settings')
     },
@@ -346,6 +362,10 @@ export default {
       if (this.generating) {
         return
       }
+
+      this.$fire.analytics.logEvent('create_poster', {
+        collection: 'profiles'
+      })
 
       this.generating = true
       this.$nuxt.$loading.start()

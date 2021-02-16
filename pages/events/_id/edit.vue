@@ -87,6 +87,7 @@ export default {
         return
       }
 
+      this.$fire.analytics.logEvent('copy_event')
       const doc = await this.create(data)
 
       this.$router.push(`/events/${doc.id}`)
@@ -97,14 +98,17 @@ export default {
       }
 
       if (data.id) {
+        this.$fire.analytics.logEvent('update_event')
         await this.update(data.id, data)
       } else {
+        this.$fire.analytics.logEvent('create_event')
         await this.create(data)
       }
 
       this.cancelItem()
     },
     async removeItem(id) {
+      this.$fire.analytics.logEvent('delete_event')
       await this.remove(id)
       this.cancelItem()
     }

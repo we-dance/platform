@@ -5,12 +5,15 @@
       <p>{{ description }}</p>
     </div>
     <div class="flex justify-center">
-      <TButton v-if="url" class="my-2" type="primary" :to="url">{{
-        button
-      }}</TButton>
-      <TButton v-else-if="href" class="my-2" type="primary" :href="href">{{
-        button
-      }}</TButton>
+      <TButton
+        v-if="button"
+        class="my-2"
+        type="primary"
+        :to="url"
+        :href="href"
+        v-on="$listeners"
+        >{{ button }}</TButton
+      >
     </div>
   </div>
 </template>
