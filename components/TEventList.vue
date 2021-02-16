@@ -142,7 +142,7 @@ export default {
     const count = computed(() => items.value.length)
     const { route } = useRouter()
 
-    const loading = computed(() => loadingRsvps.value && loadingPosts.value)
+    const loading = computed(() => loadingRsvps.value || loadingPosts.value)
 
     const { getAccount } = useAccounts()
 

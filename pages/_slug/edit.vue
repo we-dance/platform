@@ -17,7 +17,6 @@
         show-remove
         class="bg-white p-4"
         @save="saveItem"
-        @remove="removeItem"
       />
     </div>
   </div>
@@ -38,6 +37,7 @@ export default {
 
     let profile = null
     let profileFound = false
+    let id = null
 
     const collection = await app.$fire.firestore
       .collection('profiles')
@@ -48,7 +48,7 @@ export default {
       const doc = collection.docs[0]
 
       profile = doc.data()
-      profile.id = doc.id
+      id = doc.id
 
       profileFound = true
     }
@@ -58,7 +58,8 @@ export default {
     }
 
     return {
-      item: profile
+      item: profile,
+      id
     }
   },
   mounted() {
@@ -67,22 +68,19 @@ export default {
     }
   },
   methods: {
-    async removeItem() {
-      await this.remove(this.id)
-    },
     async saveItem(data) {
       await this.update(this.id, data)
+      this.$router.push(`/${this.item.username}`)
     }
   },
   setup() {
     const { can } = useAuth()
     const { profileFields } = useProfiles()
-    const { update, remove } = useDoc('profiles')
+    const { update } = useDoc('profiles')
 
     return {
       update,
       profileFields,
-      remove,
       can
     }
   }

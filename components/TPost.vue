@@ -30,7 +30,7 @@
     <div class="px-4 pb-4 md:flex items-center justify-between">
       <TStyles class="text-xs mb-4 md:mb-0" hide-level :value="item.styles" />
 
-      <div class="flex">
+      <div class="flex items-center space-x-2">
         <TButton
           :to="`/posts/${item.id}`"
           icon="chat"

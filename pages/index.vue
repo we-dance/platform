@@ -197,7 +197,7 @@ export default {
       return result
     })
     const loading = computed(
-      () => loadingLikes.value && loadingComments.value && loadingPosts.value
+      () => loadingLikes.value || loadingComments.value || loadingPosts.value
     )
 
     const { getAccount } = useAccounts()

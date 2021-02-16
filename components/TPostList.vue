@@ -15,6 +15,7 @@
 import { computed } from '@nuxtjs/composition-api'
 import useRSVP from '~/use/rsvp'
 import useCollection from '~/use/collection'
+import useComments from '~/use/comments'
 import { sortBy } from '~/utils'
 
 export default {
@@ -43,6 +44,7 @@ export default {
   },
   setup(params) {
     const { getCount, getRsvpResponse, loading: loadingRsvps } = useRSVP()
+    const { getCommentsCount, loading: loadingComments } = useComments()
     const { docs, loading: loadingPosts } = useCollection(
       'posts',
       params.filter
@@ -59,6 +61,7 @@ export default {
       const response = getRsvpResponse(item.id)
       const multi = !response ? 3 : response === 'up' ? 2 : 1
       const order = multi * 100 + votes
+      const commentsCount = getCommentsCount(item.id)
 
       return {
         ...item,
@@ -66,12 +69,15 @@ export default {
         downVotes,
         votes,
         response,
-        order
+        order,
+        commentsCount
       }
     }
 
     const count = computed(() => items.value.length)
-    const loading = computed(() => loadingRsvps.value && loadingPosts.value)
+    const loading = computed(
+      () => loadingRsvps.value || loadingPosts.value || loadingComments.value
+    )
     // const isPublic = (item) => item.visibility !== 'Unlisted'
 
     const items = computed(() => {
