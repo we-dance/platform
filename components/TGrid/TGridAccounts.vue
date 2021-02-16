@@ -95,22 +95,20 @@
               >
             </div>
             <pre v-if="item.marketing.ref" class="text-xs">
-ref: {{ item.marketing.ref }}</pre
+ref: {{ item.marketing.ref }} <template
+              v-if="item.marketing.utms && item.marketing.utms.utm_source"
+            >• {{ item.marketing.utms.utm_campaign }} • {{
+                item.marketing.utms.utm_medium
+              }} • {{ item.marketing.utms.utm_source }}</template
+            ></pre>
+
+            <pre class="text-xs">
+last login: {{ getDateTime(item.lastLoginAt) }}</pre
             >
-            <pre v-if="Object.keys(item.marketing.utms).length" class="text-xs">
-utms: {{ item.marketing.utms }}</pre
-            >
-            <pre class="text-xs">joined: {{ getDate(item.createdAt) }}</pre>
+            <pre class="text-xs">joined: {{ getDateTime(item.createdAt) }}</pre>
             <pre class="text-xs">used: {{ item.daysUsed }} days</pre>
             <pre class="text-xs">type: {{ item.profile.type }}</pre>
             <pre class="text-xs">visibility: {{ item.profile.visibility }}</pre>
-            <pre
-              v-for="contactField in contactFields"
-              :key="`${item.id}_${contactField.name}`"
-              class="text-xs"
-            ><span v-if="item.profile[contactField.name]">{{ contactField.name }}: {{
-                item.profile[contactField.name]
-              }}</span></pre>
           </div>
         </div>
 
@@ -297,7 +295,7 @@ export default {
             matchString(item.email, search)
           )
         })
-        .sort(sortBy('-createdAt'))
+        .sort(sortBy('-lastLoginAt'))
     )
 
     return {
@@ -307,6 +305,7 @@ export default {
       selectedAll,
       items,
       getTime,
+      getDateTime,
       selected,
       getDate,
       removeProfile,
