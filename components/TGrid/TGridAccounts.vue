@@ -127,7 +127,14 @@ import Vue from 'vue'
 import { computed, ref } from '@nuxtjs/composition-api'
 import useCollection from '~/use/collection'
 import useDoc from '~/use/doc'
-import { sortBy, getTime, getDate, getDateTime, saveCSV } from '~/utils'
+import {
+  sortBy,
+  getTime,
+  getDate,
+  getDateTime,
+  getDateObect,
+  saveCSV
+} from '~/utils'
 import useProfiles from '~/use/profiles'
 
 export default {
@@ -278,7 +285,8 @@ export default {
       docs.value
         .map((item) => ({
           ...item,
-          profile: getProfile(item.id)
+          profile: getProfile(item.id),
+          lastLoginAt: getDateObect(item.lastLoginAt)
         }))
         .filter(activeFilterItem.value.filter)
         .filter((item) => {
