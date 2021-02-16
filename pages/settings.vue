@@ -77,28 +77,31 @@
             $t('settings.account.changepassword')
           }}</TButton>
           <div class="bg-red-200 mt-4 -mb-4 -mx-4 p-4">
-            <TButton
-              type="danger"
-              @click.native="deleteAccountPopupVisible = true"
-              >{{ $t('settings.account.delete') }}</TButton
-            >
+            <TButton type="danger" @click="deleteAccountPopupVisible = true">{{
+              $t('settings.account.delete')
+            }}</TButton>
             <TPopup
+              v-if="deleteAccountPopupVisible"
               title="Confirm account deletion"
-              @click="deleteAccountPopupVisible = false"
+              @close="deleteAccountPopupVisible = false"
             >
-              <div class="py-4">
+              <div class="py-4 space-y-4">
+                <TField
+                  v-model="deleteReason"
+                  label-position="vertical"
+                  type="textarea"
+                  label="Why are you leaving?"
+                />
                 <TField
                   v-model="usernameConfirmation"
                   label-position="vertical"
                   :placeholder="profile.username"
                   label="Enter username"
                 />
-                <div class="flex justify-end mt-4">
-                  <TButton
-                    type="danger"
-                    @click.native="deleteAccountAction()"
-                    >{{ $t('settings.account.delete') }}</TButton
-                  >
+                <div class="flex justify-end">
+                  <TButton type="danger" @click="deleteAccountAction()">{{
+                    $t('settings.account.delete')
+                  }}</TButton>
                 </div>
               </div>
             </TPopup>
@@ -210,7 +213,8 @@ export default {
     isBoosting: false,
     generating: false,
     deleteAccountPopupVisible: false,
-    usernameConfirmation: ''
+    usernameConfirmation: '',
+    deleteReason: ''
   }),
   setup() {
     const {
@@ -289,10 +293,17 @@ export default {
   methods: {
     async deleteAccountAction() {
       if (this.usernameConfirmation !== this.profile.username) {
+        this.$toast.error('Enter username to confirm account deletion')
         return
       }
 
       try {
+        await this.$fire.firestore.collection('suspended').create({
+          reason: this.deleteReason,
+          username: this.profile.username,
+          email: this.account.email
+        })
+
         await this.deleteAccount()
         this.$toast.success('Your account has been deleted')
         this.$router.push('/')
