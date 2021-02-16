@@ -1,0 +1,106 @@
+signin: Zaloguj się
+signup: Zapisz się
+signout: Wyloguj
+events.add: Dodaj wydarzenie
+posts.add: Dodaj post
+profiles.add: Dodaj profil
+myprofile.events.add: Dodaj wydarzenie
+myprofile.posts.add: Napisz post
+posts.title: Trendy
+profiles.title: Społeczność
+events.title: Wydarzenia
+myprofile.title: Mój profil
+settings.title: Ustawienia
+city.anywhere: Gdziekolwiek
+city.change: Zmień miasto
+objective.label: Cel
+role.label: Rola
+sort.popular: Popularny
+sort.newest: Najnowszy
+style.label: Styl
+profile.username: Nazwa Użytkownika
+account.email: E-mail
+account.password: Hasło
+account.name: Pełne imię i nazwisko
+account.phone: Telefon
+account.newsletter: Jakie aktualizacje chcesz otrzymywać co tydzień?
+profile.community: Tańczę
+agreement: Logując się, zgadzasz się na {terms} i {privacy}.
+terms: Warunki usługi
+privacy: Polityka prywatności
+register.login: Zaloguj sie
+register.submit: Zarejestrować
+signin.register: Utwórz konto
+signin.nopassword: Zapomniałeś hasła
+nopassword.signin: Mam hasło
+nopassword.google: Zaloguj się przez Google
+nopassword.submit: Wyślij magiczny link
+signin.submit: Zaloguj sie
+settings.account.title: Konto
+settings.account.description: Informacje te będą wykorzystywane do powiadomień i
+  zakupów. Zostaną one udostępnione usługodawcom lub sprzedawcom tylko za Twoją
+  zgodą.
+settings.profile.title: Profil
+settings.profile.description: Co chcesz, aby inni tancerze wiedzieli o tobie? To
+  miejsce, w którym możesz podzielić się swoją pasją do tańca. Przedstaw się,
+  nie wstydź się!
+settings.contacts.title: Łączność
+settings.contacts.description: Informacje te będą publicznie dostępne.
+  Udostępnij swoje kontakty tylko wtedy, gdy chcesz, aby członkowie kontaktowali
+  się z Tobą. Jest to również miłe miejsce do udostępniania mediów
+  społecznościowych, aby zwrócić na siebie uwagę.
+settings.account.changepassword: Zmień hasło
+settings.account.delete: Usuń konto
+contacts.email: E-mail
+contacts.website: Stronie internetowej
+save: Zapisać
+profile.type: Rodzaj
+profile.name: Nazwa
+profile.bio: Zwiastun
+profile.hometown: Miasto rodzinne
+profile.birthday: Urodziny
+profile.gender: Płeć
+profile.styles: Twoje style i poziom tańca
+profile.story: Opis
+profile.languages: Twoje języki
+profile.skills: Umiejętności niezwiązane z tańcem
+profile.days: Dni
+profile.topics: Jakie tematy taneczne Cię interesują?
+profile.teacher: Czy uczysz?
+profile.partner: Szukasz partnera do tańca?
+profile.height: Twój wzrost (cm)
+profile.weight: Twoja waga (kg)
+profile.partnerBio: O swoim partnerze
+profile.objectives: Cele
+profile.place: Gdzie się spotkać?
+profile.visibility: Widoczność
+profile.photo: Zdjęcie
+teaser.partner.title: Potrzebujesz partnera?
+teaser.partner.description: Tancerze na całym świecie tworzą swoje profile, aby znaleźć partnerów do tańca
+teaser.partner.btn: Zobacz Społeczność
+teaser.events.title: Gdzie tańczyć?
+teaser.events.description: Wszystkie kursy tańca, imprezy i festiwale w jednym miejscu
+teaser.events.btn: Zobacz wydarzenia
+teaser.profile.title: Opublikuj swój profil
+teaser.profile.description: aby inni mogli się z Tobą skontaktować
+teaser.profile.btn: Dołącz za darmo
+teaser.allevents.title: Imprezy prywatne
+teaser.allevents.description: Zostań członkiem społeczności WeDance, aby zobaczyć więcej
+teaser.allevents.btn: Dołącz teraz
+teaser.chat.title: Chcesz porozmawiać?
+teaser.chat.description: Prowadzimy rozmowy taneczne w każdym mieście
+teaser.chat.btn: Dołącz do czatu {city}
+teaser.involve.title: Potrzebujemy Twojej pomocy
+teaser.involve.description: Jesteśmy międzynarodową społecznością taneczną
+  non-profit. Chcemy, abyś udał się do dowolnego miasta w dowolnym kraju i
+  znalazł imprezy taneczne i tancerzy. Wszystko zaczyna się od lokalnej
+  społeczności.
+teaser.involve.btn: Zaangażować się
+share.title: Dzielić
+share.copy: Skopiuj link
+footer.about: O nas
+footer.support: Wsparcie
+footer.privacy: Prywatność
+footer.terms: Warunki
+footer.coc: Kodeks postępowania
+footer.faq: FAQ

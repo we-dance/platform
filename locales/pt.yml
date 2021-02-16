@@ -1,0 +1,104 @@
+signin: Entrar
+signup: Inscrever-se
+signout: Sair
+events.add: Adicionar Evento
+posts.add: Adicionar postagem
+profiles.add: Adicionar perfil
+myprofile.events.add: Adicionar Evento
+myprofile.posts.add: Escreva uma postagem
+posts.title: Tendências
+profiles.title: Comunidade
+events.title: Eventos
+myprofile.title: Meu perfil
+settings.title: Configurações
+city.anywhere: Qualquer lugar
+city.change: Mudar de cidade
+objective.label: Objetivo
+role.label: Função
+sort.popular: Popular
+sort.newest: O mais novo
+style.label: Estilo
+profile.username: Nome de usuário
+account.email: O email
+account.password: Senha
+account.name: Nome completo
+account.phone: Telefone
+account.newsletter: Que tipo de atualização você gostaria de receber semanalmente?
+profile.community: Eu danço em
+agreement: Ao fazer login, você concorda com os {terms} e {privacy}.
+terms: Termos de serviço
+privacy: Política de Privacidade
+register.login: Conecte-se
+register.submit: Registro
+signin.register: Criar uma conta
+signin.nopassword: Esqueceu a senha
+nopassword.signin: Eu tenho uma senha
+nopassword.google: Faça login no Google
+nopassword.submit: Envie um link mágico
+signin.submit: Conecte-se
+settings.account.title: Conta
+settings.account.description: Essas informações serão usadas para notificações e
+  compras. Ele será compartilhado com provedores de serviços ou vendedores
+  somente com o seu acordo.
+settings.profile.title: Perfil
+settings.profile.description: O que você quer que outros dançarinos saibam sobre
+  você? É um lugar para compartilhar sua paixão pela dança. Apresente-se, não
+  seja tímido!
+settings.contacts.title: Contatos
+settings.contacts.description: Esta informação estará disponível publicamente.
+  Compartilhe seus contatos apenas se quiser ser contatado por membros. Também é
+  um bom lugar para compartilhar suas redes sociais para obter alguma atenção.
+settings.account.changepassword: Mudar senha
+settings.account.delete: Deletar conta
+contacts.email: O email
+contacts.website: Local na rede Internet
+save: Salve 
+profile.type: Modelo
+profile.name: Nome
+profile.bio: Teaser
+profile.hometown: Cidade natal
+profile.birthday: Aniversário
+profile.gender: Gênero
+profile.styles: Seu estilo de dança e nível
+profile.story: Descrição
+profile.languages: Seus idiomas
+profile.skills: Habilidades de não dançar
+profile.days: Dias
+profile.topics: Em quais tópicos de dança você está interessado?
+profile.teacher: Você está ensinando?
+profile.partner: Você está procurando um parceiro de dança?
+profile.height: Sua altura (cm)
+profile.weight: Seu peso (kg)
+profile.partnerBio: Sobre seu parceiro
+profile.objectives: Objetivos
+profile.place: Onde encontrar?
+profile.visibility: Visibilidade
+profile.photo: foto
+teaser.partner.title: Precisa de um parceiro?
+teaser.partner.description: Dançarinos de todo o mundo criam seus perfis para encontrar parceiros de dança
+teaser.partner.btn: Ver comunidade
+teaser.events.title: Onde dançar?
+teaser.events.description: Todos os cursos de dança, festas e festivais em um só lugar
+teaser.events.btn: Ver Eventos
+teaser.profile.title: Publique o seu perfil
+teaser.profile.description: para que outros possam contatá-lo
+teaser.profile.btn: Entre de graça
+teaser.allevents.title: Eventos privados
+teaser.allevents.description: Torne-se um membro da Comunidade WeDance para ver mais
+teaser.allevents.btn: Entrar
+teaser.chat.title: Precisa conversar?
+teaser.chat.description: Temos chats de dança em todas as cidades
+teaser.chat.btn: Participe do bate-papo de {city}
+teaser.involve.title: Nós precisamos da sua ajuda
+teaser.involve.description: Somos uma comunidade internacional de dança sem fins
+  lucrativos. Queremos que você vá a qualquer cidade de qualquer país e encontre
+  eventos de dança e dançarinos. Tudo começa com a comunidade local.
+teaser.involve.btn: Se envolver
+share.title: Compartilhar
+share.copy: Link de cópia
+footer.about: Sobre nós
+footer.support: Apoio, suporte
+footer.privacy: Privacidade
+footer.terms: Termos
+footer.coc: Código de Conduta
+footer.faq: Perguntas frequentes
