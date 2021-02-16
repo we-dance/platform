@@ -2,7 +2,7 @@
   <TInputSelect
     :value="value"
     :options="dancesList"
-    @change="(val) => $emit('change', val)"
+    @input="(val) => $emit('input', val)"
   />
 </template>
 
