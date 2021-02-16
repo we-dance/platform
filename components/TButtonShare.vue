@@ -47,6 +47,9 @@
         >
           Twitter
         </TButton>
+        <TButton type="nav" @click="refresh()">
+          Refresh image
+        </TButton>
       </div>
     </TPopup>
   </div>
@@ -101,6 +104,11 @@ export default {
     downloadUrl: ''
   }),
   methods: {
+    async refresh() {
+      this.sharing = false
+      await this.generate()
+      await this.share()
+    },
     download() {
       saveAs(this.downloadUrl, `${this.fileName}.png`)
     },

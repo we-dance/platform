@@ -1,15 +1,9 @@
 <template>
   <div>
-    <TButton
-      v-if="myUid"
-      type="primary"
-      @click="
-        message = ''
-        isWritingMessage = true
-      "
+    <TButton v-if="myUid" type="primary" @click="draftMessage()"
       >Message</TButton
     >
-    <TButton v-else @click="showPopup = true">Message</TButton>
+    <TButton v-else type="primary" @click="showPopup = true">Message</TButton>
 
     <TPopup
       v-if="isWritingMessage"
@@ -47,7 +41,12 @@
           >
         </div>
 
-        <TInputTextarea v-model="message" placeholder="Write a message" />
+        <TInputTextarea
+          v-model="message"
+          placeholder="Write a message"
+          cols="40"
+          rows="10"
+        />
 
         <div class="flex mt-2 justify-end">
           <TButton class="mr-2" @click="isWritingMessage = false"
@@ -76,7 +75,7 @@
 </template>
 
 <script>
-import { ref } from '@nuxtjs/composition-api'
+import { ref, computed } from '@nuxtjs/composition-api'
 import useAuth from '~/use/auth'
 import useDoc from '~/use/doc'
 import useProfiles from '~/use/profiles'
@@ -89,9 +88,38 @@ export default {
       default: ''
     }
   },
+  methods: {
+    draftMessage() {
+      this.message = `Hi ${this.profile.name}!\n\nI am looking for a dance partner to practice.\n\nIf you are interested please contact me via Whatsapp: +XX (XXX) XXX-XX-XXX`
+      this.isWritingMessage = true
+    },
+    async sendMessage() {
+      if (!this.message) {
+        return
+      }
+
+      try {
+        await this.create({
+          from: this.myUid,
+          to: this.uid,
+          message: this.message,
+          status: 'open',
+          auto: 'No'
+        })
+
+        this.$toast.success(
+          `Your message have been sent to ${this.profile.name}'s email`
+        )
+      } catch (e) {
+        this.$toast.error(e.message)
+      }
+
+      this.isWritingMessage = false
+    }
+  },
   setup(props) {
     const { getProfile } = useProfiles()
-    const profile = getProfile(props.uid)
+    const profile = computed(() => getProfile(props.uid))
 
     const { create } = useDoc('matches')
     const { uid: myUid, profile: myProfile } = useAuth()
@@ -99,29 +127,13 @@ export default {
     const message = ref('')
     const isWritingMessage = ref(false)
 
-    const sendMessage = () => {
-      if (!message.value) {
-        return
-      }
-
-      create({
-        from: myUid.value,
-        to: props.uid,
-        message: message.value,
-        status: 'open',
-        auto: 'No'
-      })
-
-      isWritingMessage.value = false
-    }
-
     return {
+      create,
       profile,
       myUid,
       showPopup,
       message,
       isWritingMessage,
-      sendMessage,
       myProfile
     }
   }
