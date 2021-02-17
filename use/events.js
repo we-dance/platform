@@ -1,12 +1,16 @@
 export default () => {
   const eventTypeList = [
     {
+      label: 'Party',
+      value: 'Party'
+    },
+    {
       label: 'Workshop',
       value: 'Workshop'
     },
     {
-      label: 'Party',
-      value: 'Party'
+      label: 'Course',
+      value: 'Course'
     },
     {
       label: 'Festival',
