@@ -39,6 +39,7 @@
 
     <template v-if="isAdmin">
       <div class="h-8"></div>
+      <TButton to="/admin/shares" type="nav-admin" label="Shares" />
       <TButton to="/admin/accounts" type="nav-admin" label="Accounts" />
       <TButton to="/admin/cities" type="nav-admin" label="Cities" />
       <TButton to="/admin/reports" type="nav-admin" label="Reports" />

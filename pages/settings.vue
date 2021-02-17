@@ -387,6 +387,16 @@ export default {
           socialCoverAt: +new Date(),
           socialCoverPublish: 'Yes'
         })
+
+        await this.$fire.firestore.collection('shares').add({
+          state: 'new',
+          collection: 'profiles',
+          contentId: this.uid,
+          image: socialCover,
+          url: `https://wedance.vip/${this.profile.username}`,
+          city: this.currentCity,
+          visibility: this.profile.visibility
+        })
       } catch (e) {
         console.error(e)
       }

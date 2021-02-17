@@ -43,6 +43,11 @@ export default {
         return
       }
 
+      this.$fire.analytics.logEvent('add_comment', {
+        content_type: 'posts',
+        content_id: this.postId
+      })
+
       await this.addComment(this.postId, this.commentId, this.comment)
       this.comment = ''
 

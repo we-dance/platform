@@ -5,7 +5,7 @@
     :label="count"
     :class="{ 'text-primary': value, 'text-gray-700': !value }"
     v-bind="$attrs"
-    @click="$emit('change', !value)"
+    @click="onClick"
   />
 </template>
 
@@ -19,6 +19,12 @@ export default {
     count: {
       type: Number,
       default: 0
+    }
+  },
+  methods: {
+    onClick() {
+      this.$fire.analytics.logEvent('like')
+      this.$emit('change', !this.value)
     }
   }
 }
