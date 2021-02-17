@@ -101,7 +101,7 @@ ref: {{ item.marketing.ref }} <template
                 item.marketing.utms.utm_medium
               }} • {{ item.marketing.utms.utm_source }}</template
             ></pre>
-
+            <pre class="text-xs">uid: {{ item.id }}</pre>
             <pre class="text-xs">
 last login: {{ getDateTime(item.lastLoginAt) }}</pre
             >
