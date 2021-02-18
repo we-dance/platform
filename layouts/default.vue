@@ -107,14 +107,11 @@ export default {
     }
   },
   watch: {
-    '$route.path': {
-      handler() {
-        this.updateMenu()
-      }
-    }
+    '$route.path': 'onPageView',
+    'profile.username': 'onProfileLoad'
   },
   mounted() {
-    this.updateMenu()
+    this.onPageView()
 
     window &&
       window.addEventListener('beforeinstallprompt', (event) => {
@@ -132,12 +129,27 @@ export default {
     showSearch() {
       this.isSearchShown = true
     },
-    updateMenu() {
+    onProfileLoad() {
+      const hubspotContact = {
+        email: this.account?.email,
+        uid: this.uid,
+        username: this.profile?.username,
+        community: this.profile?.community
+      }
+
+      const _hsq = (window._hsq = window._hsq || [])
+      _hsq.push(['identify', hubspotContact])
+    },
+    onPageView() {
       this.isMenuOpen = false
+
+      const _hsq = (window._hsq = window._hsq || [])
+      _hsq.push(['setPath', this.$route.path])
+      _hsq.push(['trackPageView'])
     }
   },
   setup() {
-    const { uid, account, isAdmin } = useAuth()
+    const { uid, account, profile, isAdmin } = useAuth()
     const { docs: tagDocs } = useCollection('tags')
     const { getProfile } = useProfiles()
     const { currentCity } = useCities()
@@ -147,6 +159,7 @@ export default {
 
     return {
       account,
+      profile,
       getProfile,
       uid,
       tags,
