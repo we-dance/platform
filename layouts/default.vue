@@ -61,11 +61,7 @@
         v-if="isMenuOpen"
         class="bg-white fixed left-0 w-56 bottom-0 top-0 z-30 shadow-lg md:hidden"
       >
-        <MainNavigation
-          :uid="uid"
-          :username="getProfile(uid).username"
-          :is-admin="isAdmin()"
-        />
+        <MainNavigation :uid="uid" :username="getProfile(uid).username" />
       </div>
     </transition>
 
@@ -73,7 +69,6 @@
       <MainNavigation
         :uid="uid"
         :username="getProfile(uid).username"
-        :is-admin="isAdmin()"
         class="hidden md:block flex-initial"
       />
       <div class="flex-grow p-4 mx-auto w-full max-w-xl">

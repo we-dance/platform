@@ -26,6 +26,8 @@ export default () => {
   const { router, route } = useRouter()
 
   const isAdmin = () => !!state.uid && !!state.account && !!state.account.admin
+  const isEditor = () =>
+    !!state.uid && !!state.account && !!state.account.editor
 
   if (!state.initialized) {
     getRedirectResult().then(() => {
@@ -439,6 +441,7 @@ export default () => {
     signOut,
     isAccountConfirmed,
     isAdmin,
+    isEditor,
     getAccount,
     can,
     signInAnonymously,

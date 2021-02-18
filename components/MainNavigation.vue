@@ -37,22 +37,60 @@
       />
     </template>
 
-    <template v-if="isAdmin">
-      <div class="h-8"></div>
-      <TButton to="/admin/shares" type="nav-admin" label="Shares" />
-      <TButton to="/admin/accounts" type="nav-admin" label="Accounts" />
-      <TButton to="/admin/cities" type="nav-admin" label="Cities" />
-      <TButton to="/admin/reports" type="nav-admin" label="Reports" />
-      <TButton to="/admin/matches" type="nav-admin" label="Matches" />
-      <TButton to="/admin/emails" type="nav-admin" label="Emails" />
-      <TButton to="/admin/templates" type="nav-admin" label="Templates" />
-      <TButton to="/admin/tags" type="nav-admin" label="Tags" />
-    </template>
+    <div class="h-8"></div>
+    <TButton
+      v-if="isAdmin() || isEditor()"
+      to="/admin/shares"
+      type="nav-admin"
+      label="Shares"
+    />
+    <TButton
+      v-if="isAdmin()"
+      to="/admin/accounts"
+      type="nav-admin"
+      label="Accounts"
+    />
+    <TButton
+      v-if="isAdmin()"
+      to="/admin/cities"
+      type="nav-admin"
+      label="Cities"
+    />
+    <TButton
+      v-if="isAdmin()"
+      to="/admin/reports"
+      type="nav-admin"
+      label="Reports"
+    />
+    <TButton
+      v-if="isAdmin()"
+      to="/admin/matches"
+      type="nav-admin"
+      label="Matches"
+    />
+    <TButton
+      v-if="isAdmin()"
+      to="/admin/emails"
+      type="nav-admin"
+      label="Emails"
+    />
+    <TButton
+      v-if="isAdmin()"
+      to="/admin/templates"
+      type="nav-admin"
+      label="Templates"
+    />
   </nav>
 </template>
 
 <script>
+import useAuth from '~/use/auth'
+
 export default {
+  setup() {
+    const { isAdmin, isEditor } = useAuth()
+    return { isAdmin, isEditor }
+  },
   props: {
     uid: {
       type: String,
@@ -61,10 +99,6 @@ export default {
     username: {
       type: String,
       default: ''
-    },
-    isAdmin: {
-      type: Boolean,
-      default: false
     }
   }
 }

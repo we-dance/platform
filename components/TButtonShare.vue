@@ -35,13 +35,16 @@ import { saveAs } from 'file-saver'
 import axios from 'axios'
 import { openURL } from '~/utils'
 import useCities from '~/use/cities'
+import useAuth from '~/use/auth'
 
 export default {
   setup() {
     const { currentCity } = useCities()
+    const { uid } = useAuth()
 
     return {
-      currentCity
+      currentCity,
+      uid
     }
   },
   props: {
@@ -54,6 +57,10 @@ export default {
       default: ''
     },
     text: {
+      type: String,
+      default: ''
+    },
+    city: {
       type: String,
       default: ''
     },
@@ -168,12 +175,14 @@ export default {
           .update({ socialCover: this.downloadUrl })
 
         await this.$fire.firestore.collection('shares').add({
+          createdAt: +new Date(),
+          createdBy: this.uid,
           state: 'new',
           collection: this.collection,
           contentId: this.id,
           image: this.downloadUrl,
           url: this.url,
-          city: this.currentCity
+          city: this.city
         })
       } catch (e) {
         this.$toast.error(e.message)

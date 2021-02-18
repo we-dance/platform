@@ -9,6 +9,7 @@
         <TButtonShare
           :id="item.id"
           collection="events"
+          :city="item.city"
           :url="`https://wedance.vip/events/${item.id}`"
           :text="item.name"
           :file="item.socialCover"

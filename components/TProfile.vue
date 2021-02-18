@@ -53,6 +53,7 @@
           <TButtonShare
             :id="profile.id"
             collection="profiles"
+            :city="profile.community"
             :url="`https://wedance.vip/${profile.username}`"
             :text="`${profile.username} at WeDance`"
             :file="profile.socialCover"

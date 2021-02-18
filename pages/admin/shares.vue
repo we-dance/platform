@@ -3,7 +3,7 @@
     collection="shares"
     title="Shares"
     :fields="fields"
-    :filters="filters"
+    :filters="states"
   >
     <template v-slot:empty>
       <div class="text-center mt-4">
@@ -14,12 +14,16 @@
       <div class="rounded bg-white mb-4 shadow border overflow-hidden">
         <div class="p-4 space-y-2">
           <div class="flex justify-between">
-            <div>{{ item.city }}</div>
-            <div>{{ item.state }}</div>
+            <div>{{ item.city || 'Everywhere' }}</div>
+            <TInputSelect
+              :value="item.state"
+              :options="states"
+              @input="(val) => changeState(item.id, val)"
+            />
           </div>
           <div class="flex justify-between">
-            <div>{{ item.createdAt }}</div>
-            <div>{{ item.createdBy }}</div>
+            <TAvatar :uid="item.createdBy" name />
+            <div>{{ getDateTime(item.createdAt) }}</div>
           </div>
         </div>
         <img :src="item.image" />
@@ -29,6 +33,8 @@
 </template>
 
 <script>
+import { getDateTime } from '~/utils'
+
 export default {
   name: 'PageAdminShares',
   setup() {
@@ -65,17 +71,45 @@ export default {
       }
     ]
 
-    const filters = [
+    const states = [
       {
-        default: true,
-        name: 'default',
+        label: 'New',
+        name: 'new',
+        value: 'new',
+        filter: (item) => item.state === 'new',
+        sort: 'createdAt',
+        default: true
+      },
+      {
+        label: 'Published',
+        name: 'published',
+        value: 'published',
+        filter: (item) => item.state === 'published',
+        sort: 'createdAt'
+      },
+      {
+        label: 'Cancelled',
+        name: 'cancelled',
+        value: 'cancelled',
+        filter: (item) => item.state === 'cancelled',
         sort: 'createdAt'
       }
     ]
 
     return {
       fields,
-      filters
+      getDateTime,
+      states
+    }
+  },
+  methods: {
+    async changeState(id, state) {
+      await this.$fire.firestore
+        .collection('shares')
+        .doc(id)
+        .update({
+          state
+        })
     }
   }
 }

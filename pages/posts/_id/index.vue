@@ -53,6 +53,7 @@
             <TButtonShare
               :id="postId"
               collection="posts"
+              :city="post.community"
               :file="post.socialCover"
               :file-name="post.title"
               :url="`https://wedance.vip/posts/${postId}`"
