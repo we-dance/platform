@@ -137,8 +137,8 @@ export default {
         email: this.account?.email,
         uid: this.uid,
         username: this.profile?.username,
-        firstName: names[0] || '',
-        lastName: names[1] || '',
+        firstname: names[0] || '',
+        lastname: names[1] || '',
         community: this.profile?.community
       }
 
