@@ -133,7 +133,7 @@ export default {
       const name = this.account?.name || this.profile?.name
       const names = name.split(' ')
 
-      const hubspotContact = {
+      const contact = {
         email: this.account?.email,
         uid: this.uid,
         username: this.profile?.username,
@@ -143,7 +143,23 @@ export default {
       }
 
       const _hsq = (window._hsq = window._hsq || [])
-      _hsq.push(['identify', hubspotContact])
+      _hsq.push(['identify', contact])
+
+      this.$sentry.setUser({
+        email: contact.email,
+        username: contact.username,
+        id: contact.uid
+      })
+
+      this.$fire.analytics.setUserId(contact.uid)
+      this.$fire.analytics.setUserProperties({
+        community: contact.community,
+        type: this.profile?.type,
+        gender: this.profile?.gender,
+        visibility: this.profile?.visibility,
+        partner: this.profile?.partner,
+        teacher: this.profile?.teacher
+      })
     },
     onPageView() {
       this.isMenuOpen = false
@@ -151,6 +167,8 @@ export default {
       const _hsq = (window._hsq = window._hsq || [])
       _hsq.push(['setPath', this.$route.path])
       _hsq.push(['trackPageView'])
+
+      this.$fire.analytics.setCurrentScreen()
     }
   },
   setup() {
