@@ -202,17 +202,6 @@ export default () => {
         pwaUsed
       })
 
-    const _hsq = (window._hsq = window._hsq || [])
-    _hsq.push([
-      'identify',
-      {
-        email: state.account.email,
-        id: state.uid,
-        firstName: state.profile.name,
-        username: state.profile.username
-      }
-    ])
-
     if (!state.account.marketing) {
       await firestore
         .collection('accounts')
@@ -226,6 +215,16 @@ export default () => {
     }
 
     await loadProfile()
+
+    const _hsq = (window._hsq = window._hsq || [])
+    _hsq.push([
+      'identify',
+      {
+        email: state.account?.email,
+        id: state.uid,
+        firstName: state.profile?.username
+      }
+    ])
   }
 
   async function getAccount() {
