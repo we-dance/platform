@@ -22,8 +22,30 @@
             />
           </div>
           <div class="flex justify-between">
-            <TAvatar :uid="item.createdBy" name />
+            <div class="flex space-x-2">
+              <span>Created by</span>
+              <TAvatar :uid="item.createdBy" name />
+            </div>
             <div>{{ getDateTime(item.createdAt) }}</div>
+          </div>
+          <div v-if="item.publishedBy" class="flex justify-between">
+            <div class="flex space-x-2">
+              <span>Published by</span>
+              <TAvatar :uid="item.publishedBy" name />
+            </div>
+            <div>{{ getDateTime(item.publishedAt) }}</div>
+          </div>
+          <div v-if="item.cancelledBy" class="flex justify-between">
+            <div class="flex space-x-2">
+              <span>Cancelled by</span>
+              <TAvatar :uid="item.cancelledBy" name />
+            </div>
+            <div>{{ getDateTime(item.cancelledAt) }}</div>
+          </div>
+          <div>
+            <a :href="item.url" class="underline hover:no-underline">{{
+              item.url
+            }}</a>
           </div>
         </div>
         <img :src="item.image" />
@@ -33,11 +55,13 @@
 </template>
 
 <script>
+import useAuth from '~/use/auth'
 import { getDateTime } from '~/utils'
 
 export default {
   name: 'PageAdminShares',
   setup() {
+    const { uid } = useAuth()
     const fields = [
       {
         name: 'state'
@@ -56,18 +80,6 @@ export default {
       },
       {
         name: 'city'
-      },
-      {
-        name: 'visibility'
-      },
-      {
-        name: 'scheduledAt'
-      },
-      {
-        name: 'publishedAt'
-      },
-      {
-        name: 'publishedBy'
       }
     ]
 
@@ -99,7 +111,8 @@ export default {
     return {
       fields,
       getDateTime,
-      states
+      states,
+      uid
     }
   },
   methods: {
@@ -108,7 +121,9 @@ export default {
         .collection('shares')
         .doc(id)
         .update({
-          state
+          state,
+          [`${state}At`]: +new Date(),
+          [`${state}By`]: this.uid
         })
     }
   }
