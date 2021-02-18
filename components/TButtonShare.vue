@@ -207,6 +207,7 @@ export default {
       const filesArray = [file]
 
       if (
+        this.$route.query.admin ||
         !navigator.share ||
         !navigator.canShare ||
         !navigator.canShare({ files: filesArray })
@@ -223,11 +224,13 @@ export default {
         content_id: this.id
       })
 
-      navigator.share({
-        title: this.text,
-        url: this.url,
-        files: filesArray
-      })
+      try {
+        await navigator.share({
+          title: this.text,
+          url: this.url,
+          files: filesArray
+        })
+      } catch (e) {}
     }
   }
 }
