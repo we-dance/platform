@@ -61,7 +61,6 @@ import useCollection from '~/use/collection'
 import useAccounts from '~/use/accounts'
 import useAuth from '~/use/auth'
 import useCities from '~/use/cities'
-import useRouter from '~/use/router'
 import {
   dateDiff,
   sortBy,
@@ -136,11 +135,9 @@ export default {
     const startOfWeekString = getYmd(startOfWeekDate)
     const startOfTodayString = getYmd(now)
     const endOfWeekString = getYmd(addDays(startOfWeekDate, 7))
-    const in7DaysString = getYmd(addDays(now, 7))
     const endOfYearString = getYmd(endOfYear(now))
 
     const count = computed(() => items.value.length)
-    const { route } = useRouter()
 
     const loading = computed(() => loadingRsvps.value || loadingPosts.value)
 
@@ -152,31 +149,12 @@ export default {
 
     const filterOptions = computed(() => [
       {
-        value: 'next7days',
-        label: 'Next 7 days',
-        filter: (item) =>
-          getYmd(item.startDate) >= startOfTodayString &&
-          getYmd(item.startDate) <= in7DaysString &&
-          isPublic(item)
-      },
-      {
         value: 'thisYear',
         label: 'This Year',
         filter: (item) =>
           getYmd(item.startDate) >= startOfTodayString &&
           getYmd(item.startDate) <= endOfYearString &&
           isPublic(item)
-      },
-      {
-        value: 'createdByMe',
-        label: 'Created by me',
-        filter: (item) => item.createdBy === uid.value
-      },
-      {
-        value: 'schedule',
-        label: 'My schedule',
-        filter: (item) =>
-          item.response === 'up' && getYmd(item.startDate) >= startOfWeekString
       }
     ])
 
@@ -184,16 +162,10 @@ export default {
       filterOptions.value.find((item) => item.value === activeFilter.value)
     )
 
-    const thisCityFilter = (item) => item.city === currentCity.value
-
     const items = computed(() => {
       let result = docs.value.map(map)
 
-      if (!route.query.all) {
-        result = result
-          .filter(thisCityFilter)
-          .filter(activeFilterItem.value.filter)
-      }
+      result = result.filter(activeFilterItem.value.filter)
 
       return result.sort(sortBy('startDate'))
     })
