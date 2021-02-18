@@ -1,3 +1,7 @@
+---
+title: Terms and Conditions
+---
+
 # Terms and Conditions
 
 **Effective date: October 11, 2020**

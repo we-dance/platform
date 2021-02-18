@@ -1,3 +1,7 @@
+---
+title: WeDancePlatform
+---
+
 ## We bring dancers together
 
 WeDance.vip is a community platform for dancers:

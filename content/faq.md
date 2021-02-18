@@ -1,3 +1,7 @@
+---
+title: FAQ
+---
+
 # FAQ
 
 You will find here answers to the following questions:

@@ -1,3 +1,7 @@
+---
+title: Code of Conduct
+---
+
 # Code of Conduct
 
 **Effective date: October 11, 2020**

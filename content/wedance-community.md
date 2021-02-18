@@ -1,3 +1,7 @@
+---
+title: WeDanceCommunity
+---
+
 # WeDanceCommunity
 
 Local dance community, represented by WeDance Ambassador.

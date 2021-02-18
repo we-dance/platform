@@ -82,6 +82,8 @@
 
 <script>
 import { computed } from '@nuxtjs/composition-api'
+import features from 'platform-detect'
+import { version } from '../package.json'
 import useAuth from '~/use/auth'
 import useCollection from '~/use/collection'
 import useProfiles from '~/use/profiles'
@@ -168,7 +170,24 @@ export default {
       _hsq.push(['setPath', this.$route.path])
       _hsq.push(['trackPageView'])
 
-      this.$fire.analytics.setCurrentScreen()
+      setTimeout(() => {
+        const screen = {
+          app_name: features.pwa ? 'pwa' : 'web',
+          screen_name: document.title,
+          screen_view: this.$route.name,
+          app_version: version
+        }
+
+        this.$fire.analytics.logEvent('page_view')
+        this.$fire.analytics.logEvent('screen_view', screen)
+      }, 500)
+    }
+  },
+  head() {
+    return {
+      htmlAttrs: {
+        lang: this.$i18n.locale
+      }
     }
   },
   setup() {

@@ -32,15 +32,6 @@ const firebase = {
 export default {
   mode: 'spa',
   /*
-   ** Headers of the page
-   */
-  head: {
-    title: app.name,
-    bodyAttrs: {
-      class: 'bg-white'
-    }
-  },
-  /*
    ** Customize the progress-bar color
    */
   loading: { color: '#210309' },

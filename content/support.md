@@ -1,3 +1,7 @@
+---
+title: Support
+---
+
 # Support
 
 WeDance is supported by [Aleksey Razbakov](https://razbakov.com).

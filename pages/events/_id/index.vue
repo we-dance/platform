@@ -231,7 +231,7 @@ export default {
         },
         {
           property: 'og:image',
-          content: item.cover,
+          content: item.socialCover || item.cover,
           hid: 'og:image'
         },
         {

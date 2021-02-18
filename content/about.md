@@ -1,3 +1,7 @@
+---
+title: About WeDance
+---
+
 # About WeDance
 
 WeDance is a non-profit non-goverment organisation.
