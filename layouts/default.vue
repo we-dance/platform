@@ -130,10 +130,15 @@ export default {
       this.isSearchShown = true
     },
     onProfileLoad() {
+      const name = this.account?.name || this.profile?.name
+      const names = name.split(' ')
+
       const hubspotContact = {
         email: this.account?.email,
         uid: this.uid,
         username: this.profile?.username,
+        firstName: names[0] || '',
+        lastName: names[1] || '',
         community: this.profile?.community
       }
 
