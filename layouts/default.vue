@@ -166,11 +166,11 @@ export default {
     onPageView() {
       this.isMenuOpen = false
 
-      const _hsq = (window._hsq = window._hsq || [])
-      _hsq.push(['setPath', this.$route.path])
-      _hsq.push(['trackPageView'])
-
       setTimeout(() => {
+        const _hsq = (window._hsq = window._hsq || [])
+        _hsq.push(['setPath', this.$route.path])
+        _hsq.push(['trackPageView'])
+
         const screen = {
           app_name: features.pwa ? 'pwa' : 'web',
           screen_name: document.title,
