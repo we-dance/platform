@@ -31,6 +31,25 @@
         url="/register"
       />
 
+      <div class="mt-4 grid grid-cols-1 md:grid-cols-2 gap-2">
+        <router-link
+          v-for="profile in items"
+          :key="profile.id"
+          :to="`/${profile.username}`"
+          class="hover:opacity-75"
+        >
+          <TSharePreviewPost
+            :type="profile.type"
+            :username="profile.username"
+            :description="getExcerpt(profile.bio)"
+            :extra="profile.height ? `${profile.height}cm` : ''"
+            :photo="profile.photo"
+            :styles="profile.styles"
+            size="sm"
+          />
+        </router-link>
+      </div>
+
       <WTeaser
         v-if="uid && !items.length"
         :title="$t('teaser.involve.title')"

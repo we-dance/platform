@@ -1,5 +1,10 @@
 <template>
-  <TCardList collection="shares" title="Shares" :fields="fields">
+  <TCardList
+    collection="shares"
+    title="Shares"
+    :fields="fields"
+    :filters="filters"
+  >
     <template v-slot:empty>
       <div class="text-center mt-4">
         No scheduled posts.
@@ -7,9 +12,15 @@
     </template>
     <template v-slot:default="{ item }">
       <div class="rounded bg-white mb-4 shadow border overflow-hidden">
-        <div class="flex justify-between p-4">
-          <div>{{ item.city }}</div>
-          <div>{{ item.state }}</div>
+        <div class="p-4 space-y-2">
+          <div class="flex justify-between">
+            <div>{{ item.city }}</div>
+            <div>{{ item.state }}</div>
+          </div>
+          <div class="flex justify-between">
+            <div>{{ item.createdAt }}</div>
+            <div>{{ item.createdBy }}</div>
+          </div>
         </div>
         <img :src="item.image" />
       </div>
@@ -54,8 +65,17 @@ export default {
       }
     ]
 
+    const filters = [
+      {
+        default: true,
+        name: 'default',
+        sort: 'createdAt'
+      }
+    ]
+
     return {
-      fields
+      fields,
+      filters
     }
   }
 }
