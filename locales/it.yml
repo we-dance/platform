@@ -1,9 +1,9 @@
-signin: Accedi
-signup: Iscriviti
-signout: Disconnettersi
-events.add: Aggiungi
-posts.add: Aggiungi
-profiles.add: Aggiungi
+signin: Accedere
+signup: Iscriverti
+signout: Uscire
+events.add: Aggiungi evento
+posts.add: Aggiungi post
+profiles.add: Aggiungi profilo
 myprofile.events.add: Aggiungi evento
 myprofile.posts.add: Scrivi un post
 posts.title: Tendenze
@@ -20,26 +20,26 @@ sort.newest: Più recente
 style.label: Stile
 profile.username: Nome utente
 account.email: E-mail
-account.password: Parola d'ordine
-account.name: Nome e cognome
+account.password: Password
+account.name: Nome completo
 account.phone: Telefono
 account.newsletter: Che tipo di aggiornamento vorresti ricevere settimanalmente?
-profile.community: Ballo dentro
+profile.community: Io ballo in
 agreement: Eseguendo l'accesso, accetti i {terms} e la {privacy}.
 terms: Termini di servizio
 privacy: Politica sulla riservatezza
 register.login: Login
 register.submit: Registrati
 signin.register: Creare un account
-signin.nopassword: Ha dimenticato la password
+signin.nopassword: Hai dimenticato la password
 nopassword.signin: Ho una password
 nopassword.google: Accedi con Google
 nopassword.submit: Invia un collegamento magico
 signin.submit: Login
-settings.account.title: account
+settings.account.title: Account
 settings.account.description: Queste informazioni verranno utilizzate per
-  notifiche e acquisti. Sarà condiviso con fornitori di servizi o venditori solo
-  con il tuo accordo.
+  notifiche e acquisti. Esse verrano condivise con fornitori di servizi o
+  venditori solo con il tuo accordo.
 settings.profile.title: Profilo
 settings.profile.description: Cosa vuoi che gli altri ballerini sappiano di te?
   È un posto dove condividere la tua passione per la danza. Presentati, non
@@ -47,10 +47,10 @@ settings.profile.description: Cosa vuoi che gli altri ballerini sappiano di te?
 settings.contacts.title: Contatti
 settings.contacts.description: Queste informazioni saranno disponibili
   pubblicamente. Condividi i tuoi contatti solo se vuoi essere contattato dai
-  membri. È anche un bel posto per condividere i tuoi social media per attirare
+  membri. È anche un bel posto, per condividere i tuoi social media e attirare
   l'attenzione.
 settings.account.changepassword: Cambia la password
-settings.account.delete: Eliminare l'account
+settings.account.delete: Elimina account
 contacts.email: E-mail
 contacts.website: Sito web
 save: Salva
@@ -59,8 +59,8 @@ profile.name: Nome
 profile.bio: Teaser
 profile.hometown: Città natale
 profile.birthday: Compleanno
-profile.gender: Genere
-profile.styles: I tuoi stili di danza e il tuo livello
+profile.gender: Sesso
+profile.styles: I tuoi stili di danza e livello
 profile.story: Descrizione
 profile.languages: Le tue lingue
 profile.skills: Abilità non danzanti
@@ -68,20 +68,19 @@ profile.days: Giorni
 profile.topics: Quali argomenti di danza ti interessano?
 profile.teacher: Stai insegnando?
 profile.partner: Cerchi un compagno di ballo?
-profile.height: La tua altezza (cm)
-profile.weight: Il tuo peso (kg)
+profile.height: Altezza (cm)
+profile.weight: Peso (kg)
 profile.partnerBio: Sul tuo partner
 profile.objectives: Obiettivi
 profile.place: Dove incontrarci?
 profile.visibility: Visibilità
 profile.photo: Foto
 teaser.partner.title: Hai bisogno di un partner?
-teaser.partner.description: I ballerini di tutto il mondo creano i loro profili
-  per trovare partner di ballo
+teaser.partner.description: Ballerini in tutto il mondo creano i loro profili per trovare partner di ballo
 teaser.partner.btn: Vedi Community
 teaser.events.title: Dove ballare?
 teaser.events.description: Tutti i corsi di ballo, feste e festival in un unico luogo
-teaser.events.btn: Vedi Eventi
+teaser.events.btn: Vedi eventi
 teaser.profile.title: Pubblica il tuo profilo
 teaser.profile.description: in modo che altri possano contattarti
 teaser.profile.btn: Entra gratuitamente
@@ -93,8 +92,8 @@ teaser.chat.description: Abbiamo chat di ballo in ogni città
 teaser.chat.btn: Entra nella chat di {city}
 teaser.involve.title: Abbiamo bisogno del tuo aiuto
 teaser.involve.description: Siamo una comunità di danza internazionale senza
-  scopo di lucro. Vogliamo che tu vada in qualsiasi città di qualsiasi paese e
-  trovi eventi di danza e ballerini. Tutto inizia con la comunità locale.
+  scopo di lucro. Vogliamo che tu trovi eventi di danza e ballerini in qualsiasi
+  città di qualsiasi paese Tutto inizia con la comunità locale.
 teaser.involve.btn: Mettersi in gioco
 share.title: Condividere
 share.copy: Copia link
