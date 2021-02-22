@@ -142,13 +142,13 @@ export default {
         username: this.profile?.username,
         firstname: names[0] || '',
         lastname: names[1] || '',
-        community: this.profile?.community,
-        facebook: this.profile?.facebook,
-        instagram: this.profile?.instagram,
-        telegram: this.profile?.telegram,
-        type: this.profile?.type,
-        partner: this.profile?.partner,
-        teacher: this.profile?.teacher
+        community: this.profile?.community || '',
+        facebook: this.profile?.facebook || '',
+        instagram: this.profile?.instagram || '',
+        telegram: this.profile?.telegram || '',
+        type: this.profile?.type || '',
+        partner: this.profile?.partner || '',
+        teacher: this.profile?.teacher || ''
       }
 
       const _hsq = (window._hsq = window._hsq || [])
