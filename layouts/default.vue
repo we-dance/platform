@@ -132,7 +132,7 @@ export default {
       this.isSearchShown = true
     },
     onProfileLoad() {
-      const name = this.account?.name || this.profile?.name
+      const name = this.account?.name || this.profile?.name || ''
       const names = name.split(' ')
 
       const contact = {
