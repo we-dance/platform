@@ -44,7 +44,7 @@
     "detect-inapp": "^1.4.0",
     "excerpt-html": "^1.2.1",
     "file-saver": "^2.0.2",
-    "firebase": "^7.10.0",
+    "firebase": "^8.2.9",
     "generate-google-calendar-url": "^0.0.2",
     "hamburgers": "^1.1.3",
     "local-storage": "^2.0.0",
