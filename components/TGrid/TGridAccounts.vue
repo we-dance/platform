@@ -48,10 +48,7 @@
             <div class="float-right -mr-2">
               <TMenu>
                 <template v-slot:button>
-                  <TIcon
-                    class="cursor-pointer rounded-full hover:bg-gray-200 p-1"
-                    name="more_vert"
-                  />
+                  <TButton icon="more_vert" type="icon" />
                 </template>
                 <template v-slot:menu="{ closeMenu }">
                   <div class="p-4 bg-white rounded-lg shadow-xl border">
@@ -85,6 +82,14 @@
               {{ item.profile.jobs }}
             </div>
             <div>{{ item.name }} &lt;{{ item.email }}&gt;</div>
+            <label>
+              <input
+                :checked="item.editor"
+                type="checkbox"
+                @change="updateAccount(item.id, { editor: !item.editor })"
+              />
+              <span>Editor</span>
+            </label>
             <div class="text-xs text-orange-500">
               <span>Community: {{ item.profile.community }}</span
               ><span v-if="item.profile.city">
@@ -321,7 +326,8 @@ export default {
       list,
       applyList,
       contactFields,
-      updateProfile
+      updateProfile,
+      updateAccount
     }
   },
   computed: {
