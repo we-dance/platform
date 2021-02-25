@@ -93,7 +93,7 @@ export default {
         nav:
           'w-full px-4 py-2 items-center flex rounded-full border hover:border-indigo-500 hover:text-indigo-500',
         'nav-admin':
-          'w-full px-4 py-2 items-center text-gray-200 flex rounded-full border border-gray-200 hover:border-indigo-500 hover:text-indigo-500',
+          'w-full px-4 py-2 items-center text-gray-500 flex rounded-full border border-gray-500 hover:border-indigo-500 hover:text-indigo-500',
         void: ''
       }
 
