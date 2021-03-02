@@ -3,6 +3,7 @@
     <div v-if="editable" class="flex justify-end mb-4">
       <TButton class="mr-2" @click="proccess">Proccess</TButton>
       <TButton class="mr-2" @click="download">Download</TButton>
+      <TButton class="mr-2" @click="stats">Stats</TButton>
       <TButton @click="removeSelected">Delete</TButton>
     </div>
     <div class="bg-white py-4 flex flex-row mb-4 items-center border-b">
@@ -345,6 +346,30 @@ export default {
     this.load()
   },
   methods: {
+    stats() {
+      const dances = {}
+      const cities = {}
+
+      this.items.forEach((item) => {
+        if (!item.profile) {
+          return
+        }
+
+        if (item.profile.community) {
+          cities[item.profile.community] = cities[item.profile.community]
+            ? cities[item.profile.community] + 1
+            : 1
+        }
+
+        if (item.profile.styles) {
+          Object.keys(item.profile.styles).forEach((style) => {
+            dances[style] = dances[style] ? dances[style] + 1 : 1
+          })
+        }
+      })
+
+      console.log({ dances, cities })
+    },
     load() {
       if (!this.value) {
         this.selected = {}
