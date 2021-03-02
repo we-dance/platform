@@ -112,7 +112,7 @@ export default () => {
 
     return result.map((item) => ({
       value: item.id,
-      label: item.name
+      label: item.name + (item.synonyms ? ' (' + item.synonyms + ')' : '')
     }))
   }
 
