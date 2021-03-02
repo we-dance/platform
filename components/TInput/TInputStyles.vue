@@ -82,6 +82,10 @@ export default {
       const newValue = { ...this.value }
 
       if (newValue[val]?.selected) {
+        for (const item of this.children(val)) {
+          delete newValue[item.id]
+        }
+
         delete newValue[val]
       } else {
         newValue[val] = {
