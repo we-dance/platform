@@ -152,7 +152,11 @@
     <TPreview v-if="profile.story" :content="profile.story" class="mt-8 px-4" />
 
     <div class="iconed border shadow p-4 space-y-4 mt-8">
-      <dl v-if="profile.languages">
+      <dl v-if="profile.locales">
+        <dt class="font-bold mr-1">Languages:</dt>
+        <dd>{{ getLanguages(profile.locales) }}</dd>
+      </dl>
+      <dl v-else-if="profile.languages">
         <dt class="font-bold mr-1">Languages:</dt>
         <dd>{{ profile.languages }}</dd>
       </dl>
@@ -182,6 +186,11 @@
         <dd>{{ getDateTimeYear(profile.createdAt) }}</dd>
       </dl>
 
+      <dl v-if="profile.lastLoginAt" class="mt-4 md:flex">
+        <dt class="font-bold mr-1">Last seen:</dt>
+        <dd>{{ getDateTimeYear(profile.lastLoginAt) }}</dd>
+      </dl>
+
       <dl class="mt-4 md:flex">
         <dt class="font-bold mr-1">Visibility:</dt>
         <dd>{{ profile.visibility }}</dd>
@@ -203,6 +212,7 @@ import { saveAs } from 'file-saver'
 import useAuth from '~/use/auth'
 import useProfiles from '~/use/profiles'
 import { getDateTimeYear } from '~/utils'
+import languages from '~/assets/languages'
 
 export default {
   props: {
@@ -230,6 +240,19 @@ export default {
     getObjectives(objectives) {
       return Object.keys(objectives)
         .map((o) => this.objectivesList.find((i) => i.value === o).label)
+        .join(', ')
+    },
+    getLanguage(lang) {
+      return languages.find((l) => l.value === lang)
+    },
+    getLanguages(langs) {
+      if (!langs) {
+        return []
+      }
+
+      return Object.keys(langs)
+        .map((lang) => this.getLanguage(lang))
+        .map((l) => l.label)
         .join(', ')
     }
   }
