@@ -13,11 +13,14 @@
       <div class="flex flex-no-wrap space-x-2">
         <TInputCity v-model="currentCity" />
         <TInputSelect v-model="eventType" :options="eventTypeOptions" />
-        <TStylesFilter v-model="dances" :label="$t('style.label')" />
+        <TStylesFilter
+          v-model="dances"
+          :label="$t('style.label')"
+          :selected="myStyles"
+        />
         <TInputSelect
           v-if="uid"
           v-model="activeFilter"
-          :selected="myStyles"
           :options="filterOptions"
         />
         <TInputSelect v-model="view" :options="viewOptions" />
