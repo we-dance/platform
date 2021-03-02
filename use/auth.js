@@ -160,8 +160,7 @@ export default () => {
         name: user.displayName ?? '',
         email: user.email ?? '',
         photo: user.photoURL ?? '',
-        timezone: new Date().toString().match(/([A-Z]+[+-][0-9]+)/)[1],
-        marketing: state.marketing
+        timezone: new Date().toString().match(/([A-Z]+[+-][0-9]+)/)[1]
       }
 
       await firestore
