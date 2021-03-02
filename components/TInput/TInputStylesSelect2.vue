@@ -52,6 +52,10 @@ export default {
   }),
   methods: {
     add() {
+      if (!this.newStyleName) {
+        return
+      }
+
       const val = this.value
 
       val[this.newStyleName] = {

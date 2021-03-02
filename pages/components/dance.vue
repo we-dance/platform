@@ -13,6 +13,7 @@
 
 <script>
 export default {
+  name: 'PageDance',
   data: () => ({
     variant: '',
     variants: [
