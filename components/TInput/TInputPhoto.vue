@@ -1,11 +1,11 @@
 <template>
   <div>
-    <div class="w-full flex flex-col items-center p-4">
+    <div class="w-full flex flex-col items-center">
       <img
         v-if="value"
         :src="value"
         :alt="name"
-        class="h-32"
+        class="w-full"
         :class="{ 'rounded-full': circle }"
       />
       <button
@@ -92,7 +92,7 @@ export default {
     },
     circle: {
       type: Boolean,
-      default: true
+      default: false
     }
   },
   data: () => ({

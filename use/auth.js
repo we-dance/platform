@@ -8,7 +8,7 @@ import firebase from 'firebase/app'
 import 'firebase/auth'
 import 'firebase/firestore'
 import useRouter from '~/use/router'
-import { getDateObect } from '~/utils'
+import { getDateObect, getLanguages } from '~/utils'
 import useDoc from '~/use/doc'
 
 const state = Vue.observable({
@@ -88,16 +88,6 @@ export default () => {
   function setMarketing() {
     state.marketing = ls('marketing')
 
-    const languages = window?.navigator?.languages || []
-    const languageString = languages.length
-      ? languages[0]
-      : window?.navigator?.userLanguage || window?.navigator?.language || ''
-
-    const [language, locale] = languageString
-      .replace('-', '_')
-      .toLowerCase()
-      .split('_')
-
     const width =
       window.innerWidth ||
       document.documentElement.clientWidth ||
@@ -116,9 +106,6 @@ export default () => {
       fbclid: router?.currentRoute?.query?.fbclid || '',
       gclid: router?.currentRoute?.query?.gclid || '',
       utms: utm(document.location.href),
-      language,
-      locale,
-      languages,
       screen: {
         width,
         height
@@ -185,36 +172,39 @@ export default () => {
       await loadAccount()
     }
 
-    const lastLoginAt = new Date()
+    await loadProfile()
 
-    const pwaUsed = state.account.pwaUsed || features.pwa
-
+    const locales = state.profile.locales || getLanguages()
+    const timezone = new Date().toString().match(/([A-Z]+[+-][0-9]+)/)[1]
+    const lastLoginAt = +new Date()
+    const pwaUsed =
+      state.profile.pwaUsed || state.account.pwaUsed || features.pwa
     const daysUsed =
-      (state.account.daysUsed || 0) +
-      (isSameDay(getDateObect(state.account.lastLoginAt), lastLoginAt) ? 0 : 1)
+      (state.profile.daysUsed || state.account.daysUsed || 0) +
+      (isSameDay(
+        getDateObect(state.profile.lastLoginAt || state.account.lastLoginAt),
+        lastLoginAt
+      )
+        ? 0
+        : 1)
 
     await firestore
-      .collection('accounts')
+      .collection('profiles')
       .doc(state.uid)
       .update({
+        locales,
+        timezone,
         lastLoginAt,
-        daysUsed,
-        pwaUsed
+        pwaUsed,
+        daysUsed
       })
 
-    if (!state.account.marketing) {
-      await firestore
-        .collection('accounts')
-        .doc(state.uid)
-        .update({
-          marketing: {
-            ...state.marketing,
-            existing: true
-          }
-        })
-    }
-
     await loadProfile()
+
+    firestore.collection('marketing').add({
+      uid: state.uid,
+      ...state.marketing
+    })
   }
 
   async function getAccount() {

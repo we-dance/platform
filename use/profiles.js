@@ -152,10 +152,9 @@ export default () => {
       type: 'stylesSelect'
     },
     {
-      name: 'languages',
+      name: 'locales',
       key: 'profile.languages',
-      type: 'textarea',
-      description: 'For example: English, German, etc.'
+      type: 'languages'
     },
     {
       name: 'jobs',

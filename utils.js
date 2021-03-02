@@ -199,3 +199,36 @@ export const getOptions = (items, label) => {
     ...items
   ]
 }
+
+function getLang(languageString) {
+  const [language] = languageString
+    .replace('-', '_')
+    .toLowerCase()
+    .split('_')
+
+  return language
+}
+
+export function getLanguages() {
+  if (!window) {
+    return {}
+  }
+
+  const langs = []
+
+  if (window?.navigator?.languages) {
+    langs.push(...window.navigator.languages)
+  }
+
+  if (window?.navigator?.userLanguage) {
+    langs.push(window.navigator.userLanguage)
+  }
+
+  if (window?.navigator?.language) {
+    langs.push(window.navigator.language)
+  }
+
+  const locales = getObjectKeysFromArray(langs.map(getLang))
+
+  return locales
+}
