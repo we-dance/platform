@@ -71,7 +71,7 @@ export default {
         return
       }
 
-      const val = this.value
+      const val = this.value || {}
 
       Vue.set(val, styleId, {
         selected: true,

@@ -6,7 +6,10 @@
       class="inline-block rounded-full px-2 py-1 border m-1"
       :class="levelClass[style.level]"
     >
-      {{ style.name }}<span v-if="!hideLevel"> – {{ style.level }}</span>
+      {{ style.name
+      }}<span v-if="style.level !== 'Interested' && !hideLevel">
+        – {{ style.level }}</span
+      >
     </div>
   </div>
 </template>

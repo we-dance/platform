@@ -57,7 +57,7 @@ import TAccountListSelector from '~/components/TAccountListSelector'
 import TAccountSelector from '~/components/TAccountSelector'
 import TInputCity from '~/components/TInput/TInputCity'
 import TInputStyles from '~/components/TInput/TInputStyles'
-import TInputStylesSelect from '~/components/TInput/TInputStylesSelect'
+import TInputStylesSelect2 from '~/components/TInput/TInputStylesSelect2'
 import TInputButtons from '~/components/TInput/TInputButtons'
 import TInputUsername from '~/components/TInput/TInputUsername'
 import TInputDateTime from '~/components/TInput/TInputDateTime'
@@ -178,7 +178,7 @@ export default {
         accounts: TAccountListSelector,
         account: TAccountSelector,
         styles: TInputStyles,
-        stylesSelect: TInputStylesSelect,
+        stylesSelect: TInputStylesSelect2,
         buttons: TInputButtons,
         username: TInputUsername,
         datetime: TInputDateTime
