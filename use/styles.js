@@ -100,13 +100,20 @@ export default () => {
     return state.collection
   })
 
-  const getAllStyles = () => {
-    return state.collection
-      .filter((item) => item.root === 'yes')
-      .map((item) => ({
-        value: item.id,
-        label: item.name
-      }))
+  const getAllStyles = (filters) => {
+    let result = state.collection
+
+    if (filters) {
+      const fields = Object.keys(filters)
+      for (const field of fields) {
+        result = result.filter((item) => item[field] === filters[field])
+      }
+    }
+
+    return result.map((item) => ({
+      value: item.id,
+      label: item.name
+    }))
   }
 
   const categories = computed(() => {

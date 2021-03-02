@@ -1,9 +1,9 @@
 <template>
-  <div>
+  <div class="space-y-2">
     <div
       v-for="style in getStyles(value)"
       :key="style.id"
-      class="flex mb-2 items-center"
+      class="flex items-center"
     >
       <div class="w-1/2">
         {{ style.name }}
@@ -14,6 +14,12 @@
         @input="(val) => setLevel(style.id, val)"
       />
     </div>
+    <t-rich-select
+      v-model="newStyleName"
+      placeholder="Add dance style"
+      :options="getAllStyles()"
+      @change="add()"
+    />
   </div>
 </template>
 
@@ -45,6 +51,18 @@ export default {
     newStyleName: ''
   }),
   methods: {
+    add() {
+      const val = this.value
+
+      val[this.newStyleName] = {
+        selected: true,
+        level: 'Interested'
+      }
+
+      this.$emit('input', val)
+
+      this.newStyleName = ''
+    },
     setLevel(styleId, level) {
       if (!level) {
         return

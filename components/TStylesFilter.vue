@@ -32,7 +32,7 @@ export default {
               value: item.id,
               label: item.name
             }))
-          : getAllStyles()
+          : getAllStyles({ root: 'yes' })
 
       return getOptions(list, 'Style')
     })

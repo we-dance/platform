@@ -47,7 +47,12 @@ export default {
   /*
    ** Plugins to load before mounting the App
    */
-  plugins: ['~/plugins/firebase', '~/plugins/router', '~/plugins/directives'],
+  plugins: [
+    '~/plugins/firebase',
+    '~/plugins/router',
+    '~/plugins/directives',
+    '~/plugins/vue-tailwind'
+  ],
   /*
    ** Nuxt.js dev-modules
    */
