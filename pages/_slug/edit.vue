@@ -75,12 +75,13 @@ export default {
   },
   setup() {
     const { can } = useAuth()
-    const { profileFields } = useProfiles()
+    const { profileFields, contactFields } = useProfiles()
     const { update } = useDoc('profiles')
 
     return {
       update,
       profileFields,
+      contactFields,
       can
     }
   }

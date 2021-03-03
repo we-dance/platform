@@ -76,6 +76,39 @@ export default () => {
     }
   ]
 
+  const contactFields = [
+    {
+      name: 'instagram',
+      label: 'instagram.com/'
+    },
+    {
+      name: 'facebook',
+      label: 'fb.com/'
+    },
+    {
+      name: 'telegram',
+      label: 't.me/'
+    },
+    {
+      name: 'twitter',
+      label: 'twitter.com/'
+    },
+    {
+      name: 'tiktok',
+      label: 'tiktok.com/'
+    },
+    {
+      name: 'youtube',
+      label: 'youtube.com/'
+    },
+    {
+      name: 'email'
+    },
+    {
+      name: 'website'
+    }
+  ]
+
   const profileFields = [
     {
       name: 'type',
@@ -243,6 +276,7 @@ export default () => {
         }
       ]
     },
+    ...contactFields,
     {
       name: 'visibility',
       key: 'profile.visibility',
@@ -250,39 +284,6 @@ export default () => {
       options: ['Public', 'Members', 'Unlisted'],
       tips:
         '- Public profiles are searchable in Google and used in our social media to attract new members.\n- Members profile are only visible for logged-in users.\n- Unlisted profiles are possible to open with exact link, but they are not listed in members lists and search.'
-    }
-  ]
-
-  const contactFields = [
-    {
-      name: 'instagram',
-      label: 'instagram.com/'
-    },
-    {
-      name: 'facebook',
-      label: 'fb.com/'
-    },
-    {
-      name: 'telegram',
-      label: 't.me/'
-    },
-    {
-      name: 'twitter',
-      label: 'twitter.com/'
-    },
-    {
-      name: 'tiktok',
-      label: 'tiktok.com/'
-    },
-    {
-      name: 'youtube',
-      label: 'youtube.com/'
-    },
-    {
-      name: 'email'
-    },
-    {
-      name: 'website'
     }
   ]
 

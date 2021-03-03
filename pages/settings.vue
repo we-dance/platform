@@ -160,38 +160,6 @@
           @save="saveProfile"
         />
       </div>
-      <div class="rounded bg-white mb-4 shadow border p-4 bg-white">
-        <div class="flex items-center">
-          <div>
-            <router-link
-              v-if="currentTab !== 'contacts'"
-              to="/settings?tab=contacts"
-            >
-              <TIcon class="h-8 w-8" name="arrow_right" />
-            </router-link>
-            <router-link v-else to="/settings">
-              <TIcon class="h-8 w-8" name="arrow_drop_down" />
-            </router-link>
-          </div>
-          <div class="ml-2">
-            <div class="font-bold text-xl">
-              {{ $t('settings.contacts.title') }}
-            </div>
-            <div class="text-sm text-gray-700">
-              {{ $t('settings.contacts.description') }}
-            </div>
-          </div>
-        </div>
-
-        <TForm
-          v-if="currentTab === 'contacts'"
-          v-model="profile"
-          :fields="contactFields"
-          :submit-label="$t('save')"
-          class="border-t mt-4 pt-4"
-          @save="saveProfile"
-        />
-      </div>
     </div>
   </main>
 </template>
