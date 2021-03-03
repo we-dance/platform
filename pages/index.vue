@@ -23,7 +23,7 @@
     </div>
 
     <div>
-      <div v-if="!uid" class="md:flex space-y-4 md:space-y-0 md:space-x-4 mb-4">
+      <div class="md:flex space-y-4 md:space-y-0 md:space-x-4 mb-4">
         <WTeaser
           :title="$t('teaser.partner.title')"
           :description="$t('teaser.partner.description')"
@@ -37,14 +37,6 @@
           :button="$t('teaser.events.btn')"
           url="/events"
           class="flex-1"
-        />
-      </div>
-      <div v-if="uid && currentCity" class="mb-4">
-        <WTeaser
-          :title="$t('teaser.chat.title')"
-          :description="$t('teaser.chat.description')"
-          :button="$t('teaser.chat.btn', { city: currentCity })"
-          @click="joinChat()"
         />
       </div>
 
@@ -89,7 +81,7 @@ import useAccounts from '~/use/accounts'
 import useCities from '~/use/cities'
 import useAuth from '~/use/auth'
 import useProfiles from '~/use/profiles'
-import { sortBy, openURL } from '~/utils'
+import { sortBy } from '~/utils'
 
 export default {
   name: 'PostsIndex',
@@ -218,23 +210,6 @@ export default {
         )
 
       return result.sort(sortBy(this.sorting))
-    }
-  },
-  methods: {
-    async joinChat() {
-      await this.$fire.firestore.collection('city_chats').add({
-        city: this.currentCity
-      })
-
-      this.$fire.analytics.logEvent('join_chat', {
-        city: this.currentCity
-      })
-
-      if (this.city?.telegram) {
-        openURL(this.city.telegram)
-      } else {
-        openURL('https://t.me/joinchat/Iqif2X0FCXCpqHDj')
-      }
     }
   }
 }

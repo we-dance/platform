@@ -1,25 +1,53 @@
 <template>
   <div>
     <TTitle>
-      {{ $t('profiles.title') }}
+      <span v-if="city">{{ city.name }}</span> {{ $t('profiles.title') }}
+      <template slot="right">
+        <TButton
+          icon="tune"
+          type="icon"
+          class="md:hidden"
+          @click="isPopupFilterOpened = !isPopupFilterOpened"
+        />
+      </template>
     </TTitle>
 
-    <div class="overflow-x-scroll my-2">
-      <div class="flex flex-no-wrap space-x-2">
-        <TInputCity v-model="currentCity" />
-        <TInputSelect v-model="profileType" :options="typeOptions" />
-        <TInputSelect
-          v-model="objective"
-          :options="objectivesOptions"
-          :label="$t('objective.label')"
-        />
-        <TInputSelect v-model="roles" :options="rolesList" label="Gender" />
-        <TStylesFilter
-          v-model="dances"
-          :selected="myStyles"
-          :label="$t('style.label')"
-        />
-      </div>
+    <div
+      class="my-2 md:flex md:space-x-2"
+      :class="isPopupFilterOpened ? 'block space-y-2' : 'hidden'"
+    >
+      <TInputCity v-model="currentCity" />
+
+      <t-rich-select
+        v-model="dances"
+        clearable
+        :options="danceStyles"
+        class="w-full"
+        :placeholder="$t('style.label')"
+      />
+      <t-rich-select
+        v-model="objective"
+        :options="objectivesOptions"
+        hide-search-box
+        clearable
+        class="w-full"
+        :placeholder="$t('objective.label')"
+      />
+      <t-rich-select
+        v-model="profileType"
+        :options="typeOptions"
+        hide-search-box
+        clearable
+        class="w-full"
+        placeholder="Type"
+      />
+      <t-rich-select
+        v-model="roles"
+        :options="rolesList"
+        hide-search-box
+        clearable
+        placeholder="Gender"
+      />
     </div>
 
     <div>
@@ -29,6 +57,15 @@
         :description="$t('teaser.profile.description')"
         :button="$t('teaser.profile.btn')"
         url="/register"
+      />
+
+      <WTeaser
+        v-if="uid && currentCity"
+        :title="$t('teaser.chat.title')"
+        :description="$t('teaser.chat.description')"
+        :button="$t('teaser.chat.btn', { city: currentCity })"
+        class="mb-4"
+        @click="joinChat()"
       />
 
       <div class="mt-4 grid grid-cols-1 md:grid-cols-2 gap-2">
@@ -68,48 +105,55 @@ import useAuth from '~/use/auth'
 import useCollection from '~/use/collection'
 import useDoc from '~/use/doc'
 import useCities from '~/use/cities'
-import { sortBy, getExcerpt, getDateTime } from '~/utils'
+import { sortBy, getExcerpt, getDateTime, openURL } from '~/utils'
 import useProfiles from '~/use/profiles'
+import useStyles from '~/use/styles'
 
 export default {
   name: 'PeopleIndex',
+  data: () => ({
+    isPopupFilterOpened: false
+  }),
+  methods: {
+    async joinChat() {
+      await this.$fire.firestore.collection('city_chats').add({
+        city: this.currentCity
+      })
+
+      this.$fire.analytics.logEvent('join_chat', {
+        city: this.currentCity
+      })
+
+      if (this.city?.telegram) {
+        openURL(this.city.telegram)
+      } else {
+        openURL('https://t.me/joinchat/Iqif2X0FCXCpqHDj')
+      }
+    }
+  },
   setup() {
     const { uid, updateProfile, profile: myProfile } = useAuth()
 
     const { docs: docsProfiles } = useCollection('profiles')
     const { create: createProfile } = useDoc('profiles')
+    const { getStylesDropdown } = useStyles()
 
-    const { currentCity } = useCities()
+    const { currentCity, city } = useCities()
     const { objectivesList, typeList } = useProfiles()
 
-    const typeOptions = [
-      {
-        label: 'Type',
-        value: ''
-      },
-      ...typeList
-    ]
-
-    const objectivesOptions = [
-      {
-        label: 'Objective',
-        value: ''
-      },
-      ...objectivesList
-    ]
+    const typeOptions = typeList
+    const objectivesOptions = objectivesList
 
     const tab = ref('partner')
     const objective = ref('')
     const profileType = ref('')
     const roles = ref('')
     const dances = ref('')
-    const myStyles = computed(() => myProfile.value?.styles)
+    const danceStyles = computed(() =>
+      getStylesDropdown(myProfile.value?.styles)
+    )
 
     const rolesList = [
-      {
-        label: 'Gender',
-        value: ''
-      },
       {
         label: 'Female',
         value: 'Female'
@@ -174,8 +218,9 @@ export default {
       profileType,
       getExcerpt,
       createProfile,
-      myStyles,
-      getDateTime
+      danceStyles,
+      getDateTime,
+      city
     }
   }
 }

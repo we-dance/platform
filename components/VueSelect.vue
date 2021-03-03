@@ -4,7 +4,7 @@
       <slot name="SelectLabel"></slot>
     </label>
 
-    <div v-click-outside="closeDropdown" class="relative">
+    <div v-click-outside="closeDropdown" class="relative z-10">
       <span class="inline-block w-full rounded-md shadow-sm">
         <button
           type="button"
@@ -16,7 +16,7 @@
         >
           <div class="flex items-center space-x-3">
             <span class="block truncate">
-              {{ getLabel(value) }}
+              {{ findLabel(value) }}
             </span>
           </div>
           <span
@@ -59,22 +59,22 @@
           <li
             v-for="option in options"
             id="listbox-item-0"
-            :key="option.value"
+            :key="getValue(option)"
             tabindex="0"
             role="option"
             class="text-gray-900 cursor-default select-none relative py-2 pl-3 pr-9  cursor-pointer hover:text-white hover:bg-indigo-600 focus:outline-none focus:text-white focus:bg-indigo-600"
-            @click="select(option.value)"
+            @click="select(getValue(option))"
           >
             <div class="flex items-center space-x-3">
               <!-- Selected: "font-semibold", Not Selected: "font-normal" -->
               <span
                 class="block truncate"
                 :class="{
-                  'font-normal': !isSelected(option.value),
-                  'font-semibold': isSelected(option.value)
+                  'font-normal': !isSelected(getValue(option)),
+                  'font-semibold': isSelected(getValue(option))
                 }"
               >
-                {{ option.label }}
+                {{ getLabel(option) }}
               </span>
             </div>
 
@@ -84,7 +84,7 @@
               Highlighted: "text-white", Not Highlighted: "text-indigo-600"
             -->
             <span
-              v-show="isSelected(option.value)"
+              v-show="isSelected(getValue(option))"
               class="absolute inset-y-0 right-0 flex items-center pr-4"
             >
               <svg class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
@@ -106,6 +106,7 @@
 
 <script>
 import ClickOutside from 'vue-click-outside'
+import { camelcase } from '~/utils'
 
 export default {
   name: 'VueSelect',
@@ -120,6 +121,10 @@ export default {
     value: {
       type: String,
       default: ''
+    },
+    item: {
+      type: Object,
+      default: () => ({})
     }
   },
   data() {
@@ -142,8 +147,34 @@ export default {
 
       this.$emit('input', value)
     },
-    getLabel(value) {
-      return this.options?.find((option) => option.value === value)?.label
+    findLabel(value) {
+      const option = this.options?.find(
+        (option) => this.getValue(option) === value
+      )
+
+      return this.getLabel(option)
+    },
+    getValue(field) {
+      if (typeof field === 'string') {
+        return field
+      }
+
+      if (field.value) {
+        return field.value
+      }
+
+      return field.name
+    },
+    getLabel(field) {
+      if (typeof field === 'string') {
+        return camelcase(field)
+      }
+
+      if (field.label) {
+        return field.label
+      }
+
+      return camelcase(field.name)
     }
   }
 }

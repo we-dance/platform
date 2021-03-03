@@ -42,6 +42,19 @@ export default () => {
     }
   ]
 
+  const getStylesDropdown = (selected) => {
+    const isSelected = selected && Object.keys(selected).length > 0
+
+    if (isSelected) {
+      return getStyles(selected).map((item) => ({
+        value: item.id,
+        label: item.name
+      }))
+    }
+
+    return getAllStyles({ root: 'yes' })
+  }
+
   const getStyles = (selected, level = 0, onlyRoot = false, limit = 0) => {
     if (!selected) {
       return []
@@ -133,6 +146,7 @@ export default () => {
     getStyleName,
     levels,
     getStyles,
-    getAllStyles
+    getAllStyles,
+    getStylesDropdown
   }
 }
