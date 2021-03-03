@@ -68,7 +68,7 @@ import useAuth from '~/use/auth'
 import useCollection from '~/use/collection'
 import useDoc from '~/use/doc'
 import useCities from '~/use/cities'
-import { sortBy, getExcerpt } from '~/utils'
+import { sortBy, getExcerpt, getDateTime } from '~/utils'
 import useProfiles from '~/use/profiles'
 
 export default {
@@ -120,16 +120,12 @@ export default {
       }
     ]
 
-    const docs = computed(() => {
-      return docsProfiles.value
-        .filter((item) =>
-          currentCity.value ? item.community === currentCity.value : true
-        )
-        .sort(sortBy('-lastLoginAt'))
-    })
-
     const items = computed(() => {
-      let result = docs.value.filter(
+      let result = docsProfiles.value.filter((item) =>
+        currentCity.value ? item.community === currentCity.value : true
+      )
+
+      result = result.filter(
         (item) =>
           item.username &&
           (uid.value || item.visibility === 'Public') &&
@@ -159,7 +155,7 @@ export default {
         profileType.value ? item.type && item.type === profileType.value : true
       )
 
-      return result
+      return result.sort(sortBy('-lastLoginAt'))
     })
 
     return {
@@ -178,7 +174,8 @@ export default {
       profileType,
       getExcerpt,
       createProfile,
-      myStyles
+      myStyles,
+      getDateTime
     }
   }
 }

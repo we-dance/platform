@@ -43,7 +43,7 @@
             <div v-if="title" class="text-lg font-bold leading-tight">
               {{ title }}
             </div>
-            <div class="text-sm leading-tight">
+            <div class="text-sm leading-tight mb-1">
               {{ description }}
             </div>
           </template>
