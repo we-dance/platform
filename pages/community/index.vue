@@ -125,7 +125,7 @@ export default {
         .filter((item) =>
           currentCity.value ? item.community === currentCity.value : true
         )
-        .sort(sortBy('-createdAt'))
+        .sort(sortBy('-lastLoginAt'))
     })
 
     const items = computed(() => {
