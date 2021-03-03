@@ -92,12 +92,9 @@
               <span>Editor</span>
             </label>
             <div class="text-xs text-orange-500">
-              <span>Community: {{ item.profile.community }}</span
-              ><span v-if="item.profile.city">
-                • City: {{ item.profile.city }}</span
-              >
+              <span>Community: {{ item.profile.community }}</span>
               <span v-if="item.profile.location">
-                • Location: {{ item.profile.location.locality }}</span
+                • Hometown: {{ item.profile.location.locality }}</span
               >
             </div>
             <pre v-if="item.marketing.ref" class="text-xs">
@@ -108,11 +105,16 @@ ref: {{ item.marketing.ref }} <template
               }} • {{ item.marketing.utms.utm_source }}</template
             ></pre>
             <pre class="text-xs">uid: {{ item.id }}</pre>
+            <pre v-if="item.profile.locales" class="text-xs">
+languages: {{ item.profile.language }} ({{
+                Object.keys(item.profile.locales).join(', ')
+              }})</pre
+            >
             <pre class="text-xs">
 last login: {{ getDateTime(item.lastLoginAt) }}</pre
             >
             <pre class="text-xs">joined: {{ getDateTime(item.createdAt) }}</pre>
-            <pre class="text-xs">used: {{ item.daysUsed }} days</pre>
+            <pre class="text-xs">used: {{ item.profile.daysUsed }} days</pre>
             <pre class="text-xs">type: {{ item.profile.type }}</pre>
             <pre class="text-xs">visibility: {{ item.profile.visibility }}</pre>
           </div>
@@ -138,8 +140,8 @@ import {
   getTime,
   getDate,
   getDateTime,
-  getDateObect,
-  saveCSV
+  saveCSV,
+  getDateObect
 } from '~/utils'
 import useProfiles from '~/use/profiles'
 
@@ -211,67 +213,67 @@ export default {
       {
         value: 'notype',
         label: 'No Type',
-        filter: (account) => !account.profile.type
+        filter: (account) => !account.profile?.type
       },
       {
         value: 'visibility',
         label: 'No visibility',
-        filter: (account) => !account.profile.visibility
+        filter: (account) => !account.profile?.visibility
       },
       {
         value: 'socialCover',
         label: 'Social Cover',
-        filter: (account) => !!account.profile.socialCover
+        filter: (account) => !!account.profile?.socialCover
       },
       {
         value: 'boosting',
         label: 'Boosting',
-        filter: (account) => account.profile.socialCoverPublish === 'Yes'
+        filter: (account) => account.profile?.socialCoverPublish === 'Yes'
       },
       {
         value: 'noboosting',
         label: 'Not boosting',
-        filter: (account) => account.profile.socialCoverPublish === 'No'
+        filter: (account) => account.profile?.socialCoverPublish === 'No'
       },
       {
         value: 'looking',
         label: 'Looking',
-        filter: (account) => account.profile.partner === 'Yes'
+        filter: (account) => account.profile?.partner === 'Yes'
       },
       {
         value: 'not_looking',
         label: 'Not looking',
-        filter: (account) => account.profile.partner !== 'Yes'
+        filter: (account) => account.profile?.partner !== 'Yes'
       },
       {
         value: 'no_community',
         label: 'No community',
-        filter: (account) => !account.profile.community
+        filter: (account) => !account.profile?.community
       },
       {
         value: 'munich',
         label: 'Munich',
-        filter: (account) => account.profile.community === 'Munich'
+        filter: (account) => account.profile?.community === 'Munich'
       },
       {
         value: 'used_more_10d',
         label: 'More than 10 days',
-        filter: (account) => account.daysUsed > 10
+        filter: (account) => account.profile?.daysUsed > 10
       },
       {
         value: 'used_more_1d',
         label: 'More than 1 day',
-        filter: (account) => account.daysUsed > 1
+        filter: (account) => account.profile?.daysUsed > 1
       },
       {
         value: 'used_less_2d',
         label: 'Less than 2 day',
-        filter: (account) => account.daysUsed < 2
+        filter: (account) => account.profile?.daysUsed < 2
       },
       {
         value: 'no_username',
         label: 'No username',
-        filter: (account) => !account.profile.username
+        filter: (account) => !account.profile?.username
       }
     ])
 
@@ -292,7 +294,8 @@ export default {
         .map((item) => ({
           ...item,
           profile: getProfile(item.id),
-          lastLoginAt: getDateObect(item.lastLoginAt)
+          lastLoginAt:
+            getProfile(item.id).lastLoginAt || +getDateObect(item.lastLoginAt)
         }))
         .filter(activeFilterItem.value.filter)
         .filter((item) => {
@@ -378,14 +381,37 @@ export default {
 
       this.selected = this.value
     },
-    proccess() {
-      this.items.forEach(async (item) => {
-        // try {
-        //   await this.updateProfile(item.id, { visibility: 'Members' })
-        // } catch (e) {
-        //   console.error(e)
-        // }
+    log(...opts) {
+      return new Promise((resolve) => {
+        console.log(...opts)
+        return resolve()
       })
+    },
+    async proccess() {
+      const success = []
+      const errors = []
+      const skipped = []
+
+      for (const item of this.items) {
+        try {
+          const data = {}
+
+          if (!item.profile?.username) {
+            skipped.push({ uid: item.id })
+            continue
+          }
+
+          await this.log(item.id, data)
+          success.push({ uid: item.id })
+        } catch (e) {
+          errors.push({ uid: item.id, error: e })
+        }
+      }
+
+      console.log(`Succes: ${success.length}`)
+      console.log(`Skipped: ${skipped.length}`)
+      console.log(`Failed: ${errors.length}`)
+      console.log({ success, skipped, errors })
     },
     download() {
       const flatItems = this.items.map((item) => {

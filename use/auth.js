@@ -173,9 +173,7 @@ export default () => {
 
     await loadProfile()
 
-    const locales = state.profile.locales || getLanguages()
-    const timezone = new Date().toString().match(/([A-Z]+[+-][0-9]+)/)[1]
-    const lastLoginAt = +new Date()
+    const lastLoginAt = new Date()
     const pwaUsed =
       state.profile.pwaUsed || state.account.pwaUsed || features.pwa
     const daysUsed =
@@ -191,9 +189,7 @@ export default () => {
       .collection('profiles')
       .doc(state.uid)
       .update({
-        locales,
-        timezone,
-        lastLoginAt,
+        lastLoginAt: +lastLoginAt,
         pwaUsed,
         daysUsed
       })
@@ -249,6 +245,8 @@ export default () => {
       const profile = {
         createdBy: state.uid,
         createdAt: +new Date(),
+        locales: getLanguages(),
+        timezone: new Date().toString().match(/([A-Z]+[+-][0-9]+)/)[1],
         community: ls('city'),
         username: ls('username'),
         visibility: 'Public',

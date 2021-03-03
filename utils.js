@@ -5,6 +5,7 @@ import excerptHtml from 'excerpt-html'
 import _ from 'lodash'
 import saveAs from 'file-saver'
 import { dsvFormat } from 'd3'
+import languages from '~/assets/languages'
 
 export const getObjectKeysFromArray = (arr) => {
   const obj = {}
@@ -175,10 +176,10 @@ export const getLocation = (result, usedGps) => ({
   usedGps
 })
 
-export const sanitize = (input, trim) => {
+export const sanitize = (input, trim, target = '') => {
   const val = input || ''
   const expression = new RegExp(trim, 'gi')
-  return val.replace(expression, '').trim()
+  return val.replace(expression, target).trim()
 }
 
 export const saveCSV = (data, filename) => {
@@ -209,11 +210,7 @@ function getLang(languageString) {
   return language
 }
 
-export function getLanguages() {
-  if (!window) {
-    return {}
-  }
-
+export function browserLanguages() {
   const langs = []
 
   if (window?.navigator?.languages) {
@@ -226,6 +223,55 @@ export function getLanguages() {
 
   if (window?.navigator?.language) {
     langs.push(window.navigator.language)
+  }
+
+  return langs
+}
+
+export function guessLanguages(fromUser, fromBrowser) {
+  const input = String(fromUser).toLowerCase()
+  const result = {}
+
+  const longLangs = input
+    .replace(/[`~!@#$%^&()_+\-?;:'",.\n\r/\\ ]/gi, '|')
+    .split('|')
+    .filter((l) => l)
+
+  for (const longLang of longLangs) {
+    const lang = languages.find(
+      (l) =>
+        longLang === l.label.toLowerCase() ||
+        longLang === l.native.toLowerCase() ||
+        (l.synonyms && l.synonyms.includes(longLang))
+    )
+
+    if (!lang) {
+      continue
+    }
+
+    result[lang.value] = true
+  }
+
+  const langs = getLanguages(fromBrowser)
+
+  let extended = { ...result, ...langs }
+
+  if (!Object.keys(result)) {
+    extended = { en: true }
+  }
+
+  return extended
+}
+
+export function getLanguages(input) {
+  if (!window) {
+    return {}
+  }
+
+  let langs = input
+
+  if (!input) {
+    langs = browserLanguages()
   }
 
   const locales = getObjectKeysFromArray(langs.map(getLang))
