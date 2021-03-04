@@ -278,3 +278,29 @@ export function getLanguages(input) {
 
   return locales
 }
+
+function traverseAndFlatten(currentNode, target, flattenedKey) {
+  for (const key in currentNode) {
+    if (key in currentNode) {
+      let newKey
+      if (flattenedKey === undefined) {
+        newKey = key
+      } else {
+        newKey = flattenedKey + '.' + key
+      }
+
+      const value = currentNode[key]
+      if (typeof value === 'object' && value && !value.toDate) {
+        traverseAndFlatten(value, target, newKey)
+      } else {
+        target[newKey] = value
+      }
+    }
+  }
+}
+
+export function flatten(obj) {
+  const flattenedObject = {}
+  traverseAndFlatten(obj, flattenedObject)
+  return flattenedObject
+}
