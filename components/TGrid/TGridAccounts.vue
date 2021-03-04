@@ -97,13 +97,6 @@
                 • Hometown: {{ item.profile.location.locality }}</span
               >
             </div>
-            <pre v-if="item.marketing.ref" class="text-xs">
-ref: {{ item.marketing.ref }} <template
-              v-if="item.marketing.utms && item.marketing.utms.utm_source"
-            >• {{ item.marketing.utms.utm_campaign }} • {{
-                item.marketing.utms.utm_medium
-              }} • {{ item.marketing.utms.utm_source }}</template
-            ></pre>
             <pre class="text-xs">uid: {{ item.id }}</pre>
             <pre v-if="item.profile.locales" class="text-xs">
 languages: {{ item.profile.language }} ({{
@@ -421,10 +414,6 @@ export default {
           flatItem[`profile_${key}`] = item.profile[key]
         })
         delete flatItem.profile
-
-        Object.keys(item.marketing).forEach((key) => {
-          flatItem[`marketing_${key}`] = item.marketing[key]
-        })
         delete flatItem.marketing
 
         flatItem.createdAt = getDateTime(flatItem.createdAt)
