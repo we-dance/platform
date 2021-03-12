@@ -4,3 +4,4 @@ https://we-dance.app/* https://wedance.vip/:splat 301!
 http://wedance.netlify.app/* https://wedance.vip/:splat 301!
 https://wedance.netlify.app/* https://wedance.vip/:splat 301!
 /api/styles/* https://dance-styles.herokuapp.com/styles/:splat 200!
+/wiki https://bit.ly/wedance-intranet 301!
