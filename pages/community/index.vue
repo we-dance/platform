@@ -2,52 +2,43 @@
   <div>
     <TTitle>
       <span v-if="city">{{ city.name }}</span> {{ $t('profiles.title') }}
-      <template slot="right">
-        <TButton
-          icon="tune"
-          type="icon"
-          class="md:hidden"
-          @click="isPopupFilterOpened = !isPopupFilterOpened"
-        />
-      </template>
     </TTitle>
 
-    <div
-      class="my-2 md:flex md:space-x-2"
-      :class="isPopupFilterOpened ? 'block space-y-2' : 'hidden'"
-    >
-      <TInputCity v-model="currentCity" />
+    <div class="overflow-x-scroll my-2">
+      <div class="flex flex-no-wrap space-x-2">
+        <TInputCity v-model="currentCity" />
 
-      <t-rich-select
-        v-model="dances"
-        clearable
-        :options="danceStyles"
-        class="w-full"
-        :placeholder="$t('style.label')"
-      />
-      <t-rich-select
-        v-model="objective"
-        :options="objectivesOptions"
-        hide-search-box
-        clearable
-        class="w-full"
-        :placeholder="$t('objective.label')"
-      />
-      <t-rich-select
-        v-model="profileType"
-        :options="typeOptions"
-        hide-search-box
-        clearable
-        class="w-full"
-        placeholder="Type"
-      />
-      <t-rich-select
-        v-model="roles"
-        :options="rolesList"
-        hide-search-box
-        clearable
-        placeholder="Gender"
-      />
+        <t-rich-select
+          v-model="dances"
+          clearable
+          :options="danceStyles"
+          class="w-full"
+          :placeholder="$t('style.label')"
+        />
+        <t-rich-select
+          v-model="objective"
+          :options="objectivesOptions"
+          hide-search-box
+          clearable
+          class="w-full"
+          :placeholder="$t('profile.objectives')"
+        />
+        <t-rich-select
+          v-model="profileType"
+          :options="typeOptions"
+          hide-search-box
+          clearable
+          class="w-full"
+          placeholder="Type"
+        />
+        <t-rich-select
+          v-model="roles"
+          :options="rolesList"
+          hide-search-box
+          clearable
+          placeholder="Gender"
+        />
+      </div>
     </div>
 
     <div>
@@ -111,9 +102,6 @@ import useStyles from '~/use/styles'
 
 export default {
   name: 'PeopleIndex',
-  data: () => ({
-    isPopupFilterOpened: false
-  }),
   methods: {
     async joinChat() {
       await this.$fire.firestore.collection('city_chats').add({

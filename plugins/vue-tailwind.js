@@ -7,7 +7,7 @@ const settings = {
     component: TRichSelect,
     props: {
       fixedClasses: {
-        wrapper: 'relative text-sm leading-tight',
+        wrapper: 'text-sm leading-tight',
         buttonWrapper: 'inline-block relative w-full',
         selectButton:
           'w-full flex text-left justify-between items-center px-3 py-2 text-black transition duration-100 ease-in-out border rounded shadow-sm focus:border-blue-500 focus:ring-2 focus:ring-blue-500 focus:outline-none focus:ring-opacity-50 disabled:opacity-50 disabled:cursor-not-allowed',
@@ -16,9 +16,9 @@ const settings = {
         selectButtonIcon: 'fill-current flex-shrink-0 ml-1 h-4 w-4',
         selectButtonClearButton:
           'rounded flex flex-shrink-0 items-center justify-center absolute right-0 top-0 m-2 h-6 w-6 transition duration-100 ease-in-out',
-        selectButtonClearIcon: 'fill-current h-3 w-3',
+        selectButtonClearIcon: 'bg-white fill-current h-3 w-3',
         dropdown:
-          'absolute w-full z-10 -mt-1 absolute border-b border-l border-r rounded-b shadow-sm z-10',
+          'absolute z-10 -mt-1 border-b border-l border-r rounded-b shadow-sm z-10',
         dropdownFeedback: '',
         loadingMoreResults: '',
         optionsList: 'overflow-auto',

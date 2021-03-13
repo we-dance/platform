@@ -12,18 +12,26 @@
     <div class="overflow-x-scroll my-2">
       <div class="flex flex-no-wrap space-x-2">
         <TInputCity v-model="currentCity" />
-        <TInputSelect v-model="eventType" :options="eventTypeOptions" />
-        <TStylesFilter
-          v-model="dances"
-          :label="$t('style.label')"
-          :selected="myStyles"
+        <t-rich-select
+          v-model="eventType"
+          clearable
+          hide-search-box
+          :options="eventTypeList"
+          :placeholder="$t('event.type')"
         />
-        <TInputSelect
+        <t-rich-select
+          v-model="dances"
+          clearable
+          :options="danceStyles"
+          :placeholder="$t('style.label')"
+        />
+        <t-rich-select
           v-if="uid"
           v-model="activeFilter"
+          hide-search-box
           :options="filterOptions"
         />
-        <TInputSelect v-model="view" :options="viewOptions" />
+        <t-rich-select v-model="view" hide-search-box :options="viewOptions" />
       </div>
     </div>
 
@@ -89,6 +97,7 @@ import useCities from '~/use/cities'
 import useRouter from '~/use/router'
 import useProfiles from '~/use/profiles'
 import useEvents from '~/use/events'
+import useStyles from '~/use/styles'
 
 import {
   dateDiff,
@@ -98,8 +107,7 @@ import {
   getYmd,
   getTime,
   getTimeZone,
-  getDateObect,
-  getOptions
+  getDateObect
 } from '~/utils'
 
 export default {
@@ -110,9 +118,9 @@ export default {
     const { currentCity } = useCities()
     const { docs, loading: loadingPosts, getById } = useCollection('events')
     const { getProfile } = useProfiles()
+    const { getStylesDropdown } = useStyles()
 
     const eventType = ref('')
-    const eventTypeOptions = getOptions(eventTypeList, 'Type')
 
     const view = ref('covers')
     const viewOptions = [
@@ -128,7 +136,9 @@ export default {
 
     const { uid, profile: myProfile } = useAuth()
     const dances = ref('')
-    const myStyles = computed(() => myProfile.value?.styles)
+    const danceStyles = computed(() =>
+      getStylesDropdown(myProfile.value?.styles)
+    )
 
     const map = (item) => {
       if (!item.id) {
@@ -260,9 +270,9 @@ export default {
       dances,
       view,
       viewOptions,
-      eventTypeOptions,
+      eventTypeList,
       eventType,
-      myStyles
+      danceStyles
     }
   },
   methods: {

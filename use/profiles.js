@@ -42,10 +42,6 @@ export default () => {
     {
       label: 'Venue',
       value: 'Venue'
-    },
-    {
-      label: 'City',
-      value: 'City'
     }
   ]
 

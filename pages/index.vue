@@ -12,12 +12,13 @@
     <div class="overflow-x-scroll my-4">
       <div class="flex flex-no-wrap space-x-2">
         <TInputCity v-model="currentCity" />
-        <TInputSelect v-model="sorting" :options="sortingList" />
-        <TInputSelect v-model="view" :options="viewOptions" />
-        <TStylesFilter
+        <t-rich-select v-model="sorting" :options="sortingList" />
+        <t-rich-select v-model="view" :options="viewOptions" />
+        <t-rich-select
           v-model="dances"
-          :selected="myStyles"
-          :label="$t('style.label')"
+          clearable
+          :options="danceStyles"
+          :placeholder="$t('style.label')"
         />
       </div>
     </div>
@@ -81,6 +82,7 @@ import useAccounts from '~/use/accounts'
 import useCities from '~/use/cities'
 import useAuth from '~/use/auth'
 import useProfiles from '~/use/profiles'
+import useStyles from '~/use/styles'
 import { sortBy } from '~/utils'
 
 export default {
@@ -91,10 +93,13 @@ export default {
     const { currentCity, city } = useCities()
     const { docs, loading: loadingPosts, getById } = useCollection('posts')
     const { getProfile } = useProfiles()
+    const { getStylesDropdown } = useStyles()
 
     const { uid, profile: myProfile, updateAccount } = useAuth()
     const dances = ref('')
-    const myStyles = computed(() => myProfile.value?.styles)
+    const danceStyles = computed(() =>
+      getStylesDropdown(myProfile.value?.styles)
+    )
 
     const sorting = ref(uid.value ? '-createdAt' : '-upVotes')
 
@@ -188,8 +193,8 @@ export default {
       sortingList,
       view,
       viewOptions,
-      myStyles,
-      updateAccount
+      updateAccount,
+      danceStyles
     }
   },
   data: () => ({

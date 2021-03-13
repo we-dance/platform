@@ -1,6 +1,6 @@
 import Vue from 'vue'
 import { computed, useContext } from '@nuxtjs/composition-api'
-import { sortBy } from '~/utils'
+import { sortBy, search } from '~/utils'
 
 const state = Vue.observable({
   collection: []
@@ -52,7 +52,7 @@ export default () => {
       }))
     }
 
-    return getAllStyles({ root: 'yes' })
+    return getAllStyles({ root: 'yes' }).results
   }
 
   const getStyles = (selected, level = 0, onlyRoot = false, limit = 0) => {
@@ -113,20 +113,28 @@ export default () => {
     return state.collection
   })
 
-  const getAllStyles = (filters) => {
-    let result = state.collection
+  const getAllStyles = (q, filters) => {
+    let results = state.collection
 
     if (filters) {
       const fields = Object.keys(filters)
       for (const field of fields) {
-        result = result.filter((item) => item[field] === filters[field])
+        results = results.filter((item) => item[field] === filters[field])
       }
     }
 
-    return result.map((item) => ({
+    if (q) {
+      results = results.filter(
+        (i) => search(i.name, q) || search(i.synonyms, q)
+      )
+    }
+
+    results = results.map((item) => ({
       value: item.id,
-      label: item.name + (item.synonyms ? ' (' + item.synonyms + ')' : '')
+      label: item.name
     }))
+
+    return { results }
   }
 
   const categories = computed(() => {

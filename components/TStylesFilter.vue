@@ -9,7 +9,6 @@
 <script>
 import { computed } from '@nuxtjs/composition-api'
 import useStyles from '~/use/styles'
-import { getOptions } from '~/utils'
 
 export default {
   props: {
@@ -23,18 +22,10 @@ export default {
     }
   },
   setup(props) {
-    const { getAllStyles, getStyles } = useStyles()
+    const { getStylesDropdown } = useStyles()
 
     const dancesList = computed(() => {
-      const list =
-        Object.keys(props.selected).length > 0
-          ? getStyles(props.selected).map((item) => ({
-              value: item.id,
-              label: item.name
-            }))
-          : getAllStyles({ root: 'yes' })
-
-      return getOptions(list, 'Style')
+      return getStylesDropdown(props.selected)
     })
 
     return {

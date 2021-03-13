@@ -304,3 +304,15 @@ export function flatten(obj) {
   traverseAndFlatten(obj, flattenedObject)
   return flattenedObject
 }
+
+export function search(str, match) {
+  if (!match || !match.length) {
+    return true
+  }
+
+  if (!str) {
+    return false
+  }
+
+  return str.toLowerCase().includes(match.toLowerCase())
+}

@@ -19,7 +19,7 @@
     <t-rich-select
       v-model="newStyleName"
       placeholder="Add dance style"
-      :options="getAllStyles()"
+      :fetch-options="getAllStyles"
       @change="setLevel(newStyleName, 'Interested')"
     />
   </div>
