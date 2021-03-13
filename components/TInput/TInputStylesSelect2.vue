@@ -1,26 +1,57 @@
 <template>
   <div class="space-y-2">
-    <div v-for="style in styles" :key="style.id" class="flex items-center">
-      <div class="w-1/2">
+    <div
+      v-for="style in styles"
+      :key="style.id"
+      class="flex items-center justify-between space-x-2 p-2 border rounded"
+    >
+      <TButton
+        icon="favorite"
+        type="icon"
+        :class="style.highlighted ? 'text-primary' : 'text-gray-500'"
+        @click="setLevel(style.id, !style.highlighted, style.level)"
+      />
+      <div class="flex-grow">
         {{ style.name }}
       </div>
-      <TInputSelect
-        :options="levels"
-        :value.sync="style.level"
-        @input="(val) => setLevel(style.id, val)"
-      />
-      <TButton
-        icon="close"
-        type="icon"
-        class="ml-1"
-        @click="remove(style.id)"
-      />
+      <TMenu>
+        <template v-slot:button>
+          <TButton icon="more_vert" type="icon" />
+        </template>
+        <template v-slot:menu="{ closeMenu }">
+          <div class="w-32 bg-white rounded-lg shadow-xl border">
+            <div class="bg-gray-200 p-2 font-bold">Your Level</div>
+            <TButton
+              v-for="level in levels"
+              :key="level.value"
+              type="context"
+              :class="{
+                'font-bold': style.level === level.value
+              }"
+              @click="
+                setLevel(style.id, style.highlighted, level.value)
+                closeMenu()
+              "
+              >{{ level.label }}</TButton
+            >
+            <div class="border-t"></div>
+            <TButton
+              type="context"
+              @click="
+                remove(style.id)
+                closeMenu()
+              "
+              >Remove</TButton
+            >
+          </div>
+        </template>
+      </TMenu>
     </div>
     <t-rich-select
       v-model="newStyleName"
       placeholder="Add dance style"
       :fetch-options="getAllStyles"
-      @change="setLevel(newStyleName, 'Interested')"
+      @change="setLevel(newStyleName, false, 'Interested')"
     />
   </div>
 </template>
@@ -66,7 +97,7 @@ export default {
 
       this.$emit('input', val)
     },
-    setLevel(styleId, level) {
+    setLevel(styleId, highlighted, level) {
       if (!styleId || !level) {
         return
       }
@@ -75,6 +106,7 @@ export default {
 
       Vue.set(val, styleId, {
         selected: true,
+        highlighted,
         level
       })
 

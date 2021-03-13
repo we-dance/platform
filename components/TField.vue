@@ -38,7 +38,7 @@
       <slot name="bottom" />
     </div>
     <TPopup v-if="showTips" :title="label" @close="showTips = false">
-      <TPreview :content="tips" class="mt-4" />
+      <TPreview :content="tips" class="my-4" />
     </TPopup>
   </div>
 </template>

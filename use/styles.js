@@ -55,7 +55,7 @@ export default () => {
     return getAllStyles({ root: 'yes' }).results
   }
 
-  const getStyles = (selected, level = 0, onlyRoot = false, limit = 0) => {
+  const getStyles = (selected, level = 0, highlighted = false, limit = 0) => {
     if (!selected) {
       return []
     }
@@ -71,7 +71,7 @@ export default () => {
     result = result.filter(
       (item) =>
         item.levelMeta.weight >= level &&
-        (onlyRoot ? item.root === 'yes' : true)
+        (highlighted ? item.highlighted : true)
     )
 
     result = result.sort(sortBy('name'))

@@ -178,7 +178,9 @@ export default () => {
     {
       name: 'styles',
       key: 'profile.styles',
-      type: 'stylesSelect'
+      type: 'stylesSelect',
+      tips:
+        'Mark up to 4 favorite dances that will be highlighted in your poster'
     },
     {
       name: 'locales',

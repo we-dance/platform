@@ -4,7 +4,7 @@
       v-for="style in getStyles(value)"
       :key="style.id"
       class="inline-block rounded-full px-2 py-1 border m-1"
-      :class="levelClass[style.level]"
+      :class="getClasses(style)"
     >
       {{ style.name
       }}<span v-if="style.level !== 'Interested' && !hideLevel">
@@ -42,6 +42,17 @@ export default {
       Intermediate: 'text-orange-500',
       Advanced: 'text-red-500'
     }
-  })
+  }),
+  methods: {
+    getClasses(style) {
+      let result = this.levelClass[style.level]
+
+      if (style.highlighted) {
+        result += ' font-bold'
+      }
+
+      return result
+    }
+  }
 }
 </script>

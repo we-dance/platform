@@ -102,7 +102,7 @@ export default {
   },
   computed: {
     dances() {
-      return this.getStyles(this.styles, 0, false, 5)
+      return this.getStyles(this.styles, 0, true, 5)
     }
   }
 }
