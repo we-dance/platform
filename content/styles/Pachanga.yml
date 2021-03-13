@@ -1,14 +1,25 @@
 id: Pachanga
-root: ""
 name: Pachanga
-region: Afro-Caribbean
-family: Salsa
 synonyms: ""
-country: ""
+description: '"A happy-go-lucky dance" of Cuban origin with a Charleston flavor
+  due to the double bending and straightening of the knees. It is danced on the
+  downbeat of four-four time to the usual mambo offbeat music characterized by
+  the charanga instrumentation of flutes, violins, and drums.'
+history: ""
+origins: Cuba
+adjectives: ""
 type: Social dance
+holding: solo
+year: 1950s
+predecessors: Charleston
+parent: ""
+influence: Son montuno, Merengue, Mambo
+family: Salsa
+region: Afro-Caribbean
+source: https://en.wikipedia.org/wiki/Pachanga
+root: ""
 partner: yes
 group: ""
 related: ""
-genres: ""
+music: ""
 timing: ""
-active: ""

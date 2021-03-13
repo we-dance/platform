@@ -1,14 +1,26 @@
 id: RumbaYambu
-root: ""
-name: Rumba Yambú
-region: Afro-Caribbean
+name: Yambú
+synonyms: Rumba Yambu, Cuban cumba, Afro Cubano
+description: Yambú is a dance in which a single couple slowly and respectfully
+  dances within a circle created by the conga drummers, singers, waiting
+  dancers, and spectators. The partners seldom touch, except when the man moves
+  to the side of the woman and places his hand on her shoulder; they gracefully
+  lower themselves almost to the floor and then come back up.
+history: ""
+origins: Afro-Cuban
+adjectives: ""
+type: Folkloric dance
+holding: solo
+year: ""
+predecessors: ""
+parent: Cuban rumba
+influence: ""
 family: Salsa
-synonyms: ""
-country: ""
-type: Social dance
+region: Afro-Caribbean
+source: https://www.britannica.com/art/Latin-American-dance/The-Caribbean
+root: ""
 partner: yes
 group: ""
 related: ""
-genres: ""
+music: ""
 timing: ""
-active: ""

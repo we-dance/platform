@@ -1,14 +1,29 @@
 id: SalsaCalena
-root: ""
-name: Salsa Caleña
-region: Afro-Caribbean
-family: Salsa
-synonyms: ""
-country: ""
+name: Salsa Colombian
+synonyms: Cali style, Salsa Caleña
+description: The central feature is the footwork which has quick rapid steps and
+  skipping motions. Colombian style does not execute Cross-body Leads or the
+  "Dile Que No" as seen in other styles, but rather step in place and displace
+  in closed position. Their footwork is intricate and precise, helping several
+  Colombian Style dancers win major world championships. Cali hosts many annual
+  salsa events such as the World Salsa Cali Festival and the Encuentro de
+  Melomanos y Coleccionistas.
+history: The elements of Cali-Style Salsa were strongly influenced by dances to
+  Caribbean rhythms which preceded salsa, such as Pachanga and Boogaloo.
+origins: Cali, Colombia
+adjectives: ""
 type: Social dance
+holding: closed-couple
+year: ""
+predecessors: Pachanga, Boogaloo
+parent: ""
+influence: ""
+family: Salsa
+region: Afro-Caribbean
+source: https://en.wikipedia.org/wiki/Salsa_(dance)
+root: ""
 partner: yes
 group: ""
 related: ""
-genres: ""
+music: ""
 timing: ""
-active: ""

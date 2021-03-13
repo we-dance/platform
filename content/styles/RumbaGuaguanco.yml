@@ -1,14 +1,26 @@
 id: RumbaGuaguanco
-root: ""
-name: Rumba Guaguancó
-region: Afro-Caribbean
+name: Guaguancó
+synonyms: Rumba Guaguanco, Cuban rumba, Afro Cubano
+description: Guaguancó places the man and woman in opposition, as they circle
+  each other in symbolic sexual play. The dance is characterized by the vacunao,
+  a hip-thrusting gesture by the man toward his partner; to avoid his advances,
+  the woman must immediately turn away from him or use her skirts to cover her
+  pelvic area.
+history: ""
+origins: Afro-Cuban
+adjectives: ""
+type: Folkloric dance
+holding: solo
+year: ""
+predecessors: ""
+parent: Cuban rumba
+influence: ""
 family: Salsa
-synonyms: Cuban rumba
-country: ""
-type: Social dance
+region: Afro-Caribbean
+source: https://www.britannica.com/art/Latin-American-dance/The-Caribbean
+root: ""
 partner: yes
 group: ""
 related: ""
-genres: ""
+music: ""
 timing: ""
-active: ""

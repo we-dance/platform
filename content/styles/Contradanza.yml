@@ -1,14 +1,22 @@
 id: Contradanza
-root: ""
-name: Contradanza
-region: European
-family: Contradanza
+name: Contredanse
 synonyms: contradanza criolla, danza, danza criolla, habanera
-country: Spain
+description: ""
+history: ""
+origins: Cuba
+adjectives: ""
 type: Social dance
+holding: interdependent-couple
+year: 16xx
+predecessors: ""
+parent: ""
+influence: ""
+family: Contradanza
+region: ""
+source: https://www.britannica.com/art/Latin-American-dance#ref279309
+root: ""
 partner: yes
 group: yes
-related: Contradanse
-genres: ""
+related: ""
+music: ""
 timing: 2/4 or 6/8
-active: ""

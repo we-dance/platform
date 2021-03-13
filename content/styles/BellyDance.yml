@@ -1,14 +1,22 @@
 id: BellyDance
-root: yes
 name: Belly Dance
-region: Oriental
-family: Belly Dance
 synonyms: Arabic dance
-country: Egypt
+description: ""
+history: ""
+origins: Egypt
+adjectives: ""
 type: Performance dance
+holding: ""
+year: ""
+predecessors: ""
+parent: ""
+influence: ""
+family: Belly Dance
+region: Oriental
+source: ""
+root: yes
 partner: ""
 group: ""
 related: ""
-genres: ""
+music: ""
 timing: ""
-active: ""

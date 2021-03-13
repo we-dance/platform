@@ -1,14 +1,22 @@
 id: CountryDance
-root: ""
 name: Country Dance
-region: European
-family: Country dance
 synonyms: Contradanse
-country: British Isles
+description: ""
+history: ""
+origins: British Isles
+adjectives: ""
 type: Social dance
+holding: ""
+year: ""
+predecessors: ""
+parent: ""
+influence: ""
+family: Country dance
+region: European
+source: ""
+root: ""
 partner: yes
 group: yes
 related: ""
-genres: ""
+music: ""
 timing: ""
-active: ""

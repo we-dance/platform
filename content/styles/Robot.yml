@@ -1,14 +1,22 @@
 id: Robot
-root: ""
 name: Robot
-region: Afro-American
-family: Street dance
 synonyms: mannequin
-country: ""
+description: ""
+history: ""
+origins: ""
+adjectives: ""
 type: ""
+holding: ""
+year: ""
+predecessors: ""
+parent: ""
+influence: ""
+family: Street dance
+region: Afro-American
+source: ""
+root: ""
 partner: ""
 group: ""
 related: Popping
-genres: ""
+music: ""
 timing: ""
-active: ""

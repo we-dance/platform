@@ -1,14 +1,22 @@
 id: Zumba
-root: yes
 name: Zumba
-region: South American
-family: Zumba
 synonyms: ""
-country: Colombia
+description: ""
+history: ""
+origins: Colombia
+adjectives: ""
 type: Fitness
+holding: ""
+year: ""
+predecessors: ""
+parent: ""
+influence: ""
+family: Zumba
+region: South American
+source: ""
+root: yes
 partner: no
 group: yes
 related: hip-hop, soca, samba, salsa, merengue, mambo
-genres: ""
+music: ""
 timing: ""
-active: ""
