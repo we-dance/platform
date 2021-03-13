@@ -14,14 +14,7 @@
         @input="(val) => setLevel(style.id, val)"
       />
     </div>
-    <TButton @click="showPopup = true">Change styles</TButton>
-    <TPopup v-if="showPopup" title="Select styles" @close="showPopup = false">
-      <TInputStyles
-        class="max-w-md mx-auto h-64 overflow-y-scroll"
-        :value.sync="value"
-        @input="(val) => $emit('input', val)"
-      />
-    </TPopup>
+    <TInputStyles :value.sync="value" @input="(val) => $emit('input', val)" />
   </div>
 </template>
 
