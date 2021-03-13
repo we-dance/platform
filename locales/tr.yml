@@ -9,11 +9,11 @@ myprofile.posts.add: Bir gönderi yazın
 posts.title: Popüler
 profiles.title: Topluluk
 events.title: Etkinlikler
+event.type: Type
 myprofile.title: Benim profilim
 settings.title: Ayarlar
 city.anywhere: Herhangi bir yer
 city.change: Şehri değiştir
-objective.label: Amaç
 role.label: Rol
 sort.popular: Popüler
 sort.newest: En yeni

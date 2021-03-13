@@ -9,11 +9,11 @@ myprofile.posts.add: Напишите пост
 posts.title: Трендови
 profiles.title: Заједница
 events.title: Догађаји
+event.type: Type
 myprofile.title: Мој профил
 settings.title: Подешавања
 city.anywhere: Било где
 city.change: Промени град
-objective.label: Објективан
 role.label: Улога
 sort.popular: Популарно
 sort.newest: Најновије

@@ -9,11 +9,11 @@ myprofile.posts.add: Rédiger un post
 posts.title: Les tendances
 profiles.title: Communauté
 events.title: Événements
+event.type: Type
 myprofile.title: Mon profil
 settings.title: Paramètres
 city.anywhere: Nulle part
 city.change: Changer de ville
-objective.label: Objectif
 role.label: Rôle
 sort.popular: Populaire
 sort.newest: Plus récent

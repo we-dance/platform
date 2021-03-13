@@ -9,11 +9,11 @@ myprofile.posts.add: Scrie o postare
 posts.title: Tendințe
 profiles.title: Comunitate
 events.title: Evenimente
+event.type: Type
 myprofile.title: Profilul meu
 settings.title: Setări
 city.anywhere: Oriunde
 city.change: Schimbă orașul
-objective.label: Obiectiv
 role.label: Rol
 sort.popular: Popular
 sort.newest: Cel mai nou
