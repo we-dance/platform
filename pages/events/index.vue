@@ -9,6 +9,29 @@
       </template>
     </TTitle>
 
+    <div class="flex items-center space-x-2">
+      <TTabs
+        v-if="uid"
+        v-model="activeFilter"
+        :tabs="filterOptions"
+        class="flex-grow"
+      />
+      <div>
+        <TButton
+          v-if="view === 'list'"
+          icon="news"
+          type="icon"
+          @click="view = 'covers'"
+        />
+        <TButton
+          v-if="view === 'covers'"
+          icon="notes"
+          type="icon"
+          @click="view = 'list'"
+        />
+      </div>
+    </div>
+
     <div class="overflow-x-scroll my-2">
       <div class="flex flex-no-wrap space-x-2">
         <TInputCity v-model="currentCity" />
@@ -25,13 +48,6 @@
           :options="danceStyles"
           :placeholder="$t('style.label')"
         />
-        <t-rich-select
-          v-if="uid"
-          v-model="activeFilter"
-          hide-search-box
-          :options="filterOptions"
-        />
-        <t-rich-select v-model="view" hide-search-box :options="viewOptions" />
       </div>
     </div>
 

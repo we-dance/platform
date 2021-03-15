@@ -6,7 +6,7 @@ posts.add: Додај пост
 profiles.add: Додај профил
 myprofile.events.add: Додај догађај
 myprofile.posts.add: Напишите пост
-posts.title: Трендови
+posts.title: Feed
 profiles.title: Заједница
 events.title: Догађаји
 event.type: Type

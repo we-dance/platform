@@ -1,13 +1,13 @@
 <template>
   <div>
     <div
-      v-for="style in getStyles(value)"
+      v-for="style in getStyles(value, 0, false, max)"
       :key="style.id"
       class="inline-block rounded-full px-2 py-1 border m-1"
       :class="getClasses(style)"
     >
       {{ style.name
-      }}<span v-if="style.level !== 'Interested' && !hideLevel">
+      }}<span v-if="style.level && style.level !== 'Interested' && !hideLevel">
         – {{ style.level }}</span
       >
     </div>
@@ -33,6 +33,10 @@ export default {
     hideLevel: {
       type: Boolean,
       default: false
+    },
+    max: {
+      type: Number,
+      default: 0
     }
   },
   data: () => ({

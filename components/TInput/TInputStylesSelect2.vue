@@ -6,6 +6,7 @@
       class="flex items-center justify-between space-x-2 p-2 border rounded"
     >
       <TButton
+        v-if="!hideHighlight"
         icon="favorite"
         type="icon"
         :class="style.highlighted ? 'text-primary' : 'text-gray-500'"
@@ -14,44 +15,23 @@
       <div class="flex-grow">
         {{ style.name }}
       </div>
-      <TMenu>
-        <template v-slot:button>
-          <TButton icon="more_vert" type="icon" />
-        </template>
-        <template v-slot:menu="{ closeMenu }">
-          <div class="w-32 bg-white rounded-lg shadow-xl border">
-            <div class="bg-gray-200 p-2 font-bold">Your Level</div>
-            <TButton
-              v-for="level in levels"
-              :key="level.value"
-              type="context"
-              :class="{
-                'font-bold': style.level === level.value
-              }"
-              @click="
-                setLevel(style.id, style.highlighted, level.value)
-                closeMenu()
-              "
-              >{{ level.label }}</TButton
-            >
-            <div class="border-t"></div>
-            <TButton
-              type="context"
-              @click="
-                remove(style.id)
-                closeMenu()
-              "
-              >Remove</TButton
-            >
-          </div>
-        </template>
-      </TMenu>
+      <TInputSelect
+        :options="levels"
+        :value.sync="style.level"
+        @input="(val) => setLevel(style.id, style.highlighted, val)"
+      />
+      <TButton
+        icon="delete"
+        type="icon"
+        class="pr-2"
+        @click="remove(style.id)"
+      />
     </div>
     <t-rich-select
       v-model="newStyleName"
       placeholder="Add dance style"
-      :fetch-options="getAllStyles"
-      @change="setLevel(newStyleName, false, 'Interested')"
+      :fetch-options="findStyles"
+      @change="add(newStyleName)"
     />
   </div>
 </template>
@@ -59,16 +39,32 @@
 <script>
 import Vue from 'vue'
 import useStyles from '~/use/styles'
+import useAuth from '~/use/auth'
+import { search } from '~/utils'
 
 export default {
   name: 'TInputStylesSelect2',
   setup(props) {
-    const { getStyles, levels, getAllStyles } = useStyles()
+    const { getStyles, levels, getAllStyles, getStylesDropdown } = useStyles()
+    const { profile } = useAuth()
+
+    const findStyles = (q) => {
+      if (props.mineOnly) {
+        return {
+          results: getStylesDropdown(profile.value?.styles).filter((i) =>
+            search(i.label, q)
+          )
+        }
+      }
+
+      return getAllStyles(q)
+    }
 
     return {
+      profile,
       levels,
       getStyles,
-      getAllStyles
+      findStyles
     }
   },
   props: {
@@ -79,6 +75,14 @@ export default {
     item: {
       type: Object,
       default: () => ({})
+    },
+    mineOnly: {
+      type: Boolean,
+      default: false
+    },
+    hideHighlight: {
+      type: Boolean,
+      default: false
     }
   },
   data: () => ({
@@ -96,6 +100,18 @@ export default {
       Vue.delete(val, styleId)
 
       this.$emit('input', val)
+    },
+    add(styleId) {
+      if (
+        this.mineOnly &&
+        this.profile?.styles &&
+        this.profile.styles[styleId]
+      ) {
+        this.setLevel(styleId, false, this.profile.styles[styleId].level)
+        return
+      }
+
+      this.setLevel(styleId, false, 'Interested')
     },
     setLevel(styleId, highlighted, level) {
       if (!styleId || !level) {

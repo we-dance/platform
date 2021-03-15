@@ -6,7 +6,7 @@ posts.add: Add post
 profiles.add: Add profile
 myprofile.events.add: Add event
 myprofile.posts.add: Write a post
-posts.title: Trends
+posts.title: Feed
 profiles.title: Community
 events.title: Events
 event.type: Type

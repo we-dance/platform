@@ -6,7 +6,7 @@ posts.add: Gönderi ekle
 profiles.add: Profil ekle
 myprofile.events.add: Etkinlik ekle
 myprofile.posts.add: Bir gönderi yazın
-posts.title: Popüler
+posts.title: Feed
 profiles.title: Topluluk
 events.title: Etkinlikler
 event.type: Type

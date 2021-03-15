@@ -4,6 +4,15 @@
       <span v-if="city">{{ city.name }}</span> {{ $t('profiles.title') }}
     </TTitle>
 
+    <div class="flex items-center space-x-2">
+      <TTabs
+        v-if="uid"
+        v-model="profileType"
+        :tabs="typeOptions"
+        class="flex-grow"
+      />
+    </div>
+
     <div class="overflow-x-scroll my-2">
       <div class="flex flex-no-wrap space-x-2">
         <TInputCity v-model="currentCity" />
@@ -22,14 +31,6 @@
           clearable
           class="w-full"
           :placeholder="$t('profile.objectives')"
-        />
-        <t-rich-select
-          v-model="profileType"
-          :options="typeOptions"
-          hide-search-box
-          clearable
-          class="w-full"
-          placeholder="Type"
         />
         <t-rich-select
           v-model="roles"
@@ -96,7 +97,7 @@ import useAuth from '~/use/auth'
 import useCollection from '~/use/collection'
 import useDoc from '~/use/doc'
 import useCities from '~/use/cities'
-import { sortBy, getExcerpt, getDateTime, openURL } from '~/utils'
+import { sortBy, getExcerpt, getDateTime, openURL, getOptions } from '~/utils'
 import useProfiles from '~/use/profiles'
 import useStyles from '~/use/styles'
 
@@ -129,7 +130,7 @@ export default {
     const { currentCity, city } = useCities()
     const { objectivesList, typeList } = useProfiles()
 
-    const typeOptions = typeList
+    const typeOptions = getOptions(typeList, 'All')
     const objectivesOptions = objectivesList
 
     const tab = ref('partner')

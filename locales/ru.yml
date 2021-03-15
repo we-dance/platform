@@ -6,7 +6,7 @@ posts.add: Добавить
 profiles.add: Добавить
 myprofile.events.add: Добавить мероприятие
 myprofile.posts.add: Написать пост
-posts.title: Тренды
+posts.title: Feed
 profiles.title: Сообщество
 events.title: Мероприятия
 event.type: Type

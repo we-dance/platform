@@ -1,8 +1,74 @@
 import Vue from 'vue'
 import VueTailwind from 'vue-tailwind'
-import { TRichSelect } from 'vue-tailwind/dist/components'
+import {
+  TRichSelect,
+  TRadioGroup,
+  TCheckboxGroup
+} from 'vue-tailwind/dist/components'
 
 const settings = {
+  't-checkbox-group': {
+    component: TCheckboxGroup,
+    props: {
+      classes: {
+        groupWrapper: 'flex flex-col',
+        label: 'ml-2 text-gray-700 text-sm',
+        input:
+          'transition duration-100 ease-in-out rounded shadow-sm focus:border-blue-500 focus:ring-2 focus:ring-blue-500 focus:outline-none focus:ring-opacity-50 focus:ring-offset-0  disabled:opacity-50 disabled:cursor-not-allowed text-blue-500 border-gray-300'
+      },
+      variants: {
+        danger: {
+          groupWrapper: 'flex flex-col',
+          label: 'ml-2 text-red-500 text-sm',
+          input:
+            'transition duration-100 ease-in-out rounded shadow-sm focus:border-blue-500 focus:ring-2 focus:ring-blue-500 focus:outline-none focus:ring-opacity-50 focus:ring-offset-0  disabled:opacity-50 disabled:cursor-not-allowed text-red-500 border-red-500'
+        },
+        buttons: {
+          groupWrapper: 'flex',
+          label: '',
+          labelChecked: '',
+          wrapper:
+            'mx-1 bg-white border border-gray-300 flex items-center px-4 py-2 rounded shadow-sm cursor-pointer focus:shadow-outline text-sm text-gray-700 hover:text-gray-500 leading-5 uppercase',
+          wrapperChecked:
+            'mx-1 bg-gray-100 border border-gray-300 flex items-center px-4 py-2 rounded shadow-inner cursor-pointer focus:shadow-outline text-sm text-gray-700 hover:text-gray-500 leading-5 uppercase',
+          inputWrapper: '',
+          inputWrapperChecked: '',
+          input: 'absolute invisible'
+        }
+      }
+    }
+  },
+  't-radio-group': {
+    component: TRadioGroup,
+    props: {
+      classes: {
+        groupWrapper: 'flex flex-col',
+        label: 'ml-2 text-gray-700 text-sm',
+        input:
+          'text-blue-500 transition duration-100 ease-in-out border-gray-300 shadow-sm focus:border-blue-500 focus:ring-2 focus:ring-blue-500 focus:outline-none focus:ring-opacity-50 focus:ring-offset-0 disabled:opacity-50 disabled:cursor-not-allowed'
+      },
+      variants: {
+        danger: {
+          groupWrapper: 'flex flex-col',
+          label: 'ml-2 text-red-500 text-sm',
+          input:
+            'text-red-500 transition duration-100 ease-in-out border-red-500 shadow-sm focus:border-blue-500 focus:ring-2 focus:ring-blue-500 focus:outline-none focus:ring-opacity-50 focus:ring-offset-0 disabled:opacity-50 disabled:cursor-not-allowed'
+        },
+        buttons: {
+          groupWrapper: 'flex',
+          label: '',
+          labelChecked: '',
+          wrapper:
+            'mx-1 bg-white border border-gray-300 flex items-center px-4 py-2 rounded shadow-sm cursor-pointer focus:shadow-outline text-sm text-gray-700 hover:text-gray-500 leading-5 uppercase',
+          wrapperChecked:
+            'mx-1 bg-gray-100 border border-gray-300 flex items-center px-4 py-2 rounded shadow-inner cursor-pointer focus:shadow-outline text-sm text-gray-700 hover:text-gray-500 leading-5 uppercase',
+          inputWrapper: '',
+          inputWrapperChecked: '',
+          input: 'absolute invisible'
+        }
+      }
+    }
+  },
   't-rich-select': {
     component: TRichSelect,
     props: {
@@ -18,7 +84,7 @@ const settings = {
           'rounded flex flex-shrink-0 items-center justify-center absolute right-0 top-0 m-2 h-6 w-6 transition duration-100 ease-in-out',
         selectButtonClearIcon: 'bg-white fill-current h-3 w-3',
         dropdown:
-          'absolute z-10 -mt-1 border-b border-l border-r rounded-b shadow-sm z-10',
+          'absolute z-50 -mt-1 border-b border-l border-r rounded-b shadow-sm',
         dropdownFeedback: '',
         loadingMoreResults: '',
         optionsList: 'overflow-auto',

@@ -9,11 +9,27 @@
       </template>
     </TTitle>
 
+    <div class="flex items-center space-x-2">
+      <TTabs v-model="sorting" :tabs="sortingList" class="flex-grow" />
+      <div>
+        <TButton
+          v-if="view === 'list'"
+          icon="news"
+          type="icon"
+          @click="view = 'covers'"
+        />
+        <TButton
+          v-if="view === 'covers'"
+          icon="notes"
+          type="icon"
+          @click="view = 'list'"
+        />
+      </div>
+    </div>
+
     <div class="overflow-x-scroll my-4">
-      <div class="flex flex-no-wrap space-x-2">
+      <div class="flex flex-no-wrap space-x-2 items-center">
         <TInputCity v-model="currentCity" />
-        <t-rich-select v-model="sorting" :options="sortingList" />
-        <t-rich-select v-model="view" :options="viewOptions" />
         <t-rich-select
           v-model="dances"
           clearable

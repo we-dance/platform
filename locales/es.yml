@@ -6,7 +6,7 @@ posts.add: Añadir
 profiles.add: Añadir
 myprofile.events.add: Añadir evento
 myprofile.posts.add: Escribir una publicación
-posts.title: Tendencias
+posts.title: Feed
 profiles.title: Comunidad
 events.title: Eventos
 event.type: Type

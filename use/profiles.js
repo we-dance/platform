@@ -3,6 +3,37 @@ import useCollection from '~/use/collection'
 export default () => {
   const { getById, loading } = useCollection('profiles')
 
+  const days = [
+    {
+      label: 'Monday',
+      value: 'Monday'
+    },
+    {
+      label: 'Tuesday',
+      value: 'Tuesday'
+    },
+    {
+      label: 'Wednesday',
+      value: 'Wednesday'
+    },
+    {
+      label: 'Thursday',
+      value: 'Thursday'
+    },
+    {
+      label: 'Friday',
+      value: 'Friday'
+    },
+    {
+      label: 'Saturday',
+      value: 'Saturday'
+    },
+    {
+      label: 'Sunday',
+      value: 'Sunday'
+    }
+  ]
+
   const meetingPlaces = [
     {
       label: 'My place',
@@ -19,10 +50,6 @@ export default () => {
     {
       label: 'Somewhere public',
       value: 'public'
-    },
-    {
-      label: "Doesn't matter",
-      value: 'anywhere'
     }
   ]
 
@@ -164,6 +191,10 @@ export default () => {
         'Tips for effective pitch:\n- Uncomplicated: It should be catchy and roll off the tongue\n- Concise: It shouldn’t take more than a minute to say or read\n- Unique: It reflects your skills, goals, and desires\n- Storyline: It covers who you are, what you offer, and where you want to be\n- Appealing: Your elevator pitch is essentially a persuasive sales pitch; the emphasis should be on what you offer\n- Use [Markdown](https://simplemde.com/markdown-guide)'
     },
     {
+      name: 'zipcode',
+      label: 'Your zipcode'
+    },
+    {
       name: 'community',
       key: 'profile.community',
       required: true,
@@ -243,36 +274,7 @@ export default () => {
       name: 'days',
       key: 'profile.days',
       type: 'multi',
-      options: [
-        {
-          label: 'Monday',
-          value: 'Monday'
-        },
-        {
-          label: 'Tuesday',
-          value: 'Tuesday'
-        },
-        {
-          label: 'Wednesday',
-          value: 'Wednesday'
-        },
-        {
-          label: 'Thursday',
-          value: 'Thursday'
-        },
-        {
-          label: 'Friday',
-          value: 'Friday'
-        },
-        {
-          label: 'Saturday',
-          value: 'Saturday'
-        },
-        {
-          label: 'Sunday',
-          value: 'Sunday'
-        }
-      ]
+      options: days
     },
     ...contactFields,
     {

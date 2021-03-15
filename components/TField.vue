@@ -48,6 +48,7 @@ import { camelize } from '~/utils'
 import TInput from '~/components/TInput/TInput'
 import TInputMarkdown from '~/components/TInput/TInputMarkdown'
 import TInputSelect from '~/components/TInput/TInputSelect'
+import TInputCollection from '~/components/TInput/TInputCollection'
 import TInputMulti from '~/components/TInput/TInputMulti'
 import TInputTags from '~/components/TInput/TInputTags'
 import TInputTextarea from '~/components/TInput/TInputTextarea'
@@ -170,12 +171,15 @@ export default {
       const map = {
         tags: TInputTags,
         select: TInputSelect,
+        richselect: 't-rich-select',
         markdown: TInputMarkdown,
         textarea: TInputTextarea,
         photo: TInputPhoto,
         location: TInputLocationSelect,
         city: TInputCity,
         multi: TInputMulti,
+        collection: TInputCollection,
+        radio: 't-radio-group',
         accounts: TAccountListSelector,
         account: TAccountSelector,
         styles: TInputStyles,

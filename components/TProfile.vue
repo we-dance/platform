@@ -154,7 +154,7 @@
     <div class="iconed border shadow p-4 space-y-4 mt-8">
       <dl v-if="profile.locales">
         <dt class="font-bold mr-1">Languages:</dt>
-        <dd>{{ getLanguages(profile.locales) }}</dd>
+        <dd>{{ getLabels(languages, profile.locales) }}</dd>
       </dl>
       <dl v-else-if="profile.languages">
         <dt class="font-bold mr-1">Languages:</dt>
@@ -162,7 +162,7 @@
       </dl>
       <div v-if="profile.objectives">
         <h2 class="font-bold">Objectives:</h2>
-        <div>{{ getObjectives(profile.objectives) }}</div>
+        <div>{{ getLabels(objectivesList, profile.objectives) }}</div>
       </div>
       <div v-if="profile.learning">
         <h2 class="font-bold">Which dance topics you are interested in?</h2>
@@ -211,7 +211,7 @@
 import { saveAs } from 'file-saver'
 import useAuth from '~/use/auth'
 import useProfiles from '~/use/profiles'
-import { getDateTimeYear } from '~/utils'
+import { getDateTimeYear, getLabels } from '~/utils'
 import languages from '~/assets/languages'
 
 export default {
@@ -229,31 +229,15 @@ export default {
       uid,
       getDateTimeYear,
       objectivesList,
+      languages,
       can,
-      isAdmin
+      isAdmin,
+      getLabels
     }
   },
   methods: {
     download() {
       saveAs(this.profile.socialCover, `${this.profile.username}.png`)
-    },
-    getObjectives(objectives) {
-      return Object.keys(objectives)
-        .map((o) => this.objectivesList.find((i) => i.value === o).label)
-        .join(', ')
-    },
-    getLanguage(lang) {
-      return languages.find((l) => l.value === lang)
-    },
-    getLanguages(langs) {
-      if (!langs) {
-        return []
-      }
-
-      return Object.keys(langs)
-        .map((lang) => this.getLanguage(lang))
-        .map((l) => l.label)
-        .join(', ')
     }
   }
 }
