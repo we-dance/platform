@@ -2,6 +2,7 @@ import { reactive, toRefs, computed } from '@nuxtjs/composition-api'
 import firebase from 'firebase/app'
 import 'firebase/firestore'
 import useAuth from '~/use/auth'
+import stats from '~/stats'
 
 export default (name) => {
   const { uid } = useAuth()
@@ -12,7 +13,7 @@ export default (name) => {
     loading: false,
     saving: false,
     exists: false,
-    doc: null,
+    doc: {},
     id: null,
     slug: null
   })
@@ -29,16 +30,22 @@ export default (name) => {
         state.doc = doc.data()
         state.id = doc.id
       } else {
-        state.doc = null
+        state.doc = {}
         state.id = null
       }
     })
   }
 
   async function load(id) {
-    state.loading = true
+    stats.add(name, 1, 'doc.load')
 
-    const doc = await collection.doc(id).get()
+    state.loading = true
+    let doc = {}
+
+    if (id) {
+      doc = await collection.doc(id).get()
+    }
+
     state.id = id
 
     if (!doc.exists) {

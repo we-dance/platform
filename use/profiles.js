@@ -1,4 +1,4 @@
-import useCollection from '~/use/collection'
+import useApp from '~/use/app'
 
 export const genderList = [
   {
@@ -299,8 +299,8 @@ export const profileFields = [
 ]
 
 export default () => {
-  const { getById, loading } = useCollection('profiles')
-  const getProfile = (uid) => getById(uid) || {}
+  const { read, loading } = useApp()
+  const getProfile = (uid) => read('profiles', uid) || {}
 
   return {
     getProfile,

@@ -24,7 +24,7 @@
         :show-remove="!!id"
         :submit-label="id ? saveLabel : addLabel"
         :edit-creator="editCreator"
-        class="p-4"
+        class="p-4 space-y-4"
         @save="saveItem"
         @cancel="cancelItem"
         @remove="removeItem"

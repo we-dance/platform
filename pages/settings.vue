@@ -71,6 +71,7 @@
             v-model="account"
             :fields="accountFields"
             :submit-label="$t('save')"
+            class="space-y-4"
             @save="saveAccount"
           />
           <TButton to="/settings?tab=password" class="mt-4">{{
@@ -156,7 +157,7 @@
           v-model="profile"
           :fields="profileFields"
           :submit-label="$t('save')"
-          class="border-t mt-4 pt-4"
+          class="border-t mt-4 pt-4 space-y-4"
           @save="saveProfile"
         />
       </div>

@@ -5,9 +5,7 @@
 
       <div class="md:flex space-y-2 justify-between">
         <div class="flex flex-col">
-          <p>
-            © WeDance 2021 – All rights reserved.
-          </p>
+          <p>© WeDance 2021 – All rights reserved.</p>
           <p class="md:flex space-x-2">
             <router-link class="underline hover:no-underline" to="/about">{{
               $t('footer.about')

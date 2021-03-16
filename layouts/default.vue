@@ -83,11 +83,9 @@
 </template>
 
 <script>
-import { computed } from '@nuxtjs/composition-api'
 import features from 'platform-detect'
 import { version } from '../package.json'
 import useAuth from '~/use/auth'
-import useCollection from '~/use/collection'
 import useProfiles from '~/use/profiles'
 import useCities from '~/use/cities'
 
@@ -201,19 +199,14 @@ export default {
   },
   setup() {
     const { uid, account, profile, isAdmin } = useAuth()
-    const { docs: tagDocs } = useCollection('tags')
     const { getProfile } = useProfiles()
     const { currentCity } = useCities()
-    const tags = computed(() =>
-      tagDocs.value.map((doc) => ({ key: doc.id, label: doc.id }))
-    )
 
     return {
       account,
       profile,
       getProfile,
       uid,
-      tags,
       isAdmin,
       currentCity
     }

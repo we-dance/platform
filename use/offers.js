@@ -75,7 +75,7 @@ export const offerFields = [
     name: 'playlist',
     type: 'collection',
     collection: 'playlists',
-    keyLabel: (i, p) => `${i.name} (${p.username})`,
+    keyLabel: (i, creator) => `${i.name} (${creator})`,
     keyValue: 'id',
     canAdd: true
   },

@@ -2,6 +2,7 @@ import Vue from 'vue'
 import { computed, toRefs } from '@nuxtjs/composition-api'
 import firebase from 'firebase/app'
 import 'firebase/firestore'
+import stats from '~/stats'
 
 const state = Vue.observable({})
 
@@ -29,7 +30,11 @@ export default (name, filter) => {
     Vue.set(state, loadingHash, true)
 
     collection.onSnapshot({ includeMetadataChanges: true }, (snapshot) => {
-      snapshot.docChanges().forEach((change) => {
+      const changes = snapshot.docChanges()
+
+      stats.add(name, changes.length, 'collection.snapshot')
+
+      changes.forEach((change) => {
         if (change.type === 'modified' || change.type === 'added') {
           Vue.set(state[hash], change.doc.id, change.doc.data())
         }
@@ -50,6 +55,8 @@ export default (name, filter) => {
     const docs = await collection.get()
 
     Vue.set(state, loadingHash, true)
+
+    stats.add(name, docs.length, 'collection.load')
 
     docs.forEach((doc) => {
       Vue.set(state[hash], doc.id, doc.data())

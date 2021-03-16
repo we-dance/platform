@@ -17,7 +17,7 @@
         :show-cancel="!!id"
         :show-remove="!!id"
         :submit-label="id ? 'Save' : 'Add'"
-        class="bg-white p-4"
+        class="bg-white p-4 space-y-4"
         @save="saveItem"
         @cancel="cancelItem"
         @remove="removeItem"

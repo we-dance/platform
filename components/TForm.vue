@@ -1,5 +1,5 @@
 <template>
-  <div class="space-y-4">
+  <div>
     <div v-for="field in visibleFields" :key="field.name" :class="fieldWrapper">
       <TField
         :value="value[field.name]"

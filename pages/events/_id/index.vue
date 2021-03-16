@@ -130,7 +130,7 @@
               v-model="account"
               :fields="reservationFields"
               submit-label="Register"
-              class="mt-4"
+              class="mt-4 space-y-4"
               @save="reserve"
             >
               <template v-if="!uid" slot="buttons">

@@ -15,9 +15,9 @@
 
     <div v-if="currentId === 'add'" class="mt-4 rounded bg-white mb-4 shadow">
       <TForm
-        class="px-6 py-4"
         :fields="fields"
         show-cancel
+        class="px-6 py-4 space-y-4"
         @save="createItem"
         @cancel="cancelItem"
       />
@@ -66,7 +66,7 @@
           :fields="fields"
           show-cancel
           :show-remove="can('remove', collection, item)"
-          class="rounded bg-white mb-4 shadow p-4"
+          class="rounded bg-white mb-4 shadow p-4 space-y-4"
           @save="saveItem"
           @cancel="cancelItem"
           @remove="removeItem"

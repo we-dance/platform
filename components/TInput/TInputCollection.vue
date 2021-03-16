@@ -16,14 +16,18 @@
       @close="isAdding = false"
     >
       <div class="max-w-md mx-auto py-4 h-64 overflow-y-scroll">
-        <TForm v-model="newItem" :fields="getFields(collection)" />
+        <TForm
+          v-model="newItem"
+          :fields="getFields(collection)"
+          class="space-y-4"
+        />
       </div>
     </TPopup>
   </div>
 </template>
 
 <script>
-import useProfiles from '~/use/profiles'
+import useApp from '~/use/app'
 import { getFields } from '~/use/forms'
 import { search } from '~/utils'
 
@@ -83,18 +87,36 @@ export default {
   },
   methods: {
     async fetchOptions(q) {
-      const docsRef = this.$fire.firestore
-        .collection(this.collection)
-        .orderBy(this.orderBy)
+      let results = []
 
-      const collection = await docsRef.get()
+      const cached = ['cities', 'profiles']
 
-      let results = collection.docs.map((doc) => {
-        return {
-          label: this.getLabel(doc),
-          value: this.getValue(doc)
+      if (cached.includes(this.collection)) {
+        const keys = Object.keys(this.cache[this.collection])
+        for (const key of keys) {
+          const doc = this.cache[this.collection][key]
+
+          results.push({
+            label: this.getLabel(doc),
+            value: this.getValue(doc)
+          })
         }
-      })
+      } else {
+        const docsRef = this.$fire.firestore
+          .collection(this.collection)
+          .orderBy(this.orderBy)
+
+        const collection = await docsRef.get()
+
+        results = collection.docs
+          .map((doc) => ({ ...doc.data(), id: doc.id }))
+          .map((doc) => {
+            return {
+              label: this.getLabel(doc),
+              value: this.getValue(doc)
+            }
+          })
+      }
 
       if (this.preFilter) {
         results = results.filter(this.preFilter)
@@ -109,33 +131,27 @@ export default {
       return { results }
     },
     getLabel(doc) {
-      const item = doc.data()
+      const item = doc
 
-      let profile = {}
-
-      if (item.createdBy) {
-        profile = this.getProfile(item.createdBy)
-      }
+      const creator = this.read('profiles', item.createdBy, 'username')
 
       if (typeof this.keyLabel === 'function') {
-        return this.keyLabel(item, profile)
+        return this.keyLabel(item, creator)
       }
 
       return item[this.keyLabel]
     },
     getValue(doc) {
-      if (this.keyValue === 'id') {
-        return doc.id
-      }
-      return doc.data()[this.keyValue]
+      return doc[this.keyValue]
     }
   },
   setup() {
-    const { getProfile } = useProfiles()
+    const { cache, read } = useApp()
 
     return {
-      getProfile,
-      getFields
+      getFields,
+      cache,
+      read
     }
   }
 }

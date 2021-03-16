@@ -9,6 +9,7 @@
           v-model="profile"
           :fields="profileFields"
           show-cancel
+          class="space-y-4"
           @save="save"
           @cancel="cancel"
         />

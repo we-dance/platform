@@ -17,7 +17,7 @@
           {{ selectedParticipantsList.join(', ') }}
         </div>
         <TForm
-          class="mt-4"
+          class="mt-4 space-y-4"
           :value="{ subject: item.name }"
           :fields="emailFields"
           submit-label="Send"
@@ -26,7 +26,11 @@
       </div>
     </TPopup>
     <TPopup v-if="addingGuest" title="Add Guest" @close="addingGuest = false">
-      <TForm class="mt-4" :fields="reservationFields" @save="addGuest" />
+      <TForm
+        class="mt-4 space-y-4"
+        :fields="reservationFields"
+        @save="addGuest"
+      />
     </TPopup>
     <div class="mx-auto max-w-md bg-white p-4">
       <div class="px-4 mx-auto max-w-2xl text-center">

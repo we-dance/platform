@@ -1,10 +1,7 @@
-import Vue from 'vue'
 import firebase from 'firebase/app'
 import 'firebase/firestore'
 import { computed } from '@nuxtjs/composition-api'
 import useDoc from '~/use/doc'
-
-const changes = Vue.observable({})
 
 export default (uid, collection, item) => {
   const { update } = useDoc(collection)
@@ -13,7 +10,11 @@ export default (uid, collection, item) => {
     () => uid && item.favorites && item.favorites[uid]
   )
 
-  const addToFavorites = () => {
+  const countFavorites = computed(() =>
+    item.favorites ? Object.keys(item.favorites).length : 0
+  )
+
+  const setFavorite = (val) => {
     const id = item.id
 
     if (!id) {
@@ -21,16 +22,14 @@ export default (uid, collection, item) => {
     }
 
     let change = {}
-    changes[item.id] = changes[item.id] || {}
-    changes[item.id][uid] = !isFavorite.value
 
-    if (!isFavorite.value) {
+    if (val) {
       change = {
-        [`favorites.${uid}`]: true
+        [`savedBy.${uid}`]: true
       }
     } else {
       change = {
-        [`favorites.${uid}`]: firebase.firestore.FieldValue.delete()
+        [`savedBy.${uid}`]: firebase.firestore.FieldValue.delete()
       }
     }
 
@@ -39,6 +38,7 @@ export default (uid, collection, item) => {
 
   return {
     isFavorite,
-    addToFavorites
+    setFavorite,
+    countFavorites
   }
 }

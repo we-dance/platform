@@ -15,7 +15,7 @@
         :fields="profileFields"
         vertical
         show-remove
-        class="bg-white p-4"
+        class="bg-white p-4 space-y-4"
         @save="saveItem"
       />
     </div>
