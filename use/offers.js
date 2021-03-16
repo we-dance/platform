@@ -1,3 +1,5 @@
+import { genderList } from '~/use/profiles'
+
 export const objectivesList = [
   {
     label: 'Learn together',
@@ -101,5 +103,45 @@ export const offerFields = [
     name: 'partnerBio',
     label: 'My dance partner is',
     type: 'textarea'
+  }
+]
+
+export const offerFilters = [
+  {
+    name: 'city',
+    type: 'collection',
+    collection: 'cities',
+    keyValue: 'name',
+    keyLabel: (c) => `${c.name}, ${c.location.country}`,
+    clearable: true,
+    hideLabel: true,
+    placeholder: 'City'
+  },
+  {
+    name: 'dance',
+    type: 'style',
+    hideLabel: true,
+    placeholder: 'Style',
+    compare: (item, field, value) =>
+      item[field][value] && item[field][value].selected,
+    mineOnly: true
+  },
+  {
+    name: 'objective',
+    type: 'richselect',
+    options: objectivesList,
+    hideSearchBox: true,
+    clearable: true,
+    hideLabel: true,
+    placeholder: 'Objective'
+  },
+  {
+    name: 'gender',
+    type: 'richselect',
+    options: genderList,
+    hideSearchBox: true,
+    clearable: true,
+    hideLabel: true,
+    placeholder: 'Gender'
   }
 ]

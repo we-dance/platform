@@ -121,6 +121,9 @@ export default () => {
   }
 
   function can(action, collection, object) {
+    if (!object || !object.createdBy) {
+      return true
+    }
     if (isAdmin()) {
       return true
     }

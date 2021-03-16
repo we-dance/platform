@@ -2,9 +2,12 @@
   <div>
     <t-rich-select v-model="internalValue" :fetch-options="fetchOptions">
       <template v-if="canAdd" v-slot:dropdownDown>
-        <TButton type="link" class="m-4" @click="isAdding = true">
-          Add new
-        </TButton>
+        <TButton
+          type="link"
+          class="m-4"
+          :label="addLabel"
+          @click="isAdding = true"
+        />
       </template>
     </t-rich-select>
     <TPopup
@@ -12,7 +15,7 @@
       :title="`Adding to ${collection}`"
       @close="isAdding = false"
     >
-      <div class="p-4">
+      <div class="max-w-md mx-auto py-4 h-64 overflow-y-scroll">
         <TForm v-model="newItem" :fields="getFields(collection)" />
       </div>
     </TPopup>
@@ -39,6 +42,10 @@ export default {
       type: String,
       default: 'name'
     },
+    preFilter: {
+      type: [Function, Boolean],
+      default: false
+    },
     keyLabel: {
       type: [Function, String],
       default: 'name'
@@ -50,6 +57,10 @@ export default {
     canAdd: {
       type: Boolean,
       default: false
+    },
+    addLabel: {
+      type: String,
+      default: 'Add new'
     },
     item: {
       type: Object,
@@ -84,6 +95,12 @@ export default {
           value: this.getValue(doc)
         }
       })
+
+      if (this.preFilter) {
+        results = results.filter(this.preFilter)
+      }
+
+      results = results.filter((i) => i.label)
 
       if (q) {
         results = results.filter((i) => search(i.label, q))

@@ -1,4 +1,5 @@
 import { offerFields } from '~/use/offers'
+import useProfiles from '~/use/profiles'
 import { playlistFields } from '~/use/playlists'
 
 export function getFields(collection) {
@@ -8,6 +9,12 @@ export function getFields(collection) {
 
   if (collection === 'playlists') {
     return playlistFields
+  }
+
+  if (collection === 'profiles') {
+    const { profileFields } = useProfiles()
+
+    return profileFields
   }
 
   return []

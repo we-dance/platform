@@ -64,9 +64,9 @@
               </a>
             </div>
           </div>
-          <div class="flex items-center">
-            <TIcon name="icon" class="w-4 h-4 mr-1" />
-            <TAvatar class="mr-2" name :uid="item.createdBy" />
+          <div class="flex items-center space-x-1">
+            <TIcon name="icon" class="w-4 h-4" />
+            <TAvatar name :uid="item.createdBy" />
           </div>
           <div v-if="item.price">
             <div class="flex items-center">

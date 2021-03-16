@@ -3,7 +3,6 @@
     <div
       v-for="style in getStyles(value, 0, false, max)"
       :key="style.id"
-      class="inline-block rounded-full px-2 py-1 border m-1"
       :class="getClasses(style)"
     >
       {{ style.name
@@ -37,6 +36,10 @@ export default {
     max: {
       type: Number,
       default: 0
+    },
+    wrapperClass: {
+      type: String,
+      default: 'inline-block rounded-full px-2 py-1 border m-1'
     }
   },
   data: () => ({
@@ -54,6 +57,8 @@ export default {
       if (style.highlighted) {
         result += ' font-bold'
       }
+
+      result += ' ' + this.wrapperClass
 
       return result
     }

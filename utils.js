@@ -347,3 +347,18 @@ export function getOptionsFromMulti(list, values) {
     value: v
   }))
 }
+
+export async function loadDoc({ app, params, error }, collection) {
+  const docRef = app.$fire.firestore.collection(collection).doc(params.id)
+
+  const snapshot = await docRef.get()
+  const doc = snapshot.data()
+
+  if (!doc) {
+    error({ statusCode: 404 })
+  }
+
+  return {
+    doc
+  }
+}

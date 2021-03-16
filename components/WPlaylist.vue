@@ -1,24 +1,18 @@
 <template>
   <div>
-    <div v-if="!loading" class="flex justify-between items-center">
-      <div>
+    <div v-if="!loading && playlist" class="flex justify-between items-center">
+      <div class="flex space-x-2">
         <button
           class="font-bold cursor-pointer text-blue-700 underline hover:no-underline"
           @click="isOpen = !isOpen"
         >
           {{ playlist.name }}
         </button>
+        <TButton icon="edit" type="icon" :to="`/playlists/${id}/edit`" />
       </div>
     </div>
-    <div v-if="isOpen" class="mt-4">
-      <figure class="aspect-ratio">
-        <iframe
-          :src="getSpotifyEmbedUrl(playlist.url)"
-          frameborder="0"
-          allowtransparency="true"
-          allow="encrypted-media"
-        ></iframe>
-      </figure>
+    <div v-if="isOpen && playlist" class="mt-4">
+      <w-spotify :url="playlist.url" />
     </div>
   </div>
 </template>
@@ -29,20 +23,26 @@ import useDoc from '~/use/doc'
 import useProfiles from '~/use/profiles'
 
 export default {
+  name: 'WPlaylist',
   props: {
     id: {
       type: String,
       default: ''
+    },
+    editable: {
+      type: Boolean,
+      default: false
+    },
+    opened: {
+      type: Boolean,
+      default: false
     }
   },
   data: () => ({
     isOpen: false
   }),
-  methods: {
-    getSpotifyEmbedUrl(url) {
-      const playlistId = url.replace('https://open.spotify.com/playlist/', '')
-      return `https://open.spotify.com/embed/playlist/${playlistId}`
-    }
+  mounted() {
+    this.isOpen = this.opened
   },
   setup(params) {
     const collection = 'playlists'

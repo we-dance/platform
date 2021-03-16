@@ -1,9 +1,9 @@
 <template>
-  <div>
-    <div v-for="field in visibleFields" :key="field.name" class="mb-4">
+  <div class="space-y-4">
+    <div v-for="field in visibleFields" :key="field.name" :class="fieldWrapper">
       <TField
-        v-model="data[field.name]"
-        :item="data"
+        :value="value[field.name]"
+        :item="value"
         v-bind="field"
         :label="getLabel(field)"
         @input="(val) => onFieldChange(field, val)"
@@ -19,7 +19,12 @@
       <TButton v-if="showCancel" label="Cancel" @click="cancel" />
       <TButton v-if="showCopy" label="Copy" @click="copy" />
       <slot name="buttons" />
-      <TButton type="primary" :label="submitLabel" @click="save" />
+      <TButton
+        v-if="submitLabel"
+        type="primary"
+        :label="submitLabel"
+        @click="save"
+      />
     </div>
   </div>
 </template>
@@ -56,31 +61,44 @@ export default {
     showRemove: {
       type: Boolean,
       default: false
+    },
+    editCreator: {
+      type: Boolean,
+      default: false
+    },
+    fieldWrapper: {
+      type: String,
+      default: ''
     }
   },
   data: () => ({
-    data: {},
     error: false
   }),
   computed: {
     visibleFields() {
-      return this.fields.filter((field) => !field.when || field.when(this.data))
+      const fields = this.fields.filter(
+        (field) => !field.when || field.when(this.value)
+      )
+
+      if (this.editCreator) {
+        fields.push({
+          name: 'createdBy',
+          label: 'Creator',
+          type: 'collection',
+          collection: 'profiles',
+          keyValue: 'id',
+          keyLabel: 'username',
+          canAdd: true,
+          admin: true
+        })
+      }
+
+      return fields
     }
   },
-  watch: {
-    value: 'load',
-    fields: 'load'
-  },
-  mounted() {
-    this.load()
-  },
   methods: {
-    load() {
-      const data = { ...this.value }
-      this.data = data
-    },
     remove() {
-      this.$emit('remove', this.data.id)
+      this.$emit('remove', this.value.id)
     },
     cancel() {
       this.$emit('cancel')
@@ -110,7 +128,7 @@ export default {
         return
       }
 
-      this.$emit('copy', this.data)
+      this.$emit('copy', this.value)
     },
     save() {
       this.error = false
@@ -119,12 +137,22 @@ export default {
         return
       }
 
-      this.$emit('save', this.data)
+      this.$emit('save', this.value)
     },
     onFieldChange(field, value) {
-      if (field && field.onChange) {
-        field.onChange(this.data)
+      const val = { ...this.value }
+
+      if (value) {
+        this.$set(val, field.name, value)
+      } else {
+        this.$delete(val, field.name)
       }
+
+      if (field && field.onChange) {
+        field.onChange(val)
+      }
+
+      this.$emit('input', val)
     }
   }
 }

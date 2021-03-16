@@ -2,10 +2,16 @@
   <div>
     <div class="p-4 flex justify-between items-start">
       <div class="flex-grow">
-        <h2 class="text-lg leading-none font-bold">
-          {{ getLabel(objectivesList, offer.objective) }}
-        </h2>
-        <div class="font-bold text-xs text-gray-700">Expires in 2 days</div>
+        <div class="flex items-center space-x-1">
+          <h2 class="text-lg leading-none font-bold">
+            {{ getLabel(objectivesList, offer.objective) }}
+          </h2>
+          <TStyles :value="offer.dance" wrapper-class="" :max="2" />
+        </div>
+
+        <div class="font-bold text-xs text-gray-700">
+          {{ getLabels(days, offer.days) }}
+        </div>
       </div>
 
       <TMenu>
@@ -22,43 +28,57 @@
       </TMenu>
     </div>
 
-    <TStyles class="mx-4 text-xs" :value="offer.dance" :max="4" />
-
-    <div class="p-4 bg-gray-100">
-      <TProfileCard3 :profile="author" show-details />
+    <div v-if="!isOpened" class="p-4">
+      <TProfileCard3 :profile="author" />
+      <div class="flex justify-end mt-4">
+        <TButton label="View offer" @click="isOpened = true" />
+      </div>
     </div>
 
-    <div class="p-4 space-y-2">
-      <TField label="You are:">
-        <p>{{ offer.partnerBio }}</p>
-      </TField>
-      <TField label="Playlist:">
-        <w-playlist :id="offer.playlist" />
-      </TField>
-      <TField
-        v-model="where"
-        label="Where:"
-        type="radio"
-        :options="
-          getOptionsFromMulti(
-            {
-              myPlace: `${author.username}'s Home - ${author.community} ${author.zipcode}`,
-              yourPlace: `${profile.username}'s Home - ${profile.community} ${profile.zipcode}`
-            },
-            offer.place
-          )
-        "
-      />
-      <TField
-        v-model="when"
-        label="When:"
-        type="radio"
-        :options="getOptionsFromMulti(days, offer.days)"
-      />
-    </div>
+    <div v-if="isOpened">
+      <div class="p-4 bg-gray-100">
+        <TProfileCard3 :profile="author" show-details />
+      </div>
 
-    <div class="flex justify-end p-4">
-      <TButton type="primary" label="Accept offer" />
+      <div class="p-4 space-y-2">
+        <TField label="You are:">
+          <p>{{ offer.partnerBio }}</p>
+        </TField>
+        <TField label="Playlist:">
+          <w-playlist :id="offer.playlist" />
+        </TField>
+        <TField
+          v-model="where"
+          label="Where:"
+          :name="`${offer.id}_where`"
+          type="richselect"
+          hide-search-box
+          :options="
+            getOptionsFromMulti(
+              {
+                myPlace: `${author.username}'s Home - ${
+                  author.community
+                } ${author.zipcode || ''}`,
+                yourPlace: `${profile.username}'s Home - ${
+                  profile.community
+                } ${profile.zipcode || ''}`
+              },
+              offer.place
+            )
+          "
+        />
+        <TField
+          v-model="when"
+          label="When:"
+          :name="`${offer.id}_when`"
+          type="richselect"
+          hide-search-box
+          :options="getOptionsFromMulti(days, offer.days)"
+        />
+      </div>
+      <div class="flex justify-end p-4">
+        <TButton type="primary" label="Accept offer" />
+      </div>
     </div>
   </div>
 </template>
@@ -67,7 +87,7 @@
 import useAuth from '~/use/auth'
 import useProfiles from '~/use/profiles'
 import { objectivesList, meetingPlaces, days } from '~/use/offers'
-import { getLabel, getOptionsFromMulti } from '~/utils'
+import { getLabel, getOptionsFromMulti, getLabels } from '~/utils'
 
 export default {
   props: {
@@ -78,7 +98,8 @@ export default {
   },
   data: () => ({
     where: '',
-    when: ''
+    when: '',
+    isOpened: false
   }),
   computed: {
     author() {
@@ -99,6 +120,7 @@ export default {
       meetingPlaces,
       days,
       getOptionsFromMulti,
+      getLabels,
       uid
     }
   }

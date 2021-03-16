@@ -57,7 +57,7 @@ import TInputLocationSelect from '~/components/TInput/TInputLocationSelect'
 import TAccountListSelector from '~/components/TAccountListSelector'
 import TAccountSelector from '~/components/TAccountSelector'
 import TInputCity from '~/components/TInput/TInputCity'
-import TInputStyles from '~/components/TInput/TInputStyles'
+import TInputStyle from '~/components/TInput/TInputStyle'
 import TInputStylesSelect2 from '~/components/TInput/TInputStylesSelect2'
 import TInputLanguages from '~/components/TInput/TInputLanguages'
 import TInputButtons from '~/components/TInput/TInputButtons'
@@ -182,7 +182,7 @@ export default {
         radio: 't-radio-group',
         accounts: TAccountListSelector,
         account: TAccountSelector,
-        styles: TInputStyles,
+        style: TInputStyle,
         stylesSelect: TInputStylesSelect2,
         languages: TInputLanguages,
         buttons: TInputButtons,

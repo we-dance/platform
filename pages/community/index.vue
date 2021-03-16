@@ -26,15 +26,15 @@
         />
         <t-rich-select
           v-model="objective"
-          :options="objectivesOptions"
+          :options="objectivesList"
           hide-search-box
           clearable
           class="w-full"
           :placeholder="$t('profile.objectives')"
         />
         <t-rich-select
-          v-model="roles"
-          :options="rolesList"
+          v-model="gender"
+          :options="genderList"
           hide-search-box
           clearable
           placeholder="Gender"
@@ -128,30 +128,18 @@ export default {
     const { getStylesDropdown } = useStyles()
 
     const { currentCity, city } = useCities()
-    const { objectivesList, typeList } = useProfiles()
+    const { objectivesList, typeList, genderList } = useProfiles()
 
     const typeOptions = getOptions(typeList, 'All')
-    const objectivesOptions = objectivesList
-
-    const tab = ref('partner')
-    const objective = ref('')
     const profileType = ref('')
-    const roles = ref('')
+    const tab = ref('partner')
+
+    const objective = ref('')
+    const gender = ref('')
     const dances = ref('')
     const danceStyles = computed(() =>
       getStylesDropdown(myProfile.value?.styles)
     )
-
-    const rolesList = [
-      {
-        label: 'Female',
-        value: 'Female'
-      },
-      {
-        label: 'Male',
-        value: 'Male'
-      }
-    ]
 
     const items = computed(() => {
       let result = docsProfiles.value.filter((item) =>
@@ -174,8 +162,8 @@ export default {
         )
       }
 
-      if (roles.value) {
-        result = result.filter((item) => item.gender === roles.value)
+      if (gender.value) {
+        result = result.filter((item) => item.gender === gender.value)
       }
 
       if (objective.value) {
@@ -198,10 +186,10 @@ export default {
       updateProfile,
       myProfile,
       objective,
-      roles,
+      gender,
       dances,
-      objectivesOptions,
-      rolesList,
+      objectivesList,
+      genderList,
       currentCity,
       typeOptions,
       profileType,
