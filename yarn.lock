@@ -2848,6 +2848,29 @@
     lodash "^4.17.15"
     pretty "^2.0.0"
 
+"@vueuse/core@^4.4.1":
+  version "4.4.1"
+  resolved "https://registry.yarnpkg.com/@vueuse/core/-/core-4.4.1.tgz#1c1a83ac29306840c96329b1005c4d7608cee92f"
+  integrity sha512-L9TWFwI+pEqgEmfv+uWz2kQ9bXejtpaQdoS67UUyii22rSesjP1aTTU7z7XX5i7aIgsHKnKYv68cDCtEZbjsPA==
+  dependencies:
+    "@vueuse/shared" "4.4.1"
+    vue-demi latest
+
+"@vueuse/firebase@^4.4.1":
+  version "4.4.1"
+  resolved "https://registry.yarnpkg.com/@vueuse/firebase/-/firebase-4.4.1.tgz#50e1fc5a0a1dbdb5dabfc255e78ddb4147eb0518"
+  integrity sha512-02JbJ/6JtSooZ/4tjTQ8Fc2sSDpbGDypEQ5YXbbjmMMWGZYpE+A4iEliyQkhhP8cYZIKEP43lnPID6kCntxaHQ==
+  dependencies:
+    "@vueuse/shared" "4.4.1"
+    vue-demi latest
+
+"@vueuse/shared@4.4.1":
+  version "4.4.1"
+  resolved "https://registry.yarnpkg.com/@vueuse/shared/-/shared-4.4.1.tgz#8963740d1b8a036933ae5c02b461b430430e2433"
+  integrity sha512-pY7bXgYaA9g25XNREE3zeuIWfOwbyiKeQ0IppE4nIRuro4gVGuLoV/BIU6D0VOTv7hYefv5eqE+WS03v61y8xA==
+  dependencies:
+    vue-demi latest
+
 "@webassemblyjs/ast@1.9.0":
   version "1.9.0"
   resolved "https://registry.yarnpkg.com/@webassemblyjs/ast/-/ast-1.9.0.tgz#bd850604b4042459a5a41cd7d338cbed695ed964"
@@ -15337,6 +15360,11 @@ vue-datetime@^1.0.0-beta.14:
   version "1.0.0-beta.14"
   resolved "https://registry.yarnpkg.com/vue-datetime/-/vue-datetime-1.0.0-beta.14.tgz#791e724500929cdfeb31395154d9a26fd27ffb46"
   integrity sha512-n25LqldE1xryeoweohiqlxy8iUsi+UwZnKLaN4gXjk7xxGL6rUl1y/GGvkoMwJUzRKttw+QnQV4oFAYupUQdug==
+
+vue-demi@latest:
+  version "0.7.3"
+  resolved "https://registry.yarnpkg.com/vue-demi/-/vue-demi-0.7.3.tgz#463188044d31d33985e67da51f315b447a1fed85"
+  integrity sha512-vrzM26H4CZCXBf/eu4T8nks6o7qgziYM52myk8bg+atw4qYqpeWJf5c82W8VdmgGfSIdh9ulOOe9+GeLc3Z/8A==
 
 vue-eslint-parser@^7.0.0:
   version "7.1.0"

@@ -37,6 +37,8 @@
     "@nuxtjs/toast": "^3.3.1",
     "@tailwindcss/forms": "^0.2.1",
     "@voerro/vue-tagsinput": "^2.2.0",
+    "@vueuse/core": "^4.4.1",
+    "@vueuse/firebase": "^4.4.1",
     "axios": "^0.19.2",
     "core-js": "2",
     "d3": "^6.2.0",
