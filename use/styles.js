@@ -68,10 +68,12 @@ export default () => {
       }
     })
 
+    const highlightedCount = result.filter((i) => i.highlighted).length
+
     result = result.filter(
       (item) =>
         item.levelMeta.weight >= level &&
-        (highlighted ? item.highlighted : true)
+        (highlightedCount && highlighted ? item.highlighted : true)
     )
 
     result = result.sort(sortBy('name'))
