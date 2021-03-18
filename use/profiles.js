@@ -1,4 +1,4 @@
-import useApp from '~/use/app'
+import { useApp } from '~/use/app'
 
 export const genderList = [
   {

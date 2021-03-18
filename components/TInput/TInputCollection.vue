@@ -27,7 +27,8 @@
 </template>
 
 <script>
-import useApp from '~/use/app'
+import { when } from '@vueuse/core'
+import { useApp } from '~/use/app'
 import { getFields } from '~/use/forms'
 import { search } from '~/utils'
 
@@ -92,6 +93,8 @@ export default {
       const cached = ['cities', 'profiles']
 
       if (cached.includes(this.collection)) {
+        await when(this.cache).not.toBeNull()
+
         const keys = Object.keys(this.cache[this.collection])
         for (const key of keys) {
           const doc = this.cache[this.collection][key]

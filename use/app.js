@@ -1,11 +1,13 @@
 import firebase from 'firebase/app'
 import 'firebase/firestore'
-import useDoc from '~/use/doc'
+import { createGlobalState } from '@vueuse/core'
+import { useFirestore } from '@vueuse/firebase'
+import nuxtConfig from '~/nuxt.config'
+
+const db = firebase.initializeApp(nuxtConfig.firebase.config).firestore()
 
 export async function cache(name, keyField, check, fields) {
-  const firestore = firebase.firestore()
-
-  const collection = await firestore.collection(name).get()
+  const collection = await db.collection(name).get()
 
   const items = {}
 
@@ -35,8 +37,6 @@ export async function cache(name, keyField, check, fields) {
 }
 
 export async function warmup() {
-  const firestore = firebase.firestore()
-
   const profiles = await cache('profiles', 'id', (d) => d.username, [
     'username',
     'photo',
@@ -48,7 +48,7 @@ export async function warmup() {
   ])
   const cities = await cache('cities', 'name')
 
-  await firestore
+  await db
     .collection('app')
     .doc('latest')
     .set({
@@ -57,32 +57,30 @@ export async function warmup() {
     })
 }
 
-export default () => {
-  const { doc, load, loading } = useDoc('app')
+export const useCache = createGlobalState(() =>
+  useFirestore(db.collection('app').doc('latest'))
+)
 
-  load('latest')
+export const useApp = () => {
+  const cache = useCache()
 
   const read = (collection, id, field) => {
     if (
-      !doc.value ||
+      !cache.value ||
       !collection ||
       !id ||
-      !doc.value[collection] ||
-      !doc.value[collection][id]
+      !cache.value[collection] ||
+      !cache.value[collection][id]
     ) {
       return ''
     }
 
     if (!field) {
-      return doc.value[collection][id]
+      return cache.value[collection][id]
     }
 
-    return doc.value[collection][id][field]
+    return cache.value[collection][id][field]
   }
 
-  return {
-    read,
-    loading,
-    cache: doc
-  }
+  return { read, cache }
 }
