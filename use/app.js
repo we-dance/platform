@@ -2,10 +2,8 @@ import firebase from 'firebase/app'
 import 'firebase/firestore'
 import { createGlobalState } from '@vueuse/core'
 import { useFirestore } from '@vueuse/firebase'
-import nuxtConfig from '~/nuxt.config'
 
-console.log('nuxt', nuxtConfig.firebase.config)
-const db = firebase.initializeApp(nuxtConfig.firebase.config).firestore()
+const db = firebase.initializeApp(process.env.firebase.config).firestore()
 
 export async function cache(name, keyField, check, fields) {
   const collection = await db.collection(name).get()
