@@ -17,7 +17,7 @@ import useAuth from '~/use/auth'
 
 export default {
   name: 'PagePlaylistEdit',
-  layout: 'empty',
+  layout: 'dark',
   middleware: ['auth'],
   setup() {
     const { isAdmin } = useAuth()

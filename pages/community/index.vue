@@ -13,33 +13,31 @@
       />
     </div>
 
-    <div class="overflow-x-scroll my-2">
-      <div class="flex flex-no-wrap space-x-2">
-        <TInputCity v-model="currentCity" />
+    <div class="my-2 flex space-x-2">
+      <TInputCity v-model="currentCity" />
 
-        <t-rich-select
-          v-model="dances"
-          clearable
-          :options="danceStyles"
-          class="w-full"
-          :placeholder="$t('style.label')"
-        />
-        <t-rich-select
-          v-model="objective"
-          :options="objectivesList"
-          hide-search-box
-          clearable
-          class="w-full"
-          :placeholder="$t('profile.objectives')"
-        />
-        <t-rich-select
-          v-model="gender"
-          :options="genderList"
-          hide-search-box
-          clearable
-          placeholder="Gender"
-        />
-      </div>
+      <t-rich-select
+        v-model="dances"
+        clearable
+        :options="danceStyles"
+        class="w-full"
+        :placeholder="$t('style.label')"
+      />
+      <t-rich-select
+        v-model="objective"
+        :options="objectivesList"
+        hide-search-box
+        clearable
+        class="w-full"
+        :placeholder="$t('profile.objectives')"
+      />
+      <t-rich-select
+        v-model="gender"
+        :options="genderList"
+        hide-search-box
+        clearable
+        placeholder="Gender"
+      />
     </div>
 
     <div>
@@ -71,7 +69,7 @@
             :type="profile.type"
             :username="profile.username"
             :description="getExcerpt(profile.bio)"
-            :extra="profile.height ? `${profile.height}cm` : ''"
+            :color="profile.partner === 'Yes' ? 'bg-green-400' : 'bg-red-400'"
             :photo="profile.photo"
             :styles="profile.styles"
             size="sm"

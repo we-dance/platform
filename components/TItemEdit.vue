@@ -1,35 +1,29 @@
 <template>
-  <div class="bg-dark md:py-4 min-h-screen">
-    <TLoader v-if="loading" />
-    <div
-      v-else
-      class="mx-auto w-full max-w-lg md:rounded md:border md:shadow bg-white"
-    >
-      <div class="flex justify-between m-4">
-        <div class="font-bold">{{ title }}</div>
-        <TButton
-          icon="close"
-          type="icon"
-          class="cursor-pointer w-4 h-4"
-          :to="indexUrl"
-        />
-      </div>
-
-      <TForm
-        v-if="item !== null"
-        v-model="item"
-        :fields="fields"
-        vertical
-        :show-cancel="!!id"
-        :show-remove="!!id"
-        :submit-label="id ? saveLabel : addLabel"
-        :edit-creator="editCreator"
-        class="p-4 space-y-4"
-        @save="saveItem"
-        @cancel="cancelItem"
-        @remove="removeItem"
+  <TLoader v-if="loading" />
+  <div v-else>
+    <div v-if="indexUrl" class="flex justify-between m-4">
+      <div class="font-bold">{{ title }}</div>
+      <TButton
+        icon="close"
+        type="icon"
+        class="cursor-pointer w-4 h-4"
+        :to="indexUrl"
       />
     </div>
+
+    <TForm
+      v-if="item !== null"
+      v-model="item"
+      :fields="fields"
+      vertical
+      :show-cancel="exists"
+      :submit-label="exists ? saveLabel : addLabel"
+      :edit-creator="editCreator"
+      class="p-4 space-y-4"
+      @save="saveItem"
+      @cancel="cancelItem"
+      @remove="removeItem"
+    />
   </div>
 </template>
 
@@ -42,6 +36,10 @@ import useRouter from '~/use/router'
 export default {
   name: 'TItemEdit',
   props: {
+    id: {
+      type: String,
+      default: ''
+    },
     title: {
       type: String,
       default: ''
@@ -91,10 +89,14 @@ export default {
   },
   methods: {
     cancelItem() {
-      if (this.id) {
-        this.$router.push(`${this.indexUrl}/${this.id}`)
-      } else {
-        this.$router.push(this.indexUrl)
+      this.$emit('cancel')
+
+      if (this.indexUrl) {
+        if (this.id) {
+          this.$router.push(`${this.indexUrl}/${this.id}`)
+        } else {
+          this.$router.push(this.indexUrl)
+        }
       }
     },
     async saveItem(data) {
@@ -118,10 +120,16 @@ export default {
     const { can, profile } = useAuth()
     const { params } = useRouter()
 
+    let itemId = props.id || params.id
+
+    if (itemId === '-') {
+      itemId = null
+    }
+
     const {
       doc: item,
-      id,
       load,
+      exists,
       update,
       remove,
       create,
@@ -133,14 +141,14 @@ export default {
       () => can('edit', props.collection, item.value) || loading
     )
 
-    if (params.id !== '-') {
-      load(params.id)
+    if (itemId) {
+      load(itemId)
     }
 
     return {
+      exists,
       loading,
       item,
-      id,
       can,
       update,
       remove,

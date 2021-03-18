@@ -32,23 +32,21 @@
       </div>
     </div>
 
-    <div class="overflow-x-scroll my-2">
-      <div class="flex flex-no-wrap space-x-2">
-        <TInputCity v-model="currentCity" />
-        <t-rich-select
-          v-model="eventType"
-          clearable
-          hide-search-box
-          :options="eventTypeList"
-          :placeholder="$t('event.type')"
-        />
-        <t-rich-select
-          v-model="dances"
-          clearable
-          :options="danceStyles"
-          :placeholder="$t('style.label')"
-        />
-      </div>
+    <div class="flex my-2 space-x-2">
+      <TInputCity v-model="currentCity" />
+      <t-rich-select
+        v-model="eventType"
+        clearable
+        hide-search-box
+        :options="eventTypeList"
+        :placeholder="$t('event.type')"
+      />
+      <t-rich-select
+        v-model="dances"
+        clearable
+        :options="danceStyles"
+        :placeholder="$t('style.label')"
+      />
     </div>
 
     <div class="mt-4">

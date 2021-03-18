@@ -1,24 +1,13 @@
 <template>
   <div>
-    <div
+    <TPopupEdit
       v-if="can('edit', 'profiles', profile)"
-      class="mb-2 flex items-start justify-center"
-    >
-      <TButton
-        v-if="isAdmin()"
-        icon="edit"
-        :to="`/${profile.username}/edit`"
-        class="hover:text-blue-500"
-        label="Edit"
-      />
-      <TButton
-        v-else
-        icon="edit"
-        to="/settings?tab=profile"
-        class="hover:text-blue-500"
-        label="Edit"
-      />
-    </div>
+      :id="profile.id"
+      :fields="profilePosterFields"
+      label="Edit Poster"
+      collection="profiles"
+      singular="profile"
+    />
 
     <div class="flex flex-col items-center">
       <portal to="title">
@@ -30,13 +19,15 @@
         </router-link>
       </portal>
 
-      <img
-        v-if="profile.socialCover"
-        :src="profile.socialCover"
-        class="cursor-pointer"
-        @click="download()"
+      <TSharePreviewPost
+        :type="profile.type"
+        :username="profile.username"
+        :description="getExcerpt(profile.bio)"
+        :color="profile.partner === 'Yes' ? 'bg-green-400' : 'bg-red-400'"
+        :photo="profile.photo"
+        :styles="profile.styles"
+        size="sm"
       />
-      <img v-else-if="profile.photo" :src="profile.photo" />
 
       <div class="flex w-full justify-between items-center p-2">
         <div>
@@ -67,9 +58,14 @@
         </div>
       </div>
 
-      <div v-if="profile.bio && !profile.socialCover" class="mt-4">
-        <div>{{ profile.bio }}</div>
-      </div>
+      <TPopupEdit
+        v-if="can('edit', 'profiles', profile)"
+        :id="profile.id"
+        :fields="profileDetailFields"
+        label="Edit Details"
+        collection="profiles"
+        singular="profile"
+      />
 
       <WTeaser
         v-if="profile.partner === 'Yes'"
@@ -211,7 +207,7 @@
 import { saveAs } from 'file-saver'
 import useAuth from '~/use/auth'
 import useProfiles from '~/use/profiles'
-import { getDateTimeYear, getLabels } from '~/utils'
+import { getDateTimeYear, getLabels, getExcerpt } from '~/utils'
 import languages from '~/assets/languages'
 
 export default {
@@ -223,7 +219,11 @@ export default {
   },
   setup() {
     const { uid, can, isAdmin } = useAuth()
-    const { objectivesList } = useProfiles()
+    const {
+      objectivesList,
+      profilePosterFields,
+      profileDetailFields
+    } = useProfiles()
 
     return {
       uid,
@@ -232,7 +232,10 @@ export default {
       languages,
       can,
       isAdmin,
-      getLabels
+      getLabels,
+      getExcerpt,
+      profilePosterFields,
+      profileDetailFields
     }
   },
   methods: {

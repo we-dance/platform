@@ -15,7 +15,7 @@
         <div>
           <div
             v-if="title"
-            class="flex bg-white justify-between border-b pt-4 pb-2 sticky top-0"
+            class="flex bg-white justify-between border-b pt-4 pb-2 sticky top-0 z-50"
           >
             <div class="font-bold">{{ title }}</div>
             <button

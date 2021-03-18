@@ -53,10 +53,11 @@
               <div class="text-sm font-bold">{{ username }}</div>
             </div>
             <TButtonLike v-if="likes !== false" :count="likes" :value="true" />
+            <div v-if="color" :class="color" class="rounded-full w-2 h-2"></div>
             <div v-if="extra" class="text-sm">{{ extra }}</div>
             <div
               v-if="objective"
-              class="bg-primary text-base font-bold text-white rounded-full px-4 py-2 leading-none"
+              class="bg-primary text-sm font-bold text-white rounded-full px-4 py-2 leading-none"
             >
               {{ objective }}
             </div>
@@ -120,6 +121,10 @@ export default {
     styles: {
       type: Object,
       default: () => ({})
+    },
+    color: {
+      type: String,
+      default: ''
     }
   },
   computed: {

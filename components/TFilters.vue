@@ -1,5 +1,5 @@
 <template>
-  <div class="overflow-x-scroll my-2">
+  <div class="my-2">
     <TForm
       v-model="internalValue"
       :fields="fields"

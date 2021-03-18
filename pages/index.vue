@@ -27,16 +27,14 @@
       </div>
     </div>
 
-    <div class="overflow-x-scroll my-4">
-      <div class="flex flex-no-wrap space-x-2 items-center">
-        <TInputCity v-model="currentCity" />
-        <t-rich-select
-          v-model="dances"
-          clearable
-          :options="danceStyles"
-          :placeholder="$t('style.label')"
-        />
-      </div>
+    <div class="flex my-4 space-x-2 items-center">
+      <TInputCity v-model="currentCity" />
+      <t-rich-select
+        v-model="dances"
+        clearable
+        :options="danceStyles"
+        :placeholder="$t('style.label')"
+      />
     </div>
 
     <div>

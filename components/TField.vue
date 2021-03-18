@@ -16,6 +16,11 @@
     </div>
     <div :class="inputWrapperClasses">
       <slot name="top" />
+      <TPreview
+        v-if="before"
+        :content="before"
+        class="text-gray-500 text-sm px-2"
+      />
       <slot>
         <component
           :is="getComponent()"
@@ -33,7 +38,7 @@
       <TPreview
         v-if="description"
         :content="description"
-        class="text-gray-500 text-sm px-2 py-1"
+        class="text-gray-500 text-sm px-2"
       />
       <slot name="bottom" />
     </div>
@@ -81,6 +86,10 @@ export default {
       default: ''
     },
     description: {
+      type: String,
+      default: ''
+    },
+    before: {
       type: String,
       default: ''
     },
