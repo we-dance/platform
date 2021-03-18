@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="w-full">
     <div id="canvas" class="relative leading-none font-lato">
       <img v-if="photo" :src="photo" :alt="title" class="w-full" />
       <div v-else class="square bg-indigo-500"></div>

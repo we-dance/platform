@@ -61,14 +61,14 @@
         v-if="isMenuOpen"
         class="bg-white fixed left-0 w-56 bottom-0 top-0 z-30 shadow-lg md:hidden"
       >
-        <MainNavigation :uid="uid" :username="getProfile(uid).username" />
+        <MainNavigation :uid="uid" :username="username" />
       </div>
     </transition>
 
     <div class="flex-grow flex">
       <MainNavigation
         :uid="uid"
-        :username="getProfile(uid).username"
+        :username="username"
         class="hidden md:block flex-initial"
       />
       <portal-target name="left" />
@@ -86,7 +86,6 @@
 import features from 'platform-detect'
 import { version } from '../package.json'
 import useAuth from '~/use/auth'
-import useProfiles from '~/use/profiles'
 import useCities from '~/use/cities'
 
 export default {
@@ -198,14 +197,13 @@ export default {
     }
   },
   setup() {
-    const { uid, account, profile, isAdmin } = useAuth()
-    const { getProfile } = useProfiles()
+    const { uid, account, profile, username, isAdmin } = useAuth()
     const { currentCity } = useCities()
 
     return {
+      username,
       account,
       profile,
-      getProfile,
       uid,
       isAdmin,
       currentCity

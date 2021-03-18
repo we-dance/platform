@@ -3,7 +3,7 @@ import features from 'platform-detect'
 import ls from 'local-storage'
 import { utm } from 'url-utm-params'
 import { isSameDay } from 'date-fns'
-import { toRefs } from '@nuxtjs/composition-api'
+import { computed, toRefs } from '@nuxtjs/composition-api'
 import firebase from 'firebase/app'
 import 'firebase/auth'
 import 'firebase/firestore'
@@ -16,6 +16,7 @@ const state = Vue.observable({
   signingIn: false,
   uid: null,
   profile: null,
+  username: null,
   account: null,
   initialized: false,
   marketing: null,
@@ -50,6 +51,8 @@ export default () => {
       }
     }
   }
+
+  const username = computed(() => state.profile?.username)
 
   const isAccountConfirmed = () =>
     !!state.uid && !!state.account && !!state.account.confirmed
@@ -424,6 +427,7 @@ export default () => {
 
   return {
     ...toRefs(state),
+    username,
     getRedirectResult,
     updateProfile,
     updateAccount,

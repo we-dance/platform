@@ -29,9 +29,11 @@
       />
       <TField
         v-model="community"
-        :label="$t('profile.community')"
+        label="Community"
         label-position="vertical"
-        type="city"
+        type="collection"
+        collection="cities"
+        before="Where do you dance the most? If you live in a small city, you probably go to dance to a bigger city, which one?"
       />
 
       <div class="mt-4 text-xs">
