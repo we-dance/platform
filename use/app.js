@@ -4,6 +4,7 @@ import { createGlobalState } from '@vueuse/core'
 import { useFirestore } from '@vueuse/firebase'
 import nuxtConfig from '~/nuxt.config'
 
+console.log('nuxt', nuxtConfig.firebase.config)
 const db = firebase.initializeApp(nuxtConfig.firebase.config).firestore()
 
 export async function cache(name, keyField, check, fields) {

@@ -1,4 +1,4 @@
-const app = {
+export const app = {
   name: 'WeDance',
   description: 'We bring dancers together',
   social: {
@@ -9,7 +9,7 @@ const app = {
   cover: '/cover/wide.png'
 }
 
-const firebase = {
+export const firebase = {
   config: {
     apiKey: process.env.FIREBASE_API_KEY,
     authDomain: process.env.FIREBASE_AUTH_DOMAIN,
