@@ -123,7 +123,7 @@ export const offerFilters = [
     hideLabel: true,
     placeholder: 'Style',
     compare: (item, field, value) =>
-      item[field][value] && item[field][value].selected,
+      item && item[field] && item[field][value] && item[field][value].selected,
     mineOnly: true
   },
   {
