@@ -8,10 +8,6 @@ export const objectivesList = [
   {
     label: 'Dance practice',
     value: 'dance'
-  },
-  {
-    label: 'Dance exchange',
-    value: 'exchange'
   }
 ]
 
@@ -59,6 +55,13 @@ export const meetingPlaces = [
 
 export const offerFields = [
   {
+    name: 'title',
+    hideLabel: true,
+    placeholder: 'Title',
+    description:
+      'Who are you looking for? Put it as a question, for example: Do you love dogs?'
+  },
+  {
     name: 'objective',
     label: 'Objective',
     type: 'radio',
@@ -98,11 +101,6 @@ export const offerFields = [
     label: 'Where?',
     type: 'multi',
     options: meetingPlaces
-  },
-  {
-    name: 'partnerBio',
-    label: 'My dance partner is',
-    type: 'textarea'
   }
 ]
 

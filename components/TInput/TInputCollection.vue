@@ -34,7 +34,7 @@
 import { when } from '@vueuse/core'
 import { useApp } from '~/use/app'
 import { getFields } from '~/use/forms'
-import { search } from '~/utils'
+import { search, sortBy } from '~/utils'
 
 export default {
   name: 'TInputCollection',
@@ -94,14 +94,10 @@ export default {
     async fetchOptions(q) {
       let results = []
 
-      if (!this.cache) {
-        return
-      }
-
       const cached = ['cities', 'profiles']
 
       if (cached.includes(this.collection)) {
-        await when(this.cache).not.toBeNull()
+        await this.isReady
 
         const keys = Object.keys(this.cache[this.collection])
         for (const key of keys) {
@@ -128,6 +124,8 @@ export default {
             }
           })
       }
+
+      results = results.sort(sortBy('label'))
 
       if (this.preFilter) {
         results = results.filter(this.preFilter)
@@ -158,11 +156,13 @@ export default {
   },
   setup() {
     const { cache, read } = useApp()
+    const isReady = when(cache).not.toBeUndefined()
 
     return {
       getFields,
       cache,
-      read
+      read,
+      isReady
     }
   }
 }

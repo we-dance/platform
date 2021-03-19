@@ -18,7 +18,8 @@ import useCities from '~/use/cities'
 import useAuth from '~/use/auth'
 
 export default {
-  layout: 'empty',
+  name: 'OfferEdit',
+  layout: 'dark',
   middleware: ['auth'],
   setup() {
     const { currentCity } = useCities()

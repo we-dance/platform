@@ -1,20 +1,28 @@
 <template>
-  <div>
-    <div v-if="!loading && playlist" class="flex justify-between items-center">
-      <div class="flex space-x-2">
-        <button
-          class="font-bold cursor-pointer text-blue-700 underline hover:no-underline"
-          @click="isOpen = !isOpen"
-        >
-          {{ playlist.name }}
-        </button>
-        <TButton icon="edit" type="icon" :to="`/playlists/${id}/edit`" />
+  <div v-if="!loading && playlist">
+    <TButton
+      icon="spotify"
+      type="icon"
+      :label="playlist.name"
+      v-bind="$attrs"
+      @click="isOpen = true"
+    />
+    <TPopup
+      v-if="isOpen"
+      :title="playlist.name"
+      class="text-dark"
+      @close="isOpen = false"
+    >
+      <div class="w-screen max-w-md h-64">
+        <w-spotify
+          :url="playlist.url"
+          wrapper-class="w-full h-full"
+          iframe-class="w-full h-full"
+        />
       </div>
-    </div>
-    <div v-if="isOpen && playlist" class="mt-4">
-      <w-spotify :url="playlist.url" />
-    </div>
+    </TPopup>
   </div>
+  <div v-else>...</div>
 </template>
 
 <script>
@@ -24,6 +32,7 @@ import useProfiles from '~/use/profiles'
 
 export default {
   name: 'WPlaylist',
+  inheritAttrs: false,
   props: {
     id: {
       type: String,

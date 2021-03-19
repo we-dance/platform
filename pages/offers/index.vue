@@ -18,6 +18,7 @@ import { offerFilters } from '~/use/offers'
 import useCities from '~/use/cities'
 
 export default {
+  name: 'OfferIndex',
   setup() {
     const { currentCity } = useCities()
 

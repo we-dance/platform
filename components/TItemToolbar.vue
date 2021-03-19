@@ -1,5 +1,5 @@
 <template>
-  <div v-if="can('edit', collection, item)" class="mb-2 flex justify-end">
+  <div v-if="can('edit', collection, item)" class="flex space-x-2 justify-end">
     <TButton
       v-if="dashboard"
       icon="people"
@@ -13,6 +13,7 @@
       class="hover:text-blue-500"
       label="Edit"
     />
+    <slot />
   </div>
 </template>
 

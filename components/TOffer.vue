@@ -1,52 +1,56 @@
 <template>
-  <div>
-    <div class="p-4 flex justify-between items-start">
-      <div class="flex-grow">
-        <div class="flex items-center space-x-1">
-          <h2 class="text-lg leading-none font-bold">
-            {{ getLabel(objectivesList, offer.objective) }}
-          </h2>
-          <TStyles :value="offer.dance" wrapper-class="" :max="2" />
-        </div>
-
-        <div class="font-bold text-xs text-gray-700">
-          {{ getLabels(days, offer.days) }}
-        </div>
-      </div>
-
-      <TMenu>
-        <template v-slot:button>
-          <TButton icon="more_vert" type="icon" />
-        </template>
-        <template v-slot:menu>
-          <div class="w-32 py-2 bg-white rounded-lg shadow-xl border">
-            <TButton type="context" :to="`/offers/${offer.id}/edit`"
-              >Edit</TButton
-            >
+  <div class="max-w-sm">
+    <TSharePreviewPost2
+      :type="getLabel(objectivesList, offer.objective)"
+      collection="offers"
+      :username="author.username"
+      :center-title="offer.title"
+      :bottom-description="author.bio"
+      :photo="author.photo"
+      align="center"
+      size="sm"
+    >
+      <template v-slot:bottom>
+        <w-playlist :id="offer.playlist" class="text-sm text-white" />
+      </template>
+      <template v-slot:top>
+        <TStyles
+          :value="offer.dance"
+          :max="2"
+          wrapper-class="text-xs uppercase bg-dark px-2 py-2 rounded-full"
+          no-color
+        />
+      </template>
+      <template v-slot:right>
+        <div v-if="offer.days" class="mt-2 text-shadow-md text-right space-y-2">
+          <div v-for="(_, day) in offer.days" :key="day" class="text-xs">
+            {{ getLabel(days, day) }}
           </div>
-        </template>
-      </TMenu>
-    </div>
+        </div>
+      </template>
+    </TSharePreviewPost2>
 
-    <div v-if="!isOpened" class="p-4">
-      <TProfileCard3 :profile="author" />
-      <div class="flex justify-end mt-4">
-        <TButton label="View offer" @click="isOpened = true" />
+    <div class="px-4">
+      <div class="font-bold text-lg leading-none">
+        {{ author.name }}
+      </div>
+      <div class="text-sm text-gray-700">
+        {{ author.community }} {{ author.zipcode }}
+        <span v-if="author.height">• {{ author.height }}cm</span>
+        <span v-if="author.weight">• {{ author.weight }}kg</span>
       </div>
     </div>
 
-    <div v-if="isOpened">
-      <div class="p-4 bg-gray-100">
-        <TProfileCard3 :profile="author" show-details />
-      </div>
-
+    <TItemToolbar
+      v-if="!isOpened"
+      collection="offers"
+      :item="offer"
+      class="p-4"
+    >
+      <TButton type="primary" label="Accept offer" @click="isOpened = true" />
+    </TItemToolbar>
+    <div v-else>
       <div class="p-4 space-y-2">
-        <TField label="You are:">
-          <p>{{ offer.partnerBio }}</p>
-        </TField>
-        <TField label="Playlist:">
-          <w-playlist :id="offer.playlist" />
-        </TField>
         <TField
           v-model="where"
           label="Where:"
@@ -75,10 +79,11 @@
           hide-search-box
           :options="getOptionsFromMulti(days, offer.days)"
         />
+        <TField v-model="phone" label="Your phone:" />
       </div>
-      <div class="flex justify-end p-4">
-        <TButton type="primary" label="Accept offer" />
-      </div>
+      <TAlignRight class="p-4">
+        <TButton type="primary" label="Confirm" />
+      </TAlignRight>
     </div>
   </div>
 </template>
@@ -87,7 +92,7 @@
 import useAuth from '~/use/auth'
 import useProfiles from '~/use/profiles'
 import { objectivesList, meetingPlaces, days } from '~/use/offers'
-import { getLabel, getOptionsFromMulti, getLabels } from '~/utils'
+import { getLabel, getOptionsFromMulti } from '~/utils'
 
 export default {
   props: {
@@ -99,6 +104,7 @@ export default {
   data: () => ({
     where: '',
     when: '',
+    phone: '',
     isOpened: false
   }),
   computed: {
@@ -120,7 +126,6 @@ export default {
       meetingPlaces,
       days,
       getOptionsFromMulti,
-      getLabels,
       uid
     }
   }

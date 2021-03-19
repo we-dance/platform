@@ -1,7 +1,8 @@
 <template>
-  <figure class="aspect-ratio">
+  <figure :class="wrapperClass">
     <iframe
       :src="getSpotifyEmbedUrl(url)"
+      :class="iframeClass"
       frameborder="0"
       allowtransparency="true"
       allow="encrypted-media"
@@ -14,6 +15,14 @@ export default {
   name: 'WSpotify',
   props: {
     url: {
+      type: String,
+      default: ''
+    },
+    wrapperClass: {
+      type: String,
+      default: 'aspect-ratio'
+    },
+    iframeClass: {
       type: String,
       default: ''
     }

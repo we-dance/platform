@@ -33,6 +33,10 @@ export default {
       type: Boolean,
       default: false
     },
+    noColor: {
+      type: Boolean,
+      default: false
+    },
     max: {
       type: Number,
       default: 0
@@ -52,10 +56,14 @@ export default {
   }),
   methods: {
     getClasses(style) {
-      let result = this.levelClass[style.level]
+      let result = ''
 
-      if (style.highlighted) {
-        result += ' font-bold'
+      if (!this.noColor) {
+        result = this.levelClass[style.level]
+
+        if (style.highlighted) {
+          result += ' font-bold'
+        }
       }
 
       result += ' ' + this.wrapperClass
