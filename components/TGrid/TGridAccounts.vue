@@ -137,7 +137,6 @@ import {
   getDateObect,
   flatten
 } from '~/utils'
-import useProfiles from '~/use/profiles'
 
 export default {
   name: 'TGridAccounts',
@@ -161,9 +160,11 @@ export default {
   },
   setup() {
     const { docs } = useCollection('accounts')
+    const { getById } = useCollection('profiles')
+    const getProfile = (uid) => getById(uid) || {}
+
     const { remove: removeProfile, update: updateProfile } = useDoc('profiles')
     const { remove: removeAccount, update: updateAccount } = useDoc('accounts')
-    const { getProfile, contactFields } = useProfiles()
     const nameFilter = ref('')
     const activeFilter = ref('')
     const selectedAll = ref(false)
@@ -323,7 +324,6 @@ export default {
       removeAccount,
       list,
       applyList,
-      contactFields,
       updateProfile,
       updateAccount
     }

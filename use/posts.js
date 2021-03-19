@@ -5,6 +5,7 @@ export const postFilters = [
     collection: 'cities',
     keyValue: 'name',
     keyLabel: (c) => `${c.name}, ${c.location.country}`,
+    compare: (item, field, value) => !item[field] || item[field] === value,
     clearable: true,
     hideLabel: true,
     placeholder: 'City'
