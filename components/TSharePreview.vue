@@ -12,7 +12,8 @@
       >
         <div class="flex-grow-0 flex flex-col items-end">
           <div
-            class="uppercase py-4 px-8 -mr-8 text-4xl bg-green-500 font-bold"
+            class="uppercase py-4 px-8 -mr-8 text-4xl font-bold"
+            :class="labelColor"
           >
             {{ type }}
           </div>
@@ -54,15 +55,22 @@
 </template>
 
 <script>
+import { useApp } from '~/use/app'
 import useStyles from '~/use/styles'
 
 export default {
-  setup() {
+  setup(props) {
     const { getStyles } = useStyles()
+    const { getPosterLabelColor } = useApp()
+    const labelColor = getPosterLabelColor(props.collection, props.type)
 
-    return { getStyles }
+    return { getStyles, labelColor }
   },
   props: {
+    collection: {
+      type: String,
+      default: ''
+    },
     type: {
       type: String,
       default: ''

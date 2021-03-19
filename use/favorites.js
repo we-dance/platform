@@ -3,16 +3,18 @@ import 'firebase/firestore'
 import { computed } from '@nuxtjs/composition-api'
 import useDoc from '~/use/doc'
 
+export const getCountFavorites = (item) =>
+  item.savedBy ? Object.keys(item.savedBy).length : 0
+
+export const getIsFavorite = (uid, item) =>
+  uid && item.savedBy && item.savedBy[uid]
+
 export default (uid, collection, item) => {
   const { update } = useDoc(collection)
 
-  const isFavorite = computed(
-    () => uid && item.favorites && item.favorites[uid]
-  )
+  const isFavorite = computed(() => getIsFavorite(uid, item))
 
-  const countFavorites = computed(() =>
-    item.favorites ? Object.keys(item.favorites).length : 0
-  )
+  const countFavorites = computed(() => getCountFavorites(item))
 
   const setFavorite = (val) => {
     const id = item.id

@@ -1,6 +1,6 @@
 <template>
   <TSharePreview
-    type="Feed"
+    type="Post"
     :username="getProfile(post.createdBy).username"
     :title="post.title"
     :description="getExcerpt(post.description)"

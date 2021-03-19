@@ -1,57 +1,23 @@
 <template>
-  <TLoader v-if="loading" />
-  <div v-else-if="!exists" class="text-center">
-    Event not found
-  </div>
-  <div v-else>
-    <div class="mx-auto max-w-md bg-white p-4">
-      <div class="flex space-x-2 items-center justify-end mb-4">
-        <TButtonShare
-          :id="item.id"
-          collection="events"
-          :city="item.city"
-          :url="`https://wedance.vip/events/${item.id}`"
-          :text="item.name"
-          :file="item.socialCover"
-          :file-name="item.name"
-        />
-        <TCardActions :id="item.id" collection="events" :item="item" />
-      </div>
+  <div>
+    <TItemToolbar collection="events" :item="item" />
 
-      <div
-        v-if="can('edit', 'events', item)"
-        class="mb-2 flex items-start justify-center"
-      >
-        <TButton
-          icon="people"
-          :to="`/events/${item.id}/dashboard`"
-          class="hover:text-blue-500 mr-2"
-          label="Dashboard"
-        />
-        <TButton
-          icon="edit"
-          :to="`/events/${item.id}/edit`"
-          class="hover:text-blue-500"
-          label="Edit"
-        />
-      </div>
+    <TItemCard>
+      <TSharePreviewPost
+        :username="item.organiser"
+        collection="events"
+        :title="item.name"
+        :type="item.type"
+        :description="getEventDescription(item)"
+        :extra="item.price"
+        :photo="item.cover"
+        :styles="item.styles"
+        size="sm"
+        class="md:-mt-4 md:-mx-4 mb-2"
+      />
 
-      <img v-if="item.cover" :src="item.cover" :alt="item.name" class="mb-2" />
-      <div class="px-4 mx-auto max-w-2xl text-center">
-        <div class="uppercase text-red-600">
-          <span>{{ getDay(item.startDate) }},</span>
-          <span>{{ getDate(item.startDate) }}</span>
-          <span>{{ getTime(item.startDate) }}</span>
-          –
-          <span v-if="getDate(item.startDate) !== getDate(item.endDate)">{{
-            getDate(item.endDate)
-          }}</span>
-          {{ getTime(item.endDate) }}
-        </div>
-        <h1 class="text-4xl font-bold leading-none">
-          {{ item.name }}
-        </h1>
-        <div class="flex flex-wrap justify-center space-x-2 mt-2">
+      <div class="mx-auto max-w-2xl text-center">
+        <div class="flex flex-wrap justify-start space-x-2 mt-2">
           <div v-if="item.address">
             <div class="flex items-center">
               <TIcon name="place" class="w-4 h-4 mr-1" />
@@ -62,18 +28,6 @@
               >
                 {{ item.address }}
               </a>
-            </div>
-          </div>
-          <div class="flex items-center space-x-1">
-            <TIcon name="icon" class="w-4 h-4" />
-            <TAvatar name :uid="item.createdBy" />
-          </div>
-          <div v-if="item.price">
-            <div class="flex items-center">
-              <TIcon name="ticket" class="w-4 h-4 mr-1" />
-              <p>
-                {{ item.price }}
-              </p>
             </div>
           </div>
         </div>
@@ -102,16 +56,10 @@
         </div>
       </div>
 
-      <TStyles class="text-center text-xs mt-4" :value="item.styles" />
-
       <TPreview class="mt-4" :content="item.description" />
-    </div>
-
-    <div class="mx-auto max-w-md flex justify-end my-4 text-xs pr-4">
-      <span class="mr-1">Added by</span>
-      <TAvatar :uid="item.createdBy" name />
-      <span class="ml-1">on {{ getDateTime(item.createdAt) }}</span>
-    </div>
+      <TItemFooter collection="events" :item="item" :title="item.name" />
+      <TItemCreator :item="item" />
+    </TItemCard>
 
     <TPopup
       v-if="reservationPopup"
@@ -170,7 +118,14 @@ import useProfiles from '~/use/profiles'
 import useReactions from '~/use/reactions'
 import useAccounts from '~/use/accounts'
 import useCities from '~/use/cities'
-import { getDay, getDateTime, getDate, getTime, dateDiff } from '~/utils'
+import {
+  getDay,
+  getDateTime,
+  getDate,
+  getTime,
+  dateDiff,
+  getEventDescription
+} from '~/utils'
 
 export default {
   name: 'EventView',
@@ -179,6 +134,12 @@ export default {
     comment: ''
   }),
   computed: {
+    publishedAt() {
+      return getDateTime(this.item?.createdAt)
+    },
+    creator() {
+      return this.getProfile(this.item?.createdBy)
+    },
     eventUrl() {
       const app = process.env.app
       const url = app.url + this.$route.fullPath
@@ -318,7 +279,8 @@ export default {
       dateDiff,
       getDate,
       getTime,
-      getDay
+      getDay,
+      getEventDescription
     }
   }
 }

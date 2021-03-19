@@ -67,6 +67,7 @@
         >
           <TSharePreviewPost
             :type="profile.type"
+            collection="profiles"
             :username="profile.username"
             :description="getExcerpt(profile.bio)"
             :color="profile.partner === 'Yes' ? 'bg-green-400' : 'bg-red-400'"

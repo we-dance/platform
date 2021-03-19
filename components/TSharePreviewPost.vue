@@ -1,5 +1,5 @@
 <template>
-  <div class="w-full">
+  <div>
     <div id="canvas" class="relative leading-none font-lato">
       <img v-if="photo" :src="photo" :alt="title" class="w-full" />
       <div v-else class="square bg-indigo-500"></div>
@@ -10,7 +10,8 @@
         <div class="flex-grow-0 flex flex-col items-end">
           <div
             v-if="type"
-            class="uppercase py-2 px-4 -mr-4 text-sm bg-green-500 font-bold"
+            class="uppercase py-2 px-4 -mr-4 text-sm font-bold"
+            :class="labelColor"
           >
             {{ type }}
           </div>
@@ -69,15 +70,22 @@
 </template>
 
 <script>
+import { useApp } from '~/use/app'
 import useStyles from '~/use/styles'
 
 export default {
-  setup() {
+  setup(props) {
     const { getStyles } = useStyles()
+    const { getPosterLabelColor } = useApp()
+    const labelColor = getPosterLabelColor(props.collection, props.type)
 
-    return { getStyles }
+    return { getStyles, labelColor }
   },
   props: {
+    collection: {
+      type: String,
+      default: ''
+    },
     align: {
       type: String,
       default: 'bottom'

@@ -221,6 +221,7 @@ export const profileFields = [
     key: 'profile.bio',
     poster: true,
     type: 'textarea',
+    labelPosition: 'top',
     description:
       'Introduce yourself. Make it short and attractive. Max 280 symbols.',
     placeholder: '280 symbols'
@@ -267,6 +268,7 @@ export const profileFields = [
   {
     name: 'styles',
     label: 'Dances',
+    labelPosition: 'top',
     poster: true,
     type: 'stylesSelect',
     tips: 'Mark up to 4 favorite dances that will be highlighted in your poster'
@@ -294,9 +296,12 @@ export const profileFields = [
     name: 'story',
     key: 'profile.story',
     type: 'textarea',
-    placeholder: 'Description (markdown)',
+    labelPosition: 'top',
+    placeholder: 'Text (markdown)',
+    description:
+      'Use [widgets](https://wedance.vip/markdown), including images and videos',
     tips:
-      'Pitch yourself: Who are you? What do you offer? What do you want?\n\nTips for effective pitch:\n- Uncomplicated: It should be catchy and roll off the tongue\n- Concise: It shouldn’t take more than a minute to say or read\n- Unique: It reflects your skills, goals, and desires\n- Storyline: It covers who you are, what you offer, and where you want to be\n- Appealing: Your elevator pitch is essentially a persuasive sales pitch; the emphasis should be on what you offer\n- Use [Markdown](https://simplemde.com/markdown-guide)'
+      'Pitch yourself: Who are you? What do you offer? What do you want?\n\nTips for effective pitch:\n- Uncomplicated: It should be catchy and roll off the tongue\n- Concise: It shouldn’t take more than a minute to say or read\n- Unique: It reflects your skills, goals, and desires\n- Storyline: It covers who you are, what you offer, and where you want to be\n- Appealing: Your elevator pitch is essentially a persuasive sales pitch; the emphasis should be on what you offer'
   },
   {
     name: 'jobs',
@@ -381,6 +386,61 @@ export const profileFields = [
 
 const profilePosterFields = profileFields.filter((f) => f.poster)
 const profileDetailFields = profileFields.filter((f) => !f.poster)
+
+export const profileFilters = [
+  {
+    name: 'city',
+    type: 'collection',
+    collection: 'cities',
+    keyValue: 'name',
+    keyLabel: (c) => `${c.name}, ${c.location.country}`,
+    clearable: true,
+    hideLabel: true,
+    placeholder: 'City'
+  },
+  {
+    name: 'dance',
+    type: 'style',
+    hideLabel: true,
+    placeholder: 'Style',
+    compare: (item, field, value) =>
+      item && item[field] && item[field][value] && item[field][value].selected,
+    mineOnly: true
+  },
+  {
+    name: 'objective',
+    type: 'richselect',
+    options: objectivesList,
+    hideSearchBox: true,
+    clearable: true,
+    hideLabel: true,
+    placeholder: 'Objective'
+  },
+  {
+    name: 'gender',
+    type: 'richselect',
+    options: genderList,
+    hideSearchBox: true,
+    clearable: true,
+    hideLabel: true,
+    placeholder: 'Gender'
+  }
+]
+
+export const profileSorts = [
+  {
+    value: 'username',
+    label: 'Username'
+  },
+  {
+    value: '-createdAt',
+    label: 'Registered'
+  },
+  {
+    value: '-lastLoginAt',
+    label: 'Last seen'
+  }
+]
 
 export default () => {
   const { read, loading } = useApp()

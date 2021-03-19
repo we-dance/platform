@@ -1,5 +1,8 @@
 <template>
-  <div class="mb-2 flex items-start justify-center">
+  <div
+    v-if="can('edit', collection, item)"
+    class="mb-2 flex items-start justify-center"
+  >
     <TButton
       icon="edit"
       class="hover:text-blue-500"
@@ -14,7 +17,7 @@
     >
       <div class="max-w-md mx-auto py-4 max-h-screen overflow-y-scroll">
         <TItemEdit
-          :id="id"
+          :id="item.id"
           :title="title"
           save-label="Save"
           add-label="Add"
@@ -29,6 +32,8 @@
 </template>
 
 <script>
+import useAuth from '~/use/auth'
+
 export default {
   props: {
     collection: {
@@ -36,10 +41,6 @@ export default {
       default: ''
     },
     singular: {
-      type: String,
-      default: ''
-    },
-    id: {
       type: String,
       default: ''
     },
@@ -54,10 +55,21 @@ export default {
     fields: {
       type: Array,
       default: () => []
+    },
+    item: {
+      type: Object,
+      default: () => ({})
     }
   },
   data: () => ({
     isPopupOpen: false
-  })
+  }),
+  setup() {
+    const { can } = useAuth()
+
+    return {
+      can
+    }
+  }
 }
 </script>

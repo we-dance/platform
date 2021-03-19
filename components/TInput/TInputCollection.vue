@@ -1,6 +1,10 @@
 <template>
   <div>
-    <t-rich-select v-model="internalValue" :fetch-options="fetchOptions">
+    <t-rich-select
+      v-model="internalValue"
+      :fetch-options="fetchOptions"
+      v-bind="$attrs"
+    >
       <template v-if="canAdd" v-slot:dropdownDown>
         <TButton
           type="link"
@@ -89,6 +93,10 @@ export default {
   methods: {
     async fetchOptions(q) {
       let results = []
+
+      if (!this.cache) {
+        return
+      }
 
       const cached = ['cities', 'profiles']
 

@@ -67,8 +67,10 @@
         >
           <TSharePreviewPost
             :username="event.organiser"
+            collection="events"
             :title="event.name"
-            :description="getDescription(event)"
+            :type="event.type"
+            :description="getEventDescription(event)"
             :extra="event.price"
             :photo="event.cover"
             :styles="event.styles"
@@ -119,8 +121,7 @@ import {
   getDate,
   getDay,
   getYmd,
-  getTime,
-  getTimeZone,
+  getEventDescription,
   getDateObect
 } from '~/utils'
 
@@ -265,6 +266,7 @@ export default {
     })
 
     return {
+      getEventDescription,
       currentCity,
       count,
       events: items,
@@ -287,27 +289,6 @@ export default {
       eventTypeList,
       eventType,
       danceStyles
-    }
-  },
-  methods: {
-    getDescription(event) {
-      let result =
-        getDay(event.startDate) +
-        ', ' +
-        getDate(event.startDate) +
-        ' ' +
-        getTime(event.startDate) +
-        ' – '
-
-      if (getDate(event.startDate) !== getDate(event.endDate)) {
-        result += getDate(event.endDate) + ' '
-      }
-
-      result += getTime(event.endDate) + ' '
-
-      result += getTimeZone(event.startDate)
-
-      return result
     }
   }
 }

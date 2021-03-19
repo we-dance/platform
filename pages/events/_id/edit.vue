@@ -1,5 +1,5 @@
 <template>
-  <div class="bg-dark md:py-4">
+  <div class="bg-dark md:py-4 min-h-screen">
     <div
       class="mx-auto w-full max-w-lg md:rounded md:border md:shadow bg-white"
     >
@@ -12,6 +12,7 @@
 
       <TForm
         v-model="item"
+        :edit-creator="isAdmin()"
         :fields="fields"
         vertical
         :show-remove="!!id"
@@ -154,9 +155,11 @@ export default {
             name: 'description',
             hideLabel: true,
             type: 'textarea',
-            placeholder: 'Event Description (markdown)',
+            placeholder: 'Text (markdown)',
+            tips:
+              'Pitch yourself: Who are you? What do you offer? What do you want?\n\nTips for effective pitch:\n- Uncomplicated: It should be catchy and roll off the tongue\n- Concise: It shouldn’t take more than a minute to say or read\n- Unique: It reflects your skills, goals, and desires\n- Storyline: It covers who you are, what you offer, and where you want to be\n- Appealing: Your elevator pitch is essentially a persuasive sales pitch; the emphasis should be on what you offer',
             description:
-              '[Markdown cheatsheet](https://simplemde.com/markdown-guide)'
+              'Use [widgets](https://wedance.vip/markdown), including images and videos'
           },
           {
             name: 'price'
@@ -223,7 +226,9 @@ export default {
           },
           {
             name: 'form',
-            label: 'Do you have a link?',
+            label: 'External registration?',
+            before:
+              'Do you use Google Forms, Facebook, Eventbrite, etc. for people to register for your event?',
             type: 'select',
             options: ['Yes', 'No']
           },
@@ -236,12 +241,6 @@ export default {
             name: 'city',
             label: 'Community',
             type: 'city'
-          },
-          {
-            name: 'createdBy',
-            label: 'Owner',
-            type: 'account',
-            when: () => isAdmin()
           }
         ]
       }
@@ -261,7 +260,8 @@ export default {
       remove,
       create,
       types,
-      profile
+      profile,
+      isAdmin
     }
   }
 }

@@ -1,6 +1,7 @@
 <template>
   <TSharePreview
     :type="profile.type"
+    collection="profiles"
     :username="profile.username"
     :description="profile.bio"
     :photo="profile.photo"

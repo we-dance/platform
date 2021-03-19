@@ -33,7 +33,11 @@
         </TMenu>
       </div>
 
-      <TButtonFav collection="playlists" :item="playlist" />
+      <TItemFooter
+        collection="playlists"
+        :item="playlist"
+        :title="playlist.name"
+      />
     </div>
   </div>
 </template>

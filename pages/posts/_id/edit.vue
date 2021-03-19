@@ -1,5 +1,5 @@
 <template>
-  <div class="bg-dark md:py-4">
+  <div class="bg-dark md:py-4 min-h-screen">
     <div
       class="mx-auto w-full max-w-lg md:rounded md:border md:shadow bg-white"
     >
@@ -12,6 +12,7 @@
 
       <TForm
         v-model="item"
+        :edit-creator="isAdmin()"
         :fields="fields"
         vertical
         :show-cancel="!!id"
@@ -22,8 +23,6 @@
         @cancel="cancelItem"
         @remove="removeItem"
       />
-
-      <nuxt-content :document="newPostWidget" class="m-4 typo" />
     </div>
   </div>
 </template>
@@ -40,18 +39,6 @@ export default {
   name: 'PostEdit',
   layout: 'empty',
   middleware: ['auth'],
-  async asyncData({ $content }) {
-    let newPostWidget = ''
-    try {
-      newPostWidget = await $content('widgets/newpost').fetch()
-    } catch (e) {
-      console.error(e)
-    }
-
-    return {
-      newPostWidget
-    }
-  },
   data: () => ({
     selectedType: 'post'
   }),
@@ -138,7 +125,11 @@ export default {
             name: 'description',
             hideLabel: true,
             type: 'textarea',
-            placeholder: 'Text (markdown)'
+            placeholder: 'Text (markdown)',
+            tips:
+              'Pitch yourself: Who are you? What do you offer? What do you want?\n\nTips for effective pitch:\n- Uncomplicated: It should be catchy and roll off the tongue\n- Concise: It shouldn’t take more than a minute to say or read\n- Unique: It reflects your skills, goals, and desires\n- Storyline: It covers who you are, what you offer, and where you want to be\n- Appealing: Your elevator pitch is essentially a persuasive sales pitch; the emphasis should be on what you offer',
+            description:
+              'Use [widgets](https://wedance.vip/markdown), including images and videos'
           },
           {
             name: 'community',
@@ -148,12 +139,6 @@ export default {
             name: 'styles',
             label: 'Styles',
             type: 'stylesSelect'
-          },
-          {
-            name: 'createdBy',
-            label: 'Author',
-            type: 'account',
-            when: () => isAdmin()
           }
         ]
       },
@@ -198,7 +183,8 @@ export default {
       remove,
       create,
       types,
-      profile
+      profile,
+      isAdmin
     }
   }
 }

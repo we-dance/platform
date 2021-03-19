@@ -1,43 +1,16 @@
 <template>
-  <main>
-    <TTitle>
-      {{ $t('posts.title') }}
-      <template slot="right">
-        <TButton to="/posts/-/edit" type="primary">{{
-          $t('posts.add')
-        }}</TButton>
-      </template>
-    </TTitle>
-
-    <div class="flex items-center space-x-2">
-      <TTabs v-model="sorting" :tabs="sortingList" class="flex-grow" />
-      <div>
-        <TButton
-          v-if="view === 'list'"
-          icon="news"
-          type="icon"
-          @click="view = 'covers'"
-        />
-        <TButton
-          v-if="view === 'covers'"
-          icon="notes"
-          type="icon"
-          @click="view = 'list'"
-        />
-      </div>
-    </div>
-
-    <div class="flex my-4 space-x-2 items-center">
-      <TInputCity v-model="currentCity" />
-      <t-rich-select
-        v-model="dances"
-        clearable
-        :options="danceStyles"
-        :placeholder="$t('style.label')"
-      />
-    </div>
-
-    <div>
+  <TList
+    title="Feed"
+    add="Add Post"
+    add-url="/posts/-/edit"
+    collection="posts"
+    :filter-default="{ community: currentCity }"
+    :filter-fields="postFilters"
+    :tabs="postSorts"
+    sort-by="-savedByCount"
+    list-wrapper="mt-4 grid grid-cols-1 md:grid-cols-2 gap-2"
+  >
+    <template v-slot:before>
       <div class="md:flex space-y-4 md:space-y-0 md:space-x-4 mb-4">
         <WTeaser
           :title="$t('teaser.partner.title')"
@@ -54,181 +27,38 @@
           class="flex-1"
         />
       </div>
-
-      <TLoader v-if="loading" />
-      <div v-else-if="!filteredItems.length">No posts found</div>
-
-      <div
-        v-if="view === 'covers'"
-        class="mt-4 grid grid-cols-1 md:grid-cols-2 gap-2"
-      >
-        <router-link
-          v-for="post in filteredItems"
-          :key="post.id"
-          :to="`/posts/${post.id}`"
-          class="hover:opacity-75"
-        >
-          <TSharePreviewPost
-            :username="post.author"
-            :title="post.title"
-            :photo="post.cover"
-            :styles="post.styles"
-            align="center"
-            size="sm"
-            :likes="post.upVotes"
-          />
-        </router-link>
-      </div>
-
-      <div v-else>
-        <TPost v-for="item in filteredItems" :key="item.id" :item="item" />
-      </div>
-    </div>
-  </main>
+    </template>
+    <template v-slot:item="{ item }">
+      <router-link :to="`/posts/${item.id}`" class="hover:opacity-75">
+        <TSharePreviewPost
+          type="Post"
+          collection="posts"
+          :username="item.createdByUsername"
+          :title="item.title"
+          :photo="item.cover"
+          :styles="item.styles"
+          align="center"
+          size="sm"
+          :likes="item.savedByCount"
+        />
+      </router-link>
+    </template>
+  </TList>
 </template>
 
 <script>
-import { ref, computed, watch } from '@nuxtjs/composition-api'
-import useRSVP from '~/use/rsvp'
-import useComments from '~/use/comments'
-import useCollection from '~/use/collection'
-import useAccounts from '~/use/accounts'
+import { postFilters, postSorts } from '~/use/posts'
 import useCities from '~/use/cities'
-import useAuth from '~/use/auth'
-import useProfiles from '~/use/profiles'
-import useStyles from '~/use/styles'
-import { sortBy } from '~/utils'
 
 export default {
   name: 'PostsIndex',
   setup() {
-    const { getCount, getRsvpResponse, loading: loadingLikes } = useRSVP()
-    const { getCommentsCount, loading: loadingComments } = useComments()
-    const { currentCity, city } = useCities()
-    const { docs, loading: loadingPosts, getById } = useCollection('posts')
-    const { getProfile } = useProfiles()
-    const { getStylesDropdown } = useStyles()
-
-    const { uid, profile: myProfile, updateAccount } = useAuth()
-    const dances = ref('')
-    const danceStyles = computed(() =>
-      getStylesDropdown(myProfile.value?.styles)
-    )
-
-    const sorting = ref(uid.value ? '-createdAt' : '-upVotes')
-
-    watch(uid, (uid) => {
-      sorting.value = uid ? '-createdAt' : '-upVotes'
-    })
-
-    const view = ref('covers')
-    const viewOptions = [
-      {
-        value: 'covers',
-        label: 'Grid View'
-      },
-      {
-        value: 'text',
-        label: 'List View'
-      }
-    ]
-
-    const sortingList = [
-      {
-        value: '-upVotes',
-        label: 'Popular'
-      },
-      {
-        value: '-createdAt',
-        label: 'Newest'
-      }
-    ]
-
-    const map = (item) => {
-      if (!item.id) {
-        return {}
-      }
-
-      const upVotes = getCount(item.id, 'up')
-      const downVotes = getCount(item.id, 'down')
-      const votes = upVotes - downVotes
-      const response = getRsvpResponse(item.id)
-      const multi = !response ? 3 : response === 'up' ? 2 : 1
-      const order = multi * 100 + votes
-      const commentsCount = getCommentsCount(item.id)
-      const profile = getProfile(item.createdBy)
-      const author = profile.username
-      const cover = item.cover
-
-      return {
-        ...item,
-        commentsCount,
-        upVotes,
-        downVotes,
-        votes,
-        response,
-        order,
-        author,
-        cover
-      }
-    }
-
-    const items = computed(() => {
-      let result = docs.value.map(map)
-
-      if (dances.value) {
-        result = result.filter(
-          (item) =>
-            item.styles &&
-            item.styles[dances.value] &&
-            item.styles[dances.value].selected
-        )
-      }
-
-      return result
-    })
-    const loading = computed(
-      () => loadingLikes.value || loadingComments.value || loadingPosts.value
-    )
-
-    const { getAccount } = useAccounts()
+    const { currentCity } = useCities()
 
     return {
-      city,
-      items,
-      getRsvpResponse,
-      getAccount,
-      loading,
-      getById,
-      uid,
-      currentCity,
-      dances,
-      sorting,
-      sortingList,
-      view,
-      viewOptions,
-      updateAccount,
-      danceStyles
-    }
-  },
-  data: () => ({
-    showAuthPopup: false
-  }),
-  computed: {
-    filteredItems() {
-      const result = this.items
-        .filter((item) =>
-          this.currentCity
-            ? !item.community || item.community === this.currentCity
-            : true
-        )
-        .filter((item) =>
-          this.$route.query.tag
-            ? item.tags && item.tags[this.$route.query.tag]
-            : true
-        )
-
-      return result.sort(sortBy(this.sorting))
+      postFilters,
+      postSorts,
+      currentCity
     }
   }
 }

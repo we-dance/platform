@@ -358,7 +358,57 @@ export async function loadDoc({ app, params, error }, collection) {
     error({ statusCode: 404 })
   }
 
+  doc.id = snapshot.id
+
   return {
     doc
+  }
+}
+
+export const getEventDescription = (event) => {
+  let result =
+    getDay(event.startDate) +
+    ', ' +
+    getDate(event.startDate) +
+    ' ' +
+    getTime(event.startDate) +
+    ' – '
+
+  if (getDate(event.startDate) !== getDate(event.endDate)) {
+    result += getDate(event.endDate) + ' '
+  }
+
+  result += getTime(event.endDate) + ' '
+
+  result += getTimeZone(event.startDate)
+
+  return result
+}
+
+export const getMeta = (collection, post) => {
+  return {
+    title: post.title,
+    meta: [
+      {
+        vmid: 'description',
+        name: 'description',
+        content: getExcerpt(post.description)
+      },
+      {
+        vmid: 'keywords',
+        name: 'keywords',
+        content: post.keywords
+      },
+      {
+        vmid: 'og:title',
+        property: 'og:title',
+        content: post.title
+      },
+      {
+        vmid: 'og:description',
+        property: 'og:description',
+        content: getExcerpt(post.description)
+      }
+    ]
   }
 }

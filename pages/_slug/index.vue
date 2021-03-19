@@ -48,7 +48,7 @@ export default {
   },
   computed: {
     classes() {
-      let classes = 'mx-auto max-w-md '
+      let classes = ''
 
       if (this.page) {
         classes += this.page.container + ' '

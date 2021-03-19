@@ -127,18 +127,18 @@ export default () => {
     if (!object || !object.createdBy) {
       return true
     }
+
     if (isAdmin()) {
       return true
     }
-    if (action === 'add') {
-      return !!state.uid
+
+    const actions = {
+      add: !!state.uid,
+      edit: object.createdBy === state.uid,
+      remove: object.createdBy === state.uid
     }
-    if (action === 'edit') {
-      return !object || object.createdBy === state.uid
-    }
-    if (action === 'remove') {
-      return object && object.createdBy === state.uid
-    }
+
+    return actions[action]
   }
 
   async function setUser(user) {

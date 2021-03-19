@@ -1,7 +1,7 @@
 <template>
   <TButtonLike
-    :value="isFavorite"
-    :count="countFavorites"
+    :value.sync="isFavorite"
+    :count.sync="countFavorites"
     @change="setFavorite(!isFavorite)"
   />
 </template>

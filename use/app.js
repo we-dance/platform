@@ -2,6 +2,8 @@ import firebase from 'firebase/app'
 import 'firebase/firestore'
 import { createGlobalState } from '@vueuse/core'
 import { useFirestore } from '@vueuse/firebase'
+import { computed } from '@nuxtjs/composition-api'
+import { getCountFavorites } from '~/use/favorites'
 
 const db = firebase.initializeApp(process.env.firebase.config).firestore()
 
@@ -60,8 +62,18 @@ export const useCache = createGlobalState(() =>
   useFirestore(db.collection('app').doc('latest'))
 )
 
+export const posterLabelColors = {
+  profiles: 'bg-green-500',
+  events: 'bg-red-500',
+  posts: 'bg-orange-500'
+}
+
 export const useApp = () => {
   const cache = useCache()
+
+  const getPosterLabelColor = (collection, type) => {
+    return posterLabelColors[collection] || 'bg-indigo-500'
+  }
 
   const read = (collection, id, field) => {
     if (
@@ -81,5 +93,25 @@ export const useApp = () => {
     return cache.value[collection][id][field]
   }
 
-  return { read, cache }
+  const mapDetails = (item) => {
+    return {
+      ...item,
+      savedByCount: getCountFavorites(item),
+      createdByUsername: item.createdBy
+        ? read('profiles', item.createdBy, 'username')
+        : ''
+    }
+  }
+
+  return { read, cache, getPosterLabelColor, mapDetails }
+}
+
+export const useFullItems = (docs) => {
+  const { mapDetails } = useApp()
+
+  const items = computed(() => (docs.value ? docs.value.map(mapDetails) : []))
+
+  return {
+    items
+  }
 }

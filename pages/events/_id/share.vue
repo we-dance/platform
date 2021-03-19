@@ -1,6 +1,7 @@
 <template>
   <TSharePreview
     :type="event.type"
+    collection="events"
     :username="author.username"
     :price="event.price"
     :title="event.name"

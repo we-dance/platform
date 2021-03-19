@@ -1,22 +1,6 @@
 <template>
   <div>
-    <TMenu>
-      <template v-slot:button>
-        <TButton icon="more_vert" type="icon" />
-      </template>
-      <template v-slot:menu="{ closeMenu }">
-        <div class="w-32 py-2 bg-white rounded-lg shadow-xl border">
-          <TButton
-            type="context"
-            @click="
-              isReportShown = true
-              closeMenu()
-            "
-            >Report</TButton
-          >
-        </div>
-      </template>
-    </TMenu>
+    <TButton type="base" @click="isReportShown = true">Report</TButton>
     <TPopup v-if="isReportShown" title="Report" @close="isReportShown = false">
       <div class="p-4">
         <TField

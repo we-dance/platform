@@ -8,9 +8,7 @@
 #### BODY
 
 - Keep it short and sweet.
-- [Markdown](https://simplemde.com/markdown-guide) is allowed, including inline images.
-- To embed a tweet, paste the link on a line by itself.
-- FFS put blank lines in between your paragraphs.
+- Use [widgets](https://wedance.vip/markdown), including images and videos.
 - Preview your post to make sure it looks good.
 
 #### SHARING
