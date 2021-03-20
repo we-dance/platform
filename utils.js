@@ -412,3 +412,34 @@ export const getMeta = (collection, post) => {
     ]
   }
 }
+
+export const getFieldValue = (field) => {
+  if (typeof field === 'string') {
+    return field
+  }
+
+  if (field.value) {
+    return field.value
+  }
+
+  return field.name
+}
+
+export const getFieldLabel = (field) => {
+  if (typeof field === 'string') {
+    return camelcase(field)
+  }
+
+  if (field.label) {
+    return field.label
+  }
+
+  return camelcase(field.name)
+}
+
+export const getOptionsFromArray = (items) => {
+  return items.map((i) => ({
+    value: getFieldValue(i),
+    label: getFieldLabel(i)
+  }))
+}
