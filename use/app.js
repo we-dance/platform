@@ -1,9 +1,10 @@
 import firebase from 'firebase/app'
 import 'firebase/firestore'
-import { createGlobalState } from '@vueuse/core'
+import { createGlobalState, when } from '@vueuse/core'
 import { useFirestore } from '@vueuse/firebase'
 import { computed } from '@nuxtjs/composition-api'
 import { getCountFavorites } from '~/use/favorites'
+import { getFiltered, getOptionsFromHash } from '~/utils'
 
 const db = firebase.initializeApp(process.env.firebase.config).firestore()
 
@@ -68,6 +69,8 @@ export const posterLabelColors = {
   posts: 'bg-orange-500'
 }
 
+export const getCityLabel = (doc) => `${doc.name}, ${doc.location.country}`
+
 export const useApp = () => {
   const cache = useCache()
 
@@ -103,7 +106,15 @@ export const useApp = () => {
     }
   }
 
-  return { read, cache, getPosterLabelColor, mapDetails }
+  const getCities = async (q) => {
+    await when(cache).not.toBeUndefined()
+
+    const results = getOptionsFromHash(cache.value.cities, getCityLabel)
+
+    return getFiltered(results, q, 'label')
+  }
+
+  return { read, cache, getPosterLabelColor, mapDetails, getCities }
 }
 
 export const useFullItems = (docs) => {

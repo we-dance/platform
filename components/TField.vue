@@ -62,6 +62,7 @@ import TInputLocationSelect from '~/components/TInput/TInputLocationSelect'
 import TAccountListSelector from '~/components/TAccountListSelector'
 import TAccountSelector from '~/components/TAccountSelector'
 import TInputCity from '~/components/TInput/TInputCity'
+import TInputCity2 from '~/components/TInput/TInputCity2'
 import TInputStyle from '~/components/TInput/TInputStyle'
 import TInputStylesSelect2 from '~/components/TInput/TInputStylesSelect2'
 import TInputLanguages from '~/components/TInput/TInputLanguages'
@@ -186,6 +187,7 @@ export default {
         photo: TInputPhoto,
         location: TInputLocationSelect,
         city: TInputCity,
+        city2: TInputCity2,
         multi: TInputMulti,
         collection: TInputCollection,
         radio: 't-radio-group',

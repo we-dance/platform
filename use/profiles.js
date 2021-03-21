@@ -235,6 +235,7 @@ export const profileFields = [
     collection: 'cities',
     keyLabel: (i) => `${i.name}, ${i.location.country}`,
     keyValue: 'name',
+    placeholder: 'City',
     tips:
       'Where do you dance the most? If you live in a small city, you probably go to dance to a bigger city, which one?'
   },

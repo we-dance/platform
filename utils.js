@@ -443,3 +443,42 @@ export const getOptionsFromArray = (items) => {
     label: getFieldLabel(i)
   }))
 }
+
+export const getFiltered = (items, q, field = 'label') => {
+  let results = items.sort(sortBy(field))
+
+  if (q) {
+    results = results.filter((i) => search(i[field], q))
+  }
+
+  return results
+}
+
+export const getOptionsFromHash = (hash, label = 'name') => {
+  if (!hash) {
+    return []
+  }
+
+  let labelFn
+
+  if (typeof label === 'function') {
+    labelFn = label
+  } else {
+    labelFn = (doc) => doc[label]
+  }
+
+  const keys = Object.keys(hash)
+
+  const results = []
+
+  for (const key of keys) {
+    const doc = hash[key]
+
+    results.push({
+      label: labelFn(doc),
+      value: key
+    })
+  }
+
+  return results
+}
