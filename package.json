@@ -15,11 +15,6 @@
     "*.{js,vue}": "yarn lint",
     "*.{css,vue}": "stylelint"
   },
-  "husky": {
-    "hooks": {
-      "pre-commit": "lint-staged"
-    }
-  },
   "dependencies": {
     "@johmun/vue-tags-input": "^2.1.0",
     "@microlink/vue": "^5.2.1",
