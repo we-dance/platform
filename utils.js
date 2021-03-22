@@ -2,7 +2,6 @@ import format from 'date-fns/format'
 import formatDistance from 'date-fns/formatDistance'
 import MarkdownIt from 'markdown-it'
 import excerptHtml from 'excerpt-html'
-import _ from 'lodash'
 import saveAs from 'file-saver'
 import { dsvFormat } from 'd3'
 import languages from '~/assets/languages'
@@ -159,7 +158,7 @@ export const addressPart = (result, type) => {
     return ''
   }
 
-  const part = _.find(result.address_components, (o) => o.types.includes(type))
+  const part = result.address_components.find((o) => o.types.includes(type))
   if (!part) {
     return ''
   }
@@ -445,6 +444,14 @@ export const getOptionsFromArray = (items) => {
 }
 
 export const searchBy = (field, value) => (i) => search(i[field], value)
+
+export const searchByStart = (field, value) => (i) => {
+  if (!value) {
+    return true
+  }
+
+  return i[field].toLowerCase().startsWith(value.toLowerCase())
+}
 
 export const getArrayFromHash = (hash) => {
   if (!hash) {

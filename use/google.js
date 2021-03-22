@@ -26,7 +26,7 @@ export const getAddress = (
       c.types.includes(componentName)
     )
     if (item) {
-      result[componentName] = item.short_name
+      result[componentName] = item.long_name
     }
   }
 
