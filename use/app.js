@@ -1,10 +1,10 @@
 import firebase from 'firebase/app'
 import 'firebase/firestore'
+import { get } from 'lodash'
 import { createGlobalState, when } from '@vueuse/core'
 import { useFirestore } from '@vueuse/firebase'
 import { computed } from '@nuxtjs/composition-api'
 import { getCountFavorites } from '~/use/favorites'
-import { getFiltered, getOptionsFromHash } from '~/utils'
 
 const db = firebase.initializeApp(process.env.firebase.config).firestore()
 
@@ -16,7 +16,7 @@ export async function cache(name, keyField, check, fields) {
   for (const doc of collection.docs) {
     const item = doc.data()
     item.id = doc.id
-    const keyValue = item[keyField]
+    const keyValue = get(item, keyField)
 
     if (check && !check(item)) {
       continue
@@ -48,11 +48,11 @@ export async function warmup() {
     'community',
     'locales'
   ])
-  const cities = await cache('cities', 'name')
+  const cities = await cache('cities', 'location.place_id')
 
   await db
     .collection('app')
-    .doc('latest')
+    .doc('v2')
     .set({
       profiles,
       cities
@@ -60,7 +60,7 @@ export async function warmup() {
 }
 
 export const useCache = createGlobalState(() =>
-  useFirestore(db.collection('app').doc('latest'))
+  useFirestore(db.collection('app').doc('v2'))
 )
 
 export const posterLabelColors = {
@@ -106,15 +106,13 @@ export const useApp = () => {
     }
   }
 
-  const getCities = async (q) => {
+  const readAll = async (collection) => {
     await when(cache).not.toBeUndefined()
 
-    const results = getOptionsFromHash(cache.value.cities, getCityLabel)
-
-    return getFiltered(results, q, 'label')
+    return cache.value[collection]
   }
 
-  return { read, cache, getPosterLabelColor, mapDetails, getCities }
+  return { read, cache, getPosterLabelColor, mapDetails, readAll }
 }
 
 export const useFullItems = (docs) => {

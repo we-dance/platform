@@ -444,14 +444,14 @@ export const getOptionsFromArray = (items) => {
   }))
 }
 
-export const getFiltered = (items, q, field = 'label') => {
-  let results = items.sort(sortBy(field))
+export const searchBy = (field, value) => (i) => search(i[field], value)
 
-  if (q) {
-    results = results.filter((i) => search(i[field], q))
+export const getArrayFromHash = (hash) => {
+  if (!hash) {
+    return []
   }
 
-  return results
+  return Object.keys(hash).map((k) => hash[k])
 }
 
 export const getOptionsFromHash = (hash, label = 'name') => {
