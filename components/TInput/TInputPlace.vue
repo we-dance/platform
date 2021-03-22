@@ -8,10 +8,12 @@
 
 <script>
 import { onMounted, ref } from '@nuxtjs/composition-api'
+import { when } from '@vueuse/shared'
 import { useApp } from '~/use/app'
 import { getBrowserLocation } from '~/use/geo'
 import { getAddress, getGeoCode, getPlacePredictions } from '~/use/google'
 import { getArrayFromHash, searchByStart, sortBy } from '~/utils'
+import useAuth from '~/use/auth'
 
 export default {
   name: 'TInputPlace',
@@ -41,10 +43,10 @@ export default {
   },
   setup(props, { emit }) {
     const { readAll } = useApp()
+    const { uid, profile, updateProfile } = useAuth()
 
     const cities = ref(null)
     const places = ref(null)
-    const shownResults = ref(null)
     const isLocating = ref(false)
     const isUpdating = ref(false)
 
@@ -54,6 +56,23 @@ export default {
 
     const addCommunity = (address) => {
       console.log(`Adding ${address.locality} community`)
+    }
+
+    const setPlace = (placeId, address) => {
+      emit('input', placeId)
+
+      if (
+        uid.value &&
+        (!profile.value.cities || !profile.value.cities[placeId])
+      ) {
+        updateProfile({
+          [`cities.${placeId}`]: true
+        })
+      }
+
+      if (!communityExists(placeId) && address) {
+        addCommunity(address)
+      }
     }
 
     const requestBrowserLocation = async () => {
@@ -67,16 +86,12 @@ export default {
 
       isLocating.value = false
 
-      emit('input', address.place_id)
-
-      if (!communityExists(address.place_id)) {
-        addCommunity(address)
-      }
+      setPlace(address.place_id, address)
     }
 
     const onChange = async (placeId) => {
       if (communityExists(placeId)) {
-        emit('input', placeId)
+        setPlace(placeId)
         return
       }
 
@@ -96,11 +111,7 @@ export default {
 
       isUpdating.value = false
 
-      emit('input', address.place_id)
-
-      if (!communityExists(address.place_id)) {
-        addCommunity(address)
-      }
+      setPlace(address.place_id, address)
     }
 
     const fetchOptions = async (q) => {
@@ -108,15 +119,23 @@ export default {
         cities.value = await readAll('cities')
       }
 
+      if (uid.value) {
+        await when(profile).not.toBeNull()
+      }
+
       places.value = []
+      let results = []
 
       const citiesArray = getArrayFromHash(cities.value)
 
-      let results = []
-
-      results = citiesArray
-
-      results = results.filter(searchByStart('name', q)).sort(sortBy('name'))
+      if (!q && profile.value && profile.value.cities) {
+        const favCities = profile.value.cities
+        results = citiesArray.filter((c) => favCities[c.location.place_id])
+      } else {
+        results = citiesArray
+          .filter(searchByStart('name', q))
+          .sort(sortBy('name'))
+      }
 
       results = results.map((c) => ({
         label: `${c.location.locality}, ${c.location.country}`,
@@ -134,8 +153,6 @@ export default {
         }
       }
 
-      shownResults.value = results
-
       return { results }
     }
 
@@ -151,8 +168,8 @@ export default {
       requestBrowserLocation,
       isLocating,
       isUpdating,
-      shownResults,
-      places
+      places,
+      profile
     }
   }
 }
