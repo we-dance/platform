@@ -12,7 +12,7 @@ const settings = {
     component: TInput,
     props: {
       fixedClasses:
-        'block w-full px-3 py-2 transition duration-100 ease-in-out border rounded shadow-sm focus:ring-2 focus:ring-blue-500 focus:outline-none focus:ring-opacity-50 disabled:opacity-50 disabled:cursor-not-allowed',
+        'block text-sm w-full px-3 py-2 transition duration-100 ease-in-out border rounded shadow-sm focus:ring-2 focus:ring-blue-500 focus:outline-none focus:ring-opacity-50 disabled:opacity-50 disabled:cursor-not-allowed',
       classes:
         'text-black placeholder-gray-400 bg-white border-gray-300 focus:border-blue-500 ',
       variants: {
@@ -96,10 +96,10 @@ const settings = {
         selectButtonPlaceholder: 'block truncate',
         selectButtonIcon: 'fill-current flex-shrink-0 ml-1 h-4 w-4',
         selectButtonClearButton:
-          'rounded flex flex-shrink-0 items-center justify-center absolute right-0 top-0 m-2 h-6 w-6 transition duration-100 ease-in-out',
+          'rounded flex flex-shrink-0 items-center justify-center absolute right-0 top-0 m-1 h-6 w-6 transition duration-100 ease-in-out',
         selectButtonClearIcon: 'bg-white fill-current h-3 w-3',
         dropdown:
-          'absolute z-50 -mt-1 border-b border-l border-r rounded-b shadow-sm',
+          'absolute w-full z-50 -mt-1 border-b border-l border-r rounded-b shadow-sm',
         dropdownFeedback: '',
         loadingMoreResults: '',
         optionsList: 'overflow-auto',

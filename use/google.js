@@ -17,6 +17,8 @@ export const getAddress = (
     return {}
   }
 
+  console.log('getAddress', places)
+
   const place = places.find((p) => p.types.includes('locality')) || places[0]
 
   const result = {}

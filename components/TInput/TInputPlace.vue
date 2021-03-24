@@ -3,6 +3,7 @@
     v-model="internalValue"
     :fetch-options="fetchOptions"
     :placeholder="isLocating || isUpdating ? 'Locating...' : placeholder"
+    v-bind="$attrs"
   />
 </template>
 
@@ -29,6 +30,10 @@ export default {
     autoDetect: {
       type: Boolean,
       default: false
+    },
+    propertyKey: {
+      type: String,
+      default: 'place_id'
     }
   },
   computed: {
@@ -37,6 +42,11 @@ export default {
         return this.value
       },
       async set(val) {
+        if (!val) {
+          this.$emit('input', '')
+          return
+        }
+
         await this.onChange(val)
       }
     }
@@ -60,6 +70,10 @@ export default {
 
     const setPlace = (placeId, address) => {
       emit('input', placeId)
+
+      if (!placeId) {
+        return
+      }
 
       if (
         uid.value &&
@@ -92,6 +106,10 @@ export default {
     const onChange = async (placeId) => {
       if (communityExists(placeId)) {
         setPlace(placeId)
+        return
+      }
+
+      if (!placeId) {
         return
       }
 
@@ -130,7 +148,11 @@ export default {
 
       if (!q && profile.value && profile.value.cities) {
         const favCities = profile.value.cities
-        results = citiesArray.filter((c) => favCities[c.location.place_id])
+        results = citiesArray.filter(
+          (c) =>
+            favCities[c.location.place_id] ||
+            c.location.place_id === props.value
+        )
       } else {
         results = citiesArray
           .filter(searchByStart('name', q))

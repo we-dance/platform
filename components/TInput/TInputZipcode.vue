@@ -1,5 +1,5 @@
 <template>
-  <TInput v-model="internalValue" />
+  <vt-input v-model="internalValue" />
 </template>
 
 <script>
