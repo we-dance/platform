@@ -32,6 +32,7 @@
               </div>
             </div>
           </div>
+          <pre v-if="$route.query.debug">{{ item }}</pre>
         </div>
       </template>
     </TCardList>
