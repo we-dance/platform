@@ -5,6 +5,9 @@ import { createGlobalState, when } from '@vueuse/core'
 import { useFirestore } from '@vueuse/firebase'
 import { computed } from '@nuxtjs/composition-api'
 import { getCountFavorites } from '~/use/favorites'
+import useAuth from '~/use/auth'
+import useDoc from '~/use/doc'
+import { getArrayFromHash } from '~/utils'
 
 const db = firebase.initializeApp(process.env.firebase.config).firestore()
 
@@ -48,7 +51,10 @@ export async function warmup() {
     'community',
     'locales'
   ])
-  const cities = await cache('cities', 'location.place_id')
+  const cities = await cache('cities', 'location.place_id', false, [
+    'name',
+    'location'
+  ])
 
   await db
     .collection('app')
@@ -57,6 +63,13 @@ export async function warmup() {
       profiles,
       cities
     })
+}
+
+export async function cacheCity(placeId, data) {
+  await db
+    .collection('app')
+    .doc('v2')
+    .update({ [`cities.${placeId}`]: data })
 }
 
 export const useCache = createGlobalState(() =>
@@ -72,7 +85,11 @@ export const posterLabelColors = {
 export const getCityLabel = (doc) => `${doc.name}, ${doc.location.country}`
 
 export const useApp = () => {
+  const { uid, profile, updateProfile } = useAuth()
+  const { create, update } = useDoc('cities')
+
   const cache = useCache()
+  const cities = computed(() => getArrayFromHash(cache.value.cities))
 
   const getPosterLabelColor = (collection, type) => {
     return posterLabelColors[collection] || 'bg-indigo-500'
@@ -106,13 +123,92 @@ export const useApp = () => {
     }
   }
 
-  const readAll = async (collection) => {
-    await when(cache).not.toBeUndefined()
+  const getCityHistory = async () => {
+    if (!uid.value) {
+      return []
+    }
 
-    return cache.value[collection]
+    await when(profile).not.toBeNull()
+    await when(cache).not.toBeNull()
+
+    if (!profile.value.cities) {
+      return []
+    }
+
+    const favCities = profile.value.cities
+
+    return cities.value.filter((c) => favCities[c.location.place_id])
   }
 
-  return { read, cache, getPosterLabelColor, mapDetails, readAll }
+  const getCommunity = async (placeId) => {
+    const snapshot = await db
+      .collection('cities')
+      .where('location.place_id', '==', placeId)
+      .get()
+
+    if (!snapshot.docs.length) {
+      return false
+    }
+
+    const result = {
+      ...snapshot.docs[0].data(),
+      id: snapshot.docs[0].id
+    }
+
+    return result
+  }
+
+  const addCommunity = async (address) => {
+    const community = await getCommunity(address.place_id)
+
+    if (!community) {
+      const item = {
+        name: address.locality.replace(' ', ''),
+        telegram: '',
+        hits: 1,
+        status: 'requested',
+        location: address
+      }
+
+      await create(item)
+
+      await cacheCity(address.place_id, {
+        name: item.name,
+        location: item.location
+      })
+    } else {
+      await update(community.id, { hits: parseInt(community.hits || 1) + 1 })
+    }
+  }
+
+  const addCityHistory = async (address) => {
+    if (!address?.place_id) {
+      return
+    }
+
+    const placeId = address.place_id
+
+    if (
+      uid.value &&
+      (!profile.value.cities || !profile.value.cities[placeId])
+    ) {
+      await updateProfile({
+        [`cities.${placeId}`]: true
+      })
+    }
+
+    await addCommunity(address)
+  }
+
+  return {
+    read,
+    cache,
+    cities,
+    getPosterLabelColor,
+    mapDetails,
+    getCityHistory,
+    addCityHistory
+  }
 }
 
 export const useFullItems = (docs) => {

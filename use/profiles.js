@@ -238,16 +238,13 @@ export const profileFields = [
     before: 'Use only letters, numbers, underscores and periods.'
   },
   {
-    name: 'community',
+    name: 'place',
     label: 'Where do you dance the most?',
     register: true,
     poster: true,
     required: true,
-    type: 'collection',
-    collection: 'cities',
+    type: 'place',
     placeholder: 'City',
-    keyLabel: (i) => `${i.name}, ${i.location.country}`,
-    keyValue: 'name',
     tips:
       'If you live in a small city, you probably go to dance to a bigger city, which one?'
   },

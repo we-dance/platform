@@ -2,25 +2,22 @@
   <t-rich-select
     v-model="internalValue"
     :fetch-options="fetchOptions"
-    :placeholder="isLocating || isUpdating ? 'Locating...' : placeholder"
+    :placeholder="isLocating ? 'Locating...' : placeholder"
     v-bind="$attrs"
   />
 </template>
 
 <script>
-import { onMounted, ref } from '@nuxtjs/composition-api'
-import { when } from '@vueuse/shared'
+import { computed, onMounted, ref } from '@nuxtjs/composition-api'
 import { useApp } from '~/use/app'
-import { getBrowserLocation } from '~/use/geo'
-import { getAddress, getGeoCode, getPlacePredictions } from '~/use/google'
-import { getArrayFromHash, searchByStart, sortBy } from '~/utils'
-import useAuth from '~/use/auth'
+import { getPlacePredictions, getLocality, getUserAddress } from '~/use/google'
+import { searchByStart, sortBy } from '~/utils'
 
 export default {
   name: 'TInputPlace',
   props: {
     value: {
-      type: String,
+      type: [String, Object],
       default: ''
     },
     placeholder: {
@@ -30,131 +27,50 @@ export default {
     autoDetect: {
       type: Boolean,
       default: false
-    },
-    propertyKey: {
-      type: String,
-      default: 'place_id'
-    }
-  },
-  computed: {
-    internalValue: {
-      get() {
-        return this.value
-      },
-      async set(val) {
-        if (!val) {
-          this.$emit('input', '')
-          return
-        }
-
-        await this.onChange(val)
-      }
     }
   },
   setup(props, { emit }) {
-    const { readAll } = useApp()
-    const { uid, profile, updateProfile } = useAuth()
+    const { getCityHistory, addCityHistory, cities, cache } = useApp()
 
-    const cities = ref(null)
-    const places = ref(null)
     const isLocating = ref(false)
-    const isUpdating = ref(false)
 
-    const communityExists = (placeId) => {
-      return !!cities.value[placeId]
-    }
-
-    const addCommunity = (address) => {
-      console.log(`Adding ${address.locality} community`)
-    }
-
-    const setPlace = (placeId, address) => {
-      emit('input', placeId)
-
-      if (!placeId) {
-        return
-      }
-
-      if (
-        uid.value &&
-        (!profile.value.cities || !profile.value.cities[placeId])
-      ) {
-        updateProfile({
-          [`cities.${placeId}`]: true
-        })
-      }
-
-      if (!communityExists(placeId) && address) {
-        addCommunity(address)
-      }
-    }
-
-    const requestBrowserLocation = async () => {
-      isLocating.value = true
-
-      const location = await getBrowserLocation()
-      const lat = location.coords.latitude
-      const lng = location.coords.longitude
-      const results = await getGeoCode({ location: { lat, lng } })
-      const address = getAddress(results)
-
-      isLocating.value = false
-
-      setPlace(address.place_id, address)
+    const setPlace = (address) => {
+      emit('input', address)
+      addCityHistory(address)
     }
 
     const onChange = async (placeId) => {
-      if (communityExists(placeId)) {
-        setPlace(placeId)
-        return
-      }
-
       if (!placeId) {
+        setPlace('')
         return
       }
 
-      isUpdating.value = true
+      isLocating.value = true
 
-      let results = await getGeoCode({ placeId })
       let address
 
-      if (!results.find((p) => p.types.includes('locality'))) {
-        address = getAddress(results)
-        results = await getGeoCode({
-          address: `${address.locality}, ${address.country}`
-        })
+      if (cache.value.cities[placeId]) {
+        address = cache.value.cities[placeId].location
+      } else {
+        address = await getLocality({ placeId })
       }
 
-      address = getAddress(results)
+      isLocating.value = false
 
-      isUpdating.value = false
-
-      setPlace(address.place_id, address)
+      setPlace(address)
     }
 
     const fetchOptions = async (q) => {
-      if (!cities.value) {
-        cities.value = await readAll('cities')
-      }
-
-      if (uid.value) {
-        await when(profile).not.toBeNull()
-      }
-
-      places.value = []
       let results = []
 
-      const citiesArray = getArrayFromHash(cities.value)
+      if (!q) {
+        const cityHistory = await getCityHistory()
 
-      if (!q && profile.value && profile.value.cities) {
-        const favCities = profile.value.cities
-        results = citiesArray.filter(
-          (c) =>
-            favCities[c.location.place_id] ||
-            c.location.place_id === props.value
-        )
+        if (cityHistory) {
+          results.push(...cityHistory)
+        }
       } else {
-        results = citiesArray
+        results = cities.value
           .filter(searchByStart('name', q))
           .sort(sortBy('name'))
       }
@@ -164,34 +80,53 @@ export default {
         value: c.location.place_id
       }))
 
-      if (!results.length) {
-        places.value = await getPlacePredictions(q)
+      if (q && results.length < 3) {
+        const places = await getPlacePredictions(q)
 
-        if (places.value.length) {
-          results = places.value.map((i) => ({
-            label: i.description,
-            value: i.place_id
-          }))
+        if (places.length) {
+          results.push(
+            ...places
+              .map((i) => ({
+                label: `${i.description} *`,
+                value: i.place_id
+              }))
+              .filter((n) => !results.find((o) => n.value === o.value))
+          )
         }
       }
 
       return { results }
     }
 
-    onMounted(() => {
+    onMounted(async () => {
       if (props.autoDetect) {
-        requestBrowserLocation()
+        isLocating.value = true
+
+        const address = await getUserAddress()
+        setPlace(address)
+
+        isLocating.value = false
+      }
+    })
+
+    const internalValue = computed({
+      get() {
+        if (!props.value?.place_id) {
+          return ''
+        }
+
+        return props.value.place_id
+      },
+      set(val) {
+        onChange(val)
       }
     })
 
     return {
       fetchOptions,
       onChange,
-      requestBrowserLocation,
       isLocating,
-      isUpdating,
-      places,
-      profile
+      internalValue
     }
   }
 }

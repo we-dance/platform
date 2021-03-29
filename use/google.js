@@ -1,5 +1,6 @@
 import axios from 'axios'
 import loader from './google-loader'
+import { getBrowserLocation } from '~/use/geo'
 
 export const getPlusCode = async (address) => {
   const url = 'https://plus.codes/api'
@@ -9,27 +10,35 @@ export const getPlusCode = async (address) => {
   return await axios.get(url, { params: { address, key, language } })
 }
 
-export const getAddress = (
-  places,
-  components = ['locality', 'country', 'administrative_area_level_1']
-) => {
+export const addressPart = (result, type) => {
+  if (!result) {
+    return ''
+  }
+
+  const part = result.address_components.find((o) => o.types.includes(type))
+  if (!part) {
+    return ''
+  }
+
+  return part.long_name
+}
+
+export const getAddress = (places) => {
   if (!places) {
     return {}
   }
-
-  console.log('getAddress', places)
 
   const place = places.find((p) => p.types.includes('locality')) || places[0]
 
   const result = {}
 
-  for (const componentName of components) {
-    const item = place.address_components.find((c) =>
-      c.types.includes(componentName)
-    )
-    if (item) {
-      result[componentName] = item.long_name
-    }
+  result.locality = addressPart(place, 'locality')
+  result.country = addressPart(place, 'country')
+  result.region = addressPart(place, 'administrative_area_level_1')
+
+  if (place.geometry?.location) {
+    result.latitude = place.geometry.location.lat()
+    result.longitude = place.geometry.location.lng()
   }
 
   result.place_id = place.place_id
@@ -50,8 +59,6 @@ export const getGeoCode = async (config) => {
     ...config
   }
 
-  console.log('getGeoCode', input)
-
   const promise = new Promise((resolve, reject) => {
     geocoder.geocode(input, (results, status) => {
       if (status !== 'OK') {
@@ -63,6 +70,23 @@ export const getGeoCode = async (config) => {
   })
 
   return await promise
+}
+
+export const getLocality = async ({ placeId }) => {
+  if (!placeId) {
+    return {}
+  }
+
+  let results = await getGeoCode({ placeId })
+
+  if (!results.find((p) => p.types.includes('locality')).length) {
+    const address = getAddress(results)
+    results = await getGeoCode({
+      address: `${address.locality}, ${address.country}`
+    })
+  }
+
+  return getAddress(results)
 }
 
 export const getPlacePredictions = async (input, types = ['(cities)']) => {
@@ -90,4 +114,13 @@ export const getPlacePredictions = async (input, types = ['(cities)']) => {
   })
 
   return await promise
+}
+
+export const getUserAddress = async () => {
+  const location = await getBrowserLocation()
+  const lat = location.coords.latitude
+  const lng = location.coords.longitude
+  const results = await getGeoCode({ location: { lat, lng } })
+
+  return getAddress(results)
 }

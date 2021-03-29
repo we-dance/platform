@@ -105,6 +105,8 @@ export default {
   methods: {
     async joinChat() {
       await this.$fire.firestore.collection('city_chats').add({
+        uid: this.uid,
+        joinedAt: Date.now(),
         city: this.currentCity
       })
 

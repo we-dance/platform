@@ -1,12 +1,6 @@
 <template>
   <main class="p-4">
-    <TCardList
-      :collection="collection"
-      :title="title"
-      :add="add"
-      :fields="fields"
-      :filters="filters"
-    >
+    <TCardList v-bind="config">
       <template v-slot="{ item }">
         <div class="p-4 border rounded mb-4 bg-white">
           <div class="flex justify-between items-start">
@@ -40,71 +34,63 @@
 </template>
 
 <script>
-import useAuth from '~/use/auth'
-
 import { getDate, getDateTime, getTime } from '~/utils'
 
 export default {
   data: () => ({
-    data: '',
     cityStatusClass: {
       active: 'bg-green-500',
       requested: 'bg-red-500'
     }
   }),
   setup() {
-    const { can } = useAuth()
-    const title = 'Cities'
-    const collection = 'cities'
-    const add = 'Add'
-
-    const fields = [
-      {
-        name: 'name'
-      },
-      {
-        name: 'telegram'
-      },
-      {
-        name: 'location',
-        type: 'location'
-      },
-      {
-        name: 'hits'
-      },
-      {
-        name: 'status',
-        type: 'select',
-        options: ['requested', 'active']
-      }
-    ]
-
-    const filters = [
-      {
-        name: 'requested',
-        label: 'Requested',
-        default: true,
-        filter: (item) => item.status === 'requested',
-        sort: '-hits'
-      },
-      {
-        name: 'active',
-        label: 'Active',
-        filter: (item) => item.status === 'active',
-        sort: '-hits'
-      }
-    ]
+    const config = {
+      collection: 'cities',
+      title: 'Communities',
+      empty: 'Nothing here',
+      add: 'Add',
+      fields: [
+        {
+          name: 'name'
+        },
+        {
+          name: 'telegram'
+        },
+        {
+          name: 'location',
+          type: 'place'
+        },
+        {
+          name: 'hits'
+        },
+        {
+          name: 'status',
+          type: 'select',
+          options: ['requested', 'active']
+        }
+      ],
+      filters: [
+        {
+          name: 'requested',
+          label: 'Requested',
+          default: true,
+          filter: (item) => item.status === 'requested',
+          sort: '-hits'
+        },
+        {
+          name: 'active',
+          label: 'Active',
+          filter: (item) => item.status === 'active',
+          sort: '-hits'
+        }
+      ]
+    }
 
     return {
-      fields,
-      filters,
-      title,
-      collection,
-      add,
+      config,
       getDate,
       getDateTime,
-      getTime,
-      can
+      getTime
     }
   }
 }
