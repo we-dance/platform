@@ -1,6 +1,6 @@
 <template>
   <div v-if="hidden"></div>
-  <div v-else :class="wrapperClasses" class="w-full grid gap-4">
+  <div v-else :class="wrapperClasses" class="w-full grid">
     <div v-if="!hideLabel" :class="labelClasses">
       <label :for="elementId">
         <div v-if="tips" class="float-right">
@@ -19,7 +19,8 @@
       <TPreview
         v-if="before"
         :content="before"
-        class="text-gray-500 text-sm px-2"
+        no-typo
+        class="text-gray-500 text-sm mb-2"
       />
       <slot>
         <component
@@ -38,12 +39,13 @@
       <TPreview
         v-if="description"
         :content="description"
-        class="text-gray-500 text-sm px-2"
+        no-typo
+        class="text-gray-500 text-sm mt-2"
       />
       <slot name="bottom" />
     </div>
     <TPopup v-if="showTips" :title="label" @close="showTips = false">
-      <TPreview :content="tips" class="my-4" />
+      <TPreview :content="tips" class="my-4 max-w-sm" />
     </TPopup>
   </div>
 </template>
@@ -145,7 +147,7 @@ export default {
     wrapperClasses() {
       const map = {
         top: 'grid-cols-1',
-        left: 'grid-cols-12'
+        left: 'grid-cols-12 gap-2'
       }
 
       return map[this.labelPosition]

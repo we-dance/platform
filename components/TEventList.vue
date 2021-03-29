@@ -58,7 +58,7 @@ import { computed, ref } from '@nuxtjs/composition-api'
 import { startOfWeek, addDays, endOfYear } from 'date-fns'
 import useRSVP from '~/use/rsvp'
 import useCollection from '~/use/collection'
-import useAccounts from '~/use/accounts'
+import { useAccounts } from '~/use/accounts'
 import useAuth from '~/use/auth'
 import useCities from '~/use/cities'
 import {

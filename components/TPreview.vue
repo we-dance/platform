@@ -69,17 +69,26 @@ export default {
     excerpt: {
       type: Boolean,
       default: false
+    },
+    noTypo: {
+      type: Boolean,
+      default: false
     }
   },
   computed: {
     raw() {
       let html = md.render(this.content)
+      let classes = ''
 
       if (this.excerpt) {
         html = excerptHtml(html)
       }
 
-      return '<div class="typo">' + html + '</div>'
+      if (!this.noTypo) {
+        classes = ' class="typo"'
+      }
+
+      return `<div${classes}>${html}</div>`
     }
   }
 }

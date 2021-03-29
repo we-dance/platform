@@ -21,6 +21,7 @@
                   item.location.place_id
                 }}</span>
               </div>
+              <pre v-if="$route.query.debug">{{ item }}</pre>
             </div>
             <div>
               <div

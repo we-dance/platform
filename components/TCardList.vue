@@ -39,62 +39,27 @@
     </div>
 
     <div v-if="!items.length">
-      <slot name="empty" />
+      <slot name="empty">
+        {{ empty }}
+      </slot>
     </div>
 
-    <div v-for="(item, itemId) in items" :key="item.id">
-      <div v-if="currentId === itemId">
-        <div
-          v-if="itemLabel(item)"
-          class="font-bold border-b mb-4 flex justify-between"
-        >
-          <div>
-            {{ itemLabel(item) }}
-          </div>
-          <button
-            class="rounded p-2 hover:text-primary"
-            @click="cancelItem(item)"
-          >
-            <TIcon name="close" />
-          </button>
-        </div>
-
-        <slot name="editor-header" :item="item" />
-
-        <TForm
-          v-model="items[itemId]"
-          :fields="fields"
-          show-cancel
-          :show-remove="can('remove', collection, item)"
-          class="rounded bg-white mb-4 shadow p-4 space-y-4"
-          @save="saveItem"
-          @cancel="cancelItem"
-          @remove="removeItem"
-        />
-      </div>
-      <template v-else>
-        <div class="flex justify-end">
-          <slot name="card-toolbar" :item="item" />
-
-          <button
-            v-if="fields.length && can('edit', collection, item)"
-            class="rounded p-2 hover:text-primary"
-            @click="currentId = itemId"
-          >
-            <TIcon name="edit" />
-          </button>
-          <button
-            v-if="deleteItem"
-            class="rounded p-2 hover:text-primary"
-            @click="removeItem(item.id)"
-          >
-            Delete
-          </button>
-        </div>
+    <div :class="wrapperClass">
+      <div v-for="(item, itemId) in items" :key="item.id">
         <slot :item="item">
-          {{ itemLabel(item) }}
+          <TItemCard :key="itemId">
+            <TListItem :item="item" :fields="fields" />
+            <TItemToolbar :item="item" :collection="collection" :edit="false">
+              <TPopupEdit
+                :fields="fields"
+                label="Edit"
+                :collection="collection"
+                :item="item"
+              />
+            </TItemToolbar>
+          </TItemCard>
         </slot>
-      </template>
+      </div>
     </div>
   </div>
 </template>
@@ -105,20 +70,20 @@ import { sortBy } from '~/utils'
 import useAuth from '~/use/auth'
 import useDoc from '~/use/doc'
 import useCollection from '~/use/collection'
-import TIcon from '~/components/TIcon'
-import TForm from '~/components/TForm'
-import TButton from '~/components/TButton'
 
 export default {
-  components: {
-    TIcon,
-    TForm,
-    TButton
-  },
   props: {
     title: {
       type: String,
       default: ''
+    },
+    empty: {
+      type: String,
+      default: ''
+    },
+    wrapperClass: {
+      type: String,
+      default: 'space-y-4'
     },
     add: {
       type: String,

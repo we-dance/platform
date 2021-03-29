@@ -101,17 +101,23 @@ export default {
     },
     async saveItem(data) {
       if (data.id) {
-        this.$fire.analytics.logEvent(`update_${this.singular}`)
+        if (this.singular) {
+          this.$fire.analytics.logEvent(`update_${this.singular}`)
+        }
         await this.update(data.id, data)
       } else {
-        this.$fire.analytics.logEvent(`create_${this.singular}`)
+        if (this.singular) {
+          this.$fire.analytics.logEvent(`create_${this.singular}`)
+        }
         await this.create(data)
       }
 
       this.cancelItem()
     },
     async removeItem(id) {
-      this.$fire.analytics.logEvent(`delete_${this.singular}`)
+      if (this.singular) {
+        this.$fire.analytics.logEvent(`delete_${this.singular}`)
+      }
       await this.remove(id)
       this.cancelItem()
     }

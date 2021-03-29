@@ -1,4 +1,5 @@
 import { useApp } from '~/use/app'
+import { accountFields } from '~/use/accounts'
 
 export const genderList = [
   {
@@ -188,33 +189,12 @@ export const booleanOptions = [
 
 export const profileFields = [
   {
-    name: 'visibility',
-    key: 'profile.visibility',
+    name: 'styles',
+    label: 'Dances',
+    labelPosition: 'top',
     poster: true,
-    type: 'richselect',
-    hideSearchBox: true,
-    options: visibilityOptions,
-    tips:
-      '- Public profiles are searchable in Google and used in our social media to attract new members.\n- Members profile are only visible for logged-in users.\n- Unlisted profiles are possible to open with exact link, but they are not listed in members lists and search.'
-  },
-  {
-    name: 'permission',
-    label: 'Publish on social media?',
-    poster: true,
-    type: 'buttons',
-    options: booleanOptions,
-    before:
-      'Would you like your profile to be published on WeDance account in Instagram, Facebook, Telegram, Twitter, TikTok?'
-  },
-  {
-    name: 'username',
-    key: 'profile.username',
-    poster: true,
-    required: true,
-    placeholder: '(Required)',
-    type: 'username',
-    description:
-      'Create a unique username, which will be a link to your profile. Allowed only letters and numbers.'
+    type: 'stylesSelect',
+    tips: 'Mark up to 4 favorite dances that will be highlighted in your poster'
   },
   {
     name: 'bio',
@@ -222,27 +202,9 @@ export const profileFields = [
     poster: true,
     type: 'textarea',
     labelPosition: 'top',
-    description:
+    before:
       'Introduce yourself. Make it short and attractive. Max 280 symbols.',
     placeholder: '280 symbols'
-  },
-  {
-    name: 'community',
-    label: 'Community',
-    poster: true,
-    required: true,
-    type: 'collection',
-    collection: 'cities',
-    keyLabel: (i) => `${i.name}, ${i.location.country}`,
-    keyValue: 'name',
-    placeholder: 'City',
-    tips:
-      'Where do you dance the most? If you live in a small city, you probably go to dance to a bigger city, which one?'
-  },
-  {
-    name: 'zipcode',
-    label: 'Your zipcode',
-    poster: true
   },
   {
     name: 'photo',
@@ -267,19 +229,53 @@ export const profileFields = [
     options: typeList
   },
   {
-    name: 'styles',
-    label: 'Dances',
-    labelPosition: 'top',
+    name: 'username',
+    key: 'profile.username',
+    register: true,
     poster: true,
-    type: 'stylesSelect',
-    tips: 'Mark up to 4 favorite dances that will be highlighted in your poster'
+    required: true,
+    type: 'username',
+    before: 'Use only letters, numbers, underscores and periods.'
+  },
+  {
+    name: 'community',
+    label: 'Where do you dance the most?',
+    register: true,
+    poster: true,
+    required: true,
+    type: 'collection',
+    collection: 'cities',
+    placeholder: 'City',
+    keyLabel: (i) => `${i.name}, ${i.location.country}`,
+    keyValue: 'name',
+    tips:
+      'If you live in a small city, you probably go to dance to a bigger city, which one?'
+  },
+  {
+    name: 'visibility',
+    key: 'profile.visibility',
+    poster: true,
+    type: 'richselect',
+    hideSearchBox: true,
+    options: visibilityOptions,
+    tips:
+      '- Public profiles are searchable in Google and used in our social media to attract new members.\n- Members profile are only visible for logged-in users.\n- Unlisted profiles are possible to open with exact link, but they are not listed in members lists and search.'
+  },
+  {
+    name: 'permission',
+    label: 'Publish on social media?',
+    poster: true,
+    type: 'buttons',
+    options: booleanOptions,
+    before:
+      'Would you like your profile to be published on WeDance account in Instagram, Facebook, Telegram, Twitter, TikTok?'
   },
   {
     name: 'name',
     key: 'profile.name',
     required: true,
     placeholder: '(Required)',
-    description: 'If you want to remain anonym use your first name.'
+    before: 'If you want to remain anonym use your first name.'
   },
   {
     name: 'location',
@@ -387,6 +383,11 @@ export const profileFields = [
 
 const profilePosterFields = profileFields.filter((f) => f.poster)
 const profileDetailFields = profileFields.filter((f) => !f.poster)
+
+export const registerFields = [
+  ...accountFields.filter((f) => f.register),
+  ...profileFields.filter((f) => f.register)
+]
 
 export const profileFilters = [
   {

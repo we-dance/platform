@@ -8,6 +8,7 @@
       label="Dashboard"
     />
     <TButton
+      v-if="edit"
       icon="edit"
       :to="`/${collection}/${item.id}/edit`"
       class="hover:text-blue-500"
@@ -34,6 +35,10 @@ export default {
     dashboard: {
       type: Boolean,
       default: false
+    },
+    edit: {
+      type: Boolean,
+      default: true
     }
   },
   setup() {

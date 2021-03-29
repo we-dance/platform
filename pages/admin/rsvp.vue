@@ -115,7 +115,7 @@
 
 <script>
 import useAuth from '~/use/auth'
-import useAccounts from '~/use/accounts'
+import { useAccounts } from '~/use/accounts'
 import useRsvp from '~/use/rsvp'
 import TCardList from '~/components/TCardList'
 import { getDay, getTime, getDate } from '~/utils'

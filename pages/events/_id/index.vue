@@ -116,7 +116,7 @@ import useRSVP from '~/use/rsvp'
 import useRouter from '~/use/router'
 import useProfiles from '~/use/profiles'
 import useReactions from '~/use/reactions'
-import useAccounts from '~/use/accounts'
+import { useAccounts } from '~/use/accounts'
 import useCities from '~/use/cities'
 import {
   getDay,

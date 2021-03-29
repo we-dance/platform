@@ -12,6 +12,7 @@
     <div v-if="error" class="text-red-500 py-4 text-right">
       {{ error.message }}
     </div>
+    <slot name="bottom" />
     <div
       class="flex justify-end space-x-2 bg-white py-4 border-t z-10 items-center bottom-0 sticky"
     >
@@ -46,6 +47,10 @@ export default {
       type: Object,
       default: () => ({})
     },
+    fieldConfig: {
+      type: Object,
+      default: () => ({})
+    },
     submitLabel: {
       type: String,
       default: 'Save'
@@ -76,9 +81,9 @@ export default {
   }),
   computed: {
     visibleFields() {
-      const fields = this.fields.filter(
-        (field) => !field.when || field.when(this.value)
-      )
+      const fields = this.fields
+        .filter((f) => f)
+        .filter((field) => !field.when || field.when(this.value))
 
       if (this.editCreator) {
         fields.push({
@@ -93,7 +98,7 @@ export default {
         })
       }
 
-      return fields
+      return fields.map((f) => ({ ...f, ...this.fieldConfig }))
     }
   },
   methods: {

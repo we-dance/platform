@@ -93,6 +93,7 @@ export const offerFields = [
     label: 'City',
     type: 'collection',
     collection: 'cities',
+    placeholder: 'City',
     keyLabel: (i) => `${i.name}, ${i.location.country}`,
     keyValue: 'name'
   },

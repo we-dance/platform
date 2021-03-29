@@ -109,7 +109,7 @@
           </div>
         </div>
         <div v-if="currentTab === 'password'" class="border-t mt-4 pt-4">
-          <TField v-model="password" type="password" label="New Password" />
+          <TField v-model="password" v-bind="passwordField" />
           <div class="flex justify-end mt-4">
             <TButton @click="changePassword">{{ $t('save') }}</TButton>
           </div>
@@ -170,7 +170,7 @@ import axios from 'axios'
 import { ref } from '@nuxtjs/composition-api'
 import useAuth from '~/use/auth'
 import useProfiles from '~/use/profiles'
-import useAccounts from '~/use/accounts'
+import { useAccounts } from '~/use/accounts'
 import useRouter from '~/use/router'
 import TPopup from '~/components/TPopup.vue'
 
@@ -200,10 +200,13 @@ export default {
     } = useAuth()
 
     const { profileFields, contactFields } = useProfiles()
-    const { accountFields } = useAccounts()
+    const { accountFields: allAccountFields } = useAccounts()
     const password = ref('')
     const passwordError = ref(false)
     const { router } = useRouter()
+
+    const accountFields = allAccountFields.filter((f) => f.name !== 'password')
+    const passwordField = allAccountFields.find((f) => f.name === 'password')
 
     const changePassword = async () => {
       try {
@@ -232,6 +235,7 @@ export default {
       contactFields,
       password,
       changePassword,
+      passwordField,
       deleteAccount
     }
   },
@@ -273,7 +277,11 @@ export default {
         await this.$fire.firestore.collection('suspended').add({
           reason: this.deleteReason,
           username: this.profile.username,
-          email: this.account.email
+          email: this.account.email,
+          deletedAt: Date.now(),
+          uid: this.uid,
+          account: this.account,
+          profile: this.profile
         })
 
         await this.deleteAccount()
