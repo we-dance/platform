@@ -35,7 +35,7 @@ export default {
     const isLocating = ref(false)
 
     const setPlace = (address) => {
-      emit('input', address)
+      emit('input', address.place_id)
       addCityHistory(address)
     }
 
@@ -111,11 +111,7 @@ export default {
 
     const internalValue = computed({
       get() {
-        if (!props.value?.place_id) {
-          return ''
-        }
-
-        return props.value.place_id
+        return props.value
       },
       set(val) {
         onChange(val)

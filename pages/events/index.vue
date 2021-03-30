@@ -33,7 +33,7 @@
     </div>
 
     <div class="flex my-2 space-x-2">
-      <TInputCity v-model="currentCity" />
+      <TInputPlace v-model="currentCity" clearable />
       <t-rich-select
         v-model="eventType"
         clearable
@@ -226,7 +226,7 @@ export default {
     )
 
     const thisCityFilter = (item) =>
-      item.city && currentCity.value ? item.city === currentCity.value : true
+      item.place && currentCity.value ? item.place === currentCity.value : true
 
     const items = computed(() => {
       let result = docs.value.map(map)

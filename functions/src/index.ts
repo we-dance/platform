@@ -105,8 +105,8 @@ export const welcomeEmail = functions.firestore
     if (
       !profile ||
       !profile.username ||
-      !profile.community ||
-      oldProfile?.community === profile.community
+      !profile.place ||
+      oldProfile?.place === profile.place
     ) {
       return
     }
@@ -155,15 +155,28 @@ export const welcomeEmail = functions.firestore
 
     const cities = await db
       .collection('cities')
-      .where('name', '==', profile.community)
+      .where('location.place_id', '==', profile.place)
       .get()
 
     cities.forEach((currentCity) => {
       city = currentCity.data()
     })
 
-    if (!city || !city.name || !city.telegram) {
-      throw Error(`City ${profile.community} not found`)
+    if (!city || !city.name) {
+      throw Error(`City ${profile.place} not found for ${profile.username}`)
+    }
+
+    if (!city.telegram) {
+      await db.collection('errors').add({
+        uid: profileId,
+        username: profile.username,
+        context: {
+          city: city.name
+        },
+        error: 'No chat for city'
+      })
+
+      throw Error(`City ${city.name} has no chat`)
     }
 
     let emailTemplate: any

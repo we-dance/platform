@@ -8,7 +8,7 @@
       <TButtonShare
         :id="item.id"
         :collection="collection"
-        :city="item.community || item.city"
+        :place="item.place"
         :file="item.socialCover"
         :file-name="title"
         :url="url"

@@ -21,6 +21,7 @@
           :title="title"
           save-label="Save"
           add-label="Add"
+          :show-remove="showRemove"
           :collection="collection"
           :singular="singular"
           :fields="fields"
@@ -59,6 +60,10 @@ export default {
     item: {
       type: Object,
       default: () => ({})
+    },
+    showRemove: {
+      type: Boolean,
+      default: false
     }
   },
   data: () => ({

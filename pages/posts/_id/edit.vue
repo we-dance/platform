@@ -132,8 +132,8 @@ export default {
               'Use [widgets](https://wedance.vip/markdown), including images and videos'
           },
           {
-            name: 'community',
-            type: 'city'
+            name: 'place',
+            type: 'place'
           },
           {
             name: 'styles',

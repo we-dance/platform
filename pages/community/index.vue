@@ -14,7 +14,7 @@
     </div>
 
     <div class="my-2 flex space-x-2">
-      <TInputCity v-model="currentCity" />
+      <TInputPlace v-model="currentCity" clearable />
 
       <t-rich-select
         v-model="dances"
@@ -53,7 +53,7 @@
         v-if="uid && currentCity"
         :title="$t('teaser.chat.title')"
         :description="$t('teaser.chat.description')"
-        :button="$t('teaser.chat.btn', { city: currentCity })"
+        :button="$t('teaser.chat.btn', { city: city.name })"
         class="mb-4"
         @click="joinChat()"
       />
@@ -107,11 +107,11 @@ export default {
       await this.$fire.firestore.collection('city_chats').add({
         uid: this.uid,
         joinedAt: Date.now(),
-        city: this.currentCity
+        city: this.city?.name
       })
 
       this.$fire.analytics.logEvent('join_chat', {
-        city: this.currentCity
+        city: this.city?.name
       })
 
       if (this.city?.telegram) {
@@ -144,7 +144,7 @@ export default {
 
     const items = computed(() => {
       let result = docsProfiles.value.filter((item) =>
-        currentCity.value ? item.community === currentCity.value : true
+        currentCity.value ? item.place === currentCity.value : true
       )
 
       result = result.filter(

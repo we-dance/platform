@@ -60,7 +60,7 @@ export default {
       type: String,
       default: ''
     },
-    city: {
+    place: {
       type: String,
       default: ''
     },
@@ -182,7 +182,7 @@ export default {
           contentId: this.id,
           image: this.downloadUrl,
           url: this.url,
-          city: this.city
+          place: this.place
         })
       } catch (e) {
         this.$toast.error(e.message)

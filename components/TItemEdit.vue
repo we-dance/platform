@@ -17,6 +17,7 @@
       :fields="fields"
       vertical
       :show-cancel="exists"
+      :show-remove="showRemove"
       :submit-label="exists ? saveLabel : addLabel"
       :edit-creator="editCreator"
       class="p-4 space-y-4"
@@ -73,6 +74,10 @@ export default {
       default: 'Add'
     },
     editCreator: {
+      type: Boolean,
+      default: false
+    },
+    showRemove: {
       type: Boolean,
       default: false
     }

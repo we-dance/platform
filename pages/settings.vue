@@ -373,7 +373,7 @@ export default {
           contentId: this.uid,
           image: socialCover,
           url: `https://wedance.vip/${this.profile.username}`,
-          city: this.profile.community,
+          place: this.profile.place,
           visibility: this.profile.visibility
         })
       } catch (e) {

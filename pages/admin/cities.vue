@@ -1,36 +1,42 @@
 <template>
-  <main class="p-4">
-    <TCardList v-bind="config">
-      <template v-slot="{ item }">
-        <div class="p-4 border rounded mb-4 bg-white">
-          <div class="flex justify-between items-start">
-            <div>
-              <div class="text-xs">Hits: {{ item.hits || 0 }}</div>
-              <div class="font-bold text-lg">
-                {{ item.name }}
-              </div>
-              <div>
-                {{ item.location.country }} –
-                <span class="text-xs font-mono bg-gray-200 p-1 rounded">{{
-                  item.location.place_id
-                }}</span>
-              </div>
-              <pre v-if="$route.query.debug">{{ item }}</pre>
+  <TCardList v-bind="config">
+    <template v-slot="{ item }">
+      <div class="p-4 border rounded mb-4 bg-white">
+        <div class="flex justify-between items-start">
+          <div>
+            <div class="text-xs">Hits: {{ item.hits || 0 }}</div>
+            <div class="font-bold text-lg">
+              {{ item.name }}
             </div>
             <div>
-              <div
-                class="text-xs text-white font-bold px-2 py-1 rounded-full"
-                :class="cityStatusClass[item.status]"
-              >
-                {{ item.status }}
-              </div>
+              {{ item.location.country }} –
+              <span class="text-xs font-mono bg-gray-200 p-1 rounded">{{
+                item.location.place_id
+              }}</span>
+            </div>
+            <pre v-if="$route.query.debug">{{ item }}</pre>
+          </div>
+          <div>
+            <div
+              class="text-xs text-white font-bold px-2 py-1 rounded-full"
+              :class="cityStatusClass[item.status]"
+            >
+              {{ item.status }}
             </div>
           </div>
-          <pre v-if="$route.query.debug">{{ item }}</pre>
         </div>
-      </template>
-    </TCardList>
-  </main>
+
+        <TPopupEdit
+          :fields="config.fields"
+          label="Edit"
+          show-remove
+          :collection="config.collection"
+          :item="item"
+          class="mt-2"
+        />
+      </div>
+    </template>
+  </TCardList>
 </template>
 
 <script>

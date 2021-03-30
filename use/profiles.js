@@ -275,10 +275,10 @@ export const profileFields = [
     before: 'If you want to remain anonym use your first name.'
   },
   {
-    name: 'location',
+    name: 'hometown',
     key: 'profile.hometown',
     required: true,
-    type: 'location',
+    type: 'place',
     tips: 'Where were you born and raised?'
   },
   {
@@ -356,7 +356,7 @@ export const profileFields = [
     options: objectivesList
   },
   {
-    name: 'place',
+    name: 'meetingPlace',
     key: 'profile.place',
     when: (p) => p.partner === 'Yes',
     type: 'multi',
@@ -388,11 +388,8 @@ export const registerFields = [
 
 export const profileFilters = [
   {
-    name: 'city',
-    type: 'collection',
-    collection: 'cities',
-    keyValue: 'name',
-    keyLabel: (c) => `${c.name}, ${c.location.country}`,
+    name: 'place',
+    type: 'place',
     clearable: true,
     hideLabel: true,
     placeholder: 'City'

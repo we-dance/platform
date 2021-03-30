@@ -1,10 +1,7 @@
 export const postFilters = [
   {
-    name: 'community',
-    type: 'collection',
-    collection: 'cities',
-    keyValue: 'name',
-    keyLabel: (c) => `${c.name}, ${c.location.country}`,
+    name: 'place',
+    type: 'place',
     compare: (item, field, value) => !item[field] || item[field] === value,
     clearable: true,
     hideLabel: true,

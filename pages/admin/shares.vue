@@ -1,7 +1,7 @@
 <template>
   <div>
     <div>
-      <TInputCity v-model="currentCity" />
+      <TInputPlace v-model="currentCity" clearable />
     </div>
 
     <TCardList
@@ -88,12 +88,12 @@ export default {
         name: 'url'
       },
       {
-        name: 'city'
+        name: 'place'
       }
     ]
 
     const thisCityFilter = (item) =>
-      item.city && currentCity.value ? item.city === currentCity.value : true
+      item.place && currentCity.value ? item.place === currentCity.value : true
 
     const states = [
       {

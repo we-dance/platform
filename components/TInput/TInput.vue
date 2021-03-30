@@ -1,11 +1,5 @@
 <template>
-  <vt-input
-    ref="input"
-    v-model="input"
-    v-bind="$attrs"
-    autocomplete="off"
-    :type="type"
-  />
+  <vt-input ref="input" v-model="input" v-bind="$attrs" />
 </template>
 
 <script>

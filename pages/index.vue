@@ -4,7 +4,7 @@
     add="Add Post"
     add-url="/posts/-/edit"
     collection="posts"
-    :filter-default="{ community: currentCity }"
+    :filter-default="{ place: currentCity }"
     :filter-fields="postFilters"
     :tabs="postSorts"
     sort-by="-savedByCount"

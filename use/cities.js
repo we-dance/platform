@@ -12,13 +12,13 @@ export default () => {
 
   const currentCity = computed(() => state.currentCity)
 
-  find('name', currentCity.value)
+  find('location.place_id', currentCity.value)
 
   watch(currentCity, (currentCity) => {
-    ls('city', currentCity)
+    ls('city', currentCity || '')
 
     if (currentCity) {
-      find('name', currentCity)
+      find('location.place_id', currentCity)
     } else {
       city.value = {}
     }
