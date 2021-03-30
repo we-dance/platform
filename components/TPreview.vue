@@ -78,17 +78,19 @@ export default {
   computed: {
     raw() {
       let html = md.render(this.content)
-      let classes = ''
+      const classes = []
 
       if (this.excerpt) {
         html = excerptHtml(html)
       }
 
       if (!this.noTypo) {
-        classes = ' class="typo"'
+        classes.push('typo')
+      } else {
+        classes.push('preview')
       }
 
-      return `<div${classes}>${html}</div>`
+      return `<div class="${classes.join(' ')}">${html}</div>`
     }
   }
 }

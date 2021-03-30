@@ -9,16 +9,6 @@
       </router-link>
     </portal>
 
-    <TAlignRight>
-      <TPopupEdit
-        :fields="profilePosterFields"
-        label="Edit Poster"
-        collection="profiles"
-        singular="profile"
-        :item="profile"
-      />
-    </TAlignRight>
-
     <TItemCard>
       <TSharePreviewPost
         collection="profiles"
@@ -48,13 +38,23 @@
 
       <TProfileContacts :profile="profile" class="mb-4" />
 
-      <TPopupEdit
-        :fields="profileDetailFields"
-        label="Edit Details"
-        collection="profiles"
-        singular="profile"
-        :item="profile"
-      />
+      <div class="flex justify-center space-x-2">
+        <TPopupEdit
+          :fields="profilePosterFields"
+          label="Edit Poster"
+          collection="profiles"
+          singular="profile"
+          :item="profile"
+        />
+
+        <TPopupEdit
+          :fields="profileDetailFields"
+          label="Edit Details"
+          collection="profiles"
+          singular="profile"
+          :item="profile"
+        />
+      </div>
 
       <WTeaser
         v-if="profile.partner === 'Yes'"

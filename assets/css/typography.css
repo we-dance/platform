@@ -14,12 +14,14 @@ html {
 .typo strong {
   @apply font-semibold;
 }
+.preview a,
 .typo a {
   @apply text-blue-600 underline;
 }
 .typo .no-underline {
   @apply no-underline;
 }
+.preview a:hover,
 .typo a:hover {
   @apply text-blue-800 no-underline;
 }
