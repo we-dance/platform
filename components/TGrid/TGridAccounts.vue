@@ -92,9 +92,9 @@
               <span>Editor</span>
             </label>
             <div class="text-xs text-orange-500">
-              <span>Community: {{ item.profile.community }}</span>
-              <span v-if="item.profile.location">
-                • Hometown: {{ item.profile.location.locality }}</span
+              <span>Community: {{ getCity(item.profile.place) }}</span>
+              <span v-if="item.profile.hometown">
+                • Hometown: {{ getCity(item.profile.hometown) }}</span
               >
             </div>
             <pre class="text-xs">uid: {{ item.id }}</pre>
@@ -137,6 +137,7 @@ import {
   getDateObect,
   flatten
 } from '~/utils'
+import { useApp } from '~/use/app'
 
 export default {
   name: 'TGridAccounts',
@@ -161,6 +162,7 @@ export default {
   setup() {
     const { docs } = useCollection('accounts')
     const { getById } = useCollection('profiles')
+    const { getCity } = useApp()
     const getProfile = (uid) => getById(uid) || {}
 
     const { remove: removeProfile, update: updateProfile } = useDoc('profiles')
@@ -325,7 +327,8 @@ export default {
       list,
       applyList,
       updateProfile,
-      updateAccount
+      updateAccount,
+      getCity
     }
   },
   computed: {

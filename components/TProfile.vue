@@ -38,7 +38,7 @@
             {{ profile.name }}
           </div>
           <div class="text-sm text-gray-700">
-            {{ profile.community }}
+            {{ getCity(profile.place) }}
             <span v-if="profile.height">• {{ profile.height }}cm</span>
             <span v-if="profile.weight">• {{ profile.weight }}kg</span>
           </div>
@@ -96,6 +96,7 @@
 </template>
 
 <script>
+import { useApp } from '~/use/app'
 import useAuth from '~/use/auth'
 import useProfiles from '~/use/profiles'
 import { getExcerpt } from '~/utils'
@@ -110,12 +111,14 @@ export default {
   setup() {
     const { uid } = useAuth()
     const { profilePosterFields, profileDetailFields } = useProfiles()
+    const { getCity } = useApp()
 
     return {
       uid,
       getExcerpt,
       profilePosterFields,
-      profileDetailFields
+      profileDetailFields,
+      getCity
     }
   }
 }

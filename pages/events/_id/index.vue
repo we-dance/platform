@@ -154,8 +154,8 @@ export default {
   },
   watch: {
     item() {
-      if (this.item && this.item.city) {
-        this.currentCity = this.item.city
+      if (this.item && this.item.place) {
+        this.currentCity = this.item.place
       }
     }
   },

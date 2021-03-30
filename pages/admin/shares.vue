@@ -20,7 +20,7 @@
         <div class="rounded bg-white mb-4 shadow border overflow-hidden">
           <div class="p-4 space-y-2">
             <div class="flex justify-between">
-              <div>{{ item.city || 'Everywhere' }}</div>
+              <div>{{ getCity(item.place) || 'Everywhere' }}</div>
               <TInputSelect
                 :value="item.state"
                 :options="states"
@@ -65,10 +65,12 @@
 import useAuth from '~/use/auth'
 import { getDateTime } from '~/utils'
 import useCities from '~/use/cities'
+import { useApp } from '~/use/app'
 
 export default {
   name: 'PageAdminShares',
   setup() {
+    const { getCity } = useApp()
     const { currentCity } = useCities()
     const { uid } = useAuth()
     const fields = [
@@ -125,7 +127,8 @@ export default {
       getDateTime,
       states,
       uid,
-      currentCity
+      currentCity,
+      getCity
     }
   },
   methods: {

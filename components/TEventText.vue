@@ -35,7 +35,7 @@
             <TIcon name="place" class="w-4 h-4 mr-1" />
             <p>
               {{ item.address }}
-              <span v-if="item.city">• {{ item.city }}</span>
+              <span v-if="item.place">• {{ getCity(item.place) }}</span>
             </p>
           </div>
         </div>
@@ -47,15 +47,18 @@
 <script>
 import { getTime } from '~/utils'
 import useRSVP from '~/use/rsvp'
+import { useApp } from '~/use/app'
 
 export default {
   name: 'TEventText',
   setup() {
     const { updateRsvp } = useRSVP()
+    const { getCity } = useApp()
 
     return {
       getTime,
-      updateRsvp
+      updateRsvp,
+      getCity
     }
   },
   props: {

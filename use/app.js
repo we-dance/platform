@@ -200,6 +200,18 @@ export const useApp = () => {
     await addCommunity(address)
   }
 
+  const getCity = (placeId) => {
+    if (!placeId) {
+      return ''
+    }
+
+    if (!cache.value) {
+      return ''
+    }
+
+    return cache.value.cities[placeId]?.name
+  }
+
   return {
     read,
     cache,
@@ -207,7 +219,8 @@ export const useApp = () => {
     getPosterLabelColor,
     mapDetails,
     getCityHistory,
-    addCityHistory
+    addCityHistory,
+    getCity
   }
 }
 

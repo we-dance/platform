@@ -35,10 +35,10 @@
     <div v-if="step == 'community'">
       <TField
         ref="community"
-        v-model="profile.community"
+        v-model="profile.place"
         label="Dance community of which city would you like to join?"
         label-position="vertical"
-        type="city"
+        type="place"
       />
     </div>
 
