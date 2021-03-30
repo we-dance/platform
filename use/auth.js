@@ -253,7 +253,7 @@ export default () => {
         createdAt: +new Date(),
         locales: getLanguages(),
         timezone: new Date().toString().match(/([A-Z]+[+-][0-9]+)/)[1],
-        community: ls('city'),
+        place: ls('city'),
         username: ls('username'),
         visibility: 'Public',
         type: 'Dancer',
@@ -272,7 +272,7 @@ export default () => {
       state.profile = doc.data()
 
       if (!ls('city')) {
-        ls('city', state.profile.community)
+        ls('city', state.profile.place)
       }
     }
 
@@ -388,11 +388,11 @@ export default () => {
     email,
     password,
     username,
-    community
+    place
   ) {
     try {
       ls('username', username)
-      ls('city', community)
+      ls('city', place)
       await firebase.auth().createUserWithEmailAndPassword(email, password)
     } catch (e) {
       state.error = e

@@ -88,7 +88,7 @@ export default {
       ls('target', target)
     }
 
-    this.$set(this.data, 'community', ls('city'))
+    this.$set(this.data, 'place', ls('city'))
 
     if (this.uid) {
       this.redirect()
@@ -98,7 +98,7 @@ export default {
     redirect() {
       this.$router.push(`/${this.profile.username}`)
     },
-    async submit({ email, username, password, community }) {
+    async submit({ email, username, password, place }) {
       if (!email.trim() || !username.trim() || !password.trim()) {
         this.error = {
           message: 'Please fill all the fields'
@@ -111,15 +111,11 @@ export default {
         method: 'Password'
       })
 
-      this.$fire.analytics.logEvent('join_group', {
-        group_id: community
-      })
-
       await this.createUserWithEmailAndPassword(
         email,
         password,
         username,
-        community
+        place
       )
     }
   }

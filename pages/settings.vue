@@ -309,12 +309,6 @@ export default {
     async saveProfile(data) {
       this.$fire.analytics.logEvent('save_profile')
 
-      if (data.community !== this.profile.community) {
-        this.$fire.analytics.logEvent('join_group', {
-          group_id: data.community
-        })
-      }
-
       await this.updateProfile(data)
 
       const canBoost =
