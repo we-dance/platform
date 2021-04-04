@@ -133,7 +133,7 @@
 
     <div class="bg-black text-white text-sm">
       <div
-        class="p-4 py-8 container mx-auto grid grid-flow-col grid-cols-2 gap-4"
+        class="p-4 py-8 container mx-auto grid grid-flow-col grid-cols-2 col-gap-4 row-gap-4"
       >
         <div class="flex items-center">
           <p>
@@ -153,7 +153,9 @@
             >.
           </p>
         </div>
-        <div class="grid grid-flow-col grid-cols-4 grid-rows-1 gap-4">
+        <div
+          class="grid grid-flow-col grid-cols-4 grid-rows-1 col-gap-4 row-gap-4"
+        >
           <a
             target="_blank"
             class="flex justify-center hover:opacity-50"

@@ -146,7 +146,7 @@ export default {
     wrapperClasses() {
       const map = {
         top: 'grid-cols-1',
-        left: 'grid-cols-12 gap-2'
+        left: 'grid-cols-12 col-gap-2 row-gap-2'
       }
 
       return map[this.labelPosition]

@@ -58,7 +58,7 @@
         @click="joinChat()"
       />
 
-      <div class="mt-4 grid grid-cols-1 md:grid-cols-2 gap-2">
+      <div class="mt-4 grid grid-cols-1 md:grid-cols-2 col-gap-2 row-gap-2">
         <router-link
           v-for="profile in items"
           :key="profile.id"

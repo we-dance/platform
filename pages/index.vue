@@ -8,7 +8,7 @@
     :filter-fields="postFilters"
     :tabs="postSorts"
     sort-by="-savedByCount"
-    list-wrapper="mt-4 grid grid-cols-1 md:grid-cols-2 gap-2"
+    list-wrapper="mt-4 grid grid-cols-1 md:grid-cols-2 col-gap-2 row-gap-2"
   >
     <template v-slot:before>
       <div class="md:flex space-y-4 md:space-y-0 md:space-x-4 mb-4">

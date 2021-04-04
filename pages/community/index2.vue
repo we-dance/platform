@@ -8,7 +8,7 @@
     :filter-fields="profileFilters"
     :tabs="profileSorts"
     sort-by="-lastLoginAt"
-    list-wrapper="mt-4 grid grid-cols-1 md:grid-cols-2 gap-2"
+    list-wrapper="mt-4 grid grid-cols-1 md:grid-cols-2 col-gap-2 row-gap-2"
   >
     <template v-slot:before>
       <WTeaser
