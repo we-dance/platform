@@ -1,10 +1,10 @@
 <template>
   <div>
-    <TItemToolbar collection="events" :item="item" class="mb-2" />
+    <TItemToolbar dashboard collection="events" :item="item" class="mb-2" />
 
     <TItemCard>
       <TSharePreviewPost
-        :username="item.organiser"
+        :username="creator.username"
         collection="events"
         :title="item.name"
         :type="item.type"
@@ -178,12 +178,12 @@ export default {
         {
           hid: 'author',
           name: 'author',
-          content: item.organiser
+          content: this.creator.username
         },
         {
           hid: 'publisher',
           name: 'publisher',
-          content: item.createdBy
+          content: this.creator.username
         },
         {
           name: 'keywords',
