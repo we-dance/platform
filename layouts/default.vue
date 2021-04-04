@@ -87,6 +87,7 @@ import features from 'platform-detect'
 import { version } from '../package.json'
 import useAuth from '~/use/auth'
 import useCities from '~/use/cities'
+import { useApp } from '~/use/app'
 
 export default {
   name: 'DefaultLayout',
@@ -141,7 +142,7 @@ export default {
         username: this.profile?.username,
         firstname: names[0] || '',
         lastname: names[1] || '',
-        community: this.profile?.community || '',
+        community: this.getCity(this.profile?.place),
         facebook: this.profile?.facebook || '',
         instagram: this.profile?.instagram || '',
         telegram: this.profile?.telegram || '',
@@ -199,6 +200,7 @@ export default {
   setup() {
     const { uid, account, profile, username, isAdmin } = useAuth()
     const { currentCity } = useCities()
+    const { getCity } = useApp()
 
     return {
       username,
@@ -206,7 +208,8 @@ export default {
       profile,
       uid,
       isAdmin,
-      currentCity
+      currentCity,
+      getCity
     }
   }
 }
