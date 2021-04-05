@@ -105,15 +105,15 @@
 <script>
 import { computed, ref } from '@nuxtjs/composition-api'
 import { startOfWeek, addDays, endOfYear } from 'date-fns'
-import useRSVP from '~/use/rsvp'
-import useCollection from '~/use/collection'
+import { useRsvp } from '~/use/rsvp'
+import { useCollection } from '~/use/collection'
 import { useAccounts } from '~/use/accounts'
-import useAuth from '~/use/auth'
-import useCities from '~/use/cities'
-import useRouter from '~/use/router'
-import useProfiles from '~/use/profiles'
-import useEvents from '~/use/events'
-import useStyles from '~/use/styles'
+import { useAuth } from '~/use/auth'
+import { useCities } from '~/use/cities'
+import { useRouter } from '~/use/router'
+import { useProfiles } from '~/use/profiles'
+import { useEvents } from '~/use/events'
+import { useStyles } from '~/use/styles'
 
 import {
   dateDiff,
@@ -129,7 +129,7 @@ export default {
   name: 'EventsIndex',
   setup() {
     const { eventTypeList } = useEvents()
-    const { getCount, getRsvpResponse, loading: loadingRsvps } = useRSVP()
+    const { getCount, getRsvpResponse, loading: loadingRsvps } = useRsvp()
     const { currentCity } = useCities()
     const { docs, loading: loadingPosts, getById } = useCollection('events')
     const { getProfile } = useProfiles()

@@ -6,7 +6,7 @@ const state = Vue.observable({
   collection: []
 })
 
-export default () => {
+export const useStyles = () => {
   const { $content } = useContext()
 
   const load = async () => {

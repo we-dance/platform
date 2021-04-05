@@ -30,9 +30,9 @@
 
 <script>
 import { computed } from '@vue/composition-api'
-import useAuth from '~/use/auth'
-import useDoc from '~/use/doc'
-import useRouter from '~/use/router'
+import { useAuth } from '~/use/auth'
+import { useDoc } from '~/use/doc'
+import { useRouter } from '~/use/router'
 
 export default {
   name: 'TItemEdit',

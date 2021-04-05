@@ -15,8 +15,8 @@
 </template>
 
 <script>
-import useProfiles from '~/use/profiles'
-import useComments from '~/use/comments'
+import { useProfiles } from '~/use/profiles'
+import { useComments } from '~/use/comments'
 
 export default {
   name: 'TFormComment',

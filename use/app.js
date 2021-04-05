@@ -5,8 +5,8 @@ import { createGlobalState, when } from '@vueuse/core'
 import { useFirestore } from '@vueuse/firebase'
 import { computed } from '@nuxtjs/composition-api'
 import { getCountFavorites } from '~/use/favorites'
-import useAuth from '~/use/auth'
-import useDoc from '~/use/doc'
+import { useAuth } from '~/use/auth'
+import { useDoc } from '~/use/doc'
 import { getArrayFromHash } from '~/utils'
 
 const db = firebase.initializeApp(process.env.firebase.config).firestore()

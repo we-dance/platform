@@ -255,12 +255,12 @@
 
 <script>
 import { computed, ref } from '@nuxtjs/composition-api'
-import useAuth from '~/use/auth'
-import useDoc from '~/use/doc'
-import useRSVP from '~/use/rsvp'
-import useRouter from '~/use/router'
-import useProfiles from '~/use/profiles'
-import useReactions from '~/use/reactions'
+import { useAuth } from '~/use/auth'
+import { useDoc } from '~/use/doc'
+import { useRsvp } from '~/use/rsvp'
+import { useRouter } from '~/use/router'
+import { useProfiles } from '~/use/profiles'
+import { useReactions } from '~/use/reactions'
 import { useAccounts } from '~/use/accounts'
 import { getDateTime, getDate, getTime, dateDiff, sortBy } from '~/utils'
 
@@ -277,7 +277,7 @@ export default {
     const { map } = useReactions()
     const selectedParticipants = ref({})
 
-    const { update, updateRsvp, createGuestRsvp, getListRsvps } = useRSVP()
+    const { update, updateRsvp, createGuestRsvp, getListRsvps } = useRsvp()
 
     if (params.id) {
       load(params.id)

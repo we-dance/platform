@@ -9,7 +9,7 @@
 
 <script>
 import { computed } from '@nuxtjs/composition-api'
-import useProfiles from '~/use/profiles'
+import { useProfiles } from '~/use/profiles'
 
 export default {
   name: 'TProfilePhoto',

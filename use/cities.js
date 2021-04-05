@@ -1,13 +1,13 @@
 import Vue from 'vue'
 import { watch, toRefs, computed } from '@nuxtjs/composition-api'
 import ls from 'local-storage'
-import useDoc from '~/use/doc'
+import { useDoc } from '~/use/doc'
 
 const state = Vue.observable({
   currentCity: ls('city')
 })
 
-export default () => {
+export const useCities = () => {
   const { doc: city, find } = useDoc('cities')
 
   const currentCity = computed(() => state.currentCity)

@@ -1,7 +1,7 @@
-import { useRouter } from '~/plugins/router'
+import { getRouter } from '~/plugins/router'
 
-export default () => {
-  const router = useRouter()
+export const useRouter = () => {
+  const router = getRouter()
   const route = router.currentRoute
   const params = route.params
 

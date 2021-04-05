@@ -67,9 +67,9 @@
 <script>
 import { computed, ref } from '@nuxtjs/composition-api'
 import { sortBy } from '~/utils'
-import useAuth from '~/use/auth'
-import useDoc from '~/use/doc'
-import useCollection from '~/use/collection'
+import { useAuth } from '~/use/auth'
+import { useDoc } from '~/use/doc'
+import { useCollection } from '~/use/collection'
 
 export default {
   props: {

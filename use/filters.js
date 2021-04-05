@@ -2,7 +2,7 @@ import { computed, ref } from '@vue/composition-api'
 import { sortBy } from '~/utils'
 import { useFullItems } from '~/use/app'
 
-export default (docs, fields, defaultFilter, sorting) => {
+export const useFilters = (docs, fields, defaultFilter, sorting) => {
   const filters = ref(defaultFilter)
   const { items } = useFullItems(docs)
 

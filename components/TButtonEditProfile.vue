@@ -20,8 +20,8 @@
 
 <script>
 import { onMounted, ref } from '@nuxtjs/composition-api'
-import useProfiles from '~/use/profiles'
-import useDoc from '~/use/doc'
+import { useProfiles } from '~/use/profiles'
+import { useDoc } from '~/use/doc'
 
 export default {
   name: 'TButtonEditProfile',

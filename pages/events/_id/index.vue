@@ -110,14 +110,14 @@
 
 <script>
 import { computed, ref } from '@nuxtjs/composition-api'
-import useAuth from '~/use/auth'
-import useDoc from '~/use/doc'
-import useRSVP from '~/use/rsvp'
-import useRouter from '~/use/router'
-import useProfiles from '~/use/profiles'
-import useReactions from '~/use/reactions'
+import { useAuth } from '~/use/auth'
+import { useDoc } from '~/use/doc'
+import { useRsvp } from '~/use/rsvp'
+import { useRouter } from '~/use/router'
+import { useProfiles } from '~/use/profiles'
+import { useReactions } from '~/use/reactions'
 import { useAccounts } from '~/use/accounts'
-import useCities from '~/use/cities'
+import { useCities } from '~/use/cities'
 import {
   getDay,
   getDateTime,
@@ -230,7 +230,7 @@ export default {
     const { doc, load, exists, loading } = useDoc('events')
     const { map } = useReactions()
 
-    const { updateRsvp, createGuestRsvp } = useRSVP()
+    const { updateRsvp, createGuestRsvp } = useRsvp()
 
     if (params.id) {
       load(params.id)

@@ -58,8 +58,8 @@
 
 <script>
 import { profileFilters, typeList, profileSorts } from '~/use/profiles'
-import useCities from '~/use/cities'
-import useAuth from '~/use/auth'
+import { useCities } from '~/use/cities'
+import { useAuth } from '~/use/auth'
 import { getExcerpt, openURL, getOptions, getDateTime } from '~/utils'
 
 export default {

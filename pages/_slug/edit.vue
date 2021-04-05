@@ -23,9 +23,9 @@
 </template>
 
 <script>
-import useAuth from '~/use/auth'
-import useDoc from '~/use/doc'
-import useProfiles from '~/use/profiles'
+import { useAuth } from '~/use/auth'
+import { useDoc } from '~/use/doc'
+import { useProfiles } from '~/use/profiles'
 
 export default {
   name: 'ProfileEdit',

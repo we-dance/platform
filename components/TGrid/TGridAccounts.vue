@@ -126,8 +126,8 @@ last login: {{ getDateTime(item.lastLoginAt) }}</pre
 <script>
 import Vue from 'vue'
 import { computed, ref } from '@nuxtjs/composition-api'
-import useCollection from '~/use/collection'
-import useDoc from '~/use/doc'
+import { useCollection } from '~/use/collection'
+import { useDoc } from '~/use/doc'
 import {
   sortBy,
   getTime,

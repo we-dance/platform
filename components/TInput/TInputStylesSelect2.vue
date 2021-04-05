@@ -38,8 +38,8 @@
 
 <script>
 import Vue from 'vue'
-import useStyles from '~/use/styles'
-import useAuth from '~/use/auth'
+import { useStyles } from '~/use/styles'
+import { useAuth } from '~/use/auth'
 import { search } from '~/utils'
 
 export default {

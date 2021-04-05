@@ -1,4 +1,4 @@
-import useCollection from '~/use/collection'
+import { useCollection } from '~/use/collection'
 
 export const accountFields = [
   {

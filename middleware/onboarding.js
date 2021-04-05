@@ -1,5 +1,5 @@
 import accountMiddleware from './account'
-import useAuth from '~/use/auth'
+import { useAuth } from '~/use/auth'
 
 export default async ({ route, redirect }) => {
   const { uid } = useAuth()

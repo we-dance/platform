@@ -14,8 +14,8 @@
 
 <script>
 import { offerFields } from '~/use/offers'
-import useCities from '~/use/cities'
-import useAuth from '~/use/auth'
+import { useCities } from '~/use/cities'
+import { useAuth } from '~/use/auth'
 
 export default {
   name: 'OfferEdit',

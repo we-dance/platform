@@ -1,9 +1,9 @@
 import firebase from 'firebase/app'
 import 'firebase/storage'
 import { v4 as uuidv4 } from 'uuid'
-import useAuth from '~/use/auth'
+import { useAuth } from '~/use/auth'
 
-export default () => {
+export const useUpload = () => {
   const { uid } = useAuth()
 
   function upload(file, onChange) {

@@ -41,7 +41,7 @@
 <script>
 import { ref } from '@nuxtjs/composition-api'
 import ls from 'local-storage'
-import useAuth from '~/use/auth'
+import { useAuth } from '~/use/auth'
 import { registerFields } from '~/use/profiles'
 
 export default {

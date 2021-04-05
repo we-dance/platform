@@ -92,13 +92,13 @@
 
 <script>
 import { ref, computed } from '@nuxtjs/composition-api'
-import useAuth from '~/use/auth'
-import useCollection from '~/use/collection'
-import useDoc from '~/use/doc'
-import useCities from '~/use/cities'
+import { useAuth } from '~/use/auth'
+import { useCollection } from '~/use/collection'
+import { useDoc } from '~/use/doc'
+import { useCities } from '~/use/cities'
 import { sortBy, getExcerpt, getDateTime, openURL, getOptions } from '~/utils'
-import useProfiles from '~/use/profiles'
-import useStyles from '~/use/styles'
+import { useProfiles } from '~/use/profiles'
+import { useStyles } from '~/use/styles'
 
 export default {
   name: 'PeopleIndex',

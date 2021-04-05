@@ -3,7 +3,7 @@
 </template>
 
 <script>
-import useRSVP from '~/use/rsvp'
+import { useRsvp } from '~/use/rsvp'
 
 export default {
   middleware: ['auth', 'account'],
@@ -17,7 +17,7 @@ export default {
     this.$router.replace(back)
   },
   setup() {
-    const { updateRsvp } = useRSVP()
+    const { updateRsvp } = useRsvp()
 
     return {
       updateRsvp

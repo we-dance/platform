@@ -1,9 +1,9 @@
-import useRSVP from '~/use/rsvp'
-import useComments from '~/use/comments'
+import { useRsvp } from '~/use/rsvp'
+import { useComments } from '~/use/comments'
 import { getExcerpt } from '~/utils'
 
-export default () => {
-  const { getCount, getRsvpResponse } = useRSVP()
+export const useReactions = () => {
+  const { getCount, getRsvpResponse } = useRsvp()
   const { getCommentsCount } = useComments()
 
   const map = (item) => {

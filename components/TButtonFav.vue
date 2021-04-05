@@ -7,8 +7,8 @@
 </template>
 
 <script>
-import useAuth from '~/use/auth'
-import useFavorites from '~/use/favorites'
+import { useAuth } from '~/use/auth'
+import { useFavorites } from '~/use/favorites'
 
 export default {
   props: {

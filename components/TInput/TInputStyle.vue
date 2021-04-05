@@ -8,8 +8,8 @@
 </template>
 
 <script>
-import useStyles from '~/use/styles'
-import useAuth from '~/use/auth'
+import { useStyles } from '~/use/styles'
+import { useAuth } from '~/use/auth'
 import { search } from '~/utils'
 
 export default {

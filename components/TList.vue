@@ -41,8 +41,8 @@
 
 <script>
 import { ref } from '@nuxtjs/composition-api'
-import useFilters from '~/use/filters'
-import useCollection from '~/use/collection'
+import { useFilters } from '~/use/filters'
+import { useCollection } from '~/use/collection'
 
 export default {
   props: {

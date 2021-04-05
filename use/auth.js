@@ -7,9 +7,9 @@ import { computed, toRefs } from '@nuxtjs/composition-api'
 import firebase from 'firebase/app'
 import 'firebase/auth'
 import 'firebase/firestore'
-import useRouter from '~/use/router'
+import { useRouter } from '~/use/router'
 import { getDateObect, getLanguages } from '~/utils'
-import useDoc from '~/use/doc'
+import { useDoc } from '~/use/doc'
 
 const state = Vue.observable({
   loading: true,
@@ -23,7 +23,7 @@ const state = Vue.observable({
   error: null
 })
 
-export default () => {
+export const useAuth = () => {
   const { router, route } = useRouter()
 
   const isAdmin = () => !!state.uid && !!state.account && !!state.account.admin

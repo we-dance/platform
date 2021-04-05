@@ -27,8 +27,8 @@
 
 <script>
 import { computed } from '@vue/composition-api'
-import useDoc from '~/use/doc'
-import useProfiles from '~/use/profiles'
+import { useDoc } from '~/use/doc'
+import { useProfiles } from '~/use/profiles'
 
 export default {
   name: 'WPlaylist',

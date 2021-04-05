@@ -22,7 +22,7 @@
 
 <script>
 import { getDateTime } from '~/utils'
-import useProfiles from '~/use/profiles'
+import { useProfiles } from '~/use/profiles'
 
 export default {
   name: 'TItemFooter',

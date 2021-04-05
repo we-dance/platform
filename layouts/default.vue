@@ -85,8 +85,8 @@
 <script>
 import features from 'platform-detect'
 import { version } from '../package.json'
-import useAuth from '~/use/auth'
-import useCities from '~/use/cities'
+import { useAuth } from '~/use/auth'
+import { useCities } from '~/use/cities'
 import { useApp } from '~/use/app'
 
 export default {

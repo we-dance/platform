@@ -10,8 +10,8 @@
 
 <script>
 import { computed } from 'vue-demi'
-import useCollection from '~/use/collection'
-import useDoc from '~/use/doc'
+import { useCollection } from '~/use/collection'
+import { useDoc } from '~/use/doc'
 import { useApp } from '~/use/app'
 
 export default {

@@ -1,4 +1,4 @@
-import useAuth from '~/use/auth'
+import { useAuth } from '~/use/auth'
 
 export default async ({ route, redirect }) => {
   const { getAccount, uid } = useAuth()

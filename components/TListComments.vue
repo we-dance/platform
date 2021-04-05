@@ -16,7 +16,7 @@
 </template>
 
 <script>
-import useReactions from '~/use/reactions'
+import { useReactions } from '~/use/reactions'
 
 export default {
   name: 'TListComments',

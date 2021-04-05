@@ -24,7 +24,7 @@
 </template>
 
 <script>
-import useProfiles from '~/use/profiles'
+import { useProfiles } from '~/use/profiles'
 import { getExcerpt, getMeta, loadDoc } from '~/utils'
 
 export default {

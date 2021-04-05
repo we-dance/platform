@@ -6,7 +6,7 @@ import stats from '~/stats'
 
 const state = Vue.observable({})
 
-export default (name, filter) => {
+export const useCollection = (name, filter) => {
   let field = ''
   let value = ''
 

@@ -89,8 +89,8 @@
 </template>
 
 <script>
-import useAuth from '~/use/auth'
-import useProfiles from '~/use/profiles'
+import { useAuth } from '~/use/auth'
+import { useProfiles } from '~/use/profiles'
 import { objectivesList, meetingPlaces, days } from '~/use/offers'
 import { getLabel, getOptionsFromMulti } from '~/utils'
 

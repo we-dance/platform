@@ -44,7 +44,7 @@
 
 <script>
 import { getDateTime } from '~/utils'
-import useAuth from '~/use/auth'
+import { useAuth } from '~/use/auth'
 
 export default {
   name: 'EndorsementIndex',

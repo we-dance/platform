@@ -1,5 +1,5 @@
 import { offerFields } from '~/use/offers'
-import useProfiles from '~/use/profiles'
+import { useProfiles } from '~/use/profiles'
 import { playlistFields } from '~/use/playlists'
 
 export function getFields(collection) {

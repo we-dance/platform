@@ -53,12 +53,12 @@
 </template>
 
 <script>
-import useRSVP from '~/use/rsvp'
+import { useRsvp } from '~/use/rsvp'
 import { dateDiff } from '~/utils'
 
 export default {
   setup() {
-    const { updateRsvp } = useRSVP()
+    const { updateRsvp } = useRsvp()
 
     return {
       updateRsvp,

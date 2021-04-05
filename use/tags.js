@@ -1,8 +1,8 @@
 import { computed } from '@nuxtjs/composition-api'
-import useCollection from '~/use/collection'
-import useDoc from '~/use/doc'
+import { useCollection } from '~/use/collection'
+import { useDoc } from '~/use/doc'
 
-export default (selectedCollection) => {
+export const useTags = (selectedCollection) => {
   const collection = selectedCollection || 'tags'
 
   const { docs, getById } = useCollection(collection)

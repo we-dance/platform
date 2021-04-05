@@ -17,7 +17,7 @@
 </template>
 
 <script>
-import useProfiles from '~/use/profiles'
+import { useProfiles } from '~/use/profiles'
 import { getDateTime } from '~/utils'
 
 export default {

@@ -83,7 +83,7 @@
 import Vue from 'vue'
 import * as VueGoogleMaps from 'vue2-google-maps'
 import { getLocation, sanitize } from '~/utils'
-import useDoc from '~/use/doc'
+import { useDoc } from '~/use/doc'
 
 Vue.use(VueGoogleMaps, {
   load: {

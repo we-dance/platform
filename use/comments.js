@@ -1,7 +1,7 @@
-import useDoc from '~/use/doc'
-import useCollection from '~/use/collection'
+import { useDoc } from '~/use/doc'
+import { useCollection } from '~/use/collection'
 
-export default () => {
+export const useComments = () => {
   const { docs, loading } = useCollection('comments')
   const { create } = useDoc('comments')
 

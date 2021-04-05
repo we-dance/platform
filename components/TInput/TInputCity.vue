@@ -76,8 +76,8 @@ import Vue from 'vue'
 import * as VueGoogleMaps from 'vue2-google-maps'
 import { computed } from '@nuxtjs/composition-api'
 import { getLocation, sanitize, sortBy } from '~/utils'
-import useDoc from '~/use/doc'
-import useCollection from '~/use/collection'
+import { useDoc } from '~/use/doc'
+import { useCollection } from '~/use/collection'
 
 Vue.use(VueGoogleMaps, {
   load: {

@@ -56,11 +56,11 @@
 <script>
 import { computed, ref } from '@nuxtjs/composition-api'
 import { startOfWeek, addDays, endOfYear } from 'date-fns'
-import useRSVP from '~/use/rsvp'
-import useCollection from '~/use/collection'
+import { useRsvp } from '~/use/rsvp'
+import { useCollection } from '~/use/collection'
 import { useAccounts } from '~/use/accounts'
-import useAuth from '~/use/auth'
-import useCities from '~/use/cities'
+import { useAuth } from '~/use/auth'
+import { useCities } from '~/use/cities'
 import {
   dateDiff,
   sortBy,
@@ -97,7 +97,7 @@ export default {
       getRsvpResponse,
       updateRsvp,
       loading: loadingRsvps
-    } = useRSVP()
+    } = useRsvp()
     const { currentCity } = useCities()
     const { docs, loading: loadingPosts, getById } = useCollection(
       'events',

@@ -11,7 +11,7 @@
 </template>
 
 <script>
-import useDoc from '~/use/doc'
+import { useDoc } from '~/use/doc'
 
 export default {
   setup() {

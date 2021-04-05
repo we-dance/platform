@@ -79,8 +79,8 @@
 
 <script>
 import { getDateTime } from '~/utils'
-import useAuth from '~/use/auth'
-import useRSVP from '~/use/rsvp'
+import { useAuth } from '~/use/auth'
+import { useRsvp } from '~/use/rsvp'
 
 export default {
   setup() {
@@ -114,7 +114,7 @@ export default {
       }
     ]
 
-    const { getCount, getRsvpResponse, updateRsvp } = useRSVP()
+    const { getCount, getRsvpResponse, updateRsvp } = useRsvp()
 
     const map = (item) => {
       const upVotes = getCount(item.id, 'up')

@@ -46,13 +46,13 @@
 
 <script>
 import { getTime } from '~/utils'
-import useRSVP from '~/use/rsvp'
+import { useRsvp } from '~/use/rsvp'
 import { useApp } from '~/use/app'
 
 export default {
   name: 'TEventText',
   setup() {
-    const { updateRsvp } = useRSVP()
+    const { updateRsvp } = useRsvp()
     const { getCity } = useApp()
 
     return {

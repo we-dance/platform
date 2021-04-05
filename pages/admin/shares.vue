@@ -62,9 +62,9 @@
 </template>
 
 <script>
-import useAuth from '~/use/auth'
+import { useAuth } from '~/use/auth'
 import { getDateTime } from '~/utils'
-import useCities from '~/use/cities'
+import { useCities } from '~/use/cities'
 import { useApp } from '~/use/app'
 
 export default {

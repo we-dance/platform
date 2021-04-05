@@ -13,9 +13,9 @@
 
 <script>
 import { computed } from '@nuxtjs/composition-api'
-import useRSVP from '~/use/rsvp'
-import useCollection from '~/use/collection'
-import useComments from '~/use/comments'
+import { useRsvp } from '~/use/rsvp'
+import { useCollection } from '~/use/collection'
+import { useComments } from '~/use/comments'
 import { sortBy } from '~/utils'
 
 export default {
@@ -43,7 +43,7 @@ export default {
     }
   },
   setup(params) {
-    const { getCount, getRsvpResponse, loading: loadingRsvps } = useRSVP()
+    const { getCount, getRsvpResponse, loading: loadingRsvps } = useRsvp()
     const { getCommentsCount, loading: loadingComments } = useComments()
     const { docs, loading: loadingPosts } = useCollection(
       'posts',

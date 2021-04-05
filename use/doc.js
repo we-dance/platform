@@ -1,10 +1,10 @@
 import { reactive, toRefs, computed } from '@nuxtjs/composition-api'
 import firebase from 'firebase/app'
 import 'firebase/firestore'
-import useAuth from '~/use/auth'
+import { useAuth } from '~/use/auth'
 import stats from '~/stats'
 
-export default (name) => {
+export const useDoc = (name) => {
   const { uid } = useAuth()
 
   const firestore = firebase.firestore()

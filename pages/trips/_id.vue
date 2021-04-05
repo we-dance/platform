@@ -28,9 +28,9 @@
 </template>
 
 <script>
-import useDoc from '~/use/doc'
-import useCollection from '~/use/collection'
-import useRouter from '~/use/router'
+import { useDoc } from '~/use/doc'
+import { useCollection } from '~/use/collection'
+import { useRouter } from '~/use/router'
 import { dateDiff } from '~/utils'
 
 export default {

@@ -168,10 +168,10 @@
 <script>
 import axios from 'axios'
 import { ref } from '@nuxtjs/composition-api'
-import useAuth from '~/use/auth'
-import useProfiles from '~/use/profiles'
+import { useAuth } from '~/use/auth'
+import { useProfiles } from '~/use/profiles'
 import { useAccounts } from '~/use/accounts'
-import useRouter from '~/use/router'
+import { useRouter } from '~/use/router'
 import TPopup from '~/components/TPopup.vue'
 
 export default {

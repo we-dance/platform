@@ -19,7 +19,7 @@
 </template>
 
 <script>
-import useStyles from '~/use/styles'
+import { useStyles } from '~/use/styles'
 
 export default {
   name: 'TInputStylesSelect',

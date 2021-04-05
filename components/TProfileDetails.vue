@@ -48,7 +48,7 @@
 
 <script>
 import { getDateTimeYear, getLabels } from '~/utils'
-import useProfiles from '~/use/profiles'
+import { useProfiles } from '~/use/profiles'
 import languages from '~/assets/languages'
 
 export default {

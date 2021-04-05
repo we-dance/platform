@@ -82,7 +82,7 @@
 
 <script>
 import { useApp } from '~/use/app'
-import useStyles from '~/use/styles'
+import { useStyles } from '~/use/styles'
 import { days } from '~/use/offers'
 import { getLabel } from '~/utils'
 

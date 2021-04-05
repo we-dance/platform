@@ -34,8 +34,8 @@
 import { saveAs } from 'file-saver'
 import axios from 'axios'
 import { openURL } from '~/utils'
-import useCities from '~/use/cities'
-import useAuth from '~/use/auth'
+import { useCities } from '~/use/cities'
+import { useAuth } from '~/use/auth'
 
 export default {
   setup() {

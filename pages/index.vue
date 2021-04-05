@@ -48,7 +48,7 @@
 
 <script>
 import { postFilters, postSorts } from '~/use/posts'
-import useCities from '~/use/cities'
+import { useCities } from '~/use/cities'
 
 export default {
   name: 'PostsIndex',

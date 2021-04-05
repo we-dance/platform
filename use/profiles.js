@@ -438,7 +438,7 @@ export const profileSorts = [
   }
 ]
 
-export default () => {
+export const useProfiles = () => {
   const { read, loading } = useApp()
   const getProfile = (uid) => read('profiles', uid) || {}
 

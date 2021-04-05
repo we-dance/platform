@@ -13,7 +13,7 @@
 
 <script>
 import { playlistFields } from '~/use/playlists'
-import useAuth from '~/use/auth'
+import { useAuth } from '~/use/auth'
 
 export default {
   name: 'PagePlaylistEdit',

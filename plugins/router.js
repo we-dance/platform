@@ -4,6 +4,6 @@ export default ({ app }) => {
   router = app.router
 }
 
-export const useRouter = () => {
+export const getRouter = () => {
   return router
 }

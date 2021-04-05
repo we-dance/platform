@@ -86,8 +86,8 @@
 </template>
 
 <script>
-import useAuth from '~/use/auth'
-import useDoc from '~/use/doc'
+import { useAuth } from '~/use/auth'
+import { useDoc } from '~/use/doc'
 import { getDate, getDateTime, getTime } from '~/utils'
 
 export default {

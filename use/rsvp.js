@@ -1,9 +1,9 @@
-import useAuth from '~/use/auth'
-import useDoc from '~/use/doc'
-import useRouter from '~/use/router'
-import useCollection from '~/use/collection'
+import { useAuth } from '~/use/auth'
+import { useDoc } from '~/use/doc'
+import { useRouter } from '~/use/router'
+import { useCollection } from '~/use/collection'
 
-export default () => {
+export const useRsvp = () => {
   const { uid, account } = useAuth()
   const { router, route } = useRouter()
 

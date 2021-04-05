@@ -30,10 +30,10 @@
 <script>
 import { computed } from '@nuxtjs/composition-api'
 import ls from 'local-storage'
-import useAuth from '~/use/auth'
-import useDoc from '~/use/doc'
-import useTags from '~/use/tags'
-import useRouter from '~/use/router'
+import { useAuth } from '~/use/auth'
+import { useDoc } from '~/use/doc'
+import { useTags } from '~/use/tags'
+import { useRouter } from '~/use/router'
 
 export default {
   name: 'PostEdit',

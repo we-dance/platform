@@ -97,8 +97,8 @@
 
 <script>
 import { useApp } from '~/use/app'
-import useAuth from '~/use/auth'
-import useProfiles from '~/use/profiles'
+import { useAuth } from '~/use/auth'
+import { useProfiles } from '~/use/profiles'
 import { getExcerpt } from '~/utils'
 
 export default {

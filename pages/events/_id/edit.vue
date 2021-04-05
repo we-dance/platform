@@ -32,10 +32,10 @@
 import { addMinutes, parseISO } from 'date-fns'
 import { computed } from '@nuxtjs/composition-api'
 import ls from 'local-storage'
-import useAuth from '~/use/auth'
-import useDoc from '~/use/doc'
-import useRouter from '~/use/router'
-import useEvents from '~/use/events'
+import { useAuth } from '~/use/auth'
+import { useDoc } from '~/use/doc'
+import { useRouter } from '~/use/router'
+import { useEvents } from '~/use/events'
 
 export default {
   name: 'EventEdit',

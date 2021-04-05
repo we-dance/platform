@@ -15,7 +15,7 @@
 
 <script>
 import { offerFilters } from '~/use/offers'
-import useCities from '~/use/cities'
+import { useCities } from '~/use/cities'
 
 export default {
   name: 'OfferIndex',
