@@ -9,9 +9,8 @@ import { useAuth } from '~/use/auth'
 import { useDoc } from '~/use/doc'
 import { getArrayFromHash } from '~/utils'
 
-const db = firebase.initializeApp(process.env.firebase.config).firestore()
-
 export async function cache(name, keyField, check, fields) {
+  const db = firebase.firestore()
   const collection = await db.collection(name).get()
 
   const items = {}
@@ -42,6 +41,8 @@ export async function cache(name, keyField, check, fields) {
 }
 
 export async function warmup() {
+  const db = firebase.firestore()
+
   const profiles = await cache('profiles', 'id', (d) => d.username, [
     'username',
     'photo',
@@ -66,15 +67,17 @@ export async function warmup() {
 }
 
 export async function cacheCity(placeId, data) {
+  const db = firebase.firestore()
   await db
     .collection('app')
     .doc('v2')
     .update({ [`cities.${placeId}`]: data })
 }
 
-export const useCache = createGlobalState(() =>
-  useFirestore(db.collection('app').doc('v2'))
-)
+export const useCache = createGlobalState(() => {
+  const db = firebase.firestore()
+  return useFirestore(db.collection('app').doc('v2'))
+})
 
 export const posterLabelColors = {
   profiles: 'bg-green-500',
@@ -85,6 +88,7 @@ export const posterLabelColors = {
 export const getCityLabel = (doc) => `${doc.name}, ${doc.location.country}`
 
 export const useApp = () => {
+  const db = firebase.firestore()
   const { uid, profile, updateProfile } = useAuth()
   const { create, update } = useDoc('cities')
 
