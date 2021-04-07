@@ -7,7 +7,7 @@
 
     <TPopup
       v-if="isWritingMessage"
-      :title="`Message to ${profile.name}`"
+      :title="`Message to ${profile.username}`"
       @close="isWritingMessage = false"
     >
       <div class="my-4 flex flex-col justify-center">
@@ -91,7 +91,7 @@ export default {
   methods: {
     draftMessage() {
       this.$fire.analytics.logEvent('popup_message')
-      this.message = `Hi ${this.profile.name}!\n\nI am looking for a dance partner to practice.\n\nIf you are interested please contact me via Whatsapp: +XX (XXX) XXX-XX-XXX`
+      this.message = `Hi ${this.profile.username}!\n\nI am looking for a dance partner to practice.\n\nIf you are interested please contact me: `
       this.isWritingMessage = true
     },
     async sendMessage() {
@@ -111,7 +111,7 @@ export default {
         })
 
         this.$toast.success(
-          `Your message have been sent to ${this.profile.name}'s email`
+          `Your message have been sent to ${this.profile.username}'s email`
         )
       } catch (e) {
         this.$toast.error(e.message)
