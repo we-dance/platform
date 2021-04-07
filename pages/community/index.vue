@@ -107,11 +107,11 @@ export default {
       await this.$fire.firestore.collection('city_chats').add({
         uid: this.uid,
         joinedAt: Date.now(),
-        city: this.city?.name
+        city: this.city?.name || ''
       })
 
       this.$fire.analytics.logEvent('join_chat', {
-        city: this.city?.name
+        city: this.city?.name || ''
       })
 
       if (this.city?.telegram) {
