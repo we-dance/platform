@@ -97,6 +97,13 @@
                 • Hometown: {{ getCity(item.profile.hometown) }}</span
               >
             </div>
+            <div v-if="item.profile.cities" class="text-xs">
+              {{
+                Object.keys(item.profile.cities)
+                  .map((city) => getCity(city))
+                  .join(', ')
+              }}
+            </div>
             <pre class="text-xs">uid: {{ item.id }}</pre>
             <pre v-if="item.profile.locales" class="text-xs">
 languages: {{ item.profile.language }} ({{
