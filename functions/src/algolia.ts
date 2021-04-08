@@ -1,5 +1,4 @@
 import algoliasearch from 'algoliasearch'
-// @ts-ignore
 import { firestore } from './firebase'
 import env from './env'
 
