@@ -25,12 +25,7 @@ async function indexProfiles() {
 
     console.log(`Processing ${profile.id} `)
 
-    if (
-      !profile.username ||
-      !profile.place ||
-      !profile.objectives ||
-      !profile.styles
-    ) {
+    if (!profile.username || !profile.place) {
       await index.deleteObject(profile.id)
       console.log(`Deleted`)
       continue
@@ -46,8 +41,10 @@ async function indexProfiles() {
       bio: profile.bio,
       locales: Object.keys(profile.locales),
       location: cache.cities[profile.place].location,
-      styles: Object.keys(profile.styles),
-      objectives: Object.keys(profile.objectives),
+      styles: profile.styles,
+      stylesList: profile.styles ? Object.keys(profile.styles) : [],
+      partner: profile.partner,
+      objectives: profile.objectives ? Object.keys(profile.objectives) : [],
       gender: profile.gender,
       type: profile.type,
       lastLoginAt: profile.lastLoginAt,
