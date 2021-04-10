@@ -40,9 +40,11 @@ async function indexProfiles() {
       weight: profile.weight,
       bio: profile.bio,
       locales: Object.keys(profile.locales),
-      location: cache.cities[profile.place].location,
+      place: profile.place,
+      country: cache.cities[profile.place].location.country,
+      locality: cache.cities[profile.place].location.locality,
       styles: profile.styles,
-      stylesList: profile.styles ? Object.keys(profile.styles) : [],
+      style: profile.styles ? Object.keys(profile.styles) : [],
       partner: profile.partner,
       objectives: profile.objectives ? Object.keys(profile.objectives) : [],
       gender: profile.gender,
@@ -50,7 +52,7 @@ async function indexProfiles() {
       lastLoginAt: profile.lastLoginAt,
       createdAt: profile.createdAt,
       daysUsed: profile.daysUsed,
-      _tags: [profile.type],
+      _tags: profile.styles ? Object.keys(profile.styles) : [],
       _geoloc: {
         lat: cache.cities[profile.place].location.latitude,
         lng: cache.cities[profile.place].location.longitude

@@ -2957,12 +2957,12 @@
     lodash "^4.17.15"
     pretty "^2.0.0"
 
-"@vueuse/core@^4.4.1":
-  version "4.4.1"
-  resolved "https://registry.yarnpkg.com/@vueuse/core/-/core-4.4.1.tgz#1c1a83ac29306840c96329b1005c4d7608cee92f"
-  integrity sha512-L9TWFwI+pEqgEmfv+uWz2kQ9bXejtpaQdoS67UUyii22rSesjP1aTTU7z7XX5i7aIgsHKnKYv68cDCtEZbjsPA==
+"@vueuse/core@^4.8.1":
+  version "4.8.1"
+  resolved "https://registry.yarnpkg.com/@vueuse/core/-/core-4.8.1.tgz#d7a7fb2e72610d1962ecb9244bd93dacb96d921c"
+  integrity sha512-oXFEDaKNU69Rj20/Hd7ZlmTpEtA2M19cRkZaL4A0Nl0w5Wb5In/8aK+0vtdi1VyMUXXbq6h1OGKCJcIhg5cziA==
   dependencies:
-    "@vueuse/shared" "4.4.1"
+    "@vueuse/shared" "4.8.1"
     vue-demi latest
 
 "@vueuse/firebase@^4.4.1":
@@ -2977,6 +2977,13 @@
   version "4.4.1"
   resolved "https://registry.yarnpkg.com/@vueuse/shared/-/shared-4.4.1.tgz#8963740d1b8a036933ae5c02b461b430430e2433"
   integrity sha512-pY7bXgYaA9g25XNREE3zeuIWfOwbyiKeQ0IppE4nIRuro4gVGuLoV/BIU6D0VOTv7hYefv5eqE+WS03v61y8xA==
+  dependencies:
+    vue-demi latest
+
+"@vueuse/shared@4.8.1":
+  version "4.8.1"
+  resolved "https://registry.yarnpkg.com/@vueuse/shared/-/shared-4.8.1.tgz#45fd5f64bf4e8944db42a5b72fa2705cfc74608a"
+  integrity sha512-ONKJoIvZPrGCA8loK7dX+ZcjgZLikI+vPiz1lWlXs6+jZiQiZSLkmvg1NjV6Cfb6OqbDCfEScTWLbZHB7EwrRw==
   dependencies:
     vue-demi latest
 

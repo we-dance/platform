@@ -3,21 +3,7 @@
     class="font-sans leading-normal tracking-normal antialiased min-h-screen flex flex-col"
   >
     <header class="border-b p-4">
-      <div v-if="isSearchShown" class="flex">
-        <TInput
-          v-model="query"
-          auto-focus
-          placeholder="Search dancers, workshops, parties and more"
-          class="w-full"
-        />
-        <button class="-ml-8" @click="isSearchShown = false">
-          <TIcon
-            name="close"
-            class="w-8 h-8 rounded-full cursor-pointer hover:text-primary p-1 mr-1"
-          />
-        </button>
-      </div>
-      <div v-else class="flex items-center justify-between">
+      <div class="flex items-center justify-between">
         <div class="flex flex-no-wrap items-center">
           <div class="mt-1 md:hidden">
             <THamburger v-model="isMenuOpen" />
@@ -29,12 +15,7 @@
           </portal-target>
         </div>
         <div class="flex-grow"></div>
-        <button @click="showSearch()">
-          <TIcon
-            name="search"
-            class="w-8 h-8 rounded-full cursor-pointer hover:text-primary p-1"
-          />
-        </button>
+        <TButton type="icon" icon="search" to="/community/index3?search=1" />
       </div>
     </header>
 
