@@ -1,204 +1,227 @@
 <template>
   <div>
-    <TTitle>
-      <span v-if="city">{{ city.name }}</span> {{ $t('profiles.title') }}
-    </TTitle>
+    <TInput
+      v-if="$route.query.search"
+      v-model="query"
+      auto-focus
+      placeholder="Search dancers"
+      class="mb-4"
+      @input="search"
+    />
+
+    <portal to="right">
+      <TCollapseIcon
+        v-if="response.facets"
+        title="Filter"
+        icon="tune"
+        desktop-class="w-56 space-y-2 p-4"
+      >
+        <button
+          v-if="Object.keys(filters).length"
+          class="rounded-full px-2 py-1 bg-gray-200 inline-block cursor-pointer mb-4"
+          @click="setFilter()"
+        >
+          Reset {{ Object.keys(filters).length }} filters
+        </button>
+        <div v-for="field in facets" :key="field" class="space-y-1">
+          <h4 class="font-bold text-gray-700">
+            {{ $t(`profile.${field}`) }}
+          </h4>
+          <div v-for="(count, value) in response.facets[field]" :key="value">
+            <button
+              class="rounded-full px-2 py-1 bg-gray-200 inline-block cursor-pointer"
+              :class="{ 'font-bold': filters[field] === value }"
+              @click="setFilter(field, value)"
+            >
+              {{ getFieldLabel(field, value) }}
+              <span
+                class="rounded-full text-xs bg-blue-500 text-white h-5 px-1 inline-block"
+                >{{ count }}</span
+              >
+            </button>
+          </div>
+        </div>
+      </TCollapseIcon>
+    </portal>
 
     <div class="flex items-center space-x-2">
-      <TTabs
-        v-if="uid"
-        v-model="profileType"
-        :tabs="typeOptions"
-        class="flex-grow"
-      />
+      <TTabs v-model="profileType" :tabs="typeOptions" class="flex-grow" />
     </div>
 
-    <div class="my-2 flex space-x-2">
-      <TInputPlace v-model="currentCity" clearable />
+    <t-pagination
+      v-model="currentPage"
+      :total-items="response.nbHits"
+      :per-page="response.hitsPerPage"
+      class="mt-4"
+    />
 
-      <t-rich-select
-        v-model="dances"
-        clearable
-        :options="danceStyles"
-        class="w-full"
-        :placeholder="$t('style.label')"
-      />
-      <t-rich-select
-        v-model="objective"
-        :options="objectivesList"
-        hide-search-box
-        clearable
-        class="w-full"
-        :placeholder="$t('profile.objectives')"
-      />
-      <t-rich-select
-        v-model="gender"
-        :options="genderList"
-        hide-search-box
-        clearable
-        placeholder="Gender"
-      />
+    <div class="mt-4 grid grid-cols-1 md:grid-cols-2 col-gap-2 row-gap-2">
+      <router-link
+        v-for="item in response.hits"
+        :key="item.id"
+        :to="`/${item.username}`"
+        class="hover:opacity-75"
+      >
+        <TSharePreviewPost
+          :type="item.type"
+          collection="profiles"
+          :username="item.username"
+          :description="getExcerpt(item.bio)"
+          :color="item.partner === 'Yes' ? 'bg-green-400' : 'bg-red-400'"
+          :photo="item.photo"
+          :styles="item.styles"
+          size="sm"
+        />
+      </router-link>
     </div>
 
-    <div>
-      <WTeaser
-        v-if="!uid"
-        :title="$t('teaser.profile.title')"
-        :description="$t('teaser.profile.description')"
-        :button="$t('teaser.profile.btn')"
-        url="/register"
-      />
-
-      <WTeaser
-        v-if="uid && currentCity"
-        :title="$t('teaser.chat.title')"
-        :description="$t('teaser.chat.description')"
-        :button="$t('teaser.chat.btn', { city: city.name })"
-        class="mb-4"
-        @click="joinChat()"
-      />
-
-      <div class="mt-4 grid grid-cols-1 md:grid-cols-2 col-gap-2 row-gap-2">
-        <router-link
-          v-for="profile in items"
-          :key="profile.id"
-          :to="`/${profile.username}`"
-          class="hover:opacity-75"
-        >
-          <TSharePreviewPost
-            :type="profile.type"
-            collection="profiles"
-            :username="profile.username"
-            :description="getExcerpt(profile.bio)"
-            :color="profile.partner === 'Yes' ? 'bg-green-400' : 'bg-red-400'"
-            :photo="profile.photo"
-            :styles="profile.styles"
-            size="sm"
-          />
-        </router-link>
-      </div>
-
-      <WTeaser
-        v-if="uid && !items.length"
-        :title="$t('teaser.involve.title')"
-        :description="$t('teaser.involve.description')"
-        :button="$t('teaser.involve.btn')"
-        href="http://bit.ly/wedance-start"
-        class="mt-4"
-      />
-    </div>
+    <t-pagination
+      v-model="currentPage"
+      :total-items="response.nbHits"
+      :per-page="response.hitsPerPage"
+      class="mt-4"
+    />
   </div>
 </template>
 
 <script>
-import { ref, computed } from '@nuxtjs/composition-api'
+import Vue from 'vue'
+import { computed, onMounted, ref, watch } from 'vue-demi'
+import { until } from '@vueuse/core'
+import { getExcerpt, getOptions } from '~/utils'
+import { useAlgolia } from '~/use/algolia'
+import { objectivesList, typeList } from '~/use/profiles'
 import { useAuth } from '~/use/auth'
-import { useCollection } from '~/use/collection'
-import { useDoc } from '~/use/doc'
-import { useCities } from '~/use/cities'
-import { sortBy, getExcerpt, getDateTime, openURL, getOptions } from '~/utils'
-import { useProfiles } from '~/use/profiles'
 import { useStyles } from '~/use/styles'
 
 export default {
-  name: 'PeopleIndex',
-  methods: {
-    async joinChat() {
-      await this.$fire.firestore.collection('city_chats').add({
-        uid: this.uid,
-        joinedAt: Date.now(),
-        city: this.city?.name || ''
-      })
-
-      this.$fire.analytics.logEvent('join_chat', {
-        city: this.city?.name || ''
-      })
-
-      if (this.city?.telegram) {
-        openURL(this.city.telegram)
-      } else {
-        openURL('https://t.me/joinchat/Iqif2X0FCXCpqHDj')
-      }
-    }
-  },
+  name: 'ProfilesIndex',
   setup() {
-    const { uid, updateProfile, profile: myProfile } = useAuth()
-
-    const { docs: docsProfiles } = useCollection('profiles')
-    const { create: createProfile } = useDoc('profiles')
-    const { getStylesDropdown } = useStyles()
-
-    const { currentCity, city } = useCities()
-    const { objectivesList, typeList, genderList } = useProfiles()
-
-    const typeOptions = getOptions(typeList, 'All')
+    const query = ref('')
     const profileType = ref('')
-    const tab = ref('partner')
+    const currentPage = ref(1)
+    const filters = ref({})
+    const { uid, profile } = useAuth()
 
-    const objective = ref('')
-    const gender = ref('')
-    const dances = ref('')
-    const danceStyles = computed(() =>
-      getStylesDropdown(myProfile.value?.styles)
-    )
+    const { search, response } = useAlgolia('profiles')
 
-    const items = computed(() => {
-      let result = docsProfiles.value.filter((item) =>
-        currentCity.value ? item.place === currentCity.value : true
-      )
+    const myFilter = computed(() => {
+      if (!uid.value) {
+        return ''
+      }
 
-      result = result.filter(
-        (item) =>
-          item.username &&
-          (uid.value || item.visibility === 'Public') &&
-          item.visibility !== 'Unlisted'
-      )
+      let parts = []
 
-      if (dances.value) {
-        result = result.filter(
-          (item) =>
-            item.styles &&
-            item.styles[dances.value] &&
-            item.styles[dances.value].selected
+      if (profile.value.styles) {
+        parts.push(Object.keys(profile.value.styles).join(' OR '))
+      }
+
+      if (profile.value.objectives) {
+        parts.push(
+          Object.keys(profile.value.objectives)
+            .map((objective) => `objectives:${objective}`)
+            .join(' OR ')
         )
       }
 
-      if (gender.value) {
-        result = result.filter((item) => item.gender === gender.value)
-      }
-
-      if (objective.value) {
-        result = result.filter(
-          (item) => item.objectives && item.objectives[objective.value]
+      if (profile.value.locales) {
+        parts.push(
+          Object.keys(profile.value.locales)
+            .map((locale) => `locales:${locale}`)
+            .join(' OR ')
         )
       }
 
-      result = result.filter((item) =>
-        profileType.value ? item.type && item.type === profileType.value : true
+      parts.push(
+        `gender:${profile.value.gender === 'Male' ? 'Female' : 'Male'}`
       )
 
-      return result.sort(sortBy('-lastLoginAt'))
+      parts.push(`place:${profile.value.place}`)
+
+      parts = parts.map((part) => `(${part})`)
+
+      return parts.join(' AND ')
     })
 
+    const facets = ['country', 'locality', 'gender', 'objectives', 'style']
+
+    onMounted(async () => {
+      if (uid.value) {
+        await until(profile).not.toBeNull()
+      }
+
+      await search('', {
+        filters: myFilter.value,
+        facets
+      })
+    })
+
+    const typeOptions = getOptions(typeList, 'For You')
+
+    const filterQuery = computed(() => {
+      if (profileType.value) {
+        return `type:${profileType.value}`
+      } else {
+        return myFilter.value
+      }
+    })
+
+    const facetFilters = computed(() => {
+      return Object.keys(filters.value).map(
+        (field) => `${field}:${filters.value[field]}`
+      )
+    })
+
+    const facetFiltersStr = computed(() => {
+      return facetFilters.value.join(',')
+    })
+
+    function setFilter(field, value) {
+      if (!field) {
+        filters.value = {}
+      } else if (filters.value[field] === value) {
+        Vue.delete(filters.value, field)
+      } else {
+        Vue.set(filters.value, field, value)
+      }
+    }
+
+    watch([currentPage, filterQuery, facetFiltersStr], () => {
+      search(query.value, {
+        filters: filterQuery.value,
+        facets,
+        facetFilters: facetFilters.value,
+        page: currentPage.value - 1
+      })
+      window.scrollTo(0, 0)
+    })
+
+    const { getStyleName } = useStyles()
+
+    function getFieldLabel(field, value) {
+      switch (field) {
+        case 'objectives':
+          return objectivesList.find((o) => o.value === value).label
+        case 'style':
+          return getStyleName(value)
+        default:
+          return value
+      }
+    }
+
     return {
-      items,
-      uid,
-      tab,
-      updateProfile,
-      myProfile,
-      objective,
-      gender,
-      dances,
-      objectivesList,
-      genderList,
-      currentCity,
-      typeOptions,
-      profileType,
+      facets,
       getExcerpt,
-      createProfile,
-      danceStyles,
-      getDateTime,
-      city
+      search,
+      query,
+      response,
+      typeOptions,
+      filters,
+      currentPage,
+      profileType,
+      facetFilters,
+      setFilter,
+      getFieldLabel
     }
   }
 }

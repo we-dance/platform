@@ -15,7 +15,7 @@
           </portal-target>
         </div>
         <div class="flex-grow"></div>
-        <TButton type="icon" icon="search" to="/community/index3?search=1" />
+        <TButton type="icon" icon="search" to="/community/?search=1" />
       </div>
     </header>
 
