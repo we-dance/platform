@@ -1,0 +1,46 @@
+<template>
+  <div v-if="isDesktop">
+    <slot />
+  </div>
+  <div v-else>
+    <div
+      class="fixed flex items-center justify-center bottom-0 right-0 mb-4 mr-4 shadow-lg bg-white text-primary rounded-full p-2"
+      @click="isOpen = true"
+    >
+      <TIcon :name="icon" size="6" />
+    </div>
+    <TPopup v-if="isOpen" :title="title" @close="isOpen = false">
+      <div class="max-w-md mx-auto py-4 h-64 overflow-y-scroll">
+        <slot />
+      </div>
+    </TPopup>
+  </div>
+</template>
+
+<script>
+import { useMediaQuery } from '@vueuse/core'
+import { ref } from 'vue-demi'
+
+export default {
+  props: {
+    title: {
+      type: String,
+      default: ''
+    },
+    icon: {
+      type: String,
+      default: ''
+    },
+    desktopClass: {
+      type: String,
+      default: ''
+    }
+  },
+  setup() {
+    const isOpen = ref(false)
+    const isDesktop = useMediaQuery('(min-width: 800px)')
+
+    return { isDesktop, isOpen }
+  }
+}
+</script>

@@ -10,7 +10,12 @@
     />
 
     <portal to="right">
-      <div v-if="response.facets" class="w-56 space-y-2 p-4">
+      <TCollapseIcon
+        v-if="response.facets"
+        title="Filter"
+        icon="tune"
+        desktop-class="w-56 space-y-2 p-4"
+      >
         <button
           v-if="Object.keys(filters).length"
           class="rounded-full px-2 py-1 bg-gray-200 inline-block cursor-pointer mb-4"
@@ -19,7 +24,9 @@
           Reset {{ Object.keys(filters).length }} filters
         </button>
         <div v-for="field in facets" :key="field" class="space-y-1">
-          <h4 class="font-bold text-gray-700">{{ $t(`profile.${field}`) }}</h4>
+          <h4 class="font-bold text-gray-700">
+            {{ $t(`profile.${field}`) }}
+          </h4>
           <div v-for="(count, value) in response.facets[field]" :key="value">
             <button
               class="rounded-full px-2 py-1 bg-gray-200 inline-block cursor-pointer"
@@ -34,7 +41,7 @@
             </button>
           </div>
         </div>
-      </div>
+      </TCollapseIcon>
     </portal>
 
     <div class="flex items-center space-x-2">
@@ -94,12 +101,12 @@ export default {
     const profileType = ref('')
     const currentPage = ref(1)
     const filters = ref({})
-    const { profile } = useAuth()
+    const { uid, profile } = useAuth()
 
     const { search, response } = useAlgolia('profiles')
 
     const myFilter = computed(() => {
-      if (!profile.value) {
+      if (!uid.value) {
         return ''
       }
 
@@ -136,10 +143,13 @@ export default {
       return parts.join(' AND ')
     })
 
-    const facets = ['gender', 'country', 'locality', 'objectives', 'style']
+    const facets = ['country', 'locality', 'gender', 'objectives', 'style']
 
     onMounted(async () => {
-      await until(profile).not.toBeNull()
+      if (uid.value) {
+        await until(profile).not.toBeNull()
+      }
+
       await search('', {
         filters: myFilter.value,
         facets
