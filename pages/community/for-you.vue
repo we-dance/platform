@@ -1,14 +1,5 @@
 <template>
   <div>
-    <TInput
-      v-if="$route.query.search"
-      v-model="query"
-      auto-focus
-      placeholder="Search dancers"
-      class="mb-4"
-      @input="search"
-    />
-
     <portal to="right">
       <TCollapseIcon
         v-if="response.facets"
@@ -48,6 +39,7 @@
       v-model="currentPage"
       :total-items="response.nbHits"
       :per-page="response.hitsPerPage"
+      class="mt-4"
     />
 
     <div class="mt-4 grid grid-cols-1 md:grid-cols-2 col-gap-2 row-gap-2">
@@ -82,9 +74,11 @@
 <script>
 import Vue from 'vue'
 import { computed, onMounted, ref, watch } from 'vue-demi'
-import { getExcerpt, getOptions } from '~/utils'
+import { until } from '@vueuse/core'
+import { getExcerpt } from '~/utils'
 import { useAlgolia } from '~/use/algolia'
-import { objectivesList, typeList } from '~/use/profiles'
+import { objectivesList } from '~/use/profiles'
+import { useAuth } from '~/use/auth'
 import { useStyles } from '~/use/styles'
 
 export default {
@@ -94,32 +88,63 @@ export default {
     const profileType = ref('')
     const currentPage = ref(1)
     const filters = ref({})
+    const { uid, profile } = useAuth()
 
     const { search, response } = useAlgolia('profiles')
 
-    const facets = [
-      'type',
-      'gender',
-      'objectives',
-      'country',
-      'locality',
-      'style'
-    ]
+    const myFilter = computed(() => {
+      if (!uid.value) {
+        return ''
+      }
+
+      let parts = []
+
+      if (profile.value.styles) {
+        parts.push(Object.keys(profile.value.styles).join(' OR '))
+      }
+
+      if (profile.value.objectives) {
+        parts.push(
+          Object.keys(profile.value.objectives)
+            .map((objective) => `objectives:${objective}`)
+            .join(' OR ')
+        )
+      }
+
+      if (profile.value.locales) {
+        parts.push(
+          Object.keys(profile.value.locales)
+            .map((locale) => `locales:${locale}`)
+            .join(' OR ')
+        )
+      }
+
+      parts.push(
+        `gender:${profile.value.gender === 'Male' ? 'Female' : 'Male'}`
+      )
+
+      parts.push(`place:${profile.value.place}`)
+
+      parts = parts.map((part) => `(${part})`)
+
+      return parts.join(' AND ')
+    })
+
+    const facets = ['country', 'locality', 'gender', 'objectives', 'style']
 
     onMounted(async () => {
+      if (uid.value) {
+        await until(profile).not.toBeNull()
+      }
+
       await search('', {
+        filters: myFilter.value,
         facets
       })
     })
 
-    const typeOptions = getOptions(typeList, 'All')
-
     const filterQuery = computed(() => {
-      if (profileType.value) {
-        return `type:${profileType.value}`
-      } else {
-        return ''
-      }
+      return myFilter.value
     })
 
     const facetFilters = computed(() => {
@@ -171,7 +196,6 @@ export default {
       search,
       query,
       response,
-      typeOptions,
       filters,
       currentPage,
       profileType,

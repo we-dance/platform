@@ -1,6 +1,8 @@
 <template>
   <div v-if="isDesktop">
-    <slot />
+    <div :class="desktopClass">
+      <slot />
+    </div>
   </div>
   <div v-else>
     <div
