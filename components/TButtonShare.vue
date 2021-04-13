@@ -11,7 +11,7 @@
         <TButton type="nav" @click="copyToClipboard">
           Copy Link
         </TButton>
-        <TButton type="nav" @click="download">
+        <TButton type="nav" download :href="downloadUrl" @click="download">
           Download Image
         </TButton>
         <TButton
@@ -131,8 +131,6 @@ export default {
         content_type: this.collection,
         content_id: this.id
       })
-
-      openURL(this.downloadUrl)
     },
     async copyToClipboard() {
       this.$fire.analytics.logEvent('share', {
