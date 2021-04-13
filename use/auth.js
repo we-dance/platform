@@ -181,11 +181,11 @@ export const useAuth = () => {
 
     const lastLoginAt = new Date()
     const pwaUsed =
-      state.profile.pwaUsed || state.account.pwaUsed || features.pwa
+      state.profile?.pwaUsed || state.account?.pwaUsed || features.pwa
     const daysUsed =
-      (state.profile.daysUsed || state.account.daysUsed || 0) +
+      (state.profile?.daysUsed || state.account?.daysUsed || 0) +
       (isSameDay(
-        getDateObect(state.profile.lastLoginAt || state.account.lastLoginAt),
+        getDateObect(state.profile?.lastLoginAt || state.account?.lastLoginAt),
         lastLoginAt
       )
         ? 0
