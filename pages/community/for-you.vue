@@ -1,48 +1,6 @@
 <template>
   <div>
-    <portal to="right">
-      <TCollapseIcon
-        v-if="response.facets"
-        title="Filter"
-        icon="tune"
-        desktop-class="w-56 space-y-2 p-4"
-      >
-        <button
-          v-if="Object.keys(filters).length"
-          class="rounded-full px-2 py-1 bg-gray-200 inline-block cursor-pointer mb-4"
-          @click="setFilter()"
-        >
-          Reset {{ Object.keys(filters).length }} filters
-        </button>
-        <div v-for="field in facets" :key="field" class="space-y-1">
-          <h4 class="font-bold text-gray-700">
-            {{ $t(`profile.${field}`) }}
-          </h4>
-          <div v-for="(count, value) in response.facets[field]" :key="value">
-            <button
-              class="rounded-full px-2 py-1 bg-gray-200 inline-block cursor-pointer"
-              :class="{ 'font-bold': filters[field] === value }"
-              @click="setFilter(field, value)"
-            >
-              {{ getFieldLabel(field, value) }}
-              <span
-                class="rounded-full text-xs bg-blue-500 text-white h-5 px-1 inline-block"
-                >{{ count }}</span
-              >
-            </button>
-          </div>
-        </div>
-      </TCollapseIcon>
-    </portal>
-
-    <t-pagination
-      v-model="currentPage"
-      :total-items="response.nbHits"
-      :per-page="response.hitsPerPage"
-      class="mt-4"
-    />
-
-    <div class="mt-4 grid grid-cols-1 md:grid-cols-2 col-gap-2 row-gap-2">
+    <div class="mt-4 max-w-sm mx-auto">
       <router-link
         v-for="item in response.hits"
         :key="item.id"
@@ -60,34 +18,25 @@
           size="sm"
         />
       </router-link>
+      <div class="mt-4 flex justify-between">
+        <TButton label="Archive" />
+        <TButton type="primary" label="Save for later" @click="currentPage++" />
+      </div>
     </div>
-
-    <t-pagination
-      v-model="currentPage"
-      :total-items="response.nbHits"
-      :per-page="response.hitsPerPage"
-      class="mt-4"
-    />
   </div>
 </template>
 
 <script>
-import Vue from 'vue'
 import { computed, onMounted, ref, watch } from 'vue-demi'
 import { until } from '@vueuse/core'
 import { getExcerpt } from '~/utils'
 import { useAlgolia } from '~/use/algolia'
-import { objectivesList } from '~/use/profiles'
 import { useAuth } from '~/use/auth'
-import { useStyles } from '~/use/styles'
 
 export default {
   name: 'ProfilesIndex',
   setup() {
-    const query = ref('')
-    const profileType = ref('')
     const currentPage = ref(1)
-    const filters = ref({})
     const { uid, profile } = useAuth()
 
     const { search, response } = useAlgolia('profiles')
@@ -130,8 +79,6 @@ export default {
       return parts.join(' AND ')
     })
 
-    const facets = ['country', 'locality', 'gender', 'objectives', 'style']
-
     onMounted(async () => {
       if (uid.value) {
         await until(profile).not.toBeNull()
@@ -139,69 +86,23 @@ export default {
 
       await search('', {
         filters: myFilter.value,
-        facets
+        hitsPerPage: 1
       })
     })
 
-    const filterQuery = computed(() => {
-      return myFilter.value
-    })
-
-    const facetFilters = computed(() => {
-      return Object.keys(filters.value).map(
-        (field) => `${field}:${filters.value[field]}`
-      )
-    })
-
-    const facetFiltersStr = computed(() => {
-      return facetFilters.value.join(',')
-    })
-
-    function setFilter(field, value) {
-      if (!field) {
-        filters.value = {}
-      } else if (filters.value[field] === value) {
-        Vue.delete(filters.value, field)
-      } else {
-        Vue.set(filters.value, field, value)
-      }
-    }
-
-    watch([currentPage, filterQuery, facetFiltersStr], () => {
-      search(query.value, {
-        filters: filterQuery.value,
-        facets,
-        facetFilters: facetFilters.value,
+    watch(currentPage, () => {
+      search('', {
+        filters: myFilter.value,
+        hitsPerPage: 1,
         page: currentPage.value - 1
       })
-      window.scrollTo(0, 0)
     })
 
-    const { getStyleName } = useStyles()
-
-    function getFieldLabel(field, value) {
-      switch (field) {
-        case 'objectives':
-          return objectivesList.find((o) => o.value === value).label
-        case 'style':
-          return getStyleName(value)
-        default:
-          return value
-      }
-    }
-
     return {
-      facets,
       getExcerpt,
       search,
-      query,
       response,
-      filters,
-      currentPage,
-      profileType,
-      facetFilters,
-      setFilter,
-      getFieldLabel
+      currentPage
     }
   }
 }

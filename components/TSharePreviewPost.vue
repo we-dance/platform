@@ -1,8 +1,8 @@
 <template>
   <div>
     <div id="canvas" class="relative leading-none font-lato">
-      <img v-if="photo" :src="photo" :alt="title" class="w-full" />
-      <div v-else class="square bg-indigo-500"></div>
+      <img v-if="photo" :src="photo" :alt="title" class="absolute w-full" />
+      <div class="square bg-indigo-500"></div>
 
       <div
         class="absolute h-full w-full top-0 p-4 text-white flex flex-col bg-gradient-to-t from-black to-transparent"
