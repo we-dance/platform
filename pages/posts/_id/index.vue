@@ -21,13 +21,13 @@
       />
       <div v-if="!uid" class="p-4 text-center bg-gray-100 rounded">
         <router-link
-          to="/signin"
+          :to="`/signin?target=${$route.fullPath}`"
           class="underline text-blue-500 hover:no-underline"
           >Login</router-link
         >
         to read full post. Not a member yet?
         <router-link
-          to="/signin"
+          :to="`/register?target=${$route.fullPath}`"
           class="underline text-blue-500 hover:no-underline"
           >Register</router-link
         >.
@@ -39,13 +39,13 @@
     <TItemComments v-if="uid" :reply-to="doc.createdBy" :post-id="doc.id" />
     <div v-else class="mt-4 p-4 text-center bg-gray-100 rounded">
       <router-link
-        to="/signin"
+        :to="`/signin?target=${$route.fullPath}`"
         class="underline text-blue-500 hover:no-underline"
         >Login</router-link
       >
       to see discussion. Not a member yet?
       <router-link
-        to="/register"
+        :to="`/register?target=${$route.fullPath}`"
         class="underline text-blue-500 hover:no-underline"
         >Register</router-link
       >.
