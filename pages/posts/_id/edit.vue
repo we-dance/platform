@@ -133,7 +133,8 @@ export default {
           },
           {
             name: 'place',
-            type: 'place'
+            type: 'place',
+            clearable: true
           },
           {
             name: 'styles',

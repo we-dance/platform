@@ -7,7 +7,7 @@
     :filter-default="{ place: currentCity }"
     :filter-fields="postFilters"
     :tabs="postSorts"
-    sort-by="-savedByCount"
+    sort-by="-createdAt"
     list-wrapper="mt-4 grid grid-cols-1 md:grid-cols-2 col-gap-2 row-gap-2"
   >
     <template v-slot:before>

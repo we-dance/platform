@@ -99,7 +99,7 @@ const settings = {
           'rounded flex flex-shrink-0 items-center justify-center absolute right-0 top-0 m-1 h-6 w-6 transition duration-100 ease-in-out',
         selectButtonClearIcon: 'bg-white fill-current h-3 w-3',
         dropdown:
-          'absolute w-full z-50 -mt-1 border-b border-l border-r rounded-b shadow-sm',
+          'absolute w-full min-w-40 z-50 -mt-1 border-b border-l border-r rounded-b shadow-sm',
         dropdownFeedback: '',
         loadingMoreResults: '',
         optionsList: 'overflow-auto',

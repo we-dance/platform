@@ -107,4 +107,8 @@ html {
   text-shadow: none;
 }
 
+.min-w-40 {
+  min-width: 10rem;
+}
+
 /* purgecss end ignore */
