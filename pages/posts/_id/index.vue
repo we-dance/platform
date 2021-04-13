@@ -17,7 +17,7 @@
       <TPreview
         :content="doc.description"
         class="mt-4"
-        :class="uid ? '' : 'h-64 overflow-hidden'"
+        :class="uid || $route.query.preview ? '' : 'h-64 overflow-hidden'"
       />
       <div v-if="!uid" class="p-4 text-center bg-gray-100 rounded">
         <router-link
