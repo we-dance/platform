@@ -232,12 +232,12 @@ export default {
       {
         value: 'boosting',
         label: 'Boosting',
-        filter: (account) => account.profile?.socialCoverPublish === 'Yes'
+        filter: (account) => account.profile?.permission === 'Yes'
       },
       {
         value: 'noboosting',
         label: 'Not boosting',
-        filter: (account) => account.profile?.socialCoverPublish === 'No'
+        filter: (account) => account.profile?.permission === 'No'
       },
       {
         value: 'looking',
