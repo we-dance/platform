@@ -10,79 +10,64 @@
       <TButton type="icon" icon="close" to="/community" />
     </div>
 
-    <div v-if="!$route.query.search || query">
-      <portal to="right">
-        <TCollapseIcon
-          v-if="response.facets"
-          title="Filter"
-          icon="tune"
-          desktop-class="w-56 space-y-2 p-4"
-        >
-          <div v-if="uid" class="mb-4">
-            <router-link
-              to="/community/for-you"
-              class="underline hover:no-underline text-blue-500"
-              >Top picks for you</router-link
-            >
-          </div>
+    <div v-if="uid" class="mb-4">
+      <router-link
+        to="/community/for-you"
+        class="underline hover:no-underline text-blue-500"
+        >Top picks for you</router-link
+      >
+    </div>
 
-          <div class="space-y-4">
-            <button
-              v-if="Object.keys(filters).length"
-              class="rounded-full px-2 py-1 bg-gray-200 inline-block cursor-pointer"
-              @click="setFilter()"
-            >
-              Reset {{ Object.keys(filters).length }} filters
-            </button>
-
-            <t-rich-select
-              v-for="field in facets"
-              :key="field"
-              :placeholder="$t(`profile.${field}`)"
-              :options="getFacetOptions(field)"
-              clearable
-              hide-search-box
-              @input="(val) => setFilter(field, val)"
-            />
-          </div>
-        </TCollapseIcon>
-      </portal>
-
-      <t-pagination
-        v-if="response.nbPages > 1 && !$route.query.search"
-        v-model="currentPage"
-        :total-items="response.nbHits"
-        :per-page="response.hitsPerPage"
-      />
-
-      <div class="mt-4 grid grid-cols-1 md:grid-cols-2 col-gap-2 row-gap-2">
-        <router-link
-          v-for="item in response.hits"
-          :key="item.id"
-          :to="`/${item.username}`"
-          class="hover:opacity-75"
-        >
-          <TSharePreviewPost
-            :type="item.type"
-            collection="profiles"
-            :username="item.username"
-            :description="getExcerpt(item.bio)"
-            :color="item.partner === 'Yes' ? 'bg-green-400' : 'bg-red-400'"
-            :photo="item.photo"
-            :styles="item.styles"
-            size="sm"
-          />
-        </router-link>
-      </div>
-
-      <t-pagination
-        v-if="response.nbPages > 1 && !$route.query.search"
-        v-model="currentPage"
-        :total-items="response.nbHits"
-        :per-page="response.hitsPerPage"
-        class="mt-4"
+    <div
+      v-if="response.facets && !$route.query.search"
+      class="flex flex-no-wrap space-x-2 w-full overflow-x-scroll overflow-y-visible"
+    >
+      <t-rich-select
+        v-for="field in facets"
+        :key="field"
+        :placeholder="$t(`profile.${field}`)"
+        :options="getFacetOptions(field)"
+        clearable
+        hide-search-box
+        @input="(val) => setFilter(field, val)"
       />
     </div>
+
+    <t-pagination
+      v-if="response.nbPages > 1 && !$route.query.search"
+      v-model="currentPage"
+      :total-items="response.nbHits"
+      :per-page="response.hitsPerPage"
+      class="mt-4"
+    />
+
+    <div class="mt-4 grid grid-cols-1 md:grid-cols-2 col-gap-2 row-gap-2">
+      <router-link
+        v-for="item in response.hits"
+        :key="item.id"
+        :to="`/${item.username}`"
+        class="hover:opacity-75"
+      >
+        <TSharePreviewPost
+          :type="item.type"
+          collection="profiles"
+          :username="item.username"
+          :description="getExcerpt(item.bio)"
+          :color="item.partner === 'Yes' ? 'bg-green-400' : 'bg-red-400'"
+          :photo="item.photo"
+          :styles="item.styles"
+          size="sm"
+        />
+      </router-link>
+    </div>
+
+    <t-pagination
+      v-if="response.nbPages > 1 && !$route.query.search"
+      v-model="currentPage"
+      :total-items="response.nbHits"
+      :per-page="response.hitsPerPage"
+      class="mt-4"
+    />
   </div>
 </template>
 
@@ -166,7 +151,11 @@ export default {
     const { getStyleName } = useStyles()
 
     function getFacetOptions(field) {
-      if (!response.value || !response.value.facets[field]) {
+      if (
+        !response.value ||
+        !response.value.facets ||
+        !response.value.facets[field]
+      ) {
         return []
       }
 
