@@ -39,7 +39,7 @@
     <TItemComments v-if="uid" :reply-to="doc.createdBy" :post-id="doc.id" />
     <div v-else class="mt-4 p-4 text-center bg-gray-100 rounded">
       <router-link
-        to="/login"
+        to="/signin"
         class="underline text-blue-500 hover:no-underline"
         >Login</router-link
       >
