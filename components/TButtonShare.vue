@@ -31,7 +31,6 @@
 </template>
 
 <script>
-import { saveAs } from 'file-saver'
 import axios from 'axios'
 import { openURL } from '~/utils'
 import { useCities } from '~/use/cities'
@@ -133,7 +132,7 @@ export default {
         content_id: this.id
       })
 
-      saveAs(this.downloadUrl, `${this.fileName}.png`)
+      openURL(this.downloadUrl)
     },
     async copyToClipboard() {
       this.$fire.analytics.logEvent('share', {
