@@ -72,8 +72,6 @@ export default {
         `gender:${profile.value.gender === 'Male' ? 'Female' : 'Male'}`
       )
 
-      parts.push(`place:${profile.value.place}`)
-
       parts = parts.map((part) => `(${part})`)
 
       return parts.join(' AND ')
@@ -86,7 +84,9 @@ export default {
 
       await search('', {
         filters: myFilter.value,
-        hitsPerPage: 1
+        hitsPerPage: 1,
+        aroundLatLngViaIP: true,
+        aroundRadius: 50000
       })
     })
 
@@ -94,7 +94,9 @@ export default {
       search('', {
         filters: myFilter.value,
         hitsPerPage: 1,
-        page: currentPage.value - 1
+        page: currentPage.value - 1,
+        aroundLatLngViaIP: true,
+        aroundRadius: 50000
       })
     })
 

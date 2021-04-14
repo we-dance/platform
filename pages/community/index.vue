@@ -10,70 +10,119 @@
       <TButton type="icon" icon="close" to="/community" />
     </div>
 
-    <div v-if="uid" class="mb-4">
-      <router-link
-        to="/community/for-you"
-        class="underline hover:no-underline text-blue-500"
-        >Top picks for you</router-link
-      >
-    </div>
+    <div v-if="!$route.query.search || query">
+      <portal v-if="!feat('community_filters')" to="right">
+        <TCollapseIcon
+          v-if="response.facets"
+          title="Filter"
+          icon="tune"
+          desktop-class="w-56 space-y-2 p-4"
+        >
+          <div v-if="uid" class="mb-4">
+            <router-link
+              to="/community/for-you"
+              class="underline hover:no-underline text-blue-500"
+              >Top picks for you</router-link
+            >
+          </div>
 
-    <div
-      v-if="response.facets && !$route.query.search"
-      class="flex flex-no-wrap space-x-2 w-full overflow-x-scroll overflow-y-visible"
-    >
-      <t-rich-select
-        v-for="field in facets"
-        :key="field"
-        :placeholder="$t(`profile.${field}`)"
-        :options="getFacetOptions(field)"
-        clearable
-        hide-search-box
-        @input="(val) => setFilter(field, val)"
+          <div class="space-y-2">
+            <button
+              v-if="Object.keys(filters).length"
+              class="rounded-full px-2 py-1 bg-gray-200 inline-block cursor-pointer"
+              @click="setFilter()"
+            >
+              Reset {{ Object.keys(filters).length }} filters
+            </button>
+
+            <t-rich-select
+              v-model="radius"
+              placeholder="Radius"
+              :options="radiusOptions"
+              hide-search-box
+            />
+
+            <t-rich-select
+              v-for="field in facets"
+              :key="field"
+              :placeholder="$t(`profile.${field}`)"
+              :options="getFacetOptions(field)"
+              clearable
+              hide-search-box
+              @input="(val) => setFilter(field, val)"
+            />
+          </div>
+        </TCollapseIcon>
+      </portal>
+
+      <div v-if="uid && feat('community_filters')" class="mb-4">
+        <router-link
+          to="/community/for-you"
+          class="underline hover:no-underline text-blue-500"
+          >Top picks for you</router-link
+        >
+      </div>
+
+      <div
+        v-if="
+          response.facets && !$route.query.search && feat('community_filters')
+        "
+        class="flex flex-no-wrap space-x-2 w-full overflow-x-scroll overflow-y-visible"
+      >
+        <t-rich-select
+          v-for="field in facets"
+          :key="field"
+          :placeholder="$t(`profile.${field}`)"
+          :options="getFacetOptions(field)"
+          clearable
+          hide-search-box
+          @input="(val) => setFilter(field, val)"
+        />
+      </div>
+
+      <t-pagination
+        v-if="response.nbPages > 1 && !$route.query.search"
+        v-model="currentPage"
+        :total-items="response.nbHits"
+        :per-page="response.hitsPerPage"
+        class="mt-4"
+      />
+
+      <div class="mt-4 grid grid-cols-1 md:grid-cols-2 col-gap-2 row-gap-2">
+        <router-link
+          v-for="item in response.hits"
+          :key="item.id"
+          :to="`/${item.username}`"
+          class="hover:opacity-75"
+        >
+          <TSharePreviewPost
+            :type="item.type"
+            collection="profiles"
+            :username="item.username"
+            :description="getExcerpt(item.bio)"
+            :color="item.partner === 'Yes' ? 'bg-green-400' : 'bg-red-400'"
+            :photo="item.photo"
+            :styles="item.styles"
+            size="sm"
+          />
+        </router-link>
+      </div>
+
+      <t-pagination
+        v-if="response.nbPages > 1 && !$route.query.search"
+        v-model="currentPage"
+        :total-items="response.nbHits"
+        :per-page="response.hitsPerPage"
+        class="mt-4"
       />
     </div>
-
-    <t-pagination
-      v-if="response.nbPages > 1 && !$route.query.search"
-      v-model="currentPage"
-      :total-items="response.nbHits"
-      :per-page="response.hitsPerPage"
-      class="mt-4"
-    />
-
-    <div class="mt-4 grid grid-cols-1 md:grid-cols-2 col-gap-2 row-gap-2">
-      <router-link
-        v-for="item in response.hits"
-        :key="item.id"
-        :to="`/${item.username}`"
-        class="hover:opacity-75"
-      >
-        <TSharePreviewPost
-          :type="item.type"
-          collection="profiles"
-          :username="item.username"
-          :description="getExcerpt(item.bio)"
-          :color="item.partner === 'Yes' ? 'bg-green-400' : 'bg-red-400'"
-          :photo="item.photo"
-          :styles="item.styles"
-          size="sm"
-        />
-      </router-link>
-    </div>
-
-    <t-pagination
-      v-if="response.nbPages > 1 && !$route.query.search"
-      v-model="currentPage"
-      :total-items="response.nbHits"
-      :per-page="response.hitsPerPage"
-      class="mt-4"
-    />
   </div>
 </template>
 
 <script>
 import Vue from 'vue'
 import { computed, onMounted, ref, watch } from 'vue-demi'
+import ls from 'local-storage'
 import { getExcerpt, getOptions } from '~/utils'
 import { useAlgolia } from '~/use/algolia'
 import { objectivesList, typeList } from '~/use/profiles'
@@ -83,6 +132,7 @@ import { useAuth } from '~/use/auth'
 export default {
   name: 'ProfilesIndex',
   setup() {
+    const radius = ref(50)
     const query = ref('')
     const profileType = ref('')
     const currentPage = ref(1)
@@ -102,8 +152,14 @@ export default {
 
     onMounted(async () => {
       await search('', {
-        facets
+        facets,
+        aroundLatLngViaIP: !!radius.value,
+        aroundRadius: radius.value * 1000
       })
+
+      if (!response.value.hits.length) {
+        radius.value = ''
+      }
     })
 
     const typeOptions = getOptions(typeList, 'All')
@@ -117,6 +173,10 @@ export default {
     })
 
     const facetFilters = computed(() => {
+      if (!filters.value) {
+        return ''
+      }
+
       return Object.keys(filters.value).map(
         (field) => `${field}:${filters.value[field]}`
       )
@@ -138,12 +198,14 @@ export default {
       }
     }
 
-    watch([currentPage, filterQuery, facetFiltersStr], () => {
+    watch([currentPage, filterQuery, facetFiltersStr, radius], () => {
       search(query.value, {
         filters: filterQuery.value,
         facets,
         facetFilters: facetFilters.value,
-        page: currentPage.value - 1
+        page: currentPage.value - 1,
+        aroundLatLngViaIP: !!radius.value,
+        aroundRadius: radius.value * 1000
       })
       window.scrollTo(0, 0)
     })
@@ -182,7 +244,43 @@ export default {
       }
     }
 
+    const radiusOptions = [
+      {
+        label: 'in 10km radius',
+        value: 10
+      },
+      {
+        label: 'in 20km radius',
+        value: 20
+      },
+      {
+        label: 'in 50km radius',
+        value: 50
+      },
+      {
+        label: 'in 100km radius',
+        value: 100
+      },
+      {
+        label: 'in 500km radius',
+        value: 500
+      },
+      {
+        label: 'in 1000km radius',
+        value: 1000
+      },
+      {
+        label: `Anywhere`,
+        value: ''
+      }
+    ]
+
+    function feat(name) {
+      return !!ls(name)
+    }
+
     return {
+      radiusOptions,
       uid,
       getFacetOptions,
       facets,
@@ -196,7 +294,9 @@ export default {
       profileType,
       facetFilters,
       setFilter,
-      getFieldLabel
+      getFieldLabel,
+      feat,
+      radius
     }
   }
 }

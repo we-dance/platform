@@ -1,70 +1,38 @@
-import algoliasearch from 'algoliasearch'
-import { firestore } from './firebase'
-import env from './env'
+// import { firestore } from './firebase'
+// import { initIndex, profileToAlgolia } from './lib/algolia'
 
-const algolia = algoliasearch(env.algolia.appId, env.algolia.apiKey)
+// async function indexProfiles() {
+//   const cache = (
+//     await firestore
+//       .collection('app')
+//       .doc('v2')
+//       .get()
+//   ).data() as any
 
-async function indexProfiles() {
-  const cache = (
-    await firestore
-      .collection('app')
-      .doc('v2')
-      .get()
-  ).data() as any
+//   const index = initIndex('profiles')
 
-  const profileDocs = (await firestore.collection('profiles').get()).docs
-  console.log(`Found ${profileDocs.length} profiles`)
+//   const profileDocs = (await firestore.collection('profiles').get()).docs
+//   const objects = []
 
-  const index = algolia.initIndex('profiles')
+//   for (const doc of profileDocs) {
+//     const profile = {
+//       id: doc.id,
+//       ...doc.data()
+//     } as any
 
-  for (let doc of profileDocs) {
-    const profile = {
-      id: doc.id,
-      ...doc.data()
-    } as any
+//     if (!profile.username || !profile.place) {
+//       await index.deleteObject(profile.id)
+//       continue
+//     }
 
-    console.log(`Processing ${profile.id} `)
+//     objects.push(profileToAlgolia(profile, cache))
+//   }
 
-    if (!profile.username || !profile.place) {
-      await index.deleteObject(profile.id)
-      console.log(`Deleted`)
-      continue
-    }
+//   await index.saveObjects(objects)
+// }
 
-    await index.saveObject({
-      objectID: profile.id,
-      id: profile.id,
-      username: profile.username,
-      photo: profile.photo,
-      height: profile.height,
-      weight: profile.weight,
-      bio: profile.bio,
-      locales: Object.keys(profile.locales),
-      place: profile.place,
-      country: cache.cities[profile.place].location.country,
-      locality: cache.cities[profile.place].location.locality,
-      styles: profile.styles,
-      style: profile.styles ? Object.keys(profile.styles) : [],
-      partner: profile.partner,
-      objectives: profile.objectives ? Object.keys(profile.objectives) : [],
-      gender: profile.gender,
-      type: profile.type,
-      lastLoginAt: profile.lastLoginAt,
-      createdAt: profile.createdAt,
-      daysUsed: profile.daysUsed,
-      _tags: profile.styles ? Object.keys(profile.styles) : [],
-      _geoloc: {
-        lat: cache.cities[profile.place].location.latitude,
-        lng: cache.cities[profile.place].location.longitude
-      }
-    })
-
-    console.log(`Saved profile ${profile.username}`)
-  }
-}
-
-try {
-  indexProfiles()
-} catch (e) {
-  console.log(e)
-}
+// try {
+//   indexProfiles()
+// } catch (e) {
+//   console.log(e)
+// }

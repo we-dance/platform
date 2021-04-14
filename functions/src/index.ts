@@ -5,6 +5,7 @@ import * as cors from 'cors'
 import * as Handlebars from 'handlebars'
 import sendEmail from './lib/sendEmail'
 import screenshot from './lib/screenshot'
+import { initIndex, profileToAlgolia } from './lib/algolia'
 
 admin.initializeApp()
 const db = admin.firestore()
@@ -94,7 +95,7 @@ const render = (templateString: string, data: Object) => {
   return templator({ data })
 }
 
-export const welcomeEmail = functions.firestore
+export const onProfileChange = functions.firestore
   .document('profiles/{profileId}')
   .onWrite(async (change, context) => {
     const snapshot = change.after
@@ -102,16 +103,31 @@ export const welcomeEmail = functions.firestore
     const profile = snapshot.data()
     const profileId = context.params.profileId
 
-    if (
-      !profile ||
-      !profile.username ||
-      !profile.place ||
-      oldProfile?.place === profile.place
-    ) {
+    if (!profile || !profile.username || !profile.place) {
       return
     }
 
-    let city: any
+    const cache = (
+      await db
+        .collection('app')
+        .doc('v2')
+        .get()
+    ).data() as any
+
+    const index = initIndex('profiles')
+    await index.saveObject(
+      profileToAlgolia(
+        {
+          ...profile,
+          id: profileId
+        },
+        cache
+      )
+    )
+
+    if (oldProfile?.place === profile.place) {
+      return
+    }
 
     const account = (
       await db
@@ -157,6 +173,8 @@ export const welcomeEmail = functions.firestore
       .collection('cities')
       .where('location.place_id', '==', profile.place)
       .get()
+
+    let city: any
 
     cities.forEach((currentCity) => {
       city = currentCity.data()
