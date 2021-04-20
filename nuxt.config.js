@@ -31,6 +31,9 @@ export const firebase = {
 
 export default {
   mode: 'spa',
+  tailwindcss: {
+    jit: true
+  },
   /*
    ** Customize the progress-bar color
    */
