@@ -11,7 +11,7 @@
     </div>
 
     <div v-if="!$route.query.search || query">
-      <portal v-if="!feat('community_filters')" to="right">
+      <portal to="right">
         <TCollapseIcon
           v-if="response.facets"
           title="Filter"
@@ -30,7 +30,7 @@
             <button
               v-if="Object.keys(filters).length"
               class="rounded-full px-2 py-1 bg-gray-200 inline-block cursor-pointer"
-              @click="setFilter()"
+              @click="load()"
             >
               Reset {{ Object.keys(filters).length }} filters
             </button>
@@ -43,42 +43,18 @@
             />
 
             <t-rich-select
-              v-for="field in facets"
+              v-for="(options, field) in facets"
+              v-show="options.length > 1"
               :key="field"
+              v-model="filters[field]"
               :placeholder="$t(`profile.${field}`)"
-              :options="getFacetOptions(field)"
+              :options="options"
               clearable
               hide-search-box
-              @input="(val) => setFilter(field, val)"
             />
           </div>
         </TCollapseIcon>
       </portal>
-
-      <div v-if="uid && feat('community_filters')" class="mb-4">
-        <router-link
-          to="/community/for-you"
-          class="underline hover:no-underline text-blue-500"
-          >Top picks for you</router-link
-        >
-      </div>
-
-      <div
-        v-if="
-          response.facets && !$route.query.search && feat('community_filters')
-        "
-        class="flex flex-no-wrap space-x-2 w-full overflow-x-scroll overflow-y-visible"
-      >
-        <t-rich-select
-          v-for="field in facets"
-          :key="field"
-          :placeholder="$t(`profile.${field}`)"
-          :options="getFacetOptions(field)"
-          clearable
-          hide-search-box
-          @input="(val) => setFilter(field, val)"
-        />
-      </div>
 
       <t-pagination
         v-if="response.nbPages > 1 && !$route.query.search"
@@ -88,7 +64,7 @@
         class="mt-4"
       />
 
-      <div class="mt-4 grid grid-cols-1 md:grid-cols-2 col-gap-2 row-gap-2">
+      <div class="mt-4 grid grid-cols-1 md:grid-cols-2 gap-2">
         <router-link
           v-for="item in response.hits"
           :key="item.id"
@@ -120,7 +96,6 @@
 </template>
 
 <script>
-import Vue from 'vue'
 import { computed, onMounted, ref, watch } from 'vue-demi'
 import ls from 'local-storage'
 import { getExcerpt, getOptions } from '~/utils'
@@ -141,26 +116,30 @@ export default {
 
     const { search, response } = useAlgolia('profiles')
 
-    const facets = [
-      'country',
-      'locality',
-      'type',
-      'gender',
-      'objectives',
-      'style'
-    ]
+    const facets = computed(() => ({
+      country: getFacetOptions('country'),
+      locality: getFacetOptions('locality'),
+      type: getFacetOptions('type'),
+      gender: getFacetOptions('gender'),
+      objectives: getFacetOptions('objectives'),
+      style: getFacetOptions('style')
+    }))
 
-    onMounted(async () => {
+    async function load() {
+      filters.value = {}
+
       await search('', {
-        facets,
+        facets: Object.keys(facets.value),
         aroundLatLngViaIP: !!radius.value,
-        aroundRadius: radius.value * 1000
+        aroundRadius: radius.value * 1000 || 1
       })
 
       if (!response.value.hits.length) {
         radius.value = ''
       }
-    })
+    }
+
+    onMounted(load)
 
     const typeOptions = getOptions(typeList, 'All')
 
@@ -186,26 +165,14 @@ export default {
       return facetFilters.value.join(',')
     })
 
-    function setFilter(field, value) {
-      if (!field) {
-        filters.value = {}
-      } else if (!value) {
-        Vue.delete(filters.value, field)
-      } else if (filters.value[field] === value) {
-        Vue.delete(filters.value, field)
-      } else {
-        Vue.set(filters.value, field, value)
-      }
-    }
-
     watch([currentPage, filterQuery, facetFiltersStr, radius], () => {
       search(query.value, {
         filters: filterQuery.value,
-        facets,
+        facets: Object.keys(facets.value),
         facetFilters: facetFilters.value,
         page: currentPage.value - 1,
         aroundLatLngViaIP: !!radius.value,
-        aroundRadius: radius.value * 1000
+        aroundRadius: radius.value * 1000 || 1
       })
       window.scrollTo(0, 0)
     })
@@ -213,11 +180,7 @@ export default {
     const { getStyleName } = useStyles()
 
     function getFacetOptions(field) {
-      if (
-        !response.value ||
-        !response.value.facets ||
-        !response.value.facets[field]
-      ) {
+      if (!response.value?.facets || !response.value.facets[field]) {
         return []
       }
 
@@ -293,10 +256,10 @@ export default {
       currentPage,
       profileType,
       facetFilters,
-      setFilter,
       getFieldLabel,
       feat,
-      radius
+      radius,
+      load
     }
   }
 }
