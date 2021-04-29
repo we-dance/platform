@@ -11,55 +11,36 @@
     </div>
 
     <div v-if="!$route.query.search || query">
-      <portal to="right">
-        <TCollapseIcon
-          v-if="response.facets"
-          title="Filter"
-          icon="tune"
-          desktop-class="w-56 space-y-2 p-4"
-        >
-          <div v-if="uid" class="mb-4">
-            <router-link
-              to="/community/for-you"
-              class="underline hover:no-underline text-blue-500"
-              >Top picks for you</router-link
-            >
-          </div>
+      <TCollapseIcon
+        v-if="response.facets"
+        title="Filter"
+        icon="tune"
+        desktop-class="mb-4 gap-2 flex flex-wrap"
+        mobile-class="space-y-2"
+      >
+        <t-rich-select
+          v-model="radius"
+          placeholder="Radius"
+          :options="radiusOptions"
+          hide-search-box
+        />
 
-          <div class="space-y-2">
-            <t-rich-select
-              v-model="radius"
-              placeholder="Radius"
-              :options="radiusOptions"
-              hide-search-box
-            />
+        <t-rich-select
+          v-for="(options, field) in facets"
+          :key="field"
+          v-model="filters[field]"
+          :placeholder="$t(`profile.${field}`)"
+          :options="options"
+          clearable
+          hide-search-box
+        />
 
-            <t-rich-select
-              v-for="(options, field) in facets"
-              :key="field"
-              v-model="filters[field]"
-              :placeholder="$t(`profile.${field}`)"
-              :options="options"
-              clearable
-              hide-search-box
-            />
+        <TButton v-if="facetFilters" type="base" @click="load()">
+          Reset filters
+        </TButton>
+      </TCollapseIcon>
 
-            <TButton v-if="facetFilters" @click="load()">
-              Reset filters
-            </TButton>
-          </div>
-        </TCollapseIcon>
-      </portal>
-
-      <t-pagination
-        v-if="response.nbPages > 1 && !$route.query.search"
-        v-model="currentPage"
-        :total-items="response.nbHits"
-        :per-page="response.hitsPerPage"
-        class="mt-4"
-      />
-
-      <div class="mt-4 grid grid-cols-1 md:grid-cols-2 gap-2">
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
         <router-link
           v-for="item in response.hits"
           :key="item.id"
@@ -92,7 +73,6 @@
 
 <script>
 import { computed, onMounted, ref, watch } from 'vue-demi'
-import ls from 'local-storage'
 import { getExcerpt, getOptions } from '~/utils'
 import { useAlgolia } from '~/use/algolia'
 import { objectivesList, typeList } from '~/use/profiles'
@@ -122,6 +102,7 @@ export default {
 
     async function load() {
       filters.value = {}
+      query.value = ''
 
       await search('', {
         facets: Object.keys(facets.value),
@@ -145,8 +126,17 @@ export default {
         .join(',')
     })
 
+    const filterQuery = computed(() => {
+      if (uid.value) {
+        return `visibility:Public OR visibility:Members`
+      } else {
+        return 'visibility:Public'
+      }
+    })
+
     watch([currentPage, facetFilters, radius], () => {
-      search(query.value, {
+      search('', {
+        filters: filterQuery.value,
         facets: Object.keys(facets.value),
         facetFilters: facetFilters.value,
         page: currentPage.value - 1,
@@ -188,38 +178,34 @@ export default {
 
     const radiusOptions = [
       {
-        label: 'in 10km radius',
+        label: 'around 10km',
         value: 10
       },
       {
-        label: 'in 20km radius',
+        label: 'around 20km',
         value: 20
       },
       {
-        label: 'in 50km radius',
+        label: 'around 50km',
         value: 50
       },
       {
-        label: 'in 100km radius',
+        label: 'around 100km',
         value: 100
       },
       {
-        label: 'in 500km radius',
+        label: 'around 500km',
         value: 500
       },
       {
-        label: 'in 1000km radius',
+        label: 'around 1000km',
         value: 1000
       },
       {
-        label: `Anywhere`,
+        label: 'Anywhere',
         value: ''
       }
     ]
-
-    function feat(name) {
-      return !!ls(name)
-    }
 
     return {
       radiusOptions,
@@ -236,7 +222,6 @@ export default {
       profileType,
       facetFilters,
       getFieldLabel,
-      feat,
       radius,
       load
     }

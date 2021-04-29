@@ -6,14 +6,14 @@
   </div>
   <div v-else>
     <div
-      class="fixed flex items-center justify-center bottom-0 right-0 mb-4 mr-4 shadow-lg bg-white text-primary rounded-full py-2 px-4 space-x-2"
+      class="fixed flex items-center justify-center bottom-0 right-0 mb-4 mr-4 shadow-lg bg-white text-primary rounded-full py-2 px-4 space-x-2 z-50"
       @click="isOpen = true"
     >
       <TIcon :name="icon" size="6" />
       <span class="text-dark">{{ title }}</span>
     </div>
     <TPopup v-if="isOpen" :title="title" @close="isOpen = false">
-      <div class="py-4 h-64 overflow-y-scroll">
+      <div class="py-4 h-64 overflow-y-scroll" :class="mobileClass">
         <slot />
       </div>
     </TPopup>
@@ -35,6 +35,10 @@ export default {
       default: ''
     },
     desktopClass: {
+      type: String,
+      default: ''
+    },
+    mobileClass: {
       type: String,
       default: ''
     }

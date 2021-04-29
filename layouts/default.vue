@@ -52,11 +52,9 @@
         :username="username"
         class="hidden md:block flex-initial"
       />
-      <portal-target name="left" />
       <div class="flex-grow p-4 mx-auto w-full max-w-xl">
         <nuxt />
       </div>
-      <portal-target name="right" />
     </div>
 
     <TFooter />
