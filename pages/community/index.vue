@@ -27,14 +27,6 @@
           </div>
 
           <div class="space-y-2">
-            <button
-              v-if="Object.keys(filters).length"
-              class="rounded-full px-2 py-1 bg-gray-200 inline-block cursor-pointer"
-              @click="load()"
-            >
-              Reset {{ Object.keys(filters).length }} filters
-            </button>
-
             <t-rich-select
               v-model="radius"
               placeholder="Radius"
@@ -44,7 +36,6 @@
 
             <t-rich-select
               v-for="(options, field) in facets"
-              v-show="options.length > 1"
               :key="field"
               v-model="filters[field]"
               :placeholder="$t(`profile.${field}`)"
@@ -52,6 +43,10 @@
               clearable
               hide-search-box
             />
+
+            <TButton v-if="facetFilters" @click="load()">
+              Reset filters
+            </TButton>
           </div>
         </TCollapseIcon>
       </portal>
@@ -143,31 +138,15 @@ export default {
 
     const typeOptions = getOptions(typeList, 'All')
 
-    const filterQuery = computed(() => {
-      if (profileType.value) {
-        return `type:${profileType.value}`
-      } else {
-        return ''
-      }
-    })
-
     const facetFilters = computed(() => {
-      if (!filters.value) {
-        return ''
-      }
-
-      return Object.keys(filters.value).map(
-        (field) => `${field}:${filters.value[field]}`
-      )
+      return Object.keys(filters.value)
+        .filter((field) => filters.value[field])
+        .map((field) => `${field}:${filters.value[field]}`)
+        .join(',')
     })
 
-    const facetFiltersStr = computed(() => {
-      return facetFilters.value.join(',')
-    })
-
-    watch([currentPage, filterQuery, facetFiltersStr, radius], () => {
+    watch([currentPage, facetFilters, radius], () => {
       search(query.value, {
-        filters: filterQuery.value,
         facets: Object.keys(facets.value),
         facetFilters: facetFilters.value,
         page: currentPage.value - 1,

@@ -15736,10 +15736,10 @@ vue-svg-loader@^0.16.0:
     loader-utils "^1.2.3"
     svg-to-vue "^0.7.0"
 
-vue-tailwind@^2.1.3:
-  version "2.1.3"
-  resolved "https://registry.yarnpkg.com/vue-tailwind/-/vue-tailwind-2.1.3.tgz#7264ffb292a38431b71834e78ac149095754d6e8"
-  integrity sha512-8HMOjx542DR/i7DRtBZ1A7zkEfMXUJVZH/HsBngmsJA84PSPMroLDPh12RdWXCXt1EaOxW29tXh4Hdqh7QeWVw==
+vue-tailwind@^2.2.1:
+  version "2.2.1"
+  resolved "https://registry.yarnpkg.com/vue-tailwind/-/vue-tailwind-2.2.1.tgz#ea42f260db49fda2dbe1454d66e40578f13875b4"
+  integrity sha512-TgSRy97ZjhDSJSmzC+hav/uA5vZpiszyTp75Ecbr2kyzAamj5wXcXB8BTsOXliAP/6ym4Wd/LElwLE8RYyfg6w==
   dependencies:
     body-scroll-lock "^3.1.5"
     lodash.clonedeep "^4.5.0"

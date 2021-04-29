@@ -57,7 +57,7 @@
 
       <div
         v-if="view === 'covers'"
-        class="mt-4 grid grid-cols-1 md:grid-cols-2 col-gap-2 row-gap-2"
+        class="mt-4 grid grid-cols-1 md:grid-cols-2 gap-2"
       >
         <router-link
           v-for="event in events"
