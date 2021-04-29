@@ -40,19 +40,17 @@
 
       <div class="flex justify-center space-x-2">
         <TPopupEdit
-          :fields="profilePosterFields"
-          label="Edit Poster"
+          v-if="isAdmin()"
+          :fields="profileFields"
+          label="Edit Profile"
           collection="profiles"
           singular="profile"
           :item="profile"
         />
-
-        <TPopupEdit
-          :fields="profileDetailFields"
-          label="Edit Details"
-          collection="profiles"
-          singular="profile"
-          :item="profile"
+        <TButton
+          v-else-if="can('edit', 'profiles', profile)"
+          label="Edit Profile"
+          to="/settings?tab=profile"
         />
       </div>
 
@@ -109,16 +107,17 @@ export default {
     }
   },
   setup() {
-    const { uid } = useAuth()
-    const { profilePosterFields, profileDetailFields } = useProfiles()
+    const { uid, isAdmin, can } = useAuth()
+    const { profileFields } = useProfiles()
     const { getCity } = useApp()
 
     return {
       uid,
+      can,
       getExcerpt,
-      profilePosterFields,
-      profileDetailFields,
-      getCity
+      profileFields,
+      getCity,
+      isAdmin
     }
   }
 }

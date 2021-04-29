@@ -25,6 +25,7 @@
           :collection="collection"
           :singular="singular"
           :fields="fields"
+          @save="$emit('save')"
           @cancel="isPopupOpen = false"
         />
       </div>

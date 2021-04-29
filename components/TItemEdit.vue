@@ -117,6 +117,8 @@ export default {
         await this.create(data)
       }
 
+      this.$emit('save')
+
       this.cancelItem()
     },
     async removeItem(id) {
