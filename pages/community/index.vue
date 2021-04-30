@@ -18,7 +18,7 @@
 
     <div v-if="!$route.query.search || query">
       <TCollapseIcon
-        v-if="response.facets"
+        v-if="uid && response.facets"
         title="Filter"
         icon="tune"
         desktop-class="mb-4 gap-2 flex flex-wrap"
@@ -67,10 +67,19 @@
       </div>
 
       <t-pagination
-        v-if="response.nbPages > 1 && !$route.query.search"
+        v-if="uid && response.nbPages > 1 && !$route.query.search"
         v-model="currentPage"
         :total-items="response.nbHits"
         :per-page="response.hitsPerPage"
+        class="mt-4"
+      />
+
+      <WTeaser
+        v-if="!uid"
+        :title="$t('teaser.profile.title')"
+        :description="$t('teaser.profile.description')"
+        :button="$t('teaser.profile.btn')"
+        url="/signup"
         class="mt-4"
       />
     </div>
@@ -106,19 +115,9 @@ export default {
       style: getFacetOptions('style')
     }))
 
-    async function load() {
+    function load() {
       filters.value = {}
       query.value = ''
-
-      await search('', {
-        facets: Object.keys(facets.value),
-        aroundLatLngViaIP: !!radius.value,
-        aroundRadius: radius.value * 1000 || 1
-      })
-
-      if (!response.value.hits.length) {
-        radius.value = ''
-      }
     }
 
     onMounted(load)
@@ -147,7 +146,8 @@ export default {
         facetFilters: facetFilters.value,
         page: currentPage.value - 1,
         aroundLatLngViaIP: !!radius.value,
-        aroundRadius: radius.value * 1000 || 1
+        aroundRadius: radius.value * 1000 || 1,
+        hitsPerPage: uid.value ? 10 : 4
       })
       window.scrollTo(0, 0)
     })

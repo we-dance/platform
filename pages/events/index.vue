@@ -6,27 +6,8 @@
       </h1>
     </portal>
 
-    <div class="flex items-center space-x-2">
-      <TTabs
-        v-if="uid"
-        v-model="activeFilter"
-        :tabs="filterOptions"
-        class="flex-grow"
-      />
-      <div>
-        <TButton
-          v-if="view === 'list'"
-          icon="news"
-          type="icon"
-          @click="view = 'covers'"
-        />
-        <TButton
-          v-if="view === 'covers'"
-          icon="notes"
-          type="icon"
-          @click="view = 'list'"
-        />
-      </div>
+    <div v-if="uid" class="flex items-center space-x-2">
+      <TTabs v-model="activeFilter" :tabs="filterOptions" class="flex-grow" />
     </div>
 
     <div class="flex my-2 space-x-2">
@@ -44,6 +25,20 @@
         :options="danceStyles"
         :placeholder="$t('style.label')"
       />
+      <div>
+        <TButton
+          v-if="view === 'list'"
+          icon="news"
+          type="icon"
+          @click="view = 'covers'"
+        />
+        <TButton
+          v-if="view === 'covers'"
+          icon="notes"
+          type="icon"
+          @click="view = 'list'"
+        />
+      </div>
     </div>
 
     <div class="mt-4">

@@ -5,6 +5,7 @@
     <TButton to="/" icon="logo-horizontal-dark" class="mb-8" type="void" />
 
     <TButton
+      v-if="uid"
       to="/community/for-you"
       icon="gps_fixed"
       label="Ramble"
