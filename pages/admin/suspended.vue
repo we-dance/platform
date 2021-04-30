@@ -5,11 +5,12 @@
         <div class="flex justify-between p-4">
           <div>
             <div class="font-bold text-lg">{{ item.reason }}</div>
-            <div>{{ item.username }}</div>
+            <div>{{ item.username }} • {{ item.email }}</div>
             <div v-if="item.profile" class="text-sm text-gray-700">
               {{ getCity(item.profile.place) }} •
               {{ item.profile.daysUsed }} days used
             </div>
+            <pre v-if="$route.query.debug">{{ item.profile }}</pre>
           </div>
           <div>{{ getDateTimeYear(item.deletedAt) }}</div>
         </div>
