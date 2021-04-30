@@ -46,7 +46,10 @@
 
     <div :class="wrapperClass">
       <div v-for="(item, itemId) in items" :key="item.id">
-        <slot name="item" :item="item">
+        <div class="flex justify-end">
+          <slot name="card-toolbar" :item="item" />
+        </div>
+        <slot :item="item">
           <TItemCard :key="itemId">
             <TListItem :item="item" :fields="fields" />
             <TItemToolbar :item="item" :collection="collection" :edit="false">

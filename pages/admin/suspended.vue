@@ -1,6 +1,6 @@
 <template>
   <TCardList v-bind="config" class="max-w-md">
-    <template v-slot:item="{ item }">
+    <template v-slot:default="{ item }">
       <div class="space-y-2 border rounded overflow-hidden">
         <div class="flex justify-between p-4">
           <div>

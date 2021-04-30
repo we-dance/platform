@@ -28,7 +28,7 @@
           />
         </button>
       </template>
-      <template v-slot="{ item }">
+      <template v-slot:default="{ item }">
         <TRecipients
           v-if="peopleId === item.id"
           :recipients="item.recipients"
