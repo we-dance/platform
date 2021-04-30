@@ -4,7 +4,7 @@
     "lint": "tslint --project tsconfig.json",
     "build": "tsc",
     "test": "npm run build && node dist/test.js",
-    "algolia": "npm run build && node dist/algolia.js",
+    "cli": "npm run build && node dist/cli.js",
     "serve": "npm run build && firebase emulators:start --only functions",
     "shell": "npm run build && firebase functions:shell",
     "start": "npm run shell",
@@ -12,7 +12,7 @@
     "logs": "firebase functions:log"
   },
   "engines": {
-    "node": "10"
+    "node": "12"
   },
   "main": "dist/index.js",
   "dependencies": {
@@ -28,7 +28,8 @@
     "handlebars": "^4.7.6",
     "mailgun-js": "^0.22.0",
     "markdown-it": "^10.0.0",
-    "puppeteer": "^7.0.0"
+    "puppeteer": "^7.0.0",
+    "yargs": "^16.2.0"
   },
   "devDependencies": {
     "@types/puppeteer": "^5.4.2",

@@ -4,7 +4,7 @@ import * as express from 'express'
 import * as cors from 'cors'
 import * as Handlebars from 'handlebars'
 import sendEmail from './lib/sendEmail'
-import screenshot from './lib/screenshot'
+import { screenshot } from './lib/screenshot'
 import { initIndex, profileToAlgolia } from './lib/algolia'
 
 admin.initializeApp()
