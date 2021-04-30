@@ -2,14 +2,11 @@
   <div class="rounded bg-white mb-4 shadow border">
     <div class="p-4">
       <div>
-        <div class="flex justify-between">
-          <router-link
-            :to="`/posts/${item.id}`"
-            class="font-bold leading-tight"
-            >{{ item.title }}</router-link
-          >
-          <TCardActions :id="item.id" collection="posts" :item="item" />
-        </div>
+        <router-link
+          :to="`/posts/${item.id}`"
+          class="font-bold leading-tight"
+          >{{ item.title }}</router-link
+        >
 
         <div class="text-xs my-1 flex items-center">
           <TAvatar class="mr-2" photo size="sm" :uid="item.createdBy" />
@@ -36,39 +33,25 @@
       />
 
       <div class="flex items-center space-x-2">
-        <TButton
-          :to="`/posts/${item.id}`"
-          icon="chat"
-          type="icon"
-          :label="item.commentsCount"
-        />
-        <TButtonLike
-          :value="item.response === 'up'"
-          :count="item.upVotes"
-          @change="updateRsvp(item.id, 'posts', 'up')"
-        />
+        <TButtonFav collection="posts" :item="item" />
       </div>
     </div>
   </div>
 </template>
 
 <script>
-import { useRsvp } from '~/use/rsvp'
 import { dateDiff } from '~/utils'
 
 export default {
-  setup() {
-    const { updateRsvp } = useRsvp()
-
-    return {
-      updateRsvp,
-      dateDiff
-    }
-  },
   props: {
     item: {
       type: Object,
       default: () => ({})
+    }
+  },
+  setup() {
+    return {
+      dateDiff
     }
   }
 }

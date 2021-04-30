@@ -107,7 +107,6 @@ import { computed, ref } from '@nuxtjs/composition-api'
 import { startOfWeek, addDays, endOfYear } from 'date-fns'
 import { useRsvp } from '~/use/rsvp'
 import { useCollection } from '~/use/collection'
-import { useAccounts } from '~/use/accounts'
 import { useAuth } from '~/use/auth'
 import { useCities } from '~/use/cities'
 import { useRouter } from '~/use/router'
@@ -193,8 +192,6 @@ export default {
 
     const loading = computed(() => loadingRsvps.value || loadingPosts.value)
 
-    const { getAccount } = useAccounts()
-
     const activeFilter = ref('thisYear')
 
     const isPublic = (item) => item.visibility !== 'Unlisted'
@@ -273,7 +270,6 @@ export default {
       itemsByDate,
       getRsvpResponse,
       dateDiff,
-      getAccount,
       loading,
       getById,
       uid,

@@ -116,7 +116,7 @@ import { useRsvp } from '~/use/rsvp'
 import { useRouter } from '~/use/router'
 import { useProfiles } from '~/use/profiles'
 import { useReactions } from '~/use/reactions'
-import { useAccounts } from '~/use/accounts'
+import { accountFields } from '~/use/accounts'
 import { useCities } from '~/use/cities'
 import {
   getDay,
@@ -225,7 +225,6 @@ export default {
 
     const { params } = useRouter()
     const { getProfile } = useProfiles()
-    const { accountFields } = useAccounts()
 
     const { doc, load, exists, loading } = useDoc('events')
     const { map } = useReactions()

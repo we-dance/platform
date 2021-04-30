@@ -56,9 +56,7 @@
 <script>
 import { computed, ref } from '@nuxtjs/composition-api'
 import { startOfWeek, addDays, endOfYear } from 'date-fns'
-import { useRsvp } from '~/use/rsvp'
 import { useCollection } from '~/use/collection'
-import { useAccounts } from '~/use/accounts'
 import { useAuth } from '~/use/auth'
 import { useCities } from '~/use/cities'
 import {
@@ -92,17 +90,8 @@ export default {
     }
   },
   setup(params) {
-    const {
-      getCount,
-      getRsvpResponse,
-      updateRsvp,
-      loading: loadingRsvps
-    } = useRsvp()
     const { currentCity } = useCities()
-    const { docs, loading: loadingPosts, getById } = useCollection(
-      'events',
-      params.filter
-    )
+    const { docs, loading, getById } = useCollection('events', params.filter)
 
     const { uid } = useAuth()
 
@@ -111,22 +100,11 @@ export default {
         return {}
       }
 
-      const upVotes = getCount(item.id, 'up')
-      const downVotes = getCount(item.id, 'down')
-      const votes = upVotes - downVotes
-      const response = getRsvpResponse(item.id)
-      const multi = !response ? 3 : response === 'up' ? 2 : 1
-      const order = multi * 100 + votes
       const startDate = getDateObect(item.startDate)
 
       return {
         ...item,
-        startDate,
-        upVotes,
-        downVotes,
-        votes,
-        response,
-        order
+        startDate
       }
     }
 
@@ -138,10 +116,6 @@ export default {
     const endOfYearString = getYmd(endOfYear(now))
 
     const count = computed(() => items.value.length)
-
-    const loading = computed(() => loadingRsvps.value || loadingPosts.value)
-
-    const { getAccount } = useAccounts()
 
     const activeFilter = ref('thisYear')
 
@@ -187,10 +161,7 @@ export default {
       count,
       itemsByDate,
       items,
-      getRsvpResponse,
-      updateRsvp,
       dateDiff,
-      getAccount,
       loading,
       getById,
       uid,

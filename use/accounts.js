@@ -82,7 +82,6 @@ export const useAccounts = () => {
 
   return {
     getAccount,
-    accountFields,
     getAccountByEmail
   }
 }
