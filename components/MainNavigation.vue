@@ -1,15 +1,17 @@
 <template>
   <nav
-    class="p-4 flex flex-col space-y-2 text-dark h-screen overflow-y-scroll sticky top-0"
+    class="p-4 flex flex-col space-y-2 text-dark h-screen overflow-y-scroll sticky top-0 border-r"
   >
+    <TButton to="/" icon="logo-horizontal-dark" class="mb-8" type="void" />
+
     <TButton
-      to="/"
-      icon="logo-horizontal-dark"
-      class="md:hidden mb-4"
-      type="void"
+      to="/community/for-you"
+      icon="gps_fixed"
+      label="Ramble"
+      type="nav"
     />
 
-    <TButton to="/" icon="fire" :label="$t('posts.title')" type="nav" />
+    <TButton to="/" icon="chat" label="Messages" type="nav" />
     <TButton
       to="/community"
       icon="people"
@@ -41,43 +43,50 @@
     <TButton
       v-if="isAdmin() || isEditor()"
       to="/admin/shares"
-      type="nav-admin"
+      type="nav"
+      class="text-gray-700"
       label="Shares"
     />
     <TButton
       v-if="isAdmin()"
       to="/admin/accounts"
-      type="nav-admin"
+      type="nav"
+      class="text-gray-700"
       label="Accounts"
     />
     <TButton
       v-if="isAdmin()"
       to="/admin/cities"
-      type="nav-admin"
+      type="nav"
+      class="text-gray-700"
       label="Cities"
     />
     <TButton
       v-if="isAdmin()"
       to="/admin/reports"
-      type="nav-admin"
+      type="nav"
+      class="text-gray-700"
       label="Reports"
     />
     <TButton
       v-if="isAdmin()"
       to="/admin/matches"
-      type="nav-admin"
+      type="nav"
+      class="text-gray-700"
       label="Matches"
     />
     <TButton
       v-if="isAdmin()"
       to="/admin/emails"
-      type="nav-admin"
+      type="nav"
+      class="text-gray-700"
       label="Emails"
     />
     <TButton
       v-if="isAdmin()"
       to="/admin/templates"
-      type="nav-admin"
+      type="nav"
+      class="text-gray-700"
       label="Templates"
     />
   </nav>

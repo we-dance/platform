@@ -1,5 +1,11 @@
 <template>
-  <div>
+  <div class="p-4">
+    <portal to="title">
+      <h1 class="ml-1 font-lato text-lg font-bold">
+        {{ $t('profiles.title') }}
+      </h1>
+    </portal>
+
     <div v-if="$route.query.search" class="flex items-center mb-4">
       <TInput
         v-model="query"

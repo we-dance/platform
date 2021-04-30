@@ -1,12 +1,9 @@
 <template>
-  <div>
+  <div class="p-4">
     <portal to="title">
-      <router-link to="/" class="flex items-center">
-        <TIcon name="icon" size="8" />
-        <h1 class="ml-1 font-lato text-lg font-bold">
-          {{ profile.username }}
-        </h1>
-      </router-link>
+      <h1 class="ml-1 font-lato text-lg font-bold">
+        {{ profile.username }}
+      </h1>
     </portal>
 
     <TItemCard>

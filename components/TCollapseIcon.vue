@@ -6,7 +6,7 @@
   </div>
   <div v-else>
     <div
-      class="fixed flex items-center justify-center bottom-0 right-0 mb-4 mr-4 shadow-lg bg-white text-primary rounded-full py-2 px-4 space-x-2 z-50"
+      class="fixed flex items-center justify-center bottom-0 right-0 mb-4 mr-4 shadow-lg bg-white text-primary rounded-full py-2 px-4 space-x-2 z-50 cursor-pointer"
       @click="isOpen = true"
     >
       <TIcon :name="icon" size="6" />

@@ -1,24 +1,7 @@
 <template>
   <div
-    class="font-sans leading-normal tracking-normal antialiased min-h-screen flex flex-col"
+    class="font-sans leading-normal tracking-normal antialiased min-h-screen flex flex-col mx-auto max-w-3xl border-r"
   >
-    <header class="border-b p-4">
-      <div class="flex items-center justify-between">
-        <div class="flex flex-no-wrap items-center">
-          <div class="mt-1 md:hidden">
-            <THamburger v-model="isMenuOpen" />
-          </div>
-          <portal-target name="title">
-            <router-link to="/">
-              <TIcon name="logo-horizontal-dark" />
-            </router-link>
-          </portal-target>
-        </div>
-        <div class="flex-grow"></div>
-        <TButton type="icon" icon="search" to="/community/?search=1" />
-      </div>
-    </header>
-
     <TPopup v-if="showAuthPopup">
       <div class="flex justify-between border-b pb-2 mb-4">
         <div class="font-bold">Members only</div>
@@ -50,9 +33,21 @@
       <MainNavigation
         :uid="uid"
         :username="username"
-        class="hidden md:block flex-initial"
+        class="hidden md:block flex-initial w-64"
       />
-      <div class="flex-grow p-4 mx-auto w-full max-w-xl">
+      <div class="flex-grow w-full">
+        <header class="border-b p-4">
+          <div class="flex items-center justify-between">
+            <div class="flex flex-no-wrap items-center">
+              <div class="mt-1 md:hidden">
+                <THamburger v-model="isMenuOpen" />
+              </div>
+              <portal-target name="title" />
+            </div>
+            <div class="flex-grow"></div>
+            <TButton type="icon" icon="search" to="/community/?search=1" />
+          </div>
+        </header>
         <nuxt />
       </div>
     </div>

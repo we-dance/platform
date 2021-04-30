@@ -1,5 +1,5 @@
 <template>
-  <main class="mt-8">
+  <main class="p-4">
     <TLoader v-if="loading || !profile || !account" />
     <div v-else>
       <TPopup v-if="isBoosting" title="Bonus" @close="skipBoosting()">
@@ -38,11 +38,13 @@
           </div>
         </div>
       </TPopup>
-      <div>
-        <div class="font-bold text-xl mb-4 pb-4 border-b">
+
+      <portal to="title">
+        <h1 class="ml-1 font-lato text-lg font-bold">
           {{ $t('settings.title') }}
-        </div>
-      </div>
+        </h1>
+      </portal>
+
       <div class="rounded bg-white mb-4 shadow border p-4 bg-white">
         <div class="flex items-center">
           <div>

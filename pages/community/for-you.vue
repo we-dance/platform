@@ -1,5 +1,11 @@
 <template>
   <div>
+    <portal to="title">
+      <h1 class="ml-1 font-lato text-lg font-bold">
+        Ramble
+      </h1>
+    </portal>
+
     <div class="mt-4 max-w-sm mx-auto">
       <router-link
         v-for="item in response.hits"

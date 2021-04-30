@@ -1,5 +1,5 @@
 <template>
-  <div class="bg-dark pb-16 md:pb-0 text-white text-sm">
+  <div class="pb-16 md:pb-0 text-sm">
     <div class="p-4 md:py-8 container mx-auto">
       <slot />
 

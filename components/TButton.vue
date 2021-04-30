@@ -91,9 +91,7 @@ export default {
         context:
           'text-left w-full px-4 py-2 text-gray-800 hover:bg-indigo-500 hover:text-white',
         nav:
-          'w-full px-4 py-2 items-center flex rounded-full border hover:border-indigo-500 hover:text-indigo-500',
-        'nav-admin':
-          'w-full px-4 py-2 items-center text-gray-500 flex rounded-full border border-gray-500 hover:border-indigo-500 hover:text-indigo-500',
+          'w-full p-2 font-semibold items-center flex rounded-full hover:bg-red-100',
         void: ''
       }
 

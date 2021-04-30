@@ -1,13 +1,10 @@
 <template>
-  <main>
-    <TTitle>
-      {{ $t('events.title') }}
-      <template slot="right">
-        <TButton to="/events/-/edit" type="primary">{{
-          $t('events.add')
-        }}</TButton>
-      </template>
-    </TTitle>
+  <main class="p-4">
+    <portal to="title">
+      <h1 class="ml-1 font-lato text-lg font-bold">
+        {{ $t('events.title') }}
+      </h1>
+    </portal>
 
     <div class="flex items-center space-x-2">
       <TTabs

@@ -6,7 +6,7 @@
     </div>
     <h2 v-if="title" class="font-bold text-lg mb-4">{{ title }}</h2>
     <div v-if="items.length">
-      <TPost v-for="item in items" :key="item.id" :item="item" />
+      <TPost2 v-for="item in items" :key="item.id" :item="item" />
     </div>
   </div>
 </template>
