@@ -1,6 +1,6 @@
 <template>
   <div class="flex flex-col space-y-2 text-sm">
-    <TInputSelect v-model="lang" :options="localesDropdown" />
+    <TInputSelect v-model="lang" :options="localesDropdown" class="mb-4" />
     <p>© WeDance 2021 – All rights reserved.</p>
     <router-link class="underline hover:no-underline" to="/about">{{
       $t('footer.about')

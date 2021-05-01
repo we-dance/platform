@@ -51,7 +51,7 @@ export default {
       let classes = ''
 
       if (this.page) {
-        classes += this.page.container + ' '
+        classes += this.page.container + ' p-4 '
         classes += this.page.notypo ? '' : 'typo'
       }
 

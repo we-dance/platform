@@ -15,15 +15,13 @@
       <TButton icon="directions" type="nav" to="/communities" />
     </div>
 
-    <TButton to="/favs" icon="favorite" label="Saved" type="nav" />
-    <TButton to="/messages" icon="chat" label="Messages" type="nav" />
-
     <template v-if="uid">
+      <TButton to="/favs" icon="favorite" label="Saved" type="nav" />
+      <TButton to="/messages" icon="chat" label="Messages" type="nav" />
       <TButton :to="`/${username}`" type="nav">
         <TProfilePhoto size="xs" :uid="uid" class="mr-1" />
         <span>{{ $t('myprofile.title') }}</span>
       </TButton>
-
       <TButton to="/settings" type="nav" :label="$t('settings.title')" />
       <TButton to="/signout" type="nav" :label="$t('signout')" />
     </template>
