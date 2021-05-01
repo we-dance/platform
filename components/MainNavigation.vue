@@ -4,16 +4,8 @@
   >
     <TButton to="/" icon="logo-horizontal-dark" class="mb-8" type="void" />
 
-    <div class="flex justify-between">
-      <TButton
-        to="/Munich"
-        icon="house"
-        :label="city.name"
-        type="nav"
-        class="flex-grow"
-      />
-      <TButton icon="directions" type="nav" to="/communities" />
-    </div>
+    <TButton to="/Munich" icon="house" :label="city.name" type="nav" />
+    <TButton to="/communities" icon="directions" label="Travel" type="nav" />
 
     <template v-if="uid">
       <TButton to="/favs" icon="favorite" label="Saved" type="nav" />
