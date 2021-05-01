@@ -1,5 +1,5 @@
 import { indexProfiles } from './lib/algolia'
-import { migrateFavs } from './lib/migrations'
+import { migrateFavs, migrateUsernames } from './lib/migrations'
 import { screenshot } from './lib/screenshot'
 
 require('yargs')
@@ -17,6 +17,9 @@ require('yargs')
   })
   .command('migrate:favs', 'Migrate favs', async (args: any) => {
     await migrateFavs()
+  })
+  .command('migrate:usernames', 'Migrate usernames', async (args: any) => {
+    await migrateUsernames()
   })
   .help()
   .alias('help', 'h')

@@ -91,7 +91,7 @@ export default {
         context:
           'text-left w-full px-4 py-2 text-gray-800 hover:bg-indigo-500 hover:text-white',
         nav:
-          'w-full p-2 font-semibold items-center flex rounded-full hover:bg-red-100',
+          'p-2 font-semibold items-center flex rounded-full hover:bg-red-100 hover:text-primary',
         void: ''
       }
 

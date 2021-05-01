@@ -4,22 +4,19 @@
   >
     <TButton to="/" icon="logo-horizontal-dark" class="mb-8" type="void" />
 
-    <TButton
-      v-if="uid"
-      to="/community/for-you"
-      icon="gps_fixed"
-      label="Ramble"
-      type="nav"
-    />
+    <div class="flex justify-between">
+      <TButton
+        to="/Munich"
+        icon="house"
+        :label="city.name"
+        type="nav"
+        class="flex-grow"
+      />
+      <TButton icon="directions" type="nav" to="/communities" />
+    </div>
 
-    <TButton to="/" icon="chat" label="Messages" type="nav" />
-    <TButton
-      to="/community"
-      icon="people"
-      :label="$t('profiles.title')"
-      type="nav"
-    />
-    <TButton to="/events" icon="event" :label="$t('events.title')" type="nav" />
+    <TButton to="/favs" icon="favorite" label="Saved" type="nav" />
+    <TButton to="/messages" icon="chat" label="Messages" type="nav" />
 
     <template v-if="uid">
       <TButton :to="`/${username}`" type="nav">
@@ -90,16 +87,21 @@
       class="text-gray-700"
       label="Templates"
     />
+
+    <TFooter />
   </nav>
 </template>
 
 <script>
 import { useAuth } from '~/use/auth'
+import { useCities } from '~/use/cities'
 
 export default {
   setup() {
     const { isAdmin, isEditor } = useAuth()
-    return { isAdmin, isEditor }
+    const { city } = useCities()
+
+    return { isAdmin, isEditor, city }
   },
   props: {
     uid: {

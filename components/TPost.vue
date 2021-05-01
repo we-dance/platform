@@ -6,7 +6,11 @@
     <div class="flex-grow">
       <div>
         <div class="text-xs my-1 space-x-2 flex items-center">
-          <TAvatar name :uid="item.createdBy" class="font-bold" />
+          <router-link
+            :to="`/${item.username}`"
+            class="font-bold hover:underline"
+            >{{ item.username }}</router-link
+          >
 
           <router-link
             :to="`/posts/${item.id}`"
@@ -17,7 +21,7 @@
 
         <router-link
           :to="`/posts/${item.id}`"
-          class="font-bold leading-tight"
+          class="font-bold leading-tight hover:underline"
           >{{ item.title }}</router-link
         >
 
@@ -28,12 +32,7 @@
           <span class="text-xs mr-2">{{
             item.place ? getCity(item.place) : 'Global'
           }}</span>
-          <TStyles
-            class="text-xs mb-4 md:mb-0"
-            hide-level
-            :value="item.styles"
-            :max="4"
-          />
+          <TStyles class="text-xs" hide-level :value="item.styles" :max="4" />
         </div>
 
         <div class="flex items-center space-x-2">

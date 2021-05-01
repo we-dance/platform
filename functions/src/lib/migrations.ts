@@ -40,3 +40,45 @@ export async function migrateFavs() {
     console.log({ title: post.title, before, after })
   }
 }
+
+export async function migrateUsernames() {
+  const posts = await getDocs(db.collection('posts'))
+
+  for (const post of posts) {
+    const username = (
+      await db
+        .collection('profiles')
+        .doc(post.createdBy)
+        .get()
+    ).data()?.username
+
+    if (username) {
+      await db
+        .collection('posts')
+        .doc(post.id)
+        .update({ username })
+    }
+
+    console.log({ type: 'post', title: post.title, username, id: post.id })
+  }
+
+  const events = await getDocs(db.collection('events'))
+
+  for (const event of events) {
+    const username = (
+      await db
+        .collection('profiles')
+        .doc(event.createdBy)
+        .get()
+    ).data()?.username
+
+    if (username) {
+      await db
+        .collection('events')
+        .doc(event.id)
+        .update({ username })
+    }
+
+    console.log({ type: 'event', name: event.name, username, id: event.id })
+  }
+}

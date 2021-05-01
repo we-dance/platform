@@ -45,14 +45,12 @@
               <portal-target name="title" />
             </div>
             <div class="flex-grow"></div>
-            <TButton type="icon" icon="search" to="/community/?search=1" />
+            <TButton type="nav" icon="search" to="/community/?search=1" />
           </div>
         </header>
         <nuxt />
       </div>
     </div>
-
-    <TFooter />
   </div>
 </template>
 

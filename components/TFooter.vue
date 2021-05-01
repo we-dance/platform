@@ -1,38 +1,25 @@
 <template>
-  <div class="pb-16 md:pb-0 text-sm">
-    <div class="p-4 md:py-8 container mx-auto">
-      <slot />
-
-      <div class="md:flex space-y-2 justify-between">
-        <div class="flex flex-col">
-          <p>© WeDance 2021 – All rights reserved.</p>
-          <p class="md:flex space-x-2">
-            <router-link class="underline hover:no-underline" to="/about">{{
-              $t('footer.about')
-            }}</router-link>
-            <router-link class="underline hover:no-underline" to="/support">{{
-              $t('footer.support')
-            }}</router-link>
-            <router-link class="underline hover:no-underline" to="/privacy">{{
-              $t('footer.privacy')
-            }}</router-link>
-            <router-link class="underline hover:no-underline" to="/terms">{{
-              $t('footer.terms')
-            }}</router-link>
-            <router-link class="underline hover:no-underline" to="/coc">{{
-              $t('footer.coc')
-            }}</router-link>
-            <router-link class="underline hover:no-underline" to="/faq">{{
-              $t('footer.faq')
-            }}</router-link>
-          </p>
-        </div>
-
-        <div class="text-dark">
-          <TInputSelect v-model="lang" :options="localesDropdown" />
-        </div>
-      </div>
-    </div>
+  <div class="flex flex-col space-y-2 text-sm">
+    <TInputSelect v-model="lang" :options="localesDropdown" />
+    <p>© WeDance 2021 – All rights reserved.</p>
+    <router-link class="underline hover:no-underline" to="/about">{{
+      $t('footer.about')
+    }}</router-link>
+    <router-link class="underline hover:no-underline" to="/support">{{
+      $t('footer.support')
+    }}</router-link>
+    <router-link class="underline hover:no-underline" to="/privacy">{{
+      $t('footer.privacy')
+    }}</router-link>
+    <router-link class="underline hover:no-underline" to="/terms">{{
+      $t('footer.terms')
+    }}</router-link>
+    <router-link class="underline hover:no-underline" to="/coc">{{
+      $t('footer.coc')
+    }}</router-link>
+    <router-link class="underline hover:no-underline" to="/faq">{{
+      $t('footer.faq')
+    }}</router-link>
   </div>
 </template>
 
