@@ -88,17 +88,26 @@
 </template>
 
 <script>
+import { onMounted, watch } from 'vue-demi'
 import { useAuth } from '~/use/auth'
+import { useRouter } from '~/use/router'
 
 export default {
   name: 'Index',
   layout: 'empty',
   setup() {
-    const { uid } = useAuth()
+    const { profile } = useAuth()
+    const { router } = useRouter()
 
-    return {
-      uid
-    }
+    watch(profile, (p) => {
+      router.push(`/${p.username}`)
+    })
+
+    onMounted(() => {
+      if (profile.value?.username) {
+        router.push(`/${profile.value.username}`)
+      }
+    })
   }
 }
 </script>
