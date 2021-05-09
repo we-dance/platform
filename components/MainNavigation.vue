@@ -4,10 +4,9 @@
   >
     <TButton to="/" icon="logo-horizontal-dark" class="mb-8" type="void" />
 
-    <TButton to="/Munich" icon="house" :label="city.name" type="nav" />
-    <TButton to="/communities" icon="directions" label="Travel" type="nav" />
-
     <template v-if="uid">
+      <TButton to="/Munich" icon="house" :label="city.name" type="nav" />
+      <TButton to="/communities" icon="directions" label="Travel" type="nav" />
       <TButton to="/favs" icon="favorite" label="Saved" type="nav" />
       <TButton to="/messages" icon="chat" label="Messages" type="nav" />
       <TButton :to="`/${username}`" type="nav">
