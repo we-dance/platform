@@ -1,6 +1,7 @@
 import { indexProfiles } from './lib/algolia'
 import { migrateFavs, migrateUsernames } from './lib/migrations'
 import { screenshot } from './lib/screenshot'
+import { getCities } from './lib/stats'
 
 require('yargs')
   .command('screenshot <username>', 'Screenshot', async (args: any) => {
@@ -20,6 +21,9 @@ require('yargs')
   })
   .command('migrate:usernames', 'Migrate usernames', async (args: any) => {
     await migrateUsernames()
+  })
+  .command('stats:cities', 'Get cities stats', async (args: any) => {
+    await getCities()
   })
   .help()
   .alias('help', 'h')
