@@ -1,37 +1,8 @@
 <template>
   <div>
-    <portal to="title">
-      <h1 class="ml-1 font-lato text-lg font-bold">
-        Munich
-      </h1>
-    </portal>
+    <THeader title="Community" />
 
-    <div class="flex border-b divide-x text-center text-sm">
-      <router-link to="/Munich" class="px-4 py-2 uppercase flex-grow"
-        >News</router-link
-      >
-      <router-link to="/Munich/events" class="px-4 py-2 uppercase flex-grow"
-        >Events</router-link
-      >
-      <router-link
-        to="/Munich/community"
-        class="px-4 py-2 uppercase flex-grow text-primary border-b border-primary"
-      >
-        Community
-      </router-link>
-    </div>
-
-    <div v-if="$route.query.search" class="flex items-center mb-4">
-      <TInput
-        v-model="query"
-        auto-focus
-        placeholder="Search dancers"
-        @input="search"
-      />
-      <TButton type="icon" icon="close" to="/community" />
-    </div>
-
-    <div v-if="!$route.query.search || query" class="p-4">
+    <div class="p-4">
       <TCollapseIcon
         v-if="uid && response.facets"
         title="Filter"

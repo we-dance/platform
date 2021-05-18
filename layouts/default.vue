@@ -35,21 +35,7 @@
         :username="username"
         class="hidden md:block flex-initial w-64"
       />
-      <div class="flex-grow w-full">
-        <header class="border-b p-4">
-          <div class="flex items-center justify-between">
-            <div class="flex flex-no-wrap items-center">
-              <div class="mt-1 md:hidden">
-                <THamburger v-model="isMenuOpen" />
-              </div>
-              <portal-target name="title" />
-            </div>
-            <div class="flex-grow"></div>
-            <TButton type="nav" icon="search" to="/community/?search=1" />
-          </div>
-        </header>
-        <nuxt />
-      </div>
+      <nuxt class="flex-grow w-full" />
     </div>
   </div>
 </template>

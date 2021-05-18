@@ -5,10 +5,11 @@
     <TButton to="/" icon="logo-horizontal-dark" class="mb-8" type="void" />
 
     <template v-if="uid">
-      <TButton to="/Munich" icon="house" :label="city.name" type="nav" />
-      <TButton to="/communities" icon="directions" label="Travel" type="nav" />
+      <TButton to="/inbox" icon="chat" label="Inbox" type="nav" />
+      <TButton to="/feed" icon="news" label="Feed" type="nav" />
+      <TButton to="/community" icon="people" label="Community" type="nav" />
+      <TButton to="/events" icon="calendar" label="Events" type="nav" />
       <TButton to="/favs" icon="favorite" label="Saved" type="nav" />
-      <TButton to="/messages" icon="chat" label="Messages" type="nav" />
       <TButton :to="`/${username}`" type="nav">
         <TProfilePhoto size="xs" :uid="uid" class="mr-1" />
         <span>{{ $t('myprofile.title') }}</span>

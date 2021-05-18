@@ -91,7 +91,8 @@ export default {
   googleFonts: {
     display: 'swap',
     families: {
-      Lato: true
+      Lato: true,
+      Montserrat: true
     }
   },
   toast: {

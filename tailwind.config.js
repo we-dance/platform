@@ -19,7 +19,8 @@ module.exports = {
         white: '#FFFFFF'
       },
       fontFamily: {
-        lato: 'Lato'
+        lato: 'Lato',
+        montserrat: 'Montserrat'
       }
     }
   },

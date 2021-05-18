@@ -1,5 +1,8 @@
 <template>
-  <TPostList :filter="{ [`savedBy.${uid}`]: true }" />
+  <div>
+    <THeader title="Saved" />
+    <TPostList :filter="{ [`savedBy.${uid}`]: true }" />
+  </div>
 </template>
 
 <script>

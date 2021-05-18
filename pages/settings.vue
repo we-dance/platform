@@ -1,5 +1,5 @@
 <template>
-  <main class="p-4">
+  <main>
     <TLoader v-if="loading || !profile || !account" />
     <div v-else>
       <TPopup v-if="isBoosting" title="Bonus" @close="skipBoosting()">
@@ -39,129 +39,133 @@
         </div>
       </TPopup>
 
-      <portal to="title">
-        <h1 class="ml-1 font-lato text-lg font-bold">
-          {{ $t('settings.title') }}
-        </h1>
-      </portal>
+      <THeader :title="$t('settings.title')" />
 
-      <div class="rounded bg-white mb-4 shadow border p-4 bg-white">
-        <div class="flex items-center">
-          <div>
-            <router-link
-              v-if="currentTab !== 'account'"
-              to="/settings?tab=account"
-            >
-              <TIcon class="h-8 w-8" name="arrow_right" />
-            </router-link>
-            <router-link v-else to="/settings">
-              <TIcon class="h-8 w-8" name="arrow_drop_down" />
-            </router-link>
-          </div>
-          <div class="ml-2">
-            <div class="font-bold text-xl">
-              {{ $t('settings.account.title') }}
+      <div class="p-4 space-y-4">
+        <div class="rounded bg-white shadow border p-4 bg-white">
+          <div class="flex items-center">
+            <div>
+              <router-link
+                v-if="currentTab !== 'account'"
+                to="/settings?tab=account"
+              >
+                <TIcon class="h-8 w-8" name="arrow_right" />
+              </router-link>
+              <router-link v-else to="/settings">
+                <TIcon class="h-8 w-8" name="arrow_drop_down" />
+              </router-link>
             </div>
-            <div class="text-sm text-gray-700">
-              {{ $t('settings.account.description') }}
+            <div class="ml-2">
+              <div class="font-bold text-xl">
+                {{ $t('settings.account.title') }}
+              </div>
+              <div class="text-sm text-gray-700">
+                {{ $t('settings.account.description') }}
+              </div>
             </div>
           </div>
-        </div>
 
-        <div v-if="currentTab === 'account'" class="border-t mt-4 pt-4">
-          <TForm
-            v-model="account"
-            :fields="accountFields"
-            :submit-label="$t('save')"
-            class="space-y-4"
-            @save="saveAccount"
-          />
-          <TButton to="/settings?tab=password" class="mt-4">{{
-            $t('settings.account.changepassword')
-          }}</TButton>
-          <div class="bg-red-200 mt-4 -mb-4 -mx-4 p-4">
-            <TButton type="danger" @click="deleteAccountPopupVisible = true">{{
-              $t('settings.account.delete')
+          <div v-if="currentTab === 'account'" class="border-t mt-4 pt-4">
+            <TForm
+              v-model="account"
+              :fields="accountFields"
+              :submit-label="$t('save')"
+              class="space-y-4"
+              @save="saveAccount"
+            />
+            <TButton to="/settings?tab=password" class="mt-4">{{
+              $t('settings.account.changepassword')
             }}</TButton>
-            <TPopup
-              v-if="deleteAccountPopupVisible"
-              title="Confirm account deletion"
-              @close="deleteAccountPopupVisible = false"
-            >
-              <div class="py-4 space-y-4">
-                <TField
-                  v-model="deleteReason"
-                  label-position="vertical"
-                  type="textarea"
-                  label="Why are you leaving?"
-                />
-                <TField
-                  v-model="usernameConfirmation"
-                  label-position="vertical"
-                  :placeholder="profile.username"
-                  label="Enter username"
-                />
-                <div class="flex justify-end">
-                  <TButton type="danger" @click="deleteAccountAction()">{{
-                    $t('settings.account.delete')
-                  }}</TButton>
+            <div class="bg-red-200 mt-4 -mb-4 -mx-4 p-4">
+              <TButton
+                type="danger"
+                @click="deleteAccountPopupVisible = true"
+                >{{ $t('settings.account.delete') }}</TButton
+              >
+              <TPopup
+                v-if="deleteAccountPopupVisible"
+                title="Confirm account deletion"
+                @close="deleteAccountPopupVisible = false"
+              >
+                <div class="py-4 space-y-4">
+                  <TField
+                    v-model="deleteReason"
+                    label-position="vertical"
+                    type="textarea"
+                    label="Why are you leaving?"
+                  />
+                  <TField
+                    v-model="usernameConfirmation"
+                    label-position="vertical"
+                    :placeholder="profile.username"
+                    label="Enter username"
+                  />
+                  <div class="flex justify-end">
+                    <TButton type="danger" @click="deleteAccountAction()">{{
+                      $t('settings.account.delete')
+                    }}</TButton>
+                  </div>
+                </div>
+              </TPopup>
+            </div>
+          </div>
+          <div v-if="currentTab === 'password'" class="border-t mt-4 pt-4">
+            <TField v-model="password" v-bind="passwordField" />
+            <div class="flex justify-end mt-4">
+              <TButton @click="changePassword">{{ $t('save') }}</TButton>
+            </div>
+          </div>
+          <TPopup
+            v-if="passwordError"
+            title="Error"
+            @close="passwordError = ''"
+          >
+            <div class="py-4 max-w-md">{{ passwordError.message }}</div>
+            <div class="flex justify-end mb-4">
+              <TButton
+                v-if="passwordError.code === 'auth/requires-recent-login'"
+                type="primary"
+                to="/signout?target=/signin"
+                class="float-right mt-4"
+                >{{ $t('signout') }}</TButton
+              >
+            </div>
+          </TPopup>
+        </div>
+        <div class="rounded bg-white shadow border p-4 bg-white">
+          <div class="flex items-center">
+            <div>
+              <router-link
+                v-if="currentTab !== 'profile'"
+                to="/settings?tab=profile"
+              >
+                <TIcon class="h-8 w-8" name="arrow_right" />
+              </router-link>
+              <router-link v-else to="/settings">
+                <TIcon class="h-8 w-8" name="arrow_drop_down" />
+              </router-link>
+            </div>
+            <div class="ml-2">
+              <div class="font-bold text-xl">
+                {{ $t('settings.profile.title') }}
+              </div>
+              <div class="text-sm text-gray-700">
+                <div>
+                  {{ $t('settings.profile.description') }}
                 </div>
               </div>
-            </TPopup>
-          </div>
-        </div>
-        <div v-if="currentTab === 'password'" class="border-t mt-4 pt-4">
-          <TField v-model="password" v-bind="passwordField" />
-          <div class="flex justify-end mt-4">
-            <TButton @click="changePassword">{{ $t('save') }}</TButton>
-          </div>
-        </div>
-        <TPopup v-if="passwordError" title="Error" @close="passwordError = ''">
-          <div class="py-4 max-w-md">{{ passwordError.message }}</div>
-          <div class="flex justify-end mb-4">
-            <TButton
-              v-if="passwordError.code === 'auth/requires-recent-login'"
-              type="primary"
-              to="/signout?target=/signin"
-              class="float-right mt-4"
-              >{{ $t('signout') }}</TButton
-            >
-          </div>
-        </TPopup>
-      </div>
-      <div class="rounded bg-white mb-4 shadow border p-4 bg-white">
-        <div class="flex items-center">
-          <div>
-            <router-link
-              v-if="currentTab !== 'profile'"
-              to="/settings?tab=profile"
-            >
-              <TIcon class="h-8 w-8" name="arrow_right" />
-            </router-link>
-            <router-link v-else to="/settings">
-              <TIcon class="h-8 w-8" name="arrow_drop_down" />
-            </router-link>
-          </div>
-          <div class="ml-2">
-            <div class="font-bold text-xl">
-              {{ $t('settings.profile.title') }}
-            </div>
-            <div class="text-sm text-gray-700">
-              <div>
-                {{ $t('settings.profile.description') }}
-              </div>
             </div>
           </div>
-        </div>
 
-        <TForm
-          v-if="currentTab === 'profile'"
-          v-model="profile"
-          :fields="profileFields"
-          :submit-label="$t('save')"
-          class="border-t mt-4 pt-4 space-y-4"
-          @save="saveProfile"
-        />
+          <TForm
+            v-if="currentTab === 'profile'"
+            v-model="profile"
+            :fields="profileFields"
+            :submit-label="$t('save')"
+            class="border-t mt-4 pt-4 space-y-4"
+            @save="saveProfile"
+          />
+        </div>
       </div>
     </div>
   </main>

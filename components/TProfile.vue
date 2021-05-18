@@ -1,10 +1,6 @@
 <template>
-  <div class="p-4">
-    <portal to="title">
-      <h1 class="ml-1 font-lato text-lg font-bold">
-        {{ profile.username }}
-      </h1>
-    </portal>
+  <div>
+    <THeader :title="profile.username" />
 
     <TItemCard>
       <TSharePreviewPost

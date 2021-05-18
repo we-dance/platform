@@ -1,10 +1,6 @@
 <template>
   <div>
-    <portal to="title">
-      <h1 class="ml-1 font-lato text-lg font-bold">
-        Choose city
-      </h1>
-    </portal>
+    <THeader title="Choose city" />
 
     <div class="text-xs font-bold p-4">Saved cities</div>
     <div
