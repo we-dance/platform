@@ -1,8 +1,8 @@
 <template>
   <div>
-    <THeader title="Inbox" />
+    <THeader title="Home" />
     <div class="p-16 text-xs text-center">
-      Start conversations and they will appear here.
+      You are currently in Munich. Want to travel?
     </div>
   </div>
 </template>
