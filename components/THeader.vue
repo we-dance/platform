@@ -1,10 +1,7 @@
 <template>
   <header class="border-b p-4">
     <div class="flex items-center justify-between">
-      <div class="flex flex-no-wrap items-center">
-        <div class="mt-1 md:hidden">
-          <THamburger v-model="isMenuOpen" />
-        </div>
+      <div class="flex flex-no-wrap items-center ml-8 md:ml-0">
         <h1 class="ml-1 font-lato text-lg font-bold">
           {{ title }}
         </h1>
@@ -22,9 +19,6 @@ export default {
       type: String,
       default: ''
     }
-  },
-  data: () => ({
-    isMenuOpen: false
-  })
+  }
 }
 </script>

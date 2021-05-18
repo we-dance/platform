@@ -2,14 +2,8 @@
   <div>
     <THeader title="Community" />
 
-    <div class="p-4">
-      <TCollapseIcon
-        v-if="uid && response.facets"
-        title="Filter"
-        icon="tune"
-        desktop-class="mb-4 gap-2 flex flex-wrap"
-        mobile-class="space-y-2"
-      >
+    <div>
+      <div v-if="uid && response.facets" class="mb-4 gap-2 flex flex-wrap p-4">
         <t-rich-select
           v-model="radius"
           placeholder="Radius"
@@ -30,9 +24,9 @@
         <TButton v-if="facetFilters" type="base" @click="load()">
           Reset filters
         </TButton>
-      </TCollapseIcon>
+      </div>
 
-      <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-2">
         <router-link
           v-for="item in response.hits"
           :key="item.id"
@@ -57,7 +51,7 @@
         v-model="currentPage"
         :total-items="response.nbHits"
         :per-page="response.hitsPerPage"
-        class="mt-4"
+        class="my-4"
       />
 
       <WTeaser

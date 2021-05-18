@@ -29,6 +29,8 @@
       </div>
     </transition>
 
+    <THamburger v-model="isMenuOpen" class="absolute mt-2 md:hidden" />
+
     <div class="flex-grow flex">
       <MainNavigation
         :uid="uid"

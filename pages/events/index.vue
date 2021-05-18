@@ -1,16 +1,12 @@
 <template>
-  <main class="p-4">
-    <portal to="title">
-      <h1 class="ml-1 font-lato text-lg font-bold">
-        {{ $t('events.title') }}
-      </h1>
-    </portal>
+  <main>
+    <THeader :title="$t('events.title')" />
 
     <div v-if="uid" class="flex items-center space-x-2">
       <TTabs v-model="activeFilter" :tabs="filterOptions" class="flex-grow" />
     </div>
 
-    <div class="flex my-2 space-x-2">
+    <div class="flex space-x-2 p-2">
       <TInputPlace v-model="currentCity" clearable />
       <t-rich-select
         v-model="eventType"
@@ -41,7 +37,7 @@
       </div>
     </div>
 
-    <div class="mt-4">
+    <div>
       <TLoader v-if="loading" />
       <div v-else-if="!count" class="p-4">
         No events found. Would you like to add one?
@@ -49,7 +45,7 @@
 
       <div
         v-if="view === 'covers'"
-        class="mt-4 grid grid-cols-1 md:grid-cols-2 gap-2"
+        class="grid grid-cols-1 md:grid-cols-2 gap-2"
       >
         <router-link
           v-for="event in events"
@@ -73,7 +69,7 @@
 
       <div v-else>
         <div v-for="(items, date) in itemsByDate" :key="date" class="mb-8">
-          <h2 class="font-bold bg-dark text-white py-2 px-4 rounded">
+          <h2 class="font-bold bg-dark text-white py-2 px-4">
             {{ getDay(date) }}, {{ getDate(date) }}
           </h2>
           <div v-for="item in items" :key="item.id" class="px-4 mt-4">

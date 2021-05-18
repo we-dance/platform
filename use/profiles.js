@@ -299,10 +299,8 @@ export const profileFields = [
   },
   {
     name: 'jobs',
-    label: 'Skills',
-    type: 'textarea',
-    tips:
-      'What other skills would you like to share with dance community? For example: video editing, photography, copywriting, etc. It might be useful to exchange your skills for free passes.'
+    label: 'I can help with',
+    type: 'textarea'
   },
   {
     name: 'teacher',

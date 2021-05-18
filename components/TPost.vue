@@ -4,42 +4,25 @@
       <TAvatar photo size="md" :uid="item.createdBy" />
     </div>
     <div class="flex-grow">
-      <div>
-        <div class="text-xs my-1 space-x-2 flex items-center">
-          <router-link
-            :to="`/${item.username}`"
-            class="font-bold hover:underline"
-            >{{ item.username }}</router-link
-          >
-
-          <router-link
-            :to="`/posts/${item.id}`"
-            class="text-xs text-gray-600 hover:underline text-right"
-            >{{ dateDiff(item.createdAt) }} ago</router-link
-          >
-        </div>
+      <div class="text-xs my-1 space-x-2 flex items-center">
+        <router-link
+          :to="`/${item.username}`"
+          class="font-bold hover:underline"
+          >{{ item.username }}</router-link
+        >
 
         <router-link
           :to="`/posts/${item.id}`"
-          class="font-bold leading-tight hover:underline"
-          >{{ item.title }}</router-link
+          class="text-xs text-gray-600 hover:underline text-right"
+          >{{ dateDiff(item.createdAt) }} ago</router-link
         >
-
-        <TPreview class="mt-2" :content="item.description" :excerpt="true" />
       </div>
-      <div class="md:flex items-center justify-between">
-        <div class="flex space-x-2 items-center">
-          <span class="text-xs mr-2">{{
-            item.place ? getCity(item.place) : 'Global'
-          }}</span>
-          <TStyles class="text-xs" hide-level :value="item.styles" :max="4" />
-        </div>
 
-        <div class="flex items-center space-x-2">
-          <TButtonFav collection="posts" :item="item" />
-        </div>
-      </div>
+      <router-link :to="`/posts/${item.id}`" class="leading-tight">{{
+        item.title
+      }}</router-link>
     </div>
+    <TButtonFav collection="posts" :item="item" />
   </div>
 </template>
 
