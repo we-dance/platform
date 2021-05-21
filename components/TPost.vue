@@ -4,25 +4,20 @@
       <TAvatar photo size="md" :uid="item.createdBy" />
     </div>
     <div class="flex-grow">
-      <div class="text-xs my-1 space-x-2 flex items-center">
-        <router-link
-          :to="`/${item.username}`"
-          class="font-bold hover:underline"
-          >{{ item.username }}</router-link
-        >
+      <router-link
+        :to="`/posts/${item.id}`"
+        class="block text-sm leading-tight"
+        >{{ item.title }}</router-link
+      >
 
-        <router-link
-          :to="`/posts/${item.id}`"
-          class="text-xs text-gray-600 hover:underline text-right"
-          >{{ dateDiff(item.createdAt) }} ago</router-link
-        >
+      <div class="text-xs space-x-1 text-gray-900 flex">
+        <router-link :to="`/${item.username}`" class="hover:underline">{{
+          item.username
+        }}</router-link>
+        <span>•</span>
+        <div>{{ dateDiff(item.createdAt) }} ago</div>
       </div>
-
-      <router-link :to="`/posts/${item.id}`" class="leading-tight">{{
-        item.title
-      }}</router-link>
     </div>
-    <TButtonFav collection="posts" :item="item" />
   </div>
 </template>
 
