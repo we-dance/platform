@@ -10,7 +10,7 @@ function getBrowser() {
 export async function screenshot(
   url: string,
   timezone: string,
-  config?: puppeteer.BinaryScreenShotOptions
+  config?: puppeteer.ScreenshotOptions
 ) {
   const browser = await getBrowser()
 

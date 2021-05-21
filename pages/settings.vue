@@ -2,43 +2,6 @@
   <main>
     <TLoader v-if="loading || !profile || !account" />
     <div v-else>
-      <TPopup v-if="isBoosting" title="Bonus" @close="skipBoosting()">
-        <div class="max-w-md">
-          <div v-if="generating" class="p-4">
-            Generating image... Please wait...
-          </div>
-          <div v-else>
-            <div class="p-4">
-              Would you like your profile to be published in our social media?
-              <div class="mt-4 flex flex-col items-center space-y-2">
-                <TButton
-                  icon="instagram"
-                  icon-size="6"
-                  :href="`https://instagram.com/WeDance${profile.community}`"
-                  :label="`WeDance${profile.community}`"
-                />
-                <TButton
-                  icon="facebook"
-                  icon-size="6"
-                  :href="`https://fb.com/WeDance${profile.community}`"
-                  :label="`WeDance${profile.community}`"
-                />
-                <TButton
-                  icon="telegram"
-                  icon-size="6"
-                  :href="`https://t.me/WeDance${profile.community}`"
-                  :label="`WeDance${profile.community}`"
-                />
-              </div>
-            </div>
-            <div class="flex justify-end my-4 space-x-2">
-              <TButton @click="skipBoosting()">No, thank you</TButton>
-              <TButton type="primary" @click="generate()">Yes!</TButton>
-            </div>
-          </div>
-        </div>
-      </TPopup>
-
       <THeader :title="$t('settings.title')" />
 
       <div class="p-4 space-y-4">
@@ -185,9 +148,6 @@ export default {
   components: { TPopup },
   middleware: ['auth'],
   data: () => ({
-    canBoost: false,
-    isBoosting: false,
-    generating: false,
     deleteAccountPopupVisible: false,
     usernameConfirmation: '',
     deleteReason: ''
@@ -296,18 +256,6 @@ export default {
         this.passwordError = e
       }
     },
-    async skipBoosting() {
-      this.$fire.analytics.logEvent('skip_boosting')
-
-      await this.updateProfile({
-        socialCoverAt: +new Date(),
-        socialCoverPublish: 'No'
-      })
-
-      this.isBoosting = false
-
-      this.goToProfile()
-    },
     goToProfile() {
       this.$router.push(`/${this.profile.username}`)
     },
@@ -316,15 +264,6 @@ export default {
 
       await this.updateProfile(data)
 
-      const canBoost =
-        data.photo && data.styles && data.community && data.bio && data.type
-
-      if (canBoost) {
-        this.$fire.analytics.logEvent('popup_profile_boosting')
-        this.isBoosting = true
-        return
-      }
-
       this.goToProfile()
     },
     async saveAccount(data) {
@@ -332,58 +271,6 @@ export default {
 
       await this.updateAccount(data)
       this.$router.push('/settings')
-    },
-
-    async generate() {
-      if (this.generating) {
-        return
-      }
-
-      this.$fire.analytics.logEvent('create_poster', {
-        collection: 'profiles'
-      })
-
-      this.generating = true
-      this.$nuxt.$loading.start()
-
-      try {
-        const result = await axios.get(
-          `https://us-central1-wedance-4abe3.cloudfunctions.net/hooks/share/${this.profile.username}?timezone=Europe/Berlin`
-        )
-
-        if (!result.data.success) {
-          throw new Error('Failed to make a screenshot')
-        }
-
-        const socialCover = result.data.url
-
-        await this.updateProfile({
-          socialCover,
-          socialCoverBy: this.uid,
-          socialCoverAt: +new Date(),
-          socialCoverPublish: 'Yes'
-        })
-
-        await this.$fire.firestore.collection('shares').add({
-          createdAt: +new Date(),
-          createdBy: this.uid,
-          state: 'new',
-          collection: 'profiles',
-          contentId: this.uid,
-          image: socialCover,
-          url: `https://wedance.vip/${this.profile.username}`,
-          place: this.profile.place,
-          visibility: this.profile.visibility
-        })
-      } catch (e) {
-        console.error(e)
-      }
-
-      this.generating = false
-      this.isBoosting = false
-      this.$nuxt.$loading.finish()
-
-      this.goToProfile()
     }
   }
 }

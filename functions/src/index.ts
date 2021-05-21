@@ -6,9 +6,8 @@ import * as Handlebars from 'handlebars'
 import sendEmail from './lib/sendEmail'
 import { screenshot } from './lib/screenshot'
 import { initIndex, profileToAlgolia } from './lib/algolia'
-
-admin.initializeApp()
-const db = admin.firestore()
+import { generateSocialCover } from './lib/migrations'
+import { firestore as db } from './firebase'
 
 const app = express()
 app.use(cors({ origin: true }))
@@ -105,6 +104,17 @@ export const onProfileChange = functions.firestore
 
     if (!profile || !profile.username || !profile.place) {
       return
+    }
+
+    const canBoost =
+      profile.permission === 'Yes' &&
+      profile.photo &&
+      profile.styles &&
+      profile.bio &&
+      profile.type
+
+    if (canBoost) {
+      await generateSocialCover(profile)
     }
 
     const cache = (

@@ -6,6 +6,10 @@ import stats from '~/stats'
 
 const state = Vue.observable({})
 
+export const useFirestore = () => {
+  return firebase.firestore()
+}
+
 export const useCollection = (name, filter) => {
   let field = ''
   let value = ''
