@@ -113,7 +113,7 @@ export const onProfileChange = functions.firestore
       profile.bio &&
       profile.type
 
-    if (canBoost) {
+    if (canBoost && oldProfile?.photo !== profile.photo) {
       await generateSocialCover(profile)
     }
 

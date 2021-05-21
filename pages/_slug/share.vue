@@ -3,7 +3,7 @@
     :type="profile.type"
     collection="profiles"
     :username="profile.username"
-    :description="profile.bio"
+    :description="getExcerpt(profile.bio)"
     :photo="profile.photo"
     :styles="profile.styles"
     :objective="profile.partner === 'Yes' ? 'Looking for a dance partner' : ''"
@@ -11,6 +11,8 @@
 </template>
 
 <script>
+import { getExcerpt } from '~/utils'
+
 export default {
   layout: 'empty',
   async asyncData({ app, params, error }) {
@@ -30,7 +32,8 @@ export default {
     profile.id = doc.id
 
     return {
-      profile
+      profile,
+      getExcerpt
     }
   }
 }
