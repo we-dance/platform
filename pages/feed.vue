@@ -1,30 +1,68 @@
 <template>
   <div>
-    <THeader title="Feed" />
-    <div class="border-b p-4 flex items-start">
-      <div class="w-12 flex-shrink-0">
-        <TAvatar photo size="md" :uid="uid" />
-      </div>
-      <div class="flex-grow">
-        <div class="w-full bg-gray-200 p-4 rounded text-sm text-gray-900">
-          What's on your mind?
+    <THeader title="Feed">
+      <TButton type="nav" icon="plus" to="/posts/-/edit" />
+    </THeader>
+    <TList
+      collection="posts"
+      :filter-default="{ place: currentCity }"
+      :filter-fields="postFilters"
+      sort-by="-createdAt"
+      list-wrapper="mt-4 grid grid-cols-1 md:grid-cols-2 gap-2"
+    >
+      <template v-slot:before>
+        <div class="px-2 md:flex space-y-2 md:space-y-0 md:space-x-2 mb-2">
+          <WTeaser
+            :title="$t('teaser.partner.title')"
+            :description="$t('teaser.partner.description')"
+            :button="$t('teaser.partner.btn')"
+            url="/community"
+            class="flex-1"
+          />
+          <WTeaser
+            :title="$t('teaser.events.title')"
+            :description="$t('teaser.events.description')"
+            :button="$t('teaser.events.btn')"
+            url="/events"
+            class="flex-1"
+          />
         </div>
-      </div>
-    </div>
-    <TPostList :filter="{ place: currentCity }" />
+      </template>
+      <template v-slot:item="{ item }">
+        <router-link :to="`/posts/${item.id}`" class="hover:opacity-75">
+          <TSharePreviewPost
+            type="Post"
+            collection="posts"
+            :username="item.createdByUsername"
+            :title="item.title"
+            :photo="item.cover"
+            :styles="item.styles"
+            align="center"
+            size="sm"
+            :likes="item.savedByCount"
+          />
+        </router-link>
+      </template>
+    </TList>
   </div>
 </template>
 
 <script>
-import { useAuth } from '~/use/auth'
+import { postFilters } from '~/use/posts'
 import { useCities } from '~/use/cities'
+import { useAuth } from '~/use/auth'
 
 export default {
+  name: 'PostsIndex',
   setup() {
-    const { uid } = useAuth()
     const { currentCity } = useCities()
+    const { uid } = useAuth()
 
-    return { currentCity, uid }
+    return {
+      postFilters,
+      currentCity,
+      uid
+    }
   }
 }
 </script>

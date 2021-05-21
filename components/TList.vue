@@ -1,13 +1,13 @@
 <template>
   <main>
-    <TTitle>
+    <TTitle v-if="title">
       {{ title }}
       <template slot="right">
-        <TButton :to="addUrl" type="primary" :label="add" />
+        <TButton v-if="addUrl" :to="addUrl" type="primary" :label="add" />
       </template>
     </TTitle>
 
-    <div v-if="tabs" class="flex items-center space-x-2">
+    <div v-if="tabs" class="flex items-center space-x-2 px-2">
       <TTabs v-model="sorting" :tabs="tabs" class="flex-grow" />
       <div v-if="false">
         <TButton
@@ -25,7 +25,12 @@
       </div>
     </div>
 
-    <TFilters v-if="filters" v-model="filters" :fields="filterFields" />
+    <TFilters
+      v-if="filters"
+      v-model="filters"
+      :fields="filterFields"
+      class="px-2"
+    />
 
     <slot name="before" v-bind="{ count: results.length }" />
 

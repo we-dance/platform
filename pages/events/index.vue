@@ -1,6 +1,8 @@
 <template>
   <main>
-    <THeader :title="$t('events.title')" />
+    <THeader :title="$t('events.title')">
+      <TButton type="nav" icon="plus" to="/events/-/edit" />
+    </THeader>
 
     <div v-if="uid" class="flex items-center space-x-2">
       <TTabs v-model="activeFilter" :tabs="filterOptions" class="flex-grow" />

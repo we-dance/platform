@@ -7,6 +7,7 @@
         </h1>
       </div>
       <div class="flex-grow"></div>
+      <slot />
       <TButton type="nav" icon="search" to="/search" />
     </div>
   </header>

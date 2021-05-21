@@ -87,6 +87,8 @@ export default {
     const { search, response } = useAlgolia('profiles')
 
     const facets = computed(() => ({
+      country: getFacetOptions('country'),
+      locality: getFacetOptions('locality'),
       type: getFacetOptions('type'),
       gender: getFacetOptions('gender'),
       objectives: getFacetOptions('objectives'),

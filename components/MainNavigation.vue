@@ -5,8 +5,6 @@
     <TButton to="/" icon="logo-horizontal-dark" class="mb-8" type="void" />
 
     <template v-if="uid">
-      <TButton to="/home" icon="house" label="Home" type="nav" />
-      <TButton to="/inbox" icon="chat" label="Inbox" type="nav" />
       <TButton to="/feed" icon="news" label="Feed" type="nav" />
       <TButton to="/community" icon="people" label="Community" type="nav" />
       <TButton to="/events" icon="calendar" label="Events" type="nav" />
