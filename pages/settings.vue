@@ -135,7 +135,6 @@
 </template>
 
 <script>
-import axios from 'axios'
 import { ref } from '@nuxtjs/composition-api'
 import { useAuth } from '~/use/auth'
 import { useProfiles } from '~/use/profiles'
