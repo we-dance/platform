@@ -48,12 +48,12 @@ export default {
     const { router } = useRouter()
 
     watch(profile, (p) => {
-      router.push(`/${p.username}`)
+      router.push('/home')
     })
 
     onMounted(() => {
       if (profile.value?.username) {
-        router.push(`/${profile.value.username}`)
+        router.push('/home')
       }
     })
   }
