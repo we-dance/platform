@@ -1,6 +1,17 @@
 <template>
   <div>
-    <THeader :title="profile.username" />
+    <THeader :title="profile.username">
+      <TDropdown v-if="isAdmin()">
+        <TPopupEdit
+          type="context"
+          :fields="profileFields"
+          label="Edit Profile"
+          collection="profiles"
+          singular="profile"
+          :item="profile"
+        />
+      </TDropdown>
+    </THeader>
 
     <TItemCard>
       <TSharePreviewPost
@@ -36,20 +47,8 @@
 
       <TProfileContacts :profile="profile" class="mb-4" />
 
-      <div class="flex justify-center space-x-2">
-        <TButton
-          v-if="can('edit', 'profiles', profile)"
-          label="Edit Profile"
-          to="/settings?tab=profile"
-        />
-        <TPopupEdit
-          v-else-if="isAdmin()"
-          :fields="profileFields"
-          label="Edit Profile"
-          collection="profiles"
-          singular="profile"
-          :item="profile"
-        />
+      <div v-if="uid === profile.id" class="flex justify-center space-x-2">
+        <TButton label="Edit Profile" to="/settings?tab=profile" />
       </div>
 
       <WTeaser

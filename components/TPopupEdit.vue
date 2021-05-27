@@ -4,8 +4,8 @@
     class="mb-2 flex items-start justify-center"
   >
     <TButton
-      icon="edit"
-      class="hover:text-blue-500"
+      :icon="icon"
+      :type="type"
       :label="label"
       @click="isPopupOpen = true"
     />
@@ -38,6 +38,14 @@ import { useAuth } from '~/use/auth'
 
 export default {
   props: {
+    type: {
+      type: String,
+      default: 'simple'
+    },
+    icon: {
+      type: String,
+      default: 'edit'
+    },
     collection: {
       type: String,
       default: ''
