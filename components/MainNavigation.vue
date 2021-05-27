@@ -8,6 +8,7 @@
       <TButton to="/feed" icon="news" label="Feed" type="nav" />
       <TButton to="/community" icon="people" label="Community" type="nav" />
       <TButton to="/events" icon="calendar" label="Events" type="nav" />
+      <TButton to="/chat" icon="chat" label="Chat" type="nav" />
       <TButton :to="`/${username}`" type="nav">
         <TProfilePhoto size="xs" :uid="uid" class="mr-1" />
         <span>{{ $t('myprofile.title') }}</span>

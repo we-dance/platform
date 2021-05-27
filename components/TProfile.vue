@@ -26,24 +26,29 @@
             <span v-if="profile.weight">• {{ profile.weight }}kg</span>
           </div>
         </div>
-        <TProfileContact :uid="profile.createdBy" />
+        <TButton
+          v-if="uid !== profile.id"
+          type="primary"
+          :to="`/chat/${profile.username}`"
+          >Chat</TButton
+        >
       </div>
 
       <TProfileContacts :profile="profile" class="mb-4" />
 
       <div class="flex justify-center space-x-2">
+        <TButton
+          v-if="can('edit', 'profiles', profile)"
+          label="Edit Profile"
+          to="/settings?tab=profile"
+        />
         <TPopupEdit
-          v-if="isAdmin()"
+          v-else-if="isAdmin()"
           :fields="profileFields"
           label="Edit Profile"
           collection="profiles"
           singular="profile"
           :item="profile"
-        />
-        <TButton
-          v-else-if="can('edit', 'profiles', profile)"
-          label="Edit Profile"
-          to="/settings?tab=profile"
         />
       </div>
 

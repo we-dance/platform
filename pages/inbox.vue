@@ -1,8 +1,0 @@
-<template>
-  <div>
-    <THeader title="Inbox" />
-    <div class="p-16 text-xs text-center">
-      Start conversations and they will appear here.
-    </div>
-  </div>
-</template>
