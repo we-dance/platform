@@ -10,9 +10,11 @@
             <router-link class="underline hover:no-underline" to="/about">{{
               $t('footer.about')
             }}</router-link>
-            <router-link class="underline hover:no-underline" to="/support">{{
-              $t('footer.support')
-            }}</router-link>
+            <router-link
+              class="underline hover:no-underline"
+              to="/support#hs-chat-open"
+              >{{ $t('footer.support') }}</router-link
+            >
             <router-link class="underline hover:no-underline" to="/privacy">{{
               $t('footer.privacy')
             }}</router-link>
