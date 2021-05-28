@@ -12,7 +12,7 @@
 export default {
   data: () => ({
     city: 'Munich',
-    place: 'ChIJE9on3F3HwoAR9AhGJW_fL-I',
+    place: 'ChIJAVkDPzdOqEcRcDteW0YgIQQ',
     zipcode: '81543'
   })
 }

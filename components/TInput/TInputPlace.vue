@@ -2,6 +2,7 @@
   <t-rich-select
     v-model="internalValue"
     :fetch-options="fetchOptions"
+    :options="options"
     :placeholder="isLocating ? 'Locating...' : placeholder"
     v-bind="$attrs"
   />
@@ -35,7 +36,7 @@ export default {
     const isLocating = ref(false)
 
     const setPlace = (address) => {
-      emit('input', address.place_id)
+      emit('input', address)
       addCityHistory(address)
     }
 
@@ -59,6 +60,23 @@ export default {
 
       setPlace(address)
     }
+
+    const options = computed(() => {
+      let results = []
+
+      if (!cities.value) {
+        return []
+      }
+
+      results = cities.value.sort(sortBy('name'))
+
+      results = results.map((c) => ({
+        label: `${c.location.locality}, ${c.location.country}`,
+        value: c.location.place_id
+      }))
+
+      return results
+    })
 
     const fetchOptions = async (q) => {
       let results = []
@@ -119,6 +137,7 @@ export default {
     })
 
     return {
+      options,
       fetchOptions,
       onChange,
       isLocating,
