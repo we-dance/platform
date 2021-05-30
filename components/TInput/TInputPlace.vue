@@ -36,7 +36,7 @@ export default {
     const isLocating = ref(false)
 
     const setPlace = (address) => {
-      emit('input', address)
+      emit('input', address.place_id)
       addCityHistory(address)
     }
 
