@@ -71,7 +71,7 @@ export default {
       results = cities.value.sort(sortBy('name'))
 
       results = results.map((c) => ({
-        label: `${c.location.locality}, ${c.location.country}`,
+        label: `${c.location.locality}`,
         value: c.location.place_id
       }))
 

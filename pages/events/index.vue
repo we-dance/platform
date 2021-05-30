@@ -9,7 +9,7 @@
     </div>
 
     <div class="flex space-x-2 p-2">
-      <TInputPlace v-model="currentCity" clearable />
+      <TInputPlace v-model="currentCity" />
       <t-rich-select
         v-model="eventType"
         clearable

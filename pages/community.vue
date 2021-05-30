@@ -4,6 +4,8 @@
 
     <div>
       <div v-if="uid && response.facets" class="mb-4 gap-2 flex flex-wrap p-4">
+        <TInputPlace v-model="currentCity" />
+
         <t-rich-select
           v-model="radius"
           placeholder="Radius"
@@ -73,6 +75,7 @@ import { useAlgolia } from '~/use/algolia'
 import { objectivesList, typeList } from '~/use/profiles'
 import { useStyles } from '~/use/styles'
 import { useAuth } from '~/use/auth'
+import { useCities } from '~/use/cities'
 
 export default {
   name: 'ProfilesIndex',
@@ -83,12 +86,11 @@ export default {
     const currentPage = ref(1)
     const filters = ref({})
     const { uid } = useAuth()
+    const { city, currentCity } = useCities()
 
     const { search, response } = useAlgolia('profiles')
 
     const facets = computed(() => ({
-      country: getFacetOptions('country'),
-      locality: getFacetOptions('locality'),
       type: getFacetOptions('type'),
       gender: getFacetOptions('gender'),
       objectives: getFacetOptions('objectives'),
@@ -119,13 +121,19 @@ export default {
       }
     })
 
-    watch([currentPage, facetFilters, radius], () => {
+    watch([currentPage, facetFilters, radius, city], () => {
+      if (!city.value?.location) {
+        return
+      }
+
       search('', {
         filters: filterQuery.value,
         facets: Object.keys(facets.value),
         facetFilters: facetFilters.value,
         page: currentPage.value - 1,
-        aroundLatLngViaIP: !!radius.value,
+        aroundLatLng: radius.value
+          ? `${city.value.location.latitude}, ${city.value.location.longitude}`
+          : '',
         aroundRadius: radius.value * 1000 || 1,
         hitsPerPage: uid.value ? 10 : 4
       })
@@ -209,7 +217,8 @@ export default {
       facetFilters,
       getFieldLabel,
       radius,
-      load
+      load,
+      currentCity
     }
   }
 }
