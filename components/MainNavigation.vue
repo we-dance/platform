@@ -5,12 +5,7 @@
     <TButton to="/" icon="logo-horizontal-dark" class="mb-8" type="void" />
 
     <template v-if="uid">
-      <TButton
-        to="/cities"
-        icon="house"
-        :label="city ? city.name : 'Choose city'"
-        type="nav"
-      />
+      <TButton to="/cities" icon="house" :label="cityName" type="nav" />
       <TButton to="/feed" icon="news" label="Feed" type="nav" />
       <TButton to="/community" icon="people" label="Community" type="nav" />
       <TButton to="/events" icon="calendar" label="Events" type="nav" />
@@ -88,6 +83,7 @@
 </template>
 
 <script>
+import { computed } from 'vue-demi'
 import { useAuth } from '~/use/auth'
 import { useCities } from '~/use/cities'
 
@@ -96,7 +92,11 @@ export default {
     const { isAdmin, isEditor } = useAuth()
     const { city } = useCities()
 
-    return { isAdmin, isEditor, city }
+    const cityName = computed(() => {
+      return city.value?.name || 'Choose city'
+    })
+
+    return { isAdmin, isEditor, cityName }
   },
   props: {
     uid: {

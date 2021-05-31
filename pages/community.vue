@@ -74,6 +74,7 @@ import { objectivesList, typeList } from '~/use/profiles'
 import { useStyles } from '~/use/styles'
 import { useAuth } from '~/use/auth'
 import { useCities } from '~/use/cities'
+import { useRouter } from '~/use/router'
 
 export default {
   name: 'ProfilesIndex',
@@ -85,6 +86,11 @@ export default {
     const filters = ref({})
     const { uid } = useAuth()
     const { city, currentCity } = useCities()
+    const { router } = useRouter()
+
+    if (!currentCity.value) {
+      router.push('/cities')
+    }
 
     const { search, response } = useAlgolia('profiles')
 
@@ -215,8 +221,7 @@ export default {
       facetFilters,
       getFieldLabel,
       radius,
-      load,
-      currentCity
+      load
     }
   }
 }
