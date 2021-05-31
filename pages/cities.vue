@@ -45,7 +45,7 @@ export default {
 
     function changeCity(placeId) {
       currentCity.value = placeId
-      router.push('/Munich')
+      router.push('/feed')
     }
 
     return { currentCity, cities, changeCity }

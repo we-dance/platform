@@ -5,6 +5,12 @@
     <TButton to="/" icon="logo-horizontal-dark" class="mb-8" type="void" />
 
     <template v-if="uid">
+      <TButton
+        to="/cities"
+        icon="house"
+        :label="city ? city.name : 'Choose city'"
+        type="nav"
+      />
       <TButton to="/feed" icon="news" label="Feed" type="nav" />
       <TButton to="/community" icon="people" label="Community" type="nav" />
       <TButton to="/events" icon="calendar" label="Events" type="nav" />

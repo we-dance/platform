@@ -5,7 +5,8 @@ export const postFilters = [
     compare: (item, field, value) => !item[field] || item[field] === value,
     clearable: true,
     hideLabel: true,
-    placeholder: 'City'
+    placeholder: 'City',
+    when: () => false
   },
   {
     name: 'dance',

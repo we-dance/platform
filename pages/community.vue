@@ -4,8 +4,6 @@
 
     <div>
       <div v-if="uid && response.facets" class="mb-4 gap-2 flex flex-wrap p-4">
-        <TInputPlace v-model="currentCity" />
-
         <t-rich-select
           v-model="radius"
           placeholder="Radius"
