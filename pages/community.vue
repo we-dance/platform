@@ -79,7 +79,7 @@ import { useRouter } from '~/use/router'
 export default {
   name: 'ProfilesIndex',
   setup() {
-    const radius = ref(50)
+    const radius = ref(10)
     const query = ref('')
     const profileType = ref('')
     const currentPage = ref(1)
