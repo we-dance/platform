@@ -109,6 +109,80 @@ export async function migrateShares() {
   }
 }
 
+function getChatId(to: string, from: string) {
+  const list = [to, from]
+  return list.sort((a, b) => ('' + a).localeCompare(b)).join('-')
+}
+
+function getDate(date: any) {
+  if (date?.toDate) {
+    return date.toDate()
+  }
+
+  return 0
+}
+
+export async function migrateChat() {
+  const matches = await getDocs(db.collection('matches').orderBy('createdAt'))
+
+  const chats = {} as any
+
+  for (const match of matches) {
+    const chatId = getChatId(match.to, match.from)
+    if (match.to === match.from) {
+      continue
+    }
+
+    chats[chatId] = chats[chatId] || {
+      createdAt: match.createdAt,
+      createdBy: match.createdBy,
+      members: {
+        [match.from]: true,
+        [match.to]: true
+      },
+      migration: 'matches210603'
+    }
+
+    chats[chatId].lastMessage = match.message
+    chats[chatId].lastMessageBy = match.from
+    chats[chatId].lastMessageAt = match.createdAt
+    chats[chatId].lastSeen = chats[chatId].lastSeen || {
+      [match.from]: 0,
+      [match.to]: 0
+    }
+
+    chats[chatId].lastSeen[match.from] = match.createdAt
+
+    const clickedDate = match.recipients
+      ? getDate(match.recipients[match.to].clickedAt)
+      : 0
+
+    if (clickedDate) {
+      chats[chatId].lastSeen[match.to] = clickedDate
+    }
+
+    chats[chatId].messages = chats[chatId].messages || []
+    chats[chatId].messages.push({
+      text: match.message,
+      createdBy: match.from,
+      createdAt: match.createdAt
+    })
+  }
+
+  const chatIds = Object.keys(chats)
+
+  for (const chatId of chatIds) {
+    const chat = chats[chatId]
+
+    console.log(chatId, chat)
+
+    await db
+      .collection('chats')
+      .doc(chatId)
+      .set(chat)
+  }
+}
+
 export async function generateSocialCover(profile: any) {
   const result = await axios.get(
     `https://us-central1-wedance-4abe3.cloudfunctions.net/hooks/share/${profile.username}?timezone=Europe/Berlin`

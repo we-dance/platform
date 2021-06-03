@@ -1,5 +1,10 @@
 import { indexProfiles } from './lib/algolia'
-import { migrateFavs, migrateShares, migrateUsernames } from './lib/migrations'
+import {
+  migrateFavs,
+  migrateShares,
+  migrateUsernames,
+  migrateChat
+} from './lib/migrations'
 import { screenshot } from './lib/screenshot'
 import { getCities } from './lib/stats'
 
@@ -24,6 +29,9 @@ require('yargs')
   })
   .command('migrate:shares', 'Migrate shares', async (args: any) => {
     await migrateShares()
+  })
+  .command('migrate:chat', 'Migrate chat', async (args: any) => {
+    await migrateChat()
   })
   .command('stats:cities', 'Get cities stats', async (args: any) => {
     await getCities()
