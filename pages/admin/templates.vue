@@ -53,6 +53,7 @@ import { useAuth } from '~/use/auth'
 import { getDate, getDateTime, getTime } from '~/utils'
 
 export default {
+  middleware: ['auth'],
   data: () => ({
     data: '',
     peopleId: false

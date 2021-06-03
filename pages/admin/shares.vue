@@ -1,63 +1,66 @@
 <template>
   <div>
-    <div>
-      <TInputPlace v-model="currentCity" clearable />
-    </div>
+    <THeader title="Shares" />
 
-    <TCardList
-      collection="shares"
-      title="Shares"
-      :fields="fields"
-      :filters="states"
-      class="mt-4"
-    >
-      <template v-slot:empty>
-        <div class="text-center mt-4">
-          No scheduled posts.
-        </div>
-      </template>
-      <template v-slot:default="{ item }">
-        <div class="rounded bg-white mb-4 shadow border overflow-hidden">
-          <div class="p-4 space-y-2">
-            <div class="flex justify-between">
-              <div>{{ getCity(item.place) || 'Everywhere' }}</div>
-              <TInputSelect
-                :value="item.state"
-                :options="states"
-                @input="(val) => changeState(item.id, val)"
-              />
-            </div>
-            <div class="flex justify-between">
-              <div class="flex space-x-2">
-                <span>Created by</span>
-                <TAvatar :uid="item.createdBy" name />
-              </div>
-              <div>{{ getDateTime(item.createdAt) }}</div>
-            </div>
-            <div v-if="item.publishedBy" class="flex justify-between">
-              <div class="flex space-x-2">
-                <span>Published by</span>
-                <TAvatar :uid="item.publishedBy" name />
-              </div>
-              <div>{{ getDateTime(item.publishedAt) }}</div>
-            </div>
-            <div v-if="item.cancelledBy" class="flex justify-between">
-              <div class="flex space-x-2">
-                <span>Cancelled by</span>
-                <TAvatar :uid="item.cancelledBy" name />
-              </div>
-              <div>{{ getDateTime(item.cancelledAt) }}</div>
-            </div>
-            <div>
-              <a :href="item.url" class="underline hover:no-underline">{{
-                item.url
-              }}</a>
-            </div>
+    <div class="p-4">
+      <div>
+        <TInputPlace v-model="currentCity" clearable />
+      </div>
+
+      <TCardList
+        collection="shares"
+        :fields="fields"
+        :filters="states"
+        class="mt-4"
+      >
+        <template v-slot:empty>
+          <div class="text-center mt-4">
+            No scheduled posts.
           </div>
-          <img :src="item.image" />
-        </div>
-      </template>
-    </TCardList>
+        </template>
+        <template v-slot:default="{ item }">
+          <div class="rounded bg-white mb-4 shadow border overflow-hidden">
+            <div class="p-4 space-y-2">
+              <div class="flex justify-between">
+                <div>{{ getCity(item.place) || 'Everywhere' }}</div>
+                <TInputSelect
+                  :value="item.state"
+                  :options="states"
+                  @input="(val) => changeState(item.id, val)"
+                />
+              </div>
+              <div class="flex justify-between">
+                <div class="flex space-x-2">
+                  <span>Created by</span>
+                  <TAvatar :uid="item.createdBy" name />
+                </div>
+                <div>{{ getDateTime(item.createdAt) }}</div>
+              </div>
+              <div v-if="item.publishedBy" class="flex justify-between">
+                <div class="flex space-x-2">
+                  <span>Published by</span>
+                  <TAvatar :uid="item.publishedBy" name />
+                </div>
+                <div>{{ getDateTime(item.publishedAt) }}</div>
+              </div>
+              <div v-if="item.cancelledBy" class="flex justify-between">
+                <div class="flex space-x-2">
+                  <span>Cancelled by</span>
+                  <TAvatar :uid="item.cancelledBy" name />
+                </div>
+                <div>{{ getDateTime(item.cancelledAt) }}</div>
+              </div>
+              <div>
+                <a :href="item.url" class="underline hover:no-underline">{{
+                  item.url
+                }}</a>
+              </div>
+            </div>
+            <img :src="item.image" />
+          </div>
+        </template>
+      </TCardList>
+    </div>
   </div>
 </template>
 
@@ -68,6 +71,7 @@ import { useCities } from '~/use/cities'
 import { useApp } from '~/use/app'
 
 export default {
+  middleware: ['auth'],
   name: 'PageAdminShares',
   setup() {
     const { getCity } = useApp()

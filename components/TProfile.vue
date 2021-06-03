@@ -1,13 +1,17 @@
 <template>
   <div>
-    <portal to="title">
-      <router-link to="/" class="flex items-center">
-        <TIcon name="icon" size="8" />
-        <h1 class="ml-1 font-lato text-lg font-bold">
-          {{ profile.username }}
-        </h1>
-      </router-link>
-    </portal>
+    <THeader :title="profile.username">
+      <TDropdown v-if="isAdmin()">
+        <TPopupEdit
+          type="context"
+          :fields="profileFields"
+          label="Edit Profile"
+          collection="profiles"
+          singular="profile"
+          :item="profile"
+        />
+      </TDropdown>
+    </THeader>
 
     <TItemCard>
       <TSharePreviewPost
@@ -33,27 +37,18 @@
             <span v-if="profile.weight">• {{ profile.weight }}kg</span>
           </div>
         </div>
-        <TProfileContact :uid="profile.createdBy" />
+        <TButton
+          v-if="uid !== profile.id"
+          type="primary"
+          :to="`/chat/${profile.username}`"
+          >Chat</TButton
+        >
       </div>
 
       <TProfileContacts :profile="profile" class="mb-4" />
 
-      <div class="flex justify-center space-x-2">
-        <TPopupEdit
-          :fields="profilePosterFields"
-          label="Edit Poster"
-          collection="profiles"
-          singular="profile"
-          :item="profile"
-        />
-
-        <TPopupEdit
-          :fields="profileDetailFields"
-          label="Edit Details"
-          collection="profiles"
-          singular="profile"
-          :item="profile"
-        />
+      <div v-if="uid === profile.id" class="flex justify-center space-x-2">
+        <TButton label="Edit Profile" to="/settings?tab=profile" />
       </div>
 
       <WTeaser
@@ -109,16 +104,17 @@ export default {
     }
   },
   setup() {
-    const { uid } = useAuth()
-    const { profilePosterFields, profileDetailFields } = useProfiles()
+    const { uid, isAdmin, can } = useAuth()
+    const { profileFields } = useProfiles()
     const { getCity } = useApp()
 
     return {
       uid,
+      can,
       getExcerpt,
-      profilePosterFields,
-      profileDetailFields,
-      getCity
+      profileFields,
+      getCity,
+      isAdmin
     }
   }
 }

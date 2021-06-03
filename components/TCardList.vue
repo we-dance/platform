@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div class="flex items-baseline justify-between">
+    <div class="flex items-baseline justify-between mb-4">
       <h1 v-if="title" class="text-xl font-bold">{{ title }}</h1>
       <TButton v-if="add && can('add', collection)" @click="currentId = 'add'">
         {{ add }}
@@ -46,6 +46,9 @@
 
     <div :class="wrapperClass">
       <div v-for="(item, itemId) in items" :key="item.id">
+        <div class="flex justify-end">
+          <slot name="card-toolbar" :item="item" />
+        </div>
         <slot :item="item">
           <TItemCard :key="itemId">
             <TListItem :item="item" :fields="fields" />

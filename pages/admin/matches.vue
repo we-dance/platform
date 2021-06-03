@@ -28,7 +28,7 @@
           />
         </button>
       </template>
-      <template v-slot="{ item }">
+      <template v-slot:default="{ item }">
         <TRecipients
           v-if="peopleId === item.id"
           :recipients="item.recipients"
@@ -91,6 +91,7 @@ import { useDoc } from '~/use/doc'
 import { getDate, getDateTime, getTime } from '~/utils'
 
 export default {
+  middleware: ['admin'],
   data: () => ({
     data: '',
     peopleId: false,

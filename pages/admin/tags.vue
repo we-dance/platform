@@ -22,6 +22,7 @@
 
 <script>
 export default {
+  middleware: ['auth'],
   name: 'TagsIndex',
   setup() {
     const collection = 'tags'

@@ -25,7 +25,7 @@
       <div>{{ profile.skills }}</div>
     </div>
     <div v-if="profile.jobs">
-      <h2 class="font-bold">Skills:</h2>
+      <h2 class="font-bold">I can help with:</h2>
       <div>{{ profile.jobs }}</div>
     </div>
 

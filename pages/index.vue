@@ -1,65 +1,61 @@
 <template>
-  <TList
-    title="Feed"
-    add="Add Post"
-    add-url="/posts/-/edit"
-    collection="posts"
-    :filter-default="{ place: currentCity }"
-    :filter-fields="postFilters"
-    :tabs="postSorts"
-    sort-by="-createdAt"
-    list-wrapper="mt-4 grid grid-cols-1 md:grid-cols-2 col-gap-2 row-gap-2"
-  >
-    <template v-slot:before>
-      <div class="md:flex space-y-4 md:space-y-0 md:space-x-4 mb-4">
-        <WTeaser
-          :title="$t('teaser.partner.title')"
-          :description="$t('teaser.partner.description')"
-          :button="$t('teaser.partner.btn')"
-          url="/community"
-          class="flex-1"
-        />
-        <WTeaser
-          :title="$t('teaser.events.title')"
-          :description="$t('teaser.events.description')"
-          :button="$t('teaser.events.btn')"
-          url="/events"
-          class="flex-1"
-        />
+  <div>
+    <nav
+      class="mx-auto max-w-2xl mt-4 mb-4 px-4 flex justify-between items-center"
+    >
+      <div>
+        <TIcon name="logo-horizontal-dark" />
       </div>
-    </template>
-    <template v-slot:item="{ item }">
-      <router-link :to="`/posts/${item.id}`" class="hover:opacity-75">
-        <TSharePreviewPost
-          type="Post"
-          collection="posts"
-          :username="item.createdByUsername"
-          :title="item.title"
-          :photo="item.cover"
-          :styles="item.styles"
-          align="center"
-          size="sm"
-          :likes="item.savedByCount"
-        />
-      </router-link>
-    </template>
-  </TList>
+      <div>
+        <TButton type="secondary" to="/signin" label="Login" />
+      </div>
+    </nav>
+
+    <div class="py-16">
+      <div class="px-4 mx-auto max-w-2xl text-center">
+        <TIcon name="undraw_i_can_fly" class="mb-4" />
+        <h1 class="text-4xl leading-tight font-montserrat font-bold">
+          Do you like to dance?
+        </h1>
+        <p class="mt-2 text-xl font-lato">
+          Meet dance partners and help each other to find interesting dance
+          events.
+        </p>
+        <div>
+          <TButton class="mt-4 mr-4" type="primary" to="/register"
+            >Join community</TButton
+          >
+        </div>
+      </div>
+    </div>
+
+    <div class="bg-dark text-white">
+      <TFooter class="p-4 mx-auto max-w-2xl" />
+    </div>
+  </div>
 </template>
 
 <script>
-import { postFilters, postSorts } from '~/use/posts'
-import { useCities } from '~/use/cities'
+import { onMounted, watch } from 'vue-demi'
+import { useAuth } from '~/use/auth'
+import { useRouter } from '~/use/router'
 
 export default {
-  name: 'PostsIndex',
+  name: 'Index',
+  layout: 'empty',
   setup() {
-    const { currentCity } = useCities()
+    const { profile } = useAuth()
+    const { router } = useRouter()
 
-    return {
-      postFilters,
-      postSorts,
-      currentCity
-    }
+    watch(profile, (p) => {
+      router.push('/feed')
+    })
+
+    onMounted(() => {
+      if (profile.value?.username) {
+        router.push('/feed')
+      }
+    })
   }
 }
 </script>

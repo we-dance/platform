@@ -80,6 +80,7 @@ import {
 } from '~/utils'
 
 export default {
+  middleware: ['auth'],
   data: () => ({
     data: '',
     peopleId: false,

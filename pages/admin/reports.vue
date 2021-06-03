@@ -35,6 +35,7 @@ import { useAuth } from '~/use/auth'
 import { useAccounts } from '~/use/accounts'
 
 export default {
+  middleware: ['auth'],
   setup() {
     const collection = 'reports'
 

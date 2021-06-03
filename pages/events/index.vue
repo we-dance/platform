@@ -1,20 +1,26 @@
 <template>
   <main>
-    <TTitle>
-      {{ $t('events.title') }}
-      <template slot="right">
-        <TButton to="/events/-/edit" type="primary">{{
-          $t('events.add')
-        }}</TButton>
-      </template>
-    </TTitle>
+    <THeader :title="$t('events.title')">
+      <TButton type="nav" icon="plus" to="/events/-/edit" />
+    </THeader>
 
-    <div class="flex items-center space-x-2">
-      <TTabs
-        v-if="uid"
-        v-model="activeFilter"
-        :tabs="filterOptions"
-        class="flex-grow"
+    <div v-if="uid" class="flex items-center space-x-2">
+      <TTabs v-model="activeFilter" :tabs="filterOptions" class="flex-grow" />
+    </div>
+
+    <div class="flex space-x-2 p-2">
+      <t-rich-select
+        v-model="eventType"
+        clearable
+        hide-search-box
+        :options="eventTypeList"
+        :placeholder="$t('event.type')"
+      />
+      <t-rich-select
+        v-model="dances"
+        clearable
+        :options="danceStyles"
+        :placeholder="$t('style.label')"
       />
       <div>
         <TButton
@@ -32,24 +38,7 @@
       </div>
     </div>
 
-    <div class="flex my-2 space-x-2">
-      <TInputPlace v-model="currentCity" clearable />
-      <t-rich-select
-        v-model="eventType"
-        clearable
-        hide-search-box
-        :options="eventTypeList"
-        :placeholder="$t('event.type')"
-      />
-      <t-rich-select
-        v-model="dances"
-        clearable
-        :options="danceStyles"
-        :placeholder="$t('style.label')"
-      />
-    </div>
-
-    <div class="mt-4">
+    <div>
       <TLoader v-if="loading" />
       <div v-else-if="!count" class="p-4">
         No events found. Would you like to add one?
@@ -57,7 +46,7 @@
 
       <div
         v-if="view === 'covers'"
-        class="mt-4 grid grid-cols-1 md:grid-cols-2 col-gap-2 row-gap-2"
+        class="grid grid-cols-1 md:grid-cols-2 gap-2"
       >
         <router-link
           v-for="event in events"
@@ -81,7 +70,7 @@
 
       <div v-else>
         <div v-for="(items, date) in itemsByDate" :key="date" class="mb-8">
-          <h2 class="font-bold bg-dark text-white py-2 px-4 rounded">
+          <h2 class="font-bold bg-dark text-white py-2 px-4">
             {{ getDay(date) }}, {{ getDate(date) }}
           </h2>
           <div v-for="item in items" :key="item.id" class="px-4 mt-4">
@@ -107,7 +96,6 @@ import { computed, ref } from '@nuxtjs/composition-api'
 import { startOfWeek, addDays, endOfYear } from 'date-fns'
 import { useRsvp } from '~/use/rsvp'
 import { useCollection } from '~/use/collection'
-import { useAccounts } from '~/use/accounts'
 import { useAuth } from '~/use/auth'
 import { useCities } from '~/use/cities'
 import { useRouter } from '~/use/router'
@@ -193,8 +181,6 @@ export default {
 
     const loading = computed(() => loadingRsvps.value || loadingPosts.value)
 
-    const { getAccount } = useAccounts()
-
     const activeFilter = ref('thisYear')
 
     const isPublic = (item) => item.visibility !== 'Unlisted'
@@ -273,7 +259,6 @@ export default {
       itemsByDate,
       getRsvpResponse,
       dateDiff,
-      getAccount,
       loading,
       getById,
       uid,

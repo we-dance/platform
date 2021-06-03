@@ -93,7 +93,9 @@ export const useApp = () => {
   const { create, update } = useDoc('cities')
 
   const cache = useCache()
-  const cities = computed(() => getArrayFromHash(cache.value.cities))
+  const cities = computed(() =>
+    cache.value ? getArrayFromHash(cache.value.cities) : []
+  )
 
   const getPosterLabelColor = (collection, type) => {
     return posterLabelColors[collection] || 'bg-indigo-500'

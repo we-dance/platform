@@ -1,7 +1,7 @@
 <template>
   <TButton
     icon="favorite"
-    type="icon"
+    type="nav"
     :label="count"
     :class="{ 'text-primary': value, 'text-gray-700': !value }"
     v-bind="$attrs"

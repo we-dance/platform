@@ -239,14 +239,12 @@ export const profileFields = [
   },
   {
     name: 'place',
-    label: 'Where do you dance the most?',
+    label: 'Your city',
     register: true,
     poster: true,
     required: true,
     type: 'place',
-    placeholder: 'City',
-    tips:
-      'If you live in a small city, you probably go to dance to a bigger city, which one?'
+    placeholder: 'City'
   },
   {
     name: 'visibility',
@@ -299,10 +297,8 @@ export const profileFields = [
   },
   {
     name: 'jobs',
-    label: 'Skills',
-    type: 'textarea',
-    tips:
-      'What other skills would you like to share with dance community? For example: video editing, photography, copywriting, etc. It might be useful to exchange your skills for free passes.'
+    label: 'I can help with',
+    type: 'textarea'
   },
   {
     name: 'teacher',

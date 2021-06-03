@@ -12,7 +12,7 @@
       <div
         class="bg-white px-4 rounded w-full md:w-auto z-50 overflow-y-scroll mt-4 flex justify-center items-center max-h-screen"
       >
-        <div>
+        <div class="w-full">
           <div
             v-if="title"
             class="flex bg-white justify-between border-b pt-4 pb-2 sticky top-0 z-50"

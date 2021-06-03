@@ -31,6 +31,9 @@ export const firebase = {
 
 export default {
   mode: 'spa',
+  tailwindcss: {
+    jit: true
+  },
   /*
    ** Customize the progress-bar color
    */
@@ -88,7 +91,8 @@ export default {
   googleFonts: {
     display: 'swap',
     families: {
-      Lato: true
+      Lato: true,
+      Montserrat: true
     }
   },
   toast: {

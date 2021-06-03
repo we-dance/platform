@@ -15,6 +15,7 @@ import { useDoc } from '~/use/doc'
 import { useApp } from '~/use/app'
 
 export default {
+  middleware: ['auth'],
   name: 'PageAdminPlaces',
   setup() {
     const { docs: all } = useCollection('shares')
