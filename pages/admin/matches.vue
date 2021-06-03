@@ -91,6 +91,7 @@ import { useDoc } from '~/use/doc'
 import { getDate, getDateTime, getTime } from '~/utils'
 
 export default {
+  middleware: ['admin'],
   data: () => ({
     data: '',
     peopleId: false,

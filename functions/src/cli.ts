@@ -3,7 +3,8 @@ import {
   migrateFavs,
   migrateShares,
   migrateUsernames,
-  migrateChat
+  migrateChat,
+  chatNotifications
 } from './lib/migrations'
 import { screenshot } from './lib/screenshot'
 import { getCities } from './lib/stats'
@@ -32,6 +33,10 @@ require('yargs')
   })
   .command('migrate:chat', 'Migrate chat', async (args: any) => {
     await migrateChat()
+  })
+
+  .command('chat', 'Chat notifications', async (args: any) => {
+    await chatNotifications()
   })
   .command('stats:cities', 'Get cities stats', async (args: any) => {
     await getCities()

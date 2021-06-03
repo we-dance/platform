@@ -31,6 +31,13 @@ app.post('/track/:action', async (req, res) => {
       .update({
         [`recipients.${uid}.${action}`]: admin.firestore.Timestamp.now()
       })
+  } else if (type === 'chatNotification') {
+    await db.collection('chatNotifications').add({
+      uid,
+      action,
+      chatId: campaignId,
+      date: admin.firestore.Timestamp.now()
+    })
   } else if (type === 'welcomeEmail') {
     await db
       .collection('templates')
@@ -262,60 +269,30 @@ export const onProfileChange = functions.firestore
   })
 
 export const matchNotification = functions.firestore
-  .document('matches/{matchId}')
+  .document('chats/{chatId}')
   .onWrite(async (change, context) => {
-    const snapshot = change.after
-    const match = snapshot.data()
+    const after = change.after.data() as any
+    const before = change.before.data() as any
 
-    if (!match || match.status !== 'open') {
+    if (after?.lastMessageBy === before?.lastMessageBy) {
       return
     }
 
-    const fromAccount = (
-      await db
-        .collection('accounts')
-        .doc(match.from)
-        .get()
-    ).data()
+    delete after.members[after.lastMessageBy]
+    const to = Object.keys(after.members)[0]
 
     const toAccount = (
       await db
         .collection('accounts')
-        .doc(match.to)
+        .doc(to)
         .get()
     ).data()
-
-    const fromProfile = (
-      await db
-        .collection('profiles')
-        .doc(match.from)
-        .get()
-    ).data()
-
-    const toProfile = (
-      await db
-        .collection('profiles')
-        .doc(match.to)
-        .get()
-    ).data()
-
-    if (!fromAccount) {
-      throw Error('fromAccount not found')
-    }
 
     if (!toAccount) {
       throw Error('toAccount not found')
     }
 
-    if (!fromProfile || !fromProfile.username) {
-      throw Error('fromProfile not found')
-    }
-
-    if (!toProfile || !toProfile.username) {
-      throw Error('toProfile not found')
-    }
-
-    let subject = ''
+    const subject = 'You’ve got a new message'
 
     type RecipientList = {
       [key: string]: {
@@ -326,33 +303,16 @@ export const matchNotification = functions.firestore
 
     const recipients: RecipientList = {}
 
-    recipients[match.to] = {
-      name: toAccount.name || toProfile.name,
+    recipients[to] = {
+      name: toAccount.name,
       email: toAccount.email
     }
 
-    if (match.auto === 'Yes') {
-      subject = 'Recommendation from WeDance'
+    const content = `#### You’ve got a new message
 
-      recipients[match.from] = {
-        name: fromAccount.name || fromProfile.name,
-        email: fromAccount.email
-      }
-    } else {
-      subject = `Message from ${fromProfile.name}`
-    }
+    You have a message. Visit WeDance to see it now.
 
-    const content = `${match.message}
-
----
-
-[Click here to reply to ${fromProfile.name}](https://wedance.vip/u/${fromProfile.username})
-
-It's an automated email sent by robot, please **don't reply directly to this email**.
-
-Contact via website and share your contacts to continue conversation in a proper messenger.
-
-The goal of WeDance is to connect you with dancers, not to provide chatting platform.
+[View message](https://wedance.vip/chat)
 `
 
     const from = 'WeDance <noreply@wedance.vip>'
@@ -362,26 +322,11 @@ The goal of WeDance is to connect you with dancers, not to provide chatting plat
       recipients,
       subject,
       content,
-      type: 'matchNotification',
-      id: snapshot.id
+      type: 'chatNotification',
+      id: change.after.id
     }
 
-    return await sendEmail(data)
-      .then(() =>
-        snapshot.ref.update({
-          status: 'sent',
-          recipients,
-          processedAt: admin.firestore.Timestamp.now(),
-          error: ''
-        })
-      )
-      .catch((err) =>
-        snapshot.ref.update({
-          status: 'error',
-          processedAt: admin.firestore.Timestamp.now(),
-          error: err.message
-        })
-      )
+    await sendEmail(data)
   })
 
 export const taskRunner = functions

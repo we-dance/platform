@@ -35,6 +35,7 @@ import { useApp } from '~/use/app'
 import { getOptionsFromArray, getExcerpt, getDateTimeYear } from '~/utils'
 
 export default {
+  middleware: ['auth'],
   name: 'SuspendedIndex',
   setup() {
     const config = {

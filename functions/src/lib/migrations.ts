@@ -122,6 +122,26 @@ function getDate(date: any) {
   return 0
 }
 
+export async function chatNotifications() {
+  const lastHour = Date.now() - 60000 * 60
+
+  console.log('Messages sent after', new Date(lastHour))
+
+  const chats = await getDocs(
+    db.collection('chats').where('lastMessageAt', '>', lastHour)
+  )
+
+  const notifications = {} as any
+
+  for (const chat of chats) {
+    delete chat.members[chat.lastMessageBy]
+    const to = Object.keys(chat.members)[0]
+    notifications[to] = true
+  }
+
+  console.log(notifications)
+}
+
 export async function migrateChat() {
   const matches = await getDocs(db.collection('matches').orderBy('createdAt'))
 

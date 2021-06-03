@@ -239,14 +239,12 @@ export const profileFields = [
   },
   {
     name: 'place',
-    label: 'Where do you dance the most?',
+    label: 'Your city',
     register: true,
     poster: true,
     required: true,
     type: 'place',
-    placeholder: 'City',
-    tips:
-      'If you live in a small city, you probably go to dance to a bigger city, which one?'
+    placeholder: 'City'
   },
   {
     name: 'visibility',

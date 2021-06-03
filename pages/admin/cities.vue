@@ -43,6 +43,7 @@
 import { getDate, getDateTime, getTime } from '~/utils'
 
 export default {
+  middleware: ['auth'],
   data: () => ({
     cityStatusClass: {
       active: 'bg-green-500',

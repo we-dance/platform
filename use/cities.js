@@ -10,7 +10,7 @@ const state = Vue.observable({
 export const useCities = () => {
   const { doc: city, find } = useDoc('cities')
 
-  const currentCity = computed(() => state.currentCity)
+  const currentCity = computed(() => state.currentCity || ls('city'))
 
   find('location.place_id', currentCity.value)
 

@@ -59,6 +59,7 @@ import { useFirestore } from '~/use/collection'
 
 export default {
   name: 'ChatDialogue',
+  middleware: ['auth'],
   setup() {
     const { params } = useRouter()
     const { uid } = useAuth()

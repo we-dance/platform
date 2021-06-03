@@ -71,6 +71,7 @@ import { useCities } from '~/use/cities'
 import { useApp } from '~/use/app'
 
 export default {
+  middleware: ['auth'],
   name: 'PageAdminShares',
   setup() {
     const { getCity } = useApp()

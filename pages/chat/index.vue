@@ -40,6 +40,7 @@ import { useFirestore } from '~/use/collection'
 import { useProfiles } from '~/use/profiles'
 
 export default {
+  middleware: ['auth'],
   name: 'ChatIndex',
   setup() {
     const { uid } = useAuth()

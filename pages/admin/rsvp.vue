@@ -121,6 +121,7 @@ import TCardList from '~/components/TCardList'
 import { getDay, getTime, getDate } from '~/utils'
 
 export default {
+  middleware: ['auth'],
   components: {
     TCardList
   },
