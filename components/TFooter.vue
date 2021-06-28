@@ -13,7 +13,7 @@
       class="underline hover:no-underline"
       to="/support#hs-chat-open"
       target="_blank"
-      >{{ $t('footer.support') }}</router-link
+      >Impressum</router-link
     >
     <router-link class="underline hover:no-underline" to="/privacy">{{
       $t('footer.privacy')
