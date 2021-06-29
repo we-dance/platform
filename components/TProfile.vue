@@ -45,6 +45,8 @@
         >
       </div>
 
+      <div class="mb-2">{{ profile.bio }}</div>
+
       <TProfileContacts :profile="profile" class="mb-4" />
 
       <div v-if="uid === profile.id" class="flex justify-center space-x-2">
