@@ -450,6 +450,10 @@ export const searchByStart = (field, value) => (i) => {
     return true
   }
 
+  if (!i[field]) {
+    return false
+  }
+
   return i[field].toLowerCase().startsWith(value.toLowerCase())
 }
 
