@@ -17,7 +17,7 @@
         </div>
         <div class="flex-grow">
           <div class="text-xs space-x-1 text-gray-900 flex">
-            <span>{{ chat.receiver.username }}</span>
+            <span>{{ chat.receiver.username || 'DELETED' }}</span>
             <span>•</span>
             <div>
               {{ dateDiff(chat.lastMessageAt) }} ago
