@@ -259,6 +259,11 @@ export default {
       this.$router.push(`/${this.profile.username}`)
     },
     async saveProfile(data) {
+      if (data.bio.length > 140) {
+        alert('Teaser can be maximum 140 symbols.')
+        return
+      }
+
       this.$fire.analytics.logEvent('save_profile')
 
       await this.updateProfile(data)

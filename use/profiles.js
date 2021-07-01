@@ -202,9 +202,8 @@ export const profileFields = [
     poster: true,
     type: 'textarea',
     labelPosition: 'top',
-    before:
-      'Introduce yourself. Make it short and attractive. Max 280 symbols.',
-    placeholder: '280 symbols'
+    before: 'Introduce yourself. Make it short and attractive.',
+    max: 140
   },
   {
     name: 'photo',
