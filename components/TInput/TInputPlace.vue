@@ -87,7 +87,9 @@ export default {
         if (cityHistory) {
           results.push(...cityHistory)
         }
-      } else {
+      }
+
+      if (q || !results.length) {
         results = cities.value
           .filter(searchByStart('name', q))
           .sort(sortBy('name'))

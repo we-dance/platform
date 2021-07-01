@@ -5,10 +5,17 @@
     <TButton to="/" icon="logo-horizontal-dark" class="mb-8" type="void" />
 
     <template v-if="uid">
-      <TButton to="/cities" icon="house" :label="cityName" type="nav" />
-      <TButton to="/feed" icon="news" label="Feed" type="nav" />
-      <TButton to="/community" icon="people" label="Community" type="nav" />
-      <TButton to="/events" icon="calendar" label="Events" type="nav" />
+      <TButton
+        to="/cities"
+        icon="place"
+        :label="cityName || 'Choose city'"
+        type="nav"
+      />
+      <template v-if="cityName">
+        <TButton to="/feed" icon="news" label="Feed" type="nav" />
+        <TButton to="/community" icon="people" label="Community" type="nav" />
+        <TButton to="/events" icon="calendar" label="Events" type="nav" />
+      </template>
       <TButton to="/chat" icon="chat" label="Chat" type="nav" />
       <TButton :to="`/${username}`" type="nav">
         <TProfilePhoto size="xs" :uid="uid" class="mr-1" />
@@ -93,7 +100,7 @@ export default {
     const { city } = useCities()
 
     const cityName = computed(() => {
-      return city.value?.name || 'Choose city'
+      return city.value?.name
     })
 
     return { isAdmin, isEditor, cityName }

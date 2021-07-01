@@ -1,54 +1,94 @@
 <template>
   <div>
-    <THeader title="Choose city" />
+    <div class="p-2 border-b">
+      <t-input v-model="query" placeholder="Search city" />
+    </div>
 
-    <div class="text-xs font-bold p-4">Saved cities</div>
     <div
-      v-for="city in cities"
+      v-for="city in results"
       :key="city.value"
       class="border-b p-4 text-lg cursor-pointer hover:bg-red-100"
       @click="changeCity(city.value)"
     >
-      {{ city.name }}
-    </div>
-
-    <div class="text-xs font-bold p-4">Add new city</div>
-    <div class="px-4">
-      <TInputPlace v-model="currentCity" clearable />
+      {{ city.label }}
     </div>
   </div>
 </template>
 
 <script>
-import { computed } from 'vue-demi'
-import { useAuth } from '~/use/auth'
+import { onMounted, ref, watch } from 'vue-demi'
 import { useCities } from '~/use/cities'
-import { useApp } from '~/use/app'
 import { useRouter } from '~/use/router'
+import { useApp } from '~/use/app'
+import { getPlacePredictions } from '~/use/google'
+import { searchByStart, sortBy } from '~/utils'
 
 export default {
   setup() {
     const { currentCity } = useCities()
-    const { profile } = useAuth()
-    const { getCity } = useApp()
     const { router } = useRouter()
-
-    const cities = computed(() => {
-      if (!profile.value || !profile.value.cities) {
-        return []
-      }
-
-      return Object.keys(profile.value.cities)
-        .map((city) => ({ name: getCity(city), value: city }))
-        .filter((c) => c.name)
-    })
+    const { getCityHistory, cities } = useApp()
 
     function changeCity(placeId) {
       currentCity.value = placeId
       router.push('/feed')
     }
 
-    return { currentCity, cities, changeCity }
+    const query = ref('')
+
+    const fetchOptions = async (q) => {
+      let results = []
+
+      if (!q) {
+        const cityHistory = await getCityHistory()
+
+        if (cityHistory) {
+          results.push(...cityHistory)
+        }
+      } else {
+        results = cities.value
+          .filter(searchByStart('name', q))
+          .sort(sortBy('name'))
+      }
+
+      results = results.map((c) => ({
+        label: `${c.location.locality}, ${c.location.country}`,
+        value: c.location.place_id
+      }))
+
+      if (q && results.length < 3) {
+        const places = await getPlacePredictions(q)
+
+        if (places.length) {
+          results.push(
+            ...places
+              .map((i) => ({
+                label: `${i.description} *`,
+                value: i.place_id
+              }))
+              .filter((n) => !results.find((o) => n.value === o.value))
+          )
+        }
+      }
+
+      return { results }
+    }
+
+    const results = ref([])
+
+    watch(query, async () => {
+      const res = await fetchOptions(query.value)
+
+      results.value = res.results
+    })
+
+    onMounted(async () => {
+      const res = await fetchOptions(query.value)
+
+      results.value = res.results
+    })
+
+    return { currentCity, cities, changeCity, query, results }
   }
 }
 </script>
