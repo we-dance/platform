@@ -101,8 +101,6 @@ export default {
       if (q && results.length < 3) {
         const places = await getPlacePredictions(q)
 
-        console.log(places)
-
         if (places.length) {
           results.push(
             ...places
