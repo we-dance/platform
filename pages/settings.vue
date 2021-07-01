@@ -260,7 +260,7 @@ export default {
     },
     async saveProfile(data) {
       if (data.bio.length > 140) {
-        alert('Teaser can be maximum 140 symbols.')
+        this.$toast.error('Teaser can be maximum 140 symbols.')
         return
       }
 
