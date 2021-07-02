@@ -4,7 +4,7 @@
       <TInput
         v-model="query"
         auto-focus
-        placeholder="Search WeDance"
+        placeholder="Search profiles"
         class="rounded-full"
         @input="search"
       />

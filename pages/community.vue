@@ -1,6 +1,8 @@
 <template>
   <div>
-    <THeader title="Community" />
+    <THeader title="Community">
+      <TButton type="nav" icon="search" to="/search" />
+    </THeader>
 
     <div>
       <div v-if="uid && response.facets" class="mb-4 gap-2 flex flex-wrap p-4">

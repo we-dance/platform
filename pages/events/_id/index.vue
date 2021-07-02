@@ -1,6 +1,8 @@
 <template>
   <div>
-    <TItemToolbar dashboard collection="events" :item="item" class="mb-2" />
+    <THeader>
+      <TItemToolbar dashboard collection="events" :item="item" />
+    </THeader>
 
     <TItemCard>
       <TSharePreviewPost

@@ -1,8 +1,8 @@
 <template>
   <div>
-    <div class="p-2 border-b">
+    <THeader>
       <t-input v-model="query" placeholder="Search city" />
-    </div>
+    </THeader>
 
     <div
       v-for="city in results"
