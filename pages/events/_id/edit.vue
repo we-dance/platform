@@ -133,6 +133,14 @@ export default {
       e.endDate = addMinutes(parseISO(e.startDate), e.duration)
     }
 
+    const updatePlace = (e) => {
+      if (!e.online || e.online === 'No') {
+        return
+      }
+
+      e.place = ''
+    }
+
     const types = computed(() => [
       {
         label: 'Event',
@@ -219,6 +227,13 @@ export default {
             options: eventTypeList
           },
           {
+            name: 'online',
+            label: 'Online?',
+            type: 'select',
+            options: ['Yes', 'No'],
+            onChange: updatePlace
+          },
+          {
             name: 'visibility',
             type: 'select',
             options: ['Public', 'Members', 'Unlisted'],
@@ -240,7 +255,11 @@ export default {
           {
             name: 'place',
             label: 'Community',
-            type: 'place'
+            type: 'place',
+            clearable: true,
+            when: (answers) => answers.online !== 'Yes',
+            description:
+              'Leave empty if you want your event to be shown in all cities'
           }
         ]
       }
