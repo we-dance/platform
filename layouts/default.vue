@@ -84,7 +84,7 @@ export default {
     const routedCity = this.$route.query.city
 
     if (routedCity) {
-      this.currentCity = routedCity
+      this.changeCityByName(routedCity)
     }
   },
   methods: {
@@ -159,7 +159,7 @@ export default {
   },
   setup() {
     const { uid, account, profile, username, isAdmin } = useAuth()
-    const { currentCity } = useCities()
+    const { changeCityByName } = useCities()
     const { getCity } = useApp()
 
     return {
@@ -168,8 +168,8 @@ export default {
       profile,
       uid,
       isAdmin,
-      currentCity,
-      getCity
+      getCity,
+      changeCityByName
     }
   }
 }

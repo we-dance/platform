@@ -24,8 +24,15 @@ export const useCities = () => {
     }
   })
 
+  async function changeCityByName(cityName) {
+    await find('name', cityName)
+
+    state.currentCity = city.value?.location?.place_id || ''
+  }
+
   return {
     ...toRefs(state),
-    city
+    city,
+    changeCityByName
   }
 }
