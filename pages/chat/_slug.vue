@@ -162,6 +162,11 @@ export default {
       newMessage,
       send
     }
+  },
+  head() {
+    return {
+      title: 'WeDance Chat'
+    }
   }
 }
 </script>

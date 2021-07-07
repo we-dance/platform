@@ -275,6 +275,11 @@ export default {
       eventType,
       danceStyles
     }
+  },
+  head() {
+    return {
+      title: 'WeDance Events'
+    }
   }
 }
 </script>

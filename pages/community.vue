@@ -225,6 +225,11 @@ export default {
       radius,
       load
     }
+  },
+  head() {
+    return {
+      title: 'WeDance Community'
+    }
   }
 }
 </script>

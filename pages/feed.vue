@@ -63,6 +63,11 @@ export default {
       currentCity,
       uid
     }
+  },
+  head() {
+    return {
+      title: 'WeDance Feed'
+    }
   }
 }
 </script>

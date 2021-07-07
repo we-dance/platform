@@ -87,6 +87,11 @@ export default {
       dateDiff,
       uid
     }
+  },
+  head() {
+    return {
+      title: 'WeDance Messenger'
+    }
   }
 }
 </script>

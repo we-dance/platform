@@ -89,6 +89,11 @@ export default {
     })
 
     return { currentCity, cities, changeCity, query, results }
+  },
+  head() {
+    return {
+      title: 'WeDance Cities'
+    }
   }
 }
 </script>

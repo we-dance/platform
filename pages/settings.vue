@@ -276,6 +276,11 @@ export default {
       await this.updateAccount(data)
       this.$router.push('/settings')
     }
+  },
+  head() {
+    return {
+      title: 'WeDance Settings'
+    }
   }
 }
 </script>
