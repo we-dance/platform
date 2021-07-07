@@ -65,10 +65,10 @@
     />
     <TButton
       v-if="isAdmin()"
-      to="/admin/matches"
+      to="/admin/suspended"
       type="nav"
       class="text-gray-700"
-      label="Matches"
+      label="Suspended"
     />
     <TButton
       v-if="isAdmin()"

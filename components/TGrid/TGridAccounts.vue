@@ -250,14 +250,9 @@ export default {
         filter: (account) => account.profile?.partner !== 'Yes'
       },
       {
-        value: 'no_community',
-        label: 'No community',
-        filter: (account) => !account.profile?.community
-      },
-      {
-        value: 'munich',
-        label: 'Munich',
-        filter: (account) => account.profile?.community === 'Munich'
+        value: 'no_city',
+        label: 'No city',
+        filter: (account) => !account.profile?.place
       },
       {
         value: 'used_more_10d',

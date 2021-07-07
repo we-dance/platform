@@ -1,5 +1,5 @@
 <template>
-  <main class="p-4">
+  <main>
     <TCardList
       :collection="collection"
       :title="title"

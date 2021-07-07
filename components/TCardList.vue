@@ -1,11 +1,10 @@
 <template>
   <div>
-    <div class="flex items-baseline justify-between mb-4">
-      <h1 v-if="title" class="text-xl font-bold">{{ title }}</h1>
+    <THeader :title="title">
       <TButton v-if="add && can('add', collection)" @click="currentId = 'add'">
         {{ add }}
       </TButton>
-    </div>
+    </THeader>
 
     <div v-if="!can('add', collection)">
       <slot name="auth" />
