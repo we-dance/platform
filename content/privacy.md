@@ -1,8 +1,8 @@
 ---
-title: Privacy Policy
+title: Datenschutzerklärung/Privacy
 ---
 
-# Privacy Policy
+# Datenschutzerklärung / Privacy Policy
 
 **Effective date: October 11, 2020**
 

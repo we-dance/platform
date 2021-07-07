@@ -13,14 +13,14 @@
       class="underline hover:no-underline"
       to="/support#hs-chat-open"
       target="_blank"
-      >Impressum</router-link
+      >Support</router-link
     >
-    <router-link class="underline hover:no-underline" to="/privacy">{{
-      $t('footer.privacy')
-    }}</router-link>
-    <router-link class="underline hover:no-underline" to="/terms">{{
-      $t('footer.terms')
-    }}</router-link>
+    <router-link class="underline hover:no-underline" to="/privacy"
+      >Datenschutzerklärung</router-link
+    >
+    <router-link class="underline hover:no-underline" to="/terms"
+      >Impressum/Terms</router-link
+    >
     <router-link class="underline hover:no-underline" to="/coc">{{
       $t('footer.coc')
     }}</router-link>
