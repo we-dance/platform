@@ -5,7 +5,7 @@ title: Impressum/Terms
 # Impressum
 
 ```
-Angaben gemäß § 5 TMG:
+Angaben gemäß § 5 Telemediengesetz:
 
 Oleksii Razbakov
 Adalbertstr. 41A
