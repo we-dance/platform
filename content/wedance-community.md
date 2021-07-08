@@ -4,7 +4,7 @@ title: WeDanceCommunity
 
 # WeDanceCommunity
 
-Local dance community, represented by WeDance Ambassador.
+WeDance is represented by Ambassador in local dance communities. Volunteers help Ambassador with different initiatives to unite local dancers.
 
 **We plan activities to:**
 
@@ -41,7 +41,7 @@ Local dance community, represented by WeDance Ambassador.
 
 ## What should Ambassador do?
 
-Ambassador provides communication bridge between Foundation, Platform and local dance community.
+Ambassador represents local dance community at global level.
 
 You can launch community in your city and become Ambassador.
 
@@ -55,7 +55,7 @@ You can launch community in your city and become Ambassador.
 ## How to become WeDance Ambassador?
 
 1. Create profile at [wedance.vip](https://wedance.vip/).
-2. Drop message to [@razbakov](https://t.me/razbakov) that you would like to become ambassador with link to your profile – and you will get invitation to our special ambassador chat.
+2. Drop message to [@razbakov](https://t.me/AlexRazbakov) that you would like to become ambassador with link to your profile – and you will get invitation to our special ambassador chat.
 3. Write there in which city and how do you see your first steps in starting community and we will exchange our experiences and help each other.
 
 ## What is WeDance?
