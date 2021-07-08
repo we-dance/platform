@@ -26,31 +26,45 @@
       </div>
     </TPopup>
     <TPopup v-if="addingGuest" title="Add Guest" @close="addingGuest = false">
-      <TForm
-        class="mt-4 space-y-4"
-        :fields="reservationFields"
-        @save="addGuest"
-      />
-    </TPopup>
-    <div class="mx-auto max-w-md bg-white p-4">
-      <div class="px-4 mx-auto max-w-2xl text-center">
-        <div class="uppercase text-red-600">
-          <span>{{ getDate(item.startDate) }}</span>
-          <span>{{ getTime(item.startDate) }}</span>
-          –
-          <span v-if="getDate(item.startDate) !== getDate(item.endDate)">{{
-            getDate(item.endDate)
-          }}</span>
-          {{ getTime(item.endDate) }}
-        </div>
-        <h1 class="text-4xl font-bold leading-none">
-          {{ item.name }}
-        </h1>
+      <div class="max-w-md mx-auto py-4 max-h-screen overflow-y-scroll">
+        <TForm
+          v-model="guestAccount"
+          class="mt-4 space-y-4"
+          :fields="reservationFields"
+          @save="addGuest"
+        />
       </div>
-      <div class="my-2 flex items-start justify-between">
-        <TButton label="Add participant" @click="addingGuest = true" />
-        <TButton label="Email" @click="compose = true" />
-        <TButton :to="`/events/${item.id}/`" label="View Event" />
+    </TPopup>
+    <THeader :title="item.name">
+      <TDropdown>
+        <TButton
+          type="context"
+          label="Add participant"
+          class="border-b"
+          @click="addingGuest = true"
+        />
+        <TButton
+          type="context"
+          label="Send emails"
+          class="border-b"
+          @click="compose = true"
+        />
+        <TButton
+          type="context"
+          :to="`/events/${item.id}/`"
+          label="View Event"
+        />
+      </TDropdown>
+    </THeader>
+    <div class="mx-auto max-w-md bg-white p-4">
+      <div>
+        <span>{{ getDate(item.startDate) }}</span>
+        <span>{{ getTime(item.startDate) }}</span>
+        –
+        <span v-if="getDate(item.startDate) !== getDate(item.endDate)">{{
+          getDate(item.endDate)
+        }}</span>
+        {{ getTime(item.endDate) }}
       </div>
       <div>
         <TGridParticipants
@@ -267,6 +281,7 @@ import { getDateTime, getDate, getTime, dateDiff, sortBy } from '~/utils'
 export default {
   setup() {
     const addingGuest = ref(false)
+    const guestAccount = ref({})
     const { uid, can, account } = useAuth()
     const { params } = useRouter()
     const { getProfile } = useProfiles()
@@ -322,7 +337,7 @@ export default {
 
     const item = computed(() => map(doc.value))
 
-    const reservationFields = accountFields
+    const reservationFields = accountFields.filter((f) => f.event)
 
     const reservationPopup = ref(false)
     const isCreatingProfile = ref(false)
@@ -436,6 +451,7 @@ export default {
       }
 
       addingGuest.value = false
+      guestAccount.value = {}
     }
 
     const notes = [
@@ -494,7 +510,8 @@ export default {
       getTime,
       participants,
       selectedParticipants,
-      selectedParticipantsList
+      selectedParticipantsList,
+      guestAccount
     }
   }
 }

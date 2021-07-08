@@ -2,7 +2,7 @@
   <div>
     <div v-for="field in visibleFields" :key="field.name" :class="fieldWrapper">
       <TField
-        :value="value[field.name]"
+        :value="value ? value[field.name] : ''"
         :item="value"
         v-bind="field"
         :label="getLabel(field)"

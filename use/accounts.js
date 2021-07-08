@@ -63,13 +63,13 @@ export const accountFields = [
   {
     name: 'partnerName',
     label: "Partner's name",
-    when: (answers) => answers.withPartner === 'Yes',
+    when: (answers) => answers?.withPartner === 'Yes',
     event: true
   },
   {
     name: 'partnerEmail',
     label: "Partner's email",
-    when: (answers) => answers.withPartner === 'Yes',
+    when: (answers) => answers?.withPartner === 'Yes',
     event: true
   }
 ]

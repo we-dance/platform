@@ -1,7 +1,22 @@
 <template>
   <div>
-    <THeader>
-      <TItemToolbar dashboard collection="events" :item="item" />
+    <THeader :title="item.name">
+      <TDropdown v-if="can('edit', 'events', item)">
+        <TButton
+          type="context"
+          icon="people"
+          :to="`/events/${item.id}/dashboard`"
+          class="hover:text-blue-500 mr-2"
+          label="Dashboard"
+        />
+        <TButton
+          type="context"
+          icon="edit"
+          :to="`/events/${item.id}/edit`"
+          class="hover:text-blue-500"
+          label="Edit"
+        />
+      </TDropdown>
     </THeader>
 
     <TItemCard>
@@ -34,27 +49,36 @@
           </div>
         </div>
         <div>
-          <TButton
-            v-if="item.link"
-            class="mt-4 mr-4"
-            type="danger"
-            :href="item.link"
-            >Register</TButton
-          >
-          <TButton
-            v-else-if="!uid || item.response !== 'up'"
-            class="mt-4 mr-4"
-            type="danger"
-            @click="reservationPopup = 'reserve'"
-            >Register</TButton
-          >
-          <TButton
-            v-else
-            class="mt-4 mr-4"
-            type="success"
-            @click="updateRsvp(item.id, 'events', 'down')"
-            >You are registered</TButton
-          >
+          <template v-if="item.link">
+            <TButton
+              class="mt-4 mr-4"
+              type="danger"
+              @click="register(item.id, item.link)"
+              >Register</TButton
+            >
+          </template>
+          <template v-else>
+            <div class="flex mt-4 space-x-2 justify-center">
+              <TButton
+                v-if="!uid"
+                type="primary"
+                @click="reservationPopup = 'reserve'"
+                >Register for event</TButton
+              >
+              <TButton
+                v-else
+                :type="uid && item.response === 'up' ? 'success' : 'secondary'"
+                @click="reservationPopup = 'reserve'"
+                >Going</TButton
+              >
+              <TButton
+                v-if="uid"
+                :type="uid && item.response === 'down' ? 'danger' : 'secondary'"
+                @click="updateRsvp(item.id, 'events', 'down')"
+                >Not going</TButton
+              >
+            </div>
+          </template>
         </div>
       </div>
 
@@ -68,9 +92,7 @@
       title="Register"
       @close="reservationPopup = false"
     >
-      <div
-        class="flex flex-col justify-center max-w-md max-h-screen overflow-y-scroll"
-      >
+      <div class="max-w-md mx-auto py-4 max-h-screen overflow-y-scroll">
         <div v-if="reservationPopup === 'reserve'">
           <div>
             <div class="text-dark text-sm font-bold my-4 text-left">
@@ -126,7 +148,8 @@ import {
   getDate,
   getTime,
   dateDiff,
-  getEventDescription
+  getEventDescription,
+  openURL
 } from '~/utils'
 
 export default {
@@ -248,6 +271,14 @@ export default {
       reservationPopup.value = false
     }
 
+    function register(id, link) {
+      if (uid.value) {
+        updateRsvp(id, 'events', 'up')
+      }
+
+      openURL(link)
+    }
+
     const reserve = async (participant) => {
       if (!uid.value) {
         await createGuestRsvp(params.id, 'events', 'up', participant)
@@ -261,6 +292,7 @@ export default {
     }
 
     return {
+      register,
       currentCity,
       isCreatingProfile,
       finishReservation,
