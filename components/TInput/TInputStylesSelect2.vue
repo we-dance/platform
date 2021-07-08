@@ -18,7 +18,7 @@
       <TInputSelect
         :options="levels"
         :value.sync="style.level"
-        @input="(val) => setLevel(style.id, style.highlighted, val)"
+        @input="(val) => setLevel(style.id, !!style.highlighted, val)"
       />
       <TButton
         icon="delete"
