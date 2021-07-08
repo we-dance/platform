@@ -197,15 +197,6 @@ export const profileFields = [
     tips: 'Mark up to 4 favorite dances that will be highlighted in your poster'
   },
   {
-    name: 'bio',
-    key: 'profile.bio',
-    poster: true,
-    type: 'textarea',
-    labelPosition: 'top',
-    before: 'Introduce yourself. Make it short and attractive.',
-    max: 140
-  },
-  {
     name: 'photo',
     key: 'profile.photo',
     poster: true,
@@ -246,6 +237,13 @@ export const profileFields = [
     placeholder: 'City'
   },
   {
+    name: 'hometown',
+    key: 'profile.hometown',
+    required: true,
+    type: 'place',
+    before: 'Where were you born and raised?'
+  },
+  {
     name: 'visibility',
     key: 'profile.visibility',
     poster: true,
@@ -272,16 +270,24 @@ export const profileFields = [
     before: 'If you want to remain anonym use your first name.'
   },
   {
-    name: 'hometown',
-    key: 'profile.hometown',
-    required: true,
-    type: 'place',
-    tips: 'Where were you born and raised?'
-  },
-  {
     name: 'locales',
     key: 'profile.languages',
     type: 'languages'
+  },
+  {
+    name: 'objectives',
+    key: 'profile.objectives',
+    type: 'multi',
+    options: objectivesList
+  },
+  {
+    name: 'bio',
+    key: 'profile.bio',
+    poster: true,
+    type: 'textarea',
+    labelPosition: 'top',
+    before: 'Short introduction on top of your photo',
+    max: 140
   },
   {
     name: 'story',
@@ -289,27 +295,23 @@ export const profileFields = [
     type: 'textarea',
     labelPosition: 'top',
     placeholder: 'Text (markdown)',
-    description:
-      'Use [widgets](https://wedance.vip/markdown), including images and videos',
+    before:
+      'Tell your dance story. Use can also use [widgets](https://wedance.vip/markdown), including images and videos',
     tips:
       'Pitch yourself: Who are you? What do you offer? What do you want?\n\nTips for effective pitch:\n- Uncomplicated: It should be catchy and roll off the tongue\n- Concise: It shouldn’t take more than a minute to say or read\n- Unique: It reflects your skills, goals, and desires\n- Storyline: It covers who you are, what you offer, and where you want to be\n- Appealing: Your elevator pitch is essentially a persuasive sales pitch; the emphasis should be on what you offer'
-  },
-  {
-    name: 'jobs',
-    label: 'I can help with',
-    type: 'textarea'
-  },
-  {
-    name: 'teacher',
-    key: 'profile.teacher',
-    type: 'buttons',
-    options: booleanOptions
   },
   {
     name: 'learning',
     key: 'profile.topics',
     type: 'textarea',
     description: 'For example: Musicality in Salsa, Men Styling, etc.'
+  },
+  {
+    name: 'jobs',
+    label: 'I can help with',
+    type: 'textarea',
+    description:
+      'How can you help our community? What are you good at? For example: design, programming, marketing, social media, etc.'
   },
   {
     name: 'partner',
@@ -342,13 +344,6 @@ export const profileFields = [
     type: 'textarea',
     description:
       'What is important in your partner? Put it as a question, for example: Do you love dogs?'
-  },
-  {
-    name: 'objectives',
-    key: 'profile.objectives',
-    when: (p) => p.partner === 'Yes',
-    type: 'multi',
-    options: objectivesList
   },
   {
     name: 'meetingPlace',

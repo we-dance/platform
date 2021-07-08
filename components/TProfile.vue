@@ -45,7 +45,9 @@
         >
       </div>
 
-      <div class="mb-2">{{ profile.bio }}</div>
+      <div v-if="profile.bio && profile.bio.length > 140" class="mb-2">
+        {{ profile.bio }}
+      </div>
 
       <TProfileContacts :profile="profile" class="mb-4" />
 
