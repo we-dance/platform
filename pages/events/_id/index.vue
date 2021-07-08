@@ -95,9 +95,6 @@
       <div class="max-w-md mx-auto py-4 max-h-screen overflow-y-scroll">
         <div v-if="reservationPopup === 'reserve'">
           <div>
-            <div class="text-dark text-sm font-bold my-4 text-left">
-              Organiser of the event requires the following information:
-            </div>
             <TForm
               v-model="account"
               :fields="reservationFields"
@@ -123,9 +120,13 @@
           <p v-else>
             Check your email to finish creation of the WeDance profile.
           </p>
-          <TButton type="primary" class="mt-4" @click="reservationPopup = false"
-            >Finish</TButton
-          >
+          <div>
+            <TButton
+              :href="calendarLink"
+              label="Add to calendar"
+              class="mt-2"
+            />
+          </div>
         </div>
       </div>
     </TPopup>
@@ -133,6 +134,7 @@
 </template>
 
 <script>
+import googleCalendarEventUrl from 'generate-google-calendar-url'
 import { computed, ref } from '@nuxtjs/composition-api'
 import { useAuth } from '~/use/auth'
 import { useDoc } from '~/use/doc'
@@ -149,7 +151,8 @@ import {
   getTime,
   dateDiff,
   getEventDescription,
-  openURL
+  openURL,
+  getDateObect
 } from '~/utils'
 
 export default {
@@ -262,6 +265,16 @@ export default {
 
     const item = computed(() => map(doc.value))
 
+    const calendarLink = computed(() =>
+      googleCalendarEventUrl({
+        start: getDateObect(item.value?.startDate),
+        end: getDateObect(item.value?.endDate),
+        title: item.value?.name,
+        details: `https://wedance.vip/events/${item.value?.id}`,
+        location: item.value?.address
+      })
+    )
+
     const reservationFields = accountFields.filter((f) => f.event)
 
     const reservationPopup = ref(false)
@@ -313,7 +326,8 @@ export default {
       getDate,
       getTime,
       getDay,
-      getEventDescription
+      getEventDescription,
+      calendarLink
     }
   }
 }
