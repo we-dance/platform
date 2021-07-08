@@ -93,6 +93,7 @@ export default {
           collection: 'profiles',
           keyValue: 'id',
           keyLabel: 'username',
+          orderBy: 'username',
           canAdd: true,
           admin: true
         })

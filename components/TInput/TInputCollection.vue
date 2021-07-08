@@ -105,7 +105,7 @@ export default {
 
           results.push({
             label: this.getLabel(doc),
-            value: this.getValue(doc)
+            value: key
           })
         }
       } else {
