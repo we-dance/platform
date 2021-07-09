@@ -69,6 +69,7 @@ export default {
   setup() {
     const {
       uid,
+      profile,
       loading,
       signingIn,
       signInWithGoogle,
@@ -84,13 +85,14 @@ export default {
       signInWithGoogle,
       signUserIn,
       signOut,
-      error
+      error,
+      profile
     }
   },
   watch: {
-    uid: {
+    loading: {
       handler(val) {
-        if (val) {
+        if (!val && this.profile) {
           this.redirect()
         }
       }
@@ -113,7 +115,8 @@ export default {
       ls.remove('target')
 
       if (!target) {
-        target = '/'
+        const page = this.profile?.username || 'onboarding'
+        target = '/' + page
       }
 
       this.$router.push(target)

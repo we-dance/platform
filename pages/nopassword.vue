@@ -77,7 +77,8 @@ export default {
       signInWithGoogle,
       sendSignInLinkToEmail,
       signOut,
-      error
+      error,
+      profile
     } = useAuth()
 
     return {
@@ -87,13 +88,14 @@ export default {
       signInWithGoogle,
       sendSignInLinkToEmail,
       signOut,
-      error
+      error,
+      profile
     }
   },
   watch: {
-    uid: {
+    loading: {
       handler(val) {
-        if (val) {
+        if (!val && this.profile) {
           this.redirect()
         }
       }
@@ -116,7 +118,8 @@ export default {
       ls.remove('target')
 
       if (!target) {
-        target = '/'
+        const page = this.profile?.username || 'onboarding'
+        target = '/' + page
       }
 
       this.$router.push(target)

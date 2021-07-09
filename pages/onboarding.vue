@@ -32,23 +32,13 @@
       />
     </div>
 
-    <div v-if="step == 'community'">
+    <div v-if="step == 'place'">
       <TField
-        ref="community"
+        ref="place"
         v-model="profile.place"
         label="Dance community of which city would you like to join?"
         label-position="vertical"
         type="place"
-      />
-    </div>
-
-    <div v-if="step == 'styles'">
-      <TField
-        v-model="profile.styles"
-        label="Tell us what you're interested in"
-        label-position="vertical"
-        placeholder="Salsa, Bachata, Kizomba, etc."
-        type="styles"
       />
     </div>
 
@@ -69,7 +59,7 @@
       >
     </div>
 
-    <div class="flex justify-end mt-4">
+    <div v-if="step != 'photo' || profile.photo" class="flex justify-end mt-4">
       <TButton type="primary" @click="next">Next</TButton>
     </div>
   </form>
@@ -109,9 +99,8 @@ export default {
     nextSteps: {
       name: 'username',
       username: 'gender',
-      gender: 'community',
-      community: 'styles',
-      styles: 'photo',
+      gender: 'place',
+      place: 'photo',
       photo: 'finish'
     },
     genderOptions: [
@@ -139,7 +128,7 @@ export default {
   mounted() {
     const city = ls('city')
 
-    this.profile.community = city
+    this.profile.place = city
   },
   methods: {
     skipPhoto() {
