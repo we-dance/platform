@@ -38,8 +38,8 @@
       </h2>
       <div class="typo">
         <p>
-          WeDance is for all of you, who's interested in dancing Salsa, Bachata,
-          Kizomba, Zouk and 135 other dance styles in any city.
+          WeDance is for all of you, who's interested in dancing! Salsa,
+          Bachata, Kizomba, Zouk, you name it! We are open for all dances!
         </p>
         <p>
           You can post information about events, parties, social meetings, share
@@ -85,7 +85,9 @@
           <TIcon name="undraw_events" class="pr-4" />
         </div>
         <div class="w-2/3 h-40">
-          <h2 class="font-lato font-bold text-xl">Find parties</h2>
+          <h2 class="font-lato font-bold text-xl">
+            Find parties (coming soon)
+          </h2>
           <p>
             We monitor all activities in dance scene and provide you with event
             calendar, which will highlight the best party for you.
