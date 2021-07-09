@@ -19,7 +19,7 @@
         :type="profile.type"
         :username="profile.username"
         :description="getExcerpt(profile.bio)"
-        :color="profile.partner === 'Yes' ? 'bg-green-400' : 'bg-red-400'"
+        :extra="getCity(profile.place)"
         :photo="profile.photo"
         :styles="profile.styles"
         size="sm"

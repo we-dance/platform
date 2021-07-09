@@ -40,7 +40,7 @@
             collection="profiles"
             :username="item.username"
             :description="getExcerpt(item.bio)"
-            :color="item.partner === 'Yes' ? 'bg-green-400' : 'bg-red-400'"
+            :extra="getCity(item.place)"
             :photo="item.photo"
             :styles="item.styles"
             size="sm"
@@ -77,6 +77,7 @@ import { useStyles } from '~/use/styles'
 import { useAuth } from '~/use/auth'
 import { useCities } from '~/use/cities'
 import { useRouter } from '~/use/router'
+import { useApp } from '~/use/app'
 
 export default {
   name: 'ProfilesIndex',
@@ -89,6 +90,7 @@ export default {
     const { uid } = useAuth()
     const { city, currentCity } = useCities()
     const { router } = useRouter()
+    const { getCity } = useApp()
 
     if (!currentCity.value) {
       router.push('/cities')
@@ -223,7 +225,8 @@ export default {
       facetFilters,
       getFieldLabel,
       radius,
-      load
+      load,
+      getCity
     }
   },
   head() {
