@@ -259,7 +259,7 @@ export default {
       this.$router.push(`/${this.profile.username}`)
     },
     async saveProfile(data) {
-      if (data.bio.length > 140) {
+      if (data.bio?.length > 140) {
         this.$toast.error('Teaser can be maximum 140 symbols.')
         return
       }
