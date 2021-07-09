@@ -189,18 +189,18 @@ export const booleanOptions = [
 
 export const profileFields = [
   {
+    name: 'photo',
+    key: 'profile.photo',
+    poster: true,
+    type: 'photo'
+  },
+  {
     name: 'styles',
     label: 'Dances',
     labelPosition: 'top',
     poster: true,
     type: 'stylesSelect',
     tips: 'Mark up to 4 favorite dances that will be highlighted in your poster'
-  },
-  {
-    name: 'photo',
-    key: 'profile.photo',
-    poster: true,
-    type: 'photo'
   },
   {
     name: 'gender',
