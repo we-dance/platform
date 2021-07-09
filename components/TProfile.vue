@@ -95,11 +95,11 @@
       />
 
       <div class="my-2 flex justify-between">
-        <div>
+        <div class="flex items-center">
           <div class="font-bold text-lg leading-none">
             {{ profile.name }}
           </div>
-          <div class="text-sm text-gray-700">
+          <div class="ml-2 text-sm text-gray-700">
             <span v-if="profile.height">• {{ profile.height }}cm</span>
             <span v-if="profile.weight">• {{ profile.weight }}kg</span>
           </div>
