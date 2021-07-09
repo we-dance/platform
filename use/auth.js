@@ -296,7 +296,7 @@ export const useAuth = () => {
       .doc(state.uid)
       .update(changes)
 
-    loadProfile()
+    await loadProfile()
   }
 
   async function updatePassword(password) {

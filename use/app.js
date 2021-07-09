@@ -187,6 +187,12 @@ export const useApp = () => {
     }
   }
 
+  const removeCityHistory = async (placeId) => {
+    await updateProfile({
+      [`cities.${placeId}`]: firebase.firestore.FieldValue.delete()
+    })
+  }
+
   const addCityHistory = async (address) => {
     if (!address?.place_id) {
       return
@@ -226,7 +232,8 @@ export const useApp = () => {
     mapDetails,
     getCityHistory,
     addCityHistory,
-    getCity
+    getCity,
+    removeCityHistory
   }
 }
 

@@ -4,13 +4,19 @@
       <t-input v-model="query" placeholder="Search city" />
     </THeader>
 
-    <div
-      v-for="city in results"
-      :key="city.value"
-      class="border-b p-4 text-lg cursor-pointer hover:bg-red-100"
-      @click="changeCity(city.value)"
-    >
-      {{ city.label }}
+    <div v-for="city in results" :key="city.value" class="border-b flex">
+      <div
+        class="flex-grow text-lg p-4 cursor-pointer hover:bg-red-100"
+        @click="changeCity(city.value)"
+      >
+        {{ city.label }}
+      </div>
+      <TButton
+        type="nav"
+        icon="close"
+        class="p-4"
+        @click="removeCityHistory(city.value)"
+      />
     </div>
   </div>
 </template>
@@ -27,7 +33,7 @@ export default {
   setup() {
     const { currentCity } = useCities()
     const { router } = useRouter()
-    const { getCityHistory, cities } = useApp()
+    const { getCityHistory, removeCityHistory: removeCity, cities } = useApp()
 
     function changeCity(placeId) {
       currentCity.value = placeId
@@ -46,15 +52,15 @@ export default {
           results.push(...cityHistory)
         }
       } else {
-        results = cities.value
-          .filter(searchByStart('name', q))
-          .sort(sortBy('name'))
+        results = cities.value.filter(searchByStart('name', q))
       }
 
       results = results.map((c) => ({
         label: `${c.location.locality}, ${c.location.country}`,
         value: c.location.place_id
       }))
+
+      results = results.sort(sortBy('label'))
 
       if (q && results.length < 3) {
         const places = await getPlacePredictions(q)
@@ -76,19 +82,29 @@ export default {
 
     const results = ref([])
 
-    watch(query, async () => {
+    async function render() {
       const res = await fetchOptions(query.value)
 
       results.value = res.results
-    })
+    }
 
-    onMounted(async () => {
-      const res = await fetchOptions(query.value)
+    async function removeCityHistory(placeId) {
+      await removeCity(placeId)
+      await render()
+    }
 
-      results.value = res.results
-    })
+    watch(query, render)
 
-    return { currentCity, cities, changeCity, query, results }
+    onMounted(render)
+
+    return {
+      currentCity,
+      cities,
+      changeCity,
+      query,
+      results,
+      removeCityHistory
+    }
   },
   head() {
     return {
