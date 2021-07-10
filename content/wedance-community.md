@@ -54,9 +54,7 @@ You can launch community in your city and become Ambassador.
 
 ## How to become WeDance Ambassador?
 
-1. Create profile at [wedance.vip](https://wedance.vip/).
-2. Drop message to [@razbakov](https://t.me/AlexRazbakov) that you would like to become ambassador with link to your profile – and you will get invitation to our special ambassador chat.
-3. Write there in which city and how do you see your first steps in starting community and we will exchange our experiences and help each other.
+Write an email to team@wedance.vip and use the role name as a subject.
 
 ## What is WeDance?
 
