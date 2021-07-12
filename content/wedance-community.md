@@ -36,7 +36,7 @@ WeDance is represented by Ambassador in local dance communities. Volunteers help
 - **Youtube**
   - We provide shared channel to help local creators and artists to boost their art and subscribers.
   - We help to get license for music, provide technical support and devices, create network of collaborators and supporters, including writers, translators, video editors, video operators, musicians, etc.
-  - We produce overviews and news about dancing in Munich.
+  - We produce overviews and news about dancing.
   - We share dancers stories as interviews or short movies.
 
 ## What should Ambassador do?
@@ -54,7 +54,7 @@ You can launch community in your city and become Ambassador.
 
 ## How to become WeDance Ambassador?
 
-Write an email to team@wedance.vip and use the role name as a subject.
+Write an email to team@wedance.vip
 
 ## What is WeDance?
 
