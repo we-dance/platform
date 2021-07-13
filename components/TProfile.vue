@@ -135,12 +135,12 @@
         }}</TButton>
       </div>
 
+      <TPreview v-if="profile.story" :content="profile.story" class="mt-4" />
+
       <TEventList
         :filter="{ createdBy: profile.createdBy }"
         class="mt-4 w-full"
       />
-
-      <TPreview v-if="profile.story" :content="profile.story" class="mt-4" />
 
       <TProfileDetails :profile="profile" />
     </TItemCard>
