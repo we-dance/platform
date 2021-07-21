@@ -125,7 +125,7 @@ export default {
 
     const eventType = ref('')
 
-    const view = ref('covers')
+    const view = ref('text')
     const viewOptions = [
       {
         value: 'covers',
