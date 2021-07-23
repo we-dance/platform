@@ -1,6 +1,7 @@
 <template>
   <div>
     <THeader :title="profile.username">
+      <TButton type="nav" icon="search" to="/search" />
       <TDropdown v-if="isAdmin()">
         <TPopupEdit
           type="context"
@@ -82,39 +83,41 @@
     </template>
 
     <TItemCard>
-      <TSharePreviewPost
-        collection="profiles"
-        :type="profile.type"
-        :username="profile.username"
-        :description="getExcerpt(profile.bio)"
-        :extra="community"
-        :photo="profile.photo"
-        :styles="profile.styles"
-        size="sm"
-        class="md:-mt-4 md:-mx-4"
-      />
+      <template v-if="profile.type !== 'City'">
+        <TSharePreviewPost
+          collection="profiles"
+          :type="profile.type"
+          :username="profile.username"
+          :description="getExcerpt(profile.bio)"
+          :extra="community"
+          :photo="profile.photo"
+          :styles="profile.styles"
+          size="sm"
+          class="md:-mt-4 md:-mx-4"
+        />
 
-      <div class="my-2 flex justify-between">
-        <div class="flex items-center">
-          <div class="font-bold text-lg leading-none">
-            {{ profile.name }}
+        <div class="my-2 flex justify-between">
+          <div class="flex items-center">
+            <div class="font-bold text-lg leading-none">
+              {{ profile.name }}
+            </div>
+            <div class="ml-2 text-sm text-gray-700">
+              <span v-if="profile.height">• {{ profile.height }}cm</span>
+              <span v-if="profile.weight">• {{ profile.weight }}kg</span>
+            </div>
           </div>
-          <div class="ml-2 text-sm text-gray-700">
-            <span v-if="profile.height">• {{ profile.height }}cm</span>
-            <span v-if="profile.weight">• {{ profile.weight }}kg</span>
-          </div>
+          <TButton
+            v-if="uid !== profile.id"
+            type="primary"
+            :to="`/chat/${profile.username}`"
+            >Chat</TButton
+          >
         </div>
-        <TButton
-          v-if="uid !== profile.id"
-          type="primary"
-          :to="`/chat/${profile.username}`"
-          >Chat</TButton
-        >
-      </div>
 
-      <div v-if="profile.bio && profile.bio.length > 140" class="mb-2">
-        {{ profile.bio }}
-      </div>
+        <div v-if="profile.bio && profile.bio.length > 140" class="mb-2">
+          {{ profile.bio }}
+        </div>
+      </template>
 
       <TProfileContacts :profile="profile" class="mb-4" />
 
@@ -138,11 +141,18 @@
       <TPreview v-if="profile.story" :content="profile.story" class="mt-4" />
 
       <TEventList
+        v-if="profile.type !== 'City'"
         :filter="{ createdBy: profile.createdBy }"
         class="mt-4 w-full"
       />
 
-      <TProfileDetails :profile="profile" />
+      <TEventList
+        v-if="profile.type === 'City'"
+        :filter="{ place: profile.place }"
+        class="mt-4 w-full"
+      />
+
+      <TProfileDetails v-if="profile.type !== 'City'" :profile="profile" />
     </TItemCard>
 
     <TItemFooter
