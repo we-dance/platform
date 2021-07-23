@@ -27,12 +27,14 @@
           v-if="view === 'list'"
           icon="news"
           type="icon"
+          label="See photos"
           @click="view = 'covers'"
         />
         <TButton
           v-if="view === 'covers'"
           icon="notes"
           type="icon"
+          label="See list"
           @click="view = 'list'"
         />
       </div>
@@ -125,14 +127,14 @@ export default {
 
     const eventType = ref('')
 
-    const view = ref('text')
+    const view = ref('covers')
     const viewOptions = [
       {
         value: 'covers',
         label: 'Grid View'
       },
       {
-        value: 'text',
+        value: 'list',
         label: 'Calendar'
       }
     ]
