@@ -9,3 +9,5 @@
   from = "/*"
   to = "/index.html"
   status = 200
+ [[plugins]]
+ package = "@netlify/plugin-functions-install-core"
