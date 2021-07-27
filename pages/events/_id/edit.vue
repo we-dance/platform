@@ -206,6 +206,18 @@ export default {
                 label: '2 hours'
               },
               {
+                value: 180,
+                label: '3 hours'
+              },
+              {
+                value: 240,
+                label: '4 hours'
+              },
+              {
+                value: 300,
+                label: '5 hours'
+              },
+              {
                 value: 'custom',
                 label: 'Custom'
               }
