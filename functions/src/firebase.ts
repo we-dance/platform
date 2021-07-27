@@ -1,13 +1,17 @@
 import * as admin from 'firebase-admin'
 
-// const serviceAccount = require('../var/serviceAccountKey.json')
+require('dotenv').config()
 
-// admin.initializeApp({
-//   credential: admin.credential.cert(serviceAccount),
-//   databaseURL: 'https://wedance-4abe3.firebaseio.com'
-// })
+if (process.env.LOCAL) {
+  const serviceAccount = require('../var/serviceAccountKey.json')
 
-admin.initializeApp()
+  admin.initializeApp({
+    credential: admin.credential.cert(serviceAccount),
+    databaseURL: 'https://wedance-4abe3.firebaseio.com'
+  })
+} else {
+  admin.initializeApp()
+}
 
 const firestore = admin.firestore()
 
