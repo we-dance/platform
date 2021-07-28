@@ -5,7 +5,7 @@ import * as cors from 'cors'
 import * as Handlebars from 'handlebars'
 import sendEmail from './lib/sendEmail'
 import { screenshot } from './lib/screenshot'
-import { initIndex, profileToAlgolia } from './lib/algolia'
+import { initIndex, profileToAlgolia, removeObject } from './lib/algolia'
 import { generateSocialCover } from './lib/migrations'
 import { firestore as db } from './firebase'
 
@@ -109,6 +109,15 @@ export const onProfileChange = functions.firestore
     const profile = snapshot.data()
     const profileId = context.params.profileId
 
+    const wasDeleted = oldProfile?.id && !profile?.id
+    const becameUnlisted =
+      profile?.visibility === 'Unlisted' &&
+      oldProfile?.visibility !== 'Unlisted'
+
+    if (wasDeleted || becameUnlisted) {
+      await removeObject(profileId)
+    }
+
     if (!profile || !profile.username || !profile.place) {
       return
     }
@@ -132,15 +141,18 @@ export const onProfileChange = functions.firestore
     ).data() as any
 
     const index = initIndex('profiles')
-    await index.saveObject(
-      profileToAlgolia(
-        {
-          ...profile,
-          id: profileId
-        },
-        cache
+
+    if (profile.visibility !== 'Unlisted') {
+      await index.saveObject(
+        profileToAlgolia(
+          {
+            ...profile,
+            id: profileId
+          },
+          cache
+        )
       )
-    )
+    }
 
     if (oldProfile?.place === profile.place) {
       return
