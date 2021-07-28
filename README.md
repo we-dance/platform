@@ -78,7 +78,7 @@ To activate all services and features see section `Services` below.
 
 ### City auto-complete
 
-- Enable Maps API in Google API in [Google Cloud Console](https://console.cloud.google.com/apis/library)
+- Enable Maps API and Places API from [Google Cloud Console](https://console.cloud.google.com/apis/library)
 
 ### Mailgun
 
