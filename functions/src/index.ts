@@ -123,7 +123,7 @@ export const onProfileChange = functions.firestore
     const profile = snapshot.data()
     const profileId = context.params.profileId
 
-    const wasDeleted = oldProfile?.id && !profile?.id
+    const wasDeleted = oldProfile?.username && !profile?.username
     const becameUnlisted =
       profile?.visibility === 'Unlisted' &&
       oldProfile?.visibility !== 'Unlisted'
