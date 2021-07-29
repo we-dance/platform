@@ -411,7 +411,8 @@ export const useAuth = () => {
     state.signingIn = true
 
     const provider = new firebase.auth.GoogleAuthProvider()
-    provider.addScope('https://www.googleapis.com/auth/userinfo.email')
+    provider.addScope('profile')
+    provider.addScope('email')
     firebase.auth().signInWithRedirect(provider)
   }
 
