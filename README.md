@@ -78,7 +78,7 @@ To activate all services and features see section `Services` below.
 
 ### City auto-complete
 
-- Enable Maps API in Google API in [Google Cloud Console](https://console.cloud.google.com/apis/library)
+- Enable [Maps JavaScript API](https://console.cloud.google.com/apis/library/maps-backend.googleapis.com) and [Places API](https://console.cloud.google.com/marketplace/product/google/places-backend.googleapis.com) in the Google Cloud Console
 - [Enable Billing](https://console.cloud.google.com/project/_/billing/enable) on the Google Cloud Project
 
 ### Mailgun
