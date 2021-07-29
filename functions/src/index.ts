@@ -5,7 +5,7 @@ import * as cors from 'cors'
 import * as Handlebars from 'handlebars'
 import sendEmail from './lib/sendEmail'
 import { screenshot } from './lib/screenshot'
-import { initIndex, profileToAlgolia } from './lib/algolia'
+import { initIndex, profileToAlgolia, removeObject } from './lib/algolia'
 import { generateSocialCover } from './lib/migrations'
 import { firestore as db } from './firebase'
 
@@ -101,6 +101,20 @@ const render = (templateString: string, data: Object) => {
   return templator({ data })
 }
 
+function wasChanged(prev: any, next: any, fields: string[]) {
+  return !fields.every((field: string) => prev[field] === next[field])
+}
+
+function pick(object: any, fields: string[]) {
+  const result = {} as any
+
+  fields.forEach((field: string) => {
+    result[field] = object[field] || ''
+  })
+
+  return result
+}
+
 export const onProfileChange = functions.firestore
   .document('profiles/{profileId}')
   .onWrite(async (change, context) => {
@@ -109,8 +123,38 @@ export const onProfileChange = functions.firestore
     const profile = snapshot.data()
     const profileId = context.params.profileId
 
+    const wasDeleted = oldProfile?.username && !profile?.username
+    const becameUnlisted =
+      profile?.visibility === 'Unlisted' &&
+      oldProfile?.visibility !== 'Unlisted'
+
+    if (wasDeleted || becameUnlisted) {
+      await removeObject(profileId)
+    }
+
     if (!profile || !profile.username || !profile.place) {
       return
+    }
+
+    const cacheFields = [
+      'username',
+      'photo',
+      'height',
+      'weight',
+      'bio',
+      'community',
+      'locales'
+    ]
+
+    const needsCacheUpdate = wasChanged(oldProfile, profile, cacheFields)
+
+    if (needsCacheUpdate) {
+      const profileCache = pick(profile, cacheFields)
+
+      await db
+        .collection('app')
+        .doc('v2')
+        .update({ [`profiles.${profileId}`]: profileCache })
     }
 
     const canBoost =
@@ -132,15 +176,18 @@ export const onProfileChange = functions.firestore
     ).data() as any
 
     const index = initIndex('profiles')
-    await index.saveObject(
-      profileToAlgolia(
-        {
-          ...profile,
-          id: profileId
-        },
-        cache
+
+    if (profile.visibility !== 'Unlisted') {
+      await index.saveObject(
+        profileToAlgolia(
+          {
+            ...profile,
+            id: profileId
+          },
+          cache
+        )
       )
-    )
+    }
 
     if (oldProfile?.place === profile.place) {
       return

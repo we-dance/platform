@@ -7,6 +7,11 @@ export function initIndex(indexName: string) {
   return algolia.initIndex(indexName)
 }
 
+export async function removeObject(objectID: string) {
+  const index = initIndex('profiles')
+  await index.deleteObject(objectID)
+}
+
 export function profileToAlgolia(profile: any, cache: any) {
   return {
     objectID: profile.id,

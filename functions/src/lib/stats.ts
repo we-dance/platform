@@ -27,7 +27,9 @@ export async function getCities() {
     }
 
     if (!app.cities[profile.place]) {
-      console.log(`Missing ${profile.place}`)
+      console.log(
+        `Missing place:${profile.place} for username:${profile.username} uid:${profile.id}`
+      )
       continue
     }
 
