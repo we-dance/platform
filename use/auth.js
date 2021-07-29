@@ -409,7 +409,6 @@ export const useAuth = () => {
 
   function signInWithGoogle() {
     state.signingIn = true
-
     const provider = new firebase.auth.GoogleAuthProvider()
     provider.addScope('profile')
     provider.addScope('email')
