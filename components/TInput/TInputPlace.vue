@@ -50,7 +50,7 @@ export default {
 
       let address
 
-      if (cache.value.cities[placeId]) {
+      if (cache.value?.cities[placeId]) {
         address = cache.value.cities[placeId].location
       } else {
         address = await getLocality({ placeId })
