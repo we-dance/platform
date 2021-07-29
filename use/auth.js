@@ -414,7 +414,6 @@ export const useAuth = () => {
     provider.addScope('email')
     firebase.auth().signInWithRedirect(provider)
   }
-
   async function getRedirectResult() {
     try {
       const result = await firebase.auth().getRedirectResult()
