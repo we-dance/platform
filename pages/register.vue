@@ -101,11 +101,11 @@ export default {
     async submit({ email, username, password, place }) {
       if (
         !email ||
-        email.trim() ||
+        !email.trim() ||
         !username ||
-        username.trim() ||
+        !username.trim() ||
         !password ||
-        password.trim()
+        !password.trim()
       ) {
         this.error = {
           message: 'Please fill all the fields'
