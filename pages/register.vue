@@ -100,9 +100,12 @@ export default {
     },
     async submit({ email, username, password, place }) {
       if (
-        !(typeof email !== 'string' ? '' : email.trim()) ||
-        !(typeof username !== 'string' ? '' : username.trim()) ||
-        !(typeof password !== 'string' ? '' : password.trim())
+        !email ||
+        email.trim() ||
+        !username ||
+        username.trim() ||
+        !password ||
+        password.trim()
       ) {
         this.error = {
           message: 'Please fill all the fields'
