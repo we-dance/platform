@@ -99,7 +99,14 @@ export default {
       this.$router.push(`/${this.profile.username}`)
     },
     async submit({ email, username, password, place }) {
-      if (!email.trim() || !username.trim() || !password.trim()) {
+      if (
+        !email ||
+        !email.trim() ||
+        !username ||
+        !username.trim() ||
+        !password ||
+        !password.trim()
+      ) {
         this.error = {
           message: 'Please fill all the fields'
         }
