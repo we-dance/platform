@@ -38,7 +38,7 @@ To activate all services and features see section `Services` below.
 
 Workarounds:
 
-- [Error: Node Sass does not yet support your current environment: OS X 64-bit with Unsupported runtime](https://medium.com/@proustibat/how-to-fix-error-node-sass-does-not-yet-support-your-current-environment-os-x-64-bit-with-c1b3298e4af0)
+- [Error: Node Sass does not yet support your current environment](https://stackoverflow.com/questions/37415134/error-node-sass-does-not-yet-support-your-current-environment-windows-64-bit-w)
 
 ### Tools
 
