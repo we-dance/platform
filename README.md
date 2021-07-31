@@ -39,10 +39,14 @@ To activate all services and features see section `Services` below.
 Workarounds:
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 - [Error: Node Sass does not yet support your current environment](https://stackoverflow.com/questions/37415134/error-node-sass-does-not-yet-support-your-current-environment-windows-64-bit-w)
 =======
 - [Error: Node Sass does not yet support your current environment: OS X 64-bit with Unsupported runtime](https://medium.com/@proustibat/how-to-fix-error-node-sass-does-not-yet-support-your-current-environment-os-x-64-bit-with-c1b3298e4af0)
 >>>>>>> 60bf201... docs: setup
+=======
+- [Error: Node Sass does not yet support your current environment](https://stackoverflow.com/questions/37415134/error-node-sass-does-not-yet-support-your-current-environment-windows-64-bit-w)
+>>>>>>> 086a6e2... docs: change link for node-sass error
 
 ### Tools
 
