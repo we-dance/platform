@@ -151,7 +151,7 @@ export default {
       if (value) {
         this.$set(val, field.name, value)
       } else {
-        this.$delete(val, field.name)
+        this.$set(val, field.name, '')
       }
 
       if (field && field.onChange) {
