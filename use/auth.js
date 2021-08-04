@@ -400,9 +400,19 @@ export const useAuth = () => {
     }
   }
 
+  async function updateTimeZone() {
+    const { zone } = await getAccount()
+    if (!zone) {
+      await updateAccount({
+        zone: Intl.DateTimeFormat().resolvedOptions().timeZone
+      })
+    }
+  }
+
   async function signUserIn(email, password) {
     try {
       await firebase.auth().signInWithEmailAndPassword(email, password)
+      updateTimeZone()
     } catch (e) {
       state.error = e
     }
@@ -414,6 +424,7 @@ export const useAuth = () => {
     const provider = new firebase.auth.GoogleAuthProvider()
     provider.addScope('https://www.googleapis.com/auth/userinfo.email')
     firebase.auth().signInWithRedirect(provider)
+    updateTimeZone()
   }
 
   async function getRedirectResult() {
