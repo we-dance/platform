@@ -166,7 +166,8 @@ export const useAuth = () => {
         name: user.displayName ?? '',
         email: user.email ?? '',
         photo: user.photoURL ?? '',
-        timezone: new Date().toString().match(/([A-Z]+[+-][0-9]+)/)[1]
+        timezone: new Date().toString().match(/([A-Z]+[+-][0-9]+)/)[1],
+        zone: Intl.DateTimeFormat().resolvedOptions().timeZone
       }
 
       await firestore
