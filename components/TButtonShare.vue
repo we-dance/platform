@@ -156,8 +156,15 @@ export default {
       this.$nuxt.$loading.start()
 
       try {
+        const { account } = useAuth()
         const result = await axios.get(
-          `https://us-central1-wedance-4abe3.cloudfunctions.net/hooks/share${this.$route.path}?timezone=Europe/Berlin`
+          `https://us-central1-wedance-4abe3.cloudfunctions.net/hooks/share${
+            this.$route.path
+          }?timezone=${
+            !account.value?.zone
+              ? Intl.DateTimeFormat().resolvedOptions().timeZone
+              : account.value?.zone
+          }`
         )
 
         if (!result.data.success) {

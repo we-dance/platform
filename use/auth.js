@@ -166,7 +166,8 @@ export const useAuth = () => {
         name: user.displayName ?? '',
         email: user.email ?? '',
         photo: user.photoURL ?? '',
-        timezone: new Date().toString().match(/([A-Z]+[+-][0-9]+)/)[1]
+        timezone: new Date().toString().match(/([A-Z]+[+-][0-9]+)/)[1],
+        zone: Intl.DateTimeFormat().resolvedOptions().timeZone
       }
 
       await firestore
@@ -398,10 +399,18 @@ export const useAuth = () => {
       state.error = e
     }
   }
-
+  async function updateTimeZone() {
+    const { zone } = await getAccount()
+    if (!zone) {
+      await updateAccount({
+        zone: Intl.DateTimeFormat().resolvedOptions().timeZone
+      })
+    }
+  }
   async function signUserIn(email, password) {
     try {
       await firebase.auth().signInWithEmailAndPassword(email, password)
+      updateTimeZone()
     } catch (e) {
       state.error = e
     }
@@ -429,6 +438,7 @@ export const useAuth = () => {
   return {
     ...toRefs(state),
     username,
+    updateTimeZone,
     getRedirectResult,
     updateProfile,
     updateAccount,
