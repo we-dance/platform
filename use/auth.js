@@ -424,7 +424,6 @@ export const useAuth = () => {
     const provider = new firebase.auth.GoogleAuthProvider()
     provider.addScope('https://www.googleapis.com/auth/userinfo.email')
     firebase.auth().signInWithRedirect(provider)
-    updateTimeZone()
   }
 
   async function getRedirectResult() {
@@ -440,6 +439,7 @@ export const useAuth = () => {
   return {
     ...toRefs(state),
     username,
+    updateTimeZone,
     getRedirectResult,
     updateProfile,
     updateAccount,
