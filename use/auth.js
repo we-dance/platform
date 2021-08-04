@@ -425,6 +425,7 @@ export const useAuth = () => {
     provider.addScope('profile')
     provider.addScope('email')
     firebase.auth().signInWithRedirect(provider)
+    updateTimeZone()
   }
 
   async function getRedirectResult() {
