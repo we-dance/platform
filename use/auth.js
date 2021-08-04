@@ -444,7 +444,6 @@ export const useAuth = () => {
   return {
     ...toRefs(state),
     username,
-    updateTimeZone,
     getRedirectResult,
     updateProfile,
     updateAccount,
