@@ -16,7 +16,8 @@
 
 ### Prerequisites
 
-- [Yarn](https://classic.yarnpkg.com/en/docs/install) – javascript package manager
+- [Node v14.7.4 LTS](https://nodejs.org/en/)
+- [Yarn v1.22.5](https://classic.yarnpkg.com/en/docs/install) – javascript package manager
 
 ### Create Firebase project
 
@@ -34,6 +35,10 @@
 5. Run `yarn dev` to serve site with hot reload at https://localhost:3000/
 
 To activate all services and features see section `Services` below.
+
+Workarounds:
+
+- [Error: Node Sass does not yet support your current environment](https://stackoverflow.com/questions/37415134/error-node-sass-does-not-yet-support-your-current-environment-windows-64-bit-w)
 
 ### Tools
 

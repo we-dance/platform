@@ -1,5 +1,4 @@
 import * as functions from 'firebase-functions'
-import * as admin from 'firebase-admin'
 import * as express from 'express'
 import * as cors from 'cors'
 import * as Handlebars from 'handlebars'
@@ -7,7 +6,7 @@ import sendEmail from './lib/sendEmail'
 import { screenshot } from './lib/screenshot'
 import { initIndex, profileToAlgolia, removeObject } from './lib/algolia'
 import { generateSocialCover } from './lib/migrations'
-import { firestore as db } from './firebase'
+import { firestore as db, admin } from './firebase'
 
 const app = express()
 app.use(cors({ origin: true }))
