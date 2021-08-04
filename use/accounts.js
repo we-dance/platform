@@ -1,3 +1,4 @@
+import moment from 'moment-timezone'
 import { useCollection } from '~/use/collection'
 
 export const accountFields = [
@@ -25,6 +26,13 @@ export const accountFields = [
     key: 'account.phone',
     required: true,
     event: true
+  },
+  {
+    name: 'zone',
+    label: 'Timezone',
+    type: 'richselect',
+    options: moment.tz.names(),
+    require: true
   },
   {
     name: 'newsletter',
