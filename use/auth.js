@@ -401,7 +401,6 @@ export const useAuth = () => {
       state.error = e
     }
   }
-
   async function updateTimeZone() {
     const { zone } = await getAccount()
     if (!zone) {
@@ -410,7 +409,6 @@ export const useAuth = () => {
       })
     }
   }
-
   async function signUserIn(email, password) {
     try {
       await firebase.auth().signInWithEmailAndPassword(email, password)
@@ -441,6 +439,7 @@ export const useAuth = () => {
   return {
     ...toRefs(state),
     username,
+    updateTimeZone,
     getRedirectResult,
     updateProfile,
     updateAccount,
