@@ -416,7 +416,6 @@ export const useAuth = () => {
   async function signUserIn(email, password) {
     try {
       await firebase.auth().signInWithEmailAndPassword(email, password)
-      updateTimeZone()
     } catch (e) {
       state.error = e
     }
