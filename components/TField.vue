@@ -33,7 +33,7 @@
           :hide-label="hideLabel"
           :item="item"
           v-on="$attrs.listeners"
-          @input="(val) => $emit('input', set(val))"
+          @update="(val) => $emit('input', set(val))"
         />
       </slot>
       <TPreview
