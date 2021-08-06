@@ -39,11 +39,12 @@ import { useAuth } from '~/use/auth'
 export default {
   setup() {
     const { currentCity } = useCities()
-    const { uid } = useAuth()
+    const { uid, account } = useAuth()
 
     return {
       currentCity,
-      uid
+      uid,
+      account
     }
   },
   props: {
@@ -156,15 +157,8 @@ export default {
       this.$nuxt.$loading.start()
 
       try {
-        const { account } = useAuth()
         const result = await axios.get(
-          `https://us-central1-wedance-4abe3.cloudfunctions.net/hooks/share${
-            this.$route.path
-          }?timezone=${
-            !account.value?.zone
-              ? Intl.DateTimeFormat().resolvedOptions().timeZone
-              : account.value?.zone
-          }`
+          `https://us-central1-wedance-4abe3.cloudfunctions.net/hooks/share${this.$route.path}?timezone=${this.account?.zone}`
         )
 
         if (!result.data.success) {
