@@ -39,11 +39,12 @@ import { useAuth } from '~/use/auth'
 export default {
   setup() {
     const { currentCity } = useCities()
-    const { uid } = useAuth()
+    const { uid, account } = useAuth()
 
     return {
       currentCity,
-      uid
+      uid,
+      account
     }
   },
   props: {
@@ -157,7 +158,7 @@ export default {
 
       try {
         const result = await axios.get(
-          `https://us-central1-wedance-4abe3.cloudfunctions.net/hooks/share${this.$route.path}?timezone=Europe/Berlin`
+          `https://us-central1-wedance-4abe3.cloudfunctions.net/hooks/share${this.$route.path}?timezone=${this.account?.zone}`
         )
 
         if (!result.data.success) {
