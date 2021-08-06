@@ -203,7 +203,6 @@ export const useAuth = () => {
 
     await updateTimeZone()
 
-
     await loadProfile()
 
     firestore.collection('marketing').add({
@@ -411,7 +410,7 @@ export const useAuth = () => {
       })
     }
   }
-  
+
   async function signUserIn(email, password) {
     try {
       await firebase.auth().signInWithEmailAndPassword(email, password)
