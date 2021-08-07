@@ -201,7 +201,10 @@ export const useAuth = () => {
         daysUsed
       })
 
-    updateTimeZone()
+
+    await updateTimeZone()
+
+
 
     await loadProfile()
 
