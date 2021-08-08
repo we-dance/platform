@@ -15,9 +15,9 @@
         :edit-creator="isAdmin()"
         :fields="fields"
         vertical
-        :show-remove="!!id"
-        :show-copy="!!id"
-        :submit-label="id ? 'Save' : 'Add'"
+        :show-remove="id !== '-'"
+        :show-copy="id !== '-'"
+        :submit-label="id === '-' ? 'Add' : 'Save'"
         class="bg-white p-4 space-y-4"
         @copy="copyItem"
         @save="saveItem"
@@ -31,7 +31,6 @@
 <script>
 import { addMinutes, parseISO } from 'date-fns'
 import { computed } from '@nuxtjs/composition-api'
-import ls from 'local-storage'
 import { useAuth } from '~/use/auth'
 import { useDoc } from '~/use/doc'
 import { useRouter } from '~/use/router'
@@ -41,6 +40,12 @@ export default {
   name: 'EventEdit',
   layout: 'empty',
   middleware: ['auth'],
+  props: {
+    id: {
+      type: String,
+      default: '-'
+    }
+  },
   data: () => ({
     selectedType: 'event'
   }),
@@ -59,20 +64,19 @@ export default {
     }
   },
   mounted() {
-    if (!this.can('edit', 'events', this.item)) {
-      this.error({ statusCode: 405 })
-    }
-
-    const city = ls('city')
-    this.item = this.item || {
-      city,
-      visibility: 'Public',
-      form: 'No',
-      type: 'Course',
-      duration: 60,
-      price: 'FREE',
-      cover: '',
-      organiser: this.profile?.username || ''
+    if (this.id === '-') {
+      this.item = {
+        place: this.profile?.place,
+        visibility: 'Public',
+        form: 'No',
+        online: 'No',
+        type: 'Party',
+        duration: 60,
+        price: 'FREE',
+        styles: this.profile?.styles,
+        cover: this.profile?.photo || '',
+        organiser: this.profile?.username || ''
+      }
     }
   },
   methods: {
@@ -121,7 +125,7 @@ export default {
 
     const collection = 'events'
 
-    const { doc: item, id, load, update, remove, create, loading } = useDoc(
+    const { doc: item, load, update, remove, create, loading } = useDoc(
       collection
     )
 
@@ -147,14 +151,6 @@ export default {
         value: 'event',
         fields: [
           {
-            name: 'cover',
-            type: 'photo',
-            width: 500,
-            height: 500,
-            circle: false,
-            hideLabel: true
-          },
-          {
             name: 'name',
             hideLabel: true,
             placeholder: 'Event Name'
@@ -163,14 +159,11 @@ export default {
             name: 'description',
             hideLabel: true,
             type: 'textarea',
-            placeholder: 'Text (markdown)',
+            placeholder: 'Details (markdown)',
             tips:
               'Pitch yourself: Who are you? What do you offer? What do you want?\n\nTips for effective pitch:\n- Uncomplicated: It should be catchy and roll off the tongue\n- Concise: It shouldn’t take more than a minute to say or read\n- Unique: It reflects your skills, goals, and desires\n- Storyline: It covers who you are, what you offer, and where you want to be\n- Appealing: Your elevator pitch is essentially a persuasive sales pitch; the emphasis should be on what you offer',
             description:
               'Use [widgets](https://wedance.vip/markdown), including images and videos'
-          },
-          {
-            name: 'price'
           },
           {
             name: 'address',
@@ -229,6 +222,10 @@ export default {
             when: (e) => e.duration === 'custom'
           },
           {
+            name: 'price',
+            description: 'Please include also currency, for example: 10EUR'
+          },
+          {
             name: 'styles',
             label: 'What?',
             type: 'stylesSelect'
@@ -239,24 +236,32 @@ export default {
             options: eventTypeList
           },
           {
-            name: 'online',
-            label: 'Online?',
-            type: 'select',
-            options: ['Yes', 'No'],
-            onChange: updatePlace
+            name: 'cover',
+            type: 'photo',
+            width: 500,
+            height: 500,
+            circle: false,
+            hideLabel: true
           },
           {
             name: 'visibility',
-            type: 'select',
+            type: 'buttons',
             options: ['Public', 'Members', 'Unlisted'],
-            tip: `- Public - searchable in Google.\n- Members - visible only for logged-in users.\n- Unlisted - possible to open with exact link, but they are not listed nor not shown in the search.`
+            description: `- Public - searchable in Google.\n- Members - visible only for logged-in users.\n- Unlisted - possible to open with exact link, but they are not listed nor not shown in the search.`
+          },
+          {
+            name: 'online',
+            label: 'Online?',
+            type: 'buttons',
+            options: ['Yes', 'No'],
+            onChange: updatePlace
           },
           {
             name: 'form',
             label: 'External registration?',
             before:
               'Do you use Google Forms, Facebook, Eventbrite, etc. for people to register for your event?',
-            type: 'select',
+            type: 'buttons',
             options: ['Yes', 'No']
           },
           {
@@ -272,6 +277,14 @@ export default {
             when: (answers) => answers.online !== 'Yes',
             description:
               'Leave empty if you want your event to be shown in all cities'
+          },
+          {
+            name: 'promo',
+            label: 'Do you want free promo?',
+            type: 'buttons',
+            options: ['Yes', 'No'],
+            description:
+              'Send us link to your event on [Instagram](https://instagram.com/wedancevip) and we will promote it on our social media channels: Telegram, Instagram, Facebook and Twitter.'
           }
         ]
       }
@@ -284,7 +297,6 @@ export default {
     return {
       loading,
       item,
-      id,
       can,
       collection,
       update,

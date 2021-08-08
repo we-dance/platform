@@ -247,20 +247,19 @@ export const profileFields = [
     name: 'visibility',
     key: 'profile.visibility',
     poster: true,
-    type: 'richselect',
-    hideSearchBox: true,
+    type: 'buttons',
     options: visibilityOptions,
-    tips:
+    description:
       '- Public profiles are searchable in Google and used in our social media to attract new members.\n- Members profile are only visible for logged-in users.\n- Unlisted profiles are possible to open with exact link, but they are not listed in members lists and search.'
   },
   {
     name: 'permission',
-    label: 'Publish on social media?',
+    label: 'Do you want free promo?',
     poster: true,
     type: 'buttons',
     options: booleanOptions,
-    before:
-      'Would you like your profile to be published on WeDance account in Instagram, Facebook, Telegram, Twitter, TikTok?'
+    description:
+      'Send us link to your profile on [Instagram](https://instagram.com/wedancevip) and we will promote it on our social media channels: Telegram, Instagram, Facebook and Twitter.'
   },
   {
     name: 'name',
