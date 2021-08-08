@@ -1,3 +1,6 @@
+hero.title: Dans etmeyi sever misin?
+hero.subtitle: İlginç dans etkinlikleri ve dans partnerleri bulma konusunda
+  birbirimize yardımcı oluyoruz.
 signin: Oturum aç
 signup: Kayıt ol
 signout: Çıkış Yap
@@ -10,6 +13,8 @@ posts.title: Feed
 profiles.title: Topluluk
 events.title: Etkinlikler
 event.type: Type
+chat.title: Chat
+cities.choose: Choose city
 myprofile.title: Benim profilim
 settings.title: Ayarlar
 city.anywhere: Herhangi bir yer

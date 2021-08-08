@@ -1,3 +1,6 @@
+hero.title: Tanzt du gerne?
+hero.subtitle: Wir helfen uns gegenseitig, interessante Tanzveranstaltungen und
+  Tanzpartner zu finden.
 signin: Einloggen
 signup: Registrieren
 signout: Ausloggen
@@ -10,6 +13,8 @@ posts.title: Feed
 profiles.title: Community
 events.title: Veranstaltungen
 event.type: Type
+chat.title: Chat
+cities.choose: Choose city
 myprofile.title: Mein Profil
 settings.title: Einstellungen
 city.anywhere: Irgendwo

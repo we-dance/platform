@@ -1,3 +1,6 @@
+hero.title: Czy lubisz tańczyć?
+hero.subtitle: Pomagamy sobie nawzajem znaleźć ciekawe imprezy taneczne i
+  partnerów tanecznych.
 signin: Zaloguj się
 signup: Zapisz się
 signout: Wyloguj
@@ -10,6 +13,8 @@ posts.title: Feed
 profiles.title: Społeczność
 events.title: Wydarzenia
 event.type: Type
+chat.title: Chat
+cities.choose: Choose city
 myprofile.title: Mój profil
 settings.title: Ustawienia
 city.anywhere: Gdziekolwiek

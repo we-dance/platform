@@ -1,3 +1,6 @@
+hero.title: Iti place sa dansezi?
+hero.subtitle: Ne ajutăm reciproc să găsim evenimente de dans interesante și
+  parteneri de dans.
 signin: Loghează-te
 signup: Inscrie-te
 signout: Deconectează-te
@@ -10,6 +13,8 @@ posts.title: Feed
 profiles.title: Comunitate
 events.title: Evenimente
 event.type: Type
+chat.title: Chat
+cities.choose: Choose city
 myprofile.title: Profilul meu
 settings.title: Setări
 city.anywhere: Oriunde

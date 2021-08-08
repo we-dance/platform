@@ -8,7 +8,7 @@
       </div>
       <div class="flex space-x-2">
         <TButton type="nav" icon="search" to="/search" />
-        <TButton type="secondary" to="/signin" label="Login" />
+        <TButton type="secondary" to="/signin" :label="$t('signin')" />
       </div>
     </nav>
 
@@ -18,16 +18,18 @@
           <TIcon name="undraw_i_can_fly" />
         </div>
         <h1 class="text-4xl leading-tight font-montserrat font-bold">
-          Do you like to dance?
+          {{ $t('hero.title') }}
         </h1>
         <p class="mt-2">
-          Meet dance partners and help each other to find interesting dance
-          events.
+          {{ $t('hero.subtitle') }}
         </p>
         <div>
-          <TButton class="mt-4 mr-4" type="primary" to="/register"
-            >Join community</TButton
-          >
+          <TButton
+            class="mt-4 mr-4"
+            type="primary"
+            to="/register"
+            :label="$t('signup')"
+          />
         </div>
       </div>
     </div>
@@ -57,7 +59,7 @@
       <h2 class="mt-4 mb-10 text-3xl font-montserrat leading-tight text-center">
         Your dance journey with WeDance
       </h2>
-      <div class="mt-4 flex min-w-full justify-end items-center">
+      <div class="mt-16 flex min-w-full justify-end items-center">
         <div class="w-1/3">
           <TIcon name="undraw_i_can_fly" class="pr-4" />
         </div>
@@ -69,7 +71,7 @@
           </p>
         </div>
       </div>
-      <div class="mt-4 flex min-w-full justify-start items-center">
+      <div class="mt-16 flex min-w-full justify-start items-center">
         <div class="w-2/3 h-40">
           <h2 class="font-lato font-bold text-xl">Find dance partner</h2>
           <p>
@@ -80,7 +82,7 @@
           <TIcon name="undraw_together" class="pl-4" />
         </div>
       </div>
-      <div class="mt-4 flex min-w-full justify-end items-center">
+      <div class="mt-16 flex min-w-full justify-end items-center">
         <div class="w-1/3">
           <TIcon name="undraw_events" class="pr-4" />
         </div>
@@ -94,7 +96,7 @@
           </p>
         </div>
       </div>
-      <div class="mt-4 flex min-w-full justify-start items-center">
+      <div class="mt-16 flex min-w-full justify-start items-center">
         <div class="w-2/3 h-40">
           <h2 class="font-lato font-bold text-xl">Improve dancing</h2>
           <p>
@@ -107,7 +109,7 @@
         </div>
       </div>
 
-      <div class="mt-4 flex min-w-full justify-end items-center">
+      <div class="mt-16 flex min-w-full justify-end items-center">
         <div class="w-1/3">
           <TIcon name="undraw_online_ad" class="pr-4" />
         </div>
@@ -119,7 +121,7 @@
           </p>
         </div>
       </div>
-      <div class="mt-4 flex min-w-full justify-start items-center">
+      <div class="mt-16 flex min-w-full justify-start items-center">
         <div class="w-2/3 h-40">
           <h2 class="font-lato font-bold text-xl">Book venues (coming soon)</h2>
           <p>
@@ -146,8 +148,8 @@
         </p>
         <p>
           WeDance is created and supported by volunteers. Everyone is
-          <router-link to="/wedance-community"
-            >welcome to contribute</router-link
+          <a href="https://bit.ly/wedance-get-involved" target="_blank"
+            >welcome to contribute</a
           >.
         </p>
         <p>

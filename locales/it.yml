@@ -1,3 +1,6 @@
+hero.title: Ti piace ballare?
+hero.subtitle: Ci aiutiamo a vicenda a trovare interessanti eventi di danza e
+  partner di ballo.
 signin: Accedere
 signup: Iscriverti
 signout: Uscire
@@ -10,6 +13,8 @@ posts.title: Feed
 profiles.title: Comunità
 events.title: Eventi
 event.type: Type
+chat.title: Chat
+cities.choose: Choose city
 myprofile.title: Il mio profilo
 settings.title: Impostazioni
 city.anywhere: Dovunque

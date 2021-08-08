@@ -1,3 +1,5 @@
+hero.title: Do you like dancing?
+hero.subtitle: We help each other find interesting dance events and dance partners.
 signin: Sign in
 signup: Sign up
 signout: Log out
@@ -10,6 +12,8 @@ posts.title: Feed
 profiles.title: Community
 events.title: Events
 event.type: Type
+chat.title: Chat
+cities.choose: Choose city
 myprofile.title: My Profile
 settings.title: Settings
 city.anywhere: Anywhere
@@ -59,9 +63,6 @@ profile.hometown: Hometown
 profile.birthday: Birthday
 profile.gender: Gender
 profile.styles: Your dance styles and level
-profile.style: Dance style
-profile.country: Country
-profile.locality: City
 profile.story: Description
 profile.languages: Your languages
 profile.skills: Non-dancing skills
