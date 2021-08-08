@@ -201,11 +201,7 @@ export const useAuth = () => {
         daysUsed
       })
 
-
     await updateTimeZone()
-
-
-
     await loadProfile()
 
     firestore.collection('marketing').add({
