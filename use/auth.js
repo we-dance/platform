@@ -301,6 +301,11 @@ export const useAuth = () => {
     await loadProfile()
   }
 
+  async function updateEmail(email) {
+    const user = firebase.auth().currentUser
+    await user.updateEmail(email)
+  }
+
   async function updatePassword(password) {
     const user = firebase.auth().currentUser
     await user.updatePassword(password)
@@ -455,6 +460,7 @@ export const useAuth = () => {
     sendSignInLinkToEmail,
     signInWithEmailLink,
     updatePassword,
+    updateEmail,
     createUserWithEmailAndPassword,
     deleteAccount
   }
