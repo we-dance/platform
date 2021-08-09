@@ -1,8 +1,8 @@
 import * as admin from 'firebase-admin'
 
-require('dotenv').config()
+// require('dotenv').config()
 
-if (process.env.LOCAL) {
+if (false) {
   const serviceAccount = require('../var/serviceAccountKey.json')
 
   admin.initializeApp({

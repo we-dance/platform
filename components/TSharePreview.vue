@@ -21,9 +21,10 @@
             <div
               v-for="dance in dances"
               :key="dance.id"
-              class="uppercase text-3xl"
+              class="uppercase text-3xl flex space-x-2 justify-end items-center"
             >
-              {{ dance.name }}
+              <span>{{ dance.name }}</span
+              ><TIcon :name="getIcon(dance.level)" size="8" />
             </div>
           </div>
         </div>
@@ -111,6 +112,23 @@ export default {
   computed: {
     dances() {
       return this.getStyles(this.styles, 0, true, 5)
+    }
+  },
+  methods: {
+    getIcon(level) {
+      const map = {
+        Interested: '0_of_4',
+        Beginner: '1_of_4',
+        Intermediate: '2_of_4',
+        Advanced: '3_of_4',
+        Master: '4_of_4'
+      }
+
+      if (!map[level]) {
+        return '0_of_4'
+      }
+
+      return map[level]
     }
   }
 }
