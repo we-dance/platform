@@ -40,7 +40,7 @@ export default {
   name: 'TInputCollection',
   props: {
     value: {
-      type: String,
+      type: [String, Object],
       default: ''
     },
     collection: {
@@ -151,6 +151,10 @@ export default {
       return item[this.keyLabel]
     },
     getValue(doc) {
+      if (this.keyValue === '@doc') {
+        return doc
+      }
+
       return doc[this.keyValue]
     }
   },

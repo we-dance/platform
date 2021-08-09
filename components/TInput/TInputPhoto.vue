@@ -21,8 +21,8 @@
         <div :class="!editing ? 'cursor-pointer' : ''" class="mx-auto">
           <croppa
             v-model="croppa"
-            :width="320"
-            :height="320"
+            :width="width"
+            :height="height"
             prevent-white-space
             :show-remove-button="false"
             :placeholder="selectLabel"

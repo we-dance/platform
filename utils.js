@@ -370,16 +370,11 @@ export const getEventDescription = (event) => {
     ', ' +
     getDate(event.startDate) +
     ' ' +
-    getTime(event.startDate) +
-    ' – '
+    getTime(event.startDate)
 
-  if (getDate(event.startDate) !== getDate(event.endDate)) {
-    result += getDate(event.endDate) + ' '
+  if (event.venue) {
+    result += ' at ' + event.venue.name + ' '
   }
-
-  result += getTime(event.endDate) + ' '
-
-  result += getTimeZone(event.startDate)
 
   return result
 }

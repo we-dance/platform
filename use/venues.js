@@ -4,25 +4,16 @@ export const venueFields = [
     label: 'Name'
   },
   {
-    name: 'address',
-    label: 'Address',
-    type: 'address'
+    name: 'rooms',
+    label: 'Areas/Rooms',
+    type: 'textarea',
+    description: 'One area per line'
   },
   {
-    name: 'place',
-    label: 'City',
-    type: 'place'
-  },
-  {
-    name: 'phone',
-    label: 'Phone'
-  },
-  {
-    name: 'website',
-    label: 'Website'
-  },
-  {
-    name: 'email',
-    label: 'Email'
+    name: 'map',
+    type: 'photo',
+    label: 'Venue map',
+    width: 1280,
+    height: 720
   }
 ]

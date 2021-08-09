@@ -33,9 +33,13 @@ import { computed } from '@vue/composition-api'
 import { useAuth } from '~/use/auth'
 import { useDoc } from '~/use/doc'
 import { useRouter } from '~/use/router'
+import TForm from '~/components/TForm'
 
 export default {
   name: 'TItemEdit',
+  components: {
+    TForm
+  },
   props: {
     id: {
       type: String,

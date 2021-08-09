@@ -15,13 +15,13 @@
         :edit-creator="isAdmin()"
         :fields="fields"
         vertical
-        :show-remove="id !== '-'"
-        :show-copy="id !== '-'"
-        :submit-label="id === '-' ? 'Add' : 'Save'"
+        :show-remove="item.id"
+        :show-copy="item.id"
+        submit-label="Save"
         class="bg-white p-4 space-y-4"
         @copy="copyItem"
         @save="saveItem"
-        @cancel="cancelItem"
+        @cancel="view(item.id)"
         @remove="removeItem"
       />
     </div>
@@ -80,9 +80,9 @@ export default {
     }
   },
   methods: {
-    cancelItem() {
-      if (this.id) {
-        this.$router.push(`/events/${this.id}`)
+    view(id) {
+      if (id && id !== '-') {
+        this.$router.push(`/events/${id}`)
       } else {
         this.$router.push(`/events`)
       }
@@ -105,17 +105,17 @@ export default {
       if (data.id) {
         this.$fire.analytics.logEvent('update_event')
         await this.update(data.id, data)
+        this.view(data.id)
       } else {
         this.$fire.analytics.logEvent('create_event')
-        await this.create(data)
+        const result = await this.create(data)
+        this.view(result.id)
       }
-
-      this.cancelItem()
     },
     async removeItem(id) {
       this.$fire.analytics.logEvent('delete_event')
       await this.remove(id)
-      this.cancelItem()
+      this.view()
     }
   },
   setup() {
@@ -166,9 +166,10 @@ export default {
               'Use [widgets](https://wedance.vip/markdown), including images and videos'
           },
           {
-            name: 'address',
+            name: 'venue',
             label: 'Where?',
-            type: 'address'
+            labelPosition: 'top',
+            type: 'venue'
           },
           {
             name: 'startDate',
