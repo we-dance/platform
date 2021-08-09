@@ -1,9 +1,9 @@
 <template>
   <TLoader v-if="loading" />
   <div v-else class="flex flex-col h-full">
-    <THeader :title="`Chat with ${receiver.username}`" />
+    <THeader :title="$t('chat.with', { username: receiver.username })" />    
     <div v-if="!chat || !chat.createdAt" class="p-16 text-xs text-center">
-      Start conversation with something nice.
+      {{ $t("chat.welcome") }}
     </div>
     <div v-else class="overflow-y-scroll flex-grow">
       <div
@@ -18,7 +18,7 @@
           <div class="text-xs space-x-1 text-gray-900 flex">
             <TAvatar name :uid="item.createdBy" />
             <span>•</span>
-            <div>{{ dateDiff(item.createdAt) }} ago</div>
+            <div>{{ $t("chat.dateDiff", { diff: dateDiff(item.createdAt) }) }}</div>
           </div>
 
           <div class="block text-sm leading-tight">{{ item.text }}</div>
