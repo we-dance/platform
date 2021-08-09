@@ -126,6 +126,12 @@ export const contactFields = [
     when: (p) => p.contacts === 'Yes'
   },
   {
+    name: 'whatsapp',
+    label: 'chat.whatsapp.com/',
+    placeholder: 'whatsapp chat',
+    when: (p) => p.contacts === 'Yes'
+  },
+  {
     name: 'telegram',
     label: 't.me/',
     placeholder: 'username',

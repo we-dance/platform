@@ -12,6 +12,13 @@
         icon-size="6"
       />
       <TButton
+        v-if="profile.whatsapp"
+        icon="whatsapp"
+        type="round"
+        icon-size="6"
+        :href="`https://chat.whatsapp.com/${profile.whatsapp}`"
+      />
+      <TButton
         v-if="profile.telegram"
         icon="telegram"
         type="round"
