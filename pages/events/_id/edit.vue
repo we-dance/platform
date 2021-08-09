@@ -15,8 +15,8 @@
         :edit-creator="isAdmin()"
         :fields="fields"
         vertical
-        :show-remove="item.id"
-        :show-copy="item.id"
+        :show-remove="!!item.id"
+        :show-copy="!!item.id"
         submit-label="Save"
         class="bg-white p-4 space-y-4"
         @copy="copyItem"

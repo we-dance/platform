@@ -40,7 +40,10 @@ export default {
     }
   },
   components: {
-    TField: () => import(/* webpackChunkName: "TField" */ '~/components/TField')
+    TField: () =>
+      import(/* webpackChunkName: "TField" */ '~/components/TField'),
+    TPopupEdit: () =>
+      import(/* webpackChunkName: "TPopupEdit" */ '~/components/TPopupEdit')
   },
   props: {
     value: {
