@@ -208,7 +208,6 @@ export default {
     },
     onFieldChange(field, value) {
       const val = { ...this.value }
-      this.form[field.name] = value
       if (value) {
         this.$set(val, field.name, value)
       } else {
@@ -217,7 +216,6 @@ export default {
       if (field && field.onChange) {
         field.onChange(val)
       }
-      this.$emit('input', val)
     },
   },
 }
