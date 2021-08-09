@@ -6,7 +6,7 @@
         :item="value"
         v-bind="field"
         :label="getLabel(field)"
-        @update="(val) => onFieldChange(field, val)"
+        @input="(val) => onFieldChange(field, val)"
       />
       <div
         v-if="v$.form[field.name].$errors[0]"
