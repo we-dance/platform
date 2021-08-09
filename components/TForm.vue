@@ -6,7 +6,7 @@
         :item="value"
         v-bind="field"
         :label="getLabel(field)"
-        @update="(val) => onFieldChange(field, val)"
+        @input="(val) => onFieldChange(field, val)"
       />
     </div>
     <div v-if="error" class="text-red-500 py-4 text-right">
@@ -147,7 +147,7 @@ export default {
     },
     onFieldChange(field, value) {
       const val = { ...this.value }
-
+      console.log(value)
       if (value) {
         this.$set(val, field.name, value)
       } else {
