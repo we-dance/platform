@@ -37,6 +37,7 @@
 import { useAuth } from '~/use/auth'
 
 export default {
+  name: 'TPopupEdit',
   props: {
     type: {
       type: String,

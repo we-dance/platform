@@ -1,3 +1,6 @@
+hero.title: Нравится танцевать?
+hero.subtitle: Мы помогаем друг другу находить интересные танцевальные
+  мероприятия и танц-партнёров.
 signin: Войти
 signup: Зарегистрироваться
 signout: Выйти
@@ -10,6 +13,8 @@ posts.title: Feed
 profiles.title: Сообщество
 events.title: Мероприятия
 event.type: Type
+chat.title: Чат
+cities.choose: Choose city
 myprofile.title: Мой профиль
 settings.title: Настройки
 city.anywhere: Куда угодно
@@ -61,6 +66,7 @@ profile.hometown: Родной город
 profile.birthday: День рождения
 profile.gender: Пол
 profile.styles: Ваши танцевальные стили и уровень
+profile.style: Танц-стили
 profile.story: Описание
 profile.languages: Ваши языки
 profile.skills: Не танцевальные навыки

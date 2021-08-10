@@ -215,6 +215,11 @@ export default {
         filter: (account) => selected.value[account.id]
       },
       {
+        value: 'jobs',
+        label: 'Volunteers',
+        filter: (account) => !!account.profile?.jobs
+      },
+      {
         value: 'notype',
         label: 'No Type',
         filter: (account) => !account.profile?.type

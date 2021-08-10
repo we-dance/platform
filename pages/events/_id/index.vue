@@ -35,7 +35,21 @@
 
       <div class="mx-auto max-w-2xl text-center">
         <div class="flex flex-wrap justify-start space-x-2 mt-2">
-          <div v-if="item.address">
+          <div v-if="item.venue">
+            <div class="flex items-center">
+              <TIcon name="place" class="w-4 h-4 mr-1" />
+              <div>
+                <a
+                  :href="item.venue.url"
+                  class="underline hover:no-underline"
+                  target="_blank"
+                >
+                  {{ item.venue.name }}</a
+                ><span v-if="item.venue.room"> • {{ item.venue.room }}</span>
+              </div>
+            </div>
+          </div>
+          <div v-else-if="item.address">
             <div class="flex items-center">
               <TIcon name="place" class="w-4 h-4 mr-1" />
               <a
@@ -84,6 +98,17 @@
 
       <TPreview class="mt-4" :content="item.description" />
       <TItemFooter collection="events" :item="item" :title="item.name" />
+
+      <div
+        v-if="item.venue && item.venue.map"
+        class="p-4 md:-mx-4 md:-mb-4 bg-gray-100"
+      >
+        <div class="font-bold text-sm mb-4 leading-none text-gray-700">
+          Venue Map
+        </div>
+        <img :src="item.venue.map" alt="Venue Map" class="mt-4" />
+      </div>
+
       <TItemCreator :item="item" />
     </TItemCard>
 

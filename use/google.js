@@ -46,8 +46,14 @@ export const getAddress = (places) => {
   return result
 }
 
-export const getGeoCode = async (config) => {
+export const getGoogle = async () => {
   const google = await loader.load()
+
+  return google
+}
+
+export const getGeoCode = async (config) => {
+  const google = await getGoogle()
   const geocoder = new google.maps.Geocoder()
 
   const defaults = {

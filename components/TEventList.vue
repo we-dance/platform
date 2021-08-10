@@ -37,7 +37,15 @@
               {{ item.name }}
             </router-link>
             <div class="text-xs flex flex-wrap">
-              <div v-if="item.address">
+              <div v-if="item.venue">
+                <div class="flex items-center">
+                  <TIcon name="place" class="w-4 h-4 mr-1" />
+                  <p>
+                    {{ item.venue.name }}
+                  </p>
+                </div>
+              </div>
+              <div v-else-if="item.address">
                 <div class="flex items-center">
                   <TIcon name="place" class="w-4 h-4 mr-1" />
                   <p>

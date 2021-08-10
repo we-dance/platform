@@ -1,3 +1,6 @@
+hero.title: ¿Te gusta bailar?
+hero.subtitle: Nos ayudamos mutuamente a encontrar eventos de baile interesantes
+  y parejas de baile.
 signin: Ingresar
 signup: Registrarse
 signout: Cerrar sesión
@@ -10,6 +13,8 @@ posts.title: Feed
 profiles.title: Comunidad
 events.title: Eventos
 event.type: Type
+chat.title: Chat
+cities.choose: Choose city
 myprofile.title: Mi perfil
 settings.title: Configuraciones
 city.anywhere: En cualquier sitio
@@ -61,6 +66,7 @@ profile.hometown: Pueblo natal
 profile.birthday: Cumpleaños
 profile.gender: Género
 profile.styles: Tus estilos de baile y tu nivel
+profile.style: Estilos de baile
 profile.story: Descripción
 profile.languages: Tus idiomas
 profile.skills: Habilidades para no bailar

@@ -63,6 +63,7 @@ import TInputPhoto from '~/components/TInput/TInputPhoto'
 import TAccountListSelector from '~/components/TAccountListSelector'
 import TAccountSelector from '~/components/TAccountSelector'
 import TInputPlace from '~/components/TInput/TInputPlace'
+import TInputVenue from '~/components/TInput/TInputVenue'
 import TInputZipcode from '~/components/TInput/TInputZipcode'
 import TInputStyle from '~/components/TInput/TInputStyle'
 import TInputStylesSelect2 from '~/components/TInput/TInputStylesSelect2'
@@ -187,6 +188,7 @@ export default {
         textarea: TInputTextarea,
         photo: TInputPhoto,
         place: TInputPlace,
+        venue: TInputVenue,
         zipcode: TInputZipcode,
         multi: TInputMulti,
         collection: TInputCollection,

@@ -123,6 +123,7 @@ const settings = {
     }
   },
   't-rich-select': {
+    name: 'TRichSelect',
     component: TRichSelect,
     props: {
       fixedClasses: {

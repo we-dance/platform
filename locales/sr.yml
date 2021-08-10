@@ -1,3 +1,6 @@
+hero.title: Да ли волиш плес?
+hero.subtitle: Помажемо једни другима у проналажењу занимљивих плесних догађаја
+  и плесних партнера.
 signin: Улазни
 signup: Пријавити
 signout: Одјавити се
@@ -10,6 +13,8 @@ posts.title: Feed
 profiles.title: Заједница
 events.title: Догађаји
 event.type: Type
+chat.title: Chat
+cities.choose: Choose city
 myprofile.title: Мој профил
 settings.title: Подешавања
 city.anywhere: Било где
@@ -59,6 +64,7 @@ profile.hometown: Родни град
 profile.birthday: Рођендан
 profile.gender: Пол
 profile.styles: Ваши плесни стилови и ниво
+profile.style: Плесни стилови
 profile.story: Опис
 profile.languages: Твоји језици
 profile.skills: Не-плесне вештине

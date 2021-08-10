@@ -132,12 +132,6 @@
         class="w-full mt-4"
       />
 
-      <div v-if="uid === profile.id" class="w-full flex justify-center p-4">
-        <TButton to="/events/-/edit" type="primary">{{
-          $t('myprofile.events.add')
-        }}</TButton>
-      </div>
-
       <TPreview v-if="profile.story" :content="profile.story" class="mt-4" />
 
       <TEventList
@@ -151,6 +145,12 @@
         :filter="{ place: profile.place }"
         class="mt-4 w-full"
       />
+
+      <div v-if="uid === profile.id" class="w-full flex justify-center p-4">
+        <TButton to="/events/-/edit" type="primary">{{
+          $t('myprofile.events.add')
+        }}</TButton>
+      </div>
 
       <TProfileDetails v-if="profile.type !== 'City'" :profile="profile" />
     </TItemCard>

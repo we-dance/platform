@@ -25,19 +25,26 @@
       >
         {{ item.name }}
       </router-link>
-      <div class="text-xs flex flex-wrap">
-        <div class="flex items-center mr-2">
-          <TIcon name="icon" class="w-4 h-4 mr-1" />
-          <TAvatar class="mr-2" name :uid="item.createdBy" />
+      <div class="text-xs flex flex-wrap space-x-2">
+        <div v-if="item.venue">
+          <div class="flex items-center">
+            <TIcon name="place" class="w-4 h-4 mr-1" />
+            <p>
+              {{ item.venue.name }}
+            </p>
+          </div>
         </div>
-        <div v-if="item.address">
+        <div v-else-if="item.address">
           <div class="flex items-center">
             <TIcon name="place" class="w-4 h-4 mr-1" />
             <p>
               {{ item.address }}
-              <span v-if="item.place">• {{ getCity(item.place) }}</span>
             </p>
           </div>
+        </div>
+        <div class="flex items-center">
+          <TIcon name="icon" class="w-4 h-4 mr-1" />
+          <TAvatar name :uid="item.createdBy" />
         </div>
       </div>
     </div>

@@ -202,7 +202,6 @@ export const useAuth = () => {
       })
 
     await updateTimeZone()
-
     await loadProfile()
 
     firestore.collection('marketing').add({
@@ -300,6 +299,11 @@ export const useAuth = () => {
       .update(changes)
 
     await loadProfile()
+  }
+
+  async function updateEmail(email) {
+    const user = firebase.auth().currentUser
+    await user.updateEmail(email)
   }
 
   async function updatePassword(password) {
@@ -456,6 +460,7 @@ export const useAuth = () => {
     sendSignInLinkToEmail,
     signInWithEmailLink,
     updatePassword,
+    updateEmail,
     createUserWithEmailAndPassword,
     deleteAccount
   }

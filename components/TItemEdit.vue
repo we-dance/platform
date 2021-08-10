@@ -36,6 +36,9 @@ import { useRouter } from '~/use/router'
 
 export default {
   name: 'TItemEdit',
+  components: {
+    TForm: () => import(/* webpackChunkName: "TForm" */ '~/components/TForm')
+  },
   props: {
     id: {
       type: String,

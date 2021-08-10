@@ -1,3 +1,6 @@
+hero.title: Você gosta de dançar?
+hero.subtitle: Ajudamos uns aos outros a encontrar eventos de dança
+  interessantes e parceiros de dança.
 signin: Entrar
 signup: Inscrever-se
 signout: Sair
@@ -10,6 +13,8 @@ posts.title: Feed
 profiles.title: Comunidade
 events.title: Eventos
 event.type: Type
+chat.title: Chat
+cities.choose: Choose city
 myprofile.title: Meu perfil
 settings.title: Configurações
 city.anywhere: Qualquer lugar
@@ -60,6 +65,7 @@ profile.hometown: Cidade natal
 profile.birthday: Aniversário
 profile.gender: Gênero
 profile.styles: Seu estilo de dança e nível
+profile.style: Estilo de dança
 profile.story: Descrição
 profile.languages: Seus idiomas
 profile.skills: Habilidades de não dançar

@@ -161,6 +161,7 @@ export default {
       updateProfile,
       loading,
       updatePassword,
+      updateEmail,
       deleteAccount
     } = useAuth()
 
@@ -195,6 +196,7 @@ export default {
       signOut,
       updateAccount,
       updateProfile,
+      updateEmail,
       profileFields,
       contactFields,
       password,
@@ -271,10 +273,16 @@ export default {
       this.goToProfile()
     },
     async saveAccount(data) {
-      this.$fire.analytics.logEvent('save_account')
+      try {
+        await this.updateEmail(data.email)
 
-      await this.updateAccount(data)
-      this.$router.push('/settings')
+        this.$fire.analytics.logEvent('save_account')
+
+        await this.updateAccount(data)
+        this.$router.push('/settings')
+      } catch (e) {
+        this.passwordError = e
+      }
     }
   },
   head() {
