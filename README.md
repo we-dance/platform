@@ -14,11 +14,6 @@
 
 ## Installation Guide
 
-### Prerequisites
-
-- [Node v14.7.4 LTS](https://nodejs.org/en/)
-- [Yarn v1.22.5](https://classic.yarnpkg.com/en/docs/install) – javascript package manager
-
 ### Create Firebase project
 
 - Go to [Firebase Console](https://console.firebase.google.com/) click `Add project`, enter any name, click `Continue`, uncheck `Enable Google Analytics for this project`, click `Continue`.
@@ -26,19 +21,18 @@
 - Go to `Authentication`, switch to tab `Sign-in method`, click `Email/Password` and enable both triggers (password and email link); enable `Google`.
 - Go to `Cloud Firestore`, click `Create database`, select `Start in test mode`, click `Next`, choose region `eur3`.
 
+### Prerequisites
+
+- [Docker](https://www.docker.com/products/docker-desktop)
+
 ### Setup
 
 1. Fork this repository, e.g. https://github.com/we-dance/platform/fork
 2. Clone your forked repository with `git clone https://github.com/<your-username>/platform.git`
-3. Install dependencies with `yarn install`
-4. Set up keys for your local instance of WeDance, you'll need to create an `.env` file. Take a look at `.env.example`. This file lists all the `ENV` variables we use and provides a fake default for any missing keys.
-5. Run `yarn dev` to serve site with hot reload at https://localhost:3000/
+3. Set up keys for your local instance of WeDance: copy `.env.example` to `.env` file and update values with corresponding items from `firebaseConfig`.
+4. Run `docker-compose up`
 
 To activate all services and features see section `Services` below.
-
-Workarounds:
-
-- [Error: Node Sass does not yet support your current environment](https://stackoverflow.com/questions/37415134/error-node-sass-does-not-yet-support-your-current-environment-windows-64-bit-w)
 
 ### Tools
 

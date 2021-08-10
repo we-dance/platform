@@ -1,0 +1,13 @@
+---
+version: '3.7'
+services:
+  app:
+    build: ./
+    container_name: wedance-app
+    environment:
+      - HOST=0.0.0.0
+    ports:
+      - '3000:3000'
+    volumes:
+      - ${PWD}:/app
+      - /app/node_modules
