@@ -12,47 +12,21 @@
 - [Sentry](https://sentry.io/) – monitoring platform to log exceptions and errors.
 - [Netlify](https://netlify.com/) – CDN, CI and Hosting provider, that deploys site on each commit.
 
-## Installation Guide
+## Setup
 
-### Create Firebase project
-
-- Go to [Firebase Console](https://console.firebase.google.com/) click `Add project`, enter any name, click `Continue`, uncheck `Enable Google Analytics for this project`, click `Continue`.
-- Under `Get started by adding Firebase to your app` click 3d icon (Web), enter name `Web`, uncheck `Firebase Hosting`, click `Register app`, copy generated `firebaseConfig` for later, you will need it for `.env` file.
-- Go to `Authentication`, switch to tab `Sign-in method`, click `Email/Password` and enable both triggers (password and email link); enable `Google`.
-- Go to `Cloud Firestore`, click `Create database`, select `Start in test mode`, click `Next`, choose region `eur3`.
-
-### Prerequisites
-
-- [Docker](https://www.docker.com/products/docker-desktop)
-
-### Setup
-
-1. Fork this repository, e.g. https://github.com/we-dance/platform/fork
-2. Clone your forked repository with `git clone https://github.com/<your-username>/platform.git`
-3. Set up keys for your local instance of WeDance: copy `.env.example` to `.env` file and update values with corresponding items from `firebaseConfig`.
-4. Run `docker-compose up`
+1. [Download Docker](https://www.docker.com/products/docker-desktop).
+2. Go to [Firebase Console](https://console.firebase.google.com/) click `Add project`, enter any name, click `Continue`, uncheck `Enable Google Analytics for this project`, click `Continue`.
+3. Under `Get started by adding Firebase to your app` click 3d icon (Web), enter name `Web`, uncheck `Firebase Hosting`, click `Register app`, copy generated `firebaseConfig`.
+4. Go to `Authentication`, switch to tab `Sign-in method`, click `Email/Password` and enable both triggers (password and email link); enable `Google`.
+5. Go to `Cloud Firestore`, click `Create database`, select `Start in test mode`, click `Next`, choose region `eur3`.
+6. [Transform js object to one line JSON](https://www.convertjson.com/javascript-object-to-json.htm), for this paste value of `firebaseConfig` (from step 3) and enable Minimize JSON.
+7. Clone this repository and open the project folder.
+8. Copy `.env.example` file to `.env` file and set value of `FIREBASE_CONFIG` to one line JSON you got from step 6.
+9. Run `docker-compose up`.
 
 To activate all services and features see section `Services` below.
 
-### Tools
-
-**Code Editor:** [VSCode](https://code.visualstudio.com/) with following plugins:
-
-- [Prettier](https://marketplace.visualstudio.com/items?itemName=esbenp.prettier-vscode)
-- [Vetur](https://marketplace.visualstudio.com/items?itemName=octref.vetur)
-- [Tailwind CSS IntelliSense](https://marketplace.visualstudio.com/items?itemName=bradlc.vscode-tailwindcss)
-
-**Browser:** [Chrome](https://chrome.google.com/) with extensions:
-
-- [Vue.js devtools](https://chrome.google.com/webstore/detail/vuejs-devtools/nhdogjmejiglipccpnnnanhbledajbpd)
-
-## Site structure
-
-This site is a [Nuxt.js](https://nuxtjs.org) application. See [Directory Structure](https://nuxtjs.org/guide/directory-structure) and official guide for more information. Also most of folders in this repository has a `README.md` file.
-
-`functions` folder contains Firebase Cloud Functions.
-
-## Deployment Guide
+## Deploy
 
 Read [How to deploy on Netlify?](https://nuxtjs.org/faq/netlify-deployment/).
 
@@ -63,8 +37,8 @@ Read [How to deploy on Netlify?](https://nuxtjs.org/faq/netlify-deployment/).
 - Select your branch.
 - Build command: `yarn build`.
 - Publish directory: `dist`.
-- Click `Advanced build settings` and empty value for `Functions directory` as we don’t use Netlify functions
-- Click `New variable` and add all keys and values from `.env` file (`URL` and [some other variables](https://docs.netlify.com/configure-builds/environment-variables/) are set automatically)
+- Click `Advanced build settings` and empty value for `Functions directory` as we don’t use Netlify functions.
+- Click `New variable` and add all keys and values from `.env` file (`URL` and [some other variables](https://docs.netlify.com/configure-builds/environment-variables/) are set automatically).
 - Click `Deploy site`.
 
 To activate all services and features see section `Services` below.
@@ -147,9 +121,8 @@ However, any significant improvement should be associated to an existing feature
 
 #### Getting started
 
-- Setup project locally (see Installation Guide).
+- Setup project locally (see Setup).
 - Make changes to code.
-- Build and run locally `yarn build && yarn start`.
 - Checkout new branch and commit your changes.
 - Deploy to Netlify.
 - Create a Pull Request and include a link to your Netlify demo.
@@ -163,6 +136,24 @@ As you might have noticed already, we are using ESLint to enforce a code standar
 ##### git
 
 We use [Conventional Commits](https://www.conventionalcommits.org/en/v1.0.0/). See examples of [good commits](https://chris.beams.io/posts/git-commit/) and [bad commits](http://whatthecommit.com/).
+
+### Tools
+
+**Code Editor:** [VSCode](https://code.visualstudio.com/) with following plugins:
+
+- [Prettier](https://marketplace.visualstudio.com/items?itemName=esbenp.prettier-vscode)
+- [Vetur](https://marketplace.visualstudio.com/items?itemName=octref.vetur)
+- [Tailwind CSS IntelliSense](https://marketplace.visualstudio.com/items?itemName=bradlc.vscode-tailwindcss)
+
+**Browser:** [Chrome](https://chrome.google.com/) with extensions:
+
+- [Vue.js devtools](https://chrome.google.com/webstore/detail/vuejs-devtools/nhdogjmejiglipccpnnnanhbledajbpd)
+
+## Site structure
+
+This site is a [Nuxt.js](https://nuxtjs.org) application. See [Directory Structure](https://nuxtjs.org/guide/directory-structure) and official guide for more information. Also most of folders in this repository has a `README.md` file.
+
+`functions` folder contains Firebase Cloud Functions.
 
 ## The bottom line
 
