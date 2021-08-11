@@ -5,6 +5,7 @@
         :value="value ? value[field.name] : ''"
         :item="value"
         v-bind="field"
+        :error="usernameError"
         :label="getLabel(field)"
         @input="(val) => onFieldChange(field, val)"
       />
@@ -32,9 +33,18 @@
 
 <script>
 import { camelcase } from '~/utils'
+import { useDoc } from '~/use/doc'
 
 export default {
   name: 'TForm',
+  setup() {
+    const { find, id } = useDoc('profiles')
+
+    return {
+      find,
+      id
+    }
+  },
   components: {
     TField: () => import('~/components/TField')
   },
@@ -77,7 +87,8 @@ export default {
     }
   },
   data: () => ({
-    error: false
+    error: false,
+    usernameError: ''
   }),
   computed: {
     visibleFields() {
@@ -136,16 +147,25 @@ export default {
 
       this.$emit('copy', this.value)
     },
-    save() {
+    async save() {
       this.error = false
 
       if (!this.validate()) {
         return
       }
 
+      await this.find('username', this.value.username)
+
+      if (this.id && this.id !== this.value.id) {
+        this.usernameError = 'This name is already taken'
+        this.$emit('input', this.value)
+        return
+      }
+
       this.$emit('save', this.value)
     },
     onFieldChange(field, value) {
+      this.usernameError = ''
       const val = { ...this.value }
 
       if (value) {
@@ -157,6 +177,8 @@ export default {
       if (field && field.onChange) {
         field.onChange(val)
       }
+
+      this.$emit('input', val)
     }
   }
 }

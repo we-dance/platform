@@ -28,7 +28,7 @@
     </div>
   </TPopup>
 
-  <TPopup v-else-if="slide == 2" @close="close">
+  <TPopup v-else-if="slide === 2" @close="close">
     <div class="p-4 text-center">
       <TIcon class="w-64" name="undraw_work_chat" />
       <div class="mt-8 w-64">

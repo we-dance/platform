@@ -32,6 +32,7 @@
           :auto-focus="autoFocus"
           :hide-label="hideLabel"
           :item="item"
+          :error="error"
           v-on="$attrs.listeners"
           @input="(val) => $emit('input', set(val))"
         />
@@ -130,6 +131,10 @@ export default {
     set: {
       type: Function,
       default: (val) => val
+    },
+    error: {
+      type: String,
+      default: ''
     }
   },
   data: () => ({
