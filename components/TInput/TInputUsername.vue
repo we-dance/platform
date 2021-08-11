@@ -11,18 +11,8 @@
 </template>
 
 <script>
-import { useDoc } from '~/use/doc'
-
 export default {
   name: 'TInputUsername',
-  setup() {
-    const { find, id } = useDoc('profiles')
-
-    return {
-      find,
-      id
-    }
-  },
   inheritAttrs: false,
   props: {
     value: {
@@ -36,11 +26,14 @@ export default {
     item: {
       type: Object,
       default: () => ({})
+    },
+    error: {
+      type: String,
+      default: ''
     }
   },
   data: () => ({
-    computedValue: '',
-    error: ''
+    computedValue: ''
   }),
   watch: {
     value(val) {
@@ -53,18 +46,8 @@ export default {
     this.computedValue = this.value
   },
   methods: {
-    async save(newName) {
-      this.error = ''
-
+    save(newName) {
       if (newName === this.value) {
-        return
-      }
-
-      await this.find('username', newName)
-
-      if (this.id && this.id !== this.item.id) {
-        this.error = 'This name is already taken'
-        this.$emit('input', this.value)
         return
       }
 
