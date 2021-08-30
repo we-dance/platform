@@ -21,7 +21,7 @@ export default {
       name: '',
       email: '',
       username: '',
-      place: ''
+      place: '',
     })
     const fields = [
       {
@@ -29,16 +29,16 @@ export default {
         key: 'account.name',
         validations: {
           required: true,
-          minLength: 3
-        }
+          minLength: 3,
+        },
       },
       {
         name: 'email',
         key: 'account.email',
         validations: {
           required: true,
-          email: true
-        }
+          email: true,
+        },
       },
       {
         name: 'username',
@@ -49,8 +49,8 @@ export default {
           required: true,
           minLength: 4,
           alphaNum: true,
-          isUnique: true
-        }
+          isUnique: true,
+        },
       },
       {
         name: 'place',
@@ -58,19 +58,19 @@ export default {
         type: 'place',
         placeholder: 'City',
         validations: {
-          required: true
-        }
-      }
+          required: true,
+        },
+      },
     ]
     return {
       data,
-      fields
+      fields,
     }
   },
   methods: {
     submit(data) {
       console.log('submited', data)
-    }
-  }
+    },
+  },
 }
 </script>

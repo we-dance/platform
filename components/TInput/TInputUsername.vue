@@ -12,12 +12,10 @@
 
 <script>
 import { useDoc } from '~/use/doc'
-
 export default {
   name: 'TInputUsername',
   setup() {
     const { find, id } = useDoc('profiles')
-
     return {
       find,
       id,
@@ -55,11 +53,9 @@ export default {
   methods: {
     save(newName) {
       this.error = ''
-
       if (newName === this.value) {
         return
       }
-
       this.$emit('input', newName)
     },
   },
