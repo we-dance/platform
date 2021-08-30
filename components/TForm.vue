@@ -203,19 +203,14 @@ export default {
       if (!this.validate()) {
         return
       }
-
-      this.$v.form.$touch()
-      console.log(this.$v.form, this.value)
-      if (this.$v.form.$pending || this.$v.form.$error) return
-
+      this.v.$validate()
+      if (this.v.$pending || this.v.$error || this.v.$silentErrors) {
+        return
+      }
       this.$emit('save', this.value)
     },
     onFieldChange(field, value) {
       const val = { ...this.value }
-
-      this.form[field.name] = value
-      this.$v.form[field.name].$touch()
-
       if (value) {
         this.$set(val, field.name, value)
       } else {
