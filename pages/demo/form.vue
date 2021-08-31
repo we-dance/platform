@@ -4,7 +4,6 @@
     <TForm
       v-model="data"
       :fields="fields"
-      :v="v$"
       :field-config="{ labelPosition: 'top' }"
       class="space-y-4"
       submit-label="Submit"

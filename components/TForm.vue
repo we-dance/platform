@@ -203,14 +203,11 @@ export default {
       if (!this.validate()) {
         return
       }
-      this.v.$validate()
-      if (this.v.$pending || this.v.$error || this.v.$silentErrors) {
-        return
-      }
       this.$emit('save', this.value)
     },
     onFieldChange(field, value) {
       const val = { ...this.value }
+      this.form[field.name] = value
       if (value) {
         this.$set(val, field.name, value)
       } else {
