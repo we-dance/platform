@@ -64,6 +64,15 @@
         url="/signup"
         class="mt-4"
       />
+
+      <WTeaser
+        v-if="uid"
+        :title="$t('teaser.chat.title')"
+        :description="$t('teaser.chat.description')"
+        :button="$t('teaser.chat.btn', { city: 'Community' })"
+        href="https://t.me/joinchat/Vxw15sDG-dWpqHDj"
+        class="mt-4"
+      />
     </div>
   </div>
 </template>
