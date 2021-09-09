@@ -88,7 +88,7 @@
         </div>
         <div class="w-2/3 h-40">
           <h2 class="font-lato font-bold text-xl">
-            Find parties (coming soon)
+            Find parties
           </h2>
           <p>
             We monitor all activities in dance scene and provide you with event
