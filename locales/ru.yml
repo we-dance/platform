@@ -9,12 +9,12 @@ posts.add: Добавить
 profiles.add: Добавить
 myprofile.events.add: Добавить мероприятие
 myprofile.posts.add: Написать пост
-posts.title: Feed
+posts.title: Комментарий
 profiles.title: Сообщество
 events.title: Мероприятия
-event.type: Type
-chat.title: Чат
-cities.choose: Choose city
+event.type: Классификация
+chat.title: Беседа
+cities.choose: Elige una ciudad
 myprofile.title: Мой профиль
 settings.title: Настройки
 city.anywhere: Куда угодно
@@ -93,9 +93,12 @@ teaser.profile.btn: Присоединись бесплатно
 teaser.allevents.title: Закрытые мероприятия
 teaser.allevents.description: Станьте участником сообщества WeDance, чтобы увидеть больше
 teaser.allevents.btn: Присоединяйся сейчас
-teaser.chat.title: Поболтаем?
-teaser.chat.description: У нас есть танцевальные чаты в каждом городе
-teaser.chat.btn: Присоединяйтесь к чату {city}
+teaser.chat.title: Спросите у местных
+teaser.chat.description: У нас есть танцевальный чат Telegram в каждом городе.
+  Присоединяйтесь к своему городскому чату, чтобы помогать путешествующим
+  танцорам, приглашайте своих танцевальных друзей. Давайте вместе создадим
+  WeDance!
+teaser.chat.btn: Присоединиться к чату
 teaser.involve.title: Нам нужна твоя помощь
 teaser.involve.description: Мы некоммерческое международное танцевальное
   сообщество. Мы хотим, чтобы вы побывали в любом городе любой страны и нашли
@@ -109,3 +112,6 @@ footer.privacy: Конфиденциальность
 footer.terms: Условия
 footer.coc: Нормы поведения
 footer.faq: Вопросы-Ответы
+chat.welcome: Начните разговор с чего-нибудь приятного.
+chat.with: Пообщайтесь с {username}
+chat.dateDiff: "{diff} лет назад"

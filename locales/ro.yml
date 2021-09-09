@@ -9,12 +9,12 @@ posts.add: Adăugați o postare
 profiles.add: Adaugă profilul
 myprofile.events.add: Adăugați un eveniment
 myprofile.posts.add: Scrie o postare
-posts.title: Feed
+posts.title: Comentariu
 profiles.title: Comunitate
 events.title: Evenimente
-event.type: Type
-chat.title: Chat
-cities.choose: Choose city
+event.type: Clasificare
+chat.title: Conversaţie
+cities.choose: Alegeți un oraș
 myprofile.title: Profilul meu
 settings.title: Setări
 city.anywhere: Oriunde
@@ -110,3 +110,6 @@ footer.privacy: Confidențialitate
 footer.terms: Termeni
 footer.coc: Codul de conduită
 footer.faq: FAQ
+chat.welcome: Începeți conversația cu ceva frumos.
+chat.with: Discutați cu {username}
+chat.dateDiff: acum {diff}

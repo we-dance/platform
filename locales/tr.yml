@@ -9,12 +9,12 @@ posts.add: Gönderi ekle
 profiles.add: Profil ekle
 myprofile.events.add: Etkinlik ekle
 myprofile.posts.add: Bir gönderi yazın
-posts.title: Feed
+posts.title: Yorum
 profiles.title: Topluluk
 events.title: Etkinlikler
-event.type: Type
-chat.title: Chat
-cities.choose: Choose city
+event.type: Sınıflandırma
+chat.title: Konuşma
+cities.choose: Bir şehir seçin
 myprofile.title: Benim profilim
 settings.title: Ayarlar
 city.anywhere: Herhangi bir yer
@@ -109,3 +109,6 @@ footer.privacy: Gizlilik
 footer.terms: Koşullar
 footer.coc: Davranış kodu
 footer.faq: SSS
+chat.welcome: Sohbete güzel bir şeyle başlayın.
+chat.with: "{username} ile sohbet et."
+chat.dateDiff: "{diff} önce"

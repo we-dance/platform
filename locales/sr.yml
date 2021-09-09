@@ -9,12 +9,12 @@ posts.add: Додај пост
 profiles.add: Додај профил
 myprofile.events.add: Додај догађај
 myprofile.posts.add: Напишите пост
-posts.title: Feed
+posts.title: Коментар
 profiles.title: Заједница
 events.title: Догађаји
-event.type: Type
-chat.title: Chat
-cities.choose: Choose city
+event.type: Класификација
+chat.title: Разговор
+cities.choose: Одаберите град
 myprofile.title: Мој профил
 settings.title: Подешавања
 city.anywhere: Било где
@@ -107,3 +107,6 @@ footer.privacy: Приватност
 footer.terms: Услови
 footer.coc: Кодекс понашања
 footer.faq: Питања и одговори
+chat.welcome: Започни разговор са нечим лепим
+chat.with: Ћаскај са {username}
+chat.dateDiff: Пре {diff}

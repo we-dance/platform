@@ -9,12 +9,12 @@ posts.add: Ajouter
 profiles.add: Ajouter
 myprofile.events.add: Ajouter un évènement
 myprofile.posts.add: Rédiger un post
-posts.title: Feed
+posts.title: Commentaire
 profiles.title: Communauté
 events.title: Événements
-event.type: Type
-chat.title: Chat
-cities.choose: Choose city
+event.type: Classification
+chat.title: Conversation
+cities.choose: Choisissez une ville
 myprofile.title: Mon profil
 settings.title: Paramètres
 city.anywhere: Nulle part
@@ -111,3 +111,6 @@ footer.privacy: Intimité
 footer.terms: Termes
 footer.coc: Code de conduite
 footer.faq: FAQ
+chat.welcome: Commencez la conversation avec quelque chose de gentil.
+chat.with: Discutez avec {username}
+chat.dateDiff: il y a {diff}

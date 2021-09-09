@@ -90,9 +90,11 @@ teaser.profile.btn: Join for free
 teaser.allevents.title: Private events
 teaser.allevents.description: Become a member of WeDance Community to see more
 teaser.allevents.btn: Join Now
-teaser.chat.title: Let's talk?
-teaser.chat.description: We have dance chats in every city
-teaser.chat.btn: Join {city} Chat
+teaser.chat.title: Ask Locals
+teaser.chat.description: "We have a Telegram dance chat in every city. Join your
+  city chat to help traveling dancers, invite your dance friends. Let's build
+  WeDance together! "
+teaser.chat.btn: Join Chat
 teaser.involve.title: We need your help
 teaser.involve.description: We are non-profit international dance community. We
   want you go to any city in any country and find dance events and dancers. It
@@ -106,3 +108,6 @@ footer.privacy: Privacy
 footer.terms: Terms
 footer.coc: Code of Conduct
 footer.faq: FAQ
+chat.welcome: Start conversation with something nice.
+chat.with: Chat with {username}
+chat.dateDiff: "{diff} ago"

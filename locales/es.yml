@@ -9,12 +9,12 @@ posts.add: Añadir
 profiles.add: Añadir
 myprofile.events.add: Añadir evento
 myprofile.posts.add: Escribir una publicación
-posts.title: Feed
+posts.title: Comentario
 profiles.title: Comunidad
 events.title: Eventos
-event.type: Type
-chat.title: Chat
-cities.choose: Choose city
+event.type: Tipo
+chat.title: Conversaciones
+cities.choose: Selecciona una ciudad
 myprofile.title: Mi perfil
 settings.title: Configuraciones
 city.anywhere: En cualquier sitio
@@ -93,9 +93,11 @@ teaser.profile.btn: Únete gratis
 teaser.allevents.title: Eventos privados
 teaser.allevents.description: Hágase miembro de WeDance Community para ver más
 teaser.allevents.btn: Únete ahora
-teaser.chat.title: ¿Charlamos?
-teaser.chat.description: Tenemos charlas de baile en todas las ciudades
-teaser.chat.btn: Únete al chat de {city}
+teaser.chat.title: Pregunte a los lugareños
+teaser.chat.description: Tenemos un chat de baile de Telegram en cada ciudad.
+  Únase al chat de su ciudad para ayudar a los bailarines que viajan, invite a
+  sus amigos de baile. ¡Construyamos WeDance juntos!
+teaser.chat.btn: Únete al chat
 teaser.involve.title: Necesitamos tu ayuda
 teaser.involve.description: Somos una comunidad internacional de danza sin fines
   de lucro. Queremos que vayas a cualquier ciudad de cualquier país y encuentres
@@ -109,3 +111,6 @@ footer.privacy: Intimidad
 footer.terms: Condiciones
 footer.coc: Código de conducta
 footer.faq: Preguntas más frecuentes
+chat.welcome: Inicie una conversación agradable.
+chat.with: Conversa con {username}
+chat.dateDiff: hace {diff}
