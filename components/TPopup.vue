@@ -39,12 +39,12 @@ export default {
   props: {
     title: {
       type: String,
-      default: ''
+      default: '',
     },
     noClose: {
       type: Boolean,
-      default: false
-    }
+      default: false,
+    },
   },
   mounted() {
     const el = document.getElementsByTagName('body')[0]
@@ -53,6 +53,6 @@ export default {
   beforeDestroy() {
     const el = document.getElementsByTagName('body')[0]
     el.classList.remove('overflow-y-hidden')
-  }
+  },
 }
 </script>

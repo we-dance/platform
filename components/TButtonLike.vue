@@ -14,18 +14,18 @@ export default {
   props: {
     value: {
       type: Boolean,
-      default: false
+      default: false,
     },
     count: {
       type: Number,
-      default: 0
-    }
+      default: 0,
+    },
   },
   methods: {
     onClick() {
       this.$fire.analytics.logEvent('like')
       this.$emit('change', !this.value)
-    }
-  }
+    },
+  },
 }
 </script>

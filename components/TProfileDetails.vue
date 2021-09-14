@@ -55,14 +55,14 @@ export default {
   props: {
     profile: {
       type: Object,
-      default: () => ({})
-    }
+      default: () => ({}),
+    },
   },
   setup() {
     const {
       objectivesList,
       profilePosterFields,
-      profileDetailFields
+      profileDetailFields,
     } = useProfiles()
 
     return {
@@ -71,8 +71,8 @@ export default {
       profileDetailFields,
       languages,
       getDateTimeYear,
-      getLabels
+      getLabels,
     }
-  }
+  },
 }
 </script>

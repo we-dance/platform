@@ -204,7 +204,7 @@ export default {
     const { uid } = useAuth()
 
     return {
-      uid
+      uid,
     }
   },
   computed: {
@@ -212,21 +212,21 @@ export default {
       return [
         {
           value: '',
-          label: 'Your city'
+          label: 'Your city',
         },
         {
           value: 'Munich',
-          label: 'Munich'
+          label: 'Munich',
         },
         {
           value: 'new',
-          label: 'New city'
-        }
+          label: 'New city',
+        },
       ]
     },
     citySelected() {
       return this.$route.params.city
-    }
-  }
+    },
+  },
 }
 </script>

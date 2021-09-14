@@ -55,7 +55,7 @@ export default {
       signingIn,
       createUserWithEmailAndPassword,
       signOut,
-      error
+      error,
     } = useAuth()
 
     const data = ref({})
@@ -69,7 +69,7 @@ export default {
       createUserWithEmailAndPassword,
       signOut,
       error,
-      registerFields
+      registerFields,
     }
   },
   watch: {
@@ -78,8 +78,8 @@ export default {
         if (!val && this.profile) {
           this.redirect()
         }
-      }
-    }
+      },
+    },
   },
   mounted() {
     const target = this.$route.query.target
@@ -108,23 +108,23 @@ export default {
         !password.trim()
       ) {
         this.error = {
-          message: 'Please fill all the fields'
+          message: 'Please fill all the fields',
         }
 
         return
       }
 
       this.$fire.analytics.logEvent('sign_up', {
-        method: 'Password'
+        method: 'Password',
       })
 
       await this.createUserWithEmailAndPassword(
         email,
         password,
         username,
-        place
+        place,
       )
-    }
-  }
+    },
+  },
 }
 </script>

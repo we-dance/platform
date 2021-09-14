@@ -52,8 +52,8 @@ Vue.use(VueGoogleMaps, {
   load: {
     key: process.env.firebase.config.apiKey,
     libraries: 'places',
-    language: 'en'
-  }
+    language: 'en',
+  },
 })
 
 const gmapApi = VueGoogleMaps.gmapApi
@@ -63,28 +63,28 @@ export default {
   props: {
     value: {
       type: [Object, String],
-      default: ''
+      default: '',
     },
     popupTitle: {
       type: String,
-      default: 'Select city'
+      default: 'Select city',
     },
     searchPlaceholder: {
       type: String,
-      default: 'Search city'
+      default: 'Search city',
     },
     emptyLabel: {
       type: String,
-      default: '(Not specified)'
+      default: '(Not specified)',
     },
     buttonLabel: {
       type: String,
-      default: 'Change'
+      default: 'Change',
     },
     item: {
       type: Object,
-      default: () => ({})
-    }
+      default: () => ({}),
+    },
   },
 
   data: () => ({
@@ -92,11 +92,11 @@ export default {
     predictions: [],
     gpsIsBlocked: false,
     showPopup: false,
-    loading: false
+    loading: false,
   }),
 
   computed: {
-    google: gmapApi
+    google: gmapApi,
   },
 
   watch: {
@@ -113,11 +113,11 @@ export default {
       autocomplete.getPlacePredictions(
         {
           input: val,
-          types: ['(cities)']
+          types: ['(cities)'],
         },
-        this.updateList
+        this.updateList,
       )
-    }
+    },
   },
 
   async mounted() {
@@ -176,7 +176,7 @@ export default {
         () => {
           this.loading = false
           this.gpsIsBlocked = true
-        }
+        },
       )
     },
 
@@ -191,17 +191,17 @@ export default {
           region: 'us',
           location: {
             lat: position.coords.latitude,
-            lng: position.coords.longitude
-          }
+            lng: position.coords.longitude,
+          },
         },
         (response, status) => {
           this.loading = false
 
           const location = getLocation(response[5], true)
           this.change(location)
-        }
+        },
       )
-    }
-  }
+    },
+  },
 }
 </script>

@@ -23,12 +23,12 @@ export default {
   props: {
     postId: {
       type: String,
-      default: ''
+      default: '',
     },
     commentId: {
       type: String,
-      default: ''
-    }
+      default: '',
+    },
   },
   setup(props) {
     const items = []
@@ -39,8 +39,8 @@ export default {
       {
         name: 'body',
         type: 'markdown',
-        hideLabel: true
-      }
+        hideLabel: true,
+      },
     ]
 
     const filters = [
@@ -49,8 +49,8 @@ export default {
         default: true,
         filter: (item) =>
           item.postId === props.postId && item.commentId === props.commentId,
-        sort: 'createdAt'
-      }
+        sort: 'createdAt',
+      },
     ]
 
     const { map } = useReactions()
@@ -60,8 +60,8 @@ export default {
       collection,
       fields,
       filters,
-      map
+      map,
     }
-  }
+  },
 }
 </script>

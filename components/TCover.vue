@@ -15,20 +15,20 @@ export default {
   props: {
     src: {
       type: String,
-      default: ''
+      default: '',
     },
     fallback: {
       type: String,
-      default: 'undraw_profile_pic'
+      default: 'undraw_profile_pic',
     },
     width: {
       type: Number,
-      default: 1024
+      default: 1024,
     },
     height: {
       type: Number,
-      default: 1024
-    }
-  }
+      default: 1024,
+    },
+  },
 }
 </script>

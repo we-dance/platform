@@ -19,16 +19,16 @@ export default {
   props: {
     value: {
       type: [String, Object],
-      default: ''
+      default: '',
     },
     placeholder: {
       type: String,
-      default: 'City'
+      default: 'City',
     },
     autoDetect: {
       type: Boolean,
-      default: false
-    }
+      default: false,
+    },
   },
   setup(props, { emit }) {
     const { getCityHistory, addCityHistory, cities, cache } = useApp()
@@ -72,7 +72,7 @@ export default {
 
       results = results.map((c) => ({
         label: `${c.location.locality}`,
-        value: c.location.place_id
+        value: c.location.place_id,
       }))
 
       return results
@@ -97,7 +97,7 @@ export default {
 
       results = results.map((c) => ({
         label: `${c.location.locality}, ${c.location.country}`,
-        value: c.location.place_id
+        value: c.location.place_id,
       }))
 
       if (q && results.length < 3) {
@@ -108,9 +108,9 @@ export default {
             ...places
               .map((i) => ({
                 label: `${i.description} *`,
-                value: i.place_id
+                value: i.place_id,
               }))
-              .filter((n) => !results.find((o) => n.value === o.value))
+              .filter((n) => !results.find((o) => n.value === o.value)),
           )
         }
       }
@@ -135,7 +135,7 @@ export default {
       },
       set(val) {
         onChange(val)
-      }
+      },
     })
 
     return {
@@ -143,8 +143,8 @@ export default {
       fetchOptions,
       onChange,
       isLocating,
-      internalValue
+      internalValue,
     }
-  }
+  },
 }
 </script>

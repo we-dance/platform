@@ -69,7 +69,7 @@ export default {
               return {
                 ...data,
                 receiver,
-                unread
+                unread,
               }
             })
             .sort(sortBy('-lastMessageAt'))
@@ -85,13 +85,13 @@ export default {
     return {
       chats,
       dateDiff,
-      uid
+      uid,
     }
   },
   head() {
     return {
-      title: 'WeDance Messenger'
+      title: 'WeDance Messenger',
     }
-  }
+  },
 }
 </script>

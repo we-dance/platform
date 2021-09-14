@@ -29,7 +29,7 @@ export default {
     const post = ref.data()
 
     return {
-      post
+      post,
     }
   },
   setup() {
@@ -37,8 +37,8 @@ export default {
 
     return {
       getProfile,
-      getExcerpt
+      getExcerpt,
     }
-  }
+  },
 }
 </script>

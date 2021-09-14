@@ -59,7 +59,7 @@ export default {
 
     return {
       item: profile,
-      id
+      id,
     }
   },
   mounted() {
@@ -71,7 +71,7 @@ export default {
     async saveItem(data) {
       await this.update(this.id, data)
       this.$router.push(`/${this.item.username}`)
-    }
+    },
   },
   setup() {
     const { can } = useAuth()
@@ -82,8 +82,8 @@ export default {
       update,
       profileFields,
       contactFields,
-      can
+      can,
     }
-  }
+  },
 }
 </script>

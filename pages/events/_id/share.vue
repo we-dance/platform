@@ -38,7 +38,7 @@ export default {
 
     return {
       event,
-      author
+      author,
     }
   },
   computed: {
@@ -60,7 +60,7 @@ export default {
       result += getTimeZone(this.event.startDate)
 
       return result
-    }
-  }
+    },
+  },
 }
 </script>

@@ -39,14 +39,14 @@ export default {
       },
       set(val) {
         this.$i18n.setLocale(val)
-      }
+      },
     },
     localesDropdown() {
       return this.$i18n.locales.map((locale) => ({
         value: locale.code,
-        label: locale.name
+        label: locale.name,
       }))
-    }
-  }
+    },
+  },
 }
 </script>

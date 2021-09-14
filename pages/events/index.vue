@@ -121,7 +121,7 @@ import {
   getDay,
   getYmd,
   getEventDescription,
-  getDateObect
+  getDateObect,
 } from '~/utils'
 
 export default {
@@ -140,18 +140,18 @@ export default {
     const viewOptions = [
       {
         value: 'covers',
-        label: 'Grid View'
+        label: 'Grid View',
       },
       {
         value: 'list',
-        label: 'Calendar'
-      }
+        label: 'Calendar',
+      },
     ]
 
     const { uid, profile: myProfile } = useAuth()
     const dances = ref('')
     const danceStyles = computed(() =>
-      getStylesDropdown(myProfile.value?.styles)
+      getStylesDropdown(myProfile.value?.styles),
     )
 
     const map = (item) => {
@@ -176,7 +176,7 @@ export default {
         votes,
         response,
         order,
-        organiser
+        organiser,
       }
     }
 
@@ -203,23 +203,23 @@ export default {
         filter: (item) =>
           getYmd(item.startDate) >= startOfTodayString &&
           getYmd(item.startDate) <= endOfYearString &&
-          isPublic(item)
+          isPublic(item),
       },
       {
         value: 'createdByMe',
         label: 'Created by me',
-        filter: (item) => item.createdBy === uid.value
+        filter: (item) => item.createdBy === uid.value,
       },
       {
         value: 'schedule',
         label: 'My schedule',
         filter: (item) =>
-          item.response === 'up' && getYmd(item.startDate) >= startOfWeekString
-      }
+          item.response === 'up' && getYmd(item.startDate) >= startOfWeekString,
+      },
     ])
 
     const activeFilterItem = computed(() =>
-      filterOptions.value.find((item) => item.value === activeFilter.value)
+      filterOptions.value.find((item) => item.value === activeFilter.value),
     )
 
     const thisCityFilter = (item) =>
@@ -233,7 +233,7 @@ export default {
           (item) =>
             item.styles &&
             item.styles[dances.value] &&
-            item.styles[dances.value].selected
+            item.styles[dances.value].selected,
         )
       }
 
@@ -284,13 +284,13 @@ export default {
       viewOptions,
       eventTypeList,
       eventType,
-      danceStyles
+      danceStyles,
     }
   },
   head() {
     return {
-      title: 'WeDance Events'
+      title: 'WeDance Events',
     }
-  }
+  },
 }
 </script>

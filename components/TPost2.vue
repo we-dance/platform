@@ -26,13 +26,13 @@ export default {
   props: {
     item: {
       type: Object,
-      default: () => ({})
-    }
+      default: () => ({}),
+    },
   },
   setup() {
     return {
-      dateDiff
+      dateDiff,
     }
-  }
+  },
 }
 </script>

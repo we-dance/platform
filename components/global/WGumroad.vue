@@ -7,12 +7,12 @@ export default {
   props: {
     href: {
       type: String,
-      default: ''
+      default: '',
     },
     label: {
       type: String,
-      default: 'Register'
-    }
+      default: 'Register',
+    },
   },
   mounted() {
     const script = document.createElement('script')
@@ -20,6 +20,6 @@ export default {
     script.async = true
 
     document.head.appendChild(script)
-  }
+  },
 }
 </script>

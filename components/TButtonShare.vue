@@ -2,15 +2,11 @@
   <div>
     <TButton :icon="icon" :type="type" :label="label" @click="share()" />
     <TPopup v-if="generating" title="Generating poster">
-      <div class="p-4">
-        Generating image... Please wait...
-      </div>
+      <div class="p-4">Generating image... Please wait...</div>
     </TPopup>
     <TPopup v-if="sharing" title="Share" @close="sharing = false">
       <div class="w-64 space-y-2 py-4">
-        <TButton type="nav" @click="copyToClipboard">
-          Copy Link
-        </TButton>
+        <TButton type="nav" @click="copyToClipboard"> Copy Link </TButton>
         <TButton type="nav" download :href="downloadUrl" @click="download">
           Download Image
         </TButton>
@@ -22,9 +18,7 @@
         >
           {{ platform }}
         </TButton>
-        <TButton type="nav" @click="refresh()">
-          Refresh image
-        </TButton>
+        <TButton type="nav" @click="refresh()"> Refresh image </TButton>
       </div>
     </TPopup>
   </div>
@@ -44,55 +38,55 @@ export default {
     return {
       currentCity,
       uid,
-      account
+      account,
     }
   },
   props: {
     collection: {
       type: String,
-      default: ''
+      default: '',
     },
     id: {
       type: String,
-      default: ''
+      default: '',
     },
     text: {
       type: String,
-      default: ''
+      default: '',
     },
     place: {
       type: String,
-      default: ''
+      default: '',
     },
     url: {
       type: String,
-      default: ''
+      default: '',
     },
     file: {
       type: String,
-      default: ''
+      default: '',
     },
     fileName: {
       type: String,
-      default: ''
+      default: '',
     },
     label: {
       type: String,
-      default: ''
+      default: '',
     },
     icon: {
       type: String,
-      default: 'share'
+      default: 'share',
     },
     type: {
       type: String,
-      default: 'icon'
-    }
+      default: 'icon',
+    },
   },
   data: () => ({
     sharing: false,
     generating: false,
-    downloadUrl: ''
+    downloadUrl: '',
   }),
   computed: {
     platforms() {
@@ -103,9 +97,9 @@ export default {
         Whatsapp: `whatsapp://send?text=${text} ${url}`,
         Telegram: `https://t.me/share/url?url=${url}&text=${text}`,
         Facebook: `https://www.facebook.com/share.php?display=page&u=${url}&t=${text}`,
-        Twitter: `https://twitter.com/intent/tweet?text=${text} ${url}`
+        Twitter: `https://twitter.com/intent/tweet?text=${text} ${url}`,
       }
-    }
+    },
   },
   methods: {
     shareTo(platform) {
@@ -116,7 +110,7 @@ export default {
       this.$fire.analytics.logEvent('share', {
         method: platform,
         content_type: this.collection,
-        content_id: this.id
+        content_id: this.id,
       })
 
       openURL(this.platforms[platform])
@@ -130,14 +124,14 @@ export default {
       this.$fire.analytics.logEvent('share', {
         method: 'Download',
         content_type: this.collection,
-        content_id: this.id
+        content_id: this.id,
       })
     },
     async copyToClipboard() {
       this.$fire.analytics.logEvent('share', {
         method: 'Link',
         content_type: this.collection,
-        content_id: this.id
+        content_id: this.id,
       })
 
       await navigator.clipboard.writeText(this.url)
@@ -150,7 +144,7 @@ export default {
       }
 
       this.$fire.analytics.logEvent('create_poster', {
-        collection: this.collection
+        collection: this.collection,
       })
 
       this.generating = true
@@ -158,7 +152,7 @@ export default {
 
       try {
         const result = await axios.get(
-          `https://us-central1-wedance-4abe3.cloudfunctions.net/hooks/share${this.$route.path}?timezone=${this.account?.zone}`
+          `https://us-central1-wedance-4abe3.cloudfunctions.net/hooks/share${this.$route.path}?timezone=${this.account?.zone}`,
         )
 
         if (!result.data.success) {
@@ -180,7 +174,7 @@ export default {
           contentId: this.id,
           image: this.downloadUrl,
           url: this.url,
-          place: this.place
+          place: this.place,
         })
       } catch (e) {
         this.$toast.error(e.message)
@@ -199,7 +193,7 @@ export default {
       const response = await fetch(this.downloadUrl)
       const blob = await response.blob()
       const file = new File([blob], `${this.fileName}.png`, {
-        type: 'image/png'
+        type: 'image/png',
       })
 
       const filesArray = [file]
@@ -219,17 +213,17 @@ export default {
       this.$fire.analytics.logEvent('share', {
         method: 'Native',
         content_type: this.collection,
-        content_id: this.id
+        content_id: this.id,
       })
 
       try {
         await navigator.share({
           title: this.text,
           url: this.url,
-          files: filesArray
+          files: filesArray,
         })
       } catch (e) {}
-    }
-  }
+    },
+  },
 }
 </script>

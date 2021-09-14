@@ -15,12 +15,12 @@ export default {
   props: {
     src: {
       type: String,
-      default: ''
+      default: '',
     },
     size: {
       type: String,
-      default: ''
-    }
+      default: '',
+    },
   },
   computed: {
     dim() {
@@ -29,11 +29,11 @@ export default {
         sm: 6,
         md: 8,
         lg: 10,
-        xl: 32
+        xl: 32,
       }
 
       return sizes[this.size]
-    }
-  }
+    },
+  },
 }
 </script>

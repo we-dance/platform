@@ -48,16 +48,16 @@ export default {
   props: {
     value: {
       type: [String, Object],
-      default: ''
+      default: '',
     },
     placeholder: {
       type: String,
-      default: 'Search place or address'
-    }
+      default: 'Search place or address',
+    },
   },
   data: () => ({
     autocomplete: null,
-    text: ''
+    text: '',
   }),
   async mounted() {
     const google = await getGoogle()
@@ -72,13 +72,13 @@ export default {
         'name',
         'url',
         'website',
-        'international_phone_number'
-      ]
+        'international_phone_number',
+      ],
     }
 
     this.autocomplete = new google.maps.places.Autocomplete(
       this.$refs.autocomplete,
-      options
+      options,
     )
 
     this.autocomplete.addListener('place_changed', () => {
@@ -86,6 +86,6 @@ export default {
 
       this.$emit('input', place)
     })
-  }
+  },
 }
 </script>

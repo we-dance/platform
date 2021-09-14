@@ -74,9 +74,7 @@
       <div class="mt-16 flex min-w-full justify-start items-center">
         <div class="w-2/3 h-40">
           <h2 class="font-lato font-bold text-xl">Find dance partner</h2>
-          <p>
-            Let us know who you are looking for and let them find you.
-          </p>
+          <p>Let us know who you are looking for and let them find you.</p>
         </div>
         <div class="w-1/3">
           <TIcon name="undraw_together" class="pl-4" />
@@ -87,9 +85,7 @@
           <TIcon name="undraw_events" class="pr-4" />
         </div>
         <div class="w-2/3 h-40">
-          <h2 class="font-lato font-bold text-xl">
-            Find parties
-          </h2>
+          <h2 class="font-lato font-bold text-xl">Find parties</h2>
           <p>
             We monitor all activities in dance scene and provide you with event
             calendar, which will highlight the best party for you.
@@ -187,6 +183,6 @@ export default {
         router.push('/feed')
       }
     })
-  }
+  },
 }
 </script>

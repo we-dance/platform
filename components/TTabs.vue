@@ -19,12 +19,12 @@ export default {
   props: {
     value: {
       type: String,
-      default: ''
+      default: '',
     },
     tabs: {
       type: Array,
-      default: () => []
-    }
-  }
+      default: () => [],
+    },
+  },
 }
 </script>

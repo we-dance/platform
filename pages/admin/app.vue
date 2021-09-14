@@ -1,7 +1,5 @@
 <template>
-  <main>
-    App
-  </main>
+  <main>App</main>
 </template>
 
 <script>
@@ -11,6 +9,6 @@ export default {
   name: 'PageAdminApp',
   async asyncData() {
     await warmup()
-  }
+  },
 }
 </script>

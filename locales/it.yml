@@ -111,4 +111,4 @@ footer.coc: Codice di comportamento
 footer.faq: FAQ
 chat.welcome: Inizia la conversazione con qualcosa di carino.
 chat.with: Chatta con {username}
-chat.dateDiff: "{diff} fa"
+chat.dateDiff: '{diff} fa'

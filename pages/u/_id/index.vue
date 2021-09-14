@@ -16,10 +16,10 @@ export default {
   computed: {
     redirectUrl() {
       return `/${this.$route.params.id}`
-    }
+    },
   },
   mounted() {
     this.$router.replace(this.redirectUrl)
-  }
+  },
 }
 </script>

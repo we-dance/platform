@@ -27,16 +27,16 @@ export default {
   props: {
     options: {
       type: Array,
-      default: () => []
+      default: () => [],
     },
     value: {
       type: [Object, String],
-      default: () => {}
+      default: () => {},
     },
     item: {
       type: Object,
-      default: () => ({})
-    }
+      default: () => ({}),
+    },
   },
   computed: {
     internalValue: {
@@ -45,8 +45,8 @@ export default {
       },
       set(val) {
         this.$emit('input', getObjectKeysFromArray(val))
-      }
-    }
+      },
+    },
   },
   methods: {
     getValue(field) {
@@ -70,7 +70,7 @@ export default {
       }
 
       return camelcase(field.name)
-    }
-  }
+    },
+  },
 }
 </script>

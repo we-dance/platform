@@ -64,7 +64,7 @@ export default {
   layout: 'popup',
   data: () => ({
     email: '',
-    password: ''
+    password: '',
   }),
   setup() {
     const {
@@ -75,7 +75,7 @@ export default {
       signInWithGoogle,
       signUserIn,
       signOut,
-      error
+      error,
     } = useAuth()
 
     return {
@@ -86,7 +86,7 @@ export default {
       signUserIn,
       signOut,
       error,
-      profile
+      profile,
     }
   },
   watch: {
@@ -95,8 +95,8 @@ export default {
         if (!val && this.profile) {
           this.redirect()
         }
-      }
-    }
+      },
+    },
   },
   mounted() {
     const target = this.$route.query.target
@@ -129,11 +129,11 @@ export default {
       }
 
       this.$fire.analytics.logEvent('login', {
-        method: 'Password'
+        method: 'Password',
       })
 
       await this.signUserIn(this.email, this.password)
-    }
-  }
+    },
+  },
 }
 </script>

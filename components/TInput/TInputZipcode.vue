@@ -8,12 +8,12 @@ export default {
   props: {
     value: {
       type: String,
-      default: ''
+      default: '',
     },
     placeholder: {
       type: String,
-      default: 'Zipcode'
-    }
+      default: 'Zipcode',
+    },
   },
   computed: {
     internalValue: {
@@ -22,9 +22,9 @@ export default {
       },
       set(val) {
         console.log('zipcode set', val)
-      }
-    }
+      },
+    },
   },
-  setup(props, { emit }) {}
+  setup(props, { emit }) {},
 }
 </script>

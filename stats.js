@@ -19,7 +19,7 @@ class Stats {
       method,
       collection,
       count,
-      source
+      source,
     })
 
     this.stats[collection] += count

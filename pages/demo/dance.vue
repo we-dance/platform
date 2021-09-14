@@ -19,14 +19,14 @@ export default {
     variants: [
       {
         value: 'v1',
-        label: 'Variant 1'
+        label: 'Variant 1',
       },
       {
         value: 'v2',
-        label: 'Variant 2'
-      }
+        label: 'Variant 2',
+      },
     ],
-    selected: {}
-  })
+    selected: {},
+  }),
 }
 </script>

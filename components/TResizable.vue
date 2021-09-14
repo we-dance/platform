@@ -10,12 +10,12 @@ export default {
     resize(event) {
       event.target.style.height = 'auto'
       event.target.style.height = `${event.target.scrollHeight}px`
-    }
+    },
   },
   render() {
     return this.$scopedSlots.default({
-      resize: this.resize
+      resize: this.resize,
     })
-  }
+  },
 }
 </script>

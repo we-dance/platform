@@ -22,27 +22,27 @@ export default {
       remove,
       load,
       doc,
-      exists
+      exists,
     }
   },
   inheritAttrs: false,
   props: {
     value: {
       type: String,
-      default: ''
+      default: '',
     },
     target: {
       type: String,
-      default: ''
+      default: '',
     },
     item: {
       type: Object,
-      default: () => ({})
-    }
+      default: () => ({}),
+    },
   },
   data: () => ({
     computedValue: '',
-    error: ''
+    error: '',
   }),
   mounted() {
     this.computedValue = this.value
@@ -67,11 +67,11 @@ export default {
       }
 
       this.set(newName, {
-        target: this.target
+        target: this.target,
       })
 
       this.$emit('input', newName)
-    }
-  }
+    },
+  },
 }
 </script>

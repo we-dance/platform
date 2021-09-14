@@ -53,40 +53,40 @@ export default {
   props: {
     title: {
       type: String,
-      default: ''
+      default: '',
     },
     add: {
       type: String,
-      default: ''
+      default: '',
     },
     addUrl: {
       type: String,
-      default: ''
+      default: '',
     },
     collection: {
       type: String,
-      default: ''
+      default: '',
     },
     filterFields: {
       type: Array,
-      default: () => []
+      default: () => [],
     },
     filterDefault: {
       type: Object,
-      default: () => ({})
+      default: () => ({}),
     },
     tabs: {
       type: Array,
-      default: () => []
+      default: () => [],
     },
     sortBy: {
       type: String,
-      default: ''
+      default: '',
     },
     listWrapper: {
       type: String,
-      default: 'space-y-2'
-    }
+      default: 'space-y-2',
+    },
   },
   setup(params) {
     const { docs } = useCollection(params.collection)
@@ -96,19 +96,19 @@ export default {
     const viewOptions = [
       {
         value: 'covers',
-        label: 'Grid View'
+        label: 'Grid View',
       },
       {
         value: 'text',
-        label: 'List View'
-      }
+        label: 'List View',
+      },
     ]
 
     const { filters, results } = useFilters(
       docs,
       params.filterFields,
       params.filterDefault,
-      sorting
+      sorting,
     )
 
     return {
@@ -116,8 +116,8 @@ export default {
       results,
       sorting,
       view,
-      viewOptions
+      viewOptions,
     }
-  }
+  },
 }
 </script>

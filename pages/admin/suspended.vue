@@ -66,9 +66,9 @@ export default {
         {
           name: 'all',
           default: true,
-          sort: '-deletedAt'
-        }
-      ]
+          sort: '-deletedAt',
+        },
+      ],
     }
 
     const { getCity } = useApp()
@@ -77,8 +77,8 @@ export default {
       config,
       getExcerpt,
       getDateTime,
-      getCity
+      getCity,
     }
-  }
+  },
 }
 </script>

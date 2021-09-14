@@ -1,9 +1,7 @@
 <template>
   <div v-if="!uid" class="mt-4 mx-auto max-w-md p-4 text-sm">
     <TIcon name="undraw_video_files" class="p-4" />
-    <div>
-      Dance videos directory
-    </div>
+    <div>Dance videos directory</div>
     <div v-if="!uid" class="mt-8 bg-gray-400 p-4 rounded text-center">
       <div>Sign in to access</div>
       <TButton class="mt-2" to="/signin?target=/trips">Sign in</TButton>
@@ -75,13 +73,13 @@ export default {
     const fields = [
       {
         name: 'url',
-        label: 'Url'
+        label: 'Url',
       },
       {
         name: 'tags',
         label: 'Tags',
-        type: 'tags'
-      }
+        type: 'tags',
+      },
     ]
 
     const { getCount, getRsvpResponse, updateRsvp } = useRsvp()
@@ -102,7 +100,7 @@ export default {
         downVotes,
         votes,
         response,
-        order
+        order,
       }
     }
 
@@ -112,13 +110,13 @@ export default {
       {
         name: 'all',
         label: 'All',
-        default: true
+        default: true,
       },
       {
         name: 'mine',
         label: 'Mine',
-        filter: (item) => item.createdBy === uid.value
-      }
+        filter: (item) => item.createdBy === uid.value,
+      },
     ]
 
     return {
@@ -128,8 +126,8 @@ export default {
       filters,
       uid,
       map,
-      updateRsvp
+      updateRsvp,
     }
-  }
+  },
 }
 </script>

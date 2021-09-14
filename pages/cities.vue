@@ -57,7 +57,7 @@ export default {
 
       results = results.map((c) => ({
         label: `${c.location.locality}, ${c.location.country}`,
-        value: c.location.place_id
+        value: c.location.place_id,
       }))
 
       results = results.sort(sortBy('label'))
@@ -70,9 +70,9 @@ export default {
             ...places
               .map((i) => ({
                 label: `${i.description} *`,
-                value: i.place_id
+                value: i.place_id,
               }))
-              .filter((n) => !results.find((o) => n.value === o.value))
+              .filter((n) => !results.find((o) => n.value === o.value)),
           )
         }
       }
@@ -103,13 +103,13 @@ export default {
       changeCity,
       query,
       results,
-      removeCityHistory
+      removeCityHistory,
     }
   },
   head() {
     return {
-      title: 'WeDance Cities'
+      title: 'WeDance Cities',
     }
-  }
+  },
 }
 </script>

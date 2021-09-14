@@ -6,7 +6,7 @@
  */
 module.exports = {
   future: {
-    removeDeprecatedGapUtilities: true
+    removeDeprecatedGapUtilities: true,
   },
   theme: {
     extend: {
@@ -16,21 +16,21 @@ module.exports = {
         light: '#F4F1F1',
         dark: '#210309',
         black: '#000000',
-        white: '#FFFFFF'
+        white: '#FFFFFF',
       },
       fontFamily: {
         lato: 'Lato',
-        montserrat: 'Montserrat'
-      }
-    }
+        montserrat: 'Montserrat',
+      },
+    },
   },
   variants: {
     extend: {
       opacity: ['disabled'],
-      cursor: ['disabled']
-    }
+      cursor: ['disabled'],
+    },
   },
   plugins: [
     // require('@tailwindcss/forms')
-  ]
+  ],
 }

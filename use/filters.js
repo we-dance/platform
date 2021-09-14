@@ -24,7 +24,7 @@ export const useFilters = (docs, fields, defaultFilter, sorting) => {
         const compareFn = field.compare || defaultCompareFn
 
         results = results.filter((item) =>
-          compareFn(item, fieldName, filters.value[fieldName])
+          compareFn(item, fieldName, filters.value[fieldName]),
         )
       }
     }
@@ -38,6 +38,6 @@ export const useFilters = (docs, fields, defaultFilter, sorting) => {
 
   return {
     filters,
-    results
+    results,
   }
 }

@@ -28,28 +28,28 @@ import TAvatar from '~/components/TAvatar'
 export default {
   name: 'TAccountSelector',
   components: {
-    TAvatar
+    TAvatar,
   },
   props: {
     value: {
       type: [Object, String],
-      default: () => ({})
-    }
+      default: () => ({}),
+    },
   },
   data: () => ({
     showPopup: false,
     showImport: false,
-    csv: ''
+    csv: '',
   }),
   setup() {
     const selected = ref({})
 
     return {
-      selected
+      selected,
     }
   },
   watch: {
-    value: 'load'
+    value: 'load',
   },
   mounted() {
     this.load()
@@ -68,7 +68,7 @@ export default {
       this.showPopup = false
       const uid = Object.keys(this.selected)[0]
       this.$emit('input', uid)
-    }
-  }
+    },
+  },
 }
 </script>

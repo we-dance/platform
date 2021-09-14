@@ -12,6 +12,6 @@ export default {
   name: 'PagePlaylistView',
   async asyncData(ctx) {
     return await loadDoc(ctx, 'playlists')
-  }
+  },
 }
 </script>

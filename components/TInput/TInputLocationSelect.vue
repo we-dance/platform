@@ -89,8 +89,8 @@ Vue.use(VueGoogleMaps, {
   load: {
     key: process.env.firebase.config.apiKey,
     libraries: 'places',
-    language: 'en'
-  }
+    language: 'en',
+  },
 })
 
 const gmapApi = VueGoogleMaps.gmapApi
@@ -105,34 +105,34 @@ export default {
       create,
       update,
       id,
-      doc
+      doc,
     }
   },
   props: {
     value: {
       type: [Object, String],
-      default: ''
+      default: '',
     },
     autoSelect: {
       type: Boolean,
-      default: false
+      default: false,
     },
     searchPlaceholder: {
       type: String,
-      default: 'Search city'
+      default: 'Search city',
     },
     emptyLabel: {
       type: String,
-      default: 'Select city'
+      default: 'Select city',
     },
     popupTitle: {
       type: String,
-      default: 'Change city'
+      default: 'Change city',
     },
     item: {
       type: Object,
-      default: () => ({})
-    }
+      default: () => ({}),
+    },
   },
 
   data: () => ({
@@ -145,28 +145,28 @@ export default {
       {
         locality: 'Berlin',
         country: 'Germany',
-        label: 'Berlin'
+        label: 'Berlin',
       },
       {
         locality: 'Munich',
         country: 'Germany',
-        label: 'Munich'
+        label: 'Munich',
       },
       {
         locality: 'Frankfurt',
         country: 'Germany',
-        label: 'Frankfurt'
+        label: 'Frankfurt',
       },
       {
         locality: 'Stuttgart',
         country: 'Germany',
-        label: 'Stuttgart'
-      }
-    ]
+        label: 'Stuttgart',
+      },
+    ],
   }),
 
   computed: {
-    google: gmapApi
+    google: gmapApi,
   },
 
   watch: {
@@ -187,11 +187,11 @@ export default {
       autocomplete.getPlacePredictions(
         {
           input: val,
-          types: ['(cities)']
+          types: ['(cities)'],
         },
-        this.updateList
+        this.updateList,
       )
-    }
+    },
   },
 
   async mounted() {
@@ -261,11 +261,11 @@ export default {
           name: cityName,
           location,
           status: 'requested',
-          hits: 1
+          hits: 1,
         })
       } else {
         this.update(this.id, {
-          hits: parseInt(this.doc.hits || 0) + 1
+          hits: parseInt(this.doc.hits || 0) + 1,
         })
       }
 
@@ -280,7 +280,7 @@ export default {
         () => {
           this.loading = false
           this.gpsIsBlocked = true
-        }
+        },
       )
     },
 
@@ -295,15 +295,15 @@ export default {
           region: 'us',
           location: {
             lat: position.coords.latitude,
-            lng: position.coords.longitude
-          }
+            lng: position.coords.longitude,
+          },
         },
         (response, status) => {
           const location = getLocation(response[5], true)
           this.selectLocation(location)
-        }
+        },
       )
-    }
-  }
+    },
+  },
 }
 </script>

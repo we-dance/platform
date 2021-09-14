@@ -65,14 +65,14 @@ export default {
     return {
       getTime,
       updateRsvp,
-      getCity
+      getCity,
     }
   },
   props: {
     item: {
       type: Object,
-      default: () => ({})
-    }
-  }
+      default: () => ({}),
+    },
+  },
 }
 </script>

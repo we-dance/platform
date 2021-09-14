@@ -52,8 +52,8 @@ export default {
       if (props.mineOnly) {
         return {
           results: getStylesDropdown(profile.value?.styles).filter((i) =>
-            search(i.label, q)
-          )
+            search(i.label, q),
+          ),
         }
       }
 
@@ -64,34 +64,34 @@ export default {
       profile,
       levels,
       getStyles,
-      findStyles
+      findStyles,
     }
   },
   props: {
     value: {
       type: [Object, String],
-      default: () => ({})
+      default: () => ({}),
     },
     item: {
       type: Object,
-      default: () => ({})
+      default: () => ({}),
     },
     mineOnly: {
       type: Boolean,
-      default: false
+      default: false,
     },
     hideHighlight: {
       type: Boolean,
-      default: false
-    }
+      default: false,
+    },
   },
   data: () => ({
-    newStyleName: ''
+    newStyleName: '',
   }),
   computed: {
     styles() {
       return this.getStyles(this.value)
-    }
+    },
   },
   methods: {
     remove(styleId) {
@@ -123,13 +123,13 @@ export default {
       Vue.set(val, styleId, {
         selected: true,
         highlighted,
-        level
+        level,
       })
 
       this.$emit('input', val)
 
       this.newStyleName = ''
-    }
-  }
+    },
+  },
 }
 </script>

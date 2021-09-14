@@ -98,69 +98,69 @@ export default {
   props: {
     collection: {
       type: String,
-      default: ''
+      default: '',
     },
     align: {
       type: String,
-      default: 'bottom'
+      default: 'bottom',
     },
     likes: {
       type: [Number, Boolean],
-      default: false
+      default: false,
     },
     type: {
       type: String,
-      default: ''
+      default: '',
     },
     username: {
       type: String,
-      default: ''
+      default: '',
     },
     centerTitle: {
       type: String,
-      default: ''
+      default: '',
     },
     centerDescription: {
       type: String,
-      default: ''
+      default: '',
     },
     bottomTitle: {
       type: String,
-      default: ''
+      default: '',
     },
     bottomDescription: {
       type: String,
-      default: ''
+      default: '',
     },
     extra: {
       type: String,
-      default: ''
+      default: '',
     },
     objective: {
       type: String,
-      default: ''
+      default: '',
     },
     photo: {
       type: String,
-      default: ''
+      default: '',
     },
     size: {
       type: String,
-      default: 'lg'
+      default: 'lg',
     },
     styles: {
       type: Object,
-      default: () => ({})
+      default: () => ({}),
     },
     color: {
       type: String,
-      default: ''
-    }
+      default: '',
+    },
   },
   computed: {
     dances() {
       return this.getStyles(this.styles, 0, true, 5)
-    }
+    },
   },
   methods: {
     getIcon(level) {
@@ -169,7 +169,7 @@ export default {
         Beginner: '1_of_4',
         Intermediate: '2_of_4',
         Advanced: '3_of_4',
-        Master: '4_of_4'
+        Master: '4_of_4',
       }
 
       if (!map[level]) {
@@ -177,7 +177,7 @@ export default {
       }
 
       return map[level]
-    }
-  }
+    },
+  },
 }
 </script>

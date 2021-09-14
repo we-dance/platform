@@ -59,46 +59,46 @@ import 'vue-croppa/dist/vue-croppa.css'
 export default {
   name: 'TInputPhoto',
   components: {
-    croppa: Croppa.component
+    croppa: Croppa.component,
   },
   props: {
     value: {
       type: String,
-      default: ''
+      default: '',
     },
     name: {
       type: String,
-      default: ''
+      default: '',
     },
     placeholder: {
       type: String,
-      default: 'Change photo'
+      default: 'Change photo',
     },
     selectLabel: {
       type: String,
-      default: 'Upload photo'
+      default: 'Upload photo',
     },
     item: {
       type: Object,
-      default: () => ({})
+      default: () => ({}),
     },
     width: {
       type: Number,
-      default: 300
+      default: 300,
     },
     height: {
       type: Number,
-      default: 300
+      default: 300,
     },
     circle: {
       type: Boolean,
-      default: false
-    }
+      default: false,
+    },
   },
   data: () => ({
     showPopup: false,
     progress: 0,
-    croppa: {}
+    croppa: {},
   }),
   computed: {
     editing() {
@@ -107,7 +107,7 @@ export default {
         this.croppa.getChosenFile &&
         !!this.croppa.getChosenFile()
       )
-    }
+    },
   },
   methods: {
     rotate() {
@@ -132,14 +132,14 @@ export default {
     updateProgress(snapshot) {
       const { bytesTransferred, totalBytes } = snapshot
       this.progress = (bytesTransferred / totalBytes) * 100
-    }
+    },
   },
   setup() {
     const { upload } = useUpload()
 
     return {
-      upload
+      upload,
     }
-  }
+  },
 }
 </script>

@@ -16,12 +16,12 @@ export default {
   props: {
     uid: {
       type: String,
-      default: ''
+      default: '',
     },
     size: {
       type: String,
-      default: 'xs'
-    }
+      default: 'xs',
+    },
   },
   computed: {
     photo() {
@@ -33,11 +33,11 @@ export default {
         sm: 6,
         md: 8,
         lg: 10,
-        xl: 32
+        xl: 32,
       }
 
       return sizes[this.size]
-    }
+    },
   },
   setup(props) {
     const { getProfile, loading } = useProfiles()
@@ -46,8 +46,8 @@ export default {
 
     return {
       profile,
-      loading
+      loading,
     }
-  }
+  },
 }
 </script>

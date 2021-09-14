@@ -27,11 +27,11 @@ export const useFavorites = (uid, collection, item) => {
 
     if (val) {
       change = {
-        [`savedBy.${uid}`]: true
+        [`savedBy.${uid}`]: true,
       }
     } else {
       change = {
-        [`savedBy.${uid}`]: firebase.firestore.FieldValue.delete()
+        [`savedBy.${uid}`]: firebase.firestore.FieldValue.delete(),
       }
     }
 
@@ -41,6 +41,6 @@ export const useFavorites = (uid, collection, item) => {
   return {
     isFavorite,
     setFavorite,
-    countFavorites
+    countFavorites,
   }
 }

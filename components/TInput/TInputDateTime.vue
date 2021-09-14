@@ -8,17 +8,17 @@ import 'flatpickr/dist/flatpickr.css'
 
 export default {
   components: {
-    FlatPickr
+    FlatPickr,
   },
   props: {
     value: {
       type: [String, Object, Date],
-      default: ''
+      default: '',
     },
     item: {
       type: Object,
-      default: () => ({})
-    }
+      default: () => ({}),
+    },
   },
   data: () => ({
     input: '',
@@ -31,8 +31,8 @@ export default {
       altFormat: 'H:i D, j M Y',
       defaultHour: 19,
       minuteIncrement: 15,
-      dateFormat: 'Z'
-    }
+      dateFormat: 'Z',
+    },
   }),
   watch: {
     input(val) {
@@ -48,7 +48,7 @@ export default {
       }
 
       this.updateValue()
-    }
+    },
   },
   mounted() {
     this.updateValue()
@@ -63,7 +63,7 @@ export default {
       }
 
       this.input = val
-    }
-  }
+    },
+  },
 }
 </script>

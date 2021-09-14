@@ -16,10 +16,10 @@ export default {
   computed: {
     redirectUrl() {
       return `/events`
-    }
+    },
   },
   mounted() {
     this.$router.replace(this.redirectUrl)
-  }
+  },
 }
 </script>

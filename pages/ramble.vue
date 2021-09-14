@@ -1,9 +1,7 @@
 <template>
   <div>
     <portal to="title">
-      <h1 class="ml-1 font-lato text-lg font-bold">
-        Ramble
-      </h1>
+      <h1 class="ml-1 font-lato text-lg font-bold">Ramble</h1>
     </portal>
 
     <div class="mt-4 max-w-sm mx-auto">
@@ -62,7 +60,7 @@ export default {
         parts.push(
           Object.keys(profile.value.objectives)
             .map((objective) => `objectives:${objective}`)
-            .join(' OR ')
+            .join(' OR '),
         )
       }
 
@@ -70,12 +68,12 @@ export default {
         parts.push(
           Object.keys(profile.value.locales)
             .map((locale) => `locales:${locale}`)
-            .join(' OR ')
+            .join(' OR '),
         )
       }
 
       parts.push(
-        `gender:${profile.value.gender === 'Male' ? 'Female' : 'Male'}`
+        `gender:${profile.value.gender === 'Male' ? 'Female' : 'Male'}`,
       )
 
       parts = parts.map((part) => `(${part})`)
@@ -92,7 +90,7 @@ export default {
         filters: myFilter.value,
         hitsPerPage: 1,
         aroundLatLngViaIP: true,
-        aroundRadius: 50000
+        aroundRadius: 50000,
       })
     })
 
@@ -102,7 +100,7 @@ export default {
         hitsPerPage: 1,
         page: currentPage.value - 1,
         aroundLatLngViaIP: true,
-        aroundRadius: 50000
+        aroundRadius: 50000,
       })
     })
 
@@ -110,8 +108,8 @@ export default {
       getExcerpt,
       search,
       response,
-      currentPage
+      currentPage,
     }
-  }
+  },
 }
 </script>

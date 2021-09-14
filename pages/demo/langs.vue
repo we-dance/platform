@@ -18,10 +18,10 @@ export default {
     variants: [
       {
         value: 'v1',
-        label: 'Variant 1'
-      }
+        label: 'Variant 1',
+      },
     ],
-    selected: {}
-  })
+    selected: {},
+  }),
 }
 </script>

@@ -16,16 +16,16 @@ export default {
   props: {
     icon: {
       type: String,
-      default: 'more_vert'
+      default: 'more_vert',
     },
     type: {
       type: String,
-      default: 'nav'
+      default: 'nav',
     },
     label: {
       type: [String, Number, Boolean],
-      default: false
-    }
-  }
+      default: false,
+    },
+  },
 }
 </script>

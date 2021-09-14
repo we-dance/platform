@@ -12,6 +12,6 @@ export default {
   name: 'OfferView',
   async asyncData(ctx) {
     return await loadDoc(ctx, 'offers')
-  }
+  },
 }
 </script>

@@ -4,9 +4,7 @@
 
     <TListComments class="mt-4" :post-id="postId">
       <template v-slot:empty>
-        <div class="text-center my-8">
-          There are no comments yet.
-        </div>
+        <div class="text-center my-8">There are no comments yet.</div>
       </template>
     </TListComments>
   </div>
@@ -19,12 +17,12 @@ export default {
   props: {
     postId: {
       type: String,
-      default: ''
+      default: '',
     },
     replyTo: {
       type: String,
-      default: ''
-    }
+      default: '',
+    },
   },
   methods: {
     checkAuth() {
@@ -43,14 +41,14 @@ export default {
           el.scrollIntoView()
         }
       }
-    }
+    },
   },
   setup() {
     const { uid } = useAuth()
 
     return {
-      uid
+      uid,
     }
-  }
+  },
 }
 </script>

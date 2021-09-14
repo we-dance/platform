@@ -39,17 +39,14 @@ export function profileToAlgolia(profile: any, cache: any) {
     _tags: profile.styles ? Object.keys(profile.styles) : [],
     _geoloc: {
       lat: cache.cities[profile.place].location.latitude,
-      lng: cache.cities[profile.place].location.longitude
-    }
+      lng: cache.cities[profile.place].location.longitude,
+    },
   }
 }
 
 export async function indexProfiles() {
   const cache = (
-    await firestore
-      .collection('app')
-      .doc('v2')
-      .get()
+    await firestore.collection('app').doc('v2').get()
   ).data() as any
 
   const index = initIndex('profiles')
@@ -60,7 +57,7 @@ export async function indexProfiles() {
   for (const doc of profileDocs) {
     const profile = {
       id: doc.id,
-      ...doc.data()
+      ...doc.data(),
     } as any
 
     if (!profile.username || !profile.place) {

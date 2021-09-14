@@ -47,8 +47,8 @@ export default {
   data: () => ({
     cityStatusClass: {
       active: 'bg-green-500',
-      requested: 'bg-red-500'
-    }
+      requested: 'bg-red-500',
+    },
   }),
   setup() {
     const config = {
@@ -58,23 +58,23 @@ export default {
       add: 'Add',
       fields: [
         {
-          name: 'name'
+          name: 'name',
         },
         {
-          name: 'telegram'
+          name: 'telegram',
         },
         {
           name: 'location',
-          type: 'place'
+          type: 'place',
         },
         {
-          name: 'hits'
+          name: 'hits',
         },
         {
           name: 'status',
           type: 'select',
-          options: ['requested', 'active']
-        }
+          options: ['requested', 'active'],
+        },
       ],
       filters: [
         {
@@ -82,23 +82,23 @@ export default {
           label: 'Requested',
           default: true,
           filter: (item) => item.status === 'requested',
-          sort: '-hits'
+          sort: '-hits',
         },
         {
           name: 'active',
           label: 'Active',
           filter: (item) => item.status === 'active',
-          sort: '-hits'
-        }
-      ]
+          sort: '-hits',
+        },
+      ],
     }
 
     return {
       config,
       getDate,
       getDateTime,
-      getTime
+      getTime,
     }
-  }
+  },
 }
 </script>

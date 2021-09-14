@@ -43,7 +43,7 @@ export default {
 
     return {
       page,
-      profile
+      profile,
     }
   },
   computed: {
@@ -56,7 +56,7 @@ export default {
       }
 
       return classes
-    }
+    },
   },
   head() {
     if (this.profile) {
@@ -69,29 +69,29 @@ export default {
           {
             hid: 'description',
             name: 'description',
-            content: profile.bio
+            content: profile.bio,
           },
           {
             property: 'og:image',
             content: profile.socialCover || profile.photo,
-            hid: 'og:image'
+            hid: 'og:image',
           },
           {
             property: 'og:type',
             content: 'profile',
-            hid: 'og:type'
+            hid: 'og:type',
           },
           {
             property: 'og:title',
             content: profile.username,
-            hid: 'og:title'
+            hid: 'og:title',
           },
           {
             property: 'og:description',
             content: profile.bio,
-            hid: 'og:description'
-          }
-        ]
+            hid: 'og:description',
+          },
+        ],
       }
     }
 
@@ -105,26 +105,26 @@ export default {
           {
             hid: 'description',
             name: 'description',
-            content: page.description
+            content: page.description,
           },
           {
             property: 'og:type',
             content: 'article',
-            hid: 'og:type'
+            hid: 'og:type',
           },
           {
             property: 'og:title',
             content: page.title,
-            hid: 'og:title'
+            hid: 'og:title',
           },
           {
             property: 'og:description',
             content: page.description,
-            hid: 'og:description'
-          }
-        ]
+            hid: 'og:description',
+          },
+        ],
       }
     }
-  }
+  },
 }
 </script>

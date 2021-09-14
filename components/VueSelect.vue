@@ -62,7 +62,7 @@
             :key="getValue(option)"
             tabindex="0"
             role="option"
-            class="text-gray-900 cursor-default select-none relative py-2 pl-3 pr-9  cursor-pointer hover:text-white hover:bg-indigo-600 focus:outline-none focus:text-white focus:bg-indigo-600"
+            class="text-gray-900 cursor-default select-none relative py-2 pl-3 pr-9 cursor-pointer hover:text-white hover:bg-indigo-600 focus:outline-none focus:text-white focus:bg-indigo-600"
             @click="select(getValue(option))"
           >
             <div class="flex items-center space-x-3">
@@ -71,7 +71,7 @@
                 class="block truncate"
                 :class="{
                   'font-normal': !isSelected(getValue(option)),
-                  'font-semibold': isSelected(getValue(option))
+                  'font-semibold': isSelected(getValue(option)),
                 }"
               >
                 {{ getLabel(option) }}
@@ -111,25 +111,25 @@ import { camelcase } from '~/utils'
 export default {
   name: 'VueSelect',
   directives: {
-    ClickOutside
+    ClickOutside,
   },
   props: {
     options: {
       type: Array,
-      default: () => []
+      default: () => [],
     },
     value: {
       type: String,
-      default: ''
+      default: '',
     },
     item: {
       type: Object,
-      default: () => ({})
-    }
+      default: () => ({}),
+    },
   },
   data() {
     return {
-      isOpen: false
+      isOpen: false,
     }
   },
   methods: {
@@ -149,7 +149,7 @@ export default {
     },
     findLabel(value) {
       const option = this.options?.find(
-        (option) => this.getValue(option) === value
+        (option) => this.getValue(option) === value,
       )
 
       return this.getLabel(option)
@@ -175,7 +175,7 @@ export default {
       }
 
       return camelcase(field.name)
-    }
-  }
+    },
+  },
 }
 </script>

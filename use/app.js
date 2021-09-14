@@ -50,20 +50,17 @@ export async function warmup() {
     'weight',
     'bio',
     'community',
-    'locales'
+    'locales',
   ])
   const cities = await cache('cities', 'location.place_id', false, [
     'name',
-    'location'
+    'location',
   ])
 
-  await db
-    .collection('app')
-    .doc('v2')
-    .set({
-      profiles,
-      cities
-    })
+  await db.collection('app').doc('v2').set({
+    profiles,
+    cities,
+  })
 }
 
 export async function cacheCity(placeId, data) {
@@ -82,7 +79,7 @@ export const useCache = createGlobalState(() => {
 export const posterLabelColors = {
   profiles: 'bg-green-500',
   events: 'bg-red-500',
-  posts: 'bg-orange-500'
+  posts: 'bg-orange-500',
 }
 
 export const getCityLabel = (doc) => `${doc.name}, ${doc.location.country}`
@@ -94,7 +91,7 @@ export const useApp = () => {
 
   const cache = useCache()
   const cities = computed(() =>
-    cache.value ? getArrayFromHash(cache.value.cities) : []
+    cache.value ? getArrayFromHash(cache.value.cities) : [],
   )
 
   const getPosterLabelColor = (collection, type) => {
@@ -125,7 +122,7 @@ export const useApp = () => {
       savedByCount: getCountFavorites(item),
       createdByUsername: item.createdBy
         ? read('profiles', item.createdBy, 'username')
-        : ''
+        : '',
     }
   }
 
@@ -158,7 +155,7 @@ export const useApp = () => {
 
     const result = {
       ...snapshot.docs[0].data(),
-      id: snapshot.docs[0].id
+      id: snapshot.docs[0].id,
     }
 
     return result
@@ -173,14 +170,14 @@ export const useApp = () => {
         telegram: '',
         hits: 1,
         status: 'requested',
-        location: address
+        location: address,
       }
 
       await create(item)
 
       await cacheCity(address.place_id, {
         name: item.name,
-        location: item.location
+        location: item.location,
       })
     } else {
       await update(community.id, { hits: parseInt(community.hits || 1) + 1 })
@@ -189,7 +186,7 @@ export const useApp = () => {
 
   const removeCityHistory = async (placeId) => {
     await updateProfile({
-      [`cities.${placeId}`]: firebase.firestore.FieldValue.delete()
+      [`cities.${placeId}`]: firebase.firestore.FieldValue.delete(),
     })
   }
 
@@ -205,7 +202,7 @@ export const useApp = () => {
       (!profile.value.cities || !profile.value.cities[placeId])
     ) {
       await updateProfile({
-        [`cities.${placeId}`]: true
+        [`cities.${placeId}`]: true,
       })
     }
 
@@ -233,7 +230,7 @@ export const useApp = () => {
     getCityHistory,
     addCityHistory,
     getCity,
-    removeCityHistory
+    removeCityHistory,
   }
 }
 
@@ -243,6 +240,6 @@ export const useFullItems = (docs) => {
   const items = computed(() => (docs.value ? docs.value.map(mapDetails) : []))
 
   return {
-    items
+    items,
   }
 }

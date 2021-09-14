@@ -21,38 +21,38 @@ export default {
     const { getStyles } = useStyles()
 
     return {
-      getStyles
+      getStyles,
     }
   },
   props: {
     value: {
       type: [Object, String],
-      default: () => ({})
+      default: () => ({}),
     },
     hideLevel: {
       type: Boolean,
-      default: false
+      default: false,
     },
     noColor: {
       type: Boolean,
-      default: false
+      default: false,
     },
     max: {
       type: Number,
-      default: 0
+      default: 0,
     },
     wrapperClass: {
       type: String,
-      default: 'inline-block rounded-full px-2 py-1 border m-1'
-    }
+      default: 'inline-block rounded-full px-2 py-1 border m-1',
+    },
   },
   data: () => ({
     levelClass: {
       Interested: '',
       Beginner: 'text-green-500',
       Intermediate: 'text-orange-500',
-      Advanced: 'text-red-500'
-    }
+      Advanced: 'text-red-500',
+    },
   }),
   methods: {
     getClasses(style) {
@@ -69,7 +69,7 @@ export default {
       result += ' ' + this.wrapperClass
 
       return result
-    }
-  }
+    },
+  },
 }
 </script>

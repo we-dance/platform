@@ -24,8 +24,8 @@ export default {
 
     return {
       playlistFields,
-      isAdmin
+      isAdmin,
     }
-  }
+  },
 }
 </script>

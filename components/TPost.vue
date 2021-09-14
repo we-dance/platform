@@ -29,16 +29,16 @@ export default {
   props: {
     item: {
       type: Object,
-      default: () => ({})
-    }
+      default: () => ({}),
+    },
   },
   setup() {
     const { getCity } = useApp()
 
     return {
       dateDiff,
-      getCity
+      getCity,
     }
-  }
+  },
 }
 </script>

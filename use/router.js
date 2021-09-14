@@ -8,6 +8,6 @@ export const useRouter = () => {
   return {
     router,
     route,
-    params
+    params,
   }
 }

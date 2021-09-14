@@ -3,54 +3,54 @@ import { genderList } from '~/use/profiles'
 export const objectivesList = [
   {
     label: 'Learn together',
-    value: 'learn'
+    value: 'learn',
   },
   {
     label: 'Dance practice',
-    value: 'dance'
-  }
+    value: 'dance',
+  },
 ]
 
 export const days = [
   {
     label: 'Monday at 19:00',
-    value: 'Monday'
+    value: 'Monday',
   },
   {
     label: 'Tuesday at 19:00',
-    value: 'Tuesday'
+    value: 'Tuesday',
   },
   {
     label: 'Wednesday at 19:00',
-    value: 'Wednesday'
+    value: 'Wednesday',
   },
   {
     label: 'Thursday at 19:00',
-    value: 'Thursday'
+    value: 'Thursday',
   },
   {
     label: 'Friday at 19:00',
-    value: 'Friday'
+    value: 'Friday',
   },
   {
     label: 'Saturday at 19:00',
-    value: 'Saturday'
+    value: 'Saturday',
   },
   {
     label: 'Sunday at 19:00',
-    value: 'Sunday'
-  }
+    value: 'Sunday',
+  },
 ]
 
 export const meetingPlaces = [
   {
     label: 'My place',
-    value: 'myPlace'
+    value: 'myPlace',
   },
   {
     label: 'Your place',
-    value: 'yourPlace'
-  }
+    value: 'yourPlace',
+  },
 ]
 
 export const offerFields = [
@@ -59,20 +59,20 @@ export const offerFields = [
     hideLabel: true,
     placeholder: 'Title',
     description:
-      'Who are you looking for? Put it as a question, for example: Do you love dogs?'
+      'Who are you looking for? Put it as a question, for example: Do you love dogs?',
   },
   {
     name: 'objective',
     label: 'Objective',
     type: 'radio',
-    options: objectivesList
+    options: objectivesList,
   },
   {
     name: 'dance',
     label: 'What?',
     type: 'stylesSelect',
     mineOnly: true,
-    hideHighlight: true
+    hideHighlight: true,
   },
   {
     name: 'playlist',
@@ -80,13 +80,13 @@ export const offerFields = [
     collection: 'playlists',
     keyLabel: (i, creator) => `${i.name} (${creator})`,
     keyValue: 'id',
-    canAdd: true
+    canAdd: true,
   },
   {
     name: 'days',
     label: 'When?',
     type: 'multi',
-    options: days
+    options: days,
   },
   {
     name: 'city',
@@ -95,14 +95,14 @@ export const offerFields = [
     collection: 'cities',
     placeholder: 'City',
     keyLabel: (i) => `${i.name}, ${i.location.country}`,
-    keyValue: 'name'
+    keyValue: 'name',
   },
   {
     name: 'place',
     label: 'Where?',
     type: 'multi',
-    options: meetingPlaces
-  }
+    options: meetingPlaces,
+  },
 ]
 
 export const offerFilters = [
@@ -114,7 +114,7 @@ export const offerFilters = [
     keyLabel: (c) => `${c.name}, ${c.location.country}`,
     clearable: true,
     hideLabel: true,
-    placeholder: 'City'
+    placeholder: 'City',
   },
   {
     name: 'dance',
@@ -123,7 +123,7 @@ export const offerFilters = [
     placeholder: 'Style',
     compare: (item, field, value) =>
       item && item[field] && item[field][value] && item[field][value].selected,
-    mineOnly: true
+    mineOnly: true,
   },
   {
     name: 'objective',
@@ -132,7 +132,7 @@ export const offerFilters = [
     hideSearchBox: true,
     clearable: true,
     hideLabel: true,
-    placeholder: 'Objective'
+    placeholder: 'Objective',
   },
   {
     name: 'gender',
@@ -141,6 +141,6 @@ export const offerFilters = [
     hideSearchBox: true,
     clearable: true,
     hideLabel: true,
-    placeholder: 'Gender'
-  }
+    placeholder: 'Gender',
+  },
 ]

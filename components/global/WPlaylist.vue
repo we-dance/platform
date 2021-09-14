@@ -36,19 +36,19 @@ export default {
   props: {
     id: {
       type: String,
-      default: ''
+      default: '',
     },
     editable: {
       type: Boolean,
-      default: false
+      default: false,
     },
     opened: {
       type: Boolean,
-      default: false
-    }
+      default: false,
+    },
   },
   data: () => ({
-    isOpen: false
+    isOpen: false,
   }),
   mounted() {
     this.isOpen = this.opened
@@ -69,8 +69,8 @@ export default {
       loading,
       playlist,
       collection,
-      author
+      author,
     }
-  }
+  },
 }
 </script>

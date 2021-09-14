@@ -27,28 +27,28 @@ export default {
   props: {
     value: {
       type: [Object, String],
-      default: () => ({})
-    }
+      default: () => ({}),
+    },
   },
   data: () => ({
     showPopup: false,
     showImport: false,
-    csv: ''
+    csv: '',
   }),
   setup() {
     const selected = ref({})
 
     return {
-      selected
+      selected,
     }
   },
   computed: {
     count() {
       return Object.keys(this.selected).length
-    }
+    },
   },
   watch: {
-    value: 'load'
+    value: 'load',
   },
   mounted() {
     this.load()
@@ -65,7 +65,7 @@ export default {
     save() {
       this.showPopup = false
       this.$emit('input', this.selected)
-    }
-  }
+    },
+  },
 }
 </script>

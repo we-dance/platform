@@ -97,7 +97,7 @@ export default {
           .collection('chats')
           .doc(chatId.value)
           .update({
-            [`lastSeen.${uid.value}`]: Date.now()
+            [`lastSeen.${uid.value}`]: Date.now(),
           })
       }
     }
@@ -108,7 +108,7 @@ export default {
       const message = {
         text: newMessage.value,
         createdBy: uid.value,
-        createdAt: timeSent
+        createdAt: timeSent,
       }
 
       newMessage.value = ''
@@ -125,13 +125,13 @@ export default {
             lastMessageAt: timeSent,
             members: {
               [uid.value]: true,
-              [receiverUid.value]: true
+              [receiverUid.value]: true,
             },
             lastSeen: {
               [uid.value]: timeSent,
-              [receiverUid.value]: 0
+              [receiverUid.value]: 0,
             },
-            messages: [message]
+            messages: [message],
           })
       } else {
         await db
@@ -142,7 +142,7 @@ export default {
             lastMessageBy: uid.value,
             lastMessageAt: timeSent,
             [`lastSeen.${uid.value}`]: timeSent,
-            messages: firebase.firestore.FieldValue.arrayUnion(message)
+            messages: firebase.firestore.FieldValue.arrayUnion(message),
           })
       }
     }
@@ -160,13 +160,13 @@ export default {
       loading,
       chat,
       newMessage,
-      send
+      send,
     }
   },
   head() {
     return {
-      title: 'WeDance Chat'
+      title: 'WeDance Chat',
     }
-  }
+  },
 }
 </script>

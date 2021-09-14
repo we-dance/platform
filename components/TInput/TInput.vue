@@ -10,27 +10,27 @@ export default {
   props: {
     value: {
       type: [String, Number],
-      default: ''
+      default: '',
     },
     trim: {
       type: String,
-      default: ''
+      default: '',
     },
     autoFocus: {
       type: Boolean,
-      default: false
+      default: false,
     },
     defaultValue: {
       type: String,
-      default: ''
+      default: '',
     },
     item: {
       type: Object,
-      default: () => ({})
-    }
+      default: () => ({}),
+    },
   },
   data: () => ({
-    input: ''
+    input: '',
   }),
   watch: {
     input(val, oldVal) {
@@ -42,7 +42,7 @@ export default {
     },
     value(val) {
       this.input = val
-    }
+    },
   },
   mounted() {
     this.input = this.value
@@ -60,7 +60,7 @@ export default {
       if (this.trim) {
         this.input = sanitize(this.input, this.trim)
       }
-    }
-  }
+    },
+  },
 }
 </script>

@@ -1,8 +1,6 @@
 <template>
   <div>
-    <TButton @click="showPopup = true">
-      Edit Profile
-    </TButton>
+    <TButton @click="showPopup = true"> Edit Profile </TButton>
     <TPopup v-if="showPopup" title="Edit Profile" @close="showPopup = false">
       <div class="max-w-md mx-auto py-4 h-64 overflow-y-scroll">
         <TForm
@@ -28,8 +26,8 @@ export default {
   props: {
     uid: {
       type: String,
-      default: ''
-    }
+      default: '',
+    },
   },
   setup(props) {
     const { profileFields, getProfile } = useProfiles()
@@ -55,8 +53,8 @@ export default {
       save,
       cancel,
       showPopup,
-      profile
+      profile,
     }
-  }
+  },
 }
 </script>

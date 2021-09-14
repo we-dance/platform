@@ -21,20 +21,20 @@ export default {
   props: {
     uid: {
       type: String,
-      default: ''
+      default: '',
     },
     photo: {
       type: Boolean,
-      default: false
+      default: false,
     },
     name: {
       type: Boolean,
-      default: false
+      default: false,
     },
     size: {
       type: String,
-      default: 'xs'
-    }
+      default: 'xs',
+    },
   },
   setup(props) {
     const { getProfile } = useProfiles()
@@ -42,8 +42,8 @@ export default {
     const profile = getProfile(props.uid)
 
     return {
-      profile
+      profile,
     }
-  }
+  },
 }
 </script>

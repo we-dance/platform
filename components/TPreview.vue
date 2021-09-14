@@ -13,7 +13,7 @@ import mila from 'markdown-it-link-attributes'
 const md = new MarkdownIt({
   html: true,
   linkify: true,
-  typographer: true
+  typographer: true,
 })
 
 md.use(MarkdownAttrs)
@@ -21,8 +21,8 @@ md.use(mila, {
   pattern: /^https:/,
   attrs: {
     target: '_blank',
-    rel: 'noopener'
-  }
+    rel: 'noopener',
+  },
 })
 
 md.use(MarkdownContainer, 'details', {
@@ -40,7 +40,7 @@ md.use(MarkdownContainer, 'details', {
       // closing tag
       return '</details>\n'
     }
-  }
+  },
 })
 
 md.use(MarkdownContainer, 'hero', {
@@ -54,26 +54,26 @@ md.use(MarkdownContainer, 'hero', {
     } else {
       return '</div>\n'
     }
-  }
+  },
 })
 
 export default {
   components: {
-    VRuntimeTemplate
+    VRuntimeTemplate,
   },
   props: {
     content: {
       type: String,
-      default: ''
+      default: '',
     },
     excerpt: {
       type: Boolean,
-      default: false
+      default: false,
     },
     noTypo: {
       type: Boolean,
-      default: false
-    }
+      default: false,
+    },
   },
   computed: {
     raw() {
@@ -91,7 +91,7 @@ export default {
       }
 
       return `<div class="${classes.join(' ')}">${html}</div>`
-    }
-  }
+    },
+  },
 }
 </script>

@@ -10,7 +10,7 @@
 <script>
 export default {
   data: () => ({
-    date: ''
-  })
+    date: '',
+  }),
 }
 </script>

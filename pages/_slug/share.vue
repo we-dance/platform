@@ -33,8 +33,8 @@ export default {
 
     return {
       profile,
-      getExcerpt
+      getExcerpt,
     }
-  }
+  },
 }
 </script>

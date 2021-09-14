@@ -7,9 +7,7 @@
     />
 
     <div class="flex justify-end">
-      <TButton @click="submit">
-        Post comment
-      </TButton>
+      <TButton @click="submit"> Post comment </TButton>
     </div>
   </div>
 </template>
@@ -23,19 +21,19 @@ export default {
   props: {
     commentId: {
       type: String,
-      default: ''
+      default: '',
     },
     postId: {
       type: String,
-      default: ''
+      default: '',
     },
     replyTo: {
       type: String,
-      default: ''
-    }
+      default: '',
+    },
   },
   data: () => ({
-    comment: ''
+    comment: '',
   }),
   methods: {
     async submit() {
@@ -45,14 +43,14 @@ export default {
 
       this.$fire.analytics.logEvent('add_comment', {
         content_type: 'posts',
-        content_id: this.postId
+        content_id: this.postId,
       })
 
       await this.addComment(this.postId, this.commentId, this.comment)
       this.comment = ''
 
       this.$emit('submit')
-    }
+    },
   },
   setup() {
     const { getProfile } = useProfiles()
@@ -60,8 +58,8 @@ export default {
 
     return {
       addComment,
-      getProfile
+      getProfile,
     }
-  }
+  },
 }
 </script>

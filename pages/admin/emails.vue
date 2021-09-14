@@ -76,7 +76,7 @@ import {
   getDateTime,
   getTime,
   getDateObect,
-  toDatetimeLocal
+  toDatetimeLocal,
 } from '~/utils'
 
 export default {
@@ -89,8 +89,8 @@ export default {
       scheduled: 'bg-blue-500',
       sent: 'bg-green-500',
       canceled: 'bg-red-900',
-      error: 'bg-red-500'
-    }
+      error: 'bg-red-500',
+    },
   }),
   setup() {
     const { can } = useAuth()
@@ -102,13 +102,13 @@ export default {
       {
         name: 'all',
         default: true,
-        sort: '-createdAt'
-      }
+        sort: '-createdAt',
+      },
     ]
 
     const fields = [
       {
-        name: 'subject'
+        name: 'subject',
       },
       {
         name: 'from',
@@ -116,19 +116,19 @@ export default {
         options: [
           {
             value: 'WeDance <automated@wedance.vip>',
-            label: 'WeDance'
+            label: 'WeDance',
           },
           {
             value: 'Alex from WeDance <alex@wedance.vip>',
-            label: 'Alex'
-          }
-        ]
+            label: 'Alex',
+          },
+        ],
       },
       {
         name: 'status',
         type: 'select',
         defaultValue: 'draft',
-        options: ['draft', 'scheduled', 'sent', 'canceled']
+        options: ['draft', 'scheduled', 'sent', 'canceled'],
       },
       {
         name: 'scheduledAt',
@@ -140,17 +140,17 @@ export default {
         get: (val) => {
           if (!val) return ''
           return toDatetimeLocal(getDateObect(val))
-        }
+        },
       },
       {
         name: 'recipients',
-        type: 'accounts'
+        type: 'accounts',
       },
       {
         name: 'content',
         hideLabel: true,
-        type: 'textarea'
-      }
+        type: 'textarea',
+      },
     ]
 
     return {
@@ -162,8 +162,8 @@ export default {
       getDate,
       getTime,
       getDateTime,
-      can
+      can,
     }
-  }
+  },
 }
 </script>

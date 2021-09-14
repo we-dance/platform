@@ -14,16 +14,16 @@ export default {
   props: {
     value: {
       type: Object,
-      default: () => {}
+      default: () => {},
     },
     default: {
       type: Object,
-      default: () => {}
+      default: () => {},
     },
     fields: {
       type: Array,
-      default: () => []
-    }
+      default: () => [],
+    },
   },
   computed: {
     internalValue: {
@@ -32,8 +32,8 @@ export default {
       },
       set(val) {
         this.$emit('input', val)
-      }
-    }
-  }
+      },
+    },
+  },
 }
 </script>

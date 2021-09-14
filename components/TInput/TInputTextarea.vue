@@ -26,16 +26,16 @@ export default {
   props: {
     value: {
       type: String,
-      default: ''
+      default: '',
     },
     item: {
       type: Object,
-      default: () => ({})
+      default: () => ({}),
     },
     max: {
       type: Number,
-      default: 0
-    }
+      default: 0,
+    },
   },
   computed: {
     input: {
@@ -44,8 +44,8 @@ export default {
       },
       set(val) {
         this.$emit('input', val)
-      }
-    }
-  }
+      },
+    },
+  },
 }
 </script>

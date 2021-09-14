@@ -4,7 +4,7 @@ import ls from 'local-storage'
 import { useDoc } from '~/use/doc'
 
 const state = Vue.observable({
-  currentCity: ls('city')
+  currentCity: ls('city'),
 })
 
 export const useCities = () => {
@@ -33,6 +33,6 @@ export const useCities = () => {
   return {
     ...toRefs(state),
     city,
-    changeCityByName
+    changeCityByName,
   }
 }

@@ -12,7 +12,7 @@ export const useRsvp = () => {
 
   const getRsvp = (eventId) =>
     docs.value.find(
-      (item) => item.eventId === eventId && item.uid === uid.value
+      (item) => item.eventId === eventId && item.uid === uid.value,
     )
 
   const getRsvpResponse = (eventId) =>
@@ -30,7 +30,7 @@ export const useRsvp = () => {
   function getListRsvps(eventId, rsvp) {
     if (rsvp) {
       return docs.value.filter(
-        (item) => item.eventId === eventId && item.rsvp === rsvp
+        (item) => item.eventId === eventId && item.rsvp === rsvp,
       )
     }
 
@@ -45,7 +45,7 @@ export const useRsvp = () => {
             item.uid === userId &&
             ((item.event && item.event.date) ||
               item.collection === collection) &&
-            item.rsvp === rsvp
+            item.rsvp === rsvp,
         )
         .map((item) => item.eventId)
     }
@@ -55,7 +55,7 @@ export const useRsvp = () => {
         (item) =>
           item.uid === userId &&
           item.collection === collection &&
-          item.rsvp === rsvp
+          item.rsvp === rsvp,
       )
       .map((item) => item.eventId)
   }
@@ -67,14 +67,14 @@ export const useRsvp = () => {
     collection,
     rsvp,
     participant,
-    extra
+    extra,
   ) {
     const rsvpObject = {
       participant,
       rsvp,
       eventId,
       collection,
-      ...extra
+      ...extra,
     }
 
     return await create(rsvpObject)
@@ -83,7 +83,7 @@ export const useRsvp = () => {
   async function updateRsvp(eventId, collection, rsvp, extra) {
     if (!uid.value) {
       router.push(
-        `/rsvp/${eventId}/?rsvp=${rsvp}&back=${route.fullPath}&collection=${collection}`
+        `/rsvp/${eventId}/?rsvp=${rsvp}&back=${route.fullPath}&collection=${collection}`,
       )
 
       return
@@ -93,7 +93,7 @@ export const useRsvp = () => {
 
     if (!rsvpObject) {
       rsvpObject = {
-        uid: uid.value
+        uid: uid.value,
       }
     }
 
@@ -103,7 +103,7 @@ export const useRsvp = () => {
       rsvp,
       eventId,
       collection,
-      ...extra
+      ...extra,
     }
 
     if (rsvpObject.id) {
@@ -124,6 +124,6 @@ export const useRsvp = () => {
     getEvents,
     getFeedback,
     getListRsvps,
-    loading
+    loading,
   }
 }

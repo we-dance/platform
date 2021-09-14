@@ -111,7 +111,7 @@ export default {
       type: getFacetOptions('type'),
       gender: getFacetOptions('gender'),
       objectives: getFacetOptions('objectives'),
-      style: getFacetOptions('style')
+      style: getFacetOptions('style'),
     }))
 
     function load() {
@@ -152,7 +152,7 @@ export default {
           ? `${city.value.location.latitude}, ${city.value.location.longitude}`
           : '',
         aroundRadius: radius.value * 1000 || 1,
-        hitsPerPage: uid.value ? 10 : 4
+        hitsPerPage: uid.value ? 10 : 4,
       })
       window.scrollTo(0, 0)
     })
@@ -168,7 +168,7 @@ export default {
         value: val,
         label: `${getFieldLabel(field, val)} (${
           response.value.facets[field][val]
-        })`
+        })`,
       }))
     }
 
@@ -190,32 +190,32 @@ export default {
     const radiusOptions = [
       {
         label: 'around 10km',
-        value: 10
+        value: 10,
       },
       {
         label: 'around 20km',
-        value: 20
+        value: 20,
       },
       {
         label: 'around 50km',
-        value: 50
+        value: 50,
       },
       {
         label: 'around 100km',
-        value: 100
+        value: 100,
       },
       {
         label: 'around 500km',
-        value: 500
+        value: 500,
       },
       {
         label: 'around 1000km',
-        value: 1000
+        value: 1000,
       },
       {
         label: 'Anywhere',
-        value: ''
-      }
+        value: '',
+      },
     ]
 
     return {
@@ -235,13 +235,13 @@ export default {
       getFieldLabel,
       radius,
       load,
-      getCity
+      getCity,
     }
   },
   head() {
     return {
-      title: 'WeDance Community'
+      title: 'WeDance Community',
     }
-  }
+  },
 }
 </script>

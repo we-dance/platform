@@ -54,8 +54,8 @@ export default {
       loading,
       getAccount,
       getFirst,
-      dateDiff
+      dateDiff,
     }
-  }
+  },
 }
 </script>

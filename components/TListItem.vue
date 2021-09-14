@@ -13,12 +13,12 @@ export default {
   props: {
     item: {
       type: Object,
-      default: () => ({})
+      default: () => ({}),
     },
     fields: {
       type: Array,
-      default: () => ['id']
-    }
-  }
+      default: () => ['id'],
+    },
+  },
 }
 </script>

@@ -15,7 +15,7 @@ export const useDoc = (name) => {
     exists: false,
     doc: {},
     id: null,
-    slug: null
+    slug: null,
   })
 
   const collection = firestore.collection(name)
@@ -102,7 +102,7 @@ export const useDoc = (name) => {
     const changes = {
       updatedAt: +new Date(),
       updatedBy: uid.value,
-      ...data
+      ...data,
     }
 
     const result = await collection.doc(id).update(changes)
@@ -120,7 +120,7 @@ export const useDoc = (name) => {
       updatedAt: +new Date(),
       createdBy: uid.value,
       updatedBy: uid.value,
-      ...data
+      ...data,
     })
 
     state.saving = false
@@ -147,7 +147,7 @@ export const useDoc = (name) => {
       updatedAt: +new Date(),
       createdBy: uid.value,
       updatedBy: uid.value,
-      ...data
+      ...data,
     })
 
     state.id = doc.id
@@ -157,7 +157,7 @@ export const useDoc = (name) => {
   }
 
   const isCreator = computed(
-    () => state.doc && uid.value === state.doc.createdBy
+    () => state.doc && uid.value === state.doc.createdBy,
   )
 
   return {
@@ -169,6 +169,6 @@ export const useDoc = (name) => {
     remove,
     isCreator,
     set,
-    sync
+    sync,
   }
 }

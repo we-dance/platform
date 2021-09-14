@@ -20,34 +20,34 @@ export default {
 
     return {
       find,
-      id
+      id,
     }
   },
   inheritAttrs: false,
   props: {
     value: {
       type: String,
-      default: ''
+      default: '',
     },
     target: {
       type: String,
-      default: ''
+      default: '',
     },
     item: {
       type: Object,
-      default: () => ({})
-    }
+      default: () => ({}),
+    },
   },
   data: () => ({
     computedValue: '',
-    error: ''
+    error: '',
   }),
   watch: {
     value(val) {
       if (val) {
         this.computedValue = this.value
       }
-    }
+    },
   },
   mounted() {
     this.computedValue = this.value
@@ -69,7 +69,7 @@ export default {
       }
 
       this.$emit('input', newName)
-    }
-  }
+    },
+  },
 }
 </script>

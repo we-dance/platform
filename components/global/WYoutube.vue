@@ -9,8 +9,8 @@ export default {
   props: {
     url: {
       type: String,
-      default: ''
-    }
+      default: '',
+    },
   },
   computed: {
     src() {
@@ -23,7 +23,7 @@ export default {
       const videoId = match && match[7].length === 11 ? match[7] : ''
 
       return `https://www.youtube.com/embed/${videoId}`
-    }
-  }
+    },
+  },
 }
 </script>

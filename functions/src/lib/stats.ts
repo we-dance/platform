@@ -5,19 +5,14 @@ export async function getDocs(collection: FirebaseFirestore.Query) {
     (doc) =>
       ({
         ...doc.data(),
-        id: doc.id
-      } as any)
+        id: doc.id,
+      } as any),
   )
 }
 
 export async function getCities() {
   const profiles = await getDocs(db.collection('profiles'))
-  const app = (
-    await db
-      .collection('app')
-      .doc('v2')
-      .get()
-  ).data() as any
+  const app = (await db.collection('app').doc('v2').get()).data() as any
 
   const cities = {} as any
 
@@ -28,7 +23,7 @@ export async function getCities() {
 
     if (!app.cities[profile.place]) {
       console.log(
-        `Missing place:${profile.place} for username:${profile.username} uid:${profile.id}`
+        `Missing place:${profile.place} for username:${profile.username} uid:${profile.id}`,
       )
       continue
     }

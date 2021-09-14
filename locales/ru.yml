@@ -114,4 +114,4 @@ footer.coc: Нормы поведения
 footer.faq: Вопросы-Ответы
 chat.welcome: Начните разговор с чего-нибудь приятного.
 chat.with: Пообщайтесь с {username}
-chat.dateDiff: "{diff} лет назад"
+chat.dateDiff: '{diff} лет назад'

@@ -51,20 +51,20 @@
 <script>
 export default {
   data: () => ({
-    data: {}
+    data: {},
   }),
   computed: {
     result() {
       return JSON.stringify(this.data, null, 2)
-    }
+    },
   },
   watch: {
     data: {
       deep: true,
       handler: (newVal) => {
         console.log(newVal)
-      }
-    }
-  }
+      },
+    },
+  },
 }
 </script>

@@ -74,7 +74,7 @@ import {
   getDate,
   getDay,
   getYmd,
-  getDateObect
+  getDateObect,
 } from '~/utils'
 
 export default {
@@ -82,20 +82,20 @@ export default {
   props: {
     filter: {
       type: Object,
-      default: null
+      default: null,
     },
     title: {
       type: String,
-      default: ''
+      default: '',
     },
     emptyLabel: {
       type: String,
-      default: 'No scheduled events'
+      default: 'No scheduled events',
     },
     showEmpty: {
       type: Boolean,
-      default: false
-    }
+      default: false,
+    },
   },
   setup(params) {
     const { currentCity } = useCities()
@@ -112,7 +112,7 @@ export default {
 
       return {
         ...item,
-        startDate
+        startDate,
       }
     }
 
@@ -136,12 +136,12 @@ export default {
         filter: (item) =>
           getYmd(item.startDate) >= startOfTodayString &&
           getYmd(item.startDate) <= endOfYearString &&
-          isPublic(item)
-      }
+          isPublic(item),
+      },
     ])
 
     const activeFilterItem = computed(() =>
-      filterOptions.value.find((item) => item.value === activeFilter.value)
+      filterOptions.value.find((item) => item.value === activeFilter.value),
     )
 
     const items = computed(() => {
@@ -179,8 +179,8 @@ export default {
       startOfWeekString,
       endOfWeekString,
       activeFilter,
-      filterOptions
+      filterOptions,
     }
-  }
+  },
 }
 </script>

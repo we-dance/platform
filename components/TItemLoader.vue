@@ -9,18 +9,18 @@ export default {
   props: {
     collection: {
       type: String,
-      default: ''
+      default: '',
     },
     id: {
       type: String,
-      default: ''
-    }
+      default: '',
+    },
   },
   setup(props) {
     const { doc, load } = useDoc(props.collection)
     load(props.id)
 
     return { doc }
-  }
+  },
 }
 </script>

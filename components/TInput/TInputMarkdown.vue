@@ -5,7 +5,7 @@
       theme: 'base16-light',
       tabSize: 2,
       styleActiveLine: true,
-      lineWrapping: true
+      lineWrapping: true,
     }"
     class="z-0"
     :value.sync="value"
@@ -20,17 +20,17 @@ import 'codemirror/mode/markdown/markdown.js'
 export default {
   name: 'TInputMarkdown',
   components: {
-    codemirror
+    codemirror,
   },
   props: {
     value: {
       type: String,
-      default: ''
+      default: '',
     },
     item: {
       type: Object,
-      default: () => ({})
-    }
-  }
+      default: () => ({}),
+    },
+  },
 }
 </script>

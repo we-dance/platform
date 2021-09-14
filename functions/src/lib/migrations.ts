@@ -6,8 +6,8 @@ export async function getDocs(collection: FirebaseFirestore.Query) {
     (doc) =>
       ({
         ...doc.data(),
-        id: doc.id
-      } as any)
+        id: doc.id,
+      } as any),
   )
 }
 
@@ -20,7 +20,7 @@ export async function migrateFavs() {
     const before = Object.keys(savedBy).length
 
     const responses = await getDocs(
-      db.collection('participants').where('eventId', '==', post.id)
+      db.collection('participants').where('eventId', '==', post.id),
     )
 
     for (const r of responses) {
@@ -33,10 +33,7 @@ export async function migrateFavs() {
 
     const after = Object.keys(savedBy).length
 
-    await db
-      .collection('posts')
-      .doc(post.id)
-      .update({ savedBy })
+    await db.collection('posts').doc(post.id).update({ savedBy })
 
     console.log({ title: post.title, before, after })
   }
@@ -47,17 +44,11 @@ export async function migrateUsernames() {
 
   for (const post of posts) {
     const username = (
-      await db
-        .collection('profiles')
-        .doc(post.createdBy)
-        .get()
+      await db.collection('profiles').doc(post.createdBy).get()
     ).data()?.username
 
     if (username) {
-      await db
-        .collection('posts')
-        .doc(post.id)
-        .update({ username })
+      await db.collection('posts').doc(post.id).update({ username })
     }
 
     console.log({ type: 'post', title: post.title, username, id: post.id })
@@ -67,17 +58,11 @@ export async function migrateUsernames() {
 
   for (const event of events) {
     const username = (
-      await db
-        .collection('profiles')
-        .doc(event.createdBy)
-        .get()
+      await db.collection('profiles').doc(event.createdBy).get()
     ).data()?.username
 
     if (username) {
-      await db
-        .collection('events')
-        .doc(event.id)
-        .update({ username })
+      await db.collection('events').doc(event.id).update({ username })
     }
 
     console.log({ type: 'event', name: event.name, username, id: event.id })
@@ -90,7 +75,7 @@ export async function migrateShares() {
   ).map((i) => i.contentId)
 
   const profiles = await getDocs(
-    db.collection('profiles').where('permission', '==', 'Yes')
+    db.collection('profiles').where('permission', '==', 'Yes'),
   )
 
   for (const profile of profiles) {
@@ -128,7 +113,7 @@ export async function chatNotifications() {
   console.log('Messages sent after', new Date(lastHour))
 
   const chats = await getDocs(
-    db.collection('chats').where('lastMessageAt', '>', lastHour)
+    db.collection('chats').where('lastMessageAt', '>', lastHour),
   )
 
   const notifications = {} as any
@@ -158,9 +143,9 @@ export async function migrateChat() {
       createdBy: match.createdBy,
       members: {
         [match.from]: true,
-        [match.to]: true
+        [match.to]: true,
       },
-      migration: 'matches210603'
+      migration: 'matches210603',
     }
 
     chats[chatId].lastMessage = match.message
@@ -168,7 +153,7 @@ export async function migrateChat() {
     chats[chatId].lastMessageAt = match.createdAt
     chats[chatId].lastSeen = chats[chatId].lastSeen || {
       [match.from]: 0,
-      [match.to]: 0
+      [match.to]: 0,
     }
 
     chats[chatId].lastSeen[match.from] = match.createdAt
@@ -185,7 +170,7 @@ export async function migrateChat() {
     chats[chatId].messages.push({
       text: match.message,
       createdBy: match.from,
-      createdAt: match.createdAt
+      createdAt: match.createdAt,
     })
   }
 
@@ -196,16 +181,13 @@ export async function migrateChat() {
 
     console.log(chatId, chat)
 
-    await db
-      .collection('chats')
-      .doc(chatId)
-      .set(chat)
+    await db.collection('chats').doc(chatId).set(chat)
   }
 }
 
 export async function generateSocialCover(profile: any) {
   const result = await axios.get(
-    `https://us-central1-wedance-4abe3.cloudfunctions.net/hooks/share/${profile.username}?timezone=Europe/Berlin`
+    `https://us-central1-wedance-4abe3.cloudfunctions.net/hooks/share/${profile.username}?timezone=Europe/Berlin`,
   )
 
   const socialCover = result.data.url
@@ -218,13 +200,10 @@ export async function generateSocialCover(profile: any) {
     contentId: profile.id,
     image: result.data.url,
     url: `https://wedance.vip/${profile.username}`,
-    place: profile.place
+    place: profile.place,
   })
 
-  await db
-    .collection('profiles')
-    .doc(profile.id)
-    .update({
-      socialCover
-    })
+  await db.collection('profiles').doc(profile.id).update({
+    socialCover,
+  })
 }

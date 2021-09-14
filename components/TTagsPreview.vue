@@ -15,13 +15,13 @@ export default {
   props: {
     value: {
       type: Object,
-      default: () => ({})
-    }
+      default: () => ({}),
+    },
   },
   computed: {
     tags() {
       return Object.keys(this.value).map((key) => ({ key, label: key }))
-    }
-  }
+    },
+  },
 }
 </script>

@@ -24,8 +24,8 @@ export default {
 
     return {
       offerFilters,
-      currentCity
+      currentCity,
     }
-  }
+  },
 }
 </script>

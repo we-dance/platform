@@ -15,7 +15,7 @@ export const useComments = () => {
     await create({
       postId,
       commentId,
-      body
+      body,
     })
   }
 
@@ -23,6 +23,6 @@ export const useComments = () => {
     addComment,
     getComments,
     getCommentsCount,
-    loading
+    loading,
   }
 }

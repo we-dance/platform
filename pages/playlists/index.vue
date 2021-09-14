@@ -13,6 +13,6 @@
 
 <script>
 export default {
-  name: 'PagePlaylistIndex'
+  name: 'PagePlaylistIndex',
 }
 </script>

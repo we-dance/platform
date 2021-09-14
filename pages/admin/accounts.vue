@@ -10,7 +10,7 @@ export default {
   name: 'PageAdminAccounts',
   middleware: ['auth'],
   data: () => ({
-    accounts: {}
-  })
+    accounts: {},
+  }),
 }
 </script>

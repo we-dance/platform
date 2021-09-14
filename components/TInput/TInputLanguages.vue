@@ -34,16 +34,16 @@ export default {
   props: {
     value: {
       type: [Object, String],
-      default: () => ({})
-    }
+      default: () => ({}),
+    },
   },
   data: () => ({
-    newLanguage: ''
+    newLanguage: '',
   }),
   computed: {
     languages() {
       return languages
-    }
+    },
   },
   methods: {
     add(lang) {
@@ -76,7 +76,7 @@ export default {
       }
 
       return Object.keys(this.value).map((lang) => this.getLanguage(lang))
-    }
-  }
+    },
+  },
 }
 </script>

@@ -7,12 +7,12 @@ export default {
   props: {
     name: {
       type: String,
-      required: true
+      required: true,
     },
     size: {
       type: String,
-      default: ''
-    }
+      default: '',
+    },
   },
   computed: {
     classes() {
@@ -21,7 +21,7 @@ export default {
       }
 
       return `w-${this.size} h-${this.size}`
-    }
-  }
+    },
+  },
 }
 </script>

@@ -26,27 +26,27 @@ export default {
   props: {
     item: {
       type: Object,
-      default: () => ({})
+      default: () => ({}),
     },
     collection: {
       type: String,
-      default: ''
+      default: '',
     },
     dashboard: {
       type: Boolean,
-      default: false
+      default: false,
     },
     edit: {
       type: Boolean,
-      default: true
-    }
+      default: true,
+    },
   },
   setup() {
     const { can } = useAuth()
 
     return {
-      can
+      can,
     }
-  }
+  },
 }
 </script>

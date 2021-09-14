@@ -35,6 +35,6 @@ export default {
     const { search, response } = useAlgolia('profiles')
 
     return { query, search, response }
-  }
+  },
 }
 </script>

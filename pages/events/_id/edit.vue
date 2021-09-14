@@ -43,16 +43,16 @@ export default {
   props: {
     id: {
       type: String,
-      default: '-'
-    }
+      default: '-',
+    },
   },
   data: () => ({
-    selectedType: 'event'
+    selectedType: 'event',
   }),
   computed: {
     fields() {
       return this.types.find((f) => f.value === this.selectedType).fields
-    }
+    },
   },
   watch: {
     loading(loading) {
@@ -61,7 +61,7 @@ export default {
           this.$nuxt.error({ statusCode: 405 })
         }
       }
-    }
+    },
   },
   mounted() {
     if (this.id === '-') {
@@ -75,7 +75,7 @@ export default {
         price: 'FREE',
         styles: this.profile?.styles,
         cover: this.profile?.photo || '',
-        organiser: this.profile?.username || ''
+        organiser: this.profile?.username || '',
       }
     }
   },
@@ -116,7 +116,7 @@ export default {
       this.$fire.analytics.logEvent('delete_event')
       await this.remove(id)
       this.view()
-    }
+    },
   },
   setup() {
     const { can, profile, isAdmin } = useAuth()
@@ -126,7 +126,7 @@ export default {
     const collection = 'events'
 
     const { doc: item, load, update, remove, create, loading } = useDoc(
-      collection
+      collection,
     )
 
     const updateEndDate = (e) => {
@@ -153,7 +153,7 @@ export default {
           {
             name: 'name',
             hideLabel: true,
-            placeholder: 'Event Name'
+            placeholder: 'Event Name',
           },
           {
             name: 'description',
@@ -163,19 +163,19 @@ export default {
             tips:
               'Pitch yourself: Who are you? What do you offer? What do you want?\n\nTips for effective pitch:\n- Uncomplicated: It should be catchy and roll off the tongue\n- Concise: It shouldn’t take more than a minute to say or read\n- Unique: It reflects your skills, goals, and desires\n- Storyline: It covers who you are, what you offer, and where you want to be\n- Appealing: Your elevator pitch is essentially a persuasive sales pitch; the emphasis should be on what you offer',
             description:
-              'Use [widgets](https://wedance.vip/markdown), including images and videos'
+              'Use [widgets](https://wedance.vip/markdown), including images and videos',
           },
           {
             name: 'venue',
             label: 'Where?',
             labelPosition: 'top',
-            type: 'venue'
+            type: 'venue',
           },
           {
             name: 'startDate',
             type: 'datetime',
             label: 'When?',
-            onChange: updateEndDate
+            onChange: updateEndDate,
           },
           {
             name: 'duration',
@@ -185,56 +185,56 @@ export default {
             options: [
               {
                 value: 30,
-                label: '30 min'
+                label: '30 min',
               },
               {
                 value: 60,
-                label: '1 hour'
+                label: '1 hour',
               },
               {
                 value: 90,
-                label: '1.5 hour'
+                label: '1.5 hour',
               },
               {
                 value: 120,
-                label: '2 hours'
+                label: '2 hours',
               },
               {
                 value: 180,
-                label: '3 hours'
+                label: '3 hours',
               },
               {
                 value: 240,
-                label: '4 hours'
+                label: '4 hours',
               },
               {
                 value: 300,
-                label: '5 hours'
+                label: '5 hours',
               },
               {
                 value: 'custom',
-                label: 'Custom'
-              }
-            ]
+                label: 'Custom',
+              },
+            ],
           },
           {
             name: 'endDate',
             type: 'datetime',
-            when: (e) => e.duration === 'custom'
+            when: (e) => e.duration === 'custom',
           },
           {
             name: 'price',
-            description: 'Please include also currency, for example: 10EUR'
+            description: 'Please include also currency, for example: 10EUR',
           },
           {
             name: 'styles',
             label: 'What?',
-            type: 'stylesSelect'
+            type: 'stylesSelect',
           },
           {
             name: 'type',
             type: 'select',
-            options: eventTypeList
+            options: eventTypeList,
           },
           {
             name: 'cover',
@@ -242,20 +242,20 @@ export default {
             width: 500,
             height: 500,
             circle: false,
-            hideLabel: true
+            hideLabel: true,
           },
           {
             name: 'visibility',
             type: 'buttons',
             options: ['Public', 'Members', 'Unlisted'],
-            description: `- Public - searchable in Google.\n- Members - visible only for logged-in users.\n- Unlisted - possible to open with exact link, but they are not listed nor not shown in the search.`
+            description: `- Public - searchable in Google.\n- Members - visible only for logged-in users.\n- Unlisted - possible to open with exact link, but they are not listed nor not shown in the search.`,
           },
           {
             name: 'online',
             label: 'Online?',
             type: 'buttons',
             options: ['Yes', 'No'],
-            onChange: updatePlace
+            onChange: updatePlace,
           },
           {
             name: 'form',
@@ -263,12 +263,12 @@ export default {
             before:
               'Do you use Google Forms, Facebook, Eventbrite, etc. for people to register for your event?',
             type: 'buttons',
-            options: ['Yes', 'No']
+            options: ['Yes', 'No'],
           },
           {
             name: 'link',
             description: 'URL of your registration form',
-            when: (answers) => answers.form === 'Yes'
+            when: (answers) => answers.form === 'Yes',
           },
           {
             name: 'place',
@@ -277,7 +277,7 @@ export default {
             clearable: true,
             when: (answers) => answers.online !== 'Yes',
             description:
-              'Leave empty if you want your event to be shown in all cities'
+              'Leave empty if you want your event to be shown in all cities',
           },
           {
             name: 'promo',
@@ -285,10 +285,10 @@ export default {
             type: 'buttons',
             options: ['Yes', 'No'],
             description:
-              'Send us link to your event on [Instagram](https://instagram.com/wedancevip) and we will promote it on our social media channels: Telegram, Instagram, Facebook and Twitter.'
-          }
-        ]
-      }
+              'Send us link to your event on [Instagram](https://instagram.com/wedancevip) and we will promote it on our social media channels: Telegram, Instagram, Facebook and Twitter.',
+          },
+        ],
+      },
     ])
 
     if (params.id !== '-') {
@@ -305,8 +305,8 @@ export default {
       create,
       types,
       profile,
-      isAdmin
+      isAdmin,
     }
-  }
+  },
 }
 </script>

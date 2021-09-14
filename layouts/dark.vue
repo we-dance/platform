@@ -10,6 +10,6 @@
 
 <script>
 export default {
-  name: 'DarkLayout'
+  name: 'DarkLayout',
 }
 </script>

@@ -25,6 +25,6 @@ export default {
     const { currentCity } = useCities()
 
     return { currentCity, uid }
-  }
+  },
 }
 </script>

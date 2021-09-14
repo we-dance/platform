@@ -50,28 +50,28 @@ export default {
   props: {
     value: {
       type: [Object, String],
-      default: () => ({})
+      default: () => ({}),
     },
     items: {
       type: Array,
-      default: () => []
+      default: () => [],
     },
     filters: {
       type: Array,
-      default: () => []
+      default: () => [],
     },
     multi: {
       type: Boolean,
-      default: false
+      default: false,
     },
     editable: {
       type: Boolean,
-      default: false
+      default: false,
     },
     verticalScroll: {
       type: Boolean,
-      default: false
-    }
+      default: false,
+    },
   },
   setup(props) {
     const nameFilter = ref('')
@@ -81,7 +81,7 @@ export default {
     const view = ref('name')
 
     const activeFilterItem = computed(() =>
-      props.filters.find((item) => item.value === activeFilter.value)
+      props.filters.find((item) => item.value === activeFilter.value),
     )
 
     const matchString = (str, match) => {
@@ -101,25 +101,25 @@ export default {
         const search = nameFilter.value.toLowerCase()
 
         return matchString(item.search, search)
-      })
+      }),
     )
 
     const coupleCount = computed(
-      () => filteredItems.value.filter((item) => item.couple === 'Yes').length
+      () => filteredItems.value.filter((item) => item.couple === 'Yes').length,
     )
 
     const femaleCount = computed(
       () =>
         filteredItems.value.filter(
-          (item) => item.couple === 'No' && item.gender === 'Female'
-        ).length
+          (item) => item.couple === 'No' && item.gender === 'Female',
+        ).length,
     )
 
     const maleCount = computed(
       () =>
         filteredItems.value.filter(
-          (item) => item.couple === 'No' && item.gender === 'Male'
-        ).length
+          (item) => item.couple === 'No' && item.gender === 'Male',
+        ).length,
     )
 
     return {
@@ -134,19 +134,19 @@ export default {
       filteredItems,
       coupleCount,
       femaleCount,
-      maleCount
+      maleCount,
     }
   },
   computed: {
     count() {
       return Object.keys(this.selected).length
-    }
+    },
   },
   watch: {
     value: 'load',
     selected(val) {
       this.$emit('input', val)
-    }
+    },
   },
   mounted() {
     this.load()
@@ -175,7 +175,7 @@ export default {
       if (mark) {
         Vue.set(this.selected, item.id, {
           email: item.email,
-          name: item.name || item.email
+          name: item.name || item.email,
         })
       } else {
         Vue.delete(this.selected, item.id)
@@ -187,7 +187,7 @@ export default {
       this.filteredItems.forEach((item) => {
         this.select(item, mark)
       })
-    }
-  }
+    },
+  },
 }
 </script>

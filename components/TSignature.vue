@@ -24,20 +24,20 @@ export default {
   props: {
     item: {
       type: Object,
-      default: () => ({})
+      default: () => ({}),
     },
     small: {
       type: Boolean,
-      default: false
-    }
+      default: false,
+    },
   },
   setup() {
     const { getProfile } = useProfiles()
 
     return {
       getProfile,
-      getDateTime
+      getDateTime,
     }
-  }
+  },
 }
 </script>

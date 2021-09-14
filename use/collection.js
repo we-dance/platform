@@ -88,7 +88,7 @@ export const useCollection = (name, filter) => {
 
     return Object.keys(state[hash]).map((key) => ({
       ...state[hash][key],
-      id: key
+      id: key,
     }))
   })
 
@@ -96,7 +96,7 @@ export const useCollection = (name, filter) => {
     return docs.value.find(
       (item) =>
         (item[field] || '').trim().toLowerCase() ===
-        (value || '').trim().toLowerCase()
+        (value || '').trim().toLowerCase(),
     )
   }
 
@@ -107,6 +107,6 @@ export const useCollection = (name, filter) => {
     docs,
     loading,
     load,
-    reset
+    reset,
   }
 }

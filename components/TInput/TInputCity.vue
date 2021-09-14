@@ -83,8 +83,8 @@ Vue.use(VueGoogleMaps, {
   load: {
     key: process.env.firebase.config.apiKey,
     libraries: 'places',
-    language: 'en'
-  }
+    language: 'en',
+  },
 })
 
 const gmapApi = VueGoogleMaps.gmapApi
@@ -95,7 +95,9 @@ export default {
     const { find, create, id, update, doc } = useDoc('cities')
     const { docs } = useCollection('cities')
     const cities = computed(() =>
-      docs.value.filter((city) => city.status === 'active').sort(sortBy('name'))
+      docs.value
+        .filter((city) => city.status === 'active')
+        .sort(sortBy('name')),
     )
 
     return {
@@ -104,42 +106,42 @@ export default {
       update,
       id,
       doc,
-      cities
+      cities,
     }
   },
   props: {
     value: {
       type: [Object, String],
-      default: ''
+      default: '',
     },
     autoSelect: {
       type: Boolean,
-      default: false
+      default: false,
     },
     hideGlobal: {
       type: Boolean,
-      default: false
+      default: false,
     },
     searchPlaceholder: {
       type: String,
-      default: 'Search city'
+      default: 'Search city',
     },
     globalLabel: {
       type: String,
-      default: 'Anywhere'
+      default: 'Anywhere',
     },
     emptyLabel: {
       type: String,
-      default: 'Anywhere'
+      default: 'Anywhere',
     },
     popupTitle: {
       type: String,
-      default: 'Change city'
+      default: 'Change city',
     },
     item: {
       type: Object,
-      default: () => ({})
-    }
+      default: () => ({}),
+    },
   },
 
   data: () => ({
@@ -148,11 +150,11 @@ export default {
     gpsIsBlocked: false,
     loading: false,
     showPopup: false,
-    focused: false
+    focused: false,
   }),
 
   computed: {
-    google: gmapApi
+    google: gmapApi,
   },
 
   watch: {
@@ -175,11 +177,11 @@ export default {
       autocomplete.getPlacePredictions(
         {
           input: val,
-          types: ['(cities)']
+          types: ['(cities)'],
         },
-        this.updateList
+        this.updateList,
       )
-    }
+    },
   },
 
   async mounted() {
@@ -258,13 +260,13 @@ export default {
           name: cityName,
           location,
           status: 'requested',
-          hits: 1
+          hits: 1,
         })
       } else {
         cityName = this.doc.name
 
         this.update(this.id, {
-          hits: parseInt(this.doc.hits || 0) + 1
+          hits: parseInt(this.doc.hits || 0) + 1,
         })
       }
 
@@ -279,7 +281,7 @@ export default {
         () => {
           this.loading = false
           this.gpsIsBlocked = true
-        }
+        },
       )
     },
 
@@ -293,17 +295,17 @@ export default {
         {
           location: {
             lat: position.coords.latitude,
-            lng: position.coords.longitude
-          }
+            lng: position.coords.longitude,
+          },
         },
         (response, status) => {
           this.loading = false
 
           const location = getLocation(response[5], true)
           this.selectLocation(location)
-        }
+        },
       )
-    }
-  }
+    },
+  },
 }
 </script>

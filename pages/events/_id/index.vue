@@ -177,14 +177,14 @@ import {
   dateDiff,
   getEventDescription,
   openURL,
-  getDateObect
+  getDateObect,
 } from '~/utils'
 
 export default {
   name: 'EventView',
   layout: 'default',
   data: () => ({
-    comment: ''
+    comment: '',
   }),
   computed: {
     publishedAt() {
@@ -203,14 +203,14 @@ export default {
       const text = encodeURI(`"${this.item.name}"`)
 
       return `https://twitter.com/intent/tweet?text=${text} %23WeDance ${this.eventUrl}`
-    }
+    },
   },
   watch: {
     item() {
       if (this.item && this.item.place) {
         this.currentCity = this.item.place
       }
-    }
+    },
   },
   head() {
     if (!this.item) {
@@ -226,44 +226,44 @@ export default {
         {
           hid: 'description',
           name: 'description',
-          content: item.excerpt
+          content: item.excerpt,
         },
         {
           hid: 'author',
           name: 'author',
-          content: this.creator.username
+          content: this.creator.username,
         },
         {
           hid: 'publisher',
           name: 'publisher',
-          content: this.creator.username
+          content: this.creator.username,
         },
         {
           name: 'keywords',
           content: item.keywords,
-          hid: 'keywords'
+          hid: 'keywords',
         },
         {
           property: 'og:image',
           content: item.socialCover || item.cover,
-          hid: 'og:image'
+          hid: 'og:image',
         },
         {
           property: 'og:type',
           content: 'event',
-          hid: 'og:type'
+          hid: 'og:type',
         },
         {
           property: 'og:title',
           content: item.name,
-          hid: 'og:title'
+          hid: 'og:title',
         },
         {
           property: 'og:description',
           content: item.excerpt,
-          hid: 'og:description'
-        }
-      ]
+          hid: 'og:description',
+        },
+      ],
     }
   },
   setup() {
@@ -272,7 +272,7 @@ export default {
       can,
       account,
       updateAccount,
-      sendSignInLinkToEmail
+      sendSignInLinkToEmail,
     } = useAuth()
     const { currentCity } = useCities()
 
@@ -296,8 +296,8 @@ export default {
         end: getDateObect(item.value?.endDate),
         title: item.value?.name,
         details: `https://wedance.vip/events/${item.value?.id}`,
-        location: item.value?.address
-      })
+        location: item.value?.address,
+      }),
     )
 
     const reservationFields = accountFields.filter((f) => f.event)
@@ -352,8 +352,8 @@ export default {
       getTime,
       getDay,
       getEventDescription,
-      calendarLink
+      calendarLink,
     }
-  }
+  },
 }
 </script>

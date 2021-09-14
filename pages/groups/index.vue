@@ -89,29 +89,29 @@ export default {
     const fields = [
       {
         name: 'name',
-        label: 'Name'
+        label: 'Name',
       },
       {
         name: 'description',
-        label: 'Description'
+        label: 'Description',
       },
       {
         name: 'location',
-        label: 'Location'
+        label: 'Location',
       },
       {
         name: 'type',
-        label: 'Type'
+        label: 'Type',
       },
       {
         name: 'tags',
         label: 'Tags',
-        type: 'tags'
+        type: 'tags',
       },
       {
         name: 'url',
-        label: 'Url'
-      }
+        label: 'Url',
+      },
     ]
 
     const { getCount, getRsvpResponse, updateRsvp } = useRsvp()
@@ -130,7 +130,7 @@ export default {
         downVotes,
         votes,
         response,
-        order
+        order,
       }
     }
 
@@ -140,13 +140,13 @@ export default {
       {
         name: 'all',
         label: 'All',
-        default: true
+        default: true,
       },
       {
         name: 'mine',
         label: 'Mine',
-        filter: (item) => item.createdBy === uid.value
-      }
+        filter: (item) => item.createdBy === uid.value,
+      },
     ]
 
     return {
@@ -156,8 +156,8 @@ export default {
       filters,
       uid,
       map,
-      updateRsvp
+      updateRsvp,
     }
-  }
+  },
 }
 </script>

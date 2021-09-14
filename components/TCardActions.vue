@@ -32,27 +32,27 @@ export default {
     const { create: createReport } = useDoc('reports')
 
     return {
-      createReport
+      createReport,
     }
   },
   props: {
     id: {
       type: String,
-      default: ''
+      default: '',
     },
     collection: {
       type: String,
-      default: ''
+      default: '',
     },
     item: {
       type: Object,
-      default: () => ({})
-    }
+      default: () => ({}),
+    },
   },
   data: () => ({
     isReportShown: false,
     reportCategory: 'spam',
-    reportReason: ''
+    reportReason: '',
   }),
   methods: {
     cancelReport() {
@@ -68,10 +68,10 @@ export default {
         category: this.reportCategory,
         collection: this.collection,
         reason: this.reportReason,
-        documentData: this.item
+        documentData: this.item,
       })
       this.cancelReport()
-    }
-  }
+    },
+  },
 }
 </script>

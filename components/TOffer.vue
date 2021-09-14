@@ -60,14 +60,14 @@
           :options="
             getOptionsFromMulti(
               {
-                myPlace: `${author.username}'s Home - ${
-                  author.community
-                } ${author.zipcode || ''}`,
-                yourPlace: `${profile.username}'s Home - ${
-                  profile.community
-                } ${profile.zipcode || ''}`
+                myPlace: `${author.username}'s Home - ${author.community} ${
+                  author.zipcode || ''
+                }`,
+                yourPlace: `${profile.username}'s Home - ${profile.community} ${
+                  profile.zipcode || ''
+                }`,
               },
-              offer.place
+              offer.place,
             )
           "
         />
@@ -98,14 +98,14 @@ export default {
   props: {
     offer: {
       type: Object,
-      default: () => ({})
-    }
+      default: () => ({}),
+    },
   },
   data: () => ({
     where: '',
     when: '',
     phone: '',
-    isOpened: false
+    isOpened: false,
   }),
   computed: {
     author() {
@@ -113,7 +113,7 @@ export default {
     },
     profile() {
       return this.getProfile(this.uid)
-    }
+    },
   },
   setup() {
     const { uid } = useAuth()
@@ -126,8 +126,8 @@ export default {
       meetingPlaces,
       days,
       getOptionsFromMulti,
-      uid
+      uid,
     }
-  }
+  },
 }
 </script>

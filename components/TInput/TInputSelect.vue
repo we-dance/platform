@@ -10,8 +10,9 @@
         v-for="option in options"
         :key="getValue(option)"
         :value="getValue(option)"
-        >{{ getLabel(option) }}</option
       >
+        {{ getLabel(option) }}
+      </option>
     </select>
     <div
       class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700"
@@ -38,20 +39,20 @@ export default {
   props: {
     options: {
       type: Array,
-      default: () => []
+      default: () => [],
     },
     value: {
       type: [String, Number],
-      default: ''
+      default: '',
     },
     defaultValue: {
       type: [String, Number],
-      default: ''
+      default: '',
     },
     item: {
       type: Object,
-      default: () => ({})
-    }
+      default: () => ({}),
+    },
   },
   mounted() {
     if (!this.value) {
@@ -83,7 +84,7 @@ export default {
       }
 
       return camelcase(field.name)
-    }
-  }
+    },
+  },
 }
 </script>

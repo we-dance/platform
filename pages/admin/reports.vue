@@ -44,26 +44,26 @@ export default {
         name: 'state',
         label: 'State',
         type: 'select',
-        options: ['open', 'accepted', 'declined']
+        options: ['open', 'accepted', 'declined'],
       },
       {
         name: 'category',
         label: 'Category',
         type: 'select',
-        options: ['spam', 'claim']
+        options: ['spam', 'claim'],
       },
       {
         name: 'reason',
-        label: 'Reason'
+        label: 'Reason',
       },
       {
         name: 'collection',
-        label: 'Collection'
+        label: 'Collection',
       },
       {
         name: 'documentId',
-        label: 'Document'
-      }
+        label: 'Document',
+      },
     ]
 
     const { uid, isAdmin } = useAuth()
@@ -73,8 +73,8 @@ export default {
       {
         name: 'all',
         label: 'All',
-        default: true
-      }
+        default: true,
+      },
     ]
 
     return {
@@ -84,8 +84,8 @@ export default {
       filters,
       uid,
       isAdmin,
-      getAccount
+      getAccount,
     }
-  }
+  },
 }
 </script>

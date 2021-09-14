@@ -19,13 +19,13 @@ export default {
   props: {
     hover: {
       type: Boolean,
-      default: false
-    }
+      default: false,
+    },
   },
   data: () => ({
     show: false,
     isTop: true,
-    isLett: true
+    isLett: true,
   }),
   computed: {
     classes() {
@@ -35,7 +35,7 @@ export default {
       result += this.isLeft ? ' left-0' : ' right-0'
 
       return result
-    }
+    },
   },
   watch: {
     $route() {
@@ -47,7 +47,7 @@ export default {
 
       this.isLeft =
         this.$refs.btn.getBoundingClientRect().left < window.innerWidth / 2
-    }
+    },
   },
   methods: {
     closeMenu() {
@@ -63,7 +63,7 @@ export default {
       if (this.hover) {
         this.show = val
       }
-    }
-  }
+    },
+  },
 }
 </script>
