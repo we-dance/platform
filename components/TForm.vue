@@ -186,9 +186,11 @@ export default {
       if (!this.v$) return true
 
       this.v$.$validate()
+
       if (this.v$.$error || this.v$.$pending || this.v$.$silentErrors[0]) {
         return false
       }
+
       return true
     },
     copy() {
