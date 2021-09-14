@@ -111,3 +111,12 @@ footer.faq: FAQ
 chat.welcome: Start conversation with something nice.
 chat.with: Chat with {username}
 chat.dateDiff: "{diff} ago"
+validation.name.required: Name is a required field
+validation.name.minLength: Name must be at least 3 characters
+validation.email.required: Email is a required field
+validation.email.email: Email must be valid
+validation.username.required: Usernname is a required field
+validation.username.minLength: Username must be at least 3 characters
+validation.username.isUnique: Username must be unique
+validation.username.alphaNum: Username must be alphanumerics
+validation.place.required: Place is a required field

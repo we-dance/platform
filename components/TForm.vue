@@ -8,9 +8,12 @@
         :label="getLabel(field)"
         @input="(val) => onFieldChange(field, val)"
       />
-    </div>
-    <div v-if="error" class="text-red-500 py-4 text-right">
-      {{ error.message }}
+      <div
+        v-if="v$.form[field.name].$errors[0]"
+        class="text-red-500 py-2 text-left"
+      >
+        {{ $t(v$.form[field.name].$errors[0].$message) }}
+      </div>
     </div>
     <slot name="bottom" />
     <div
@@ -31,7 +34,10 @@
 </template>
 
 <script>
+import { useVuelidate } from '@vuelidate/core'
 import { camelcase } from '~/utils'
+import { validators } from '~/use/validators'
+import { useDoc } from '~/use/doc'
 
 export default {
   name: 'TForm',
@@ -76,9 +82,63 @@ export default {
       default: ''
     }
   },
-  data: () => ({
-    error: false
-  }),
+  setup() {
+    const { find, exists } = useDoc('profiles')
+    const isUnique = async (value) => {
+      await find('username', value)
+      if (exists.value) {
+        return false
+      } else {
+        return true
+      }
+    }
+    return { v$: useVuelidate(), find, exists, isUnique }
+  },
+  data() {
+    return {
+      form: this.value,
+      error: true
+    }
+  },
+  validations() {
+    const rules = Object.fromEntries(
+      this.fields.map((field) => {
+        const validations = Object.fromEntries(
+          Object.entries(field.validations).map((name) => {
+            if (name[0] === 'isUnique') {
+              return [
+                name[0],
+                validators.helpers.withMessage(
+                  `validation.${field.name}.${name[0]}`,
+                  validators.helpers.withAsync(this.isUnique)
+                )
+              ]
+            } else if (typeof name[1] !== 'boolean') {
+              return [
+                name[0],
+                validators.helpers.withMessage(
+                  `validation.${field.name}.${name[0]}`,
+                  validators[name[0]](name[1])
+                )
+              ]
+            } else {
+              return [
+                name[0],
+                validators.helpers.withMessage(
+                  `validation.${field.name}.${name[0]}`,
+                  validators[name[0]]
+                )
+              ]
+            }
+          })
+        )
+        return [field.name, validations]
+      })
+    )
+    return {
+      form: rules
+    }
+  },
   computed: {
     visibleFields() {
       const fields = this.fields
@@ -125,6 +185,12 @@ export default {
       return camelcase(field.name)
     },
     validate() {
+      this.v$.$validate()
+
+      if (this.v$.$error || this.v$.$pending || this.v$.$silentErrors[0]) {
+        return false
+      }
+
       return true
     },
     copy() {
@@ -147,6 +213,7 @@ export default {
     },
     onFieldChange(field, value) {
       const val = { ...this.value }
+      this.form[field.name] = value
 
       if (value) {
         this.$set(val, field.name, value)

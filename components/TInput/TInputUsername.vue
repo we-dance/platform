@@ -53,18 +53,10 @@ export default {
     this.computedValue = this.value
   },
   methods: {
-    async save(newName) {
+    save(newName) {
       this.error = ''
 
       if (newName === this.value) {
-        return
-      }
-
-      await this.find('username', newName)
-
-      if (this.id && this.id !== this.item.id) {
-        this.error = 'This name is already taken'
-        this.$emit('input', this.value)
         return
       }
 
