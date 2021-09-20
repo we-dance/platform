@@ -12,6 +12,10 @@ export const accountFields = [
     name: 'email',
     key: 'account.email',
     register: true,
+    validations: {
+      required: true,
+      email: true
+    },
     required: true,
     event: true
   },
@@ -19,7 +23,11 @@ export const accountFields = [
     name: 'password',
     type: 'password',
     label: 'New Password',
-    register: true
+    register: true,
+    validations: {
+      required: true,
+      minLength: 8
+    }
   },
   {
     name: 'phone',

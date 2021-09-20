@@ -120,3 +120,5 @@ validation.username.minLength: Username must be at least 3 characters
 validation.username.isUnique: Username must be unique
 validation.username.alphaNum: Username must be alphanumerics
 validation.place.required: Place is a required field
+validation.password.required: Password is a required field
+validation.password.minLength: Password must be at least 8 characters

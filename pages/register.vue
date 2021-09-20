@@ -58,7 +58,7 @@ export default {
       error
     } = useAuth()
 
-    const data = ref({})
+    const data = ref({ password: '', email: '', username: '', place: '' })
 
     return {
       data,
@@ -99,21 +99,6 @@ export default {
       this.$router.push(`/${this.profile.username}`)
     },
     async submit({ email, username, password, place }) {
-      if (
-        !email ||
-        !email.trim() ||
-        !username ||
-        !username.trim() ||
-        !password ||
-        !password.trim()
-      ) {
-        this.error = {
-          message: 'Please fill all the fields'
-        }
-
-        return
-      }
-
       this.$fire.analytics.logEvent('sign_up', {
         method: 'Password'
       })
