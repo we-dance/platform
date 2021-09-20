@@ -229,6 +229,12 @@ export const profileFields = [
     name: 'username',
     key: 'profile.username',
     register: true,
+    validations: {
+      required: true,
+      minLength: 4,
+      alphaNum: true,
+      isUnique: true
+    },
     poster: true,
     validations: {
       required: true,

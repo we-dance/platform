@@ -30,7 +30,7 @@ export const accountFields = [
     register: true,
     validations: {
       required: true,
-      minLength: 6,
+      minLength: 8,
     },
   },
   {
