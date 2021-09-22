@@ -66,19 +66,19 @@ export const accountFields = [
     type: 'select',
     label: 'Do you have a partner?',
     options: ['Yes', 'No'],
-    event: true
+    event: false
   },
   {
     name: 'partnerName',
     label: "Partner's name",
     when: (answers) => answers?.withPartner === 'Yes',
-    event: true
+    event: false
   },
   {
     name: 'partnerEmail',
     label: "Partner's email",
     when: (answers) => answers?.withPartner === 'Yes',
-    event: true
+    event: false
   }
 ]
 
