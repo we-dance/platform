@@ -161,7 +161,15 @@ export default {
       this.selected = this.value
     },
     download() {
-      saveCSV(this.items)
+      const items = this.items
+        .filter((item) => item.rsvp === 'up')
+        .map((item) => ({
+          name: item.name,
+          email: item.email,
+          phone: item.phone
+        }))
+
+      saveCSV(items)
     },
     select(item, mark) {
       if (!item.email) {
