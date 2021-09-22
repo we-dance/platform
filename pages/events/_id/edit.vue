@@ -29,6 +29,7 @@
 </template>
 
 <script>
+import { pickBy } from 'lodash'
 import { addMinutes, parseISO } from 'date-fns'
 import { computed } from '@nuxtjs/composition-api'
 import { useAuth } from '~/use/auth'
@@ -101,6 +102,8 @@ export default {
       if (!data.name) {
         return
       }
+
+      data = pickBy(data, (v) => v !== undefined)
 
       if (data.id) {
         this.$fire.analytics.logEvent('update_event')
@@ -286,6 +289,13 @@ export default {
             options: ['Yes', 'No'],
             description:
               'Send us link to your event on [Instagram](https://instagram.com/wedancevip) and we will promote it on our social media channels: Telegram, Instagram, Facebook and Twitter.'
+          },
+          {
+            name: 'confirmation',
+            labelPosition: 'top',
+            label: 'Confirmation email for guests',
+            type: 'textarea',
+            placeholder: 'Example: Dear guest, you are confirmed to our event.'
           }
         ]
       }

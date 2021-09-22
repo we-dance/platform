@@ -93,6 +93,13 @@ app.get('/share/*', async (req, res) => {
   }
 })
 
+type RecipientList = {
+  [key: string]: {
+    name: string
+    email: string
+  }
+}
+
 export const hooks = functions.runWith({ memory: '1GB' }).https.onRequest(app)
 
 const render = (templateString: string, data: Object) => {
@@ -314,6 +321,62 @@ export const onProfileChange = functions.firestore
     return await sendEmail(emailData)
   })
 
+export const eventConfirmation = functions.firestore
+  .document('participants/{rsvpId}')
+  .onWrite(async (snapshot, context) => {
+    const rsvp = snapshot.after.data() as any
+    const rsvpId = context.params.rsvpId
+
+    if (rsvp.rsvp !== 'up' || rsvp.collection !== 'events') {
+      return
+    }
+
+    const recipients: RecipientList = {}
+
+    const guest = rsvp.participant
+
+    if (!guest.name || !guest.email) {
+      return
+    }
+
+    recipients[rsvpId] = {
+      name: guest.name,
+      email: guest.email
+    }
+
+    const event: any = (
+      await db
+        .collection('events')
+        .doc(rsvp.eventId)
+        .get()
+    ).data()
+
+    const subject = event.name
+    const content = event.confirmation
+
+    if (!content) {
+      return
+    }
+
+    const from = 'WeDance <noreply@wedance.vip>'
+
+    const data = {
+      guest,
+      event
+    }
+
+    const email = {
+      from,
+      recipients,
+      subject,
+      content: render(content, data),
+      type: 'eventConfirmation',
+      id: rsvpId
+    }
+
+    await sendEmail(email)
+  })
+
 export const matchNotification = functions.firestore
   .document('chats/{chatId}')
   .onWrite(async (change, context) => {
@@ -339,13 +402,6 @@ export const matchNotification = functions.firestore
     }
 
     const subject = 'You’ve got a new message'
-
-    type RecipientList = {
-      [key: string]: {
-        name: string
-        email: string
-      }
-    }
 
     const recipients: RecipientList = {}
 
