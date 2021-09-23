@@ -1,16 +1,14 @@
 <template>
   <div>
     <button
-      class="hamburger hamburger--elastic outline-none focus:outline-none appearance-none"
+      class="p-2"
       :class="{ 'is-active': value }"
       type="button"
       aria-label="Menu"
       aria-controls="navigation"
       @click="$emit('input', !value)"
     >
-      <span class="hamburger-box">
-        <span class="hamburger-inner"></span>
-      </span>
+      <TIcon name="menu" class="h-8 w-8" />
     </button>
   </div>
 </template>
