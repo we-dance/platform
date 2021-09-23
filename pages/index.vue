@@ -40,7 +40,7 @@
               </div>
 
               <div class="flex justify-center">
-                <div class="mt-16 flex space-x-4 font-bold text-white">
+                <div class="mt-8 flex space-x-4 font-bold text-white">
                   <div class="flex flex-col items-center justify-center">
                     <TIcon name="group" class="h-16 w-16" />
                     <div class="text-4xl">1068</div>
