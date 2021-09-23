@@ -5,7 +5,7 @@
   "author": "WeDance",
   "private": true,
   "scripts": {
-    "dev": "nuxt dev --spa",
+    "dev": "nuxt dev",
     "build": "nuxt generate",
     "start": "nuxt start",
     "lint": "eslint --ext .js,.vue --ignore-path .gitignore .",
