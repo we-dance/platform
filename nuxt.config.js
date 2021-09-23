@@ -129,6 +129,12 @@ export default {
     extend(config, ctx) {
       config.resolve.alias.vue = 'vue/dist/vue.common'
 
+      config.module.rules.push({
+        test: /\.mjs$/,
+        include: /node_modules/,
+        type: 'javascript/auto'
+      })
+
       const svgRule = config.module.rules.find((rule) => rule.test.test('.svg'))
 
       svgRule.test = /\.(png|jpe?g|gif|webp)$/
