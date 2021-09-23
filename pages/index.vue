@@ -1,166 +1,85 @@
 <template>
-  <div>
-    <nav
-      class="mx-auto max-w-2xl mt-4 mb-4 px-4 flex justify-between items-center"
-    >
-      <div>
-        <TIcon name="logo-horizontal-dark" />
-      </div>
-      <div class="flex space-x-2">
-        <TButton type="nav" icon="search" to="/search" />
-        <TButton type="secondary" to="/signin" :label="$t('signin')" />
-      </div>
-    </nav>
-
-    <div class="py-8">
-      <div class="px-4 mx-auto max-w-2xl text-center">
-        <div class="mx-auto max-w-xs mb-4">
-          <TIcon name="undraw_i_can_fly" />
-        </div>
-        <h1 class="text-4xl leading-tight font-montserrat font-bold">
-          {{ $t('hero.title') }}
-        </h1>
-        <p class="mt-2">
-          {{ $t('hero.subtitle') }}
-        </p>
+  <div class="font-noto">
+    <main>
+      <div class="relative">
+        <div class="absolute inset-x-0 bottom-0 h-1/2 bg-gray-100" />
         <div>
-          <TButton
-            class="mt-4 mr-4"
-            type="primary"
-            to="/register"
-            :label="$t('signup')"
-          />
-        </div>
-      </div>
-    </div>
+          <div class="relative sm:overflow-hidden">
+            <div class="absolute inset-0">
+              <img
+                class="h-full w-full object-cover"
+                src="/img/hero.jpg"
+                alt="People dancing salsa"
+              />
+              <div class="absolute inset-0 bg-black opacity-50" />
+            </div>
 
-    <div class="mt-8 p-4 max-w-md mx-auto">
-      <h2 class="mt-4 mb-10 text-3xl font-montserrat leading-tight text-center">
-        Who can join WeDance?
-      </h2>
-      <div class="typo">
-        <p>
-          WeDance is for all of you, who's interested in dancing! Salsa,
-          Bachata, Kizomba, Zouk, you name it! We are open for all dances!
-        </p>
-        <p>
-          You can post information about events, parties, social meetings, share
-          dancing music, videos and other things associated with social dances.
-        </p>
-        <p>
-          Enjoy networking and meeting new dancers in your area or while
-          traveling to other cities.
-        </p>
-        <p>It's free to join for anyone.</p>
-      </div>
-    </div>
+            <nav class="relative flex p-4 justify-end">
+              <TButton type="simple" to="/signin" :label="$t('signin')" />
+            </nav>
 
-    <div class="mt-8 p-4 max-w-2xl mx-auto">
-      <h2 class="mt-4 mb-10 text-3xl font-montserrat leading-tight text-center">
-        Your dance journey with WeDance
-      </h2>
-      <div class="mt-16 flex min-w-full justify-end items-center">
-        <div class="w-1/3">
-          <TIcon name="undraw_i_can_fly" class="pr-4" />
-        </div>
-        <div class="w-2/3 h-40">
-          <h2 class="font-lato font-bold text-xl">Start dancing</h2>
-          <p>
-            Discover all dance styles in your city, find your passion, get
-            inspired and plan your first workshop.
-          </p>
-        </div>
-      </div>
-      <div class="mt-16 flex min-w-full justify-start items-center">
-        <div class="w-2/3 h-40">
-          <h2 class="font-lato font-bold text-xl">Find dance partner</h2>
-          <p>
-            Let us know who you are looking for and let them find you.
-          </p>
-        </div>
-        <div class="w-1/3">
-          <TIcon name="undraw_together" class="pl-4" />
-        </div>
-      </div>
-      <div class="mt-16 flex min-w-full justify-end items-center">
-        <div class="w-1/3">
-          <TIcon name="undraw_events" class="pr-4" />
-        </div>
-        <div class="w-2/3 h-40">
-          <h2 class="font-lato font-bold text-xl">
-            Find parties
-          </h2>
-          <p>
-            We monitor all activities in dance scene and provide you with event
-            calendar, which will highlight the best party for you.
-          </p>
-        </div>
-      </div>
-      <div class="mt-16 flex min-w-full justify-start items-center">
-        <div class="w-2/3 h-40">
-          <h2 class="font-lato font-bold text-xl">Improve dancing</h2>
-          <p>
-            Find and connect with dance instructors, dance schools and
-            festivals.
-          </p>
-        </div>
-        <div class="w-1/3">
-          <TIcon name="undraw_super_woman" class="pl-4" />
-        </div>
-      </div>
+            <div class="relative p-4 sm:p-10 lg:p-14">
+              <div class="flex justify-center">
+                <TIcon name="logo-vertical-white" />
+              </div>
 
-      <div class="mt-16 flex min-w-full justify-end items-center">
-        <div class="w-1/3">
-          <TIcon name="undraw_online_ad" class="pr-4" />
-        </div>
-        <div class="w-2/3 h-40">
-          <h2 class="font-lato font-bold text-xl">Promote events</h2>
-          <p>
-            Organising a party with us is easier and faster. We help you to
-            connect with dancers and collaborate with other organisers.
-          </p>
-        </div>
-      </div>
-      <div class="mt-16 flex min-w-full justify-start items-center">
-        <div class="w-2/3 h-40">
-          <h2 class="font-lato font-bold text-xl">Book venues (coming soon)</h2>
-          <p>
-            Get access to our currated list of studios and open air places
-            available for parties or workshops. See availability. Book in few
-            clicks with no emails and calls.
-          </p>
-        </div>
-        <div class="w-1/3">
-          <TIcon name="undraw_verified" class="pl-4" />
-        </div>
-      </div>
-    </div>
+              <p
+                class="mt-2 max-w-lg mx-auto text-center sm:max-w-3xl text-white"
+              >
+                Even one dance contact in a city makes a difference
+              </p>
 
-    <div class="mt-8 p-4 max-w-md mx-auto">
-      <h2 class="mt-4 mb-10 text-3xl font-montserrat leading-tight text-center">
-        WeDance is a non-profit
-      </h2>
-      <div class="typo">
-        <p>
-          Our mission is to unite dancers worldwide, so that you can go to any
-          city and find dance events and dancers. It all starts with the local
-          community and volunteers.
-        </p>
-        <p>
-          WeDance is created and supported by volunteers. Everyone is
-          <a href="https://bit.ly/wedance-get-involved" target="_blank"
-            >welcome to contribute</a
-          >.
-        </p>
-        <p>
-          The project can be much more interesting, if it is launched in all
-          cities, then traveling as a dancer will be very easy and pleasant.
-          <router-link to="/about">Read more</router-link>.
-        </p>
-      </div>
-    </div>
+              <div class="max-w-lg mx-auto">
+                <TButton
+                  icon="search"
+                  label="Search dancers"
+                  to="/search"
+                  type="void"
+                  class="mt-8 w-full text-gray-500 bg-white hover:bg-gray-100 font-semibold py-2 px-4 border border-gray-400 rounded-full shadow"
+                />
+              </div>
 
-    <div class="mt-4 bg-dark text-white">
+              <div class="flex justify-center">
+                <div class="mt-16 flex space-x-4 font-bold text-white">
+                  <div class="flex flex-col items-center justify-center">
+                    <TIcon name="group" class="h-16 w-16" />
+                    <div class="text-4xl">1068</div>
+                    <div class="text-sm">dancers</div>
+                  </div>
+                  <div class="flex flex-col items-center justify-center">
+                    <TIcon name="location" class="h-16 w-16" />
+                    <div class="text-4xl">18</div>
+                    <div class="text-sm">cities</div>
+                  </div>
+                  <div class="flex flex-col items-center justify-center">
+                    <TIcon name="calendar" class="h-16 w-16" />
+                    <div class="text-4xl">120</div>
+                    <div class="text-sm">events</div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="mt-8 flex justify-center">
+                <TButton
+                  type="primary"
+                  to="/register"
+                  label="Join the community"
+                />
+              </div>
+
+              <p
+                class="mt-8 max-w-lg mx-auto text-center sm:max-w-3xl text-white"
+              >
+                Salsa, Bachata, Kizomba, Urban Kiz, Raggaeton, Casino, Tango and
+                130 more dance styles
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+
+    <div class="bg-dark text-white">
       <TFooter class="p-4 mx-auto max-w-2xl" />
     </div>
   </div>

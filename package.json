@@ -110,7 +110,7 @@
     "sass": "^1.42.1",
     "sass-loader": "^8.0.2",
     "stylelint": "^10.1.0",
-    "tailwindcss": "^1.7.1",
+    "tailwindcss": "2.0",
     "vue-jest": "^4.0.0-0",
     "vue-svg-loader": "^0.16.0",
     "yaml-loader": "^0.6.0"

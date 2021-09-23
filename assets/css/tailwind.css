@@ -111,4 +111,7 @@ html {
   min-width: 10rem;
 }
 
+.mix-blend-multiply {
+  mix-blend-mode: multiply;
+}
 /* purgecss end ignore */
