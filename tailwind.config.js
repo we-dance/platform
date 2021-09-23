@@ -20,6 +20,7 @@ module.exports = {
       },
       fontFamily: {
         lato: 'Lato',
+        noto: 'Noto Sans',
         montserrat: 'Montserrat'
       }
     }
