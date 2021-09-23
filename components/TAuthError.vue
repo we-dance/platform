@@ -1,4 +1,4 @@
-<template>
+c<template>
   <div>
     <div>
       <h2 class="font-bold text-xl text-red-500">Oops</h2>
