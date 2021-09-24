@@ -6,10 +6,11 @@
         <div>
           <div class="relative sm:overflow-hidden">
             <div class="absolute inset-0">
-              <img
+              <nuxt-img
                 class="h-full w-full object-cover"
-                src="/img/hero.jpg"
-                alt="People dancing salsa"
+                src="/hero.jpg"
+                alt="People dancing bachata"
+                sizes="sm:100vw md:100vw lg:100vw xl:100vw xxl:100vw 2xl:100vw"
               />
               <div class="absolute inset-0 bg-black opacity-50" />
             </div>

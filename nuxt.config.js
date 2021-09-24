@@ -61,7 +61,8 @@ export default {
     '@nuxtjs/tailwindcss',
     // Doc: https://composition-api.nuxtjs.org/
     '@nuxtjs/composition-api',
-    '@nuxtjs/google-fonts'
+    '@nuxtjs/google-fonts',
+    '@nuxt/image'
   ],
   /*
    ** Nuxt.js modules
@@ -207,5 +208,9 @@ export default {
       fallbackLocale: 'en',
       alwaysRedirect: true
     }
+  },
+  image: {
+    dir: 'static/img',
+    provider: 'ipx'
   }
 }
