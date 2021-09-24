@@ -6,18 +6,16 @@ export default {
     const { uid } = useAuth()
 
     return {
-      uid
+      uid,
     }
-  }
+  },
 }
 </script>
 
 <template>
   <div v-if="!uid" class="mt-4 mx-auto max-w-md p-4 text-sm">
     <TIcon name="undraw_modern_art" class="p-4" />
-    <div>
-      Dance and music artists directory.
-    </div>
+    <div>Dance and music artists directory.</div>
     <div v-if="!uid" class="mt-8 bg-gray-400 p-4 rounded text-center">
       <div>Sign in to access</div>
       <TButton class="mt-2" to="/signin?target=/trips">Sign in</TButton>
@@ -123,33 +121,33 @@ export default {
     const fields = [
       {
         name: 'name',
-        label: 'Name'
+        label: 'Name',
       },
       {
         name: 'photo',
-        label: 'Photo'
+        label: 'Photo',
       },
       {
         name: 'tags',
         label: 'Tags',
-        type: 'tags'
+        type: 'tags',
       },
       {
         name: 'phone',
-        label: 'Phone'
+        label: 'Phone',
       },
       {
         name: 'website',
-        label: 'Website'
+        label: 'Website',
       },
       {
         name: 'email',
-        label: 'Email'
+        label: 'Email',
       },
       {
         name: 'location',
-        label: 'Location'
-      }
+        label: 'Location',
+      },
     ]
 
     const { getCount, getRsvpResponse, updateRsvp } = useRsvp()
@@ -168,7 +166,7 @@ export default {
         downVotes,
         votes,
         response,
-        order
+        order,
       }
     }
 
@@ -178,13 +176,13 @@ export default {
       {
         name: 'all',
         label: 'All',
-        default: true
+        default: true,
       },
       {
         name: 'mine',
         label: 'Mine',
-        filter: (item) => item.createdBy === uid.value
-      }
+        filter: (item) => item.createdBy === uid.value,
+      },
     ]
 
     return {
@@ -194,8 +192,8 @@ export default {
       filters,
       uid,
       map,
-      updateRsvp
+      updateRsvp,
     }
-  }
+  },
 }
 </script>

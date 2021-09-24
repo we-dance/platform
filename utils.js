@@ -31,7 +31,7 @@ export const sortBy = (_key) => {
 
 export const toDatetimeLocal = (date) => {
   return format(date, "yyyy-MM-dd'T'HH:mm", {
-    awareOfUnicodeTokens: true
+    awareOfUnicodeTokens: true,
   })
 }
 
@@ -105,7 +105,7 @@ export const getExcerpt = (markdown) => {
   const md = new MarkdownIt({
     html: true,
     linkify: true,
-    typographer: true
+    typographer: true,
   })
 
   const html = md.render(markdown)
@@ -147,7 +147,7 @@ export const getId = (text) => {
 
 export const camelize = (str) => {
   return str
-    .replace(/(?:^\w|[A-Z]|\b\w)/g, function(word, index) {
+    .replace(/(?:^\w|[A-Z]|\b\w)/g, function (word, index) {
       return index === 0 ? word.toLowerCase() : word.toUpperCase()
     })
     .replace(/\s+/g, '')
@@ -172,7 +172,7 @@ export const getLocation = (result, usedGps) => ({
   place_id: result.place_id,
   latitude: result.geometry.location.lat(),
   longitude: result.geometry.location.lng(),
-  usedGps
+  usedGps,
 })
 
 export const sanitize = (input, trim, target = '') => {
@@ -184,7 +184,7 @@ export const sanitize = (input, trim, target = '') => {
 export const saveCSV = (data, filename) => {
   const csvFile = dsvFormat(',').format(data)
   const blob = new Blob([csvFile], {
-    type: 'text/csv;charset=utf-8'
+    type: 'text/csv;charset=utf-8',
   })
 
   saveAs(blob, filename)
@@ -194,17 +194,14 @@ export const getOptions = (items, label) => {
   return [
     {
       label,
-      value: ''
+      value: '',
     },
-    ...items
+    ...items,
   ]
 }
 
 function getLang(languageString) {
-  const [language] = languageString
-    .replace('-', '_')
-    .toLowerCase()
-    .split('_')
+  const [language] = languageString.replace('-', '_').toLowerCase().split('_')
 
   return language
 }
@@ -343,7 +340,7 @@ export function getOptionsFromMulti(list, values) {
 
   return Object.keys(values).map((v) => ({
     label: getLabel(list, v),
-    value: v
+    value: v,
   }))
 }
 
@@ -360,7 +357,7 @@ export async function loadDoc({ app, params, error }, collection) {
   doc.id = snapshot.id
 
   return {
-    doc
+    doc,
   }
 }
 
@@ -386,24 +383,24 @@ export const getMeta = (collection, post) => {
       {
         vmid: 'description',
         name: 'description',
-        content: getExcerpt(post.description)
+        content: getExcerpt(post.description),
       },
       {
         vmid: 'keywords',
         name: 'keywords',
-        content: post.keywords
+        content: post.keywords,
       },
       {
         vmid: 'og:title',
         property: 'og:title',
-        content: post.title
+        content: post.title,
       },
       {
         vmid: 'og:description',
         property: 'og:description',
-        content: getExcerpt(post.description)
-      }
-    ]
+        content: getExcerpt(post.description),
+      },
+    ],
   }
 }
 
@@ -434,7 +431,7 @@ export const getFieldLabel = (field) => {
 export const getOptionsFromArray = (items) => {
   return items.map((i) => ({
     value: getFieldValue(i),
-    label: getFieldLabel(i)
+    label: getFieldLabel(i),
   }))
 }
 
@@ -482,7 +479,7 @@ export const getOptionsFromHash = (hash, label = 'name') => {
 
     results.push({
       label: labelFn(doc),
-      value: key
+      value: key,
     })
   }
 

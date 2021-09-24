@@ -57,12 +57,12 @@ export const getGeoCode = async (config) => {
   const geocoder = new google.maps.Geocoder()
 
   const defaults = {
-    language: 'en'
+    language: 'en',
   }
 
   const input = {
     ...defaults,
-    ...config
+    ...config,
   }
 
   const promise = new Promise((resolve, reject) => {
@@ -88,7 +88,7 @@ export const getLocality = async ({ placeId }) => {
   if (!results.find((p) => p.types.includes('locality')).length) {
     const address = getAddress(results)
     results = await getGeoCode({
-      address: `${address.locality}, ${address.country}`
+      address: `${address.locality}, ${address.country}`,
     })
   }
 
@@ -107,7 +107,7 @@ export const getPlacePredictions = async (input, types = ['(cities)']) => {
     autocomplete.getPlacePredictions(
       {
         input,
-        types
+        types,
       },
       (results, status) => {
         if (status !== 'OK') {

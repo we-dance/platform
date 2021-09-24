@@ -40,12 +40,12 @@ export default {
   layout: 'empty',
   middleware: ['auth'],
   data: () => ({
-    selectedType: 'post'
+    selectedType: 'post',
   }),
   computed: {
     fields() {
       return this.types.find((f) => f.value === this.selectedType).fields
-    }
+    },
   },
   watch: {
     loading(loading) {
@@ -54,13 +54,13 @@ export default {
           this.$nuxt.error({ statusCode: 405 })
         }
       }
-    }
+    },
   },
   mounted() {
     const city = ls('city')
 
     this.item = this.item || {
-      community: city
+      community: city,
     }
   },
   methods: {
@@ -90,7 +90,7 @@ export default {
       this.$fire.analytics.logEvent('delete_post')
       await this.remove(id)
       this.cancelItem()
-    }
+    },
   },
   setup() {
     const { can, profile, isAdmin } = useAuth()
@@ -114,12 +114,12 @@ export default {
             width: 500,
             height: 500,
             circle: false,
-            hideLabel: true
+            hideLabel: true,
           },
           {
             name: 'title',
             hideLabel: true,
-            placeholder: 'Title'
+            placeholder: 'Title',
           },
           {
             name: 'description',
@@ -129,19 +129,19 @@ export default {
             tips:
               'Pitch yourself: Who are you? What do you offer? What do you want?\n\nTips for effective pitch:\n- Uncomplicated: It should be catchy and roll off the tongue\n- Concise: It shouldn’t take more than a minute to say or read\n- Unique: It reflects your skills, goals, and desires\n- Storyline: It covers who you are, what you offer, and where you want to be\n- Appealing: Your elevator pitch is essentially a persuasive sales pitch; the emphasis should be on what you offer',
             description:
-              'Use [widgets](https://wedance.vip/markdown), including images and videos'
+              'Use [widgets](https://wedance.vip/markdown), including images and videos',
           },
           {
             name: 'place',
             type: 'place',
-            clearable: true
+            clearable: true,
           },
           {
             name: 'styles',
             label: 'Styles',
-            type: 'stylesSelect'
-          }
-        ]
+            type: 'stylesSelect',
+          },
+        ],
       },
       {
         label: 'Link',
@@ -150,12 +150,12 @@ export default {
           {
             name: 'title',
             hideLabel: true,
-            placeholder: 'Title'
+            placeholder: 'Title',
           },
           {
             name: 'link',
             hideLabel: true,
-            placeholder: 'Link'
+            placeholder: 'Link',
           },
           {
             name: 'tags',
@@ -163,11 +163,11 @@ export default {
             type: 'tags',
             options: tagsOptions.value,
             listeners: {
-              add: addTag
-            }
-          }
-        ]
-      }
+              add: addTag,
+            },
+          },
+        ],
+      },
     ])
 
     if (params.id !== '-') {
@@ -185,8 +185,8 @@ export default {
       create,
       types,
       profile,
-      isAdmin
+      isAdmin,
     }
-  }
+  },
 }
 </script>

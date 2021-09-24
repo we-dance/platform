@@ -40,21 +40,21 @@ export default {
 
     return {
       styles,
-      categories
+      categories,
     }
   },
   props: {
     value: {
       type: [Object, String],
-      default: () => ({})
+      default: () => ({}),
     },
     item: {
       type: Object,
-      default: () => ({})
-    }
+      default: () => ({}),
+    },
   },
   data: () => ({
-    showPopup: false
+    showPopup: false,
   }),
   methods: {
     subStyles(category) {
@@ -90,12 +90,12 @@ export default {
       } else {
         newValue[val] = {
           selected: true,
-          level: 'Interested'
+          level: 'Interested',
         }
       }
 
       this.$emit('input', newValue)
-    }
-  }
+    },
+  },
 }
 </script>

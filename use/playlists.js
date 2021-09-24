@@ -3,14 +3,14 @@ export const playlistFields = [
     name: 'dances',
     label: 'Dances',
     type: 'stylesSelect',
-    mineOnly: true
+    mineOnly: true,
   },
   {
     name: 'name',
-    label: 'Name'
+    label: 'Name',
   },
   {
     name: 'url',
-    label: 'Spotify Playlist Link'
-  }
+    label: 'Spotify Playlist Link',
+  },
 ]

@@ -41,44 +41,44 @@ export default {
   props: {
     value: {
       type: [String, Object],
-      default: ''
+      default: '',
     },
     collection: {
       type: String,
-      default: ''
+      default: '',
     },
     orderBy: {
       type: String,
-      default: 'name'
+      default: 'name',
     },
     preFilter: {
       type: [Function, Boolean],
-      default: false
+      default: false,
     },
     keyLabel: {
       type: [Function, String],
-      default: 'name'
+      default: 'name',
     },
     keyValue: {
       type: String,
-      default: 'id'
+      default: 'id',
     },
     canAdd: {
       type: Boolean,
-      default: false
+      default: false,
     },
     addLabel: {
       type: String,
-      default: 'Add new'
+      default: 'Add new',
     },
     item: {
       type: Object,
-      default: () => ({})
-    }
+      default: () => ({}),
+    },
   },
   data: () => ({
     isAdding: false,
-    newItem: {}
+    newItem: {},
   }),
   computed: {
     internalValue: {
@@ -87,8 +87,8 @@ export default {
       },
       set(val) {
         this.$emit('input', val)
-      }
-    }
+      },
+    },
   },
   methods: {
     async fetchOptions(q) {
@@ -105,7 +105,7 @@ export default {
 
           results.push({
             label: this.getLabel(doc),
-            value: key
+            value: key,
           })
         }
       } else {
@@ -120,7 +120,7 @@ export default {
           .map((doc) => {
             return {
               label: this.getLabel(doc),
-              value: this.getValue(doc)
+              value: this.getValue(doc),
             }
           })
       }
@@ -156,7 +156,7 @@ export default {
       }
 
       return doc[this.keyValue]
-    }
+    },
   },
   setup() {
     const { cache, read } = useApp()
@@ -166,8 +166,8 @@ export default {
       getFields,
       cache,
       read,
-      isReady
+      isReady,
     }
-  }
+  },
 }
 </script>

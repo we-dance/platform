@@ -37,8 +37,8 @@ export default {
     const { uid } = useAuth()
 
     return {
-      uid
+      uid,
     }
-  }
+  },
 }
 </script>

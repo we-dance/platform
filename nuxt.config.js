@@ -2,11 +2,11 @@ export const app = {
   name: 'WeDance',
   description: 'We bring dancers together',
   social: {
-    twitter: 'WeDanceVIP'
+    twitter: 'WeDanceVIP',
   },
   url: process.env.URL,
   author: 'WeDance',
-  cover: '/cover/wide.png'
+  cover: '/cover/wide.png',
 }
 
 const firebaseConfig = JSON.parse(process.env.FIREBASE_CONFIG)
@@ -17,15 +17,15 @@ export const firebase = {
     auth: true,
     firestore: true,
     analytics: {
-      collectionEnabled: process.env.FIREBASE_ANALYTICS_ENABLED
-    }
-  }
+      collectionEnabled: process.env.FIREBASE_ANALYTICS_ENABLED,
+    },
+  },
 }
 
 export default {
   mode: 'spa',
   tailwindcss: {
-    jit: true
+    jit: true,
   },
   /*
    ** Customize the progress-bar color
@@ -38,7 +38,7 @@ export default {
   css: [
     '@/assets/css/typography.css',
     '@/assets/css/vendors.scss',
-    '@/assets/css/animation.css'
+    '@/assets/css/animation.css',
   ],
   /*
    ** Plugins to load before mounting the App
@@ -47,7 +47,7 @@ export default {
     '~/plugins/firebase',
     '~/plugins/router',
     '~/plugins/directives',
-    '~/plugins/vue-tailwind'
+    '~/plugins/vue-tailwind',
   ],
   /*
    ** Nuxt.js dev-modules
@@ -62,7 +62,7 @@ export default {
     // Doc: https://composition-api.nuxtjs.org/
     '@nuxtjs/composition-api',
     '@nuxtjs/google-fonts',
-    '@nuxt/image'
+    '@nuxt/image',
   ],
   /*
    ** Nuxt.js modules
@@ -80,28 +80,28 @@ export default {
     '@nuxtjs/amp',
     '@nuxt/content',
     '@nuxtjs/firebase',
-    '@nuxtjs/toast'
+    '@nuxtjs/toast',
   ],
   googleFonts: {
     display: 'swap',
     families: {
       Lato: true,
       Montserrat: true,
-      'Noto Sans': true
-    }
+      'Noto Sans': true,
+    },
   },
   toast: {
     position: 'top-center',
-    duration: 2000
+    duration: 2000,
   },
   purgeCSS: {
-    enabled: false
+    enabled: false,
   },
   pwa: {
     workbox: {
       offline: true,
       dev: false,
-      pagesURLPattern: '/.*'
+      pagesURLPattern: '/.*',
     },
     meta: {
       name: app.name,
@@ -109,15 +109,15 @@ export default {
       ogHost: app.url,
       ogImage: app.cover,
       nativeUI: true,
-      twitterSite: '@' + app.social.twitter
+      twitterSite: '@' + app.social.twitter,
     },
     manifest: {
       name: app.name,
       short_name: app.name,
       start_url: '/?standalone=true',
       background_color: '#3C3348',
-      lang: 'en'
-    }
+      lang: 'en',
+    },
   },
   /*
    ** Build configuration
@@ -139,47 +139,47 @@ export default {
           {
             loader: 'html-loader',
             options: {
-              minimize: true
-            }
-          }
-        ]
+              minimize: true,
+            },
+          },
+        ],
       })
 
       config.module.rules.push({
         test: /\.yml$/,
-        use: 'js-yaml-loader'
+        use: 'js-yaml-loader',
       })
-    }
+    },
   },
   env: {
     app,
-    firebase
+    firebase,
   },
   firebase,
   sentry: {
-    dsn: process.env.SENTRY_DSN
+    dsn: process.env.SENTRY_DSN,
   },
   robots: [
     {
       UserAgent: '*',
-      Allow: '/'
+      Allow: '/',
     },
     {
       UserAgent: '*',
-      Disallow: '/settings'
+      Disallow: '/settings',
     },
     {
       UserAgent: '*',
-      Disallow: '/admin'
+      Disallow: '/admin',
     },
     {
       UserAgent: '*',
-      Disallow: '/signin'
-    }
+      Disallow: '/signin',
+    },
   ],
   sitemap: {
     hostname: app.url,
-    routes: ['/']
+    routes: ['/'],
   },
   i18n: {
     locales: [
@@ -193,24 +193,24 @@ export default {
       { code: 'ro', name: 'Română', file: 'ro.yml' },
       { code: 'tr', name: 'Türkçe', file: 'tr.yml' },
       { code: 'ru', name: 'Русский', file: 'ru.yml' },
-      { code: 'sr', name: 'Српски', file: 'sr.yml' }
+      { code: 'sr', name: 'Српски', file: 'sr.yml' },
     ],
     defaultLocale: 'en',
     strategy: 'no_prefix',
     lazy: true,
     langDir: 'locales/',
     vueI18n: {
-      fallbackLocale: 'en'
+      fallbackLocale: 'en',
     },
     detectBrowserLanguage: {
       useCookie: true,
       cookieKey: 'i18n_redirected',
       fallbackLocale: 'en',
-      alwaysRedirect: true
-    }
+      alwaysRedirect: true,
+    },
   },
   image: {
     dir: 'static/img',
-    provider: 'ipx'
-  }
+    provider: 'ipx',
+  },
 }

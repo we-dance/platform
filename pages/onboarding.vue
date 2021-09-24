@@ -80,7 +80,7 @@ export default {
       loading: loadingAuth,
       updateProfile,
       updateAccount,
-      uid
+      uid,
     } = useAuth()
 
     return {
@@ -88,7 +88,7 @@ export default {
       updateAccount,
       loadingAuth,
       loadedProfile,
-      uid
+      uid,
     }
   },
 
@@ -101,28 +101,28 @@ export default {
       username: 'gender',
       gender: 'place',
       place: 'photo',
-      photo: 'finish'
+      photo: 'finish',
     },
     genderOptions: [
       {
         label: 'I am a woman',
-        value: 'Female'
+        value: 'Female',
       },
       {
         label: 'I am a man',
-        value: 'Male'
-      }
-    ]
+        value: 'Male',
+      },
+    ],
   }),
 
   computed: {
     loading() {
       return this.step === 'finish' || (this.loadingAuth && !this.loadedProfile)
-    }
+    },
   },
 
   watch: {
-    loadedProfile: 'load'
+    loadedProfile: 'load',
   },
 
   mounted() {
@@ -144,7 +144,7 @@ export default {
       if (this.profile[this.step] || this.skip[this.step]) {
         this.updateProfile({
           step: this.step,
-          ...this.profile
+          ...this.profile,
         })
 
         this.step = this.nextSteps[this.step]
@@ -156,7 +156,7 @@ export default {
     },
     async finish() {
       await this.updateAccount({
-        confirmed: true
+        confirmed: true,
       })
 
       let target = ls('target')
@@ -167,7 +167,7 @@ export default {
       }
 
       this.$router.push(target)
-    }
-  }
+    },
+  },
 }
 </script>

@@ -28,26 +28,26 @@ export default {
   props: {
     title: {
       type: String,
-      default: ''
+      default: '',
     },
     icon: {
       type: String,
-      default: ''
+      default: '',
     },
     desktopClass: {
       type: String,
-      default: ''
+      default: '',
     },
     mobileClass: {
       type: String,
-      default: ''
-    }
+      default: '',
+    },
   },
   setup() {
     const isOpen = ref(false)
     const isDesktop = useMediaQuery('(min-width: 800px)')
 
     return { isDesktop, isOpen }
-  }
+  },
 }
 </script>

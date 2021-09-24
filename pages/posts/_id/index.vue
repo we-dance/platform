@@ -65,7 +65,7 @@ export default {
   computed: {
     author() {
       return this.getProfile(this.doc.createdBy)
-    }
+    },
   },
   head() {
     return getMeta('posts', this.doc)
@@ -77,8 +77,8 @@ export default {
     return {
       uid,
       getProfile,
-      getExcerpt
+      getExcerpt,
     }
-  }
+  },
 }
 </script>

@@ -118,13 +118,13 @@ export default {
   props: {
     uid: {
       type: String,
-      default: ''
+      default: '',
     },
     username: {
       type: String,
-      default: ''
-    }
-  }
+      default: '',
+    },
+  },
 }
 </script>
 

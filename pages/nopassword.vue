@@ -3,9 +3,7 @@
   <TLoader v-else-if="loading || signingIn" />
   <div v-else-if="emailSent" class="typo">
     <h2>Check your email</h2>
-    <p>
-      Email might come in 5-10 minutes and might land in spam.
-    </p>
+    <p>Email might come in 5-10 minutes and might land in spam.</p>
     <p>
       Please report if you have any issues to
       <a
@@ -67,7 +65,7 @@ export default {
   layout: 'popup',
   data: () => ({
     email: '',
-    emailSent: false
+    emailSent: false,
   }),
   setup() {
     const {
@@ -78,7 +76,7 @@ export default {
       sendSignInLinkToEmail,
       signOut,
       error,
-      profile
+      profile,
     } = useAuth()
 
     return {
@@ -89,7 +87,7 @@ export default {
       sendSignInLinkToEmail,
       signOut,
       error,
-      profile
+      profile,
     }
   },
   watch: {
@@ -98,8 +96,8 @@ export default {
         if (!val && this.profile) {
           this.redirect()
         }
-      }
-    }
+      },
+    },
   },
   mounted() {
     const target = this.$route.query.target
@@ -132,7 +130,7 @@ export default {
       }
 
       this.$fire.analytics.logEvent('login', {
-        method: 'NoPassword'
+        method: 'NoPassword',
       })
 
       await this.sendSignInLinkToEmail(this.email)
@@ -140,11 +138,11 @@ export default {
     },
     async signGoogle() {
       this.$fire.analytics.logEvent('login', {
-        method: 'Google'
+        method: 'Google',
       })
 
       await this.signInWithGoogle()
-    }
-  }
+    },
+  },
 }
 </script>

@@ -10,16 +10,16 @@ export default {
   props: {
     title: {
       type: String,
-      default: ''
+      default: '',
     },
     action: {
       type: String,
-      default: ''
+      default: '',
     },
     url: {
       type: String,
-      default: ''
-    }
-  }
+      default: '',
+    },
+  },
 }
 </script>

@@ -5,7 +5,7 @@ import * as MarkdownIt from 'markdown-it'
 const md = new MarkdownIt({
   html: true,
   linkify: true,
-  typographer: true
+  typographer: true,
 })
 
 const getHtml = (content: any) => {
@@ -22,7 +22,7 @@ export default async (data: any) => {
   const mg = mailgun({
     apiKey: mailgunConfig.key,
     domain: mailgunConfig.domain,
-    host: mailgunConfig.host
+    host: mailgunConfig.host,
   })
 
   const jobs: Promise<any>[] = []
@@ -36,7 +36,7 @@ export default async (data: any) => {
       html: getHtml(data.content),
       'v:uid': uid,
       'v:campaignId': data.id,
-      'v:type': data.type
+      'v:type': data.type,
     })
 
     jobs.push(job)

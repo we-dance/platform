@@ -12,6 +12,6 @@ export default {
   layout: 'popup',
   mounted() {
     this.$router.replace('/')
-  }
+  },
 }
 </script>

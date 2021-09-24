@@ -9,12 +9,12 @@ export default {
   props: {
     title: {
       type: String,
-      default: ''
+      default: '',
     },
     noClose: {
       type: Boolean,
-      default: false
-    }
-  }
+      default: false,
+    },
+  },
 }
 </script>

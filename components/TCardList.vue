@@ -77,56 +77,56 @@ export default {
   props: {
     title: {
       type: String,
-      default: ''
+      default: '',
     },
     empty: {
       type: String,
-      default: ''
+      default: '',
     },
     wrapperClass: {
       type: String,
-      default: 'space-y-4'
+      default: 'space-y-4',
     },
     add: {
       type: String,
-      default: ''
+      default: '',
     },
     collection: {
       type: String,
-      default: ''
+      default: '',
     },
     fields: {
       type: Array,
-      default: () => []
+      default: () => [],
     },
     filters: {
       type: Array,
-      default: () => []
+      default: () => [],
     },
     map: {
       type: [Function, Boolean],
-      default: false
+      default: false,
     },
     deleteItem: {
       type: Boolean,
-      default: false
+      default: false,
     },
     itemClass: {
       type: String,
-      default: 'px-6 py-4 rounded bg-white mb-4 shadow'
+      default: 'px-6 py-4 rounded bg-white mb-4 shadow',
     },
     itemLabel: {
       type: Function,
       default: (item) => {
         return item.name
-      }
-    }
+      },
+    },
   },
   data: () => ({
-    currentId: false
+    currentId: false,
   }),
   watch: {
-    items: 'loadItems'
+    items: 'loadItems',
   },
   setup(props) {
     const { docs } = useCollection(props.collection)
@@ -177,7 +177,7 @@ export default {
       create,
       remove,
       items,
-      activeFilter
+      activeFilter,
     }
   },
   methods: {
@@ -198,7 +198,7 @@ export default {
     async removeItem(id) {
       this.cancelItem()
       await this.remove(id)
-    }
-  }
+    },
+  },
 }
 </script>

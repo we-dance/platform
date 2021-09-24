@@ -16,16 +16,16 @@ export default {
   props: {
     url: {
       type: String,
-      default: ''
+      default: '',
     },
     wrapperClass: {
       type: String,
-      default: 'aspect-ratio'
+      default: 'aspect-ratio',
     },
     iframeClass: {
       type: String,
-      default: ''
-    }
+      default: '',
+    },
   },
   methods: {
     getSpotifyEmbedUrl(url) {
@@ -34,7 +34,7 @@ export default {
       }
       const playlistId = url.replace('https://open.spotify.com/playlist/', '')
       return `https://open.spotify.com/embed/playlist/${playlistId}`
-    }
-  }
+    },
+  },
 }
 </script>

@@ -182,8 +182,8 @@ export default {
   props: {
     profile: {
       type: Object,
-      default: () => ({})
-    }
+      default: () => ({}),
+    },
   },
   setup(props) {
     const { uid, isAdmin, can } = useAuth()
@@ -196,31 +196,31 @@ export default {
       fields: [
         {
           name: 'photo',
-          label: 'your photo'
+          label: 'your photo',
         },
         {
           name: 'gender',
-          label: 'your gender'
+          label: 'your gender',
         },
         {
           name: 'styles',
-          label: 'what do you dance'
+          label: 'what do you dance',
         },
         {
           name: 'bio',
-          label: 'teaser (short introduction)'
+          label: 'teaser (short introduction)',
         },
         {
           name: 'place',
-          label: 'your city'
+          label: 'your city',
         },
         {
           name: 'objectives',
-          label: 'your objectives'
-        }
+          label: 'your objectives',
+        },
       ],
       missing: [],
-      visible: false
+      visible: false,
     }
 
     for (const field of intro.fields) {
@@ -238,8 +238,8 @@ export default {
       profileFields,
       getCity,
       isAdmin,
-      community
+      community,
     }
-  }
+  },
 }
 </script>

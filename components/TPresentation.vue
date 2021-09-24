@@ -3,9 +3,7 @@
     <div class="p-4 text-center">
       <TIcon class="w-64" name="logo" />
       <div class="mt-8 w-64">
-        <p>
-          Welcome to open source, democratic dance community.
-        </p>
+        <p>Welcome to open source, democratic dance community.</p>
         <div class="mt-8 flex justify-end">
           <TButton @click="slide = 2">Next</TButton>
         </div>
@@ -32,9 +30,7 @@
     <div class="p-4 text-center">
       <TIcon class="w-64" name="undraw_work_chat" />
       <div class="mt-8 w-64">
-        <p>
-          Ask questions and participate in discussions about dancing
-        </p>
+        <p>Ask questions and participate in discussions about dancing</p>
         <div class="mt-8 flex justify-end">
           <TButton @click="slide = 3">Next</TButton>
         </div>
@@ -46,9 +42,7 @@
     <div class="p-4 text-center">
       <TIcon class="w-64" name="undraw_video_files" />
       <div class="mt-8 w-64">
-        <p>
-          Inspiration and interesting links
-        </p>
+        <p>Inspiration and interesting links</p>
         <div class="mt-8 flex justify-end">
           <TButton @click="slide = 4">Next</TButton>
         </div>
@@ -60,9 +54,7 @@
     <div class="p-4 text-center">
       <TIcon class="w-64" name="undraw_dua_lipa" />
       <div class="mt-8 w-64">
-        <p>
-          Upcoming events and festivals
-        </p>
+        <p>Upcoming events and festivals</p>
         <div class="mt-8 flex justify-end">
           <TButton to="/posts/hpHquGrQKthCaGBizAZB">Read more</TButton>
         </div>
@@ -81,10 +73,10 @@ export default {
   components: {
     TPopup,
     TIcon,
-    TButton
+    TButton,
   },
   data: () => ({
-    slide: 1
+    slide: 1,
   }),
   mounted() {
     this.slide = 1
@@ -95,7 +87,7 @@ export default {
     close() {
       this.$emit('close')
       this.$router.replace('/')
-    }
-  }
+    },
+  },
 }
 </script>

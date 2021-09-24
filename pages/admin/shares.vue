@@ -14,9 +14,7 @@
         class="mt-4"
       >
         <template v-slot:empty>
-          <div class="text-center mt-4">
-            No scheduled posts.
-          </div>
+          <div class="text-center mt-4">No scheduled posts.</div>
         </template>
         <template v-slot:default="{ item }">
           <div class="rounded bg-white mb-4 shadow border overflow-hidden">
@@ -79,23 +77,23 @@ export default {
     const { uid } = useAuth()
     const fields = [
       {
-        name: 'state'
+        name: 'state',
       },
       {
-        name: 'collection'
+        name: 'collection',
       },
       {
-        name: 'contentId'
+        name: 'contentId',
       },
       {
-        name: 'image'
+        name: 'image',
       },
       {
-        name: 'url'
+        name: 'url',
       },
       {
-        name: 'place'
-      }
+        name: 'place',
+      },
     ]
 
     const thisCityFilter = (item) =>
@@ -108,22 +106,22 @@ export default {
         value: 'new',
         filter: (item) => item.state === 'new' && thisCityFilter(item),
         sort: 'createdAt',
-        default: true
+        default: true,
       },
       {
         label: 'Published',
         name: 'published',
         value: 'published',
         filter: (item) => item.state === 'published' && thisCityFilter(item),
-        sort: 'createdAt'
+        sort: 'createdAt',
       },
       {
         label: 'Cancelled',
         name: 'cancelled',
         value: 'cancelled',
         filter: (item) => item.state === 'cancelled' && thisCityFilter(item),
-        sort: 'createdAt'
-      }
+        sort: 'createdAt',
+      },
     ]
 
     return {
@@ -132,7 +130,7 @@ export default {
       states,
       uid,
       currentCity,
-      getCity
+      getCity,
     }
   },
   methods: {
@@ -143,9 +141,9 @@ export default {
         .update({
           state,
           [`${state}At`]: +new Date(),
-          [`${state}By`]: this.uid
+          [`${state}By`]: this.uid,
         })
-    }
-  }
+    },
+  },
 }
 </script>

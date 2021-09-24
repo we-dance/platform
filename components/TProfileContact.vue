@@ -85,8 +85,8 @@ export default {
   props: {
     uid: {
       type: String,
-      default: ''
-    }
+      default: '',
+    },
   },
   methods: {
     draftMessage() {
@@ -107,7 +107,7 @@ export default {
           to: this.uid,
           message: this.message,
           status: 'open',
-          auto: 'No'
+          auto: 'No',
         })
 
         this.$toast.success(
@@ -118,7 +118,7 @@ export default {
       }
 
       this.isWritingMessage = false
-    }
+    },
   },
   setup(props) {
     const { getProfile } = useProfiles()
@@ -137,8 +137,8 @@ export default {
       showPopup,
       message,
       isWritingMessage,
-      myProfile
+      myProfile,
     }
-  }
+  },
 }
 </script>

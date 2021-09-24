@@ -78,64 +78,64 @@ export default {
   props: {
     value: {
       type: [String, Object, Array, Number, Date],
-      default: ''
+      default: '',
     },
     item: {
       type: Object,
-      default: () => ({})
+      default: () => ({}),
     },
     label: {
       type: String,
-      default: ''
+      default: '',
     },
     description: {
       type: String,
-      default: ''
+      default: '',
     },
     before: {
       type: String,
-      default: ''
+      default: '',
     },
     tips: {
       type: String,
-      default: ''
+      default: '',
     },
     labelPosition: {
       type: String,
-      default: 'left'
+      default: 'left',
     },
     type: {
       type: String,
-      default: 'text'
+      default: 'text',
     },
     autoFocus: {
       type: Boolean,
-      default: false
+      default: false,
     },
     default: {
       type: String,
-      default: ''
+      default: '',
     },
     data: {
       type: Object,
-      default: () => ({})
+      default: () => ({}),
     },
     hideLabel: {
       type: Boolean,
-      default: false
+      default: false,
     },
     get: {
       type: Function,
-      default: (val) => val
+      default: (val) => val,
     },
     set: {
       type: Function,
-      default: (val) => val
-    }
+      default: (val) => val,
+    },
   },
   data: () => ({
     elementId: '',
-    showTips: false
+    showTips: false,
   }),
   computed: {
     computedValue() {
@@ -147,7 +147,7 @@ export default {
     wrapperClasses() {
       const map = {
         top: 'grid-cols-1',
-        left: 'grid-cols-12 gap-2'
+        left: 'grid-cols-12 gap-2',
       }
 
       return map[this.labelPosition]
@@ -155,7 +155,7 @@ export default {
     labelClasses() {
       const map = {
         top: 'col-span-12',
-        left: 'col-span-12 text-left lg:text-right lg:col-span-4'
+        left: 'col-span-12 text-left lg:text-right lg:col-span-4',
       }
 
       return map[this.labelPosition]
@@ -163,13 +163,13 @@ export default {
     inputWrapperClasses() {
       const map = {
         top: 'col-span-12',
-        left: 'col-span-12 lg:col-span-8'
+        left: 'col-span-12 lg:col-span-8',
       }
 
       const labelPosition = this.hideLabel ? 'top' : this.labelPosition
 
       return map[labelPosition]
-    }
+    },
   },
   mounted() {
     this.elementId = camelize(this.label)
@@ -200,11 +200,11 @@ export default {
         languages: TInputLanguages,
         buttons: TInputButtons,
         username: TInputUsername,
-        datetime: TInputDateTime
+        datetime: TInputDateTime,
       }
 
       return map[this.type] || TInput
-    }
-  }
+    },
+  },
 }
 </script>

@@ -6,7 +6,7 @@ export const postFilters = [
     clearable: true,
     hideLabel: true,
     placeholder: 'City',
-    when: () => false
+    when: () => false,
   },
   {
     name: 'dance',
@@ -15,17 +15,17 @@ export const postFilters = [
     placeholder: 'Style',
     compare: (item, field, value) =>
       item && item[field] && item[field][value] && item[field][value].selected,
-    mineOnly: true
-  }
+    mineOnly: true,
+  },
 ]
 
 export const postSorts = [
   {
     value: '-savedByCount',
-    label: 'Popular'
+    label: 'Popular',
   },
   {
     value: '-createdAt',
-    label: 'Newest'
-  }
+    label: 'Newest',
+  },
 ]

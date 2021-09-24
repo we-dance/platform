@@ -21,24 +21,24 @@ export default {
   props: {
     filter: {
       type: Object,
-      default: null
+      default: null,
     },
     sorting: {
       type: String,
-      default: '-createdAt'
+      default: '-createdAt',
     },
     title: {
       type: String,
-      default: ''
+      default: '',
     },
     emptyLabel: {
       type: String,
-      default: 'No post found'
+      default: 'No post found',
     },
     showEmpty: {
       type: Boolean,
-      default: false
-    }
+      default: false,
+    },
   },
   setup(params) {
     const { docs, loading } = useCollection('posts', params.filter)
@@ -55,8 +55,8 @@ export default {
     return {
       count,
       items,
-      loading
+      loading,
     }
-  }
+  },
 }
 </script>

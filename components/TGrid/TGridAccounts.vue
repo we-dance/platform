@@ -142,7 +142,7 @@ import {
   getDateTime,
   saveCSV,
   getDateObect,
-  flatten
+  flatten,
 } from '~/utils'
 import { useApp } from '~/use/app'
 
@@ -151,20 +151,20 @@ export default {
   props: {
     value: {
       type: [Object, String],
-      default: () => ({})
+      default: () => ({}),
     },
     verticalScroll: {
       type: Boolean,
-      default: false
+      default: false,
     },
     multi: {
       type: Boolean,
-      default: false
+      default: false,
     },
     editable: {
       type: Boolean,
-      default: false
-    }
+      default: false,
+    },
   },
   setup() {
     const { docs } = useCollection('accounts')
@@ -181,24 +181,24 @@ export default {
     const list = ref([
       {
         value: 'PartnerForm',
-        label: 'PartnerForm'
+        label: 'PartnerForm',
       },
       {
         value: 'PartnerChat',
-        label: 'PartnerChat'
+        label: 'PartnerChat',
       },
       {
         value: 'MontunoClub',
-        label: 'MontunoClub'
+        label: 'MontunoClub',
       },
       {
         value: 'NoProfile',
-        label: 'NoProfile'
-      }
+        label: 'NoProfile',
+      },
     ])
     const applyList = (id, lists, closeMenu) => {
       updateAccount(id, {
-        lists
+        lists,
       })
       closeMenu()
     }
@@ -207,78 +207,78 @@ export default {
       {
         value: '',
         label: `Everyone (${docs.value.length})`,
-        filter: (account) => true
+        filter: (account) => true,
       },
       {
         value: 'selected',
         label: `Selected (${Object.keys(selected.value).length})`,
-        filter: (account) => selected.value[account.id]
+        filter: (account) => selected.value[account.id],
       },
       {
         value: 'jobs',
         label: 'Volunteers',
-        filter: (account) => !!account.profile?.jobs
+        filter: (account) => !!account.profile?.jobs,
       },
       {
         value: 'notype',
         label: 'No Type',
-        filter: (account) => !account.profile?.type
+        filter: (account) => !account.profile?.type,
       },
       {
         value: 'visibility',
         label: 'No visibility',
-        filter: (account) => !account.profile?.visibility
+        filter: (account) => !account.profile?.visibility,
       },
       {
         value: 'socialCover',
         label: 'Social Cover',
-        filter: (account) => !!account.profile?.socialCover
+        filter: (account) => !!account.profile?.socialCover,
       },
       {
         value: 'boosting',
         label: 'Boosting',
-        filter: (account) => account.profile?.permission === 'Yes'
+        filter: (account) => account.profile?.permission === 'Yes',
       },
       {
         value: 'noboosting',
         label: 'Not boosting',
-        filter: (account) => account.profile?.permission === 'No'
+        filter: (account) => account.profile?.permission === 'No',
       },
       {
         value: 'looking',
         label: 'Looking',
-        filter: (account) => account.profile?.partner === 'Yes'
+        filter: (account) => account.profile?.partner === 'Yes',
       },
       {
         value: 'not_looking',
         label: 'Not looking',
-        filter: (account) => account.profile?.partner !== 'Yes'
+        filter: (account) => account.profile?.partner !== 'Yes',
       },
       {
         value: 'no_city',
         label: 'No city',
-        filter: (account) => !account.profile?.place
+        filter: (account) => !account.profile?.place,
       },
       {
         value: 'used_more_10d',
         label: 'More than 10 days',
-        filter: (account) => account.profile?.daysUsed > 10
+        filter: (account) => account.profile?.daysUsed > 10,
       },
       {
         value: 'used_more_1d',
         label: 'More than 1 day',
-        filter: (account) => account.profile?.daysUsed > 1
+        filter: (account) => account.profile?.daysUsed > 1,
       },
       {
         value: 'used_less_2d',
         label: 'Less than 2 day',
-        filter: (account) => account.profile?.daysUsed < 2
+        filter: (account) => account.profile?.daysUsed < 2,
       },
       {
         value: 'no_username',
         label: 'No username',
-        filter: (account) => !account.profile?.username
-      }
+        filter: (account) => !account.profile?.username,
+      },
     ])
 
     const activeFilterItem = computed(() =>
@@ -299,7 +299,7 @@ export default {
           ...item,
           profile: getProfile(item.id),
           lastLoginAt:
-            getProfile(item.id).lastLoginAt || +getDateObect(item.lastLoginAt)
+            getProfile(item.id).lastLoginAt || +getDateObect(item.lastLoginAt),
         }))
         .filter(activeFilterItem.value.filter)
         .filter((item) => {
@@ -335,19 +335,19 @@ export default {
       applyList,
       updateProfile,
       updateAccount,
-      getCity
+      getCity,
     }
   },
   computed: {
     count() {
       return Object.keys(this.selected).length
-    }
+    },
   },
   watch: {
     value: 'load',
     selected(val) {
       this.$emit('input', val)
-    }
+    },
   },
   mounted() {
     this.load()
@@ -436,7 +436,7 @@ export default {
       if (mark) {
         Vue.set(this.selected, item.id, {
           email: item.email,
-          name: item.name
+          name: item.name,
         })
       } else {
         Vue.delete(this.selected, item.id)
@@ -446,7 +446,7 @@ export default {
       this.items.forEach((item) => {
         this.select(item, mark)
       })
-    }
-  }
+    },
+  },
 }
 </script>

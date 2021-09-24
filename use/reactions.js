@@ -25,7 +25,7 @@ export const useReactions = () => {
     tags = {
       ...tags,
       WeDance: true,
-      Dance: true
+      Dance: true,
     }
 
     const keywords = Object.keys(tags).join(', ')
@@ -39,11 +39,11 @@ export const useReactions = () => {
       downVotes,
       votes,
       response,
-      order
+      order,
     }
   }
 
   return {
-    map
+    map,
   }
 }

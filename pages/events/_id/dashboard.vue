@@ -1,8 +1,6 @@
 <template>
   <TLoader v-if="loading" />
-  <div v-else-if="!exists" class="text-center">
-    Event not found
-  </div>
+  <div v-else-if="!exists" class="text-center">Event not found</div>
   <main
     v-else-if="!can('edit', 'events', item)"
     class="mt-4 mx-auto max-w-md p-4 text-sm text-center"
@@ -171,7 +169,7 @@
                       class="underline hover:no-underline"
                       @click="
                         update(item.id, {
-                          couple: item.couple !== 'Yes' ? 'Yes' : 'No'
+                          couple: item.couple !== 'Yes' ? 'Yes' : 'No',
                         })
                       "
                     >
@@ -184,7 +182,7 @@
                       class="underline hover:no-underline"
                       @click="
                         update(item.id, {
-                          gender: item.gender !== 'Male' ? 'Male' : 'Female'
+                          gender: item.gender !== 'Male' ? 'Male' : 'Female',
                         })
                       "
                     >
@@ -319,7 +317,7 @@ export default {
             item.couple || item.withPartner || item.participant.withPartner,
           partnerName: item.participant.partnerName,
           partnerEmail: item.participant.partnerEmail,
-          search: item.participant.name + item.participant.email
+          search: item.participant.name + item.participant.email,
         }))
         .sort(sortBy('name'))
     )
@@ -331,7 +329,7 @@ export default {
     const participants = computed(() =>
       participantsMap.value.map((participant) => ({
         ...participant,
-        partner: getParticipant(participant.partnerId)
+        partner: getParticipant(participant.partnerId),
       }))
     )
 
@@ -367,7 +365,7 @@ export default {
 
     const emailFields = [
       {
-        name: 'subject'
+        name: 'subject',
       },
       {
         name: 'content',
@@ -375,30 +373,30 @@ export default {
         type: 'textarea',
         placeholder: 'Your message',
         rows: '5',
-        cols: '50'
-      }
+        cols: '50',
+      },
     ]
 
     const filters = computed(() => [
       {
         value: '',
         label: 'Registered',
-        filter: (item) => item.rsvp === 'up'
+        filter: (item) => item.rsvp === 'up',
       },
       {
         value: 'out',
         label: 'Check in',
-        filter: (item) => item.rsvp === 'up' && item.state !== 'in'
+        filter: (item) => item.rsvp === 'up' && item.state !== 'in',
       },
       {
         value: 'in',
         label: 'Present',
-        filter: (item) => item.rsvp === 'up' && item.state === 'in'
+        filter: (item) => item.rsvp === 'up' && item.state === 'in',
       },
       {
         value: 'payment',
         label: 'Payment',
-        filter: (item) => item.rsvp === 'up' && item.state === 'in'
+        filter: (item) => item.rsvp === 'up' && item.state === 'in',
       },
       {
         value: 'couples',
@@ -406,19 +404,19 @@ export default {
         filter: (item) =>
           ((!!item.partnerId && item.gender === 'Male') ||
             item.couple === 'Yes') &&
-          item.rsvp === 'up'
+          item.rsvp === 'up',
       },
       {
         value: 'no_couple',
         label: 'No couple',
         filter: (item) =>
-          !item.partnerId && item.couple === 'No' && item.rsvp === 'up'
+          !item.partnerId && item.couple === 'No' && item.rsvp === 'up',
       },
       {
         value: 'canceled',
         label: 'Canceled',
-        filter: (item) => item.rsvp === 'down'
-      }
+        filter: (item) => item.rsvp === 'down',
+      },
     ])
 
     const sendEmail = (data) => {
@@ -428,7 +426,7 @@ export default {
         recipients: selectedParticipants.value,
         scheduledAt: new Date(),
         status: 'scheduled',
-        content: data.content
+        content: data.content,
       }
 
       compose.value = false
@@ -464,7 +462,7 @@ export default {
       'NoEnglish',
       'Russian',
       'German',
-      'Spanish'
+      'Spanish',
     ]
 
     const addNote = (item, note) => {
@@ -511,8 +509,8 @@ export default {
       participants,
       selectedParticipants,
       selectedParticipantsList,
-      guestAccount
+      guestAccount,
     }
-  }
+  },
 }
 </script>

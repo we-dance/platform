@@ -54,23 +54,23 @@ export default {
     const fields = [
       {
         name: 'name',
-        label: 'Name of dance partner'
+        label: 'Name of dance partner',
       },
       {
         name: 'when',
         label: 'When?',
-        type: 'datetime-local'
+        type: 'datetime-local',
       },
       {
         name: 'genre',
         label: 'What did you dance?',
-        type: 'tags'
+        type: 'tags',
       },
       {
         name: 'like',
         label: 'What did you like?',
-        type: 'tags'
-      }
+        type: 'tags',
+      },
     ]
 
     const { uid } = useAuth()
@@ -79,8 +79,8 @@ export default {
       {
         name: 'mine',
         default: true,
-        filter: (item) => item.createdBy === uid.value
-      }
+        filter: (item) => item.createdBy === uid.value,
+      },
     ]
 
     return {
@@ -88,8 +88,8 @@ export default {
       fields,
       getDateTime,
       filters,
-      uid
+      uid,
     }
-  }
+  },
 }
 </script>

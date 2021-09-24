@@ -16,10 +16,10 @@ export default {
   computed: {
     redirectUrl() {
       return `/community`
-    }
+    },
   },
   mounted() {
     this.$router.replace(this.redirectUrl)
-  }
+  },
 }
 </script>

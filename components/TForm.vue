@@ -36,48 +36,48 @@ import { camelcase } from '~/utils'
 export default {
   name: 'TForm',
   components: {
-    TField: () => import('~/components/TField')
+    TField: () => import('~/components/TField'),
   },
   props: {
     fields: {
       type: Array,
-      default: () => []
+      default: () => [],
     },
     value: {
       type: Object,
-      default: () => ({})
+      default: () => ({}),
     },
     fieldConfig: {
       type: Object,
-      default: () => ({})
+      default: () => ({}),
     },
     submitLabel: {
       type: String,
-      default: 'Save'
+      default: 'Save',
     },
     showCancel: {
       type: Boolean,
-      default: false
+      default: false,
     },
     showCopy: {
       type: Boolean,
-      default: false
+      default: false,
     },
     showRemove: {
       type: Boolean,
-      default: false
+      default: false,
     },
     editCreator: {
       type: Boolean,
-      default: false
+      default: false,
     },
     fieldWrapper: {
       type: String,
-      default: ''
-    }
+      default: '',
+    },
   },
   data: () => ({
-    error: false
+    error: false,
   }),
   computed: {
     visibleFields() {
@@ -95,12 +95,12 @@ export default {
           keyLabel: 'username',
           orderBy: 'username',
           canAdd: true,
-          admin: true
+          admin: true,
         })
       }
 
       return fields.map((f) => ({ ...f, ...this.fieldConfig }))
-    }
+    },
   },
   methods: {
     remove() {
@@ -159,7 +159,7 @@ export default {
       }
 
       this.$emit('input', val)
-    }
-  }
+    },
+  },
 }
 </script>

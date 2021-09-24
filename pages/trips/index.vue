@@ -50,41 +50,41 @@ export default {
     const fields = [
       {
         name: 'event',
-        label: 'Name of the event'
+        label: 'Name of the event',
       },
       {
         name: 'url',
-        label: 'URL'
+        label: 'URL',
       },
       {
         name: 'eventDate',
         label: 'Date of the event',
-        type: 'datetime-local'
+        type: 'datetime-local',
       },
       {
         name: 'to',
-        label: 'Location of the event'
+        label: 'Location of the event',
       },
       {
         name: 'from',
-        label: 'Where are you traveling from?'
+        label: 'Where are you traveling from?',
       },
       {
         name: 'start',
         label: 'When do you want to start a trip?',
-        type: 'datetime-local'
+        type: 'datetime-local',
       },
       {
         name: 'genre',
         label: 'Genres',
-        type: 'tags'
+        type: 'tags',
       },
       {
         name: 'car',
         label: 'Do you have a car?',
         type: 'select',
-        options: ['yes', 'no']
-      }
+        options: ['yes', 'no'],
+      },
     ]
 
     const { uid } = useAuth()
@@ -93,8 +93,8 @@ export default {
       {
         name: 'mine',
         default: true,
-        filter: (item) => item.createdBy === uid.value
-      }
+        filter: (item) => item.createdBy === uid.value,
+      },
     ]
 
     return {
@@ -102,8 +102,8 @@ export default {
       fields,
       getDateTime,
       filters,
-      uid
+      uid,
     }
-  }
+  },
 }
 </script>

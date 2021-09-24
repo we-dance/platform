@@ -4,7 +4,7 @@ import {
   migrateShares,
   migrateUsernames,
   migrateChat,
-  chatNotifications
+  chatNotifications,
 } from './lib/migrations'
 import { screenshot } from './lib/screenshot'
 import { getCities } from './lib/stats'
@@ -15,7 +15,7 @@ require('yargs')
       `https://wedance.vip/${args.username}/share`,
       'Europe/Berlin',
       {
-        path: `var/${args.username}.png`
+        path: `var/${args.username}.png`,
       }
     )
   })

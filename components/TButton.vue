@@ -37,37 +37,37 @@ import TIcon from '~/components/TIcon'
 
 export default {
   components: {
-    TIcon
+    TIcon,
   },
   props: {
     icon: {
       type: String,
-      default: ''
+      default: '',
     },
     iconSize: {
       type: String,
-      default: '4'
+      default: '4',
     },
     to: {
       type: String,
-      default: ''
+      default: '',
     },
     href: {
       type: String,
-      default: ''
+      default: '',
     },
     type: {
       type: String,
-      default: 'simple'
+      default: 'simple',
     },
     label: {
       type: [String, Number, Boolean],
-      default: false
+      default: false,
     },
     color: {
       type: String,
-      default: ''
-    }
+      default: '',
+    },
   },
   computed: {
     classes() {
@@ -92,7 +92,7 @@ export default {
           'text-left w-full px-4 py-2 text-gray-800 hover:bg-indigo-500 hover:text-white',
         nav:
           'p-2 font-semibold items-center flex rounded-full hover:bg-red-100 hover:text-primary',
-        void: ''
+        void: '',
       }
 
       let classes =
@@ -104,7 +104,7 @@ export default {
       }
 
       return classes
-    }
-  }
+    },
+  },
 }
 </script>

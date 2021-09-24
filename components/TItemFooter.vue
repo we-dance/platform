@@ -29,16 +29,16 @@ export default {
   props: {
     title: {
       type: String,
-      default: ''
+      default: '',
     },
     collection: {
       type: String,
-      default: ''
+      default: '',
     },
     item: {
       type: Object,
-      default: () => ({})
-    }
+      default: () => ({}),
+    },
   },
   computed: {
     url() {
@@ -48,7 +48,7 @@ export default {
         playlists: `${appUrl}/playlists/${this.item.id}`,
         posts: `${appUrl}/posts/${this.item.id}`,
         events: `${appUrl}/events/${this.item.id}`,
-        profiles: `${appUrl}/${this.item.username}`
+        profiles: `${appUrl}/${this.item.username}`,
       }
 
       return urls[this.collection]
@@ -58,14 +58,14 @@ export default {
     },
     creator() {
       return this.getProfile(this.item?.createdBy)
-    }
+    },
   },
   setup() {
     const { getProfile } = useProfiles()
 
     return {
-      getProfile
+      getProfile,
     }
-  }
+  },
 }
 </script>

@@ -10,7 +10,7 @@ export default {
   setup() {
     const { signOut } = useAuth()
     return {
-      signOut
+      signOut,
     }
   },
   async mounted() {
@@ -19,6 +19,6 @@ export default {
     await this.signOut()
 
     this.$router.replace(target)
-  }
+  },
 }
 </script>

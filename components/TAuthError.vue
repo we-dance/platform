@@ -33,19 +33,19 @@ export default {
     const { signOut } = useAuth()
 
     return {
-      signOut
+      signOut,
     }
   },
   props: {
     error: {
       type: Object,
-      default: () => ({})
-    }
+      default: () => ({}),
+    },
   },
   methods: {
     async tryAgain() {
       await this.signOut()
-    }
-  }
+    },
+  },
 }
 </script>

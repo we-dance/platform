@@ -61,13 +61,13 @@ export default {
     return {
       postFilters,
       currentCity,
-      uid
+      uid,
     }
   },
   head() {
     return {
-      title: 'WeDance Feed'
+      title: 'WeDance Feed',
     }
-  }
+  },
 }
 </script>

@@ -29,16 +29,16 @@ export default {
     const fields = [
       {
         name: 'label',
-        label: 'Label'
-      }
+        label: 'Label',
+      },
     ]
 
     return {
       collection,
       fields,
       add,
-      title
+      title,
     }
-  }
+  },
 }
 </script>

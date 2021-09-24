@@ -23,7 +23,7 @@ export default {
         return {
           results: getStylesDropdown(profile.value?.styles).filter((i) =>
             search(i.label, q)
-          )
+          ),
         }
       }
 
@@ -34,29 +34,29 @@ export default {
       profile,
       levels,
       getStyles,
-      findStyles
+      findStyles,
     }
   },
   props: {
     value: {
       type: [Object, String],
-      default: () => ({})
+      default: () => ({}),
     },
     item: {
       type: Object,
-      default: () => ({})
+      default: () => ({}),
     },
     mineOnly: {
       type: Boolean,
-      default: false
+      default: false,
     },
     placeholder: {
       type: String,
-      default: ''
-    }
+      default: '',
+    },
   },
   data: () => ({
-    newStyleName: ''
+    newStyleName: '',
   }),
   computed: {
     internalValue: {
@@ -65,8 +65,8 @@ export default {
       },
       set(val) {
         this.$emit('input', val)
-      }
-    }
-  }
+      },
+    },
+  },
 }
 </script>

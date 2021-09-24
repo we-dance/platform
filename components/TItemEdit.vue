@@ -37,60 +37,60 @@ import { useRouter } from '~/use/router'
 export default {
   name: 'TItemEdit',
   components: {
-    TForm: () => import(/* webpackChunkName: "TForm" */ '~/components/TForm')
+    TForm: () => import(/* webpackChunkName: "TForm" */ '~/components/TForm'),
   },
   props: {
     id: {
       type: String,
-      default: ''
+      default: '',
     },
     title: {
       type: String,
-      default: ''
+      default: '',
     },
     collection: {
       type: String,
-      default: ''
+      default: '',
     },
     singular: {
       type: String,
-      default: ''
+      default: '',
     },
     indexUrl: {
       type: String,
-      default: ''
+      default: '',
     },
     fields: {
       type: Array,
-      default: () => []
+      default: () => [],
     },
     defaults: {
       type: Object,
-      default: () => {}
+      default: () => {},
     },
     saveLabel: {
       type: String,
-      default: 'Save'
+      default: 'Save',
     },
     addLabel: {
       type: String,
-      default: 'Add'
+      default: 'Add',
     },
     editCreator: {
       type: Boolean,
-      default: false
+      default: false,
     },
     showRemove: {
       type: Boolean,
-      default: false
-    }
+      default: false,
+    },
   },
   watch: {
     isAllowed(isAllowed) {
       if (!isAllowed) {
         this.$nuxt.error({ statusCode: 405 })
       }
-    }
+    },
   },
   mounted() {
     this.item = this.item || this.defaults
@@ -130,7 +130,7 @@ export default {
       }
       await this.remove(id)
       this.cancelItem()
-    }
+    },
   },
   setup(props) {
     const { can, profile } = useAuth()
@@ -149,7 +149,7 @@ export default {
       update,
       remove,
       create,
-      loading: loadingDoc
+      loading: loadingDoc,
     } = useDoc(props.collection)
 
     const loading = computed(() => loadingDoc.value || !profile.value?.username)
@@ -169,8 +169,8 @@ export default {
       update,
       remove,
       create,
-      isAllowed
+      isAllowed,
     }
-  }
+  },
 }
 </script>

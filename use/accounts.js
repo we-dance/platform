@@ -6,33 +6,33 @@ export const accountFields = [
     name: 'name',
     key: 'account.name',
     required: true,
-    event: true
+    event: true,
   },
   {
     name: 'email',
     key: 'account.email',
     register: true,
     required: true,
-    event: true
+    event: true,
   },
   {
     name: 'password',
     type: 'password',
     label: 'New Password',
-    register: true
+    register: true,
   },
   {
     name: 'phone',
     key: 'account.phone',
     required: true,
-    event: true
+    event: true,
   },
   {
     name: 'zone',
     label: 'Timezone',
     type: 'richselect',
     options: moment.tz.names(),
-    require: true
+    require: true,
   },
   {
     name: 'newsletter',
@@ -41,45 +41,45 @@ export const accountFields = [
     options: [
       {
         value: 'party',
-        label: 'Social/party events'
+        label: 'Social/party events',
       },
       {
         value: 'class',
-        label: 'Dance classes'
+        label: 'Dance classes',
       },
       {
         value: 'workshop',
-        label: 'Workshops and bootcamps'
+        label: 'Workshops and bootcamps',
       },
       {
         value: 'online',
-        label: 'Online dance classes'
+        label: 'Online dance classes',
       },
       {
         value: 'festival',
-        label: 'International festivals'
-      }
-    ]
+        label: 'International festivals',
+      },
+    ],
   },
   {
     name: 'withPartner',
     type: 'select',
     label: 'Do you have a partner?',
     options: ['Yes', 'No'],
-    event: false
+    event: false,
   },
   {
     name: 'partnerName',
     label: "Partner's name",
     when: (answers) => answers?.withPartner === 'Yes',
-    event: false
+    event: false,
   },
   {
     name: 'partnerEmail',
     label: "Partner's email",
     when: (answers) => answers?.withPartner === 'Yes',
-    event: false
-  }
+    event: false,
+  },
 ]
 
 export const useAccounts = () => {
@@ -90,6 +90,6 @@ export const useAccounts = () => {
 
   return {
     getAccount,
-    getAccountByEmail
+    getAccountByEmail,
   }
 }

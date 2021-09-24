@@ -18,21 +18,21 @@ export default {
   props: {
     error: {
       type: Object,
-      default: () => ({})
-    }
+      default: () => ({}),
+    },
   },
   data: () => ({
     statusCode: '',
-    message: ''
+    message: '',
   }),
   mounted() {
     const codes = {
       404: 'Page not found',
-      405: 'Not allowed'
+      405: 'Not allowed',
     }
 
     this.statusCode = this.error.statusCode
     this.message = codes[this.statusCode] || 'An error occured'
-  }
+  },
 }
 </script>

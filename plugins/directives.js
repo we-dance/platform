@@ -5,7 +5,7 @@ import VueTour from 'vue-tour'
 Vue.directive('focus', {
   inserted: (el) => {
     el.focus()
-  }
+  },
 })
 
 Vue.use(Vue2TouchEvents)

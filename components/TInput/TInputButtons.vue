@@ -21,20 +21,20 @@ export default {
   props: {
     options: {
       type: Array,
-      default: () => []
+      default: () => [],
     },
     value: {
       type: [String, Number],
-      default: ''
+      default: '',
     },
     defaultValue: {
       type: [String, Number],
-      default: ''
+      default: '',
     },
     item: {
       type: Object,
-      default: () => ({})
-    }
+      default: () => ({}),
+    },
   },
   mounted() {
     if (!this.value) {
@@ -66,7 +66,7 @@ export default {
       }
 
       return camelcase(field.name)
-    }
-  }
+    },
+  },
 }
 </script>

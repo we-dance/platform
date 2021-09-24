@@ -33,14 +33,14 @@ export default {
       id,
       profile,
       loading,
-      exists
+      exists,
     }
   },
   props: {
     username: {
       type: String,
-      default: ''
-    }
-  }
+      default: '',
+    },
+  },
 }
 </script>

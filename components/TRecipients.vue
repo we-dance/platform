@@ -41,8 +41,8 @@ export default {
   props: {
     recipients: {
       type: Object,
-      default: () => ({})
-    }
+      default: () => ({}),
+    },
   },
   data: () => ({
     current: '',
@@ -52,7 +52,7 @@ export default {
       clickedAt: 'bg-green-500',
       failedAt: 'bg-red-500',
       spammedAt: 'bg-orange-500',
-      unsubscribedAt: 'bg-orange-500'
+      unsubscribedAt: 'bg-orange-500',
     },
     folderNames: {
       deliveredAt: 'Unread',
@@ -60,8 +60,8 @@ export default {
       clickedAt: 'Clicked',
       failedAt: 'Failed',
       spammedAt: 'Spammed',
-      unsubscribedAt: 'Unsubscribed'
-    }
+      unsubscribedAt: 'Unsubscribed',
+    },
   }),
   setup() {
     return { getDateTime }
@@ -92,16 +92,16 @@ export default {
             !item.unsubscribedAt &&
             !item.spammedAt &&
             !item.clickedAt
-        )
+        ),
       }
-    }
+    },
   },
   methods: {
     percent(count) {
       const round = (val) => Math.round(val)
 
       return round((count / this.itemsList.length) * 100)
-    }
-  }
+    },
+  },
 }
 </script>

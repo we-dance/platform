@@ -36,27 +36,27 @@ export default {
   name: 'TInputVenue',
   setup() {
     return {
-      venueFields
+      venueFields,
     }
   },
   components: {
     TField: () =>
       import(/* webpackChunkName: "TField" */ '~/components/TField'),
     TPopupEdit: () =>
-      import(/* webpackChunkName: "TPopupEdit" */ '~/components/TPopupEdit')
+      import(/* webpackChunkName: "TPopupEdit" */ '~/components/TPopupEdit'),
   },
   props: {
     value: {
       type: [String, Object],
-      default: ''
+      default: '',
     },
     placeholder: {
       type: String,
-      default: 'Search place or address'
-    }
+      default: 'Search place or address',
+    },
   },
   data: () => ({
-    venue: null
+    venue: null,
   }),
   computed: {
     room: {
@@ -69,7 +69,7 @@ export default {
         newVal.room = room
 
         this.$emit('input', newVal)
-      }
+      },
     },
     internalValue: {
       get() {
@@ -85,7 +85,7 @@ export default {
 
         const newVal = JSON.parse(JSON.stringify(val))
         this.$emit('input', newVal)
-      }
+      },
     },
     rooms() {
       if (!this.venue?.rooms) {
@@ -95,10 +95,10 @@ export default {
       return this.venue.rooms
         .split('\n')
         .map((room) => ({ value: room, label: room }))
-    }
+    },
   },
   watch: {
-    value: 'load'
+    value: 'load',
   },
   async mounted() {
     await this.load()
@@ -120,14 +120,14 @@ export default {
           id: this.value.place_id,
           rooms: '',
           map: '',
-          address: this.value
+          address: this.value,
         })
 
         doc = await collection.doc(this.value.place_id).get()
       }
 
       this.venue = doc.data()
-    }
-  }
+    },
+  },
 }
 </script>

@@ -2,39 +2,39 @@ export const useEvents = () => {
   const eventTypeList = [
     {
       label: 'Party',
-      value: 'Party'
+      value: 'Party',
     },
     {
       label: 'Workshop',
-      value: 'Workshop'
+      value: 'Workshop',
     },
     {
       label: 'Course',
-      value: 'Course'
+      value: 'Course',
     },
     {
       label: 'Festival',
-      value: 'Festival'
+      value: 'Festival',
     },
     {
       label: 'Congress',
-      value: 'Congress'
+      value: 'Congress',
     },
     {
       label: 'Concert',
-      value: 'Concert'
+      value: 'Concert',
     },
     {
       label: 'Show',
-      value: 'Show'
+      value: 'Show',
     },
     {
       label: 'Other',
-      value: 'Other'
-    }
+      value: 'Other',
+    },
   ]
 
   return {
-    eventTypeList
+    eventTypeList,
   }
 }

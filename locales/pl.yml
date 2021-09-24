@@ -112,4 +112,4 @@ footer.coc: Kodeks postępowania
 footer.faq: FAQ
 chat.welcome: Zacznij rozmowę od czegoś miłego.
 chat.with: Porozmawiaj z {username}
-chat.dateDiff: "{diff} temu"
+chat.dateDiff: '{diff} temu'

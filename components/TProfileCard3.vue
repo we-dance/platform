@@ -20,9 +20,7 @@
             <dt class="font-bold">Address:</dt>
             <dd>
               <a
-                :href="
-                  `https://maps.google.com/?q=${profile.zipcode} ${profile.community}`
-                "
+                :href="`https://maps.google.com/?q=${profile.zipcode} ${profile.community}`"
                 class="underline hover:no-underline"
                 target="_blank"
                 >{{ profile.community }} {{ profile.zipcode }}</a
@@ -55,22 +53,22 @@ export default {
   props: {
     label: {
       type: String,
-      default: ''
+      default: '',
     },
     profile: {
       type: Object,
-      default: () => ({})
+      default: () => ({}),
     },
     showDetails: {
       type: Boolean,
-      default: false
-    }
+      default: false,
+    },
   },
   setup() {
     return {
       getLabels,
-      languages
+      languages,
     }
-  }
+  },
 }
 </script>

@@ -11,16 +11,16 @@ export default {
   props: {
     collection: {
       type: String,
-      default: ''
+      default: '',
     },
     id: {
       type: String,
-      default: ''
+      default: '',
     },
     item: {
       type: Object,
-      default: () => ({})
-    }
+      default: () => ({}),
+    },
   },
   setup(props) {
     const data = props.item
@@ -34,16 +34,16 @@ export default {
           description: getExcerpt(data.bio),
           color: data.partner === 'Yes' ? 'bg-green-400' : 'bg-red-400',
           photo: data.photo,
-          styles: data.styles
-        }
+          styles: data.styles,
+        },
       }
 
       return mapping[props.collection] || {}
     })
 
     return {
-      preview
+      preview,
     }
-  }
+  },
 }
 </script>

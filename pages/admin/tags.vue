@@ -6,9 +6,7 @@
     :fields="fields"
   >
     <template v-slot:empty>
-      <div class="text-center mt-4">
-        There are no tags yet.
-      </div>
+      <div class="text-center mt-4">There are no tags yet.</div>
     </template>
     <template v-slot:default="{ item }">
       <div class="rounded bg-white mb-4 shadow border">
@@ -30,14 +28,14 @@ export default {
     const fields = [
       {
         name: 'type',
-        label: 'Type'
-      }
+        label: 'Type',
+      },
     ]
 
     return {
       collection,
-      fields
+      fields,
     }
-  }
+  },
 }
 </script>

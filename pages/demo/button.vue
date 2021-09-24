@@ -16,7 +16,7 @@ export default {
   data: () => ({
     icon: '',
     type: '',
-    label: 'Button'
+    label: 'Button',
   }),
   computed: {
     icons() {
@@ -34,9 +34,9 @@ export default {
         'secondary',
         'link',
         'context',
-        'nav'
+        'nav',
       ]
-    }
-  }
+    },
+  },
 }
 </script>

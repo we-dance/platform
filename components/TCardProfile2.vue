@@ -38,8 +38,8 @@ export default {
   props: {
     uid: {
       type: String,
-      default: ''
-    }
+      default: '',
+    },
   },
   setup(props) {
     const { getProfile } = useProfiles()
@@ -48,8 +48,8 @@ export default {
     return {
       getProfile,
       getDateTime,
-      profile
+      profile,
     }
-  }
+  },
 }
 </script>

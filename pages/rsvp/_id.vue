@@ -20,8 +20,8 @@ export default {
     const { updateRsvp } = useRsvp()
 
     return {
-      updateRsvp
+      updateRsvp,
     }
-  }
+  },
 }
 </script>

@@ -5,7 +5,7 @@ import {
   TRadioGroup,
   TCheckboxGroup,
   TInput,
-  TPagination
+  TPagination,
 } from 'vue-tailwind/dist/components'
 
 const settings = {
@@ -26,7 +26,7 @@ const settings = {
           'opacity-25 w-full h-full cursor-not-allowed transition duration-100 ease-in-out',
         button:
           'hover:bg-blue-100 w-full h-full transition duration-100 ease-in-out focus:ring-2 focus:ring-blue-500 focus:outline-none focus:ring-opacity-50',
-        ellipsis: ''
+        ellipsis: '',
       },
       variants: {
         rounded: {
@@ -41,10 +41,10 @@ const settings = {
             'border border-gray-200  opacity-25 w-full h-full rounded-full cursor-not-allowed transition duration-100 ease-in-out',
           button:
             'border border-gray-200 hover:bg-blue-100 hover:border-blue-100 rounded-full w-full h-full transition duration-100 ease-in-out focus:ring-2 focus:ring-blue-500 focus:outline-none focus:ring-opacity-50',
-          ellipsis: ''
-        }
-      }
-    }
+          ellipsis: '',
+        },
+      },
+    },
   },
   'vt-input': {
     component: TInput,
@@ -56,9 +56,9 @@ const settings = {
       variants: {
         danger: 'border-red-300 bg-red-50 placeholder-red-200 text-red-900',
         success:
-          'border-green-300 bg-green-50 placeholder-gray-400 text-green-900'
-      }
-    }
+          'border-green-300 bg-green-50 placeholder-gray-400 text-green-900',
+      },
+    },
   },
   't-checkbox-group': {
     component: TCheckboxGroup,
@@ -67,14 +67,14 @@ const settings = {
         groupWrapper: 'flex flex-col',
         label: 'ml-2 text-gray-700 text-sm',
         input:
-          'transition duration-100 ease-in-out rounded shadow-sm focus:border-blue-500 focus:ring-2 focus:ring-blue-500 focus:outline-none focus:ring-opacity-50 focus:ring-offset-0  disabled:opacity-50 disabled:cursor-not-allowed text-blue-500 border-gray-300'
+          'transition duration-100 ease-in-out rounded shadow-sm focus:border-blue-500 focus:ring-2 focus:ring-blue-500 focus:outline-none focus:ring-opacity-50 focus:ring-offset-0  disabled:opacity-50 disabled:cursor-not-allowed text-blue-500 border-gray-300',
       },
       variants: {
         danger: {
           groupWrapper: 'flex flex-col',
           label: 'ml-2 text-red-500 text-sm',
           input:
-            'transition duration-100 ease-in-out rounded shadow-sm focus:border-blue-500 focus:ring-2 focus:ring-blue-500 focus:outline-none focus:ring-opacity-50 focus:ring-offset-0  disabled:opacity-50 disabled:cursor-not-allowed text-red-500 border-red-500'
+            'transition duration-100 ease-in-out rounded shadow-sm focus:border-blue-500 focus:ring-2 focus:ring-blue-500 focus:outline-none focus:ring-opacity-50 focus:ring-offset-0  disabled:opacity-50 disabled:cursor-not-allowed text-red-500 border-red-500',
         },
         buttons: {
           groupWrapper: 'flex',
@@ -86,10 +86,10 @@ const settings = {
             'mx-1 bg-gray-100 border border-gray-300 flex items-center px-4 py-2 rounded shadow-inner cursor-pointer focus:shadow-outline text-sm text-gray-700 hover:text-gray-500 leading-5 uppercase',
           inputWrapper: '',
           inputWrapperChecked: '',
-          input: 'absolute invisible'
-        }
-      }
-    }
+          input: 'absolute invisible',
+        },
+      },
+    },
   },
   't-radio-group': {
     component: TRadioGroup,
@@ -98,14 +98,14 @@ const settings = {
         groupWrapper: 'flex flex-col',
         label: 'ml-2 text-gray-700 text-sm',
         input:
-          'text-blue-500 transition duration-100 ease-in-out border-gray-300 shadow-sm focus:border-blue-500 focus:ring-2 focus:ring-blue-500 focus:outline-none focus:ring-opacity-50 focus:ring-offset-0 disabled:opacity-50 disabled:cursor-not-allowed'
+          'text-blue-500 transition duration-100 ease-in-out border-gray-300 shadow-sm focus:border-blue-500 focus:ring-2 focus:ring-blue-500 focus:outline-none focus:ring-opacity-50 focus:ring-offset-0 disabled:opacity-50 disabled:cursor-not-allowed',
       },
       variants: {
         danger: {
           groupWrapper: 'flex flex-col',
           label: 'ml-2 text-red-500 text-sm',
           input:
-            'text-red-500 transition duration-100 ease-in-out border-red-500 shadow-sm focus:border-blue-500 focus:ring-2 focus:ring-blue-500 focus:outline-none focus:ring-opacity-50 focus:ring-offset-0 disabled:opacity-50 disabled:cursor-not-allowed'
+            'text-red-500 transition duration-100 ease-in-out border-red-500 shadow-sm focus:border-blue-500 focus:ring-2 focus:ring-blue-500 focus:outline-none focus:ring-opacity-50 focus:ring-offset-0 disabled:opacity-50 disabled:cursor-not-allowed',
         },
         buttons: {
           groupWrapper: 'flex',
@@ -117,10 +117,10 @@ const settings = {
             'mx-1 bg-gray-100 border border-gray-300 flex items-center px-4 py-2 rounded shadow-inner cursor-pointer focus:shadow-outline text-sm text-gray-700 hover:text-gray-500 leading-5 uppercase',
           inputWrapper: '',
           inputWrapperChecked: '',
-          input: 'absolute invisible'
-        }
-      }
-    }
+          input: 'absolute invisible',
+        },
+      },
+    },
   },
   't-rich-select': {
     name: 'TRichSelect',
@@ -158,7 +158,7 @@ const settings = {
         enterToClass: '',
         leaveClass: '',
         leaveActiveClass: '',
-        leaveToClass: ''
+        leaveToClass: '',
       },
       classes: {
         wrapper: '',
@@ -192,7 +192,7 @@ const settings = {
         enterToClass: 'opacity-100',
         leaveClass: 'transition ease-in opacity-100',
         leaveActiveClass: '',
-        leaveToClass: 'opacity-0 duration-75'
+        leaveToClass: 'opacity-0 duration-75',
       },
       variants: {
         danger: {
@@ -200,17 +200,17 @@ const settings = {
           selectButtonPlaceholder: 'text-red-200',
           selectButtonIcon: 'text-red-500',
           selectButtonClearButton: 'hover:bg-red-200 text-red-500',
-          dropdown: 'bg-red-50 border-red-300'
+          dropdown: 'bg-red-50 border-red-300',
         },
         success: {
           selectButton: 'border-green-300 bg-green-50 text-green-900',
           selectButtonIcon: 'text-green-500',
           selectButtonClearButton: 'hover:bg-green-200 text-green-500',
-          dropdown: 'bg-green-50 border-green-300'
-        }
-      }
-    }
-  }
+          dropdown: 'bg-green-50 border-green-300',
+        },
+      },
+    },
+  },
 }
 
 Vue.use(VueTailwind, settings)

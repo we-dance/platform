@@ -74,7 +74,7 @@ export const useRsvp = () => {
       rsvp,
       eventId,
       collection,
-      ...extra
+      ...extra,
     }
 
     return await create(rsvpObject)
@@ -93,7 +93,7 @@ export const useRsvp = () => {
 
     if (!rsvpObject) {
       rsvpObject = {
-        uid: uid.value
+        uid: uid.value,
       }
     }
 
@@ -103,7 +103,7 @@ export const useRsvp = () => {
       rsvp,
       eventId,
       collection,
-      ...extra
+      ...extra,
     }
 
     if (rsvpObject.id) {
@@ -124,6 +124,6 @@ export const useRsvp = () => {
     getEvents,
     getFeedback,
     getListRsvps,
-    loading
+    loading,
   }
 }

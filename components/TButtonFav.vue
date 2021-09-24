@@ -14,12 +14,12 @@ export default {
   props: {
     collection: {
       type: String,
-      default: ''
+      default: '',
     },
     item: {
       type: Object,
-      default: () => {}
-    }
+      default: () => {},
+    },
   },
   setup(props) {
     const { uid } = useAuth()
@@ -32,8 +32,8 @@ export default {
     return {
       setFavorite,
       isFavorite,
-      countFavorites
+      countFavorites,
     }
-  }
+  },
 }
 </script>

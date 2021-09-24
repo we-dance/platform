@@ -23,29 +23,29 @@ export default {
   props: {
     hover: {
       type: Boolean,
-      default: false
+      default: false,
     },
     wrapped: {
       type: Boolean,
-      default: false
+      default: false,
     },
     type: {
       type: String,
-      default: 'round'
+      default: 'round',
     },
     label: {
       type: String,
-      default: '...'
+      default: '...',
     },
     wrappedClasses: {
       type: String,
-      default: 'w-32 py-2 bg-white rounded-lg shadow-xl border'
-    }
+      default: 'w-32 py-2 bg-white rounded-lg shadow-xl border',
+    },
   },
   data: () => ({
     show: false,
     isTop: true,
-    isLett: true
+    isLett: true,
   }),
   computed: {
     classes() {
@@ -55,7 +55,7 @@ export default {
       result += this.isLeft ? ' left-0' : ' right-0'
 
       return result
-    }
+    },
   },
   watch: {
     $route() {
@@ -67,7 +67,7 @@ export default {
 
       this.isLeft =
         this.$refs.btn.getBoundingClientRect().left < window.innerWidth / 2
-    }
+    },
   },
   methods: {
     closeMenu() {
@@ -83,7 +83,7 @@ export default {
       if (this.hover) {
         this.show = val
       }
-    }
-  }
+    },
+  },
 }
 </script>

@@ -10,16 +10,12 @@ export const useUpload = () => {
     const id = uuidv4()
 
     const metadata = {
-      uploadedBy: uid.value
+      uploadedBy: uid.value,
     }
 
     return new Promise((resolve) => {
       const ref = `media/${uid.value}/${id}`
-      const uploadTask = firebase
-        .storage()
-        .ref()
-        .child(ref)
-        .put(file, metadata)
+      const uploadTask = firebase.storage().ref().child(ref).put(file, metadata)
 
       uploadTask.on(
         'state_changed',
@@ -36,7 +32,7 @@ export const useUpload = () => {
               path: ref,
               name: file.name,
               size: file.size,
-              updatedAt: file.lastModified
+              updatedAt: file.lastModified,
             })
           })
         }
@@ -45,6 +41,6 @@ export const useUpload = () => {
   }
 
   return {
-    upload
+    upload,
   }
 }

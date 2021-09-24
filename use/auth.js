@@ -20,7 +20,7 @@ const state = Vue.observable({
   account: null,
   initialized: false,
   marketing: null,
-  error: null
+  error: null,
 })
 
 export const useAuth = () => {
@@ -111,8 +111,8 @@ export const useAuth = () => {
       utms: utm(document.location.href),
       screen: {
         width,
-        height
-      }
+        height,
+      },
     }
 
     if (!state.marketing) {
@@ -135,7 +135,7 @@ export const useAuth = () => {
     const actions = {
       add: !!state.uid,
       edit: object.createdBy === state.uid,
-      remove: object.createdBy === state.uid
+      remove: object.createdBy === state.uid,
     }
 
     return actions[action]
@@ -167,13 +167,10 @@ export const useAuth = () => {
         email: user.email ?? '',
         photo: user.photoURL ?? '',
         timezone: new Date().toString().match(/([A-Z]+[+-][0-9]+)/)[1],
-        zone: Intl.DateTimeFormat().resolvedOptions().timeZone
+        zone: Intl.DateTimeFormat().resolvedOptions().timeZone,
       }
 
-      await firestore
-        .collection('accounts')
-        .doc(state.uid)
-        .set(newAccount)
+      await firestore.collection('accounts').doc(state.uid).set(newAccount)
 
       await loadAccount()
     }
@@ -198,7 +195,7 @@ export const useAuth = () => {
       .update({
         lastLoginAt: +lastLoginAt,
         pwaUsed,
-        daysUsed
+        daysUsed,
       })
 
     await updateTimeZone()
@@ -206,7 +203,7 @@ export const useAuth = () => {
 
     firestore.collection('marketing').add({
       uid: state.uid,
-      ...state.marketing
+      ...state.marketing,
     })
   }
 
@@ -221,10 +218,7 @@ export const useAuth = () => {
   async function loadAccount() {
     state.loading = true
 
-    const doc = await firestore
-      .collection('accounts')
-      .doc(state.uid)
-      .get()
+    const doc = await firestore.collection('accounts').doc(state.uid).get()
 
     if (!doc.exists) {
       return false
@@ -244,10 +238,7 @@ export const useAuth = () => {
 
     state.loading = true
 
-    const doc = await firestore
-      .collection('profiles')
-      .doc(state.uid)
-      .get()
+    const doc = await firestore.collection('profiles').doc(state.uid).get()
 
     if (!doc.exists) {
       const profile = {
@@ -259,13 +250,10 @@ export const useAuth = () => {
         username: ls('username'),
         visibility: 'Public',
         type: 'Dancer',
-        name: ls('username')
+        name: ls('username'),
       }
 
-      await firestore
-        .collection('profiles')
-        .doc(state.uid)
-        .set(profile)
+      await firestore.collection('profiles').doc(state.uid).set(profile)
 
       ls.remove('username')
 
@@ -290,13 +278,10 @@ export const useAuth = () => {
 
     const changes = {
       updatedAt: +new Date(),
-      ...data
+      ...data,
     }
 
-    await firestore
-      .collection('profiles')
-      .doc(state.uid)
-      .update(changes)
+    await firestore.collection('profiles').doc(state.uid).update(changes)
 
     await loadProfile()
   }
@@ -320,13 +305,10 @@ export const useAuth = () => {
 
     const changes = {
       updatedAt: +new Date(),
-      ...data
+      ...data,
     }
 
-    await firestore
-      .collection('accounts')
-      .doc(state.uid)
-      .update(changes)
+    await firestore.collection('accounts').doc(state.uid).update(changes)
 
     await loadAccount()
   }
@@ -381,7 +363,7 @@ export const useAuth = () => {
     const url = window.location.origin + '/signin?email=' + email
     const actionCodeSettings = {
       url,
-      handleCodeInApp: true
+      handleCodeInApp: true,
     }
 
     try {
@@ -409,7 +391,7 @@ export const useAuth = () => {
     const { zone } = await getAccount()
     if (!zone) {
       await updateAccount({
-        zone: Intl.DateTimeFormat().resolvedOptions().timeZone
+        zone: Intl.DateTimeFormat().resolvedOptions().timeZone,
       })
     }
   }
@@ -462,6 +444,6 @@ export const useAuth = () => {
     updatePassword,
     updateEmail,
     createUserWithEmailAndPassword,
-    deleteAccount
+    deleteAccount,
   }
 }

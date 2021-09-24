@@ -95,7 +95,7 @@ teaser.allevents.description: Daha fazlasını görmek için WeDance Topluluğu'
 teaser.allevents.btn: Şimdi Katıl
 teaser.chat.title: Sohbet ediyor muyuz?
 teaser.chat.description: Her şehirde dans sohbetleri var
-teaser.chat.btn: "{city} Sohbetine Katıl"
+teaser.chat.btn: '{city} Sohbetine Katıl'
 teaser.involve.title: Yardımına ihtiyacımız var
 teaser.involve.description: Kar amacı gütmeyen uluslararası dans topluluğuyuz.
   Herhangi bir ülke ve şehre gitmeni ve dans etkinlikleri ve dansçılar bulmanı
@@ -110,5 +110,5 @@ footer.terms: Koşullar
 footer.coc: Davranış kodu
 footer.faq: SSS
 chat.welcome: Sohbete güzel bir şeyle başlayın.
-chat.with: "{username} ile sohbet et."
-chat.dateDiff: "{diff} önce"
+chat.with: '{username} ile sohbet et.'
+chat.dateDiff: '{diff} önce'

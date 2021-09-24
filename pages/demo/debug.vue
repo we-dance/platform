@@ -16,8 +16,8 @@ export default {
 
     return {
       app,
-      maker
+      maker,
     }
-  }
+  },
 }
 </script>

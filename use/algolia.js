@@ -13,6 +13,6 @@ export function useAlgolia(indexName) {
 
   return {
     response,
-    search
+    search,
   }
 }

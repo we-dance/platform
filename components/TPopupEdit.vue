@@ -41,50 +41,50 @@ export default {
   props: {
     type: {
       type: String,
-      default: 'simple'
+      default: 'simple',
     },
     icon: {
       type: String,
-      default: 'edit'
+      default: 'edit',
     },
     collection: {
       type: String,
-      default: ''
+      default: '',
     },
     singular: {
       type: String,
-      default: ''
+      default: '',
     },
     label: {
       type: String,
-      default: ''
+      default: '',
     },
     title: {
       type: String,
-      default: ''
+      default: '',
     },
     fields: {
       type: Array,
-      default: () => []
+      default: () => [],
     },
     item: {
       type: Object,
-      default: () => ({})
+      default: () => ({}),
     },
     showRemove: {
       type: Boolean,
-      default: false
-    }
+      default: false,
+    },
   },
   data: () => ({
-    isPopupOpen: false
+    isPopupOpen: false,
   }),
   setup() {
     const { can } = useAuth()
 
     return {
-      can
+      can,
     }
-  }
+  },
 }
 </script>

@@ -149,7 +149,7 @@ export default {
   data: () => ({
     deleteAccountPopupVisible: false,
     usernameConfirmation: '',
-    deleteReason: ''
+    deleteReason: '',
   }),
   setup() {
     const {
@@ -162,7 +162,7 @@ export default {
       loading,
       updatePassword,
       updateEmail,
-      deleteAccount
+      deleteAccount,
     } = useAuth()
 
     const { profileFields, contactFields } = useProfiles()
@@ -178,8 +178,8 @@ export default {
         await updatePassword(password.value)
         router.push({
           query: {
-            tab: 'account'
-          }
+            tab: 'account',
+          },
         })
       } catch (e) {
         passwordError.value = e
@@ -202,7 +202,7 @@ export default {
       password,
       changePassword,
       passwordField,
-      deleteAccount
+      deleteAccount,
     }
   },
   computed: {
@@ -224,11 +224,11 @@ export default {
       set(tab) {
         this.$router.push({
           query: {
-            tab
-          }
+            tab,
+          },
         })
-      }
-    }
+      },
+    },
   },
   methods: {
     async deleteAccountAction() {
@@ -247,7 +247,7 @@ export default {
           deletedAt: Date.now(),
           uid: this.uid,
           account: this.account,
-          profile: this.profile
+          profile: this.profile,
         })
 
         await this.deleteAccount()
@@ -283,12 +283,12 @@ export default {
       } catch (e) {
         this.passwordError = e
       }
-    }
+    },
   },
   head() {
     return {
-      title: 'WeDance Settings'
+      title: 'WeDance Settings',
     }
-  }
+  },
 }
 </script>

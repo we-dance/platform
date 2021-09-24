@@ -14,6 +14,6 @@ export default {
   layout: 'popup',
   mounted() {
     this.$router.replace('/community')
-  }
+  },
 }
 </script>

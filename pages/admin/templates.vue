@@ -56,7 +56,7 @@ export default {
   middleware: ['auth'],
   data: () => ({
     data: '',
-    peopleId: false
+    peopleId: false,
   }),
   setup() {
     const { can } = useAuth()
@@ -67,11 +67,11 @@ export default {
     const fields = [
       {
         name: 'name',
-        labelPosition: 'top'
+        labelPosition: 'top',
       },
       {
         name: 'subject',
-        labelPosition: 'top'
+        labelPosition: 'top',
       },
       {
         name: 'from',
@@ -80,20 +80,20 @@ export default {
         options: [
           {
             value: 'WeDance <automated@wedance.vip>',
-            label: 'WeDance'
+            label: 'WeDance',
           },
           {
             value: 'Alex from WeDance <alex@wedance.vip>',
-            label: 'Alex'
-          }
-        ]
+            label: 'Alex',
+          },
+        ],
       },
       {
         name: 'content',
         label: 'Content',
         labelPosition: 'top',
-        type: 'textarea'
-      }
+        type: 'textarea',
+      },
     ]
 
     return {
@@ -104,8 +104,8 @@ export default {
       getDate,
       getDateTime,
       getTime,
-      can
+      can,
     }
-  }
+  },
 }
 </script>

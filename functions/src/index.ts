@@ -28,34 +28,34 @@ app.post('/track/:action', async (req, res) => {
       .collection('matches')
       .doc(campaignId)
       .update({
-        [`recipients.${uid}.${action}`]: admin.firestore.Timestamp.now()
+        [`recipients.${uid}.${action}`]: admin.firestore.Timestamp.now(),
       })
   } else if (type === 'chatNotification') {
     await db.collection('chatNotifications').add({
       uid,
       action,
       chatId: campaignId,
-      date: admin.firestore.Timestamp.now()
+      date: admin.firestore.Timestamp.now(),
     })
   } else if (type === 'welcomeEmail') {
     await db
       .collection('templates')
       .doc(campaignId)
       .update({
-        [`recipients.${uid}.${action}`]: admin.firestore.Timestamp.now()
+        [`recipients.${uid}.${action}`]: admin.firestore.Timestamp.now(),
       })
   } else {
     await db
       .collection('emails')
       .doc(campaignId)
       .update({
-        [`recipients.${uid}.${action}`]: admin.firestore.Timestamp.now()
+        [`recipients.${uid}.${action}`]: admin.firestore.Timestamp.now(),
       })
   }
 
   res.json({
     success: true,
-    message: 'Action tracked'
+    message: 'Action tracked',
   })
 })
 
@@ -74,7 +74,7 @@ app.get('/share/*', async (req, res) => {
     const file = bucket.file(filePath)
 
     await file.save(imageBuffer, {
-      public: true
+      public: true,
     })
 
     const [metadata] = await file.getMetadata()
@@ -83,12 +83,12 @@ app.get('/share/*', async (req, res) => {
 
     return res.json({
       success: true,
-      url
+      url,
     })
   } catch (e) {
     return res.json({
       success: false,
-      error: e.message
+      error: e.message,
     })
   }
 })
@@ -149,7 +149,7 @@ export const onProfileChange = functions.firestore
       'weight',
       'bio',
       'community',
-      'locales'
+      'locales',
     ]
 
     const needsCacheUpdate = wasChanged(oldProfile, profile, cacheFields)
@@ -174,12 +174,7 @@ export const onProfileChange = functions.firestore
       await generateSocialCover(profile)
     }
 
-    const cache = (
-      await db
-        .collection('app')
-        .doc('v2')
-        .get()
-    ).data() as any
+    const cache = (await db.collection('app').doc('v2').get()).data() as any
 
     const index = initIndex('profiles')
 
@@ -188,7 +183,7 @@ export const onProfileChange = functions.firestore
         profileToAlgolia(
           {
             ...profile,
-            id: profileId
+            id: profileId,
           },
           cache
         )
@@ -200,10 +195,7 @@ export const onProfileChange = functions.firestore
     }
 
     const account = (
-      await db
-        .collection('accounts')
-        .doc(profileId)
-        .get()
+      await db.collection('accounts').doc(profileId).get()
     ).data()
 
     if (!account) {
@@ -217,7 +209,7 @@ export const onProfileChange = functions.firestore
 
     const accountInfo = {
       name: '',
-      phone: ''
+      phone: '',
     }
 
     rsvps.forEach(async (currentRsvp) => {
@@ -234,10 +226,7 @@ export const onProfileChange = functions.firestore
       await currentRsvp.ref.update({ uid: profileId })
     })
 
-    await db
-      .collection('accounts')
-      .doc(profileId)
-      .update(accountInfo)
+    await db.collection('accounts').doc(profileId).update(accountInfo)
 
     const cities = await db
       .collection('cities')
@@ -259,9 +248,9 @@ export const onProfileChange = functions.firestore
         uid: profileId,
         username: profile.username,
         context: {
-          city: city.name
+          city: city.name,
         },
-        error: 'No chat for city'
+        error: 'No chat for city',
       })
 
       throw Error(`City ${city.name} has no chat`)
@@ -292,14 +281,14 @@ export const onProfileChange = functions.firestore
     const data = {
       profile,
       account,
-      city
+      city,
     }
 
     const recipients = {
       [profileId]: {
         name: account.name || account.name,
-        email: account.email
-      }
+        email: account.email,
+      },
     }
 
     const emailData = {
@@ -308,14 +297,14 @@ export const onProfileChange = functions.firestore
       content: render(emailTemplate.content, data),
       recipients,
       type: 'welcomeEmail',
-      id: emailTemplateId
+      id: emailTemplateId,
     }
 
     await db
       .collection('templates')
       .doc(emailTemplate.id)
       .update({
-        [`recipients.${profileId}`]: recipients[profileId]
+        [`recipients.${profileId}`]: recipients[profileId],
       })
 
     return await sendEmail(emailData)
@@ -341,14 +330,11 @@ export const eventConfirmation = functions.firestore
 
     recipients[rsvpId] = {
       name: guest.name,
-      email: guest.email
+      email: guest.email,
     }
 
     const event: any = (
-      await db
-        .collection('events')
-        .doc(rsvp.eventId)
-        .get()
+      await db.collection('events').doc(rsvp.eventId).get()
     ).data()
 
     const subject = event.name
@@ -362,7 +348,7 @@ export const eventConfirmation = functions.firestore
 
     const data = {
       guest,
-      event
+      event,
     }
 
     const email = {
@@ -371,7 +357,7 @@ export const eventConfirmation = functions.firestore
       subject,
       content: render(content, data),
       type: 'eventConfirmation',
-      id: rsvpId
+      id: rsvpId,
     }
 
     await sendEmail(email)
@@ -390,12 +376,7 @@ export const matchNotification = functions.firestore
     delete after.members[after.lastMessageBy]
     const to = Object.keys(after.members)[0]
 
-    const toAccount = (
-      await db
-        .collection('accounts')
-        .doc(to)
-        .get()
-    ).data()
+    const toAccount = (await db.collection('accounts').doc(to).get()).data()
 
     if (!toAccount) {
       throw Error('toAccount not found')
@@ -407,7 +388,7 @@ export const matchNotification = functions.firestore
 
     recipients[to] = {
       name: toAccount.name,
-      email: toAccount.email
+      email: toAccount.email,
     }
 
     const content = `#### You’ve got a new message
@@ -425,7 +406,7 @@ export const matchNotification = functions.firestore
       subject,
       content,
       type: 'chatNotification',
-      id: change.after.id
+      id: change.after.id,
     }
 
     await sendEmail(data)
@@ -449,21 +430,21 @@ export const taskRunner = functions
     tasks.forEach((snapshot) => {
       const data = {
         ...snapshot.data(),
-        id: snapshot.id
+        id: snapshot.id,
       }
       const job = sendEmail(data)
         .then(() =>
           snapshot.ref.update({
             status: 'sent',
             processedAt: admin.firestore.Timestamp.now(),
-            error: ''
+            error: '',
           })
         )
         .catch((err) =>
           snapshot.ref.update({
             status: 'error',
             processedAt: admin.firestore.Timestamp.now(),
-            error: err.message
+            error: err.message,
           })
         )
 

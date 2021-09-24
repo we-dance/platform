@@ -7,7 +7,7 @@ if (false) {
 
   admin.initializeApp({
     credential: admin.credential.cert(serviceAccount),
-    databaseURL: 'https://wedance-4abe3.firebaseio.com'
+    databaseURL: 'https://wedance-4abe3.firebaseio.com',
   })
 } else {
   admin.initializeApp()

@@ -51,16 +51,16 @@ export default {
   props: {
     playlist: {
       type: Object,
-      default: () => ({})
-    }
+      default: () => ({}),
+    },
   },
   setup(props) {
     const { getProfile } = useProfiles()
     const author = computed(() => getProfile(props.playlist.value?.createdBy))
 
     return {
-      author
+      author,
     }
-  }
+  },
 }
 </script>

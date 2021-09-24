@@ -4,7 +4,7 @@
       <div
         v-for="tag in selectedTags"
         :key="tag.value"
-        class="px-2 py-1 cursor-pointer mr-1 mb-1 rounded-full inline-block bg-gray-200 "
+        class="px-2 py-1 cursor-pointer mr-1 mb-1 rounded-full inline-block bg-gray-200"
         @click="remove(tag.value)"
       >
         <div class="flex items-center justify-center">
@@ -48,21 +48,21 @@ export default {
   props: {
     value: {
       type: [Object, String],
-      default: ''
+      default: '',
     },
     options: {
       type: Array,
-      default: () => []
+      default: () => [],
     },
     item: {
       type: Object,
-      default: () => ({})
-    }
+      default: () => ({}),
+    },
   },
   data: () => ({
     input: '',
     selectedIndex: 0,
-    showTypeHead: false
+    showTypeHead: false,
   }),
   computed: {
     escapedInput() {
@@ -71,7 +71,7 @@ export default {
     selectedTags() {
       return Object.keys(this.value).map((key) => ({
         label: key,
-        value: key
+        value: key,
       }))
     },
     filteredTags() {
@@ -91,17 +91,17 @@ export default {
         result.push({
           label: this.escapedInput,
           value: this.escapedInput,
-          new: true
+          new: true,
         })
       }
 
       return result
-    }
+    },
   },
   watch: {
     input() {
       this.selectedIndex = 0
-    }
+    },
   },
   methods: {
     removeLast() {
@@ -143,7 +143,7 @@ export default {
 
       this.$emit('remove', val)
       this.$emit('input', result)
-    }
-  }
+    },
+  },
 }
 </script>

@@ -32,20 +32,20 @@ import { useAuth } from '~/use/auth'
 export default {
   name: 'TCardComment',
   components: {
-    ChildComments: () => import('./TListComments.vue')
+    ChildComments: () => import('./TListComments.vue'),
   },
   props: {
     postId: {
       type: String,
-      default: ''
+      default: '',
     },
     item: {
       type: Object,
-      default: () => ({})
-    }
+      default: () => ({}),
+    },
   },
   data: () => ({
-    showForm: false
+    showForm: false,
   }),
   methods: {
     onShowForm() {
@@ -55,15 +55,15 @@ export default {
       }
 
       this.showForm = !this.showForm
-    }
+    },
   },
   setup() {
     const { uid } = useAuth()
 
     return {
       dateDiff,
-      uid
+      uid,
     }
-  }
+  },
 }
 </script>

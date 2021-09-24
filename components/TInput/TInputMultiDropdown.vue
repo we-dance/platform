@@ -44,29 +44,29 @@ export default {
   props: {
     options: {
       type: Array,
-      default: () => []
+      default: () => [],
     },
     value: {
       type: Object,
-      default: () => []
+      default: () => [],
     },
     label: {
       type: String,
-      default: ''
-    }
+      default: '',
+    },
   },
   data: () => ({
-    editing: false
+    editing: false,
   }),
   computed: {
     count() {
       return Object.keys(this.value).length
-    }
+    },
   },
   methods: {
     onChange(val) {
       this.$emit('input', val)
-    }
-  }
+    },
+  },
 }
 </script>

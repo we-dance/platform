@@ -15,13 +15,13 @@ export const useTags = (selectedCollection) => {
   const addTag = (val) => {
     if (!getById(val)) {
       set(val, {
-        label: val
+        label: val,
       })
     }
   }
 
   return {
     addTag,
-    tagsOptions
+    tagsOptions,
   }
 }

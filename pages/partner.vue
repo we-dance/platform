@@ -2,9 +2,7 @@
   <div>
     <div class="bg-dark text-white py-16">
       <div class="mt-8 px-4 mx-auto max-w-2xl text-center">
-        <h1 class="text-4xl font-bold leading-tight">
-          Find dance partner
-        </h1>
+        <h1 class="text-4xl font-bold leading-tight">Find dance partner</h1>
         <p class="mt-2 text-xl">
           There are 52 other dancers looking for a partner
         </p>
@@ -73,6 +71,6 @@
 
 <script>
 export default {
-  layout: 'public'
+  layout: 'public',
 }
 </script>

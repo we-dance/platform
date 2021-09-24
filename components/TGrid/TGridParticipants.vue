@@ -50,28 +50,28 @@ export default {
   props: {
     value: {
       type: [Object, String],
-      default: () => ({})
+      default: () => ({}),
     },
     items: {
       type: Array,
-      default: () => []
+      default: () => [],
     },
     filters: {
       type: Array,
-      default: () => []
+      default: () => [],
     },
     multi: {
       type: Boolean,
-      default: false
+      default: false,
     },
     editable: {
       type: Boolean,
-      default: false
+      default: false,
     },
     verticalScroll: {
       type: Boolean,
-      default: false
-    }
+      default: false,
+    },
   },
   setup(props) {
     const nameFilter = ref('')
@@ -134,19 +134,19 @@ export default {
       filteredItems,
       coupleCount,
       femaleCount,
-      maleCount
+      maleCount,
     }
   },
   computed: {
     count() {
       return Object.keys(this.selected).length
-    }
+    },
   },
   watch: {
     value: 'load',
     selected(val) {
       this.$emit('input', val)
-    }
+    },
   },
   mounted() {
     this.load()
@@ -166,7 +166,7 @@ export default {
         .map((item) => ({
           name: item.name,
           email: item.email,
-          phone: item.phone
+          phone: item.phone,
         }))
 
       saveCSV(items)
@@ -183,7 +183,7 @@ export default {
       if (mark) {
         Vue.set(this.selected, item.id, {
           email: item.email,
-          name: item.name || item.email
+          name: item.name || item.email,
         })
       } else {
         Vue.delete(this.selected, item.id)
@@ -195,7 +195,7 @@ export default {
       this.filteredItems.forEach((item) => {
         this.select(item, mark)
       })
-    }
-  }
+    },
+  },
 }
 </script>

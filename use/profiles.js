@@ -4,112 +4,112 @@ import { accountFields } from '~/use/accounts'
 export const genderList = [
   {
     label: 'Female',
-    value: 'Female'
+    value: 'Female',
   },
   {
     label: 'Male',
-    value: 'Male'
+    value: 'Male',
   },
   {
     label: 'Other',
-    value: 'Other'
-  }
+    value: 'Other',
+  },
 ]
 
 export const days = [
   {
     label: 'Monday',
-    value: 'Monday'
+    value: 'Monday',
   },
   {
     label: 'Tuesday',
-    value: 'Tuesday'
+    value: 'Tuesday',
   },
   {
     label: 'Wednesday',
-    value: 'Wednesday'
+    value: 'Wednesday',
   },
   {
     label: 'Thursday',
-    value: 'Thursday'
+    value: 'Thursday',
   },
   {
     label: 'Friday',
-    value: 'Friday'
+    value: 'Friday',
   },
   {
     label: 'Saturday',
-    value: 'Saturday'
+    value: 'Saturday',
   },
   {
     label: 'Sunday',
-    value: 'Sunday'
-  }
+    value: 'Sunday',
+  },
 ]
 
 export const meetingPlaces = [
   {
     label: 'My place',
-    value: 'myPlace'
+    value: 'myPlace',
   },
   {
     label: 'Your place',
-    value: 'yourPlace'
+    value: 'yourPlace',
   },
   {
     label: 'Somewhere private',
-    value: 'private'
+    value: 'private',
   },
   {
     label: 'Somewhere public',
-    value: 'public'
-  }
+    value: 'public',
+  },
 ]
 
 export const typeList = [
   {
     label: 'Dancer',
-    value: 'Dancer'
+    value: 'Dancer',
   },
   {
     label: 'Artist',
-    value: 'Artist'
+    value: 'Artist',
   },
   {
     label: 'Organiser',
-    value: 'Organiser'
+    value: 'Organiser',
   },
   {
     label: 'Venue',
-    value: 'Venue'
-  }
+    value: 'Venue',
+  },
 ]
 
 export const objectivesList = [
   {
     label: 'Talk about dance',
-    value: 'talk'
+    value: 'talk',
   },
   {
     label: 'Learn together',
-    value: 'learn'
+    value: 'learn',
   },
   {
     label: 'Dance outdoors',
-    value: 'outdoors'
+    value: 'outdoors',
   },
   {
     label: 'Dance indoors',
-    value: 'indoors'
+    value: 'indoors',
   },
   {
     label: 'Teach together',
-    value: 'teach'
+    value: 'teach',
   },
   {
     label: 'Dance project',
-    value: 'project'
-  }
+    value: 'project',
+  },
 ]
 
 export const contactFields = [
@@ -117,80 +117,80 @@ export const contactFields = [
     name: 'instagram',
     label: 'instagram.com/',
     placeholder: 'username',
-    when: (p) => p.contacts === 'Yes'
+    when: (p) => p.contacts === 'Yes',
   },
   {
     name: 'facebook',
     label: 'fb.com/',
     placeholder: 'username',
-    when: (p) => p.contacts === 'Yes'
+    when: (p) => p.contacts === 'Yes',
   },
   {
     name: 'whatsapp',
     label: 'chat.whatsapp.com/',
     placeholder: 'whatsapp chat',
-    when: (p) => p.contacts === 'Yes'
+    when: (p) => p.contacts === 'Yes',
   },
   {
     name: 'telegram',
     label: 't.me/',
     placeholder: 'username',
-    when: (p) => p.contacts === 'Yes'
+    when: (p) => p.contacts === 'Yes',
   },
   {
     name: 'twitter',
     label: 'twitter.com/',
     placeholder: 'username',
-    when: (p) => p.contacts === 'Yes'
+    when: (p) => p.contacts === 'Yes',
   },
   {
     name: 'tiktok',
     label: 'tiktok.com/',
     placeholder: 'username',
-    when: (p) => p.contacts === 'Yes'
+    when: (p) => p.contacts === 'Yes',
   },
   {
     name: 'youtube',
     label: 'youtube.com/',
     placeholder: 'username',
-    when: (p) => p.contacts === 'Yes'
+    when: (p) => p.contacts === 'Yes',
   },
   {
     name: 'email',
     placeholder: 'for business requests',
-    when: (p) => p.contacts === 'Yes'
+    when: (p) => p.contacts === 'Yes',
   },
   {
     name: 'website',
     placeholder: 'for business requests',
-    when: (p) => p.contacts === 'Yes'
-  }
+    when: (p) => p.contacts === 'Yes',
+  },
 ]
 
 export const visibilityOptions = [
   {
     label: 'Public',
-    value: 'Public'
+    value: 'Public',
   },
   {
     label: 'Members',
-    value: 'Members'
+    value: 'Members',
   },
   {
     label: 'Unlisted',
-    value: 'Unlisted'
-  }
+    value: 'Unlisted',
+  },
 ]
 
 export const booleanOptions = [
   {
     label: 'Yes',
-    value: 'Yes'
+    value: 'Yes',
   },
   {
     label: 'No',
-    value: 'No'
-  }
+    value: 'No',
+  },
 ]
 
 export const profileFields = [
@@ -198,7 +198,7 @@ export const profileFields = [
     name: 'photo',
     key: 'profile.photo',
     poster: true,
-    type: 'photo'
+    type: 'photo',
   },
   {
     name: 'styles',
@@ -206,7 +206,8 @@ export const profileFields = [
     labelPosition: 'top',
     poster: true,
     type: 'stylesSelect',
-    tips: 'Mark up to 4 favorite dances that will be highlighted in your poster'
+    tips:
+      'Mark up to 4 favorite dances that will be highlighted in your poster',
   },
   {
     name: 'gender',
@@ -214,7 +215,7 @@ export const profileFields = [
     type: 'buttons',
     hideSearchBox: true,
     poster: true,
-    options: genderList
+    options: genderList,
   },
   {
     name: 'type',
@@ -222,7 +223,7 @@ export const profileFields = [
     type: 'radio',
     hideSearchBox: true,
     poster: true,
-    options: typeList
+    options: typeList,
   },
   {
     name: 'username',
@@ -231,7 +232,7 @@ export const profileFields = [
     poster: true,
     required: true,
     type: 'username',
-    before: 'Use only letters, numbers, underscores and periods.'
+    before: 'Use only letters, numbers, underscores and periods.',
   },
   {
     name: 'place',
@@ -240,14 +241,14 @@ export const profileFields = [
     poster: true,
     required: true,
     type: 'place',
-    placeholder: 'City'
+    placeholder: 'City',
   },
   {
     name: 'hometown',
     key: 'profile.hometown',
     required: true,
     type: 'place',
-    before: 'Where were you born and raised?'
+    before: 'Where were you born and raised?',
   },
   {
     name: 'visibility',
@@ -256,7 +257,7 @@ export const profileFields = [
     type: 'buttons',
     options: visibilityOptions,
     description:
-      '- Public profiles are searchable in Google and used in our social media to attract new members.\n- Members profile are only visible for logged-in users.\n- Unlisted profiles are possible to open with exact link, but they are not listed in members lists and search.'
+      '- Public profiles are searchable in Google and used in our social media to attract new members.\n- Members profile are only visible for logged-in users.\n- Unlisted profiles are possible to open with exact link, but they are not listed in members lists and search.',
   },
   {
     name: 'permission',
@@ -265,25 +266,25 @@ export const profileFields = [
     type: 'buttons',
     options: booleanOptions,
     description:
-      'Send us link to your profile on [Instagram](https://instagram.com/wedancevip) and we will promote it on our social media channels: Telegram, Instagram, Facebook and Twitter.'
+      'Send us link to your profile on [Instagram](https://instagram.com/wedancevip) and we will promote it on our social media channels: Telegram, Instagram, Facebook and Twitter.',
   },
   {
     name: 'name',
     key: 'profile.name',
     required: true,
     placeholder: '(Required)',
-    before: 'If you want to remain anonym use your first name.'
+    before: 'If you want to remain anonym use your first name.',
   },
   {
     name: 'locales',
     key: 'profile.languages',
-    type: 'languages'
+    type: 'languages',
   },
   {
     name: 'objectives',
     key: 'profile.objectives',
     type: 'multi',
-    options: objectivesList
+    options: objectivesList,
   },
   {
     name: 'bio',
@@ -292,7 +293,7 @@ export const profileFields = [
     type: 'textarea',
     labelPosition: 'top',
     before: 'Short introduction on top of your photo',
-    max: 140
+    max: 140,
   },
   {
     name: 'story',
@@ -303,44 +304,44 @@ export const profileFields = [
     before:
       'Tell your dance story. Use can also use [widgets](https://wedance.vip/markdown), including images and videos',
     tips:
-      'Pitch yourself: Who are you? What do you offer? What do you want?\n\nTips for effective pitch:\n- Uncomplicated: It should be catchy and roll off the tongue\n- Concise: It shouldn’t take more than a minute to say or read\n- Unique: It reflects your skills, goals, and desires\n- Storyline: It covers who you are, what you offer, and where you want to be\n- Appealing: Your elevator pitch is essentially a persuasive sales pitch; the emphasis should be on what you offer'
+      'Pitch yourself: Who are you? What do you offer? What do you want?\n\nTips for effective pitch:\n- Uncomplicated: It should be catchy and roll off the tongue\n- Concise: It shouldn’t take more than a minute to say or read\n- Unique: It reflects your skills, goals, and desires\n- Storyline: It covers who you are, what you offer, and where you want to be\n- Appealing: Your elevator pitch is essentially a persuasive sales pitch; the emphasis should be on what you offer',
   },
   {
     name: 'learning',
     key: 'profile.topics',
     type: 'textarea',
-    description: 'For example: Musicality in Salsa, Men Styling, etc.'
+    description: 'For example: Musicality in Salsa, Men Styling, etc.',
   },
   {
     name: 'jobs',
     label: 'I can help with',
     type: 'textarea',
     description:
-      'How can you help our community? What are you good at? For example: design, programming, marketing, social media, etc.'
+      'How can you help our community? What are you good at? For example: design, programming, marketing, social media, etc.',
   },
   {
     name: 'partner',
     key: 'profile.partner',
     type: 'buttons',
-    options: booleanOptions
+    options: booleanOptions,
   },
   {
     name: 'birthday',
     key: 'profile.birthday',
     when: (p) => p.partner === 'Yes',
     type: 'date',
-    description: 'We will show only your age'
+    description: 'We will show only your age',
   },
   {
     name: 'height',
     key: 'profile.height',
-    when: (p) => p.partner === 'Yes'
+    when: (p) => p.partner === 'Yes',
   },
   {
     name: 'weight',
     key: 'profile.weight',
     when: (p) => p.partner === 'Yes',
-    description: "Leave this field blank if you think it's irrelevant."
+    description: "Leave this field blank if you think it's irrelevant.",
   },
   {
     name: 'partnerBio',
@@ -348,29 +349,29 @@ export const profileFields = [
     when: (p) => p.partner === 'Yes',
     type: 'textarea',
     description:
-      'What is important in your partner? Put it as a question, for example: Do you love dogs?'
+      'What is important in your partner? Put it as a question, for example: Do you love dogs?',
   },
   {
     name: 'meetingPlace',
     key: 'profile.place',
     when: (p) => p.partner === 'Yes',
     type: 'multi',
-    options: meetingPlaces
+    options: meetingPlaces,
   },
   {
     name: 'days',
     key: 'profile.days',
     when: (p) => p.partner === 'Yes',
     type: 'multi',
-    options: days
+    options: days,
   },
   {
     name: 'contacts',
     label: 'Do you use social media?',
     type: 'buttons',
-    options: booleanOptions
+    options: booleanOptions,
   },
-  ...contactFields
+  ...contactFields,
 ]
 
 const profilePosterFields = profileFields.filter((f) => f.poster)
@@ -378,7 +379,7 @@ const profileDetailFields = profileFields.filter((f) => !f.poster)
 
 export const registerFields = [
   ...accountFields.filter((f) => f.register),
-  ...profileFields.filter((f) => f.register)
+  ...profileFields.filter((f) => f.register),
 ]
 
 export const profileFilters = [
@@ -387,7 +388,7 @@ export const profileFilters = [
     type: 'place',
     clearable: true,
     hideLabel: true,
-    placeholder: 'City'
+    placeholder: 'City',
   },
   {
     name: 'dance',
@@ -396,7 +397,7 @@ export const profileFilters = [
     placeholder: 'Style',
     compare: (item, field, value) =>
       item && item[field] && item[field][value] && item[field][value].selected,
-    mineOnly: true
+    mineOnly: true,
   },
   {
     name: 'objective',
@@ -405,7 +406,7 @@ export const profileFilters = [
     hideSearchBox: true,
     clearable: true,
     hideLabel: true,
-    placeholder: 'Objective'
+    placeholder: 'Objective',
   },
   {
     name: 'gender',
@@ -414,23 +415,23 @@ export const profileFilters = [
     hideSearchBox: true,
     clearable: true,
     hideLabel: true,
-    placeholder: 'Gender'
-  }
+    placeholder: 'Gender',
+  },
 ]
 
 export const profileSorts = [
   {
     value: 'username',
-    label: 'Username'
+    label: 'Username',
   },
   {
     value: '-createdAt',
-    label: 'Registered'
+    label: 'Registered',
   },
   {
     value: '-lastLoginAt',
-    label: 'Last seen'
-  }
+    label: 'Last seen',
+  },
 ]
 
 export const useProfiles = () => {
@@ -446,6 +447,6 @@ export const useProfiles = () => {
     loading,
     objectivesList,
     typeList,
-    genderList
+    genderList,
   }
 }

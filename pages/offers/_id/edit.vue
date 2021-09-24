@@ -28,8 +28,8 @@ export default {
     return {
       offerFields,
       currentCity,
-      isAdmin
+      isAdmin,
     }
-  }
+  },
 }
 </script>

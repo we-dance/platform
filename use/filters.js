@@ -38,6 +38,6 @@ export const useFilters = (docs, fields, defaultFilter, sorting) => {
 
   return {
     filters,
-    results
+    results,
   }
 }

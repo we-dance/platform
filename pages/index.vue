@@ -107,6 +107,6 @@ export default {
         router.push('/feed')
       }
     })
-  }
+  },
 }
 </script>

@@ -54,23 +54,23 @@ export default {
   props: {
     noContainer: {
       type: Boolean,
-      default: false
-    }
+      default: false,
+    },
   },
   data: () => ({
     isMenuOpen: false,
     isSearchShown: false,
     showAuthPopup: false,
-    query: ''
+    query: '',
   }),
   computed: {
     isHome() {
       return this.$route.name === 'index'
-    }
+    },
   },
   watch: {
     '$route.path': 'onPageView',
-    'profile.username': 'onProfileLoad'
+    'profile.username': 'onProfileLoad',
   },
   mounted() {
     this.onPageView()
@@ -108,7 +108,7 @@ export default {
         telegram: this.profile?.telegram || '',
         type: this.profile?.type || '',
         partner: this.profile?.partner || '',
-        teacher: this.profile?.teacher || ''
+        teacher: this.profile?.teacher || '',
       }
 
       const _hsq = (window._hsq = window._hsq || [])
@@ -117,7 +117,7 @@ export default {
       this.$sentry.setUser({
         email: contact.email,
         username: contact.username,
-        id: contact.uid
+        id: contact.uid,
       })
 
       this.$fire.analytics.setUserId(contact.uid)
@@ -127,7 +127,7 @@ export default {
         gender: this.profile?.gender,
         visibility: this.profile?.visibility,
         partner: this.profile?.partner,
-        teacher: this.profile?.teacher
+        teacher: this.profile?.teacher,
       })
     },
     onPageView() {
@@ -142,19 +142,19 @@ export default {
           app_name: features.pwa ? 'pwa' : 'web',
           screen_name: document.title,
           screen_view: this.$route.name,
-          app_version: version
+          app_version: version,
         }
 
         this.$fire.analytics.logEvent('page_view')
         this.$fire.analytics.logEvent('screen_view', screen)
       }, 500)
-    }
+    },
   },
   head() {
     return {
       htmlAttrs: {
-        lang: this.$i18n.locale
-      }
+        lang: this.$i18n.locale,
+      },
     }
   },
   setup() {
@@ -169,8 +169,8 @@ export default {
       uid,
       isAdmin,
       getCity,
-      changeCityByName
+      changeCityByName,
     }
-  }
+  },
 }
 </script>

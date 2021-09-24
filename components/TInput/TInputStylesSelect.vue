@@ -28,21 +28,21 @@ export default {
 
     return {
       levels,
-      getStyles
+      getStyles,
     }
   },
   props: {
     value: {
       type: [Object, String],
-      default: () => ({})
+      default: () => ({}),
     },
     item: {
       type: Object,
-      default: () => ({})
-    }
+      default: () => ({}),
+    },
   },
   data: () => ({
-    showPopup: false
+    showPopup: false,
   }),
   methods: {
     setLevel(styleId, level) {
@@ -55,7 +55,7 @@ export default {
       val[styleId].level = level
 
       this.$emit('input', val)
-    }
-  }
+    },
+  },
 }
 </script>

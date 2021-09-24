@@ -16,8 +16,8 @@ export default {
   props: {
     item: {
       type: Object,
-      default: () => ({})
-    }
+      default: () => ({}),
+    },
   },
   computed: {
     publishedAt() {
@@ -25,14 +25,14 @@ export default {
     },
     creator() {
       return this.getProfile(this.item?.createdBy)
-    }
+    },
   },
   setup() {
     const { getProfile } = useProfiles()
 
     return {
-      getProfile
+      getProfile,
     }
-  }
+  },
 }
 </script>

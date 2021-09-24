@@ -3,7 +3,7 @@ import * as puppeteer from 'puppeteer'
 function getBrowser() {
   return puppeteer.launch({
     headless: true,
-    args: ['--no-sandbox', '--disable-setuid-sandbox']
+    args: ['--no-sandbox', '--disable-setuid-sandbox'],
   })
 }
 
@@ -20,7 +20,7 @@ export async function screenshot(
   await page.goto(url, { waitUntil: 'networkidle2' })
 
   await page.waitForSelector('#canvas', {
-    visible: true
+    visible: true,
   })
 
   await page.evaluate(async () => {

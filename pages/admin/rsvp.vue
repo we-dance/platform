@@ -23,7 +23,7 @@
                   'uid',
                   'collection',
                   'eventId',
-                  'rsvp'
+                  'rsvp',
                 ]"
                 :key="field"
                 class="flex"
@@ -39,15 +39,11 @@
                 v-if="item.participant && item.participant.email"
                 class="flex"
               >
-                <dt class="w-1/3 text-right mr-2 text-gray-500">
-                  email
-                </dt>
+                <dt class="w-1/3 text-right mr-2 text-gray-500">email</dt>
                 <dd>{{ item.participant.email }}</dd>
               </div>
               <div class="flex">
-                <dt class="w-1/3 text-right mr-2 text-gray-500">
-                  account
-                </dt>
+                <dt class="w-1/3 text-right mr-2 text-gray-500">account</dt>
                 <dd v-if="item.account && item.uid">
                   {{ item.account.id }}
                 </dd>
@@ -61,46 +57,34 @@
                 <dd v-if="!item.account" class="text-red-500">no</dd>
               </div>
               <div v-if="item.nickname" class="flex">
-                <dt class="w-1/3 text-right mr-2 text-gray-500">
-                  nickname
-                </dt>
+                <dt class="w-1/3 text-right mr-2 text-gray-500">nickname</dt>
                 <dd>{{ item.nickname }}</dd>
               </div>
               <div
                 v-if="item.participant && item.participant.name"
                 class="flex"
               >
-                <dt class="w-1/3 text-right mr-2 text-gray-500">
-                  name
-                </dt>
+                <dt class="w-1/3 text-right mr-2 text-gray-500">name</dt>
                 <dd>{{ item.participant.name }}</dd>
               </div>
               <div v-if="item.event && item.event.name" class="flex">
-                <dt class="w-1/3 text-right mr-2 text-gray-500">
-                  event
-                </dt>
+                <dt class="w-1/3 text-right mr-2 text-gray-500">event</dt>
                 <dd>{{ item.event.name }}</dd>
               </div>
               <div class="flex">
-                <dt class="w-1/3 text-right mr-2 text-gray-500">
-                  responded
-                </dt>
+                <dt class="w-1/3 text-right mr-2 text-gray-500">responded</dt>
                 <dd>
                   {{ getDate(item.createdAt) }} at {{ getTime(item.createdAt) }}
                 </dd>
               </div>
               <div v-if="item.updatedAt" class="flex">
-                <dt class="w-1/3 text-right mr-2 text-gray-500">
-                  updated
-                </dt>
+                <dt class="w-1/3 text-right mr-2 text-gray-500">updated</dt>
                 <dd>
                   {{ getDate(item.updatedAt) }} at {{ getTime(item.updatedAt) }}
                 </dd>
               </div>
               <div v-if="item.joinedAt" class="flex">
-                <dt class="w-1/3 text-right mr-2 text-gray-500">
-                  joined
-                </dt>
+                <dt class="w-1/3 text-right mr-2 text-gray-500">joined</dt>
                 <dd>
                   {{ getDate(item.joinedAt) }} at {{ getTime(item.joinedAt) }}
                 </dd>
@@ -123,7 +107,7 @@ import { getDay, getTime, getDate } from '~/utils'
 export default {
   middleware: ['auth'],
   components: {
-    TCardList
+    TCardList,
   },
   setup() {
     const title = 'RSVPs'
@@ -139,7 +123,7 @@ export default {
       ...item,
       account: item.participant.email
         ? getAccountByEmail(item.participant.email)
-        : null
+        : null,
     })
 
     const filters = [
@@ -158,33 +142,33 @@ export default {
           item.collection === 'events' &&
           item.account,
         default: true,
-        sort: '-createdAt'
+        sort: '-createdAt',
       },
       {
         name: 'noaccount',
         label: 'No Account',
         filter: (item) =>
           !item.uid && item.rsvp === 'up' && item.collection === 'events',
-        sort: '-createdAt'
+        sort: '-createdAt',
       },
       {
         name: 'checkin',
         label: 'Check in',
         filter: (item) => item.rsvp === 'up' && item.state === 'in',
-        sort: '-createdAt'
+        sort: '-createdAt',
       },
       {
         name: 'yes',
         label: 'Yes',
         filter: (item) => item.rsvp === 'up',
-        sort: '-createdAt'
+        sort: '-createdAt',
       },
       {
         name: 'no',
         label: 'No',
         filter: (item) => item.rsvp === 'down',
-        sort: '-createdAt'
-      }
+        sort: '-createdAt',
+      },
       // {
       //   name: 'feedback',
       //   label: 'Feedback',
@@ -204,13 +188,13 @@ export default {
       collection,
       isAdmin,
       filters,
-      update
+      update,
     }
   },
   mounted() {
     if (!this.isAdmin) {
       this.$router.push('/')
     }
-  }
+  },
 }
 </script>
