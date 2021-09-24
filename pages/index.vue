@@ -6,11 +6,19 @@
         <div>
           <div class="relative sm:overflow-hidden">
             <div class="absolute inset-0">
-              <nuxt-img
+              <img
                 class="h-full w-full object-cover"
-                src="/hero.jpg"
                 alt="People dancing bachata"
-                sizes="sm:100vw md:100vw lg:100vw xl:100vw xxl:100vw 2xl:100vw"
+                src="/img/hero_640.jpg"
+                sizes="(max-width: 640px) 100vw, (max-width: 768px) 100vw, (max-width: 1024px) 100vw, (max-width: 1280px) 100vw, (max-width: 1536px) 100vw, 100vw"
+                srcset="
+                  /img/hero_640.jpg   640w,
+                  /img/hero_768.jpg   768w,
+                  /img/hero_1024.jpg 1024w,
+                  /img/hero_1280.jpg 1280w,
+                  /img/hero_1536.jpg 1536w,
+                  /img/hero_1536.jpg 1536w
+                "
               />
               <div class="absolute inset-0 bg-black opacity-50" />
             </div>

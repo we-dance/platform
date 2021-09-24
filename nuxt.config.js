@@ -210,7 +210,6 @@ export default {
     },
   },
   image: {
-    dir: 'static/img',
-    provider: 'netlify',
+    provider: 'static',
   },
 }
