@@ -62,7 +62,6 @@ export default {
     // Doc: https://composition-api.nuxtjs.org/
     '@nuxtjs/composition-api',
     '@nuxtjs/google-fonts',
-    '@nuxt/image',
   ],
   /*
    ** Nuxt.js modules
@@ -81,6 +80,7 @@ export default {
     '@nuxt/content',
     '@nuxtjs/firebase',
     '@nuxtjs/toast',
+    '@nuxt/image',
   ],
   googleFonts: {
     display: 'swap',
@@ -212,5 +212,6 @@ export default {
   image: {
     dir: 'static/img',
     provider: 'ipx',
+    staticFilename: '[publicPath]/images/[name]-[hash][ext]',
   },
 }
