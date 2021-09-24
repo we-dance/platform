@@ -4,9 +4,12 @@ import ls from 'local-storage'
 import { utm } from 'url-utm-params'
 import { isSameDay } from 'date-fns'
 import { computed, toRefs } from '@nuxtjs/composition-api'
-import firebase from 'firebase/app'
-import 'firebase/auth'
-import 'firebase/firestore'
+import {
+  getAuth,
+  isSignInWithEmailLink,
+  GoogleAuthProvider
+} from 'firebase/auth'
+import { getFirestore } from 'firebase/firestore'
 import { useRouter } from '~/use/router'
 import { getDateObect, getLanguages } from '~/utils'
 import { useDoc } from '~/use/doc'
@@ -32,9 +35,9 @@ export const useAuth = () => {
 
   if (!state.initialized) {
     getRedirectResult().then(() => {
-      firebase.auth().onAuthStateChanged(setUser)
+      getAuth().onAuthStateChanged(setUser)
 
-      if (firebase.auth().isSignInWithEmailLink(window.location.href)) {
+      if (isSignInWithEmailLink(window.location.href)) {
         signInWithEmailLink()
       }
     })
@@ -57,7 +60,7 @@ export const useAuth = () => {
   const isAccountConfirmed = () =>
     !!state.uid && !!state.account && !!state.account.confirmed
 
-  const firestore = firebase.firestore()
+  const firestore = getFirestore()
 
   function getReferrer() {
     const payload = document.referrer
@@ -302,12 +305,12 @@ export const useAuth = () => {
   }
 
   async function updateEmail(email) {
-    const user = firebase.auth().currentUser
+    const user = getAuth().currentUser
     await user.updateEmail(email)
   }
 
   async function updatePassword(password) {
-    const user = firebase.auth().currentUser
+    const user = getAuth().currentUser
     await user.updatePassword(password)
   }
 
@@ -337,7 +340,7 @@ export const useAuth = () => {
 
     await removeProfile(state.uid)
     await removeAccount(state.uid)
-    const user = firebase.auth().currentUser
+    const user = getAuth().currentUser
     await user.delete()
     await signOut()
   }
@@ -345,7 +348,7 @@ export const useAuth = () => {
   async function signOut() {
     state.loading = true
 
-    await firebase.auth().signOut()
+    await getAuth().signOut()
     setUser(null)
 
     state.loading = false
@@ -354,7 +357,7 @@ export const useAuth = () => {
   }
 
   async function signInAnonymously() {
-    await firebase.auth().signInAnonymously()
+    await getAuth().signInAnonymously()
   }
 
   async function signInWithEmailLink() {
@@ -365,7 +368,7 @@ export const useAuth = () => {
     const email = ls('email') || route.query.email
 
     try {
-      await firebase.auth().signInWithEmailLink(email, link)
+      await getAuth().signInWithEmailLink(email, link)
     } catch (e) {
       state.error = e
 
@@ -385,7 +388,7 @@ export const useAuth = () => {
     }
 
     try {
-      await firebase.auth().sendSignInLinkToEmail(email, actionCodeSettings)
+      await getAuth().sendSignInLinkToEmail(email, actionCodeSettings)
     } catch (e) {
       state.error = e
     }
@@ -400,7 +403,7 @@ export const useAuth = () => {
     try {
       ls('username', username)
       ls('city', place)
-      await firebase.auth().createUserWithEmailAndPassword(email, password)
+      await getAuth().createUserWithEmailAndPassword(email, password)
     } catch (e) {
       state.error = e
     }
@@ -415,7 +418,7 @@ export const useAuth = () => {
   }
   async function signUserIn(email, password) {
     try {
-      await firebase.auth().signInWithEmailAndPassword(email, password)
+      await getAuth().signInWithEmailAndPassword(email, password)
     } catch (e) {
       state.error = e
     }
@@ -424,15 +427,15 @@ export const useAuth = () => {
   function signInWithGoogle() {
     state.signingIn = true
 
-    const provider = new firebase.auth.GoogleAuthProvider()
+    const provider = new GoogleAuthProvider()
     provider.addScope('profile')
     provider.addScope('email')
-    firebase.auth().signInWithRedirect(provider)
+    getAuth().signInWithRedirect(provider)
   }
 
   async function getRedirectResult() {
     try {
-      const result = await firebase.auth().getRedirectResult()
+      const result = await getAuth().getRedirectResult()
       setUser(result.user)
     } catch (error) {
       state.error = error

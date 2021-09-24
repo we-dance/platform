@@ -25,7 +25,7 @@ export const firebase = {
 export default {
   target: 'static',
   tailwindcss: {
-    jit: true
+    mode: 'jit'
   },
   /*
    ** Customize the progress-bar color
@@ -60,7 +60,7 @@ export default {
     // Doc: https://github.com/nuxt-community/nuxt-tailwindcss
     '@nuxtjs/tailwindcss',
     // Doc: https://composition-api.nuxtjs.org/
-    '@nuxtjs/composition-api',
+    '@nuxtjs/composition-api/module',
     '@nuxtjs/google-fonts',
     '@nuxt/image'
   ],
@@ -128,6 +128,12 @@ export default {
      */
     extend(config, ctx) {
       config.resolve.alias.vue = 'vue/dist/vue.common'
+
+      config.module.rules.push({
+        test: /\.mjs$/,
+        include: /node_modules/,
+        type: 'javascript/auto'
+      })
 
       const svgRule = config.module.rules.find((rule) => rule.test.test('.svg'))
 

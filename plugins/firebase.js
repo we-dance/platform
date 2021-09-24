@@ -1,16 +1,14 @@
-import Firebase from 'firebase/app'
-import 'firebase/auth'
-import 'firebase/firestore'
-import 'firebase/analytics'
+import { initializeApp, getApps } from 'firebase/app'
+import { getAnalytics } from 'firebase/analytics'
 
 export default ({ env: { firebase } }) => {
-  if (Firebase.apps.length > 0) {
+  if (getApps().length > 0) {
     return
   }
 
-  Firebase.initializeApp(firebase.config)
+  initializeApp(firebase.config)
 
   if (firebase.services.analytics) {
-    Firebase.analytics()
+    getAnalytics()
   }
 }
