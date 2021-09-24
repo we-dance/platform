@@ -3,7 +3,6 @@ import formatDistance from 'date-fns/formatDistance'
 import MarkdownIt from 'markdown-it'
 import excerptHtml from 'excerpt-html'
 import saveAs from 'file-saver'
-import { dsvFormat } from 'd3'
 import languages from '~/assets/languages'
 
 export const getObjectKeysFromArray = (arr) => {
@@ -182,7 +181,8 @@ export const sanitize = (input, trim, target = '') => {
 }
 
 export const saveCSV = (data, filename) => {
-  const csvFile = dsvFormat(',').format(data)
+  // todo: const csvFile = dsvFormat(',').format(data)
+  const csvFile = ''
   const blob = new Blob([csvFile], {
     type: 'text/csv;charset=utf-8'
   })

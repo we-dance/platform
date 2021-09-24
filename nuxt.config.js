@@ -23,7 +23,6 @@ export const firebase = {
 }
 
 export default {
-  target: 'static',
   tailwindcss: {
     mode: 'jit'
   },

@@ -35,7 +35,6 @@
     "algoliasearch": "^4.8.6",
     "axios": "^0.21.4",
     "core-js": "3.18.0",
-    "d3": "^7.0.3",
     "date-fns": "^2.10.0",
     "date-fns-timezone": "^0.1.4",
     "detect-inapp": "^1.4.0",
