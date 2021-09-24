@@ -211,7 +211,6 @@ export default {
   },
   image: {
     dir: 'static/img',
-    provider: 'ipx',
-    staticFilename: '[publicPath]/images/[name]-[hash][ext]',
+    provider: 'netlify',
   },
 }
