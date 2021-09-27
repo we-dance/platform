@@ -15,7 +15,11 @@ export const useUpload = () => {
 
     return new Promise((resolve) => {
       const ref = `media/${uid.value}/${id}`
-      const uploadTask = firebase.storage().ref().child(ref).put(file, metadata)
+      const uploadTask = firebase
+        .storage()
+        .ref()
+        .child(ref)
+        .put(file, metadata)
 
       uploadTask.on(
         'state_changed',

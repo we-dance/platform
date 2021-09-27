@@ -10,7 +10,9 @@ export const useStyles = () => {
   const { $content } = useContext()
 
   const load = async () => {
-    state.collection = await $content('styles').sortBy('id').fetch()
+    state.collection = await $content('styles')
+      .sortBy('id')
+      .fetch()
   }
 
   if (!state.collection.length) {

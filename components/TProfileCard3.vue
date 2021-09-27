@@ -20,7 +20,9 @@
             <dt class="font-bold">Address:</dt>
             <dd>
               <a
-                :href="`https://maps.google.com/?q=${profile.zipcode} ${profile.community}`"
+                :href="
+                  `https://maps.google.com/?q=${profile.zipcode} ${profile.community}`
+                "
                 class="underline hover:no-underline"
                 target="_blank"
                 >{{ profile.community }} {{ profile.zipcode }}</a

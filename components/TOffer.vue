@@ -60,12 +60,12 @@
           :options="
             getOptionsFromMulti(
               {
-                myPlace: `${author.username}'s Home - ${author.community} ${
-                  author.zipcode || ''
-                }`,
-                yourPlace: `${profile.username}'s Home - ${profile.community} ${
-                  profile.zipcode || ''
-                }`,
+                myPlace: `${author.username}'s Home - ${
+                  author.community
+                } ${author.zipcode || ''}`,
+                yourPlace: `${profile.username}'s Home - ${
+                  profile.community
+                } ${profile.zipcode || ''}`,
               },
               offer.place
             )

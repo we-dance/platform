@@ -170,7 +170,10 @@ export const useAuth = () => {
         zone: Intl.DateTimeFormat().resolvedOptions().timeZone,
       }
 
-      await firestore.collection('accounts').doc(state.uid).set(newAccount)
+      await firestore
+        .collection('accounts')
+        .doc(state.uid)
+        .set(newAccount)
 
       await loadAccount()
     }
@@ -218,7 +221,10 @@ export const useAuth = () => {
   async function loadAccount() {
     state.loading = true
 
-    const doc = await firestore.collection('accounts').doc(state.uid).get()
+    const doc = await firestore
+      .collection('accounts')
+      .doc(state.uid)
+      .get()
 
     if (!doc.exists) {
       return false
@@ -238,7 +244,10 @@ export const useAuth = () => {
 
     state.loading = true
 
-    const doc = await firestore.collection('profiles').doc(state.uid).get()
+    const doc = await firestore
+      .collection('profiles')
+      .doc(state.uid)
+      .get()
 
     if (!doc.exists) {
       const profile = {
@@ -253,7 +262,10 @@ export const useAuth = () => {
         name: ls('username'),
       }
 
-      await firestore.collection('profiles').doc(state.uid).set(profile)
+      await firestore
+        .collection('profiles')
+        .doc(state.uid)
+        .set(profile)
 
       ls.remove('username')
 
@@ -281,7 +293,10 @@ export const useAuth = () => {
       ...data,
     }
 
-    await firestore.collection('profiles').doc(state.uid).update(changes)
+    await firestore
+      .collection('profiles')
+      .doc(state.uid)
+      .update(changes)
 
     await loadProfile()
   }
@@ -308,7 +323,10 @@ export const useAuth = () => {
       ...data,
     }
 
-    await firestore.collection('accounts').doc(state.uid).update(changes)
+    await firestore
+      .collection('accounts')
+      .doc(state.uid)
+      .update(changes)
 
     await loadAccount()
   }

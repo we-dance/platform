@@ -147,7 +147,7 @@ export const getId = (text) => {
 
 export const camelize = (str) => {
   return str
-    .replace(/(?:^\w|[A-Z]|\b\w)/g, function (word, index) {
+    .replace(/(?:^\w|[A-Z]|\b\w)/g, function(word, index) {
       return index === 0 ? word.toLowerCase() : word.toUpperCase()
     })
     .replace(/\s+/g, '')
@@ -201,7 +201,10 @@ export const getOptions = (items, label) => {
 }
 
 function getLang(languageString) {
-  const [language] = languageString.replace('-', '_').toLowerCase().split('_')
+  const [language] = languageString
+    .replace('-', '_')
+    .toLowerCase()
+    .split('_')
 
   return language
 }
