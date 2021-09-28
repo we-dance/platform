@@ -1,6 +1,6 @@
 <template>
   <ag-grid-vue
-    style="height: 100vh; width: 100%"
+    style="height: 100%; width: 100%"
     class="ag-theme-alpine"
     :column-defs="columns"
     :row-data="accounts"
@@ -31,7 +31,13 @@ export default {
     const accounts = ref([])
     const columns = [
       { field: 'id' },
-      { field: 'username' },
+      {
+        field: 'username',
+        cellRenderer: (params) =>
+          `<a target="blank" href="/${
+            params.data.username
+          }" class="underline text-primary">${params.data.username || ''}</a>`,
+      },
       {
         field: 'city',
         valueGetter: (params) => getCity(params.data.place),
