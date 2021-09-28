@@ -1,6 +1,6 @@
 <template>
   <ag-grid-vue
-    style="height: 100%; width: 100%"
+    style="height: 100vh; width: 100%"
     class="ag-theme-alpine"
     :column-defs="columns"
     :row-data="accounts"
