@@ -1,5 +1,9 @@
 <template>
   <div class="flex flex-col" style="height: 100vh">
+    <div class="p-4 flex space-x-4">
+      <div>{{ events.length }} events</div>
+      <TInputButtons v-model="onlyLast" :options="onlyLastOptions" />
+    </div>
     <ag-grid-vue
       class="ag-theme-alpine mt-4"
       style="width: 100%; height: 100%"
@@ -13,7 +17,7 @@
 <script>
 import firebase from 'firebase/app'
 import 'firebase/firestore'
-import { computed, onMounted, ref } from 'vue-demi'
+import { computed, onMounted, ref, watch } from 'vue-demi'
 import 'ag-grid-community/dist/styles/ag-grid.css'
 import 'ag-grid-community/dist/styles/ag-theme-alpine.css'
 import { AgGridVue } from 'ag-grid-vue'
@@ -28,6 +32,12 @@ export default {
   },
   setup() {
     const { getCity } = useApp()
+
+    const onlyLast = ref(true)
+    const onlyLastOptions = [
+      { value: false, label: 'All' },
+      { value: true, label: 'Last 100' },
+    ]
 
     const columns = computed(() => [
       { field: 'id' },
@@ -95,18 +105,23 @@ export default {
     }
 
     const load = () => {
-      firestore
+      let collection = firestore
         .collection('events')
-        .limit(100)
         .orderBy('createdAt', 'desc')
-        .get()
-        .then((snapshot) => {
-          events.value = snapshot.docs.map((doc) => ({
-            ...doc.data(),
-            id: doc.id,
-          }))
-        })
+
+      if (onlyLast.value) {
+        collection = collection.limit(100)
+      }
+
+      collection.get().then((snapshot) => {
+        events.value = snapshot.docs.map((doc) => ({
+          ...doc.data(),
+          id: doc.id,
+        }))
+      })
     }
+
+    watch(onlyLast, load)
 
     onMounted(load)
 
@@ -114,6 +129,8 @@ export default {
       events,
       columns,
       onGridReady,
+      onlyLast,
+      onlyLastOptions,
     }
   },
 }

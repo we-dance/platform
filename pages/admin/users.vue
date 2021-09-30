@@ -1,14 +1,19 @@
 <template>
   <div class="flex flex-col" style="height: 100vh">
-    <TInputButtons
-      v-model="includeMarketing"
-      :options="includeMarketingOptions"
-    />
+    <div class="p-4 flex space-x-4">
+      <div>{{ profiles.length }} profiles</div>
+      <TInputButtons v-model="onlyLast" :options="onlyLastOptions" />
+      <TInputButtons
+        v-model="includeMarketing"
+        :options="includeMarketingOptions"
+      />
+    </div>
+
     <ag-grid-vue
       class="ag-theme-alpine mt-4"
       style="width: 100%; height: 100%"
       :column-defs="columns"
-      :row-data="accounts"
+      :row-data="profiles"
       @grid-ready="onGridReady"
     />
   </div>
@@ -38,6 +43,13 @@ export default {
       { value: false, label: 'Profiles' },
       { value: true, label: 'Marketing' },
     ]
+
+    const onlyLast = ref(true)
+    const onlyLastOptions = [
+      { value: false, label: 'All' },
+      { value: true, label: 'Last 100' },
+    ]
+
     const columns = computed(() => [
       { field: 'id' },
       {
@@ -118,7 +130,7 @@ export default {
     ])
 
     const api = ref(null)
-    const accounts = ref([])
+    const profiles = ref([])
 
     const firestore = firebase.firestore()
 
@@ -127,51 +139,57 @@ export default {
     }
 
     const load = () => {
-      firestore
+      let collection = firestore
         .collection('profiles')
-        .limit(100)
         .orderBy('createdAt', 'desc')
-        .get()
-        .then((snapshot) => {
-          accounts.value = snapshot.docs.map((doc) => ({
-            ...doc.data(),
-            id: doc.id,
-          }))
 
-          if (includeMarketing.value) {
-            snapshot.docs.forEach((doc) => {
-              firestore
-                .collection('marketing')
-                .where('uid', '==', doc.id)
-                .orderBy('updatedAt', 'asc')
-                .limit(1)
-                .get()
-                .then((snapshot) => {
-                  if (snapshot.docs.length) {
-                    const marketing = snapshot.docs[0].data()
+      if (onlyLast.value) {
+        collection = collection.limit(100)
+      }
 
-                    accounts.value.find(
-                      (account) => account.id === marketing.uid
-                    ).marketing = marketing
-                  }
+      collection.get().then((snapshot) => {
+        profiles.value = snapshot.docs.map((doc) => ({
+          ...doc.data(),
+          id: doc.id,
+        }))
 
-                  api.value.redrawRows()
-                })
-            })
-          }
-        })
+        if (includeMarketing.value) {
+          snapshot.docs.forEach((doc) => {
+            firestore
+              .collection('marketing')
+              .where('uid', '==', doc.id)
+              .orderBy('updatedAt', 'asc')
+              .limit(1)
+              .get()
+              .then((snapshot) => {
+                if (snapshot.docs.length) {
+                  const marketing = snapshot.docs[0].data()
+
+                  profiles.value.find(
+                    (account) => account.id === marketing.uid
+                  ).marketing = marketing
+                }
+
+                api.value.redrawRows()
+              })
+          })
+        }
+      })
     }
 
     watch(includeMarketing, load)
+    watch(onlyLast, load)
 
     onMounted(load)
 
     return {
-      accounts,
+      profiles,
       columns,
       onGridReady,
       includeMarketing,
       includeMarketingOptions,
+      onlyLast,
+      onlyLastOptions,
     }
   },
 }

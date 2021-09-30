@@ -52,17 +52,17 @@
                 <div class="mt-8 flex space-x-4 font-bold text-white">
                   <div class="flex flex-col items-center justify-center">
                     <TIcon name="group" class="h-16 w-16" />
-                    <div class="text-4xl">1068</div>
+                    <div class="text-4xl">1309</div>
                     <div class="text-sm">dancers</div>
                   </div>
                   <div class="flex flex-col items-center justify-center">
                     <TIcon name="location" class="h-16 w-16" />
-                    <div class="text-4xl">18</div>
+                    <div class="text-4xl">102</div>
                     <div class="text-sm">cities</div>
                   </div>
                   <div class="flex flex-col items-center justify-center">
                     <TIcon name="calendar" class="h-16 w-16" />
-                    <div class="text-4xl">120</div>
+                    <div class="text-4xl">441</div>
                     <div class="text-sm">events</div>
                   </div>
                 </div>
