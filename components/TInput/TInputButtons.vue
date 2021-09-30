@@ -24,11 +24,11 @@ export default {
       default: () => [],
     },
     value: {
-      type: [String, Number],
+      type: [String, Number, Boolean],
       default: '',
     },
     defaultValue: {
-      type: [String, Number],
+      type: [String, Number, Boolean],
       default: '',
     },
     item: {
