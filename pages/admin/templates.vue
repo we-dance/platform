@@ -41,6 +41,15 @@
               <div class="font-bold">{{ item.subject }}</div>
             </div>
           </div>
+
+          <TPopupEdit
+            :fields="fields"
+            label="Edit"
+            show-remove
+            :collection="collection"
+            :item="item"
+            class="mt-2"
+          />
         </div>
       </template>
     </TCardList>

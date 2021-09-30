@@ -59,6 +59,15 @@
             </div>
           </div>
 
+          <TPopupEdit
+            :fields="fields"
+            label="Edit"
+            show-remove
+            :collection="collection"
+            :item="item"
+            class="mt-2"
+          />
+
           <div v-if="item.status === 'error'" class="text-red-500 text-xs">
             <span class="font-bold">Error:</span> {{ item.error }}
           </div>
