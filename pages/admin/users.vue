@@ -67,6 +67,9 @@ export default {
       { field: 'daysUsed' },
       { field: 'visibility' },
       {
+        field: 'permission',
+      },
+      {
         field: 'languages',
         valueGetter: (params) => Object.keys(params.data.locales).join(', '),
       },

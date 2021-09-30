@@ -255,10 +255,21 @@ export default {
           },
           {
             name: 'online',
-            label: 'Online?',
+            label: 'International?',
             type: 'buttons',
             options: ['Yes', 'No'],
             onChange: updatePlace,
+            description:
+              'Is it a big event with >500 guests, like festival or online workshop via Zoom?',
+          },
+          {
+            name: 'place',
+            label: 'Community',
+            type: 'place',
+            clearable: true,
+            when: (answers) => answers.online !== 'Yes',
+            description:
+              'Leave empty if you want your event to be shown in all cities',
           },
           {
             name: 'form',
@@ -272,15 +283,6 @@ export default {
             name: 'link',
             description: 'URL of your registration form',
             when: (answers) => answers.form === 'Yes',
-          },
-          {
-            name: 'place',
-            label: 'Community',
-            type: 'place',
-            clearable: true,
-            when: (answers) => answers.online !== 'Yes',
-            description:
-              'Leave empty if you want your event to be shown in all cities',
           },
           {
             name: 'promo',
