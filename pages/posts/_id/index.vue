@@ -3,17 +3,19 @@
     <TItemToolbar collection="posts" :item="doc" class="mb-2" />
 
     <TItemCard>
-      <TSharePreviewPost
-        type="Post"
-        collection="posts"
-        :username="author.username"
-        :title="doc.title"
-        :description="getExcerpt(doc.description)"
-        :photo="doc.cover"
-        :styles="doc.styles"
-        align="center"
-        class="md:-mt-4 md:-mx-4"
-      />
+      <h1 class="text-3xl leading-tight font-bold">{{ doc.title }}</h1>
+      <div class="flex text-sm space-x-1">
+        <div>
+          by
+          <router-link
+            class="underline text-primary"
+            :to="`/${author.username}`"
+            >{{ author.username }}</router-link
+          >
+        </div>
+        <div>• {{ publishedAt }}</div>
+      </div>
+
       <TPreview
         :content="doc.description"
         class="mt-4"
@@ -50,13 +52,25 @@
         >Register</router-link
       >.
     </div>
+
+    <TSharePreviewPost
+      type="Post"
+      collection="posts"
+      :username="author.username"
+      :title="doc.title"
+      :description="getExcerpt(doc.description)"
+      :photo="doc.cover"
+      :styles="doc.styles"
+      align="center"
+      class="md:mt-4"
+    />
   </div>
 </template>
 
 <script>
 import { useAuth } from '~/use/auth'
 import { useProfiles } from '~/use/profiles'
-import { getExcerpt, getMeta, loadDoc } from '~/utils'
+import { getExcerpt, getMeta, loadDoc, getDateTime } from '~/utils'
 
 export default {
   async asyncData(ctx) {
@@ -65,6 +79,9 @@ export default {
   computed: {
     author() {
       return this.getProfile(this.doc.createdBy)
+    },
+    publishedAt() {
+      return getDateTime(this.doc?.createdAt)
     },
   },
   head() {
