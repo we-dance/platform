@@ -6,9 +6,9 @@
       class="mb-4 text-dark"
     />
     <p>© WeDance 2021 – All rights reserved.</p>
-    <router-link class="underline hover:no-underline" to="/about">{{
+    <a class="underline hover:no-underline" href="/about" target="_blank">{{
       $t('footer.about')
-    }}</router-link>
+    }}</a>
     <router-link
       class="underline hover:no-underline"
       to="/support#hs-chat-open"
