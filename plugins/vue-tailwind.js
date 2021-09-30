@@ -13,7 +13,8 @@ const settings = {
     component: TPagination,
     props: {
       classes: {
-        wrapper: 'table border-collapse text-center bg-white mx-auto shadow-sm',
+        wrapper:
+          'flex justify-center border-collapse text-center bg-white mx-auto shadow-sm',
         element:
           'w-8 h-8 border border-gray-200 table-cell hover:border-blue-100',
         activeElement:
