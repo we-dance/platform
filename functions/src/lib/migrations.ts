@@ -33,7 +33,10 @@ export async function migrateFavs() {
 
     const after = Object.keys(savedBy).length
 
-    await db.collection('posts').doc(post.id).update({ savedBy })
+    await db
+      .collection('posts')
+      .doc(post.id)
+      .update({ savedBy })
 
     console.log({ title: post.title, before, after })
   }
@@ -44,11 +47,17 @@ export async function migrateUsernames() {
 
   for (const post of posts) {
     const username = (
-      await db.collection('profiles').doc(post.createdBy).get()
+      await db
+        .collection('profiles')
+        .doc(post.createdBy)
+        .get()
     ).data()?.username
 
     if (username) {
-      await db.collection('posts').doc(post.id).update({ username })
+      await db
+        .collection('posts')
+        .doc(post.id)
+        .update({ username })
     }
 
     console.log({ type: 'post', title: post.title, username, id: post.id })
@@ -58,11 +67,17 @@ export async function migrateUsernames() {
 
   for (const event of events) {
     const username = (
-      await db.collection('profiles').doc(event.createdBy).get()
+      await db
+        .collection('profiles')
+        .doc(event.createdBy)
+        .get()
     ).data()?.username
 
     if (username) {
-      await db.collection('events').doc(event.id).update({ username })
+      await db
+        .collection('events')
+        .doc(event.id)
+        .update({ username })
     }
 
     console.log({ type: 'event', name: event.name, username, id: event.id })
@@ -181,7 +196,10 @@ export async function migrateChat() {
 
     console.log(chatId, chat)
 
-    await db.collection('chats').doc(chatId).set(chat)
+    await db
+      .collection('chats')
+      .doc(chatId)
+      .set(chat)
   }
 }
 
@@ -192,18 +210,10 @@ export async function generateSocialCover(profile: any) {
 
   const socialCover = result.data.url
 
-  await db.collection('shares').add({
-    createdAt: +new Date(),
-    createdBy: profile.id,
-    state: 'new',
-    collection: 'profiles',
-    contentId: profile.id,
-    image: result.data.url,
-    url: `https://wedance.vip/${profile.username}`,
-    place: profile.place,
-  })
-
-  await db.collection('profiles').doc(profile.id).update({
-    socialCover,
-  })
+  await db
+    .collection('profiles')
+    .doc(profile.id)
+    .update({
+      socialCover,
+    })
 }

@@ -105,6 +105,9 @@ export default {
       }
     },
   },
+  mounted() {
+    this.downloadUrl = this.file
+  },
   methods: {
     shareTo(platform) {
       if (!this.platforms[platform]) {
@@ -169,17 +172,6 @@ export default {
           .collection(this.collection)
           .doc(this.id)
           .update({ socialCover: this.downloadUrl })
-
-        await this.$fire.firestore.collection('shares').add({
-          createdAt: +new Date(),
-          createdBy: this.uid,
-          state: 'new',
-          collection: this.collection,
-          contentId: this.id,
-          image: this.downloadUrl,
-          url: this.url,
-          place: this.place,
-        })
       } catch (e) {
         this.$toast.error(e.message)
       }
@@ -188,8 +180,6 @@ export default {
       this.$nuxt.$loading.finish()
     },
     async share() {
-      this.downloadUrl = this.file
-
       if (!this.downloadUrl) {
         await this.generate()
       }
