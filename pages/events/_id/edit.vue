@@ -227,7 +227,8 @@ export default {
           },
           {
             name: 'price',
-            description: 'Please include also currency, for example: 10EUR',
+            placeholder: 'Examples: 10EUR, 5USD, FREE',
+            description: 'Examples: 10EUR, 5USD, FREE',
           },
           {
             name: 'styles',
