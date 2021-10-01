@@ -6,16 +6,19 @@
     :description="getExcerpt(profile.bio)"
     :photo="profile.photo"
     :styles="profile.styles"
-    :objective="profile.partner === 'Yes' ? 'Looking for a dance partner' : ''"
+    :price="profile.locality"
   />
 </template>
 
 <script>
 import { getExcerpt } from '~/utils'
+import { useApp } from '~/use/app'
 
 export default {
   layout: 'empty',
   async asyncData({ app, params, error }) {
+    const { getCity } = useApp()
+
     const collection = await app.$fire.firestore
       .collection('profiles')
       .where('username', '==', params.slug)
@@ -30,6 +33,7 @@ export default {
     const profile = doc.data()
     profile.type = profile.type || 'Dancer'
     profile.id = doc.id
+    profile.locality = getCity(profile.place)
 
     return {
       profile,
