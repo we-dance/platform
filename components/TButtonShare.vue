@@ -2,13 +2,13 @@
   <div>
     <TButton :icon="icon" :type="type" :label="label" @click="share()" />
     <TPopup v-if="generating" title="Generating poster">
-      <div class="p-4">Generating image... Please wait...</div>
+      <div class="p-4">Generating Poster... Please wait...</div>
     </TPopup>
     <TPopup v-if="sharing" title="Share" @close="sharing = false">
       <div class="w-64 space-y-2 py-4">
         <TButton type="nav" @click="copyToClipboard"> Copy Link </TButton>
         <TButton type="nav" download :href="downloadUrl" @click="download">
-          Download Image
+          Download Poster
         </TButton>
         <TButton
           v-for="(_, platform) in platforms"
@@ -18,7 +18,10 @@
         >
           {{ platform }}
         </TButton>
-        <TButton type="nav" @click="refresh()"> Refresh image </TButton>
+        <TButton v-if="nativeShareSupported" type="nav" @click="nativeShare()">
+          More
+        </TButton>
+        <TButton type="nav" @click="refresh()"> Refresh Poster </TButton>
       </div>
     </TPopup>
   </div>
@@ -87,6 +90,7 @@ export default {
     sharing: false,
     generating: false,
     downloadUrl: '',
+    nativeShareSupported: false,
   }),
   computed: {
     platforms() {
@@ -190,6 +194,16 @@ export default {
         await this.generate()
       }
 
+      this.$fire.analytics.logEvent('popup_share')
+      this.sharing = true
+
+      if (navigator.share && navigator.canShare) {
+        this.nativeShareSupported = true
+      } else {
+        this.nativeShareSupported = false
+      }
+    },
+    async nativeShare() {
       const response = await fetch(this.downloadUrl)
       const blob = await response.blob()
       const file = new File([blob], `${this.fileName}.png`, {
@@ -198,16 +212,9 @@ export default {
 
       const filesArray = [file]
 
-      if (
-        this.$route.query.admin ||
-        !navigator.share ||
-        !navigator.canShare ||
-        !navigator.canShare({ files: filesArray })
-      ) {
-        this.$fire.analytics.logEvent('popup_share')
-        this.sharing = true
-
-        return
+      if (!navigator.canShare({ files: filesArray })) {
+        this.nativeShareSupported = false
+        return false
       }
 
       this.$fire.analytics.logEvent('share', {
