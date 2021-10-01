@@ -1,5 +1,5 @@
 <template>
-  <div class="font-noto">
+  <div class="font-noto bg-dark min-h-screen">
     <main>
       <div class="relative">
         <div class="absolute inset-x-0 bottom-0 h-1/2 bg-gray-100" />
