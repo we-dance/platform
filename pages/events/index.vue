@@ -62,7 +62,7 @@
             :title="event.name"
             :type="event.type"
             :description="getEventDescription(event)"
-            :extra="event.price"
+            :extra="event.locality"
             :photo="event.cover"
             :styles="event.styles"
             size="sm"
@@ -105,7 +105,6 @@
 <script>
 import { computed, ref } from '@nuxtjs/composition-api'
 import { startOfWeek, addDays, endOfYear } from 'date-fns'
-import { useRsvp } from '~/use/rsvp'
 import { useCollection } from '~/use/collection'
 import { useAuth } from '~/use/auth'
 import { useCities } from '~/use/cities'
@@ -113,6 +112,7 @@ import { useRouter } from '~/use/router'
 import { useProfiles } from '~/use/profiles'
 import { useEvents } from '~/use/events'
 import { useStyles } from '~/use/styles'
+import { addressPart } from '~/use/google'
 
 import {
   dateDiff,
@@ -128,7 +128,6 @@ export default {
   name: 'EventsIndex',
   setup() {
     const { eventTypeList } = useEvents()
-    const { getCount, getRsvpResponse, loading: loadingRsvps } = useRsvp()
     const { currentCity } = useCities()
     const { docs, loading: loadingPosts, getById } = useCollection('events')
     const { getProfile } = useProfiles()
@@ -159,24 +158,15 @@ export default {
         return {}
       }
 
-      const upVotes = getCount(item.id, 'up')
-      const downVotes = getCount(item.id, 'down')
-      const votes = upVotes - downVotes
-      const response = getRsvpResponse(item.id)
-      const multi = !response ? 3 : response === 'up' ? 2 : 1
-      const order = multi * 100 + votes
       const startDate = getDateObect(item.startDate)
       const organiser = getProfile(item.createdBy).username
+      const locality = addressPart(item.venue, 'locality')
 
       return {
         ...item,
         startDate,
-        upVotes,
-        downVotes,
-        votes,
-        response,
-        order,
         organiser,
+        locality,
       }
     }
 
@@ -190,7 +180,7 @@ export default {
     const count = computed(() => items.value.length)
     const { route } = useRouter()
 
-    const loading = computed(() => loadingRsvps.value || loadingPosts.value)
+    const loading = computed(() => loadingPosts.value)
 
     const activeFilter = ref('thisYear')
 
@@ -268,7 +258,6 @@ export default {
       count,
       events: items,
       itemsByDate,
-      getRsvpResponse,
       dateDiff,
       loading,
       getById,

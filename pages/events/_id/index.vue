@@ -26,7 +26,7 @@
         :title="item.name"
         :type="item.type"
         :description="getEventDescription(item)"
-        :extra="item.price"
+        :extra="item.locality"
         :photo="item.cover"
         :styles="item.styles"
         size="sm"
@@ -62,6 +62,7 @@
             </div>
           </div>
         </div>
+        <div class="text-left">Price: {{ item.price }}</div>
         <div>
           <template v-if="item.link">
             <TButton
@@ -179,6 +180,7 @@ import {
   openURL,
   getDateObect,
 } from '~/utils'
+import { addressPart } from '~/use/google'
 
 export default {
   name: 'EventView',
@@ -288,7 +290,12 @@ export default {
       load(params.id)
     }
 
-    const item = computed(() => map(doc.value))
+    const item = computed(() => {
+      const result = map(doc.value)
+      result.locality = addressPart(result.venue, 'locality')
+
+      return result
+    })
 
     const calendarLink = computed(() =>
       googleCalendarEventUrl({

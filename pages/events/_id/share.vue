@@ -3,7 +3,7 @@
     :type="event.type"
     collection="events"
     :username="author.username"
-    :price="event.price"
+    :price="event.locality"
     :title="event.name"
     :description="eventDate"
     :photo="event.cover"
@@ -13,6 +13,7 @@
 
 <script>
 import { getDay, getDate, getTime, getTimeZone } from '~/utils'
+import { addressPart } from '~/use/google'
 
 export default {
   layout: 'empty',
@@ -28,6 +29,7 @@ export default {
     }
 
     const event = ref.data()
+    event.locality = addressPart(event.venue, 'locality')
 
     const authorRef = await app.$fire.firestore
       .collection('profiles')
