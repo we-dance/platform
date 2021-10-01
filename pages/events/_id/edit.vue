@@ -232,7 +232,7 @@ export default {
           },
           {
             name: 'styles',
-            label: 'What?',
+            label: 'Dance styles',
             type: 'stylesSelect',
           },
           {
