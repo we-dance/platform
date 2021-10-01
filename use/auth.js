@@ -257,7 +257,7 @@ export const useAuth = () => {
         timezone: new Date().toString().match(/([A-Z]+[+-][0-9]+)/)[1],
         place: ls('city'),
         username: ls('username'),
-        visibility: 'Public',
+        visibility: 'Members',
         type: 'Dancer',
         name: ls('username'),
       }
