@@ -63,7 +63,7 @@
           </div>
         </div>
         <div class="text-left">Price: {{ item.price }}</div>
-        <div v-if="uid">
+        <div>
           <template v-if="item.link">
             <TButton
               class="mt-4 mr-4"
@@ -95,27 +95,9 @@
             </div>
           </template>
         </div>
-        <div v-else class="mt-4 p-4 text-center bg-gray-100 rounded">
-          <router-link
-            :to="`/signin?target=${$route.fullPath}`"
-            class="underline text-blue-500 hover:no-underline"
-            >Login</router-link
-          >
-          to read description and make a reservation.<br />
-          Not a member yet?
-          <router-link
-            :to="`/register?target=${$route.fullPath}`"
-            class="underline text-blue-500 hover:no-underline"
-            >Register</router-link
-          >.
-        </div>
       </div>
 
-      <TPreview
-        v-if="uid || $route.query.preview"
-        class="mt-4"
-        :content="item.description"
-      />
+      <TPreview class="mt-4" :content="item.description" />
       <TItemFooter collection="events" :item="item" :title="item.name" />
 
       <div
