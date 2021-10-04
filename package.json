@@ -36,12 +36,11 @@
     "@nuxtjs/toast": "^3.3.1",
     "@tailwindcss/forms": "^0.2.1",
     "@voerro/vue-tagsinput": "^2.2.0",
-    "@vue/reactivity": "^3.2.19",
+    "@vuelidate/core": "^2.0.0-alpha.26",
+    "@vuelidate/validators": "^2.0.0-alpha.22",
     "@vueuse/core": "^4.8.1",
     "@vueuse/firebase": "^4.4.1",
-    "ag-grid-community": "^26.0.0",
-    "ag-grid-vue": "^26.0.0",
-    "ag-grid-vue3": "^26.0.1",
+    "add": "^2.0.6",
     "algoliasearch": "^4.8.6",
     "axios": "^0.19.2",
     "core-js": "2",
@@ -94,7 +93,8 @@
     "vue2-google-maps": "^0.10.7",
     "vue2-touch-events": "^2.2.1",
     "vuetify-image-input": "^19.1.0",
-    "weekstart": "^1.0.1"
+    "weekstart": "^1.0.1",
+    "yarn": "^1.22.11"
   },
   "devDependencies": {
     "@nuxtjs/eslint-config": "^2.0.0",

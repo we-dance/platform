@@ -58,7 +58,13 @@ export default {
       error,
     } = useAuth()
 
-    const data = ref({})
+    const data = ref({
+      name: '',
+      email: '',
+      password: '',
+      username: '',
+      place: ''
+    })
 
     return {
       data,

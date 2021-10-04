@@ -6,12 +6,20 @@ export const accountFields = [
     name: 'name',
     key: 'account.name',
     required: true,
+    validations: {
+      required: true,
+      minLength: 3,
+    },
     event: true,
   },
   {
     name: 'email',
     key: 'account.email',
     register: true,
+    validations: {
+      required: true,
+      email: true,
+    },
     required: true,
     event: true,
   },
@@ -20,6 +28,10 @@ export const accountFields = [
     type: 'password',
     label: 'New Password',
     register: true,
+    validations: {
+      required: true,
+      minLength: 6,
+    },
   },
   {
     name: 'phone',

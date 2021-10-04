@@ -19,5 +19,6 @@ module.exports = {
   rules: {
     'no-console': 'off',
     'vue/no-v-html': 'off',
-  },
+    'vue/comment-directive': 'off'
+  }
 }
