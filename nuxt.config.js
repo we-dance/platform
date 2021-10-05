@@ -47,7 +47,7 @@ export default {
     '~/plugins/firebase',
     '~/plugins/router',
     '~/plugins/directives',
-    '~/plugins/vue-tailwind',
+    '~/plugins/vue-tailwind'
   ],
   /*
    ** Nuxt.js dev-modules
