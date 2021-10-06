@@ -236,12 +236,6 @@ export const profileFields = [
       isUnique: true
     },
     poster: true,
-    validations: {
-      required: true,
-      minLength: 4,
-      alphaNum: true,
-      isUnique: true
-    },
     required: true,
     type: 'username',
     before: 'Use only letters, numbers, underscores and periods.',
