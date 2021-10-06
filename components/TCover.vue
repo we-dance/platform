@@ -1,4 +1,4 @@
-c<template>
+<template>
   <div>
     <TIcon
       v-if="!src"

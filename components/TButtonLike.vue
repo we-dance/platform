@@ -1,4 +1,4 @@
-r<template>
+<template>
   <TButton
     icon="favorite"
     type="nav"

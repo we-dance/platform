@@ -48,6 +48,7 @@ export default {
     '~/plugins/router',
     '~/plugins/directives',
     '~/plugins/vue-tailwind',
+    '~/plugins/composition-api',
   ],
   /*
    ** Nuxt.js dev-modules
