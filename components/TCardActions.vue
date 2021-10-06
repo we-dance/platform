@@ -1,4 +1,4 @@
-<template>
+l<template>
   <div>
     <TButton type="base" @click="isReportShown = true">Report</TButton>
     <TPopup v-if="isReportShown" title="Report" @close="isReportShown = false">

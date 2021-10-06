@@ -1,4 +1,4 @@
-<template>
+c<template>
   <div>
     <TButton :icon="icon" :type="type" :label="label" @click="share()" />
     <TPopup v-if="generating" title="Generating poster">

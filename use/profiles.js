@@ -233,7 +233,7 @@ export const profileFields = [
       required: true,
       minLength: 4,
       alphaNum: true,
-      isUnique: true
+      isUnique: true,
     },
     poster: true,
     required: true,
@@ -245,7 +245,7 @@ export const profileFields = [
     label: 'Your city',
     register: true,
     validations: {
-      required: true
+      required: true,
     },
     poster: true,
     required: true,

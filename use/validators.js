@@ -3,7 +3,7 @@ import {
   email,
   minLength,
   alphaNum,
-  helpers
+  helpers,
 } from '@vuelidate/validators'
 
 export const validators = {
@@ -11,5 +11,5 @@ export const validators = {
   email,
   minLength,
   alphaNum,
-  helpers
+  helpers,
 }

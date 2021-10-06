@@ -1,4 +1,4 @@
-<template>
+c<template>
   <t-rich-select
     v-model="internalValue"
     clearable

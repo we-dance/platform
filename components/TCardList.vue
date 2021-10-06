@@ -1,4 +1,4 @@
-<template>
+a<template>
   <div>
     <THeader :title="title">
       <TButton v-if="add && can('add', collection)" @click="currentId = 'add'">

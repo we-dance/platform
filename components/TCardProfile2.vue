@@ -1,4 +1,4 @@
-<template>
+r<template>
   <router-link
     :to="`/${profile.username}`"
     class="border rounded shadow text-sm bg-white overflow-hidden"
