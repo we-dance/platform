@@ -62,6 +62,30 @@ export const accountFields = [
     ],
   },
   {
+    name: 'covid',
+    label: 'Covid Control',
+    type: 'radio',
+    event: true,
+    options: [
+      {
+        value: 'vaccinated',
+        label: 'I am vaccinated',
+      },
+      {
+        value: 'recovered',
+        label: 'I am recovered',
+      },
+      {
+        value: 'tested',
+        label: 'I will bring my own test',
+      },
+      {
+        value: 'buy',
+        label: 'I want to buy test on site',
+      },
+    ],
+  },
+  {
     name: 'withPartner',
     type: 'select',
     label: 'Do you have a partner?',
