@@ -51,8 +51,15 @@
           </template>
           <div class="flex justify-between items-end">
             <div class="flex items-center">
+              <div v-if="claimed === 'Yes'" class="mr-2 text-sm">
+                Organised by
+              </div>
+              <div v-if="claimed === 'No'" class="mr-2 text-sm">
+                Promoted by
+              </div>
               <TIcon class="w-4 h-4 mr-1" name="icon" />
               <div class="text-sm font-bold">{{ username }}</div>
+              <div class="ml-2 text-sm">on www.wedance.vip</div>
             </div>
             <TButtonLike v-if="likes !== false" :count="likes" :value="true" />
             <div v-if="color" :class="color" class="rounded-full w-2 h-2"></div>
@@ -84,6 +91,10 @@ export default {
   },
   props: {
     collection: {
+      type: String,
+      default: '',
+    },
+    claimed: {
       type: String,
       default: '',
     },

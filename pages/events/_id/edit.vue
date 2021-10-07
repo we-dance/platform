@@ -71,12 +71,15 @@ export default {
         visibility: 'Public',
         form: 'No',
         online: 'No',
+        international: 'No',
+        claimed: 'No',
         type: 'Party',
         duration: 60,
         price: 'FREE',
         styles: this.profile?.styles,
         cover: this.profile?.photo || '',
         organiser: this.profile?.username || '',
+        promoter: this.profile?.username || '',
       }
     }
   },
@@ -103,6 +106,14 @@ export default {
         return
       }
 
+      data.organisedBy = this.uid
+      data.promotedBy = this.uid
+
+      if (data.claimed === 'No') {
+        data.organiser = ''
+        data.organisedBy = ''
+      }
+
       data = pickBy(data, (v) => v !== undefined)
 
       if (data.id) {
@@ -122,7 +133,7 @@ export default {
     },
   },
   setup() {
-    const { can, profile, isAdmin } = useAuth()
+    const { can, profile, isAdmin, uid } = useAuth()
     const { params } = useRouter()
     const { eventTypeList } = useEvents()
 
@@ -141,7 +152,7 @@ export default {
     }
 
     const updatePlace = (e) => {
-      if (!e.online || e.online === 'No') {
+      if (e?.online === 'No' && e?.international === 'No') {
         return
       }
 
@@ -255,35 +266,66 @@ export default {
             description: `- Public - searchable in Google.\n- Members - visible only for logged-in users.\n- Unlisted - possible to open with exact link, but they are not listed nor not shown in the search.`,
           },
           {
+            name: 'claimed',
+            label: 'Are you organiser?',
+            type: 'buttons',
+            options: ['Yes', 'No'],
+            onChange: updatePlace,
+            description: 'Are you the event organiser?',
+          },
+          {
+            name: 'organiserName',
+            label: 'Name of the organiser',
+            when: (answers) => answers.claimed === 'No',
+            description: 'or their username on WeDance',
+          },
+          {
             name: 'online',
+            label: 'Online?',
+            type: 'buttons',
+            options: ['Yes', 'No'],
+            onChange: updatePlace,
+            description:
+              'Streaming via Zoom, Google Meet, Instagram Live, etc.?',
+          },
+          {
+            name: 'international',
             label: 'International?',
             type: 'buttons',
             options: ['Yes', 'No'],
             onChange: updatePlace,
             description:
-              'Is it a big event with >500 guests, like festival or online workshop via Zoom?',
+              'Is it a big event with >500 guests, like festival or online?',
           },
           {
             name: 'place',
             label: 'Community',
             type: 'place',
             clearable: true,
-            when: (answers) => answers.online !== 'Yes',
+            when: (answers) =>
+              answers.online === 'No' && answers.international === 'No',
             description:
               'Leave empty if you want your event to be shown in all cities',
           },
           {
             name: 'form',
             label: 'External registration?',
-            before:
-              'Do you use Google Forms, Facebook, Eventbrite, etc. for people to register for your event?',
+            before: 'Do you use external platform to register for your event?',
             type: 'buttons',
             options: ['Yes', 'No'],
           },
           {
             name: 'link',
-            description: 'URL of your registration form',
-            when: (answers) => answers.form === 'Yes',
+            description:
+              'Direct booking link on ticket platform (ti.to, eventbrite.com, Google Form, etc.)',
+          },
+          {
+            name: 'website',
+            description: 'Link to your event or website',
+          },
+          {
+            name: 'facebook',
+            description: 'Link to your Facebook event',
           },
           {
             name: 'promo',
@@ -319,6 +361,7 @@ export default {
       types,
       profile,
       isAdmin,
+      uid,
     }
   },
 }

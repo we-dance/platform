@@ -21,7 +21,11 @@
 
     <TItemCard>
       <TSharePreviewPost
-        :username="creator.username"
+        :username="
+          (item.claimed === 'Yes' ? item.organiser : item.promoter) ||
+            creator.username
+        "
+        :claimed="item.claimed"
         collection="events"
         :title="item.name"
         :type="item.type"
