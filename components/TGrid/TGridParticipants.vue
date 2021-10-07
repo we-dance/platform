@@ -167,6 +167,8 @@ export default {
           name: item.name,
           email: item.email,
           phone: item.phone,
+          covid: item.covid,
+          comment: item.comment,
         }))
 
       saveCSV(items)
