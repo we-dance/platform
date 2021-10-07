@@ -270,14 +270,12 @@ export default {
             label: 'Are you organiser?',
             type: 'buttons',
             options: ['Yes', 'No'],
-            onChange: updatePlace,
             description: 'Are you the event organiser?',
           },
           {
-            name: 'organiserName',
-            label: 'Name of the organiser',
-            when: (answers) => answers.claimed === 'No',
-            description: 'or their username on WeDance',
+            name: 'organiser',
+            label: 'Organiser',
+            description: 'Username on WeDance',
           },
           {
             name: 'online',
