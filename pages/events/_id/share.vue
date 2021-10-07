@@ -2,8 +2,11 @@
   <TSharePreview
     :type="event.type"
     collection="events"
-    :username="author.username"
-    :price="event.locality"
+    :claimed="event.claimed"
+    :username="
+      (event.claimed === 'Yes' ? event.organiser : event.promoter) ||
+        author.username
+    "
     :title="event.name"
     :description="eventDate"
     :photo="event.cover"

@@ -51,7 +51,7 @@
           </template>
           <div class="flex justify-between items-end">
             <div class="flex items-center">
-              <div class="hidden md:block">
+              <div v-if="collection === 'events'" class="hidden md:block">
                 <div v-if="claimed === 'Yes'" class="mr-2 text-sm">
                   Organised by
                 </div>
@@ -61,16 +61,10 @@
               </div>
               <TIcon class="w-4 h-4 mr-1" name="icon" />
               <div class="text-sm font-bold">{{ username }}</div>
-              <div class="ml-2 text-sm hidden md:block">on www.wedance.vip</div>
             </div>
-            <TButtonLike v-if="likes !== false" :count="likes" :value="true" />
             <div v-if="color" :class="color" class="rounded-full w-2 h-2"></div>
-            <div v-if="extra" class="text-sm">{{ extra }}</div>
-            <div
-              v-if="objective"
-              class="bg-primary text-sm font-bold text-white rounded-full px-4 py-2 leading-none"
-            >
-              {{ objective }}
+            <div v-if="extra && collection !== 'events'" class="text-sm">
+              {{ extra }}
             </div>
           </div>
         </div>

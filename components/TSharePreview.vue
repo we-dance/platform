@@ -38,15 +38,17 @@
           </div>
           <div class="flex justify-between items-end">
             <div class="flex items-center mt-4">
+              <div v-if="collection === 'events'">
+                <div v-if="claimed === 'Yes'" class="mr-4 text-2xl">
+                  Organised by
+                </div>
+                <div v-if="claimed === 'No'" class="mr-4 text-2xl">
+                  Promoted by
+                </div>
+              </div>
               <TIcon class="w-8 h-8 mr-2" name="icon" />
               <div class="text-4xl font-bold">{{ username }}</div>
-            </div>
-            <div v-if="price" class="text-3xl">{{ price }}</div>
-            <div
-              v-if="objective"
-              class="bg-primary text-2xl font-bold text-white rounded-full px-4 py-2 leading-none"
-            >
-              {{ objective }}
+              <div class="ml-2 text-2xl">on www.wedance.vip</div>
             </div>
           </div>
         </div>
@@ -68,6 +70,10 @@ export default {
     return { getStyles, labelColor }
   },
   props: {
+    claimed: {
+      type: String,
+      default: '',
+    },
     collection: {
       type: String,
       default: '',
