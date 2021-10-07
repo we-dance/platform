@@ -3,6 +3,10 @@ import 'firebase/firestore'
 import ls from 'local-storage'
 
 export const trackView = (collection, id, viewsCount) => {
+  if (!collection || !id) {
+    return
+  }
+
   const firestore = firebase.firestore()
   const key = `viewed_${collection}_${id}`
   const alreadyViewed = ls.get(key)
