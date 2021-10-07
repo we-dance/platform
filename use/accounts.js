@@ -69,19 +69,15 @@ export const accountFields = [
     options: [
       {
         value: 'vaccinated',
-        label: 'I am vaccinated',
+        label: 'Vaccinated',
       },
       {
         value: 'recovered',
-        label: 'I am recovered',
+        label: 'Recovered',
       },
       {
         value: 'tested',
-        label: 'I will bring my own test',
-      },
-      {
-        value: 'buy',
-        label: 'I want to buy test on site',
+        label: 'Test',
       },
     ],
   },
