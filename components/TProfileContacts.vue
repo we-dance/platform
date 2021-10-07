@@ -1,8 +1,6 @@
 <template>
-  <div
-    class="md:flex items-center justify-end space-x-2 space-y-2 p-2 bg-gray-100 -mx-4"
-  >
-    <div class="pl-2 font-bold">Subscribe</div>
+  <div class="md:flex items-center justify-end space-x-2 space-y-2 bg-gray-100">
+    <div class="pl-2 font-bold">{{ title }}</div>
     <div class="flex space-x-2 items-center justify-end">
       <TButton
         v-if="profile.website"
@@ -67,6 +65,10 @@
 <script>
 export default {
   props: {
+    title: {
+      type: String,
+      default: 'Subscribe',
+    },
     profile: {
       type: Object,
       default: () => ({}),

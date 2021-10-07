@@ -34,70 +34,67 @@
         :photo="item.cover"
         :styles="item.styles"
         size="sm"
-        class="md:-mt-4 md:-mx-4 mb-2"
+        class="-m-4 mb-2"
       />
 
-      <div class="mx-auto max-w-2xl text-center">
-        <div class="flex flex-wrap justify-start space-x-2 mt-2">
-          <div v-if="item.venue">
-            <div class="flex items-center">
-              <TIcon name="place" class="w-4 h-4 mr-1" />
-              <div>
-                <a
-                  :href="item.venue.url"
-                  class="underline hover:no-underline"
-                  target="_blank"
-                >
-                  {{ item.venue.name }}</a
-                ><span v-if="item.venue.room"> • {{ item.venue.room }}</span>
-              </div>
-            </div>
-          </div>
-          <div v-else-if="item.address">
-            <div class="flex items-center">
-              <TIcon name="place" class="w-4 h-4 mr-1" />
-              <a
-                :href="`https://maps.google.com/?q=${item.address}`"
-                class="underline hover:no-underline"
-                target="_blank"
-              >
-                {{ item.address }}
-              </a>
+      <a
+        v-if="item.venue"
+        :href="item.venue.url"
+        target="_blank"
+        class="hover:bg-gray-200 block py-2 px-4 -mx-4"
+      >
+        <div class="flex items-center justify-start leading-tight">
+          <TIcon name="place" class="w-4 h-4 mr-4" />
+          <div>
+            <h4 class="font-bold">
+              {{ item.venue.name
+              }}<span v-if="item.venue.room"> • {{ item.venue.room }}</span>
+            </h4>
+            <div class="text-gray-700">
+              {{ item.venue.formatted_address }}
             </div>
           </div>
         </div>
-        <div class="text-left">Price: {{ item.price }}</div>
-        <div>
-          <template v-if="item.link">
-            <TButton
-              class="mt-4 mr-4"
-              type="danger"
-              @click="register(item.id, item.link)"
-              >Register</TButton
-            >
-          </template>
-          <template v-else>
-            <div class="flex mt-4 space-x-2 justify-center">
-              <TButton
-                v-if="!uid"
-                type="primary"
-                @click="reservationPopup = 'reserve'"
-                >Register for event</TButton
-              >
-              <TButton
-                v-else
-                :type="uid && item.response === 'up' ? 'success' : 'secondary'"
-                @click="reservationPopup = 'reserve'"
-                >Going</TButton
-              >
-              <TButton
-                v-if="uid"
-                :type="uid && item.response === 'down' ? 'danger' : 'secondary'"
-                @click="updateRsvp(item.id, 'events', 'down')"
-                >Not going</TButton
-              >
-            </div>
-          </template>
+      </a>
+      <div v-else-if="item.address">
+        <div class="flex items-center">
+          <TIcon name="place" class="w-4 h-4 mr-1" />
+          <a
+            :href="`https://maps.google.com/?q=${item.address}`"
+            class="underline hover:no-underline"
+            target="_blank"
+          >
+            {{ item.address }}
+          </a>
+        </div>
+      </div>
+
+      <div
+        class="flex items-center justify-start w-full leading-tight border-t border-b py-2 px-4 -mx-4"
+      >
+        <TIcon name="ticket" class="w-4 h-4 mr-4" />
+        <div>{{ item.price }}</div>
+      </div>
+      <div>
+        <div class="flex mt-4 space-x-2 justify-center">
+          <TButton
+            v-if="!uid"
+            type="primary"
+            @click="reservationPopup = 'reserve'"
+            >Register for event</TButton
+          >
+          <TButton
+            v-else
+            :type="uid && item.response === 'up' ? 'success' : 'secondary'"
+            @click="reservationPopup = 'reserve'"
+            >Going</TButton
+          >
+          <TButton
+            v-if="uid"
+            :type="uid && item.response === 'down' ? 'danger' : 'secondary'"
+            @click="updateRsvp(item.id, 'events', 'down')"
+            >Not going</TButton
+          >
         </div>
       </div>
 
@@ -115,6 +112,13 @@
       </div>
 
       <TItemCreator :item="item" />
+
+      <TProfileContacts
+        v-if="item.facebook"
+        :profile="item"
+        title="Source"
+        class="mt-4"
+      />
     </TItemCard>
 
     <TPopup
@@ -142,21 +146,29 @@
           </div>
         </div>
         <div v-if="reservationPopup === 'finish'" class="p-4">
-          <h2 class="font-bold mb-4">Your spot is reserved</h2>
-          <p v-if="uid">
-            See you soon! Don't forget to check-in by the organiser when you
-            come!
-          </p>
-          <p v-else>
-            Check your email to finish creation of the WeDance profile.
-          </p>
-          <div>
-            <TButton
-              :href="calendarLink"
-              label="Add to calendar"
-              class="mt-2"
-            />
-          </div>
+          <template v-if="item.link">
+            <h2 class="font-bold mb-4">Almost there</h2>
+            <TButton class="mt-4 mr-4" type="danger" :href="item.link"
+              >Complete registration</TButton
+            >
+          </template>
+          <template v-else>
+            <h2 class="font-bold mb-4">Almost there</h2>
+            <p v-if="uid">
+              See you soon! Don't forget to check-in by the organiser when you
+              come!
+            </p>
+            <p v-else>
+              Check your email to finish creation of the WeDance profile.
+            </p>
+            <div v-if="uid">
+              <TButton
+                :href="calendarLink"
+                label="Add to calendar"
+                class="mt-2"
+              />
+            </div>
+          </template>
         </div>
       </div>
     </TPopup>

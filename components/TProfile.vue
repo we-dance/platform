@@ -119,7 +119,7 @@
         </div>
       </template>
 
-      <TProfileContacts :profile="profile" class="mb-4" />
+      <TProfileContacts :profile="profile" class="p-2 -mx-4 mb-4" />
 
       <div v-if="uid === profile.id" class="flex justify-center space-x-2">
         <TButton label="Edit Profile" to="/settings?tab=profile" />
