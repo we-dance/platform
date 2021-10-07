@@ -82,6 +82,12 @@ export const accountFields = [
     ],
   },
   {
+    name: 'comment',
+    label: 'Comment',
+    type: 'text',
+    event: true,
+  },
+  {
     name: 'withPartner',
     type: 'select',
     label: 'Do you have a partner?',
