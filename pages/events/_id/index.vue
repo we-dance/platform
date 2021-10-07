@@ -119,6 +119,10 @@
         title="Source"
         class="mt-4"
       />
+
+      <div v-if="item.views" class="text-gray-500 text-sm mt-8">
+        {{ item.views }} views
+      </div>
     </TItemCard>
 
     <TPopup
@@ -197,6 +201,7 @@ import {
   getDateObect,
 } from '~/utils'
 import { addressPart } from '~/use/google'
+import { trackView } from '~/use/tracking'
 
 export default {
   name: 'EventView',
@@ -225,6 +230,10 @@ export default {
   },
   watch: {
     item() {
+      if (this.item) {
+        this.trackView('events', this.item?.id, this.item?.views || 0)
+      }
+
       if (this.item && this.item.place) {
         this.currentCity = this.item.place
       }
@@ -376,6 +385,7 @@ export default {
       getDay,
       getEventDescription,
       calendarLink,
+      trackView,
     }
   },
 }
