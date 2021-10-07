@@ -83,6 +83,10 @@ export const typeList = [
     label: 'Venue',
     value: 'Venue',
   },
+  {
+    label: 'City',
+    value: 'City',
+  },
 ]
 
 export const objectivesList = [
