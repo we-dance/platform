@@ -83,7 +83,7 @@
     </template>
 
     <TItemCard>
-      <template v-if="profile.type !== 'City'">
+      <template>
         <TSharePreviewPost
           collection="profiles"
           :type="profile.type"
