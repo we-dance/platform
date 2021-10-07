@@ -53,6 +53,9 @@ export default {
         field: 'organiser',
       },
       {
+        field: 'views',
+      },
+      {
         field: 'cover',
         valueGetter: (params) => (params.data.cover ? 'Yes' : 'No'),
       },
