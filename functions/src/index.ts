@@ -7,6 +7,7 @@ import { screenshot } from './lib/screenshot'
 import { initIndex, profileToAlgolia, removeObject } from './lib/algolia'
 import { generateSocialCover } from './lib/migrations'
 import { firestore as db, admin } from './firebase'
+import { notifySlackAboutEvents, notifySlackAboutUsers } from './lib/slack'
 
 const app = express()
 app.use(cors({ origin: true }))
@@ -174,7 +175,12 @@ export const onProfileChange = functions.firestore
       await generateSocialCover(profile)
     }
 
-    const cache = (await db.collection('app').doc('v2').get()).data() as any
+    const cache = (
+      await db
+        .collection('app')
+        .doc('v2')
+        .get()
+    ).data() as any
 
     const index = initIndex('profiles')
 
@@ -195,7 +201,10 @@ export const onProfileChange = functions.firestore
     }
 
     const account = (
-      await db.collection('accounts').doc(profileId).get()
+      await db
+        .collection('accounts')
+        .doc(profileId)
+        .get()
     ).data()
 
     if (!account) {
@@ -226,7 +235,10 @@ export const onProfileChange = functions.firestore
       await currentRsvp.ref.update({ uid: profileId })
     })
 
-    await db.collection('accounts').doc(profileId).update(accountInfo)
+    await db
+      .collection('accounts')
+      .doc(profileId)
+      .update(accountInfo)
 
     const cities = await db
       .collection('cities')
@@ -240,8 +252,21 @@ export const onProfileChange = functions.firestore
     })
 
     if (!city || !city.name) {
+      await db.collection('errors').add({
+        uid: profileId,
+        username: profile.username,
+        context: {
+          placeId: profile.place,
+        },
+        error: 'City not found',
+      })
+
       throw Error(`City ${profile.place} not found for ${profile.username}`)
     }
+
+    await notifySlackAboutUsers(
+      `New dancer in ${city.name} - https://wedance.vip/${profile.username}`
+    )
 
     if (!city.telegram) {
       await db.collection('errors').add({
@@ -252,8 +277,6 @@ export const onProfileChange = functions.firestore
         },
         error: 'No chat for city',
       })
-
-      throw Error(`City ${city.name} has no chat`)
     }
 
     let emailTemplate: any
@@ -310,6 +333,25 @@ export const onProfileChange = functions.firestore
     return await sendEmail(emailData)
   })
 
+export const eventCreated = functions.firestore
+  .document('events/{eventId}')
+  .onCreate(async (snapshot, context) => {
+    const eventId = context.params.eventId
+    const event = snapshot.data() as any
+    const cache = (
+      await db
+        .collection('app')
+        .doc('v2')
+        .get()
+    ).data() as any
+
+    const cityName = cache.cities[event.place]?.name || 'International'
+
+    const message = `New event in ${cityName} - ${event.name}\n\nhttps://wedance.vip/events/${eventId}`
+
+    await notifySlackAboutEvents(message)
+  })
+
 export const eventConfirmation = functions.firestore
   .document('participants/{rsvpId}')
   .onWrite(async (snapshot, context) => {
@@ -334,7 +376,10 @@ export const eventConfirmation = functions.firestore
     }
 
     const event: any = (
-      await db.collection('events').doc(rsvp.eventId).get()
+      await db
+        .collection('events')
+        .doc(rsvp.eventId)
+        .get()
     ).data()
 
     const subject = event.name
@@ -376,7 +421,12 @@ export const matchNotification = functions.firestore
     delete after.members[after.lastMessageBy]
     const to = Object.keys(after.members)[0]
 
-    const toAccount = (await db.collection('accounts').doc(to).get()).data()
+    const toAccount = (
+      await db
+        .collection('accounts')
+        .doc(to)
+        .get()
+    ).data()
 
     if (!toAccount) {
       throw Error('toAccount not found')
