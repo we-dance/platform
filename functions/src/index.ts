@@ -264,10 +264,6 @@ export const onProfileChange = functions.firestore
       throw Error(`City ${profile.place} not found for ${profile.username}`)
     }
 
-    await notifySlackAboutUsers(
-      `New dancer in ${city.name} - https://wedance.vip/${profile.username}`
-    )
-
     if (!city.telegram) {
       await db.collection('errors').add({
         uid: profileId,
@@ -331,6 +327,25 @@ export const onProfileChange = functions.firestore
       })
 
     return await sendEmail(emailData)
+  })
+
+export const profileCreated = functions.firestore
+  .document('profiles/{profileId}')
+  .onCreate(async (snapshot, context) => {
+    const profile = snapshot.data() as any
+    const profileId = context.params.profileId
+    const cache = (
+      await db
+        .collection('app')
+        .doc('v2')
+        .get()
+    ).data() as any
+
+    const cityName = cache.cities[profile.place]?.name || 'International'
+
+    const message = `New dancer in ${cityName} - https://wedance.vip/${profile.username}\n\nUID:${profileId}`
+
+    await notifySlackAboutUsers(message)
   })
 
 export const eventCreated = functions.firestore
