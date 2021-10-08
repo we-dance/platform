@@ -100,11 +100,11 @@
 </template>
 
 <script>
-import { computed } from 'vue-demi'
+import { computed, defineComponent } from '@nuxtjs/composition-api'
 import { useAuth } from '~/use/auth'
 import { useCities } from '~/use/cities'
 
-export default {
+export default defineComponent({
   setup() {
     const { isAdmin, isEditor } = useAuth()
     const { city } = useCities()
@@ -125,7 +125,7 @@ export default {
       default: '',
     },
   },
-}
+})
 </script>
 
 <style>
