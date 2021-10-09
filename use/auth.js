@@ -106,9 +106,12 @@ export const useAuth = () => {
       timezone: new Date().toString().match(/([A-Z]+[+-][0-9]+)/)[1],
       referrer: getReferrer(),
       ref: router?.currentRoute?.query?.ref || '',
+      from: router?.currentRoute?.query?.from || '',
+      promo: router?.currentRoute?.query?.promo || '',
       fbclid: router?.currentRoute?.query?.fbclid || '',
       gclid: router?.currentRoute?.query?.gclid || '',
       utms: utm(document.location.href),
+      start: document.location.href,
       screen: {
         width,
         height,
@@ -158,8 +161,9 @@ export const useAuth = () => {
     }
 
     const account = await loadAccount()
+    const isNewUser = !account
 
-    if (!account) {
+    if (isNewUser) {
       const newAccount = {
         createdBy: state.uid,
         createdAt: +new Date(),
@@ -206,6 +210,8 @@ export const useAuth = () => {
 
     firestore.collection('marketing').add({
       uid: state.uid,
+      isNewUser,
+      target: ls('target'),
       ...state.marketing,
     })
   }
