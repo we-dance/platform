@@ -43,7 +43,7 @@ export default {
       },
       {
         field: 'address',
-        valueGetter: (params) => params.data.venue?.formatted_address || '',
+        valueGetter: (params) => params.data.address?.formatted_address || '',
         resizable: true,
       },
       {
