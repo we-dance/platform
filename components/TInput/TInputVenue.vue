@@ -121,6 +121,7 @@ export default {
           rooms: '',
           map: '',
           address: this.value,
+          createdAt: Date.now(),
         })
 
         doc = await collection.doc(this.value.place_id).get()
