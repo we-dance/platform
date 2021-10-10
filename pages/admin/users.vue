@@ -108,6 +108,28 @@ export default {
         hide: !includeMarketing.value,
       },
       {
+        field: 'start',
+        valueGetter: (params) => params.data.marketing?.start,
+        hide: !includeMarketing.value,
+        resizable: true,
+      },
+      {
+        field: 'target',
+        valueGetter: (params) => params.data.marketing?.target,
+        hide: !includeMarketing.value,
+        resizable: true,
+      },
+      {
+        field: 'from',
+        valueGetter: (params) => params.data.marketing?.from,
+        hide: !includeMarketing.value,
+      },
+      {
+        field: 'promo',
+        valueGetter: (params) => params.data.marketing?.promo,
+        hide: !includeMarketing.value,
+      },
+      {
         field: 'ref',
         valueGetter: (params) => params.data.marketing?.ref,
         hide: !includeMarketing.value,
@@ -116,16 +138,19 @@ export default {
         field: 'referrer',
         valueGetter: (params) => params.data.marketing?.referrer,
         hide: !includeMarketing.value,
+        resizable: true,
       },
       {
         field: 'fbclid',
         valueGetter: (params) => params.data.marketing?.fbclid,
         hide: !includeMarketing.value,
+        resizable: true,
       },
       {
         field: 'gclid',
         valueGetter: (params) => params.data.marketing?.gclid,
         hide: !includeMarketing.value,
+        resizable: true,
       },
     ])
 
