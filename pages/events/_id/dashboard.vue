@@ -160,6 +160,8 @@
                 <div v-if="view === 'contacts'">
                   <div>{{ item.email }}</div>
                   <div>{{ item.phone }}</div>
+                  <div>Covid: {{ item.covid }}</div>
+                  <div>Comment: {{ item.comment }}</div>
                   <div class="text-xs">{{ getDateTime(item.createdAt) }}</div>
                 </div>
                 <div v-if="tab === ''">
@@ -301,6 +303,8 @@ export default {
           name: item.participant.name,
           email: item.participant.email,
           phone: item.participant.phone,
+          covid: item.participant.covid,
+          comment: item.participant.comment,
           createdAt: item.createdAt,
           updatedAt: item.updatedAt,
           createdBy: item.createdBy,
