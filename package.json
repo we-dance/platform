@@ -35,6 +35,8 @@
     "@vue/reactivity": "^3.2.19",
     "@vueuse/core": "^4.8.1",
     "@vueuse/firebase": "^4.4.1",
+    "ag-grid-community": "^26.1.0",
+    "ag-grid-vue": "^26.1.0",
     "algoliasearch": "^4.8.6",
     "axios": "^0.19.2",
     "core-js": "2",
