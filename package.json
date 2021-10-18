@@ -16,9 +16,6 @@
     "*.{css,vue}": "stylelint"
   },
   "dependencies": {
-    "@ag-grid-community/all-modules": "^26.0.0",
-    "@ag-grid-community/vue": "^26.0.0",
-    "@ag-grid-community/vue3": "^26.0.1",
     "@johmun/vue-tags-input": "^2.1.0",
     "@microlink/vue": "^5.2.1",
     "@nuxt/content": "^1.9.0",
@@ -38,9 +35,6 @@
     "@vue/reactivity": "^3.2.19",
     "@vueuse/core": "^4.8.1",
     "@vueuse/firebase": "^4.4.1",
-    "ag-grid-community": "^26.0.0",
-    "ag-grid-vue": "^26.0.0",
-    "ag-grid-vue3": "^26.0.1",
     "algoliasearch": "^4.8.6",
     "axios": "^0.19.2",
     "core-js": "2",
