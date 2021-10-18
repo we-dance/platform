@@ -80,7 +80,6 @@ export default {
     '@nuxt/content',
     '@nuxtjs/firebase',
     '@nuxtjs/toast',
-    '@nuxt/image',
   ],
   googleFonts: {
     display: 'swap',
