@@ -1,4 +1,5 @@
-FROM node:lts-alpine
+FROM node:14-alpine
+RUN apk add --no-cache python3 py3-pip make g++
 
 WORKDIR /app
 
