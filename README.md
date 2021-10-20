@@ -85,23 +85,7 @@ We are all humans trying to work together to improve the community. Always be ki
 
 A great way to contribute to the project is to send a detailed report when you encounter an issue.
 
-[See issues](https://github.com/we-dance/platform/issues) or [Create an issue](https://github.com/we-dance/platform/issues/new).
-
-#### Bug Report
-
-A good bug report answers the following questions:
-
-- How to reproduce? Steps to reproduce, conditions, environment, browser version.
-- What is actual result?
-- What is the expected result?
-
-#### Feature request
-
-A good feature request is using the following sentence structure:
-
-As a `Role` I want to `Goal` in order to `Reason`
-
-And include acceptance criteria, which describes a check list with all requirements.
+[See issues](https://github.com/we-dance/platform/issues) or [Create an issue](https://github.com/we-dance/platform/issues/new/choose).
 
 ### Where to contribute
 
@@ -112,6 +96,8 @@ Refactoring, which involves improving the code without modifying behavior, is a 
 Fixing bugs is a super fast way to improve the experience for our users! When you're fixing bugs, we appreciate communication in a GitHub issue. If an issue exists, please claim that issue and link it in your PR, otherwise creating an issue is the best first step! Be sure to surround bug fixes with ample tests; bugs are magnets for other bugs. Write tests around bugs!
 
 Building features requires a lot of communication, but we'd love to have your help with this too! Features tend to be subjective and might spur some debate. Be sure to create an issue for new features before getting started! If your feature involves design changes, including design mockups can be very helpful. As always, when in doubt, ask!
+
+👉 [Join our team on Slack](https://wedance.vip/slack)
 
 ### How to contribute
 
