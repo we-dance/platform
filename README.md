@@ -42,8 +42,8 @@ To activate all services and features see section `Services` below.
 Read [How to deploy on Netlify?](https://nuxtjs.org/faq/netlify-deployment/).
 
 - Push your branch to github.
-- Sing in to [Netlify](https://netlify.com/).
-- Click `New sity from Git`.
+- Sign in to [Netlify](https://netlify.com/).
+- Click `New site from Git`.
 - Choose `GitHub` and select your repository.
 - Select your branch.
 - Build command: `yarn build`.
