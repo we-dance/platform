@@ -361,10 +361,29 @@ export const eventCreated = functions.firestore
     ).data() as any
 
     const cityName = cache.cities[event.place]?.name || 'International'
+    const promoter = cache.profiles[event.promotedBy]?.username || 'Unknown'
+    const startDate = new Date(event.startDate)
 
-    const message = `New event in ${cityName} - ${event.name}\n\nhttps://wedance.vip/events/${eventId}`
+    const lines = []
 
-    await notifySlackAboutEvents(message)
+    if (event.promo === 'Yes') {
+      lines.push(`Promote event in ${cityName}`)
+    } else {
+      lines.push(`New event in ${cityName}`)
+    }
+
+    lines.push(event.name)
+    lines.push(startDate)
+
+    if (event.claimed === 'Yes') {
+      lines.push(`Organised by ${event.organiser}`)
+    } else {
+      lines.push(`Promoted by ${promoter}`)
+    }
+
+    lines.push(`https://wedance.vip/events/${eventId}`)
+
+    await notifySlackAboutEvents(lines.join('\n'))
   })
 
 export const eventConfirmation = functions.firestore
