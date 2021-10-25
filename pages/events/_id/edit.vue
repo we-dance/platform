@@ -315,7 +315,7 @@ export default {
           {
             name: 'link',
             description:
-              'Direct booking link on ticket platform (ti.to, eventbrite.com, Google Form, etc.)',
+              'Direct booking link on ticket platform (ti.to, Eventbrite, Google Form, etc.)',
           },
           {
             name: 'website',
@@ -323,7 +323,7 @@ export default {
           },
           {
             name: 'facebook',
-            description: 'Link to your Facebook event',
+            description: 'Link to original event (Facebook, Eventbrite, etc.)',
           },
           {
             name: 'promo',

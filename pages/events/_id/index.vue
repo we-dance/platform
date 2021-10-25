@@ -113,12 +113,11 @@
 
       <TItemCreator :item="item" />
 
-      <TProfileContacts
-        v-if="item.facebook"
-        :profile="item"
-        title="Source"
-        class="mt-4"
-      />
+      <div v-if="item.facebook" class="mt-8 text-right text-sm">
+        <a :href="item.facebook" class="hover:underline text-gray-700"
+          >Event Source</a
+        >
+      </div>
 
       <div v-if="item.views" class="text-gray-500 text-sm mt-8">
         {{ item.views }} views
