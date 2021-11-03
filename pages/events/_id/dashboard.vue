@@ -15,8 +15,8 @@
           {{ selectedParticipantsList.join(', ') }}
         </div>
         <TForm
+          v-model="email"
           class="mt-4 space-y-4"
-          :value="{ subject: item.name }"
           :fields="emailFields"
           submit-label="Send"
           @save="sendEmail"
@@ -45,7 +45,10 @@
           type="context"
           label="Send emails"
           class="border-b"
-          @click="compose = true"
+          @click="
+            email.subject = item.name
+            compose = true
+          "
         />
         <TButton
           type="context"
@@ -282,6 +285,7 @@ export default {
   setup() {
     const addingGuest = ref(false)
     const guestAccount = ref({})
+    const email = ref({})
     const { uid, can, account } = useAuth()
     const { params } = useRouter()
     const { getProfile } = useProfiles()
@@ -514,6 +518,7 @@ export default {
       selectedParticipants,
       selectedParticipantsList,
       guestAccount,
+      email,
     }
   },
 }
