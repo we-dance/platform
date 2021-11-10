@@ -45,10 +45,7 @@
           type="context"
           label="Send emails"
           class="border-b"
-          @click="
-            email.subject = item.name
-            compose = true
-          "
+          @click="composeEmail"
         />
         <TButton
           type="context"
@@ -304,11 +301,11 @@ export default {
     const participantsMap = computed(() =>
       getListRsvps(params.id)
         .map((item) => ({
-          name: item.participant.name,
-          email: item.participant.email,
-          phone: item.participant.phone,
-          covid: item.participant.covid,
-          comment: item.participant.comment,
+          name: item.participant?.name,
+          email: item.participant?.email,
+          phone: item.participant?.phone,
+          covid: item.participant?.covid,
+          comment: item.participant?.comment,
           createdAt: item.createdAt,
           updatedAt: item.updatedAt,
           createdBy: item.createdBy,
@@ -322,10 +319,10 @@ export default {
           notes: item.notes,
           notesArray: item.notes ? Object.keys(item.notes) : [],
           couple:
-            item.couple || item.withPartner || item.participant.withPartner,
-          partnerName: item.participant.partnerName,
-          partnerEmail: item.participant.partnerEmail,
-          search: item.participant.name + item.participant.email,
+            item?.couple || item?.withPartner || item.participant?.withPartner,
+          partnerName: item.participant?.partnerName,
+          partnerEmail: item.participant?.partnerEmail,
+          search: item.participant?.name + item.participant?.email,
         }))
         .sort(sortBy('name'))
     )
@@ -364,6 +361,11 @@ export default {
     }
 
     const compose = ref(false)
+
+    function composeEmail() {
+      email.value.subject = item.value?.name
+      compose.value = true
+    }
 
     const selectedParticipantsList = computed(() =>
       Object.keys(selectedParticipants.value).map(
@@ -519,6 +521,7 @@ export default {
       selectedParticipantsList,
       guestAccount,
       email,
+      composeEmail,
     }
   },
 }
