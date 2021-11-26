@@ -1,7 +1,7 @@
 <template>
   <div class="font-noto bg-dark min-h-screen">
     <main>
-      <div class="relative">
+      <div class="relative sm:overflow-hidden">
         <div class="absolute inset-x-0 bottom-0 h-1/2 bg-gray-100" />
         <div>
           <div class="relative sm:overflow-hidden">
@@ -83,6 +83,145 @@
                 130 more dance styles
               </p>
             </div>
+          </div>
+        </div>
+      </div>
+      <div class="p-4 bg-light">
+        <div
+          class="md:grid md:grid-cols-2 lg:grid-cols-3 md:gap-4 max-w-4xl mx-auto"
+        >
+          <div class="py-8 space-y-1 bg-light">
+            <div class="flex justify-center ">
+              <div
+                class="flex items-center justify-center w-20 h-20 bg-white rounded-full "
+              >
+                <img src="/img/event-calendar.svg" alt="Event Calendar" />
+              </div>
+            </div>
+            <h3 class="text-2xl font-extrabold text-center">Event Calendar</h3>
+            <p class="text-center">
+              Find dance workshops, courses, socials and parties. We fill event
+              calendar all together as a community. Everyone can share.
+            </p>
+          </div>
+          <div class="py-8 space-y-1 bg-light">
+            <div class="flex justify-center ">
+              <div
+                class="flex items-center justify-center w-20 h-20 bg-white rounded-full "
+              >
+                <img src="/img/dance-partners.svg" alt="Dance Partners" />
+              </div>
+            </div>
+            <h3 class="text-2xl font-extrabold text-center">Dance Partners</h3>
+            <p class="text-center">
+              Find a dance partner for your dance style and let them find you.
+            </p>
+          </div>
+          <div class="py-8 space-y-1 bg-light">
+            <div class="flex justify-center ">
+              <div
+                class="flex items-center justify-center w-20 h-20 bg-white rounded-full "
+              >
+                <img src="/img/city-chats.svg" alt="City Chats" />
+              </div>
+            </div>
+            <h3 class="text-2xl font-extrabold text-center">City Chats</h3>
+            <p class="text-center">
+              Find dance chat in any city. Join your city chat and invite your
+              friends to help new dancers in the city. Think globally, act
+              locally.
+            </p>
+          </div>
+          <div class="py-8 space-y-1 bg-light">
+            <div class="flex justify-center ">
+              <div
+                class="flex items-center justify-center w-20 h-20 bg-white rounded-full "
+              >
+                <img src="/img/dance-travel.svg" alt="Dance Travel" />
+              </div>
+            </div>
+            <h3 class="text-2xl font-extrabold text-center">Dance Travel</h3>
+            <p class="text-center">
+              Find international dance festivals and congresses. Share a ride,
+              an appartment and find a buddy to experience a new city together.
+            </p>
+          </div>
+          <div class="py-8 space-y-1 bg-light">
+            <div class="flex justify-center ">
+              <div
+                class="flex items-center justify-center w-20 h-20 bg-white rounded-full "
+              >
+                <img src="/img/volunteer.svg" alt="Volunteer" />
+              </div>
+            </div>
+            <h3 class="text-2xl font-extrabold text-center">Volunteer</h3>
+            <p class="text-center">
+              We build a community, where everyone enters with mindset “I can
+              help”, so whenever you need help you can count on it. We are one
+              big family worldwide. We help each other.
+            </p>
+          </div>
+          <div class="py-8 space-y-1 bg-light">
+            <div class="flex justify-center ">
+              <div
+                class="flex items-center justify-center w-20 h-20 bg-white rounded-full "
+              >
+                <img src="/img/interviews.svg" alt="Interviews" />
+              </div>
+            </div>
+            <h3 class="text-2xl font-extrabold text-center">Interviews</h3>
+            <p class="text-center">
+              Explore more about you favorite dance artists and catch their tips
+              &amp; tricks.
+            </p>
+          </div>
+        </div>
+      </div>
+      <div class="bg-gray-100 py-4 flex justify-center">
+        <div class="max-w-sm py-4 space-y-1">
+          <div class="flex justify-center"></div>
+          <h3 class="text-2xl font-extrabold text-center">Let’s connect!</h3>
+          <p class="text-center">
+            We regularly post interviews, event announcements and introduce new
+            members on our social media.
+          </p>
+          <div class="pt-4 flex space-x-2 items-center justify-center">
+            <TButton
+              icon="youtube"
+              type="round"
+              icon-size="6"
+              href="https://www.youtube.com/channel/UC1pdWS3nCLrd8LnQyNNSNUw"
+            />
+            <TButton
+              icon="instagram"
+              type="round"
+              icon-size="6"
+              href="https://instagram.com/WeDanceVIP"
+            />
+            <TButton
+              icon="telegram"
+              type="round"
+              icon-size="6"
+              href="https://t.me/WeDanceVIP"
+            />
+            <TButton
+              icon="twitter"
+              type="round"
+              icon-size="6"
+              href="https://twitter.com/WeDanceVIP"
+            />
+            <TButton
+              icon="tiktok"
+              type="round"
+              icon-size="6"
+              href="https://tiktok.com/@WeDanceVIP"
+            />
+            <TButton
+              icon="facebook"
+              type="round"
+              icon-size="6"
+              href="https://www.facebook.com/WeDance-109777921433083"
+            />
           </div>
         </div>
       </div>
