@@ -1,32 +1,37 @@
 <template>
-  <div class="flex flex-col space-y-2 text-sm">
-    <TInputSelect
-      v-model="lang"
-      :options="localesDropdown"
-      class="mb-4 text-dark"
-    />
-    <p>© WeDance 2021 – All rights reserved.</p>
-    <a class="underline hover:no-underline" href="/about" target="_blank">{{
-      $t('footer.about')
-    }}</a>
-    <router-link
-      class="underline hover:no-underline"
-      to="/support#hs-chat-open"
-      target="_blank"
-      >Support</router-link
-    >
-    <router-link class="underline hover:no-underline" to="/privacy"
-      >Datenschutzerklärung</router-link
-    >
-    <router-link class="underline hover:no-underline" to="/terms"
-      >Impressum/Terms</router-link
-    >
-    <router-link class="underline hover:no-underline" to="/coc">{{
-      $t('footer.coc')
-    }}</router-link>
-    <router-link class="underline hover:no-underline" to="/faq">{{
-      $t('footer.faq')
-    }}</router-link>
+  <div>
+    <div class="flex justify-start mb-4">
+      <TInputSelect
+        v-model="lang"
+        :options="localesDropdown"
+        class="text-dark"
+      />
+    </div>
+
+    <div class="flex flex-wrap gap-4 text-xs">
+      <a class="hover:underline" href="/about" target="_blank">{{
+        $t('footer.about')
+      }}</a>
+      <router-link
+        class="hover:underline"
+        to="/support#hs-chat-open"
+        target="_blank"
+        >Support</router-link
+      >
+      <router-link class="hover:underline" to="/privacy"
+        >Datenschutzerklärung</router-link
+      >
+      <router-link class="hover:underline" to="/terms"
+        >Impressum/Terms</router-link
+      >
+      <router-link class="hover:underline" to="/coc">{{
+        $t('footer.coc')
+      }}</router-link>
+      <router-link class="hover:underline" to="/faq">{{
+        $t('footer.faq')
+      }}</router-link>
+    </div>
+    <div class="mt-4 text-xs">© WeDance 2021 – All rights reserved.</div>
   </div>
 </template>
 

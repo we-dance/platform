@@ -190,14 +190,16 @@
         </div>
       </div>
       <div class="bg-gray-100 py-4 flex justify-center">
-        <div class="max-w-sm py-4 space-y-1">
+        <div class="max-w-md py-4 space-y-1">
           <div class="flex justify-center"></div>
-          <h3 class="text-2xl font-extrabold text-center">Let’s connect!</h3>
+          <h3 class="text-2xl font-extrabold text-center">
+            International Community
+          </h3>
           <p class="text-center">
             We regularly post interviews, event announcements and introduce new
             members on our social media.
           </p>
-          <div class="pt-4 flex space-x-2 items-center justify-center">
+          <div class="p-4 flex flex-wrap gap-2 items-center justify-center">
             <TButton
               icon="youtube"
               type="round"
@@ -240,7 +242,7 @@
     </main>
 
     <div class="bg-dark text-white">
-      <TFooter class="p-4 mx-auto max-w-2xl" />
+      <TFooter class="p-4 mx-auto max-w-4xl" />
     </div>
   </div>
 </template>
