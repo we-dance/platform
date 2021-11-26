@@ -158,7 +158,13 @@
             <p class="text-center">
               We build a community, where everyone enters with mindset “I can
               help”, so whenever you need help you can count on it. We are one
-              big family worldwide. We help each other.
+              big family worldwide. We help each other.<br />
+              <a
+                href="https://wedance.vip/slack"
+                target="_blank"
+                class="underline font-bold hover:no-underline"
+                >Join Our Team</a
+              >
             </p>
           </div>
           <div class="py-8 space-y-1 bg-light">
@@ -172,7 +178,13 @@
             <h3 class="text-2xl font-extrabold text-center">Interviews</h3>
             <p class="text-center">
               Explore more about you favorite dance artists and catch their tips
-              &amp; tricks.
+              &amp; tricks.<br />
+              <a
+                href="https://anchor.fm/wedance"
+                target="_blank"
+                class="underline font-bold hover:no-underline"
+                >Listen to Podcast</a
+              >
             </p>
           </div>
         </div>
