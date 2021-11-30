@@ -15,12 +15,7 @@
       <router-link class="hover:underline" to="/get-involved">
         Get Involved
       </router-link>
-      <router-link
-        class="hover:underline"
-        to="/support#hs-chat-open"
-        target="_blank"
-        >Support</router-link
-      >
+      <router-link class="hover:underline" to="/support">Support</router-link>
       <router-link class="hover:underline" to="/privacy"
         >Datenschutzerklärung</router-link
       >

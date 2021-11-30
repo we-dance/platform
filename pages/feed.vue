@@ -11,7 +11,7 @@
       list-wrapper="mt-4 grid grid-cols-1 md:grid-cols-2 gap-2"
     >
       <template v-slot:before>
-        <div class="px-2 md:flex space-y-2 md:space-y-0 md:space-x-2 mb-2">
+        <div class="grid grid-cols-2">
           <WTeaser
             :title="$t('teaser.partner.title')"
             :description="$t('teaser.partner.description')"
