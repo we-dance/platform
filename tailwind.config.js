@@ -6,6 +6,7 @@
  */
 module.exports = {
   purge: ['./**/*.html', './**/*.vue'],
+  important: '#__nuxt',
   future: {
     removeDeprecatedGapUtilities: true,
   },

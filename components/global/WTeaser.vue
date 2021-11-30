@@ -1,7 +1,7 @@
 <template>
-  <div class="rounded bg-dark-gradient text-white text-sm text-center p-4">
+  <div class="border bg-gray-100 text-sm text-center p-4 my-4">
     <div>
-      <h1 class="font-bold text-lg">{{ title }}</h1>
+      <h4 class="font-bold text-xl my-0">{{ title }}</h4>
       <p>{{ description }}</p>
     </div>
     <div class="flex justify-center">

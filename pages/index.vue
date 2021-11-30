@@ -159,11 +159,10 @@
               We build a community, where everyone enters with mindset “I can
               help”, so whenever you need help you can count on it. We are one
               big family worldwide. We help each other.<br />
-              <a
-                href="https://wedance.vip/slack"
-                target="_blank"
+              <router-link
+                to="/get-involved"
                 class="underline font-bold hover:no-underline"
-                >Join Our Team</a
+                >Get Involved</router-link
               >
             </p>
           </div>

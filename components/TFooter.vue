@@ -9,9 +9,12 @@
     </div>
 
     <div class="flex flex-wrap gap-4 text-xs">
-      <a class="hover:underline" href="/about" target="_blank">{{
+      <router-link class="hover:underline" to="/about">{{
         $t('footer.about')
-      }}</a>
+      }}</router-link>
+      <router-link class="hover:underline" to="/get-involved">
+        Get Involved
+      </router-link>
       <router-link
         class="hover:underline"
         to="/support#hs-chat-open"
