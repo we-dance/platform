@@ -5,11 +5,9 @@
  ** Default: https://github.com/tailwindcss/tailwindcss/blob/master/stubs/defaultConfig.stub.js
  */
 module.exports = {
+  mode: 'jit',
   purge: ['./**/*.vue'],
-  important: '#__nuxt',
-  future: {
-    removeDeprecatedGapUtilities: true,
-  },
+  important: true,
   theme: {
     extend: {
       colors: {

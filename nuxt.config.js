@@ -76,7 +76,6 @@ export default {
     'portal-vue/nuxt',
     '@nuxtjs/device',
     'nuxt-i18n',
-    '@nuxtjs/amp',
     '@nuxt/content',
     '@nuxtjs/firebase',
     '@nuxtjs/toast',
