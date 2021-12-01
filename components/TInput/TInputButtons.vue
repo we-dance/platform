@@ -4,7 +4,7 @@
       v-for="option in options"
       :key="getValue(option)"
       :value="getValue(option)"
-      class="m-1"
+      class="m-1 whitespace-no-wrap"
       :type="value === getValue(option) ? 'secondary' : 'simple'"
       @click="change(getValue(option))"
       >{{ getLabel(option) }}</TButton
@@ -43,6 +43,11 @@ export default {
   },
   methods: {
     change(val) {
+      if (val === this.value) {
+        this.$emit('input', '')
+        return
+      }
+
       this.$emit('input', val)
     },
     getValue(field) {

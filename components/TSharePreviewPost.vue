@@ -51,7 +51,7 @@
           </template>
           <div class="flex justify-between items-end">
             <div class="flex items-center">
-              <div v-if="collection === 'events'" class="hidden md:block">
+              <div v-if="collection === 'events'">
                 <div v-if="claimed === 'Yes'" class="mr-2 text-sm">
                   Organised by
                 </div>

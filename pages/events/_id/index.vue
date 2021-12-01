@@ -70,6 +70,21 @@
       </div>
 
       <div
+        v-if="item.online === 'Yes'"
+        class="flex items-center justify-start w-full leading-tight border-t border-b py-2 px-4 -mx-4"
+      >
+        <TIcon name="youtube" class="w-4 h-4 mr-4" />
+        <div>Online Event</div>
+      </div>
+
+      <div
+        v-if="item.organiser"
+        class="flex items-center justify-start w-full leading-tight border-t border-b py-2 px-4 -mx-4"
+      >
+        <TIcon name="lobby" class="w-4 h-4 mr-4" />
+        <div>{{ item.organiser }}</div>
+      </div>
+      <div
         class="flex items-center justify-start w-full leading-tight border-t border-b py-2 px-4 -mx-4"
       >
         <TIcon name="ticket" class="w-4 h-4 mr-4" />

@@ -30,7 +30,7 @@
         </div>
         <div class="flex-grow"></div>
         <div class="flex-grow-0">
-          <div v-if="title" class="text-5xl font-bold leading-normal">
+          <div v-if="title" class="text-5xl font-bold leading-none">
             {{ title }}
           </div>
           <div class="text-3xl leading-normal">

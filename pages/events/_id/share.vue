@@ -15,7 +15,7 @@
 </template>
 
 <script>
-import { getDay, getDate, getTime, getTimeZone } from '~/utils'
+import { getDay, getDate, getTime } from '~/utils'
 import { addressPart } from '~/use/google'
 
 export default {
@@ -60,9 +60,7 @@ export default {
         result += getDate(this.event.endDate) + ' '
       }
 
-      result += getTime(this.event.endDate) + ' '
-
-      result += getTimeZone(this.event.startDate)
+      result += getTime(this.event.endDate)
 
       return result
     },

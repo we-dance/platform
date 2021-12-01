@@ -16,7 +16,7 @@
       {{ getTime(item.startDate) }}
     </div>
     <div class="mr-2">
-      {{ item.type === 'Party' ? '🎉' : '👣' }}
+      {{ icon }}
     </div>
     <div>
       <router-link
@@ -25,26 +25,48 @@
       >
         {{ item.name }}
       </router-link>
-      <div class="text-xs flex flex-wrap space-x-2">
-        <div v-if="item.venue">
-          <div class="flex items-center">
-            <TIcon name="place" class="w-4 h-4 mr-1" />
+      <div class="text-xs flex flex-wrap gap-1">
+        <div v-if="item.online === 'Yes'">
+          <div class="flex items-center gap-1">
+            <TIcon name="youtube" class="w-4 h-4" />
+            <p>
+              Online
+            </p>
+          </div>
+        </div>
+        <div v-if="item.venue" class="flex items-center gap-1">
+          <template v-if="currentCity === item.place">
+            <TIcon name="place" class="w-4 h-4" />
             <p>
               {{ item.venue.name }}
             </p>
-          </div>
-        </div>
-        <div v-else-if="item.address">
-          <div class="flex items-center">
-            <TIcon name="place" class="w-4 h-4 mr-1" />
+          </template>
+          <template v-else>
+            <TIcon name="car" class="w-4 h-4" />
             <p>
-              {{ item.address }}
+              {{ addressPart(item.venue, 'locality') }}
+            </p>
+          </template>
+        </div>
+      </div>
+      <div class="text-xs flex flex-wrap gap-1">
+        <div v-if="item.price">
+          <div class="flex items-center gap-1">
+            <TIcon name="ticket" class="w-4 h-4" />
+            <p>
+              {{ item.price }}
             </p>
           </div>
         </div>
-        <div class="flex items-center">
-          <TIcon name="icon" class="w-4 h-4 mr-1" />
-          <TAvatar name :uid="item.createdBy" />
+        <div class="flex items-center gap-1">
+          <TIcon name="lobby" class="w-4 h-4" />
+          <div v-if="item.claimed === 'Yes'">
+            Organised by
+          </div>
+          <div v-else>
+            Promoted by
+          </div>
+          <TAvatar name :uid="item.createdBy" class="text-primary" />
         </div>
       </div>
     </div>
@@ -55,23 +77,37 @@
 import { getTime } from '~/utils'
 import { useRsvp } from '~/use/rsvp'
 import { useApp } from '~/use/app'
+import { useEvents } from '~/use/events'
+import { useCities } from '~/use/cities'
+import { addressPart } from '~/use/google'
 
 export default {
   name: 'TEventText',
   setup() {
     const { updateRsvp } = useRsvp()
     const { getCity } = useApp()
+    const { eventTypeList } = useEvents()
+    const { currentCity } = useCities()
 
     return {
       getTime,
       updateRsvp,
       getCity,
+      eventTypeList,
+      currentCity,
+      addressPart,
     }
   },
   props: {
     item: {
       type: Object,
       default: () => ({}),
+    },
+  },
+  computed: {
+    icon() {
+      return this.eventTypeList.find((type) => type.value === this.item?.type)
+        .icon
     },
   },
 }

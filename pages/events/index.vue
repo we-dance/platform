@@ -4,10 +4,6 @@
       <TButton type="nav" icon="plus" to="/events/-/edit" />
     </THeader>
 
-    <div v-if="uid" class="flex items-center space-x-2">
-      <TTabs v-model="activeFilter" :tabs="filterOptions" class="flex-grow" />
-    </div>
-
     <div class="flex space-x-2 p-2">
       <t-rich-select
         v-model="eventType"
@@ -127,7 +123,7 @@ import {
 export default {
   name: 'EventsIndex',
   setup() {
-    const { eventTypeList } = useEvents()
+    const { eventTypeListIcons: eventTypeList } = useEvents()
     const { currentCity } = useCities()
     const { docs, loading: loadingPosts, getById } = useCollection('events')
     const { getProfile } = useProfiles()
