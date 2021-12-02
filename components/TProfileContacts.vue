@@ -1,7 +1,9 @@
 <template>
-  <div class="md:flex items-center justify-end space-x-2 space-y-2 bg-gray-100">
-    <div class="pl-2 font-bold">{{ title }}</div>
-    <div class="flex space-x-2 items-center justify-end">
+  <div
+    class="md:flex items-center justify-center space-x-2 space-y-2 bg-gray-100"
+  >
+    <div v-if="title" class="pl-2 font-bold">{{ title }}</div>
+    <div class="p-4 flex flex-wrap gap-2 items-center justify-center">
       <TButton
         v-if="profile.website"
         :href="profile.website"
@@ -67,7 +69,7 @@ export default {
   props: {
     title: {
       type: String,
-      default: 'Subscribe',
+      default: '',
     },
     profile: {
       type: Object,

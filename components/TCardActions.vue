@@ -1,6 +1,6 @@
 <template>
   <div>
-    <TButton type="base" @click="isReportShown = true">Report</TButton>
+    <TButton :type="type" @click="isReportShown = true">Report</TButton>
     <TPopup v-if="isReportShown" title="Report" @close="isReportShown = false">
       <div class="p-4">
         <TField
@@ -28,6 +28,7 @@
 import { useDoc } from '~/use/doc'
 
 export default {
+  name: 'TCardActions',
   setup() {
     const { create: createReport } = useDoc('reports')
 
@@ -47,6 +48,10 @@ export default {
     item: {
       type: Object,
       default: () => ({}),
+    },
+    type: {
+      type: String,
+      default: 'base',
     },
   },
   data: () => ({

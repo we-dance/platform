@@ -1,5 +1,6 @@
 import { useApp } from '~/use/app'
 import { accountFields } from '~/use/accounts'
+import { useCollection } from '~/use/collection'
 
 export const genderList = [
   {
@@ -440,10 +441,14 @@ export const profileSorts = [
 
 export const useProfiles = () => {
   const { read, loading } = useApp()
+  const { getById } = useCollection('profiles')
+
+  const getFullProfile = (uid) => getById(uid) || {}
   const getProfile = (uid) => read('profiles', uid) || {}
 
   return {
     getProfile,
+    getFullProfile,
     profileFields,
     profilePosterFields,
     profileDetailFields,

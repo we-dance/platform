@@ -4,6 +4,12 @@
       :label="`Published on ${publishedAt} by`"
       :profile="creator"
     />
+    <TPreview
+      v-if="full && creator.story"
+      :content="creator.story"
+      class="mt-4"
+    />
+    <TProfileContacts v-if="full" :profile="creator" class="mt-4 p-2" />
   </div>
 </template>
 
@@ -18,20 +24,24 @@ export default {
       type: Object,
       default: () => ({}),
     },
+    full: {
+      type: Boolean,
+      default: false,
+    },
   },
   computed: {
     publishedAt() {
       return getDateTime(this.item?.createdAt)
     },
     creator() {
-      return this.getProfile(this.item?.createdBy)
+      return this.getFullProfile(this.item?.createdBy)
     },
   },
   setup() {
-    const { getProfile } = useProfiles()
+    const { getFullProfile } = useProfiles()
 
     return {
-      getProfile,
+      getFullProfile,
     }
   },
 }

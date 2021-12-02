@@ -1,8 +1,9 @@
 <template>
   <div>
     <THeader :title="item.name">
-      <TDropdown v-if="can('edit', 'events', item)">
+      <TDropdown>
         <TButton
+          v-if="can('edit', 'events', item)"
           type="context"
           icon="people"
           :to="`/events/${item.id}/dashboard`"
@@ -10,111 +11,126 @@
           label="Dashboard"
         />
         <TButton
+          v-if="can('edit', 'events', item)"
           type="context"
           icon="edit"
           :to="`/events/${item.id}/edit`"
           class="hover:text-blue-500"
           label="Edit"
         />
+        <TCardActions
+          :id="item.id"
+          collection="events"
+          :item="item"
+          type="context"
+        />
+        <TButtonShare
+          :id="item.id"
+          collection="events"
+          :place="item.place"
+          :file="item.socialCover"
+          :file-name="item.name"
+          :url="$route.fullPath"
+          :text="item.name"
+          type="context"
+          label="Share"
+        />
       </TDropdown>
     </THeader>
 
-    <TItemCard>
-      <TSharePreviewPost
-        :username="
-          (item.claimed === 'Yes' ? item.organiser : item.promoter) ||
-            creator.username
-        "
-        :claimed="item.claimed"
-        collection="events"
-        :title="item.name"
-        :type="item.type"
-        :description="getEventDescription(item)"
-        :extra="item.locality"
-        :photo="item.cover"
-        :styles="item.styles"
-        size="sm"
-        class="-m-4 mb-2"
-      />
+    <div v-if="item.cover" class="relative">
+      <img :src="item.cover" :alt="item.name" class="absolute w-full" />
+      <div class="square bg-indigo-500"></div>
+    </div>
 
-      <a
-        v-if="item.venue"
-        :href="item.venue.url"
-        target="_blank"
-        class="hover:bg-gray-200 block py-2 px-4 -mx-4"
-      >
-        <div class="flex items-center justify-start leading-tight">
-          <TIcon name="place" class="w-4 h-4 mr-4" />
-          <div>
-            <h4 class="font-bold">
-              {{ item.venue.name
-              }}<span v-if="item.venue.room"> • {{ item.venue.room }}</span>
-            </h4>
-            <div class="text-gray-700">
-              {{ item.venue.formatted_address }}
-            </div>
+    <TStyles
+      :value="item.styles"
+      hide-level
+      class="flex flex-wrap justify-center border-b text-xs p-2"
+    />
+
+    <a
+      v-if="item.venue"
+      :href="item.venue.url"
+      target="_blank"
+      class="hover:bg-gray-200 block py-2 px-4 border-b"
+    >
+      <div class="flex items-center justify-start leading-tight">
+        <TIcon name="place" class="w-4 h-4 mr-4" />
+        <div>
+          <h4 class="font-bold">
+            {{ item.venue.name
+            }}<span v-if="item.venue.room"> • {{ item.venue.room }}</span>
+          </h4>
+          <div class="text-gray-700">
+            {{ item.venue.formatted_address }}
           </div>
         </div>
-      </a>
-      <div v-else-if="item.address">
-        <div class="flex items-center">
-          <TIcon name="place" class="w-4 h-4 mr-1" />
-          <a
-            :href="`https://maps.google.com/?q=${item.address}`"
-            class="underline hover:no-underline"
-            target="_blank"
-          >
-            {{ item.address }}
-          </a>
-        </div>
       </div>
+    </a>
 
-      <div
-        v-if="item.online === 'Yes'"
-        class="flex items-center justify-start w-full leading-tight border-t border-b py-2 px-4 -mx-4"
-      >
-        <TIcon name="youtube" class="w-4 h-4 mr-4" />
-        <div>Online Event</div>
-      </div>
+    <div
+      v-if="item.online === 'Yes'"
+      class="flex items-center justify-start w-full leading-tight border-b py-2 px-4"
+    >
+      <TIcon name="youtube" class="w-4 h-4 mr-4" />
+      <div>Online Event</div>
+    </div>
 
-      <div
-        v-if="item.organiser"
-        class="flex items-center justify-start w-full leading-tight border-t border-b py-2 px-4 -mx-4"
-      >
-        <TIcon name="lobby" class="w-4 h-4 mr-4" />
-        <div>{{ item.organiser }}</div>
-      </div>
-      <div
-        class="flex items-center justify-start w-full leading-tight border-t border-b py-2 px-4 -mx-4"
-      >
-        <TIcon name="ticket" class="w-4 h-4 mr-4" />
-        <div>{{ item.price }}</div>
-      </div>
+    <div
+      class="flex items-center justify-start w-full leading-tight border-b py-2 px-4"
+    >
+      <TIcon name="calendar" class="w-4 h-4 mr-4" />
       <div>
-        <div class="flex mt-4 space-x-2 justify-center">
-          <TButton
-            v-if="!uid"
-            type="primary"
-            @click="reservationPopup = 'reserve'"
-            >Register for event</TButton
-          >
-          <TButton
-            v-else
-            :type="uid && item.response === 'up' ? 'success' : 'secondary'"
-            @click="reservationPopup = 'reserve'"
-            >Going</TButton
-          >
-          <TButton
-            v-if="uid"
-            :type="uid && item.response === 'down' ? 'danger' : 'secondary'"
-            @click="updateRsvp(item.id, 'events', 'down')"
-            >Not going</TButton
-          >
-        </div>
+        {{ getDateTime(item.startDate) }} - {{ getDateTime(item.endDate) }}
       </div>
+    </div>
 
+    <div
+      class="flex items-center justify-start w-full leading-tight border-b py-2 px-4"
+    >
+      <TIcon name="ticket" class="w-4 h-4 mr-4" />
+      <div>{{ item.price }}</div>
+    </div>
+
+    <div
+      v-if="item.type"
+      class="flex items-center justify-start w-full leading-tight border-b py-2 px-4"
+    >
+      <div class="w-4 mr-4 text-center">{{ getEventIcon(item.type) }}</div>
+      <div>{{ item.type }}</div>
+    </div>
+
+    <div
+      v-if="item.organiser"
+      class="flex items-center justify-start w-full leading-tight border-b py-2 px-4"
+    >
+      <TIcon name="lobby" class="w-4 h-4 mr-4" />
+      <div>Organised by {{ item.organiser }}</div>
+    </div>
+
+    <div
+      class="flex mt-4 space-x-2 justify-center sticky bg-white p-4 border-b z-50 top-0"
+    >
+      <TButton v-if="!uid" type="primary" @click="reservationPopup = 'reserve'"
+        >Register for event</TButton
+      >
+      <TButton
+        v-else
+        :type="uid && item.response === 'up' ? 'success' : 'secondary'"
+        @click="reservationPopup = 'reserve'"
+        >Going</TButton
+      >
+      <TButton
+        v-if="uid"
+        :type="uid && item.response === 'down' ? 'danger' : 'secondary'"
+        @click="updateRsvp(item.id, 'events', 'down')"
+        >Not going</TButton
+      >
+    </div>
+
+    <TItemCard>
       <TPreview class="mt-4" :content="item.description" />
-      <TItemFooter collection="events" :item="item" :title="item.name" />
 
       <div
         v-if="item.venue && item.venue.map"
@@ -126,7 +142,7 @@
         <img :src="item.venue.map" alt="Venue Map" class="mt-4" />
       </div>
 
-      <TItemCreator :item="item" />
+      <TItemCreator :item="item" full class="mt-4" />
 
       <div v-if="item.facebook" class="mt-8 text-right text-sm">
         <a :href="item.facebook" class="hover:underline text-gray-700"
@@ -204,6 +220,7 @@ import { useProfiles } from '~/use/profiles'
 import { useReactions } from '~/use/reactions'
 import { accountFields } from '~/use/accounts'
 import { useCities } from '~/use/cities'
+import { useEvents } from '~/use/events'
 import {
   getDay,
   getDateTime,
@@ -316,6 +333,7 @@ export default {
       sendSignInLinkToEmail,
     } = useAuth()
     const { currentCity } = useCities()
+    const { getEventIcon } = useEvents()
 
     const { params } = useRouter()
     const { getProfile } = useProfiles()
@@ -400,6 +418,7 @@ export default {
       getEventDescription,
       calendarLink,
       trackView,
+      getEventIcon,
     }
   },
 }

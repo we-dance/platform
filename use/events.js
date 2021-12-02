@@ -47,8 +47,13 @@ export const useEvents = () => {
     label: `${type.icon}  ${type.label}`,
   }))
 
+  function getEventIcon(eventType) {
+    return eventTypeListIcons.find((type) => type.value === eventType).icon
+  }
+
   return {
     eventTypeList,
     eventTypeListIcons,
+    getEventIcon,
   }
 }

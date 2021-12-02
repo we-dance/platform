@@ -16,7 +16,7 @@
       {{ getTime(item.startDate) }}
     </div>
     <div class="mr-2">
-      {{ icon }}
+      {{ getEventIcon(item.type) }}
     </div>
     <div>
       <router-link
@@ -86,28 +86,22 @@ export default {
   setup() {
     const { updateRsvp } = useRsvp()
     const { getCity } = useApp()
-    const { eventTypeList } = useEvents()
+    const { getEventIcon } = useEvents()
     const { currentCity } = useCities()
 
     return {
       getTime,
       updateRsvp,
       getCity,
-      eventTypeList,
       currentCity,
       addressPart,
+      getEventIcon,
     }
   },
   props: {
     item: {
       type: Object,
       default: () => ({}),
-    },
-  },
-  computed: {
-    icon() {
-      return this.eventTypeList.find((type) => type.value === this.item?.type)
-        .icon
     },
   },
 }
