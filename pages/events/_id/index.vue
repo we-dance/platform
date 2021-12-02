@@ -38,75 +38,82 @@
       </TDropdown>
     </THeader>
 
-    <div v-if="item.cover" class="relative">
-      <img :src="item.cover" :alt="item.name" class="absolute w-full" />
-      <div class="square bg-indigo-500"></div>
-    </div>
-
-    <TStyles
-      :value="item.styles"
-      hide-level
-      class="flex flex-wrap justify-center border-b text-xs p-2"
-    />
-
-    <a
-      v-if="item.venue"
-      :href="item.venue.url"
-      target="_blank"
-      class="hover:bg-gray-200 block py-2 px-4 border-b"
+    <div
+      class="grid grid-cols-1"
+      :class="$route.query.variant ? 'md:grid-cols-2' : ''"
     >
-      <div class="flex items-center justify-start leading-tight">
-        <TIcon name="place" class="w-4 h-4 mr-4" />
-        <div>
-          <h4 class="font-bold">
-            {{ item.venue.name
-            }}<span v-if="item.venue.room"> • {{ item.venue.room }}</span>
-          </h4>
-          <div class="text-gray-700">
-            {{ item.venue.formatted_address }}
+      <div v-if="item.cover" class="relative">
+        <img :src="item.cover" :alt="item.name" class="absolute w-full" />
+        <div class="square bg-indigo-500"></div>
+      </div>
+
+      <div class="md:border-l">
+        <div
+          v-if="item.type"
+          class="flex items-center justify-start w-full leading-tight border-b py-2 px-4"
+        >
+          <div class="w-4 mr-4 text-center">{{ getEventIcon(item.type) }}</div>
+          <div>{{ item.type }}</div>
+        </div>
+
+        <TStyles
+          :value="item.styles"
+          hide-level
+          class="flex flex-wrap justify-center border-b text-xs p-2"
+        />
+
+        <a
+          v-if="item.venue"
+          :href="item.venue.url"
+          target="_blank"
+          class="hover:bg-gray-200 block py-2 px-4 border-b"
+        >
+          <div class="flex items-center justify-start leading-tight">
+            <TIcon name="place" class="w-4 h-4 mr-4" />
+            <div>
+              <h4 class="font-bold">
+                {{ item.venue.name
+                }}<span v-if="item.venue.room"> • {{ item.venue.room }}</span>
+              </h4>
+              <div class="text-gray-700">
+                {{ item.venue.formatted_address }}
+              </div>
+            </div>
+          </div>
+        </a>
+
+        <div
+          v-if="item.online === 'Yes'"
+          class="flex items-center justify-start w-full leading-tight border-b py-2 px-4"
+        >
+          <TIcon name="youtube" class="w-4 h-4 mr-4" />
+          <div>Online Event</div>
+        </div>
+
+        <div
+          class="flex items-center justify-start w-full leading-tight border-b py-2 px-4"
+        >
+          <TIcon name="calendar" class="w-4 h-4 mr-4" />
+          <div>
+            {{ getDateTime(item.startDate) }} - {{ getDateTime(item.endDate) }}
           </div>
         </div>
+
+        <div
+          class="flex items-center justify-start w-full leading-tight border-b py-2 px-4"
+        >
+          <TIcon name="ticket" class="w-4 h-4 mr-4" />
+          <div>{{ item.price }}</div>
+        </div>
+
+        <div
+          v-if="item.organiser"
+          class="flex items-center justify-start w-full leading-tight border-b py-2 px-4"
+        >
+          <TIcon name="lobby" class="w-4 h-4 mr-4" />
+          <div>Organised by {{ item.organiser }}</div>
+        </div>
       </div>
-    </a>
-
-    <div
-      v-if="item.online === 'Yes'"
-      class="flex items-center justify-start w-full leading-tight border-b py-2 px-4"
-    >
-      <TIcon name="youtube" class="w-4 h-4 mr-4" />
-      <div>Online Event</div>
-    </div>
-
-    <div
-      class="flex items-center justify-start w-full leading-tight border-b py-2 px-4"
-    >
-      <TIcon name="calendar" class="w-4 h-4 mr-4" />
-      <div>
-        {{ getDateTime(item.startDate) }} - {{ getDateTime(item.endDate) }}
-      </div>
-    </div>
-
-    <div
-      class="flex items-center justify-start w-full leading-tight border-b py-2 px-4"
-    >
-      <TIcon name="ticket" class="w-4 h-4 mr-4" />
-      <div>{{ item.price }}</div>
-    </div>
-
-    <div
-      v-if="item.type"
-      class="flex items-center justify-start w-full leading-tight border-b py-2 px-4"
-    >
-      <div class="w-4 mr-4 text-center">{{ getEventIcon(item.type) }}</div>
-      <div>{{ item.type }}</div>
-    </div>
-
-    <div
-      v-if="item.organiser"
-      class="flex items-center justify-start w-full leading-tight border-b py-2 px-4"
-    >
-      <TIcon name="lobby" class="w-4 h-4 mr-4" />
-      <div>Organised by {{ item.organiser }}</div>
     </div>
 
     <div
