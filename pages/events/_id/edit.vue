@@ -152,7 +152,7 @@ export default {
     }
 
     const updatePlace = (e) => {
-      if (e?.online === 'No' && e?.international === 'No') {
+      if (e?.international === 'No') {
         return
       }
 
@@ -300,8 +300,7 @@ export default {
             label: 'Community',
             type: 'place',
             clearable: true,
-            when: (answers) =>
-              answers.online === 'No' && answers.international === 'No',
+            when: (answers) => answers.international === 'No',
             description:
               'Leave empty if you want your event to be shown in all cities',
           },
