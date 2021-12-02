@@ -13,51 +13,8 @@
         <h2 class="font-bold bg-dark text-white py-2 px-4 rounded">
           {{ getDay(date) }}, {{ getDate(date) }}
         </h2>
-        <div v-for="item in items" :key="item.id" class="px-4 mt-4 flex">
-          <div v-if="false" class="mr-2 flex justify-center items-start pt-1">
-            <button
-              v-if="item.response === 'up'"
-              class="text-green-500"
-              @click="updateRsvp(item.id, 'events', 'down')"
-            >
-              <TIcon name="check_circle" class="w-4 h-4" />
-            </button>
-            <button v-else @click="updateRsvp(item.id, 'events', 'up')">
-              <TIcon name="check" class="w-4 h-4" />
-            </button>
-          </div>
-          <div class="mr-2">
-            {{ getTime(item.startDate) }}
-          </div>
-          <div class="mr-2">
-            {{ item.type === 'Party' ? '🎉' : '👣' }}
-          </div>
-          <div>
-            <router-link
-              :to="`/events/${item.id}`"
-              class="font-bold leading-none hover:underline hover:text-primary"
-            >
-              {{ item.name }}
-            </router-link>
-            <div class="text-xs flex flex-wrap">
-              <div v-if="item.venue">
-                <div class="flex items-center">
-                  <TIcon name="place" class="w-4 h-4 mr-1" />
-                  <p>
-                    {{ item.venue.name }}
-                  </p>
-                </div>
-              </div>
-              <div v-else-if="item.address">
-                <div class="flex items-center">
-                  <TIcon name="place" class="w-4 h-4 mr-1" />
-                  <p>
-                    {{ item.address }}
-                  </p>
-                </div>
-              </div>
-            </div>
-          </div>
+        <div v-for="item in items" :key="item.id" class="px-4 mt-4">
+          <TEventText :item="item" />
         </div>
       </div>
     </div>
