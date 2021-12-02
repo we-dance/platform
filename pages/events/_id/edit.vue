@@ -75,9 +75,9 @@ export default {
         claimed: 'No',
         type: 'Party',
         duration: 60,
-        price: 'FREE',
-        styles: this.profile?.styles,
-        cover: this.profile?.photo || '',
+        price: '0 EUR',
+        styles: {},
+        cover: '',
         organiser: this.profile?.username || '',
         promoter: this.profile?.username || '',
       }
