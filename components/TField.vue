@@ -71,6 +71,7 @@ import TInputLanguages from '~/components/TInput/TInputLanguages'
 import TInputButtons from '~/components/TInput/TInputButtons'
 import TInputUsername from '~/components/TInput/TInputUsername'
 import TInputDateTime from '~/components/TInput/TInputDateTime'
+import TInputPrice from '~/components/TInput/TInputPrice'
 
 export default {
   name: 'TField',
@@ -201,6 +202,7 @@ export default {
         buttons: TInputButtons,
         username: TInputUsername,
         datetime: TInputDateTime,
+        price: TInputPrice,
       }
 
       return map[this.type] || TInput

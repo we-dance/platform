@@ -75,7 +75,7 @@ export default {
         claimed: 'No',
         type: 'Party',
         duration: 60,
-        price: '0 EUR',
+        price: '0',
         styles: {},
         cover: '',
         organiser: this.profile?.username || '',
@@ -238,8 +238,19 @@ export default {
           },
           {
             name: 'price',
-            placeholder: 'Examples: 10EUR, 5USD, FREE',
-            description: 'Examples: 10EUR, 5USD, FREE',
+            type: 'price',
+            placeholder: 'Examples: 10, 5, FREE',
+            description: 'Examples: 10, 5, FREE',
+            defaultPrice: {
+              amount: 0,
+              currency: 'EUR',
+            },
+            options: [
+              { name: 'EUR' },
+              { name: 'USD' },
+              { name: 'GBP' },
+              { name: 'JPY' },
+            ],
           },
           {
             name: 'styles',
