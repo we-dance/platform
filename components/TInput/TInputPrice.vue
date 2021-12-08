@@ -1,20 +1,14 @@
 <template>
-  <div class="flex flex-row  ">
+  <div class="flex flex-row ">
     <vt-input ref="input" v-model="amount" v-bind="$attrs" />
-    <TInputSelect v-model="currency" :options="options" />
+    <TInputSelect v-model="currency" :options="options" class="border-2" />
   </div>
 </template>
 
 <script>
-import { sanitize } from '~/utils'
-
 export default {
   name: 'TInputPrice',
   props: {
-    trim: {
-      type: String,
-      default: '',
-    },
     defaultPrice: {
       type: Object,
       default: () => ({}),
@@ -29,10 +23,11 @@ export default {
     currency: '',
   }),
   watch: {
-    amount(val, oldVal) {
-      if (val !== oldVal) {
-        this.sanitize()
-      }
+    amount() {
+      const price = this.amount + this.currency
+      this.$emit('input', price)
+    },
+    currency() {
       const price = this.amount + this.currency
       this.$emit('input', price)
     },
@@ -40,14 +35,6 @@ export default {
   mounted() {
     this.amount = this.defaultPrice.amount
     this.currency = this.defaultPrice.currency
-  },
-
-  methods: {
-    sanitize() {
-      if (this.trim) {
-        this.amount = sanitize(this.amount, this.trim)
-      }
-    },
   },
 }
 </script>
