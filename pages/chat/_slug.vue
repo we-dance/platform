@@ -21,15 +21,22 @@
             <div>{{ dateDiff(item.createdAt) }} ago</div>
           </div>
 
-          <div class="block text-sm leading-tight">{{ item.text }}</div>
+          <TPreview class="text-sm leading-tight" :content="item.text" />
         </div>
       </div>
       <div class="text-xs p-4 text-center">
         <div v-if="chat.lastSeen[receiverUid]">
-          {{ receiver.username }} opened chat last time
-          {{ dateDiff(chat.lastSeen[receiverUid]) }} ago
+          <router-link :to="`/${receiver.username}`" class="underline">{{
+            receiver.username
+          }}</router-link>
+          opened chat last time {{ dateDiff(chat.lastSeen[receiverUid]) }} ago
         </div>
-        <div v-else>{{ receiver.username }} haven't opened this chat yet</div>
+        <div v-else>
+          <router-link :to="`/${receiver.username}`" class="underline">{{
+            receiver.username
+          }}</router-link>
+          haven't opened this chat yet
+        </div>
       </div>
     </div>
     <div>

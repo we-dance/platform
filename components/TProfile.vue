@@ -143,7 +143,6 @@
       <TEventList
         v-if="profile.type === 'City'"
         :filter="{ place: profile.place }"
-        tab="7days"
         :community="profile.username"
         class="mt-4 w-full"
       />
