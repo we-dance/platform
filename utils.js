@@ -488,3 +488,11 @@ export const getOptionsFromHash = (hash, label = 'name') => {
 
   return results
 }
+
+export const getPrice = (p) => {
+  if (typeof p === 'string') {
+    return p
+  }
+  const price = p?.amount + ' ' + p?.currency
+  return price
+}

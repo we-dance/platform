@@ -54,7 +54,7 @@
           <div class="flex items-center gap-1">
             <TIcon name="ticket" class="w-4 h-4" />
             <p>
-              {{ item.price }}
+              {{ getPrice(item.price) }}
             </p>
           </div>
         </div>
@@ -74,7 +74,7 @@
 </template>
 
 <script>
-import { getTime } from '~/utils'
+import { getTime, getPrice } from '~/utils'
 import { useRsvp } from '~/use/rsvp'
 import { useApp } from '~/use/app'
 import { useEvents } from '~/use/events'
@@ -96,6 +96,7 @@ export default {
       currentCity,
       addressPart,
       getEventIcon,
+      getPrice,
     }
   },
   props: {

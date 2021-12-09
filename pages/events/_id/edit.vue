@@ -239,12 +239,8 @@ export default {
           {
             name: 'price',
             type: 'price',
-            placeholder: 'Examples: 10, 5, FREE',
-            description: 'Examples: 10, 5, FREE',
-            defaultPrice: {
-              amount: 0,
-              currency: 'EUR',
-            },
+            placeholder: 'Examples: 10, 5, 0',
+            description: 'Examples: 10, 5, 0',
             options: [
               { name: 'EUR' },
               { name: 'USD' },

@@ -103,7 +103,7 @@
           class="flex items-center justify-start w-full leading-tight border-b py-2 px-4"
         >
           <TIcon name="ticket" class="w-4 h-4 mr-4" />
-          <div>{{ item.price }}</div>
+          <div>{{ getPrice(item.price) }}</div>
         </div>
 
         <div
@@ -237,6 +237,7 @@ import {
   getEventDescription,
   openURL,
   getDateObect,
+  getPrice,
 } from '~/utils'
 import { addressPart } from '~/use/google'
 import { trackView } from '~/use/tracking'
@@ -426,6 +427,7 @@ export default {
       calendarLink,
       trackView,
       getEventIcon,
+      getPrice,
     }
   },
 }

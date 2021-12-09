@@ -36,6 +36,7 @@ import {
   getDay,
   getYmd,
   getDateObect,
+  getPrice,
 } from '~/utils'
 
 export default {
@@ -161,7 +162,7 @@ export default {
           if (item.venue) {
             result += `📍 ${item.venue?.name}\n`
           }
-          result += `💸 ${item.price}\n`
+          result += `💸 ${getPrice(item.price)}\n`
           result += `\n`
         })
       })
