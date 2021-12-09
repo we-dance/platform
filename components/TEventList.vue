@@ -47,7 +47,7 @@ export default {
     },
     tab: {
       type: String,
-      default: 'thisYear',
+      default: 'all',
     },
     community: {
       type: String,
@@ -124,6 +124,12 @@ export default {
           getYmd(item.startDate) >= startOfTodayString &&
           getYmd(item.startDate) <= in7daysString &&
           isPublic(item),
+      },
+      {
+        value: 'all',
+        label: 'All',
+        filter: (item) =>
+          getYmd(item.startDate) >= startOfTodayString && isPublic(item),
       },
     ])
 
