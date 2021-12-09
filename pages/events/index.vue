@@ -178,7 +178,7 @@ export default {
 
     const loading = computed(() => loadingPosts.value)
 
-    const activeFilter = ref('thisYear')
+    const activeFilter = ref('all')
 
     const isPublic = (item) => item.visibility !== 'Unlisted'
 
@@ -192,7 +192,13 @@ export default {
           isPublic(item),
       },
       {
-        value: 'createdByMe',
+        value: 'all',
+        label: 'All',
+        filter: (item) =>
+          getYmd(item.startDate) >= startOfTodayString && isPublic(item),
+      },
+      {
+        value: 'mine',
         label: 'Created by me',
         filter: (item) => item.createdBy === uid.value,
       },
