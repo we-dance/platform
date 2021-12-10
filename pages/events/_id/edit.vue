@@ -36,6 +36,7 @@ import { useAuth } from '~/use/auth'
 import { useDoc } from '~/use/doc'
 import { useRouter } from '~/use/router'
 import { useEvents } from '~/use/events'
+import { useCurrencies } from '~/use/currencies'
 
 export default {
   name: 'EventEdit',
@@ -239,14 +240,13 @@ export default {
           {
             name: 'price',
             type: 'price',
-            placeholder: 'Examples: 10, 5, 0',
-            description: 'Examples: 10, 5, 0',
-            options: [
-              { name: 'EUR' },
-              { name: 'USD' },
-              { name: 'GBP' },
-              { name: 'JPY' },
-            ],
+            options: useCurrencies,
+            // options: [
+            //   { name: 'EUR' },
+            //   { name: 'USD' },
+            //   { name: 'GBP' },
+            //   { name: 'JPY' },
+            // ],
           },
           {
             name: 'styles',

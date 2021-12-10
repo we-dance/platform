@@ -33,7 +33,7 @@ export default {
   },
   data: () => ({
     amount: 0,
-    currency: 'EUR',
+    currency: '€ EUR',
   }),
   watch: {
     amount() {
