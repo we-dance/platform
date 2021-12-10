@@ -241,12 +241,6 @@ export default {
             name: 'price',
             type: 'price',
             options: useCurrencies,
-            // options: [
-            //   { name: 'EUR' },
-            //   { name: 'USD' },
-            //   { name: 'GBP' },
-            //   { name: 'JPY' },
-            // ],
           },
           {
             name: 'styles',
