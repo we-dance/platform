@@ -17,6 +17,7 @@
         vertical
         :show-remove="!!item.id"
         :show-copy="!!item.id"
+        :event-error="eventError"
         submit-label="Save"
         class="bg-white p-4 space-y-4"
         @copy="copyItem"
@@ -49,6 +50,7 @@ export default {
   },
   data: () => ({
     selectedType: 'event',
+    eventError: '',
   }),
   computed: {
     fields() {
@@ -103,6 +105,12 @@ export default {
     },
     async saveItem(data) {
       if (!data.name) {
+        this.eventError = 'name is a required field!'
+        return
+      }
+
+      if (!data.startDate) {
+        this.eventError = 'start date is not set!'
         return
       }
 

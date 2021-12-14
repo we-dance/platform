@@ -75,6 +75,10 @@ export default {
       type: String,
       default: '',
     },
+    eventError: {
+      type: String,
+      default: '',
+    },
   },
   data: () => ({
     error: false,
@@ -100,6 +104,13 @@ export default {
       }
 
       return fields.map((f) => ({ ...f, ...this.fieldConfig }))
+    },
+  },
+  watch: {
+    eventError(newValue, _) {
+      this.error = {
+        message: newValue,
+      }
     },
   },
   methods: {
