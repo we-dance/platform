@@ -241,6 +241,10 @@ export default {
             type: 'price',
           },
           {
+            name: 'specialOffer',
+            type: 'specialOffer',
+          },
+          {
             name: 'styles',
             label: 'Dance styles',
             type: 'stylesSelect',

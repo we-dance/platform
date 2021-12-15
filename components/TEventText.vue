@@ -49,6 +49,14 @@
           </template>
         </div>
       </div>
+      <div v-if="item.specialOffer" class="text-xs flex flex-wrap gap-1">
+        <div class="flex items-center gap-1">
+          <TIcon name="fire" class="w-4 h-4" />
+          <div>
+            {{ item.specialOffer }}
+          </div>
+        </div>
+      </div>
       <div class="text-xs flex flex-wrap gap-1">
         <div v-if="item.price">
           <div class="flex items-center gap-1">

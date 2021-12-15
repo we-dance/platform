@@ -98,7 +98,15 @@
             {{ getDateTime(item.startDate) }} - {{ getDateTime(item.endDate) }}
           </div>
         </div>
-
+        <div
+          v-if="item.specialOffer"
+          class="flex items-center justify-start w-full leading-tight border-b py-2 px-4"
+        >
+          <TIcon name="fire" class="w-4 h-4 mr-4" />
+          <div>
+            {{ item.specialOffer }}
+          </div>
+        </div>
         <div
           class="flex items-center justify-start w-full leading-tight border-b py-2 px-4"
         >
