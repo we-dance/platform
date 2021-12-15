@@ -36,7 +36,6 @@ import { useAuth } from '~/use/auth'
 import { useDoc } from '~/use/doc'
 import { useRouter } from '~/use/router'
 import { useEvents } from '~/use/events'
-import { useCurrencies } from '~/use/currencies'
 
 export default {
   name: 'EventEdit',
@@ -240,7 +239,6 @@ export default {
           {
             name: 'price',
             type: 'price',
-            options: useCurrencies,
           },
           {
             name: 'styles',

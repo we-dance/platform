@@ -103,7 +103,19 @@
           class="flex items-center justify-start w-full leading-tight border-b py-2 px-4"
         >
           <TIcon name="ticket" class="w-4 h-4 mr-4" />
-          <div>{{ getPrice(item.price) }}</div>
+          <div>
+            <small class="font-serif font-medium">&#9660; Min</small>
+            {{ getPrice.min(item.price) }}
+          </div>
+        </div>
+        <div
+          class="flex items-center justify-start w-full leading-tight border-b py-2 px-4"
+        >
+          <TIcon name="ticket" class="w-4 h-4 mr-4" />
+          <div>
+            <small class="font-serif font-medium">&#9650; Max</small>
+            {{ getPrice.max(item.price) }}
+          </div>
         </div>
 
         <div

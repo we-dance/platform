@@ -489,10 +489,23 @@ export const getOptionsFromHash = (hash, label = 'name') => {
   return results
 }
 
-export const getPrice = (p) => {
-  if (typeof p === 'string') {
-    return p
+export const getPrice = (() => {
+  function max(p) {
+    if (typeof p === 'string' || typeof p === 'number') {
+      return p
+    }
+    const price = `${(p?.maxAmount || p?.amount) + ' ' + (p?.currency || ' ')}`
+    return price
   }
-  const price = p?.amount + ' ' + p?.currency
-  return price
-}
+  function min(p) {
+    if (typeof p === 'string' || typeof p === 'number') {
+      return p
+    }
+    const price = `${(p?.minAmount || p?.amount) + ' ' + (p?.currency || ' ')}`
+    return price
+  }
+  return {
+    max,
+    min,
+  }
+})()

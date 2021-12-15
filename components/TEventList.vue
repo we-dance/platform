@@ -168,7 +168,7 @@ export default {
           if (item.venue) {
             result += `📍 ${item.venue?.name}\n`
           }
-          result += `💸 ${getPrice(item.price)}\n`
+          result += `💸 ${getPrice.min(item.price)}\n`
           result += `\n`
         })
       })

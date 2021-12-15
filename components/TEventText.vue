@@ -53,9 +53,17 @@
         <div v-if="item.price">
           <div class="flex items-center gap-1">
             <TIcon name="ticket" class="w-4 h-4" />
-            <p>
-              {{ getPrice(item.price) }}
-            </p>
+            <div>
+              <small class="font-serif font-medium">&#9660; Min</small>
+              {{ getPrice.min(item.price) }}
+            </div>
+          </div>
+          <div class="flex items-center gap-1">
+            <TIcon name="ticket" class="w-4 h-4" />
+            <div>
+              <small class="font-serif font-medium">&#9650; Max</small>
+              {{ getPrice.max(item.price) }}
+            </div>
           </div>
         </div>
         <div class="flex items-center gap-1">
