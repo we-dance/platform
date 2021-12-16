@@ -49,7 +49,7 @@ export default {
   data: () => ({
     minAmount: 0,
     maxAmount: 0,
-    currency: '€ EUR',
+    currency: '€',
   }),
   watch: {
     minAmount() {

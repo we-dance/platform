@@ -501,7 +501,7 @@ export const getPrice = (() => {
     if (typeof p === 'string' || typeof p === 'number') {
       return p
     }
-    const price = `${(p?.minAmount || p?.amount) + ' ' + (p?.currency || ' ')}`
+    const price = `${p?.minAmount || p?.amount}`
     return price
   }
   return {
