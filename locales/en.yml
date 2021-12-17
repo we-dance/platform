@@ -111,3 +111,4 @@ footer.faq: FAQ
 chat.welcome: Start conversation with something nice.
 chat.with: Chat with {username}
 chat.dateDiff: '{diff} ago'
+feed.title: Feed
