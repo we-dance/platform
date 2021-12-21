@@ -6,7 +6,7 @@
       <h1 class="text-3xl leading-tight font-bold">{{ doc.title }}</h1>
       <div class="flex text-sm space-x-1">
         <div>
-          by
+          {{ $t('posts.by') }}
           <router-link
             class="underline text-primary"
             :to="`/${author.username}`"
@@ -25,13 +25,13 @@
         <router-link
           :to="`/signin?target=${$route.fullPath}`"
           class="underline text-blue-500 hover:no-underline"
-          >Login</router-link
+          >{{ $t('posts.login') }}</router-link
         >
-        to read full post. Not a member yet?
+        {{ $t('posts.link.read') }}
         <router-link
           :to="`/register?target=${$route.fullPath}`"
           class="underline text-blue-500 hover:no-underline"
-          >Register</router-link
+          >{{ $('posts.register') }}</router-link
         >.
       </div>
       <TItemFooter collection="posts" :item="doc" :title="doc.title" />
@@ -43,13 +43,13 @@
       <router-link
         :to="`/signin?target=${$route.fullPath}`"
         class="underline text-blue-500 hover:no-underline"
-        >Login</router-link
+        >{{ $t('posts.login') }}</router-link
       >
-      to see discussion. Not a member yet?
+      {{ $t('posts.link.discuss') }}
       <router-link
         :to="`/register?target=${$route.fullPath}`"
         class="underline text-blue-500 hover:no-underline"
-        >Register</router-link
+        >{{ $('posts.register') }}</router-link
       >.
     </div>
 

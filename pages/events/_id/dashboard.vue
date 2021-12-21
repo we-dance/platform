@@ -1,24 +1,26 @@
 <template>
   <TLoader v-if="loading" />
-  <div v-else-if="!exists" class="text-center">Event not found</div>
+  <div v-else-if="!exists" class="text-center">
+    {{ $t('events.dashboard.empty') }}
+  </div>
   <main
     v-else-if="!can('edit', 'events', item)"
     class="mt-4 mx-auto max-w-md p-4 text-sm text-center"
   >
-    Only event owner can access this area.
+    {{ $t('events.dashboard.description') }}
   </main>
   <div v-else>
     <TPopup v-if="compose" title="Compose email" @close="compose = false">
       <div class="max-w-lg">
         <div class="text-xs mt-4">
-          {{ selectedParticipantsList.length }} recipients:
+          {{ selectedParticipantsList.length }} {{ $t('recipients') }}:
           {{ selectedParticipantsList.join(', ') }}
         </div>
         <TForm
           v-model="email"
           class="mt-4 space-y-4"
           :fields="emailFields"
-          submit-label="Send"
+          :submit-label="$t('events.dashboard.submitlabel')"
           @save="sendEmail"
         />
       </div>
@@ -37,20 +39,20 @@
       <TDropdown>
         <TButton
           type="context"
-          label="Add participant"
+          :label="$t('events.participant.label')"
           class="border-b"
           @click="addingGuest = true"
         />
         <TButton
           type="context"
-          label="Send emails"
+          :label="$t('events.emails.label')"
           class="border-b"
           @click="composeEmail"
         />
         <TButton
           type="context"
           :to="`/events/${item.id}/`"
-          label="View Event"
+          :_label="$t('events.view.label')"
         />
       </TDropdown>
     </THeader>
@@ -88,7 +90,7 @@
                     update(item.partnerId, { partnerId: '' })
                     update(item.id, { partnerId: '' })
                   "
-                  >Unlink</TButton
+                  >{{ $t('events.unlink.btn') }}</TButton
                 >
               </div>
               <div
@@ -104,7 +106,10 @@
                 </div>
               </div>
               <div v-else-if="item.couple === 'Yes'" class="text-right">
-                <TButton label="Add" @click="addingGuest = item.id" />
+                <TButton
+                  :label="$t('events.add.label')"
+                  @click="addingGuest = item.id"
+                />
               </div>
             </div>
             <div v-if="tab !== 'couples'" class="flex flex-col md:flex-row">
@@ -147,7 +152,11 @@
                       {{ note }}
                     </div>
                   </div>
-                  <TMenu2 wrapped label="Add note" type="link">
+                  <TMenu2
+                    wrapped
+                    :label="$t('events.addnote.label')"
+                    type="link"
+                  >
                     <TButton
                       v-for="(note, noteId) in notes"
                       :key="noteId"
@@ -160,13 +169,13 @@
                 <div v-if="view === 'contacts'">
                   <div>{{ item.email }}</div>
                   <div>{{ item.phone }}</div>
-                  <div>Covid: {{ item.covid }}</div>
-                  <div>Comment: {{ item.comment }}</div>
+                  <div>{{ $t('events.covid') }}: {{ item.covid }}</div>
+                  <div>{{ $t('events.comment') }}: {{ item.comment }}</div>
                   <div class="text-xs">{{ getDateTime(item.createdAt) }}</div>
                 </div>
                 <div v-if="tab === ''">
                   <div>
-                    Couple:
+                    {{ $t('events.couple') }}:
                     <button
                       class="underline hover:no-underline"
                       @click="
@@ -179,7 +188,7 @@
                     </button>
                   </div>
                   <div>
-                    Gender:
+                    {{ $t('events.gender') }}:
                     <button
                       class="underline hover:no-underline"
                       @click="

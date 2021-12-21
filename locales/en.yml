@@ -10,8 +10,63 @@ myprofile.events.add: Add event
 myprofile.posts.add: Write a post
 posts.title: Feed
 profiles.title: Community
-events.title: Events
 event.type: Type
+events.title: Events
+events.list.empty: No events found. Would you like to add one?
+events.photos.label: See Photos
+events.list.label: See list
+
+events.dashboard.label: Dashboard
+events.edit.label: Edit
+events.share.label: Share
+events.online: Online Event
+events.organiser: Organised by
+events.register.btn: Register for event
+events.going.btn: Going
+events.notgoing.btn: Not going
+events.venue: Venue Map
+events.source: Event Source
+events.views: Views
+events.register.title: Register
+events.register.submitlabel: Register
+events.login.btn: Login
+events.reservation.title: Almost there
+events.complete.btn: Complete registration
+events.reservation.description: See you soon! Don't forget to check-in by the organiser when you come!
+events.email.description: Check your email to finish creation of the WeDance profile.
+events.calendar.btn: Add to calendar
+
+events.edit.title: Add event
+events.edit.submitlabel: Save
+
+events.dashboard.empty: Event not found
+events.dashboard.description: Only event owner can access this area.
+events.dashboard.recipients: recipients
+events.dashboard.submitlabel: Send
+events.participant.btn: Add participant
+events.emails.label: Send emails
+events.view.label: View Event
+events.unlink.label: Unlink
+events.add.label: Add
+events.addnote.label: Add note
+events.covid: Covid
+events.comment: Comment
+events.couple: Couple
+events.gender: Gender
+
+
+posts.by: by
+posts.login: Login
+posts.register: Register
+posts.link.read: to read full post. Not a member yet?
+posts.link.discuss: to see discussion. Not a member yet?
+posts.edit.new-post: Write a new post
+
+community.title: Community
+community.radius.select: Radius
+community.reset-filter.button: Reset filters
+
+
 chat.title: Chat
 cities.choose: Choose city
 myprofile.title: My Profile
@@ -104,7 +159,7 @@ share.title: Share
 share.copy: Copy Link
 footer.about: About us
 footer.support: Support
-footer.privacy: Privacy
+footer.privacy: PrivacyS
 footer.terms: Terms
 footer.coc: Code of Conduct
 footer.faq: FAQ

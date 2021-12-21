@@ -8,7 +8,7 @@
           icon="people"
           :to="`/events/${item.id}/dashboard`"
           class="hover:text-blue-500 mr-2"
-          label="Dashboard"
+          :label="$t('events.dashboard.label')"
         />
         <TButton
           v-if="can('edit', 'events', item)"
@@ -16,7 +16,7 @@
           icon="edit"
           :to="`/events/${item.id}/edit`"
           class="hover:text-blue-500"
-          label="Edit"
+          :label="$t('events.edit.label')"
         />
         <TCardActions
           :id="item.id"
@@ -33,7 +33,7 @@
           :url="$route.fullPath"
           :text="item.name"
           type="context"
-          label="Share"
+          :label="$t('events.share.label')"
         />
       </TDropdown>
     </THeader>
@@ -87,7 +87,7 @@
           class="flex items-center justify-start w-full leading-tight border-b py-2 px-4"
         >
           <TIcon name="youtube" class="w-4 h-4 mr-4" />
-          <div>Online Event</div>
+          <div>{{ $t('events.online') }}</div>
         </div>
 
         <div
@@ -111,7 +111,7 @@
           class="flex items-center justify-start w-full leading-tight border-b py-2 px-4"
         >
           <TIcon name="lobby" class="w-4 h-4 mr-4" />
-          <div>Organised by {{ item.organiser }}</div>
+          <div>{{ $t('events.organiser') }} {{ item.organiser }}</div>
         </div>
       </div>
     </div>
@@ -119,20 +119,23 @@
     <div
       class="flex mt-4 space-x-2 justify-center sticky bg-white p-4 border-b z-50 top-0"
     >
-      <TButton v-if="!uid" type="primary" @click="reservationPopup = 'reserve'"
-        >Register for event</TButton
+      <TButton
+        v-if="!uid"
+        type="primary"
+        @click="reservationPopup = 'reserve'"
+        >{{ $t('events.register.btn') }}</TButton
       >
       <TButton
         v-else
         :type="uid && item.response === 'up' ? 'success' : 'secondary'"
         @click="reservationPopup = 'reserve'"
-        >Going</TButton
+        >{{ $t('events.going.btn') }}</TButton
       >
       <TButton
         v-if="uid"
         :type="uid && item.response === 'down' ? 'danger' : 'secondary'"
         @click="updateRsvp(item.id, 'events', 'down')"
-        >Not going</TButton
+        >{{ $t('events.notgoing.btn') }}</TButton
       >
     </div>
 
@@ -144,7 +147,7 @@
         class="p-4 md:-mx-4 md:-mb-4 bg-gray-100"
       >
         <div class="font-bold text-sm mb-4 leading-none text-gray-700">
-          Venue Map
+          {{ $t('events.venue') }}
         </div>
         <img :src="item.venue.map" alt="Venue Map" class="mt-4" />
       </div>
@@ -152,13 +155,13 @@
       <TItemCreator :item="item" full class="mt-4" />
 
       <div v-if="item.facebook" class="mt-8 text-right text-sm">
-        <a :href="item.facebook" class="hover:underline text-gray-700"
-          >Event Source</a
-        >
+        <a :href="item.facebook" class="hover:underline text-gray-700">{{
+          $t('events.source')
+        }}</a>
       </div>
 
       <div v-if="item.views" class="text-gray-500 text-sm mt-8">
-        {{ item.views }} views
+        {{ item.views }} {{ $t('events.views') }}
       </div>
     </TItemCard>
 
@@ -173,14 +176,14 @@
             <TForm
               v-model="account"
               :fields="reservationFields"
-              submit-label="Register"
+              :submit-label="$t('events.register.submitlabel')"
               class="mt-4 space-y-4"
               @save="reserve"
             >
               <template v-if="!uid" slot="buttons">
                 <TButton
                   :to="`/signin?target=${this.$route.fullPath}`"
-                  label="Login"
+                  :label="$t('events.login.btn')"
                 />
               </template>
             </TForm>
@@ -188,24 +191,23 @@
         </div>
         <div v-if="reservationPopup === 'finish'" class="p-4">
           <template v-if="item.link">
-            <h2 class="font-bold mb-4">Almost there</h2>
-            <TButton class="mt-4 mr-4" type="danger" :href="item.link"
-              >Complete registration</TButton
-            >
+            <h2 class="font-bold mb-4">{{ $t('events.reservation.title') }}</h2>
+            <TButton class="mt-4 mr-4" type="danger" :href="item.link">{{
+              $t('events.complete.btn')
+            }}</TButton>
           </template>
           <template v-else>
-            <h2 class="font-bold mb-4">Almost there</h2>
+            <h2 class="font-bold mb-4">{{ $t('events.reservation.title') }}</h2>
             <p v-if="uid">
-              See you soon! Don't forget to check-in by the organiser when you
-              come!
+              {{ $t('events.reservation.description') }}
             </p>
             <p v-else>
-              Check your email to finish creation of the WeDance profile.
+              {{ $t('events.email.description') }}
             </p>
             <div v-if="uid">
               <TButton
                 :href="calendarLink"
-                label="Add to calendar"
+                :label="$t('events.calendar.btn')"
                 class="mt-2"
               />
             </div>

@@ -4,7 +4,7 @@
       class="mx-auto w-full max-w-lg md:rounded md:border md:shadow bg-white"
     >
       <div class="flex justify-between m-4">
-        <div class="font-bold">Add event</div>
+        <div class="font-bold">{{ $t('events.edit.title') }}</div>
         <button class="cursor-pointer" @click="$router.back()">
           <TIcon name="close" class="cursor-pointer w-4 h-4" />
         </button>
@@ -17,7 +17,7 @@
         vertical
         :show-remove="!!item.id"
         :show-copy="!!item.id"
-        submit-label="Save"
+        :submit-label="$t('events.edit.submitlabel')"
         class="bg-white p-4 space-y-4"
         @copy="copyItem"
         @save="saveItem"

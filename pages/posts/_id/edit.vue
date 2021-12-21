@@ -4,7 +4,7 @@
       class="mx-auto w-full max-w-lg md:rounded md:border md:shadow bg-white"
     >
       <div class="flex justify-between m-4">
-        <div class="font-bold">Write a new post</div>
+        <div class="font-bold">{{ $t('posts.edit.new-post') }}</div>
         <button class="cursor-pointer" @click="$router.back()">
           <TIcon name="close" class="cursor-pointer w-4 h-4" />
         </button>

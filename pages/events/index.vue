@@ -23,14 +23,14 @@
           v-if="view === 'list'"
           icon="news"
           type="icon"
-          label="See photos"
+          :label="$t('events.photos.label')"
           @click="view = 'covers'"
         />
         <TButton
           v-if="view === 'covers'"
           icon="notes"
           type="icon"
-          label="See list"
+          :label="$t('events.list.label')"
           @click="view = 'list'"
         />
       </div>
@@ -39,7 +39,7 @@
     <div>
       <TLoader v-if="loading" />
       <div v-else-if="!count" class="p-4">
-        No events found. Would you like to add one?
+        {{ $t('No events found. Would you like to add one?') }}
       </div>
 
       <div
