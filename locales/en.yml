@@ -17,6 +17,7 @@ events.photos.label: See Photos
 events.list.label: See list
 
 events.dashboard.label: Dashboard
+events.participant.label:
 events.edit.label: Edit
 events.share.label: Share
 events.online: Online Event
@@ -43,16 +44,23 @@ events.dashboard.empty: Event not found
 events.dashboard.description: Only event owner can access this area.
 events.dashboard.recipients: recipients
 events.dashboard.submitlabel: Send
-events.participant.btn: Add participant
-events.emails.label: Send emails
-events.view.label: View Event
-events.unlink.label: Unlink
-events.add.label: Add
-events.addnote.label: Add note
-events.covid: Covid
-events.comment: Comment
-events.couple: Couple
-events.gender: Gender
+events.dashboard.composelabel: Compose email
+events.dashboard.participant-label: Add participant
+events.dashboard.email-label: Send emails
+events.dashboard.view-label: View Event
+events.dashboard.cancel-btn: Cancel
+events.dashboard.check-in: Check In
+events.dashboard.subscribed: Subscribed
+events.dashboard.paid: Paid
+events.dashboard.not-paid: Didn't pay
+events.dashboard.link-label: Link
+events.dashboard.unlink-label: Unlink
+events.dashboard.add-label: Add
+events.dashboard.addnote-label: Add note
+events.dashboard.covid: Covid
+events.dashboard.comment: Comment
+events.dashboard.couple: Couple
+events.dashboard.gender: Gender
 
 
 posts.by: by
@@ -159,7 +167,7 @@ share.title: Share
 share.copy: Copy Link
 footer.about: About us
 footer.support: Support
-footer.privacy: PrivacyS
+footer.privacy: Privacy
 footer.terms: Terms
 footer.coc: Code of Conduct
 footer.faq: FAQ

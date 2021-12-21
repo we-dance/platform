@@ -103,7 +103,7 @@
           class="flex items-center justify-start w-full leading-tight border-b py-2 px-4"
         >
           <TIcon name="ticket" class="w-4 h-4 mr-4" />
-          <div>{{ item.price }}</div>
+          <div>{{ $n(item.price, 'currency') }}</div>
         </div>
 
         <div
