@@ -112,7 +112,7 @@
         >
           <TIcon name="ticket" class="w-4 h-4 mr-4" />
           <div>
-            {{ getPrice.min(item.price) }} &mdash;
+            {{ getPrice.min(item.price) }}
             {{ getPrice.max(item.price) }}
           </div>
         </div>

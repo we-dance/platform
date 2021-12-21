@@ -494,14 +494,21 @@ export const getPrice = (() => {
     if (typeof p === 'string' || typeof p === 'number') {
       return p
     }
-    const price = `${(p?.maxAmount || p?.amount) + ' ' + (p?.currency || ' ')}`
+    if (p?.max === p?.min) {
+      return ''
+    }
+    const price = `${p?.max + ' ' + (p?.currency || ' ')}`
     return price
   }
   function min(p) {
     if (typeof p === 'string' || typeof p === 'number') {
       return p
     }
-    const price = `${p?.minAmount || p?.amount}`
+    if (p?.min === p?.max) {
+      const price = `${p?.min + ' ' + (p?.currency || ' ')}`
+      return price
+    }
+    const price = `${p?.min || p?.amount} \u2014`
     return price
   }
   return {

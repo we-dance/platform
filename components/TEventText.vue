@@ -62,7 +62,7 @@
           <div class="flex items-center gap-1">
             <TIcon name="ticket" class="w-4 h-4" />
             <div>
-              {{ getPrice.min(item.price) }} &mdash;
+              {{ getPrice.min(item.price) }}
               {{ getPrice.max(item.price) }}
             </div>
           </div>
