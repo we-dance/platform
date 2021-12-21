@@ -1,6 +1,6 @@
 <template>
   <div>
-    <THeader title="Feed">
+    <THeader title="Feed Alex">
       <TButton type="nav" icon="plus" to="/posts/-/edit" />
     </THeader>
     <TList
