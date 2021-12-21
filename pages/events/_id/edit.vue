@@ -50,7 +50,7 @@ export default {
   },
   data: () => ({
     selectedType: 'event',
-    eventError: '',
+    eventError: {},
   }),
   computed: {
     fields() {
@@ -105,12 +105,18 @@ export default {
     },
     async saveItem(data) {
       if (!data.name) {
-        this.eventError = 'name is a required field!'
+        this.eventError = {
+          message: 'name is a required field!',
+          field: 'name',
+        }
         return
       }
 
       if (!data.startDate) {
-        this.eventError = 'start date is not set!'
+        this.eventError = {
+          message: 'start date is not set!',
+          field: 'startDate',
+        }
         return
       }
 
