@@ -170,6 +170,10 @@ export default {
             placeholder: 'Event Name',
           },
           {
+            name: 'Artist List',
+            type: 'artists',
+          },
+          {
             name: 'description',
             hideLabel: true,
             type: 'textarea',
