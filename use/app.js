@@ -212,6 +212,26 @@ export const useApp = () => {
     await addCommunity(address)
   }
 
+  const getPlace = (placeId) => {
+    if (!placeId) {
+      return {
+        placeId: '',
+        name: 'Anywhere',
+        loaded: true,
+      }
+    }
+
+    if (!cache.value) {
+      return {
+        placeId,
+        name: '<City>',
+        loaded: false,
+      }
+    }
+
+    return cache.value.cities[placeId]
+  }
+
   const getCity = (placeId) => {
     if (!placeId) {
       return ''
@@ -234,6 +254,7 @@ export const useApp = () => {
     addCityHistory,
     getCity,
     removeCityHistory,
+    getPlace,
   }
 }
 

@@ -29,6 +29,9 @@ export const useCollection = (name, filter) => {
     collection = collection.where(field, '==', value)
   }
 
+  collection = collection.limit(10)
+  collection = collection.orderBy('createdAt', 'desc')
+
   if (!state[hash]) {
     Vue.set(state, hash, {})
     Vue.set(state, loadingHash, true)
