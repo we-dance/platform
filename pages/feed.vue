@@ -2,7 +2,7 @@
   <div>
     <THeader title="Feed" />
     <div class="border-b p-4 flex items-start">
-      <div class="w-12 flex-shrink-0">
+      <div class="w-20 flex-shrink-0">
         <TAvatar photo size="md" :uid="uid" />
       </div>
       <div class="w-full">
@@ -15,7 +15,12 @@
           @keyup.enter="send"
         ></textarea>
         <div class="flex justify-between">
-          <TInputSelect v-model="postType" :options="postTypeList" />
+          <TInputSelect
+            v-model="postType"
+            icon="add"
+            type="simple"
+            :options="postTypeList"
+          />
           <TButton @click="send">Send</TButton>
         </div>
       </div>
@@ -37,8 +42,10 @@ import { useDoc } from '~/use/doc'
 import { useApp } from '~/use/app'
 import { getUrlFromText } from '~/utils'
 import { postTypeList } from '~/use/posts'
+import TInputSelect from '~/components/TInput/TInputSelect.vue'
 
 export default {
+  components: { TInputSelect },
   setup() {
     const { uid, username } = useAuth()
     const { currentCity } = useCities()

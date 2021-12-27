@@ -18,7 +18,7 @@
   </div>
   <div v-else ref="postRef" class="border-b p-4">
     <div class="flex items-start">
-      <div v-if="!item.hideMeta" class="w-12 flex-shrink-0">
+      <div v-if="!item.hideMeta && !hideMedia" class="w-12 flex-shrink-0">
         <TAvatar photo size="md" :uid="item.createdBy" />
       </div>
       <div class="flex-grow">
@@ -36,7 +36,7 @@
 
         <TCardLink v-if="item.url" :url="item.url" class="my-2" />
 
-        <template v-if="item.type === 'event'">
+        <template v-if="item.type === 'event' && !hideMedia">
           <TCardEvent v-if="!$route.query.variant" :node="item" class="my-2" />
 
           <TSharePreviewPost
@@ -54,7 +54,10 @@
           />
         </template>
 
-        <div v-if="!item.hideMeta" class="text-xs space-x-1 text-gray-900 flex">
+        <div
+          v-if="!item.hideMeta && !hideMedia"
+          class="text-xs space-x-1 text-gray-900 flex"
+        >
           <router-link :to="`/${item.username}`" class="hover:underline">{{
             item.username
           }}</router-link>
@@ -186,6 +189,10 @@ export default {
     item: {
       type: Object,
       default: () => ({}),
+    },
+    hideMedia: {
+      type: Boolean,
+      default: false,
     },
   },
   mounted() {

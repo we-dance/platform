@@ -136,9 +136,9 @@
       >
     </div>
 
-    <TItemCard>
-      <TPreview class="mt-4" :content="item.description" />
+    <TPost v-if="item.id" :item="item" hide-media />
 
+    <TItemCard>
       <div
         v-if="item.venue && item.venue.map"
         class="p-4 md:-mx-4 md:-mb-4 bg-gray-100"
@@ -155,10 +155,6 @@
         <a :href="item.facebook" class="hover:underline text-gray-700"
           >Event Source</a
         >
-      </div>
-
-      <div v-if="item.views" class="text-gray-500 text-sm mt-8">
-        {{ item.views }} views
       </div>
     </TItemCard>
 
@@ -239,7 +235,6 @@ import {
   getDateObect,
 } from '~/utils'
 import { addressPart } from '~/use/google'
-import { trackNodeView } from '~/use/tracking'
 
 export default {
   name: 'EventView',
@@ -268,10 +263,6 @@ export default {
   },
   watch: {
     item() {
-      if (this.item?.id) {
-        this.trackNodeView(this.item?.id, this.item?.viewsCount || 0)
-      }
-
       if (this.item && this.item.place) {
         this.currentCity = this.item.place
       }
@@ -423,7 +414,6 @@ export default {
       getDay,
       getEventDescription,
       calendarLink,
-      trackNodeView,
       getEventIcon,
     }
   },

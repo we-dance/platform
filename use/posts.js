@@ -1,6 +1,6 @@
 export const postTypeList = [
   {
-    label: 'Category',
+    label: 'Choose category',
     value: '',
   },
   {
@@ -46,6 +46,10 @@ export const postTypeList = [
   {
     label: 'Question',
     value: 'question',
+  },
+  {
+    label: 'Post',
+    value: 'post',
   },
 ]
 
@@ -114,6 +118,11 @@ export const postFields = [
     height: 500,
     circle: false,
     hideLabel: true,
+  },
+  {
+    name: 'styles',
+    label: 'Dance styles',
+    type: 'stylesSelect',
   },
   {
     name: 'hideMeta',

@@ -24,7 +24,7 @@ export default {
     },
     label: {
       type: [String, Number, Boolean],
-      default: false,
+      default: '',
     },
   },
 }
