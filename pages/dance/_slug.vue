@@ -5,8 +5,19 @@
       <p v-if="page.synonyms" class="italic">
         Also known as {{ page.synonyms }}
       </p>
+      <div class="flex space-x-2">
+        <a
+          href="https://docs.google.com/spreadsheets/d/1oCLW_c_Jr021AT6_gGngtFB94P_5ftSCJGp-XqdvRaM/edit#gid=0"
+          target="_blank"
+          >Edit this page</a
+        >
+        <span>•</span>
+        <router-link to="/dance" class="block"
+          >List of all dance styles</router-link
+        >
+      </div>
 
-      <div>
+      <div class="mt-4">
         <span class="font-bold">Family</span>
         <span class="leading-loose">
           <router-link :to="`/dance/${page.family}`">{{
@@ -27,57 +38,77 @@
         <tbody class="bg-white divide-y divide-gray-200">
           <tr>
             <th
-              class="bg-gray-100 px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
+              class="bg-gray-100 px-3 py-2 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
             >
               Region
             </th>
-            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+            <td class="px-3 py-2 whitespace-nowrap text-sm text-gray-500">
               {{ page.region }}
             </td>
           </tr>
 
           <tr>
             <th
-              class="bg-gray-100 px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
+              class="bg-gray-100 px-3 py-2 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
             >
-              Country
+              Origins
             </th>
-            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-              {{ page.country }}
+            <td class="px-3 py-2 whitespace-nowrap text-sm text-gray-500">
+              {{ page.origins }}
             </td>
           </tr>
 
           <tr>
             <th
-              class="bg-gray-100 px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
+              class="bg-gray-100 px-3 py-2 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
+            >
+              Parent
+            </th>
+            <td class="px-3 py-2 whitespace-nowrap text-sm text-gray-500">
+              {{ page.parent }}
+            </td>
+          </tr>
+
+          <tr>
+            <th
+              class="bg-gray-100 px-3 py-2 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
             >
               Type
             </th>
-            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+            <td class="px-3 py-2 whitespace-nowrap text-sm text-gray-500">
               {{ page.type }}
             </td>
           </tr>
 
           <tr>
             <th
-              class="bg-gray-100 px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
+              class="bg-gray-100 px-3 py-2 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
             >
               Year
             </th>
-            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+            <td class="px-3 py-2 whitespace-nowrap text-sm text-gray-500">
               {{ page.year }}
             </td>
           </tr>
         </tbody>
       </table>
 
-      <div class="mt-4">
+      <div v-if="page.description" class="mt-4">
+        {{ page.description }}
+      </div>
+
+      <div v-if="page.history" class="mt-4">
+        <h2>History</h2>
+        <div v-if="page.history">{{ page.history }}</div>
+      </div>
+
+      <div class="mt-4 flex justify-end">
         <a target="_blank" :href="page.source">Source</a>
       </div>
     </div>
     <TPostList
-      :where="{ [`styles.${page.name}.selected`]: true }"
-      orderBy="star.count"
+      :filter="{ [`styles.${page.name}.selected`]: true }"
+      order-by="star.count"
     />
   </div>
 </template>
