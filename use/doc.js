@@ -5,7 +5,7 @@ import { useAuth } from '~/use/auth'
 import stats from '~/stats'
 
 export const useDoc = (name) => {
-  const { uid, profile } = useAuth()
+  const { uid, username } = useAuth()
 
   const firestore = firebase.firestore()
 
@@ -130,7 +130,7 @@ export const useDoc = (name) => {
       updatedAt: +new Date(),
       createdBy: uid.value,
       updatedBy: uid.value,
-      username: profile.value?.username ?? '',
+      username: username.value,
       ...data,
     })
 
@@ -158,7 +158,7 @@ export const useDoc = (name) => {
       updatedAt: +new Date(),
       createdBy: uid.value,
       updatedBy: uid.value,
-      username: profile.value?.username ?? '',
+      username: username.value,
       ...data,
     })
 

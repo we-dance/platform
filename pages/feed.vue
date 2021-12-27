@@ -103,7 +103,12 @@ export default {
         url,
         commentsCount: 0,
         commentsLast: null,
-        watchersCount: 0,
+        watch: {
+          count: 1,
+          list: {
+            [username.value]: true,
+          },
+        },
         viewsCount: 0,
       }
 
