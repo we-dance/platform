@@ -33,81 +33,8 @@
             {{ showExcerpt ? 'Show more' : 'Show less' }}
           </div>
         </div>
-
-        <TCardLink v-if="item.url" :url="item.url" class="my-2" />
-
-        <TCardPoll v-if="item.type === 'poll'" :node="item" class="my-2" />
-
-        <template v-if="item.type === 'event' && !hideMedia">
-          <TCardEvent v-if="!$route.query.variant" :node="item" class="my-2" />
-
-          <TSharePreviewPost
-            v-if="$route.query.variant === '2'"
-            :username="item.username"
-            collection="events"
-            :title="item.name"
-            :type="item.type"
-            :description="getEventDescription(item)"
-            :extra="item.locality"
-            :photo="item.cover"
-            :styles="item.styles"
-            size="sm"
-            class="my-2"
-          />
-        </template>
-
-        <div
-          v-if="!item.hideMeta && !hideMedia"
-          class="text-xs space-x-1 text-gray-900 flex"
-        >
-          <router-link :to="`/${item.username}`" class="hover:underline">{{
-            item.username
-          }}</router-link>
-          <span>•</span>
-          <div>{{ dateDiff(item.createdAt) }} ago</div>
-          <template v-if="item.region">
-            <span>•</span>
-            <div>{{ item.region.name }}</div>
-          </template>
-        </div>
-
-        <div v-if="!item.hideComments" class="border-t mt-4">
-          <router-link
-            v-if="item.commentsCount > 1"
-            :to="`/posts/${item.id}`"
-            class="p-2 text-blue-700 cursor-pointer underline hover:no-underline text-xs text-center mb-2 block"
-          >
-            Show all {{ item.commentsCount - 1 }} comments
-          </router-link>
-          <div
-            v-if="item.commentsCount < 0"
-            class="text-xs text-gray-900 p-2 text-center mb-2"
-          >
-            There are no replies yet.
-          </div>
-          <div
-            v-if="item.commentsCount > 0"
-            class="flex text-xs space-x-1 text-gray-900 p-2"
-          >
-            <div>
-              <TAvatar photo name :uid="item.commentsLast.createdBy">
-                <span>•</span>
-                <div>{{ dateDiff(item.commentsLast.createdAt) }} ago</div>
-              </TAvatar>
-              <div class="mt-1">{{ item.commentsLast.body }}</div>
-            </div>
-          </div>
-          <div>
-            <textarea
-              v-model="newReply"
-              rows="1"
-              :placeholder="`Reply to ${item.username}`"
-              class="w-full border p-2 text-xs text-gray-900"
-              @keyup.enter="sendReply"
-            ></textarea>
-          </div>
-        </div>
       </div>
+
       <TDropdown
         v-if="!item.hideMeta || can('edit', 'posts', item)"
         title="report or share"
@@ -150,6 +77,81 @@
           label="Share"
         />
       </TDropdown>
+    </div>
+    <div>
+      <TCardLink v-if="item.url" :url="item.url" class="my-2" />
+
+      <TCardPoll v-if="item.type === 'poll'" :node="item" class="my-2" />
+
+      <template v-if="item.type === 'event' && !hideMedia">
+        <TCardEvent v-if="!$route.query.variant" :node="item" class="my-2" />
+
+        <TSharePreviewPost
+          v-if="$route.query.variant === '2'"
+          :username="item.username"
+          collection="events"
+          :title="item.name"
+          :type="item.type"
+          :description="getEventDescription(item)"
+          :extra="item.locality"
+          :photo="item.cover"
+          :styles="item.styles"
+          size="sm"
+          class="my-2"
+        />
+      </template>
+
+      <div
+        v-if="!item.hideMeta && !hideMedia"
+        class="text-xs space-x-1 text-gray-900 flex"
+      >
+        <router-link :to="`/${item.username}`" class="hover:underline">{{
+          item.username
+        }}</router-link>
+        <span>•</span>
+        <div>{{ dateDiff(item.createdAt) }} ago</div>
+        <template v-if="item.region">
+          <span>•</span>
+          <div>{{ item.region.name }}</div>
+        </template>
+      </div>
+
+      <div v-if="!item.hideComments" class="border-t mt-4">
+        <router-link
+          v-if="item.commentsCount > 1"
+          :to="`/posts/${item.id}`"
+          class="p-2 text-blue-700 cursor-pointer underline hover:no-underline text-xs text-center mb-2 block"
+        >
+          Show all {{ item.commentsCount - 1 }} comments
+        </router-link>
+        <div
+          v-if="item.commentsCount < 0"
+          class="text-xs text-gray-900 p-2 text-center mb-2"
+        >
+          There are no replies yet.
+        </div>
+        <div
+          v-if="item.commentsCount > 0"
+          class="flex text-xs space-x-1 text-gray-900 p-2"
+        >
+          <div>
+            <TAvatar photo name :uid="item.commentsLast.createdBy">
+              <span>•</span>
+              <div>{{ dateDiff(item.commentsLast.createdAt) }} ago</div>
+            </TAvatar>
+            <div class="mt-1">{{ item.commentsLast.body }}</div>
+          </div>
+        </div>
+        <div>
+          <textarea
+            v-model="newReply"
+            rows="1"
+            :placeholder="`Reply to ${item.username}`"
+            class="w-full border p-2 text-xs text-gray-900"
+            @keyup.enter="sendReply"
+          ></textarea>
+        </div>
+      </div>
     </div>
     <div
       v-if="!item.hideReactions"
