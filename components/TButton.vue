@@ -6,6 +6,7 @@
     rel="noopener noreferrer"
     :class="classes"
     v-on="$listeners"
+    :title="title"
   >
     <slot>
       <div class="flex items-center space-x-2">
@@ -14,7 +15,13 @@
       </div>
     </slot>
   </a>
-  <router-link v-else-if="to" :class="classes" :to="to" v-on="$listeners">
+  <router-link
+    v-else-if="to"
+    :title="title"
+    :class="classes"
+    :to="to"
+    v-on="$listeners"
+  >
     <slot>
       <div class="flex items-center space-x-2">
         <TIcon v-if="icon" :size="iconSize" :name="icon" />
@@ -22,7 +29,13 @@
       </div>
     </slot>
   </router-link>
-  <button v-else type="button" :class="classes" v-on="$listeners">
+  <button
+    v-else
+    type="button"
+    :title="title"
+    :class="classes"
+    v-on="$listeners"
+  >
     <slot>
       <div class="flex items-center space-x-2">
         <TIcon v-if="icon" :size="iconSize" :name="icon" />
@@ -40,6 +53,10 @@ export default {
     TIcon,
   },
   props: {
+    title: {
+      type: String,
+      default: '',
+    },
     icon: {
       type: String,
       default: '',

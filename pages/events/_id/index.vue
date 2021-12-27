@@ -50,8 +50,10 @@
           v-if="item.type"
           class="flex items-center justify-start w-full leading-tight border-b py-2 px-4"
         >
-          <div class="w-4 mr-4 text-center">{{ getEventIcon(item.type) }}</div>
-          <div>{{ item.type }}</div>
+          <div class="w-4 mr-4 text-center">
+            {{ getEventIcon(item.eventType) }}
+          </div>
+          <div>{{ item.eventType }}</div>
         </div>
 
         <TStyles
@@ -225,7 +227,7 @@ import { useProfiles } from '~/use/profiles'
 import { useReactions } from '~/use/reactions'
 import { accountFields } from '~/use/accounts'
 import { useCities } from '~/use/cities'
-import { useEvents } from '~/use/events'
+import { getEventIcon } from '~/use/events'
 import {
   getDay,
   getDateTime,
@@ -237,7 +239,7 @@ import {
   getDateObect,
 } from '~/utils'
 import { addressPart } from '~/use/google'
-import { trackView } from '~/use/tracking'
+import { trackNodeView } from '~/use/tracking'
 
 export default {
   name: 'EventView',
@@ -266,8 +268,8 @@ export default {
   },
   watch: {
     item() {
-      if (this.item) {
-        this.trackView('events', this.item?.id, this.item?.views || 0)
+      if (this.item?.id) {
+        this.trackNodeView(this.item?.id, this.item?.viewsCount || 0)
       }
 
       if (this.item && this.item.place) {
@@ -338,12 +340,11 @@ export default {
       sendSignInLinkToEmail,
     } = useAuth()
     const { currentCity } = useCities()
-    const { getEventIcon } = useEvents()
 
     const { params } = useRouter()
     const { getProfile } = useProfiles()
 
-    const { doc, load, exists, loading } = useDoc('events')
+    const { doc, load, exists, loading } = useDoc('posts')
     const { map } = useReactions()
 
     const { updateRsvp, createGuestRsvp } = useRsvp()
@@ -380,7 +381,7 @@ export default {
 
     function register(id, link) {
       if (uid.value) {
-        updateRsvp(id, 'events', 'up')
+        updateRsvp(id, 'posts', 'up')
       }
 
       openURL(link)
@@ -388,11 +389,11 @@ export default {
 
     const reserve = async (participant) => {
       if (!uid.value) {
-        await createGuestRsvp(params.id, 'events', 'up', participant)
+        await createGuestRsvp(params.id, 'posts', 'up', participant)
         sendSignInLinkToEmail(participant.email)
       } else {
         await updateAccount(participant)
-        updateRsvp(params.id, 'events', 'up')
+        updateRsvp(params.id, 'posts', 'up')
       }
 
       reservationPopup.value = 'finish'
@@ -422,7 +423,7 @@ export default {
       getDay,
       getEventDescription,
       calendarLink,
-      trackView,
+      trackNodeView,
       getEventIcon,
     }
   },

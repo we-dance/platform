@@ -1,5 +1,10 @@
 <template>
-  <TButton type="xs" :class="clicked ? 'font-bold' : ''" @click="toggle">
+  <TButton
+    type="xs"
+    :class="clicked ? 'font-bold' : ''"
+    :title="title"
+    @click="toggle"
+  >
     <component :is="icon" class="w-4 h-4" />
     <div class="ml-1">{{ clicked ? toggledLabel : label }}</div>
     <div class="ml-1 text-xs rounded-full bg-gray-200 px-1 block">
@@ -59,11 +64,21 @@ export default {
         : 0
     })
 
+    const title = computed(() => {
+      return props.item[props.field]
+        ? Object.keys(props.item[props.field].list).join(', ')
+        : 'None'
+    })
+
     const clicked = computed(() => {
       return !!props.item[props.field]?.list[username.value]
     })
 
     const toggle = () => {
+      if (!username.value) {
+        return
+      }
+
       let change
 
       if (!clicked.value) {
@@ -81,7 +96,7 @@ export default {
       softUpdate(props.item.id, change)
     }
 
-    return { toggle, clicked, count }
+    return { toggle, clicked, count, title }
   },
 }
 </script>

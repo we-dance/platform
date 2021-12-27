@@ -15,7 +15,7 @@
           @keyup.enter="send"
         ></textarea>
         <div class="flex justify-between">
-          <TInputSelect v-model="category" :options="categoryOptions" />
+          <TInputSelect v-model="postType" :options="postTypeList" />
           <TButton @click="send">Send</TButton>
         </div>
       </div>
@@ -36,6 +36,7 @@ import { useCities } from '~/use/cities'
 import { useDoc } from '~/use/doc'
 import { useApp } from '~/use/app'
 import { getUrlFromText } from '~/utils'
+import { postTypeList } from '~/use/posts'
 
 export default {
   setup() {
@@ -43,7 +44,7 @@ export default {
     const { currentCity } = useCities()
     const { getPlace } = useApp()
     const newMessage = ref('')
-    const category = ref('')
+    const postType = ref('')
 
     const filterTypeList = [
       { label: 'Newest', value: 'Newest' },
@@ -54,57 +55,6 @@ export default {
       { label: 'Starred', value: 'Starred' },
       { label: 'Archived', value: 'Archived' },
       { label: 'Yours', value: 'Authored' },
-    ]
-
-    const categoryOptions = [
-      {
-        label: 'Category',
-        value: '',
-      },
-      {
-        label: 'Looking for partner',
-        value: 'needPartner',
-      },
-      {
-        label: 'Looking for events',
-        value: 'needEvents',
-      },
-      {
-        label: 'Looking for instructor',
-        value: 'needInstructor',
-      },
-      {
-        label: 'Offering trip',
-        value: 'trip',
-      },
-      {
-        label: 'Event',
-        value: 'event',
-      },
-      {
-        label: 'Artist',
-        value: 'artist',
-      },
-      {
-        label: 'Venue',
-        value: 'venue',
-      },
-      {
-        label: 'App',
-        value: 'app',
-      },
-      {
-        label: 'Guide / How To',
-        value: 'guide',
-      },
-      {
-        label: 'Inspiration',
-        value: 'inspiration',
-      },
-      {
-        label: 'Question',
-        value: 'question',
-      },
     ]
 
     const filterType = ref('Newest')
@@ -142,7 +92,7 @@ export default {
       const post = {
         region,
         description,
-        type: category.value,
+        type: postType.value,
         url,
         commentsCount: 0,
         commentsLast: null,
@@ -160,9 +110,9 @@ export default {
       send,
       filterType,
       filter,
-      category,
-      categoryOptions,
+      postType,
       filterTypeList,
+      postTypeList,
     }
   },
 }

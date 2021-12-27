@@ -105,10 +105,17 @@
       </div>
       <TDropdown v-if="!item.hideMeta || can('edit', 'posts', item)">
         <TButton
-          v-if="can('edit', 'posts', item)"
+          v-if="can('edit', 'posts', item) && item.type !== 'event'"
           type="context"
           icon="edit"
           :to="`/posts/${item.id}/edit`"
+          label="Edit"
+        />
+        <TButton
+          v-if="can('edit', 'posts', item) && item.type === 'event'"
+          type="context"
+          icon="edit"
+          :to="`/events/${item.id}/edit`"
           label="Edit"
         />
         <TButton
@@ -167,7 +174,7 @@
 </template>
 
 <script>
-import { computed, onMounted, ref } from 'vue-demi'
+import { computed, ref } from 'vue-demi'
 import { useApp } from '~/use/app'
 import { dateDiff, getEventDescription } from '~/utils'
 import { useAuth } from '~/use/auth'

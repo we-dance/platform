@@ -77,7 +77,7 @@
 import { getTime } from '~/utils'
 import { useRsvp } from '~/use/rsvp'
 import { useApp } from '~/use/app'
-import { useEvents } from '~/use/events'
+import { getEventIcon } from '~/use/events'
 import { useCities } from '~/use/cities'
 import { addressPart } from '~/use/google'
 
@@ -86,7 +86,6 @@ export default {
   setup() {
     const { updateRsvp } = useRsvp()
     const { getCity } = useApp()
-    const { getEventIcon } = useEvents()
     const { currentCity } = useCities()
 
     return {

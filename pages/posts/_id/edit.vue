@@ -4,7 +4,22 @@
       class="mx-auto w-full max-w-lg md:rounded md:border md:shadow bg-white"
     >
       <div class="flex justify-between m-4">
-        <div class="font-bold">Write a new post</div>
+        <TInputButtons
+          value="posts"
+          :options="[
+            {
+              label: 'Post',
+              value: 'posts',
+              to: `/posts/${item.id}/edit`,
+            },
+            {
+              label: 'Event',
+              value: 'events',
+              to: `/events/${item.id}/edit`,
+            },
+          ]"
+        />
+
         <button class="cursor-pointer" @click="$router.back()">
           <TIcon name="close" class="cursor-pointer w-4 h-4" />
         </button>
@@ -13,9 +28,9 @@
       <TForm
         v-model="item"
         :edit-creator="isAdmin()"
-        :fields="fields"
+        :fields="postFields"
         vertical
-        :show-cancel="!!id"
+        show-cancel
         :submit-label="id ? 'Save' : 'Add'"
         class="bg-white p-4 space-y-4"
         @save="saveItem"
@@ -30,6 +45,7 @@ import ls from 'local-storage'
 import { useAuth } from '~/use/auth'
 import { useDoc } from '~/use/doc'
 import { useRouter } from '~/use/router'
+import { postFields } from '~/use/posts'
 
 export default {
   name: 'PostEdit',
@@ -81,49 +97,6 @@ export default {
       collection
     )
 
-    const fields = [
-      {
-        name: 'title',
-        hideLabel: true,
-        placeholder: 'Title',
-      },
-      {
-        name: 'description',
-        hideLabel: true,
-        type: 'textarea',
-        placeholder: 'Text (markdown)',
-        tips:
-          'Pitch yourself: Who are you? What do you offer? What do you want?\n\nTips for effective pitch:\n- Uncomplicated: It should be catchy and roll off the tongue\n- Concise: It shouldn’t take more than a minute to say or read\n- Unique: It reflects your skills, goals, and desires\n- Storyline: It covers who you are, what you offer, and where you want to be\n- Appealing: Your elevator pitch is essentially a persuasive sales pitch; the emphasis should be on what you offer',
-        description:
-          'Use [widgets](https://wedance.vip/markdown), including images and videos',
-      },
-      {
-        name: 'url',
-        hideLabel: true,
-        placeholder: 'Link',
-      },
-      {
-        name: 'cover',
-        type: 'photo',
-        width: 500,
-        height: 500,
-        circle: false,
-        hideLabel: true,
-      },
-      {
-        name: 'hideMeta',
-        admin: true,
-      },
-      {
-        name: 'hideComments',
-        admin: true,
-      },
-      {
-        name: 'hideReactions',
-        admin: true,
-      },
-    ]
-
     if (params.id !== '-') {
       load(params.id)
     }
@@ -138,7 +111,7 @@ export default {
       remove,
       create,
       profile,
-      fields,
+      postFields,
       isAdmin,
     }
   },

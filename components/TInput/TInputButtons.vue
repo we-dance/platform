@@ -5,6 +5,7 @@
         v-for="option in options"
         :key="getValue(option)"
         :value="getValue(option)"
+        :to="option.to"
         class="m-1"
         :type="value === getValue(option) ? 'toggled' : 'simple'"
         @click="change(getValue(option))"
