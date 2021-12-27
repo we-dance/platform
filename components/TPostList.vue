@@ -19,7 +19,7 @@
 import { useDocs } from '~/use/docs'
 import firebase from 'firebase/app'
 import 'firebase/firestore'
-import { onMounted, watch } from '@nuxtjs/composition-api'
+import { onMounted, onUnmounted, watch } from '@nuxtjs/composition-api'
 
 export default {
   name: 'TPostList',
@@ -72,7 +72,7 @@ export default {
 
     collection = collection.limit(10)
 
-    const { docs, count, loaded, loadMore, load } = useDocs(
+    const { docs, count, loaded, loadMore, load, detachListeners } = useDocs(
       collection.orderBy(props.orderBy, props.orderByDirection)
     )
 
@@ -82,6 +82,8 @@ export default {
         load(collection.orderBy(props.orderBy, props.orderByDirection))
       }
     )
+
+    onUnmounted(detachListeners)
 
     return {
       docs,
