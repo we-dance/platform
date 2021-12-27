@@ -278,6 +278,7 @@ export const useAuth = () => {
       state.profile = profile
     } else {
       state.profile = doc.data()
+      state.username = state.profile.username
 
       if (!ls('city')) {
         ls('city', state.profile.place)

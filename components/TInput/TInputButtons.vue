@@ -5,7 +5,7 @@
       :key="getValue(option)"
       :value="getValue(option)"
       class="m-1 whitespace-no-wrap"
-      :type="value === getValue(option) ? 'secondary' : 'simple'"
+      :type="value === getValue(option) ? 'toggled' : 'simple'"
       @click="change(getValue(option))"
       >{{ getLabel(option) }}</TButton
     >

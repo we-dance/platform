@@ -16,12 +16,10 @@
         :fields="fields"
         vertical
         :show-cancel="!!id"
-        :show-remove="!!id"
         :submit-label="id ? 'Save' : 'Add'"
         class="bg-white p-4 space-y-4"
         @save="saveItem"
         @cancel="cancelItem"
-        @remove="removeItem"
       />
     </div>
   </div>
@@ -86,11 +84,6 @@ export default {
 
       this.cancelItem()
     },
-    async removeItem(id) {
-      this.$fire.analytics.logEvent('delete_post')
-      await this.remove(id)
-      this.cancelItem()
-    },
   },
   setup() {
     const { can, profile, isAdmin } = useAuth()
@@ -109,17 +102,12 @@ export default {
         value: 'post',
         fields: [
           {
-            name: 'cover',
-            type: 'photo',
-            width: 500,
-            height: 500,
-            circle: false,
-            hideLabel: true,
-          },
-          {
             name: 'title',
             hideLabel: true,
             placeholder: 'Title',
+          },
+          {
+            name: 'type',
           },
           {
             name: 'description',
@@ -140,6 +128,14 @@ export default {
             name: 'styles',
             label: 'Styles',
             type: 'stylesSelect',
+          },
+          {
+            name: 'cover',
+            type: 'photo',
+            width: 500,
+            height: 500,
+            circle: false,
+            hideLabel: true,
           },
         ],
       },

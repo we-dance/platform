@@ -1,26 +1,25 @@
 <template>
   <div>
-    <TLoader v-if="loading" />
+    <TLoader v-if="!loaded" />
     <div v-else-if="!count && showEmpty">
       {{ emptyLabel }}
     </div>
     <h2 v-if="title" class="font-bold text-lg mb-4">{{ title }}</h2>
-    <div class="p-4 border-b">
-      <TButton @click="run">Run</TButton>
-    </div>
-    <div v-if="items.length">
-      <TPost v-for="item in items" :key="item.id" :item="item" />
+    <div v-if="docs.length">
+      <TPost v-for="doc in docs" :key="doc.id" :item="doc" />
+
+      <div class="mt-4 p-4 flex justify-center items-center">
+        <TButton @click="loadMore">Load more</TButton>
+      </div>
     </div>
   </div>
 </template>
 
 <script>
-import { computed } from '@nuxtjs/composition-api'
-import { useCollection } from '~/use/collection'
-import { sortBy } from '~/utils'
-import { useApp } from '~/use/app'
-import { useDoc } from '~/use/doc'
-import { useProfiles } from '~/use/profiles'
+import { useDocs } from '~/use/docs'
+import firebase from 'firebase/app'
+import 'firebase/firestore'
+import { onMounted, watch } from '@nuxtjs/composition-api'
 
 export default {
   name: 'TPostList',
@@ -32,6 +31,14 @@ export default {
     sorting: {
       type: String,
       default: '-createdAt',
+    },
+    orderBy: {
+      type: String,
+      default: 'createdAt',
+    },
+    orderByDirection: {
+      type: String,
+      default: 'desc',
     },
     title: {
       type: String,
@@ -46,28 +53,42 @@ export default {
       default: false,
     },
   },
-  methods: {
-    run() {},
-  },
-  setup(params) {
-    const { docs, loading } = useCollection('posts', params.filter)
-    const { set: setPost, update: updatePost } = useDoc('posts')
+  setup(props) {
+    const filter = props.filter
+    const db = firebase.firestore()
+    let collection = db.collection('posts')
 
-    const count = computed(() => items.value.length)
-    const isPublic = (item) => item.visibility !== 'Unlisted'
+    let field = ''
+    let value = ''
 
-    const items = computed(() => {
-      const result = docs.value.filter(isPublic)
+    if (filter) {
+      field = Object.keys(filter)[0]
+      value = filter[field]
+    }
 
-      return result.sort(sortBy(params.sorting))
-    })
+    if (field) {
+      collection = collection.where(field, '==', value)
+    }
+
+    collection = collection.limit(10)
+
+    const { docs, count, loaded, loadMore, load } = useDocs(
+      collection.orderBy(props.orderBy, props.orderByDirection)
+    )
+
+    watch(
+      () => props.orderBy,
+      () => {
+        load(collection.orderBy(props.orderBy, props.orderByDirection))
+      }
+    )
 
     return {
+      docs,
+      loaded,
       count,
-      items,
-      loading,
-      setPost,
-      updatePost,
+      loadMore,
+      load,
     }
   },
 }

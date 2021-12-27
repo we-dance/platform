@@ -7,7 +7,6 @@
           type="context"
           icon="people"
           :to="`/events/${item.id}/dashboard`"
-          class="hover:text-blue-500 mr-2"
           label="Dashboard"
         />
         <TButton
@@ -15,7 +14,6 @@
           type="context"
           icon="edit"
           :to="`/events/${item.id}/edit`"
-          class="hover:text-blue-500"
           label="Edit"
         />
         <TCardActions

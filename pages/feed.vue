@@ -19,7 +19,20 @@
         </div>
       </div>
     </div>
-    <TPostList />
+
+    <div class="border-b p-4">
+      <TInputButtons
+        v-model="orderBy"
+        :options="[
+          { label: 'Newest', value: 'createdAt' },
+          { label: 'Popular', value: 'star.count' },
+          { label: 'Hot', value: 'watch.count' },
+          { label: 'Unpopular', value: 'hide.count' },
+        ]"
+      />
+    </div>
+
+    <TPostList :orderBy="orderBy" />
   </div>
 </template>
 
@@ -27,16 +40,38 @@
 import { ref } from 'vue-demi'
 import { useAuth } from '~/use/auth'
 import { useCities } from '~/use/cities'
+import { useDoc } from '~/use/doc'
+import { useApp } from '~/use/app'
 
 export default {
   setup() {
     const { uid } = useAuth()
     const { currentCity } = useCities()
+    const { getPlace } = useApp()
     const newMessage = ref('')
+    const orderBy = ref('createdAt')
+    const { create } = useDoc('posts')
 
-    const send = () => {}
+    const send = () => {
+      const description = newMessage.value
+      const region = getPlace(currentCity.value)
 
-    return { currentCity, uid, newMessage, send }
+      newMessage.value = ''
+
+      const post = {
+        region,
+        description,
+        type: 'post',
+        commentsCount: 0,
+        commentsLast: null,
+        watchersCount: 0,
+        viewsCount: 0,
+      }
+
+      create(post)
+    }
+
+    return { currentCity, uid, newMessage, send, orderBy }
   },
 }
 </script>
