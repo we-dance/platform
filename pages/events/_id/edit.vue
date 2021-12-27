@@ -17,7 +17,7 @@
         vertical
         :show-remove="!!item.id"
         :show-copy="!!item.id"
-        :event-error="eventError"
+        :errors="errors"
         submit-label="Save"
         class="bg-white p-4 space-y-4"
         @copy="copyItem"
@@ -50,7 +50,7 @@ export default {
   },
   data: () => ({
     selectedType: 'event',
-    eventError: {},
+    errors: [],
   }),
   computed: {
     fields() {
@@ -104,20 +104,32 @@ export default {
       this.$router.push(`/events/${doc.id}`)
     },
     async saveItem(data) {
-      if (!data.name) {
-        this.eventError = {
-          message: 'name is a required field!',
-          field: 'name',
+      if (!data.name || !data.startDate) {
+        this.errors = []
+        let error = {
+          message: '',
+          field: '',
         }
-        return
-      }
 
-      if (!data.startDate) {
-        this.eventError = {
-          message: 'start date is not set!',
-          field: 'startDate',
+        if (!data.name) {
+          error = {
+            message: 'name is a required field!',
+            field: 'name',
+          }
+          this.errors.push(error)
+          this.$toast.error(error.message)
         }
-        return
+
+        if (!data.startDate) {
+          error = {
+            message: 'start date is not set!',
+            field: 'startDate',
+          }
+          this.errors.push(error)
+          this.$toast.error(error.message)
+        }
+
+        return false
       }
 
       data.organisedBy = this.uid

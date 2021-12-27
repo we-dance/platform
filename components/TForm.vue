@@ -8,11 +8,13 @@
         :label="getLabel(field)"
         @input="(val) => onFieldChange(field, val)"
       />
-      <div
-        v-if="error && error.field === field.name"
-        class="text-red-500 py-4 text-right"
-      >
-        {{ error.message }}
+      <div v-for="error in errors" :key="error.field">
+        <div
+          v-if="error.field === field.name"
+          class="text-red-500 py-4 text-right"
+        >
+          {{ error.message }}
+        </div>
       </div>
     </div>
     <slot name="bottom" />
@@ -78,13 +80,13 @@ export default {
       type: String,
       default: '',
     },
-    eventError: {
-      type: Object,
-      default: () => ({}),
+    errors: {
+      type: Array,
+      default: () => [],
     },
   },
   data: () => ({
-    error: {},
+    error: false,
   }),
   computed: {
     visibleFields() {
@@ -107,14 +109,6 @@ export default {
       }
 
       return fields.map((f) => ({ ...f, ...this.fieldConfig }))
-    },
-  },
-  watch: {
-    eventError(newValue, _) {
-      this.error = {
-        message: newValue.message,
-        field: newValue.field,
-      }
     },
   },
   methods: {
