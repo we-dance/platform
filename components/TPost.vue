@@ -122,7 +122,7 @@
           label="Edit"
         />
         <TButton
-          v-if="can('delete', 'posts', item)"
+          v-if="can('edit', 'posts', item)"
           type="context"
           icon="delete"
           label="Delete"

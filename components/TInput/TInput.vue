@@ -9,7 +9,7 @@ export default {
   name: 'TInput',
   props: {
     value: {
-      type: [String, Number],
+      type: [String, Number, Object],
       default: '',
     },
     trim: {
