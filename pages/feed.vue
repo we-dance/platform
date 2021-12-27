@@ -2,7 +2,7 @@
   <div>
     <THeader title="Feed" />
     <div class="border-b p-4 flex items-start">
-      <div class="w-20 flex-shrink-0">
+      <div class="w-10 flex-shrink-0">
         <TAvatar photo size="md" :uid="uid" />
       </div>
       <div class="w-full">
