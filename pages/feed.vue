@@ -14,30 +14,23 @@
           class="w-full p-4 border text-sm"
           @keyup.enter="send"
         ></textarea>
-        <div class="flex justify-end">
+        <div class="flex justify-between">
+          <TInputSelect v-model="category" :options="categoryOptions" />
           <TButton @click="send">Send</TButton>
         </div>
       </div>
     </div>
 
-    <div class="border-b p-4">
-      <TInputButtons
-        v-model="orderBy"
-        :options="[
-          { label: 'Newest', value: 'createdAt' },
-          { label: 'Hot', value: 'watch.count' },
-          { label: 'Popular', value: 'star.count' },
-          { label: 'Unpopular', value: 'hide.count' },
-        ]"
-      />
+    <div class="border-b p-4 flex">
+      <TInputSelect v-model="filterType" :options="filterTypeList" />
     </div>
 
-    <TPostList :orderBy="orderBy" />
+    <TPostList v-bind="filter" />
   </div>
 </template>
 
 <script>
-import { ref } from 'vue-demi'
+import { computed, ref } from 'vue-demi'
 import { useAuth } from '~/use/auth'
 import { useCities } from '~/use/cities'
 import { useDoc } from '~/use/doc'
@@ -46,12 +39,91 @@ import { getUrlFromText } from '~/utils'
 
 export default {
   setup() {
-    const { uid } = useAuth()
+    const { uid, username } = useAuth()
     const { currentCity } = useCities()
     const { getPlace } = useApp()
     const newMessage = ref('')
-    const orderBy = ref('createdAt')
+    const category = ref('')
+
+    const filterTypeList = [
+      { label: 'Newest', value: 'Newest' },
+      { label: 'Hot', value: 'Hot' },
+      { label: 'Popular', value: 'Popular' },
+      { label: 'Unpopular', value: 'Unpopular' },
+      { label: 'Watching', value: 'Watching' },
+      { label: 'Starred', value: 'Starred' },
+      { label: 'Archived', value: 'Archived' },
+      { label: 'Yours', value: 'Authored' },
+    ]
+
+    const categoryOptions = [
+      {
+        label: 'Category',
+        value: '',
+      },
+      {
+        label: 'Looking for partner',
+        value: 'needPartner',
+      },
+      {
+        label: 'Looking for events',
+        value: 'needEvents',
+      },
+      {
+        label: 'Looking for instructor',
+        value: 'needInstructor',
+      },
+      {
+        label: 'Offering trip',
+        value: 'trip',
+      },
+      {
+        label: 'Event',
+        value: 'event',
+      },
+      {
+        label: 'Artist',
+        value: 'artist',
+      },
+      {
+        label: 'Venue',
+        value: 'venue',
+      },
+      {
+        label: 'App',
+        value: 'app',
+      },
+      {
+        label: 'Guide / How To',
+        value: 'guide',
+      },
+      {
+        label: 'Inspiration',
+        value: 'inspiration',
+      },
+      {
+        label: 'Question',
+        value: 'question',
+      },
+    ]
+
+    const filterType = ref('Newest')
     const { create } = useDoc('posts')
+
+    const filter = computed(() => {
+      const map = {
+        Newest: { orderBy: 'createdAt' },
+        Hot: { orderBy: 'watch.count' },
+        Popular: { orderBy: 'star.count' },
+        Unpopular: { orderBy: 'hide.count' },
+        Watching: { filter: { [`watch.list.${username.value}`]: true } },
+        Starred: { filter: { [`star.list.${username.value}`]: true } },
+        Archived: { filter: { [`hide.list.${username.value}`]: true } },
+        Authored: { filter: { username: username.value } },
+      }
+
+      return map[filterType.value]
+    })
 
     const send = () => {
       let description = newMessage.value
@@ -70,7 +142,7 @@ export default {
       const post = {
         region,
         description,
-        type: 'post',
+        type: category.value,
         url,
         commentsCount: 0,
         commentsLast: null,
@@ -81,7 +153,17 @@ export default {
       create(post)
     }
 
-    return { currentCity, uid, newMessage, send, orderBy }
+    return {
+      currentCity,
+      uid,
+      newMessage,
+      send,
+      filterType,
+      filter,
+      category,
+      categoryOptions,
+      filterTypeList,
+    }
   },
 }
 </script>

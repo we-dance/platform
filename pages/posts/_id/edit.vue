@@ -60,10 +60,6 @@ export default {
       }
     },
     async saveItem(data) {
-      if (!data.title) {
-        return
-      }
-
       if (data.id) {
         this.$fire.analytics.logEvent('update_post')
         await this.update(data.id, data)
@@ -113,6 +109,18 @@ export default {
         height: 500,
         circle: false,
         hideLabel: true,
+      },
+      {
+        name: 'hideMeta',
+        admin: true,
+      },
+      {
+        name: 'hideComments',
+        admin: true,
+      },
+      {
+        name: 'hideReactions',
+        admin: true,
       },
     ]
 

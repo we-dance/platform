@@ -1,7 +1,10 @@
 <template>
   <div>
     <TLoader v-if="!loaded" />
-    <div v-else-if="!count && showEmpty">
+    <div
+      v-else-if="!count && showEmpty"
+      class="p-4 text-center text-xs text-gray-700"
+    >
       {{ emptyLabel }}
     </div>
     <h2 v-if="title" class="font-bold text-lg mb-4">{{ title }}</h2>
@@ -19,7 +22,7 @@
 import { useDocs } from '~/use/docs'
 import firebase from 'firebase/app'
 import 'firebase/firestore'
-import { onMounted, onUnmounted, watch } from '@nuxtjs/composition-api'
+import { onUnmounted, watch } from '@nuxtjs/composition-api'
 
 export default {
   name: 'TPostList',
@@ -46,41 +49,49 @@ export default {
     },
     emptyLabel: {
       type: String,
-      default: 'No post found',
+      default: 'No posts',
     },
     showEmpty: {
       type: Boolean,
-      default: false,
+      default: true,
     },
   },
   setup(props) {
-    const filter = props.filter
     const db = firebase.firestore()
-    let collection = db.collection('posts')
 
-    let field = ''
-    let value = ''
+    const getCollection = () => {
+      const filter = props.filter
 
-    if (filter) {
-      field = Object.keys(filter)[0]
-      value = filter[field]
+      let collection = db.collection('posts')
+      let field = ''
+      let value = ''
+
+      if (filter) {
+        field = Object.keys(filter)[0]
+        value = filter[field]
+      }
+
+      if (field) {
+        collection = collection.where(field, '==', value)
+      } else {
+        collection = collection.orderBy(props.orderBy, props.orderByDirection)
+      }
+
+      collection = collection.limit(10)
+
+      return collection
     }
-
-    if (field) {
-      collection = collection.where(field, '==', value)
-    }
-
-    collection = collection.limit(10)
 
     const { docs, count, loaded, loadMore, load, detachListeners } = useDocs(
-      collection.orderBy(props.orderBy, props.orderByDirection)
+      getCollection()
     )
 
     watch(
-      () => props.orderBy,
+      () => props,
       () => {
-        load(collection.orderBy(props.orderBy, props.orderByDirection))
-      }
+        load(getCollection())
+      },
+      { deep: true }
     )
 
     onUnmounted(detachListeners)

@@ -1,19 +1,20 @@
 <template>
-  <time :datetime="value">{{ getDateTime(value) }}</time>
+  <time :datetime="getDateObect(value)">{{ getDateTime(value) }}</time>
 </template>
 
 <script>
-import { getDateTime } from '~/utils'
+import { getDateTime, getDateObect } from '~/utils'
 
 export default {
   props: {
     value: {
-      type: String,
+      type: [String, Object],
       default: '',
     },
   },
   methods: {
     getDateTime,
+    getDateObect,
   },
 }
 </script>

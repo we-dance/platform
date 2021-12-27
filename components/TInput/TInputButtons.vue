@@ -1,14 +1,16 @@
 <template>
-  <div class="w-full relative flex justify-center">
-    <TButton
-      v-for="option in options"
-      :key="getValue(option)"
-      :value="getValue(option)"
-      class="m-1 whitespace-no-wrap"
-      :type="value === getValue(option) ? 'toggled' : 'simple'"
-      @click="change(getValue(option))"
-      >{{ getLabel(option) }}</TButton
-    >
+  <div class="flex justify-center">
+    <div class="flex flex-wrap">
+      <TButton
+        v-for="option in options"
+        :key="getValue(option)"
+        :value="getValue(option)"
+        class="m-1"
+        :type="value === getValue(option) ? 'toggled' : 'simple'"
+        @click="change(getValue(option))"
+        >{{ getLabel(option) }}</TButton
+      >
+    </div>
   </div>
 </template>
 
@@ -24,11 +26,11 @@ export default {
       default: () => [],
     },
     value: {
-      type: [String, Number, Boolean],
+      type: [String, Number, Boolean, Object],
       default: '',
     },
     defaultValue: {
-      type: [String, Number, Boolean],
+      type: [String, Number, Boolean, Object],
       default: '',
     },
     item: {

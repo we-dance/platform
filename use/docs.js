@@ -1,15 +1,18 @@
-import { computed, reactive, toRefs, watch } from '@nuxtjs/composition-api'
+import { computed, reactive, toRefs } from '@nuxtjs/composition-api'
 
 export const useDocs = (collection) => {
   const state = reactive({
     docs: [],
     loaded: false,
-    last: null,
-    listeners: [],
   })
 
+  let last = null
+  let listeners = []
+  let lastCollection = null
+
   function detachListeners() {
-    state.listeners.forEach((listener) => listener())
+    listeners.forEach((listener) => listener())
+    listeners = []
   }
 
   function load(currentCollection) {
@@ -21,30 +24,36 @@ export const useDocs = (collection) => {
         id: doc.id,
       }))
 
-      state.last = snapshot.docs[snapshot.docs.length - 1]
+      last = snapshot.docs[snapshot.docs.length - 1]
+      lastCollection = currentCollection
+
       state.loaded = true
     })
 
-    state.listeners.push(listener)
+    listeners.push(listener)
   }
 
   load(collection)
 
   const loadMore = () => {
-    const nextCollection = collection.startAfter(state.last)
+    const nextCollection = lastCollection.startAfter(last)
 
     const listener = nextCollection.onSnapshot((snapshot) => {
-      const docs = snapshot.docs.map((doc) => ({
+      let docs = snapshot.docs.map((doc) => ({
         ...doc.data(),
         id: doc.id,
       }))
 
+      const ids = state.docs.map((doc) => doc.id)
+
+      docs = docs.filter((doc) => !ids.includes(doc.id))
+
       state.docs.push(...docs)
 
-      state.last = snapshot.docs[snapshot.docs.length - 1]
+      last = snapshot.docs[snapshot.docs.length - 1]
     })
 
-    state.listeners.push(listener)
+    listeners.push(listener)
   }
 
   const count = computed(() => Object.keys(state.docs).length)

@@ -18,7 +18,7 @@
   </div>
   <div v-else ref="postRef" class="border-b p-4">
     <div class="flex items-start">
-      <div class="w-12 flex-shrink-0">
+      <div v-if="!item.hideMeta" class="w-12 flex-shrink-0">
         <TAvatar photo size="md" :uid="item.createdBy" />
       </div>
       <div class="flex-grow">
@@ -26,7 +26,7 @@
           <h4 class="font-bold">{{ item.title }}</h4>
           <TPreview :excerpt="showExcerpt" :content="item.description" />
           <div
-            v-if="item.description.length > 140"
+            v-if="item.description && item.description.length > 140"
             @click="showExcerpt = !showExcerpt"
             class="p-2 text-blue-700 cursor-pointer underline hover:no-underline text-xs text-center mb-2"
           >
@@ -54,7 +54,7 @@
           />
         </template>
 
-        <div class="text-xs space-x-1 text-gray-900 flex">
+        <div v-if="!item.hideMeta" class="text-xs space-x-1 text-gray-900 flex">
           <router-link :to="`/${item.username}`" class="hover:underline">{{
             item.username
           }}</router-link>
@@ -66,7 +66,7 @@
           </template>
         </div>
 
-        <div class="border-t mt-4">
+        <div v-if="!item.hideComments" class="border-t mt-4">
           <router-link
             v-if="item.commentsCount > 1"
             :to="`/posts/${item.id}`"
@@ -103,7 +103,7 @@
           </div>
         </div>
       </div>
-      <TDropdown>
+      <TDropdown v-if="!item.hideMeta || can('edit', 'posts', item)">
         <TButton
           v-if="can('edit', 'posts', item)"
           type="context"
@@ -136,7 +136,10 @@
         />
       </TDropdown>
     </div>
-    <div class="flex flex-wrap gap-2 justify-center items-center">
+    <div
+      v-if="!item.hideReactions"
+      class="flex flex-wrap gap-2 justify-center items-center"
+    >
       <TReaction
         label="Watch"
         toggledLabel="Watching"
@@ -179,6 +182,10 @@ export default {
     },
   },
   mounted() {
+    if (!this.$refs.postRef) {
+      return
+    }
+
     const options = {
       rootMargin: '0px',
       threshold: 1.0,
@@ -203,7 +210,7 @@ export default {
     const showExcerpt = ref(true)
 
     const onView = () => {
-      if (!props.item) {
+      if (!props.item?.id) {
         return
       }
 
