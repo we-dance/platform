@@ -18,9 +18,7 @@
       <div>
         <span class="font-bold">Related</span>
         <span v-for="style in related" :key="style.name" class="p-1">
-          <router-link :to="`/dance/${style.name}`">{{
-            style.name
-          }}</router-link
+          <router-link :to="`/dance/${style.id}`">{{ style.name }}</router-link
           >{{ ' ' }}
         </span>
       </div>

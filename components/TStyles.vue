@@ -2,7 +2,7 @@
   <div>
     <router-link
       v-for="style in getStyles(value, 0, false, max)"
-      :to="`/dance/${style.name}`"
+      :to="`/dance/${style.id}`"
       :key="style.id"
       :class="getClasses(style)"
     >
