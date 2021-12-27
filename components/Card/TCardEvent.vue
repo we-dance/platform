@@ -60,7 +60,6 @@ export default {
   },
   methods: {
     saveNode(data) {
-      console.log('saveNode', this.node.id, data)
       this.update(this.node.id, data)
     },
   },

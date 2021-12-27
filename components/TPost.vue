@@ -36,6 +36,8 @@
 
         <TCardLink v-if="item.url" :url="item.url" class="my-2" />
 
+        <TCardPoll v-if="item.type === 'poll'" :node="item" class="my-2" />
+
         <template v-if="item.type === 'event' && !hideMedia">
           <TCardEvent v-if="!$route.query.variant" :node="item" class="my-2" />
 

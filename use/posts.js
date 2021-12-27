@@ -48,6 +48,10 @@ export const postTypeList = [
     value: 'question',
   },
   {
+    label: 'Poll',
+    value: 'poll',
+  },
+  {
     label: 'Post',
     value: 'post',
   },
