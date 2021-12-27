@@ -25,68 +25,66 @@
       >
         {{ item.name }}
       </router-link>
-      <div class="md:flex justify-between">
-        <div>
-          <div class="text-xs flex flex-wrap gap-1">
-            <div v-if="item.online === 'Yes'">
-              <div class="flex items-center gap-1">
-                <TIcon name="youtube" class="w-4 h-4" />
-                <p>
-                  Online
-                </p>
-              </div>
-            </div>
-            <div v-if="item.venue" class="flex items-center gap-1">
-              <template v-if="currentCity === item.place">
-                <TIcon name="place" class="w-4 h-4" />
-                <p>
-                  {{ item.venue.name }}
-                </p>
-              </template>
-              <template v-else>
-                <TIcon name="car" class="w-4 h-4" />
-                <p>
-                  {{ addressPart(item.venue, 'locality') }}
-                </p>
-              </template>
+      <div class="flex flex-wrap gap-2 items-center my-1">
+        <TReaction
+          label="Watch"
+          toggledLabel="Watching"
+          field="watch"
+          icon="EyeIcon"
+          :item="item"
+        />
+        <TReaction
+          label="Star"
+          toggledLabel="Starred"
+          field="star"
+          icon="StarIcon"
+          :item="item"
+        />
+      </div>
+      <div>
+        <div class="text-xs flex flex-wrap gap-1">
+          <div v-if="item.online === 'Yes'">
+            <div class="flex items-center gap-1">
+              <TIcon name="youtube" class="w-4 h-4" />
+              <p>
+                Online
+              </p>
             </div>
           </div>
-          <div class="text-xs flex flex-wrap gap-1">
-            <div v-if="item.price">
-              <div class="flex items-center gap-1">
-                <TIcon name="ticket" class="w-4 h-4" />
-                <p>
-                  {{ item.price }}
-                </p>
-              </div>
-            </div>
-            <div class="flex items-center gap-1">
-              <TIcon name="lobby" class="w-4 h-4" />
-              <div v-if="item.claimed === 'Yes'">
-                Organised by
-              </div>
-              <div v-else>
-                Promoted by
-              </div>
-              <TAvatar name :uid="item.createdBy" class="text-primary" />
-            </div>
+          <div v-if="item.venue" class="flex items-center gap-1">
+            <template v-if="currentCity === item.place">
+              <TIcon name="place" class="w-4 h-4" />
+              <p>
+                {{ item.venue.name }}
+              </p>
+            </template>
+            <template v-else>
+              <TIcon name="car" class="w-4 h-4" />
+              <p>
+                {{ addressPart(item.venue, 'locality') }}
+              </p>
+            </template>
           </div>
         </div>
-        <div class="flex flex-wrap gap-2 justify-end items-center p-2">
-          <TReaction
-            label="Watch"
-            toggledLabel="Watching"
-            field="watch"
-            icon="EyeIcon"
-            :item="item"
-          />
-          <TReaction
-            label="Star"
-            toggledLabel="Starred"
-            field="star"
-            icon="StarIcon"
-            :item="item"
-          />
+        <div class="text-xs flex flex-wrap gap-1">
+          <div v-if="item.price">
+            <div class="flex items-center gap-1">
+              <TIcon name="ticket" class="w-4 h-4" />
+              <p>
+                {{ item.price }}
+              </p>
+            </div>
+          </div>
+          <div class="flex items-center gap-1">
+            <TIcon name="lobby" class="w-4 h-4" />
+            <div v-if="item.claimed === 'Yes'">
+              Organised by
+            </div>
+            <div v-else>
+              Promoted by
+            </div>
+            <TAvatar name :uid="item.createdBy" class="text-primary" />
+          </div>
         </div>
       </div>
     </div>
