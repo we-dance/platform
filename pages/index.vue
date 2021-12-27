@@ -24,7 +24,12 @@
             </div>
 
             <nav class="relative flex p-4 justify-end">
-              <TButton type="simple" to="/signin" :label="$t('signin')" />
+              <TButton
+                allow-guests
+                type="simple"
+                to="/signin"
+                :label="$t('signin')"
+              />
             </nav>
 
             <div class="relative p-4 sm:p-10 lg:p-14">
@@ -40,6 +45,7 @@
 
               <div class="max-w-lg mx-auto">
                 <TButton
+                  allow-guests
                   icon="search"
                   label="Search dancers"
                   to="/search"
@@ -70,6 +76,7 @@
 
               <div class="mt-8 flex justify-center">
                 <TButton
+                  allow-guests
                   type="primary"
                   to="/register"
                   label="Join the community"
@@ -200,36 +207,42 @@
           </p>
           <div class="p-4 flex flex-wrap gap-2 items-center justify-center">
             <TButton
+              allow-guests
               icon="youtube"
               type="round"
               icon-size="6"
               href="https://www.youtube.com/channel/UC1pdWS3nCLrd8LnQyNNSNUw"
             />
             <TButton
+              allow-guests
               icon="instagram"
               type="round"
               icon-size="6"
               href="https://instagram.com/WeDanceVIP"
             />
             <TButton
+              allow-guests
               icon="telegram"
               type="round"
               icon-size="6"
               href="https://t.me/WeDanceVIP"
             />
             <TButton
+              allow-guests
               icon="twitter"
               type="round"
               icon-size="6"
               href="https://twitter.com/WeDanceVIP"
             />
             <TButton
+              allow-guests
               icon="tiktok"
               type="round"
               icon-size="6"
               href="https://tiktok.com/@WeDanceVIP"
             />
             <TButton
+              allow-guests
               icon="facebook"
               type="round"
               icon-size="6"

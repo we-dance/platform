@@ -1,6 +1,20 @@
 <template>
+  <button
+    v-if="!allowGuests && !uid"
+    type="button"
+    :title="`Login to ${title}`"
+    :class="classes"
+    @click="showAuthPopup = title"
+  >
+    <slot>
+      <div class="flex items-center space-x-2">
+        <TIcon v-if="icon" :size="iconSize" :name="icon" />
+        <span v-if="label !== false">{{ label }}</span>
+      </div>
+    </slot>
+  </button>
   <a
-    v-if="href"
+    v-else-if="href"
     :href="href"
     target="_blank"
     rel="noopener noreferrer"
@@ -47,15 +61,20 @@
 
 <script>
 import TIcon from '~/components/TIcon'
+import { useAuth } from '~/use/auth'
 
 export default {
   components: {
     TIcon,
   },
   props: {
+    allowGuests: {
+      type: Boolean,
+      default: false,
+    },
     title: {
       type: String,
-      default: '',
+      default: 'continue',
     },
     icon: {
       type: String,
@@ -126,6 +145,11 @@ export default {
 
       return classes
     },
+  },
+  setup() {
+    const { uid, showAuthPopup } = useAuth()
+
+    return { uid, showAuthPopup }
   },
 }
 </script>

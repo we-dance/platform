@@ -2,7 +2,13 @@
   <nav
     class="p-4 flex flex-col space-y-2 text-dark h-screen overflow-y-scroll sticky top-0 border-r"
   >
-    <TButton to="/" icon="logo-horizontal-dark" class="mb-8" type="void" />
+    <TButton
+      allow-guests
+      to="/"
+      icon="logo-horizontal-dark"
+      class="mb-8"
+      type="void"
+    />
 
     <template v-if="uid">
       <TButton
@@ -33,8 +39,9 @@
       <TButton to="/signout" type="nav" :label="$t('signout')" />
     </template>
     <template v-else>
-      <TButton to="/signin" type="nav" :label="$t('signin')" />
+      <TButton allow-guests to="/signin" type="nav" :label="$t('signin')" />
       <TButton
+        allow-guests
         to="/register"
         type="nav"
         :label="$t('signup')"

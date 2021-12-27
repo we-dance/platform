@@ -21,7 +21,7 @@
             type="simple"
             :options="postTypeList"
           />
-          <TButton @click="send">Send</TButton>
+          <TButton @click="send" title="post a message">Send</TButton>
         </div>
       </div>
     </div>

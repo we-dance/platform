@@ -34,6 +34,7 @@
       </div>
       <div class="mt-4 flex justify-end">
         <TButton
+          allow-guests
           type="primary"
           class="mt-2 w-full md:mt-0 md:w-32 md:ml-4"
           @click="submit"

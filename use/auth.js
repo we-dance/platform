@@ -21,6 +21,7 @@ const state = Vue.observable({
   initialized: false,
   marketing: null,
   error: null,
+  showAuthPopup: false,
 })
 
 export const useAuth = () => {

@@ -2,7 +2,8 @@
   <TButton
     type="xs"
     :class="clicked ? 'font-bold' : ''"
-    :title="title"
+    :title="label"
+    :data-names="names"
     @click="toggle"
   >
     <component :is="icon" class="w-4 h-4" />
@@ -64,7 +65,7 @@ export default {
         : 0
     })
 
-    const title = computed(() => {
+    const names = computed(() => {
       return props.item[props.field]
         ? Object.keys(props.item[props.field].list).join(', ')
         : 'None'
@@ -96,7 +97,7 @@ export default {
       softUpdate(props.item.id, change)
     }
 
-    return { toggle, clicked, count, title }
+    return { toggle, clicked, count, names }
   },
 }
 </script>

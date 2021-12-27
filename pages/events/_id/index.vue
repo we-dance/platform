@@ -119,7 +119,11 @@
     <div
       class="flex mt-4 space-x-2 justify-center sticky bg-white p-4 border-b z-50 top-0"
     >
-      <TButton v-if="!uid" type="primary" @click="reservationPopup = 'reserve'"
+      <TButton
+        v-if="!uid"
+        allow-guests
+        type="primary"
+        @click="reservationPopup = 'reserve'"
         >Register for event</TButton
       >
       <TButton
@@ -167,6 +171,7 @@
         <div v-if="reservationPopup === 'reserve'">
           <div>
             <TForm
+              allow-guests
               v-model="account"
               :fields="reservationFields"
               submit-label="Register"
@@ -175,6 +180,7 @@
             >
               <template v-if="!uid" slot="buttons">
                 <TButton
+                  allow-guests
                   :to="`/signin?target=${this.$route.fullPath}`"
                   label="Login"
                 />

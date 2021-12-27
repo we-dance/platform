@@ -106,7 +106,10 @@
           </div>
         </div>
       </div>
-      <TDropdown v-if="!item.hideMeta || can('edit', 'posts', item)">
+      <TDropdown
+        v-if="!item.hideMeta || can('edit', 'posts', item)"
+        title="report or share"
+      >
         <TButton
           v-if="can('edit', 'posts', item) && item.type !== 'event'"
           type="context"
