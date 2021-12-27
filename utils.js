@@ -488,3 +488,22 @@ export const getOptionsFromHash = (hash, label = 'name') => {
 
   return results
 }
+
+export const getUrlFromText = (text) => {
+  const result =
+    text.match(/\bhttps?::\/\/\S+/gi) || text.match(/\bhttps?:\/\/\S+/gi)
+
+  if (result) {
+    return result[0]
+  }
+
+  return ''
+}
+
+export const getYoutubeId = (url) => {
+  const regExp = /^.*((youtu.be\/)|(v\/)|(\/u\/\w\/)|(embed\/)|(watch\?))\??v?=?([^#&?]*).*/
+  const match = url.match(regExp)
+  const videoId = match && match[7].length === 11 ? match[7] : ''
+
+  return videoId
+}

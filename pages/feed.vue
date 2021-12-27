@@ -25,8 +25,8 @@
         v-model="orderBy"
         :options="[
           { label: 'Newest', value: 'createdAt' },
-          { label: 'Popular', value: 'star.count' },
           { label: 'Hot', value: 'watch.count' },
+          { label: 'Popular', value: 'star.count' },
           { label: 'Unpopular', value: 'hide.count' },
         ]"
       />
@@ -42,6 +42,7 @@ import { useAuth } from '~/use/auth'
 import { useCities } from '~/use/cities'
 import { useDoc } from '~/use/doc'
 import { useApp } from '~/use/app'
+import { getUrlFromText } from '~/utils'
 
 export default {
   setup() {
@@ -53,7 +54,15 @@ export default {
     const { create } = useDoc('posts')
 
     const send = () => {
-      const description = newMessage.value
+      let description = newMessage.value
+
+      if (!description) {
+        return
+      }
+
+      const url = getUrlFromText(description)
+      description = description.replace(url, '').trim()
+
       const region = getPlace(currentCity.value)
 
       newMessage.value = ''
@@ -62,6 +71,7 @@ export default {
         region,
         description,
         type: 'post',
+        url,
         commentsCount: 0,
         commentsLast: null,
         watchersCount: 0,

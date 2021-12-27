@@ -26,25 +26,15 @@
 </template>
 
 <script>
-import { computed } from '@nuxtjs/composition-api'
 import ls from 'local-storage'
 import { useAuth } from '~/use/auth'
 import { useDoc } from '~/use/doc'
-import { useTags } from '~/use/tags'
 import { useRouter } from '~/use/router'
 
 export default {
   name: 'PostEdit',
   layout: 'empty',
   middleware: ['auth'],
-  data: () => ({
-    selectedType: 'post',
-  }),
-  computed: {
-    fields() {
-      return this.types.find((f) => f.value === this.selectedType).fields
-    },
-  },
   watch: {
     loading(loading) {
       if (!loading && this.item) {
@@ -94,77 +84,37 @@ export default {
     const { doc: item, id, load, update, remove, create, loading } = useDoc(
       collection
     )
-    const { tagsOptions, addTag } = useTags()
 
-    const types = computed(() => [
+    const fields = [
       {
-        label: 'Text',
-        value: 'post',
-        fields: [
-          {
-            name: 'title',
-            hideLabel: true,
-            placeholder: 'Title',
-          },
-          {
-            name: 'type',
-          },
-          {
-            name: 'description',
-            hideLabel: true,
-            type: 'textarea',
-            placeholder: 'Text (markdown)',
-            tips:
-              'Pitch yourself: Who are you? What do you offer? What do you want?\n\nTips for effective pitch:\n- Uncomplicated: It should be catchy and roll off the tongue\n- Concise: It shouldn’t take more than a minute to say or read\n- Unique: It reflects your skills, goals, and desires\n- Storyline: It covers who you are, what you offer, and where you want to be\n- Appealing: Your elevator pitch is essentially a persuasive sales pitch; the emphasis should be on what you offer',
-            description:
-              'Use [widgets](https://wedance.vip/markdown), including images and videos',
-          },
-          {
-            name: 'place',
-            type: 'place',
-            clearable: true,
-          },
-          {
-            name: 'styles',
-            label: 'Styles',
-            type: 'stylesSelect',
-          },
-          {
-            name: 'cover',
-            type: 'photo',
-            width: 500,
-            height: 500,
-            circle: false,
-            hideLabel: true,
-          },
-        ],
+        name: 'title',
+        hideLabel: true,
+        placeholder: 'Title',
       },
       {
-        label: 'Link',
-        value: 'link',
-        fields: [
-          {
-            name: 'title',
-            hideLabel: true,
-            placeholder: 'Title',
-          },
-          {
-            name: 'link',
-            hideLabel: true,
-            placeholder: 'Link',
-          },
-          {
-            name: 'tags',
-            hideLabel: true,
-            type: 'tags',
-            options: tagsOptions.value,
-            listeners: {
-              add: addTag,
-            },
-          },
-        ],
+        name: 'description',
+        hideLabel: true,
+        type: 'textarea',
+        placeholder: 'Text (markdown)',
+        tips:
+          'Pitch yourself: Who are you? What do you offer? What do you want?\n\nTips for effective pitch:\n- Uncomplicated: It should be catchy and roll off the tongue\n- Concise: It shouldn’t take more than a minute to say or read\n- Unique: It reflects your skills, goals, and desires\n- Storyline: It covers who you are, what you offer, and where you want to be\n- Appealing: Your elevator pitch is essentially a persuasive sales pitch; the emphasis should be on what you offer',
+        description:
+          'Use [widgets](https://wedance.vip/markdown), including images and videos',
       },
-    ])
+      {
+        name: 'url',
+        hideLabel: true,
+        placeholder: 'Link',
+      },
+      {
+        name: 'cover',
+        type: 'photo',
+        width: 500,
+        height: 500,
+        circle: false,
+        hideLabel: true,
+      },
+    ]
 
     if (params.id !== '-') {
       load(params.id)
@@ -179,8 +129,8 @@ export default {
       update,
       remove,
       create,
-      types,
       profile,
+      fields,
       isAdmin,
     }
   },
