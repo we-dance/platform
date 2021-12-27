@@ -62,26 +62,6 @@ export const accountFields = [
     ],
   },
   {
-    name: 'covid',
-    label: 'Covid Control',
-    type: 'radio',
-    event: true,
-    options: [
-      {
-        value: 'vaccinated',
-        label: 'Vaccinated',
-      },
-      {
-        value: 'recovered',
-        label: 'Recovered',
-      },
-      {
-        value: 'tested',
-        label: 'Test',
-      },
-    ],
-  },
-  {
     name: 'comment',
     label: 'Comment',
     type: 'text',

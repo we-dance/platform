@@ -89,16 +89,19 @@ export const eventFields = [
       'Use [widgets](https://wedance.vip/markdown), including images and videos',
   },
   {
+    name: 'startDate',
+    type: 'date',
+    label: 'When?',
+    labelPosition: 'top',
+    simple: true,
+    onChange: updateEndDate,
+  },
+  {
     name: 'venue',
     label: 'Where?',
     labelPosition: 'top',
     type: 'venue',
-  },
-  {
-    name: 'startDate',
-    type: 'datetime',
-    label: 'When?',
-    onChange: updateEndDate,
+    simple: true,
   },
   {
     name: 'duration',
@@ -142,13 +145,14 @@ export const eventFields = [
   },
   {
     name: 'endDate',
-    type: 'datetime',
+    type: 'date',
     when: (e) => e.duration === 'custom',
   },
   {
     name: 'price',
-    placeholder: 'Examples: 10EUR, 5USD, FREE',
-    description: 'Examples: 10EUR, 5USD, FREE',
+    labelPosition: 'top',
+    placeholder: '',
+    description: 'Please include currency, i.e. EUR, USD',
   },
   {
     name: 'styles',

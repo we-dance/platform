@@ -1,7 +1,14 @@
 <template>
-  <div class="flex space-x-4 border p-4">
+  <div v-if="showEditor" class="border p-4">
+    <TForm v-model="data" :fields="fields" class="space-y-2" @save="saveNode" />
+  </div>
+  <div v-else class="flex space-x-4 border p-4">
     <div class="flex-grow">
-      <h4 class="font-bold leading-none">{{ node.name }}</h4>
+      <router-link
+        :to="`/events/${node.id}`"
+        class="font-bold leading-none underline hover:no-underline"
+        >{{ node.name }}</router-link
+      >
       <div class="mt-2 text-sm text-gray-700 space-y-1">
         <div class="flex gap-2 items-center">
           <CalendarIcon class="w-4 h-4" />
@@ -11,7 +18,7 @@
           <LocationMarkerIcon class="w-4 h-4" />
           <TVenue :node="node.venue" />
         </div>
-        <div class="flex gap-2 items-center">
+        <div v-if="node.price" class="flex gap-2 items-center">
           <TicketIcon class="w-4 h-4" />
           {{ node.price }}
         </div>
@@ -30,6 +37,10 @@ import {
   CalendarIcon,
   TicketIcon,
 } from '@vue-hero-icons/outline'
+import { useAuth } from '~/use/auth'
+import { computed, onMounted, ref } from 'vue-demi'
+import { eventFields } from '~/use/events'
+import { useDoc } from '~/use/doc'
 
 export default {
   props: {
@@ -46,6 +57,40 @@ export default {
     LocationMarkerIcon,
     CalendarIcon,
     TicketIcon,
+  },
+  methods: {
+    saveNode(data) {
+      console.log('saveNode', this.node.id, data)
+      this.update(this.node.id, data)
+    },
+  },
+  setup(props) {
+    const { can } = useAuth()
+    const { update } = useDoc('posts')
+    const data = ref({})
+
+    onMounted(() => {
+      data.value = {
+        startDate: props.node.startDate,
+        venue: props.node.venue,
+        duration: props.node.duration || 60,
+        name: props.node.name || 'Meetup',
+      }
+    })
+
+    const showEditor = computed(() => {
+      if (!props.node) {
+        return false
+      }
+
+      const isDefined = props.node.startDate && props.node.venue
+
+      return can('edit', 'posts', props.node) && !isDefined
+    })
+
+    const fields = eventFields.filter((f) => f.simple)
+
+    return { showEditor, fields, update, data }
   },
 }
 </script>
