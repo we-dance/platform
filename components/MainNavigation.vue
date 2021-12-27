@@ -11,21 +11,19 @@
         :label="cityName || $t('cities.choose')"
         type="nav"
       />
-      <template v-if="cityName">
-        <TButton to="/feed" icon="news" :label="$t('posts.title')" type="nav" />
-        <TButton
-          to="/community"
-          icon="people"
-          :label="$t('profiles.title')"
-          type="nav"
-        />
-        <TButton
-          to="/events"
-          icon="calendar"
-          :label="$t('events.title')"
-          type="nav"
-        />
-      </template>
+      <TButton to="/feed" icon="news" :label="$t('posts.title')" type="nav" />
+      <TButton
+        to="/community"
+        icon="people"
+        :label="$t('profiles.title')"
+        type="nav"
+      />
+      <TButton
+        to="/events"
+        icon="calendar"
+        :label="$t('events.title')"
+        type="nav"
+      />
       <TButton to="/chat" icon="chat" :label="$t('chat.title')" type="nav" />
       <TButton :to="`/${username}`" type="nav">
         <TProfilePhoto size="xs" :uid="uid" class="mr-1" />
