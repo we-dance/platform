@@ -40,7 +40,7 @@
           <TCardEvent v-if="!$route.query.variant" :node="item" class="my-2" />
 
           <TSharePreviewPost
-            v-if="!$route.query.variant === 2"
+            v-if="$route.query.variant === '2'"
             :username="item.username"
             collection="events"
             :title="item.name"
