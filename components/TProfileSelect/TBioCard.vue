@@ -7,16 +7,18 @@
     <div
       :class="[
         { 'hover:bg-gray-200 cursor-pointer': !showTools },
-        'flex-row gap-2 flex justify-between items-center h-16 m-1 border-gray-200 border-2  px-2',
+        'flex-row gap-2 flex justify-between items-center py-2 m-1 border-gray-200 border-2  px-2 h-full',
       ]"
     >
       <div class="flex-shrink-0 w-12">
         <a href="#" class="block relative">
           <img
+            v-if="avatar"
             alt="profil"
             :src="avatar"
             class="mx-auto object-cover rounded-full h-12 w-12"
           />
+          <TIcon v-else-if="!avatar" name="people" />
         </a>
       </div>
       <div class=" flex flex-col w-full">
@@ -26,7 +28,7 @@
         >
           {{ name }}
         </span>
-        <span v-if="bio" class="text-gray-600 text-xs">
+        <span v-if="bio" class="text-gray-600 text-xs h-fit">
           {{ bio }}
         </span>
         <span v-if="role" class="text-gray-800 text-xs">

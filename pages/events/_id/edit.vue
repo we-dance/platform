@@ -170,8 +170,9 @@ export default {
             placeholder: 'Event Name',
           },
           {
-            name: 'Artist List',
+            label: 'Artist List',
             type: 'artists',
+            labelPosition: 'top',
           },
           {
             name: 'description',
