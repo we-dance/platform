@@ -82,9 +82,7 @@ export default {
         return false
       }
 
-      const isDefined = props.node.startDate && props.node.venue
-
-      return can('edit', 'posts', props.node) && !isDefined
+      return can('edit', 'posts', props.node) && !props.node.name
     })
 
     const fields = eventFields.filter((f) => f.simple)

@@ -73,7 +73,9 @@ export default {
 
       if (field) {
         collection = collection.where(field, '==', value)
-      } else {
+      }
+
+      if (props.orderBy) {
         collection = collection.orderBy(props.orderBy, props.orderByDirection)
       }
 

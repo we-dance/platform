@@ -76,7 +76,10 @@ export default {
         Watching: { filter: { [`watch.list.${username.value}`]: true } },
         Starred: { filter: { [`star.list.${username.value}`]: true } },
         Archived: { filter: { [`hide.list.${username.value}`]: true } },
-        Authored: { filter: { username: username.value } },
+        Authored: {
+          orderBy: 'createdAt',
+          filter: { username: username.value },
+        },
       }
 
       return map[filterType.value]
