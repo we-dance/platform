@@ -116,8 +116,7 @@ export default {
       ls.remove('target')
 
       if (!target) {
-        const page = this.profile?.username || 'onboarding'
-        target = '/' + page
+        target = '/feed'
       }
 
       this.$router.push(target)

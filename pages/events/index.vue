@@ -9,7 +9,7 @@
         v-model="eventType"
         clearable
         hide-search-box
-        :options="eventTypeList"
+        :options="eventTypeListIcons"
         :placeholder="$t('event.type')"
       />
       <t-rich-select
@@ -106,7 +106,7 @@ import { useAuth } from '~/use/auth'
 import { useCities } from '~/use/cities'
 import { useRouter } from '~/use/router'
 import { useProfiles } from '~/use/profiles'
-import { useEvents } from '~/use/events'
+import { eventTypeListIcons } from '~/use/events'
 import { useStyles } from '~/use/styles'
 import { addressPart } from '~/use/google'
 
@@ -123,9 +123,10 @@ import {
 export default {
   name: 'EventsIndex',
   setup() {
-    const { eventTypeListIcons: eventTypeList } = useEvents()
     const { currentCity } = useCities()
-    const { docs, loading: loadingPosts, getById } = useCollection('events')
+    const { docs, loading: loadingPosts, getById } = useCollection('posts', {
+      type: 'event',
+    })
     const { getProfile } = useProfiles()
     const { getStylesDropdown } = useStyles()
 
@@ -273,7 +274,7 @@ export default {
       dances,
       view,
       viewOptions,
-      eventTypeList,
+      eventTypeListIcons,
       eventType,
       danceStyles,
     }
