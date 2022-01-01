@@ -14,7 +14,7 @@
         <a href="#" class="block relative">
           <img
             v-if="avatar"
-            alt="profil"
+            :alt="username"
             :src="avatar"
             class="mx-auto object-cover rounded-full h-12 w-12"
           />
@@ -23,10 +23,10 @@
       </div>
       <div class=" flex flex-col w-full">
         <span
-          v-if="name"
+          v-if="username"
           class="text-gray-600 dark:text-white text-lg font-medium"
         >
-          {{ name }}
+          {{ username }}
         </span>
         <span v-if="bio" class="text-gray-600 text-xs h-fit">
           {{ bio }}
@@ -63,7 +63,7 @@ export default {
       type: String,
       default: '',
     },
-    name: {
+    username: {
       type: String,
       default: '',
     },

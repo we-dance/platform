@@ -39,6 +39,7 @@ export default {
     const select = (p) => {
       selectedList.value.push(p)
       toggle.value = false
+      query.value = ''
     }
     //  TODO: already selected item will be disabled.
     // eslint-disable-next-line no-unused-vars

@@ -1,12 +1,9 @@
 <template>
-  <ul
-    :class="[{ 'px-6': !showTools }, 'overflow-y-scroll']"
-    :style="{ maxHeight: '320px', height: 'fit-content' }"
-  >
+  <ul :class="[{ 'px-6 h-64 overflow-y-scroll': !showTools }]">
     <li v-for="p in list" :key="!showTools ? p.id + 'drop' : p.id + 'card'">
       <TBioCard
         :avatar="p.photo"
-        :name="p.username"
+        :username="p.username"
         :bio="p.bio"
         :role="p.role"
         :show-tools="showTools"
