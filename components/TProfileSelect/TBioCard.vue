@@ -13,12 +13,12 @@
       <div class="flex-shrink-0 w-12">
         <a href="#" class="block relative">
           <img
-            v-if="avatar"
+            v-if="photo"
             :alt="username"
-            :src="avatar"
+            :src="photo"
             class="mx-auto object-cover rounded-full h-12 w-12"
           />
-          <TIcon v-else-if="!avatar" name="people" />
+          <TIcon v-else-if="!photo" name="people" />
         </a>
       </div>
       <div class=" flex flex-col w-full">
@@ -59,7 +59,7 @@
 export default {
   name: 'TBioCard',
   props: {
-    avatar: {
+    photo: {
       type: String,
       default: '',
     },

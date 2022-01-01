@@ -6,11 +6,12 @@
       @edit="edit"
       @remove="remove"
     />
+    <TBioModal v-bind="profileToEdit" :close="closeModal" :show="isModalOpen" />
     <div class="relative text-sm leading-tight ">
       <div class="inline-block relative w-full">
         <TSelectButton :toggle-dropdown="toggleDropdown" label="Add artist" />
         <div
-          v-if="toggle"
+          v-if="isListOpen"
           class="absolute w-full z-50 bg-white border-gray-300 border-2 px-2"
         >
           <TInput v-model="query" auto-focus class="my-2" @input="search" />
@@ -33,12 +34,14 @@ export default {
   setup() {
     const query = ref('')
     const { search, response } = useAlgolia('profiles')
-    const toggle = ref(false)
+    const isListOpen = ref(false)
+    const isModalOpen = ref(false)
     const selectedList = ref([])
+    const profileToEdit = ref({})
 
     const select = (p) => {
       selectedList.value.push(p)
-      toggle.value = false
+      isListOpen.value = false
       query.value = ''
     }
     //  TODO: already selected item will be disabled.
@@ -56,6 +59,8 @@ export default {
 
     const edit = (p) => {
       console.log('edit', p)
+      profileToEdit.value = p
+      isModalOpen.value = true
     }
 
     const remove = (pId) => {
@@ -63,19 +68,24 @@ export default {
     }
 
     const toggleDropdown = () => {
-      toggle.value = !toggle.value
+      isListOpen.value = !isListOpen.value
     }
-
+    const closeModal = () => {
+      isModalOpen.value = false
+    }
     return {
       query,
-      toggle,
+      isListOpen,
+      isModalOpen,
       selectedList,
       response,
+      profileToEdit,
       select,
       toggleDropdown,
       edit,
       remove,
       search,
+      closeModal,
     }
   },
 }
