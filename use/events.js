@@ -90,7 +90,7 @@ export const eventFields = [
   },
   {
     name: 'startDate',
-    type: 'date',
+    type: 'datetime-local',
     label: 'When?',
     labelPosition: 'top',
     simple: true,
@@ -145,7 +145,7 @@ export const eventFields = [
   },
   {
     name: 'endDate',
-    type: 'date',
+    type: 'datetime-local',
     when: (e) => e.duration === 'custom',
   },
   {
