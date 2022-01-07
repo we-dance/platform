@@ -23,7 +23,7 @@
       </div>
       <div class="flex-grow">
         <div class="block text-sm leading-tight">
-          <h4 class="font-bold">{{ item.title }}</h4>
+          <h4 v-if="item.title" class="font-bold">{{ item.title }}</h4>
           <TPreview :excerpt="showExcerpt" :content="item.description" />
           <div
             v-if="item.description && item.description.length > 140"
