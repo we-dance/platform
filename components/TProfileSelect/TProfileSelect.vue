@@ -6,7 +6,9 @@
       @edit="edit"
       @remove="remove"
     />
-    <TBioModal v-bind="profileToEdit" :close="closeModal" :show="isModalOpen" />
+    <TPopup v-if="isModalOpen">
+      <TBioEditModal v-bind="profileToEdit" @close="isModalOpen = false" />
+    </TPopup>
     <div class="relative text-sm leading-tight ">
       <div class="inline-block relative w-full">
         <TSelectButton :toggle-dropdown="toggleDropdown" label="Add artist" />
