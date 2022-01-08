@@ -10,12 +10,12 @@
             {
               label: 'Post',
               value: 'posts',
-              to: `/posts/${item.id}/edit`,
+              to: `/posts/${item.id || '-'}/edit`,
             },
             {
               label: 'Event',
               value: 'events',
-              to: `/events/${item.id}/edit`,
+              to: `/events/${item.id || '-'}/edit`,
             },
           ]"
         />
