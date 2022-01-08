@@ -53,7 +53,7 @@ export const getDateObect = (val) => {
 
 export const dateDiff = (val) => {
   if (!val) return ''
-  return formatDistance(getDateObect(val), new Date())
+  return formatDistance(getDateObect(val), new Date(), { addSuffix: true })
 }
 
 export const formatDate = (val, formatStr) => {
