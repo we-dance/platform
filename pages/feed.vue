@@ -15,12 +15,7 @@
           @keyup.enter="send"
         ></textarea>
         <div class="flex justify-between">
-          <TInputSelect
-            v-model="postType"
-            icon="add"
-            type="simple"
-            :options="postTypeList"
-          />
+          <TInputSelectSmall v-model="postType" :options="postTypeList" />
           <TButton @click="send" title="post a message">Send</TButton>
         </div>
       </div>
