@@ -5,13 +5,10 @@
     @click="$listeners.select"
   >
     <div
-      :class="[
-        { 'hover:bg-gray-200 cursor-pointer': !showTools },
-        'flex-row gap-2 flex justify-between items-center py-2 m-1 border-gray-200 border-2  px-2 h-full',
-      ]"
+      class="flex-row gap-2 flex justify-between items-center py-2 m-1 border-gray-200 border-2  px-2 h-full"
     >
       <div class="flex-shrink-0 w-12">
-        <a href="#" class="block relative">
+        <router-link :to="'/' + username">
           <img
             v-if="photo"
             :alt="username"
@@ -19,7 +16,7 @@
             class="mx-auto object-cover rounded-full h-12 w-12"
           />
           <TIcon v-else-if="!photo" name="people" />
-        </a>
+        </router-link>
       </div>
       <div class=" flex flex-col w-full">
         <span
@@ -47,7 +44,7 @@
         />
         <TButton
           icon="edit"
-          type="icon"
+          type="void"
           class="pr-2"
           @click="$listeners.edit"
         />

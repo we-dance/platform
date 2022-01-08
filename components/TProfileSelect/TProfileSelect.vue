@@ -7,7 +7,11 @@
       @remove="remove"
     />
     <TPopup v-if="isModalOpen">
-      <TBioEditModal v-bind="profileToEdit" @close="isModalOpen = false" />
+      <TBioEditModal
+        v-bind="profileToEdit"
+        @close="isModalOpen = false"
+        @saveedit="saveEdit"
+      />
     </TPopup>
     <div class="relative text-sm leading-tight ">
       <div class="inline-block relative w-full">
@@ -19,7 +23,7 @@
           <TInput v-model="query" auto-focus class="my-2" @input="search" />
           <TProfileList
             :show-tools="false"
-            :list="response.hits"
+            :list="withSelectedResponse"
             @select="select"
           />
         </div>
@@ -28,7 +32,7 @@
   </div>
 </template>
 <script>
-import { ref } from '@nuxtjs/composition-api'
+import { computed, ref } from '@nuxtjs/composition-api'
 import { useAlgolia } from '~/use/algolia'
 
 export default {
@@ -42,27 +46,35 @@ export default {
     const profileToEdit = ref({})
 
     const select = (p) => {
-      selectedList.value.push(p)
-      isListOpen.value = false
-      query.value = ''
+      const isAlreadySelected = selectedList.value.some((sp) => sp.id === p.id)
+      if (!isAlreadySelected) {
+        selectedList.value.push(p)
+        isListOpen.value = false
+        query.value = ''
+      }
     }
-    //  TODO: already selected item will be disabled.
-    // eslint-disable-next-line no-unused-vars
-    const withSelectionArr = (() => {
+
+    const withSelectedResponse = computed(() => {
       const { hits } = response.value
-      const selectionArr = hits?.map((p, ind) => {
-        if (selectedList.value[ind]?.id === p.id) {
+      const selectionArr = hits?.map((p) => {
+        const isAlreadySelected = selectedList.value.some(
+          (sp) => sp.id === p.id
+        )
+        if (isAlreadySelected) {
           return { selected: true, ...p }
         }
         return { selected: false, ...p }
       })
       return selectionArr
-    })()
+    })
 
     const edit = (p) => {
-      console.log('edit', p)
       profileToEdit.value = p
       isModalOpen.value = true
+    }
+
+    const saveEdit = () => {
+      console.log('save edit')
     }
 
     const remove = (pId) => {
@@ -80,7 +92,7 @@ export default {
       isListOpen,
       isModalOpen,
       selectedList,
-      response,
+      withSelectedResponse,
       profileToEdit,
       select,
       toggleDropdown,
@@ -88,6 +100,7 @@ export default {
       remove,
       search,
       closeModal,
+      saveEdit,
     }
   },
 }

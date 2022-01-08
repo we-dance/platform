@@ -2,7 +2,7 @@
   <div class="m-2">
     <div class="py-2 m-1 px-2">
       <div class="flex w-full justify-center">
-        <a href="" class="block relative">
+        <router-link :to="'/' + username">
           <img
             v-if="photo"
             :alt="username"
@@ -10,7 +10,7 @@
             class="mx-auto object-cover rounded-full h-12 w-12"
           />
           <TIcon v-else-if="!photo" name="people" />
-        </a>
+        </router-link>
       </div>
       <div class=" flex flex-col w-full">
         <span>
@@ -19,7 +19,11 @@
         </span>
         <span
           >Bio
-          <TInputTextarea v-model="bio" :rows="bio.length / 17" class="py-2" />
+          <TInputTextarea
+            v-model="bio"
+            :rows="bio.length / 17 + 2"
+            class="py-2"
+          />
         </span>
         <span
           >Role
@@ -28,10 +32,10 @@
       </div>
     </div>
     <div class="flex justify-between">
-      <TButton type="danger" class="text-sm" @click="$emit('close')">
+      <TButton type="base" class="text-sm" @click="$emit('close')">
         Cancel
       </TButton>
-      <TButton type="success" class="text-sm" @click="$emit('edit')">
+      <TButton type="success" class="text-sm" @click="$emit('saveedit')">
         Save
       </TButton>
     </div>
@@ -39,7 +43,7 @@
 </template>
 <script>
 export default {
-  name: 'TBioModal',
+  name: 'TBioEditModal',
   props: {
     show: {
       type: Boolean,
