@@ -1,6 +1,6 @@
 <template>
   <div
-    class="font-sans leading-normal tracking-normal antialiased min-h-screen flex flex-col mx-auto max-w-3xl border-r"
+    class="font-sans leading-normal tracking-normal antialiased min-h-screen flex flex-col mx-auto max-w-2xl border-r"
   >
     <TPopup
       v-if="showAuthPopup"

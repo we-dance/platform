@@ -1,28 +1,24 @@
 <template>
-  <div
-    v-if="isHidden"
-    class="border-b p-4 text-xs flex justify-between items-center"
-  >
-    <TPreview
-      excerpt
-      :content="item.description"
-      class="flex-grow-1 text-gray-600"
-    />
-    <TReaction
-      label="Hide"
-      toggledLabel="Unhide"
-      field="hide"
-      icon="EyeOffIcon"
-      :item="item"
-    />
-  </div>
-  <div v-else ref="postRef" class="border-b p-4">
-    <div class="flex items-start">
-      <div v-if="!item.hideMeta && !hideMedia" class="w-12 flex-shrink-0">
+  <div ref="postRef" class="border-b">
+    <div class="flex items-start p-4">
+      <div v-if="!item.hideMeta && !hideMedia" class="w-10 flex-shrink-0">
         <TAvatar photo size="md" :uid="item.createdBy" />
       </div>
       <div class="flex-grow">
         <div class="block text-sm leading-tight">
+          <div class="flex space-x-1 text-xs">
+            <router-link
+              :to="`/${item.username}`"
+              class="font-bold hover:underline"
+              >{{ item.username }}</router-link
+            >
+            <span>•</span>
+            <div>{{ dateDiff(item.createdAt) }}</div>
+            <template v-if="item.region">
+              <span>•</span>
+              <div>{{ item.region.name }}</div>
+            </template>
+          </div>
           <h4 v-if="item.title" class="font-bold">{{ item.title }}</h4>
           <TPreview :excerpt="showExcerpt" :content="item.description" />
           <div
@@ -38,6 +34,7 @@
       <TDropdown
         v-if="!item.hideMeta || can('edit', 'posts', item)"
         title="report or share"
+        class="-mr-4"
       >
         <TButton
           v-if="can('edit', 'posts', item) && item.type !== 'event'"
@@ -78,16 +75,13 @@
         />
       </TDropdown>
     </div>
-    <div>
-      <TCardLink v-if="item.url" :url="item.url" class="my-2" />
-
-      <TCardPoll v-if="item.type === 'poll'" :node="item" class="my-2" />
-
-      <template v-if="item.type === 'event' && !hideMedia">
-        <TCardEvent v-if="!$route.query.variant" :node="item" class="my-2" />
-
+    <div v-if="!hideMedia">
+      <router-link
+        v-if="item.type === 'event'"
+        :to="`/events/${item.id}`"
+        class="hover:opacity-75"
+      >
         <TSharePreviewPost
-          v-if="$route.query.variant === '2'"
           :username="item.username"
           collection="events"
           :title="item.name"
@@ -97,65 +91,53 @@
           :photo="item.cover"
           :styles="item.styles"
           size="sm"
-          class="my-2"
         />
-      </template>
+      </router-link>
 
-      <div
-        v-if="!item.hideMeta && !hideMedia"
-        class="text-xs space-x-1 text-gray-900 flex"
+      <TCardPoll v-else-if="item.type === 'poll'" :node="item" />
+
+      <TCardLink v-else-if="item.url" :url="item.url" />
+    </div>
+
+    <div v-if="!item.hideComments" class="border-t p-4">
+      <router-link
+        v-if="item.commentsCount > 1"
+        :to="`/posts/${item.id}`"
+        class="p-2 text-blue-700 cursor-pointer underline hover:no-underline text-xs text-center mb-2 block"
       >
-        <router-link :to="`/${item.username}`" class="hover:underline">{{
-          item.username
-        }}</router-link>
-        <span>•</span>
-        <div>{{ dateDiff(item.createdAt) }} ago</div>
-        <template v-if="item.region">
-          <span>•</span>
-          <div>{{ item.region.name }}</div>
-        </template>
+        Show all {{ item.commentsCount - 1 }} comments
+      </router-link>
+      <div
+        v-if="item.commentsCount < 0"
+        class="text-xs text-gray-900 p-2 text-center mb-2"
+      >
+        There are no replies yet.
       </div>
-
-      <div v-if="!item.hideComments" class="border-t mt-4">
-        <router-link
-          v-if="item.commentsCount > 1"
-          :to="`/posts/${item.id}`"
-          class="p-2 text-blue-700 cursor-pointer underline hover:no-underline text-xs text-center mb-2 block"
-        >
-          Show all {{ item.commentsCount - 1 }} comments
-        </router-link>
-        <div
-          v-if="item.commentsCount < 0"
-          class="text-xs text-gray-900 p-2 text-center mb-2"
-        >
-          There are no replies yet.
-        </div>
-        <div
-          v-if="item.commentsCount > 0"
-          class="flex text-xs space-x-1 text-gray-900 p-2"
-        >
-          <div>
-            <TAvatar photo name :uid="item.commentsLast.createdBy">
-              <span>•</span>
-              <div>{{ dateDiff(item.commentsLast.createdAt) }} ago</div>
-            </TAvatar>
-            <div class="mt-1">{{ item.commentsLast.body }}</div>
-          </div>
-        </div>
+      <div
+        v-if="item.commentsCount > 0"
+        class="flex text-xs space-x-1 text-gray-900 p-2 overflow-hidden"
+      >
         <div>
-          <textarea
-            v-model="newReply"
-            rows="1"
-            :placeholder="`Reply to ${item.username}`"
-            class="w-full border p-2 text-xs text-gray-900"
-            @keyup.enter="sendReply"
-          ></textarea>
+          <TAvatar photo name :uid="item.commentsLast.createdBy">
+            <span>•</span>
+            <div>{{ dateDiff(item.commentsLast.createdAt) }} ago</div>
+          </TAvatar>
+          <div class="mt-1">{{ item.commentsLast.body }}</div>
         </div>
+      </div>
+      <div>
+        <textarea
+          v-model="newReply"
+          rows="1"
+          :placeholder="`Reply to ${item.username}`"
+          class="w-full border p-2 text-xs text-gray-900"
+          @keyup.enter="sendReply"
+        ></textarea>
       </div>
     </div>
     <div
       v-if="!item.hideReactions"
-      class="flex flex-wrap gap-2 justify-center items-center"
+      class="flex flex-wrap gap-2 justify-center items-center p-4"
     >
       <TReaction
         label="Watch"
@@ -169,13 +151,6 @@
         toggledLabel="Starred"
         field="star"
         icon="StarIcon"
-        :item="item"
-      />
-      <TReaction
-        label="Hide"
-        toggledLabel="Unhide"
-        field="hide"
-        icon="EyeOffIcon"
         :item="item"
       />
       <div class="text-xs text-gray-500">{{ item.viewsCount }} views</div>

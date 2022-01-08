@@ -57,7 +57,6 @@ export default {
       { label: 'Newest', value: 'Newest' },
       { label: 'Hot', value: 'Hot' },
       { label: 'Popular', value: 'Popular' },
-      { label: 'Unpopular', value: 'Unpopular' },
       { label: 'Watching', value: 'Watching' },
       { label: 'Starred', value: 'Starred' },
       { label: 'Archived', value: 'Archived' },
