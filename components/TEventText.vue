@@ -33,13 +33,7 @@
           icon="EyeIcon"
           :item="item"
         />
-        <TReaction
-          label="Star"
-          toggledLabel="Starred"
-          field="star"
-          icon="StarIcon"
-          :item="item"
-        />
+        <TStars :item="item" />
       </div>
       <div>
         <div class="text-xs flex flex-wrap gap-1">

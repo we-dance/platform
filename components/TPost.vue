@@ -146,13 +146,7 @@
         icon="EyeIcon"
         :item="item"
       />
-      <TReaction
-        label="Star"
-        toggledLabel="Starred"
-        field="star"
-        icon="StarIcon"
-        :item="item"
-      />
+      <TStars :item="item" />
       <div class="text-xs text-gray-500">{{ item.viewsCount }} views</div>
     </div>
   </div>
