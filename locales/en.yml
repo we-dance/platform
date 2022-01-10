@@ -69,6 +69,8 @@ posts.register: Register
 posts.link.read: to read full post. Not a member yet?
 posts.link.discuss: to see discussion. Not a member yet?
 posts.edit.new-post: Write a new post
+posts.edit.submitlabel: Save
+posts.edit.addlabel: Add
 
 community.title: Community
 community.radius.select: Radius

@@ -17,7 +17,9 @@
         vertical
         :show-cancel="!!id"
         :show-remove="!!id"
-        :submit-label="id ? 'Save' : 'Add'"
+        :submit-label="
+          id ? $t('posts.edit.submitlabel') : $t('posts.edit.addlabel')
+        "
         class="bg-white p-4 space-y-4"
         @save="saveItem"
         @cancel="cancelItem"
