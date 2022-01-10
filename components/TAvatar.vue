@@ -1,5 +1,5 @@
 <template>
-  <div class="flex items-center">
+  <div class="flex items-center space-x-1">
     <div v-if="photo">
       <router-link :to="`/${profile.username}`">
         <TProfilePhoto :uid="uid" :size="size" />
@@ -10,6 +10,7 @@
         {{ profile.username }}
       </router-link>
     </div>
+    <slot />
   </div>
 </template>
 

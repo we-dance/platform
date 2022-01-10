@@ -32,6 +32,7 @@
     "@nuxtjs/toast": "^3.3.1",
     "@tailwindcss/forms": "^0.2.1",
     "@voerro/vue-tagsinput": "^2.2.0",
+    "@vue-hero-icons/outline": "^1.7.2",
     "@vue/reactivity": "^3.2.19",
     "@vueuse/core": "^4.8.1",
     "@vueuse/firebase": "^4.4.1",

@@ -4,7 +4,7 @@
     {{ $t('events.dashboard.empty') }}
   </div>
   <main
-    v-else-if="!can('edit', 'events', item)"
+    v-else-if="!can('edit', 'posts', item)"
     class="mt-4 mx-auto max-w-md p-4 text-sm text-center"
   >
     {{ $t('events.dashboard.description') }}
@@ -306,7 +306,7 @@ export default {
     const { params } = useRouter()
     const { getProfile } = useProfiles()
 
-    const { doc, load, exists, loading } = useDoc('events')
+    const { doc, load, exists, loading } = useDoc('posts')
     const { create } = useDoc('emails')
     const { map } = useReactions()
     const selectedParticipants = ref({})
@@ -467,14 +467,14 @@ export default {
       if (addingGuest.value && addingGuest.value !== true) {
         const rsvp = await createGuestRsvp(
           params.id,
-          'events',
+          'posts',
           'up',
           participant,
           { partnerId: addingGuest.value }
         )
         update(addingGuest.value, { partnerId: rsvp.id })
       } else {
-        await createGuestRsvp(params.id, 'events', 'up', participant)
+        await createGuestRsvp(params.id, 'posts', 'up', participant)
       }
 
       addingGuest.value = false

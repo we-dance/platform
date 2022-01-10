@@ -5,7 +5,7 @@ import { useAuth } from '~/use/auth'
 import stats from '~/stats'
 
 export const useDoc = (name) => {
-  const { uid } = useAuth()
+  const { uid, username } = useAuth()
 
   const firestore = firebase.firestore()
 
@@ -96,6 +96,16 @@ export const useDoc = (name) => {
     return true
   }
 
+  async function softUpdate(id, data) {
+    state.saving = true
+
+    const result = await collection.doc(id).update(data)
+
+    state.saving = false
+
+    return result
+  }
+
   async function update(id, data) {
     state.saving = true
 
@@ -120,6 +130,7 @@ export const useDoc = (name) => {
       updatedAt: +new Date(),
       createdBy: uid.value,
       updatedBy: uid.value,
+      username: username.value,
       ...data,
     })
 
@@ -147,6 +158,7 @@ export const useDoc = (name) => {
       updatedAt: +new Date(),
       createdBy: uid.value,
       updatedBy: uid.value,
+      username: username.value,
       ...data,
     })
 
@@ -165,6 +177,7 @@ export const useDoc = (name) => {
     create,
     find,
     update,
+    softUpdate,
     load,
     remove,
     isCreator,

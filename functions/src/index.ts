@@ -38,6 +38,13 @@ app.post('/track/:action', async (req, res) => {
       chatId: campaignId,
       date: admin.firestore.Timestamp.now(),
     })
+  } else if (type === 'commentNotification') {
+    await db.collection('commentNotifications').add({
+      uid,
+      action,
+      commentId: campaignId,
+      date: admin.firestore.Timestamp.now(),
+    })
   } else if (type === 'welcomeEmail') {
     await db
       .collection('templates')
@@ -349,10 +356,15 @@ export const profileCreated = functions.firestore
   })
 
 export const eventCreated = functions.firestore
-  .document('events/{eventId}')
+  .document('posts/{eventId}')
   .onCreate(async (snapshot, context) => {
     const eventId = context.params.eventId
     const event = snapshot.data() as any
+
+    if (event.type !== 'event') {
+      return
+    }
+
     const cache = (
       await db
         .collection('app')
@@ -411,7 +423,7 @@ export const eventConfirmation = functions.firestore
 
     const event: any = (
       await db
-        .collection('events')
+        .collection('posts')
         .doc(rsvp.eventId)
         .get()
     ).data()
@@ -423,20 +435,105 @@ export const eventConfirmation = functions.firestore
       return
     }
 
-    const from = 'WeDance <noreply@wedance.vip>'
-
     const data = {
       guest,
       event,
     }
 
     const email = {
-      from,
+      from: 'WeDance <noreply@wedance.vip>',
       recipients,
       subject,
       content: render(content, data),
       type: 'eventConfirmation',
       id: rsvpId,
+    }
+
+    await sendEmail(email)
+  })
+
+async function getAccountByUsername(username: string) {
+  const profiles = await db
+    .collection('profiles')
+    .where('username', '==', username)
+    .get()
+
+  if (profiles.docs.length !== 1) {
+    return null
+  }
+
+  const id = profiles.docs[0].id
+
+  const account: any = (
+    await db
+      .collection('accounts')
+      .doc(id)
+      .get()
+  ).data()
+
+  account.id = id
+
+  return account
+}
+
+export const commentNotification = functions.firestore
+  .document('comments/{commentId}')
+  .onWrite(async (change, context) => {
+    const comment = change.after.data() as any
+    const commentId = context.params.commentId
+
+    const post: any = (
+      await db
+        .collection('posts')
+        .doc(comment.postId)
+        .get()
+    ).data()
+
+    if (!post.watch) {
+      return
+    }
+
+    const watchList = post.watch.list
+    const watchUsernames = Object.keys(watchList)
+
+    const recipients: RecipientList = {}
+
+    for (const username of watchUsernames) {
+      const account = await getAccountByUsername(username)
+
+      if (!account) {
+        continue
+      }
+
+      if (comment.createdBy === account.id) {
+        continue
+      }
+
+      recipients[account.id] = {
+        name: username,
+        email: account.email,
+      }
+    }
+
+    const content = `
+**${comment.username} replied:**
+
+${comment.body}
+
+**on post ${post.title || ''}**
+
+${post.description}
+
+[View comment](https://wedance.vip/posts/${post.id}#comment-${commentId})
+`
+
+    const email = {
+      from: 'WeDance <noreply@wedance.vip>',
+      recipients,
+      subject: 'New comment on post you are watching',
+      content,
+      type: 'commentNotification',
+      id: commentId,
     }
 
     await sendEmail(email)
