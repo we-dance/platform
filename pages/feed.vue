@@ -1,7 +1,8 @@
 <template>
   <div>
     <THeader title="Feed" />
-    <div class="border-b p-4 flex items-start">
+
+    <div v-if="$route.query.new" class="border-b p-4 flex items-start">
       <div class="w-10 flex-shrink-0">
         <TAvatar photo size="md" :uid="uid" />
       </div>
@@ -18,6 +19,41 @@
           <TInputSelectSmall v-model="postType" :options="postTypeList" />
           <TButton @click="send" title="post a message">Send</TButton>
         </div>
+      </div>
+    </div>
+
+    <div class="border-b p-4">
+      <div class="space-y-2">
+        <TField
+          label="I want to"
+          type="buttons"
+          label-position="top"
+          v-model="postData.category"
+          :options="['find', 'recommend', 'offer']"
+        />
+        <TField
+          label="What"
+          type="buttons"
+          label-position="top"
+          v-model="postData.entity"
+          :options="['dance partner', 'volunteer', 'event', 'venue', 'other']"
+        />
+        <TField
+          label="Where"
+          type="place"
+          placeholder="Anywhere"
+          label-position="top"
+          v-model="postData.location"
+        />
+        <TField
+          label="Dances"
+          type="stylesSelect"
+          label-position="top"
+          v-model="postData.style"
+        />
+      </div>
+      <div class="flex justify-end mt-4">
+        <TButton type="primary">Continue</TButton>
       </div>
     </div>
 
@@ -47,6 +83,12 @@ export default {
     const { getPlace } = useApp()
     const newMessage = ref('')
     const postType = ref('')
+    const postData = ref({
+      category: 'find',
+      entity: 'dance partner',
+      location: '',
+      style: '',
+    })
 
     const filterTypeList = [
       { label: 'Newest', value: 'Newest' },
@@ -122,6 +164,7 @@ export default {
       postType,
       filterTypeList,
       postTypeList,
+      postData,
     }
   },
 }
