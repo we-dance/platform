@@ -70,7 +70,6 @@ import TInputStylesSelect2 from '~/components/TInput/TInputStylesSelect2'
 import TInputLanguages from '~/components/TInput/TInputLanguages'
 import TInputButtons from '~/components/TInput/TInputButtons'
 import TInputUsername from '~/components/TInput/TInputUsername'
-import TInputDateTime from '~/components/TInput/TInputDateTime'
 
 export default {
   name: 'TField',
