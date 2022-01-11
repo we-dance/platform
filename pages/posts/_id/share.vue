@@ -6,7 +6,7 @@
     :description="getExcerpt(post.description)"
     :photo="post.cover"
     :styles="post.styles"
-    price="Read more on wedance.vip"
+    :price="$t('posts.share.price')"
   />
 </template>
 

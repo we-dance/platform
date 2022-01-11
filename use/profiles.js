@@ -120,53 +120,61 @@ export const objectivesList = [
 export const contactFields = [
   {
     name: 'instagram',
-    label: 'instagram.com/',
+    key: 'profile.contacts.instagram',
     placeholder: 'username',
     when: (p) => p.contacts === 'Yes',
   },
   {
     name: 'facebook',
+    key: 'profile.contacts.facebook',
     label: 'fb.com/',
     placeholder: 'username',
     when: (p) => p.contacts === 'Yes',
   },
   {
     name: 'whatsapp',
+    key: 'profile.contacts.whatsapp',
     label: 'chat.whatsapp.com/',
     placeholder: 'whatsapp chat',
     when: (p) => p.contacts === 'Yes',
   },
   {
     name: 'telegram',
+    key: 'profile.contacts.telegram',
     label: 't.me/',
     placeholder: 'username',
     when: (p) => p.contacts === 'Yes',
   },
   {
     name: 'twitter',
+    key: 'profile.contacts.twitter',
     label: 'twitter.com/',
     placeholder: 'username',
     when: (p) => p.contacts === 'Yes',
   },
   {
     name: 'tiktok',
+    key: 'profile.contacts.tiktok',
     label: 'tiktok.com/',
     placeholder: 'username',
     when: (p) => p.contacts === 'Yes',
   },
   {
     name: 'youtube',
+    key: 'profile.contacts.youtube',
     label: 'youtube.com/',
     placeholder: 'username',
     when: (p) => p.contacts === 'Yes',
   },
   {
     name: 'email',
+    key: 'profile.contacts.email',
     placeholder: 'for business requests',
     when: (p) => p.contacts === 'Yes',
   },
   {
     name: 'website',
+    key: 'profile.contacts.website',
     placeholder: 'for business requests',
     when: (p) => p.contacts === 'Yes',
   },
@@ -207,7 +215,7 @@ export const profileFields = [
   },
   {
     name: 'styles',
-    label: 'Dances',
+    key: 'profile.dances',
     labelPosition: 'top',
     poster: true,
     type: 'stylesSelect',
@@ -241,7 +249,7 @@ export const profileFields = [
   },
   {
     name: 'place',
-    label: 'Your city',
+    key: 'profile.your-city',
     register: true,
     poster: true,
     required: true,
@@ -266,7 +274,7 @@ export const profileFields = [
   },
   {
     name: 'permission',
-    label: 'Do you want free promo?',
+    key: 'profile.permission',
     poster: true,
     type: 'buttons',
     options: booleanOptions,
@@ -319,7 +327,7 @@ export const profileFields = [
   },
   {
     name: 'jobs',
-    label: 'I can help with',
+    key: 'profile.jobs',
     type: 'textarea',
     description:
       'How can you help our community? What are you good at? For example: design, programming, marketing, social media, etc.',
@@ -350,7 +358,7 @@ export const profileFields = [
   },
   {
     name: 'partnerBio',
-    label: 'Question',
+    key: 'Question',
     when: (p) => p.partner === 'Yes',
     type: 'textarea',
     description:
@@ -372,7 +380,7 @@ export const profileFields = [
   },
   {
     name: 'contacts',
-    label: 'Do you use social media?',
+    key: 'profile.contacts',
     type: 'buttons',
     options: booleanOptions,
   },

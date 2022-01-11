@@ -50,7 +50,7 @@ export const eventTypeListIcons = eventTypeList.map((type) => ({
 }))
 
 export function getEventIcon(eventType) {
-  let typeOption =
+  const typeOption =
     eventTypeListIcons.find((type) => type.value === eventType) || 'Other'
 
   return typeOption.icon

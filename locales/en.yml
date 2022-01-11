@@ -71,11 +71,27 @@ posts.link.discuss: to see discussion. Not a member yet?
 posts.edit.new-post: Write a new post
 posts.edit.submitlabel: Save
 posts.edit.addlabel: Add
+posts.share.price: Read more on wedance.vip
 
 community.title: Community
 community.radius.select: Radius
 community.reset-filter.button: Reset filters
 
+profile.dances: Dances
+profile.your-city: Your city
+profile.permission: Do you want free promo?
+profile.jobs: I can help with
+profile.contacts: Do you use social media?
+profile.contacts.instagram: instagram.com/
+profile.contacts.facebook: facebook.com/
+profile.contacts.whatsapp: whatsapp.com/
+profile.contacts.telegram: telegram.com/
+profile.contacts.twitter: twitter.com/
+profile.contacts.tiktok: tiktok.com/
+profile.contacts.youtube: youtube.com/
+profile.contacts.email: Email
+profile.contacts.website: Website
+profile.gender-female: Female
 
 chat.title: Chat
 cities.choose: Choose city
