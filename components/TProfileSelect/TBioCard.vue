@@ -1,11 +1,14 @@
 <template>
   <div
-    class="rounded-2xl bg-white dark:bg-gray-800 p-0"
+    :class="[
+      { 'hover:bg-blue-100': !showTools },
+      'rounded-2xl bg-white dark:bg-gray-800 p-0',
+    ]"
     v-bind="$attrs"
     @click="$listeners.select"
   >
     <div
-      class="flex-row gap-2 flex justify-between items-center py-2 m-1 border-gray-200 border-2  px-2 h-full"
+      class="flex-row gap-2 flex justify-between items-center py-2 m-1 border-gray-200 px-2 h-full"
     >
       <div class="flex-shrink-0 w-12">
         <router-link :to="'/' + username">
@@ -29,7 +32,7 @@
           {{ bio }}
         </span>
         <span v-if="role" class="text-gray-800 text-xs">
-          {{ role }}
+          <b>Role:</b> {{ role }}
         </span>
       </div>
       <div

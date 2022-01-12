@@ -18,7 +18,7 @@
         <TSelectButton :toggle-dropdown="toggleDropdown" label="Add artist" />
         <div
           v-if="isListOpen"
-          class="absolute w-full z-50 bg-white border-gray-300 border-2 px-2"
+          class="absolute w-full z-50 bg-white border-gray-300 border-2"
         >
           <TInput v-model="query" auto-focus class="my-2" @input="search" />
           <TProfileList
@@ -61,9 +61,9 @@ export default {
           (sp) => sp.id === p.id
         )
         if (isAlreadySelected) {
-          return { selected: true, ...p }
+          return { selected: true, role: 'Dancer', ...p }
         }
-        return { selected: false, ...p }
+        return { selected: false, role: 'Dancer', ...p }
       })
       return selectionArr
     })
@@ -71,6 +71,8 @@ export default {
     const edit = (p) => {
       profileToEdit.value = p
       isModalOpen.value = true
+
+      console.log('p', p)
     }
 
     const saveEdit = () => {
