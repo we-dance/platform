@@ -17,7 +17,10 @@
     >
       <div class="max-w-lg">
         <div class="text-xs mt-4">
-          {{ selectedParticipantsList.length }} {{ $t('recipients') }}:
+          {{ selectedParticipantsList.length }}
+          {{
+            $t('events.dashboard.recipient', selectedParticipantsList.length)
+          }}:
           {{ selectedParticipantsList.join(', ') }}
         </div>
         <TForm
