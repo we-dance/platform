@@ -191,6 +191,10 @@ export const eventFields = [
     description: 'Username on WeDance',
   },
   {
+    name: 'username',
+    admin: true,
+  },
+  {
     name: 'online',
     label: 'Online?',
     type: 'buttons',
