@@ -24,13 +24,13 @@
             </template>
           </div>
           <h4 v-if="item.title" class="font-bold">{{ item.title }}</h4>
-          <TPreview :excerpt="!showAll" :content="item.description" />
+          <TPreview :excerpt="!show" :content="item.description" />
           <div
             v-if="item.description && item.description.length > 140"
-            @click="showAll = !showAll"
+            @click="show = !show"
             class="p-2 text-blue-700 cursor-pointer underline hover:no-underline text-xs text-center mb-2"
           >
-            {{ showAll ? 'Show less' : 'Show more' }}
+            {{ show ? 'Show less' : 'Show more' }}
           </div>
         </div>
       </div>
@@ -100,7 +100,7 @@
 
       <TCardPoll v-else-if="item.type === 'poll'" :node="item" />
 
-      <TCardLink v-else-if="item.url" :url="item.url" :show="showAll" />
+      <TCardLink v-else-if="item.url" :url="item.url" :show="show" />
     </div>
 
     <div v-if="!hideComments && !item.hideComments" class="border-t p-4">
@@ -196,7 +196,7 @@ export default {
     const { remove, softUpdate } = useDoc('posts')
     const { create } = useDoc('comments')
     const newReply = ref('')
-    const showAll = ref(props.showAll)
+    const show = ref(props.showAll)
 
     const onView = () => {
       if (!props.item?.id) {
@@ -247,7 +247,7 @@ export default {
       can,
       remove,
       isHidden,
-      showAll,
+      show,
       onView,
     }
   },

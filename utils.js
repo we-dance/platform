@@ -394,28 +394,47 @@ export const getEventDescription = (event) => {
 }
 
 export const getMeta = (collection, post) => {
+  if (!post) {
+    return {}
+  }
+
   return {
-    title: post.title,
+    title: post.title || getExcerpt(post.description),
     meta: [
       {
-        vmid: 'description',
+        hid: 'description',
         name: 'description',
         content: getExcerpt(post.description),
       },
       {
-        vmid: 'keywords',
+        hid: 'keywords',
         name: 'keywords',
         content: post.keywords,
       },
       {
-        vmid: 'og:title',
+        hid: 'og:title',
         property: 'og:title',
         content: post.title,
       },
       {
-        vmid: 'og:description',
+        hid: 'og:description',
         property: 'og:description',
         content: getExcerpt(post.description),
+      },
+      {
+        hid: 'og:image',
+        property: 'og:image',
+        content: post.socialCover || post.cover,
+      },
+      {
+        hid: 'author',
+        name: 'author',
+        content: post.username,
+      },
+      {
+        hid: 'publisher',
+        name: 'publisher',
+        content: post.username,
       },
     ],
   }
