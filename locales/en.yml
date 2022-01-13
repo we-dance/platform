@@ -112,3 +112,9 @@ chat.welcome: Start conversation with something nice.
 chat.with: Chat with {username}
 chat.dateDiff: '{diff} ago'
 feed.title: Feed
+events.loading: Loading...
+events.post.organizer: Organised by
+events.post.promoter: Promoted by
+events.event.organizer: Organised by
+events.event.promoter: Promoted by
+events.event.location:  Online
