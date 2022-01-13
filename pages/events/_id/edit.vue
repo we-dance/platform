@@ -172,7 +172,7 @@ export default {
           {
             label: 'Artist List',
             type: 'artists',
-            labelPosition: 'top',
+            labelPosition: 'left',
           },
           {
             name: 'description',

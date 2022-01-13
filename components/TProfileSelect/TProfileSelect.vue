@@ -1,5 +1,5 @@
 <template>
-  <div class="border-2">
+  <div>
     <TProfileList
       :list="selectedList"
       :show-tools="true"
@@ -10,37 +10,42 @@
       <TBioEditModal
         v-bind="profileToEdit"
         @close="isModalOpen = false"
-        @saveedit="saveEdit"
+        @saveedit="saveEdit(profileToEdit)"
       />
     </TPopup>
-    <div class="relative text-sm leading-tight ">
-      <div class="inline-block relative w-full">
-        <TSelectButton :toggle-dropdown="toggleDropdown" label="Add artist" />
-        <div
-          v-if="isListOpen"
-          class="absolute w-full z-50 bg-white border-gray-300 border-2"
-        >
-          <TInput v-model="query" auto-focus class="my-2" @input="search" />
-          <TProfileList
-            :show-tools="false"
-            :list="withSelectedResponse"
-            @select="select"
-          />
-        </div>
-      </div>
-    </div>
+    <TInput
+      ref="searchEl"
+      v-model="query"
+      auto-focus
+      class="bg-gray-50 border border-gray-300 focus:outline-none focus:shadow-outline px-3 py-2 rounded text-sm w-full"
+      @input="search"
+    />
+    <TProfileList
+      v-if="isDrodownOpen"
+      ref="dropdownEl"
+      :show-tools="false"
+      :list="withSelectedResponse"
+      @select="select"
+    />
   </div>
 </template>
 <script>
-import { computed, ref } from '@nuxtjs/composition-api'
+import {
+  computed,
+  onBeforeUnmount,
+  onMounted,
+  ref,
+} from '@nuxtjs/composition-api'
 import { useAlgolia } from '~/use/algolia'
 
 export default {
   name: 'TProfileSelect',
-  setup() {
-    const query = ref('')
+  setup(props, { emit }) {
     const { search, response } = useAlgolia('profiles')
-    const isListOpen = ref(false)
+    const query = ref('')
+    const searchEl = ref(null)
+    const dropdownEl = ref(null)
+    const isDrodownOpen = ref(false)
     const isModalOpen = ref(false)
     const selectedList = ref([])
     const profileToEdit = ref({})
@@ -49,7 +54,7 @@ export default {
       const isAlreadySelected = selectedList.value.some((sp) => sp.id === p.id)
       if (!isAlreadySelected) {
         selectedList.value.push(p)
-        isListOpen.value = false
+        isDrodownOpen.value = false
         query.value = ''
       }
     }
@@ -68,6 +73,24 @@ export default {
       return selectionArr
     })
 
+    const checkFocus = (e) => {
+      if (
+        searchEl.value.$el.contains(e.target) ||
+        dropdownEl.value.$el.contains(e.target)
+      ) {
+        isDrodownOpen.value = true
+      } else {
+        isDrodownOpen.value = false
+      }
+    }
+
+    onMounted(() => {
+      document.addEventListener('click', checkFocus)
+    })
+    onBeforeUnmount(() => {
+      document.removeEventListener('click', checkFocus)
+    })
+
     const edit = (p) => {
       profileToEdit.value = p
       isModalOpen.value = true
@@ -75,7 +98,10 @@ export default {
       console.log('p', p)
     }
 
-    const saveEdit = () => {
+    const saveEdit = (p) => {
+      emit('input', profileToEdit)
+      isModalOpen.value = false
+
       console.log('save edit')
     }
 
@@ -83,25 +109,19 @@ export default {
       selectedList.value = selectedList.value.filter((a) => a.id !== pId)
     }
 
-    const toggleDropdown = () => {
-      isListOpen.value = !isListOpen.value
-    }
-    const closeModal = () => {
-      isModalOpen.value = false
-    }
     return {
       query,
-      isListOpen,
+      isDrodownOpen,
       isModalOpen,
       selectedList,
       withSelectedResponse,
       profileToEdit,
+      searchEl,
+      dropdownEl,
       select,
-      toggleDropdown,
       edit,
       remove,
       search,
-      closeModal,
       saveEdit,
     }
   },
