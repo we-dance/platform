@@ -30,7 +30,7 @@
           <div class="flex items-center gap-1">
             <TIcon name="youtube" class="w-4 h-4" />
             <p>
-             {{$t('events.event.location')}}
+             {{ $t('events.event.online') }}
             </p>
           </div>
         </div>
@@ -61,10 +61,10 @@
         <div class="flex items-center gap-1">
           <TIcon name="lobby" class="w-4 h-4" />
           <div v-if="item.claimed === 'Yes'">
-            {{$t('events.event.organizer')}}
+            {{ $t('events.event.organizer') }}
           </div>
           <div v-else>
-             {{$t('events.event.promoter')}}
+             {{ $t('events.event.promoter') }}
           </div>
           <TAvatar name :uid="item.createdBy" class="text-primary" />
         </div>
