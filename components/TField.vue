@@ -18,7 +18,7 @@
       <slot name="top" />
       <TPreview
         v-if="before"
-        :content="before"
+        :content="$t(before)"
         no-typo
         class="text-gray-500 text-sm mb-2"
       />
@@ -26,7 +26,7 @@
         <component
           :is="getComponent()"
           :id="elementId"
-          v-bind="$attrs"
+          v-bind="changeAttrs($attrs)"
           :value.sync="computedValue"
           :type="type"
           :auto-focus="autoFocus"
@@ -38,14 +38,14 @@
       </slot>
       <TPreview
         v-if="description"
-        :content="description"
+        :content="$t(description)"
         no-typo
         class="text-gray-500 text-sm mt-2"
       />
       <slot name="bottom" />
     </div>
     <TPopup v-if="showTips" :title="label" @close="showTips = false">
-      <TPreview :content="tips" class="my-4 max-w-sm" />
+      <TPreview :content="$t(tips)" class="my-4 max-w-sm" />
     </TPopup>
   </div>
 </template>
@@ -70,7 +70,6 @@ import TInputStylesSelect2 from '~/components/TInput/TInputStylesSelect2'
 import TInputLanguages from '~/components/TInput/TInputLanguages'
 import TInputButtons from '~/components/TInput/TInputButtons'
 import TInputUsername from '~/components/TInput/TInputUsername'
-import TInputDateTime from '~/components/TInput/TInputDateTime'
 
 export default {
   name: 'TField',
@@ -200,10 +199,20 @@ export default {
         languages: TInputLanguages,
         buttons: TInputButtons,
         username: TInputUsername,
-        datetime: TInputDateTime,
       }
 
       return map[this.type] || TInput
+    },
+    changeAttrs(attrs) {
+      if (attrs && attrs.options) {
+        attrs.options.map(
+          (option) =>
+            this.$te(option.label) && (option.label = this.$t(option.label))
+        )
+      } else if (attrs && attrs.placeholder && this.$te(attrs.placeholder)) {
+        attrs.placeholder = this.$t(attrs.placeholder)
+      }
+      return attrs
     },
   },
 }

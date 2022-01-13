@@ -2,7 +2,7 @@
   <div>
     <pre>Selected date is - {{ date }}</pre>
     <div class="mt-4">
-      <TInputDateTime v-model="date" />
+      <TField type="datetime-local" v-model="date" />
     </div>
   </div>
 </template>

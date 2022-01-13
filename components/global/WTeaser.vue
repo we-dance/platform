@@ -6,6 +6,7 @@
     </div>
     <div class="flex justify-center">
       <TButton
+        allow-guests
         v-if="button"
         class="my-2"
         type="primary"

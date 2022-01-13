@@ -21,6 +21,7 @@ const state = Vue.observable({
   initialized: false,
   marketing: null,
   error: null,
+  showAuthPopup: false,
 })
 
 export const useAuth = () => {
@@ -278,6 +279,7 @@ export const useAuth = () => {
       state.profile = profile
     } else {
       state.profile = doc.data()
+      state.username = state.profile.username
 
       if (!ls('city')) {
         ls('city', state.profile.place)

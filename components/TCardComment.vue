@@ -1,5 +1,5 @@
 <template>
-  <div class="bg-white rounded shadow p-4 pb-0">
+  <div class="bg-white p-4 pb-0">
     <div class="flex items-start justify-between">
       <div class="flex mb-1">
         <TAvatar photo size="xs" :uid="item.createdBy" class="mr-2" />

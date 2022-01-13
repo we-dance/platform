@@ -68,7 +68,7 @@ export default {
   },
   setup(props) {
     const { currentCity } = useCities()
-    const { docs, loading, getById } = useCollection('events', props.filter)
+    const { docs, loading, getById } = useCollection('posts', props.filter)
 
     const { uid } = useAuth()
 

@@ -1,7 +1,7 @@
 <template>
   <TMenu>
     <template v-slot:button>
-      <TButton :icon="icon" :type="type" :label="label" />
+      <TButton :icon="icon" :type="type" :label="label" :title="title" />
     </template>
     <template v-slot:menu>
       <div class="w-32 py-2 bg-white rounded-lg shadow-xl border">
@@ -18,13 +18,17 @@ export default {
       type: String,
       default: 'more_vert',
     },
+    title: {
+      type: String,
+      default: 'open dropdown',
+    },
     type: {
       type: String,
       default: 'nav',
     },
     label: {
       type: [String, Number, Boolean],
-      default: false,
+      default: '',
     },
   },
 }

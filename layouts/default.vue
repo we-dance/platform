@@ -1,17 +1,15 @@
 <template>
   <div
-    class="font-sans leading-normal tracking-normal antialiased min-h-screen flex flex-col mx-auto max-w-3xl border-r"
+    class="font-sans leading-normal tracking-normal antialiased min-h-screen flex flex-col mx-auto max-w-2xl border-r"
   >
-    <TPopup v-if="showAuthPopup">
-      <div class="flex justify-between border-b pb-2 mb-4">
-        <div class="font-bold">Members only</div>
-        <button class="cursor-pointer" @click="showAuthPopup = false">
-          <TIcon name="close" class="cursor-pointer w-6 h-6" />
-        </button>
-      </div>
-      <div class="my-4 flex flex-col justify-center">
-        <div>You need a profile to write posts</div>
-        <TButton class="mt-2" to="/signin">Create Profile</TButton>
+    <TPopup
+      v-if="showAuthPopup"
+      title="Members only"
+      @close="showAuthPopup = false"
+    >
+      <div class="my-4 w-64 flex flex-col justify-center text-center">
+        <div class="p-4">Sign in to {{ showAuthPopup }}</div>
+        <TButton class="mt-2" type="primary" to="/signin">Sign in</TButton>
       </div>
     </TPopup>
 
@@ -60,7 +58,6 @@ export default {
   data: () => ({
     isMenuOpen: false,
     isSearchShown: false,
-    showAuthPopup: false,
     query: '',
   }),
   computed: {
@@ -158,7 +155,14 @@ export default {
     }
   },
   setup() {
-    const { uid, account, profile, username, isAdmin } = useAuth()
+    const {
+      uid,
+      account,
+      profile,
+      username,
+      isAdmin,
+      showAuthPopup,
+    } = useAuth()
     const { changeCityByName } = useCities()
     const { getCity } = useApp()
 
@@ -170,6 +174,7 @@ export default {
       isAdmin,
       getCity,
       changeCityByName,
+      showAuthPopup,
     }
   },
 }

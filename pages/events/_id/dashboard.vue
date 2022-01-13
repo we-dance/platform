@@ -1,24 +1,33 @@
 <template>
   <TLoader v-if="loading" />
-  <div v-else-if="!exists" class="text-center">Event not found</div>
+  <div v-else-if="!exists" class="text-center">
+    {{ $t('events.dashboard.empty') }}
+  </div>
   <main
-    v-else-if="!can('edit', 'events', item)"
+    v-else-if="!can('edit', 'posts', item)"
     class="mt-4 mx-auto max-w-md p-4 text-sm text-center"
   >
-    Only event owner can access this area.
+    {{ $t('events.dashboard.description') }}
   </main>
   <div v-else>
-    <TPopup v-if="compose" title="Compose email" @close="compose = false">
+    <TPopup
+      v-if="compose"
+      :title="$t('events.dashboard.composelabel')"
+      @close="compose = false"
+    >
       <div class="max-w-lg">
         <div class="text-xs mt-4">
-          {{ selectedParticipantsList.length }} recipients:
+          {{ selectedParticipantsList.length }}
+          {{
+            $t('events.dashboard.recipient', selectedParticipantsList.length)
+          }}:
           {{ selectedParticipantsList.join(', ') }}
         </div>
         <TForm
           v-model="email"
           class="mt-4 space-y-4"
           :fields="emailFields"
-          submit-label="Send"
+          :submit-label="$t('events.dashboard.submitlabel')"
           @save="sendEmail"
         />
       </div>
@@ -37,20 +46,20 @@
       <TDropdown>
         <TButton
           type="context"
-          label="Add participant"
+          :label="$t('events.dashboard.participant-label')"
           class="border-b"
           @click="addingGuest = true"
         />
         <TButton
           type="context"
-          label="Send emails"
+          :label="$t('events.dashboard.email-label')"
           class="border-b"
           @click="composeEmail"
         />
         <TButton
           type="context"
           :to="`/events/${item.id}/`"
-          label="View Event"
+          :label="$t('events.dashboard.view-label')"
         />
       </TDropdown>
     </THeader>
@@ -88,7 +97,7 @@
                     update(item.partnerId, { partnerId: '' })
                     update(item.id, { partnerId: '' })
                   "
-                  >Unlink</TButton
+                  >{{ $t('events.dashboard.unlink-label') }}</TButton
                 >
               </div>
               <div
@@ -104,7 +113,10 @@
                 </div>
               </div>
               <div v-else-if="item.couple === 'Yes'" class="text-right">
-                <TButton label="Add" @click="addingGuest = item.id" />
+                <TButton
+                  :label="$t('events.dashboard.add-label')"
+                  @click="addingGuest = item.id"
+                />
               </div>
             </div>
             <div v-if="tab !== 'couples'" class="flex flex-col md:flex-row">
@@ -147,7 +159,11 @@
                       {{ note }}
                     </div>
                   </div>
-                  <TMenu2 wrapped label="Add note" type="link">
+                  <TMenu2
+                    wrapped
+                    :label="$t('events.dashboard.addnote-label')"
+                    type="link"
+                  >
                     <TButton
                       v-for="(note, noteId) in notes"
                       :key="noteId"
@@ -160,13 +176,17 @@
                 <div v-if="view === 'contacts'">
                   <div>{{ item.email }}</div>
                   <div>{{ item.phone }}</div>
-                  <div>Covid: {{ item.covid }}</div>
-                  <div>Comment: {{ item.comment }}</div>
+                  <div>
+                    {{ $t('events.dashboard.covid') }}: {{ item.covid }}
+                  </div>
+                  <div>
+                    {{ $t('events.dashboard.comment') }}: {{ item.comment }}
+                  </div>
                   <div class="text-xs">{{ getDateTime(item.createdAt) }}</div>
                 </div>
                 <div v-if="tab === ''">
                   <div>
-                    Couple:
+                    {{ $t('events.dashboard.couple') }}:
                     <button
                       class="underline hover:no-underline"
                       @click="
@@ -179,7 +199,7 @@
                     </button>
                   </div>
                   <div>
-                    Gender:
+                    {{ $t('events.dashboard.gender') }}:
                     <button
                       class="underline hover:no-underline"
                       @click="
@@ -195,7 +215,7 @@
                     <TMenu2
                       v-if="!item.partnerId"
                       wrapped
-                      label="Link"
+                      :label="$t('events.dashboard.link-label')"
                       type="link"
                     >
                       <TButton
@@ -216,7 +236,9 @@
                         update(item.partnerId, { partnerId: '' })
                         update(item.id, { partnerId: '' })
                       "
-                      >{{ item.partner.name }} (Unlink)</TButton
+                      >{{ item.partner.name }} ({{
+                        $('events.dashboard.unlink-label')
+                      }})</TButton
                     >
                   </div>
                 </div>
@@ -227,7 +249,7 @@
                 v-if="tab === ''"
                 type="danger"
                 @click="update(item.id, { rsvp: 'down', state: 'out' })"
-                >Cancel</TButton
+                >{{ $t('events.dashboard.cancel-btn') }}</TButton
               >
               <TButton
                 v-if="tab === 'canceled'"
@@ -239,25 +261,25 @@
                 v-if="item.state !== 'in' && tab === 'out'"
                 type="danger"
                 @click="update(item.id, { rsvp: 'up', state: 'in' })"
-                >Check In</TButton
+                >{{ $t('events.dashboard.check-in') }}</TButton
               >
               <TButton
                 v-if="tab === 'payment'"
                 :type="item.package === 'Subscribed' ? 'success' : 'base'"
                 @click="update(item.id, { package: 'Subscribed' })"
-                >Subscribed</TButton
+                >{{ $t('events.dashboard.subscribed') }}</TButton
               >
               <TButton
                 v-if="tab === 'payment'"
                 :type="item.package === 'Paid' ? 'success' : 'base'"
                 @click="update(item.id, { package: 'Paid' })"
-                >Paid</TButton
+                >{{ $t('events.dashboard.paid') }}</TButton
               >
               <TButton
                 v-if="tab === 'payment'"
                 :type="!item.package ? 'success' : 'base'"
                 @click="update(item.id, { package: '' })"
-                >Didn't pay</TButton
+                >{{ $t('events.dashboard.not-paid') }}</TButton
               >
             </div>
           </template>
@@ -287,7 +309,7 @@ export default {
     const { params } = useRouter()
     const { getProfile } = useProfiles()
 
-    const { doc, load, exists, loading } = useDoc('events')
+    const { doc, load, exists, loading } = useDoc('posts')
     const { create } = useDoc('emails')
     const { map } = useReactions()
     const selectedParticipants = ref({})
@@ -448,14 +470,14 @@ export default {
       if (addingGuest.value && addingGuest.value !== true) {
         const rsvp = await createGuestRsvp(
           params.id,
-          'events',
+          'posts',
           'up',
           participant,
           { partnerId: addingGuest.value }
         )
         update(addingGuest.value, { partnerId: rsvp.id })
       } else {
-        await createGuestRsvp(params.id, 'events', 'up', participant)
+        await createGuestRsvp(params.id, 'posts', 'up', participant)
       }
 
       addingGuest.value = false

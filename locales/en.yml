@@ -10,8 +10,158 @@ myprofile.events.add: Add event
 myprofile.posts.add: Write a post
 posts.title: Feed
 profiles.title: Community
-events.title: Events
 event.type: Type
+events.title: Events
+events.list.empty: No events found. Would you like to add one?
+events.photos.label: See Photos
+events.list.label: See list
+
+events.dashboard.label: Dashboard
+events.participant.label:
+events.edit.label: Edit
+events.share.label: Share
+events.online: Online Event
+events.organiser: Organised by
+events.register.btn: Register for event
+events.going.btn: Going
+events.notgoing.btn: Not going
+events.venue: Venue Map
+events.source: Event Source
+events.views: Views
+events.register.title: Register
+events.register.submitlabel: Register
+events.login.btn: Login
+events.reservation.title: Almost there
+events.complete.btn: Complete registration
+events.reservation.description: See you soon! Don't forget to check-in by the organiser when you come!
+events.email.description: Check your email to finish creation of the WeDance profile.
+events.calendar.btn: Add to calendar
+
+events.edit.title: Add event
+events.edit.submitlabel: Save
+
+events.dashboard.empty: Event not found
+events.dashboard.description: Only event owner can access this area.
+events.dashboard.recipient: recipient | recipients
+events.dashboard.submitlabel: Send
+events.dashboard.composelabel: Compose email
+events.dashboard.participant-label: Add participant
+events.dashboard.email-label: Send emails
+events.dashboard.view-label: View Event
+events.dashboard.cancel-btn: Cancel
+events.dashboard.check-in: Check In
+events.dashboard.subscribed: Subscribed
+events.dashboard.paid: Paid
+events.dashboard.not-paid: Didn't pay
+events.dashboard.link-label: Link
+events.dashboard.unlink-label: Unlink
+events.dashboard.add-label: Add
+events.dashboard.addnote-label: Add note
+events.dashboard.covid: Covid
+events.dashboard.comment: Comment
+events.dashboard.couple: Couple
+events.dashboard.gender: Gender
+events.eventTypeList.party: Party
+
+
+posts.by: by
+posts.login: Login
+posts.register: Register
+posts.link.read: to read full post. Not a member yet?
+posts.link.discuss: to see discussion. Not a member yet?
+posts.edit.new-post: Write a new post
+posts.edit.submitlabel: Save
+posts.edit.addlabel: Add
+posts.share.price: Read more on wedance.vip
+
+community.title: Community
+community.radius.select: Radius
+community.reset-filter.button: Reset filters
+
+profile.dances: Dances
+profile.your-city: Your city
+profile.permission: Do you want free promo?
+profile.jobs: I can help with
+profile.contacts: Do you use social media?
+profile.contacts.instagram: instagram.com/
+profile.contacts.facebook: fb.com/
+profile.contacts.whatsapp: whatsapp.com/
+profile.contacts.telegram: t.me/
+profile.contacts.twitter: twitter.com/
+profile.contacts.tiktok: tiktok.com/
+profile.contacts.youtube: youtube.com/
+profile.contacts.email: Email
+profile.contacts.website: Website
+profile.gender.female: Female
+profile.gender.male: Male
+profile.gender.other: Other
+profile.days.monday: Monday
+profile.days.tuesday: Tuesday
+profile.days.wednesday: Wednesday
+profile.days.thursday: Thursday
+profile.days.friday: Friday
+profile.days.saturday: Saturday
+profile.days.sunday: Sunday
+profile.meetingPlaces.myPlace: My place
+profile.meetingPlaces.yourPlace: Your place
+profile.meetingPlaces.somewherePrivate: Somewhere private
+profile.meetingPlaces.somewherePublic: Somewhere public
+profile.typeList.dancer: Dancer
+profile.typeList.artist: Artist
+profile.typeList.organiser: Organiser
+profile.typeList.venue: Venue
+profile.typeList.city: City
+profile.objectivesList.talk: Talk about dance
+profile.objectivesList.learn: Learn together
+profile.objectivesList.outdoors: Dance outdoors
+profile.objectivesList.indoors: Dance indoors
+profile.objectivesList.teach: Teach together
+profile.objectivesList.project: Dance project
+profile.profileSorts.username: Username
+profile.profileSorts.registered: Registered
+profile.profileSorts.last-seen: Last seen
+profile.placeholder.username: username
+profile.placeholder.whatsapp: whatsapp chat
+profile.placeholder.business: for business requests
+profile.placeholder.city: City
+profile.placeholder.required: (Required)
+profile.placeholder.markdown: Text (markdown)
+profile.placeholder.style: Style
+profile.placeholder.objective: Objective
+profile.placeholder.gender: Gender
+profile.description.visibility: '- Public profiles are searchable in Google and used in our social media to attract new members.
+
+- Members profile are only visible for logged-in users.
+
+- Unlisted profiles are possible to open with exact link, but they are not listed in members lists and search.'
+profile.description.permission: 'Send us link to your profile on [Instagram](https://instagram.com/wedancevip) and we will promote it on our social media channels: Telegram, Instagram, Facebook and Twitter.'
+profile.description.learning: 'For example: Musicality in Salsa, Men Styling, etc.'
+profile.description.jobs: 'How can you help our community? What are you good at? For example: design, programming, marketing, social media, etc.'
+profile.description.birthday: We will show only your age'
+profile.description.weight: Leave this field blank if you think it's irrelevant.
+profile.description.partnerBio: 'What is important in your partner? Put it as a question, for example: Do you love dogs?'
+profile.tips.styles: Mark up to 4 favorite dances that will be highlighted in your poster
+profile.tips.story: 'Pitch yourself: Who are you? What do you offer? What do you want?
+
+
+Tips for effective pitch:
+
+- Uncomplicated: It should be catchy and roll off the tongue
+
+- Concise: It shouldn’t take more than a minute to say or read
+
+- Unique: It reflects your skills, goals, and desires
+
+- Storyline: It covers who you are, what you offer, and where you want to be
+
+- Appealing: Your elevator pitch is essentially a persuasive sales pitch; the emphasis should be on what you offer'
+
+profile.before.username: Use only letters, numbers, underscores and periods.
+profile.before.hometown: Where were you born and raised?
+profile.before.name: If you want to remain anonym use your first name.
+profile.before.bio: Short introduction on top of your photo
+profile.before.story: Tell your dance story. You can also use [widgets](https://wedance.vip/markdown), including images and videos
+
 chat.title: Chat
 cities.choose: Choose city
 myprofile.title: My Profile

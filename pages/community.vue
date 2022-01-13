@@ -1,6 +1,6 @@
 <template>
   <div>
-    <THeader title="Community">
+    <THeader :title="$t('community.title')">
       <TButton type="nav" icon="search" to="/search" />
     </THeader>
 
@@ -8,7 +8,7 @@
       <div v-if="uid && response.facets" class="mb-4 gap-2 flex flex-wrap p-4">
         <t-rich-select
           v-model="radius"
-          placeholder="Radius"
+          :placeholder="$t('community.radius.select')"
           :options="radiusOptions"
           hide-search-box
         />
@@ -24,7 +24,7 @@
         />
 
         <TButton v-if="facetFilters" type="base" @click="load()">
-          Reset filters
+          {{ $t('community.reset-filter.button') }}
         </TButton>
       </div>
 

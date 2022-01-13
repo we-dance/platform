@@ -27,6 +27,7 @@
       <slot name="buttons" />
       <TButton
         v-if="submitLabel"
+        :allow-guests="allowGuests"
         type="primary"
         :label="submitLabel"
         @click="save"
@@ -44,6 +45,10 @@ export default {
     TField: () => import('~/components/TField'),
   },
   props: {
+    allowGuests: {
+      type: Boolean,
+      default: false,
+    },
     fields: {
       type: Array,
       default: () => [],

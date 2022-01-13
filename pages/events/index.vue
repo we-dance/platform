@@ -9,7 +9,7 @@
         v-model="eventType"
         clearable
         hide-search-box
-        :options="eventTypeList"
+        :options="eventTypeListIcons"
         :placeholder="$t('event.type')"
       />
       <t-rich-select
@@ -23,14 +23,14 @@
           v-if="view === 'list'"
           icon="news"
           type="icon"
-          label="See photos"
+          :label="$t('events.photos.label')"
           @click="view = 'covers'"
         />
         <TButton
           v-if="view === 'covers'"
           icon="notes"
           type="icon"
-          label="See list"
+          :label="$t('events.list.label')"
           @click="view = 'list'"
         />
       </div>
@@ -39,7 +39,7 @@
     <div>
       <TLoader v-if="loading" />
       <div v-else-if="!count" class="p-4">
-        No events found. Would you like to add one?
+        {{ $t('events.list.empty') }}
       </div>
 
       <div
@@ -106,7 +106,7 @@ import { useAuth } from '~/use/auth'
 import { useCities } from '~/use/cities'
 import { useRouter } from '~/use/router'
 import { useProfiles } from '~/use/profiles'
-import { useEvents } from '~/use/events'
+import { eventTypeListIcons } from '~/use/events'
 import { useStyles } from '~/use/styles'
 import { addressPart } from '~/use/google'
 
@@ -123,9 +123,10 @@ import {
 export default {
   name: 'EventsIndex',
   setup() {
-    const { eventTypeListIcons: eventTypeList } = useEvents()
     const { currentCity } = useCities()
-    const { docs, loading: loadingPosts, getById } = useCollection('events')
+    const { docs, loading: loadingPosts, getById } = useCollection('posts', {
+      type: 'event',
+    })
     const { getProfile } = useProfiles()
     const { getStylesDropdown } = useStyles()
 
@@ -273,7 +274,7 @@ export default {
       dances,
       view,
       viewOptions,
-      eventTypeList,
+      eventTypeListIcons,
       eventType,
       danceStyles,
     }

@@ -3,6 +3,7 @@
   <TLoader v-else-if="loading || signingIn" />
   <div v-else>
     <TForm
+      allow-guests
       v-model="data"
       :fields="registerFields"
       :field-config="{ labelPosition: 'top' }"
