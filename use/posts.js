@@ -91,6 +91,10 @@ export const postSorts = [
 
 export const postFields = [
   {
+    name: 'username',
+    admin: true,
+  },
+  {
     name: 'type',
     type: 'select',
     options: postTypeList,

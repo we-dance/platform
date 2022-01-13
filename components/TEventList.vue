@@ -4,8 +4,9 @@
     <div v-else-if="!count && showEmpty">
       {{ emptyLabel }}
     </div>
-    <h2 v-if="title" class="font-bold text-lg">{{ title }}</h2>
-    <div class="flex justify-end">
+    <div class="flex justify-between items-center px-2">
+      <h2 v-if="title" class="font-bold text-lg">{{ title }}</h2>
+      <div v-else></div>
       <TButton type="nav" icon="copy" @click="copyToClipboard" />
     </div>
     <div v-if="items.length" class="space-y-8 mt-4">
@@ -64,6 +65,10 @@ export default {
     showEmpty: {
       type: Boolean,
       default: false,
+    },
+    docs: {
+      type: Array,
+      default: () => [],
     },
   },
   setup(props) {
@@ -138,7 +143,7 @@ export default {
     )
 
     const items = computed(() => {
-      let result = docs.value.map(map)
+      let result = props.docs.length ? props.docs.map(map) : docs.value.map(map)
 
       result = result.filter(activeFilterItem.value.filter)
 

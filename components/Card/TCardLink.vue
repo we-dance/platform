@@ -18,6 +18,10 @@ export default {
       type: String,
       default: '',
     },
+    show: {
+      type: Boolean,
+      default: false,
+    },
   },
   computed: {
     component() {
@@ -25,6 +29,10 @@ export default {
 
       if (videoId) {
         return 'WYoutube'
+      }
+
+      if (this.url.includes('https://wedance.vip/lists/')) {
+        return this.show ? 'WList' : 'div'
       }
 
       return ''

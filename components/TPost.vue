@@ -1,7 +1,7 @@
 <template>
   <div ref="postRef" class="border-b">
     <div class="flex items-start p-4">
-      <div v-if="!item.hideMeta && !hideMedia" class="w-10 flex-shrink-0">
+      <div class="w-10 flex-shrink-0">
         <TAvatar photo size="md" :uid="item.createdBy" />
       </div>
       <div class="flex-grow">
@@ -13,20 +13,24 @@
               >{{ item.username }}</router-link
             >
             <span>•</span>
-            <div>{{ dateDiff(item.createdAt) }}</div>
+            <div>
+              <router-link :to="`/posts/${item.id}`" class="hover:underline">{{
+                dateDiff(item.createdAt)
+              }}</router-link>
+            </div>
             <template v-if="item.region">
               <span>•</span>
               <div>{{ item.region.name }}</div>
             </template>
           </div>
           <h4 v-if="item.title" class="font-bold">{{ item.title }}</h4>
-          <TPreview :excerpt="showExcerpt" :content="item.description" />
+          <TPreview :excerpt="!showAll" :content="item.description" />
           <div
             v-if="item.description && item.description.length > 140"
-            @click="showExcerpt = !showExcerpt"
+            @click="showAll = !showAll"
             class="p-2 text-blue-700 cursor-pointer underline hover:no-underline text-xs text-center mb-2"
           >
-            {{ showExcerpt ? 'Show more' : 'Show less' }}
+            {{ showAll ? 'Show less' : 'Show more' }}
           </div>
         </div>
       </div>
@@ -96,10 +100,10 @@
 
       <TCardPoll v-else-if="item.type === 'poll'" :node="item" />
 
-      <TCardLink v-else-if="item.url" :url="item.url" />
+      <TCardLink v-else-if="item.url" :url="item.url" :show="showAll" />
     </div>
 
-    <div v-if="!item.hideComments" class="border-t p-4">
+    <div v-if="!hideComments && !item.hideComments" class="border-t p-4">
       <router-link
         v-if="item.commentsCount > 1"
         :to="`/posts/${item.id}`"
@@ -135,20 +139,7 @@
         ></textarea>
       </div>
     </div>
-    <div
-      v-if="!item.hideReactions"
-      class="flex flex-wrap gap-2 justify-center items-center p-4"
-    >
-      <TReaction
-        label="Watch"
-        toggledLabel="Watching"
-        field="watch"
-        icon="EyeIcon"
-        :item="item"
-      />
-      <TStars :item="item" />
-      <div class="text-xs text-gray-500">{{ item.viewsCount }} views</div>
-    </div>
+    <slot />
   </div>
 </template>
 
@@ -167,6 +158,14 @@ export default {
       default: () => ({}),
     },
     hideMedia: {
+      type: Boolean,
+      default: false,
+    },
+    hideComments: {
+      type: Boolean,
+      default: false,
+    },
+    showAll: {
       type: Boolean,
       default: false,
     },
@@ -197,7 +196,7 @@ export default {
     const { remove, softUpdate } = useDoc('posts')
     const { create } = useDoc('comments')
     const newReply = ref('')
-    const showExcerpt = ref(true)
+    const showAll = ref(props.showAll)
 
     const onView = () => {
       if (!props.item?.id) {
@@ -248,7 +247,7 @@ export default {
       can,
       remove,
       isHidden,
-      showExcerpt,
+      showAll,
       onView,
     }
   },

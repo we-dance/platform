@@ -5,6 +5,8 @@ import excerptHtml from 'excerpt-html'
 import saveAs from 'file-saver'
 import { dsvFormat } from 'd3'
 import languages from '~/assets/languages'
+import firebase from 'firebase/app'
+import 'firebase/firestore'
 
 export const getObjectKeysFromArray = (arr) => {
   const obj = {}
@@ -362,6 +364,18 @@ export async function loadDoc({ app, params, error }, collection) {
   return {
     doc,
   }
+}
+
+export async function loadDocAsync(id, collection) {
+  const db = firebase.firestore()
+  const docRef = db.collection(collection).doc(id)
+
+  const snapshot = await docRef.get()
+  const doc = snapshot.data()
+
+  doc.id = snapshot.id
+
+  return doc
 }
 
 export const getEventDescription = (event) => {

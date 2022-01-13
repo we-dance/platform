@@ -1,5 +1,5 @@
 <template>
-  <div class="space-y-4 mt-8 p-4 -mx-4 -mb-4 bg-gray-100">
+  <div class="space-y-4 mt-8 p-4 bg-gray-100">
     <dl v-if="profile.locales">
       <dt class="font-bold mr-1">Languages:</dt>
       <dd>{{ getLabels(languages, profile.locales) }}</dd>

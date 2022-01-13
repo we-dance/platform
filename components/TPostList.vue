@@ -9,7 +9,15 @@
     </div>
     <h2 v-if="title" class="font-bold text-lg mb-4">{{ title }}</h2>
     <div v-if="docs.length">
-      <TPost v-for="doc in docs" :key="doc.id" :item="doc" />
+      <div v-for="doc in docs" :key="doc.id">
+        <TPost
+          :item="doc"
+          :hide-media="hideMedia"
+          :hide-comments="hideComments"
+        >
+          <TReactions :item="doc" class="pb-4 justify-center" />
+        </TPost>
+      </div>
 
       <div class="mt-4 p-4 flex justify-center items-center">
         <TButton @click="loadMore">Load more</TButton>
@@ -54,6 +62,14 @@ export default {
     showEmpty: {
       type: Boolean,
       default: true,
+    },
+    hideMedia: {
+      type: Boolean,
+      default: false,
+    },
+    hideComments: {
+      type: Boolean,
+      default: false,
     },
   },
   setup(props) {
