@@ -3,20 +3,19 @@
     <TProfileList
       :list="selectedList"
       :show-tools="true"
-      @edit="edit"
+      @edit="openModelToEdit"
       @remove="remove"
     />
     <TPopup v-if="isModalOpen">
       <TBioEditModal
         v-bind="profileToEdit"
         @close="isModalOpen = false"
-        @saveedit="saveEdit(profileToEdit)"
+        @saveedit="saveEdit"
       />
     </TPopup>
     <TInput
       ref="searchEl"
       v-model="query"
-      auto-focus
       class="bg-gray-50 border border-gray-300 focus:outline-none focus:shadow-outline px-3 py-2 rounded text-sm w-full"
       @input="search"
     />
@@ -75,8 +74,8 @@ export default {
 
     const checkFocus = (e) => {
       if (
-        searchEl.value.$el.contains(e.target) ||
-        dropdownEl.value.$el.contains(e.target)
+        searchEl.value?.$el.contains(e.target) ||
+        dropdownEl.value?.$el.contains(e.target)
       ) {
         isDrodownOpen.value = true
       } else {
@@ -91,18 +90,17 @@ export default {
       document.removeEventListener('click', checkFocus)
     })
 
-    const edit = (p) => {
+    const openModelToEdit = (p) => {
       profileToEdit.value = p
       isModalOpen.value = true
-
-      console.log('p', p)
     }
 
-    const saveEdit = (p) => {
-      emit('input', profileToEdit)
+    const saveEdit = (editedData) => {
+      selectedList.value = selectedList.value.map((p) => {
+        return p.id === editedData.id ? { ...p, ...editedData } : { ...p }
+      })
+      emit('input', selectedList.value)
       isModalOpen.value = false
-
-      console.log('save edit')
     }
 
     const remove = (pId) => {
@@ -119,7 +117,7 @@ export default {
       searchEl,
       dropdownEl,
       select,
-      edit,
+      openModelToEdit,
       remove,
       search,
       saveEdit,

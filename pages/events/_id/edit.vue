@@ -170,11 +170,6 @@ export default {
             placeholder: 'Event Name',
           },
           {
-            label: 'Artist List',
-            type: 'artists',
-            labelPosition: 'left',
-          },
-          {
             name: 'description',
             hideLabel: true,
             type: 'textarea',
@@ -183,6 +178,12 @@ export default {
               'Pitch yourself: Who are you? What do you offer? What do you want?\n\nTips for effective pitch:\n- Uncomplicated: It should be catchy and roll off the tongue\n- Concise: It shouldn’t take more than a minute to say or read\n- Unique: It reflects your skills, goals, and desires\n- Storyline: It covers who you are, what you offer, and where you want to be\n- Appealing: Your elevator pitch is essentially a persuasive sales pitch; the emphasis should be on what you offer',
             description:
               'Use [widgets](https://wedance.vip/markdown), including images and videos',
+          },
+          {
+            name: 'team',
+            label: 'Team',
+            type: 'team',
+            labelPosition: 'top',
           },
           {
             name: 'venue',

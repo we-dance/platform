@@ -202,7 +202,7 @@ export default {
         buttons: TInputButtons,
         username: TInputUsername,
         datetime: TInputDateTime,
-        artists: TProfileSelect,
+        team: TProfileSelect,
       }
 
       return map[this.type] || TInput

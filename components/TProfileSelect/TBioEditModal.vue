@@ -2,10 +2,10 @@
   <div class="m-2">
     <div class="py-2 m-1 px-2">
       <div class="flex w-full justify-center">
-        <router-link :to="'/' + username">
+        <router-link :to="'/' + u_name">
           <img
             v-if="photo"
-            :alt="username"
+            :alt="u_name"
             :src="photo"
             class="mx-auto object-cover rounded-full h-12 w-12"
           />
@@ -15,19 +15,19 @@
       <div class=" flex flex-col w-full">
         <span>
           Name
-          <TInputTextarea v-model="username" auto-focus rows="1" />
+          <TInputTextarea v-model="u_name" auto-focus rows="1" />
         </span>
         <span
           >Bio
           <TInputTextarea
-            v-model="bio"
-            :rows="bio.length / 17 + 2"
+            v-model="u_bio"
+            :rows="u_bio.length / 17 + 2"
             class="py-2"
           />
         </span>
         <span
           >Role
-          <TInputTextarea v-model="role" rows="1" />
+          <TInputTextarea v-model="u_role" rows="1" />
         </span>
       </div>
     </div>
@@ -35,7 +35,13 @@
       <TButton type="base" class="text-sm" @click="$emit('close')">
         Cancel
       </TButton>
-      <TButton type="success" class="text-sm" @click="$emit('saveedit')">
+      <TButton
+        type="success"
+        class="text-sm"
+        @click="
+          $emit('saveedit', { id, username: u_name, bio: u_bio, role: u_role })
+        "
+      >
         Save
       </TButton>
     </div>
@@ -65,6 +71,17 @@ export default {
       type: String,
       default: '',
     },
+    id: {
+      type: String,
+      default: '',
+    },
+  },
+  data() {
+    return {
+      u_name: this.username,
+      u_bio: this.bio,
+      u_role: this.role,
+    }
   },
 }
 </script>
