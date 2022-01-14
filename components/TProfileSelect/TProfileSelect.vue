@@ -34,6 +34,7 @@ import {
   onBeforeUnmount,
   onMounted,
   ref,
+  watch,
 } from '@nuxtjs/composition-api'
 import { useAlgolia } from '~/use/algolia'
 
@@ -89,6 +90,17 @@ export default {
     onBeforeUnmount(() => {
       document.removeEventListener('click', checkFocus)
     })
+    watch(selectedList, () => {
+      const team = selectedList.value.map((p) => ({
+        username: p.username || '',
+        name: p.name || '',
+        photo: p.photo || '',
+        bio: p.bio || '',
+        role: p.role || '',
+        description: p.description || '',
+      }))
+      emit('input', team)
+    })
 
     const openModelToEdit = (p) => {
       profileToEdit.value = p
@@ -99,7 +111,6 @@ export default {
       selectedList.value = selectedList.value.map((p) => {
         return p.id === editedData.id ? { ...p, ...editedData } : { ...p }
       })
-      emit('input', selectedList.value)
       isModalOpen.value = false
     }
 
