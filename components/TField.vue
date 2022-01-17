@@ -26,7 +26,7 @@
         <component
           :is="getComponent()"
           :id="elementId"
-          v-bind="changeAttrs($attrs)"
+          v-bind="translatedAttrs"
           :value.sync="computedValue"
           :type="type"
           :auto-focus="autoFocus"
@@ -137,6 +137,23 @@ export default {
     showTips: false,
   }),
   computed: {
+    translatedAttrs() {
+      let translated = this.$attrs
+      if (translated && translated.options) {
+        const options = translated.options.map((option) => {
+          const label = option.label
+          return this.$t(label)
+        })
+        translated = { ...translated, options }
+      }
+
+      if (translated && translated.placeholder) {
+        const placeholder = this.$t(translated.placeholder)
+        translated = { ...translated, placeholder }
+      }
+
+      return translated
+    },
     computedValue() {
       return this.get(this.value)
     },
@@ -202,17 +219,6 @@ export default {
       }
 
       return map[this.type] || TInput
-    },
-    changeAttrs(attrs) {
-      if (attrs && attrs.options) {
-        attrs.options.map(
-          (option) =>
-            this.$te(option.label) && (option.label = this.$t(option.label))
-        )
-      } else if (attrs && attrs.placeholder && this.$te(attrs.placeholder)) {
-        attrs.placeholder = this.$t(attrs.placeholder)
-      }
-      return attrs
     },
   },
 }

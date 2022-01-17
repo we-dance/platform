@@ -176,10 +176,10 @@
         <div v-if="reservationPopup === 'reserve'">
           <div>
             <TForm
-              allow-guests
               v-model="account"
+              allow-guests
               :fields="reservationFields"
-              :submit-label="$t('events.register.submitlabel')"
+              :submit-label="$t('register')"
               class="mt-4 space-y-4"
               @save="reserve"
             >
@@ -187,7 +187,7 @@
                 <TButton
                   allow-guests
                   :to="`/signin?target=${this.$route.fullPath}`"
-                  :label="$t('events.login.btn')"
+                  :label="$t('login')"
                 />
               </template>
             </TForm>

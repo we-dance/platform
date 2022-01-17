@@ -39,7 +39,7 @@
           class="mt-2 w-full md:mt-0 md:w-32 md:ml-4"
           @click="submit"
         >
-          {{ $t('signin.submit') }}
+          {{ $t('login') }}
         </TButton>
       </div>
       <div class="mt-4 text-xs">

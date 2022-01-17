@@ -12,7 +12,7 @@
   <div v-else>
     <TPopup
       v-if="compose"
-      :title="$t('events.dashboard.composelabel')"
+      :title="$t('events.dashboard.compose.label')"
       @close="compose = false"
     >
       <div class="max-w-lg">
@@ -27,12 +27,16 @@
           v-model="email"
           class="mt-4 space-y-4"
           :fields="emailFields"
-          :submit-label="$t('events.dashboard.submitlabel')"
+          :submit-label="$t('events.dashboard.submit.label')"
           @save="sendEmail"
         />
       </div>
     </TPopup>
-    <TPopup v-if="addingGuest" title="Add Guest" @close="addingGuest = false">
+    <TPopup
+      v-if="addingGuest"
+      :title="$t('events.dashboard.addGuest')"
+      @close="addingGuest = false"
+    >
       <div class="max-w-md mx-auto py-4 max-h-screen overflow-y-scroll">
         <TForm
           v-model="guestAccount"
@@ -46,20 +50,20 @@
       <TDropdown>
         <TButton
           type="context"
-          :label="$t('events.dashboard.participant-label')"
+          :label="$t('events.dashboard.participant.label')"
           class="border-b"
           @click="addingGuest = true"
         />
         <TButton
           type="context"
-          :label="$t('events.dashboard.email-label')"
+          :label="$t('events.dashboard.email.label')"
           class="border-b"
           @click="composeEmail"
         />
         <TButton
           type="context"
           :to="`/events/${item.id}/`"
-          :label="$t('events.dashboard.view-label')"
+          :label="$t('events.dashboard.view.label')"
         />
       </TDropdown>
     </THeader>
@@ -97,7 +101,7 @@
                     update(item.partnerId, { partnerId: '' })
                     update(item.id, { partnerId: '' })
                   "
-                  >{{ $t('events.dashboard.unlink-label') }}</TButton
+                  >{{ $t('events.dashboard.unlink.label') }}</TButton
                 >
               </div>
               <div
@@ -114,7 +118,7 @@
               </div>
               <div v-else-if="item.couple === 'Yes'" class="text-right">
                 <TButton
-                  :label="$t('events.dashboard.add-label')"
+                  :label="$t('events.dashboard.add.label')"
                   @click="addingGuest = item.id"
                 />
               </div>
@@ -161,7 +165,7 @@
                   </div>
                   <TMenu2
                     wrapped
-                    :label="$t('events.dashboard.addnote-label')"
+                    :label="$t('events.dashboard.addnote.label')"
                     type="link"
                   >
                     <TButton
@@ -215,7 +219,7 @@
                     <TMenu2
                       v-if="!item.partnerId"
                       wrapped
-                      :label="$t('events.dashboard.link-label')"
+                      :label="$t('events.dashboard.actions.link')"
                       type="link"
                     >
                       <TButton
@@ -237,7 +241,7 @@
                         update(item.id, { partnerId: '' })
                       "
                       >{{ item.partner.name }} ({{
-                        $('events.dashboard.unlink-label')
+                        $('events.dashboard.actions.unlink')
                       }})</TButton
                     >
                   </div>
@@ -249,7 +253,7 @@
                 v-if="tab === ''"
                 type="danger"
                 @click="update(item.id, { rsvp: 'down', state: 'out' })"
-                >{{ $t('events.dashboard.cancel-btn') }}</TButton
+                >{{ $t('events.dashboard.cancel.btn') }}</TButton
               >
               <TButton
                 v-if="tab === 'canceled'"
@@ -261,7 +265,7 @@
                 v-if="item.state !== 'in' && tab === 'out'"
                 type="danger"
                 @click="update(item.id, { rsvp: 'up', state: 'in' })"
-                >{{ $t('events.dashboard.check-in') }}</TButton
+                >{{ $t('events.dashboard.checkIn') }}</TButton
               >
               <TButton
                 v-if="tab === 'payment'"
@@ -279,7 +283,7 @@
                 v-if="tab === 'payment'"
                 :type="!item.package ? 'success' : 'base'"
                 @click="update(item.id, { package: '' })"
-                >{{ $t('events.dashboard.not-paid') }}</TButton
+                >{{ $t('events.dashboard.notPaid') }}</TButton
               >
             </div>
           </template>
