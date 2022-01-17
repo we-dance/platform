@@ -24,7 +24,7 @@
         />
 
         <TButton v-if="facetFilters" type="base" @click="load()">
-          {{ $t('community.reset-filter.button') }}
+          {{ $t('community.reset.button') }}
         </TButton>
       </div>
 

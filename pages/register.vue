@@ -3,12 +3,12 @@
   <TLoader v-else-if="loading || signingIn" />
   <div v-else>
     <TForm
-      allow-guests
       v-model="data"
+      allow-guests
       :fields="registerFields"
       :field-config="{ labelPosition: 'top' }"
       class="space-y-4"
-      :submit-label="$t('register.submit')"
+      :submit-label="$t('register')"
       @save="submit"
     >
       <template v-slot:bottom>
@@ -32,7 +32,7 @@
     <div class="mt-4 text-xs">
       <div class="mt-4 border-t pt-4 flex space-x-2 text-xs">
         <router-link to="/signin" class="underline hover:no-underline">{{
-          $t('register.login')
+          $t('login')
         }}</router-link>
       </div>
     </div>

@@ -92,11 +92,11 @@ export const typeList = [
 
 export const objectivesList = [
   {
-    label: 'Talk about dance',
+    label: 'profile.objectivesList.talk',
     value: 'talk',
   },
   {
-    label: 'profile.objectivesList.talk',
+    label: 'profile.objectivesList.learn',
     value: 'learn',
   },
   {
@@ -157,7 +157,7 @@ export const contactFields = [
   {
     name: 'youtube',
     key: 'profile.contacts.youtube',
-    placeholder: 'placeholder.username',
+    placeholder: 'profile.placeholder.username',
     when: (p) => p.contacts === 'Yes',
   },
   {
@@ -176,26 +176,26 @@ export const contactFields = [
 
 export const visibilityOptions = [
   {
-    label: 'Public',
+    label: 'profile.visibilityOptions.public',
     value: 'Public',
   },
   {
-    label: 'Members',
+    label: 'profile.visibilityOptions.Members',
     value: 'Members',
   },
   {
-    label: 'Unlisted',
+    label: 'profile.visibilityOptions.Unlisted',
     value: 'Unlisted',
   },
 ]
 
 export const booleanOptions = [
   {
-    label: 'Yes',
+    label: 'profile.booleanOptions.yes',
     value: 'Yes',
   },
   {
-    label: 'No',
+    label: 'profile.booleanOptions.no',
     value: 'No',
   },
 ]
@@ -242,7 +242,7 @@ export const profileFields = [
   },
   {
     name: 'place',
-    key: 'profile.your-city',
+    key: 'profile.city',
     register: true,
     poster: true,
     required: true,
@@ -430,7 +430,7 @@ export const profileSorts = [
   },
   {
     value: '-lastLoginAt',
-    label: 'profile.profileSorts.last-seen',
+    label: 'profile.profileSorts.lastSeen',
   },
 ]
 

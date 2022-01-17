@@ -3,6 +3,8 @@ hero.subtitle: We help each other find interesting dance events and dance partne
 signin: Sign in
 signup: Sign up
 signout: Log out
+login: Login
+register: Register
 events.add: Add event
 posts.add: Add post
 profiles.add: Add profile
@@ -28,35 +30,32 @@ events.notgoing.btn: Not going
 events.venue: Venue Map
 events.source: Event Source
 events.views: Views
-events.register.title: Register
-events.register.submitlabel: Register
-events.login.btn: Login
 events.reservation.title: Almost there
 events.complete.btn: Complete registration
 events.reservation.description: See you soon! Don't forget to check-in by the organiser when you come!
 events.email.description: Check your email to finish creation of the WeDance profile.
 events.calendar.btn: Add to calendar
 
-events.edit.title: Add event
-events.edit.submitlabel: Save
+events.edit.submit.label: Save
 
 events.dashboard.empty: Event not found
 events.dashboard.description: Only event owner can access this area.
 events.dashboard.recipient: recipient | recipients
-events.dashboard.submitlabel: Send
-events.dashboard.composelabel: Compose email
-events.dashboard.participant-label: Add participant
-events.dashboard.email-label: Send emails
-events.dashboard.view-label: View Event
-events.dashboard.cancel-btn: Cancel
-events.dashboard.check-in: Check In
+events.dashboard.submit.label: Send
+events.dashboard.compose.label: Compose email
+events.dashboard.addGuest: Add Guest
+events.dashboard.participant.label: Add participant
+events.dashboard.email.label: Send emails
+events.dashboard.view.label: View Event
+events.dashboard.cancel.btn: Cancel
+events.dashboard.checkIn: Check In
 events.dashboard.subscribed: Subscribed
 events.dashboard.paid: Paid
-events.dashboard.not-paid: Didn't pay
-events.dashboard.link-label: Link
-events.dashboard.unlink-label: Unlink
-events.dashboard.add-label: Add
-events.dashboard.addnote-label: Add note
+events.dashboard.notPaid: Didn't pay
+events.dashboard.actions.link: Link
+events.dashboard.actions.unlink: Unlink
+events.dashboard.add.label: Add
+events.dashboard.addnote.label: Add note
 events.dashboard.covid: Covid
 events.dashboard.comment: Comment
 events.dashboard.couple: Couple
@@ -65,21 +64,16 @@ events.eventTypeList.party: Party
 
 
 posts.by: by
-posts.login: Login
-posts.register: Register
-posts.link.read: to read full post. Not a member yet?
-posts.link.discuss: to see discussion. Not a member yet?
-posts.edit.new-post: Write a new post
-posts.edit.submitlabel: Save
-posts.edit.addlabel: Add
-posts.share.price: Read more on wedance.vip
+posts.edit.submit.label: Save
+posts.edit.add.label: Add
+posts.share.readMore: Read more on wedance.vip
 
 community.title: Community
 community.radius.select: Radius
-community.reset-filter.button: Reset filters
+community.reset.button: Reset filters
 
 profile.dances: Dances
-profile.your-city: Your city
+profile.city: Your city
 profile.permission: Do you want free promo?
 profile.jobs: I can help with
 profile.contacts: Do you use social media?
@@ -119,7 +113,7 @@ profile.objectivesList.teach: Teach together
 profile.objectivesList.project: Dance project
 profile.profileSorts.username: Username
 profile.profileSorts.registered: Registered
-profile.profileSorts.last-seen: Last seen
+profile.profileSorts.lastSeen: Last seen
 profile.placeholder.username: username
 profile.placeholder.whatsapp: whatsapp chat
 profile.placeholder.business: for business requests
@@ -161,6 +155,11 @@ profile.before.hometown: Where were you born and raised?
 profile.before.name: If you want to remain anonym use your first name.
 profile.before.bio: Short introduction on top of your photo
 profile.before.story: Tell your dance story. You can also use [widgets](https://wedance.vip/markdown), including images and videos
+profile.visibilityOptions.public: Public
+profile.visibilityOptions.Members: Members
+profile.visibilityOptions.Unlisted: Unlisted
+profile.booleanOptions.yes: 'Yes'
+profile.booleanOptions.no: 'No'
 
 chat.title: Chat
 cities.choose: Choose city
@@ -182,14 +181,11 @@ profile.community: I dance in
 agreement: By signing in, you agree to {terms} and {privacy}.
 terms: Terms of service
 privacy: Privacy policy
-register.login: Login
-register.submit: Register
 signin.register: Create Account
 signin.nopassword: Forgot password
 nopassword.signin: I have a password
 nopassword.google: Sign in with Google
 nopassword.submit: Send a magic link
-signin.submit: Login
 settings.account.title: Account
 settings.account.description: This information will be used for notifications
   and purchases. It will be shared with service providers or sellers only with
