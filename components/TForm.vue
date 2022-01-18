@@ -16,9 +16,9 @@
     <div
       class="flex justify-end space-x-2 bg-white py-4 border-t z-10 items-center bottom-0 sticky"
     >
-      <TButton v-if="showRemove" label="Delete" @click="remove" />
-      <TButton v-if="showCancel" label="Cancel" @click="cancel" />
-      <TButton v-if="showCopy" label="Copy" @click="copy" />
+      <TButton v-if="showRemove" :label="$t('delete.label')" @click="remove" />
+      <TButton v-if="showCancel" :label="$t('cancel.label')" @click="cancel" />
+      <TButton v-if="showCopy" :label="$t('copy.label')" @click="copy" />
       <slot name="buttons" />
       <TButton
         v-if="submitLabel"

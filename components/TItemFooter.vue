@@ -14,7 +14,7 @@
         :url="url"
         :text="title"
         type="base"
-        label="Share"
+        :label="$t('share.label')"
       />
     </div>
   </div>

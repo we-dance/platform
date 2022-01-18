@@ -120,4 +120,8 @@ events.event.promoter: Promoted by
 events.event.online: Online
 edit.label: Edit
 dashboard.label: Dashboard
-feed.post.nocomments: There are no comments yet.
+comments.empty: There are no comments yet.
+share.label: Share
+delete.label: Delete
+cancel.label: Cancel
+copy.label: Copy
