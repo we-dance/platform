@@ -139,15 +139,18 @@ export default {
   computed: {
     translatedAttrs() {
       let translated = this.$attrs
-      if (translated && translated.options) {
+      if (translated?.options) {
         const options = translated.options.map((option) => {
+          if (typeof option === 'string') {
+            return this.$te(option) ? this.$t(option) : option
+          }
           const label = option.label
           return this.$t(label)
         })
         translated = { ...translated, options }
       }
 
-      if (translated && translated.placeholder) {
+      if (translated?.placeholder) {
         const placeholder = this.$t(translated.placeholder)
         translated = { ...translated, placeholder }
       }

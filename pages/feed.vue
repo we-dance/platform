@@ -16,7 +16,7 @@
         ></textarea>
         <div class="flex justify-between">
           <TInputSelectSmall v-model="postType" :options="postTypeList" />
-          <TButton @click="send" title="post a message">Send</TButton>
+          <TButton title="post a message" @click="send">Send</TButton>
         </div>
       </div>
     </div>

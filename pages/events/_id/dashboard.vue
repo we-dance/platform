@@ -12,7 +12,7 @@
   <div v-else>
     <TPopup
       v-if="compose"
-      :title="$t('events.dashboard.compose.label')"
+      :title="$t('events.dashboard.compose')"
       @close="compose = false"
     >
       <div class="max-w-lg">
@@ -27,7 +27,7 @@
           v-model="email"
           class="mt-4 space-y-4"
           :fields="emailFields"
-          :submit-label="$t('events.dashboard.submit.label')"
+          :submit-label="$t('events.dashboard.submit')"
           @save="sendEmail"
         />
       </div>
@@ -50,20 +50,20 @@
       <TDropdown>
         <TButton
           type="context"
-          :label="$t('events.dashboard.participant.label')"
+          :label="$t('events.dashboard.participant')"
           class="border-b"
           @click="addingGuest = true"
         />
         <TButton
           type="context"
-          :label="$t('events.dashboard.email.label')"
+          :label="$t('events.dashboard.email')"
           class="border-b"
           @click="composeEmail"
         />
         <TButton
           type="context"
           :to="`/events/${item.id}/`"
-          :label="$t('events.dashboard.view.label')"
+          :label="$t('events.dashboard.view')"
         />
       </TDropdown>
     </THeader>
@@ -118,7 +118,7 @@
               </div>
               <div v-else-if="item.couple === 'Yes'" class="text-right">
                 <TButton
-                  :label="$t('events.dashboard.add.label')"
+                  :label="$t('events.dashboard.add')"
                   @click="addingGuest = item.id"
                 />
               </div>
@@ -165,7 +165,7 @@
                   </div>
                   <TMenu2
                     wrapped
-                    :label="$t('events.dashboard.addnote.label')"
+                    :label="$t('events.dashboard.addnote')"
                     type="link"
                   >
                     <TButton
@@ -253,7 +253,7 @@
                 v-if="tab === ''"
                 type="danger"
                 @click="update(item.id, { rsvp: 'down', state: 'out' })"
-                >{{ $t('events.dashboard.cancel.btn') }}</TButton
+                >{{ $t('events.dashboard.cancel') }}</TButton
               >
               <TButton
                 v-if="tab === 'canceled'"

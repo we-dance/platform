@@ -31,9 +31,7 @@
         :fields="postFields"
         vertical
         show-cancel
-        :submit-label="
-          id ? $t('posts.edit.submit.label') : $t('posts.edit.add.label')
-        "
+        :submit-label="id ? $t('posts.edit.submit') : $t('posts.edit.add')"
         class="bg-white p-4 space-y-4"
         @save="saveItem"
         @cancel="cancelItem"

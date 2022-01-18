@@ -18,7 +18,7 @@ export const accountFields = [
   {
     name: 'password',
     type: 'password',
-    label: 'New Password',
+    key: 'account.password',
     register: true,
   },
   {
@@ -29,7 +29,7 @@ export const accountFields = [
   },
   {
     name: 'zone',
-    label: 'Timezone',
+    key: 'account.timezone',
     type: 'richselect',
     options: moment.tz.names(),
     require: true,
@@ -41,48 +41,48 @@ export const accountFields = [
     options: [
       {
         value: 'party',
-        label: 'Social/party events',
+        label: 'account.update.party',
       },
       {
         value: 'class',
-        label: 'Dance classes',
+        label: 'account.update.class',
       },
       {
         value: 'workshop',
-        label: 'Workshops and bootcamps',
+        label: 'account.update.workshop',
       },
       {
         value: 'online',
-        label: 'Online dance classes',
+        label: 'account.update.online',
       },
       {
         value: 'festival',
-        label: 'International festivals',
+        label: 'account.update.festival',
       },
     ],
   },
   {
     name: 'comment',
-    label: 'Comment',
+    key: 'account.comment',
     type: 'text',
     event: true,
   },
   {
     name: 'withPartner',
     type: 'select',
-    label: 'Do you have a partner?',
-    options: ['Yes', 'No'],
+    key: 'account.withPartner',
+    options: ['account.yes', 'account.no'],
     event: false,
   },
   {
     name: 'partnerName',
-    label: "Partner's name",
+    key: 'account.partnerName',
     when: (answers) => answers?.withPartner === 'Yes',
     event: false,
   },
   {
     name: 'partnerEmail',
-    label: "Partner's email",
+    label: 'account.partnerEmail',
     when: (answers) => answers?.withPartner === 'Yes',
     event: false,
   },

@@ -48,7 +48,7 @@
             $t('signin.register')
           }}</router-link>
           <router-link to="/nopassword" class="underline hover:no-underline">{{
-            $t('signin.nopassword')
+            $t('signin.noPassword')
           }}</router-link>
         </div>
       </div>
