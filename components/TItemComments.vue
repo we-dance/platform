@@ -4,7 +4,7 @@
 
     <TListComments class="mt-4" :post-id="postId">
       <template v-slot:empty>
-        <div class="text-center my-8">There are no comments yet.</div>
+        <div class="text-center my-8">{{ $t('feed.post.nocomments') }}</div>
       </template>
     </TListComments>
   </div>
