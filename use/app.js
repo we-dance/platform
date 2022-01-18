@@ -4,7 +4,6 @@ import { get } from 'lodash'
 import { createGlobalState, when } from '@vueuse/core'
 import { useFirestore } from '@vueuse/firebase'
 import { computed } from '@nuxtjs/composition-api'
-import { getCountFavorites } from '~/use/favorites'
 import { useAuth } from '~/use/auth'
 import { useDoc } from '~/use/doc'
 import { getArrayFromHash } from '~/utils'
@@ -122,7 +121,6 @@ export const useApp = () => {
   const mapDetails = (item) => {
     return {
       ...item,
-      savedByCount: getCountFavorites(item),
       createdByUsername: item.createdBy
         ? read('profiles', item.createdBy, 'username')
         : '',
