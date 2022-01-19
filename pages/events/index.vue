@@ -10,7 +10,7 @@
         clearable
         hide-search-box
         :options="eventTypeListIcons"
-        :placeholder="$t('event.type')"
+        :placeholder="$t('events.type')"
       />
       <t-rich-select
         v-model="dances"
@@ -69,7 +69,8 @@
       <div v-else>
         <div v-for="(items, date) in itemsByDate" :key="date" class="mb-8">
           <h2 class="font-bold bg-dark text-white py-2 px-4">
-            {{ getDay(date) }}, {{ getDate(date) }}
+            {{ $t('events.day', { day: getDay(date) }) }},
+            {{ getDate(date) }}
           </h2>
           <div v-for="item in items" :key="item.id" class="px-4 mt-4">
             <TEventText :item="item" />

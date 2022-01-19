@@ -25,16 +25,7 @@
       >
         {{ item.name }}
       </router-link>
-      <div class="flex flex-wrap gap-2 items-center my-1">
-        <TReaction
-          label="Watch"
-          toggledLabel="Watching"
-          field="watch"
-          icon="EyeIcon"
-          :item="item"
-        />
-        <TStars :item="item" />
-      </div>
+      <TReactions :item="item" class="my-1" />
       <div>
         <div class="text-xs flex flex-wrap gap-1">
           <div v-if="item.online === 'Yes'">

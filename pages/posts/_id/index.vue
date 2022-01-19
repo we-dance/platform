@@ -1,30 +1,9 @@
 <template>
   <div>
-    <TItemToolbar collection="posts" :item="doc" class="mb-2" />
-
-    <TItemCard>
-      <h1 class="text-3xl leading-tight font-bold">{{ doc.title }}</h1>
-      <div class="flex text-sm space-x-1">
-        <div>
-          {{ $t('posts.by') }}
-          <router-link
-            class="underline text-primary"
-            :to="`/${author.username}`"
-            >{{ author.username }}</router-link
-          >
-        </div>
-        <div>• {{ publishedAt }}</div>
-      </div>
-
-      <TPreview :content="doc.description" class="mt-4" />
-
-      <TItemFooter collection="posts" :item="doc" :title="doc.title" />
-      <TItemCreator :item="doc" />
-    </TItemCard>
-
-    <TItemComments :reply-to="doc.createdBy" :post-id="doc.id" />
+    <THeader :title="doc.title || '...'" />
 
     <TSharePreviewPost
+      v-if="doc.cover"
       type="Post"
       collection="posts"
       :username="author.username"
@@ -33,8 +12,15 @@
       :photo="doc.cover"
       :styles="doc.styles"
       align="center"
-      class="md:mt-4"
     />
+
+    <TReactions :item="doc" class="p-4 justify-center" />
+
+    <TPost :item="doc" hide-comments show-all />
+
+    <TItemCreator :item="doc" full />
+
+    <TItemComments :reply-to="doc.createdBy" :post-id="doc.id" />
   </div>
 </template>
 

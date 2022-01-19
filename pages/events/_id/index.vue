@@ -143,29 +143,20 @@
 
     <TPost v-if="item.id" :item="item" hide-media />
 
-    <TItemCard>
-      <div
-        v-if="item.venue && item.venue.map"
-        class="p-4 md:-mx-4 md:-mb-4 bg-gray-100"
+    <div v-if="item.venue && item.venue.map" class="p-4 bg-gray-100">
+      <div class="font-bold text-sm mb-4 leading-none text-gray-700">
+        Venue Map
+      </div>
+      <img :src="item.venue.map" alt="Venue Map" class="mt-4" />
+    </div>
+
+    <TItemCreator :item="item" full class="mt-4" />
+
+    <div v-if="item.facebook" class="mt-8 text-right text-sm">
+      <a :href="item.facebook" class="hover:underline text-gray-700"
+        >Event Source</a
       >
-        <div class="font-bold text-sm mb-4 leading-none text-gray-700">
-          {{ $t('events.venue') }}
-        </div>
-        <img :src="item.venue.map" alt="Venue Map" class="mt-4" />
-      </div>
-
-      <TItemCreator :item="item" full class="mt-4" />
-
-      <div v-if="item.facebook" class="mt-8 text-right text-sm">
-        <a :href="item.facebook" class="hover:underline text-gray-700">{{
-          $t('events.source')
-        }}</a>
-      </div>
-
-      <div v-if="item.views" class="text-gray-500 text-sm mt-8">
-        {{ item.views }} {{ $t('events.views') }}
-      </div>
-    </TItemCard>
+    </div>
 
     <TPopup
       v-if="reservationPopup"

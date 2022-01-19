@@ -3,6 +3,7 @@
     <div class="flex flex-wrap">
       <TButton
         v-for="option in options"
+        allow-guests
         :key="getValue(option)"
         :value="getValue(option)"
         :to="option.to"

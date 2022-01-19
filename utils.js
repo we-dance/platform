@@ -5,6 +5,8 @@ import excerptHtml from 'excerpt-html'
 import saveAs from 'file-saver'
 import { dsvFormat } from 'd3'
 import languages from '~/assets/languages'
+import firebase from 'firebase/app'
+import 'firebase/firestore'
 
 export const getObjectKeysFromArray = (arr) => {
   const obj = {}
@@ -364,6 +366,18 @@ export async function loadDoc({ app, params, error }, collection) {
   }
 }
 
+export async function loadDocAsync(id, collection) {
+  const db = firebase.firestore()
+  const docRef = db.collection(collection).doc(id)
+
+  const snapshot = await docRef.get()
+  const doc = snapshot.data()
+
+  doc.id = snapshot.id
+
+  return doc
+}
+
 export const getEventDescription = (event) => {
   let result =
     getDay(event.startDate) +
@@ -380,28 +394,47 @@ export const getEventDescription = (event) => {
 }
 
 export const getMeta = (collection, post) => {
+  if (!post) {
+    return {}
+  }
+
   return {
-    title: post.title,
+    title: post.title || getExcerpt(post.description),
     meta: [
       {
-        vmid: 'description',
+        hid: 'description',
         name: 'description',
         content: getExcerpt(post.description),
       },
       {
-        vmid: 'keywords',
+        hid: 'keywords',
         name: 'keywords',
         content: post.keywords,
       },
       {
-        vmid: 'og:title',
+        hid: 'og:title',
         property: 'og:title',
         content: post.title,
       },
       {
-        vmid: 'og:description',
+        hid: 'og:description',
         property: 'og:description',
         content: getExcerpt(post.description),
+      },
+      {
+        hid: 'og:image',
+        property: 'og:image',
+        content: post.socialCover || post.cover,
+      },
+      {
+        hid: 'author',
+        name: 'author',
+        content: post.username,
+      },
+      {
+        hid: 'publisher',
+        name: 'publisher',
+        content: post.username,
       },
     ],
   }
