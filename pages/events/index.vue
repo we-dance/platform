@@ -10,27 +10,27 @@
         clearable
         hide-search-box
         :options="eventTypeListIcons"
-        :placeholder="$t('events.type')"
+        :placeholder="$t('events.filter.type')"
       />
       <t-rich-select
         v-model="dances"
         clearable
         :options="danceStyles"
-        :placeholder="$t('style.label')"
+        :placeholder="$t('events.filter.style')"
       />
       <div>
         <TButton
           v-if="view === 'list'"
           icon="news"
           type="icon"
-          :label="$t('events.photos.label')"
+          :label="$t('events.view.list')"
           @click="view = 'covers'"
         />
         <TButton
           v-if="view === 'covers'"
           icon="notes"
           type="icon"
-          :label="$t('events.list.label')"
+          :label="$t('events.view.covers')"
           @click="view = 'list'"
         />
       </div>
@@ -69,8 +69,7 @@
       <div v-else>
         <div v-for="(items, date) in itemsByDate" :key="date" class="mb-8">
           <h2 class="font-bold bg-dark text-white py-2 px-4">
-            {{ $t('events.day', { day: getDay(date) }) }},
-            {{ getDate(date) }}
+            {{ getDay(date) }}, {{ getDate(date) }}
           </h2>
           <div v-for="item in items" :key="item.id" class="px-4 mt-4">
             <TEventText :item="item" />
@@ -268,6 +267,7 @@ export default {
       uid,
       getDay,
       getDate,
+      getDateObect,
       startOfWeekString,
       endOfWeekString,
       activeFilter,

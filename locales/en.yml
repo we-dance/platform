@@ -14,10 +14,10 @@ posts.title: Feed
 profiles.title: Community
 events.title: Events
 events.list.empty: No events found. Would you like to add one?
-events.photos.label: See Photos
-events.list.label: See list
-events.type: Type
-events.day: '{day}'
+events.view.list: See Photos
+events.view.covers: See list
+events.filter.type: Type
+events.filter.style: Style
 
 chat.title: Chat
 cities.choose: Choose city
@@ -28,7 +28,6 @@ city.change: Change city
 role.label: Role
 sort.popular: Popular
 sort.newest: Newest
-style.label: Style
 profile.username: Username
 account.email: Email
 account.password: Passwordd
