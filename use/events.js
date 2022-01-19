@@ -3,7 +3,7 @@ import { postTypeList } from '~/use/posts'
 
 export const eventTypeList = [
   {
-    key: 'Party',
+    label: 'Party',
     value: 'Party',
     icon: '🎵',
   },
