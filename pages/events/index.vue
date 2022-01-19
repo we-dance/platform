@@ -10,7 +10,7 @@
         clearable
         hide-search-box
         :options="eventTypeListIcons"
-        :placeholder="$t('event.type')"
+        :placeholder="$t('events.type')"
       />
       <t-rich-select
         v-model="dances"
@@ -23,14 +23,14 @@
           v-if="view === 'list'"
           icon="news"
           type="icon"
-          label="See photos"
+          :label="$t('events.photos.label')"
           @click="view = 'covers'"
         />
         <TButton
           v-if="view === 'covers'"
           icon="notes"
           type="icon"
-          label="See list"
+          :label="$t('events.list.label')"
           @click="view = 'list'"
         />
       </div>
@@ -39,7 +39,7 @@
     <div>
       <TLoader v-if="loading" />
       <div v-else-if="!count" class="p-4">
-        No events found. Would you like to add one?
+        {{ $t('events.list.empty') }}
       </div>
 
       <div
@@ -69,7 +69,8 @@
       <div v-else>
         <div v-for="(items, date) in itemsByDate" :key="date" class="mb-8">
           <h2 class="font-bold bg-dark text-white py-2 px-4">
-            {{ getDay(date) }}, {{ getDate(date) }}
+            {{ $t('events.day', { day: getDay(date) }) }},
+            {{ getDate(date) }}
           </h2>
           <div v-for="item in items" :key="item.id" class="px-4 mt-4">
             <TEventText :item="item" />
