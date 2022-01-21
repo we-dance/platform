@@ -1,117 +1,105 @@
-hero.title: Нравится танцевать?
-hero.subtitle: Мы помогаем друг другу находить интересные танцевальные
-  мероприятия и танц-партнёров.
-signin: Войти
-signup: Зарегистрироваться
-signout: Выйти
-events.add: Добавить
-posts.add: Добавить
-profiles.add: Добавить
-myprofile.events.add: Добавить мероприятие
-myprofile.posts.add: Написать пост
-posts.title: Комментарий
-profiles.title: Сообщество
-events.title: Мероприятия
-event.type: Классификация
-chat.title: Беседа
-cities.choose: Elige una ciudad
-myprofile.title: Мой профиль
-settings.title: Настройки
-city.anywhere: Куда угодно
-city.change: Сменить город
-role.label: Роль
-sort.popular: Популярные
-sort.newest: Новые
-style.label: Стиль
-profile.username: Имя пользователя
-account.email: Электронная почта
-account.password: Пароль
-account.name: Полное имя
-account.phone: Телефон
-account.newsletter: Какие обновления вы хотите получать еженедельно?
-profile.community: Я танцую в
-agreement: Выполняя вход, вы соглашаетесь с {terms} и {privacy}.
-terms: Условиями использования
-privacy: Политики конфиденциальности
-register.login: Вход
-register.submit: Зарегистрироваться
-signin.register: Создать учётную запись
-signin.nopassword: Забыли пароль
-nopassword.signin: У меня есть пароль
-nopassword.google: Войти через Google
-nopassword.submit: Отправить волшебную ссылку
-signin.submit: Войти
-settings.account.title: Учетная запись
-settings.account.description: Эта информация будет использоваться для
-  уведомлений и покупок. Он будет передан поставщикам услуг или продавцам только
-  с вашего согласия.
-settings.profile.title: Профиль
-settings.profile.description: Что вы хотите, чтобы другие танцоры знали о вас?
-  Это место, где можно поделиться своей страстью к танцам. Представь себя, не
-  стесняйся!
-settings.contacts.title: Контакты
-settings.contacts.description: Эта информация будет общедоступной. Делитесь
-  своими контактами только в том случае, если вы хотите, чтобы с вами связались
-  участники. Это также хорошее место, чтобы поделиться своими социальными
-  сетями, чтобы привлечь внимание.
-settings.account.changepassword: Изменить пароль
-settings.account.delete: Удалить аккаунт
-contacts.email: Электронная почта
-contacts.website: Веб-сайт
-save: Сохранить
-profile.type: Тип
-profile.name: Имя
-profile.bio: Тизер
-profile.hometown: Родной город
-profile.birthday: День рождения
-profile.gender: Пол
-profile.styles: Ваши танцевальные стили и уровень
-profile.style: Танц-стили
-profile.story: Описание
-profile.languages: Ваши языки
-profile.skills: Не танцевальные навыки
-profile.days: Дни
-profile.topics: Какие танцевальные темы вас интересуют?
-profile.teacher: Вы преподаете?
-profile.partner: Вы ищете партнера для танцев?
-profile.height: Ваш рост (см)
-profile.weight: Ваш вес (кг)
-profile.partnerBio: О вашем партнере
-profile.objectives: Цели
-profile.place: Где встретиться?
-profile.visibility: Видимость
-profile.photo: Фото
-teaser.partner.title: Нужен партнер?
-teaser.partner.description: Танцоры со всего мира создают свои профили, чтобы найти танцевальных партнеров
-teaser.partner.btn: Посмотреть сообщество
-teaser.events.title: Где танцевать?
-teaser.events.description: Все танцевальные курсы, вечеринки и фестивали в одном месте
-teaser.events.btn: Посмотреть события
-teaser.profile.title: Опубликуйте свой профиль
-teaser.profile.description: чтобы другие могли связаться с вами
-teaser.profile.btn: Присоединись бесплатно
-teaser.allevents.title: Закрытые мероприятия
-teaser.allevents.description: Станьте участником сообщества WeDance, чтобы увидеть больше
-teaser.allevents.btn: Присоединяйся сейчас
-teaser.chat.title: Спросите у местных
-teaser.chat.description: У нас есть танцевальный чат Telegram в каждом городе.
-  Присоединяйтесь к своему городскому чату, чтобы помогать путешествующим
-  танцорам, приглашайте своих танцевальных друзей. Давайте вместе создадим
-  WeDance!
-teaser.chat.btn: Присоединиться к чату
-teaser.involve.title: Нам нужна твоя помощь
-teaser.involve.description: Мы некоммерческое международное танцевальное
-  сообщество. Мы хотим, чтобы вы побывали в любом городе любой страны и нашли
-  танцевальные мероприятия и танцоров. Все начинается с местного сообщества.
-teaser.involve.btn: Увлекаться
-share.title: Поделиться
-share.copy: Копировать ссылку
-footer.about: О нас
-footer.support: Поддержка
-footer.privacy: Конфиденциальность
-footer.terms: Условия
-footer.coc: Нормы поведения
-footer.faq: Вопросы-Ответы
-chat.welcome: Начните разговор с чего-нибудь приятного.
-chat.with: Пообщайтесь с {username}
-chat.dateDiff: '{diff} лет назад'
+---
+hero.title: Do you like dancing?
+hero.subtitle: We help each other find interesting dance events and dance partners.
+signin: Sign in
+signup: Sign up
+signout: Log out
+events.add: Add event
+posts.add: Add post
+profiles.add: Add profile
+myprofile.events.add: Add event
+myprofile.posts.add: Write a post
+posts.title: Feed
+profiles.title: Community
+events.title: Events
+event.type: Type
+chat.title: Chat
+cities.choose: Choose city
+myprofile.title: My Profile
+settings.title: Settings
+city.anywhere: Anywhere
+city.change: Change city
+role.label: Role
+sort.popular: Popular
+sort.newest: Newest
+style.label: Style
+profile.username: Username
+account.email: Email
+account.password: Password
+account.name: Full Name
+account.phone: Phone
+account.newsletter: What kind of updated would you like to receive weekly?
+profile.community: I dance in
+agreement: By signing in, you agree to {terms} and {privacy}.
+terms: Terms of service
+privacy: Privacy policy
+register.login: Login
+register.submit: Register
+signin.register: Create Account
+signin.nopassword: Forgot password
+nopassword.signin: I have a password
+nopassword.google: Sign in with Google
+nopassword.submit: Send a magic link
+signin.submit: Login
+settings.account.title: Account
+settings.account.description: This information will be used for notifications and purchases. It will be shared with service providers or sellers only with your agreement.
+settings.profile.title: Profile
+settings.profile.description: What do you want other dancers to know about you? That's a place to share your passion to dance. Present yourself, don't be shy!
+settings.contacts.title: Contacts
+settings.contacts.description: This information will be publicly available. Share your contacts only if you want to be contacted by members. It's also nice place to share your social media to get some attention.
+settings.account.changepassword: Change Password
+settings.account.delete: Delete Account
+contacts.email: Email
+contacts.website: Website
+save: Save
+profile.type: Type
+profile.name: Name
+profile.bio: Teaser
+profile.hometown: Hometown
+profile.birthday: Birthday
+profile.gender: Gender
+profile.styles: Your dance styles and level
+profile.style: Dance styles
+profile.story: Description
+profile.languages: Your languages
+profile.skills: Non-dancing skills
+profile.days: Days
+profile.topics: Which dance topics you are interested in?
+profile.teacher: Are you teaching?
+profile.partner: Are you looking for a dance partner?
+profile.height: Your height (cm)
+profile.weight: Your weight (kg)
+profile.partnerBio: About your partner
+profile.objectives: Objectives
+profile.place: Where to meet?
+profile.visibility: Visibility
+profile.photo: Photo
+teaser.partner.title: Need a partner?
+teaser.partner.description: Dancers worldwide create their profiles to find dance partners
+teaser.partner.btn: See Community
+teaser.events.title: Where to dance?
+teaser.events.description: All dance courses, parties and festivals in one place
+teaser.events.btn: See Events
+teaser.profile.title: Publish your profile
+teaser.profile.description: so that others can contact you
+teaser.profile.btn: Join for free
+teaser.allevents.title: Private events
+teaser.allevents.description: Become a member of WeDance Community to see more
+teaser.allevents.btn: Join Now
+teaser.chat.title: Ask Locals
+teaser.chat.description: "We have a Telegram dance chat in every city. Join your city chat to help traveling dancers, invite your dance friends. Let's build WeDance together! "
+teaser.chat.btn: Join Chat
+teaser.involve.title: We need your help
+teaser.involve.description: We are non-profit international dance community. We want you go to any city in any country and find dance events and dancers. It all starts with the local community.
+teaser.involve.btn: Get Involved
+share.title: Share
+share.copy: Copy Link
+footer.about: About us
+footer.support: Support
+footer.privacy: Privacy
+footer.terms: Terms
+footer.coc: Code of Conduct
+footer.faq: FAQ
+chat.welcome: Start conversation with something nice.
+chat.with: Chat with {username}
+chat.dateDiff: '{diff} ago'
