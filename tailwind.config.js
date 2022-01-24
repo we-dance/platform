@@ -5,8 +5,13 @@
  ** Default: https://github.com/tailwindcss/tailwindcss/blob/master/stubs/defaultConfig.stub.js
  */
 module.exports = {
-  mode: 'jit',
-  purge: ['./**/*.vue'],
+  content: [
+    './components/**/*.{js,vue,ts}',
+    './layouts/**/*.vue',
+    './pages/**/*.vue',
+    './plugins/**/*.{js,ts}',
+    './nuxt.config.{js,ts}',
+  ],
   important: true,
   theme: {
     extend: {
@@ -23,12 +28,6 @@ module.exports = {
         noto: 'Noto Sans',
         montserrat: 'Montserrat',
       },
-    },
-  },
-  variants: {
-    extend: {
-      opacity: ['disabled'],
-      cursor: ['disabled'],
     },
   },
   plugins: [
