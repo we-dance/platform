@@ -59,7 +59,7 @@ export default {
       error,
     } = useAuth()
 
-    const registerFields = useProfiles()
+    const { registerFields } = useProfiles()
 
     const data = ref({})
 

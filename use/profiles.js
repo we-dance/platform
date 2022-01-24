@@ -496,5 +496,8 @@ export const useProfiles = () => {
     typeList,
     genderList,
     radiusOptions,
+    registerFields,
+    profileFilters,
+    profileSorts,
   }
 }
