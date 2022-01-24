@@ -23,10 +23,6 @@ export const firebase = {
 }
 
 export default {
-  mode: 'spa',
-  tailwindcss: {
-    jit: true,
-  },
   /*
    ** Customize the progress-bar color
    */
@@ -36,6 +32,7 @@ export default {
    ** Global CSS
    */
   css: [
+    '@/assets/css/tailwind.css',
     '@/assets/css/typography.css',
     '@/assets/css/vendors.scss',
     '@/assets/css/animation.css',
@@ -55,11 +52,10 @@ export default {
   buildModules: [
     // Doc: https://github.com/nuxt-community/stylelint-module
     '@nuxtjs/stylelint-module',
-    // Doc: https://github.com/nuxt-community/nuxt-tailwindcss
-    '@nuxtjs/tailwindcss',
     // Doc: https://composition-api.nuxtjs.org/
     '@nuxtjs/composition-api',
     '@nuxtjs/google-fonts',
+    '@nuxt/postcss8',
   ],
   /*
    ** Nuxt.js modules
@@ -119,6 +115,12 @@ export default {
    ** Build configuration
    */
   build: {
+    postcss: {
+      plugins: {
+        tailwindcss: {},
+        autoprefixer: {},
+      },
+    },
     loaders: {
       vue: {
         prettify: false,
