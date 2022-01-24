@@ -19,8 +19,6 @@ settings.title: Settings
 city.anywhere: Anywhere
 city.change: Change city
 role.label: Role
-sort.popular: Popular
-sort.newest: Newest
 style.label: Style
 profile.username: Username
 account.email: Email
@@ -111,3 +109,30 @@ footer.faq: FAQ
 chat.welcome: Start conversation with something nice.
 chat.with: Chat with {username}
 chat.dateDiff: '{diff} ago'
+feed.title: Feed
+feed.interact: Ask or share something about dance...
+comments.empty: There are no comments yet.
+edit.label: Edit
+dashboard.label: Dashboard
+sort.popular: Popular
+sort.newest: Newest
+sort.hot: Hot
+sort.watching: Watching
+sort.starred: Starred
+sort.archived: Archived
+sort.yours: Yours
+send.btn: Send
+feed.category: Choose category
+feed.partner: Looking for partner
+feed.events: Looking for events
+feed.instructor: Looking for instructor
+feed.trip: Offering trip
+feed.event: Event
+feed.artist: Artist
+feed.venue: Venue
+feed.app: App
+feed.help: Guide / How To
+feed.inspiration: Inspiration
+feed.question: Question
+feed.poll: Poll
+feed.post: Post

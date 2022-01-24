@@ -1,58 +1,72 @@
 export const postTypeList = [
   {
     label: 'Choose category',
+    key: 'feed.category',
     value: '',
   },
   {
     label: 'Looking for partner',
+    key: 'feed.partner',
     value: 'needPartner',
   },
   {
     label: 'Looking for events',
+    key: 'feed.events',
     value: 'needEvents',
   },
   {
     label: 'Looking for instructor',
+    key: 'feed.instructor',
     value: 'needInstructor',
   },
   {
     label: 'Offering trip',
+    key: 'feed.trip',
     value: 'trip',
   },
   {
     label: 'Event',
+    key: 'feed.event',
     value: 'event',
   },
   {
     label: 'Artist',
+    key: 'feed.artist',
     value: 'artist',
   },
   {
     label: 'Venue',
+    key: 'feed.venue',
     value: 'venue',
   },
   {
     label: 'App',
+    key: 'feed.app',
     value: 'app',
   },
   {
     label: 'Guide / How To',
+    key: 'feed.help',
     value: 'guide',
   },
   {
     label: 'Inspiration',
+    key: 'feed.inspiration',
     value: 'inspiration',
   },
   {
     label: 'Question',
+    key: 'feed.question',
     value: 'question',
   },
   {
     label: 'Poll',
+    key: 'feed.poll',
     value: 'poll',
   },
   {
     label: 'Post',
+    key: 'feed.post',
     value: 'post',
   },
 ]
