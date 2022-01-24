@@ -138,13 +138,11 @@
 import { ref } from '@nuxtjs/composition-api'
 import { useAuth } from '~/use/auth'
 import { useProfiles } from '~/use/profiles'
-import { accountFields as allAccountFields } from '~/use/accounts'
+import { useAccounts } from '~/use/accounts'
 import { useRouter } from '~/use/router'
-import TPopup from '~/components/TPopup.vue'
 
 export default {
   name: 'PageSettings',
-  components: { TPopup },
   middleware: ['auth'],
   data: () => ({
     deleteAccountPopupVisible: false,
@@ -166,6 +164,7 @@ export default {
     } = useAuth()
 
     const { profileFields, contactFields } = useProfiles()
+    const { accountFields: allAccountFields } = useAccounts()
     const password = ref('')
     const passwordError = ref(false)
     const { router } = useRouter()

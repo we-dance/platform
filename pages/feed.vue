@@ -38,30 +38,16 @@ import { useCities } from '~/use/cities'
 import { useDoc } from '~/use/doc'
 import { useApp } from '~/use/app'
 import { getUrlFromText } from '~/utils'
-import { postTypeList } from '~/use/posts'
-import TInputSelect from '~/components/TInput/TInputSelect.vue'
-import { useContext } from '@nuxtjs/composition-api'
+import { usePosts } from '~/use/posts'
 
 export default {
-  components: { TInputSelect },
   setup() {
-    const { app } = useContext()
-    const t = app.i18n.t.bind(app.i18n)
     const { uid, username } = useAuth()
     const { currentCity } = useCities()
     const { getPlace } = useApp()
     const newMessage = ref('')
     const postType = ref('')
-
-    const filterTypeList = [
-      { label: t('sort.newest'), value: 'Newest' },
-      { label: t('sort.hot'), value: 'Hot' },
-      { label: t('sort.popular'), value: 'Popular' },
-      { label: t('sort.watching'), value: 'Watching' },
-      { label: t('sort.starred'), value: 'Starred' },
-      { label: t('sort.archived'), value: 'Archived' },
-      { label: t('sort.yours'), value: 'Authored' },
-    ]
+    const { postTypeList, filterTypeList } = usePosts()
 
     const filterType = ref('Newest')
     const { create } = useDoc('posts')

@@ -30,11 +30,13 @@
 <script>
 import firebase from 'firebase/app'
 import 'firebase/firestore'
-import { venueFields } from '~/use/venues'
+import { useVenues } from '~/use/venues'
 
 export default {
   name: 'TInputVenue',
   setup() {
+    const { venueFields } = useVenues()
+
     return {
       venueFields,
     }

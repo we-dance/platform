@@ -1,8 +1,10 @@
-import { venueFields } from '~/use/venues'
+import { useVenues } from '~/use/venues'
 import { useProfiles } from '~/use/profiles'
 
 export function getFields(collection) {
   if (collection === 'venues') {
+    const { venueFields } = useVenues()
+
     return venueFields
   }
 

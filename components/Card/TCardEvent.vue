@@ -39,7 +39,7 @@ import {
 } from '@vue-hero-icons/outline'
 import { useAuth } from '~/use/auth'
 import { computed, onMounted, ref } from 'vue-demi'
-import { eventFields } from '~/use/events'
+import { useEvents } from '~/use/events'
 import { useDoc } from '~/use/doc'
 
 export default {
@@ -67,6 +67,7 @@ export default {
     const { can } = useAuth()
     const { update } = useDoc('posts')
     const data = ref({})
+    const { eventFields } = useEvents()
 
     onMounted(() => {
       data.value = {

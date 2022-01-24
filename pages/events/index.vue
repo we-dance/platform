@@ -106,7 +106,7 @@ import { useAuth } from '~/use/auth'
 import { useCities } from '~/use/cities'
 import { useRouter } from '~/use/router'
 import { useProfiles } from '~/use/profiles'
-import { eventTypeListIcons } from '~/use/events'
+import { useEvents } from '~/use/events'
 import { useStyles } from '~/use/styles'
 import { addressPart } from '~/use/google'
 
@@ -123,6 +123,7 @@ import {
 export default {
   name: 'EventsIndex',
   setup() {
+    const { eventTypeListIcons } = useEvents()
     const { currentCity } = useCities()
     const { docs, loading: loadingPosts, getById } = useCollection('posts', {
       type: 'event',
