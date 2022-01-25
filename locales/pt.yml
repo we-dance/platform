@@ -10,12 +10,12 @@ events:
   add: Adicionar Evento
   title: Eventos
   list:
-    empty: Nenhum evento encontrado. Gostaria de adicionar um?
+    empty: No events found. Would you like to add one?
   view:
-    list: Ver fotos
-    covers: Ver lista
+    list: See Photos
+    covers: See list
   filter:
-    type: Modelo
+    type: Type
     style: Estilo
 posts:
   add: Adicionar postagem
@@ -141,34 +141,34 @@ footer:
 feed:
   title: Comentário
   newMessage:
-    input: Pergunte ou compartilhe algo sobre a dança...
-    intent: postar uma mensagem
-    submit: Mandar
-  category: Escolher categoria
-  needPartner: Procurando parceiro
-  needEvents: Procurando eventos
-  needInstructor: Procurando um instrutor
-  trip: Oferecendo corrida
-  event: Evento
-  artist: Artista
-  venue: Localidade
-  app: Aplicativo
-  guide: Guia / Como fazer
-  inspiration: Inspiração
-  question: Questão
-  poll: Enquete
-  post: Publicar
+    input: Ask or share something about dance...
+    intent: post a message
+    submit: Send
+  category: Choose category
+  needPartner: Looking for partner
+  needEvents: Looking for events
+  needInstructor: Looking for instructor
+  trip: Offering trip
+  event: Event
+  artist: Artist
+  venue: Venue
+  app: App
+  guide: Guide / How To
+  inspiration: Inspiration
+  question: Question
+  poll: Poll
+  post: Post
 comments:
-  empty: Ainda não há comentários.
+  empty: There are no comments yet.
 edit:
-  label: Alterar
+  label: Edit
 dashboard:
-  label: Painel
+  label: Dashboard
 sort:
-  popular: Populares
+  popular: Popular
   newest: O mais novo
-  hot: Quente
-  watching: Assistindo
-  starred: Marcado
-  archived: Arquivado
-  yours: Sua
+  hot: Hot
+  watching: Watching
+  starred: Starred
+  archived: Archived
+  yours: Yours
