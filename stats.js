@@ -29,6 +29,8 @@ class Stats {
 
 const appStats = new Stats()
 
-window.stats = appStats
+if (window) {
+  window.stats = appStats
+}
 
 export default appStats

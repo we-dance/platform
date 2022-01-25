@@ -23,6 +23,11 @@ export const firebase = {
 }
 
 export default {
+  target: 'static',
+  ssr: false,
+  generate: {
+    fallback: true,
+  },
   /*
    ** Customize the progress-bar color
    */
