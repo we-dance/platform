@@ -44,7 +44,7 @@ import { pickBy } from 'lodash'
 import { useAuth } from '~/use/auth'
 import { useDoc } from '~/use/doc'
 import { useRouter } from '~/use/router'
-import { eventFields } from '~/use/events'
+import { useEvents } from '~/use/events'
 
 export default {
   name: 'EventEdit',
@@ -131,6 +131,7 @@ export default {
     },
   },
   setup() {
+    const { eventFields } = useEvents()
     const { can, profile, isAdmin, uid } = useAuth()
     const { params } = useRouter()
 

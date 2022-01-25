@@ -1,114 +1,147 @@
-hero.title: Ti piace ballare?
-hero.subtitle: Ci aiutiamo a vicenda a trovare interessanti eventi di danza e
-  partner di ballo.
-signin: Accedere
-signup: Iscriverti
-signout: Uscire
-events.add: Aggiungi evento
-posts.add: Aggiungi post
-profiles.add: Aggiungi profilo
-myprofile.events.add: Aggiungi evento
-myprofile.posts.add: Scrivi un post
-posts.title: Commento
-profiles.title: Comunità
-events.title: Eventi
-event.type: Classificazione
-chat.title: Conversazione
-cities.choose: Scegli una città
-myprofile.title: Il mio profilo
-settings.title: Impostazioni
-city.anywhere: Dovunque
-city.change: Cambia città
-role.label: Ruolo
-sort.popular: Popolare
-sort.newest: Più recente
-style.label: Stile
-profile.username: Nome utente
-account.email: E-mail
-account.password: Password
-account.name: Nome completo
-account.phone: Telefono
-account.newsletter: Che tipo di aggiornamento vorresti ricevere settimanalmente?
-profile.community: Io ballo in
+hero:
+  title: Ti piace ballare?
+  subtitle: Ci aiutiamo a vicenda a trovare interessanti eventi di danza e partner
+    di ballo.
+auth:
+  signin: Accedere
+  signup: Iscriverti
+  signout: Uscire
+events:
+  add: Aggiungi evento
+  title: Eventi
+  filter:
+    style: Stile
+posts:
+  add: Aggiungi post
+  title: Commento
+profiles:
+  add: Aggiungi profilo
+  title: Comunità
+myprofile:
+  events:
+    add: Aggiungi evento
+  posts:
+    add: Scrivi un post
+  title: Il mio profilo
+event:
+  type: Classificazione
+chat:
+  title: Conversazione
+  welcome: Inizia la conversazione con qualcosa di carino.
+  with: Chatta con {username}
+  dateDiff: "{diff} fa"
+cities:
+  choose: Scegli una città
+settings:
+  title: Impostazioni
+  account:
+    title: Account
+    description: Queste informazioni verranno utilizzate per notifiche e acquisti.
+      Esse verrano condivise con fornitori di servizi o venditori solo con il
+      tuo accordo.
+    changepassword: Cambia la password
+    delete: Elimina account
+  profile:
+    title: Profilo
+    description: Cosa vuoi che gli altri ballerini sappiano di te? È un posto dove
+      condividere la tua passione per la danza. Presentati, non essere timido!
+  contacts:
+    title: Contatti
+    description: Queste informazioni saranno disponibili pubblicamente. Condividi i
+      tuoi dati solo se vuoi essere contattato dai altri membri. È anche un bel
+      posto per condividere i tuoi social media per attirare l'attenzione.
+city:
+  anywhere: Dovunque
+  change: Cambia città
+role:
+  label: Ruolo
+sort:
+  popular: Popolare
+  newest: Più recente
+profile:
+  username: Nome utente
+  community: Io ballo in
+  type: Tipo
+  name: Nome
+  bio: Teaser
+  hometown: Città natale
+  birthday: Compleanno
+  gender: Sesso
+  styles: I tuoi stili di danza e livello
+  style: Stili di danza
+  story: Descrizione
+  languages: Le tue lingue
+  skills: Abilità non danzanti
+  days: Giorni
+  topics: Quali argomenti di danza ti interessano?
+  teacher: Stai insegnando?
+  partner: Cerchi un compagno di ballo?
+  height: Altezza (cm)
+  weight: Peso (kg)
+  partnerBio: Sul tuo partner
+  objectives: Obiettivi
+  place: Dove incontrarci?
+  visibility: Visibilità
+  photo: Foto
+account:
+  email: E-mail
+  password: Password
+  name: Nome completo
+  phone: Telefono
+  newsletter: Che tipo di aggiornamento vorresti ricevere settimanalmente?
 agreement: Eseguendo l'accesso, accetti i {terms} e la {privacy}.
 terms: Termini di servizio
 privacy: Politica sulla riservatezza
-register.login: Login
-register.submit: Registrati
-signin.register: Creare un account
-signin.nopassword: Hai dimenticato la password
-nopassword.signin: Ho una password
-nopassword.google: Accedi con Google
-nopassword.submit: Invia un collegamento magico
-signin.submit: Login
-settings.account.title: Account
-settings.account.description: Queste informazioni verranno utilizzate per
-  notifiche e acquisti. Esse verrano condivise con fornitori di servizi o
-  venditori solo con il tuo accordo.
-settings.profile.title: Profilo
-settings.profile.description: Cosa vuoi che gli altri ballerini sappiano di te?
-  È un posto dove condividere la tua passione per la danza. Presentati, non
-  essere timido!
-settings.contacts.title: Contatti
-settings.contacts.description: Queste informazioni saranno disponibili
-  pubblicamente. Condividi i tuoi dati solo se vuoi essere contattato dai altri
-  membri. È anche un bel posto per condividere i tuoi social media per attirare
-  l'attenzione.
-settings.account.changepassword: Cambia la password
-settings.account.delete: Elimina account
-contacts.email: E-mail
-contacts.website: Sito web
+register:
+  login: Login
+  submit: Registrati
+signin:
+  register: Creare un account
+  nopassword: Hai dimenticato la password
+  submit: Login
+nopassword:
+  signin: Ho una password
+  google: Accedi con Google
+  submit: Invia un collegamento magico
+contacts:
+  email: E-mail
+  website: Sito web
 save: Salva
-profile.type: Tipo
-profile.name: Nome
-profile.bio: Teaser
-profile.hometown: Città natale
-profile.birthday: Compleanno
-profile.gender: Sesso
-profile.styles: I tuoi stili di danza e livello
-profile.style: Stili di danza
-profile.story: Descrizione
-profile.languages: Le tue lingue
-profile.skills: Abilità non danzanti
-profile.days: Giorni
-profile.topics: Quali argomenti di danza ti interessano?
-profile.teacher: Stai insegnando?
-profile.partner: Cerchi un compagno di ballo?
-profile.height: Altezza (cm)
-profile.weight: Peso (kg)
-profile.partnerBio: Sul tuo partner
-profile.objectives: Obiettivi
-profile.place: Dove incontrarci?
-profile.visibility: Visibilità
-profile.photo: Foto
-teaser.partner.title: Hai bisogno di un partner?
-teaser.partner.description: Ballerini in tutto il mondo creano i loro profili per trovare partner di ballo
-teaser.partner.btn: Vedi Community
-teaser.events.title: Dove ballare?
-teaser.events.description: Tutti i corsi di ballo, feste e festival in un unico luogo
-teaser.events.btn: Vedi eventi
-teaser.profile.title: Pubblica il tuo profilo
-teaser.profile.description: in modo che altri possano contattarti
-teaser.profile.btn: Entra gratuitamente
-teaser.allevents.title: Eventi privati
-teaser.allevents.description: Diventa un membro della comunità WeDance per vedere di più
-teaser.allevents.btn: Iscriviti adesso
-teaser.chat.title: Chiacchieriamo?
-teaser.chat.description: Abbiamo chat di ballo in ogni città
-teaser.chat.btn: Entra nella chat di {city}
-teaser.involve.title: Abbiamo bisogno del tuo aiuto
-teaser.involve.description: Siamo una comunità di danza internazionale senza
-  scopo di lucro. Vogliamo che tu trovi eventi di danza e ballerini in qualsiasi
-  città di qualsiasi paese Tutto inizia con la comunità locale.
-teaser.involve.btn: Mettersi in gioco
-share.title: Condividere
-share.copy: Copia link
-footer.about: Chi siamo
-footer.support: Supporto
-footer.privacy: Privacy
-footer.terms: Termini
-footer.coc: Codice di comportamento
-footer.faq: FAQ
-chat.welcome: Inizia la conversazione con qualcosa di carino.
-chat.with: Chatta con {username}
-chat.dateDiff: '{diff} fa'
+teaser:
+  partner:
+    title: Hai bisogno di un partner?
+    description: Ballerini in tutto il mondo creano i loro profili per trovare
+      partner di ballo
+    btn: Vedi Community
+  events:
+    title: Dove ballare?
+    description: Tutti i corsi di ballo, feste e festival in un unico luogo
+    btn: Vedi eventi
+  profile:
+    title: Pubblica il tuo profilo
+    description: in modo che altri possano contattarti
+    btn: Entra gratuitamente
+  allevents:
+    title: Eventi privati
+    description: Diventa un membro della comunità WeDance per vedere di più
+    btn: Iscriviti adesso
+  chat:
+    title: Chiacchieriamo?
+    description: Abbiamo chat di ballo in ogni città
+    btn: Entra nella chat di {city}
+  involve:
+    title: Abbiamo bisogno del tuo aiuto
+    description: Siamo una comunità di danza internazionale senza scopo di lucro.
+      Vogliamo che tu trovi eventi di danza e ballerini in qualsiasi città di
+      qualsiasi paese Tutto inizia con la comunità locale.
+    btn: Mettersi in gioco
+share:
+  title: Condividere
+  copy: Copia link
+footer:
+  about: Chi siamo
+  support: Supporto
+  privacy: Privacy
+  terms: Termini
+  coc: Codice di comportamento
+  faq: FAQ

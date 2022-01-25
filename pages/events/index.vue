@@ -10,27 +10,27 @@
         clearable
         hide-search-box
         :options="eventTypeListIcons"
-        :placeholder="$t('event.type')"
+        :placeholder="$t('events.filter.type')"
       />
       <t-rich-select
         v-model="dances"
         clearable
         :options="danceStyles"
-        :placeholder="$t('style.label')"
+        :placeholder="$t('events.filter.style')"
       />
       <div>
         <TButton
           v-if="view === 'list'"
           icon="news"
           type="icon"
-          label="See photos"
+          :label="$t('events.view.list')"
           @click="view = 'covers'"
         />
         <TButton
           v-if="view === 'covers'"
           icon="notes"
           type="icon"
-          label="See list"
+          :label="$t('events.view.covers')"
           @click="view = 'list'"
         />
       </div>
@@ -106,7 +106,7 @@ import { useAuth } from '~/use/auth'
 import { useCities } from '~/use/cities'
 import { useRouter } from '~/use/router'
 import { useProfiles } from '~/use/profiles'
-import { eventTypeListIcons } from '~/use/events'
+import { useEvents } from '~/use/events'
 import { useStyles } from '~/use/styles'
 import { addressPart } from '~/use/google'
 
@@ -123,6 +123,7 @@ import {
 export default {
   name: 'EventsIndex',
   setup() {
+    const { eventTypeListIcons } = useEvents()
     const { currentCity } = useCities()
     const { docs, loading: loadingPosts, getById } = useCollection('posts', {
       type: 'event',

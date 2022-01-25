@@ -1,115 +1,148 @@
-hero.title: Iti place sa dansezi?
-hero.subtitle: Ne ajutăm reciproc să găsim evenimente de dans interesante și
-  parteneri de dans.
-signin: Loghează-te
-signup: Inscrie-te
-signout: Deconectează-te
-events.add: Adăugați un eveniment
-posts.add: Adăugați o postare
-profiles.add: Adaugă profilul
-myprofile.events.add: Adăugați un eveniment
-myprofile.posts.add: Scrie o postare
-posts.title: Comentariu
-profiles.title: Comunitate
-events.title: Evenimente
-event.type: Clasificare
-chat.title: Conversaţie
-cities.choose: Alegeți un oraș
-myprofile.title: Profilul meu
-settings.title: Setări
-city.anywhere: Oriunde
-city.change: Schimbă orașul
-role.label: Rol
-sort.popular: Popular
-sort.newest: Cel mai nou
-style.label: Stil
-profile.username: Nume de utilizator
-account.email: E-mail
-account.password: Parola
-account.name: Numele complet
-account.phone: Telefon
-account.newsletter: Ce fel de actualizare ați dori să primiți săptămânal?
-profile.community: Dansez în
+hero:
+  title: Iti place sa dansezi?
+  subtitle: Ne ajutăm reciproc să găsim evenimente de dans interesante și
+    parteneri de dans.
+auth:
+  signin: Loghează-te
+  signup: Inscrie-te
+  signout: Deconectează-te
+events:
+  add: Adăugați un eveniment
+  title: Evenimente
+  filter:
+    style: Stil
+posts:
+  add: Adăugați o postare
+  title: Comentariu
+profiles:
+  add: Adaugă profilul
+  title: Comunitate
+myprofile:
+  events:
+    add: Adăugați un eveniment
+  posts:
+    add: Scrie o postare
+  title: Profilul meu
+event:
+  type: Clasificare
+chat:
+  title: Conversaţie
+  welcome: Începeți conversația cu ceva frumos.
+  with: Discutați cu {username}
+  dateDiff: acum {diff}
+cities:
+  choose: Alegeți un oraș
+settings:
+  title: Setări
+  account:
+    title: Cont
+    description: Aceste informații vor fi utilizate pentru notificări și achiziții.
+      Acesta va fi distribuit furnizorilor de servicii sau vânzătorilor numai cu
+      acordul dumneavoastră.
+    changepassword: Schimbați parola
+    delete: Șterge cont
+  profile:
+    title: Profil
+    description: Ce vrei să știe alți dansatori despre tine? Acesta este un loc
+      pentru a vă împărtăși pasiunea pentru dans. Prezintă-te, nu fi timid!
+  contacts:
+    title: Contacte
+    description: Aceste informații vor fi disponibile publicului. Partajați-vă
+      contactele numai dacă doriți să fiți contactat de membri. Este, de
+      asemenea, un loc frumos pentru a vă partaja social media pentru a atrage
+      atenția.
+city:
+  anywhere: Oriunde
+  change: Schimbă orașul
+role:
+  label: Rol
+sort:
+  popular: Popular
+  newest: Cel mai nou
+profile:
+  username: Nume de utilizator
+  community: Dansez în
+  type: Tip
+  name: Nume
+  bio: Teaser
+  hometown: Oras natal
+  birthday: Zi de nastere
+  gender: Gen
+  styles: Stilurile și nivelul tău de dans
+  style: Stilurile de dans
+  story: Descriere
+  languages: Limbile tale
+  skills: Abilități fără dans
+  days: Zile
+  topics: Ce subiecte de dans te interesează?
+  teacher: Predați?
+  partner: Căutați un partener de dans?
+  height: Inaltimea ta (cm)
+  weight: Greutatea ta (kg)
+  partnerBio: Despre partenerul tău
+  objectives: Obiective
+  place: Unde să întâlnim?
+  visibility: Vizibilitate
+  photo: Fotografie
+account:
+  email: E-mail
+  password: Parola
+  name: Numele complet
+  phone: Telefon
+  newsletter: Ce fel de actualizare ați dori să primiți săptămânal?
 agreement: Prin conectare, sunteți de acord cu {terms} și {privacy}.
 terms: Termenii serviciului
 privacy: Politica de Confidențialitate
-register.login: Logare
-register.submit: Inregistreaza-te
-signin.register: Creează cont
-signin.nopassword: Ați uitat parola
-nopassword.signin: Am o parolă
-nopassword.google: Conectați-vă cu Google
-nopassword.submit: Trimiteți un link magic
-signin.submit: Logare
-settings.account.title: Cont
-settings.account.description: Aceste informații vor fi utilizate pentru
-  notificări și achiziții. Acesta va fi distribuit furnizorilor de servicii sau
-  vânzătorilor numai cu acordul dumneavoastră.
-settings.profile.title: Profil
-settings.profile.description: Ce vrei să știe alți dansatori despre tine? Acesta
-  este un loc pentru a vă împărtăși pasiunea pentru dans. Prezintă-te, nu fi
-  timid!
-settings.contacts.title: Contacte
-settings.contacts.description: Aceste informații vor fi disponibile publicului.
-  Partajați-vă contactele numai dacă doriți să fiți contactat de membri. Este,
-  de asemenea, un loc frumos pentru a vă partaja social media pentru a atrage
-  atenția.
-settings.account.changepassword: Schimbați parola
-settings.account.delete: Șterge cont
-contacts.email: E-mail
-contacts.website: Site-ul web
+register:
+  login: Logare
+  submit: Inregistreaza-te
+signin:
+  register: Creează cont
+  nopassword: Ați uitat parola
+  submit: Logare
+nopassword:
+  signin: Am o parolă
+  google: Conectați-vă cu Google
+  submit: Trimiteți un link magic
+contacts:
+  email: E-mail
+  website: Site-ul web
 save: Salvați
-profile.type: Tip
-profile.name: Nume
-profile.bio: Teaser
-profile.hometown: Oras natal
-profile.birthday: Zi de nastere
-profile.gender: Gen
-profile.styles: Stilurile și nivelul tău de dans
-profile.style: Stilurile de dans
-profile.story: Descriere
-profile.languages: Limbile tale
-profile.skills: Abilități fără dans
-profile.days: Zile
-profile.topics: Ce subiecte de dans te interesează?
-profile.teacher: Predați?
-profile.partner: Căutați un partener de dans?
-profile.height: Inaltimea ta (cm)
-profile.weight: Greutatea ta (kg)
-profile.partnerBio: Despre partenerul tău
-profile.objectives: Obiective
-profile.place: Unde să întâlnim?
-profile.visibility: Vizibilitate
-profile.photo: Fotografie
-teaser.partner.title: Ai nevoie de un partener?
-teaser.partner.description: Dansatorii din întreaga lume își creează profilurile
-  pentru a găsi parteneri de dans
-teaser.partner.btn: A se vedea Comunitatea
-teaser.events.title: Unde să dansezi?
-teaser.events.description: Toate cursurile de dans, petreceri și festivaluri într-un singur loc
-teaser.events.btn: Vezi Evenimente
-teaser.profile.title: Publică-ți profilul
-teaser.profile.description: pentru ca alții să vă poată contacta
-teaser.profile.btn: Înscrie-te gratis
-teaser.allevents.title: Evenimente private
-teaser.allevents.description: Deveniți membru al comunității WeDance pentru a vedea mai multe
-teaser.allevents.btn: Alătură-te acum
-teaser.chat.title: Vorbim?
-teaser.chat.description: Avem discuții de dans în fiecare oraș
-teaser.chat.btn: Alăturați-vă chatului {city}
-teaser.involve.title: Noi avem nevoie de ajutorul tau
-teaser.involve.description: Suntem o comunitate internațională de dans
-  non-profit. Vrem să mergeți în orice oraș din orice țară și să găsiți
-  evenimente de dans și dansatori. Totul începe cu comunitatea locală.
-teaser.involve.btn: A se implica
-share.title: Acțiune
-share.copy: Copiază legătură
-footer.about: Despre noi
-footer.support: A sustine
-footer.privacy: Confidențialitate
-footer.terms: Termeni
-footer.coc: Codul de conduită
-footer.faq: FAQ
-chat.welcome: Începeți conversația cu ceva frumos.
-chat.with: Discutați cu {username}
-chat.dateDiff: acum {diff}
+teaser:
+  partner:
+    title: Ai nevoie de un partener?
+    description: Dansatorii din întreaga lume își creează profilurile pentru a găsi
+      parteneri de dans
+    btn: A se vedea Comunitatea
+  events:
+    title: Unde să dansezi?
+    description: Toate cursurile de dans, petreceri și festivaluri într-un singur loc
+    btn: Vezi Evenimente
+  profile:
+    title: Publică-ți profilul
+    description: pentru ca alții să vă poată contacta
+    btn: Înscrie-te gratis
+  allevents:
+    title: Evenimente private
+    description: Deveniți membru al comunității WeDance pentru a vedea mai multe
+    btn: Alătură-te acum
+  chat:
+    title: Vorbim?
+    description: Avem discuții de dans în fiecare oraș
+    btn: Alăturați-vă chatului {city}
+  involve:
+    title: Noi avem nevoie de ajutorul tau
+    description: Suntem o comunitate internațională de dans non-profit. Vrem să
+      mergeți în orice oraș din orice țară și să găsiți evenimente de dans și
+      dansatori. Totul începe cu comunitatea locală.
+    btn: A se implica
+share:
+  title: Acțiune
+  copy: Copiază legătură
+footer:
+  about: Despre noi
+  support: A sustine
+  privacy: Confidențialitate
+  terms: Termeni
+  coc: Codul de conduită
+  faq: FAQ

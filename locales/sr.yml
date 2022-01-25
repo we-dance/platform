@@ -1,112 +1,145 @@
-hero.title: Да ли волиш плес?
-hero.subtitle: Помажемо једни другима у проналажењу занимљивих плесних догађаја
-  и плесних партнера.
-signin: Улазни
-signup: Пријавити
-signout: Одјавити се
-events.add: Додај догађај
-posts.add: Додај пост
-profiles.add: Додај профил
-myprofile.events.add: Додај догађај
-myprofile.posts.add: Напишите пост
-posts.title: Коментар
-profiles.title: Заједница
-events.title: Догађаји
-event.type: Класификација
-chat.title: Разговор
-cities.choose: Одаберите град
-myprofile.title: Мој профил
-settings.title: Подешавања
-city.anywhere: Било где
-city.change: Промени град
-role.label: Улога
-sort.popular: Популарно
-sort.newest: Најновије
-style.label: Стил
-profile.username: Корисничко име
-account.email: Емаил
-account.password: Лозинка
-account.name: Пуно име
-account.phone: Телефон
-account.newsletter: Какву врсту ажурирања желите да примате недељно?
-profile.community: Плешем у
+hero:
+  title: Да ли волиш плес?
+  subtitle: Помажемо једни другима у проналажењу занимљивих плесних догађаја и
+    плесних партнера.
+auth:
+  signin: Улазни
+  signup: Пријавити
+  signout: Одјавити се
+events:
+  add: Додај догађај
+  title: Догађаји
+  filter:
+    style: Стил
+posts:
+  add: Додај пост
+  title: Коментар
+profiles:
+  add: Додај профил
+  title: Заједница
+myprofile:
+  events:
+    add: Додај догађај
+  posts:
+    add: Напишите пост
+  title: Мој профил
+event:
+  type: Класификација
+chat:
+  title: Разговор
+  welcome: Започни разговор са нечим лепим
+  with: Ћаскај са {username}
+  dateDiff: Пре {diff}
+cities:
+  choose: Одаберите град
+settings:
+  title: Подешавања
+  account:
+    title: Рачун
+    description: Ове информације ће се користити за обавештења и куповине. Делиће се
+      са добављачима услуга или продавцима само уз ваш договор.
+    changepassword: Промени лозинку
+    delete: Обришите налог
+  profile:
+    title: Профил
+    description: Шта желите да други плесачи знају о вама? То је место на којем
+      можете поделити своју страст према плесу. Представи се, не стиди се!
+  contacts:
+    title: Контакти
+    description: Ове информације ће бити јавно доступне. Поделите своје контакте
+      само ако желите да вас контактирају чланови. Такође је лепо место за
+      дељење друштвених мрежа како бисте привукли пажњу.
+city:
+  anywhere: Било где
+  change: Промени град
+role:
+  label: Улога
+sort:
+  popular: Популарно
+  newest: Најновије
+profile:
+  username: Корисничко име
+  community: Плешем у
+  type: Тип
+  name: Име
+  bio: Теасер
+  hometown: Родни град
+  birthday: Рођендан
+  gender: Пол
+  styles: Ваши плесни стилови и ниво
+  style: Плесни стилови
+  story: Опис
+  languages: Твоји језици
+  skills: Не-плесне вештине
+  days: Дани
+  topics: Које плесне теме вас занимају?
+  teacher: Да ли предајете?
+  partner: Да ли тражите плесног партнера?
+  height: Ваша висина (цм)
+  weight: Ваша тежина (кг)
+  partnerBio: О свом партнеру
+  objectives: Циљеви
+  place: Где да се састане?
+  visibility: Видљивост
+  photo: Пхото
+account:
+  email: Емаил
+  password: Лозинка
+  name: Пуно име
+  phone: Телефон
+  newsletter: Какву врсту ажурирања желите да примате недељно?
 agreement: Пријавом се слажете са {terms} и {privacy}.
 terms: Услови коришћења
 privacy: Правила о приватности
-register.login: Пријавите се
-register.submit: Регистровати
-signin.register: Региструј се
-signin.nopassword: Заборавили сте лозинку
-nopassword.signin: Имам лозинку
-nopassword.google: Пријавите се са Гоогле-ом
-nopassword.submit: Пошаљите магични линк
-signin.submit: Пријавите се
-settings.account.title: Рачун
-settings.account.description: Ове информације ће се користити за обавештења и
-  куповине. Делиће се са добављачима услуга или продавцима само уз ваш договор.
-settings.profile.title: Профил
-settings.profile.description: Шта желите да други плесачи знају о вама? То је
-  место на којем можете поделити своју страст према плесу. Представи се, не
-  стиди се!
-settings.contacts.title: Контакти
-settings.contacts.description: Ове информације ће бити јавно доступне. Поделите
-  своје контакте само ако желите да вас контактирају чланови. Такође је лепо
-  место за дељење друштвених мрежа како бисте привукли пажњу.
-settings.account.changepassword: Промени лозинку
-settings.account.delete: Обришите налог
-contacts.email: Емаил
-contacts.website: Веб сајт
+register:
+  login: Пријавите се
+  submit: Регистровати
+signin:
+  register: Региструј се
+  nopassword: Заборавили сте лозинку
+  submit: Пријавите се
+nopassword:
+  signin: Имам лозинку
+  google: Пријавите се са Гоогле-ом
+  submit: Пошаљите магични линк
+contacts:
+  email: Емаил
+  website: Веб сајт
 save: Сачувати
-profile.type: Тип
-profile.name: Име
-profile.bio: Теасер
-profile.hometown: Родни град
-profile.birthday: Рођендан
-profile.gender: Пол
-profile.styles: Ваши плесни стилови и ниво
-profile.style: Плесни стилови
-profile.story: Опис
-profile.languages: Твоји језици
-profile.skills: Не-плесне вештине
-profile.days: Дани
-profile.topics: Које плесне теме вас занимају?
-profile.teacher: Да ли предајете?
-profile.partner: Да ли тражите плесног партнера?
-profile.height: Ваша висина (цм)
-profile.weight: Ваша тежина (кг)
-profile.partnerBio: О свом партнеру
-profile.objectives: Циљеви
-profile.place: Где да се састане?
-profile.visibility: Видљивост
-profile.photo: Пхото
-teaser.partner.title: Треба вам партнер?
-teaser.partner.description: Плесачи широм света креирају своје профиле како би пронашли плесне партнере
-teaser.partner.btn: Погледајте Заједница
-teaser.events.title: Где плесати?
-teaser.events.description: Сви плесни курсеви, забаве и фестивали на једном месту
-teaser.events.btn: Погледајте Догађаји
-teaser.profile.title: Објавите свој профил
-teaser.profile.description: како би вас други могли контактирати
-teaser.profile.btn: Придружити бесплатно
-teaser.allevents.title: Приватни догађаји
-teaser.allevents.description: Постаните члан WeDance заједнице да бисте видели више
-teaser.allevents.btn: Придружи се сад
-teaser.chat.title: Да ли ћаскамо?
-teaser.chat.description: У сваком граду имамо плесне разговоре
-teaser.chat.btn: Придружите се {city} ћаскању
-teaser.involve.title: Треба нам твоја помоћ
-teaser.involve.description: Ми смо непрофитна међународна плесна заједница.
-  Желимо да одете у било који град у било којој земљи и пронађете плесне
-  догађаје и плесаче. Све почиње од локалне заједнице.
-teaser.involve.btn: Умешати се
-share.title: Објави
-share.copy: Копирај везу
-footer.about: О нама
-footer.support: Подршка
-footer.privacy: Приватност
-footer.terms: Услови
-footer.coc: Кодекс понашања
-footer.faq: Питања и одговори
-chat.welcome: Започни разговор са нечим лепим
-chat.with: Ћаскај са {username}
-chat.dateDiff: Пре {diff}
+teaser:
+  partner:
+    title: Треба вам партнер?
+    description: Плесачи широм света креирају своје профиле како би пронашли плесне партнере
+    btn: Погледајте Заједница
+  events:
+    title: Где плесати?
+    description: Сви плесни курсеви, забаве и фестивали на једном месту
+    btn: Погледајте Догађаји
+  profile:
+    title: Објавите свој профил
+    description: како би вас други могли контактирати
+    btn: Придружити бесплатно
+  allevents:
+    title: Приватни догађаји
+    description: Постаните члан WeDance заједнице да бисте видели више
+    btn: Придружи се сад
+  chat:
+    title: Да ли ћаскамо?
+    description: У сваком граду имамо плесне разговоре
+    btn: Придружите се {city} ћаскању
+  involve:
+    title: Треба нам твоја помоћ
+    description: Ми смо непрофитна међународна плесна заједница. Желимо да одете у
+      било који град у било којој земљи и пронађете плесне догађаје и плесаче.
+      Све почиње од локалне заједнице.
+    btn: Умешати се
+share:
+  title: Објави
+  copy: Копирај везу
+footer:
+  about: О нама
+  support: Подршка
+  privacy: Приватност
+  terms: Услови
+  coc: Кодекс понашања
+  faq: Питања и одговори

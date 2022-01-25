@@ -81,7 +81,7 @@
 import { computed, onMounted, ref, watch } from 'vue-demi'
 import { getExcerpt, getOptions } from '~/utils'
 import { useAlgolia } from '~/use/algolia'
-import { objectivesList, typeList } from '~/use/profiles'
+import { useProfiles } from '~/use/profiles'
 import { useStyles } from '~/use/styles'
 import { useAuth } from '~/use/auth'
 import { useCities } from '~/use/cities'
@@ -100,6 +100,7 @@ export default {
     const { city, currentCity } = useCities()
     const { router } = useRouter()
     const { getCity } = useApp()
+    const { objectivesList, typeList } = useProfiles()
 
     if (!currentCity.value) {
       router.push('/cities')
@@ -186,37 +187,6 @@ export default {
           return value
       }
     }
-
-    const radiusOptions = [
-      {
-        label: 'around 10km',
-        value: 10,
-      },
-      {
-        label: 'around 20km',
-        value: 20,
-      },
-      {
-        label: 'around 50km',
-        value: 50,
-      },
-      {
-        label: 'around 100km',
-        value: 100,
-      },
-      {
-        label: 'around 500km',
-        value: 500,
-      },
-      {
-        label: 'around 1000km',
-        value: 1000,
-      },
-      {
-        label: 'Anywhere',
-        value: '',
-      },
-    ]
 
     return {
       radiusOptions,
