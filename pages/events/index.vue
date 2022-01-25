@@ -16,7 +16,7 @@
         v-model="dances"
         clearable
         :options="danceStyles"
-        :placeholder="$t('events.filter.styleer.style')"
+        :placeholder="$t('events.filter.style')"
       />
       <div>
         <TButton
