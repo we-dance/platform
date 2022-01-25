@@ -1,7 +1,7 @@
+---
 hero:
-  title: ¿Te gusta bailar?
-  subtitle: Nos ayudamos mutuamente a encontrar eventos de baile interesantes y
-    parejas de baile.
+  title: '¿Te gusta bailar?'
+  subtitle: Nos ayudamos mutuamente a encontrar eventos de baile interesantes y parejas de baile.
 auth:
   signin: Ingresar
   signup: Registrarse
@@ -9,7 +9,13 @@ auth:
 events:
   add: Añadir
   title: Eventos
+  list:
+    empty: No se han encontrado eventos. ¿Quieres añadir uno?
+  view:
+    list: Ver fotos
+    covers: Ver lista
   filter:
+    type: Tipo
     style: Estilo
 posts:
   add: Añadir
@@ -23,41 +29,31 @@ myprofile:
   posts:
     add: Escribir una publicación
   title: Mi perfil
-event:
-  type: Tipo
 chat:
   title: Conversaciones
   welcome: Inicie una conversación agradable.
   with: Conversa con {username}
-  dateDiff: hace {diff}
+  dateDiff: "hace {diff}"
 cities:
   choose: Selecciona una ciudad
 settings:
   title: Configuraciones
   account:
     title: Cuenta
-    description: Esta información se utilizará para notificaciones y compras. Se
-      compartirá con proveedores de servicios o vendedores solo con su
-      consentimiento.
+    description: Esta información se utilizará para notificaciones y compras. Se compartirá con proveedores de servicios o vendedores solo con su consentimiento.
     changepassword: Cambia la contraseña
     delete: Borrar cuenta
   profile:
     title: Perfil
-    description: ¿Qué quieres que otros bailarines sepan de ti? Ese es un lugar para
-      compartir tu pasión por la danza. Preséntate, ¡no seas tímido!
+    description: '¿Qué quieres que otros bailarines sepan de ti? Ese es un lugar para compartir tu pasión por la danza. Preséntate, ¡no seas tímido!'
   contacts:
     title: Contactos
-    description: Esta información estará disponible públicamente. Comparta sus
-      contactos solo si desea que los miembros se comuniquen con usted. También
-      es un buen lugar para compartir sus redes sociales y llamar la atención.
+    description: Esta información estará disponible públicamente. Comparta sus contactos solo si desea que los miembros se comuniquen con usted. También es un buen lugar para compartir sus redes sociales y llamar la atención.
 city:
   anywhere: En cualquier sitio
   change: Cambiar de ciudad
 role:
   label: Papel
-sort:
-  popular: Popular
-  newest: Nuevo
 profile:
   username: Nombre de usuario
   community: Yo bailo en
@@ -73,14 +69,14 @@ profile:
   languages: Tus idiomas
   skills: Habilidades para no bailar
   days: Dias
-  topics: ¿Qué temas de baile te interesan?
+  topics: '¿Qué temas de baile te interesan?'
   teacher: Estas enseñando
-  partner: ¿Buscas pareja de baile?
+  partner: '¿Buscas pareja de baile?'
   height: Tu altura (cm)
   weight: Tu peso (kg)
   partnerBio: Sobre tu pareja
   objectives: Objetivos
-  place: ¿Dónde nos vemos?
+  place: '¿Dónde nos vemos?'
   visibility: Visibilidad
   photo: Foto
 account:
@@ -88,7 +84,7 @@ account:
   password: Contraseña
   name: Nombre completo
   phone: Teléfono
-  newsletter: ¿Qué tipo de actualización le gustaría recibir semanalmente?
+  newsletter: '¿Qué tipo de actualización le gustaría recibir semanalmente?'
 agreement: Al iniciar sesión, acepta las {terms} y la {privacy}.
 terms: Términos de servicio
 privacy: Política de privacidad
@@ -109,9 +105,8 @@ contacts:
 save: Salvar
 teaser:
   partner:
-    title: ¿Necesitas un socio?
-    description: Bailarines de todo el mundo crean sus perfiles para encontrar
-      parejas de baile
+    title: '¿Necesitas un socio?'
+    description: Bailarines de todo el mundo crean sus perfiles para encontrar parejas de baile
     btn: Ver comunidad
   events:
     title: Donde bailar
@@ -127,15 +122,11 @@ teaser:
     btn: Únete ahora
   chat:
     title: Pregunte a los lugareños
-    description: Tenemos un chat de baile de Telegram en cada ciudad. Únase al chat
-      de su ciudad para ayudar a los bailarines que viajan, invite a sus amigos
-      de baile. ¡Construyamos WeDance juntos!
+    description: "Tenemos un chat de baile de Telegram en cada ciudad. Únase al chat de su ciudad para ayudar a los bailarines que viajan, invite a sus amigos de baile. ¡Construyamos WeDance juntos!"
     btn: Únete al chat
   involve:
     title: Necesitamos tu ayuda
-    description: Somos una comunidad internacional de danza sin fines de lucro.
-      Queremos que vayas a cualquier ciudad de cualquier país y encuentres
-      eventos de danza y bailarines. Todo comienza con la comunidad local.
+    description: Somos una comunidad internacional de danza sin fines de lucro. Queremos que vayas a cualquier ciudad de cualquier país y encuentres eventos de danza y bailarines. Todo comienza con la comunidad local.
     btn: Involucrarse
 share:
   title: Compartir
@@ -147,3 +138,37 @@ footer:
   terms: Condiciones
   coc: Código de conducta
   faq: Preguntas más frecuentes
+feed:
+  title: Comentario
+  newMessage:
+    input: Pregunte o comparta algo acerca de la danza...
+    intent: publicar un mensaje
+    submit: Enviar
+  category: Elegir categoría
+  needPartner: Buscando socio
+  needEvents: Buscando eventos
+  needInstructor: Buscando instructor
+  trip: Oferta de viaje
+  event: Evento
+  artist: Artista
+  venue: Lugar
+  app: App
+  guide: Guía / Cómo
+  inspiration: Inspiración
+  question: Pregunta
+  poll: Encuesta
+  post: Publicar
+comments:
+  empty: No hay comentarios todavía.
+edit:
+  label: Editar
+dashboard:
+  label: Tablero
+sort:
+  popular: Populares
+  newest: Nuevo
+  hot: Calor
+  watching: Viendo
+  starred: Favoritos
+  archived: Archivado
+  yours: Tuyo
