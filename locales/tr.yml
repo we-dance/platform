@@ -15,7 +15,7 @@ events:
     list: See Photos
     covers: See list
   filter:
-    type: Tip
+    type: Type
     style: Tarz
 posts:
   add: Gönderi ekle
