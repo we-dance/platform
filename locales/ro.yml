@@ -1,9 +1,9 @@
 hero.title: Iti place sa dansezi?
 hero.subtitle: Ne ajutăm reciproc să găsim evenimente de dans interesante și
   parteneri de dans.
-signin: Loghează-te
-signup: Inscrie-te
-signout: Deconectează-te
+auth.signin: Loghează-te
+auth.signup: Inscrie-te
+auth.signout: Deconectează-te
 events.add: Adăugați un eveniment
 posts.add: Adăugați o postare
 profiles.add: Adaugă profilul

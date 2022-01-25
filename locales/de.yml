@@ -1,9 +1,9 @@
 hero.title: Tanzt du gerne?
 hero.subtitle: Wir helfen uns gegenseitig, interessante Tanzveranstaltungen und
   Tanzpartner zu finden.
-signin: Einloggen
-signup: Registrieren
-signout: Ausloggen
+auth.signin: Einloggen
+auth.signup: Registrieren
+auth.signout: Ausloggen
 events.add: Hinzufügen
 posts.add: Hinzufügen
 profiles.add: Hinzufügen

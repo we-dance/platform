@@ -1,8 +1,8 @@
 hero.title: Do you like dancing?
 hero.subtitle: We help each other find interesting dance events and dance partners.
-signin: Sign in
-signup: Sign up
-signout: Log out
+auth.signin: Sign in
+auth.signup: Sign up
+auth.signout: Log out
 events.add: Add event
 posts.add: Add post
 profiles.add: Add profile

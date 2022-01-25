@@ -90,7 +90,7 @@
                 type="primary"
                 to="/signout?target=/signin"
                 class="float-right mt-4"
-                >{{ $t('signout') }}</TButton
+                >{{ $t('auth.signout') }}</TButton
               >
             </div>
           </TPopup>

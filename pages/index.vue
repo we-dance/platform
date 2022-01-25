@@ -28,7 +28,7 @@
                 allow-guests
                 type="simple"
                 to="/signin"
-                :label="$t('signin')"
+                :label="$t('auth.signin')"
               />
             </nav>
 

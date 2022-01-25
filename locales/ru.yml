@@ -1,9 +1,9 @@
 hero.title: Нравится танцевать?
 hero.subtitle: Мы помогаем друг другу находить интересные танцевальные
   мероприятия и танц-партнёров.
-signin: Войти
-signup: Зарегистрироваться
-signout: Выйти
+auth.signin: Войти
+auth.signup: Зарегистрироваться
+auth.signout: Выйти
 events.add: Добавить
 posts.add: Добавить
 profiles.add: Добавить

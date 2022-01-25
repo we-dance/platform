@@ -1,9 +1,9 @@
 hero.title: ¿Te gusta bailar?
 hero.subtitle: Nos ayudamos mutuamente a encontrar eventos de baile interesantes
   y parejas de baile.
-signin: Ingresar
-signup: Registrarse
-signout: Cerrar sesión
+auth.signin: Ingresar
+auth.signup: Registrarse
+auth.signout: Cerrar sesión
 events.add: Añadir
 posts.add: Añadir
 profiles.add: Añadir

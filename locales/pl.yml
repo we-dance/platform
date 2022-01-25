@@ -1,9 +1,9 @@
 hero.title: Czy lubisz tańczyć?
 hero.subtitle: Pomagamy sobie nawzajem znaleźć ciekawe imprezy taneczne i
   partnerów tanecznych.
-signin: Zaloguj się
-signup: Zapisz się
-signout: Wyloguj
+auth.signin: Zaloguj się
+auth.signup: Zapisz się
+auth.signout: Wyloguj
 events.add: Dodaj wydarzenie
 posts.add: Dodaj post
 profiles.add: Dodaj profil

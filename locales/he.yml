@@ -1,6 +1,6 @@
-signin:
-signup:
-signout:
+auth.signin:
+auth.signup:
+auth.signout:
 events.add:
 posts.add:
 profiles.add:

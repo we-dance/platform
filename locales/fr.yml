@@ -1,9 +1,9 @@
 hero.title: Aimez-vous danser?
 hero.subtitle: Nous nous aidons mutuellement à trouver des événements de danse
   intéressants et des partenaires de danse.
-signin: Se connecter
-signup: S'inscrire
-signout: Se déconnecter
+auth.signin: Se connecter
+auth.signup: S'inscrire
+auth.signout: Se déconnecter
 events.add: Ajouter
 posts.add: Ajouter
 profiles.add: Ajouter

@@ -1,9 +1,9 @@
 hero.title: Dans etmeyi sever misin?
 hero.subtitle: İlginç dans etkinlikleri ve dans partnerleri bulma konusunda
   birbirimize yardımcı oluyoruz.
-signin: Oturum aç
-signup: Kayıt ol
-signout: Çıkış Yap
+auth.signin: Oturum aç
+auth.signup: Kayıt ol
+auth.signout: Çıkış Yap
 events.add: Etkinlik ekle
 posts.add: Gönderi ekle
 profiles.add: Profil ekle

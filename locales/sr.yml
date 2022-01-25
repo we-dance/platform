@@ -1,9 +1,9 @@
 hero.title: Да ли волиш плес?
 hero.subtitle: Помажемо једни другима у проналажењу занимљивих плесних догађаја
   и плесних партнера.
-signin: Улазни
-signup: Пријавити
-signout: Одјавити се
+auth.signin: Улазни
+auth.signup: Пријавити
+auth.signout: Одјавити се
 events.add: Додај догађај
 posts.add: Додај пост
 profiles.add: Додај профил
