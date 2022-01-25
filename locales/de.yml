@@ -10,12 +10,12 @@ events:
   add: Hinzufügen
   title: Veranstaltungen
   list:
-    empty: Keine Events gefunden. Möchten Sie eines hinzufügen?
+    empty: No events found. Would you like to add one?
   view:
-    list: Fotos ansehen
-    covers: Liste ansehen
+    list: See Photos
+    covers: See list
   filter:
-    type: Art
+    type: Type
     style: Stil
 posts:
   add: Hinzufügen
@@ -80,7 +80,7 @@ profile:
   visibility: Sichtbarkeit
   photo: Foto
 account:
-  email: E-Mail
+  email: Email
   password: Passwort
   name: Vollständiger Name
   phone: Telefon
@@ -100,7 +100,7 @@ nopassword:
   google: Anmeldung mit Google
   submit: Sende einen magischen Link
 contacts:
-  email: E-Mail
+  email: Email
   website: Webseite
 save: Speichern
 teaser:
@@ -141,34 +141,34 @@ footer:
 feed:
   title: Kommentar
   newMessage:
-    input: Fragen oder teilen Sie etwas über Tanz...
-    intent: eine Nachricht posten
-    submit: Senden
-  category: Kategorie auswählen
-  needPartner: Partner suchen
+    input: Ask or share something about dance...
+    intent: post a message
+    submit: Send
+  category: Choose category
+  needPartner: Looking for partner
   needEvents: Suche Events
   needInstructor: Lehrer suchen
-  trip: Angebotsreise
+  trip: Offering trip
   event: Veranstaltung
-  artist: Künstler
-  venue: Ort
+  artist: Artist
+  venue: Venue
   app: App
   guide: Anleitung
   inspiration: Inspiration
-  question: Frage
-  poll: Umfrage
+  question: Question
+  poll: Poll
   post: Beitrag
 comments:
-  empty: Es gibt noch keine Kommentare.
+  empty: There are no comments yet.
 edit:
-  label: Bearbeiten
+  label: Edit
 dashboard:
   label: Dashboard
 sort:
   popular: Beliebt
   newest: Neueste
-  hot: Heiß
-  watching: Beobachten
-  starred: Markiert
-  archived: Archiviert
+  hot: Hot
+  watching: Watching
+  starred: Starred
+  archived: Archived
   yours: Deine
