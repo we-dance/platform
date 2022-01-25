@@ -1,96 +1,127 @@
+auth:
+  ? signin
+  ? signup
+  ? signout
+events:
+  add: ~
+  title: ~
+  filter:
+    ? style
+posts:
+  ? add
+  ? title
+profiles:
+  ? add
+  ? title
+myprofile:
+  events:
+    ? add
+  posts:
+    ? add
+  title: ~
+settings:
+  title: ~
+  account:
+    ? title
+    ? description
+    ? changepassword
+    ? delete
+  profile:
+    ? title
+    ? description
+  contacts:
+    ? title
+    ? description
+city:
+  ? anywhere
+  ? change
+objective:
+  ? label
+role:
+  ? label
+sort:
+  ? popular
+  ? newest
+profile:
+  ? username
+  ? community
+  ? type
+  ? name
+  ? bio
+  ? hometown
+  ? birthday
+  ? gender
+  ? styles
+  ? story
+  ? languages
+  ? skills
+  ? days
+  ? topics
+  ? teacher
+  ? partner
+  ? height
+  ? weight
+  ? partnerBio
+  ? objectives
+  ? place
+  ? visibility
+  ? photo
+account:
+  ? email
+  ? password
+  ? name
+  ? phone
+  ? newsletter
+agreement: ~
+terms: ~
+privacy: ~
+register:
+  ? login
+  ? submit
 signin:
-signup:
-signout:
-events.add:
-posts.add:
-profiles.add:
-myprofile.events.add:
-myprofile.posts.add:
-posts.title:
-profiles.title:
-events.title:
-myprofile.title:
-settings.title:
-city.anywhere:
-city.change:
-objective.label:
-role.label:
-sort.popular:
-sort.newest:
-events.filter.style:
-profile.username:
-account.email:
-account.password:
-account.name:
-account.phone:
-account.newsletter:
-profile.community:
-agreement:
-terms:
-privacy:
-register.login:
-register.submit:
-signin.register:
-signin.nopassword:
-nopassword.signin:
-nopassword.google:
-nopassword.submit:
-signin.submit:
-settings.account.title:
-settings.account.description:
-settings.profile.title:
-settings.profile.description:
-settings.contacts.title:
-settings.contacts.description:
-settings.account.changepassword:
-settings.account.delete:
-contacts.email:
-contacts.website:
-save:
-profile.type:
-profile.name:
-profile.bio:
-profile.hometown:
-profile.birthday:
-profile.gender:
-profile.styles:
-profile.story:
-profile.languages:
-profile.skills:
-profile.days:
-profile.topics:
-profile.teacher:
-profile.partner:
-profile.height:
-profile.weight:
-profile.partnerBio:
-profile.objectives:
-profile.place:
-profile.visibility:
-profile.photo:
-teaser.partner.title:
-teaser.partner.description:
-teaser.partner.btn:
-teaser.events.title:
-teaser.events.description:
-teaser.events.btn:
-teaser.profile.title:
-teaser.profile.description:
-teaser.profile.btn:
-teaser.allevents.title:
-teaser.allevents.description:
-teaser.allevents.btn:
-teaser.chat.title:
-teaser.chat.description:
-teaser.chat.btn:
-teaser.involve.title:
-teaser.involve.description:
-teaser.involve.btn:
-share.title:
-share.copy:
-footer.about:
-footer.support:
-footer.privacy:
-footer.terms:
-footer.coc:
-footer.faq:
+  ? register
+  ? nopassword
+  ? submit
+nopassword:
+  ? signin
+  ? google
+  ? submit
+contacts:
+  ? email
+  ? website
+save: ~
+teaser:
+  partner:
+    ? title
+    ? description
+    ? btn
+  events:
+    ? title
+    ? description
+    ? btn
+  profile:
+    ? title
+    ? description
+    ? btn
+  allevents:
+    ? title
+    ? description
+    ? btn
+  chat:
+    ? title
+    ? description
+    ? btn
+  involve:
+    ? title
+    ? description
+    ? btn
+share:
+  ? title
+  ? copy
+footer:
+  ? about
+  ? support
+  ? privacy
+  ? terms
+  ? coc
+  ? faq
