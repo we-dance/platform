@@ -22,7 +22,7 @@ city.change: Stadt wechseln
 role.label: Rolle
 sort.popular: Beliebt
 sort.newest: Neueste
-style.label: Stil
+events.filter.style: Stil
 profile.username: Nutzername
 account.email: Email
 account.password: Passwort

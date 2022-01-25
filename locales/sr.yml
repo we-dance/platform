@@ -22,7 +22,7 @@ city.change: Промени град
 role.label: Улога
 sort.popular: Популарно
 sort.newest: Најновије
-style.label: Стил
+events.filter.style: Стил
 profile.username: Корисничко име
 account.email: Емаил
 account.password: Лозинка
