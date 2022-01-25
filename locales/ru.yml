@@ -10,12 +10,12 @@ events:
   add: Добавить
   title: Мероприятия
   list:
-    empty: События не найдены. Добавить событие?
+    empty: No events found. Would you like to add one?
   view:
-    list: Смотреть фотографии
-    covers: Просмотреть список
+    list: See Photos
+    covers: See list
   filter:
-    type: Тип
+    type: Type
     style: Стиль
 posts:
   add: Добавить
@@ -141,34 +141,34 @@ footer:
 feed:
   title: Комментарий
   newMessage:
-    input: Спросите или поделитесь что-нибудь о танцевании...
-    intent: отправить сообщение
-    submit: Отправить
-  category: Выберите категорию
-  needPartner: Поиск партнера
-  needEvents: Поиск событий
-  needInstructor: Поиск преподавателя
-  trip: Предложение поездки
-  event: Событие
-  artist: Художник
-  venue: Место проведения
-  app: Приложение
-  guide: Руководство / Как до
-  inspiration: Стимул
-  question: Вопрос
-  poll: Опрос
-  post: Пост
+    input: Ask or share something about dance...
+    intent: post a message
+    submit: Send
+  category: Choose category
+  needPartner: Looking for partner
+  needEvents: Looking for events
+  needInstructor: Looking for instructor
+  trip: Offering trip
+  event: Event
+  artist: Artist
+  venue: Venue
+  app: App
+  guide: Guide / How To
+  inspiration: Inspiration
+  question: Question
+  poll: Poll
+  post: Post
 comments:
-  empty: Комментариев пока нет.
+  empty: There are no comments yet.
 edit:
-  label: Редактирование
+  label: Edit
 dashboard:
-  label: Панель
+  label: Dashboard
 sort:
   popular: Популярные
   newest: Новые
-  hot: Горячая
-  watching: Смотрит
-  starred: Помеченные
-  archived: Архивировано
-  yours: Ваш
+  hot: Hot
+  watching: Watching
+  starred: Starred
+  archived: Archived
+  yours: Yours
