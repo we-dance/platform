@@ -10,12 +10,12 @@ events:
   add: Adăugați un eveniment
   title: Evenimente
   list:
-    empty: Niciun eveniment găsit. Doriți să adăugați unul?
+    empty: No events found. Would you like to add one?
   view:
-    list: Vezi fotografiile
-    covers: Vezi lista
+    list: See Photos
+    covers: See list
   filter:
-    type: Tip
+    type: Type
     style: Stil
 posts:
   add: Adăugați o postare
@@ -137,38 +137,38 @@ footer:
   privacy: Confidențialitate
   terms: Termeni
   coc: Codul de conduită
-  faq: Întrebări
+  faq: FAQ
 feed:
   title: Comentariu
   newMessage:
-    input: Întrebați sau împărtășiți ceva despre dans...
-    intent: postează un mesaj
-    submit: Trimite
-  category: Alege categoria
-  needPartner: Se caută partener
-  needEvents: Se caută evenimente
-  needInstructor: Căutați instructor
-  trip: Călătorie de ofertă
-  event: Eveniment
+    input: Ask or share something about dance...
+    intent: post a message
+    submit: Send
+  category: Choose category
+  needPartner: Looking for partner
+  needEvents: Looking for events
+  needInstructor: Looking for instructor
+  trip: Offering trip
+  event: Event
   artist: Artist
-  venue: Locul
-  app: Aplicație
-  guide: Ghid / Cum să
-  inspiration: Inspiraţie
-  question: Întrebare
-  poll: Sondaj
-  post: Postează
+  venue: Venue
+  app: App
+  guide: Guide / How To
+  inspiration: Inspiration
+  question: Question
+  poll: Poll
+  post: Post
 comments:
-  empty: Nu există comentarii încă.
+  empty: There are no comments yet.
 edit:
-  label: Editare
+  label: Edit
 dashboard:
-  label: Panou
+  label: Dashboard
 sort:
-  popular: Populare
+  popular: Popular
   newest: Cel mai nou
-  hot: Fierbinte
-  watching: Urmărire
-  starred: Marcate
-  archived: Arhivat
-  yours: Tale
+  hot: Hot
+  watching: Watching
+  starred: Starred
+  archived: Archived
+  yours: Yours
