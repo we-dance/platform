@@ -1,6 +1,6 @@
 <template>
   <div>
-    <THeader title="Feed" />
+    <THeader :title="$t('feed.title')" />
     <div class="border-b p-4 flex items-start">
       <div class="w-10 flex-shrink-0">
         <TAvatar photo size="md" :uid="uid" />
@@ -10,13 +10,15 @@
           v-model="newMessage"
           cols="30"
           rows="2"
-          placeholder="Ask or share something about dance..."
+          :placeholder="$t('feed.newMessage.input')"
           class="w-full p-4 border text-sm"
           @keyup.enter="send"
         ></textarea>
         <div class="flex justify-between">
           <TInputSelectSmall v-model="postType" :options="postTypeList" />
-          <TButton @click="send" title="post a message">Send</TButton>
+          <TButton @click="send" :title="$t('feed.newMessage.intent')">{{
+            $t('feed.newMessage.submit')
+          }}</TButton>
         </div>
       </div>
     </div>
@@ -38,10 +40,13 @@ import { useApp } from '~/use/app'
 import { getUrlFromText } from '~/utils'
 import { postTypeList } from '~/use/posts'
 import TInputSelect from '~/components/TInput/TInputSelect.vue'
+import { useContext } from '@nuxtjs/composition-api'
 
 export default {
   components: { TInputSelect },
   setup() {
+    const { app } = useContext()
+    const t = app.i18n.t.bind(app.i18n)
     const { uid, username } = useAuth()
     const { currentCity } = useCities()
     const { getPlace } = useApp()
@@ -49,13 +54,13 @@ export default {
     const postType = ref('')
 
     const filterTypeList = [
-      { label: 'Newest', value: 'Newest' },
-      { label: 'Hot', value: 'Hot' },
-      { label: 'Popular', value: 'Popular' },
-      { label: 'Watching', value: 'Watching' },
-      { label: 'Starred', value: 'Starred' },
-      { label: 'Archived', value: 'Archived' },
-      { label: 'Yours', value: 'Authored' },
+      { label: t('sort.newest'), value: 'Newest' },
+      { label: t('sort.hot'), value: 'Hot' },
+      { label: t('sort.popular'), value: 'Popular' },
+      { label: t('sort.watching'), value: 'Watching' },
+      { label: t('sort.starred'), value: 'Starred' },
+      { label: t('sort.archived'), value: 'Archived' },
+      { label: t('sort.yours'), value: 'Authored' },
     ]
 
     const filterType = ref('Newest')
