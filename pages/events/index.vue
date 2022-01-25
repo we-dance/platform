@@ -117,7 +117,6 @@ import {
   getDay,
   getYmd,
   getEventDescription,
-  getDateObect,
 } from '~/utils'
 
 export default {
