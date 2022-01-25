@@ -1,7 +1,7 @@
+---
 hero:
   title: Dans etmeyi sever misin?
-  subtitle: İlginç dans etkinlikleri ve dans partnerleri bulma konusunda
-    birbirimize yardımcı oluyoruz.
+  subtitle: İlginç dans etkinlikleri ve dans partnerleri bulma konusunda birbirimize yardımcı oluyoruz.
 auth:
   signin: Oturum aç
   signup: Kayıt ol
@@ -9,7 +9,13 @@ auth:
 events:
   add: Etkinlik ekle
   title: Etkinlikler
+  list:
+    empty: No events found. Would you like to add one?
+  view:
+    list: See Photos
+    covers: See list
   filter:
+    type: Type
     style: Tarz
 posts:
   add: Gönderi ekle
@@ -23,12 +29,10 @@ myprofile:
   posts:
     add: Bir gönderi yazın
   title: Benim profilim
-event:
-  type: Sınıflandırma
 chat:
   title: Konuşma
   welcome: Sohbete güzel bir şeyle başlayın.
-  with: "{username} ile sohbet et."
+  with: '{username} ile sohbet et.'
   dateDiff: "{diff} önce"
 cities:
   choose: Bir şehir seçin
@@ -36,27 +40,20 @@ settings:
   title: Ayarlar
   account:
     title: Hesap
-    description: Bu bilgiler, bildirimler ve satın alımlar için kullanılacaktır.
-      Yalnızca onayınla hizmet sağlayıcılarla veya satıcılarla paylaşılacaktır.
+    description: Bu bilgiler, bildirimler ve satın alımlar için kullanılacaktır. Yalnızca onayınla hizmet sağlayıcılarla veya satıcılarla paylaşılacaktır.
     changepassword: Şifre değiştir
     delete: Hesabı sil
   profile:
     title: Profil
-    description: Diğer dansçıların hakkında ne bilmesini istiyorsun? Burası dans
-      tutkunu paylaşabileceğin bir yer. Kendini tanıt, utanma!
+    description: Diğer dansçıların hakkında ne bilmesini istiyorsun? Burası dans tutkunu paylaşabileceğin bir yer. Kendini tanıt, utanma!
   contacts:
     title: Kişiler
-    description: Bu bilgiler halka açık olacaktır. Kişilerinizi yalnızca üyelerin
-      sizinle iletişime geçmesini istiyorsan paylaş. Dikkat çekmek ve sosyal
-      medyanı paylaşmak için iyi bir imkan olabilir.
+    description: Bu bilgiler halka açık olacaktır. Kişilerinizi yalnızca üyelerin sizinle iletişime geçmesini istiyorsan paylaş. Dikkat çekmek ve sosyal medyanı paylaşmak için iyi bir imkan olabilir.
 city:
   anywhere: Herhangi bir yer
   change: Şehri değiştir
 role:
   label: Rol
-sort:
-  popular: Popüler
-  newest: En yeni
 profile:
   username: Kullanıcı adı
   community: Dans ediyorum
@@ -109,8 +106,7 @@ save: Kayıt etmek
 teaser:
   partner:
     title: Bir dans arkadasına mı ihtiyacın var?
-    description: Dünyanın her yerinden dansçılar, dans partneri bulmak için
-      profillerini oluşturur
+    description: Dünyanın her yerinden dansçılar, dans partneri bulmak için profillerini oluşturur
     btn: Topluluğu Gör
   events:
     title: Nerede dans edilir?
@@ -126,13 +122,11 @@ teaser:
     btn: Şimdi Katıl
   chat:
     title: Sohbet ediyor muyuz?
-    description: Her şehirde dans sohbetleri var
-    btn: "{city} Sohbetine Katıl"
+    description: "Her şehirde dans sohbetleri var"
+    btn: '{city} Sohbetine Katıl'
   involve:
     title: Yardımına ihtiyacımız var
-    description: Kar amacı gütmeyen uluslararası dans topluluğuyuz. Herhangi bir
-      ülke ve şehre gitmeni ve dans etkinlikleri ve dansçılar bulmanı
-      sağlıyoruz. Her şey yerel toplulukla başlar.
+    description: Kar amacı gütmeyen uluslararası dans topluluğuyuz. Herhangi bir ülke ve şehre gitmeni ve dans etkinlikleri ve dansçılar bulmanı sağlıyoruz. Her şey yerel toplulukla başlar.
     btn: Katıl
 share:
   title: Paylaş
@@ -144,3 +138,37 @@ footer:
   terms: Koşullar
   coc: Davranış kodu
   faq: SSS
+feed:
+  title: Yorum
+  newMessage:
+    input: Ask or share something about dance...
+    intent: post a message
+    submit: Send
+  category: Choose category
+  needPartner: Looking for partner
+  needEvents: Looking for events
+  needInstructor: Looking for instructor
+  trip: Offering trip
+  event: Event
+  artist: Artist
+  venue: Venue
+  app: App
+  guide: Guide / How To
+  inspiration: Inspiration
+  question: Question
+  poll: Poll
+  post: Post
+comments:
+  empty: There are no comments yet.
+edit:
+  label: Edit
+dashboard:
+  label: Dashboard
+sort:
+  popular: Popüler
+  newest: En yeni
+  hot: Hot
+  watching: Watching
+  starred: Starred
+  archived: Archived
+  yours: Yours

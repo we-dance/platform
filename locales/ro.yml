@@ -1,7 +1,7 @@
+---
 hero:
   title: Iti place sa dansezi?
-  subtitle: Ne ajutăm reciproc să găsim evenimente de dans interesante și
-    parteneri de dans.
+  subtitle: Ne ajutăm reciproc să găsim evenimente de dans interesante și parteneri de dans.
 auth:
   signin: Loghează-te
   signup: Inscrie-te
@@ -9,7 +9,13 @@ auth:
 events:
   add: Adăugați un eveniment
   title: Evenimente
+  list:
+    empty: No events found. Would you like to add one?
+  view:
+    list: See Photos
+    covers: See list
   filter:
+    type: Type
     style: Stil
 posts:
   add: Adăugați o postare
@@ -23,42 +29,31 @@ myprofile:
   posts:
     add: Scrie o postare
   title: Profilul meu
-event:
-  type: Clasificare
 chat:
   title: Conversaţie
   welcome: Începeți conversația cu ceva frumos.
   with: Discutați cu {username}
-  dateDiff: acum {diff}
+  dateDiff: "acum {diff}"
 cities:
   choose: Alegeți un oraș
 settings:
   title: Setări
   account:
     title: Cont
-    description: Aceste informații vor fi utilizate pentru notificări și achiziții.
-      Acesta va fi distribuit furnizorilor de servicii sau vânzătorilor numai cu
-      acordul dumneavoastră.
+    description: Aceste informații vor fi utilizate pentru notificări și achiziții. Acesta va fi distribuit furnizorilor de servicii sau vânzătorilor numai cu acordul dumneavoastră.
     changepassword: Schimbați parola
     delete: Șterge cont
   profile:
     title: Profil
-    description: Ce vrei să știe alți dansatori despre tine? Acesta este un loc
-      pentru a vă împărtăși pasiunea pentru dans. Prezintă-te, nu fi timid!
+    description: Ce vrei să știe alți dansatori despre tine? Acesta este un loc pentru a vă împărtăși pasiunea pentru dans. Prezintă-te, nu fi timid!
   contacts:
     title: Contacte
-    description: Aceste informații vor fi disponibile publicului. Partajați-vă
-      contactele numai dacă doriți să fiți contactat de membri. Este, de
-      asemenea, un loc frumos pentru a vă partaja social media pentru a atrage
-      atenția.
+    description: Aceste informații vor fi disponibile publicului. Partajați-vă contactele numai dacă doriți să fiți contactat de membri. Este, de asemenea, un loc frumos pentru a vă partaja social media pentru a atrage atenția.
 city:
   anywhere: Oriunde
   change: Schimbă orașul
 role:
   label: Rol
-sort:
-  popular: Popular
-  newest: Cel mai nou
 profile:
   username: Nume de utilizator
   community: Dansez în
@@ -111,8 +106,7 @@ save: Salvați
 teaser:
   partner:
     title: Ai nevoie de un partener?
-    description: Dansatorii din întreaga lume își creează profilurile pentru a găsi
-      parteneri de dans
+    description: Dansatorii din întreaga lume își creează profilurile pentru a găsi parteneri de dans
     btn: A se vedea Comunitatea
   events:
     title: Unde să dansezi?
@@ -128,13 +122,11 @@ teaser:
     btn: Alătură-te acum
   chat:
     title: Vorbim?
-    description: Avem discuții de dans în fiecare oraș
+    description: "Avem discuții de dans în fiecare oraș"
     btn: Alăturați-vă chatului {city}
   involve:
     title: Noi avem nevoie de ajutorul tau
-    description: Suntem o comunitate internațională de dans non-profit. Vrem să
-      mergeți în orice oraș din orice țară și să găsiți evenimente de dans și
-      dansatori. Totul începe cu comunitatea locală.
+    description: Suntem o comunitate internațională de dans non-profit. Vrem să mergeți în orice oraș din orice țară și să găsiți evenimente de dans și dansatori. Totul începe cu comunitatea locală.
     btn: A se implica
 share:
   title: Acțiune
@@ -146,3 +138,37 @@ footer:
   terms: Termeni
   coc: Codul de conduită
   faq: FAQ
+feed:
+  title: Comentariu
+  newMessage:
+    input: Ask or share something about dance...
+    intent: post a message
+    submit: Send
+  category: Choose category
+  needPartner: Looking for partner
+  needEvents: Looking for events
+  needInstructor: Looking for instructor
+  trip: Offering trip
+  event: Event
+  artist: Artist
+  venue: Venue
+  app: App
+  guide: Guide / How To
+  inspiration: Inspiration
+  question: Question
+  poll: Poll
+  post: Post
+comments:
+  empty: There are no comments yet.
+edit:
+  label: Edit
+dashboard:
+  label: Dashboard
+sort:
+  popular: Popular
+  newest: Cel mai nou
+  hot: Hot
+  watching: Watching
+  starred: Starred
+  archived: Archived
+  yours: Yours

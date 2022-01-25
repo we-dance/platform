@@ -1,7 +1,7 @@
+---
 hero:
   title: Você gosta de dançar?
-  subtitle: Ajudamos uns aos outros a encontrar eventos de dança interessantes e
-    parceiros de dança.
+  subtitle: Ajudamos uns aos outros a encontrar eventos de dança interessantes e parceiros de dança.
 auth:
   signin: Entrar
   signup: Inscrever-se
@@ -9,7 +9,13 @@ auth:
 events:
   add: Adicionar Evento
   title: Eventos
+  list:
+    empty: No events found. Would you like to add one?
+  view:
+    list: See Photos
+    covers: See list
   filter:
+    type: Type
     style: Estilo
 posts:
   add: Adicionar postagem
@@ -23,41 +29,31 @@ myprofile:
   posts:
     add: Escreva uma postagem
   title: Meu perfil
-event:
-  type: O tipo
 chat:
   title: Conversas
   welcome: Comece a conversar com algo legal.
   with: Bate-papo com {username}
-  dateDiff: faz {diff}
+  dateDiff: "faz {diff}"
 cities:
   choose: Escolha a cidade
 settings:
   title: Configurações
   account:
     title: Conta
-    description: Essas informações serão usadas para notificações e compras. Ele
-      será compartilhado com provedores de serviços ou vendedores somente com o
-      seu acordo.
+    description: Essas informações serão usadas para notificações e compras. Ele será compartilhado com provedores de serviços ou vendedores somente com o seu acordo.
     changepassword: Mudar senha
     delete: Deletar conta
   profile:
     title: Perfil
-    description: O que você quer que outros dançarinos saibam sobre você? É um lugar
-      para compartilhar sua paixão pela dança. Apresente-se, não seja tímido!
+    description: O que você quer que outros dançarinos saibam sobre você? É um lugar para compartilhar sua paixão pela dança. Apresente-se, não seja tímido!
   contacts:
     title: Contatos
-    description: Esta informação estará disponível publicamente. Compartilhe seus
-      contatos apenas se quiser ser contatado por membros. Também é um bom lugar
-      para compartilhar suas redes sociais para obter alguma atenção.
+    description: Esta informação estará disponível publicamente. Compartilhe seus contatos apenas se quiser ser contatado por membros. Também é um bom lugar para compartilhar suas redes sociais para obter alguma atenção.
 city:
   anywhere: Qualquer lugar
   change: Mudar de cidade
 role:
   label: Função
-sort:
-  popular: Popular
-  newest: O mais novo
 profile:
   username: Nome de usuário
   community: Eu danço em
@@ -110,8 +106,7 @@ save: Salve 
 teaser:
   partner:
     title: Precisa de um parceiro?
-    description: Dançarinos de todo o mundo criam seus perfis para encontrar
-      parceiros de dança
+    description: Dançarinos de todo o mundo criam seus perfis para encontrar parceiros de dança
     btn: Ver comunidade
   events:
     title: Onde dançar?
@@ -127,13 +122,11 @@ teaser:
     btn: Entrar
   chat:
     title: Nós conversamos?
-    description: Temos chats de dança em todas as cidades
+    description: "Temos chats de dança em todas as cidades"
     btn: Participe do bate-papo de {city}
   involve:
     title: Nós precisamos da sua ajuda
-    description: Somos uma comunidade internacional de dança sem fins lucrativos.
-      Queremos que você vá a qualquer cidade de qualquer país e encontre eventos
-      de dança e dançarinos. Tudo começa com a comunidade local.
+    description: Somos uma comunidade internacional de dança sem fins lucrativos. Queremos que você vá a qualquer cidade de qualquer país e encontre eventos de dança e dançarinos. Tudo começa com a comunidade local.
     btn: Se envolver
 share:
   title: Compartilhar
@@ -145,3 +138,37 @@ footer:
   terms: Termos
   coc: Código de Conduta
   faq: Perguntas frequentes
+feed:
+  title: Comentário
+  newMessage:
+    input: Ask or share something about dance...
+    intent: post a message
+    submit: Send
+  category: Choose category
+  needPartner: Looking for partner
+  needEvents: Looking for events
+  needInstructor: Looking for instructor
+  trip: Offering trip
+  event: Event
+  artist: Artist
+  venue: Venue
+  app: App
+  guide: Guide / How To
+  inspiration: Inspiration
+  question: Question
+  poll: Poll
+  post: Post
+comments:
+  empty: There are no comments yet.
+edit:
+  label: Edit
+dashboard:
+  label: Dashboard
+sort:
+  popular: Popular
+  newest: O mais novo
+  hot: Hot
+  watching: Watching
+  starred: Starred
+  archived: Archived
+  yours: Yours

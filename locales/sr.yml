@@ -1,7 +1,7 @@
+---
 hero:
   title: Да ли волиш плес?
-  subtitle: Помажемо једни другима у проналажењу занимљивих плесних догађаја и
-    плесних партнера.
+  subtitle: Помажемо једни другима у проналажењу занимљивих плесних догађаја и плесних партнера.
 auth:
   signin: Улазни
   signup: Пријавити
@@ -9,7 +9,13 @@ auth:
 events:
   add: Додај догађај
   title: Догађаји
+  list:
+    empty: No events found. Would you like to add one?
+  view:
+    list: See Photos
+    covers: See list
   filter:
+    type: Type
     style: Стил
 posts:
   add: Додај пост
@@ -23,40 +29,31 @@ myprofile:
   posts:
     add: Напишите пост
   title: Мој профил
-event:
-  type: Класификација
 chat:
   title: Разговор
   welcome: Започни разговор са нечим лепим
   with: Ћаскај са {username}
-  dateDiff: Пре {diff}
+  dateDiff: "Пре {diff}"
 cities:
   choose: Одаберите град
 settings:
   title: Подешавања
   account:
     title: Рачун
-    description: Ове информације ће се користити за обавештења и куповине. Делиће се
-      са добављачима услуга или продавцима само уз ваш договор.
+    description: Ове информације ће се користити за обавештења и куповине. Делиће се са добављачима услуга или продавцима само уз ваш договор.
     changepassword: Промени лозинку
     delete: Обришите налог
   profile:
     title: Профил
-    description: Шта желите да други плесачи знају о вама? То је место на којем
-      можете поделити своју страст према плесу. Представи се, не стиди се!
+    description: Шта желите да други плесачи знају о вама? То је место на којем можете поделити своју страст према плесу. Представи се, не стиди се!
   contacts:
     title: Контакти
-    description: Ове информације ће бити јавно доступне. Поделите своје контакте
-      само ако желите да вас контактирају чланови. Такође је лепо место за
-      дељење друштвених мрежа како бисте привукли пажњу.
+    description: Ове информације ће бити јавно доступне. Поделите своје контакте само ако желите да вас контактирају чланови. Такође је лепо место за дељење друштвених мрежа како бисте привукли пажњу.
 city:
   anywhere: Било где
   change: Промени град
 role:
   label: Улога
-sort:
-  popular: Популарно
-  newest: Најновије
 profile:
   username: Корисничко име
   community: Плешем у
@@ -125,13 +122,11 @@ teaser:
     btn: Придружи се сад
   chat:
     title: Да ли ћаскамо?
-    description: У сваком граду имамо плесне разговоре
+    description: "У сваком граду имамо плесне разговоре"
     btn: Придружите се {city} ћаскању
   involve:
     title: Треба нам твоја помоћ
-    description: Ми смо непрофитна међународна плесна заједница. Желимо да одете у
-      било који град у било којој земљи и пронађете плесне догађаје и плесаче.
-      Све почиње од локалне заједнице.
+    description: Ми смо непрофитна међународна плесна заједница. Желимо да одете у било који град у било којој земљи и пронађете плесне догађаје и плесаче. Све почиње од локалне заједнице.
     btn: Умешати се
 share:
   title: Објави
@@ -143,3 +138,37 @@ footer:
   terms: Услови
   coc: Кодекс понашања
   faq: Питања и одговори
+feed:
+  title: Коментар
+  newMessage:
+    input: Ask or share something about dance...
+    intent: post a message
+    submit: Send
+  category: Choose category
+  needPartner: Looking for partner
+  needEvents: Looking for events
+  needInstructor: Looking for instructor
+  trip: Offering trip
+  event: Event
+  artist: Artist
+  venue: Venue
+  app: App
+  guide: Guide / How To
+  inspiration: Inspiration
+  question: Question
+  poll: Poll
+  post: Post
+comments:
+  empty: There are no comments yet.
+edit:
+  label: Edit
+dashboard:
+  label: Dashboard
+sort:
+  popular: Популарно
+  newest: Најновије
+  hot: Hot
+  watching: Watching
+  starred: Starred
+  archived: Archived
+  yours: Yours

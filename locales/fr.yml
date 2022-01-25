@@ -1,7 +1,7 @@
+---
 hero:
   title: Aimez-vous danser?
-  subtitle: Nous nous aidons mutuellement à trouver des événements de danse
-    intéressants et des partenaires de danse.
+  subtitle: Nous nous aidons mutuellement à trouver des événements de danse intéressants et des partenaires de danse.
 auth:
   signin: Se connecter
   signup: S'inscrire
@@ -9,7 +9,13 @@ auth:
 events:
   add: Ajouter
   title: Événements
+  list:
+    empty: No events found. Would you like to add one?
+  view:
+    list: See Photos
+    covers: See list
   filter:
+    type: Type
     style: Style
 posts:
   add: Ajouter
@@ -23,43 +29,31 @@ myprofile:
   posts:
     add: Rédiger un post
   title: Mon profil
-event:
-  type: Classification
 chat:
   title: Conversation
   welcome: Commencez la conversation avec quelque chose de gentil.
   with: Discutez avec {username}
-  dateDiff: il y a {diff}
+  dateDiff: "il y a {diff}"
 cities:
   choose: Choisissez une ville
 settings:
   title: Paramètres
   account:
     title: Compte
-    description: Ces informations seront utilisées pour les notifications et les
-      achats. Il ne sera partagé avec les fournisseurs de services ou les
-      vendeurs qu'avec votre accord.
+    description: Ces informations seront utilisées pour les notifications et les achats. Il ne sera partagé avec les fournisseurs de services ou les vendeurs qu'avec votre accord.
     changepassword: Changer le mot de passe
     delete: Supprimer le compte
   profile:
     title: Profil
-    description: Que voulez-vous que les autres danseurs sachent sur vous? C'est un
-      endroit pour partager votre passion pour la danse. Présentez-vous, ne
-      soyez pas timide!
+    description: Que voulez-vous que les autres danseurs sachent sur vous? C'est un endroit pour partager votre passion pour la danse. Présentez-vous, ne soyez pas timide!
   contacts:
     title: Contacts
-    description: Ces informations seront accessibles au public. Partagez vos
-      contacts uniquement si vous souhaitez être contacté par les membres. C'est
-      aussi un endroit agréable pour partager vos médias sociaux pour attirer
-      l'attention.
+    description: Ces informations seront accessibles au public. Partagez vos contacts uniquement si vous souhaitez être contacté par les membres. C'est aussi un endroit agréable pour partager vos médias sociaux pour attirer l'attention.
 city:
   anywhere: Nulle part
   change: Changer de ville
 role:
   label: Rôle
-sort:
-  popular: Populaire
-  newest: Plus récent
 profile:
   username: Nom d'utilisateur
   community: Je danse dans
@@ -112,8 +106,7 @@ save: sauver
 teaser:
   partner:
     title: Besoin d'un partenaire?
-    description: Des danseurs du monde entier créent leur profil pour trouver des
-      partenaires de danse
+    description: Des danseurs du monde entier créent leur profil pour trouver des partenaires de danse
     btn: Voir la communauté
   events:
     title: Où danser?
@@ -129,14 +122,11 @@ teaser:
     btn: Adhérer maintenant
   chat:
     title: On bavarde?
-    description: Nous avons des discussions de danse dans chaque ville
+    description: "Nous avons des discussions de danse dans chaque ville"
     btn: Rejoignez le chat de {city}
   involve:
     title: Nous avons besoin de votre aide
-    description: Nous sommes une communauté de danse internationale à but non
-      lucratif. Nous voulons que vous alliez dans n'importe quelle ville de
-      n'importe quel pays et que vous trouviez des événements de danse et des
-      danseurs. Tout commence avec la communauté locale.
+    description: Nous sommes une communauté de danse internationale à but non lucratif. Nous voulons que vous alliez dans n'importe quelle ville de n'importe quel pays et que vous trouviez des événements de danse et des danseurs. Tout commence avec la communauté locale.
     btn: Être impliqué
 share:
   title: Partager
@@ -148,3 +138,37 @@ footer:
   terms: Termes
   coc: Code de conduite
   faq: FAQ
+feed:
+  title: Commentaire
+  newMessage:
+    input: Ask or share something about dance...
+    intent: post a message
+    submit: Send
+  category: Choose category
+  needPartner: Looking for partner
+  needEvents: Looking for events
+  needInstructor: Looking for instructor
+  trip: Offering trip
+  event: Event
+  artist: Artist
+  venue: Venue
+  app: App
+  guide: Guide / How To
+  inspiration: Inspiration
+  question: Question
+  poll: Poll
+  post: Post
+comments:
+  empty: There are no comments yet.
+edit:
+  label: Edit
+dashboard:
+  label: Dashboard
+sort:
+  popular: Populaire
+  newest: Plus récent
+  hot: Hot
+  watching: Watching
+  starred: Starred
+  archived: Archived
+  yours: Yours

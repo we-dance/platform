@@ -1,7 +1,7 @@
+---
 hero:
   title: Ti piace ballare?
-  subtitle: Ci aiutiamo a vicenda a trovare interessanti eventi di danza e partner
-    di ballo.
+  subtitle: Ci aiutiamo a vicenda a trovare interessanti eventi di danza e partner di ballo.
 auth:
   signin: Accedere
   signup: Iscriverti
@@ -9,7 +9,13 @@ auth:
 events:
   add: Aggiungi evento
   title: Eventi
+  list:
+    empty: No events found. Would you like to add one?
+  view:
+    list: See Photos
+    covers: See list
   filter:
+    type: Type
     style: Stile
 posts:
   add: Aggiungi post
@@ -23,8 +29,6 @@ myprofile:
   posts:
     add: Scrivi un post
   title: Il mio profilo
-event:
-  type: Classificazione
 chat:
   title: Conversazione
   welcome: Inizia la conversazione con qualcosa di carino.
@@ -36,28 +40,20 @@ settings:
   title: Impostazioni
   account:
     title: Account
-    description: Queste informazioni verranno utilizzate per notifiche e acquisti.
-      Esse verrano condivise con fornitori di servizi o venditori solo con il
-      tuo accordo.
+    description: Queste informazioni verranno utilizzate per notifiche e acquisti. Esse verrano condivise con fornitori di servizi o venditori solo con il tuo accordo.
     changepassword: Cambia la password
     delete: Elimina account
   profile:
     title: Profilo
-    description: Cosa vuoi che gli altri ballerini sappiano di te? È un posto dove
-      condividere la tua passione per la danza. Presentati, non essere timido!
+    description: Cosa vuoi che gli altri ballerini sappiano di te? È un posto dove condividere la tua passione per la danza. Presentati, non essere timido!
   contacts:
     title: Contatti
-    description: Queste informazioni saranno disponibili pubblicamente. Condividi i
-      tuoi dati solo se vuoi essere contattato dai altri membri. È anche un bel
-      posto per condividere i tuoi social media per attirare l'attenzione.
+    description: Queste informazioni saranno disponibili pubblicamente. Condividi i tuoi dati solo se vuoi essere contattato dai altri membri. È anche un bel posto per condividere i tuoi social media per attirare l'attenzione.
 city:
   anywhere: Dovunque
   change: Cambia città
 role:
   label: Ruolo
-sort:
-  popular: Popolare
-  newest: Più recente
 profile:
   username: Nome utente
   community: Io ballo in
@@ -110,8 +106,7 @@ save: Salva
 teaser:
   partner:
     title: Hai bisogno di un partner?
-    description: Ballerini in tutto il mondo creano i loro profili per trovare
-      partner di ballo
+    description: Ballerini in tutto il mondo creano i loro profili per trovare partner di ballo
     btn: Vedi Community
   events:
     title: Dove ballare?
@@ -127,13 +122,11 @@ teaser:
     btn: Iscriviti adesso
   chat:
     title: Chiacchieriamo?
-    description: Abbiamo chat di ballo in ogni città
+    description: "Abbiamo chat di ballo in ogni città"
     btn: Entra nella chat di {city}
   involve:
     title: Abbiamo bisogno del tuo aiuto
-    description: Siamo una comunità di danza internazionale senza scopo di lucro.
-      Vogliamo che tu trovi eventi di danza e ballerini in qualsiasi città di
-      qualsiasi paese Tutto inizia con la comunità locale.
+    description: Siamo una comunità di danza internazionale senza scopo di lucro. Vogliamo che tu trovi eventi di danza e ballerini in qualsiasi città di qualsiasi paese Tutto inizia con la comunità locale.
     btn: Mettersi in gioco
 share:
   title: Condividere
@@ -145,3 +138,37 @@ footer:
   terms: Termini
   coc: Codice di comportamento
   faq: FAQ
+feed:
+  title: Commento
+  newMessage:
+    input: Ask or share something about dance...
+    intent: post a message
+    submit: Send
+  category: Choose category
+  needPartner: Looking for partner
+  needEvents: Looking for events
+  needInstructor: Looking for instructor
+  trip: Offering trip
+  event: Event
+  artist: Artist
+  venue: Venue
+  app: App
+  guide: Guide / How To
+  inspiration: Inspiration
+  question: Question
+  poll: Poll
+  post: Post
+comments:
+  empty: There are no comments yet.
+edit:
+  label: Edit
+dashboard:
+  label: Dashboard
+sort:
+  popular: Popolare
+  newest: Più recente
+  hot: Hot
+  watching: Watching
+  starred: Starred
+  archived: Archived
+  yours: Yours
