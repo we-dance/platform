@@ -117,6 +117,7 @@ import {
   getDay,
   getYmd,
   getEventDescription,
+  getDateObect,
 } from '~/utils'
 
 export default {
@@ -266,7 +267,6 @@ export default {
       uid,
       getDay,
       getDate,
-      getDateObect,
       startOfWeekString,
       endOfWeekString,
       activeFilter,
