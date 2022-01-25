@@ -10,14 +10,14 @@
           v-model="newMessage"
           cols="30"
           rows="2"
-          :placeholder="$t('feed.interact')"
+          :placeholder="$t('feed.newMessage.input')"
           class="w-full p-4 border text-sm"
           @keyup.enter="send"
         ></textarea>
         <div class="flex justify-between">
           <TInputSelectSmall v-model="postType" :options="postTypeList" />
-          <TButton @click="send" title="post a message">{{
-            $t('send.btn')
+          <TButton @click="send" :title="$t('feed.newMessage.intent')">{{
+            $t('feed.newMessage.submit')
           }}</TButton>
         </div>
       </div>

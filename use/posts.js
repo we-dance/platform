@@ -6,17 +6,17 @@ export const postTypeList = [
   },
   {
     label: 'Looking for partner',
-    key: 'feed.partner',
+    key: 'feed.needPartner',
     value: 'needPartner',
   },
   {
     label: 'Looking for events',
-    key: 'feed.events',
+    key: 'feed.needEvents',
     value: 'needEvents',
   },
   {
     label: 'Looking for instructor',
-    key: 'feed.instructor',
+    key: 'feed.needInstructor',
     value: 'needInstructor',
   },
   {
@@ -46,7 +46,7 @@ export const postTypeList = [
   },
   {
     label: 'Guide / How To',
-    key: 'feed.help',
+    key: 'feed.guide',
     value: 'guide',
   },
   {

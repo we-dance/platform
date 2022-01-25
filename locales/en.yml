@@ -110,7 +110,9 @@ chat.welcome: Start conversation with something nice.
 chat.with: Chat with {username}
 chat.dateDiff: '{diff} ago'
 feed.title: Feed
-feed.interact: Ask or share something about dance...
+feed.newMessage.input: Ask or share something about dance...
+feed.newMessage.intent: post a message
+feed.newMessage.submit: Send
 comments.empty: There are no comments yet.
 edit.label: Edit
 dashboard.label: Dashboard
@@ -121,17 +123,16 @@ sort.watching: Watching
 sort.starred: Starred
 sort.archived: Archived
 sort.yours: Yours
-send.btn: Send
 feed.category: Choose category
-feed.partner: Looking for partner
-feed.events: Looking for events
-feed.instructor: Looking for instructor
+feed.needPartner: Looking for partner
+feed.needEvents: Looking for events
+feed.needInstructor: Looking for instructor
 feed.trip: Offering trip
 feed.event: Event
 feed.artist: Artist
 feed.venue: Venue
 feed.app: App
-feed.help: Guide / How To
+feed.guide: Guide / How To
 feed.inspiration: Inspiration
 feed.question: Question
 feed.poll: Poll
