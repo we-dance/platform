@@ -1,105 +1,174 @@
 ---
-hero.title: Do you like dancing?
-hero.subtitle: We help each other find interesting dance events and dance partners.
-signin: Sign in
-signup: Sign up
-signout: Log out
-events.add: Add event
-posts.add: Add post
-profiles.add: Add profile
-myprofile.events.add: Add event
-myprofile.posts.add: Write a post
-posts.title: Feed
-profiles.title: Community
-events.title: Events
-event.type: Type
-chat.title: Chat
-cities.choose: Choose city
-myprofile.title: My Profile
-settings.title: Settings
-city.anywhere: Anywhere
-city.change: Change city
-role.label: Role
-sort.popular: Popular
-sort.newest: Newest
-style.label: Style
-profile.username: Username
-account.email: Email
-account.password: Password
-account.name: Full Name
-account.phone: Phone
-account.newsletter: What kind of updated would you like to receive weekly?
-profile.community: I dance in
-agreement: By signing in, you agree to {terms} and {privacy}.
-terms: Terms of service
-privacy: Privacy policy
-register.login: Login
-register.submit: Register
-signin.register: Create Account
-signin.nopassword: Forgot password
-nopassword.signin: I have a password
-nopassword.google: Sign in with Google
-nopassword.submit: Send a magic link
-signin.submit: Login
-settings.account.title: Account
-settings.account.description: This information will be used for notifications and purchases. It will be shared with service providers or sellers only with your agreement.
-settings.profile.title: Profile
-settings.profile.description: What do you want other dancers to know about you? That's a place to share your passion to dance. Present yourself, don't be shy!
-settings.contacts.title: Contacts
-settings.contacts.description: This information will be publicly available. Share your contacts only if you want to be contacted by members. It's also nice place to share your social media to get some attention.
-settings.account.changepassword: Change Password
-settings.account.delete: Delete Account
-contacts.email: Email
-contacts.website: Website
-save: Save
-profile.type: Type
-profile.name: Name
-profile.bio: Teaser
-profile.hometown: Hometown
-profile.birthday: Birthday
-profile.gender: Gender
-profile.styles: Your dance styles and level
-profile.style: Dance styles
-profile.story: Description
-profile.languages: Your languages
-profile.skills: Non-dancing skills
-profile.days: Days
-profile.topics: Which dance topics you are interested in?
-profile.teacher: Are you teaching?
-profile.partner: Are you looking for a dance partner?
-profile.height: Your height (cm)
-profile.weight: Your weight (kg)
-profile.partnerBio: About your partner
-profile.objectives: Objectives
-profile.place: Where to meet?
-profile.visibility: Visibility
-profile.photo: Photo
-teaser.partner.title: Need a partner?
-teaser.partner.description: Dancers worldwide create their profiles to find dance partners
-teaser.partner.btn: See Community
-teaser.events.title: Where to dance?
-teaser.events.description: All dance courses, parties and festivals in one place
-teaser.events.btn: See Events
-teaser.profile.title: Publish your profile
-teaser.profile.description: so that others can contact you
-teaser.profile.btn: Join for free
-teaser.allevents.title: Private events
-teaser.allevents.description: Become a member of WeDance Community to see more
-teaser.allevents.btn: Join Now
-teaser.chat.title: Ask Locals
-teaser.chat.description: "We have a Telegram dance chat in every city. Join your city chat to help traveling dancers, invite your dance friends. Let's build WeDance together! "
-teaser.chat.btn: Join Chat
-teaser.involve.title: We need your help
-teaser.involve.description: We are non-profit international dance community. We want you go to any city in any country and find dance events and dancers. It all starts with the local community.
-teaser.involve.btn: Get Involved
-share.title: Share
-share.copy: Copy Link
-footer.about: About us
-footer.support: Support
-footer.privacy: Privacy
-footer.terms: Terms
-footer.coc: Code of Conduct
-footer.faq: FAQ
-chat.welcome: Start conversation with something nice.
-chat.with: Chat with {username}
-chat.dateDiff: '{diff} ago'
+hero:
+  title: Tanzt du gerne?
+  subtitle: Wir helfen uns gegenseitig, interessante Tanzveranstaltungen und Tanzpartner zu finden.
+auth:
+  signin: Einloggen
+  signup: Registrieren
+  signout: Ausloggen
+events:
+  add: Hinzufügen
+  title: Veranstaltungen
+  list:
+    empty: No events found. Would you like to add one?
+  view:
+    list: See Photos
+    covers: See list
+  filter:
+    type: Type
+    style: Stil
+posts:
+  add: Hinzufügen
+  title: Kommentar
+profiles:
+  add: Hinzufügen
+  title: Community
+myprofile:
+  events:
+    add: Veranstaltung hinzufügen
+  posts:
+    add: Beitrag hinzufügen
+  title: Mein Profil
+chat:
+  title: Plaudern
+  welcome: Beginnen Sie ein Gespräch mit etwas Nettem.
+  with: Chatte mit {username}
+  dateDiff: "vor {diff}"
+cities:
+  choose: Wählen sie eine stadt
+settings:
+  title: Einstellungen
+  account:
+    title: Konto
+    description: Diese Informationen werden für Benachrichtigungen und Käufe verwendet. Sie werden nur mit Ihrer Zustimmung an Dienstleister oder Verkäufer weitergegeben.
+    changepassword: Ändere das Passwort
+    delete: Konto löschen
+  profile:
+    title: Profil
+    description: Was sollen andere Tänzer über Dich wissen? Hier kannst Du Deine Leidenschaft für das Tanzen teilen. Präsentiere Dich, sei nicht schüchtern!
+  contacts:
+    title: Kontakte
+    description: Diese Informationen werden öffentlich zugänglich sein. Teile Deine Kontakte nur, wenn Du von Mitgliedern kontaktiert werden möchtest. Es ist eine schöne Gelegenheit, um Deine sozialen Medien zu teilen und Aufmerksamkeit zu erregen.
+city:
+  anywhere: Irgendwo
+  change: Stadt wechseln
+role:
+  label: Rolle
+profile:
+  username: Nutzername
+  community: Ich tanze in
+  type: Art
+  name: Name
+  bio: Teaser
+  hometown: Heimatort
+  birthday: Geburtstag
+  gender: Geschlecht
+  styles: Deine Tanzstile und Dein Level
+  style: Tanzstile
+  story: Beschreibung
+  languages: Deine Sprachen
+  skills: Sonstige Fähigkeiten
+  days: Tage
+  topics: Für welche Tanzthemen interessierst Du Dich?
+  teacher: Unterrichtest Du?
+  partner: Suchst Du einen Tanzpartner?
+  height: Deine Größe (cm)
+  weight: Dein Gewicht (kg)
+  partnerBio: Über Deinen Partner
+  objectives: Ziele
+  place: Wo kann man sich treffen?
+  visibility: Sichtbarkeit
+  photo: Foto
+account:
+  email: Email
+  password: Passwort
+  name: Vollständiger Name
+  phone: Telefon
+  newsletter: Welche Art von Update möchtest Du wöchentlich erhalten?
+agreement: Mit Deiner Anmeldung stimmst Du {terms} und {privacy} zu.
+terms: Nutzungsbedingungen
+privacy: Datenschutz
+register:
+  login: Anmeldung
+  submit: Registrieren
+signin:
+  register: Benutzerkonto erstellen
+  nopassword: Passwort vergessen
+  submit: Anmelden
+nopassword:
+  signin: Ich habe ein Passwort
+  google: Anmeldung mit Google
+  submit: Sende einen magischen Link
+contacts:
+  email: Email
+  website: Webseite
+save: Speichern
+teaser:
+  partner:
+    title: Benötigst Du einen Partner?
+    description: Tänzer weltweit erstellen ihre Profile, um Tanzpartner zu finden
+    btn: Siehe Community
+  events:
+    title: Wo kann man tanzen?
+    description: Alle Tanzkurse, Partys und Festivals an einem Ort
+    btn: Siehe Ereignisse
+  profile:
+    title: Veröffentliche Dein Profil
+    description: damit andere Dich kontaktieren können
+    btn: Kostenlos beitreten
+  allevents:
+    title: Private Veranstaltungen
+    description: Werde Mitglied der WeDance Community, um mehr zu sehen
+    btn: Jetzt beitreten
+  chat:
+    title: Einheimische fragen
+    description: "Wir haben in jeder Stadt einen Telegram-Tanzchat. Treten Sie Ihrem Stadt-Chat bei, um reisenden Tänzern zu helfen, und laden Sie Ihre Tanzfreunde ein. Lass uns zusammen WeDance aufbauen!"
+    btn: Chat beitreten
+  involve:
+    title: Wir brauchen Deine Hilfe
+    description: Wir sind eine gemeinnützige internationale Tanzgemeinschaft. Wir möchten, dass Sie in jede Stadt in jedem Land gehen und Tanzveranstaltungen und Tänzer finden. Alles beginnt mit der örtlichen Gemeinde.
+    btn: Mach mit
+share:
+  title: Teilen
+  copy: Link kopieren
+footer:
+  about: Über uns
+  support: Unterstützung
+  privacy: Privatsphäre
+  terms: Bedingungen
+  coc: Verhaltenskodex
+  faq: FAQ
+feed:
+  title: Kommentar
+  newMessage:
+    input: Ask or share something about dance...
+    intent: post a message
+    submit: Send
+  category: Choose category
+  needPartner: Looking for partner
+  needEvents: Looking for events
+  needInstructor: Looking for instructor
+  trip: Offering trip
+  event: Event
+  artist: Artist
+  venue: Venue
+  app: App
+  guide: Guide / How To
+  inspiration: Inspiration
+  question: Question
+  poll: Poll
+  post: Post
+comments:
+  empty: There are no comments yet.
+edit:
+  label: Edit
+dashboard:
+  label: Dashboard
+sort:
+  popular: Beliebt
+  newest: Neueste
+  hot: Hot
+  watching: Watching
+  starred: Starred
+  archived: Archived
+  yours: Yours
