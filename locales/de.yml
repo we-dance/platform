@@ -1,7 +1,7 @@
+---
 hero:
   title: Tanzt du gerne?
-  subtitle: Wir helfen uns gegenseitig, interessante Tanzveranstaltungen und
-    Tanzpartner zu finden.
+  subtitle: Wir helfen uns gegenseitig, interessante Tanzveranstaltungen und Tanzpartner zu finden.
 auth:
   signin: Einloggen
   signup: Registrieren
@@ -9,7 +9,13 @@ auth:
 events:
   add: Hinzufügen
   title: Veranstaltungen
+  list:
+    empty: Keine Events gefunden. Möchten Sie eines hinzufügen?
+  view:
+    list: Fotos ansehen
+    covers: Liste ansehen
   filter:
+    type: Art
     style: Stil
 posts:
   add: Hinzufügen
@@ -23,43 +29,31 @@ myprofile:
   posts:
     add: Beitrag hinzufügen
   title: Mein Profil
-event:
-  type: Einstufung
 chat:
   title: Plaudern
   welcome: Beginnen Sie ein Gespräch mit etwas Nettem.
   with: Chatte mit {username}
-  dateDiff: vor {diff}
+  dateDiff: "vor {diff}"
 cities:
   choose: Wählen sie eine stadt
 settings:
   title: Einstellungen
   account:
     title: Konto
-    description: Diese Informationen werden für Benachrichtigungen und Käufe
-      verwendet. Sie werden nur mit Ihrer Zustimmung an Dienstleister oder
-      Verkäufer weitergegeben.
+    description: Diese Informationen werden für Benachrichtigungen und Käufe verwendet. Sie werden nur mit Ihrer Zustimmung an Dienstleister oder Verkäufer weitergegeben.
     changepassword: Ändere das Passwort
     delete: Konto löschen
   profile:
     title: Profil
-    description: Was sollen andere Tänzer über Dich wissen? Hier kannst Du Deine
-      Leidenschaft für das Tanzen teilen. Präsentiere Dich, sei nicht
-      schüchtern!
+    description: Was sollen andere Tänzer über Dich wissen? Hier kannst Du Deine Leidenschaft für das Tanzen teilen. Präsentiere Dich, sei nicht schüchtern!
   contacts:
     title: Kontakte
-    description: Diese Informationen werden öffentlich zugänglich sein. Teile Deine
-      Kontakte nur, wenn Du von Mitgliedern kontaktiert werden möchtest. Es ist
-      eine schöne Gelegenheit, um Deine sozialen Medien zu teilen und
-      Aufmerksamkeit zu erregen.
+    description: Diese Informationen werden öffentlich zugänglich sein. Teile Deine Kontakte nur, wenn Du von Mitgliedern kontaktiert werden möchtest. Es ist eine schöne Gelegenheit, um Deine sozialen Medien zu teilen und Aufmerksamkeit zu erregen.
 city:
   anywhere: Irgendwo
   change: Stadt wechseln
 role:
   label: Rolle
-sort:
-  popular: Beliebt
-  newest: Neueste
 profile:
   username: Nutzername
   community: Ich tanze in
@@ -86,7 +80,7 @@ profile:
   visibility: Sichtbarkeit
   photo: Foto
 account:
-  email: Email
+  email: E-Mail
   password: Passwort
   name: Vollständiger Name
   phone: Telefon
@@ -106,7 +100,7 @@ nopassword:
   google: Anmeldung mit Google
   submit: Sende einen magischen Link
 contacts:
-  email: Email
+  email: E-Mail
   website: Webseite
 save: Speichern
 teaser:
@@ -128,16 +122,11 @@ teaser:
     btn: Jetzt beitreten
   chat:
     title: Einheimische fragen
-    description: Wir haben in jeder Stadt einen Telegram-Tanzchat. Treten Sie Ihrem
-      Stadt-Chat bei, um reisenden Tänzern zu helfen, und laden Sie Ihre
-      Tanzfreunde ein. Lass uns zusammen WeDance aufbauen!
+    description: "Wir haben in jeder Stadt einen Telegram-Tanzchat. Treten Sie Ihrem Stadt-Chat bei, um reisenden Tänzern zu helfen, und laden Sie Ihre Tanzfreunde ein. Lass uns zusammen WeDance aufbauen!"
     btn: Chat beitreten
   involve:
     title: Wir brauchen Deine Hilfe
-    description: Wir sind eine gemeinnützige internationale Tanzgemeinschaft. Wir
-      möchten, dass Sie in jede Stadt in jedem Land gehen und
-      Tanzveranstaltungen und Tänzer finden. Alles beginnt mit der örtlichen
-      Gemeinde.
+    description: Wir sind eine gemeinnützige internationale Tanzgemeinschaft. Wir möchten, dass Sie in jede Stadt in jedem Land gehen und Tanzveranstaltungen und Tänzer finden. Alles beginnt mit der örtlichen Gemeinde.
     btn: Mach mit
 share:
   title: Teilen
@@ -149,3 +138,37 @@ footer:
   terms: Bedingungen
   coc: Verhaltenskodex
   faq: FAQ
+feed:
+  title: Kommentar
+  newMessage:
+    input: Fragen oder teilen Sie etwas über Tanz...
+    intent: eine Nachricht posten
+    submit: Senden
+  category: Kategorie auswählen
+  needPartner: Partner suchen
+  needEvents: Suche Events
+  needInstructor: Lehrer suchen
+  trip: Angebotsreise
+  event: Veranstaltung
+  artist: Künstler
+  venue: Ort
+  app: App
+  guide: Anleitung
+  inspiration: Inspiration
+  question: Frage
+  poll: Umfrage
+  post: Beitrag
+comments:
+  empty: Es gibt noch keine Kommentare.
+edit:
+  label: Bearbeiten
+dashboard:
+  label: Dashboard
+sort:
+  popular: Beliebt
+  newest: Neueste
+  hot: Heiß
+  watching: Beobachten
+  starred: Markiert
+  archived: Archiviert
+  yours: Deine
