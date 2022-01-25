@@ -10,12 +10,12 @@ events:
   add: Ajouter
   title: Événements
   list:
-    empty: Aucun événement trouvé. Voulez-vous en ajouter un?
+    empty: No events found. Would you like to add one?
   view:
-    list: Voir les photos
-    covers: Voir la liste
+    list: See Photos
+    covers: See list
   filter:
-    type: Type de texte
+    type: Type
     style: Style
 posts:
   add: Ajouter
@@ -57,7 +57,7 @@ role:
 profile:
   username: Nom d'utilisateur
   community: Je danse dans
-  type: Type de texte
+  type: Type
   name: Nom
   bio: Taquin
   hometown: Ville natale
@@ -65,7 +65,7 @@ profile:
   gender: Le sexe
   styles: Vos styles de danse et votre niveau
   style: Styles de danse
-  story: Libellé
+  story: Description
   languages: Vos langues
   skills: Compétences non dansantes
   days: Journées
@@ -80,7 +80,7 @@ profile:
   visibility: Visibilité
   photo: Photo
 account:
-  email: Courriel
+  email: Email
   password: Mot de passe
   name: Nom et prénom
   phone: Téléphone
@@ -100,7 +100,7 @@ nopassword:
   google: Connectez-vous avec Google
   submit: Envoyez un lien magique
 contacts:
-  email: Courriel
+  email: Email
   website: Site Internet
 save: sauver
 teaser:
@@ -137,38 +137,38 @@ footer:
   privacy: Intimité
   terms: Termes
   coc: Code de conduite
-  faq: Foire Aux Questions
+  faq: FAQ
 feed:
   title: Commentaire
   newMessage:
-    input: Demandez ou partagez quelque chose à propos de la danse...
-    intent: poster un message
-    submit: Envoyer
-  category: Choisir une catégorie
-  needPartner: Recherche de partenaire
-  needEvents: Recherche d'événements
-  needInstructor: Recherche d'instructeur
-  trip: Offre de voyage
-  event: Evénement
-  artist: Artiste
-  venue: Lieu
-  app: Application
-  guide: Guide / Comment faire
+    input: Ask or share something about dance...
+    intent: post a message
+    submit: Send
+  category: Choose category
+  needPartner: Looking for partner
+  needEvents: Looking for events
+  needInstructor: Looking for instructor
+  trip: Offering trip
+  event: Event
+  artist: Artist
+  venue: Venue
+  app: App
+  guide: Guide / How To
   inspiration: Inspiration
   question: Question
-  poll: Sondage
-  post: Poster
+  poll: Poll
+  post: Post
 comments:
-  empty: Il n'y a pas encore de commentaires.
+  empty: There are no comments yet.
 edit:
-  label: Editer
+  label: Edit
 dashboard:
-  label: Tableau de bord
+  label: Dashboard
 sort:
   popular: Populaire
   newest: Plus récent
-  hot: Chaud
-  watching: En train de regarder
-  starred: Favoris
-  archived: Archivé
-  yours: Vos
+  hot: Hot
+  watching: Watching
+  starred: Starred
+  archived: Archived
+  yours: Yours
