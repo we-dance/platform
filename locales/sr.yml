@@ -15,7 +15,7 @@ events:
     list: See Photos
     covers: See list
   filter:
-    type: Тип
+    type: Type
     style: Стил
 posts:
   add: Додај пост
