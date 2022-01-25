@@ -67,7 +67,6 @@ export default {
     '@nuxtjs/sentry',
     '@nuxtjs/robots',
     '@nuxtjs/sitemap',
-    'portal-vue/nuxt',
     '@nuxtjs/device',
     'nuxt-i18n',
     '@nuxt/content',
@@ -214,5 +213,10 @@ export default {
   },
   image: {
     provider: 'static',
+  },
+  watchers: {
+    webpack: {
+      ignored: /(node_modules)|(.git)/,
+    },
   },
 }
