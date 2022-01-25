@@ -22,7 +22,7 @@ city.change: Schimbă orașul
 role.label: Rol
 sort.popular: Popular
 sort.newest: Cel mai nou
-style.label: Stil
+events.filter.style: Stil
 profile.username: Nume de utilizator
 account.email: E-mail
 account.password: Parola

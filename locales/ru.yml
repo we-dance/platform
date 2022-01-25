@@ -22,7 +22,7 @@ city.change: Сменить город
 role.label: Роль
 sort.popular: Популярные
 sort.newest: Новые
-style.label: Стиль
+events.filter.style: Стиль
 profile.username: Имя пользователя
 account.email: Электронная почта
 account.password: Пароль

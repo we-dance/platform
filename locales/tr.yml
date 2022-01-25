@@ -22,7 +22,7 @@ city.change: Şehri değiştir
 role.label: Rol
 sort.popular: Popüler
 sort.newest: En yeni
-style.label: Tarz
+events.filter.style: Tarz
 profile.username: Kullanıcı adı
 account.email: E-posta adresi
 account.password: Parola

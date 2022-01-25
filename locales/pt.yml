@@ -22,7 +22,7 @@ city.change: Mudar de cidade
 role.label: Função
 sort.popular: Popular
 sort.newest: O mais novo
-style.label: Estilo
+events.filter.style: Estilo
 profile.username: Nome de usuário
 account.email: O email
 account.password: Senha
