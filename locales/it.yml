@@ -10,12 +10,12 @@ events:
   add: Aggiungi evento
   title: Eventi
   list:
-    empty: Nessun evento trovato. Aggiungerne uno?
+    empty: No events found. Would you like to add one?
   view:
-    list: Vedi Foto
-    covers: Vedi elenco
+    list: See Photos
+    covers: See list
   filter:
-    type: Tipo
+    type: Type
     style: Stile
 posts:
   add: Aggiungi post
@@ -89,12 +89,12 @@ agreement: Eseguendo l'accesso, accetti i {terms} e la {privacy}.
 terms: Termini di servizio
 privacy: Politica sulla riservatezza
 register:
-  login: Accedi
+  login: Login
   submit: Registrati
 signin:
   register: Creare un account
   nopassword: Hai dimenticato la password
-  submit: Accedi
+  submit: Login
 nopassword:
   signin: Ho una password
   google: Accedi con Google
@@ -141,34 +141,34 @@ footer:
 feed:
   title: Commento
   newMessage:
-    input: Chiedi o condividi qualcosa sulla danza...
-    intent: invia un messaggio
-    submit: Invia
-  category: Scegli categoria
-  needPartner: Cercare un partner
-  needEvents: Alla ricerca di eventi
-  needInstructor: Cercare istruttore
-  trip: Offerta di viaggio
-  event: Evento
-  artist: Artista
-  venue: Luogo
+    input: Ask or share something about dance...
+    intent: post a message
+    submit: Send
+  category: Choose category
+  needPartner: Looking for partner
+  needEvents: Looking for events
+  needInstructor: Looking for instructor
+  trip: Offering trip
+  event: Event
+  artist: Artist
+  venue: Venue
   app: App
-  guide: Guida / Come
-  inspiration: Ispirazione
-  question: Domanda
-  poll: Sondaggio
+  guide: Guide / How To
+  inspiration: Inspiration
+  question: Question
+  poll: Poll
   post: Post
 comments:
-  empty: Non ci sono ancora commenti.
+  empty: There are no comments yet.
 edit:
-  label: Modifica
+  label: Edit
 dashboard:
   label: Dashboard
 sort:
   popular: Popolare
   newest: Più recente
-  hot: Caldo
-  watching: Guardando
-  starred: Preferiti
-  archived: Archiviato
+  hot: Hot
+  watching: Watching
+  starred: Starred
+  archived: Archived
   yours: Yours
