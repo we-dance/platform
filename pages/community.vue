@@ -100,7 +100,7 @@ export default {
     const { city, currentCity } = useCities()
     const { router } = useRouter()
     const { getCity } = useApp()
-    const { objectivesList, typeList } = useProfiles()
+    const { objectivesList, typeList, radiusOptions } = useProfiles()
 
     if (!currentCity.value) {
       router.push('/cities')
