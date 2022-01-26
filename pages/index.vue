@@ -274,7 +274,6 @@ export default {
   setup() {
     const { profile } = useAuth()
     const { router } = useRouter()
-    // const t = index.i18n.t.bind(index.i18n)
 
     watch(profile, (p) => {
       router.push('/feed')
