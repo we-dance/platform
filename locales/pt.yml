@@ -2,6 +2,30 @@
 hero:
   title: Você gosta de dançar?
   subtitle: Ajudamos uns aos outros a encontrar eventos de dança interessantes e parceiros de dança.
+    moto: Even one dance contact in a city makes a difference.
+  join: Join the community
+features:
+  eventCalendar: Event Calendar
+  eventCalendarText: Find dance workshops, courses, socials and parties. We fill event calendar all together as a community. Everyone can share.
+  dancePartners: Dance partners
+  dancePartnersText: Find a dance partner for your dance style and let them find you.
+  cityChats: City Chats
+  cityChatsText: Find dance chat in any city. Join your city chat and invite your friends to help new dancers in the city. Think globally, act locally.
+  danceTravel: Dance Travel
+  danceTravelText: Find international dance festivals and congresses. Share a ride, an appartment and find a buddy to experience a new city together.
+  volunteer: Volunteer
+  volunteerText: We build a community, where everyone enters with mindset “I can help”, so whenever you need help you can count on it. We are one big family worldwide. We help each other.
+  getInvolved: Get Involved
+  interviews: Interviews
+  interviewsText: Explore more about you favorite dance artists and catch their tips &amp; tricks.
+  listenToPodcast: Listen to Podcast
+
+international:
+  internationalCommunity: International Community
+  internationalCommunityText: We regularly post interviews, event announcements and introduce new members on our social media.
+
+## End of index text ##
+
 auth:
   signin: Entrar
   signup: Inscrever-se

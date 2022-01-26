@@ -2,6 +2,30 @@
 hero:
   title: Tanzt du gerne?
   subtitle: Wir helfen uns gegenseitig, interessante Tanzveranstaltungen und Tanzpartner zu finden.
+  moto: Even one dance contact in a city makes a difference.
+  join: Join the community
+features:
+  eventCalendar: Event Calendar
+  eventCalendarText: Find dance workshops, courses, socials and parties. We fill event calendar all together as a community. Everyone can share.
+  dancePartners: Dance partners
+  dancePartnersText: Find a dance partner for your dance style and let them find you.
+  cityChats: City Chats
+  cityChatsText: Find dance chat in any city. Join your city chat and invite your friends to help new dancers in the city. Think globally, act locally.
+  danceTravel: Dance Travel
+  danceTravelText: Find international dance festivals and congresses. Share a ride, an appartment and find a buddy to experience a new city together.
+  volunteer: Volunteer
+  volunteerText: We build a community, where everyone enters with mindset “I can help”, so whenever you need help you can count on it. We are one big family worldwide. We help each other.
+  getInvolved: Get Involved
+  interviews: Interviews
+  interviewsText: Explore more about you favorite dance artists and catch their tips &amp; tricks.
+  listenToPodcast: Listen to Podcast
+
+international:
+  internationalCommunity: International Community
+  internationalCommunityText: We regularly post interviews, event announcements and introduce new members on our social media.
+
+## End of index text ##
+
 auth:
   signin: Einloggen
   signup: Registrieren
@@ -33,7 +57,7 @@ chat:
   title: Plaudern
   welcome: Beginnen Sie ein Gespräch mit etwas Nettem.
   with: Chatte mit {username}
-  dateDiff: "vor {diff}"
+  dateDiff: 'vor {diff}'
 cities:
   choose: Wählen sie eine stadt
 settings:
@@ -122,7 +146,7 @@ teaser:
     btn: Jetzt beitreten
   chat:
     title: Einheimische fragen
-    description: "Wir haben in jeder Stadt einen Telegram-Tanzchat. Treten Sie Ihrem Stadt-Chat bei, um reisenden Tänzern zu helfen, und laden Sie Ihre Tanzfreunde ein. Lass uns zusammen WeDance aufbauen!"
+    description: 'Wir haben in jeder Stadt einen Telegram-Tanzchat. Treten Sie Ihrem Stadt-Chat bei, um reisenden Tänzern zu helfen, und laden Sie Ihre Tanzfreunde ein. Lass uns zusammen WeDance aufbauen!'
     btn: Chat beitreten
   involve:
     title: Wir brauchen Deine Hilfe
