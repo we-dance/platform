@@ -222,9 +222,9 @@ import { useRsvp } from '~/use/rsvp'
 import { useRouter } from '~/use/router'
 import { useProfiles } from '~/use/profiles'
 import { useReactions } from '~/use/reactions'
-import { accountFields } from '~/use/accounts'
+import { useAccounts } from '~/use/accounts'
 import { useCities } from '~/use/cities'
-import { getEventIcon } from '~/use/events'
+import { useEvents } from '~/use/events'
 import {
   getDay,
   getDateTime,
@@ -331,7 +331,9 @@ export default {
       updateAccount,
       sendSignInLinkToEmail,
     } = useAuth()
+    const { getEventIcon } = useEvents()
     const { currentCity } = useCities()
+    const { accountFields } = useAccounts()
 
     const { params } = useRouter()
     const { getProfile } = useProfiles()

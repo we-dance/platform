@@ -301,7 +301,7 @@ import { useRsvp } from '~/use/rsvp'
 import { useRouter } from '~/use/router'
 import { useProfiles } from '~/use/profiles'
 import { useReactions } from '~/use/reactions'
-import { accountFields } from '~/use/accounts'
+import { useAccounts } from '~/use/accounts'
 import { getDateTime, getDate, getTime, dateDiff, sortBy } from '~/utils'
 
 export default {
@@ -312,6 +312,7 @@ export default {
     const { uid, can, account } = useAuth()
     const { params } = useRouter()
     const { getProfile } = useProfiles()
+    const { accountFields } = useAccounts()
 
     const { doc, load, exists, loading } = useDoc('posts')
     const { create } = useDoc('emails')

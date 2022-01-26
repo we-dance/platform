@@ -45,7 +45,7 @@ import ls from 'local-storage'
 import { useAuth } from '~/use/auth'
 import { useDoc } from '~/use/doc'
 import { useRouter } from '~/use/router'
-import { postFields } from '~/use/posts'
+import { usePosts } from '~/use/posts'
 
 export default {
   name: 'PostEdit',
@@ -86,6 +86,7 @@ export default {
   setup() {
     const { can, profile, isAdmin } = useAuth()
     const { params } = useRouter()
+    const { postFields } = usePosts()
 
     const collection = 'posts'
 
