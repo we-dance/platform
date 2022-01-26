@@ -69,7 +69,7 @@ export const useEvents = () => {
   }))
 
   function getEventIcon(eventType) {
-    let typeOption =
+    const typeOption =
       eventTypeListIcons.find((type) => type.value === eventType) || 'Other'
 
     return typeOption.icon
