@@ -7,7 +7,6 @@
           type="context"
           icon="people"
           :to="`/events/${item.id}/dashboard`"
-          class="hover:text-blue-500 mr-2"
           label="Dashboard"
         />
         <TButton
@@ -15,7 +14,6 @@
           type="context"
           icon="edit"
           :to="`/events/${item.id}/edit`"
-          class="hover:text-blue-500"
           label="Edit"
         />
         <TCardActions
@@ -52,8 +50,10 @@
           v-if="item.type"
           class="flex items-center justify-start w-full leading-tight border-b py-2 px-4"
         >
-          <div class="w-4 mr-4 text-center">{{ getEventIcon(item.type) }}</div>
-          <div>{{ item.type }}</div>
+          <div class="w-4 mr-4 text-center">
+            {{ getEventIcon(item.eventType) }}
+          </div>
+          <div>{{ item.eventType }}</div>
         </div>
 
         <TStyles
@@ -119,7 +119,11 @@
     <div
       class="flex mt-4 space-x-2 justify-center sticky bg-white p-4 border-b z-50 top-0"
     >
-      <TButton v-if="!uid" type="primary" @click="reservationPopup = 'reserve'"
+      <TButton
+        v-if="!uid"
+        allow-guests
+        type="primary"
+        @click="reservationPopup = 'reserve'"
         >Register for event</TButton
       >
       <TButton
@@ -136,31 +140,22 @@
       >
     </div>
 
-    <TItemCard>
-      <TPreview class="mt-4" :content="item.description" />
+    <TPost v-if="item.id" :item="item" hide-media />
 
-      <div
-        v-if="item.venue && item.venue.map"
-        class="p-4 md:-mx-4 md:-mb-4 bg-gray-100"
+    <div v-if="item.venue && item.venue.map" class="p-4 bg-gray-100">
+      <div class="font-bold text-sm mb-4 leading-none text-gray-700">
+        Venue Map
+      </div>
+      <img :src="item.venue.map" alt="Venue Map" class="mt-4" />
+    </div>
+
+    <TItemCreator :item="item" full class="mt-4" />
+
+    <div v-if="item.facebook" class="mt-8 text-right text-sm">
+      <a :href="item.facebook" class="hover:underline text-gray-700"
+        >Event Source</a
       >
-        <div class="font-bold text-sm mb-4 leading-none text-gray-700">
-          Venue Map
-        </div>
-        <img :src="item.venue.map" alt="Venue Map" class="mt-4" />
-      </div>
-
-      <TItemCreator :item="item" full class="mt-4" />
-
-      <div v-if="item.facebook" class="mt-8 text-right text-sm">
-        <a :href="item.facebook" class="hover:underline text-gray-700"
-          >Event Source</a
-        >
-      </div>
-
-      <div v-if="item.views" class="text-gray-500 text-sm mt-8">
-        {{ item.views }} views
-      </div>
-    </TItemCard>
+    </div>
 
     <TPopup
       v-if="reservationPopup"
@@ -171,6 +166,7 @@
         <div v-if="reservationPopup === 'reserve'">
           <div>
             <TForm
+              allow-guests
               v-model="account"
               :fields="reservationFields"
               submit-label="Register"
@@ -179,6 +175,7 @@
             >
               <template v-if="!uid" slot="buttons">
                 <TButton
+                  allow-guests
                   :to="`/signin?target=${this.$route.fullPath}`"
                   label="Login"
                 />
@@ -225,7 +222,7 @@ import { useRsvp } from '~/use/rsvp'
 import { useRouter } from '~/use/router'
 import { useProfiles } from '~/use/profiles'
 import { useReactions } from '~/use/reactions'
-import { accountFields } from '~/use/accounts'
+import { useAccounts } from '~/use/accounts'
 import { useCities } from '~/use/cities'
 import { useEvents } from '~/use/events'
 import {
@@ -239,7 +236,6 @@ import {
   getDateObect,
 } from '~/utils'
 import { addressPart } from '~/use/google'
-import { trackView } from '~/use/tracking'
 
 export default {
   name: 'EventView',
@@ -268,10 +264,6 @@ export default {
   },
   watch: {
     item() {
-      if (this.item) {
-        this.trackView('events', this.item?.id, this.item?.views || 0)
-      }
-
       if (this.item && this.item.place) {
         this.currentCity = this.item.place
       }
@@ -339,13 +331,14 @@ export default {
       updateAccount,
       sendSignInLinkToEmail,
     } = useAuth()
-    const { currentCity } = useCities()
     const { getEventIcon } = useEvents()
+    const { currentCity } = useCities()
+    const { accountFields } = useAccounts()
 
     const { params } = useRouter()
     const { getProfile } = useProfiles()
 
-    const { doc, load, exists, loading } = useDoc('events')
+    const { doc, load, exists, loading } = useDoc('posts')
     const { map } = useReactions()
 
     const { updateRsvp, createGuestRsvp } = useRsvp()
@@ -382,7 +375,7 @@ export default {
 
     function register(id, link) {
       if (uid.value) {
-        updateRsvp(id, 'events', 'up')
+        updateRsvp(id, 'posts', 'up')
       }
 
       openURL(link)
@@ -390,11 +383,11 @@ export default {
 
     const reserve = async (participant) => {
       if (!uid.value) {
-        await createGuestRsvp(params.id, 'events', 'up', participant)
+        await createGuestRsvp(params.id, 'posts', 'up', participant)
         sendSignInLinkToEmail(participant.email)
       } else {
         await updateAccount(participant)
-        updateRsvp(params.id, 'events', 'up')
+        updateRsvp(params.id, 'posts', 'up')
       }
 
       reservationPopup.value = 'finish'
@@ -424,7 +417,6 @@ export default {
       getDay,
       getEventDescription,
       calendarLink,
-      trackView,
       getEventIcon,
     }
   },

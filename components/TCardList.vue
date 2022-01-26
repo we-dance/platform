@@ -49,7 +49,7 @@
           <slot name="card-toolbar" :item="item" />
         </div>
         <slot :item="item">
-          <TItemCard :key="itemId">
+          <div :key="itemId" class="p-4">
             <TListItem :item="item" :fields="fields" />
             <TItemToolbar :item="item" :collection="collection" :edit="false">
               <TPopupEdit
@@ -59,7 +59,7 @@
                 :item="item"
               />
             </TItemToolbar>
-          </TItemCard>
+          </div>
         </slot>
       </div>
     </div>

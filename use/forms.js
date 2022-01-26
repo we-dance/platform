@@ -1,19 +1,11 @@
-import { venueFields } from '~/use/venues'
-import { offerFields } from '~/use/offers'
+import { useVenues } from '~/use/venues'
 import { useProfiles } from '~/use/profiles'
-import { playlistFields } from '~/use/playlists'
 
 export function getFields(collection) {
   if (collection === 'venues') {
+    const { venueFields } = useVenues()
+
     return venueFields
-  }
-
-  if (collection === 'offers') {
-    return offerFields
-  }
-
-  if (collection === 'playlists') {
-    return playlistFields
   }
 
   if (collection === 'profiles') {

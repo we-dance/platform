@@ -9,28 +9,28 @@
         v-model="eventType"
         clearable
         hide-search-box
-        :options="eventTypeList"
-        :placeholder="$t('event.type')"
+        :options="eventTypeListIcons"
+        :placeholder="$t('events.filter.type')"
       />
       <t-rich-select
         v-model="dances"
         clearable
         :options="danceStyles"
-        :placeholder="$t('style.label')"
+        :placeholder="$t('events.filter.style')"
       />
       <div>
         <TButton
           v-if="view === 'list'"
           icon="news"
           type="icon"
-          label="See photos"
+          :label="$t('events.view.list')"
           @click="view = 'covers'"
         />
         <TButton
           v-if="view === 'covers'"
           icon="notes"
           type="icon"
-          label="See list"
+          :label="$t('events.view.covers')"
           @click="view = 'list'"
         />
       </div>
@@ -123,9 +123,11 @@ import {
 export default {
   name: 'EventsIndex',
   setup() {
-    const { eventTypeListIcons: eventTypeList } = useEvents()
+    const { eventTypeListIcons } = useEvents()
     const { currentCity } = useCities()
-    const { docs, loading: loadingPosts, getById } = useCollection('events')
+    const { docs, loading: loadingPosts, getById } = useCollection('posts', {
+      type: 'event',
+    })
     const { getProfile } = useProfiles()
     const { getStylesDropdown } = useStyles()
 
@@ -273,7 +275,7 @@ export default {
       dances,
       view,
       viewOptions,
-      eventTypeList,
+      eventTypeListIcons,
       eventType,
       danceStyles,
     }

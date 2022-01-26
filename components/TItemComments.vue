@@ -1,10 +1,10 @@
 <template>
-  <div id="comment" class="col-span-12 mt-8" @click="checkAuth">
-    <TFormComment :post-id="postId" :reply-to="replyTo" />
+  <div id="comment" class="mt-8" @click="checkAuth">
+    <TFormComment :post-id="postId" :reply-to="replyTo" class="p-4" />
 
     <TListComments class="mt-4" :post-id="postId">
       <template v-slot:empty>
-        <div class="text-center my-8">There are no comments yet.</div>
+        <div class="text-center my-8">{{ $t('comments.empty') }}</div>
       </template>
     </TListComments>
   </div>

@@ -1,13 +1,8 @@
 <template>
   <main>
-    <TTitle v-if="title">
-      {{ title }}
-      <template slot="right">
-        <TButton v-if="addUrl" :to="addUrl" type="primary" :label="add" />
-      </template>
-    </TTitle>
+    <THeader v-if="title" :title="title" />
 
-    <div v-if="tabs" class="flex items-center space-x-2 px-2">
+    <div v-if="tabs.length" class="flex items-center space-x-2 px-2">
       <TTabs v-model="sorting" :tabs="tabs" class="flex-grow" />
       <div v-if="false">
         <TButton
@@ -26,7 +21,7 @@
     </div>
 
     <TFilters
-      v-if="filters"
+      v-if="filters.length"
       v-model="filters"
       :fields="filterFields"
       class="px-2"
@@ -85,7 +80,7 @@ export default {
     },
     listWrapper: {
       type: String,
-      default: 'space-y-2',
+      default: 'mt-2 space-y-2',
     },
   },
   setup(params) {

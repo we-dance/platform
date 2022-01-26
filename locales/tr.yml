@@ -1,114 +1,174 @@
-hero.title: Dans etmeyi sever misin?
-hero.subtitle: İlginç dans etkinlikleri ve dans partnerleri bulma konusunda
-  birbirimize yardımcı oluyoruz.
-signin: Oturum aç
-signup: Kayıt ol
-signout: Çıkış Yap
-events.add: Etkinlik ekle
-posts.add: Gönderi ekle
-profiles.add: Profil ekle
-myprofile.events.add: Etkinlik ekle
-myprofile.posts.add: Bir gönderi yazın
-posts.title: Yorum
-profiles.title: Topluluk
-events.title: Etkinlikler
-event.type: Sınıflandırma
-chat.title: Konuşma
-cities.choose: Bir şehir seçin
-myprofile.title: Benim profilim
-settings.title: Ayarlar
-city.anywhere: Herhangi bir yer
-city.change: Şehri değiştir
-role.label: Rol
-sort.popular: Popüler
-sort.newest: En yeni
-style.label: Tarz
-profile.username: Kullanıcı adı
-account.email: E-posta adresi
-account.password: Parola
-account.name: Ad Soyad
-account.phone: Telefon
-account.newsletter: Haftalık ne tür bir güncelleme almak istersin?
-profile.community: Dans ediyorum
+---
+hero:
+  title: Dans etmeyi sever misin?
+  subtitle: İlginç dans etkinlikleri ve dans partnerleri bulma konusunda birbirimize yardımcı oluyoruz.
+auth:
+  signin: Oturum aç
+  signup: Kayıt ol
+  signout: Çıkış Yap
+events:
+  add: Etkinlik ekle
+  title: Etkinlikler
+  list:
+    empty: No events found. Would you like to add one?
+  view:
+    list: See Photos
+    covers: See list
+  filter:
+    type: Type
+    style: Tarz
+posts:
+  add: Gönderi ekle
+  title: Yorum
+profiles:
+  add: Profil ekle
+  title: Topluluk
+myprofile:
+  events:
+    add: Etkinlik ekle
+  posts:
+    add: Bir gönderi yazın
+  title: Benim profilim
+chat:
+  title: Konuşma
+  welcome: Sohbete güzel bir şeyle başlayın.
+  with: '{username} ile sohbet et.'
+  dateDiff: "{diff} önce"
+cities:
+  choose: Bir şehir seçin
+settings:
+  title: Ayarlar
+  account:
+    title: Hesap
+    description: Bu bilgiler, bildirimler ve satın alımlar için kullanılacaktır. Yalnızca onayınla hizmet sağlayıcılarla veya satıcılarla paylaşılacaktır.
+    changepassword: Şifre değiştir
+    delete: Hesabı sil
+  profile:
+    title: Profil
+    description: Diğer dansçıların hakkında ne bilmesini istiyorsun? Burası dans tutkunu paylaşabileceğin bir yer. Kendini tanıt, utanma!
+  contacts:
+    title: Kişiler
+    description: Bu bilgiler halka açık olacaktır. Kişilerinizi yalnızca üyelerin sizinle iletişime geçmesini istiyorsan paylaş. Dikkat çekmek ve sosyal medyanı paylaşmak için iyi bir imkan olabilir.
+city:
+  anywhere: Herhangi bir yer
+  change: Şehri değiştir
+role:
+  label: Rol
+profile:
+  username: Kullanıcı adı
+  community: Dans ediyorum
+  type: Tip
+  name: İsim
+  bio: Tanıtım
+  hometown: Yer
+  birthday: Doğum günü
+  gender: Cinsiyet
+  styles: Dans stillerin ve seviyen
+  style: Dans stillerin
+  story: Dans hikayen
+  languages: Dillerin
+  skills: Baska beceriler
+  days: Günler
+  topics: Hangi dans konularıyla ilgileniyorsun?
+  teacher: Ders veriyormusun?
+  partner: Bir dans arkadası mı arıyorsun?
+  height: Boyun (cm)
+  weight: Kilon (kg)
+  partnerBio: Dans arkadasın hakkında
+  objectives: Hedefler
+  place: Nerede buluşulur?
+  visibility: Görünürlük
+  photo: Fotoğraf
+account:
+  email: E-posta adresi
+  password: Parola
+  name: Ad Soyad
+  phone: Telefon
+  newsletter: Haftalık ne tür bir güncelleme almak istersin?
 agreement: Oturum açarak, {terms} ve {privacy} 'nı kabul etmiş olursunuz.
 terms: Kullanım Şartları
 privacy: Gizlilik Politikası
-register.login: Oturum aç
-register.submit: Kayıt ol
-signin.register: Hesap oluştur
-signin.nopassword: Parolamı unuttum
-nopassword.signin: Bir şifrem var
-nopassword.google: Google ile giriş yap
-nopassword.submit: Sihirli bağlantı gönder
-signin.submit: Oturum aç
-settings.account.title: Hesap
-settings.account.description: Bu bilgiler, bildirimler ve satın alımlar için
-  kullanılacaktır. Yalnızca onayınla hizmet sağlayıcılarla veya satıcılarla
-  paylaşılacaktır.
-settings.profile.title: Profil
-settings.profile.description: Diğer dansçıların hakkında ne bilmesini
-  istiyorsun? Burası dans tutkunu paylaşabileceğin bir yer. Kendini tanıt,
-  utanma!
-settings.contacts.title: Kişiler
-settings.contacts.description: Bu bilgiler halka açık olacaktır. Kişilerinizi
-  yalnızca üyelerin sizinle iletişime geçmesini istiyorsan paylaş. Dikkat çekmek
-  ve sosyal medyanı paylaşmak için iyi bir imkan olabilir.
-settings.account.changepassword: Şifre değiştir
-settings.account.delete: Hesabı sil
-contacts.email: E-posta adresi
-contacts.website: İnternet sitesi
+register:
+  login: Oturum aç
+  submit: Kayıt ol
+signin:
+  register: Hesap oluştur
+  nopassword: Parolamı unuttum
+  submit: Oturum aç
+nopassword:
+  signin: Bir şifrem var
+  google: Google ile giriş yap
+  submit: Sihirli bağlantı gönder
+contacts:
+  email: E-posta adresi
+  website: İnternet sitesi
 save: Kayıt etmek
-profile.type: Tip
-profile.name: İsim
-profile.bio: Tanıtım
-profile.hometown: Yer
-profile.birthday: Doğum günü
-profile.gender: Cinsiyet
-profile.styles: Dans stillerin ve seviyen
-profile.style: Dans stillerin
-profile.story: Dans hikayen
-profile.languages: Dillerin
-profile.skills: Baska beceriler
-profile.days: Günler
-profile.topics: Hangi dans konularıyla ilgileniyorsun?
-profile.teacher: Ders veriyormusun?
-profile.partner: Bir dans arkadası mı arıyorsun?
-profile.height: Boyun (cm)
-profile.weight: Kilon (kg)
-profile.partnerBio: Dans arkadasın hakkında
-profile.objectives: Hedefler
-profile.place: Nerede buluşulur?
-profile.visibility: Görünürlük
-profile.photo: Fotoğraf
-teaser.partner.title: Bir dans arkadasına mı ihtiyacın var?
-teaser.partner.description: Dünyanın her yerinden dansçılar, dans partneri
-  bulmak için profillerini oluşturur
-teaser.partner.btn: Topluluğu Gör
-teaser.events.title: Nerede dans edilir?
-teaser.events.description: Tüm dans kursları, partiler ve festivaller tek bir yerde
-teaser.events.btn: Olayları Gör
-teaser.profile.title: Profilini yayınla
-teaser.profile.description: böylece diğerleri seninle iletişim kurabilir
-teaser.profile.btn: Ücretsiz katıl
-teaser.allevents.title: Özel etkinlikler
-teaser.allevents.description: Daha fazlasını görmek için WeDance Topluluğu'nun bir üyesi ol
-teaser.allevents.btn: Şimdi Katıl
-teaser.chat.title: Sohbet ediyor muyuz?
-teaser.chat.description: Her şehirde dans sohbetleri var
-teaser.chat.btn: '{city} Sohbetine Katıl'
-teaser.involve.title: Yardımına ihtiyacımız var
-teaser.involve.description: Kar amacı gütmeyen uluslararası dans topluluğuyuz.
-  Herhangi bir ülke ve şehre gitmeni ve dans etkinlikleri ve dansçılar bulmanı
-  sağlıyoruz. Her şey yerel toplulukla başlar.
-teaser.involve.btn: Katıl
-share.title: Paylaş
-share.copy: Bağlantıyı kopyala
-footer.about: Hakkımızda
-footer.support: Destek
-footer.privacy: Gizlilik
-footer.terms: Koşullar
-footer.coc: Davranış kodu
-footer.faq: SSS
-chat.welcome: Sohbete güzel bir şeyle başlayın.
-chat.with: '{username} ile sohbet et.'
-chat.dateDiff: '{diff} önce'
+teaser:
+  partner:
+    title: Bir dans arkadasına mı ihtiyacın var?
+    description: Dünyanın her yerinden dansçılar, dans partneri bulmak için profillerini oluşturur
+    btn: Topluluğu Gör
+  events:
+    title: Nerede dans edilir?
+    description: Tüm dans kursları, partiler ve festivaller tek bir yerde
+    btn: Olayları Gör
+  profile:
+    title: Profilini yayınla
+    description: böylece diğerleri seninle iletişim kurabilir
+    btn: Ücretsiz katıl
+  allevents:
+    title: Özel etkinlikler
+    description: Daha fazlasını görmek için WeDance Topluluğu'nun bir üyesi ol
+    btn: Şimdi Katıl
+  chat:
+    title: Sohbet ediyor muyuz?
+    description: "Her şehirde dans sohbetleri var"
+    btn: '{city} Sohbetine Katıl'
+  involve:
+    title: Yardımına ihtiyacımız var
+    description: Kar amacı gütmeyen uluslararası dans topluluğuyuz. Herhangi bir ülke ve şehre gitmeni ve dans etkinlikleri ve dansçılar bulmanı sağlıyoruz. Her şey yerel toplulukla başlar.
+    btn: Katıl
+share:
+  title: Paylaş
+  copy: Bağlantıyı kopyala
+footer:
+  about: Hakkımızda
+  support: Destek
+  privacy: Gizlilik
+  terms: Koşullar
+  coc: Davranış kodu
+  faq: SSS
+feed:
+  title: Yorum
+  newMessage:
+    input: Ask or share something about dance...
+    intent: post a message
+    submit: Send
+  category: Choose category
+  needPartner: Looking for partner
+  needEvents: Looking for events
+  needInstructor: Looking for instructor
+  trip: Offering trip
+  event: Event
+  artist: Artist
+  venue: Venue
+  app: App
+  guide: Guide / How To
+  inspiration: Inspiration
+  question: Question
+  poll: Poll
+  post: Post
+comments:
+  empty: There are no comments yet.
+edit:
+  label: Edit
+dashboard:
+  label: Dashboard
+sort:
+  popular: Popüler
+  newest: En yeni
+  hot: Hot
+  watching: Watching
+  starred: Starred
+  archived: Archived
+  yours: Yours

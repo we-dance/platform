@@ -200,7 +200,6 @@ export default {
         languages: TInputLanguages,
         buttons: TInputButtons,
         username: TInputUsername,
-        datetime: TInputDateTime,
       }
 
       return map[this.type] || TInput

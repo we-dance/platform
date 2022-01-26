@@ -4,8 +4,9 @@
     <div v-else-if="!count && showEmpty">
       {{ emptyLabel }}
     </div>
-    <h2 v-if="title" class="font-bold text-lg">{{ title }}</h2>
-    <div class="flex justify-end">
+    <div class="flex justify-between items-center px-2">
+      <h2 v-if="title" class="font-bold text-lg">{{ title }}</h2>
+      <div v-else></div>
       <TButton type="nav" icon="copy" @click="copyToClipboard" />
     </div>
     <div v-if="items.length" class="space-y-8 mt-4">
@@ -65,10 +66,14 @@ export default {
       type: Boolean,
       default: false,
     },
+    docs: {
+      type: Array,
+      default: () => [],
+    },
   },
   setup(props) {
     const { currentCity } = useCities()
-    const { docs, loading, getById } = useCollection('events', props.filter)
+    const { docs, loading, getById } = useCollection('posts', props.filter)
 
     const { uid } = useAuth()
 
@@ -138,7 +143,7 @@ export default {
     )
 
     const items = computed(() => {
-      let result = docs.value.map(map)
+      let result = props.docs.length ? props.docs.map(map) : docs.value.map(map)
 
       result = result.filter(activeFilterItem.value.filter)
 
@@ -160,6 +165,11 @@ export default {
     const itemsAsText = computed(() => {
       let result = ''
 
+      result += `👉 Details about events on https://wedance.vip/${props.community}\n\n`
+      result += `👉 Announcements on https://instagram.com/WeDance${props.community}\n\n`
+      result += `👉 Festivals on https://t.me/WeDanceVIP\n\n`
+      result += `👉 Add your event via website.\n\n`
+
       _.forEach(itemsByDate.value, (items, date) => {
         result += String(`**${getDay(date)} ${getDate(date)}**\n`).toUpperCase()
         items.forEach((item) => {
@@ -168,14 +178,10 @@ export default {
             result += `📍 ${item.venue?.name}\n`
           }
           result += `💸 ${item.price}\n`
+          result += `https://wedance.vip/events/${item.id}\n`
           result += `\n`
         })
       })
-
-      result += `👉 Details about events on https://wedance.vip/${props.community}\n\n`
-      result += `👉 Announcements on https://instagram.com/WeDance${props.community}\n\n`
-      result += `👉 Festivals on https://t.me/WeDanceVIP\n\n`
-      result += `👉 Add your event via website.`
 
       return result
     })

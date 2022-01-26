@@ -4,7 +4,6 @@ import { get } from 'lodash'
 import { createGlobalState, when } from '@vueuse/core'
 import { useFirestore } from '@vueuse/firebase'
 import { computed } from '@nuxtjs/composition-api'
-import { getCountFavorites } from '~/use/favorites'
 import { useAuth } from '~/use/auth'
 import { useDoc } from '~/use/doc'
 import { getArrayFromHash } from '~/utils'
@@ -122,7 +121,6 @@ export const useApp = () => {
   const mapDetails = (item) => {
     return {
       ...item,
-      savedByCount: getCountFavorites(item),
       createdByUsername: item.createdBy
         ? read('profiles', item.createdBy, 'username')
         : '',
@@ -212,6 +210,26 @@ export const useApp = () => {
     await addCommunity(address)
   }
 
+  const getPlace = (placeId) => {
+    if (!placeId) {
+      return {
+        placeId: '',
+        name: 'Anywhere',
+        loaded: true,
+      }
+    }
+
+    if (!cache.value) {
+      return {
+        placeId,
+        name: '<City>',
+        loaded: false,
+      }
+    }
+
+    return cache.value.cities[placeId]
+  }
+
   const getCity = (placeId) => {
     if (!placeId) {
       return ''
@@ -234,6 +252,7 @@ export const useApp = () => {
     addCityHistory,
     getCity,
     removeCityHistory,
+    getPlace,
   }
 }
 

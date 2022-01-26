@@ -3,6 +3,7 @@
   <TLoader v-else-if="loading || signingIn" />
   <div v-else>
     <TForm
+      allow-guests
       v-model="data"
       :fields="registerFields"
       :field-config="{ labelPosition: 'top' }"
@@ -42,7 +43,7 @@
 import { ref } from '@nuxtjs/composition-api'
 import ls from 'local-storage'
 import { useAuth } from '~/use/auth'
-import { registerFields } from '~/use/profiles'
+import { useProfiles } from '~/use/profiles'
 
 export default {
   name: 'RegisterPage',
@@ -57,6 +58,8 @@ export default {
       signOut,
       error,
     } = useAuth()
+
+    const { registerFields } = useProfiles()
 
     const data = ref({})
 

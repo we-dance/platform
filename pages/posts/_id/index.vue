@@ -1,59 +1,9 @@
 <template>
   <div>
-    <TItemToolbar collection="posts" :item="doc" class="mb-2" />
-
-    <TItemCard>
-      <h1 class="text-3xl leading-tight font-bold">{{ doc.title }}</h1>
-      <div class="flex text-sm space-x-1">
-        <div>
-          by
-          <router-link
-            class="underline text-primary"
-            :to="`/${author.username}`"
-            >{{ author.username }}</router-link
-          >
-        </div>
-        <div>• {{ publishedAt }}</div>
-      </div>
-
-      <TPreview
-        :content="doc.description"
-        class="mt-4"
-        :class="uid || $route.query.preview ? '' : 'h-64 overflow-hidden'"
-      />
-      <div v-if="!uid" class="p-4 text-center bg-gray-100 rounded">
-        <router-link
-          :to="`/signin?target=${$route.fullPath}`"
-          class="underline text-blue-500 hover:no-underline"
-          >Login</router-link
-        >
-        to read full post. Not a member yet?
-        <router-link
-          :to="`/register?target=${$route.fullPath}`"
-          class="underline text-blue-500 hover:no-underline"
-          >Register</router-link
-        >.
-      </div>
-      <TItemFooter collection="posts" :item="doc" :title="doc.title" />
-      <TItemCreator :item="doc" />
-    </TItemCard>
-
-    <TItemComments v-if="uid" :reply-to="doc.createdBy" :post-id="doc.id" />
-    <div v-else class="mt-4 p-4 text-center bg-gray-100 rounded">
-      <router-link
-        :to="`/signin?target=${$route.fullPath}`"
-        class="underline text-blue-500 hover:no-underline"
-        >Login</router-link
-      >
-      to see discussion. Not a member yet?
-      <router-link
-        :to="`/register?target=${$route.fullPath}`"
-        class="underline text-blue-500 hover:no-underline"
-        >Register</router-link
-      >.
-    </div>
+    <THeader :title="doc.title || '...'" />
 
     <TSharePreviewPost
+      v-if="doc.cover"
       type="Post"
       collection="posts"
       :username="author.username"
@@ -62,8 +12,15 @@
       :photo="doc.cover"
       :styles="doc.styles"
       align="center"
-      class="md:mt-4"
     />
+
+    <TReactions :item="doc" class="p-4 justify-center" />
+
+    <TPost :item="doc" hide-comments show-all />
+
+    <TItemCreator :item="doc" full />
+
+    <TItemComments :reply-to="doc.createdBy" :post-id="doc.id" />
   </div>
 </template>
 

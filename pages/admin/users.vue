@@ -3,10 +3,7 @@
     <div class="p-4 flex space-x-4">
       <div>{{ profiles.length }} profiles</div>
       <TInputButtons v-model="onlyLast" :options="onlyLastOptions" />
-      <TInputButtons
-        v-model="includeMarketing"
-        :options="includeMarketingOptions"
-      />
+      <TInputButtons v-model="view" :options="viewOptions" />
     </div>
 
     <ag-grid-vue
@@ -38,10 +35,10 @@ export default {
   setup() {
     const { getCity } = useApp()
 
-    const includeMarketing = ref(false)
-    const includeMarketingOptions = [
-      { value: false, label: 'Profiles' },
-      { value: true, label: 'Marketing' },
+    const view = ref('profiles')
+    const viewOptions = [
+      { value: 'profiles', label: 'Profiles' },
+      { value: 'marketing', label: 'Marketing' },
     ]
 
     const onlyLast = ref(true)
@@ -63,6 +60,9 @@ export default {
       {
         field: 'photo',
         valueGetter: (params) => (params.data.photo ? 'Yes' : 'No'),
+      },
+      {
+        field: 'partner',
       },
       {
         field: 'city',
@@ -90,66 +90,66 @@ export default {
       {
         field: 'sessionStart',
         valueGetter: (params) => getDateTime(params.data.marketing?.updatedAt),
-        hide: !includeMarketing.value,
+        hide: view.value !== 'marketing',
       },
       {
         field: 'campaign',
         valueGetter: (params) => params.data.marketing?.utms?.utm_campaign,
-        hide: !includeMarketing.value,
+        hide: view.value !== 'marketing',
       },
       {
         field: 'source',
         valueGetter: (params) => params.data.marketing?.utms?.utm_source,
-        hide: !includeMarketing.value,
+        hide: view.value !== 'marketing',
       },
       {
         field: 'medium',
         valueGetter: (params) => params.data.marketing?.utms?.utm_medium,
-        hide: !includeMarketing.value,
+        hide: view.value !== 'marketing',
       },
       {
         field: 'start',
         valueGetter: (params) => params.data.marketing?.start,
-        hide: !includeMarketing.value,
+        hide: view.value !== 'marketing',
         resizable: true,
       },
       {
         field: 'target',
         valueGetter: (params) => params.data.marketing?.target,
-        hide: !includeMarketing.value,
+        hide: view.value !== 'marketing',
         resizable: true,
       },
       {
         field: 'from',
         valueGetter: (params) => params.data.marketing?.from,
-        hide: !includeMarketing.value,
+        hide: view.value !== 'marketing',
       },
       {
         field: 'promo',
         valueGetter: (params) => params.data.marketing?.promo,
-        hide: !includeMarketing.value,
+        hide: view.value !== 'marketing',
       },
       {
         field: 'ref',
         valueGetter: (params) => params.data.marketing?.ref,
-        hide: !includeMarketing.value,
+        hide: view.value !== 'marketing',
       },
       {
         field: 'referrer',
         valueGetter: (params) => params.data.marketing?.referrer,
-        hide: !includeMarketing.value,
+        hide: view.value !== 'marketing',
         resizable: true,
       },
       {
         field: 'fbclid',
         valueGetter: (params) => params.data.marketing?.fbclid,
-        hide: !includeMarketing.value,
+        hide: view.value !== 'marketing',
         resizable: true,
       },
       {
         field: 'gclid',
         valueGetter: (params) => params.data.marketing?.gclid,
-        hide: !includeMarketing.value,
+        hide: view.value !== 'marketing',
         resizable: true,
       },
     ])
@@ -178,7 +178,7 @@ export default {
           id: doc.id,
         }))
 
-        if (includeMarketing.value) {
+        if (view.value === 'marketing') {
           snapshot.docs.forEach((doc) => {
             firestore
               .collection('marketing')
@@ -202,7 +202,7 @@ export default {
       })
     }
 
-    watch(includeMarketing, load)
+    watch(view, load)
     watch(onlyLast, load)
 
     onMounted(load)
@@ -211,8 +211,8 @@ export default {
       profiles,
       columns,
       onGridReady,
-      includeMarketing,
-      includeMarketingOptions,
+      view,
+      viewOptions,
       onlyLast,
       onlyLastOptions,
     }

@@ -22,7 +22,7 @@ export default {
   layout: 'empty',
   async asyncData({ app, params, error }) {
     const ref = await app.$fire.firestore
-      .collection('events')
+      .collection('posts')
       .doc(params.id)
       .get()
 

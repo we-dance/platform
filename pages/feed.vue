@@ -1,72 +1,118 @@
 <template>
   <div>
-    <THeader title="Feed">
-      <TButton type="nav" icon="plus" to="/posts/-/edit" />
-    </THeader>
-    <TList
-      collection="posts"
-      :filter-default="{ place: currentCity }"
-      :filter-fields="postFilters"
-      sort-by="-createdAt"
-      list-wrapper="mt-4 grid grid-cols-1 md:grid-cols-2 gap-2"
-    >
-      <template v-slot:before>
-        <div class="grid grid-cols-2">
-          <WTeaser
-            :title="$t('teaser.partner.title')"
-            :description="$t('teaser.partner.description')"
-            :button="$t('teaser.partner.btn')"
-            url="/community"
-            class="flex-1"
-          />
-          <WTeaser
-            :title="$t('teaser.events.title')"
-            :description="$t('teaser.events.description')"
-            :button="$t('teaser.events.btn')"
-            url="/events"
-            class="flex-1"
-          />
+    <THeader :title="$t('feed.title')" />
+    <div class="border-b p-4 flex items-start">
+      <div class="w-10 flex-shrink-0">
+        <TAvatar photo size="md" :uid="uid" />
+      </div>
+      <div class="w-full">
+        <textarea
+          v-model="newMessage"
+          cols="30"
+          rows="2"
+          :placeholder="$t('feed.newMessage.input')"
+          class="w-full p-4 border text-sm"
+          @keyup.enter="send"
+        ></textarea>
+        <div class="flex justify-between">
+          <TInputSelectSmall v-model="postType" :options="postTypeList" />
+          <TButton @click="send" :title="$t('feed.newMessage.intent')">{{
+            $t('feed.newMessage.submit')
+          }}</TButton>
         </div>
-      </template>
-      <template v-slot:item="{ item }">
-        <router-link :to="`/posts/${item.id}`" class="hover:opacity-75">
-          <TSharePreviewPost
-            type="Post"
-            collection="posts"
-            :username="item.createdByUsername"
-            :title="item.title"
-            :photo="item.cover"
-            :styles="item.styles"
-            align="center"
-            size="sm"
-            :likes="item.savedByCount"
-          />
-        </router-link>
-      </template>
-    </TList>
+      </div>
+    </div>
+
+    <div class="border-b p-4 flex">
+      <TInputSelect v-model="filterType" :options="filterTypeList" />
+    </div>
+
+    <TPostList v-bind="filter" />
   </div>
 </template>
 
 <script>
-import { postFilters } from '~/use/posts'
-import { useCities } from '~/use/cities'
+import { computed, ref } from 'vue-demi'
 import { useAuth } from '~/use/auth'
+import { useCities } from '~/use/cities'
+import { useDoc } from '~/use/doc'
+import { useApp } from '~/use/app'
+import { getUrlFromText } from '~/utils'
+import { usePosts } from '~/use/posts'
 
 export default {
-  name: 'PostsIndex',
   setup() {
+    const { uid, username } = useAuth()
     const { currentCity } = useCities()
-    const { uid } = useAuth()
+    const { getPlace } = useApp()
+    const newMessage = ref('')
+    const postType = ref('')
+    const { postTypeList, filterTypeList } = usePosts()
+
+    const filterType = ref('Newest')
+    const { create } = useDoc('posts')
+
+    const filter = computed(() => {
+      const map = {
+        Newest: { orderBy: 'createdAt' },
+        Hot: { orderBy: 'watch.count' },
+        Popular: { orderBy: 'star.count' },
+        Unpopular: { orderBy: 'hide.count' },
+        Watching: { filter: { [`watch.list.${username.value}`]: true } },
+        Starred: { filter: { [`star.list.${username.value}`]: true } },
+        Archived: { filter: { [`hide.list.${username.value}`]: true } },
+        Authored: {
+          orderBy: 'createdAt',
+          filter: { username: username.value },
+        },
+      }
+
+      return map[filterType.value]
+    })
+
+    const send = () => {
+      let description = newMessage.value
+
+      if (!description) {
+        return
+      }
+
+      const url = getUrlFromText(description)
+      description = description.replace(url, '').trim()
+
+      const region = getPlace(currentCity.value)
+
+      newMessage.value = ''
+
+      const post = {
+        region,
+        description,
+        type: postType.value,
+        url,
+        commentsCount: 0,
+        commentsLast: null,
+        watch: {
+          count: 1,
+          list: {
+            [username.value]: true,
+          },
+        },
+        viewsCount: 0,
+      }
+
+      create(post)
+    }
 
     return {
-      postFilters,
       currentCity,
       uid,
-    }
-  },
-  head() {
-    return {
-      title: 'WeDance Feed',
+      newMessage,
+      send,
+      filterType,
+      filter,
+      postType,
+      filterTypeList,
+      postTypeList,
     }
   },
 }

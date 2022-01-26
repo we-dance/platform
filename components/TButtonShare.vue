@@ -168,8 +168,10 @@ export default {
 
         this.downloadUrl = result.data.url
 
+        const collection = this.collection === 'profiles' ? 'profiles' : 'posts'
+
         await this.$fire.firestore
-          .collection(this.collection)
+          .collection(collection)
           .doc(this.id)
           .update({ socialCover: this.downloadUrl })
       } catch (e) {

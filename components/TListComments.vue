@@ -10,7 +10,7 @@
     </template>
 
     <template v-slot:default="{ item }">
-      <TCardComment :post-id="postId" :item="item" class="mb-4" />
+      <TCardComment :post-id="postId" :item="item" />
     </template>
   </TCardList>
 </template>

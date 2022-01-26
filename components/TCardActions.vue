@@ -1,6 +1,11 @@
 <template>
   <div>
-    <TButton :type="type" @click="isReportShown = true">Report</TButton>
+    <TButton
+      :type="type"
+      icon="fire"
+      label="Report"
+      @click="isReportShown = true"
+    />
     <TPopup v-if="isReportShown" title="Report" @close="isReportShown = false">
       <div class="p-4">
         <TField

@@ -2,7 +2,13 @@
   <nav
     class="p-4 flex flex-col space-y-2 text-dark h-screen overflow-y-scroll sticky top-0 border-r"
   >
-    <TButton to="/" icon="logo-horizontal-dark" class="mb-8" type="void" />
+    <TButton
+      allow-guests
+      to="/"
+      icon="logo-horizontal-dark"
+      class="mb-8"
+      type="void"
+    />
 
     <template v-if="uid">
       <TButton
@@ -11,35 +17,34 @@
         :label="cityName || $t('cities.choose')"
         type="nav"
       />
-      <template v-if="cityName">
-        <TButton to="/feed" icon="news" :label="$t('posts.title')" type="nav" />
-        <TButton
-          to="/community"
-          icon="people"
-          :label="$t('profiles.title')"
-          type="nav"
-        />
-        <TButton
-          to="/events"
-          icon="calendar"
-          :label="$t('events.title')"
-          type="nav"
-        />
-      </template>
+      <TButton to="/feed" icon="news" :label="$t('posts.title')" type="nav" />
+      <TButton to="/events" icon="calendar" label="Calendar" type="nav" />
+      <TButton
+        to="/community"
+        icon="people"
+        :label="$t('profiles.title')"
+        type="nav"
+      />
       <TButton to="/chat" icon="chat" :label="$t('chat.title')" type="nav" />
       <TButton :to="`/${username}`" type="nav">
         <TProfilePhoto size="xs" :uid="uid" class="mr-1" />
         <span>{{ $t('myprofile.title') }}</span>
       </TButton>
       <TButton to="/settings" type="nav" :label="$t('settings.title')" />
-      <TButton to="/signout" type="nav" :label="$t('signout')" />
+      <TButton to="/signout" type="nav" :label="$t('auth.signout')" />
     </template>
     <template v-else>
-      <TButton to="/signin" type="nav" :label="$t('signin')" />
       <TButton
+        allow-guests
+        to="/signin"
+        type="nav"
+        :label="$t('auth.signin')"
+      />
+      <TButton
+        allow-guests
         to="/register"
         type="nav"
-        :label="$t('signup')"
+        :label="$t('auth.signup')"
         class="bg-primary border-none text-white hover:bg-dark"
       />
     </template>

@@ -5,6 +5,8 @@
 </template>
 
 <script>
+import { getYoutubeId } from '~/utils'
+
 export default {
   props: {
     url: {
@@ -18,9 +20,7 @@ export default {
         return ''
       }
 
-      const regExp = /^.*((youtu.be\/)|(v\/)|(\/u\/\w\/)|(embed\/)|(watch\?))\??v?=?([^#&?]*).*/
-      const match = this.url.match(regExp)
-      const videoId = match && match[7].length === 11 ? match[7] : ''
+      const videoId = getYoutubeId(this.url)
 
       return `https://www.youtube.com/embed/${videoId}`
     },

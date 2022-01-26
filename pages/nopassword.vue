@@ -38,7 +38,7 @@
         </i18n>
       </div>
       <div class="mt-4 flex justify-end">
-        <TButton type="primary" @click="submit">
+        <TButton allow-guests type="primary" @click="submit">
           {{ $t('nopassword.submit') }}
         </TButton>
       </div>
@@ -116,8 +116,7 @@ export default {
       ls.remove('target')
 
       if (!target) {
-        const page = this.profile?.username || 'onboarding'
-        target = '/' + page
+        target = '/feed'
       }
 
       this.$router.push(target)
