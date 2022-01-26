@@ -5,14 +5,14 @@
       icon="people"
       :to="`/${collection}/${item.id}/dashboard`"
       class="hover:text-blue-500 mr-2"
-      label="Dashboard"
+      :label="$('dashboard.label')"
     />
     <TButton
       v-if="edit"
       icon="edit"
       :to="`/${collection}/${item.id}/edit`"
       class="hover:text-blue-500"
-      label="Edit"
+      :label="$t('edit.label')"
     />
     <slot />
   </div>

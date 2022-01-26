@@ -1,116 +1,174 @@
-hero.title: ¿Te gusta bailar?
-hero.subtitle: Nos ayudamos mutuamente a encontrar eventos de baile interesantes
-  y parejas de baile.
-signin: Ingresar
-signup: Registrarse
-signout: Cerrar sesión
-events.add: Añadir
-posts.add: Añadir
-profiles.add: Añadir
-myprofile.events.add: Añadir evento
-myprofile.posts.add: Escribir una publicación
-posts.title: Comentario
-profiles.title: Comunidad
-events.title: Eventos
-event.type: Tipo
-chat.title: Conversaciones
-cities.choose: Selecciona una ciudad
-myprofile.title: Mi perfil
-settings.title: Configuraciones
-city.anywhere: En cualquier sitio
-city.change: Cambiar de ciudad
-role.label: Papel
-sort.popular: Popular
-sort.newest: Nuevo
-style.label: Estilo
-profile.username: Nombre de usuario
-account.email: Email
-account.password: Contraseña
-account.name: Nombre completo
-account.phone: Teléfono
-account.newsletter: ¿Qué tipo de actualización le gustaría recibir semanalmente?
-profile.community: Yo bailo en
+---
+hero:
+  title: '¿Te gusta bailar?'
+  subtitle: Nos ayudamos mutuamente a encontrar eventos de baile interesantes y parejas de baile.
+auth:
+  signin: Ingresar
+  signup: Registrarse
+  signout: Cerrar sesión
+events:
+  add: Añadir
+  title: Eventos
+  list:
+    empty: No events found. Would you like to add one?
+  view:
+    list: See Photos
+    covers: See list
+  filter:
+    type: Type
+    style: Estilo
+posts:
+  add: Añadir
+  title: Comentario
+profiles:
+  add: Añadir
+  title: Comunidad
+myprofile:
+  events:
+    add: Añadir evento
+  posts:
+    add: Escribir una publicación
+  title: Mi perfil
+chat:
+  title: Conversaciones
+  welcome: Inicie una conversación agradable.
+  with: Conversa con {username}
+  dateDiff: "hace {diff}"
+cities:
+  choose: Selecciona una ciudad
+settings:
+  title: Configuraciones
+  account:
+    title: Cuenta
+    description: Esta información se utilizará para notificaciones y compras. Se compartirá con proveedores de servicios o vendedores solo con su consentimiento.
+    changepassword: Cambia la contraseña
+    delete: Borrar cuenta
+  profile:
+    title: Perfil
+    description: '¿Qué quieres que otros bailarines sepan de ti? Ese es un lugar para compartir tu pasión por la danza. Preséntate, ¡no seas tímido!'
+  contacts:
+    title: Contactos
+    description: Esta información estará disponible públicamente. Comparta sus contactos solo si desea que los miembros se comuniquen con usted. También es un buen lugar para compartir sus redes sociales y llamar la atención.
+city:
+  anywhere: En cualquier sitio
+  change: Cambiar de ciudad
+role:
+  label: Papel
+profile:
+  username: Nombre de usuario
+  community: Yo bailo en
+  type: Tipo
+  name: Nombre
+  bio: Rompecabezas
+  hometown: Pueblo natal
+  birthday: Cumpleaños
+  gender: Género
+  styles: Tus estilos de baile y tu nivel
+  style: Estilos de baile
+  story: Descripción
+  languages: Tus idiomas
+  skills: Habilidades para no bailar
+  days: Dias
+  topics: '¿Qué temas de baile te interesan?'
+  teacher: Estas enseñando
+  partner: '¿Buscas pareja de baile?'
+  height: Tu altura (cm)
+  weight: Tu peso (kg)
+  partnerBio: Sobre tu pareja
+  objectives: Objetivos
+  place: '¿Dónde nos vemos?'
+  visibility: Visibilidad
+  photo: Foto
+account:
+  email: Email
+  password: Contraseña
+  name: Nombre completo
+  phone: Teléfono
+  newsletter: '¿Qué tipo de actualización le gustaría recibir semanalmente?'
 agreement: Al iniciar sesión, acepta las {terms} y la {privacy}.
 terms: Términos de servicio
 privacy: Política de privacidad
-register.login: Iniciar sesión
-register.submit: Registrarse
-signin.register: Crear una cuenta
-signin.nopassword: Se te olvidó tu contraseña
-nopassword.signin: Tengo una contraseña
-nopassword.google: Inicia sesión con Google
-nopassword.submit: Envía un enlace mágico
-signin.submit: Iniciar sesión
-settings.account.title: Cuenta
-settings.account.description: Esta información se utilizará para notificaciones
-  y compras. Se compartirá con proveedores de servicios o vendedores solo con su
-  consentimiento.
-settings.profile.title: Perfil
-settings.profile.description: ¿Qué quieres que otros bailarines sepan de ti? Ese
-  es un lugar para compartir tu pasión por la danza. Preséntate, ¡no seas
-  tímido!
-settings.contacts.title: Contactos
-settings.contacts.description: Esta información estará disponible públicamente.
-  Comparta sus contactos solo si desea que los miembros se comuniquen con usted.
-  También es un buen lugar para compartir sus redes sociales y llamar la
-  atención.
-settings.account.changepassword: Cambia la contraseña
-settings.account.delete: Borrar cuenta
-contacts.email: Email
-contacts.website: Sitio web
+register:
+  login: Iniciar sesión
+  submit: Registrarse
+signin:
+  register: Crear una cuenta
+  nopassword: Se te olvidó tu contraseña
+  submit: Iniciar sesión
+nopassword:
+  signin: Tengo una contraseña
+  google: Inicia sesión con Google
+  submit: Envía un enlace mágico
+contacts:
+  email: Email
+  website: Sitio web
 save: Salvar
-profile.type: Tipo
-profile.name: Nombre
-profile.bio: Rompecabezas
-profile.hometown: Pueblo natal
-profile.birthday: Cumpleaños
-profile.gender: Género
-profile.styles: Tus estilos de baile y tu nivel
-profile.style: Estilos de baile
-profile.story: Descripción
-profile.languages: Tus idiomas
-profile.skills: Habilidades para no bailar
-profile.days: Dias
-profile.topics: ¿Qué temas de baile te interesan?
-profile.teacher: Estas enseñando
-profile.partner: ¿Buscas pareja de baile?
-profile.height: Tu altura (cm)
-profile.weight: Tu peso (kg)
-profile.partnerBio: Sobre tu pareja
-profile.objectives: Objetivos
-profile.place: ¿Dónde nos vemos?
-profile.visibility: Visibilidad
-profile.photo: Foto
-teaser.partner.title: ¿Necesitas un socio?
-teaser.partner.description: Bailarines de todo el mundo crean sus perfiles para encontrar parejas de baile
-teaser.partner.btn: Ver comunidad
-teaser.events.title: Donde bailar
-teaser.events.description: Todos los cursos de baile, fiestas y festivales en un solo lugar
-teaser.events.btn: Ver eventos
-teaser.profile.title: Publica tu perfil
-teaser.profile.description: para que otros puedan contactarte
-teaser.profile.btn: Únete gratis
-teaser.allevents.title: Eventos privados
-teaser.allevents.description: Hágase miembro de WeDance Community para ver más
-teaser.allevents.btn: Únete ahora
-teaser.chat.title: Pregunte a los lugareños
-teaser.chat.description: Tenemos un chat de baile de Telegram en cada ciudad.
-  Únase al chat de su ciudad para ayudar a los bailarines que viajan, invite a
-  sus amigos de baile. ¡Construyamos WeDance juntos!
-teaser.chat.btn: Únete al chat
-teaser.involve.title: Necesitamos tu ayuda
-teaser.involve.description: Somos una comunidad internacional de danza sin fines
-  de lucro. Queremos que vayas a cualquier ciudad de cualquier país y encuentres
-  eventos de danza y bailarines. Todo comienza con la comunidad local.
-teaser.involve.btn: Involucrarse
-share.title: Compartir
-share.copy: Copiar link
-footer.about: Sobre nosotros
-footer.support: Apoyo
-footer.privacy: Intimidad
-footer.terms: Condiciones
-footer.coc: Código de conducta
-footer.faq: Preguntas más frecuentes
-chat.welcome: Inicie una conversación agradable.
-chat.with: Conversa con {username}
-chat.dateDiff: hace {diff}
+teaser:
+  partner:
+    title: '¿Necesitas un socio?'
+    description: Bailarines de todo el mundo crean sus perfiles para encontrar parejas de baile
+    btn: Ver comunidad
+  events:
+    title: Donde bailar
+    description: Todos los cursos de baile, fiestas y festivales en un solo lugar
+    btn: Ver eventos
+  profile:
+    title: Publica tu perfil
+    description: para que otros puedan contactarte
+    btn: Únete gratis
+  allevents:
+    title: Eventos privados
+    description: Hágase miembro de WeDance Community para ver más
+    btn: Únete ahora
+  chat:
+    title: Pregunte a los lugareños
+    description: "Tenemos un chat de baile de Telegram en cada ciudad. Únase al chat de su ciudad para ayudar a los bailarines que viajan, invite a sus amigos de baile. ¡Construyamos WeDance juntos!"
+    btn: Únete al chat
+  involve:
+    title: Necesitamos tu ayuda
+    description: Somos una comunidad internacional de danza sin fines de lucro. Queremos que vayas a cualquier ciudad de cualquier país y encuentres eventos de danza y bailarines. Todo comienza con la comunidad local.
+    btn: Involucrarse
+share:
+  title: Compartir
+  copy: Copiar link
+footer:
+  about: Sobre nosotros
+  support: Apoyo
+  privacy: Intimidad
+  terms: Condiciones
+  coc: Código de conducta
+  faq: Preguntas más frecuentes
+feed:
+  title: Comentario
+  newMessage:
+    input: Ask or share something about dance...
+    intent: post a message
+    submit: Send
+  category: Choose category
+  needPartner: Looking for partner
+  needEvents: Looking for events
+  needInstructor: Looking for instructor
+  trip: Offering trip
+  event: Event
+  artist: Artist
+  venue: Venue
+  app: App
+  guide: Guide / How To
+  inspiration: Inspiration
+  question: Question
+  poll: Poll
+  post: Post
+comments:
+  empty: There are no comments yet.
+edit:
+  label: Edit
+dashboard:
+  label: Dashboard
+sort:
+  popular: Popular
+  newest: Nuevo
+  hot: Hot
+  watching: Watching
+  starred: Starred
+  archived: Archived
+  yours: Yours

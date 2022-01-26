@@ -31,15 +31,20 @@
         <span>{{ $t('myprofile.title') }}</span>
       </TButton>
       <TButton to="/settings" type="nav" :label="$t('settings.title')" />
-      <TButton to="/signout" type="nav" :label="$t('signout')" />
+      <TButton to="/signout" type="nav" :label="$t('auth.signout')" />
     </template>
     <template v-else>
-      <TButton allow-guests to="/signin" type="nav" :label="$t('signin')" />
+      <TButton
+        allow-guests
+        to="/signin"
+        type="nav"
+        :label="$t('auth.signin')"
+      />
       <TButton
         allow-guests
         to="/register"
         type="nav"
-        :label="$t('signup')"
+        :label="$t('auth.signup')"
         class="bg-primary border-none text-white hover:bg-dark"
       />
     </template>
