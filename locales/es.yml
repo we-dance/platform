@@ -4,26 +4,30 @@ hero:
   subtitle: Nos ayudamos mutuamente a encontrar eventos de baile interesantes y parejas de baile.
   moto: Un contacto de baile en una ciudad hace la diferencia.
   join: Únete a la comunidad
-
 features:
-  eventCalendar: Calendarios de Eventos
-  eventCalendarText: Encuentra talleres de baile, cursos, eventos sociales y fiestas. Llenamos el calendario de eventos todos juntos como comunidad. Cualquiera puede compartir.
-  dancePartners: Compañeros de Baile
-  dancePartnersText: Encuentra un compañero de baile para tu estilo de Baile y déjalos encontrarte.
-  cityChats: Conversaciones Locales
-  cityChatsText: Encuentra conversaciones de baile en cualquier ciudad. Únete a tu conversación local e invita a tus amigos a ayudar a nuevos bailarines en la ciudad. Piensa globalmente, actúa localmente.
-  danceTravel: Viaja y Baila
-  danceTravelText: Encuentra festival de baile internacionales y congresos. Comparte un viaje, un apartamento y encuentra un compañero para experimentar una nueva ciudad.
-  volunteer: Voluntariado
-  volunteerText: Nosotros construimos una comunidad donde todos se involucran con un pensamiento “Puedo ayudar”, así que si necesitas ayuda puedes contar con eso. Somos una gran familia alrededor del mundo. Nos ayudamos unos a otros.
+  calendar:
+    title: Calendarios de Eventos
+    description: Encuentra talleres de baile, cursos, eventos sociales y fiestas. Llenamos el calendario de eventos todos juntos como comunidad. Cualquiera puede compartir.
+  dancePartners:
+    title: Compañeros de Baile
+    description: Encuentra un compañero de baile para tu estilo de Baile y déjalos encontrarte.
+  cityChats:
+    title: Conversaciones Locales
+    description: Encuentra conversaciones de baile en cualquier ciudad. Únete a tu conversación local e invita a tus amigos a ayudar a nuevos bailarines en la ciudad. Piensa globalmente, actúa localmente.
+  danceTravel:
+    title: Viaja y Baila
+    description: Encuentra festival de baile internacionales y congresos. Comparte un viaje, un apartamento y encuentra un compañero para experimentar una nueva ciudad.
+  volunteer:
+    title: Voluntariado
+    description: Nosotros construimos una comunidad donde todos se involucran con un pensamiento “Puedo ayudar”, así que si necesitas ayuda puedes contar con eso. Somos una gran familia alrededor del mundo. Nos ayudamos unos a otros.
   getInvolved: Involúcrate
-  interviews: Entrevistas
-  interviewsText: Explora mas sobre tus artistas de baile favoritos y utiliza sus consejos y trucos.
-  listenToPodcast: Escucha un podcast
-
+  interviews:
+    title: Entrevistas
+    description: Explora mas sobre tus artistas de baile favoritos y utiliza sus consejos y trucos.
+listenToPodcast: Escucha un podcast
 international:
-  internationalCommunity: Comunidad Internacional
-  internationalCommunityText: Pubblichiamo regolarmente interviste, annunci di eventi e presentiamo nuovi membri ai nostri social network.
+  title: Comunidad Internacional
+  description: Pubblichiamo regolarmente interviste, annunci di eventi e presentiamo nuovi membri ai nostri social network.
 
 ## End of index text ##
 

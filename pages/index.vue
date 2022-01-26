@@ -106,10 +106,10 @@
               </div>
             </div>
             <h3 class="text-2xl font-extrabold text-center">
-              {{ $t('features.eventCalendar') }}
+              {{ $t('features.calendar.title') }}
             </h3>
             <p class="text-center">
-              {{ $t('features.eventCalendarText') }}
+              {{ $t('features.calendar.description') }}
             </p>
           </div>
           <div class="py-8 space-y-1 bg-light">
@@ -121,10 +121,10 @@
               </div>
             </div>
             <h3 class="text-2xl font-extrabold text-center">
-              {{ $t('features.dancePartners') }}
+              {{ $t('features.dancePartners.title') }}
             </h3>
             <p class="text-center">
-              {{ $t('features.dancePartnersText') }}
+              {{ $t('features.dancePartners.description') }}
             </p>
           </div>
           <div class="py-8 space-y-1 bg-light">
@@ -136,10 +136,10 @@
               </div>
             </div>
             <h3 class="text-2xl font-extrabold text-center">
-              {{ $t('features.cityChats') }}
+              {{ $t('features.cityChats.title') }}
             </h3>
             <p class="text-center">
-              {{ $t('features.cityChatsText') }}
+              {{ $t('features.cityChats.description') }}
             </p>
           </div>
           <div class="py-8 space-y-1 bg-light">
@@ -151,10 +151,10 @@
               </div>
             </div>
             <h3 class="text-2xl font-extrabold text-center">
-              {{ $t('features.danceTravel') }}
+              {{ $t('features.danceTravel.title') }}
             </h3>
             <p class="text-center">
-              {{ $t('features.danceTravelText') }}
+              {{ $t('features.danceTravel.description') }}
             </p>
           </div>
           <div class="py-8 space-y-1 bg-light">
@@ -166,10 +166,10 @@
               </div>
             </div>
             <h3 class="text-2xl font-extrabold text-center">
-              {{ $t('features.volunteer') }}
+              {{ $t('features.volunteer.title') }}
             </h3>
             <p class="text-center">
-              {{ $t('features.volunteerText') }}
+              {{ $t('features.volunteer.description') }}<br />
               <router-link
                 to="/get-involved"
                 class="underline font-bold hover:no-underline"
@@ -186,15 +186,15 @@
               </div>
             </div>
             <h3 class="text-2xl font-extrabold text-center">
-              {{ $t('features.interviews') }}
+              {{ $t('features.interviews.title') }}
             </h3>
             <p class="text-center">
-              {{ $t('features.interviewsText') }}<br />
+              {{ $t('features.interviews.description') }}<br />
               <a
                 href="https://anchor.fm/wedance"
                 target="_blank"
                 class="underline font-bold hover:no-underline"
-                >{{ $t('features.listenToPodcast') }}</a
+                >{{ $t('listenToPodcast') }}</a
               >
             </p>
           </div>
@@ -204,10 +204,10 @@
         <div class="max-w-md py-4 space-y-1">
           <div class="flex justify-center"></div>
           <h3 class="text-2xl font-extrabold text-center">
-            {{ $t('international.internationalCommunity') }}
+            {{ $t('international.title') }}
           </h3>
           <p class="text-center">
-            {{ $t('international.internationalCommunityText') }}
+            {{ $t('international.description') }}
           </p>
           <div class="p-4 flex flex-wrap gap-2 items-center justify-center">
             <TButton

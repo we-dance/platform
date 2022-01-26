@@ -5,24 +5,29 @@ hero:
   moto: Un contatto di danza in una città fa la differenza.
   join: Unisciti alla Comunità
 features:
-  eventCalendar: Calendari degli Eventi
-  eventCalendarText: Trova laboratori di danza, corsi, eventi sociali e feste. Riempiamo il calendario degli eventi tutti insieme come comunità. Chiunque può condividere.
-  dancePartners: Compagni di Ballo
-  dancePartnersText: Trova un compagno di ballo per il tuo stile di ballo e lascia che ti trovino.
-  cityChats: Conversazioni Locali
-  cityChatsText: Trova discorsi di ballo in qualsiasi città. Unisciti alla tua conversazione locale e invita i tuoi amici ad aiutare i nuovi ballerini in città. Pensa globalmente. agisci localmente.
-  danceTravel: Viaggiare e Ballare
-  danceTravelText: Trova festival e congressi internazionali di danza. Condividi un viaggio, un appartamento e trova un partner per vivere una nuova città.
-  volunteer: Volontariato
-  volunteerText: Costruiamo una comunità in cui tutti vengono coinvolti con un pensiero "Posso aiutare", quindi se hai bisogno di aiuto puoi contare su quello. Siamo una grande famiglia in tutto il mondo. Ci aiutiamo a vicenda.
+  calendar:
+    title: Calendari degli Eventi
+    description: Trova laboratori di danza, corsi, eventi sociali e feste. Riempiamo il calendario degli eventi tutti insieme come comunità. Chiunque può condividere.
+  dancePartners:
+    title: Compagni di Ballo
+    description: Trova un compagno di ballo per il tuo stile di ballo e lascia che ti trovino.
+  cityChats:
+    title: Conversazioni Locali
+    description: Trova discorsi di ballo in qualsiasi città. Unisciti alla tua conversazione locale e invita i tuoi amici ad aiutare i nuovi ballerini in città. Pensa globalmente. agisci localmente.
+  danceTravel:
+    title: Viaggiare e Ballare
+    description: Trova festival e congressi internazionali di danza. Condividi un viaggio, un appartamento e trova un partner per vivere una nuova città.
+  volunteer:
+    title: Volontariato
+    description: Costruiamo una comunità in cui tutti vengono coinvolti con un pensiero "Posso aiutare", quindi se hai bisogno di aiuto puoi contare su quello. Siamo una grande famiglia in tutto il mondo. Ci aiutiamo a vicenda.
   getInvolved: Mettersi in Gioco
-  interviews: Interviste
-  interviewsText: Scopri di più sui tuoi artisti di ballo preferiti e usa i loro suggerimenti e trucchi.
-  listenToPodcast: Ascolta un Podcast
-
+  interviews:
+    title: Interviste
+    description: Scopri di più sui tuoi artisti di ballo preferiti e usa i loro suggerimenti e trucchi.
+listenToPodcast: Ascolta un Podcast
 international:
-  internationalCommunity: Comunità Internazionale
-  internationalCommunityText: We regularly post interviews, event announcements and introduce new members on our social media.
+  title: Comunità Internazionale
+  description: We regularly post interviews, event announcements and introduce new members on our social media.
 
 ## End of index text ##
 
