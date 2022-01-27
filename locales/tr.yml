@@ -1,7 +1,36 @@
 ---
 hero:
-  title: Dans etmeyi sever misin?
-  subtitle: İlginç dans etkinlikleri ve dans partnerleri bulma konusunda birbirimize yardımcı oluyoruz.
+  title: Do you like dancing?
+  subtitle: We help each other find interesting dance events and dance partners.
+  moto: Even one dance contact in a city makes a difference.
+  join: Join the community
+features:
+  calendar:
+    title: Event Calendar
+    description: Find dance workshops, courses, socials and parties. We fill event calendar all together as a community. Everyone can share.
+  dancePartners:
+    title: Dance partners
+    description: Find a dance partner for your dance style and let them find you.
+  cityChats:
+    title: City Chats
+    description: Find dance chat in any city. Join your city chat and invite your friends to help new dancers in the city. Think globally, act locally.
+  danceTravel:
+    title: Dance Travel
+    description: Find international dance festivals and congresses. Share a ride, an appartment and find a buddy to experience a new city together.
+  volunteer:
+    title: Volunteer
+    description: We build a community, where everyone enters with mindset “I can help”, so whenever you need help you can count on it. We are one big family worldwide. We help each other.
+  getInvolved: Get Involved
+  interviews:
+    title: Interviews
+    description: Explore more about you favorite dance artists and catch their tips & tricks.
+listenToPodcast: Listen to Podcast
+international:
+  title: International Community
+  description: We regularly post interviews, event announcements and introduce new members on our social media.
+
+## End of index text ##
+
 auth:
   signin: Oturum aç
   signup: Kayıt ol
@@ -33,7 +62,7 @@ chat:
   title: Konuşma
   welcome: Sohbete güzel bir şeyle başlayın.
   with: '{username} ile sohbet et.'
-  dateDiff: "{diff} önce"
+  dateDiff: '{diff} önce'
 cities:
   choose: Bir şehir seçin
 settings:
@@ -122,7 +151,7 @@ teaser:
     btn: Şimdi Katıl
   chat:
     title: Sohbet ediyor muyuz?
-    description: "Her şehirde dans sohbetleri var"
+    description: 'Her şehirde dans sohbetleri var'
     btn: '{city} Sohbetine Katıl'
   involve:
     title: Yardımına ihtiyacımız var

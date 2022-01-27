@@ -1,7 +1,35 @@
 ---
 hero:
-  title: Aimez-vous danser?
-  subtitle: Nous nous aidons mutuellement à trouver des événements de danse intéressants et des partenaires de danse.
+  title: Do you like dancing?
+  subtitle: We help each other find interesting dance events and dance partners.
+  moto: Even one dance contact in a city makes a difference.
+  join: Join the community
+features:
+  calendar:
+    title: Event Calendar
+    description: Find dance workshops, courses, socials and parties. We fill event calendar all together as a community. Everyone can share.
+  dancePartners:
+    title: Dance partners
+    description: Find a dance partner for your dance style and let them find you.
+  cityChats:
+    title: City Chats
+    description: Find dance chat in any city. Join your city chat and invite your friends to help new dancers in the city. Think globally, act locally.
+  danceTravel:
+    title: Dance Travel
+    description: Find international dance festivals and congresses. Share a ride, an appartment and find a buddy to experience a new city together.
+  volunteer:
+    title: Volunteer
+    description: We build a community, where everyone enters with mindset “I can help”, so whenever you need help you can count on it. We are one big family worldwide. We help each other.
+  getInvolved: Get Involved
+  interviews:
+    title: Interviews
+    description: Explore more about you favorite dance artists and catch their tips & tricks.
+listenToPodcast: Listen to Podcast
+international:
+  title: International Community
+  description: We regularly post interviews, event announcements and introduce new members on our social media.
+
+## End of index text ##
 auth:
   signin: Se connecter
   signup: S'inscrire
@@ -33,7 +61,7 @@ chat:
   title: Conversation
   welcome: Commencez la conversation avec quelque chose de gentil.
   with: Discutez avec {username}
-  dateDiff: "il y a {diff}"
+  dateDiff: 'il y a {diff}'
 cities:
   choose: Choisissez une ville
 settings:
@@ -122,7 +150,7 @@ teaser:
     btn: Adhérer maintenant
   chat:
     title: On bavarde?
-    description: "Nous avons des discussions de danse dans chaque ville"
+    description: 'Nous avons des discussions de danse dans chaque ville'
     btn: Rejoignez le chat de {city}
   involve:
     title: Nous avons besoin de votre aide

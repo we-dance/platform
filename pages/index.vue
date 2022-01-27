@@ -40,7 +40,7 @@
               <p
                 class="mt-2 max-w-lg mx-auto text-center sm:max-w-3xl text-white"
               >
-                Even one dance contact in a city makes a difference
+                {{ $t('hero.moto') }}
               </p>
 
               <div class="max-w-lg mx-auto">
@@ -105,10 +105,11 @@
                 <img src="/img/event-calendar.svg" alt="Event Calendar" />
               </div>
             </div>
-            <h3 class="text-2xl font-extrabold text-center">Event Calendar</h3>
+            <h3 class="text-2xl font-extrabold text-center">
+              {{ $t('features.calendar.title') }}
+            </h3>
             <p class="text-center">
-              Find dance workshops, courses, socials and parties. We fill event
-              calendar all together as a community. Everyone can share.
+              {{ $t('features.calendar.description') }}
             </p>
           </div>
           <div class="py-8 space-y-1 bg-light">
@@ -119,9 +120,11 @@
                 <img src="/img/dance-partners.svg" alt="Dance Partners" />
               </div>
             </div>
-            <h3 class="text-2xl font-extrabold text-center">Dance Partners</h3>
+            <h3 class="text-2xl font-extrabold text-center">
+              {{ $t('features.dancePartners.title') }}
+            </h3>
             <p class="text-center">
-              Find a dance partner for your dance style and let them find you.
+              {{ $t('features.dancePartners.description') }}
             </p>
           </div>
           <div class="py-8 space-y-1 bg-light">
@@ -132,11 +135,11 @@
                 <img src="/img/city-chats.svg" alt="City Chats" />
               </div>
             </div>
-            <h3 class="text-2xl font-extrabold text-center">City Chats</h3>
+            <h3 class="text-2xl font-extrabold text-center">
+              {{ $t('features.cityChats.title') }}
+            </h3>
             <p class="text-center">
-              Find dance chat in any city. Join your city chat and invite your
-              friends to help new dancers in the city. Think globally, act
-              locally.
+              {{ $t('features.cityChats.description') }}
             </p>
           </div>
           <div class="py-8 space-y-1 bg-light">
@@ -147,10 +150,11 @@
                 <img src="/img/dance-travel.svg" alt="Dance Travel" />
               </div>
             </div>
-            <h3 class="text-2xl font-extrabold text-center">Dance Travel</h3>
+            <h3 class="text-2xl font-extrabold text-center">
+              {{ $t('features.danceTravel.title') }}
+            </h3>
             <p class="text-center">
-              Find international dance festivals and congresses. Share a ride,
-              an appartment and find a buddy to experience a new city together.
+              {{ $t('features.danceTravel.description') }}
             </p>
           </div>
           <div class="py-8 space-y-1 bg-light">
@@ -161,15 +165,15 @@
                 <img src="/img/volunteer.svg" alt="Volunteer" />
               </div>
             </div>
-            <h3 class="text-2xl font-extrabold text-center">Volunteer</h3>
+            <h3 class="text-2xl font-extrabold text-center">
+              {{ $t('features.volunteer.title') }}
+            </h3>
             <p class="text-center">
-              We build a community, where everyone enters with mindset “I can
-              help”, so whenever you need help you can count on it. We are one
-              big family worldwide. We help each other.<br />
+              {{ $t('features.volunteer.description') }}<br />
               <router-link
                 to="/get-involved"
                 class="underline font-bold hover:no-underline"
-                >Get Involved</router-link
+                >{{ $t('features.getInvolved') }}</router-link
               >
             </p>
           </div>
@@ -181,15 +185,16 @@
                 <img src="/img/interviews.svg" alt="Interviews" />
               </div>
             </div>
-            <h3 class="text-2xl font-extrabold text-center">Interviews</h3>
+            <h3 class="text-2xl font-extrabold text-center">
+              {{ $t('features.interviews.title') }}
+            </h3>
             <p class="text-center">
-              Explore more about you favorite dance artists and catch their tips
-              &amp; tricks.<br />
+              {{ $t('features.interviews.description') }}<br />
               <a
                 href="https://anchor.fm/wedance"
                 target="_blank"
                 class="underline font-bold hover:no-underline"
-                >Listen to Podcast</a
+                >{{ $t('listenToPodcast') }}</a
               >
             </p>
           </div>
