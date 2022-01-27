@@ -7,16 +7,14 @@
           type="context"
           icon="people"
           :to="`/events/${item.id}/dashboard`"
-          class="hover:text-blue-500 mr-2"
-          :label="$t('events.dashboard.label')"
+          :label="$t('eventView.dropdown.dashboard')"
         />
         <TButton
           v-if="can('edit', 'events', item)"
           type="context"
           icon="edit"
           :to="`/events/${item.id}/edit`"
-          class="hover:text-blue-500"
-          :label="$t('events.edit.label')"
+          :label="$t('eventView.dropdown.edit')"
         />
         <TCardActions
           :id="item.id"
@@ -33,7 +31,7 @@
           :url="$route.fullPath"
           :text="item.name"
           type="context"
-          :label="$t('events.share.label')"
+          :label="$t('eventView.dropdown.share')"
         />
       </TDropdown>
     </THeader>
@@ -89,7 +87,7 @@
           class="flex items-center justify-start w-full leading-tight border-b py-2 px-4"
         >
           <TIcon name="youtube" class="w-4 h-4 mr-4" />
-          <div>{{ $t('events.online') }}</div>
+          <div>{{ $t('eventView.online') }}</div>
         </div>
 
         <div
@@ -113,7 +111,7 @@
           class="flex items-center justify-start w-full leading-tight border-b py-2 px-4"
         >
           <TIcon name="lobby" class="w-4 h-4 mr-4" />
-          <div>{{ $t('events.organiser') }} {{ item.organiser }}</div>
+          <div>{{ $t('eventView.organiser') }} {{ item.organiser }}</div>
         </div>
       </div>
     </div>
@@ -125,19 +123,19 @@
         v-if="!uid"
         type="primary"
         @click="reservationPopup = 'reserve'"
-        >{{ $t('events.register.btn') }}</TButton
+        >{{ $t('eventView.reservation.guest') }}</TButton
       >
       <TButton
         v-else
         :type="uid && item.response === 'up' ? 'success' : 'secondary'"
         @click="reservationPopup = 'reserve'"
-        >{{ $t('events.going.btn') }}</TButton
+        >{{ $t('eventView.reservation.going') }}</TButton
       >
       <TButton
         v-if="uid"
         :type="uid && item.response === 'down' ? 'danger' : 'secondary'"
         @click="updateRsvp(item.id, 'events', 'down')"
-        >{{ $t('events.notgoing.btn') }}</TButton
+        >{{ $t('eventView.reservation.notGoing') }}</TButton
       >
     </div>
 
@@ -145,7 +143,7 @@
 
     <div v-if="item.venue && item.venue.map" class="p-4 bg-gray-100">
       <div class="font-bold text-sm mb-4 leading-none text-gray-700">
-        Venue Map
+        {{ $t('eventView.venueMap') }}
       </div>
       <img :src="item.venue.map" alt="Venue Map" class="mt-4" />
     </div>
@@ -153,14 +151,14 @@
     <TItemCreator :item="item" full class="mt-4" />
 
     <div v-if="item.facebook" class="mt-8 text-right text-sm">
-      <a :href="item.facebook" class="hover:underline text-gray-700"
-        >Event Source</a
-      >
+      <a :href="item.facebook" class="hover:underline text-gray-700">{{
+        $t('eventView.source')
+      }}</a>
     </div>
 
     <TPopup
       v-if="reservationPopup"
-      title="Register"
+      :title="$t('eventView.reservationPopup.title')"
       @close="reservationPopup = false"
     >
       <div class="max-w-md mx-auto py-4 max-h-screen overflow-y-scroll">
@@ -170,7 +168,9 @@
               v-model="account"
               allow-guests
               :fields="reservationFields"
-              :submit-label="$t('register')"
+              :submit-label="
+                $t('eventView.reservationPopup.reserve.submitLabel')
+              "
               class="mt-4 space-y-4"
               @save="reserve"
             >
@@ -178,7 +178,7 @@
                 <TButton
                   allow-guests
                   :to="`/signin?target=${this.$route.fullPath}`"
-                  :label="$t('login')"
+                  label="$t('eventView.reservationPopup.reserve.Label')"
                 />
               </template>
             </TForm>
@@ -186,23 +186,27 @@
         </div>
         <div v-if="reservationPopup === 'finish'" class="p-4">
           <template v-if="item.link">
-            <h2 class="font-bold mb-4">{{ $t('events.reservation.title') }}</h2>
+            <h2 class="font-bold mb-4">
+              {{ $t('eventView.reservationPopup.finish.title') }}
+            </h2>
             <TButton class="mt-4 mr-4" type="danger" :href="item.link">{{
-              $t('events.complete.btn')
+              $t('eventView.reservationPopup.finish.btn')
             }}</TButton>
           </template>
           <template v-else>
-            <h2 class="font-bold mb-4">{{ $t('events.reservation.title') }}</h2>
+            <h2 class="font-bold mb-4">
+              {{ $t('eventView.reservationPopup.finish.title') }}
+            </h2>
             <p v-if="uid">
-              {{ $t('events.reservation.description') }}
+              {{ $t('eventView.reservationPopup.finish.description') }}
             </p>
             <p v-else>
-              {{ $t('events.email.description') }}
+              {{ $t('eventView.reservationPopup.finish.reminder') }}
             </p>
             <div v-if="uid">
               <TButton
                 :href="calendarLink"
-                :label="$t('events.calendar.btn')"
+                :label="$t('eventView.reservationPopup.finish.calendar')"
                 class="mt-2"
               />
             </div>
