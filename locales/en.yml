@@ -16,6 +16,30 @@ events:
   filter:
     type: Type
     style: Style
+eventView:
+  dropdown:
+    dashboard: Dashboard
+    edit: Edit
+    share: Share
+  online: Online Event
+  reservation:
+    going: Going
+    notGoing: Not Going
+    guest: Register for event
+  reservationPopup:
+    title: Register
+    reserve:
+      submitLabel: Register
+      label: Login
+    finish:
+      title: Almost there
+      btn: Complete registration
+      description: See you soon! Don't forget to check-in by the organiser when you
+              come!
+      reminder: Check your email to finish creation of the WeDance profile.
+  organiser: Organised by
+  venueMap: Venue Map
+  source: Event Source
 posts:
   add: Add post
   title: Feed
