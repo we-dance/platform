@@ -37,6 +37,7 @@ eventView:
       description: See you soon! Don't forget to check-in by the organiser when you
               come!
       reminder: Check your email to finish creation of the WeDance profile.
+      calendar: Add to calendar
   organiser: Organised by
   venueMap: Venue Map
   source: Event Source
