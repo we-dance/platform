@@ -207,7 +207,7 @@
             <div v-if="uid">
               <TButton
                 :href="calendarLink"
-                label="Add to calendar"
+                :label="$t('eventView.reservationPopup.finish.calendar')"
                 class="mt-2"
               />
             </div>
