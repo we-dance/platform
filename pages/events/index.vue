@@ -39,7 +39,7 @@
     <div>
       <TLoader v-if="loading" />
       <div v-else-if="!count" class="p-4">
-        No events found. Would you like to add one?
+        {{ $t('events.list.empty') }}
       </div>
 
       <div
@@ -268,6 +268,7 @@ export default {
       uid,
       getDay,
       getDate,
+      getDateObect,
       startOfWeekString,
       endOfWeekString,
       activeFilter,
