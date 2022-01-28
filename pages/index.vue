@@ -79,7 +79,7 @@
                   allow-guests
                   type="primary"
                   to="/register"
-                  label="Join the community"
+                  :label="$t('hero.action')"
                 />
               </div>
 
@@ -102,7 +102,10 @@
               <div
                 class="flex items-center justify-center w-20 h-20 bg-white rounded-full "
               >
-                <img src="/img/event-calendar.svg" alt="Event Calendar" />
+                <img
+                  src="/img/event-calendar.svg"
+                  :alt="$t('features.calendar.title')"
+                />
               </div>
             </div>
             <h3 class="text-2xl font-extrabold text-center">
@@ -117,7 +120,10 @@
               <div
                 class="flex items-center justify-center w-20 h-20 bg-white rounded-full "
               >
-                <img src="/img/dance-partners.svg" alt="Dance Partners" />
+                <img
+                  src="/img/dance-partners.svg"
+                  :alt="$t('features.dancePartners.title')"
+                />
               </div>
             </div>
             <h3 class="text-2xl font-extrabold text-center">
@@ -132,7 +138,10 @@
               <div
                 class="flex items-center justify-center w-20 h-20 bg-white rounded-full "
               >
-                <img src="/img/city-chats.svg" alt="City Chats" />
+                <img
+                  src="/img/city-chats.svg"
+                  :alt="$t('features.cityChats.title')"
+                />
               </div>
             </div>
             <h3 class="text-2xl font-extrabold text-center">
@@ -147,7 +156,10 @@
               <div
                 class="flex items-center justify-center w-20 h-20 bg-white rounded-full "
               >
-                <img src="/img/dance-travel.svg" alt="Dance Travel" />
+                <img
+                  src="/img/dance-travel.svg"
+                  :alt="$t('features.danceTravel.title')"
+                />
               </div>
             </div>
             <h3 class="text-2xl font-extrabold text-center">
@@ -162,7 +174,10 @@
               <div
                 class="flex items-center justify-center w-20 h-20 bg-white rounded-full "
               >
-                <img src="/img/volunteer.svg" alt="Volunteer" />
+                <img
+                  src="/img/volunteer.svg"
+                  :alt="$t('features.volunteer.title')"
+                />
               </div>
             </div>
             <h3 class="text-2xl font-extrabold text-center">
@@ -173,7 +188,7 @@
               <router-link
                 to="/get-involved"
                 class="underline font-bold hover:no-underline"
-                >{{ $t('features.getInvolved') }}</router-link
+                >{{ $t('features.volunteer.action') }}</router-link
               >
             </p>
           </div>
@@ -194,7 +209,7 @@
                 href="https://anchor.fm/wedance"
                 target="_blank"
                 class="underline font-bold hover:no-underline"
-                >{{ $t('listenToPodcast') }}</a
+                >{{ $t('features.interviews.action') }}</a
               >
             </p>
           </div>
