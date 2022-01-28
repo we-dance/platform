@@ -19,17 +19,42 @@ events:
 posts:
   add: Add post
   title: Feed
+profile:
+  username:
+    label: Username
+    before: Use only letters, numbers, underscores and periods.
 profiles:
-  username: Username
   community: I dance in
   type: Type
-  name: Name
-  bio: Teaser
-  hometown: Hometown
+  name:
+    label: Name
+    before: If you want to remain anonym use your first name.
+  bio:
+    label: Teaser
+    before: Short introduction on top of your photo
+  hometown:
+    label: Hometown
+    before: Where were you born and raised?
   birthday: Birthday
   gender: Gender
   style: Dance styles
-  story: Description
+  story:
+    label: Description
+    before: Tell your dance story. You can also use [widgets](https://wedance.vip/markdown), including images and videos
+    tips: 'Pitch yourself: Who are you? What do you offer? What do you want?
+
+
+    Tips for effective pitch:
+
+    - Uncomplicated: It should be catchy and roll off the tongue
+
+    - Concise: It shouldn’t take more than a minute to say or read
+
+    - Unique: It reflects your skills, goals, and desires
+
+    - Storyline: It covers who you are, what you offer, and where you want to be
+
+    - Appealing: Your elevator pitch is essentially a persuasive sales pitch; the emphasis should be on what you offer'
   locales: Your languages
   skills: Non-dancing skills
   days: Days
@@ -45,7 +70,9 @@ profiles:
   photo: Photo
   add: Add profile
   title: Community
-  styles: Dances
+  styles:
+    label: Dance
+    tips: Mark up to 4 favorite dances that will be highlighted in your poster
   place: Your city
   permission: Do you want free promo?
   jobs: I can help with
@@ -114,28 +141,6 @@ profiles:
     birthday: We will show only your age'
     weight: Leave this field blank if you think it's irrelevant.
     partnerBio: 'What is important in your partner? Put it as a question, for example: Do you love dogs?'
-  tips:
-    styles: Mark up to 4 favorite dances that will be highlighted in your poster
-    story: 'Pitch yourself: Who are you? What do you offer? What do you want?
-
-
-    Tips for effective pitch:
-
-    - Uncomplicated: It should be catchy and roll off the tongue
-
-    - Concise: It shouldn’t take more than a minute to say or read
-
-    - Unique: It reflects your skills, goals, and desires
-
-    - Storyline: It covers who you are, what you offer, and where you want to be
-
-    - Appealing: Your elevator pitch is essentially a persuasive sales pitch; the emphasis should be on what you offer'
-  before:
-    username: Use only letters, numbers, underscores and periods.
-    hometown: Where were you born and raised?
-    name: If you want to remain anonym use your first name.
-    bio: Short introduction on top of your photo
-    story: Tell your dance story. You can also use [widgets](https://wedance.vip/markdown), including images and videos
   visibilityOptions:
     public: Public
     members: Members
@@ -173,9 +178,10 @@ settings:
     changepassword: Change Password
     delete: Delete Account
     popup:
-      title: Confirm account deletion
-      deleteReason: Why are you leaving?
-      usernameConfirmation: Enter username
+      delete:
+        title: Confirm account deletion
+        deleteReason: Why are you leaving?
+        usernameConfirmation: Enter username
   passwordError: Error
   profile:
     title: Profile

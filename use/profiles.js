@@ -220,11 +220,11 @@ export const useProfiles = () => {
     },
     {
       name: 'styles',
-      label: t('profiles.styles'),
+      label: t('profiles.styles.label'),
       labelPosition: 'top',
       poster: true,
       type: 'stylesSelect',
-      tips: t('profiles.tips.styles'),
+      tips: t('profiles.styles.tips'),
     },
     {
       name: 'gender',
@@ -244,12 +244,12 @@ export const useProfiles = () => {
     },
     {
       name: 'username',
-      label: t('profiles.username'),
+      label: t('profile.username.label'),
       register: true,
       poster: true,
       required: true,
       type: 'username',
-      before: t('profiles.before.username'),
+      before: t('profile.username.before'),
     },
     {
       name: 'place',
@@ -262,10 +262,10 @@ export const useProfiles = () => {
     },
     {
       name: 'hometown',
-      label: t('profiles.hometown'),
+      label: t('profiles.hometown.label'),
       required: true,
       type: 'place',
-      before: t('profiles.before.hometown'),
+      before: t('profiles.hometown.before'),
     },
     {
       name: 'visibility',
@@ -285,10 +285,10 @@ export const useProfiles = () => {
     },
     {
       name: 'name',
-      label: t('profiles.name'),
+      label: t('profiles.name.label'),
       required: true,
       placeholder: t('profiles.placeholder.required'),
-      before: t('profiles.before.name'),
+      before: t('profiles.name.before'),
     },
     {
       name: 'locales',
@@ -303,21 +303,21 @@ export const useProfiles = () => {
     },
     {
       name: 'bio',
-      label: t('profiles.bio'),
+      label: t('profiles.bio.label'),
       poster: true,
       type: 'textarea',
       labelPosition: 'top',
-      before: t('profiles.before.bio'),
+      before: t('profiles.bio.before'),
       max: 140,
     },
     {
       name: 'story',
-      label: t('profiles.story'),
+      label: t('profiles.story.label'),
       type: 'textarea',
       labelPosition: 'top',
       placeholder: t('profiles.placeholder.story'),
-      before: t('profiles.before.story'),
-      tips: t('profiles.tips.story'),
+      before: t('profiles.story.before'),
+      tips: t('profiles.story.tips'),
     },
     {
       name: 'learning',
