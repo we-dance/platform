@@ -15,115 +15,115 @@ export const useProfiles = () => {
 
   const genderList = [
     {
-      label: 'Female',
+      label: t('profiles.genderList.female'),
       value: 'Female',
     },
     {
-      label: 'Male',
+      label: t('profiles.genderList.male'),
       value: 'Male',
     },
     {
-      label: 'Other',
+      label: t('profiles.genderList.female'),
       value: 'Other',
     },
   ]
 
   const days = [
     {
-      label: 'Monday',
+      label: t('profiles.daysList.monday'),
       value: 'Monday',
     },
     {
-      label: 'Tuesday',
+      label: t('profiles.daysList.tuesday'),
       value: 'Tuesday',
     },
     {
-      label: 'Wednesday',
+      label: t('profiles.daysList.wednesday'),
       value: 'Wednesday',
     },
     {
-      label: 'Thursday',
+      label: t('profiles.daysList.thursday'),
       value: 'Thursday',
     },
     {
-      label: 'Friday',
+      label: t('profiles.daysList.friday'),
       value: 'Friday',
     },
     {
-      label: 'Saturday',
+      label: t('profiles.daysList.saturday'),
       value: 'Saturday',
     },
     {
-      label: 'Sunday',
+      label: t('profiles.daysList.sunday'),
       value: 'Sunday',
     },
   ]
 
   const meetingPlaces = [
     {
-      label: 'My place',
+      label: t('profiles.meetingPlaces.myPlace'),
       value: 'myPlace',
     },
     {
-      label: 'Your place',
+      label: t('profiles.meetingPlaces.yourPlace'),
       value: 'yourPlace',
     },
     {
-      label: 'Somewhere private',
+      label: t('profiles.meetingPlaces.private'),
       value: 'private',
     },
     {
-      label: 'Somewhere public',
+      label: t('profiles.meetingPlaces.public'),
       value: 'public',
     },
   ]
 
   const typeList = [
     {
-      label: 'Dancer',
+      label: t('profiles.typeList.dancer'),
       value: 'Dancer',
     },
     {
-      label: 'Artist',
+      label: t('profiles.typeList.artist'),
       value: 'Artist',
     },
     {
-      label: 'Organiser',
+      label: t('profiles.typeList.organiser'),
       value: 'Organiser',
     },
     {
-      label: 'Venue',
+      label: t('profiles.typeList.venue'),
       value: 'Venue',
     },
     {
-      label: 'City',
+      label: t('profiles.typeList.city'),
       value: 'City',
     },
   ]
 
   const objectivesList = [
     {
-      label: 'Talk about dance',
+      label: t('profiles.objectivesList.talk'),
       value: 'talk',
     },
     {
-      label: 'Learn together',
+      label: t('profiles.objectivesList.learn'),
       value: 'learn',
     },
     {
-      label: 'Dance outdoors',
+      label: t('profiles.objectivesList.outdoors'),
       value: 'outdoors',
     },
     {
-      label: 'Dance indoors',
+      label: t('profiles.objectivesList.indoors'),
       value: 'indoors',
     },
     {
-      label: 'Teach together',
+      label: t('profiles.objectivesList.teach'),
       value: 'teach',
     },
     {
-      label: 'Dance project',
+      label: t('profiles.objectivesList.project'),
       value: 'project',
     },
   ]
@@ -131,80 +131,82 @@ export const useProfiles = () => {
   const contactFields = [
     {
       name: 'instagram',
-      label: 'instagram.com/',
-      placeholder: 'username',
+      label: t('profiles.contactFields.instagram'),
+      placeholder: t('profiles.placeholder.username'),
       when: (p) => p.contacts === 'Yes',
     },
     {
       name: 'facebook',
-      label: 'fb.com/',
-      placeholder: 'username',
+      label: t('profiles.contactFields.facebook'),
+      placeholder: t('profiles.placeholder.username'),
       when: (p) => p.contacts === 'Yes',
     },
     {
       name: 'whatsapp',
-      label: 'chat.whatsapp.com/',
-      placeholder: 'whatsapp chat',
+      label: t('profiles.contactFields.whatsapp'),
+      placeholder: t('profiles.placeholder.whatsapp'),
       when: (p) => p.contacts === 'Yes',
     },
     {
       name: 'telegram',
-      label: 't.me/',
-      placeholder: 'username',
+      label: t('profiles.contactFields.telegram'),
+      placeholder: t('profiles.placeholder.username'),
       when: (p) => p.contacts === 'Yes',
     },
     {
       name: 'twitter',
-      label: 'twitter.com/',
-      placeholder: 'username',
+      label: t('profiles.contactFields.twitter'),
+      placeholder: t('profiles.placeholder.username'),
       when: (p) => p.contacts === 'Yes',
     },
     {
       name: 'tiktok',
-      label: 'tiktok.com/',
-      placeholder: 'username',
+      label: t('profiles.contactFields.tiktok'),
+      placeholder: t('profiles.placeholder.username'),
       when: (p) => p.contacts === 'Yes',
     },
     {
       name: 'youtube',
-      label: 'youtube.com/',
-      placeholder: 'username',
+      label: t('profiles.contactFields.youtube'),
+      placeholder: t('profiles.placeholder.username'),
       when: (p) => p.contacts === 'Yes',
     },
     {
       name: 'email',
-      placeholder: 'for business requests',
+      label: t('profiles.contactFields.email'),
+      placeholder: t('profiles.placeholder.business'),
       when: (p) => p.contacts === 'Yes',
     },
     {
       name: 'website',
-      placeholder: 'for business requests',
+      label: t('profiles.contactFields.website'),
+      placeholder: t('profiles.placeholder.business'),
       when: (p) => p.contacts === 'Yes',
     },
   ]
 
   const visibilityOptions = [
     {
-      label: 'Public',
+      label: t('profiles.visibilityOptions.public'),
       value: 'Public',
     },
     {
-      label: 'Members',
+      label: t('profiles.visibilityOptions.members'),
       value: 'Members',
     },
     {
-      label: 'Unlisted',
+      label: t('profiles.visibilityOptions.unlisted'),
       value: 'Unlisted',
     },
   ]
 
   const booleanOptions = [
     {
-      label: 'Yes',
+      label: t('profiles.booleanOptions.yes'),
       value: 'Yes',
     },
     {
-      label: 'No',
+      label: t('profiles.booleanOptions.no'),
       value: 'No',
     },
   ]
@@ -212,22 +214,21 @@ export const useProfiles = () => {
   const profileFields = [
     {
       name: 'photo',
-      label: t('profile.photo'),
+      label: t('profiles.photo'),
       poster: true,
       type: 'photo',
     },
     {
       name: 'styles',
-      label: 'Dances',
+      label: t('profiles.styles'),
       labelPosition: 'top',
       poster: true,
       type: 'stylesSelect',
-      tips:
-        'Mark up to 4 favorite dances that will be highlighted in your poster',
+      tips: t('profiles.tips.styles'),
     },
     {
       name: 'gender',
-      key: 'profile.gender',
+      label: t('profiles.gender'),
       type: 'buttons',
       hideSearchBox: true,
       poster: true,
@@ -235,7 +236,7 @@ export const useProfiles = () => {
     },
     {
       name: 'type',
-      key: 'profile.type',
+      label: t('profiles.type'),
       type: 'radio',
       hideSearchBox: true,
       poster: true,
@@ -243,147 +244,141 @@ export const useProfiles = () => {
     },
     {
       name: 'username',
-      key: 'profile.username',
+      label: t('profiles.username'),
       register: true,
       poster: true,
       required: true,
       type: 'username',
-      before: 'Use only letters, numbers, underscores and periods.',
+      before: t('profiles.before.username'),
     },
     {
       name: 'place',
-      label: 'Your city',
+      label: t('profiles.place'),
       register: true,
       poster: true,
       required: true,
       type: 'place',
-      placeholder: 'City',
+      placeholder: t('profiles.placeholder.place'),
     },
     {
       name: 'hometown',
-      key: 'profile.hometown',
+      label: t('profiles.hometown'),
       required: true,
       type: 'place',
-      before: 'Where were you born and raised?',
+      before: t('profiles.before.hometown'),
     },
     {
       name: 'visibility',
-      key: 'profile.visibility',
+      label: t('profiles.visibility'),
       poster: true,
       type: 'buttons',
       options: visibilityOptions,
-      description:
-        '- Public profiles are searchable in Google and used in our social media to attract new members.\n- Members profile are only visible for logged-in users.\n- Unlisted profiles are possible to open with exact link, but they are not listed in members lists and search.',
+      description: t('profiles.description.visibility'),
     },
     {
       name: 'permission',
-      label: 'Do you want free promo?',
+      label: t('profiles.permission'),
       poster: true,
       type: 'buttons',
       options: booleanOptions,
-      description:
-        'Send us link to your profile on [Instagram](https://instagram.com/wedancevip) and we will promote it on our social media channels: Telegram, Instagram, Facebook and Twitter.',
+      description: t('profiles.description.permission'),
     },
     {
       name: 'name',
-      key: 'profile.name',
+      label: t('profiles.name'),
       required: true,
-      placeholder: '(Required)',
-      before: 'If you want to remain anonym use your first name.',
+      placeholder: t('profiles.placeholder.required'),
+      before: t('profiles.before.name'),
     },
     {
       name: 'locales',
-      key: 'profile.languages',
+      label: t('profiles.locales'),
       type: 'languages',
     },
     {
       name: 'objectives',
-      key: 'profile.objectives',
+      label: t('profiles.objectives'),
       type: 'multi',
       options: objectivesList,
     },
     {
       name: 'bio',
-      key: 'profile.bio',
+      label: t('profiles.bio'),
       poster: true,
       type: 'textarea',
       labelPosition: 'top',
-      before: 'Short introduction on top of your photo',
+      before: t('profiles.before.bio'),
       max: 140,
     },
     {
       name: 'story',
-      key: 'profile.story',
+      label: t('profiles.story'),
       type: 'textarea',
       labelPosition: 'top',
-      placeholder: 'Text (markdown)',
-      before:
-        'Tell your dance story. Use can also use [widgets](https://wedance.vip/markdown), including images and videos',
-      tips:
-        'Pitch yourself: Who are you? What do you offer? What do you want?\n\nTips for effective pitch:\n- Uncomplicated: It should be catchy and roll off the tongue\n- Concise: It shouldn’t take more than a minute to say or read\n- Unique: It reflects your skills, goals, and desires\n- Storyline: It covers who you are, what you offer, and where you want to be\n- Appealing: Your elevator pitch is essentially a persuasive sales pitch; the emphasis should be on what you offer',
+      placeholder: t('profiles.placeholder.story'),
+      before: t('profiles.before.story'),
+      tips: t('profiles.tips.story'),
     },
     {
       name: 'learning',
-      key: 'profile.topics',
+      label: t('profiles.learning'),
       type: 'textarea',
-      description: 'For example: Musicality in Salsa, Men Styling, etc.',
+      description: t('profiles.description.learning'),
     },
     {
       name: 'jobs',
-      label: 'I can help with',
+      label: t('profiles.jobs'),
       type: 'textarea',
-      description:
-        'How can you help our community? What are you good at? For example: design, programming, marketing, social media, etc.',
+      description: t('profiles.description.jobs'),
     },
     {
       name: 'partner',
-      key: 'profile.partner',
+      label: t('profiles.partner'),
       type: 'buttons',
       options: booleanOptions,
     },
     {
       name: 'birthday',
-      key: 'profile.birthday',
+      label: t('profiles.birthday'),
       when: (p) => p.partner === 'Yes',
       type: 'date',
       description: 'We will show only your age',
     },
     {
       name: 'height',
-      key: 'profile.height',
+      label: t('profiles.height'),
       when: (p) => p.partner === 'Yes',
     },
     {
       name: 'weight',
-      key: 'profile.weight',
+      label: t('profiles.weight'),
       when: (p) => p.partner === 'Yes',
-      description: "Leave this field blank if you think it's irrelevant.",
+      description: t('profiles.description.weight'),
     },
     {
       name: 'partnerBio',
-      label: 'Question',
+      label: t('profiles.partnerBio'),
       when: (p) => p.partner === 'Yes',
       type: 'textarea',
-      description:
-        'What is important in your partner? Put it as a question, for example: Do you love dogs?',
+      description: t('profiles.description.partnerBio'),
     },
     {
       name: 'meetingPlace',
-      key: 'profile.place',
+      label: t('profiles.meetingPlace'),
       when: (p) => p.partner === 'Yes',
       type: 'multi',
       options: meetingPlaces,
     },
     {
       name: 'days',
-      key: 'profile.days',
+      label: t('profiles.days'),
       when: (p) => p.partner === 'Yes',
       type: 'multi',
       options: days,
     },
     {
       name: 'contacts',
-      label: 'Do you use social media?',
+      label: t('profiles.contacts'),
       type: 'buttons',
       options: booleanOptions,
     },
@@ -404,13 +399,13 @@ export const useProfiles = () => {
       type: 'place',
       clearable: true,
       hideLabel: true,
-      placeholder: 'City',
+      placeholder: t('profiles.placeholder.place'),
     },
     {
       name: 'dance',
       type: 'style',
       hideLabel: true,
-      placeholder: 'Style',
+      placeholder: t('profiles.placeholder.dance'),
       compare: (item, field, value) =>
         item &&
         item[field] &&
@@ -425,7 +420,7 @@ export const useProfiles = () => {
       hideSearchBox: true,
       clearable: true,
       hideLabel: true,
-      placeholder: 'Objective',
+      placeholder: t('profiles.placeholder.objective'),
     },
     {
       name: 'gender',
@@ -434,52 +429,52 @@ export const useProfiles = () => {
       hideSearchBox: true,
       clearable: true,
       hideLabel: true,
-      placeholder: 'Gender',
+      placeholder: t('profiles.placeholder.gender'),
     },
   ]
 
   const profileSorts = [
     {
       value: 'username',
-      label: 'Username',
+      label: t('profiles.profileSorts.username'),
     },
     {
       value: '-createdAt',
-      label: 'Registered',
+      label: t('profiles.profileSorts.registered'),
     },
     {
       value: '-lastLoginAt',
-      label: 'Last seen',
+      label: t('profiles.profileSorts.lastSeen'),
     },
   ]
 
   const radiusOptions = [
     {
-      label: 'around 10km',
+      label: t('profiles.radiusOptions.ten'),
       value: 10,
     },
     {
-      label: 'around 20km',
+      label: t('profiles.radiusOptions.twenty'),
       value: 20,
     },
     {
-      label: 'around 50km',
+      label: t('profiles.radiusOptions.fifty'),
       value: 50,
     },
     {
-      label: 'around 100km',
+      label: t('profiles.radiusOptions.hundred'),
       value: 100,
     },
     {
-      label: 'around 500km',
+      label: t('profiles.radiusOptions.fiveHundred'),
       value: 500,
     },
     {
-      label: 'around 1000km',
+      label: t('profiles.radiusOptions.thousand'),
       value: 1000,
     },
     {
-      label: 'Anywhere',
+      label: t('profiles.radiusOptions.anywhere'),
       value: '',
     },
   ]
