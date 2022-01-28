@@ -30,9 +30,19 @@ myprofile:
   title: My Profile
 chat:
   title: Chat
-  welcome: Start conversation with something nice.
-  with: Chat with {username}
-  dateDiff: '{diff} ago'
+  empty: Start conversations and they will appear here.
+  lastMessage:
+    byYou: by you
+  receiver:
+    deleted: DELETED
+conversation:
+  userName: Chat with { username }
+  empty: Start conversation with something nice.
+  lastSeen: opened chat last time
+  unread: haven't opened this chat yet
+  newMessage:
+    placeholder: Write a message
+    submit: Send
 cities:
   choose: Choose city
 settings:
