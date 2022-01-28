@@ -2,8 +2,13 @@ hero:
   title: Do you like dancing?
   subtitle: We help each other find interesting dance events and dance partners.
   motto: Even one dance contact in a city makes a difference.
+  alt: People dancing bachata
   action: Join the community
   search: Search dancers
+icons:
+  dancers: dancers
+  cities: cities
+  events: events
 features:
   calendar:
     title: Event Calendar

@@ -8,7 +8,7 @@
             <div class="absolute inset-0">
               <img
                 class="h-full w-full object-cover"
-                alt="People dancing bachata"
+                :alt="$t('hero.alt')"
                 src="/img/hero_640.jpg"
                 sizes="(max-width: 640px) 100vw, (max-width: 768px) 100vw, (max-width: 1024px) 100vw, (max-width: 1280px) 100vw, (max-width: 1536px) 100vw, 100vw"
                 srcset="
@@ -59,17 +59,17 @@
                   <div class="flex flex-col items-center justify-center">
                     <TIcon name="group" class="h-16 w-16" />
                     <div class="text-4xl">1309</div>
-                    <div class="text-sm">dancers</div>
+                    <div class="text-sm">{{ $t('icons.dancers') }}</div>
                   </div>
                   <div class="flex flex-col items-center justify-center">
                     <TIcon name="location" class="h-16 w-16" />
                     <div class="text-4xl">102</div>
-                    <div class="text-sm">cities</div>
+                    <div class="text-sm">{{ $t('icons.cities') }}</div>
                   </div>
                   <div class="flex flex-col items-center justify-center">
                     <TIcon name="calendar" class="h-16 w-16" />
                     <div class="text-4xl">441</div>
-                    <div class="text-sm">events</div>
+                    <div class="text-sm">{{ $t('icons.events') }}</div>
                   </div>
                 </div>
               </div>
