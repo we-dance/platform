@@ -33,7 +33,7 @@ chat:
   title: Plaudern
   welcome: Beginnen Sie ein Gespräch mit etwas Nettem.
   with: Chatte mit {username}
-  dateDiff: "vor {diff}"
+  dateDiff: 'vor {diff}'
 cities:
   choose: Wählen sie eine stadt
 settings:
@@ -122,7 +122,7 @@ teaser:
     btn: Jetzt beitreten
   chat:
     title: Einheimische fragen
-    description: "Wir haben in jeder Stadt einen Telegram-Tanzchat. Treten Sie Ihrem Stadt-Chat bei, um reisenden Tänzern zu helfen, und laden Sie Ihre Tanzfreunde ein. Lass uns zusammen WeDance aufbauen!"
+    description: 'Wir haben in jeder Stadt einen Telegram-Tanzchat. Treten Sie Ihrem Stadt-Chat bei, um reisenden Tänzern zu helfen, und laden Sie Ihre Tanzfreunde ein. Lass uns zusammen WeDance aufbauen!'
     btn: Chat beitreten
   involve:
     title: Wir brauchen Deine Hilfe

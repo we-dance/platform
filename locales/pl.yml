@@ -33,7 +33,7 @@ chat:
   title: Rozmowa
   welcome: Zacznij rozmowę od czegoś miłego.
   with: Porozmawiaj z {username}
-  dateDiff: "{diff} temu"
+  dateDiff: '{diff} temu'
 cities:
   choose: Wybierz miasto
 settings:
@@ -122,7 +122,7 @@ teaser:
     btn: Dołącz teraz
   chat:
     title: Czy rozmawiamy?
-    description: "Prowadzimy rozmowy taneczne w każdym mieście"
+    description: 'Prowadzimy rozmowy taneczne w każdym mieście'
     btn: Dołącz do czatu {city}
   involve:
     title: Potrzebujemy Twojej pomocy
