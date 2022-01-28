@@ -1,4 +1,5 @@
 import { addMinutes, parseISO } from 'date-fns'
+import { useI18n } from '~/use/i18n'
 import { usePosts } from '~/use/posts'
 
 const updateEndDate = (e) => {
@@ -19,45 +20,46 @@ const updatePlace = (e) => {
 
 export const useEvents = () => {
   const { postTypeList } = usePosts()
+  const { t } = useI18n()
 
   const eventTypeList = [
     {
-      label: 'Party',
+      label: t('events.typelist.party'),
       value: 'Party',
       icon: '🎵',
     },
     {
-      label: 'Workshop',
+      label: t('events.typelist.workshop'),
       value: 'Workshop',
       icon: '📙',
     },
     {
-      label: 'Course',
+      label: t('events.typelist.course'),
       value: 'Course',
       icon: '📚',
     },
     {
-      label: 'Festival',
+      label: t('events.typelist.festival'),
       value: 'Festival',
       icon: '🎁',
     },
     {
-      label: 'Congress',
+      label: t('events.typelist.congress'),
       value: 'Congress',
       icon: '🎁',
     },
     {
-      label: 'Concert',
+      label: t('events.typelist.concert'),
       value: 'Concert',
       icon: '🎷',
     },
     {
-      label: 'Show',
+      label: t('events.typelist.show'),
       value: 'Show',
       icon: '🎭',
     },
     {
-      label: 'Other',
+      label: t('events.typelist.other'),
       value: 'Other',
       icon: '❓',
     },
@@ -69,7 +71,7 @@ export const useEvents = () => {
   }))
 
   function getEventIcon(eventType) {
-    let typeOption =
+    const typeOption =
       eventTypeListIcons.find((type) => type.value === eventType) || 'Other'
 
     return typeOption.icon
