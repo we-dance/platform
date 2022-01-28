@@ -5,7 +5,7 @@
       <THeader :title="$t('settings.title')" />
 
       <div class="p-4 space-y-4">
-        <div class="rounded bg-white shadow border p-4 bg-white">
+        <div class="rounded shadow border p-4 bg-white">
           <div class="flex items-center">
             <div>
               <router-link
@@ -95,7 +95,7 @@
             </div>
           </TPopup>
         </div>
-        <div class="rounded bg-white shadow border p-4 bg-white">
+        <div class="rounded shadow border p-4 bg-white">
           <div class="flex items-center">
             <div>
               <router-link
