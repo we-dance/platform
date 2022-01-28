@@ -32,24 +32,27 @@ chat:
   title: Chat
   welcome: Start conversation with something nice.
   with: Chat with {username}
-  dateDiff: "{diff} ago"
+  dateDiff: '{diff} ago'
 cities:
   choose: Choose city
 settings:
   title: Settings
   account:
     title: Account
-    description: This information will be used for notifications and purchases. It
+    description:
+      This information will be used for notifications and purchases. It
       will be shared with service providers or sellers only with your agreement.
     changepassword: Change Password
     delete: Delete Account
   profile:
     title: Profile
-    description: What do you want other dancers to know about you? That's a place to
+    description:
+      What do you want other dancers to know about you? That's a place to
       share your passion to dance. Present yourself, don't be shy!
   contacts:
     title: Contacts
-    description: This information will be publicly available. Share your contacts
+    description:
+      This information will be publicly available. Share your contacts
       only if you want to be contacted by members. It's also nice place to share
       your social media to get some attention.
 city:
@@ -125,13 +128,15 @@ teaser:
     btn: Join Now
   chat:
     title: Ask Locals
-    description: "We have a Telegram dance chat in every city. Join your city chat
+    description:
+      "We have a Telegram dance chat in every city. Join your city chat
       to help traveling dancers, invite your dance friends. Let's build WeDance
       together! "
     btn: Join Chat
   involve:
     title: We need your help
-    description: We are non-profit international dance community. We want you go to
+    description:
+      We are non-profit international dance community. We want you go to
       any city in any country and find dance events and dancers. It all starts
       with the local community.
     btn: Get Involved
