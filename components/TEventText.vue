@@ -16,7 +16,7 @@
       {{ getTime(item.startDate) }}
     </div>
     <div class="mr-2">
-      {{ getEventIcon(item.type) }}
+      {{ getEventIcon(item.eventType) }}
     </div>
     <div>
       <router-link
