@@ -86,7 +86,7 @@
     "vue-property-decorator": "^8.0.0",
     "vue-server-renderer": "^2.6.14",
     "vue-slider-component": "^3.2.11",
-    "vue-tailwind": "^2.2.1",
+    "vue-tailwind": "^2.5.0",
     "vue-template-compiler": "^2.6.14",
     "vue-tour": "^1.3.0",
     "vue2-google-maps": "^0.10.7",
