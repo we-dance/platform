@@ -6,6 +6,15 @@ auth:
   signup: Sign up
   signout: Log out
 events:
+  typelist:
+    party: Party
+    workshop: Workshop
+    course: Course
+    festival: Festival
+    congress: Congress
+    concert: Concert
+    show: Show
+    other: Other
   add: Add event
   title: Events
   list:
