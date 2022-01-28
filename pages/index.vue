@@ -40,7 +40,7 @@
               <p
                 class="mt-2 max-w-lg mx-auto text-center sm:max-w-3xl text-white"
               >
-                {{ $t('hero.moto') }}
+                {{ $t('hero.motto') }}
               </p>
 
               <div class="max-w-lg mx-auto">
