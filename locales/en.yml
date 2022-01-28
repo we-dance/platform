@@ -20,8 +20,137 @@ posts:
   add: Add post
   title: Feed
 profiles:
+  username: Username
+  community: I dance in
+  type: Type
+  name: Name
+  bio: Teaser
+  hometown: Hometown
+  birthday: Birthday
+  gender: Gender
+  style: Dance styles
+  story: Description
+  locales: Your languages
+  skills: Non-dancing skills
+  days: Days
+  learning: Which dance topics you are interested in?
+  teacher: Are you teaching?
+  partner: Are you looking for a dance partner?
+  height: Your height (cm)
+  weight: Your weight (kg)
+  partnerBio: Question
+  objectives: Objectives
+  meetingPlace: Where to meet?
+  visibility: Visibility
+  photo: Photo
   add: Add profile
   title: Community
+  styles: Dances
+  place: Your city
+  permission: Do you want free promo?
+  jobs: I can help with
+  contacts: Do you use social media?
+  contactFields:
+    instagram: instagram.com/
+    facebook: fb.com/
+    whatsapp: whatsapp.com/
+    telegram: t.me/
+    twitter: twitter.com/
+    tiktok: tiktok.com/
+    youtube: youtube.com/
+    email: Email
+    website: Website
+  genderList:
+    female: Female
+    male: Male
+    other: Other
+  daysList:
+    monday: Monday
+    tuesday: Tuesday
+    wednesday: Wednesday
+    thursday: Thursday
+    friday: Friday
+    saturday: Saturday
+    sunday: Sunday
+  meetingPlaces:
+    myPlace: My place
+    yourPlace: Your place
+    private: Somewhere private
+    public: Somewhere public
+  typeList:
+    dancer: Dancer
+    artist: Artist
+    organiser: Organiser
+    venue: Venue
+    city: City
+  objectivesList:
+    talk: Talk about dance
+    learn: Learn together
+    outdoors: Dance outdoors
+    indoors: Dance indoors
+    teach: Teach together
+    project: Dance project
+  profileSorts:
+    username: Username
+    registered: Registered
+    lastSeen: Last seen
+  placeholder:
+    username: username
+    whatsapp: whatsapp chat
+    business: for business requests
+    place: City
+    required: (Required)
+    story: Text (markdown)
+    dance: Style
+    objective: Objective
+    gender: Gender
+  description:
+    visibility: '- Public profiles are searchable in Google and used in our social media to attract new members.
+    - Members profile are only visible for logged-in users.
+    - Unlisted profiles are possible to open with exact link, but they are not listed in members lists and search.'
+    permission: 'Send us link to your profile on [Instagram](https://instagram.com/wedancevip) and we will promote it on our social media channels: Telegram, Instagram, Facebook and Twitter.'
+    learning: 'For example: Musicality in Salsa, Men Styling, etc.'
+    jobs: 'How can you help our community? What are you good at? For example: design, programming, marketing, social media, etc.'
+    birthday: We will show only your age'
+    weight: Leave this field blank if you think it's irrelevant.
+    partnerBio: 'What is important in your partner? Put it as a question, for example: Do you love dogs?'
+  tips:
+    styles: Mark up to 4 favorite dances that will be highlighted in your poster
+    story: 'Pitch yourself: Who are you? What do you offer? What do you want?
+
+
+    Tips for effective pitch:
+
+    - Uncomplicated: It should be catchy and roll off the tongue
+
+    - Concise: It shouldn’t take more than a minute to say or read
+
+    - Unique: It reflects your skills, goals, and desires
+
+    - Storyline: It covers who you are, what you offer, and where you want to be
+
+    - Appealing: Your elevator pitch is essentially a persuasive sales pitch; the emphasis should be on what you offer'
+  before:
+    username: Use only letters, numbers, underscores and periods.
+    hometown: Where were you born and raised?
+    name: If you want to remain anonym use your first name.
+    bio: Short introduction on top of your photo
+    story: Tell your dance story. You can also use [widgets](https://wedance.vip/markdown), including images and videos
+  visibilityOptions:
+    public: Public
+    members: Members
+    unlisted: Unlisted
+  booleanOptions:
+    yes: 'Yes'
+    no: 'No'
+  radiusOptions:
+    ten: around 10km
+    twenty: around 20km
+    fifty: around 50km
+    hundred: around 100km
+    fiveHundred: around 500km
+    thousand: around 1000km
+    anywhere: Anywhere
 myprofile:
   events:
     add: Add event
@@ -43,6 +172,11 @@ settings:
       will be shared with service providers or sellers only with your agreement.
     changepassword: Change Password
     delete: Delete Account
+    popup:
+      title: Confirm account deletion
+      deleteReason: Why are you leaving?
+      usernameConfirmation: Enter username
+  passwordError: Error
   profile:
     title: Profile
     description: What do you want other dancers to know about you? That's a place to
@@ -57,37 +191,28 @@ city:
   change: Change city
 role:
   label: Role
-profile:
-  username: Username
-  community: I dance in
-  type: Type
-  name: Name
-  bio: Teaser
-  hometown: Hometown
-  birthday: Birthday
-  gender: Gender
-  styles: Your dance styles and level
-  style: Dance styles
-  story: Description
-  languages: Your languages
-  skills: Non-dancing skills
-  days: Days
-  topics: Which dance topics you are interested in?
-  teacher: Are you teaching?
-  partner: Are you looking for a dance partner?
-  height: Your height (cm)
-  weight: Your weight (kg)
-  partnerBio: About your partner
-  objectives: Objectives
-  place: Where to meet?
-  visibility: Visibility
-  photo: Photo
 account:
   email: Email
   password: Password
   name: Full Name
   phone: Phone
-  newsletter: What kind of updated would you like to receive weekly?
+  zone: Timezone
+  newsletter:
+    label: What kind of updated would you like to receive weekly?
+    options:
+      party: 'Social/party events'
+      class: Dance classes
+      workshop: Workshops and bootcamps
+      online: Online dance classes
+      festival: International festivals
+  comment: Comment
+  withPartner:
+    label: Do you have a partner?
+    options:
+      yes: 'yes'
+      no: 'No'
+  partnerName: Partner's name
+  partnerEmail: Partner's email
 agreement: By signing in, you agree to {terms} and {privacy}.
 terms: Terms of service
 privacy: Privacy policy

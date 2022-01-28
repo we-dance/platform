@@ -47,7 +47,7 @@
               >
               <TPopup
                 v-if="deleteAccountPopupVisible"
-                title="Confirm account deletion"
+                :title="$t('settings.account.popup.title')"
                 @close="deleteAccountPopupVisible = false"
               >
                 <div class="py-4 space-y-4">
@@ -55,13 +55,13 @@
                     v-model="deleteReason"
                     label-position="vertical"
                     type="textarea"
-                    label="Why are you leaving?"
+                    :label="$t('settings.account.popup.deleteReason')"
                   />
                   <TField
                     v-model="usernameConfirmation"
                     label-position="vertical"
                     :placeholder="profile.username"
-                    label="Enter username"
+                    :label="$t('settings.account.popup.usernameConfirmation')"
                   />
                   <div class="flex justify-end">
                     <TButton type="danger" @click="deleteAccountAction()">{{
@@ -80,7 +80,7 @@
           </div>
           <TPopup
             v-if="passwordError"
-            title="Error"
+            :title="$t('settings.passwordError')"
             @close="passwordError = ''"
           >
             <div class="py-4 max-w-md">{{ passwordError.message }}</div>
