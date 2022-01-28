@@ -32,7 +32,14 @@ export default {
    ** Customize the progress-bar color
    */
   loading: { color: '#210309' },
-  components: true,
+  components: [
+    '~/components',
+    '~/components/global',
+    '~/components/Actions',
+    '~/components/Card',
+    '~/components/Formatters',
+    '~/components/TInput',
+  ],
   /*
    ** Global CSS
    */
