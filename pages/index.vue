@@ -47,7 +47,7 @@
                 <TButton
                   allow-guests
                   icon="search"
-                  label="Search dancers"
+                  :label="$t('hero.search')"
                   to="/search"
                   type="void"
                   class="mt-8 w-full text-gray-500 bg-white hover:bg-gray-100 font-semibold py-2 px-4 border border-gray-400 rounded-full shadow"

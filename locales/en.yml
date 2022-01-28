@@ -3,6 +3,7 @@ hero:
   subtitle: We help each other find interesting dance events and dance partners.
   motto: Even one dance contact in a city makes a difference.
   action: Join the community
+  search: Search dancers
 features:
   calendar:
     title: Event Calendar
