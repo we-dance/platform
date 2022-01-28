@@ -232,7 +232,7 @@ export default {
       }
 
       if (eventType.value) {
-        result = result.filter((item) => item.type === eventType.value)
+        result = result.filter((item) => item.eventType === eventType.value)
       }
 
       if (!route.query.all) {
