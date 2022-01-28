@@ -19,17 +19,14 @@ features:
   volunteer:
     title: Volunteer
     description: We build a community, where everyone enters with mindset “I can help”, so whenever you need help you can count on it. We are one big family worldwide. We help each other.
-  getInvolved: Get Involved
+    action: Get Involved
   interviews:
     title: Interviews
     description: Explore more about you favorite dance artists and catch their tips & tricks.
-listenToPodcast: Listen to Podcast
+    action: Listen to Podcast
 international:
   title: International Community
   description: We regularly post interviews, event announcements and introduce new members on our social media.
-
-## End of index text ##
-
 auth:
   signin: Sign in
   signup: Sign up
