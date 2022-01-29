@@ -54,7 +54,7 @@
                   <TField
                     v-model="deleteReason"
                     label-position="vertical"
-                    type="textarea"
+                    component="TInputTextarea"
                     label="Why are you leaving?"
                   />
                   <TField
