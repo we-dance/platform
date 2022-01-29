@@ -58,6 +58,7 @@
 
 <script>
 import ls from 'local-storage'
+import { track } from '~/plugins/firebase'
 import { useAuth } from '~/use/auth'
 
 export default {
@@ -128,7 +129,7 @@ export default {
         return
       }
 
-      this.$fire.analytics.logEvent('login', {
+      track('login', {
         method: 'NoPassword',
       })
 
@@ -136,7 +137,7 @@ export default {
       this.emailSent = true
     },
     async signGoogle() {
-      this.$fire.analytics.logEvent('login', {
+      track('login', {
         method: 'Google',
       })
 

@@ -58,6 +58,7 @@
 
 <script>
 import ls from 'local-storage'
+import { track } from '~/plugins/firebase'
 import { useAuth } from '~/use/auth'
 
 export default {
@@ -129,7 +130,7 @@ export default {
         return
       }
 
-      this.$fire.analytics.logEvent('login', {
+      track('login', {
         method: 'Password',
       })
 

@@ -42,6 +42,7 @@
 <script>
 import { ref } from '@nuxtjs/composition-api'
 import ls from 'local-storage'
+import { track } from '~/plugins/firebase'
 import { useAuth } from '~/use/auth'
 import { useProfiles } from '~/use/profiles'
 
@@ -117,7 +118,7 @@ export default {
         return
       }
 
-      this.$fire.analytics.logEvent('sign_up', {
+      track('sign_up', {
         method: 'Password',
       })
 

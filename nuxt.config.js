@@ -9,19 +9,6 @@ export const app = {
   cover: '/cover/wide.png',
 }
 
-const firebaseConfig = JSON.parse(process.env.FIREBASE_CONFIG)
-
-export const firebase = {
-  config: firebaseConfig,
-  services: {
-    auth: true,
-    firestore: true,
-    analytics: {
-      collectionEnabled: process.env.FIREBASE_ANALYTICS_ENABLED,
-    },
-  },
-}
-
 export default {
   target: 'static',
   ssr: false,
@@ -82,7 +69,6 @@ export default {
     '@nuxtjs/device',
     'nuxt-i18n',
     '@nuxt/content',
-    '@nuxtjs/firebase',
     '@nuxtjs/toast',
   ],
   googleFonts: {
@@ -167,9 +153,7 @@ export default {
   },
   env: {
     app,
-    firebase,
   },
-  firebase,
   sentry: {
     dsn: process.env.SENTRY_DSN,
   },
