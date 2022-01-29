@@ -3,7 +3,7 @@ import 'firebase/firestore'
 import { get } from 'lodash'
 import { createGlobalState, when } from '@vueuse/core'
 import { useFirestore } from '@vueuse/firebase'
-import { computed } from '@nuxtjs/composition-api'
+import { computed, ref } from '@nuxtjs/composition-api'
 import { useAuth } from '~/use/auth'
 import { useDoc } from '~/use/doc'
 import { getArrayFromHash } from '~/utils'
@@ -75,9 +75,16 @@ export async function cacheCity(placeId, data) {
 
 export const useCache = createGlobalState(() => {
   const db = firebase.firestore()
-  console.log('useCache')
+  const result = ref({})
 
-  return useFirestore(db.collection('app').doc('v2'))
+  db.collection('app')
+    .doc('v2')
+    .get()
+    .then((doc) => {
+      result.value = doc.data()
+    })
+
+  return result
 })
 
 export const posterLabelColors = {

@@ -3201,21 +3201,6 @@
     "@vueuse/shared" "4.8.1"
     vue-demi latest
 
-"@vueuse/firebase@^4.4.1":
-  version "4.4.1"
-  resolved "https://registry.yarnpkg.com/@vueuse/firebase/-/firebase-4.4.1.tgz#50e1fc5a0a1dbdb5dabfc255e78ddb4147eb0518"
-  integrity sha512-02JbJ/6JtSooZ/4tjTQ8Fc2sSDpbGDypEQ5YXbbjmMMWGZYpE+A4iEliyQkhhP8cYZIKEP43lnPID6kCntxaHQ==
-  dependencies:
-    "@vueuse/shared" "4.4.1"
-    vue-demi latest
-
-"@vueuse/shared@4.4.1":
-  version "4.4.1"
-  resolved "https://registry.yarnpkg.com/@vueuse/shared/-/shared-4.4.1.tgz#8963740d1b8a036933ae5c02b461b430430e2433"
-  integrity sha512-pY7bXgYaA9g25XNREE3zeuIWfOwbyiKeQ0IppE4nIRuro4gVGuLoV/BIU6D0VOTv7hYefv5eqE+WS03v61y8xA==
-  dependencies:
-    vue-demi latest
-
 "@vueuse/shared@4.8.1":
   version "4.8.1"
   resolved "https://registry.yarnpkg.com/@vueuse/shared/-/shared-4.8.1.tgz#45fd5f64bf4e8944db42a5b72fa2705cfc74608a"
