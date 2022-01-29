@@ -7,16 +7,16 @@
       <div class="flex-grow">
         <div class="block text-sm leading-tight">
           <div class="flex space-x-1 text-xs">
-            <router-link
+            <NuxtLink
               :to="`/${item.username}`"
               class="font-bold hover:underline"
-              >{{ item.username }}</router-link
+              >{{ item.username }}</NuxtLink
             >
             <span>•</span>
             <div>
-              <router-link :to="`/posts/${item.id}`" class="hover:underline">{{
+              <NuxtLink :to="`/posts/${item.id}`" class="hover:underline">{{
                 dateDiff(item.createdAt)
-              }}</router-link>
+              }}</NuxtLink>
             </div>
             <template v-if="item.region">
               <span>•</span>
@@ -80,7 +80,7 @@
       </TDropdown>
     </div>
     <div v-if="!hideMedia">
-      <router-link
+      <NuxtLink
         v-if="item.type === 'event'"
         :to="`/events/${item.id}`"
         class="hover:opacity-75"
@@ -96,7 +96,7 @@
           :styles="item.styles"
           size="sm"
         />
-      </router-link>
+      </NuxtLink>
 
       <TCardPoll v-else-if="item.type === 'poll'" :node="item" />
 
@@ -104,13 +104,13 @@
     </div>
 
     <div v-if="!hideComments && !item.hideComments" class="border-t p-4">
-      <router-link
+      <NuxtLink
         v-if="item.commentsCount > 1"
         :to="`/posts/${item.id}`"
         class="p-2 text-blue-700 cursor-pointer underline hover:no-underline text-xs text-center mb-2 block"
       >
         Show all {{ item.commentsCount - 1 }} comments
-      </router-link>
+      </NuxtLink>
       <div
         v-if="item.commentsCount < 0"
         class="text-xs text-gray-900 p-2 text-center mb-2"

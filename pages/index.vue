@@ -185,10 +185,10 @@
             </h3>
             <p class="text-center">
               {{ $t('features.volunteer.description') }}<br />
-              <router-link
+              <NuxtLink
                 to="/get-involved"
                 class="underline font-bold hover:no-underline"
-                >{{ $t('features.volunteer.action') }}</router-link
+                >{{ $t('features.volunteer.action') }}</NuxtLink
               >
             </p>
           </div>

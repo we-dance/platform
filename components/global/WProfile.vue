@@ -5,7 +5,7 @@
   <div v-else-if="!exists" class="border rounded p-4 text-red-500">
     Profile {{ username }} not found
   </div>
-  <router-link
+  <NuxtLink
     v-else
     :to="`/${profile.username}`"
     class="rounded border hover:border-black shadow p-4 bg-dark-gradient text-sm flex items-start justify-start flex-grow my-2 no-underline"
@@ -18,7 +18,7 @@
       <div class="text-gray-300 text-xs">@{{ profile.username }}</div>
       <div class="mt-2 text-white">{{ profile.bio }}</div>
     </div>
-  </router-link>
+  </NuxtLink>
 </template>
 
 <script>

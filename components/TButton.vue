@@ -29,7 +29,7 @@
       </div>
     </slot>
   </a>
-  <router-link
+  <NuxtLink
     v-else-if="to"
     :title="title"
     :class="classes"
@@ -42,7 +42,7 @@
         <span v-if="label !== false">{{ label }}</span>
       </div>
     </slot>
-  </router-link>
+  </NuxtLink>
   <button
     v-else
     type="button"

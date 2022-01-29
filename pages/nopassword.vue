@@ -26,14 +26,14 @@
       <div class="mt-4 text-xs">
         <i18n path="agreement" tag="p">
           <template v-slot:privacy>
-            <router-link class="underline hover:no-underline" to="/privacy">{{
+            <NuxtLink class="underline hover:no-underline" to="/privacy">{{
               $t('privacy')
-            }}</router-link>
+            }}</NuxtLink>
           </template>
           <template v-slot:terms>
-            <router-link class="underline hover:no-underline" to="/terms">{{
+            <NuxtLink class="underline hover:no-underline" to="/terms">{{
               $t('terms')
-            }}</router-link>
+            }}</NuxtLink>
           </template>
         </i18n>
       </div>
@@ -44,9 +44,9 @@
       </div>
       <div class="mt-4 text-xs">
         <div class="mt-4 border-t pt-4 flex space-x-2 text-xs">
-          <router-link to="/signin" class="underline hover:no-underline">{{
+          <NuxtLink to="/signin" class="underline hover:no-underline">{{
             $t('nopassword.signin')
-          }}</router-link>
+          }}</NuxtLink>
           <button class="underline hover:no-underline" @click="signGoogle">
             {{ $t('nopassword.google') }}
           </button>

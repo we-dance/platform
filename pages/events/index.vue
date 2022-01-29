@@ -46,7 +46,7 @@
         v-if="view === 'covers'"
         class="grid grid-cols-1 md:grid-cols-2 gap-2"
       >
-        <router-link
+        <NuxtLink
           v-for="event in events"
           :key="event.id"
           :to="`/events/${event.id}`"
@@ -63,7 +63,7 @@
             :styles="event.styles"
             size="sm"
           />
-        </router-link>
+        </NuxtLink>
       </div>
 
       <div v-else>

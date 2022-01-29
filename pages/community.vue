@@ -29,7 +29,7 @@
       </div>
 
       <div class="grid grid-cols-1 md:grid-cols-2 gap-2">
-        <router-link
+        <NuxtLink
           v-for="item in response.hits"
           :key="item.id"
           :to="`/${item.username}`"
@@ -45,7 +45,7 @@
             :styles="item.styles"
             size="sm"
           />
-        </router-link>
+        </NuxtLink>
       </div>
 
       <t-pagination
