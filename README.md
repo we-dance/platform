@@ -58,7 +58,7 @@ To activate all services and features see section `Services` below.
 
 ### Authentication for custom domains
 
-- Go to `Authentication`, switch to tab `Sign-in method` find section `Authorized domains`, click `Add domain` and add new
+- Go to `Authentication`, switch to tab `Sign-in method` find section `Authorized domains`, click `Add domain` and add new.
 
 ### City auto-complete
 
