@@ -75,6 +75,7 @@ export async function cacheCity(placeId, data) {
 
 export const useCache = createGlobalState(() => {
   const db = firebase.firestore()
+
   return useFirestore(db.collection('app').doc('v2'))
 })
 
@@ -92,6 +93,7 @@ export const useApp = () => {
   const { create, update } = useDoc('cities')
 
   const cache = useCache()
+
   const cities = computed(() =>
     cache.value ? getArrayFromHash(cache.value.cities) : []
   )
