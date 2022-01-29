@@ -30,6 +30,7 @@
 
 <script>
 import { computed } from '@vue/composition-api'
+import { track } from '~/plugins/firebase'
 import { useAuth } from '~/use/auth'
 import { useDoc } from '~/use/doc'
 import { useRouter } from '~/use/router'
@@ -110,12 +111,12 @@ export default {
     async saveItem(data) {
       if (data.id) {
         if (this.singular) {
-          this.$fire.analytics.logEvent(`update_${this.singular}`)
+          track(`update_${this.singular}`)
         }
         await this.update(data.id, data)
       } else {
         if (this.singular) {
-          this.$fire.analytics.logEvent(`create_${this.singular}`)
+          track(`create_${this.singular}`)
         }
         await this.create(data)
       }
@@ -126,7 +127,7 @@ export default {
     },
     async removeItem(id) {
       if (this.singular) {
-        this.$fire.analytics.logEvent(`delete_${this.singular}`)
+        track(`delete_${this.singular}`)
       }
       await this.remove(id)
       this.cancelItem()

@@ -153,16 +153,6 @@ export default {
   },
   env: {
     app,
-    firebase: {
-      config: JSON.parse(process.env.FIREBASE_CONFIG),
-      services: {
-        auth: true,
-        firestore: true,
-        analytics: {
-          collectionEnabled: process.env.FIREBASE_ANALYTICS_ENABLED,
-        },
-      },
-    },
   },
   sentry: {
     dsn: process.env.SENTRY_DSN,

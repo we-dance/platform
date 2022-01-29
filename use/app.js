@@ -75,6 +75,7 @@ export async function cacheCity(placeId, data) {
 
 export const useCache = createGlobalState(() => {
   const db = firebase.firestore()
+  console.log('useCache')
 
   return useFirestore(db.collection('app').doc('v2'))
 })

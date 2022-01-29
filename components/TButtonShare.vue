@@ -32,6 +32,7 @@ import axios from 'axios'
 import { openURL } from '~/utils'
 import { useCities } from '~/use/cities'
 import { useAuth } from '~/use/auth'
+import { db, track } from '~/plugins/firebase'
 
 export default {
   setup() {
@@ -114,7 +115,7 @@ export default {
         return
       }
 
-      this.$fire.analytics.logEvent('share', {
+      track('share', {
         method: platform,
         content_type: this.collection,
         content_id: this.id,
@@ -128,14 +129,14 @@ export default {
       await this.share()
     },
     download() {
-      this.$fire.analytics.logEvent('share', {
+      track('share', {
         method: 'Download',
         content_type: this.collection,
         content_id: this.id,
       })
     },
     async copyToClipboard() {
-      this.$fire.analytics.logEvent('share', {
+      track('share', {
         method: 'Link',
         content_type: this.collection,
         content_id: this.id,
@@ -150,7 +151,7 @@ export default {
         return
       }
 
-      this.$fire.analytics.logEvent('create_poster', {
+      track('create_poster', {
         collection: this.collection,
       })
 
@@ -170,7 +171,7 @@ export default {
 
         const collection = this.collection === 'profiles' ? 'profiles' : 'posts'
 
-        await this.$fire.firestore
+        await db
           .collection(collection)
           .doc(this.id)
           .update({ socialCover: this.downloadUrl })
@@ -186,7 +187,7 @@ export default {
         await this.generate()
       }
 
-      this.$fire.analytics.logEvent('popup_share')
+      track('popup_share')
       this.sharing = true
 
       if (navigator.share && navigator.canShare) {
@@ -209,7 +210,7 @@ export default {
         return false
       }
 
-      this.$fire.analytics.logEvent('share', {
+      track('share', {
         method: 'Native',
         content_type: this.collection,
         content_id: this.id,

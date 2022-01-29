@@ -140,6 +140,7 @@ import { useAuth } from '~/use/auth'
 import { useProfiles } from '~/use/profiles'
 import { useAccounts } from '~/use/accounts'
 import { useRouter } from '~/use/router'
+import { db, track } from '~/plugins/firebase'
 
 export default {
   name: 'PageSettings',
@@ -237,9 +238,9 @@ export default {
       }
 
       try {
-        this.$fire.analytics.logEvent('delete_account')
+        track('delete_account')
 
-        await this.$fire.firestore.collection('suspended').add({
+        await db.collection('suspended').add({
           reason: this.deleteReason,
           username: this.profile.username,
           email: this.account.email,
@@ -265,7 +266,7 @@ export default {
         return
       }
 
-      this.$fire.analytics.logEvent('save_profile')
+      track('save_profile')
 
       await this.updateProfile(data)
 
@@ -275,7 +276,7 @@ export default {
       try {
         await this.updateEmail(data.email)
 
-        this.$fire.analytics.logEvent('save_account')
+        track('save_account')
 
         await this.updateAccount(data)
         this.$router.push('/settings')

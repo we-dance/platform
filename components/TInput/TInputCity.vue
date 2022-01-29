@@ -78,10 +78,11 @@ import { computed } from '@nuxtjs/composition-api'
 import { getLocation, sanitize, sortBy } from '~/utils'
 import { useDoc } from '~/use/doc'
 import { useCollection } from '~/use/collection'
+import { googleApiKey } from '~/plugins/firebase'
 
 Vue.use(VueGoogleMaps, {
   load: {
-    key: process.env.firebase.config.apiKey,
+    key: googleApiKey,
     libraries: 'places',
     language: 'en',
   },
