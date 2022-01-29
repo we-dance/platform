@@ -38,7 +38,7 @@ export default {
     const fields = [
       {
         name: 'body',
-        type: 'markdown',
+        component: 'TInputMarkdown',
         hideLabel: true,
       },
     ]

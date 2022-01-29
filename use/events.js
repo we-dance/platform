@@ -86,7 +86,7 @@ export const useEvents = () => {
     {
       name: 'description',
       hideLabel: true,
-      type: 'textarea',
+      component: 'TInputTextarea',
       placeholder: 'Details (markdown)',
       tips:
         'Pitch yourself: Who are you? What do you offer? What do you want?\n\nTips for effective pitch:\n- Uncomplicated: It should be catchy and roll off the tongue\n- Concise: It shouldn’t take more than a minute to say or read\n- Unique: It reflects your skills, goals, and desires\n- Storyline: It covers who you are, what you offer, and where you want to be\n- Appealing: Your elevator pitch is essentially a persuasive sales pitch; the emphasis should be on what you offer',
@@ -105,14 +105,14 @@ export const useEvents = () => {
       name: 'venue',
       label: 'Where?',
       labelPosition: 'top',
-      type: 'venue',
+      component: 'TInputVenue',
       simple: true,
     },
     {
       name: 'duration',
       label: 'How long?',
       onChange: updateEndDate,
-      type: 'select',
+      component: 'TInputSelect',
       options: [
         {
           value: 30,
@@ -162,16 +162,16 @@ export const useEvents = () => {
     {
       name: 'styles',
       label: 'Dance styles',
-      type: 'stylesSelect',
+      component: 'TInputStylesSelect2',
     },
     {
       name: 'eventType',
-      type: 'select',
+      component: 'TInputSelect',
       options: eventTypeList,
     },
     {
       name: 'cover',
-      type: 'photo',
+      component: 'TInputPhoto',
       width: 500,
       height: 500,
       circle: false,
@@ -179,14 +179,14 @@ export const useEvents = () => {
     },
     {
       name: 'visibility',
-      type: 'buttons',
+      component: 'TInputButtons',
       options: ['Public', 'Members', 'Unlisted'],
       description: `- Public - searchable in Google.\n- Members - visible only for logged-in users.\n- Unlisted - possible to open with exact link, but they are not listed nor not shown in the search.`,
     },
     {
       name: 'claimed',
       label: 'Are you organiser?',
-      type: 'buttons',
+      component: 'TInputButtons',
       options: ['Yes', 'No'],
       description: 'Are you the event organiser?',
     },
@@ -202,7 +202,7 @@ export const useEvents = () => {
     {
       name: 'online',
       label: 'Online?',
-      type: 'buttons',
+      component: 'TInputButtons',
       options: ['Yes', 'No'],
       onChange: updatePlace,
       description: 'Streaming via Zoom, Google Meet, Instagram Live, etc.?',
@@ -210,7 +210,7 @@ export const useEvents = () => {
     {
       name: 'international',
       label: 'International?',
-      type: 'buttons',
+      component: 'TInputButtons',
       options: ['Yes', 'No'],
       onChange: updatePlace,
       description:
@@ -219,7 +219,7 @@ export const useEvents = () => {
     {
       name: 'place',
       label: 'Community',
-      type: 'place',
+      component: 'TInputPlace',
       clearable: true,
       when: (answers) => answers.international === 'No',
       description:
@@ -229,7 +229,7 @@ export const useEvents = () => {
       name: 'form',
       label: 'External registration?',
       before: 'Do you use external platform to register for your event?',
-      type: 'buttons',
+      component: 'TInputButtons',
       options: ['Yes', 'No'],
     },
     {
@@ -248,7 +248,7 @@ export const useEvents = () => {
     {
       name: 'promo',
       label: 'Do you want free promo?',
-      type: 'buttons',
+      component: 'TInputButtons',
       options: ['Yes', 'No'],
       description:
         'Send us link to your event on [Instagram](https://instagram.com/wedancevip) and we will promote it on our social media channels: Telegram, Instagram, Facebook and Twitter.',
@@ -257,13 +257,13 @@ export const useEvents = () => {
       name: 'confirmation',
       labelPosition: 'top',
       label: 'Confirmation email for guests',
-      type: 'textarea',
+      component: 'TInputTextarea',
       placeholder: 'Example: Dear guest, you are confirmed to our event.',
     },
     {
       name: 'type',
       admin: true,
-      type: 'select',
+      component: 'TInputSelect',
       options: postTypeList,
     },
   ]
