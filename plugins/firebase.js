@@ -4,7 +4,9 @@ import 'firebase/firestore'
 import 'firebase/analytics'
 
 let track = function(...params) {
-  console.log('[track]', ...params)
+  if (process.env.FIREBASE_ANALYTICS_DEBUG) {
+    console.log('[track]', ...params)
+  }
 }
 
 let analytics
@@ -21,7 +23,7 @@ if (!firebase.apps.length) {
   googleApiKey = config.apiKey
   firebase.initializeApp(config)
 
-  if (process.env.FIREBASE_ANALYTICS_ENABLED === '1') {
+  if (process.env.FIREBASE_ANALYTICS_ENABLED) {
     analytics = firebase.analytics()
 
     track = analytics.logEvent
