@@ -153,6 +153,11 @@ export default {
   },
   env: {
     app,
+    firebase: {
+      config: JSON.parse(process.env.FIREBASE_CONFIG || {}),
+      analytics: process.env.FIREBASE_ANALYTICS,
+      analyticsDebug: process.env.FIREBASE_ANALYTICS_DEBUG,
+    },
   },
   sentry: {
     dsn: process.env.SENTRY_DSN,

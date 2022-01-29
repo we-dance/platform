@@ -3,8 +3,12 @@ import 'firebase/auth'
 import 'firebase/firestore'
 import 'firebase/analytics'
 
+if (!process.env.firebase.config?.apiKey) {
+  throw new Error('Missing Firebase Configuration')
+}
+
 let track = function(...params) {
-  if (process.env.FIREBASE_ANALYTICS_DEBUG) {
+  if (process.env.firebase.analyticsDebug) {
     console.log('[track]', ...params)
   }
 }
@@ -14,16 +18,11 @@ let analytics
 let googleApiKey
 
 if (!firebase.apps.length) {
-  const configString = process.env.FIREBASE_CONFIG
-  if (!configString) {
-    throw new Error('FIREBASE_CONFIG is not defined')
-  }
-
-  const config = JSON.parse(configString)
+  const config = process.env.firebase.config
   googleApiKey = config.apiKey
   firebase.initializeApp(config)
 
-  if (process.env.FIREBASE_ANALYTICS_ENABLED) {
+  if (process.env.firebase.analytics) {
     analytics = firebase.analytics()
 
     track = analytics.logEvent
