@@ -19,12 +19,12 @@
       {{ getEventIcon(item.eventType) }}
     </div>
     <div>
-      <router-link
+      <NuxtLink
         :to="`/events/${item.id}`"
         class="font-bold leading-none hover:underline hover:text-primary"
       >
         {{ item.name }}
-      </router-link>
+      </NuxtLink>
       <TReactions :item="item" class="my-1" />
       <div>
         <div class="text-xs flex flex-wrap gap-1">

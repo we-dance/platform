@@ -4,10 +4,10 @@
   </div>
   <div v-else class="flex space-x-4 border p-4">
     <div class="flex-grow">
-      <router-link
+      <NuxtLink
         :to="`/events/${node.id}`"
         class="font-bold leading-none underline hover:no-underline"
-        >{{ node.name }}</router-link
+        >{{ node.name }}</NuxtLink
       >
       <div class="mt-2 text-sm text-gray-700 space-y-1">
         <div class="flex gap-2 items-center">

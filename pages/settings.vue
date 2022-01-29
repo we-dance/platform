@@ -8,15 +8,15 @@
         <div class="rounded bg-white shadow border p-4 bg-white">
           <div class="flex items-center">
             <div>
-              <router-link
+              <NuxtLink
                 v-if="currentTab !== 'account'"
                 to="/settings?tab=account"
               >
                 <TIcon class="h-8 w-8" name="arrow_right" />
-              </router-link>
-              <router-link v-else to="/settings">
+              </NuxtLink>
+              <NuxtLink v-else to="/settings">
                 <TIcon class="h-8 w-8" name="arrow_drop_down" />
-              </router-link>
+              </NuxtLink>
             </div>
             <div class="ml-2">
               <div class="font-bold text-xl">
@@ -98,15 +98,15 @@
         <div class="rounded bg-white shadow border p-4 bg-white">
           <div class="flex items-center">
             <div>
-              <router-link
+              <NuxtLink
                 v-if="currentTab !== 'profile'"
                 to="/settings?tab=profile"
               >
                 <TIcon class="h-8 w-8" name="arrow_right" />
-              </router-link>
-              <router-link v-else to="/settings">
+              </NuxtLink>
+              <NuxtLink v-else to="/settings">
                 <TIcon class="h-8 w-8" name="arrow_drop_down" />
-              </router-link>
+              </NuxtLink>
             </div>
             <div class="ml-2">
               <div class="font-bold text-xl">

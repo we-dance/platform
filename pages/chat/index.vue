@@ -5,7 +5,7 @@
       {{ $t('chat.empty') }}
     </div>
     <div v-else>
-      <router-link
+      <NuxtLink
         v-for="chat in chats"
         :key="chat.receiver.id"
         :to="`/chat/${chat.receiver.username}`"
@@ -30,7 +30,7 @@
           </div>
           <div class="block text-sm leading-tight">{{ chat.lastMessage }}</div>
         </div>
-      </router-link>
+      </NuxtLink>
     </div>
   </div>
 </template>

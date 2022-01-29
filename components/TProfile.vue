@@ -44,12 +44,11 @@
           </p>
           <p>
             Your poster is also shown in
-            <router-link to="/community">Сommunity</router-link> among other
-            dancers.
+            <NuxtLink to="/community">Сommunity</NuxtLink> among other dancers.
           </p>
           <p>
             Click
-            <router-link to="/settings?tab=profile">Edit Profile</router-link>
+            <NuxtLink to="/settings?tab=profile">Edit Profile</NuxtLink>
             and add:
           </p>
           <ul>
