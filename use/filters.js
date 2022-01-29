@@ -1,4 +1,4 @@
-import { computed, ref } from '@vue/composition-api'
+import { computed, ref } from '@nuxtjs/composition-api'
 import { sortBy } from '~/utils'
 import { useFullItems } from '~/use/app'
 

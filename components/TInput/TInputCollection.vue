@@ -32,6 +32,7 @@
 
 <script>
 import { when } from '@vueuse/core'
+import { db } from '~/plugins/firebase'
 import { useApp } from '~/use/app'
 import { getFields } from '~/use/forms'
 import { search, sortBy } from '~/utils'
@@ -109,9 +110,7 @@ export default {
           })
         }
       } else {
-        const docsRef = this.$fire.firestore
-          .collection(this.collection)
-          .orderBy(this.orderBy)
+        const docsRef = db.collection(this.collection).orderBy(this.orderBy)
 
         const collection = await docsRef.get()
 

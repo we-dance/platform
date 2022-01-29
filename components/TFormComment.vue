@@ -15,6 +15,7 @@
 <script>
 import { useProfiles } from '~/use/profiles'
 import { useComments } from '~/use/comments'
+import { track } from '~/plugins/firebase'
 
 export default {
   name: 'TFormComment',
@@ -41,7 +42,7 @@ export default {
         return
       }
 
-      this.$fire.analytics.logEvent('add_comment', {
+      track('add_comment', {
         content_type: 'posts',
         content_id: this.postId,
       })

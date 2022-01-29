@@ -46,6 +46,7 @@ import { version } from '../package.json'
 import { useAuth } from '~/use/auth'
 import { useCities } from '~/use/cities'
 import { useApp } from '~/use/app'
+import { analytics, track } from '~/plugins/firebase'
 
 export default {
   name: 'DefaultLayout',
@@ -117,15 +118,17 @@ export default {
         id: contact.uid,
       })
 
-      this.$fire.analytics.setUserId(contact.uid)
-      this.$fire.analytics.setUserProperties({
-        community: contact.community,
-        type: this.profile?.type,
-        gender: this.profile?.gender,
-        visibility: this.profile?.visibility,
-        partner: this.profile?.partner,
-        teacher: this.profile?.teacher,
-      })
+      if (analytics) {
+        analytics.setUserId(contact.uid)
+        analytics.setUserProperties({
+          community: contact.community,
+          type: this.profile?.type,
+          gender: this.profile?.gender,
+          visibility: this.profile?.visibility,
+          partner: this.profile?.partner,
+          teacher: this.profile?.teacher,
+        })
+      }
     },
     onPageView() {
       this.isMenuOpen = false
@@ -142,8 +145,8 @@ export default {
           app_version: version,
         }
 
-        this.$fire.analytics.logEvent('page_view')
-        this.$fire.analytics.logEvent('screen_view', screen)
+        track('page_view')
+        track('screen_view', screen)
       }, 500)
     },
   },
