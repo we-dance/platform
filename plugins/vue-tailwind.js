@@ -9,7 +9,7 @@ import {
 } from 'vue-tailwind/dist/components'
 
 const settings = {
-  't-pagination': {
+  TPagination: {
     component: TPagination,
     props: {
       classes: {
@@ -47,7 +47,7 @@ const settings = {
       },
     },
   },
-  'vt-input': {
+  VtInput: {
     component: TInput,
     props: {
       fixedClasses:
@@ -61,7 +61,7 @@ const settings = {
       },
     },
   },
-  't-checkbox-group': {
+  TCheckboxGroup: {
     component: TCheckboxGroup,
     props: {
       classes: {
@@ -92,7 +92,7 @@ const settings = {
       },
     },
   },
-  't-radio-group': {
+  TRadioGroup: {
     component: TRadioGroup,
     props: {
       classes: {
@@ -123,7 +123,7 @@ const settings = {
       },
     },
   },
-  't-rich-select': {
+  TRichSelect: {
     name: 'TRichSelect',
     component: TRichSelect,
     props: {

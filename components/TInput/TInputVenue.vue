@@ -6,7 +6,7 @@
       <div v-if="rooms">
         <TField
           v-model="room"
-          type="richselect"
+          component="TRichSelect"
           :options="rooms"
           label="Area/Room"
         />

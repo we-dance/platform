@@ -85,7 +85,7 @@ export default {
       {
         name: 'from',
         labelPosition: 'top',
-        type: 'select',
+        component: 'TInputSelect',
         options: [
           {
             value: 'WeDance <automated@wedance.vip>',
@@ -101,7 +101,7 @@ export default {
         name: 'content',
         label: 'Content',
         labelPosition: 'top',
-        type: 'textarea',
+        component: 'TInputTextarea',
       },
     ]
 
