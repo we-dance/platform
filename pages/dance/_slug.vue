@@ -12,24 +12,22 @@
           >Edit this page</a
         >
         <span>•</span>
-        <router-link to="/dance" class="block"
-          >List of all dance styles</router-link
-        >
+        <NuxtLink to="/dance" class="block">List of all dance styles</NuxtLink>
       </div>
 
       <div class="mt-4">
         <span class="font-bold">Family</span>
         <span class="leading-loose">
-          <router-link :to="`/dance/${page.family}`">{{
+          <NuxtLink :to="`/dance/${page.family}`">{{
             page.family
-          }}</router-link></span
+          }}</NuxtLink></span
         >
       </div>
 
       <div>
         <span class="font-bold">Related</span>
         <span v-for="style in related" :key="style.name" class="p-1">
-          <router-link :to="`/dance/${style.id}`">{{ style.name }}</router-link
+          <NuxtLink :to="`/dance/${style.id}`">{{ style.name }}</NuxtLink
           >{{ ' ' }}
         </span>
       </div>

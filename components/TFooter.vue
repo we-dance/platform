@@ -9,25 +9,23 @@
     </div>
 
     <div class="flex flex-wrap gap-4 text-xs">
-      <router-link class="hover:underline" to="/about">{{
+      <NuxtLink class="hover:underline" to="/about">{{
         $t('footer.about')
-      }}</router-link>
-      <router-link class="hover:underline" to="/get-involved">
+      }}</NuxtLink>
+      <NuxtLink class="hover:underline" to="/get-involved">
         Get Involved
-      </router-link>
-      <router-link class="hover:underline" to="/support">Support</router-link>
-      <router-link class="hover:underline" to="/privacy"
-        >Datenschutzerklärung</router-link
+      </NuxtLink>
+      <NuxtLink class="hover:underline" to="/support">Support</NuxtLink>
+      <NuxtLink class="hover:underline" to="/privacy"
+        >Datenschutzerklärung</NuxtLink
       >
-      <router-link class="hover:underline" to="/terms"
-        >Impressum/Terms</router-link
-      >
-      <router-link class="hover:underline" to="/coc">{{
+      <NuxtLink class="hover:underline" to="/terms">Impressum/Terms</NuxtLink>
+      <NuxtLink class="hover:underline" to="/coc">{{
         $t('footer.coc')
-      }}</router-link>
-      <router-link class="hover:underline" to="/faq">{{
+      }}</NuxtLink>
+      <NuxtLink class="hover:underline" to="/faq">{{
         $t('footer.faq')
-      }}</router-link>
+      }}</NuxtLink>
     </div>
     <div class="mt-4 text-xs">© WeDance 2021 – All rights reserved.</div>
   </div>
