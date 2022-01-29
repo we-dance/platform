@@ -24,7 +24,6 @@
     "@nuxtjs/composition-api": "^0.12.5",
     "@nuxtjs/device": "^1.2.7",
     "@nuxtjs/dotenv": "^1.4.0",
-    "@nuxtjs/firebase": "^7.4.1",
     "@nuxtjs/pwa": "^3.0.0-0",
     "@nuxtjs/robots": "^2.4.2",
     "@nuxtjs/sentry": "^5.1.0",
