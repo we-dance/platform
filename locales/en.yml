@@ -19,6 +19,10 @@ events:
 posts:
   add: Add post
   title: Feed
+  edit:
+    post: Post
+    event: Event
+
 profiles:
   add: Add profile
   title: Community
