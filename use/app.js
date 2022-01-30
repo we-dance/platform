@@ -244,7 +244,7 @@ export const useApp = () => {
       return ''
     }
 
-    if (!cache.value) {
+    if (!cache.value?.cities) {
       return ''
     }
 
