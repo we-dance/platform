@@ -13,11 +13,7 @@
         <TPost :item="item" :hide-media="hideMedia">
           <TReactions :item="item" class="pt-4 justify-center" />
 
-          <TCommentsInline
-            v-if="!hideComments && !item.hideComments"
-            :item="item"
-            class="p-4"
-          />
+          <TCommentsInline v-if="!item.hideComments" :item="item" class="p-4" />
         </TPost>
       </div>
 
