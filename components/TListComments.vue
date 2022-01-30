@@ -1,23 +1,16 @@
 <template>
-  <TCardList
-    :collection="collection"
-    :fields="fields"
-    :map="map"
-    :filters="filters"
-  >
+  <TCardList :collection="collection" :fields="fields" :filters="filters">
     <template v-slot:empty>
       <slot name="empty" />
     </template>
 
     <template v-slot:default="{ item }">
-      <TCardComment :post-id="postId" :item="item" />
+      <TCardComment :post-id="postId" :item="item" class="py-2" />
     </template>
   </TCardList>
 </template>
 
 <script>
-import { useReactions } from '~/use/reactions'
-
 export default {
   name: 'TListComments',
   props: {
@@ -31,8 +24,6 @@ export default {
     },
   },
   setup(props) {
-    const items = []
-
     const collection = 'comments'
 
     const fields = [
@@ -53,14 +44,10 @@ export default {
       },
     ]
 
-    const { map } = useReactions()
-
     return {
-      items,
       collection,
       fields,
       filters,
-      map,
     }
   },
 }
