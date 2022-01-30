@@ -13,13 +13,14 @@
 <script>
 import { getExcerpt } from '~/utils'
 import { useApp } from '~/use/app'
+import { db } from '~/plugins/firebase'
 
 export default {
   layout: 'empty',
   async asyncData({ app, params, error }) {
     const { getCity } = useApp()
 
-    const collection = await app.$fire.firestore
+    const collection = await db
       .collection('profiles')
       .where('username', '==', params.slug)
       .get()

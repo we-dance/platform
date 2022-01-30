@@ -5,8 +5,7 @@ import excerptHtml from 'excerpt-html'
 import saveAs from 'file-saver'
 import { dsvFormat } from 'd3'
 import languages from '~/assets/languages'
-import firebase from 'firebase/app'
-import 'firebase/firestore'
+import { db } from './plugins/firebase'
 
 export const getObjectKeysFromArray = (arr) => {
   const obj = {}
@@ -350,7 +349,7 @@ export function getOptionsFromMulti(list, values) {
 }
 
 export async function loadDoc({ app, params, error }, collection) {
-  const docRef = app.$fire.firestore.collection(collection).doc(params.id)
+  const docRef = db.collection(collection).doc(params.id)
 
   const snapshot = await docRef.get()
   const doc = snapshot.data()
@@ -367,7 +366,6 @@ export async function loadDoc({ app, params, error }, collection) {
 }
 
 export async function loadDocAsync(id, collection) {
-  const db = firebase.firestore()
   const docRef = db.collection(collection).doc(id)
 
   const snapshot = await docRef.get()

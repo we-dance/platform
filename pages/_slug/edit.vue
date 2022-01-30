@@ -23,6 +23,7 @@
 </template>
 
 <script>
+import { db } from '~/plugins/firebase'
 import { useAuth } from '~/use/auth'
 import { useDoc } from '~/use/doc'
 import { useProfiles } from '~/use/profiles'
@@ -39,7 +40,7 @@ export default {
     let profileFound = false
     let id = null
 
-    const collection = await app.$fire.firestore
+    const collection = await db
       .collection('profiles')
       .where('username', '==', slug)
       .get()
