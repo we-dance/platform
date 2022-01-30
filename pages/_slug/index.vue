@@ -6,6 +6,8 @@
 </template>
 
 <script>
+import { db } from '~/plugins/firebase'
+
 export default {
   name: 'Slug',
   async asyncData({ app, $content, params, error }) {
@@ -22,7 +24,7 @@ export default {
     } catch (e) {}
 
     if (!pageFound) {
-      const collection = await app.$fire.firestore
+      const collection = await db
         .collection('profiles')
         .where('username', '==', slug)
         .get()
