@@ -7,7 +7,7 @@
     />
 
     <div class="flex justify-end">
-      <TButton @click="submit"> Post comment </TButton>
+      <TButton type="xs" @click="submit">Post reply</TButton>
     </div>
   </div>
 </template>

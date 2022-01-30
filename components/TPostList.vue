@@ -9,13 +9,15 @@
     </div>
     <h2 v-if="title" class="font-bold text-lg mb-4">{{ title }}</h2>
     <div v-if="docs.length">
-      <div v-for="doc in docs" :key="doc.id">
-        <TPost
-          :item="doc"
-          :hide-media="hideMedia"
-          :hide-comments="hideComments"
-        >
-          <TReactions :item="doc" class="pb-4 justify-center" />
+      <div v-for="item in docs" :key="item.id">
+        <TPost :item="item" :hide-media="hideMedia">
+          <TReactions :item="item" class="pt-4 justify-center" />
+
+          <TCommentsInline
+            v-if="!hideComments && !item.hideComments"
+            :item="item"
+            class="p-4"
+          />
         </TPost>
       </div>
 

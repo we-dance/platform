@@ -140,7 +140,8 @@
       >
     </div>
 
-    <TPost v-if="item.id" :item="item" hide-media />
+    <TPreview :content="item.description" class="p-4" />
+    <TCommentsInline :item="item" class="border-t p-4" />
 
     <div v-if="item.venue && item.venue.map" class="p-4 bg-gray-100">
       <div class="font-bold text-sm mb-4 leading-none text-gray-700">
