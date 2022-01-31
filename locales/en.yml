@@ -48,7 +48,7 @@ events:
     show: Show
     other: Other
   add: Add event
-  title: Events
+  title: Dance Calendar
   list:
     empty: No events found. Would you like to add one?
   view:
@@ -56,7 +56,8 @@ events:
     covers: See list
   filter:
     type: Type
-    style: Style
+    style: Any Dance
+    level: Any Level
 eventView:
   dropdown:
     dashboard: Dashboard
@@ -75,8 +76,9 @@ eventView:
     finish:
       title: Almost there
       btn: Complete registration
-      description: See you soon! Don't forget to check-in by the organiser when you
-              come!
+      description:
+        See you soon! Don't forget to check-in by the organiser when you
+        come!
       reminder: Check your email to finish creation of the WeDance profile.
       calendar: Add to calendar
   organiser: Organised by
@@ -260,3 +262,9 @@ sort:
   starred: Starred
   archived: Archived
   yours: Yours
+event:
+  category:
+    meetup: Meetup
+    lesson: Lesson
+    online: Online
+    travel: Travel

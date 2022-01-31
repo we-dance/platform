@@ -4,35 +4,49 @@
       <TButton type="nav" icon="plus" to="/events/-/edit" />
     </THeader>
 
-    <div class="flex space-x-2 p-2">
-      <t-rich-select
-        v-model="eventType"
-        clearable
-        hide-search-box
-        :options="eventTypeListIcons"
-        :placeholder="$t('events.filter.type')"
-      />
-      <t-rich-select
-        v-model="dances"
-        clearable
-        :options="danceStyles"
-        :placeholder="$t('events.filter.style')"
-      />
-      <div>
+    <div class="space-y-2 p-2 border-b">
+      <div class="flex justify-center overflow-x-scroll">
+        <div class="flex flex-nowrap text-center">
+          <TButton
+            v-for="option in addLabelIcons(eventCategoryOptions)"
+            :key="option.value"
+            allow-guests
+            :to="getRoute({ category: option.value })"
+            class="m-1 leading-normal"
+            :type="option.value === category ? 'toggled' : 'simple'"
+            >{{ option.label }}</TButton
+          >
+        </div>
+      </div>
+
+      <div class="md:flex md:space-x-2 space-y-2 md:space-y-0">
         <TButton
-          v-if="view === 'list'"
-          icon="news"
-          type="icon"
-          :label="$t('events.view.list')"
-          @click="view = 'covers'"
+          to="/cities?target=/events"
+          icon="place"
+          :label="cityName || $t('cities.choose')"
+          class="w-full md:w-auto"
         />
-        <TButton
-          v-if="view === 'covers'"
-          icon="notes"
-          type="icon"
-          :label="$t('events.view.covers')"
-          @click="view = 'list'"
-        />
+
+        <div class="flex space-x-2">
+          <TRichSelect
+            v-model="dance"
+            clearable
+            :options="danceStyles"
+            :placeholder="$t('events.filter.style')"
+            @input="
+              (val) => $router.push(getRoute({ dance: val || 'any-dance' }))
+            "
+          />
+          <TRichSelect
+            v-model="level"
+            clearable
+            :options="levelOptions"
+            :placeholder="$t('events.filter.level')"
+            @input="
+              (val) => $router.push(getRoute({ level: val || 'any-level' }))
+            "
+          />
+        </div>
       </div>
     </div>
 
@@ -40,30 +54,6 @@
       <TLoader v-if="loading" />
       <div v-else-if="!count" class="p-4">
         {{ $t('events.list.empty') }}
-      </div>
-
-      <div
-        v-if="view === 'covers'"
-        class="grid grid-cols-1 md:grid-cols-2 gap-2"
-      >
-        <NuxtLink
-          v-for="event in events"
-          :key="event.id"
-          :to="`/events/${event.id}`"
-          class="hover:opacity-75"
-        >
-          <TSharePreviewPost
-            :username="event.organiser"
-            collection="events"
-            :title="event.name"
-            :type="event.type"
-            :description="getEventDescription(event)"
-            :extra="event.locality"
-            :photo="event.cover"
-            :styles="event.styles"
-            size="sm"
-          />
-        </NuxtLink>
       </div>
 
       <div v-else>
@@ -99,12 +89,11 @@
 </template>
 
 <script>
-import { computed, ref } from '@nuxtjs/composition-api'
-import { startOfWeek, addDays, endOfYear } from 'date-fns'
+import { computed, onMounted, ref } from '@nuxtjs/composition-api'
+import { startOfWeek, addDays } from 'date-fns'
 import { useCollection } from '~/use/collection'
 import { useAuth } from '~/use/auth'
 import { useCities } from '~/use/cities'
-import { useRouter } from '~/use/router'
 import { useProfiles } from '~/use/profiles'
 import { useEvents } from '~/use/events'
 import { useStyles } from '~/use/styles'
@@ -119,19 +108,54 @@ import {
   getEventDescription,
   getDateObect,
 } from '~/utils'
+import { useRouter } from '~/use/router'
 
 export default {
-  name: 'EventsIndex',
+  name: 'Calendar',
   setup() {
-    const { eventTypeListIcons } = useEvents()
-    const { currentCity } = useCities()
+    const { levelOptions } = useStyles()
+    const { route, router } = useRouter()
+    const { eventCategoryOptions, addLabelIcons } = useEvents()
+    const { cityName, changeCityByName } = useCities()
     const { docs, loading: loadingPosts, getById } = useCollection('posts', {
       type: 'event',
     })
     const { getProfile } = useProfiles()
     const { getStylesDropdown } = useStyles()
 
-    const eventType = ref('')
+    const category = ref(route.params.category || 'travel')
+    const city = ref((route.params.city || '').replace('anywhere', ''))
+    const dance = ref((route.params.dance || '').replace('any-dance', ''))
+    const level = ref((route.params.level || '').replace('any-level', ''))
+
+    const getRoute = (changes) => {
+      const currentParams = {
+        city: cityName.value || 'anywhere',
+        category: category.value || 'travel',
+        dance: dance.value || 'any-dance',
+        level: level.value || 'any-level',
+      }
+
+      const params = {
+        ...currentParams,
+        ...changes,
+      }
+
+      return {
+        name: 'Calendar',
+        params,
+      }
+    }
+
+    onMounted(async () => {
+      if (city.value && city.value !== cityName.value) {
+        await changeCityByName(route.params.city)
+      }
+
+      if (!route.params.dance) {
+        router.replace(getRoute({}))
+      }
+    })
 
     const view = ref('list')
     const viewOptions = [
@@ -146,7 +170,7 @@ export default {
     ]
 
     const { uid, profile: myProfile } = useAuth()
-    const dances = ref('')
+
     const danceStyles = computed(() =>
       getStylesDropdown(myProfile.value?.styles)
     )
@@ -171,74 +195,52 @@ export default {
     const now = new Date()
     const startOfWeekDate = startOfWeek(now, { weekStartsOn: 1 })
     const startOfWeekString = getYmd(startOfWeekDate)
-    const startOfTodayString = getYmd(now)
     const endOfWeekString = getYmd(addDays(startOfWeekDate, 7))
-    const endOfYearString = getYmd(endOfYear(now))
 
     const count = computed(() => items.value.length)
-    const { route } = useRouter()
 
     const loading = computed(() => loadingPosts.value)
 
     const activeFilter = ref('all')
 
-    const isPublic = (item) => item.visibility !== 'Unlisted'
+    const isSelectedCategory = (item) =>
+      eventCategoryOptions
+        .find((option) => option.value === category.value)
+        .filter(item)
 
-    const filterOptions = computed(() => [
-      {
-        value: 'thisYear',
-        label: 'This Year',
-        filter: (item) =>
-          getYmd(item.startDate) >= startOfTodayString &&
-          getYmd(item.startDate) <= endOfYearString &&
-          isPublic(item),
-      },
-      {
-        value: 'all',
-        label: 'All',
-        filter: (item) =>
-          getYmd(item.startDate) >= startOfTodayString && isPublic(item),
-      },
-      {
-        value: 'mine',
-        label: 'Created by me',
-        filter: (item) => item.createdBy === uid.value,
-      },
-      {
-        value: 'schedule',
-        label: 'My schedule',
-        filter: (item) =>
-          item.response === 'up' && getYmd(item.startDate) >= startOfWeekString,
-      },
-    ])
+    const isSelectedStyle = (item) =>
+      item.styles &&
+      item.styles[dance.value] &&
+      item.styles[dance.value].selected
 
-    const activeFilterItem = computed(() =>
-      filterOptions.value.find((item) => item.value === activeFilter.value)
-    )
+    const isSelectedLevel = (item) => {
+      if (!item.styles) {
+        return false
+      }
 
-    const thisCityFilter = (item) =>
-      item.place && currentCity.value ? item.place === currentCity.value : true
+      const styles = Object.keys(item.styles)
+      for (const style of styles) {
+        if (item.styles[style].level === level.value) {
+          return true
+        }
+      }
+
+      return false
+    }
 
     const items = computed(() => {
       let result = docs.value.map(map)
 
-      if (dances.value) {
-        result = result.filter(
-          (item) =>
-            item.styles &&
-            item.styles[dances.value] &&
-            item.styles[dances.value].selected
-        )
+      if (dance.value) {
+        result = result.filter(isSelectedStyle)
       }
 
-      if (eventType.value) {
-        result = result.filter((item) => item.eventType === eventType.value)
+      if (level.value) {
+        result = result.filter(isSelectedLevel)
       }
 
-      if (!route.query.all) {
-        result = result
-          .filter(thisCityFilter)
-          .filter(activeFilterItem.value.filter)
+      if (category.value) {
+        result = result.filter(isSelectedCategory)
       }
 
       return result.sort(sortBy('startDate'))
@@ -258,7 +260,6 @@ export default {
 
     return {
       getEventDescription,
-      currentCity,
       count,
       events: items,
       itemsByDate,
@@ -272,13 +273,17 @@ export default {
       startOfWeekString,
       endOfWeekString,
       activeFilter,
-      filterOptions,
-      dances,
+      dance,
       view,
       viewOptions,
-      eventTypeListIcons,
-      eventType,
+      eventCategoryOptions,
+      category,
+      addLabelIcons,
       danceStyles,
+      cityName,
+      level,
+      levelOptions,
+      getRoute,
     }
   },
   head() {

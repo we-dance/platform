@@ -32,12 +32,13 @@ import { searchByStart, sortBy } from '~/utils'
 export default {
   setup() {
     const { currentCity } = useCities()
-    const { router } = useRouter()
+    const { router, route } = useRouter()
     const { getCityHistory, removeCityHistory: removeCity, cities } = useApp()
 
     function changeCity(placeId) {
       currentCity.value = placeId
-      router.push('/feed')
+      const target = route.query.target || '/feed'
+      router.push(target)
     }
 
     const query = ref('')

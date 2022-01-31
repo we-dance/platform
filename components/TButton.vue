@@ -85,7 +85,7 @@ export default {
       default: '4',
     },
     to: {
-      type: String,
+      type: [String, Object],
       default: '',
     },
     href: {
