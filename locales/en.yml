@@ -19,24 +19,31 @@ events:
 posts:
   add: Add post
   title: Feed
+profiles:
+  add: Add profile
+  title: Community
 profile:
   username:
     label: Username
     before: Use only letters, numbers, underscores and periods.
-profiles:
   community: I dance in
   type: Type
   name:
     label: Name
     before: If you want to remain anonym use your first name.
+    placeholder: (Required)
   bio:
     label: Teaser
     before: Short introduction on top of your photo
   hometown:
     label: Hometown
     before: Where were you born and raised?
-  birthday: Birthday
-  gender: Gender
+  birthday:
+    label: Birthday
+    description: We will show only your age'
+  gender:
+    label: Gender
+    placeholder: Gender
   style: Dance styles
   story:
     label: Description
@@ -55,38 +62,78 @@ profiles:
     - Storyline: It covers who you are, what you offer, and where you want to be
 
     - Appealing: Your elevator pitch is essentially a persuasive sales pitch; the emphasis should be on what you offer'
+    placeholder: Text (markdown)
   locales: Your languages
   skills: Non-dancing skills
   days: Days
-  learning: Which dance topics you are interested in?
+  learning:
+    label: Which dance topics you are interested in?
+    description: 'For example: Musicality in Salsa, Men Styling, etc.'
   teacher: Are you teaching?
   partner: Are you looking for a dance partner?
   height: Your height (cm)
-  weight: Your weight (kg)
-  partnerBio: Question
+  weight:
+    label: Your weight (kg)
+    description: Leave this field blank if you think it's irrelevant.
+  partnerBio:
+    label: Question
+    description: 'What is important in your partner? Put it as a question, for example: Do you love dogs?'
   objectives: Objectives
+  objective:
+    placeholder: Objective
   meetingPlace: Where to meet?
-  visibility: Visibility
+  visibility:
+    label: Visibility
+    description: '- Public profiles are searchable in Google and used in our social media to attract new members.
+
+    - Members profile are only visible for logged-in users.
+
+    - Unlisted profiles are possible to open with exact link, but they are not listed in members lists and search.'
   photo: Photo
   add: Add profile
   title: Community
   styles:
     label: Dance
     tips: Mark up to 4 favorite dances that will be highlighted in your poster
-  place: Your city
-  permission: Do you want free promo?
-  jobs: I can help with
+  place:
+    label: Your city
+    placeholder: City
+  dance:
+    placeholder: Style
+  permission:
+    label: Do you want free promo?
+    description: 'Send us link to your profile on [Instagram](https://instagram.com/wedancevip) and we will promote it on our social media channels: Telegram, Instagram, Facebook and Twitter.'
+  jobs:
+    label: I can help with
+    description: 'How can you help our community? What are you good at? For example: design, programming, marketing, social media, etc.'
   contacts: Do you use social media?
-  contactFields:
-    instagram: instagram.com/
-    facebook: fb.com/
-    whatsapp: whatsapp.com/
-    telegram: t.me/
-    twitter: twitter.com/
-    tiktok: tiktok.com/
-    youtube: youtube.com/
-    email: Email
-    website: Website
+  instagram:
+   label: instagram.com/
+   placeholder: username
+  facebook:
+    label: fb.com/
+    placeholder: username
+  whatsapp:
+    label: whatsapp.com/
+    placeholder: whatsapp chat
+  telegram:
+    label: t.me/
+    placeholder: username
+  twitter:
+    label: twitter.com/
+    placeholder: username
+  tiktok:
+    label: tiktok.com/
+    placeholder: username
+  youtube:
+    label: youtube.com/
+    placeholder: username
+  email:
+    label: Email
+    placeholder: for business requests
+  website:
+    label: Website
+    placeholder: for business requests
   genderList:
     female: Female
     male: Male
@@ -121,26 +168,6 @@ profiles:
     username: Username
     registered: Registered
     lastSeen: Last seen
-  placeholder:
-    username: username
-    whatsapp: whatsapp chat
-    business: for business requests
-    place: City
-    required: (Required)
-    story: Text (markdown)
-    dance: Style
-    objective: Objective
-    gender: Gender
-  description:
-    visibility: '- Public profiles are searchable in Google and used in our social media to attract new members.
-    - Members profile are only visible for logged-in users.
-    - Unlisted profiles are possible to open with exact link, but they are not listed in members lists and search.'
-    permission: 'Send us link to your profile on [Instagram](https://instagram.com/wedancevip) and we will promote it on our social media channels: Telegram, Instagram, Facebook and Twitter.'
-    learning: 'For example: Musicality in Salsa, Men Styling, etc.'
-    jobs: 'How can you help our community? What are you good at? For example: design, programming, marketing, social media, etc.'
-    birthday: We will show only your age'
-    weight: Leave this field blank if you think it's irrelevant.
-    partnerBio: 'What is important in your partner? Put it as a question, for example: Do you love dogs?'
   visibilityOptions:
     public: Public
     members: Members
