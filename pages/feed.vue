@@ -12,7 +12,6 @@
           rows="2"
           :placeholder="$t('feed.newMessage.input')"
           class="w-full p-4 border text-sm"
-          @keyup.enter="send"
         ></textarea>
         <div class="flex justify-between">
           <TInputSelectSmall v-model="postType" :options="postTypeList" />

@@ -180,7 +180,7 @@
                 <TButton
                   allow-guests
                   :to="`/signin?target=${this.$route.fullPath}`"
-                  label="$t('eventView.reservationPopup.reserve.Label')"
+                  :label="$t('eventView.reservationPopup.reserve.label')"
                 />
               </template>
             </TForm>

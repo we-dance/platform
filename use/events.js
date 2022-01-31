@@ -1,6 +1,8 @@
 import { addMinutes, parseISO } from 'date-fns'
 import { useI18n } from '~/use/i18n'
 import { usePosts } from '~/use/posts'
+import { useCities } from './cities'
+import { getYmd } from '~/utils'
 
 const updateEndDate = (e) => {
   if (!e.duration || e.duration === 'custom') {
@@ -19,6 +21,7 @@ const updatePlace = (e) => {
 }
 
 export const useEvents = () => {
+  const { currentCity } = useCities()
   const { postTypeList } = usePosts()
   const { t } = useI18n()
 
@@ -31,39 +34,91 @@ export const useEvents = () => {
     {
       label: t('events.typelist.workshop'),
       value: 'Workshop',
-      icon: '📙',
+      icon: '🎓',
     },
     {
       label: t('events.typelist.course'),
       value: 'Course',
-      icon: '📚',
+      icon: '🎓',
     },
     {
       label: t('events.typelist.festival'),
       value: 'Festival',
-      icon: '🎁',
+      icon: '✈️',
     },
     {
       label: t('events.typelist.congress'),
       value: 'Congress',
-      icon: '🎁',
+      icon: '✈️',
     },
     {
       label: t('events.typelist.concert'),
       value: 'Concert',
-      icon: '🎷',
+      icon: '🎵',
     },
     {
       label: t('events.typelist.show'),
       value: 'Show',
-      icon: '🎭',
+      icon: '🎵',
     },
     {
       label: t('events.typelist.other'),
       value: 'Other',
-      icon: '❓',
+      icon: '🎵',
     },
   ]
+
+  const now = new Date()
+  const startOfTodayString = getYmd(now)
+
+  const isPublic = (item) => item.visibility !== 'Unlisted'
+
+  const isUpcoming = (item) =>
+    getYmd(item.startDate) >= startOfTodayString && isPublic(item)
+
+  const isInSelectedCity = (item) => item.place === currentCity.value
+
+  const eventCategoryOptions = [
+    {
+      label: t('event.category.meetup'),
+      value: 'meetup',
+      icon: '🎵',
+      filter: (item) =>
+        ['Party', 'Show', 'Concert', 'Other'].includes(item.eventType) &&
+        isUpcoming(item) &&
+        isInSelectedCity(item),
+    },
+    {
+      label: t('event.category.lesson'),
+      value: 'lesson',
+      icon: '🎓',
+      filter: (item) =>
+        ['Workshop', 'Course'].includes(item.eventType) &&
+        isUpcoming(item) &&
+        isInSelectedCity(item),
+    },
+    {
+      label: t('event.category.online'),
+      value: 'online',
+      icon: '📺',
+      filter: (item) => item.online === 'Yes' && isUpcoming(item),
+    },
+    {
+      label: t('event.category.travel'),
+      value: 'travel',
+      icon: '✈️',
+      types: ['Festival', 'Congress'],
+      filter: (item) =>
+        ['Festival', 'Congress'].includes(item.eventType) && isUpcoming(item),
+    },
+  ]
+
+  function addLabelIcons(options) {
+    return options.map((type) => ({
+      ...type,
+      label: `${type.icon}  ${type.label}`,
+    }))
+  }
 
   const eventTypeListIcons = eventTypeList.map((type) => ({
     ...type,
@@ -269,9 +324,11 @@ export const useEvents = () => {
   ]
 
   return {
+    eventCategoryOptions,
     eventTypeList,
     eventTypeListIcons,
     getEventIcon,
     eventFields,
+    addLabelIcons,
   }
 }
