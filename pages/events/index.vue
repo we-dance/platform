@@ -123,7 +123,9 @@ export default {
     const { getProfile } = useProfiles()
     const { getStylesDropdown } = useStyles()
 
-    const category = ref(route.params.category || 'travel')
+    const defaultCategory = route.params.city ? 'meetup' : 'travel'
+
+    const category = ref(route.params.category || defaultCategory)
     const city = ref((route.params.city || '').replace('anywhere', ''))
     const dance = ref((route.params.dance || '').replace('any-dance', ''))
     const level = ref((route.params.level || '').replace('any-level', ''))
@@ -131,7 +133,7 @@ export default {
     const getRoute = (changes) => {
       const currentParams = {
         city: cityName.value || 'anywhere',
-        category: category.value || 'travel',
+        category: category.value || defaultCategory,
         dance: dance.value || 'any-dance',
         level: level.value || 'any-level',
       }
