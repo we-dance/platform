@@ -2,10 +2,12 @@ import { useI18n } from '~/use/i18n'
 import { useApp } from '~/use/app'
 import { useAccounts } from '~/use/accounts'
 import { useCollection } from '~/use/collection'
+import { useCommon } from '~/use/common'
 
 export const useProfiles = () => {
   const { t } = useI18n()
   const { accountFields } = useAccounts()
+  const { booleanOptions } = useCommon()
 
   const { read, loading } = useApp()
   const { getById } = useCollection('profiles')
@@ -15,115 +17,115 @@ export const useProfiles = () => {
 
   const genderList = [
     {
-      label: t('profiles.genderList.female'),
+      label: t('profile.genderList.female'),
       value: 'Female',
     },
     {
-      label: t('profiles.genderList.male'),
+      label: t('profile.genderList.male'),
       value: 'Male',
     },
     {
-      label: t('profiles.genderList.female'),
+      label: t('profile.genderList.other'),
       value: 'Other',
     },
   ]
 
   const days = [
     {
-      label: t('profiles.daysList.monday'),
+      label: t('profile.daysList.monday'),
       value: 'Monday',
     },
     {
-      label: t('profiles.daysList.tuesday'),
+      label: t('profile.daysList.tuesday'),
       value: 'Tuesday',
     },
     {
-      label: t('profiles.daysList.wednesday'),
+      label: t('profile.daysList.wednesday'),
       value: 'Wednesday',
     },
     {
-      label: t('profiles.daysList.thursday'),
+      label: t('profile.daysList.thursday'),
       value: 'Thursday',
     },
     {
-      label: t('profiles.daysList.friday'),
+      label: t('profile.daysList.friday'),
       value: 'Friday',
     },
     {
-      label: t('profiles.daysList.saturday'),
+      label: t('profile.daysList.saturday'),
       value: 'Saturday',
     },
     {
-      label: t('profiles.daysList.sunday'),
+      label: t('profile.daysList.sunday'),
       value: 'Sunday',
     },
   ]
 
   const meetingPlaces = [
     {
-      label: t('profiles.meetingPlaces.myPlace'),
+      label: t('profile.meetingPlaces.myPlace'),
       value: 'myPlace',
     },
     {
-      label: t('profiles.meetingPlaces.yourPlace'),
+      label: t('profile.meetingPlaces.yourPlace'),
       value: 'yourPlace',
     },
     {
-      label: t('profiles.meetingPlaces.private'),
+      label: t('profile.meetingPlaces.private'),
       value: 'private',
     },
     {
-      label: t('profiles.meetingPlaces.public'),
+      label: t('profile.meetingPlaces.public'),
       value: 'public',
     },
   ]
 
   const typeList = [
     {
-      label: t('profiles.typeList.dancer'),
+      label: t('profile.typeList.dancer'),
       value: 'Dancer',
     },
     {
-      label: t('profiles.typeList.artist'),
+      label: t('profile.typeList.artist'),
       value: 'Artist',
     },
     {
-      label: t('profiles.typeList.organiser'),
+      label: t('profile.typeList.organiser'),
       value: 'Organiser',
     },
     {
-      label: t('profiles.typeList.venue'),
+      label: t('profile.typeList.venue'),
       value: 'Venue',
     },
     {
-      label: t('profiles.typeList.city'),
+      label: t('profile.typeList.city'),
       value: 'City',
     },
   ]
 
   const objectivesList = [
     {
-      label: t('profiles.objectivesList.talk'),
+      label: t('profile.objectivesList.talk'),
       value: 'talk',
     },
     {
-      label: t('profiles.objectivesList.learn'),
+      label: t('profile.objectivesList.learn'),
       value: 'learn',
     },
     {
-      label: t('profiles.objectivesList.outdoors'),
+      label: t('profile.objectivesList.outdoors'),
       value: 'outdoors',
     },
     {
-      label: t('profiles.objectivesList.indoors'),
+      label: t('profile.objectivesList.indoors'),
       value: 'indoors',
     },
     {
-      label: t('profiles.objectivesList.teach'),
+      label: t('profile.objectivesList.teach'),
       value: 'teach',
     },
     {
-      label: t('profiles.objectivesList.project'),
+      label: t('profile.objectivesList.project'),
       value: 'project',
     },
   ]
@@ -131,104 +133,93 @@ export const useProfiles = () => {
   const contactFields = [
     {
       name: 'instagram',
-      label: t('profiles.contactFields.instagram'),
-      placeholder: t('profiles.placeholder.username'),
+      label: t('profile.instagram.label'),
+      placeholder: t('profile.instagram.placeholder'),
       when: (p) => p.contacts === 'Yes',
     },
     {
       name: 'facebook',
-      label: t('profiles.contactFields.facebook'),
-      placeholder: t('profiles.placeholder.username'),
+      label: t('profile.facebook.label'),
+      placeholder: t('profile.facebook.placeholder'),
       when: (p) => p.contacts === 'Yes',
     },
     {
       name: 'whatsapp',
-      label: t('profiles.contactFields.whatsapp'),
-      placeholder: t('profiles.placeholder.whatsapp'),
+      label: t('profile.whatsapp.label'),
+      placeholder: t('profile.whatsapp.placeholder'),
       when: (p) => p.contacts === 'Yes',
     },
     {
       name: 'telegram',
-      label: t('profiles.contactFields.telegram'),
-      placeholder: t('profiles.placeholder.username'),
+      label: t('profile.telegram.label'),
+      placeholder: t('profile.telegram.placeholder'),
       when: (p) => p.contacts === 'Yes',
     },
     {
       name: 'twitter',
-      label: t('profiles.contactFields.twitter'),
-      placeholder: t('profiles.placeholder.username'),
+      label: t('profile.twitter.label'),
+      placeholder: t('profile.twitter.placeholder'),
       when: (p) => p.contacts === 'Yes',
     },
     {
       name: 'tiktok',
-      label: t('profiles.contactFields.tiktok'),
-      placeholder: t('profiles.placeholder.username'),
+      label: t('profile.tiktok.label'),
+      placeholder: t('profile.tiktok.placeholder'),
       when: (p) => p.contacts === 'Yes',
     },
     {
       name: 'youtube',
-      label: t('profiles.contactFields.youtube'),
-      placeholder: t('profiles.placeholder.username'),
+      label: t('profile.youtube.label'),
+      placeholder: t('profile.youtube.placeholder'),
       when: (p) => p.contacts === 'Yes',
     },
     {
       name: 'email',
-      label: t('profiles.contactFields.email'),
-      placeholder: t('profiles.placeholder.business'),
+      label: t('profile.email.label'),
+      placeholder: t('profile.email.placeholder'),
       when: (p) => p.contacts === 'Yes',
     },
     {
       name: 'website',
-      label: t('profiles.contactFields.website'),
-      placeholder: t('profiles.placeholder.business'),
+      label: t('profile.website.label'),
+      placeholder: t('profile.website.placeholder'),
       when: (p) => p.contacts === 'Yes',
     },
   ]
 
   const visibilityOptions = [
     {
-      label: t('profiles.visibilityOptions.public'),
+      label: t('profile.visibilityOptions.public'),
       value: 'Public',
     },
     {
-      label: t('profiles.visibilityOptions.members'),
+      label: t('profile.visibilityOptions.members'),
       value: 'Members',
     },
     {
-      label: t('profiles.visibilityOptions.unlisted'),
+      label: t('profile.visibilityOptions.unlisted'),
       value: 'Unlisted',
-    },
-  ]
-
-  const booleanOptions = [
-    {
-      label: t('profiles.booleanOptions.yes'),
-      value: 'Yes',
-    },
-    {
-      label: t('profiles.booleanOptions.no'),
-      value: 'No',
     },
   ]
 
   const profileFields = [
     {
       name: 'photo',
-      label: t('profiles.photo'),
+      label: t('profile.photo'),
       poster: true,
       component: 'TInputPhoto',
     },
     {
       name: 'styles',
-      label: t('profiles.styles.label'),
+      label: t('profile.styles.label'),
       labelPosition: 'top',
       poster: true,
       component: 'TInputStylesSelect2',
-      tips: t('profiles.styles.tips'),
+      tips: t('profile.styles.tips'),
     },
     {
       name: 'gender',
-      label: t('profiles.gender'),
+      label: t('profile.gender.label'),
       component: 'TInputButtons',
       hideSearchBox: true,
       poster: true,
@@ -236,7 +227,7 @@ export const useProfiles = () => {
     },
     {
       name: 'type',
-      label: t('profiles.type'),
+      label: t('profile.type'),
       component: 'TRadioGroup',
       hideSearchBox: true,
       poster: true,
@@ -253,132 +244,132 @@ export const useProfiles = () => {
     },
     {
       name: 'place',
-      label: t('profiles.place'),
+      label: t('profile.place.label'),
       register: true,
       poster: true,
       required: true,
       component: 'TInputPlace',
-      placeholder: t('profiles.placeholder.place'),
+      placeholder: t('profile.place.placeholder'),
     },
     {
       name: 'hometown',
-      label: t('profiles.hometown.label'),
+      label: t('profile.hometown.label'),
       required: true,
       component: 'TInputPlace',
-      before: t('profiles.hometown.before'),
+      before: t('profile.hometown.before'),
     },
     {
       name: 'visibility',
-      label: t('profiles.visibility'),
+      label: t('profile.visibility.label'),
       poster: true,
       component: 'TInputButtons',
       options: visibilityOptions,
-      description: t('profiles.description.visibility'),
+      description: t('profile.visibility.description'),
     },
     {
       name: 'permission',
-      label: t('profiles.permission'),
+      label: t('profile.permission.label'),
       poster: true,
       component: 'TInputButtons',
       options: booleanOptions,
-      description: t('profiles.description.permission'),
+      description: t('profile.permission.description'),
     },
     {
       name: 'name',
-      label: t('profiles.name.label'),
+      label: t('profile.name.label'),
       required: true,
-      placeholder: t('profiles.placeholder.required'),
-      before: t('profiles.name.before'),
+      placeholder: t('profile.name.placeholder'),
+      before: t('profile.name.before'),
     },
     {
       name: 'locales',
-      label: t('profiles.locales'),
+      label: t('profile.locales'),
       component: 'TInputLanguages',
     },
     {
       name: 'objectives',
-      label: t('profiles.objectives'),
+      label: t('profile.objectives'),
       component: 'TInputMulti',
       options: objectivesList,
     },
     {
       name: 'bio',
-      label: t('profiles.bio.label'),
+      label: t('profile.bio.label'),
       poster: true,
       component: 'TInputTextarea',
       labelPosition: 'top',
-      before: t('profiles.bio.before'),
+      before: t('profile.bio.before'),
       max: 140,
     },
     {
       name: 'story',
-      label: t('profiles.story.label'),
+      label: t('profile.story.label'),
       component: 'TInputTextarea',
       labelPosition: 'top',
-      placeholder: t('profiles.placeholder.story'),
-      before: t('profiles.story.before'),
-      tips: t('profiles.story.tips'),
+      placeholder: t('profile.story.placeholder'),
+      before: t('profile.story.before'),
+      tips: t('profile.story.tips'),
     },
     {
       name: 'learning',
-      label: t('profiles.learning'),
+      label: t('profile.learning.label'),
       component: 'TInputTextarea',
-      description: t('profiles.description.learning'),
+      description: t('profile.learning.description'),
     },
     {
       name: 'jobs',
-      label: t('profiles.jobs'),
+      label: t('profile.jobs.label'),
       component: 'TInputTextarea',
-      description: t('profiles.description.jobs'),
+      description: t('profile.jobs.description'),
     },
     {
       name: 'partner',
-      label: t('profiles.partner'),
+      label: t('profile.partner'),
       component: 'TInputButtons',
       options: booleanOptions,
     },
     {
       name: 'birthday',
-      label: t('profiles.birthday'),
+      label: t('profile.birthday.label'),
       when: (p) => p.partner === 'Yes',
       type: 'date',
-      description: 'We will show only your age',
+      description: t('profile.birthday.description'),
     },
     {
       name: 'height',
-      label: t('profiles.height'),
+      label: t('profile.height'),
       when: (p) => p.partner === 'Yes',
     },
     {
       name: 'weight',
-      label: t('profiles.weight'),
+      label: t('profile.weight.label'),
       when: (p) => p.partner === 'Yes',
-      description: t('profiles.description.weight'),
+      description: t('profile.weight.description'),
     },
     {
       name: 'partnerBio',
-      label: t('profiles.partnerBio'),
+      label: t('profile.partnerBio.label'),
       when: (p) => p.partner === 'Yes',
       component: 'TInputTextarea',
-      description: t('profiles.description.partnerBio'),
+      description: t('profile.partnerBio.description'),
     },
     {
       name: 'meetingPlace',
-      label: t('profiles.meetingPlace'),
+      label: t('profile.meetingPlace'),
       when: (p) => p.partner === 'Yes',
       component: 'TInputMulti',
       options: meetingPlaces,
     },
     {
       name: 'days',
-      label: t('profiles.days'),
+      label: t('profile.days'),
       when: (p) => p.partner === 'Yes',
       component: 'TInputMulti',
       options: days,
     },
     {
       name: 'contacts',
-      label: t('profiles.contacts'),
+      label: t('profile.contacts'),
       component: 'TInputButtons',
       options: booleanOptions,
     },
@@ -399,13 +390,13 @@ export const useProfiles = () => {
       component: 'TInputPlace',
       clearable: true,
       hideLabel: true,
-      placeholder: t('profiles.placeholder.place'),
+      placeholder: t('profile.place.placeholder'),
     },
     {
       name: 'dance',
       component: 'TInputStyle',
       hideLabel: true,
-      placeholder: t('profiles.placeholder.dance'),
+      placeholder: t('profile.dance.placeholder'),
       compare: (item, field, value) =>
         item &&
         item[field] &&
@@ -420,7 +411,7 @@ export const useProfiles = () => {
       hideSearchBox: true,
       clearable: true,
       hideLabel: true,
-      placeholder: t('profiles.placeholder.objective'),
+      placeholder: t('profile.objective.placeholder'),
     },
     {
       name: 'gender',
@@ -429,52 +420,52 @@ export const useProfiles = () => {
       hideSearchBox: true,
       clearable: true,
       hideLabel: true,
-      placeholder: t('profiles.placeholder.gender'),
+      placeholder: t('profile.gender.placeholder'),
     },
   ]
 
   const profileSorts = [
     {
       value: 'username',
-      label: t('profiles.profileSorts.username'),
+      label: t('profile.profileSorts.username'),
     },
     {
       value: '-createdAt',
-      label: t('profiles.profileSorts.registered'),
+      label: t('profile.profileSorts.registered'),
     },
     {
       value: '-lastLoginAt',
-      label: t('profiles.profileSorts.lastSeen'),
+      label: t('profile.profileSorts.lastSeen'),
     },
   ]
 
   const radiusOptions = [
     {
-      label: t('profiles.radiusOptions.ten'),
+      label: t('profile.radiusOptions.ten'),
       value: 10,
     },
     {
-      label: t('profiles.radiusOptions.twenty'),
+      label: t('profile.radiusOptions.twenty'),
       value: 20,
     },
     {
-      label: t('profiles.radiusOptions.fifty'),
+      label: t('profile.radiusOptions.fifty'),
       value: 50,
     },
     {
-      label: t('profiles.radiusOptions.hundred'),
+      label: t('profile.radiusOptions.hundred'),
       value: 100,
     },
     {
-      label: t('profiles.radiusOptions.fiveHundred'),
+      label: t('profile.radiusOptions.fiveHundred'),
       value: 500,
     },
     {
-      label: t('profiles.radiusOptions.thousand'),
+      label: t('profile.radiusOptions.thousand'),
       value: 1000,
     },
     {
-      label: t('profiles.radiusOptions.anywhere'),
+      label: t('profile.radiusOptions.anywhere'),
       value: '',
     },
   ]
