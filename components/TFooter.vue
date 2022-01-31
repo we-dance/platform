@@ -9,6 +9,12 @@
     </div>
 
     <div class="flex flex-wrap gap-4 text-xs">
+      <a
+        href="https://github.com/we-dance/platform/releases"
+        target="_blank"
+        class="hover:underline"
+        >v{{ version }}</a
+      >
       <NuxtLink class="hover:underline" to="/about">{{
         $t('footer.about')
       }}</NuxtLink>
@@ -32,6 +38,8 @@
 </template>
 
 <script>
+import { version } from '~/package.json'
+
 export default {
   computed: {
     lang: {
@@ -48,6 +56,11 @@ export default {
         label: locale.name,
       }))
     },
+  },
+  setup() {
+    return {
+      version,
+    }
   },
 }
 </script>
