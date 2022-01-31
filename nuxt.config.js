@@ -15,6 +15,17 @@ export default {
   generate: {
     fallback: true,
   },
+  router: {
+    extendRoutes(routes, resolve) {
+      routes.push({
+        name: 'Calendar',
+        path: '/:city/:category/:dance/:level',
+        component: resolve(__dirname, 'pages/events/index'),
+      })
+
+      return routes
+    },
+  },
   /*
    ** Customize the progress-bar color
    */
