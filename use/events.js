@@ -34,37 +34,37 @@ export const useEvents = () => {
     {
       label: t('events.typelist.workshop'),
       value: 'Workshop',
-      icon: '📙',
+      icon: '🎓',
     },
     {
       label: t('events.typelist.course'),
       value: 'Course',
-      icon: '📚',
+      icon: '🎓',
     },
     {
       label: t('events.typelist.festival'),
       value: 'Festival',
-      icon: '🎁',
+      icon: '✈️',
     },
     {
       label: t('events.typelist.congress'),
       value: 'Congress',
-      icon: '🎁',
+      icon: '✈️',
     },
     {
       label: t('events.typelist.concert'),
       value: 'Concert',
-      icon: '🎷',
+      icon: '🎵',
     },
     {
       label: t('events.typelist.show'),
       value: 'Show',
-      icon: '🎭',
+      icon: '🎵',
     },
     {
       label: t('events.typelist.other'),
       value: 'Other',
-      icon: '❓',
+      icon: '🎵',
     },
   ]
 
