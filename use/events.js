@@ -25,6 +25,33 @@ export const useEvents = () => {
   const { postTypeList } = usePosts()
   const { t } = useI18n()
 
+  const eventRoleOptions = [
+    {
+      label: t('event.role.instructor'),
+      value: 'instructor',
+    },
+    {
+      label: t('event.role.dj'),
+      value: 'dj',
+    },
+    {
+      label: t('event.role.musician'),
+      value: 'musician',
+    },
+    {
+      label: t('event.role.taxi'),
+      value: 'taxi',
+    },
+    {
+      label: t('event.role.photographer'),
+      value: 'photographer',
+    },
+    {
+      label: t('event.role.organiser'),
+      value: 'organiser',
+    },
+  ]
+
   const eventTypeList = [
     {
       label: t('events.typelist.party'),
@@ -330,5 +357,6 @@ export const useEvents = () => {
     getEventIcon,
     eventFields,
     addLabelIcons,
+    eventRoleOptions,
   }
 }

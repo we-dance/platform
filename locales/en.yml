@@ -268,3 +268,17 @@ event:
     lesson: Lesson
     online: Online
     travel: Travel
+  role:
+    dj: DJ
+    instructor: Instructor
+    taxi: Taxi Dancer
+    photographer: Photographer
+    musician: Musician
+    organiser: Organiser
+TInputProfile:
+  changeRole: Change Role
+  actions: Actions
+  remove: Remove
+  addInstagram: (add from Instagram)
+  addFacebook: (add from Facebook)
+  placeholder: Search on WeDance, Instagram or Facebook

@@ -1,13 +1,35 @@
 <template>
-  <div class="p-4">
+  <div class="p-4 space-y-4">
     <TField
-      type="profiles"
-      v-model="winners"
+      component="TInputProfile"
+      v-model="single"
+      label="Organiser"
+      label-position="top"
+    />
+
+    <TField
+      component="TInputArray"
+      :children="{
+        component: 'TInputProfile',
+        excludeUsernames: multiple
+          .filter((item) => !!item)
+          .map((item) => item.username),
+      }"
+      v-model="multiple"
       label="Team"
       label-position="top"
     />
+
+    <div class="font-bold">single</div>
     <textarea
-      :value="JSON.stringify(winners, null, 2)"
+      :value="JSON.stringify(single, null, 2)"
+      :rows="10"
+      class="mt-4 w-full border text-xs font-mono"
+    ></textarea>
+
+    <div class="font-bold">multiple</div>
+    <textarea
+      :value="JSON.stringify(multiple, null, 2)"
       :rows="30"
       class="mt-4 w-full border text-xs font-mono"
     ></textarea>
@@ -17,17 +39,8 @@
 <script>
 export default {
   data: () => ({
-    winners: [
-      {
-        username: 'alejito',
-        name: '',
-        photo:
-          'https://firebasestorage.googleapis.com/v0/b/wedance-4abe3.appspot.com/o/media%2FtvR012ArEpQhCJdPHh6G7sLuqoO2%2F85cc5d77-6212-4707-85e0-24bdf72b1c7c?alt=media&token=2872dc07-fa22-46b7-8f0e-41c935fc6345',
-        bio: 'Founder of WeDance',
-        role: 'Dancer',
-        description: '',
-      },
-    ],
+    multiple: [],
+    single: null,
   }),
 }
 </script>
