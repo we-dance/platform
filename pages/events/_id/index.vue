@@ -141,6 +141,17 @@
     </div>
 
     <TPreview :content="item.description" class="p-4" />
+
+    <div v-if="item.artists" class="space-y-2">
+      <h3 class="text-xl font-bold">{{ $t('event.artists') }}</h3>
+      <WProfile
+        v-for="profile in item.artists"
+        :key="profile.username"
+        :username="profile.username"
+        :fallback="profile"
+      />
+    </div>
+
     <TCommentsInline :item="item" class="border-t p-4" />
 
     <div v-if="item.venue && item.venue.map" class="p-4 bg-gray-100">

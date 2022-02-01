@@ -2,7 +2,7 @@
   <div>
     <component
       v-for="(item, index) in value"
-      :key="index"
+      :key="`${children.component}-${index}`"
       :is="children.component"
       v-model="internalValue[index]"
       v-bind="children"
@@ -34,7 +34,9 @@ export default {
     internalValue: {
       deep: true,
       handler(val) {
-        const filtered = val.filter((item) => !!item)
+        const filtered = val.filter(
+          (item) => item && item !== '' && item !== null
+        )
 
         this.$emit('input', filtered)
       },

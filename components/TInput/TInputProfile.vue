@@ -127,7 +127,7 @@ export default {
         )
         .map((p) => {
           return {
-            uid: p.id,
+            id: p.id,
             username: p.username,
             name: p.name || p.username || '',
             photo: p.photo || '',

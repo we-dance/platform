@@ -25,7 +25,7 @@
       </div>
     </div>
     <slot>
-      <TProfileContacts :profile="profile" />
+      <TProfileContacts :profile="profile" short class="flex-shrink-0" />
     </slot>
   </div>
 </template>

@@ -266,6 +266,15 @@ export const useEvents = () => {
       description: `- Public - searchable in Google.\n- Members - visible only for logged-in users.\n- Unlisted - possible to open with exact link, but they are not listed nor not shown in the search.`,
     },
     {
+      name: 'artists',
+      component: 'TInputArray',
+      children: {
+        component: 'TInputProfile',
+      },
+      label: t('event.artists'),
+      labelPosition: 'top',
+    },
+    {
       name: 'claimed',
       label: 'Are you organiser?',
       component: 'TInputButtons',

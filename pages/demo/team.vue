@@ -1,6 +1,17 @@
 <template>
   <div class="p-4 space-y-4">
     <TField
+      component="TInputArray"
+      :children="{
+        component: 'TInputStyle',
+        class: 'my-2',
+      }"
+      v-model="strings"
+      label="Strings"
+      label-position="top"
+    />
+
+    <TField
       component="TInputProfile"
       v-model="single"
       label="Organiser"
@@ -20,6 +31,15 @@
       label-position="top"
     />
 
+    <div class="space-y-2">
+      <WProfile
+        v-for="profile in multiple"
+        :key="profile.username"
+        :username="profile.username"
+        :fallback="profile"
+      />
+    </div>
+
     <div class="font-bold">single</div>
     <textarea
       :value="JSON.stringify(single, null, 2)"
@@ -33,6 +53,13 @@
       :rows="30"
       class="mt-4 w-full border text-xs font-mono"
     ></textarea>
+
+    <div class="font-bold">strings</div>
+    <textarea
+      :value="JSON.stringify(strings, null, 2)"
+      :rows="30"
+      class="mt-4 w-full border text-xs font-mono"
+    ></textarea>
   </div>
 </template>
 
@@ -41,6 +68,7 @@ export default {
   data: () => ({
     multiple: [],
     single: null,
+    strings: [],
   }),
 }
 </script>

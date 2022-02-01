@@ -268,6 +268,7 @@ event:
     lesson: Lesson
     online: Online
     travel: Travel
+  artists: Artists
   role:
     dj: DJ
     instructor: Instructor
