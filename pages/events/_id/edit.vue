@@ -81,8 +81,14 @@ export default {
         price: '0 EUR',
         styles: {},
         cover: '',
-        organiser: this.profile?.username || '',
-        promoter: this.profile?.username || '',
+        artists: [],
+        org: {
+          username: this.profile?.username,
+          name: this.profile?.name,
+          photo: this.profile?.photo,
+          role: 'organiser',
+        },
+        username: this.profile?.username,
       }
     }
   },
@@ -105,14 +111,6 @@ export default {
       this.$router.push(`/events/${doc.id}`)
     },
     async saveItem(data) {
-      data.organisedBy = this.uid
-      data.promotedBy = this.uid
-
-      if (data.claimed === 'No') {
-        data.organiser = ''
-        data.organisedBy = ''
-      }
-
       data = pickBy(data, (v) => v !== undefined)
 
       if (data.id) {

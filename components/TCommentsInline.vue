@@ -33,11 +33,15 @@ export default {
       type: Object,
       default: () => ({}),
     },
+    autoload: {
+      type: Boolean,
+      default: false,
+    },
   },
   setup(props) {
     const { username } = useAuth()
     const newReply = ref('')
-    const showComments = ref(false)
+    const showComments = ref(props.autoload)
     const { softUpdate } = useDoc('posts')
     const { create } = useDoc('comments')
 
