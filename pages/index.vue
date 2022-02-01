@@ -40,7 +40,7 @@
               <p
                 class="mt-2 max-w-lg mx-auto text-center sm:max-w-3xl text-white"
               >
-                {{ $t('hero.motto') }}
+                Hello from Harsh B
               </p>
 
               <div class="max-w-lg mx-auto">
