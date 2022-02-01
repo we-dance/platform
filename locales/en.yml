@@ -280,6 +280,9 @@ conversation:
   newMessage:
     placeholder: Write a message
     submit: Send
+  welcome: Start conversation with something nice.
+  with: Chat with {username}
+  dateDiff: '{diff} ago'
 cities:
   choose: Choose city
 settings:

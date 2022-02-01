@@ -115,7 +115,12 @@ export const usePosts = () => {
     },
     {
       name: 'type',
+<<<<<<< HEAD
       component: 'TInputSelect',
+=======
+      label: t('posts.edit.label.type'),
+      type: 'select',
+>>>>>>> feat:localise post edit page labels
       options: postTypeList,
     },
     {
@@ -146,8 +151,28 @@ export const usePosts = () => {
     },
     {
       name: 'styles',
+<<<<<<< HEAD
       label: 'Dance styles',
       component: 'TInputStylesSelect2',
+=======
+      label: t('posts.edit.label.danceStyle'),
+      type: 'stylesSelect',
+    },
+    {
+      name: 'hideMeta',
+      label: t('posts.edit.label.hideMeta'),
+      admin: true,
+    },
+    {
+      name: 'hideComments',
+      label: t('posts.edit.label.hideComment'),
+      admin: true,
+    },
+    {
+      name: 'hideReactions',
+      label: t('posts.edit.label.hideReaction'),
+      admin: true,
+>>>>>>> feat:localise post edit page labels
     },
   ]
 
