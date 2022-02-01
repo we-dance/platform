@@ -5,32 +5,35 @@
       :username="value.username"
       :fallback="value"
     >
-      <TDropdown v-slot="{ closeMenu }">
-        <TDropdownSeparator :label="$t('TInputProfile.changeRole')" />
-        <TButton
-          v-for="role in eventRoleOptions"
-          :key="role.value"
-          allow-guests
-          :type="value.role === role.value ? 'context-active' : 'context'"
-          :label="role.label"
-          class="text-sm"
-          @click="
-            value.role = role.value
-            closeMenu()
-          "
-        />
-        <TDropdownSeparator :label="$t('TInputProfile.actions')" />
-        <TButton
-          allow-guests
-          type="context"
-          :label="$t('TInputProfile.remove')"
-          color="red-500 text-sm"
-          @click="
-            $emit('input', null)
-            closeMenu()
-          "
-        />
-      </TDropdown>
+      <template v-slot:right>
+        <TDropdown v-slot="{ closeMenu }">
+          <TDropdownSeparator :label="$t('TInputProfile.changeRole')" />
+          <TButton
+            v-for="role in eventRoleOptions"
+            :key="role.value"
+            allow-guests
+            :type="value.role === role.value ? 'context-active' : 'context'"
+            :label="role.label"
+            class="text-sm"
+            @click="
+              value.role = role.value
+              closeMenu()
+            "
+          />
+          <TDropdownSeparator :label="$t('TInputProfile.actions')" />
+          <TButton
+            allow-guests
+            type="context"
+            :label="$t('TInputProfile.remove')"
+            color="red-500 text-sm"
+            @click="
+              $emit('input', null)
+              closeMenu()
+            "
+          />
+        </TDropdown>
+      </template>
+      <div></div>
     </WProfile>
     <TInput
       v-else

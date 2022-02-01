@@ -24,6 +24,7 @@
           {{ profile.bio }}
         </div>
       </div>
+      <slot name="right" />
     </div>
     <slot>
       <TProfileContacts :profile="profile" short />
