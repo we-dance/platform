@@ -150,18 +150,6 @@ export const usePosts = () => {
       label: 'Dance styles',
       component: 'TInputStylesSelect2',
     },
-    {
-      name: 'hideMeta',
-      admin: true,
-    },
-    {
-      name: 'hideComments',
-      admin: true,
-    },
-    {
-      name: 'hideReactions',
-      admin: true,
-    },
   ]
 
   return {

@@ -25,6 +25,33 @@ export const useEvents = () => {
   const { postTypeList } = usePosts()
   const { t } = useI18n()
 
+  const eventRoleOptions = [
+    {
+      label: t('event.role.instructor'),
+      value: 'instructor',
+    },
+    {
+      label: t('event.role.dj'),
+      value: 'dj',
+    },
+    {
+      label: t('event.role.musician'),
+      value: 'musician',
+    },
+    {
+      label: t('event.role.taxi'),
+      value: 'taxi',
+    },
+    {
+      label: t('event.role.photographer'),
+      value: 'photographer',
+    },
+    {
+      label: t('event.role.organiser'),
+      value: 'organiser',
+    },
+  ]
+
   const eventTypeList = [
     {
       label: t('events.typelist.party'),
@@ -135,12 +162,12 @@ export const useEvents = () => {
   const eventFields = [
     {
       name: 'name',
-      hideLabel: true,
+      labelPosition: 'top',
       placeholder: 'Event Name',
     },
     {
       name: 'description',
-      hideLabel: true,
+      labelPosition: 'top',
       component: 'TInputTextarea',
       placeholder: 'Details (markdown)',
       tips:
@@ -166,6 +193,7 @@ export const useEvents = () => {
     {
       name: 'duration',
       label: 'How long?',
+      labelPosition: 'top',
       onChange: updateEndDate,
       component: 'TInputSelect',
       options: [
@@ -216,43 +244,45 @@ export const useEvents = () => {
     },
     {
       name: 'styles',
+      labelPosition: 'top',
       label: 'Dance styles',
       component: 'TInputStylesSelect2',
     },
     {
       name: 'eventType',
+      labelPosition: 'top',
       component: 'TInputSelect',
       options: eventTypeList,
     },
     {
       name: 'cover',
       component: 'TInputPhoto',
+      labelPosition: 'top',
       width: 500,
       height: 500,
       circle: false,
-      hideLabel: true,
     },
     {
       name: 'visibility',
+      labelPosition: 'top',
       component: 'TInputButtons',
       options: ['Public', 'Members', 'Unlisted'],
       description: `- Public - searchable in Google.\n- Members - visible only for logged-in users.\n- Unlisted - possible to open with exact link, but they are not listed nor not shown in the search.`,
     },
     {
-      name: 'claimed',
-      label: 'Are you organiser?',
-      component: 'TInputButtons',
-      options: ['Yes', 'No'],
-      description: 'Are you the event organiser?',
+      name: 'artists',
+      component: 'TInputArray',
+      children: {
+        component: 'TInputProfile',
+      },
+      label: t('event.artists'),
+      labelPosition: 'top',
     },
     {
-      name: 'organiser',
+      name: 'org',
+      component: 'TInputProfile',
       label: 'Organiser',
-      description: 'Username on WeDance',
-    },
-    {
-      name: 'username',
-      admin: true,
+      labelPosition: 'top',
     },
     {
       name: 'online',
@@ -261,10 +291,12 @@ export const useEvents = () => {
       options: ['Yes', 'No'],
       onChange: updatePlace,
       description: 'Streaming via Zoom, Google Meet, Instagram Live, etc.?',
+      labelPosition: 'top',
     },
     {
       name: 'international',
       label: 'International?',
+      labelPosition: 'top',
       component: 'TInputButtons',
       options: ['Yes', 'No'],
       onChange: updatePlace,
@@ -274,6 +306,7 @@ export const useEvents = () => {
     {
       name: 'place',
       label: 'Community',
+      labelPosition: 'top',
       component: 'TInputPlace',
       clearable: true,
       when: (answers) => answers.international === 'No',
@@ -283,26 +316,26 @@ export const useEvents = () => {
     {
       name: 'form',
       label: 'External registration?',
+      labelPosition: 'top',
       before: 'Do you use external platform to register for your event?',
       component: 'TInputButtons',
       options: ['Yes', 'No'],
     },
     {
       name: 'link',
+      labelPosition: 'top',
       description:
         'Direct booking link on ticket platform (ti.to, Eventbrite, Google Form, etc.)',
     },
     {
-      name: 'website',
-      description: 'Link to your event or website',
-    },
-    {
       name: 'facebook',
-      description: 'Link to original event (Facebook, Eventbrite, etc.)',
+      labelPosition: 'top',
+      description: 'Facebook event',
     },
     {
       name: 'promo',
       label: 'Do you want free promo?',
+      labelPosition: 'top',
       component: 'TInputButtons',
       options: ['Yes', 'No'],
       description:
@@ -330,5 +363,6 @@ export const useEvents = () => {
     getEventIcon,
     eventFields,
     addLabelIcons,
+    eventRoleOptions,
   }
 }
