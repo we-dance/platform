@@ -9,7 +9,13 @@
     >
       <div class="my-4 w-64 flex flex-col justify-center text-center">
         <div class="p-4">Sign in to {{ showAuthPopup }}</div>
-        <TButton class="mt-2" type="primary" to="/signin">Sign in</TButton>
+        <TButton
+          allow-guests
+          class="mt-2"
+          type="primary"
+          :to="`/signin?target=${$route.path}`"
+          >Sign in</TButton
+        >
       </div>
     </TPopup>
 

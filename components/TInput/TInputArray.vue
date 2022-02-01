@@ -22,7 +22,7 @@ export default {
   }),
   props: {
     value: {
-      type: Array,
+      type: [Array, String],
       default: () => [],
     },
     children: {
@@ -34,16 +34,18 @@ export default {
     internalValue: {
       deep: true,
       handler(val) {
-        const filtered = val.filter(
-          (item) => item && item !== '' && item !== null
-        )
+        let filtered = []
+
+        if (val) {
+          filtered = val.filter((item) => item && item !== '' && item !== null)
+        }
 
         this.$emit('input', filtered)
       },
     },
   },
   mounted() {
-    this.internalValue = this.value
+    this.internalValue = this.value || []
   },
 }
 </script>

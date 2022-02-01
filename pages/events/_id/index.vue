@@ -120,29 +120,23 @@
       class="flex mt-4 space-x-2 justify-center sticky bg-white p-4 border-b z-50 top-0"
     >
       <TButton
-        v-if="!uid"
-        allow-guests
+        v-if="item.response !== 'up'"
         type="primary"
+        :title="$t('eventView.reservation.guest')"
         @click="reservationPopup = 'reserve'"
         >{{ $t('eventView.reservation.guest') }}</TButton
       >
       <TButton
-        v-else
-        :type="uid && item.response === 'up' ? 'success' : 'secondary'"
-        @click="reservationPopup = 'reserve'"
-        >{{ $t('eventView.reservation.going') }}</TButton
-      >
-      <TButton
-        v-if="uid"
-        :type="uid && item.response === 'down' ? 'danger' : 'secondary'"
+        v-if="uid && item.response === 'up'"
+        type="secondary"
         @click="updateRsvp(item.id, 'events', 'down')"
-        >{{ $t('eventView.reservation.notGoing') }}</TButton
+        >{{ $t('eventView.reservation.cancel') }}</TButton
       >
     </div>
 
     <TPreview :content="item.description" class="p-4" />
 
-    <div v-if="item.artists" class="space-y-2">
+    <div v-if="item.artists" class="space-y-2 p-4">
       <h3 class="text-xl font-bold">{{ $t('event.artists') }}</h3>
       <WProfile
         v-for="profile in item.artists"
@@ -152,8 +146,6 @@
       />
     </div>
 
-    <TCommentsInline :item="item" class="border-t p-4" />
-
     <div v-if="item.venue && item.venue.map" class="p-4 bg-gray-100">
       <div class="font-bold text-sm mb-4 leading-none text-gray-700">
         {{ $t('eventView.venueMap') }}
@@ -161,13 +153,18 @@
       <img :src="item.venue.map" alt="Venue Map" class="mt-4" />
     </div>
 
-    <TItemCreator :item="item" full class="mt-4" />
+    <div v-if="item.org" class="space-y-2 p-4">
+      <h4 class="text-xl font-bold">{{ $t('event.organiser') }}</h4>
+      <WProfile :username="item.org.username" :fallback="item.org" full />
+    </div>
 
     <div v-if="item.facebook" class="mt-8 text-right text-sm">
       <a :href="item.facebook" class="hover:underline text-gray-700">{{
         $t('eventView.source')
       }}</a>
     </div>
+
+    <TCommentsInline :item="item" autoload class="border-t p-4" />
 
     <TPopup
       v-if="reservationPopup"
@@ -408,6 +405,10 @@ export default {
       }
 
       reservationPopup.value = 'finish'
+
+      if (item.value.link) {
+        openURL(item.value.link)
+      }
     }
 
     return {

@@ -85,11 +85,11 @@ import { useEvents } from '~/use/events'
 import { useDoc } from '~/use/doc'
 
 export default {
-  name: 'TProfileSelect',
+  name: 'TInputProfile',
   inheritAttrs: false,
   props: {
     value: {
-      type: Object,
+      type: [Object, String],
       default: () => ({}),
     },
     placeholder: {
@@ -110,9 +110,11 @@ export default {
     const { eventRoleOptions } = useEvents()
     const { create: createProfile } = useDoc('profiles')
 
-    const add = (data) => {
-      data.role = 'instructor'
+    if (typeof props.value === 'string') {
+      emit('input', { username: props.value })
+    }
 
+    const add = (data) => {
       query.value = ''
 
       emit('input', data)
