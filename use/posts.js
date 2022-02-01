@@ -110,13 +110,25 @@ export const usePosts = () => {
   const postFields = [
     {
       name: 'username',
+<<<<<<< HEAD
       label: t('postFields.username.label'),
+=======
+      label: t('posts.edit.label.username'),
+>>>>>>> feat:localise post edit page labels
       admin: true,
     },
     {
       name: 'type',
+<<<<<<< HEAD
       component: 'TInputSelect',
+<<<<<<< HEAD
       label: t('postFields.type.label'),
+=======
+=======
+      label: t('posts.edit.label.type'),
+      type: 'select',
+>>>>>>> feat:localise post edit page labels
+>>>>>>> feat:localise post edit page labels
       options: postTypeList,
     },
     {
@@ -128,9 +140,15 @@ export const usePosts = () => {
       name: 'description',
       hideLabel: true,
       component: 'TInputTextarea',
+<<<<<<< HEAD
       placeholder: t('postFields.description.placeholder'),
       tips: t('postFields.description.tips'),
       description: t('postFields.description.description'),
+=======
+      placeholder: 'Text (markdown)',
+      tips:t('posts.edit.tips'),
+      description:t('posts.edit.description'),
+>>>>>>> feat:localise post edit page labels
     },
     {
       name: 'url',
@@ -147,9 +165,35 @@ export const usePosts = () => {
     },
     {
       name: 'styles',
+<<<<<<< HEAD
       component: 'TInputStylesSelect2',
       label: t('postFields.styles.label')
     }
+=======
+<<<<<<< HEAD
+      label: 'Dance styles',
+      component: 'TInputStylesSelect2',
+=======
+      label: t('posts.edit.label.danceStyle'),
+      type: 'stylesSelect',
+    },
+    {
+      name: 'hideMeta',
+      label: t('posts.edit.label.hideMeta'),
+      admin: true,
+    },
+    {
+      name: 'hideComments',
+      label: t('posts.edit.label.hideComment'),
+      admin: true,
+    },
+    {
+      name: 'hideReactions',
+      label: t('posts.edit.label.hideReaction'),
+      admin: true,
+>>>>>>> feat:localise post edit page labels
+    },
+>>>>>>> feat:localise post edit page labels
   ]
 
   return {
