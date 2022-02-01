@@ -110,6 +110,7 @@ export const usePosts = () => {
   const postFields = [
     {
       name: 'username',
+      label: t('posts.edit.label.username'),
       admin: true,
     },
     {
@@ -127,10 +128,8 @@ export const usePosts = () => {
       hideLabel: true,
       component: 'TInputTextarea',
       placeholder: 'Text (markdown)',
-      tips:
-        'Pitch yourself: Who are you? What do you offer? What do you want?\n\nTips for effective pitch:\n- Uncomplicated: It should be catchy and roll off the tongue\n- Concise: It shouldn’t take more than a minute to say or read\n- Unique: It reflects your skills, goals, and desires\n- Storyline: It covers who you are, what you offer, and where you want to be\n- Appealing: Your elevator pitch is essentially a persuasive sales pitch; the emphasis should be on what you offer',
-      description:
-        'Use [widgets](https://wedance.vip/markdown), including images and videos',
+      tips:t('posts.edit.tips'),
+      description:t('posts.edit.description'),
     },
     {
       name: 'url',
