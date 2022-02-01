@@ -3,18 +3,18 @@ import { useI18n } from '~/use/i18n'
 export const useCommon = () => {
   const { t } = useI18n()
 
-  const booleanOptions = [
+  const yesNoOptions = [
     {
-      label: t('profile.booleanOptions.yes'),
+      label: t('yes'),
       value: 'Yes',
     },
     {
-      label: t('profile.booleanOptions.no'),
+      label: t('no'),
       value: 'No',
     },
   ]
 
   return {
-    booleanOptions,
+    yesNoOptions,
   }
 }

@@ -7,7 +7,7 @@ import { useCommon } from '~/use/common'
 export const useProfiles = () => {
   const { t } = useI18n()
   const { accountFields } = useAccounts()
-  const { booleanOptions } = useCommon()
+  const { yesNoOptions } = useCommon()
 
   const { read, loading } = useApp()
   const { getById } = useCollection('profiles')
@@ -17,46 +17,46 @@ export const useProfiles = () => {
 
   const genderList = [
     {
-      label: t('profile.genderList.female'),
+      label: t('female'),
       value: 'Female',
     },
     {
-      label: t('profile.genderList.male'),
+      label: t('male'),
       value: 'Male',
     },
     {
-      label: t('profile.genderList.other'),
+      label: t('other'),
       value: 'Other',
     },
   ]
 
   const days = [
     {
-      label: t('profile.daysList.monday'),
+      label: t('monday'),
       value: 'Monday',
     },
     {
-      label: t('profile.daysList.tuesday'),
+      label: t('tuesday'),
       value: 'Tuesday',
     },
     {
-      label: t('profile.daysList.wednesday'),
+      label: t('wednesday'),
       value: 'Wednesday',
     },
     {
-      label: t('profile.daysList.thursday'),
+      label: t('thursday'),
       value: 'Thursday',
     },
     {
-      label: t('profile.daysList.friday'),
+      label: t('friday'),
       value: 'Friday',
     },
     {
-      label: t('profile.daysList.saturday'),
+      label: t('saturday'),
       value: 'Saturday',
     },
     {
-      label: t('profile.daysList.sunday'),
+      label: t('sunday'),
       value: 'Sunday',
     },
   ]
@@ -189,15 +189,15 @@ export const useProfiles = () => {
 
   const visibilityOptions = [
     {
-      label: t('profile.visibilityOptions.public'),
+      label: t('visibilityOptions.public'),
       value: 'Public',
     },
     {
-      label: t('profile.visibilityOptions.members'),
+      label: t('visibilityOptions.members'),
       value: 'Members',
     },
     {
-      label: t('profile.visibilityOptions.unlisted'),
+      label: t('visibilityOptions.unlisted'),
       value: 'Unlisted',
     },
   ]
@@ -271,7 +271,7 @@ export const useProfiles = () => {
       label: t('profile.permission.label'),
       poster: true,
       component: 'TInputButtons',
-      options: booleanOptions,
+      options: yesNoOptions,
       description: t('profile.permission.description'),
     },
     {
@@ -326,7 +326,7 @@ export const useProfiles = () => {
       name: 'partner',
       label: t('profile.partner'),
       component: 'TInputButtons',
-      options: booleanOptions,
+      options: yesNoOptions,
     },
     {
       name: 'birthday',
@@ -371,7 +371,7 @@ export const useProfiles = () => {
       name: 'contacts',
       label: t('profile.contacts'),
       component: 'TInputButtons',
-      options: booleanOptions,
+      options: yesNoOptions,
     },
     ...contactFields,
   ]
@@ -441,31 +441,31 @@ export const useProfiles = () => {
 
   const radiusOptions = [
     {
-      label: t('profile.radiusOptions.ten'),
+      label: t('radiusOptions.ten'),
       value: 10,
     },
     {
-      label: t('profile.radiusOptions.twenty'),
+      label: t('radiusOptions.twenty'),
       value: 20,
     },
     {
-      label: t('profile.radiusOptions.fifty'),
+      label: t('radiusOptions.fifty'),
       value: 50,
     },
     {
-      label: t('profile.radiusOptions.hundred'),
+      label: t('radiusOptions.hundred'),
       value: 100,
     },
     {
-      label: t('profile.radiusOptions.fiveHundred'),
+      label: t('radiusOptions.fiveHundred'),
       value: 500,
     },
     {
-      label: t('profile.radiusOptions.thousand'),
+      label: t('radiusOptions.thousand'),
       value: 1000,
     },
     {
-      label: t('profile.radiusOptions.anywhere'),
+      label: t('radiusOptions.anywhere'),
       value: '',
     },
   ]

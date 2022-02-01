@@ -6,7 +6,7 @@ import { useCommon } from '~/use/common'
 export const useAccounts = () => {
   const { t } = useI18n()
   const { getById, find } = useCollection('accounts')
-  const { booleanOptions } = useCommon()
+  const { yesNoOptions } = useCommon()
 
   const getAccount = (uid) => getById(uid) || {}
   const getAccountByEmail = (email) => find('email', email)
@@ -81,7 +81,7 @@ export const useAccounts = () => {
       name: 'withPartner',
       component: 'TInputSelect',
       label: t('account.withPartner.label'),
-      options: booleanOptions,
+      options: yesNoOptions,
       event: false,
     },
     {

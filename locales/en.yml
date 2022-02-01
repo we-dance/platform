@@ -1,3 +1,19 @@
+yes: 'Yes'
+no: 'No'
+female: Female
+male: Male
+other: Other
+monday: Monday
+tuesday: Tuesday
+wednesday: Wednesday
+thursday: Thursday
+friday: Friday
+saturday: Saturday
+sunday: Sunday
+visibilityOptions:
+  public: Public
+  members: Members
+  unlisted: Unlisted
 hero:
   title: Do you like dancing?
   subtitle: We help each other find interesting dance events and dance partners.
@@ -201,18 +217,6 @@ profile:
   website:
     label: Website
     placeholder: for business requests
-  genderList:
-    female: Female
-    male: Male
-    other: Other
-  daysList:
-    monday: Monday
-    tuesday: Tuesday
-    wednesday: Wednesday
-    thursday: Thursday
-    friday: Friday
-    saturday: Saturday
-    sunday: Sunday
   meetingPlaces:
     myPlace: My place
     yourPlace: Your place
@@ -235,21 +239,14 @@ profile:
     username: Username
     registered: Registered
     lastSeen: Last seen
-  visibilityOptions:
-    public: Public
-    members: Members
-    unlisted: Unlisted
-  booleanOptions:
-    yes: 'Yes'
-    no: 'No'
-  radiusOptions:
-    ten: around 10km
-    twenty: around 20km
-    fifty: around 50km
-    hundred: around 100km
-    fiveHundred: around 500km
-    thousand: around 1000km
-    anywhere: Anywhere
+radiusOptions:
+  ten: around 10km
+  twenty: around 20km
+  fifty: around 50km
+  hundred: around 100km
+  fiveHundred: around 500km
+  thousand: around 1000km
+  anywhere: Anywhere
 myprofile:
   events:
     add: Add event
@@ -321,9 +318,6 @@ account:
   comment: Comment
   withPartner:
     label: Do you have a partner?
-    options:
-      yes: 'yes'
-      no: 'No'
   partnerName: Partner's name
   partnerEmail: Partner's email
 agreement: By signing in, you agree to {terms} and {privacy}.
