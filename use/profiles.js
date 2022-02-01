@@ -32,23 +32,23 @@ export const useProfiles = () => {
 
   const days = [
     {
-      label: t('monday'),
+      label: t('Monday'),
       value: 'Monday',
     },
     {
-      label: t('tuesday'),
+      label: t('Tuesday'),
       value: 'Tuesday',
     },
     {
-      label: t('wednesday'),
+      label: t('Wednesday'),
       value: 'Wednesday',
     },
     {
-      label: t('thursday'),
+      label: t('Thursday'),
       value: 'Thursday',
     },
     {
-      label: t('friday'),
+      label: t('Friday'),
       value: 'Friday',
     },
     {
