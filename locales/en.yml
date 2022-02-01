@@ -22,7 +22,15 @@ posts:
   edit:
     post: Post
     event: Event
-
+    label:
+      username: Username
+      type: Type
+      danceStyle: Dance Styles
+      hideMeta: Hide Meta
+      hideComment: Hide Comments
+      hideReaction: Hide Reactions
+    description: Use [widgets](https://wedance.vip/markdown), including images and videos
+    tips: 'Pitch yourself: Who are you? What do you offer? What do you want?\n\nTips for effective pitch:\n- Uncomplicated: It should be catchy and roll off the tongue\n- Concise: It shouldn’t take more than a minute to say or read\n- Unique: It reflects your skills, goals, and desires\n- Storyline: It covers who you are, what you offer, and where you want to be\n- Appealing: Your elevator pitch is essentially a persuasive sales pitch; the emphasis should be on what you offer'
 profiles:
   add: Add profile
   title: Community
@@ -36,24 +44,27 @@ chat:
   title: Chat
   welcome: Start conversation with something nice.
   with: Chat with {username}
-  dateDiff: "{diff} ago"
+  dateDiff: '{diff} ago'
 cities:
   choose: Choose city
 settings:
   title: Settings
   account:
     title: Account
-    description: This information will be used for notifications and purchases. It
+    description:
+      This information will be used for notifications and purchases. It
       will be shared with service providers or sellers only with your agreement.
     changepassword: Change Password
     delete: Delete Account
   profile:
     title: Profile
-    description: What do you want other dancers to know about you? That's a place to
+    description:
+      What do you want other dancers to know about you? That's a place to
       share your passion to dance. Present yourself, don't be shy!
   contacts:
     title: Contacts
-    description: This information will be publicly available. Share your contacts
+    description:
+      This information will be publicly available. Share your contacts
       only if you want to be contacted by members. It's also nice place to share
       your social media to get some attention.
 city:
@@ -110,6 +121,8 @@ contacts:
   email: Email
   website: Website
 save: Save
+add: Add
+cancel: Cancel
 teaser:
   partner:
     title: Need a partner?
@@ -129,13 +142,15 @@ teaser:
     btn: Join Now
   chat:
     title: Ask Locals
-    description: "We have a Telegram dance chat in every city. Join your city chat
+    description:
+      "We have a Telegram dance chat in every city. Join your city chat
       to help traveling dancers, invite your dance friends. Let's build WeDance
       together! "
     btn: Join Chat
   involve:
     title: We need your help
-    description: We are non-profit international dance community. We want you go to
+    description:
+      We are non-profit international dance community. We want you go to
       any city in any country and find dance events and dancers. It all starts
       with the local community.
     btn: Get Involved
