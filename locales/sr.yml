@@ -2,13 +2,54 @@
 hero:
   title: Да ли волиш плес?
   subtitle: Помажемо једни другима у проналажењу занимљивих плесних догађаја и плесних партнера.
+  motto: Even one dance contact in a city makes a difference.
+  alt: People dancing bachata
+  action: Join the community
+  search: Search dancers
+icons:
+  dancers: dancers
+  cities: cities
+  events: events
+features:
+  calendar:
+    title: Event Calendar
+    description: Find dance workshops, courses, socials and parties. We fill event calendar all together as a community. Everyone can share.
+  dancePartners:
+    title: Dance partners
+    description: Find a dance partner for your dance style and let them find you.
+  cityChats:
+    title: City Chats
+    description: Find dance chat in any city. Join your city chat and invite your friends to help new dancers in the city. Think globally, act locally.
+  danceTravel:
+    title: Dance Travel
+    description: Find international dance festivals and congresses. Share a ride, an appartment and find a buddy to experience a new city together.
+  volunteer:
+    title: Volunteer
+    description: We build a community, where everyone enters with mindset “I can help”, so whenever you need help you can count on it. We are one big family worldwide. We help each other.
+    action: Умешати се
+  interviews:
+    title: Interviews
+    description: Explore more about you favorite dance artists and catch their tips & tricks.
+    action: Listen to Podcast
+international:
+  title: International Community
+  description: We regularly post interviews, event announcements and introduce new members on our social media.
 auth:
   signin: Улазни
   signup: Пријавити
   signout: Одјавити се
 events:
+  typelist:
+    party: Party
+    workshop: Workshop
+    course: Course
+    festival: Festival
+    congress: Congress
+    concert: Concert
+    show: Show
+    other: Other
   add: Додај догађај
-  title: Догађаји
+  title: Dance Calendar
   list:
     empty: No events found. Would you like to add one?
   view:
@@ -16,7 +57,31 @@ events:
     covers: See list
   filter:
     type: Type
-    style: Стил
+    style: Any Dance
+    level: Any Level
+eventView:
+  dropdown:
+    dashboard: Dashboard
+    edit: Edit
+    share: Објави
+  online: Online Event
+  reservation:
+    guest: Register for event
+    cancel: Cancel reservation
+  reservationPopup:
+    title: Регистровати
+    reserve:
+      submitLabel: Регистровати
+      label: Пријавите се
+    finish:
+      title: Almost there
+      btn: Complete registration
+      description: See you soon! Don't forget to check-in by the organiser when you come!
+      reminder: Check your email to finish creation of the WeDance profile.
+      calendar: Add to calendar
+  organiser: Organised by
+  venueMap: Venue Map
+  source: Event Source
 posts:
   add: Додај пост
   title: Коментар
@@ -31,9 +96,19 @@ myprofile:
   title: Мој профил
 chat:
   title: Разговор
-  welcome: Започни разговор са нечим лепим
-  with: Ћаскај са {username}
-  dateDiff: "Пре {diff}"
+  empty: Start conversations and they will appear here.
+  lastMessage:
+    byYou: by you
+  receiver:
+    deleted: DELETED
+conversation:
+  userName: Chat with { username }
+  empty: Start conversation with something nice.
+  lastSeen: opened chat last time
+  unread: haven't opened this chat yet
+  newMessage:
+    placeholder: Write a message
+    submit: Send
 cities:
   choose: Одаберите град
 settings:
@@ -172,3 +247,25 @@ sort:
   starred: Starred
   archived: Archived
   yours: Yours
+event:
+  artists: Artists
+  organiser: Organiser
+  category:
+    meetup: Meetup
+    lesson: Lesson
+    online: Online
+    travel: Travel
+  role:
+    dj: DJ
+    instructor: Instructor
+    taxi: Taxi Dancer
+    photographer: Photographer
+    musician: Musician
+    organiser: Organiser
+TInputProfile:
+  changeRole: Change Role
+  actions: Actions
+  remove: Remove
+  addInstagram: (add from Instagram)
+  addFacebook: (add from Facebook)
+  placeholder: Search on WeDance, Instagram or Facebook
