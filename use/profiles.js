@@ -52,11 +52,11 @@ export const useProfiles = () => {
       value: 'Friday',
     },
     {
-      label: t('saturday'),
+      label: t('Saturday'),
       value: 'Saturday',
     },
     {
-      label: t('sunday'),
+      label: t('Sunday'),
       value: 'Sunday',
     },
   ]
