@@ -4,17 +4,19 @@
   >
     <TPopup
       v-if="showAuthPopup"
-      title="Members only"
+      :title="$t('popup.auth.title')"
       @close="showAuthPopup = false"
     >
       <div class="my-4 w-64 flex flex-col justify-center text-center">
-        <div class="p-4">Sign in to {{ showAuthPopup }}</div>
+        <div class="p-4">
+          {{ $t('popup.auth.body', { message: showAuthPopup }) }}
+        </div>
         <TButton
           allow-guests
           class="mt-2"
           type="primary"
           :to="`/signin?target=${$route.path}`"
-          >Sign in</TButton
+          >{{ $t('popup.auth.signin') }}</TButton
         >
       </div>
     </TPopup>
