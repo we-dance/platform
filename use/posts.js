@@ -119,8 +119,8 @@ export const usePosts = () => {
     },
     {
       name: 'type',
-<<<<<<< HEAD
       component: 'TInputSelect',
+<<<<<<< HEAD
 <<<<<<< HEAD
       label: t('postFields.type.label'),
 =======
@@ -129,6 +129,10 @@ export const usePosts = () => {
       type: 'select',
 >>>>>>> feat:localise post edit page labels
 >>>>>>> feat:localise post edit page labels
+=======
+      label: t('posts.edit.label.type'),
+      type: 'select',
+>>>>>>> feat:i18n:localise post edit page labels
       options: postTypeList,
     },
     {
@@ -141,6 +145,7 @@ export const usePosts = () => {
       hideLabel: true,
       component: 'TInputTextarea',
 <<<<<<< HEAD
+<<<<<<< HEAD
       placeholder: t('postFields.description.placeholder'),
       tips: t('postFields.description.tips'),
       description: t('postFields.description.description'),
@@ -149,6 +154,11 @@ export const usePosts = () => {
       tips:t('posts.edit.tips'),
       description:t('posts.edit.description'),
 >>>>>>> feat:localise post edit page labels
+=======
+      placeholder: ('posts.edit.description.placeholderr'),
+      tips:t('posts.edit.description.tips'),
+      description:t('posts.edit.description.desc'),
+>>>>>>> feat:i18n:localise post edit page labels
     },
     {
       name: 'url',
@@ -166,14 +176,16 @@ export const usePosts = () => {
     {
       name: 'styles',
 <<<<<<< HEAD
+<<<<<<< HEAD
       component: 'TInputStylesSelect2',
       label: t('postFields.styles.label')
     }
 =======
 <<<<<<< HEAD
+=======
+>>>>>>> feat:i18n:localise post edit page labels
       label: 'Dance styles',
       component: 'TInputStylesSelect2',
-=======
       label: t('posts.edit.label.danceStyle'),
       type: 'stylesSelect',
     },
@@ -191,7 +203,6 @@ export const usePosts = () => {
       name: 'hideReactions',
       label: t('posts.edit.label.hideReaction'),
       admin: true,
->>>>>>> feat:localise post edit page labels
     },
 >>>>>>> feat:localise post edit page labels
   ]
