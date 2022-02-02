@@ -8,15 +8,15 @@
         <div class="rounded bg-white shadow border p-4 bg-white">
           <div class="flex items-center">
             <div>
-              <router-link
+              <NuxtLink
                 v-if="currentTab !== 'account'"
                 to="/settings?tab=account"
               >
                 <TIcon class="h-8 w-8" name="arrow_right" />
-              </router-link>
-              <router-link v-else to="/settings">
+              </NuxtLink>
+              <NuxtLink v-else to="/settings">
                 <TIcon class="h-8 w-8" name="arrow_drop_down" />
-              </router-link>
+              </NuxtLink>
             </div>
             <div class="ml-2">
               <div class="font-bold text-xl">
@@ -54,7 +54,7 @@
                   <TField
                     v-model="deleteReason"
                     label-position="vertical"
-                    type="textarea"
+                    component="TInputTextarea"
                     label="Why are you leaving?"
                   />
                   <TField
@@ -98,15 +98,15 @@
         <div class="rounded bg-white shadow border p-4 bg-white">
           <div class="flex items-center">
             <div>
-              <router-link
+              <NuxtLink
                 v-if="currentTab !== 'profile'"
                 to="/settings?tab=profile"
               >
                 <TIcon class="h-8 w-8" name="arrow_right" />
-              </router-link>
-              <router-link v-else to="/settings">
+              </NuxtLink>
+              <NuxtLink v-else to="/settings">
                 <TIcon class="h-8 w-8" name="arrow_drop_down" />
-              </router-link>
+              </NuxtLink>
             </div>
             <div class="ml-2">
               <div class="font-bold text-xl">
@@ -140,6 +140,7 @@ import { useAuth } from '~/use/auth'
 import { useProfiles } from '~/use/profiles'
 import { useAccounts } from '~/use/accounts'
 import { useRouter } from '~/use/router'
+import { db, track } from '~/plugins/firebase'
 
 export default {
   name: 'PageSettings',
@@ -237,9 +238,9 @@ export default {
       }
 
       try {
-        this.$fire.analytics.logEvent('delete_account')
+        track('delete_account')
 
-        await this.$fire.firestore.collection('suspended').add({
+        await db.collection('suspended').add({
           reason: this.deleteReason,
           username: this.profile.username,
           email: this.account.email,
@@ -265,7 +266,7 @@ export default {
         return
       }
 
-      this.$fire.analytics.logEvent('save_profile')
+      track('save_profile')
 
       await this.updateProfile(data)
 
@@ -275,7 +276,7 @@ export default {
       try {
         await this.updateEmail(data.email)
 
-        this.$fire.analytics.logEvent('save_account')
+        track('save_account')
 
         await this.updateAccount(data)
         this.$router.push('/settings')

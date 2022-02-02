@@ -84,10 +84,11 @@ import Vue from 'vue'
 import * as VueGoogleMaps from 'vue2-google-maps'
 import { getLocation, sanitize } from '~/utils'
 import { useDoc } from '~/use/doc'
+import { googleApiKey } from '~/plugins/firebase'
 
 Vue.use(VueGoogleMaps, {
   load: {
-    key: process.env.firebase.config.apiKey,
+    key: googleApiKey,
     libraries: 'places',
     language: 'en',
   },

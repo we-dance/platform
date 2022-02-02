@@ -1,14 +1,14 @@
 <template>
   <div class="flex items-center space-x-1">
     <div v-if="photo">
-      <router-link :to="`/${profile.username}`">
+      <NuxtLink :to="`/${profile.username}`">
         <TProfilePhoto :uid="uid" :size="size" />
-      </router-link>
+      </NuxtLink>
     </div>
     <div v-if="name">
-      <router-link class="hover:underline" :to="`/${profile.username}`">
+      <NuxtLink class="hover:underline" :to="`/${profile.username}`">
         {{ profile.username }}
-      </router-link>
+      </NuxtLink>
     </div>
     <slot />
   </div>

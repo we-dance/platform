@@ -2,7 +2,13 @@ hero:
   title: Do you like dancing?
   subtitle: We help each other find interesting dance events and dance partners.
   motto: Even one dance contact in a city makes a difference.
-  join: Join the community
+  alt: People dancing bachata
+  action: Join the community
+  search: Search dancers
+icons:
+  dancers: dancers
+  cities: cities
+  events: events
 features:
   calendar:
     title: Event Calendar
@@ -32,8 +38,17 @@ auth:
   signup: Sign up
   signout: Log out
 events:
+  typelist:
+    party: Party
+    workshop: Workshop
+    course: Course
+    festival: Festival
+    congress: Congress
+    concert: Concert
+    show: Show
+    other: Other
   add: Add event
-  title: Events
+  title: Dance Calendar
   list:
     empty: No events found. Would you like to add one?
   view:
@@ -41,7 +56,33 @@ events:
     covers: See list
   filter:
     type: Type
-    style: Style
+    style: Any Dance
+    level: Any Level
+eventView:
+  dropdown:
+    dashboard: Dashboard
+    edit: Edit
+    share: Share
+  online: Online Event
+  reservation:
+    guest: Register for event
+    cancel: Cancel reservation
+  reservationPopup:
+    title: Register
+    reserve:
+      submitLabel: Register
+      label: Login
+    finish:
+      title: Almost there
+      btn: Complete registration
+      description:
+        See you soon! Don't forget to check-in by the organiser when you
+        come!
+      reminder: Check your email to finish creation of the WeDance profile.
+      calendar: Add to calendar
+  organiser: Organised by
+  venueMap: Venue Map
+  source: Event Source
 posts:
   add: Add post
   title: Feed
@@ -56,9 +97,19 @@ myprofile:
   title: My Profile
 chat:
   title: Chat
-  welcome: Start conversation with something nice.
-  with: Chat with {username}
-  dateDiff: '{diff} ago'
+  empty: Start conversations and they will appear here.
+  lastMessage:
+    byYou: by you
+  receiver:
+    deleted: DELETED
+conversation:
+  userName: Chat with { username }
+  empty: Start conversation with something nice.
+  lastSeen: opened chat last time
+  unread: haven't opened this chat yet
+  newMessage:
+    placeholder: Write a message
+    submit: Send
 cities:
   choose: Choose city
 settings:
@@ -210,3 +261,25 @@ sort:
   starred: Starred
   archived: Archived
   yours: Yours
+event:
+  artists: Artists
+  organiser: Organiser
+  category:
+    meetup: Meetup
+    lesson: Lesson
+    online: Online
+    travel: Travel
+  role:
+    dj: DJ
+    instructor: Instructor
+    taxi: Taxi Dancer
+    photographer: Photographer
+    musician: Musician
+    organiser: Organiser
+TInputProfile:
+  changeRole: Change Role
+  actions: Actions
+  remove: Remove
+  addInstagram: (add from Instagram)
+  addFacebook: (add from Facebook)
+  placeholder: Search on WeDance, Instagram or Facebook

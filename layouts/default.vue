@@ -9,7 +9,13 @@
     >
       <div class="my-4 w-64 flex flex-col justify-center text-center">
         <div class="p-4">Sign in to {{ showAuthPopup }}</div>
-        <TButton class="mt-2" type="primary" to="/signin">Sign in</TButton>
+        <TButton
+          allow-guests
+          class="mt-2"
+          type="primary"
+          :to="`/signin?target=${$route.path}`"
+          >Sign in</TButton
+        >
       </div>
     </TPopup>
 
@@ -46,6 +52,7 @@ import { version } from '../package.json'
 import { useAuth } from '~/use/auth'
 import { useCities } from '~/use/cities'
 import { useApp } from '~/use/app'
+import { analytics, track } from '~/plugins/firebase'
 
 export default {
   name: 'DefaultLayout',
@@ -117,15 +124,17 @@ export default {
         id: contact.uid,
       })
 
-      this.$fire.analytics.setUserId(contact.uid)
-      this.$fire.analytics.setUserProperties({
-        community: contact.community,
-        type: this.profile?.type,
-        gender: this.profile?.gender,
-        visibility: this.profile?.visibility,
-        partner: this.profile?.partner,
-        teacher: this.profile?.teacher,
-      })
+      if (analytics) {
+        analytics.setUserId(contact.uid)
+        analytics.setUserProperties({
+          community: contact.community,
+          type: this.profile?.type,
+          gender: this.profile?.gender,
+          visibility: this.profile?.visibility,
+          partner: this.profile?.partner,
+          teacher: this.profile?.teacher,
+        })
+      }
     },
     onPageView() {
       this.isMenuOpen = false
@@ -142,8 +151,8 @@ export default {
           app_version: version,
         }
 
-        this.$fire.analytics.logEvent('page_view')
-        this.$fire.analytics.logEvent('screen_view', screen)
+        track('page_view')
+        track('screen_view', screen)
       }, 500)
     },
   },

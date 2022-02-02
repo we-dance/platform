@@ -1,11 +1,11 @@
 <template>
   <div>
-    <THeader title="Chat" />
+    <THeader :title="$t('chat.title')" />
     <div v-if="!chats" class="p-16 text-xs text-center">
-      Start conversations and they will appear here.
+      {{ $t('chat.empty') }}
     </div>
     <div v-else>
-      <router-link
+      <NuxtLink
         v-for="chat in chats"
         :key="chat.receiver.id"
         :to="`/chat/${chat.receiver.username}`"
@@ -17,17 +17,20 @@
         </div>
         <div class="flex-grow">
           <div class="text-xs space-x-1 text-gray-900 flex">
-            <span>{{ chat.receiver.username || 'DELETED' }}</span>
+            <span>{{
+              chat.receiver.username || $t('chat.receiver.deleted')
+            }}</span>
             <span>•</span>
             <div>
-              {{ dateDiff(chat.lastMessageAt) }} ago
-              <span v-if="chat.lastMessageBy === uid">(by you)</span>
+              {{ dateDiff(chat.lastMessageAt) }}
+              <span v-if="chat.lastMessageBy === uid"
+                >({{ $t('chat.lastMessage.byYou') }})</span
+              >
             </div>
           </div>
-
           <div class="block text-sm leading-tight">{{ chat.lastMessage }}</div>
         </div>
-      </router-link>
+      </NuxtLink>
     </div>
   </div>
 </template>

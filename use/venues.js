@@ -7,12 +7,12 @@ export const useVenues = () => {
     {
       name: 'rooms',
       label: 'Areas/Rooms',
-      type: 'textarea',
+      component: 'TInputTextarea',
       description: 'One area per line',
     },
     {
       name: 'map',
-      type: 'photo',
+      component: 'TInputPhoto',
       label: 'Venue map',
       width: 1280,
       height: 720,
