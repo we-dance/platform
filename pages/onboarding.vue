@@ -15,7 +15,7 @@
         ref="username"
         v-model="profile.username"
         label="Pick a username"
-        type="username"
+        component="TInputUsername"
         label-position="vertical"
         description="There might be lot of people with the same name, so username will help others to differentiate who is who. Also link to your profile will be wedance.vip/username"
       />
@@ -27,7 +27,7 @@
         v-model="profile.gender"
         label="How do you identify?"
         label-position="vertical"
-        type="buttons"
+        component="TInputButtons"
         :options="genderOptions"
       />
     </div>
@@ -38,7 +38,7 @@
         v-model="profile.place"
         label="Dance community of which city would you like to join?"
         label-position="vertical"
-        type="place"
+        component="TInputPlace"
       />
     </div>
 
@@ -47,7 +47,7 @@
         v-model="profile.photo"
         label="Last step! Upload your photo"
         label-position="vertical"
-        type="photo"
+        component="TInputPhoto"
       />
 
       <TButton

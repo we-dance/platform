@@ -9,33 +9,40 @@ export const app = {
   cover: '/cover/wide.png',
 }
 
-const firebaseConfig = JSON.parse(process.env.FIREBASE_CONFIG)
-
-export const firebase = {
-  config: firebaseConfig,
-  services: {
-    auth: true,
-    firestore: true,
-    analytics: {
-      collectionEnabled: process.env.FIREBASE_ANALYTICS_ENABLED,
-    },
-  },
-}
-
 export default {
-  mode: 'spa',
-  tailwindcss: {
-    jit: true,
+  target: 'static',
+  ssr: false,
+  generate: {
+    fallback: true,
+  },
+  router: {
+    extendRoutes(routes, resolve) {
+      routes.push({
+        name: 'Calendar',
+        path: '/:city/:category/:dance/:level',
+        component: resolve(__dirname, 'pages/events/index'),
+      })
+
+      return routes
+    },
   },
   /*
    ** Customize the progress-bar color
    */
   loading: { color: '#210309' },
-  components: true,
+  components: [
+    '~/components',
+    '~/components/global',
+    '~/components/Actions',
+    '~/components/Card',
+    '~/components/Formatters',
+    '~/components/TInput',
+  ],
   /*
    ** Global CSS
    */
   css: [
+    '@/assets/css/tailwind.css',
     '@/assets/css/typography.css',
     '@/assets/css/vendors.scss',
     '@/assets/css/animation.css',
@@ -55,11 +62,10 @@ export default {
   buildModules: [
     // Doc: https://github.com/nuxt-community/stylelint-module
     '@nuxtjs/stylelint-module',
-    // Doc: https://github.com/nuxt-community/nuxt-tailwindcss
-    '@nuxtjs/tailwindcss',
     // Doc: https://composition-api.nuxtjs.org/
     '@nuxtjs/composition-api',
     '@nuxtjs/google-fonts',
+    '@nuxt/postcss8',
   ],
   /*
    ** Nuxt.js modules
@@ -71,11 +77,9 @@ export default {
     '@nuxtjs/sentry',
     '@nuxtjs/robots',
     '@nuxtjs/sitemap',
-    'portal-vue/nuxt',
     '@nuxtjs/device',
     'nuxt-i18n',
     '@nuxt/content',
-    '@nuxtjs/firebase',
     '@nuxtjs/toast',
   ],
   googleFonts: {
@@ -119,6 +123,12 @@ export default {
    ** Build configuration
    */
   build: {
+    postcss: {
+      plugins: {
+        tailwindcss: {},
+        autoprefixer: {},
+      },
+    },
     loaders: {
       vue: {
         prettify: false,
@@ -154,9 +164,12 @@ export default {
   },
   env: {
     app,
-    firebase,
+    firebase: {
+      config: JSON.parse(process.env.FIREBASE_CONFIG || {}),
+      analytics: process.env.FIREBASE_ANALYTICS,
+      analyticsDebug: process.env.FIREBASE_ANALYTICS_DEBUG,
+    },
   },
-  firebase,
   sentry: {
     dsn: process.env.SENTRY_DSN,
   },
@@ -212,5 +225,10 @@ export default {
   },
   image: {
     provider: 'static',
+  },
+  watchers: {
+    webpack: {
+      ignored: /(node_modules)|(.git)/,
+    },
   },
 }

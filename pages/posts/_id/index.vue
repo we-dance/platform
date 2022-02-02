@@ -19,8 +19,6 @@
     <TPost :item="doc" hide-comments show-all />
 
     <TItemCreator :item="doc" full />
-
-    <TItemComments :reply-to="doc.createdBy" :post-id="doc.id" />
   </div>
 </template>
 

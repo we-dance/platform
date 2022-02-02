@@ -94,7 +94,7 @@ export default {
         fields.push({
           name: 'createdBy',
           label: 'Creator',
-          type: 'collection',
+          component: 'TInputCollection',
           collection: 'profiles',
           keyValue: 'id',
           keyLabel: 'username',

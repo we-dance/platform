@@ -42,6 +42,8 @@ export const useStyles = () => {
     },
   ]
 
+  const levelOptions = levels
+
   const getStylesDropdown = (selected) => {
     const isSelected = selected && Object.keys(selected).length > 0
 
@@ -155,6 +157,7 @@ export const useStyles = () => {
     getStyle,
     getStyleName,
     levels,
+    levelOptions,
     getStyles,
     getAllStyles,
     getStylesDropdown,

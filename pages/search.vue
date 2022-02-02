@@ -9,7 +9,7 @@
         @input="search"
       />
     </div>
-    <router-link
+    <NuxtLink
       v-for="item in response.hits"
       :key="item.id"
       :to="`/${item.username}`"
@@ -21,7 +21,7 @@
       <div class="flex-grow">
         <div class="block text-sm leading-tight">{{ item.username }}</div>
       </div>
-    </router-link>
+    </NuxtLink>
   </div>
 </template>
 

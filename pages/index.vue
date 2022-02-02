@@ -8,7 +8,7 @@
             <div class="absolute inset-0">
               <img
                 class="h-full w-full object-cover"
-                alt="People dancing bachata"
+                :alt="$t('hero.alt')"
                 src="/img/hero_640.jpg"
                 sizes="(max-width: 640px) 100vw, (max-width: 768px) 100vw, (max-width: 1024px) 100vw, (max-width: 1280px) 100vw, (max-width: 1536px) 100vw, 100vw"
                 srcset="
@@ -47,7 +47,7 @@
                 <TButton
                   allow-guests
                   icon="search"
-                  label="Search dancers"
+                  :label="$t('hero.search')"
                   to="/search"
                   type="void"
                   class="mt-8 w-full text-gray-500 bg-white hover:bg-gray-100 font-semibold py-2 px-4 border border-gray-400 rounded-full shadow"
@@ -59,17 +59,17 @@
                   <div class="flex flex-col items-center justify-center">
                     <TIcon name="group" class="h-16 w-16" />
                     <div class="text-4xl">1309</div>
-                    <div class="text-sm">dancers</div>
+                    <div class="text-sm">{{ $t('icons.dancers') }}</div>
                   </div>
                   <div class="flex flex-col items-center justify-center">
                     <TIcon name="location" class="h-16 w-16" />
                     <div class="text-4xl">102</div>
-                    <div class="text-sm">cities</div>
+                    <div class="text-sm">{{ $t('icons.cities') }}</div>
                   </div>
                   <div class="flex flex-col items-center justify-center">
                     <TIcon name="calendar" class="h-16 w-16" />
                     <div class="text-4xl">441</div>
-                    <div class="text-sm">events</div>
+                    <div class="text-sm">{{ $t('icons.events') }}</div>
                   </div>
                 </div>
               </div>
@@ -79,7 +79,7 @@
                   allow-guests
                   type="primary"
                   to="/register"
-                  label="Join the community"
+                  :label="$t('hero.action')"
                 />
               </div>
 
@@ -102,13 +102,17 @@
               <div
                 class="flex items-center justify-center w-20 h-20 bg-white rounded-full "
               >
-                <img src="/img/event-calendar.svg" alt="Event Calendar" />
+                <img
+                  src="/img/event-calendar.svg"
+                  :alt="$t('features.calendar.title')"
+                />
               </div>
             </div>
-            <h3 class="text-2xl font-extrabold text-center">Event Calendar</h3>
+            <h3 class="text-2xl font-extrabold text-center">
+              {{ $t('features.calendar.title') }}
+            </h3>
             <p class="text-center">
-              Find dance workshops, courses, socials and parties. We fill event
-              calendar all together as a community. Everyone can share.
+              {{ $t('features.calendar.description') }}
             </p>
           </div>
           <div class="py-8 space-y-1 bg-light">
@@ -116,12 +120,17 @@
               <div
                 class="flex items-center justify-center w-20 h-20 bg-white rounded-full "
               >
-                <img src="/img/dance-partners.svg" alt="Dance Partners" />
+                <img
+                  src="/img/dance-partners.svg"
+                  :alt="$t('features.dancePartners.title')"
+                />
               </div>
             </div>
-            <h3 class="text-2xl font-extrabold text-center">Dance Partners</h3>
+            <h3 class="text-2xl font-extrabold text-center">
+              {{ $t('features.dancePartners.title') }}
+            </h3>
             <p class="text-center">
-              Find a dance partner for your dance style and let them find you.
+              {{ $t('features.dancePartners.description') }}
             </p>
           </div>
           <div class="py-8 space-y-1 bg-light">
@@ -129,14 +138,17 @@
               <div
                 class="flex items-center justify-center w-20 h-20 bg-white rounded-full "
               >
-                <img src="/img/city-chats.svg" alt="City Chats" />
+                <img
+                  src="/img/city-chats.svg"
+                  :alt="$t('features.cityChats.title')"
+                />
               </div>
             </div>
-            <h3 class="text-2xl font-extrabold text-center">City Chats</h3>
+            <h3 class="text-2xl font-extrabold text-center">
+              {{ $t('features.cityChats.title') }}
+            </h3>
             <p class="text-center">
-              Find dance chat in any city. Join your city chat and invite your
-              friends to help new dancers in the city. Think globally, act
-              locally.
+              {{ $t('features.cityChats.description') }}
             </p>
           </div>
           <div class="py-8 space-y-1 bg-light">
@@ -144,13 +156,17 @@
               <div
                 class="flex items-center justify-center w-20 h-20 bg-white rounded-full "
               >
-                <img src="/img/dance-travel.svg" alt="Dance Travel" />
+                <img
+                  src="/img/dance-travel.svg"
+                  :alt="$t('features.danceTravel.title')"
+                />
               </div>
             </div>
-            <h3 class="text-2xl font-extrabold text-center">Dance Travel</h3>
+            <h3 class="text-2xl font-extrabold text-center">
+              {{ $t('features.danceTravel.title') }}
+            </h3>
             <p class="text-center">
-              Find international dance festivals and congresses. Share a ride,
-              an appartment and find a buddy to experience a new city together.
+              {{ $t('features.danceTravel.description') }}
             </p>
           </div>
           <div class="py-8 space-y-1 bg-light">
@@ -158,18 +174,21 @@
               <div
                 class="flex items-center justify-center w-20 h-20 bg-white rounded-full "
               >
-                <img src="/img/volunteer.svg" alt="Volunteer" />
+                <img
+                  src="/img/volunteer.svg"
+                  :alt="$t('features.volunteer.title')"
+                />
               </div>
             </div>
-            <h3 class="text-2xl font-extrabold text-center">Volunteer</h3>
+            <h3 class="text-2xl font-extrabold text-center">
+              {{ $t('features.volunteer.title') }}
+            </h3>
             <p class="text-center">
-              We build a community, where everyone enters with mindset “I can
-              help”, so whenever you need help you can count on it. We are one
-              big family worldwide. We help each other.<br />
-              <router-link
+              {{ $t('features.volunteer.description') }}<br />
+              <NuxtLink
                 to="/get-involved"
                 class="underline font-bold hover:no-underline"
-                >Get Involved</router-link
+                >{{ $t('features.volunteer.action') }}</NuxtLink
               >
             </p>
           </div>
@@ -181,15 +200,16 @@
                 <img src="/img/interviews.svg" alt="Interviews" />
               </div>
             </div>
-            <h3 class="text-2xl font-extrabold text-center">Interviews</h3>
+            <h3 class="text-2xl font-extrabold text-center">
+              {{ $t('features.interviews.title') }}
+            </h3>
             <p class="text-center">
-              Explore more about you favorite dance artists and catch their tips
-              &amp; tricks.<br />
+              {{ $t('features.interviews.description') }}<br />
               <a
                 href="https://anchor.fm/wedance"
                 target="_blank"
                 class="underline font-bold hover:no-underline"
-                >Listen to Podcast</a
+                >{{ $t('features.interviews.action') }}</a
               >
             </p>
           </div>
@@ -199,11 +219,10 @@
         <div class="max-w-md py-4 space-y-1">
           <div class="flex justify-center"></div>
           <h3 class="text-2xl font-extrabold text-center">
-            International Community
+            {{ $t('international.title') }}
           </h3>
           <p class="text-center">
-            We regularly post interviews, event announcements and introduce new
-            members on our social media.
+            {{ $t('international.description') }}
           </p>
           <div class="p-4 flex flex-wrap gap-2 items-center justify-center">
             <TButton

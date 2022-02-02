@@ -11,14 +11,14 @@
         <TField
           v-model="reportCategory"
           label="Reason"
-          type="select"
+          component="TInputSelect"
           :options="['spam', 'other']"
         />
         <TField
           v-model="reportReason"
           class="mt-2"
           label="Comments"
-          type="textarea"
+          component="TInputTextarea"
         />
         <div class="mt-4 flex justify-end">
           <TButton class="mr-2" @click="cancelReport">Cancel</TButton>

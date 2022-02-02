@@ -76,6 +76,7 @@
 
 <script>
 import { ref, computed } from '@nuxtjs/composition-api'
+import { track } from '~/plugins/firebase'
 import { useAuth } from '~/use/auth'
 import { useDoc } from '~/use/doc'
 import { useProfiles } from '~/use/profiles'
@@ -90,7 +91,7 @@ export default {
   },
   methods: {
     draftMessage() {
-      this.$fire.analytics.logEvent('popup_message')
+      track('popup_message')
       this.message = `Hi ${this.profile.username}!\n\nI am looking for a dance partner to practice.\n\nIf you are interested please contact me: `
       this.isWritingMessage = true
     },
@@ -100,7 +101,7 @@ export default {
       }
 
       try {
-        this.$fire.analytics.logEvent('send_message')
+        track('send_message')
 
         await this.create({
           from: this.myUid,

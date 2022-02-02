@@ -16,15 +16,15 @@
       {{ getTime(item.startDate) }}
     </div>
     <div class="mr-2">
-      {{ getEventIcon(item.type) }}
+      {{ getEventIcon(item.eventType) }}
     </div>
     <div>
-      <router-link
+      <NuxtLink
         :to="`/events/${item.id}`"
         class="font-bold leading-none hover:underline hover:text-primary"
       >
         {{ item.name }}
-      </router-link>
+      </NuxtLink>
       <TReactions :item="item" class="my-1" />
       <div>
         <div class="text-xs flex flex-wrap gap-1">
@@ -44,7 +44,7 @@
               </p>
             </template>
             <template v-else>
-              <TIcon name="car" class="w-4 h-4" />
+              <TIcon name="place" class="w-4 h-4" />
               <p>
                 {{ addressPart(item.venue, 'locality') }}
               </p>
@@ -60,14 +60,7 @@
               </p>
             </div>
           </div>
-          <div class="flex items-center gap-1">
-            <TIcon name="lobby" class="w-4 h-4" />
-            <div v-if="item.claimed === 'Yes'">
-              Organised by
-            </div>
-            <div v-else>
-              Promoted by
-            </div>
+          <div v-if="item.claimed === 'Yes'" class="flex items-center gap-1">
             <TAvatar name :uid="item.createdBy" class="text-primary" />
           </div>
         </div>
