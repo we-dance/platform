@@ -1,6 +1,6 @@
 <template>
   <div>
-    <THeader :title="title">
+    <THeader v-if="title" :title="title">
       <TButton v-if="add && can('add', collection)" @click="currentId = 'add'">
         {{ add }}
       </TButton>

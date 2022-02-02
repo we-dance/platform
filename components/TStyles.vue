@@ -1,6 +1,6 @@
 <template>
   <div>
-    <router-link
+    <NuxtLink
       v-for="style in getStyles(value, 0, false, max)"
       :to="`/dance/${style.id}`"
       :key="style.id"
@@ -10,7 +10,7 @@
       }}<span v-if="style.level && style.level !== 'Interested' && !hideLevel">
         – {{ style.level }}</span
       >
-    </router-link>
+    </NuxtLink>
   </div>
 </template>
 

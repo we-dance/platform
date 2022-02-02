@@ -109,6 +109,9 @@ conversation:
   newMessage:
     placeholder: Write a message
     submit: Send
+  welcome: Începeți conversația cu ceva frumos.
+  with: Discutați cu {username}
+  dateDiff: 'acum {diff}'
 cities:
   choose: Alegeți un oraș
 settings:
@@ -197,7 +200,7 @@ teaser:
     btn: Alătură-te acum
   chat:
     title: Vorbim?
-    description: "Avem discuții de dans în fiecare oraș"
+    description: 'Avem discuții de dans în fiecare oraș'
     btn: Alăturați-vă chatului {city}
   involve:
     title: Noi avem nevoie de ajutorul tau

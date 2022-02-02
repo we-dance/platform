@@ -1,15 +1,12 @@
 <template>
-  <div class="bg-white p-4 pb-0">
-    <div class="flex items-start justify-between">
-      <div class="flex mb-1">
-        <TAvatar photo size="xs" :uid="item.createdBy" class="mr-2" />
-        <TAvatar name :uid="item.createdBy" />
-      </div>
-      <div class="text-gray-600">{{ dateDiff(item.createdAt) }} ago</div>
-    </div>
-    <TPreview :content="item.body" />
-    <div class="text-sm flex items-start justify-end">
-      <TButton @click="onShowForm">Reply</TButton>
+  <div class="w-full">
+    <TAvatar photo name :uid="item.createdBy">
+      <span>•</span>
+      <div>{{ dateDiff(item.createdAt) }}</div>
+    </TAvatar>
+    <div class="mt-1">{{ item.body }}</div>
+    <div class="text-sm flex items-start mt-1">
+      <TButton type="xs" @click="onShowForm">Reply</TButton>
     </div>
 
     <TFormComment

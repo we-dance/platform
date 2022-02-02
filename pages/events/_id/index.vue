@@ -7,14 +7,14 @@
           type="context"
           icon="people"
           :to="`/events/${item.id}/dashboard`"
-          label="Dashboard"
+          :label="$t('eventView.dropdown.dashboard')"
         />
         <TButton
           v-if="can('edit', 'events', item)"
           type="context"
           icon="edit"
           :to="`/events/${item.id}/edit`"
-          label="Edit"
+          :label="$t('eventView.dropdown.edit')"
         />
         <TCardActions
           :id="item.id"
@@ -31,7 +31,7 @@
           :url="$route.fullPath"
           :text="item.name"
           type="context"
-          label="Share"
+          :label="$t('eventView.dropdown.share')"
         />
       </TDropdown>
     </THeader>
@@ -87,7 +87,7 @@
           class="flex items-center justify-start w-full leading-tight border-b py-2 px-4"
         >
           <TIcon name="youtube" class="w-4 h-4 mr-4" />
-          <div>Online Event</div>
+          <div>{{ $t('eventView.online') }}</div>
         </div>
 
         <div
@@ -111,7 +111,7 @@
           class="flex items-center justify-start w-full leading-tight border-b py-2 px-4"
         >
           <TIcon name="lobby" class="w-4 h-4 mr-4" />
-          <div>Organised by {{ item.organiser }}</div>
+          <div>{{ $t('eventView.organiser') }} {{ item.organiser }}</div>
         </div>
       </div>
     </div>
@@ -120,56 +120,67 @@
       class="flex mt-4 space-x-2 justify-center sticky bg-white p-4 border-b z-50 top-0"
     >
       <TButton
-        v-if="!uid"
-        allow-guests
+        v-if="item.response !== 'up'"
         type="primary"
+        :title="$t('eventView.reservation.guest')"
         @click="reservationPopup = 'reserve'"
-        >Register for event</TButton
+        >{{ $t('eventView.reservation.guest') }}</TButton
       >
       <TButton
-        v-else
-        :type="uid && item.response === 'up' ? 'success' : 'secondary'"
-        @click="reservationPopup = 'reserve'"
-        >Going</TButton
-      >
-      <TButton
-        v-if="uid"
-        :type="uid && item.response === 'down' ? 'danger' : 'secondary'"
+        v-if="uid && item.response === 'up'"
+        type="secondary"
         @click="updateRsvp(item.id, 'events', 'down')"
-        >Not going</TButton
+        >{{ $t('eventView.reservation.cancel') }}</TButton
       >
     </div>
 
-    <TPost v-if="item.id" :item="item" hide-media />
+    <TPreview :content="item.description" class="p-4" />
+
+    <div v-if="item.artists && item.artists.length" class="space-y-2 p-4">
+      <h3 class="text-xl font-bold">{{ $t('event.artists') }}</h3>
+      <WProfile
+        v-for="profile in item.artists"
+        :key="profile.username"
+        :username="profile.username"
+        :fallback="profile"
+      />
+    </div>
 
     <div v-if="item.venue && item.venue.map" class="p-4 bg-gray-100">
       <div class="font-bold text-sm mb-4 leading-none text-gray-700">
-        Venue Map
+        {{ $t('eventView.venueMap') }}
       </div>
       <img :src="item.venue.map" alt="Venue Map" class="mt-4" />
     </div>
 
-    <TItemCreator :item="item" full class="mt-4" />
+    <div v-if="item.org" class="space-y-2 p-4">
+      <h4 class="text-xl font-bold">{{ $t('event.organiser') }}</h4>
+      <WProfile :username="item.org.username" :fallback="item.org" full />
+    </div>
 
     <div v-if="item.facebook" class="mt-8 text-right text-sm">
-      <a :href="item.facebook" class="hover:underline text-gray-700"
-        >Event Source</a
-      >
+      <a :href="item.facebook" class="hover:underline text-gray-700">{{
+        $t('eventView.source')
+      }}</a>
     </div>
+
+    <TCommentsInline :item="item" autoload class="border-t p-4" />
 
     <TPopup
       v-if="reservationPopup"
-      title="Register"
+      :title="$t('eventView.reservationPopup.title')"
       @close="reservationPopup = false"
     >
       <div class="max-w-md mx-auto py-4 max-h-screen overflow-y-scroll">
         <div v-if="reservationPopup === 'reserve'">
           <div>
             <TForm
-              allow-guests
               v-model="account"
+              allow-guests
               :fields="reservationFields"
-              submit-label="Register"
+              :submit-label="
+                $t('eventView.reservationPopup.reserve.submitLabel')
+              "
               class="mt-4 space-y-4"
               @save="reserve"
             >
@@ -177,7 +188,7 @@
                 <TButton
                   allow-guests
                   :to="`/signin?target=${this.$route.fullPath}`"
-                  label="Login"
+                  :label="$t('eventView.reservationPopup.reserve.label')"
                 />
               </template>
             </TForm>
@@ -185,24 +196,27 @@
         </div>
         <div v-if="reservationPopup === 'finish'" class="p-4">
           <template v-if="item.link">
-            <h2 class="font-bold mb-4">Almost there</h2>
-            <TButton class="mt-4 mr-4" type="danger" :href="item.link"
-              >Complete registration</TButton
-            >
+            <h2 class="font-bold mb-4">
+              {{ $t('eventView.reservationPopup.finish.title') }}
+            </h2>
+            <TButton class="mt-4 mr-4" type="danger" :href="item.link">{{
+              $t('eventView.reservationPopup.finish.btn')
+            }}</TButton>
           </template>
           <template v-else>
-            <h2 class="font-bold mb-4">Almost there</h2>
+            <h2 class="font-bold mb-4">
+              {{ $t('eventView.reservationPopup.finish.title') }}
+            </h2>
             <p v-if="uid">
-              See you soon! Don't forget to check-in by the organiser when you
-              come!
+              {{ $t('eventView.reservationPopup.finish.description') }}
             </p>
             <p v-else>
-              Check your email to finish creation of the WeDance profile.
+              {{ $t('eventView.reservationPopup.finish.reminder') }}
             </p>
             <div v-if="uid">
               <TButton
                 :href="calendarLink"
-                label="Add to calendar"
+                :label="$t('eventView.reservationPopup.finish.calendar')"
                 class="mt-2"
               />
             </div>
@@ -391,6 +405,10 @@ export default {
       }
 
       reservationPopup.value = 'finish'
+
+      if (item.value.link) {
+        openURL(item.value.link)
+      }
     }
 
     return {

@@ -109,6 +109,9 @@ conversation:
   newMessage:
     placeholder: Write a message
     submit: Send
+  welcome: Inizia la conversazione con qualcosa di carino.
+  with: Chatta con {username}
+  dateDiff: '{diff} fa'
 cities:
   choose: Scegli una città
 settings:
@@ -197,7 +200,7 @@ teaser:
     btn: Iscriviti adesso
   chat:
     title: Chiacchieriamo?
-    description: "Abbiamo chat di ballo in ogni città"
+    description: 'Abbiamo chat di ballo in ogni città'
     btn: Entra nella chat di {city}
   involve:
     title: Abbiamo bisogno del tuo aiuto

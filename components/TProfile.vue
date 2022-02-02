@@ -44,12 +44,11 @@
           </p>
           <p>
             Your poster is also shown in
-            <router-link to="/community">Сommunity</router-link> among other
-            dancers.
+            <NuxtLink to="/community">Сommunity</NuxtLink> among other dancers.
           </p>
           <p>
             Click
-            <router-link to="/settings?tab=profile">Edit Profile</router-link>
+            <NuxtLink to="/settings?tab=profile">Edit Profile</NuxtLink>
             and add:
           </p>
           <ul>
@@ -135,7 +134,7 @@
       </div>
     </template>
 
-    <TProfileContacts :profile="profile" class="p-2 mb-4" />
+    <TProfileContacts :profile="profile" class="p-2 mb-4 bg-gray-100" />
 
     <div v-if="uid === profile.id" class="flex justify-center space-x-2">
       <TButton label="Edit Profile" to="/settings?tab=profile" />

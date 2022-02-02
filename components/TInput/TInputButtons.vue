@@ -1,6 +1,6 @@
 <template>
-  <div class="flex justify-center">
-    <div class="flex flex-wrap">
+  <div class="flex justify-center overflow-x-scroll">
+    <div class="flex flex-nowrap">
       <TButton
         v-for="option in options"
         allow-guests

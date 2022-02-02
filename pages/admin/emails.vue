@@ -121,7 +121,7 @@ export default {
       },
       {
         name: 'from',
-        type: 'select',
+        component: 'TInputSelect',
         options: [
           {
             value: 'WeDance <automated@wedance.vip>',
@@ -135,7 +135,7 @@ export default {
       },
       {
         name: 'status',
-        type: 'select',
+        component: 'TInputSelect',
         defaultValue: 'draft',
         options: ['draft', 'scheduled', 'sent', 'canceled'],
       },
@@ -153,12 +153,12 @@ export default {
       },
       {
         name: 'recipients',
-        type: 'accounts',
+        component: 'TAccountListSelector',
       },
       {
         name: 'content',
         hideLabel: true,
-        type: 'textarea',
+        component: 'TInputTextarea',
       },
     ]
 

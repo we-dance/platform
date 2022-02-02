@@ -17,11 +17,12 @@
 <script>
 import { getDay, getDate, getTime } from '~/utils'
 import { addressPart } from '~/use/google'
+import { db } from '~/plugins/firebase'
 
 export default {
   layout: 'empty',
   async asyncData({ app, params, error }) {
-    const ref = await app.$fire.firestore
+    const ref = await db
       .collection('posts')
       .doc(params.id)
       .get()
@@ -34,7 +35,7 @@ export default {
     const event = ref.data()
     event.locality = addressPart(event.venue, 'locality')
 
-    const authorRef = await app.$fire.firestore
+    const authorRef = await db
       .collection('profiles')
       .doc(event.createdBy)
       .get()

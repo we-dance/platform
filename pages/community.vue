@@ -6,6 +6,12 @@
 
     <div>
       <div v-if="uid && response.facets" class="mb-4 gap-2 flex flex-wrap p-4">
+        <TButton
+          to="/cities?target=/community"
+          icon="place"
+          :label="cityName || $t('cities.choose')"
+        />
+
         <t-rich-select
           v-model="radius"
           placeholder="Radius"
@@ -29,7 +35,7 @@
       </div>
 
       <div class="grid grid-cols-1 md:grid-cols-2 gap-2">
-        <router-link
+        <NuxtLink
           v-for="item in response.hits"
           :key="item.id"
           :to="`/${item.username}`"
@@ -45,7 +51,7 @@
             :styles="item.styles"
             size="sm"
           />
-        </router-link>
+        </NuxtLink>
       </div>
 
       <t-pagination
@@ -97,7 +103,7 @@ export default {
     const currentPage = ref(1)
     const filters = ref({})
     const { uid } = useAuth()
-    const { city, currentCity } = useCities()
+    const { city, currentCity, cityName } = useCities()
     const { router } = useRouter()
     const { getCity } = useApp()
     const { objectivesList, typeList, radiusOptions } = useProfiles()
@@ -206,6 +212,7 @@ export default {
       radius,
       load,
       getCity,
+      cityName,
     }
   },
   head() {

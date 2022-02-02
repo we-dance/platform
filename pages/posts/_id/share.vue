@@ -11,13 +11,14 @@
 </template>
 
 <script>
+import { db } from '~/plugins/firebase'
 import { useProfiles } from '~/use/profiles'
 import { getExcerpt } from '~/utils'
 
 export default {
   layout: 'empty',
-  async asyncData({ app, params, error }) {
-    const ref = await app.$fire.firestore
+  async asyncData({ params, error }) {
+    const ref = await db
       .collection('posts')
       .doc(params.id)
       .get()

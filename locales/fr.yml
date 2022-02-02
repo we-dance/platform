@@ -109,6 +109,9 @@ conversation:
   newMessage:
     placeholder: Write a message
     submit: Send
+  welcome: Commencez la conversation avec quelque chose de gentil.
+  with: Discutez avec {username}
+  dateDiff: 'il y a {diff}'
 cities:
   choose: Choisissez une ville
 settings:
@@ -197,7 +200,7 @@ teaser:
     btn: Adhérer maintenant
   chat:
     title: On bavarde?
-    description: "Nous avons des discussions de danse dans chaque ville"
+    description: 'Nous avons des discussions de danse dans chaque ville'
     btn: Rejoignez le chat de {city}
   involve:
     title: Nous avons besoin de votre aide
