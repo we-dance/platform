@@ -33,7 +33,7 @@ chat:
   title: Разговор
   welcome: Започни разговор са нечим лепим
   with: Ћаскај са {username}
-  dateDiff: "Пре {diff}"
+  dateDiff: 'Пре {diff}'
 cities:
   choose: Одаберите град
 settings:
@@ -122,7 +122,7 @@ teaser:
     btn: Придружи се сад
   chat:
     title: Да ли ћаскамо?
-    description: "У сваком граду имамо плесне разговоре"
+    description: 'У сваком граду имамо плесне разговоре'
     btn: Придружите се {city} ћаскању
   involve:
     title: Треба нам твоја помоћ

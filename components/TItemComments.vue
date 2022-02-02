@@ -1,7 +1,5 @@
 <template>
-  <div id="comment" class="mt-8" @click="checkAuth">
-    <TFormComment :post-id="postId" :reply-to="replyTo" class="p-4" />
-
+  <div id="comment" class="mt-8 text-xs">
     <TListComments class="mt-4" :post-id="postId">
       <template v-slot:empty>
         <div class="text-center my-8">{{ $t('comments.empty') }}</div>
@@ -19,18 +17,8 @@ export default {
       type: String,
       default: '',
     },
-    replyTo: {
-      type: String,
-      default: '',
-    },
   },
   methods: {
-    checkAuth() {
-      if (!this.uid) {
-        this.$router.push(`/signin?target=${this.$route.fullPath}%23comment`)
-      }
-    },
-
     load() {
       const hash = this.$route.hash.replace('#', '')
 

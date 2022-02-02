@@ -214,21 +214,21 @@ export const useProfiles = () => {
       name: 'photo',
       label: t('profile.photo'),
       poster: true,
-      type: 'photo',
+      component: 'TInputPhoto',
     },
     {
       name: 'styles',
       label: 'Dances',
       labelPosition: 'top',
       poster: true,
-      type: 'stylesSelect',
+      component: 'TInputStylesSelect2',
       tips:
         'Mark up to 4 favorite dances that will be highlighted in your poster',
     },
     {
       name: 'gender',
       key: 'profile.gender',
-      type: 'buttons',
+      component: 'TInputButtons',
       hideSearchBox: true,
       poster: true,
       options: genderList,
@@ -236,7 +236,7 @@ export const useProfiles = () => {
     {
       name: 'type',
       key: 'profile.type',
-      type: 'radio',
+      component: 'TRadioGroup',
       hideSearchBox: true,
       poster: true,
       options: typeList,
@@ -247,7 +247,7 @@ export const useProfiles = () => {
       register: true,
       poster: true,
       required: true,
-      type: 'username',
+      component: 'TInputUsername',
       before: 'Use only letters, numbers, underscores and periods.',
     },
     {
@@ -256,21 +256,21 @@ export const useProfiles = () => {
       register: true,
       poster: true,
       required: true,
-      type: 'place',
+      component: 'TInputPlace',
       placeholder: 'City',
     },
     {
       name: 'hometown',
       key: 'profile.hometown',
       required: true,
-      type: 'place',
+      component: 'TInputPlace',
       before: 'Where were you born and raised?',
     },
     {
       name: 'visibility',
       key: 'profile.visibility',
       poster: true,
-      type: 'buttons',
+      component: 'TInputButtons',
       options: visibilityOptions,
       description:
         '- Public profiles are searchable in Google and used in our social media to attract new members.\n- Members profile are only visible for logged-in users.\n- Unlisted profiles are possible to open with exact link, but they are not listed in members lists and search.',
@@ -279,7 +279,7 @@ export const useProfiles = () => {
       name: 'permission',
       label: 'Do you want free promo?',
       poster: true,
-      type: 'buttons',
+      component: 'TInputButtons',
       options: booleanOptions,
       description:
         'Send us link to your profile on [Instagram](https://instagram.com/wedancevip) and we will promote it on our social media channels: Telegram, Instagram, Facebook and Twitter.',
@@ -294,19 +294,19 @@ export const useProfiles = () => {
     {
       name: 'locales',
       key: 'profile.languages',
-      type: 'languages',
+      component: 'TInputLanguages',
     },
     {
       name: 'objectives',
       key: 'profile.objectives',
-      type: 'multi',
+      component: 'TInputMulti',
       options: objectivesList,
     },
     {
       name: 'bio',
       key: 'profile.bio',
       poster: true,
-      type: 'textarea',
+      component: 'TInputTextarea',
       labelPosition: 'top',
       before: 'Short introduction on top of your photo',
       max: 140,
@@ -314,7 +314,7 @@ export const useProfiles = () => {
     {
       name: 'story',
       key: 'profile.story',
-      type: 'textarea',
+      component: 'TInputTextarea',
       labelPosition: 'top',
       placeholder: 'Text (markdown)',
       before:
@@ -325,20 +325,20 @@ export const useProfiles = () => {
     {
       name: 'learning',
       key: 'profile.topics',
-      type: 'textarea',
+      component: 'TInputTextarea',
       description: 'For example: Musicality in Salsa, Men Styling, etc.',
     },
     {
       name: 'jobs',
       label: 'I can help with',
-      type: 'textarea',
+      component: 'TInputTextarea',
       description:
         'How can you help our community? What are you good at? For example: design, programming, marketing, social media, etc.',
     },
     {
       name: 'partner',
       key: 'profile.partner',
-      type: 'buttons',
+      component: 'TInputButtons',
       options: booleanOptions,
     },
     {
@@ -363,7 +363,7 @@ export const useProfiles = () => {
       name: 'partnerBio',
       label: 'Question',
       when: (p) => p.partner === 'Yes',
-      type: 'textarea',
+      component: 'TInputTextarea',
       description:
         'What is important in your partner? Put it as a question, for example: Do you love dogs?',
     },
@@ -371,20 +371,20 @@ export const useProfiles = () => {
       name: 'meetingPlace',
       key: 'profile.place',
       when: (p) => p.partner === 'Yes',
-      type: 'multi',
+      component: 'TInputMulti',
       options: meetingPlaces,
     },
     {
       name: 'days',
       key: 'profile.days',
       when: (p) => p.partner === 'Yes',
-      type: 'multi',
+      component: 'TInputMulti',
       options: days,
     },
     {
       name: 'contacts',
       label: 'Do you use social media?',
-      type: 'buttons',
+      component: 'TInputButtons',
       options: booleanOptions,
     },
     ...contactFields,
@@ -401,14 +401,14 @@ export const useProfiles = () => {
   const profileFilters = [
     {
       name: 'place',
-      type: 'place',
+      component: 'TInputPlace',
       clearable: true,
       hideLabel: true,
       placeholder: 'City',
     },
     {
       name: 'dance',
-      type: 'style',
+      component: 'TInputStyle',
       hideLabel: true,
       placeholder: 'Style',
       compare: (item, field, value) =>
@@ -420,7 +420,7 @@ export const useProfiles = () => {
     },
     {
       name: 'objective',
-      type: 'richselect',
+      component: 'TRichSelect',
       options: objectivesList,
       hideSearchBox: true,
       clearable: true,
@@ -429,7 +429,7 @@ export const useProfiles = () => {
     },
     {
       name: 'gender',
-      type: 'richselect',
+      component: 'TRichSelect',
       options: genderList,
       hideSearchBox: true,
       clearable: true,

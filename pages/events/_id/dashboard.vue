@@ -381,7 +381,7 @@ export default {
       {
         name: 'content',
         hideLabel: true,
-        type: 'textarea',
+        component: 'TInputTextarea',
         placeholder: 'Your message',
         rows: '5',
         cols: '50',

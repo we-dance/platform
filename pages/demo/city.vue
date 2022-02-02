@@ -29,7 +29,7 @@
       <h2 class="font-bold mb-2">TField/Collection/Venues</h2>
       <TField
         v-model="data.TField"
-        type="collection"
+        component="TInputCollection"
         collection="venues"
         key-value="id"
         key-label="name"

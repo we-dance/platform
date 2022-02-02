@@ -26,7 +26,7 @@
 
     <TField
       v-model="view"
-      type="select"
+      component="TInputSelect"
       label="Cards View"
       class="mt-4"
       :options="['name', 'contacts']"

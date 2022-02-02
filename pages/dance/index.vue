@@ -14,7 +14,7 @@
       <div v-for="category in categories" :key="category" class="mb-4">
         <h4 class="font-bold text-lg">{{ category }}</h4>
         <div class="text-center">
-          <router-link
+          <NuxtLink
             v-for="style in subStyles(category)"
             :key="style.id"
             :class="{ 'bg-primary text-white': contains(style.id) }"
@@ -22,7 +22,7 @@
             :to="`/dance/${style.id}`"
           >
             <span>{{ style.name }}</span>
-          </router-link>
+          </NuxtLink>
         </div>
       </div>
     </div>

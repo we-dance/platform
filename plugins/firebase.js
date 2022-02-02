@@ -1,16 +1,34 @@
-import Firebase from 'firebase/app'
+import firebase from 'firebase/app'
 import 'firebase/auth'
 import 'firebase/firestore'
 import 'firebase/analytics'
 
-export default ({ env: { firebase } }) => {
-  if (Firebase.apps.length > 0) {
-    return
-  }
+if (!process.env.firebase.config?.apiKey) {
+  throw new Error('Missing Firebase Configuration')
+}
 
-  Firebase.initializeApp(firebase.config)
-
-  if (firebase.services.analytics) {
-    Firebase.analytics()
+let track = function(...params) {
+  if (process.env.firebase.analyticsDebug) {
+    console.log('[track]', ...params)
   }
 }
+
+let analytics
+
+let googleApiKey
+
+if (!firebase.apps.length) {
+  const config = process.env.firebase.config
+  googleApiKey = config.apiKey
+  firebase.initializeApp(config)
+
+  if (process.env.firebase.analytics) {
+    analytics = firebase.analytics()
+
+    track = analytics.logEvent
+  }
+}
+
+const db = firebase.firestore()
+
+export { db, track, analytics, googleApiKey }

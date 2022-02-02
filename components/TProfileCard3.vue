@@ -4,16 +4,16 @@
       {{ label }}
     </div>
     <div class="flex">
-      <router-link :to="`/${profile.username}`">
+      <NuxtLink :to="`/${profile.username}`">
         <TProfilePhoto2 size="lg" :src="profile.photo" />
-      </router-link>
+      </NuxtLink>
       <div class="ml-2">
-        <router-link
+        <NuxtLink
           class="font-bold hover:underline"
           :to="`/${profile.username}`"
         >
           {{ profile.username }}
-        </router-link>
+        </NuxtLink>
         <div class="text-xs text-gray-800">{{ profile.bio }}</div>
         <div v-if="showDetails" class="text-sm text-gray-700 mt-4">
           <dl class="flex space-x-1">

@@ -65,14 +65,14 @@ export default {
         },
         {
           name: 'location',
-          type: 'place',
+          component: 'TInputPlace',
         },
         {
           name: 'hits',
         },
         {
           name: 'status',
-          type: 'select',
+          component: 'TInputSelect',
           options: ['requested', 'active'],
         },
       ],

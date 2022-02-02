@@ -43,13 +43,13 @@ export default {
       {
         name: 'state',
         label: 'State',
-        type: 'select',
+        component: 'TInputSelect',
         options: ['open', 'accepted', 'declined'],
       },
       {
         name: 'category',
         label: 'Category',
-        type: 'select',
+        component: 'TInputSelect',
         options: ['spam', 'claim'],
       },
       {

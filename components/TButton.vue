@@ -29,7 +29,7 @@
       </div>
     </slot>
   </a>
-  <router-link
+  <NuxtLink
     v-else-if="to"
     :title="title"
     :class="classes"
@@ -42,7 +42,7 @@
         <span v-if="label !== false">{{ label }}</span>
       </div>
     </slot>
-  </router-link>
+  </NuxtLink>
   <button
     v-else
     type="button"
@@ -85,7 +85,7 @@ export default {
       default: '4',
     },
     to: {
-      type: String,
+      type: [String, Object],
       default: '',
     },
     href: {
@@ -127,7 +127,8 @@ export default {
           'bg-transparent text-primary font-semibold py-2 px-4 border border-primary rounded-full no-underline hover:bg-primary hover:text-white hover:border-transparent',
         link: 'underline font-semibold hover:no-underline',
         context:
-          'text-left w-full px-4 py-2 text-gray-800 hover:bg-indigo-500 hover:text-white',
+          'text-left w-full px-4 py-2 hover:bg-indigo-500 hover:text-white',
+        'context-active': 'text-left w-full px-4 py-2 bg-indigo-500 text-white',
         nav:
           'p-2 font-semibold items-center flex rounded-full hover:bg-red-100 hover:text-primary',
         void: '',

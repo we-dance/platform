@@ -1,25 +1,23 @@
 <template>
-  <div
-    class="md:flex items-center justify-center space-x-2 space-y-2 bg-gray-100"
-  >
+  <div class="md:flex items-center justify-center space-x-2 space-y-2">
     <div v-if="title" class="pl-2 font-bold">{{ title }}</div>
     <div class="p-4 flex flex-wrap gap-2 items-center justify-center">
       <TButton
-        v-if="profile.website"
+        v-if="!short && profile.website"
         :href="profile.website"
         icon="house"
         type="round"
         icon-size="6"
       />
       <TButton
-        v-if="profile.whatsapp"
+        v-if="!short && profile.whatsapp"
         icon="whatsapp"
         type="round"
         icon-size="6"
         :href="`https://chat.whatsapp.com/${profile.whatsapp}`"
       />
       <TButton
-        v-if="profile.telegram"
+        v-if="!short && profile.telegram"
         icon="telegram"
         type="round"
         icon-size="6"
@@ -33,21 +31,21 @@
         :href="`https://instagram.com/${profile.instagram}`"
       />
       <TButton
-        v-if="profile.tiktok"
+        v-if="!short && profile.tiktok"
         icon="tiktok"
         type="round"
         icon-size="6"
         :href="`https://tiktok.com/${profile.tiktok}`"
       />
       <TButton
-        v-if="profile.youtube"
+        v-if="!short && profile.youtube"
         icon="youtube"
         type="round"
         icon-size="6"
         :href="`https://youtube.com/${profile.youtube}`"
       />
       <TButton
-        v-if="profile.twitter"
+        v-if="!short && profile.twitter"
         icon="twitter"
         type="round"
         icon-size="6"
@@ -74,6 +72,10 @@ export default {
     profile: {
       type: Object,
       default: () => ({}),
+    },
+    short: {
+      type: Boolean,
+      default: false,
     },
   },
 }

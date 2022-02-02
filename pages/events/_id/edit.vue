@@ -45,6 +45,7 @@ import { useAuth } from '~/use/auth'
 import { useDoc } from '~/use/doc'
 import { useRouter } from '~/use/router'
 import { useEvents } from '~/use/events'
+import { track } from '~/plugins/firebase'
 
 export default {
   name: 'EventEdit',
@@ -80,8 +81,14 @@ export default {
         price: '0 EUR',
         styles: {},
         cover: '',
-        organiser: this.profile?.username || '',
-        promoter: this.profile?.username || '',
+        artists: [],
+        org: {
+          username: this.profile?.username,
+          name: this.profile?.name,
+          photo: this.profile?.photo,
+          role: 'organiser',
+        },
+        username: this.profile?.username,
       }
     }
   },
@@ -98,34 +105,26 @@ export default {
         return
       }
 
-      this.$fire.analytics.logEvent('copy_event')
+      track('copy_event')
       const doc = await this.create(data)
 
       this.$router.push(`/events/${doc.id}`)
     },
     async saveItem(data) {
-      data.organisedBy = this.uid
-      data.promotedBy = this.uid
-
-      if (data.claimed === 'No') {
-        data.organiser = ''
-        data.organisedBy = ''
-      }
-
       data = pickBy(data, (v) => v !== undefined)
 
       if (data.id) {
-        this.$fire.analytics.logEvent('update_event')
+        track('update_event')
         await this.update(data.id, data)
         this.view(data.id)
       } else {
-        this.$fire.analytics.logEvent('create_event')
+        track('create_event')
         const result = await this.create(data)
         this.view(result.id)
       }
     },
     async removeItem(id) {
-      this.$fire.analytics.logEvent('delete_event')
+      track('delete_event')
       await this.remove(id)
       this.view()
     },
