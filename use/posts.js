@@ -115,12 +115,9 @@ export const usePosts = () => {
     },
     {
       name: 'type',
-<<<<<<< HEAD
       component: 'TInputSelect',
-=======
       label: t('posts.edit.label.type'),
       type: 'select',
->>>>>>> feat:localise post edit page labels
       options: postTypeList,
     },
     {
@@ -132,9 +129,9 @@ export const usePosts = () => {
       name: 'description',
       hideLabel: true,
       component: 'TInputTextarea',
-      placeholder: 'Text (markdown)',
-      tips:t('posts.edit.tips'),
-      description:t('posts.edit.description'),
+      placeholder: ('posts.edit.description.placeholderr'),
+      tips:t('posts.edit.description.tips'),
+      description:t('posts.edit.description.desc'),
     },
     {
       name: 'url',
@@ -151,10 +148,8 @@ export const usePosts = () => {
     },
     {
       name: 'styles',
-<<<<<<< HEAD
       label: 'Dance styles',
       component: 'TInputStylesSelect2',
-=======
       label: t('posts.edit.label.danceStyle'),
       type: 'stylesSelect',
     },
@@ -172,7 +167,6 @@ export const usePosts = () => {
       name: 'hideReactions',
       label: t('posts.edit.label.hideReaction'),
       admin: true,
->>>>>>> feat:localise post edit page labels
     },
   ]
 
