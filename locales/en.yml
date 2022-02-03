@@ -300,6 +300,8 @@ TProfileDetailes:
   joined: Joined
   lastLoginAt: Last seen
   visibility: Visibility
+TPostList:
+  loadMore: Load more
 chat:
   title: Chat
   empty: Start conversations and they will appear here.

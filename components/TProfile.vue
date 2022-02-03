@@ -7,7 +7,7 @@
           v-if="isAdmin()"
           type="context"
           :fields="profileFields"
-          label="Edit Profile"
+          :label="$t('myprofile.dropdown.edit')"
           collection="profiles"
           singular="profile"
           :item="profile"
@@ -27,7 +27,7 @@
           :url="$route.fullPath"
           :text="profile.name"
           type="context"
-          label="Share"
+          :label="$t('myprofile.dropdown.share')"
         />
       </TDropdown>
     </THeader>
@@ -35,22 +35,32 @@
     <template v-if="uid === profile.id">
       <div v-if="intro.visible" class="m-4 rounded border p-4">
         <h2 class="border-b p-4 font-bold text-lg -m-4 mb-4">
-          Welcome to WeDance!
+          {{ $t('myprofile.intro.visible.title') }}
         </h2>
         <div class="typo">
           <p>
-            This is your profile. A square below is a poster – your visual
-            introduction.
+            {{ $t('myprofile.intro.visible.description1') }}
           </p>
-          <p>
-            Your poster is also shown in
-            <NuxtLink to="/community">Сommunity</NuxtLink> among other dancers.
-          </p>
-          <p>
-            Click
-            <NuxtLink to="/settings?tab=profile">Edit Profile</NuxtLink>
-            and add:
-          </p>
+          <div>
+            <i18n
+              path="myprofile.intro.visible.description2"
+              tag="p"
+              for="myprofile.intro.visible.community"
+            >
+              <NuxtLink to="/community">{{
+                $t('myprofile.intro.visible.community')
+              }}</NuxtLink>
+            </i18n>
+          </div>
+          <i18n
+            path="myprofile.intro.visible.description3"
+            tag="p"
+            for="myprofile.dropdown.edit"
+          >
+            <NuxtLink to="/settings?tab=profile">{{
+              $t('myprofile.dropdown.edit')
+            }}</NuxtLink>
+          </i18n>
           <ul>
             <li v-for="field in intro.missing" :key="field.name">
               {{ field.label }}
@@ -62,19 +72,17 @@
       <div v-if="false">
         <div>
           <p>
-            WeDance is represented by Ambassador in local dance communities.
-            Volunteers help Ambassador with different initiatives to unite local
-            dancers. WeDance is created and supported by volunteers. Get
-            Involved, become volunteer!
+            {{ $t('myprofile.false.description1') }}
           </p>
-          <p>Ambassador in {{ community }} is</p>
+          <p>
+            {{ $t('myprofile.false.description2', { community: community }) }}
+          </p>
         </div>
 
         <w-profile username="CharlyAl"></w-profile>
 
         <div class="mt-4">
-          Help us build a dance network in your city, follow and interact with
-          our local social media accounts:
+          {{ $t('myprofile.false.description2') }}
           <div class="mt-4 flex flex-col items-center space-y-2">
             <TButton
               icon="instagram"
@@ -117,8 +125,18 @@
             {{ profile.name }}
           </div>
           <div class="ml-2 text-sm text-gray-700">
-            <span v-if="profile.height">• {{ profile.height }}cm</span>
-            <span v-if="profile.weight">• {{ profile.weight }}kg</span>
+            <span v-if="profile.height"
+              >•
+              {{
+                $t('myprofile.profile.height', { height: profile.height })
+              }}</span
+            >
+            <span v-if="profile.weight"
+              >•
+              {{
+                $t('myprofile.profile.weight', { weight: profile.weight })
+              }}</span
+            >
           </div>
         </div>
         <TButton
