@@ -57,16 +57,16 @@
       <template v-if="isUsernameAvailable">
         <div
           class="flex px-4 py-2 hover:bg-blue-100 items-center cursor-pointer space-x-1"
-          @click="create({ username: query, instagram: query })"
+          @click="importInstagram(query)"
         >
           <div class="p-1">
             <TIcon name="instagram" size="4" class="text-gray-700 " />
           </div>
           <div class="text-sm">
-            {{ query }} {{ $t('TInputProfile.addInstagram') }}
+            {{ $t('TInputProfile.addInstagram', { username: query }) }}
           </div>
         </div>
-        <div
+        <!-- <div
           class="flex px-4 py-2 hover:bg-blue-100 items-center cursor-pointer space-x-1"
           @click="create({ username: query, facebook: query })"
         >
@@ -76,12 +76,13 @@
           <div class="text-sm">
             {{ query }} {{ $t('TInputProfile.addFacebook') }}
           </div>
-        </div>
+        </div> -->
       </template>
     </div>
   </div>
 </template>
 <script>
+import axios from 'axios'
 import { computed, ref } from '@nuxtjs/composition-api'
 import { useAlgolia } from '~/use/algolia'
 import { useEvents } from '~/use/events'
@@ -171,6 +172,26 @@ export default {
       add(data)
     }
 
+    const importInstagram = async (username) => {
+      try {
+        const result = await axios.post(
+          `https://us-central1-wedance-4abe3.cloudfunctions.net/hooks/import/instagram`,
+          {
+            username,
+          }
+        )
+
+        if (!result.data.success) {
+          console.log(result.data.error)
+          return
+        }
+
+        add(result.data.profile)
+      } catch (error) {
+        console.log(error.message)
+      }
+    }
+
     return {
       query,
       selected,
@@ -180,6 +201,7 @@ export default {
       eventRoleOptions,
       create,
       isUsernameAvailable,
+      importInstagram,
     }
   },
 }
