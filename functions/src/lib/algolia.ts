@@ -19,6 +19,9 @@ export function profileToAlgolia(profile: any, cache: any) {
     objectID: profile.id,
     id: profile.id,
     username: profile.username,
+    name: profile.name,
+    instagram: profile.instagram,
+    facebook: profile.facebook,
     photo: profile.photo,
     height: profile.height,
     weight: profile.weight,
@@ -58,6 +61,8 @@ export async function indexProfiles() {
 
   const profileDocs = (await firestore.collection('profiles').get()).docs
   const objects = []
+  const errors = []
+  const removed = []
 
   for (const doc of profileDocs) {
     const profile = {
@@ -67,6 +72,17 @@ export async function indexProfiles() {
 
     if (!profile.username) {
       await index.deleteObject(profile.id)
+      removed.push(profile.id)
+
+      continue
+    }
+
+    if (!cache.cities[profile.place]) {
+      errors.push({
+        username: profile.username,
+        place: profile.place,
+      })
+
       continue
     }
 
@@ -74,4 +90,16 @@ export async function indexProfiles() {
   }
 
   await index.saveObjects(objects)
+
+  console.log(`Indexed ${objects.length} profiles`)
+
+  if (removed.length) {
+    console.log(`Removed ${removed.length} profiles`)
+    console.log(removed)
+  }
+
+  if (errors.length) {
+    console.log(`Errors: ${errors.length}`)
+    console.log(errors)
+  }
 }
