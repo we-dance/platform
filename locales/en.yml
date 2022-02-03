@@ -89,12 +89,201 @@ posts:
 profiles:
   add: Add profile
   title: Community
+profile:
+  username:
+    label: Username
+    before: Use only letters, numbers, underscores and periods.
+  community: I dance in
+  type: Type
+  name:
+    label: Name
+    before: If you want to remain anonym use your first name.
+    placeholder: (Required)
+  bio:
+    label: Teaser
+    before: Short introduction on top of your photo
+  hometown:
+    label: Hometown
+    before: Where were you born and raised?
+  birthday:
+    label: Birthday
+    description: We will show only your age
+  gender:
+    label: Gender
+    placeholder: Gender
+  style: Dance styles
+  story:
+    label: Description
+    before: Tell your dance story. You can also use [widgets](https://wedance.vip/markdown), including images and videos
+    tips: 'Pitch yourself: Who are you? What do you offer? What do you want?
+
+
+    Tips for effective pitch:
+
+    - Uncomplicated: It should be catchy and roll off the tongue
+
+    - Concise: It shouldn’t take more than a minute to say or read
+
+    - Unique: It reflects your skills, goals, and desires
+
+    - Storyline: It covers who you are, what you offer, and where you want to be
+
+    - Appealing: Your elevator pitch is essentially a persuasive sales pitch; the emphasis should be on what you offer'
+    placeholder: Text (markdown)
+  locales: Your languages
+  skills: Non-dancing skills
+  days: Days
+  learning:
+    label: Which dance topics you are interested in?
+    description: 'For example: Musicality in Salsa, Men Styling, etc.'
+  teacher: Are you teaching?
+  partner: Are you looking for a dance partner?
+  height: Your height (cm)
+  weight:
+    label: Your weight (kg)
+    description: Leave this field blank if you think it's irrelevant.
+  partnerBio:
+    label: Question
+    description: 'What is important in your partner? Put it as a question, for example: Do you love dogs?'
+  objectives: Objectives
+  objective:
+    placeholder: Objective
+  meetingPlace: Where to meet?
+  visibility:
+    label: Visibility
+    description: '- Public profiles are searchable in Google and used in our social media to attract new members.
+
+    - Members profile are only visible for logged-in users.
+
+    - Unlisted profiles are possible to open with exact link, but they are not listed in members lists and search.'
+  photo: Photo
+  add: Add profile
+  title: Community
+  styles:
+    label: Dance
+    tips: Mark up to 4 favorite dances that will be highlighted in your poster
+  place:
+    label: Your city
+    placeholder: City
+  dance:
+    placeholder: Style
+  permission:
+    label: Do you want free promo?
+    description: 'Send us link to your profile on [Instagram](https://instagram.com/wedancevip) and we will promote it on our social media channels: Telegram, Instagram, Facebook and Twitter.'
+  jobs:
+    label: I can help with
+    description: 'How can you help our community? What are you good at? For example: design, programming, marketing, social media, etc.'
+  contacts: Do you use social media?
+  instagram:
+   label: instagram.com/
+   placeholder: username
+  facebook:
+    label: fb.com/
+    placeholder: username
+  whatsapp:
+    label: whatsapp.com/
+    placeholder: whatsapp chat
+  telegram:
+    label: t.me/
+    placeholder: username
+  twitter:
+    label: twitter.com/
+    placeholder: username
+  tiktok:
+    label: tiktok.com/
+    placeholder: username
+  youtube:
+    label: youtube.com/
+    placeholder: username
+  email:
+    label: Email
+    placeholder: for business requests
+  website:
+    label: Website
+    placeholder: for business requests
+  meetingPlaces:
+    myPlace: My place
+    yourPlace: Your place
+    private: Somewhere private
+    public: Somewhere public
+  typeList:
+    dancer: Dancer
+    artist: Artist
+    organiser: Organiser
+    venue: Venue
+    city: City
+  objectivesList:
+    talk: Talk about dance
+    learn: Learn together
+    outdoors: Dance outdoors
+    indoors: Dance indoors
+    teach: Teach together
+    project: Dance project
+  profileSorts:
+    username: Username
+    registered: Registered
+    lastSeen: Last seen
+radiusOptions:
+  ten: around 10km
+  twenty: around 20km
+  fifty: around 50km
+  hundred: around 100km
+  fiveHundred: around 500km
+  thousand: around 1000km
+  anywhere: Anywhere
 myprofile:
   events:
     add: Add event
   posts:
     add: Write a post
   title: My Profile
+  dropdown:
+    edit: Edit Profile
+    share: Share
+  intro:
+    photo: your photo
+    gender: your gender
+    styles: what do you dance
+    bio: teaser (short introduction)
+    place: your city
+    objectives: your objectives
+    visible:
+      title: Welcome to WeDance!
+      description1: This is your profile. A square below is a poster – your visual
+                   introduction.
+      description2: Your poster is also shown in {0} among other dancers.
+      community: Community
+      description3: 'Click {0} and add:'
+  false:
+    description1:
+            WeDance is represented by Ambassador in local dance communities.
+            Volunteers help Ambassador with different initiatives to unite local
+            dancers. WeDance is created and supported by volunteers. Get
+            Involved, become volunteer!
+    description2: Ambassador in {community} is
+    description3: 'Help us build a dance network in your city, follow and interact with
+          our local social media accounts:'
+  profile:
+    height: '{height}cm'
+    weight: '{weight}kg'
+  Wteaser: I am looking for a dance partner
+TCardActions:
+  report: Report
+  cancel: Cancel
+  comments: Comments
+  reason: Reason
+  options:
+   spam: spam
+   other: other
+TProfileDetailes:
+  languages: Languages
+  objectives: Objectives
+  learning: Which dance topics you are interested in?
+  styles: Dance styles
+  jobs: I can help with
+  joined: Joined
+  lastLoginAt: Last seen
+  visibility: Visibility
 chat:
   title: Chat
   empty: Start conversations and they will appear here.
