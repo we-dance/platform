@@ -129,9 +129,9 @@ export const usePosts = () => {
       name: 'description',
       hideLabel: true,
       component: 'TInputTextarea',
-      placeholder: ('posts.edit.description.placeholderr'),
-      tips:t('posts.edit.description.tips'),
-      description:t('posts.edit.description.desc'),
+      placeholder: t('posts.edit.description.placeholder'),
+      tips: t('posts.edit.description.tips'),
+      description: t('posts.edit.description.description'),
     },
     {
       name: 'url',
