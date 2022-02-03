@@ -125,7 +125,7 @@
           v-if="uid !== profile.id"
           type="primary"
           :to="`/chat/${profile.username}`"
-          >Chat</TButton
+          >{{ $t('chat.title') }}</TButton
         >
       </div>
 
@@ -137,12 +137,15 @@
     <TProfileContacts :profile="profile" class="p-2 mb-4 bg-gray-100" />
 
     <div v-if="uid === profile.id" class="flex justify-center space-x-2">
-      <TButton label="Edit Profile" to="/settings?tab=profile" />
+      <TButton
+        :label="$t('myprofile.dropdown.edit')"
+        to="/settings?tab=profile"
+      />
     </div>
 
     <WTeaser
       v-if="profile.partner === 'Yes'"
-      title="I am looking for a dance partner"
+      :title="$t('myprofile.Wteaser')"
       :description="profile.partnerBio"
       class="w-full mt-4"
     />
@@ -191,6 +194,7 @@ import { useApp } from '~/use/app'
 import { useAuth } from '~/use/auth'
 import { useProfiles } from '~/use/profiles'
 import { getExcerpt } from '~/utils'
+import { useI18n } from '~/use/i18n'
 
 export default {
   props: {
@@ -203,6 +207,7 @@ export default {
     const { uid, isAdmin, can } = useAuth()
     const { profileFields } = useProfiles()
     const { getCity } = useApp()
+    const { t } = useI18n()
 
     const community = computed(() => getCity(props.profile?.place))
 
@@ -210,27 +215,27 @@ export default {
       fields: [
         {
           name: 'photo',
-          label: 'your photo',
+          label: t('myprofile.intro.photo'),
         },
         {
           name: 'gender',
-          label: 'your gender',
+          label: t('myprofile.intro.gender'),
         },
         {
           name: 'styles',
-          label: 'what do you dance',
+          label: t('myprofile.intro.styles'),
         },
         {
           name: 'bio',
-          label: 'teaser (short introduction)',
+          label: t('myprofile.intro.bio'),
         },
         {
           name: 'place',
-          label: 'your city',
+          label: t('myprofile.intro.place'),
         },
         {
           name: 'objectives',
-          label: 'your objectives',
+          label: t('myprofile.intro.objectives'),
         },
       ],
       missing: [],

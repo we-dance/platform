@@ -123,7 +123,7 @@ profile:
     before: Where were you born and raised?
   birthday:
     label: Birthday
-    description: We will show only your age'
+    description: We will show only your age
   gender:
     label: Gender
     placeholder: Gender
@@ -253,6 +253,53 @@ myprofile:
   posts:
     add: Write a post
   title: My Profile
+  dropdown:
+    edit: Edit Profile
+    share: Share
+  intro:
+    photo: your photo
+    gender: your gender
+    styles: what do you dance
+    bio: teaser (short introduction)
+    place: your city
+    objectives: your objectives
+    visible:
+      title: Welcome to WeDance!
+      description1: This is your profile. A square below is a poster – your visual
+                   introduction.
+      description2: Your poster is also shown in {0} among other dancers.
+      community: Community
+      description3: 'Click {0} and add:'
+  false:
+    description1:
+            WeDance is represented by Ambassador in local dance communities.
+            Volunteers help Ambassador with different initiatives to unite local
+            dancers. WeDance is created and supported by volunteers. Get
+            Involved, become volunteer!
+    description2: Ambassador in {community} is
+    description3: 'Help us build a dance network in your city, follow and interact with
+          our local social media accounts:'
+  profile:
+    height: '{height}cm'
+    weight: '{weight}kg'
+  Wteaser: I am looking for a dance partner
+TCardActions:
+  report: Report
+  cancel: Cancel
+  comments: Comments
+  reason: Reason
+  options:
+   spam: spam
+   other: other
+TProfileDetailes:
+  languages: Languages
+  objectives: Objectives
+  learning: Which dance topics you are interested in?
+  styles: Dance styles
+  jobs: I can help with
+  joined: Joined
+  lastLoginAt: Last seen
+  visibility: Visibility
 chat:
   title: Chat
   empty: Start conversations and they will appear here.
