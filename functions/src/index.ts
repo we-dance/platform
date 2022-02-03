@@ -1,3 +1,4 @@
+import * as Sentry from '@sentry/node'
 import * as functions from 'firebase-functions'
 import * as express from 'express'
 import * as cors from 'cors'
@@ -8,6 +9,10 @@ import { initIndex, profileToAlgolia, removeObject } from './lib/algolia'
 import { generateSocialCover } from './lib/migrations'
 import { firestore as db, admin } from './firebase'
 import { notifySlackAboutEvents, notifySlackAboutUsers } from './lib/slack'
+import config from './env'
+import { wrap } from './sentry'
+
+Sentry.init(config.sentry)
 
 const app = express()
 app.use(cors({ origin: true }))
@@ -108,7 +113,9 @@ type RecipientList = {
   }
 }
 
-export const hooks = functions.runWith({ memory: '1GB' }).https.onRequest(app)
+export const hooks = functions
+  .runWith({ memory: '1GB' })
+  .https.onRequest(wrap(app))
 
 const render = (templateString: string, data: Object) => {
   const templator = Handlebars.compile(templateString)
@@ -560,7 +567,7 @@ export const matchNotification = functions.firestore
     ).data()
 
     if (!toAccount) {
-      throw Error('toAccount not found')
+      throw new Error('toAccount not found')
     }
 
     const subject = 'You’ve got a new message'
