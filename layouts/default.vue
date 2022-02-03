@@ -9,7 +9,7 @@
     >
       <div class="my-4 w-64 flex flex-col justify-center text-center">
         <div class="p-4">
-          {{ $t('popup.auth.body', { message: showAuthPopup }) }}
+          {{ $t('popup.auth.body', { action: showAuthPopup }) }}
         </div>
         <TButton
           allow-guests
