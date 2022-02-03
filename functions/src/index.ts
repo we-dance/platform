@@ -9,6 +9,7 @@ import { initIndex, profileToAlgolia, removeObject } from './lib/algolia'
 import { generateSocialCover } from './lib/migrations'
 import { firestore as db, admin } from './firebase'
 import { notifySlackAboutEvents, notifySlackAboutUsers } from './lib/slack'
+import { getInstagram } from './lib/browser'
 import config from './env'
 import { wrap } from './sentry'
 
@@ -16,6 +17,104 @@ Sentry.init(config.sentry)
 
 const app = express()
 app.use(cors({ origin: true }))
+
+app.post('/import/:source', async (req, res) => {
+  const source = req.params.source
+
+  if (source !== 'instagram') {
+    return res.status(400).json({
+      success: false,
+      error: 'Source not supported',
+      code: 'source_not_supported',
+    })
+  }
+
+  const username = req.body['username'].toLowerCase()
+
+  const profilesByUsername = await db
+    .collection('profiles')
+    .where('username', '==', username)
+    .get()
+
+  if (profilesByUsername.docs.length > 0) {
+    return res.status(400).json({
+      success: false,
+      error: 'Profile with that username already exists',
+      code: 'profile_exists',
+    })
+  }
+
+  const profilesByInstagram = await db
+    .collection('profiles')
+    .where('instagram', '==', username)
+    .get()
+
+  if (profilesByInstagram.docs.length > 0) {
+    return res.status(400).json({
+      success: false,
+      error: 'Profile with that instagram already exists',
+      code: 'profile_exists',
+    })
+  }
+
+  try {
+    const instagram = await getInstagram(username)
+
+    if (!instagram) {
+      return res.status(404).json({
+        success: false,
+        error: 'Username not found',
+        code: 'username_not_found',
+      })
+    }
+
+    if (instagram.screenshot) {
+      const bucket = admin.storage().bucket()
+      const filePath = 'debug/instagram.png'
+      const file = bucket.file(filePath)
+
+      await file.save(instagram.screenshot, {
+        public: true,
+      })
+
+      const [metadata] = await file.getMetadata()
+
+      const url = metadata.mediaLink
+
+      return res.status(500).json({
+        success: false,
+        url,
+      })
+    }
+
+    const now = +new Date()
+
+    const profile = {
+      createdAt: now,
+      createdBy: 'instagram',
+      updatedAt: now,
+      source: 'instagram',
+      username: instagram.username,
+      name: instagram.full_name,
+      bio: instagram.bio,
+      type: 'FanPage',
+      instagram: instagram.username,
+      website: instagram.external_url,
+      photo: instagram.profile_pic_url_hd,
+      fbid: instagram.fbid,
+    }
+
+    await db.collection('profiles').add(profile)
+
+    return { success: true, profile }
+  } catch (e) {
+    Sentry.captureException(e)
+
+    return res
+      .status(500)
+      .json({ success: false, error: (e as Error).message, code: 'error' })
+  }
+})
 
 app.post('/track/:action', async (req, res) => {
   const vars = req.body['event-data']['user-variables']

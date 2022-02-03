@@ -1,4 +1,5 @@
 import { indexProfiles } from './lib/algolia'
+import { getInstagram } from './lib/browser'
 import {
   migrateFavs,
   migrateShares,
@@ -24,6 +25,24 @@ yargs(hideBin(process.argv))
           path: `var/${argv.username}.png`,
         }
       )
+    }
+  )
+  .command(
+    'instagram <username>',
+    'Get instagram info',
+    () => undefined,
+    async (argv: any) => {
+      if (!argv.username) {
+        console.log('No username provided')
+        return
+      }
+
+      try {
+        const instagram = await getInstagram(argv.username)
+        console.log(instagram)
+      } catch (e) {
+        console.log((e as Error).message)
+      }
     }
   )
   .command(

@@ -10,6 +10,12 @@ export default {
     events: (process.env.SLACK_EVENTS || config().slack.events) as string,
     users: (process.env.SLACK_USERS || config().algolia.users) as string,
   },
+  instagram: {
+    username: (process.env.INSTAGRAM_USERNAME ||
+      config().instagram.username) as string,
+    password: (process.env.INSTAGRAM_PASSWORD ||
+      config().instagram.password) as string,
+  },
   sentry: {
     dsn: (process.env.SENTRY_DSN || config().sentry.dsn) as string,
     tracesSampleRate: 1.0,
