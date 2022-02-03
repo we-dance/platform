@@ -435,16 +435,3 @@ TInputProfile:
   addInstagram: (add from Instagram)
   addFacebook: (add from Facebook)
   placeholder: Search on WeDance, Instagram or Facebook
-popup:
-  auth:
-    title: Members only
-    body: Sign in to {action}
-    signin: Sign in
-TButton:
-  login: Login to {action}
-TDropdown:
-  title: report or share
-TReaction:
-  label:
-    watch: Watch
-    star: Star

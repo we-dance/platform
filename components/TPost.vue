@@ -37,7 +37,7 @@
 
       <TDropdown
         v-if="!item.hideMeta || can('edit', 'posts', item)"
-        :title="$t('TDropdown.title')"
+        title="report or share"
         class="-mr-4"
       >
         <TButton
