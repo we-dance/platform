@@ -286,7 +286,13 @@ TInputProfile:
 popup:
   auth:
     title: Members only
-    body: Sign in to {message}
+    body: Sign in to {action}
     signin: Sign in
 TButton:
-  login: Login to {title}
+  login: Login to {action}
+TDropdown:
+  title: report or share
+TReaction:
+  label:
+    watch: Watch
+    star: Star

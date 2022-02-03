@@ -2,7 +2,7 @@
   <div class="inline-flex border rounded divide-x items-center">
     <div>
       <TReaction
-        label="Star"
+        :label="$t('TReaction.label.star')"
         toggledLabel="Starred"
         field="star"
         icon="StarIcon"
