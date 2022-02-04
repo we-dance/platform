@@ -105,11 +105,12 @@ posts:
   edit:
     post: Post
     event: Event
+postFields:
   username: 
     label: Username
   type:
     label: Type
-  fieldTitle:
+  title:
     placeholder: Title
   description:
     placeholder: Text (markdown)
@@ -119,12 +120,6 @@ posts:
     placeholder: Link
   styles:
     label: Dance Styles
-  hideMeta:
-    label: Hide Meta
-  hideComments:
-    label: Hide Comments
-  hideReactions:
-    label: Hide Reactions
 profiles:
   add: Add profile
   title: Community
