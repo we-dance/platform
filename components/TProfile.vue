@@ -7,7 +7,7 @@
           v-if="isAdmin()"
           type="context"
           :fields="profileFields"
-          :label="$t('myprofile.dropdown.edit')"
+          :label="$t('myprofile.edit')"
           collection="profiles"
           singular="profile"
           :item="profile"
@@ -27,7 +27,7 @@
           :url="$route.fullPath"
           :text="profile.name"
           type="context"
-          :label="$t('myprofile.dropdown.share')"
+          :label="$t('share')"
         />
       </TDropdown>
     </THeader>
@@ -55,10 +55,10 @@
           <i18n
             path="myprofile.intro.visible.description3"
             tag="p"
-            for="myprofile.dropdown.edit"
+            for="myprofile.edit"
           >
             <NuxtLink to="/settings?tab=profile">{{
-              $t('myprofile.dropdown.edit')
+              $t('myprofile.edit')
             }}</NuxtLink>
           </i18n>
           <ul>
@@ -155,10 +155,7 @@
     <TProfileContacts :profile="profile" class="p-2 mb-4 bg-gray-100" />
 
     <div v-if="uid === profile.id" class="flex justify-center space-x-2">
-      <TButton
-        :label="$t('myprofile.dropdown.edit')"
-        to="/settings?tab=profile"
-      />
+      <TButton :label="$t('myprofile.edit')" to="/settings?tab=profile" />
     </div>
 
     <WTeaser
@@ -185,7 +182,7 @@
 
     <div v-if="uid === profile.id" class="w-full flex justify-center p-4">
       <TButton to="/events/-/edit" type="primary">{{
-        $t('myprofile.events.add')
+        $t('myprofile.addEvent')
       }}</TButton>
     </div>
 
@@ -193,7 +190,7 @@
 
     <div v-if="uid === profile.id" class="w-full flex justify-center p-4 mt-4">
       <TButton to="/posts/-/edit" type="primary">{{
-        $t('myprofile.posts.add')
+        $t('myprofile.addPost')
       }}</TButton>
     </div>
 
