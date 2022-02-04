@@ -126,7 +126,7 @@ profile:
     before: Where were you born and raised?
   birthday:
     label: Birthday
-    description: We will show only your age'
+    description: We will show only your age
   gender:
     label: Gender
     placeholder: Gender
