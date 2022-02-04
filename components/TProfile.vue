@@ -27,7 +27,7 @@
           :url="$route.fullPath"
           :text="profile.name"
           type="context"
-          :label="$t('share')"
+          :label="$t('share.title')"
         />
       </TDropdown>
     </THeader>
