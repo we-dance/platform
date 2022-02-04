@@ -42,6 +42,8 @@ import { usePosts } from '~/use/posts'
 export default {
   name: 'Feed',
   setup() {
+    const { app } = useContext()
+    const t = app.i18n.t.bind(app.i18n)
     const { uid, username } = useAuth()
     const { currentCity } = useCities()
     const { getPlace } = useApp()
