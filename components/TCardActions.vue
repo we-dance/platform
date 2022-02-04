@@ -3,12 +3,12 @@
     <TButton
       :type="type"
       icon="fire"
-      :label="$t('TCardActions.report')"
+      :label="$t('report')"
       @click="isReportShown = true"
     />
     <TPopup
       v-if="isReportShown"
-      :title="$t('TCardActions.report')"
+      :title="$t('report')"
       @close="isReportShown = false"
     >
       <div class="p-4">
@@ -24,16 +24,14 @@
         <TField
           v-model="reportReason"
           class="mt-2"
-          :label="$t('TCardActions.comments')"
+          :label="$t('comments.label')"
           component="TInputTextarea"
         />
         <div class="mt-4 flex justify-end">
           <TButton class="mr-2" @click="cancelReport">{{
-            $t('TCardActions.cancel')
+            $t('cancel')
           }}</TButton>
-          <TButton type="danger" @click="report">{{
-            $t('TCardActions.report')
-          }}</TButton>
+          <TButton type="danger" @click="report">{{ $t('report') }}</TButton>
         </div>
       </div>
     </TPopup>
