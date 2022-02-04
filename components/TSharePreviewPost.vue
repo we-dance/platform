@@ -56,7 +56,7 @@
                   {{ $t('events.post.organizer') }}
                 </div>
                 <div v-if="claimed === 'No'" class="mr-2 text-sm">
-                   {{ $t('events.post.promoter') }}
+                  {{ $t('events.post.promoter') }}
                 </div>
               </div>
               <TIcon class="mr-1 h-4 w-4" name="icon" />
