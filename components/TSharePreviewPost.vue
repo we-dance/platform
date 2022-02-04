@@ -53,10 +53,10 @@
             <div class="flex items-center">
               <div v-if="collection === 'events'">
                 <div v-if="claimed === 'Yes'" class="mr-2 text-sm">
-                  Organised by
+                  {{$t('events.post.organizer')}}
                 </div>
                 <div v-if="claimed === 'No'" class="mr-2 text-sm">
-                  Promoted by
+                   {{$t('events.post.promoter')}}
                 </div>
               </div>
               <TIcon class="mr-1 h-4 w-4" name="icon" />
