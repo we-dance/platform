@@ -1,3 +1,22 @@
+yes: 'Yes'
+no: 'No'
+female: Female
+male: Male
+other: Other
+Monday: Monday
+Tuesday: Tuesday
+Wednesday: Wednesday
+Thursday: Thursday
+Friday: Friday
+Saturday: Saturday
+Sunday: Sunday
+report: Report
+cancel: Cancel
+delete: Delete
+visibilityOptions:
+  public: Public
+  members: Members
+  unlisted: Unlisted
 hero:
   title: Do you like dancing?
   subtitle: We help each other find interesting dance events and dance partners.
@@ -107,7 +126,7 @@ profile:
     before: Where were you born and raised?
   birthday:
     label: Birthday
-    description: We will show only your age
+    description: We will show only your age'
   gender:
     label: Gender
     placeholder: Gender
@@ -232,14 +251,11 @@ radiusOptions:
   thousand: around 1000km
   anywhere: Anywhere
 myprofile:
-  events:
-    add: Add event
-  posts:
-    add: Write a post
+  addEvent: Add event
+  addPost: Write a post
   title: My Profile
-  dropdown:
-    edit: Edit Profile
-    share: Share
+  edit: Edit Profile
+  share: Share
   intro:
     photo: your photo
     gender: your gender
@@ -267,14 +283,6 @@ myprofile:
     height: '{height}cm'
     weight: '{weight}kg'
   Wteaser: I am looking for a dance partner
-TCardActions:
-  report: Report
-  cancel: Cancel
-  comments: Comments
-  reason: Reason
-  options:
-   spam: spam
-   other: other
 TProfileDetailes:
   languages: Languages
   objectives: Objectives
@@ -286,6 +294,16 @@ TProfileDetailes:
   visibility: Visibility
 TPostList:
   loadMore: Load more
+TPost:
+  dropdown:
+    title: report or share
+  showLess: Show less
+  showMore: Show more
+TCardActions:
+  reason: Reason
+  options:
+   spam: spam
+   other: other
 chat:
   title: Chat
   empty: Start conversations and they will appear here.
@@ -415,6 +433,7 @@ feed:
   post: Post
 comments:
   empty: There are no comments yet.
+  label: Comments
 edit:
   label: Edit
 dashboard:
