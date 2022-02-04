@@ -55,7 +55,7 @@
                     v-model="deleteReason"
                     label-position="vertical"
                     component="TInputTextarea"
-                    label="Why are you leaving?"
+                    :label="$t('settings.account.popup.delete.deleteReason')"
                   />
                   <TField
                     v-model="usernameConfirmation"

@@ -6,7 +6,7 @@ import { useCommon } from '~/use/common'
 export const useAccounts = () => {
   const { t } = useI18n()
   const { getById, find } = useCollection('accounts')
-  const { booleanOptions } = useCommon()
+  const { yesNoOptions } = useCommon()
 
   const getAccount = (uid) => getById(uid) || {}
   const getAccountByEmail = (email) => find('email', email)
@@ -39,14 +39,14 @@ export const useAccounts = () => {
     },
     {
       name: 'zone',
-      label: 'Timezone',
+      label: t('account.zone'),
       component: 'TRichSelect',
       options: moment.tz.names(),
       require: true,
     },
     {
       name: 'newsletter',
-      key: 'account.newsletter',
+      label: t('account.newsletter.label'),
       component: 'TInputMulti',
       options: [
         {
@@ -80,8 +80,8 @@ export const useAccounts = () => {
     {
       name: 'withPartner',
       component: 'TInputSelect',
-      label: 'Do you have a partner?',
-      options: ['Yes', 'No'],
+      label: t('account.withPartner.label'),
+      options: yesNoOptions,
       event: false,
     },
     {
