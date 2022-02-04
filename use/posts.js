@@ -110,33 +110,33 @@ export const usePosts = () => {
   const postFields = [
     {
       name: 'username',
-      label: t('posts.username.label'),
+      label: t('postFields.username.label'),
       admin: true,
     },
     {
       name: 'type',
       component: 'TInputSelect',
-      label: t('posts.type.label'),
+      label: t('postFields.type.label'),
       type: 'select',
       options: postTypeList,
     },
     {
       name: 'title',
       hideLabel: true,
-      placeholder: t('posts.feildTitle.placeholder'),
+      placeholder: t('postFields.title.placeholder'),
     },
     {
       name: 'description',
       hideLabel: true,
       component: 'TInputTextarea',
-      placeholder: t('posts.description.placeholder'),
-      tips: t('posts.description.tips'),
-      description: t('posts.description.description'),
+      placeholder: t('postFields.description.placeholder'),
+      tips: t('postFields.description.tips'),
+      description: t('postFields.description.description'),
     },
     {
       name: 'url',
       hideLabel: true,
-      placeholder: t('posts.url.placeholder'),
+      placeholder: t('postFields.url.placeholder'),
     },
     {
       name: 'cover',
@@ -149,24 +149,9 @@ export const usePosts = () => {
     {
       name: 'styles',
       component: 'TInputStylesSelect2',
-      label: t('posts.styles.label'),
+      label: t('postFields.styles.label'),
       type: 'stylesSelect',
-    },
-    {
-      name: 'hideMeta',
-      label: t('posts.hideMeta.label'),
-      admin: true,
-    },
-    {
-      name: 'hideComments',
-      label: t('posts.hideComments.label'),
-      admin: true,
-    },
-    {
-      name: 'hideReactions',
-      label: t('posts.hideReactions.label'),
-      admin: true,
-    },
+    }
   ]
 
   return {
