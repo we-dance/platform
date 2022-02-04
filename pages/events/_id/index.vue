@@ -136,7 +136,7 @@
 
     <TPreview :content="item.description" class="p-4" />
 
-    <div v-if="item.artists" class="space-y-2 p-4">
+    <div v-if="item.artists && item.artists.length" class="space-y-2 p-4">
       <h3 class="text-xl font-bold">{{ $t('event.artists') }}</h3>
       <WProfile
         v-for="profile in item.artists"
