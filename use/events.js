@@ -1,6 +1,8 @@
 import { addMinutes, parseISO } from 'date-fns'
 import { useI18n } from '~/use/i18n'
 import { usePosts } from '~/use/posts'
+import { useCities } from './cities'
+import { getYmd } from '~/utils'
 
 const updateEndDate = (e) => {
   if (!e.duration || e.duration === 'custom') {
@@ -19,8 +21,36 @@ const updatePlace = (e) => {
 }
 
 export const useEvents = () => {
+  const { currentCity } = useCities()
   const { postTypeList } = usePosts()
   const { t } = useI18n()
+
+  const eventRoleOptions = [
+    {
+      label: t('event.role.instructor'),
+      value: 'instructor',
+    },
+    {
+      label: t('event.role.dj'),
+      value: 'dj',
+    },
+    {
+      label: t('event.role.musician'),
+      value: 'musician',
+    },
+    {
+      label: t('event.role.taxi'),
+      value: 'taxi',
+    },
+    {
+      label: t('event.role.photographer'),
+      value: 'photographer',
+    },
+    {
+      label: t('event.role.organiser'),
+      value: 'organiser',
+    },
+  ]
 
   const eventTypeList = [
     {
@@ -31,39 +61,91 @@ export const useEvents = () => {
     {
       label: t('events.typelist.workshop'),
       value: 'Workshop',
-      icon: '📙',
+      icon: '🎓',
     },
     {
       label: t('events.typelist.course'),
       value: 'Course',
-      icon: '📚',
+      icon: '🎓',
     },
     {
       label: t('events.typelist.festival'),
       value: 'Festival',
-      icon: '🎁',
+      icon: '✈️',
     },
     {
       label: t('events.typelist.congress'),
       value: 'Congress',
-      icon: '🎁',
+      icon: '✈️',
     },
     {
       label: t('events.typelist.concert'),
       value: 'Concert',
-      icon: '🎷',
+      icon: '🎵',
     },
     {
       label: t('events.typelist.show'),
       value: 'Show',
-      icon: '🎭',
+      icon: '🎵',
     },
     {
       label: t('events.typelist.other'),
       value: 'Other',
-      icon: '❓',
+      icon: '🎵',
     },
   ]
+
+  const now = new Date()
+  const startOfTodayString = getYmd(now)
+
+  const isPublic = (item) => item.visibility !== 'Unlisted'
+
+  const isUpcoming = (item) =>
+    getYmd(item.startDate) >= startOfTodayString && isPublic(item)
+
+  const isInSelectedCity = (item) => item.place === currentCity.value
+
+  const eventCategoryOptions = [
+    {
+      label: t('event.category.meetup'),
+      value: 'meetup',
+      icon: '🎵',
+      filter: (item) =>
+        ['Party', 'Show', 'Concert', 'Other'].includes(item.eventType) &&
+        isUpcoming(item) &&
+        isInSelectedCity(item),
+    },
+    {
+      label: t('event.category.lesson'),
+      value: 'lesson',
+      icon: '🎓',
+      filter: (item) =>
+        ['Workshop', 'Course'].includes(item.eventType) &&
+        isUpcoming(item) &&
+        isInSelectedCity(item),
+    },
+    {
+      label: t('event.category.online'),
+      value: 'online',
+      icon: '📺',
+      filter: (item) => item.online === 'Yes' && isUpcoming(item),
+    },
+    {
+      label: t('event.category.travel'),
+      value: 'travel',
+      icon: '✈️',
+      types: ['Festival', 'Congress'],
+      filter: (item) =>
+        ['Festival', 'Congress'].includes(item.eventType) && isUpcoming(item),
+    },
+  ]
+
+  function addLabelIcons(options) {
+    return options.map((type) => ({
+      ...type,
+      label: `${type.icon}  ${type.label}`,
+    }))
+  }
 
   const eventTypeListIcons = eventTypeList.map((type) => ({
     ...type,
@@ -80,13 +162,13 @@ export const useEvents = () => {
   const eventFields = [
     {
       name: 'name',
-      hideLabel: true,
+      labelPosition: 'top',
       placeholder: 'Event Name',
     },
     {
       name: 'description',
-      hideLabel: true,
-      type: 'textarea',
+      labelPosition: 'top',
+      component: 'TInputTextarea',
       placeholder: 'Details (markdown)',
       tips:
         'Pitch yourself: Who are you? What do you offer? What do you want?\n\nTips for effective pitch:\n- Uncomplicated: It should be catchy and roll off the tongue\n- Concise: It shouldn’t take more than a minute to say or read\n- Unique: It reflects your skills, goals, and desires\n- Storyline: It covers who you are, what you offer, and where you want to be\n- Appealing: Your elevator pitch is essentially a persuasive sales pitch; the emphasis should be on what you offer',
@@ -105,14 +187,15 @@ export const useEvents = () => {
       name: 'venue',
       label: 'Where?',
       labelPosition: 'top',
-      type: 'venue',
+      component: 'TInputVenue',
       simple: true,
     },
     {
       name: 'duration',
       label: 'How long?',
+      labelPosition: 'top',
       onChange: updateEndDate,
-      type: 'select',
+      component: 'TInputSelect',
       options: [
         {
           value: 30,
@@ -161,56 +244,60 @@ export const useEvents = () => {
     },
     {
       name: 'styles',
+      labelPosition: 'top',
       label: 'Dance styles',
-      type: 'stylesSelect',
+      component: 'TInputStylesSelect2',
     },
     {
       name: 'eventType',
-      type: 'select',
+      labelPosition: 'top',
+      component: 'TInputSelect',
       options: eventTypeList,
     },
     {
       name: 'cover',
-      type: 'photo',
+      component: 'TInputPhoto',
+      labelPosition: 'top',
       width: 500,
       height: 500,
       circle: false,
-      hideLabel: true,
     },
     {
       name: 'visibility',
-      type: 'buttons',
+      labelPosition: 'top',
+      component: 'TInputButtons',
       options: ['Public', 'Members', 'Unlisted'],
       description: `- Public - searchable in Google.\n- Members - visible only for logged-in users.\n- Unlisted - possible to open with exact link, but they are not listed nor not shown in the search.`,
     },
     {
-      name: 'claimed',
-      label: 'Are you organiser?',
-      type: 'buttons',
-      options: ['Yes', 'No'],
-      description: 'Are you the event organiser?',
+      name: 'artists',
+      component: 'TInputArray',
+      children: {
+        component: 'TInputProfile',
+      },
+      label: t('event.artists'),
+      labelPosition: 'top',
     },
     {
-      name: 'organiser',
+      name: 'org',
+      component: 'TInputProfile',
       label: 'Organiser',
-      description: 'Username on WeDance',
-    },
-    {
-      name: 'username',
-      admin: true,
+      labelPosition: 'top',
     },
     {
       name: 'online',
       label: 'Online?',
-      type: 'buttons',
+      component: 'TInputButtons',
       options: ['Yes', 'No'],
       onChange: updatePlace,
       description: 'Streaming via Zoom, Google Meet, Instagram Live, etc.?',
+      labelPosition: 'top',
     },
     {
       name: 'international',
       label: 'International?',
-      type: 'buttons',
+      labelPosition: 'top',
+      component: 'TInputButtons',
       options: ['Yes', 'No'],
       onChange: updatePlace,
       description:
@@ -219,7 +306,8 @@ export const useEvents = () => {
     {
       name: 'place',
       label: 'Community',
-      type: 'place',
+      labelPosition: 'top',
+      component: 'TInputPlace',
       clearable: true,
       when: (answers) => answers.international === 'No',
       description:
@@ -228,27 +316,27 @@ export const useEvents = () => {
     {
       name: 'form',
       label: 'External registration?',
+      labelPosition: 'top',
       before: 'Do you use external platform to register for your event?',
-      type: 'buttons',
+      component: 'TInputButtons',
       options: ['Yes', 'No'],
     },
     {
       name: 'link',
+      labelPosition: 'top',
       description:
         'Direct booking link on ticket platform (ti.to, Eventbrite, Google Form, etc.)',
     },
     {
-      name: 'website',
-      description: 'Link to your event or website',
-    },
-    {
       name: 'facebook',
-      description: 'Link to original event (Facebook, Eventbrite, etc.)',
+      labelPosition: 'top',
+      description: 'Facebook event',
     },
     {
       name: 'promo',
       label: 'Do you want free promo?',
-      type: 'buttons',
+      labelPosition: 'top',
+      component: 'TInputButtons',
       options: ['Yes', 'No'],
       description:
         'Send us link to your event on [Instagram](https://instagram.com/wedancevip) and we will promote it on our social media channels: Telegram, Instagram, Facebook and Twitter.',
@@ -257,21 +345,24 @@ export const useEvents = () => {
       name: 'confirmation',
       labelPosition: 'top',
       label: 'Confirmation email for guests',
-      type: 'textarea',
+      component: 'TInputTextarea',
       placeholder: 'Example: Dear guest, you are confirmed to our event.',
     },
     {
       name: 'type',
       admin: true,
-      type: 'select',
+      component: 'TInputSelect',
       options: postTypeList,
     },
   ]
 
   return {
+    eventCategoryOptions,
     eventTypeList,
     eventTypeListIcons,
     getEventIcon,
     eventFields,
+    addLabelIcons,
+    eventRoleOptions,
   }
 }

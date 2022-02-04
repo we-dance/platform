@@ -1,9 +1,11 @@
 <template>
   <TLoader v-if="loading" />
   <div v-else class="flex flex-col h-full">
-    <THeader :title="`Chat with ${receiver.username}`" />
+    <THeader
+      :title="$t('conversation.userName', { username: receiver.username })"
+    />
     <div v-if="!chat || !chat.createdAt" class="p-16 text-xs text-center">
-      Start conversation with something nice.
+      {{ $t('conversation.empty') }}
     </div>
     <div v-else class="overflow-y-scroll flex-grow">
       <div
@@ -18,7 +20,7 @@
           <div class="text-xs space-x-1 text-gray-900 flex">
             <TAvatar name :uid="item.createdBy" />
             <span>•</span>
-            <div>{{ dateDiff(item.createdAt) }} ago</div>
+            <div>{{ dateDiff(item.createdAt) }}</div>
           </div>
 
           <TPreview class="text-sm leading-tight" :content="item.text" />
@@ -26,16 +28,17 @@
       </div>
       <div class="text-xs p-4 text-center">
         <div v-if="chat.lastSeen[receiverUid]">
-          <router-link :to="`/${receiver.username}`" class="underline">{{
+          <NuxtLink :to="`/${receiver.username}`" class="underline">{{
             receiver.username
-          }}</router-link>
-          opened chat last time {{ dateDiff(chat.lastSeen[receiverUid]) }} ago
+          }}</NuxtLink>
+          {{ $t('conversation.lastSeen') }}
+          {{ dateDiff(chat.lastSeen[receiverUid]) }}
         </div>
         <div v-else>
-          <router-link :to="`/${receiver.username}`" class="underline">{{
+          <NuxtLink :to="`/${receiver.username}`" class="underline">{{
             receiver.username
-          }}</router-link>
-          haven't opened this chat yet
+          }}</NuxtLink>
+          {{ $t('conversation.unread') }}
         </div>
       </div>
     </div>
@@ -44,12 +47,14 @@
         v-model="newMessage"
         cols="30"
         rows="2"
-        placeholder="Write a message"
+        :placeholder="$t('conversation.newMessage.placeholder')"
         class="w-full p-4 border-t border-b"
         @keyup.enter="send"
       ></textarea>
       <div class="flex justify-end">
-        <TButton @click="send">Send</TButton>
+        <TButton @click="send">
+          {{ $t('conversation.newMessage.submit') }}</TButton
+        >
       </div>
     </div>
   </div>

@@ -7,16 +7,16 @@
       <div class="flex-grow">
         <div class="block text-sm leading-tight">
           <div class="flex space-x-1 text-xs">
-            <router-link
+            <NuxtLink
               :to="`/${item.username}`"
               class="font-bold hover:underline"
-              >{{ item.username }}</router-link
+              >{{ item.username }}</NuxtLink
             >
             <span>•</span>
             <div>
-              <router-link :to="`/posts/${item.id}`" class="hover:underline">{{
+              <NuxtLink :to="`/posts/${item.id}`" class="hover:underline">{{
                 dateDiff(item.createdAt)
-              }}</router-link>
+              }}</NuxtLink>
             </div>
             <template v-if="item.region">
               <span>•</span>
@@ -30,14 +30,14 @@
             @click="show = !show"
             class="p-2 text-blue-700 cursor-pointer underline hover:no-underline text-xs text-center mb-2"
           >
-            {{ show ? 'Show less' : 'Show more' }}
+            {{ show ? $t('TPost.showLess') : $t('TPost.showMore') }}
           </div>
         </div>
       </div>
 
       <TDropdown
         v-if="!item.hideMeta || can('edit', 'posts', item)"
-        title="report or share"
+        :title="$t('TPost.dropdown.title')"
         class="-mr-4"
       >
         <TButton
@@ -45,20 +45,20 @@
           type="context"
           icon="edit"
           :to="`/posts/${item.id}/edit`"
-          label="Edit"
+          :label="$t('edit.label')"
         />
         <TButton
           v-if="can('edit', 'posts', item) && item.type === 'event'"
           type="context"
           icon="edit"
           :to="`/events/${item.id}/edit`"
-          label="Edit"
+          :label="$t('edit.label')"
         />
         <TButton
           v-if="can('edit', 'posts', item)"
           type="context"
           icon="delete"
-          label="Delete"
+          :label="$t('delete')"
           @click="remove(item.id)"
         />
         <TCardActions
@@ -75,12 +75,12 @@
           :url="`https://wedance.vip/posts/${item.id}`"
           :text="item.description"
           type="context"
-          label="Share"
+          :label="$t('share.title')"
         />
       </TDropdown>
     </div>
     <div v-if="!hideMedia">
-      <router-link
+      <NuxtLink
         v-if="item.type === 'event'"
         :to="`/events/${item.id}`"
         class="hover:opacity-75"
@@ -96,55 +96,18 @@
           :styles="item.styles"
           size="sm"
         />
-      </router-link>
+      </NuxtLink>
 
       <TCardPoll v-else-if="item.type === 'poll'" :node="item" />
 
       <TCardLink v-else-if="item.url" :url="item.url" :show="show" />
-    </div>
-
-    <div v-if="!hideComments && !item.hideComments" class="border-t p-4">
-      <router-link
-        v-if="item.commentsCount > 1"
-        :to="`/posts/${item.id}`"
-        class="p-2 text-blue-700 cursor-pointer underline hover:no-underline text-xs text-center mb-2 block"
-      >
-        Show all {{ item.commentsCount - 1 }} comments
-      </router-link>
-      <div
-        v-if="item.commentsCount < 0"
-        class="text-xs text-gray-900 p-2 text-center mb-2"
-      >
-        There are no replies yet.
-      </div>
-      <div
-        v-if="item.commentsCount > 0"
-        class="flex text-xs space-x-1 text-gray-900 p-2 overflow-hidden"
-      >
-        <div>
-          <TAvatar photo name :uid="item.commentsLast.createdBy">
-            <span>•</span>
-            <div>{{ dateDiff(item.commentsLast.createdAt) }} ago</div>
-          </TAvatar>
-          <div class="mt-1">{{ item.commentsLast.body }}</div>
-        </div>
-      </div>
-      <div>
-        <textarea
-          v-model="newReply"
-          rows="1"
-          :placeholder="`Reply to ${item.username}`"
-          class="w-full border p-2 text-xs text-gray-900"
-          @keyup.enter="sendReply"
-        ></textarea>
-      </div>
     </div>
     <slot />
   </div>
 </template>
 
 <script>
-import { computed, ref } from 'vue-demi'
+import { ref } from 'vue-demi'
 import { useApp } from '~/use/app'
 import { dateDiff, getEventDescription } from '~/utils'
 import { useAuth } from '~/use/auth'
@@ -191,11 +154,10 @@ export default {
     observer.observe(this.$refs.postRef)
   },
   setup(props) {
-    const { can, username } = useAuth()
+    const { can } = useAuth()
     const { getCity } = useApp()
-    const { remove, softUpdate } = useDoc('posts')
-    const { create } = useDoc('comments')
-    const newReply = ref('')
+    const { remove } = useDoc('posts')
+
     const show = ref(props.showAll)
 
     const onView = () => {
@@ -206,47 +168,12 @@ export default {
       trackNodeView(props.item.id, props.item.viewsCount || 0)
     }
 
-    const isHidden = computed(() => {
-      return !!props.item.hide?.list[username.value]
-    })
-
-    const sendReply = async () => {
-      const body = newReply.value
-
-      if (!body) {
-        return
-      }
-
-      const watchCount = props.item.watch?.count || 0
-      const isWatching = !!props.item.watch?.list[username.value]
-
-      newReply.value = ''
-
-      const commentDocRef = await create({
-        postId: props.item.id,
-        commentId: '',
-        body,
-      })
-
-      const commentsLast = await (await commentDocRef.get()).data()
-
-      softUpdate(props.item.id, {
-        commentsCount: props.item.commentsCount + 1,
-        commentsLast,
-        [`watch.count`]: isWatching ? watchCount : watchCount + 1,
-        [`watch.list.${username.value}`]: true,
-      })
-    }
-
     return {
       dateDiff,
       getCity,
-      newReply,
-      sendReply,
       getEventDescription,
       can,
       remove,
-      isHidden,
       show,
       onView,
     }

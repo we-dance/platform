@@ -7,7 +7,7 @@
           v-if="isAdmin()"
           type="context"
           :fields="profileFields"
-          label="Edit Profile"
+          :label="$t('myprofile.edit')"
           collection="profiles"
           singular="profile"
           :item="profile"
@@ -27,7 +27,7 @@
           :url="$route.fullPath"
           :text="profile.name"
           type="context"
-          label="Share"
+          :label="$t('share')"
         />
       </TDropdown>
     </THeader>
@@ -35,23 +35,32 @@
     <template v-if="uid === profile.id">
       <div v-if="intro.visible" class="m-4 rounded border p-4">
         <h2 class="border-b p-4 font-bold text-lg -m-4 mb-4">
-          Welcome to WeDance!
+          {{ $t('myprofile.intro.visible.title') }}
         </h2>
         <div class="typo">
           <p>
-            This is your profile. A square below is a poster – your visual
-            introduction.
+            {{ $t('myprofile.intro.visible.description1') }}
           </p>
-          <p>
-            Your poster is also shown in
-            <router-link to="/community">Сommunity</router-link> among other
-            dancers.
-          </p>
-          <p>
-            Click
-            <router-link to="/settings?tab=profile">Edit Profile</router-link>
-            and add:
-          </p>
+          <div>
+            <i18n
+              path="myprofile.intro.visible.description2"
+              tag="p"
+              for="myprofile.intro.visible.community"
+            >
+              <NuxtLink to="/community">{{
+                $t('myprofile.intro.visible.community')
+              }}</NuxtLink>
+            </i18n>
+          </div>
+          <i18n
+            path="myprofile.intro.visible.description3"
+            tag="p"
+            for="myprofile.edit"
+          >
+            <NuxtLink to="/settings?tab=profile">{{
+              $t('myprofile.edit')
+            }}</NuxtLink>
+          </i18n>
           <ul>
             <li v-for="field in intro.missing" :key="field.name">
               {{ field.label }}
@@ -63,19 +72,17 @@
       <div v-if="false">
         <div>
           <p>
-            WeDance is represented by Ambassador in local dance communities.
-            Volunteers help Ambassador with different initiatives to unite local
-            dancers. WeDance is created and supported by volunteers. Get
-            Involved, become volunteer!
+            {{ $t('myprofile.false.description1') }}
           </p>
-          <p>Ambassador in {{ community }} is</p>
+          <p>
+            {{ $t('myprofile.false.description2', { community: community }) }}
+          </p>
         </div>
 
         <w-profile username="CharlyAl"></w-profile>
 
         <div class="mt-4">
-          Help us build a dance network in your city, follow and interact with
-          our local social media accounts:
+          {{ $t('myprofile.false.description2') }}
           <div class="mt-4 flex flex-col items-center space-y-2">
             <TButton
               icon="instagram"
@@ -118,15 +125,25 @@
             {{ profile.name }}
           </div>
           <div class="ml-2 text-sm text-gray-700">
-            <span v-if="profile.height">• {{ profile.height }}cm</span>
-            <span v-if="profile.weight">• {{ profile.weight }}kg</span>
+            <span v-if="profile.height"
+              >•
+              {{
+                $t('myprofile.profile.height', { height: profile.height })
+              }}</span
+            >
+            <span v-if="profile.weight"
+              >•
+              {{
+                $t('myprofile.profile.weight', { weight: profile.weight })
+              }}</span
+            >
           </div>
         </div>
         <TButton
           v-if="uid !== profile.id"
           type="primary"
           :to="`/chat/${profile.username}`"
-          >Chat</TButton
+          >{{ $t('chat.title') }}</TButton
         >
       </div>
 
@@ -135,15 +152,15 @@
       </div>
     </template>
 
-    <TProfileContacts :profile="profile" class="p-2 mb-4" />
+    <TProfileContacts :profile="profile" class="p-2 mb-4 bg-gray-100" />
 
     <div v-if="uid === profile.id" class="flex justify-center space-x-2">
-      <TButton label="Edit Profile" to="/settings?tab=profile" />
+      <TButton :label="$t('myprofile.edit')" to="/settings?tab=profile" />
     </div>
 
     <WTeaser
       v-if="profile.partner === 'Yes'"
-      title="I am looking for a dance partner"
+      :title="$t('myprofile.Wteaser')"
       :description="profile.partnerBio"
       class="w-full mt-4"
     />
@@ -165,7 +182,7 @@
 
     <div v-if="uid === profile.id" class="w-full flex justify-center p-4">
       <TButton to="/events/-/edit" type="primary">{{
-        $t('myprofile.events.add')
+        $t('myprofile.addEvent')
       }}</TButton>
     </div>
 
@@ -173,7 +190,7 @@
 
     <div v-if="uid === profile.id" class="w-full flex justify-center p-4 mt-4">
       <TButton to="/posts/-/edit" type="primary">{{
-        $t('myprofile.posts.add')
+        $t('myprofile.addPost')
       }}</TButton>
     </div>
 
@@ -192,6 +209,7 @@ import { useApp } from '~/use/app'
 import { useAuth } from '~/use/auth'
 import { useProfiles } from '~/use/profiles'
 import { getExcerpt } from '~/utils'
+import { useI18n } from '~/use/i18n'
 
 export default {
   props: {
@@ -204,6 +222,7 @@ export default {
     const { uid, isAdmin, can } = useAuth()
     const { profileFields } = useProfiles()
     const { getCity } = useApp()
+    const { t } = useI18n()
 
     const community = computed(() => getCity(props.profile?.place))
 
@@ -211,27 +230,27 @@ export default {
       fields: [
         {
           name: 'photo',
-          label: 'your photo',
+          label: t('myprofile.intro.photo'),
         },
         {
           name: 'gender',
-          label: 'your gender',
+          label: t('myprofile.intro.gender'),
         },
         {
           name: 'styles',
-          label: 'what do you dance',
+          label: t('myprofile.intro.styles'),
         },
         {
           name: 'bio',
-          label: 'teaser (short introduction)',
+          label: t('myprofile.intro.bio'),
         },
         {
           name: 'place',
-          label: 'your city',
+          label: t('myprofile.intro.place'),
         },
         {
           name: 'objectives',
-          label: 'your objectives',
+          label: t('myprofile.intro.objectives'),
         },
       ],
       missing: [],

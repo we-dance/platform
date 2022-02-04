@@ -1,45 +1,89 @@
 <template>
-  <div v-if="loading" class="border rounded p-4">
-    Loading profile {{ username }}
-  </div>
-  <div v-else-if="!exists" class="border rounded p-4 text-red-500">
-    Profile {{ username }} not found
-  </div>
-  <router-link
-    v-else
-    :to="`/${profile.username}`"
-    class="rounded border hover:border-black shadow p-4 bg-dark-gradient text-sm flex items-start justify-start flex-grow my-2 no-underline"
+  <div
+    v-if="!fallback && !exists"
+    class="border rounded p-4 text-red-500 flex justify-between"
   >
-    <TProfilePhoto size="xl" :uid="id" />
-    <div class="flex-grow ml-4">
-      <div class="font-bold text-white text-xl leading-none">
-        {{ profile.name }}
+    <div>Profile {{ username }} not found</div>
+    <slot />
+  </div>
+  <div v-else>
+    <div
+      class="flex-row gap-2 flex justify-between items-center py-2 m-1 border-t border-gray-200 px-2 h-full"
+    >
+      <div class="flex-shrink-0 w-12">
+        <TProfilePhoto2 size="lg" :src="profile.photo" />
       </div>
-      <div class="text-gray-300 text-xs">@{{ profile.username }}</div>
-      <div class="mt-2 text-white">{{ profile.bio }}</div>
+      <div class="flex flex-col w-full">
+        <NuxtLink :to="`/${profile.username}`" class="font-bold">
+          {{ profile.name || profile.username }}
+        </NuxtLink>
+        <div v-if="profile.role" class="text-xs">
+          {{ getLabel(eventRoleOptions, profile.role) }}
+        </div>
+        <div v-if="profile.bio" class="text-gray-700 text-xs">
+          {{ profile.bio }}
+        </div>
+      </div>
+      <slot name="right" />
     </div>
-  </router-link>
+    <slot>
+      <TProfileContacts :profile="profile" short />
+    </slot>
+    <TPreview
+      v-if="full && profile.story"
+      :content="profile.story"
+      class="mt-4"
+    />
+  </div>
 </template>
 
 <script>
 import { useDoc } from '~/use/doc'
+import { getLabel } from '~/utils'
+import { useEvents } from '~/use/events'
+import { computed } from 'vue-demi'
 
 export default {
   setup(props) {
-    const { id, doc: profile, loading, exists, find } = useDoc('profiles')
-    find('username', props.username)
+    const { id, doc: loadedProfile, loading, exists, find } = useDoc('profiles')
+    const { eventRoleOptions } = useEvents()
+
+    if (props.username) {
+      find('username', props.username)
+    }
+
+    const profile = computed(() => {
+      if (loadedProfile.value?.username) {
+        return {
+          ...props.fallback,
+          ...loadedProfile.value,
+        }
+      }
+
+      return props.fallback
+    })
 
     return {
       id,
+      eventRoleOptions,
       profile,
       loading,
       exists,
+      getLabel,
     }
   },
   props: {
     username: {
       type: String,
       default: '',
+    },
+    fallback: {
+      type: Object,
+      default: () => ({}),
+    },
+    full: {
+      type: Boolean,
+      default: false,
     },
   },
 }

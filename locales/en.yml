@@ -1,6 +1,57 @@
+yes: 'Yes'
+no: 'No'
+female: Female
+male: Male
+other: Other
+Monday: Monday
+Tuesday: Tuesday
+Wednesday: Wednesday
+Thursday: Thursday
+Friday: Friday
+Saturday: Saturday
+Sunday: Sunday
+report: Report
+cancel: Cancel
+delete: Delete
+visibilityOptions:
+  public: Public
+  members: Members
+  unlisted: Unlisted
 hero:
   title: Do you like dancing?
   subtitle: We help each other find interesting dance events and dance partners.
+  motto: Even one dance contact in a city makes a difference.
+  alt: People dancing bachata
+  action: Join the community
+  search: Search dancers
+icons:
+  dancers: dancers
+  cities: cities
+  events: events
+features:
+  calendar:
+    title: Event Calendar
+    description: Find dance workshops, courses, socials and parties. We fill event calendar all together as a community. Everyone can share.
+  dancePartners:
+    title: Dance partners
+    description: Find a dance partner for your dance style and let them find you.
+  cityChats:
+    title: City Chats
+    description: Find dance chat in any city. Join your city chat and invite your friends to help new dancers in the city. Think globally, act locally.
+  danceTravel:
+    title: Dance Travel
+    description: Find international dance festivals and congresses. Share a ride, an appartment and find a buddy to experience a new city together.
+  volunteer:
+    title: Volunteer
+    description: We build a community, where everyone enters with mindset “I can help”, so whenever you need help you can count on it. We are one big family worldwide. We help each other.
+    action: Get Involved
+  interviews:
+    title: Interviews
+    description: Explore more about you favorite dance artists and catch their tips & tricks.
+    action: Listen to Podcast
+international:
+  title: International Community
+  description: We regularly post interviews, event announcements and introduce new members on our social media.
 auth:
   signin: Sign in
   signup: Sign up
@@ -16,7 +67,7 @@ events:
     show: Show
     other: Other
   add: Add event
-  title: Events
+  title: Dance Calendar
   list:
     empty: No events found. Would you like to add one?
   view:
@@ -24,7 +75,8 @@ events:
     covers: See list
   filter:
     type: Type
-    style: Style
+    style: Any Dance
+    level: Any Level
 eventView:
   dropdown:
     dashboard: Dashboard
@@ -32,9 +84,8 @@ eventView:
     share: Share
   online: Online Event
   reservation:
-    going: Going
-    notGoing: Not Going
     guest: Register for event
+    cancel: Cancel reservation
   reservationPopup:
     title: Register
     reserve:
@@ -43,8 +94,9 @@ eventView:
     finish:
       title: Almost there
       btn: Complete registration
-      description: See you soon! Don't forget to check-in by the organiser when you
-              come!
+      description:
+        See you soon! Don't forget to check-in by the organiser when you
+        come!
       reminder: Check your email to finish creation of the WeDance profile.
       calendar: Add to calendar
   organiser: Organised by
@@ -168,18 +220,6 @@ profile:
   website:
     label: Website
     placeholder: for business requests
-  genderList:
-    female: Female
-    male: Male
-    other: Other
-  daysList:
-    monday: Monday
-    tuesday: Tuesday
-    wednesday: Wednesday
-    thursday: Thursday
-    friday: Friday
-    saturday: Saturday
-    sunday: Sunday
   meetingPlaces:
     myPlace: My place
     yourPlace: Your place
@@ -202,39 +242,91 @@ profile:
     username: Username
     registered: Registered
     lastSeen: Last seen
-  visibilityOptions:
-    public: Public
-    members: Members
-    unlisted: Unlisted
-  booleanOptions:
-    yes: 'Yes'
-    no: 'No'
-  radiusOptions:
-    ten: around 10km
-    twenty: around 20km
-    fifty: around 50km
-    hundred: around 100km
-    fiveHundred: around 500km
-    thousand: around 1000km
-    anywhere: Anywhere
+radiusOptions:
+  ten: around 10km
+  twenty: around 20km
+  fifty: around 50km
+  hundred: around 100km
+  fiveHundred: around 500km
+  thousand: around 1000km
+  anywhere: Anywhere
 myprofile:
-  events:
-    add: Add event
-  posts:
-    add: Write a post
+  addEvent: Add event
+  addPost: Write a post
   title: My Profile
+  edit: Edit Profile
+  share: Share
+  intro:
+    photo: your photo
+    gender: your gender
+    styles: what do you dance
+    bio: teaser (short introduction)
+    place: your city
+    objectives: your objectives
+    visible:
+      title: Welcome to WeDance!
+      description1: This is your profile. A square below is a poster – your visual
+                   introduction.
+      description2: Your poster is also shown in {0} among other dancers.
+      community: Community
+      description3: 'Click {0} and add:'
+  false:
+    description1:
+            WeDance is represented by Ambassador in local dance communities.
+            Volunteers help Ambassador with different initiatives to unite local
+            dancers. WeDance is created and supported by volunteers. Get
+            Involved, become volunteer!
+    description2: Ambassador in {community} is
+    description3: 'Help us build a dance network in your city, follow and interact with
+          our local social media accounts:'
+  profile:
+    height: '{height}cm'
+    weight: '{weight}kg'
+  Wteaser: I am looking for a dance partner
+TProfileDetailes:
+  languages: Languages
+  objectives: Objectives
+  learning: Which dance topics you are interested in?
+  styles: Dance styles
+  jobs: I can help with
+  joined: Joined
+  lastLoginAt: Last seen
+  visibility: Visibility
+TPostList:
+  loadMore: Load more
+TPost:
+  dropdown:
+    title: report or share
+  showLess: Show less
+  showMore: Show more
+TCardActions:
+  reason: Reason
+  options:
+   spam: spam
+   other: other
 chat:
   title: Chat
-  welcome: Start conversation with something nice.
-  with: Chat with {username}
-  dateDiff: "{diff} ago"
+  empty: Start conversations and they will appear here.
+  lastMessage:
+    byYou: by you
+  receiver:
+    deleted: DELETED
+conversation:
+  userName: Chat with { username }
+  empty: Start conversation with something nice.
+  lastSeen: opened chat last time
+  unread: haven't opened this chat yet
+  newMessage:
+    placeholder: Write a message
+    submit: Send
 cities:
   choose: Choose city
 settings:
   title: Settings
   account:
     title: Account
-    description: This information will be used for notifications and purchases. It
+    description:
+      This information will be used for notifications and purchases. It
       will be shared with service providers or sellers only with your agreement.
     changepassword: Change Password
     delete: Delete Account
@@ -246,11 +338,13 @@ settings:
   passwordError: Error
   profile:
     title: Profile
-    description: What do you want other dancers to know about you? That's a place to
+    description:
+      What do you want other dancers to know about you? That's a place to
       share your passion to dance. Present yourself, don't be shy!
   contacts:
     title: Contacts
-    description: This information will be publicly available. Share your contacts
+    description:
+      This information will be publicly available. Share your contacts
       only if you want to be contacted by members. It's also nice place to share
       your social media to get some attention.
 city:
@@ -275,9 +369,6 @@ account:
   comment: Comment
   withPartner:
     label: Do you have a partner?
-    options:
-      yes: 'yes'
-      no: 'No'
   partnerName: Partner's name
   partnerEmail: Partner's email
 agreement: By signing in, you agree to {terms} and {privacy}.
@@ -317,13 +408,15 @@ teaser:
     btn: Join Now
   chat:
     title: Ask Locals
-    description: "We have a Telegram dance chat in every city. Join your city chat
+    description:
+      "We have a Telegram dance chat in every city. Join your city chat
       to help traveling dancers, invite your dance friends. Let's build WeDance
       together! "
     btn: Join Chat
   involve:
     title: We need your help
-    description: We are non-profit international dance community. We want you go to
+    description:
+      We are non-profit international dance community. We want you go to
       any city in any country and find dance events and dancers. It all starts
       with the local community.
     btn: Get Involved
@@ -359,6 +452,7 @@ feed:
   post: Post
 comments:
   empty: There are no comments yet.
+  label: Comments
 edit:
   label: Edit
 dashboard:
@@ -371,3 +465,38 @@ sort:
   starred: Starred
   archived: Archived
   yours: Yours
+event:
+  artists: Artists
+  organiser: Organiser
+  category:
+    meetup: Meetup
+    lesson: Lesson
+    online: Online
+    travel: Travel
+  role:
+    dj: DJ
+    instructor: Instructor
+    taxi: Taxi Dancer
+    photographer: Photographer
+    musician: Musician
+    organiser: Organiser
+TInputProfile:
+  changeRole: Change Role
+  actions: Actions
+  remove: Remove
+  addInstagram: (add from Instagram)
+  addFacebook: (add from Facebook)
+  placeholder: Search on WeDance, Instagram or Facebook
+popup:
+  auth:
+    title: Members only
+    body: Sign in to {action}
+    signin: Sign in
+TButton:
+  login: Login to {action}
+TDropdown:
+  title: report or share
+TReaction:
+  label:
+    watch: Watch
+    star: Star

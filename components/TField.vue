@@ -24,14 +24,10 @@
       />
       <slot>
         <component
-          :is="getComponent()"
+          :is="component"
           :id="elementId"
           v-bind="translatedAttrs"
           :value.sync="computedValue"
-          :type="type"
-          :auto-focus="autoFocus"
-          :hide-label="hideLabel"
-          :item="item"
           v-on="$attrs.listeners"
           @input="(val) => $emit('input', set(val))"
         />
@@ -52,24 +48,6 @@
 
 <script>
 import { camelize } from '~/utils'
-import TInput from '~/components/TInput/TInput'
-import TInputMarkdown from '~/components/TInput/TInputMarkdown'
-import TInputSelect from '~/components/TInput/TInputSelect'
-import TInputCollection from '~/components/TInput/TInputCollection'
-import TInputMulti from '~/components/TInput/TInputMulti'
-import TInputTags from '~/components/TInput/TInputTags'
-import TInputTextarea from '~/components/TInput/TInputTextarea'
-import TInputPhoto from '~/components/TInput/TInputPhoto'
-import TAccountListSelector from '~/components/TAccountListSelector'
-import TAccountSelector from '~/components/TAccountSelector'
-import TInputPlace from '~/components/TInput/TInputPlace'
-import TInputVenue from '~/components/TInput/TInputVenue'
-import TInputZipcode from '~/components/TInput/TInputZipcode'
-import TInputStyle from '~/components/TInput/TInputStyle'
-import TInputStylesSelect2 from '~/components/TInput/TInputStylesSelect2'
-import TInputLanguages from '~/components/TInput/TInputLanguages'
-import TInputButtons from '~/components/TInput/TInputButtons'
-import TInputUsername from '~/components/TInput/TInputUsername'
 
 export default {
   name: 'TField',
@@ -103,9 +81,9 @@ export default {
       type: String,
       default: 'left',
     },
-    type: {
+    component: {
       type: String,
-      default: 'text',
+      default: 'TInput',
     },
     autoFocus: {
       type: Boolean,
@@ -114,10 +92,6 @@ export default {
     default: {
       type: String,
       default: '',
-    },
-    data: {
-      type: Object,
-      default: () => ({}),
     },
     hideLabel: {
       type: Boolean,
@@ -196,33 +170,6 @@ export default {
     if (!this.value && this.default) {
       this.$emit('input', this.default)
     }
-  },
-  methods: {
-    getComponent() {
-      const map = {
-        tags: TInputTags,
-        select: TInputSelect,
-        richselect: 't-rich-select',
-        markdown: TInputMarkdown,
-        textarea: TInputTextarea,
-        photo: TInputPhoto,
-        place: TInputPlace,
-        venue: TInputVenue,
-        zipcode: TInputZipcode,
-        multi: TInputMulti,
-        collection: TInputCollection,
-        radio: 't-radio-group',
-        accounts: TAccountListSelector,
-        account: TAccountSelector,
-        style: TInputStyle,
-        stylesSelect: TInputStylesSelect2,
-        languages: TInputLanguages,
-        buttons: TInputButtons,
-        username: TInputUsername,
-      }
-
-      return map[this.type] || TInput
-    },
   },
 }
 </script>

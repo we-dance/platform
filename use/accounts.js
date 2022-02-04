@@ -39,15 +39,15 @@ export const useAccounts = () => {
     },
     {
       name: 'zone',
-      label: t('account.zone'),
-      type: 'richselect',
+      label: 'Timezone',
+      component: 'TRichSelect',
       options: moment.tz.names(),
       require: true,
     },
     {
       name: 'newsletter',
-      label: t('account.newsletter.label'),
-      type: 'multi',
+      key: 'account.newsletter',
+      component: 'TInputMulti',
       options: [
         {
           value: 'party',
@@ -79,9 +79,9 @@ export const useAccounts = () => {
     },
     {
       name: 'withPartner',
-      type: 'select',
-      label: t('account.withPartner.label'),
-      options: booleanOptions,
+      component: 'TInputSelect',
+      label: 'Do you have a partner?',
+      options: ['Yes', 'No'],
       event: false,
     },
     {

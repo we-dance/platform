@@ -75,7 +75,7 @@ export const usePosts = () => {
   const postFilters = [
     {
       name: 'place',
-      type: 'place',
+      component: 'TInputPlace',
       compare: (item, field, value) => !item[field] || item[field] === value,
       clearable: true,
       hideLabel: true,
@@ -84,7 +84,7 @@ export const usePosts = () => {
     },
     {
       name: 'dance',
-      type: 'style',
+      component: 'TInputStyle',
       hideLabel: true,
       placeholder: 'Style',
       compare: (item, field, value) =>
@@ -114,7 +114,7 @@ export const usePosts = () => {
     },
     {
       name: 'type',
-      type: 'select',
+      component: 'TInputSelect',
       options: postTypeList,
     },
     {
@@ -125,7 +125,7 @@ export const usePosts = () => {
     {
       name: 'description',
       hideLabel: true,
-      type: 'textarea',
+      component: 'TInputTextarea',
       placeholder: 'Text (markdown)',
       tips:
         'Pitch yourself: Who are you? What do you offer? What do you want?\n\nTips for effective pitch:\n- Uncomplicated: It should be catchy and roll off the tongue\n- Concise: It shouldn’t take more than a minute to say or read\n- Unique: It reflects your skills, goals, and desires\n- Storyline: It covers who you are, what you offer, and where you want to be\n- Appealing: Your elevator pitch is essentially a persuasive sales pitch; the emphasis should be on what you offer',
@@ -139,7 +139,7 @@ export const usePosts = () => {
     },
     {
       name: 'cover',
-      type: 'photo',
+      component: 'TInputPhoto',
       width: 500,
       height: 500,
       circle: false,
@@ -148,19 +148,7 @@ export const usePosts = () => {
     {
       name: 'styles',
       label: 'Dance styles',
-      type: 'stylesSelect',
-    },
-    {
-      name: 'hideMeta',
-      admin: true,
-    },
-    {
-      name: 'hideComments',
-      admin: true,
-    },
-    {
-      name: 'hideReactions',
-      admin: true,
+      component: 'TInputStylesSelect2',
     },
   ]
 

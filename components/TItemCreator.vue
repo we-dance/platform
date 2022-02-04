@@ -9,7 +9,11 @@
       :content="creator.story"
       class="mt-4"
     />
-    <TProfileContacts v-if="full" :profile="creator" class="mt-4 p-2" />
+    <TProfileContacts
+      v-if="full"
+      :profile="creator"
+      class="mt-4 p-2 bg-gray-100"
+    />
   </div>
 </template>
 

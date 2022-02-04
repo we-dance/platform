@@ -15,14 +15,14 @@
         <div class="mt-4 text-xs">
           <i18n path="agreement" tag="p">
             <template v-slot:privacy>
-              <router-link class="underline hover:no-underline" to="/privacy">{{
+              <NuxtLink class="underline hover:no-underline" to="/privacy">{{
                 $t('privacy')
-              }}</router-link>
+              }}</NuxtLink>
             </template>
             <template v-slot:terms>
-              <router-link class="underline hover:no-underline" to="/terms">{{
+              <NuxtLink class="underline hover:no-underline" to="/terms">{{
                 $t('terms')
-              }}</router-link>
+              }}</NuxtLink>
             </template>
           </i18n>
         </div>
@@ -31,9 +31,9 @@
 
     <div class="mt-4 text-xs">
       <div class="mt-4 border-t pt-4 flex space-x-2 text-xs">
-        <router-link to="/signin" class="underline hover:no-underline">{{
-          $t('login')
-        }}</router-link>
+        <NuxtLink to="/signin" class="underline hover:no-underline">{{
+          $t('register.login')
+        }}</NuxtLink>
       </div>
     </div>
   </div>
@@ -42,6 +42,7 @@
 <script>
 import { ref } from '@nuxtjs/composition-api'
 import ls from 'local-storage'
+import { track } from '~/plugins/firebase'
 import { useAuth } from '~/use/auth'
 import { useProfiles } from '~/use/profiles'
 
@@ -117,7 +118,7 @@ export default {
         return
       }
 
-      this.$fire.analytics.logEvent('sign_up', {
+      track('sign_up', {
         method: 'Password',
       })
 

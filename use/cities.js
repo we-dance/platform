@@ -12,6 +12,10 @@ export const useCities = () => {
 
   const currentCity = computed(() => state.currentCity || ls('city'))
 
+  const cityName = computed(() => {
+    return city.value?.name
+  })
+
   find('location.place_id', currentCity.value)
 
   watch(currentCity, (currentCity) => {
@@ -33,6 +37,7 @@ export const useCities = () => {
   return {
     ...toRefs(state),
     city,
+    cityName,
     changeCityByName,
   }
 }

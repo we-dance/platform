@@ -46,6 +46,7 @@ import { useAuth } from '~/use/auth'
 import { useDoc } from '~/use/doc'
 import { useRouter } from '~/use/router'
 import { usePosts } from '~/use/posts'
+import { track } from '~/plugins/firebase'
 
 export default {
   name: 'PostEdit',
@@ -73,10 +74,10 @@ export default {
     },
     async saveItem(data) {
       if (data.id) {
-        this.$fire.analytics.logEvent('update_post')
+        track('update_post')
         await this.update(data.id, data)
       } else {
-        this.$fire.analytics.logEvent('create_post')
+        track('create_post')
         await this.create(data)
       }
 

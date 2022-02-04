@@ -84,7 +84,6 @@
 <script>
 import { useApp } from '~/use/app'
 import { useStyles } from '~/use/styles'
-import { days } from '~/use/offers'
 import { getLabel } from '~/utils'
 
 export default {
@@ -93,7 +92,7 @@ export default {
     const { getPosterLabelColor } = useApp()
     const labelColor = getPosterLabelColor(props.collection, props.type)
 
-    return { getStyles, labelColor, days, getLabel }
+    return { getStyles, labelColor, getLabel }
   },
   props: {
     collection: {
