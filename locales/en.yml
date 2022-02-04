@@ -105,19 +105,15 @@ posts:
   edit:
     post: Post
     event: Event
-<<<<<<< HEAD
 postFields:
-=======
->>>>>>> feat:i18n:localise post edit page labels
+postFields:
   username: 
     label: Username
   type:
     label: Type
-<<<<<<< HEAD
   title:
-=======
   fieldTitle:
->>>>>>> feat:i18n:localise post edit page labels
+  title:
     placeholder: Title
   description:
     placeholder: Text (markdown)
@@ -127,7 +123,6 @@ postFields:
     placeholder: Link
   styles:
     label: Dance Styles
-<<<<<<< HEAD
     label:
       username: Username
       type: Type
@@ -139,14 +134,12 @@ postFields:
       description: Use [widgets](https://wedance.vip/markdown), including images and videos
       tips: 'Pitch yourself: Who are you? What do you offer? What do you want?\n\nTips for effective pitch:\n- Uncomplicated: It should be catchy and roll off the tongue\n- Concise: It shouldn’t take more than a minute to say or read\n- Unique: It reflects your skills, goals, and desires\n- Storyline: It covers who you are, what you offer, and where you want to be\n- Appealing: Your elevator pitch is essentially a persuasive sales pitch; the emphasis should be on what you offer'
       placeholder: Text (markdown)
-=======
   hideMeta:
     label: Hide Meta
   hideComments:
     label: Hide Comments
   hideReactions:
     label: Hide Reactions
->>>>>>> feat:i18n:localise post edit page labels
 profiles:
   add: Add profile
   title: Community
