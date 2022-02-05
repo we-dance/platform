@@ -109,9 +109,6 @@ conversation:
   newMessage:
     placeholder: Write a message
     submit: Send
-  welcome: Începeți conversația cu ceva frumos.
-  with: Discutați cu {username}
-  dateDiff: 'acum {diff}'
 cities:
   choose: Alegeți un oraș
 settings:
@@ -200,7 +197,7 @@ teaser:
     btn: Alătură-te acum
   chat:
     title: Vorbim?
-    description: 'Avem discuții de dans în fiecare oraș'
+    description: "Avem discuții de dans în fiecare oraș"
     btn: Alăturați-vă chatului {city}
   involve:
     title: Noi avem nevoie de ajutorul tau
@@ -269,6 +266,5 @@ TInputProfile:
   changeRole: Change Role
   actions: Actions
   remove: Remove
-  addInstagram: (add from Instagram)
-  addFacebook: (add from Facebook)
+  import: Import
   placeholder: Search on WeDance, Instagram or Facebook
