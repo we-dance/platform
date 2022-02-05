@@ -109,9 +109,6 @@ conversation:
   newMessage:
     placeholder: Write a message
     submit: Send
-  welcome: Comece a conversar com algo legal.
-  with: Bate-papo com {username}
-  dateDiff: 'faz {diff}'
 cities:
   choose: Escolha a cidade
 settings:
@@ -200,7 +197,7 @@ teaser:
     btn: Entrar
   chat:
     title: Nós conversamos?
-    description: 'Temos chats de dança em todas as cidades'
+    description: "Temos chats de dança em todas as cidades"
     btn: Participe do bate-papo de {city}
   involve:
     title: Nós precisamos da sua ajuda
@@ -269,6 +266,5 @@ TInputProfile:
   changeRole: Change Role
   actions: Actions
   remove: Remove
-  addInstagram: (add from Instagram)
-  addFacebook: (add from Facebook)
+  import: Import
   placeholder: Search on WeDance, Instagram or Facebook
