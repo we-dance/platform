@@ -12,14 +12,6 @@ const updateEndDate = (e) => {
   e.endDate = addMinutes(parseISO(e.startDate), e.duration)
 }
 
-const updatePlace = (e) => {
-  if (e?.international === 'No') {
-    return
-  }
-
-  e.place = ''
-}
-
 export const useEvents = () => {
   const { currentCity } = useCities()
   const { postTypeList } = usePosts()
@@ -161,6 +153,26 @@ export const useEvents = () => {
 
   const eventFields = [
     {
+      name: 'cover',
+      component: 'TInputPhoto',
+      labelPosition: 'top',
+      width: 500,
+      height: 500,
+      circle: false,
+    },
+    {
+      name: 'eventType',
+      labelPosition: 'top',
+      component: 'TInputSelect',
+      options: eventTypeList,
+    },
+    {
+      name: 'styles',
+      labelPosition: 'top',
+      label: 'Dance styles',
+      component: 'TInputStylesSelect2',
+    },
+    {
       name: 'name',
       labelPosition: 'top',
       placeholder: 'Event Name',
@@ -243,26 +255,6 @@ export const useEvents = () => {
       description: 'Please include currency, i.e. EUR, USD',
     },
     {
-      name: 'styles',
-      labelPosition: 'top',
-      label: 'Dance styles',
-      component: 'TInputStylesSelect2',
-    },
-    {
-      name: 'eventType',
-      labelPosition: 'top',
-      component: 'TInputSelect',
-      options: eventTypeList,
-    },
-    {
-      name: 'cover',
-      component: 'TInputPhoto',
-      labelPosition: 'top',
-      width: 500,
-      height: 500,
-      circle: false,
-    },
-    {
       name: 'visibility',
       labelPosition: 'top',
       component: 'TInputButtons',
@@ -289,7 +281,6 @@ export const useEvents = () => {
       label: 'Online?',
       component: 'TInputButtons',
       options: ['Yes', 'No'],
-      onChange: updatePlace,
       description: 'Streaming via Zoom, Google Meet, Instagram Live, etc.?',
       labelPosition: 'top',
     },
@@ -299,9 +290,8 @@ export const useEvents = () => {
       labelPosition: 'top',
       component: 'TInputButtons',
       options: ['Yes', 'No'],
-      onChange: updatePlace,
       description:
-        'Is it a big event with >500 guests, like festival or online?',
+        'Is it a big event with >500 guests, like festival or congress?',
     },
     {
       name: 'place',
@@ -309,9 +299,6 @@ export const useEvents = () => {
       labelPosition: 'top',
       component: 'TInputPlace',
       clearable: true,
-      when: (answers) => answers.international === 'No',
-      description:
-        'Leave empty if you want your event to be shown in all cities',
     },
     {
       name: 'form',
@@ -333,15 +320,6 @@ export const useEvents = () => {
       description: 'Facebook event',
     },
     {
-      name: 'promo',
-      label: 'Do you want free promo?',
-      labelPosition: 'top',
-      component: 'TInputButtons',
-      options: ['Yes', 'No'],
-      description:
-        'Send us link to your event on [Instagram](https://instagram.com/wedancevip) and we will promote it on our social media channels: Telegram, Instagram, Facebook and Twitter.',
-    },
-    {
       name: 'confirmation',
       labelPosition: 'top',
       label: 'Confirmation email for guests',
@@ -349,10 +327,13 @@ export const useEvents = () => {
       placeholder: 'Example: Dear guest, you are confirmed to our event.',
     },
     {
-      name: 'type',
-      admin: true,
-      component: 'TInputSelect',
-      options: postTypeList,
+      name: 'promo',
+      label: 'Do you want free promo?',
+      labelPosition: 'top',
+      component: 'TInputButtons',
+      options: ['Yes', 'No'],
+      description:
+        'Send us link to your event on [Instagram](https://instagram.com/wedancevip) and we will promote it on our social media channels: Telegram, Instagram, Facebook and Twitter.',
     },
   ]
 
