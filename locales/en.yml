@@ -280,6 +280,5 @@ TInputProfile:
   changeRole: Change Role
   actions: Actions
   remove: Remove
-  addInstagram: (add from Instagram)
-  addFacebook: (add from Facebook)
+  import: Import
   placeholder: Search on WeDance, Instagram or Facebook
