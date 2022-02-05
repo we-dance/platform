@@ -109,9 +109,6 @@ conversation:
   newMessage:
     placeholder: Write a message
     submit: Send
-  welcome: Начните разговор с чего-нибудь приятного.
-  with: Пообщайтесь с {username}
-  dateDiff: '{diff} лет назад'
 cities:
   choose: Elige una ciudad
 settings:
@@ -200,7 +197,7 @@ teaser:
     btn: Присоединяйся сейчас
   chat:
     title: Спросите у местных
-    description: 'У нас есть танцевальный чат Telegram в каждом городе. Присоединяйтесь к своему городскому чату, чтобы помогать путешествующим танцорам, приглашайте своих танцевальных друзей. Давайте вместе создадим WeDance!'
+    description: "У нас есть танцевальный чат Telegram в каждом городе. Присоединяйтесь к своему городскому чату, чтобы помогать путешествующим танцорам, приглашайте своих танцевальных друзей. Давайте вместе создадим WeDance!"
     btn: Присоединиться к чату
   involve:
     title: Нам нужна твоя помощь
@@ -269,6 +266,5 @@ TInputProfile:
   changeRole: Change Role
   actions: Actions
   remove: Remove
-  addInstagram: (add from Instagram)
-  addFacebook: (add from Facebook)
+  import: Import
   placeholder: Search on WeDance, Instagram or Facebook
