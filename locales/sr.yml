@@ -109,9 +109,6 @@ conversation:
   newMessage:
     placeholder: Write a message
     submit: Send
-  welcome: Започни разговор са нечим лепим
-  with: Ћаскај са {username}
-  dateDiff: 'Пре {diff}'
 cities:
   choose: Одаберите град
 settings:
@@ -200,7 +197,7 @@ teaser:
     btn: Придружи се сад
   chat:
     title: Да ли ћаскамо?
-    description: 'У сваком граду имамо плесне разговоре'
+    description: "У сваком граду имамо плесне разговоре"
     btn: Придружите се {city} ћаскању
   involve:
     title: Треба нам твоја помоћ
@@ -269,6 +266,5 @@ TInputProfile:
   changeRole: Change Role
   actions: Actions
   remove: Remove
-  addInstagram: (add from Instagram)
-  addFacebook: (add from Facebook)
+  import: Import
   placeholder: Search on WeDance, Instagram or Facebook
