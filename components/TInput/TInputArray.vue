@@ -31,9 +31,18 @@ export default {
     },
   },
   watch: {
+    value(val) {
+      console.log('value changed', val)
+      this.internalValue = val
+    },
     internalValue: {
       deep: true,
-      handler(val) {
+      handler(val, old) {
+        console.log('internalValue changed', val)
+        if (val && old && val.length === old.length) {
+          return
+        }
+
         let filtered = []
 
         if (val) {
