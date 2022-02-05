@@ -106,13 +106,10 @@ posts:
     post: Post
     event: Event
 postFields:
-postFields:
   username: 
     label: Username
   type:
     label: Type
-  title:
-  fieldTitle:
   title:
     placeholder: Title
   description:
@@ -123,23 +120,6 @@ postFields:
     placeholder: Link
   styles:
     label: Dance Styles
-    label:
-      username: Username
-      type: Type
-      danceStyle: Dance Styles
-      hideMeta: Hide Meta
-      hideComment: Hide Comments
-      hideReaction: Hide Reactions
-    description: 
-      description: Use [widgets](https://wedance.vip/markdown), including images and videos
-      tips: 'Pitch yourself: Who are you? What do you offer? What do you want?\n\nTips for effective pitch:\n- Uncomplicated: It should be catchy and roll off the tongue\n- Concise: It shouldn’t take more than a minute to say or read\n- Unique: It reflects your skills, goals, and desires\n- Storyline: It covers who you are, what you offer, and where you want to be\n- Appealing: Your elevator pitch is essentially a persuasive sales pitch; the emphasis should be on what you offer'
-      placeholder: Text (markdown)
-  hideMeta:
-    label: Hide Meta
-  hideComments:
-    label: Hide Comments
-  hideReactions:
-    label: Hide Reactions
 profiles:
   add: Add profile
   title: Community
