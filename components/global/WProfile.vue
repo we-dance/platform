@@ -17,10 +17,10 @@
         <NuxtLink :to="`/${profile.username}`" class="font-bold">
           {{ profile.name || profile.username }}
         </NuxtLink>
-        <div v-if="profile.role" class="text-xs">
+        <div v-show="profile.role" class="text-xs">
           {{ getLabel(eventRoleOptions, profile.role) }}
         </div>
-        <div v-if="profile.bio" class="text-gray-700 text-xs">
+        <div v-show="profile.bio" class="text-gray-700 text-xs">
           {{ profile.bio }}
         </div>
       </div>
@@ -57,6 +57,7 @@ export default {
         return {
           ...props.fallback,
           ...loadedProfile.value,
+          role: props?.fallback?.role,
         }
       }
 
