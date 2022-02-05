@@ -109,9 +109,6 @@ conversation:
   newMessage:
     placeholder: Write a message
     submit: Send
-  welcome: Zacznij rozmowę od czegoś miłego.
-  with: Porozmawiaj z {username}
-  dateDiff: '{diff} temu'
 cities:
   choose: Wybierz miasto
 settings:
@@ -200,7 +197,7 @@ teaser:
     btn: Dołącz teraz
   chat:
     title: Czy rozmawiamy?
-    description: 'Prowadzimy rozmowy taneczne w każdym mieście'
+    description: "Prowadzimy rozmowy taneczne w każdym mieście"
     btn: Dołącz do czatu {city}
   involve:
     title: Potrzebujemy Twojej pomocy
@@ -269,6 +266,5 @@ TInputProfile:
   changeRole: Change Role
   actions: Actions
   remove: Remove
-  addInstagram: (add from Instagram)
-  addFacebook: (add from Facebook)
+  import: Import
   placeholder: Search on WeDance, Instagram or Facebook
