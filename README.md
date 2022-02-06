@@ -18,7 +18,7 @@
 2. Under `Get started by adding Firebase to your app` click 3d icon (Web), enter name `Web`, uncheck `Firebase Hosting`, click `Register app`, copy generated `firebaseConfig`.
 3. Go to `Authentication`, switch to tab `Sign-in method`, click `Email/Password` and enable both triggers (password and email link); enable `Google`.
 4. Go to `Cloud Firestore`, click `Create database`, select `Start in test mode`, click `Next`, choose region `eur3`.
-5. [Transform js object to one line JSON](https://www.convertjson.com/javascript-object-to-json.htm), for this paste value of `firebaseConfig` (from step 3) and enable Minimize JSON.
+5. Transform `firebaseConfig` value (from step 2) to one line JSON. [This tool](https://www.convertjson.com/javascript-object-to-json.htm) might help you.
 6. Clone this repository and open the project folder.
 7. Copy `.env.example` file to `.env` file and set value of `FIREBASE_CONFIG` to one line JSON you got from step 6.
 
