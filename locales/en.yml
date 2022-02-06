@@ -440,8 +440,11 @@ popup:
     title: Members only
     body: Sign in to {action}
     signin: Sign in
-TButton: Login to {action}
-TDropdown: report or share
+TButton:
+  title: Login to {action}
+TDropdown:
+  title: report or share
 TReaction:
     watch: Watch
     star: Star
+    
