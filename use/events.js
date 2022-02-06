@@ -12,6 +12,7 @@ const updateEndDate = (e) => {
 }
 
 export const useEvents = () => {
+  const { t } = useI18n()
   const { currentCity } = useCities()
   const { t } = useI18n()
 
@@ -173,71 +174,70 @@ export const useEvents = () => {
     {
       name: 'name',
       labelPosition: 'top',
-      placeholder: 'Event Name',
+      placeholder: t('event.name.placeholder'),
+      label: t('event.name.label'),
     },
     {
       name: 'description',
       labelPosition: 'top',
       component: 'TInputTextarea',
-      placeholder: 'Details (markdown)',
-      tips:
-        'Pitch yourself: Who are you? What do you offer? What do you want?\n\nTips for effective pitch:\n- Uncomplicated: It should be catchy and roll off the tongue\n- Concise: It shouldn’t take more than a minute to say or read\n- Unique: It reflects your skills, goals, and desires\n- Storyline: It covers who you are, what you offer, and where you want to be\n- Appealing: Your elevator pitch is essentially a persuasive sales pitch; the emphasis should be on what you offer',
-      description:
-        'Use [widgets](https://wedance.vip/markdown), including images and videos',
+      placeholder: t('profile.story.placeholder'),
+      tips: t('profile.story.tips'),
+      description: t('event.description'),
     },
     {
       name: 'startDate',
       type: 'datetime-local',
-      label: 'When?',
+      label: t('event.when'),
       labelPosition: 'top',
       simple: true,
       onChange: updateEndDate,
     },
     {
       name: 'venue',
-      label: 'Where?',
+      label: t('event.where'),
       labelPosition: 'top',
       component: 'TInputVenue',
       simple: true,
     },
     {
       name: 'duration',
-      label: 'How long?',
+      label: t('event.duration'),
       labelPosition: 'top',
       onChange: updateEndDate,
       component: 'TInputSelect',
       options: [
         {
           value: 30,
-          label: '30 min',
+          label: t('event.duration.thirtyMinutes'),
         },
         {
           value: 60,
-          label: '1 hour',
+          label: t('event.duration.oneHour'),
         },
         {
           value: 90,
-          label: '1.5 hour',
+          label: t('event.duration.ninetyMinutes'),
         },
         {
           value: 120,
-          label: '2 hours',
+          label: t('event.duration.twoHours'),
         },
         {
           value: 180,
-          label: '3 hours',
+          label: t('event.duration.threeHours'),
         },
         {
           value: 240,
-          label: '4 hours',
+          label: t('event.duration.fourHours'),
         },
         {
           value: 300,
-          label: '5 hours',
+          label: t('event.duration.fiveHours'),
         },
         {
           value: 'custom',
-          label: 'Custom',
+          label: t('event.duration.custom'),
         },
       ],
     },
@@ -250,7 +250,7 @@ export const useEvents = () => {
       name: 'price',
       labelPosition: 'top',
       placeholder: '',
-      description: 'Please include currency, i.e. EUR, USD',
+      description: t('event.price.description'),
     },
     {
       name: 'visibility',
@@ -271,12 +271,12 @@ export const useEvents = () => {
     {
       name: 'org',
       component: 'TInputProfile',
-      label: 'Organiser',
+      label: t('event.org.label'),
       labelPosition: 'top',
     },
     {
       name: 'online',
-      label: 'Online?',
+      label: t('event.mode.online'),
       component: 'TInputButtons',
       options: ['Yes', 'No'],
       description: 'Streaming via Zoom, Google Meet, Instagram Live, etc.?',
@@ -284,7 +284,7 @@ export const useEvents = () => {
     },
     {
       name: 'international',
-      label: 'International?',
+      label: t('event.location.international'),
       labelPosition: 'top',
       component: 'TInputButtons',
       options: ['Yes', 'No'],
@@ -293,14 +293,14 @@ export const useEvents = () => {
     },
     {
       name: 'place',
-      label: 'Community',
+      label: t('event.place.community'),
       labelPosition: 'top',
       component: 'TInputPlace',
       clearable: true,
     },
     {
       name: 'form',
-      label: 'External registration?',
+      label: t('event.external.registration'),
       labelPosition: 'top',
       before: 'Do you use external platform to register for your event?',
       component: 'TInputButtons',
@@ -309,20 +309,19 @@ export const useEvents = () => {
     {
       name: 'link',
       labelPosition: 'top',
-      description:
-        'Direct booking link on ticket platform (ti.to, Eventbrite, Google Form, etc.)',
+      description: t('event.link.description'),
     },
     {
       name: 'facebook',
       labelPosition: 'top',
-      description: 'Facebook event',
+      description: t('event.facebook.description'),
     },
     {
       name: 'confirmation',
       labelPosition: 'top',
-      label: 'Confirmation email for guests',
+      label: t('event.confirmation.email'),
       component: 'TInputTextarea',
-      placeholder: 'Example: Dear guest, you are confirmed to our event.',
+      placeholder: t('event.confirmation.placeholder'),
     },
     {
       name: 'promo',
