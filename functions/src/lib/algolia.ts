@@ -13,6 +13,8 @@ export async function removeObject(objectID: string) {
 }
 
 export function profileToAlgolia(profile: any, cache: any) {
+  const hasPlace = profile.place && cache.cities && cache.cities[profile.place]
+
   return {
     objectID: profile.id,
     id: profile.id,
@@ -21,10 +23,10 @@ export function profileToAlgolia(profile: any, cache: any) {
     height: profile.height,
     weight: profile.weight,
     bio: profile.bio,
-    locales: Object.keys(profile.locales),
+    locales: profile.locales ? Object.keys(profile.locales) : [],
     place: profile.place,
-    country: cache.cities[profile.place].location.country,
-    locality: cache.cities[profile.place].location.locality,
+    country: hasPlace ? cache.cities[profile.place].location.country : '',
+    locality: hasPlace ? cache.cities[profile.place].location.locality : '',
     styles: profile.styles,
     style: profile.styles ? Object.keys(profile.styles) : [],
     partner: profile.partner,
@@ -38,15 +40,18 @@ export function profileToAlgolia(profile: any, cache: any) {
     daysUsed: profile.daysUsed,
     _tags: profile.styles ? Object.keys(profile.styles) : [],
     _geoloc: {
-      lat: cache.cities[profile.place].location.latitude,
-      lng: cache.cities[profile.place].location.longitude,
+      lat: hasPlace ? cache.cities[profile.place].location.latitude : '',
+      lng: hasPlace ? cache.cities[profile.place].location.longitude : '',
     },
   }
 }
 
 export async function indexProfiles() {
   const cache = (
-    await firestore.collection('app').doc('v2').get()
+    await firestore
+      .collection('app')
+      .doc('v2')
+      .get()
   ).data() as any
 
   const index = initIndex('profiles')
@@ -60,7 +65,7 @@ export async function indexProfiles() {
       ...doc.data(),
     } as any
 
-    if (!profile.username || !profile.place) {
+    if (!profile.username) {
       await index.deleteObject(profile.id)
       continue
     }
