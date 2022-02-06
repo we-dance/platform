@@ -47,6 +47,10 @@ events:
     concert: Concert
     show: Show
     other: Other
+  edit:
+    post: Post
+    event: Event
+    save: save
   add: Add event
   title: Dance Calendar
   list:
