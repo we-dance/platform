@@ -61,7 +61,6 @@ export async function indexProfiles() {
 
   const profileDocs = (await firestore.collection('profiles').get()).docs
   const objects = []
-  const errors = []
   const removed = []
 
   for (const doc of profileDocs) {
@@ -77,15 +76,6 @@ export async function indexProfiles() {
       continue
     }
 
-    if (!cache.cities[profile.place]) {
-      errors.push({
-        username: profile.username,
-        place: profile.place,
-      })
-
-      continue
-    }
-
     objects.push(profileToAlgolia(profile, cache))
   }
 
@@ -96,10 +86,5 @@ export async function indexProfiles() {
   if (removed.length) {
     console.log(`Removed ${removed.length} profiles`)
     console.log(removed)
-  }
-
-  if (errors.length) {
-    console.log(`Errors: ${errors.length}`)
-    console.log(errors)
   }
 }
