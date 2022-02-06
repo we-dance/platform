@@ -8,12 +8,12 @@
           value="events"
           :options="[
             {
-              label: $t('posts.edit.post'),
+              label: $t('events.edit.post'),
               value: 'posts',
               to: `/posts/${item.id || '-'}/edit`,
             },
             {
-              label: $t('posts.edit.event'),
+              label: $t('events.edit.event'),
               value: 'events',
               to: `/events/${item.id || '-'}/edit`,
             },
@@ -30,7 +30,7 @@
         :fields="eventFields"
         show-cancel
         vertical
-        submit-label="Save"
+        :submit-label="$t('events.edit.save')"
         class="bg-white p-4 space-y-4"
         @save="saveItem"
         @cancel="view(item.id)"
