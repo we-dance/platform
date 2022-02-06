@@ -212,6 +212,7 @@ export default {
         owned: false,
         owner: '',
         import: 'requested',
+        visibility: 'Public',
         ...data,
       })
 
