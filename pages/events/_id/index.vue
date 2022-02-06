@@ -105,29 +105,34 @@
           <TIcon name="ticket" class="w-4 h-4 mr-4" />
           <div>{{ item.price }}</div>
         </div>
-
-        <div
-          v-if="item.organiser"
-          class="flex items-center justify-start w-full leading-tight border-b py-2 px-4"
-        >
-          <TIcon name="lobby" class="w-4 h-4 mr-4" />
-          <div>{{ $t('eventView.organiser') }} {{ item.organiser }}</div>
-        </div>
       </div>
     </div>
 
+    <div class="mt-4 flex justify-center">
+      <TReactions :item="item" class="my-1" />
+    </div>
+
     <div
-      class="flex mt-4 space-x-2 justify-center sticky bg-white p-4 border-b z-50 top-0"
+      class="flex justify-center space-y-2 sticky bg-white p-4 border-b z-50 top-0"
     >
       <TButton
-        v-if="item.response !== 'up'"
+        v-if="item.link"
+        type="primary"
+        :title="$t('eventView.reservation.guest')"
+        allow-guests
+        :href="item.link"
+        target="_blank"
+        >{{ $t('eventView.reservation.guest') }}</TButton
+      >
+      <TButton
+        v-else-if="uid && item.response !== 'up'"
         type="primary"
         :title="$t('eventView.reservation.guest')"
         @click="reservationPopup = 'reserve'"
         >{{ $t('eventView.reservation.guest') }}</TButton
       >
       <TButton
-        v-if="uid && item.response === 'up'"
+        v-else-if="uid && item.response === 'up'"
         type="secondary"
         @click="updateRsvp(item.id, 'events', 'down')"
         >{{ $t('eventView.reservation.cancel') }}</TButton
@@ -158,7 +163,7 @@
       <WProfile :username="item.org.username" :fallback="item.org" full />
     </div>
 
-    <div v-if="item.facebook" class="mt-8 text-right text-sm">
+    <div v-if="item.facebook" class="m-4 text-right text-sm">
       <a :href="item.facebook" class="hover:underline text-gray-700">{{
         $t('eventView.source')
       }}</a>
