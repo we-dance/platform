@@ -1,17 +1,5 @@
 <template>
   <div class="flex">
-    <div v-if="false" class="mr-2 flex justify-center items-start pt-1">
-      <button
-        v-if="item.response === 'up'"
-        class="text-green-500"
-        @click="updateRsvp(item.id, 'events', 'down')"
-      >
-        <TIcon name="check_circle" class="w-4 h-4" />
-      </button>
-      <button v-else @click="updateRsvp(item.id, 'events', 'up')">
-        <TIcon name="check" class="w-4 h-4" />
-      </button>
-    </div>
     <div class="mr-2">
       {{ getTime(item.startDate) }}
     </div>
@@ -60,8 +48,8 @@
               </p>
             </div>
           </div>
-          <div v-if="item.claimed === 'Yes'" class="flex items-center gap-1">
-            <TAvatar name :uid="item.createdBy" class="text-primary" />
+          <div v-if="item.org" class="text-primary">
+            {{ item.org.username }}
           </div>
         </div>
       </div>

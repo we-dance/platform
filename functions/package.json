@@ -12,10 +12,13 @@
     "logs": "firebase functions:log"
   },
   "engines": {
-    "node": "12"
+    "node": "14"
   },
   "main": "dist/index.js",
   "dependencies": {
+    "@sentry/node": "^6.17.4",
+    "@sentry/tracing": "^6.17.4",
+    "@sentry/types": "^6.17.4",
     "@slack/client": "^5.0.2",
     "@types/cors": "^2.8.6",
     "@types/mailgun-js": "^0.22.4",
@@ -32,13 +35,14 @@
     "mailgun-js": "^0.22.0",
     "markdown-it": "^10.0.0",
     "puppeteer": "^7.0.0",
-    "yargs": "^16.2.0"
+    "yargs": "^17.3.1"
   },
   "devDependencies": {
+    "@types/dotenv": "^8.2.0",
     "@types/puppeteer": "^5.4.2",
     "firebase-functions-test": "^0.1.6",
     "tslint": "^5.12.0",
-    "typescript": "^3.2.2"
+    "typescript": "^3.9.10"
   },
   "private": true
 }

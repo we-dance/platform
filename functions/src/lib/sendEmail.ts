@@ -16,7 +16,7 @@ export default async (data: any) => {
   const mailgunConfig = config().mailgun
 
   if (!mailgunConfig) {
-    throw Error('Mailgun is not configured')
+    throw new Error('Mailgun is not configured')
   }
 
   const mg = mailgun({

@@ -51,12 +51,6 @@ export default {
   name: 'EventEdit',
   layout: 'empty',
   middleware: ['auth'],
-  props: {
-    id: {
-      type: String,
-      default: '-',
-    },
-  },
   watch: {
     loading(loading) {
       if (!loading && this.item) {
@@ -67,7 +61,7 @@ export default {
     },
   },
   mounted() {
-    if (this.id === '-') {
+    if (this.$route.params.id === '-') {
       this.item = {
         type: 'event',
         place: this.profile?.place,
@@ -89,6 +83,12 @@ export default {
           role: 'organiser',
         },
         username: this.profile?.username,
+        watch: {
+          count: 1,
+          list: {
+            [this.profile?.username]: true,
+          },
+        },
       }
     }
   },

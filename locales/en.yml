@@ -106,7 +106,7 @@ posts:
     post: Post
     event: Event
 postFields:
-  username: 
+  username:
     label: Username
   type:
     label: Type
@@ -455,8 +455,7 @@ TInputProfile:
   changeRole: Change Role
   actions: Actions
   remove: Remove
-  addInstagram: (add from Instagram)
-  addFacebook: (add from Facebook)
+  import: Import
   placeholder: Search on WeDance, Instagram or Facebook
 popup:
   auth:
@@ -470,4 +469,14 @@ TDropdown:
 TReaction:
     watch: Watch
     star: Star
-   
+EventDashboard:
+  noAccess: Only event owner can access this area.
+  unlink: Unlink
+  couple: Couple
+  cancel: Cancel
+  checkIn: CheckIn
+  rsvp: RSVP
+  subscribed: Subscribed
+  paid: Paid
+  notPaid: Didn't Pay
+  

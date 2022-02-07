@@ -129,7 +129,7 @@
         >
       </div>
 
-      <div v-if="profile.bio && profile.bio.length > 140" class="mb-2">
+      <div v-if="profile.bio && profile.bio.length > 140" class="mb-2 px-4">
         {{ profile.bio }}
       </div>
     </template>
@@ -151,7 +151,7 @@
 
     <TEventList
       v-if="profile.type !== 'City'"
-      :filter="{ createdBy: profile.createdBy }"
+      :filter="{ 'org.username': profile.username }"
       class="mt-4 w-full"
     />
 
@@ -177,9 +177,7 @@
     </div>
 
     <TPostList
-      :filter="{ createdBy: profile.createdBy }"
-      hide-media
-      hide-comments
+      :filter="{ username: profile.username }"
       class="mt-4 w-full border-t"
     />
   </div>

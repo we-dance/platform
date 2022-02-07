@@ -86,7 +86,7 @@
         class="hover:opacity-75"
       >
         <TSharePreviewPost
-          :username="item.username"
+          :username="item.org ? item.org.username : ''"
           collection="events"
           :title="item.name"
           :type="item.type"
