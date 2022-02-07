@@ -131,6 +131,8 @@ profile:
     label: Gender
     placeholder: Gender
   style: Dance styles
+  joined: Joined
+  languages: Languages
   story:
     label: Description
     before: Tell your dance story. You can also use [widgets](https://wedance.vip/markdown), including images and videos
@@ -263,14 +265,13 @@ myprofile:
     bio: teaser (short introduction)
     place: your city
     objectives: your objectives
-    visible:
-      title: Welcome to WeDance!
-      description1: This is your profile. A square below is a poster – your visual
-                   introduction.
-      description2: Your poster is also shown in {0} among other dancers.
-      community: Community
-      description3: 'Click {0} and add:'
-  false:
+    title: Welcome to WeDance!
+    description1: This is your profile. A square below is a poster – your visual
+                  introduction.
+    description2: Your poster is also shown in {0} among other dancers.
+    community: Community
+    description3: 'Click {0} and add:'
+  ambassador:
     description1:
             WeDance is represented by Ambassador in local dance communities.
             Volunteers help Ambassador with different initiatives to unite local
@@ -282,16 +283,9 @@ myprofile:
   profile:
     height: '{height}cm'
     weight: '{weight}kg'
-  Wteaser: I am looking for a dance partner
-TProfileDetailes:
-  languages: Languages
-  objectives: Objectives
-  learning: Which dance topics you are interested in?
-  styles: Dance styles
-  jobs: I can help with
-  joined: Joined
-  lastLoginAt: Last seen
-  visibility: Visibility
+  chat:
+    label: Chat
+Wteaser: I am looking for a dance partner
 TPostList:
   loadMore: Load more
 TPost:
@@ -453,10 +447,8 @@ feed:
 comments:
   empty: There are no comments yet.
   label: Comments
-edit:
-  label: Edit
-dashboard:
-  label: Dashboard
+edit: Edit
+dashboard: Dashboard
 sort:
   popular: Popular
   newest: Newest

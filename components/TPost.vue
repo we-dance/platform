@@ -45,14 +45,14 @@
           type="context"
           icon="edit"
           :to="`/posts/${item.id}/edit`"
-          :label="$t('edit.label')"
+          :label="$t('edit')"
         />
         <TButton
           v-if="can('edit', 'posts', item) && item.type === 'event'"
           type="context"
           icon="edit"
           :to="`/events/${item.id}/edit`"
-          :label="$t('edit.label')"
+          :label="$t('edit')"
         />
         <TButton
           v-if="can('edit', 'posts', item)"
