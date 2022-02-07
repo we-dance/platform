@@ -35,25 +35,25 @@
     <template v-if="uid === profile.id">
       <div v-if="intro.visible" class="m-4 rounded border p-4">
         <h2 class="border-b p-4 font-bold text-lg -m-4 mb-4">
-          {{ $t('myprofile.intro.visible.title') }}
+          {{ $t('myprofile.intro.title') }}
         </h2>
         <div class="typo">
           <p>
-            {{ $t('myprofile.intro.visible.description1') }}
+            {{ $t('myprofile.intro.description1') }}
           </p>
           <div>
             <i18n
-              path="myprofile.intro.visible.description2"
+              path="myprofile.intro.description2"
               tag="p"
-              for="myprofile.intro.visible.community"
+              for="myprofile.intro.community"
             >
               <NuxtLink to="/community">{{
-                $t('myprofile.intro.visible.community')
+                $t('myprofile.intro.community')
               }}</NuxtLink>
             </i18n>
           </div>
           <i18n
-            path="myprofile.intro.visible.description3"
+            path="myprofile.intro.description3"
             tag="p"
             for="myprofile.edit"
           >
@@ -72,17 +72,19 @@
       <div v-if="false">
         <div>
           <p>
-            {{ $t('myprofile.false.description1') }}
+            {{ $t('myprofile.ambassador.description1') }}
           </p>
           <p>
-            {{ $t('myprofile.false.description2', { community: community }) }}
+            {{
+              $t('myprofile.ambassador.description2', { community: community })
+            }}
           </p>
         </div>
 
         <w-profile username="CharlyAl"></w-profile>
 
         <div class="mt-4">
-          {{ $t('myprofile.false.description2') }}
+          {{ $t('myprofile.ambassador.description2') }}
           <div class="mt-4 flex flex-col items-center space-y-2">
             <TButton
               icon="instagram"
@@ -143,7 +145,7 @@
           v-if="uid !== profile.id"
           type="primary"
           :to="`/chat/${profile.username}`"
-          >{{ $t('chat.title') }}</TButton
+          >{{ $t('profile.chat.label') }}</TButton
         >
       </div>
 
@@ -160,7 +162,7 @@
 
     <WTeaser
       v-if="profile.partner === 'Yes'"
-      :title="$t('myprofile.Wteaser')"
+      :title="$t('profile.partnerSearch.title')"
       :description="profile.partnerBio"
       class="w-full mt-4"
     />

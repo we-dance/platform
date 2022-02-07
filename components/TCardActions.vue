@@ -17,8 +17,8 @@
           :label="$t('TCardActions.Reason')"
           component="TInputSelect"
           :options="[
-            $t('TCardActions.options.spam'),
-            $t('TCardActions.options.other'),
+            { value: 'spam', label: $t('TCardActions.options.spam') },
+            { value: 'other', label: $t('TCardActions.options.other') },
           ]"
         />
         <TField
