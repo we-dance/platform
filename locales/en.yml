@@ -106,7 +106,7 @@ posts:
     post: Post
     event: Event
 postFields:
-  username: 
+  username:
     label: Username
   type:
     label: Type
@@ -470,3 +470,13 @@ TReaction:
   label:
     watch: Watch
     star: Star
+EventDashboard:
+  noAccess: Only event owner can access this area.
+  unlink: Unlink
+  couple: Couple
+  cancel: Cancel
+  checkIn: CheckIn
+  rsvp: RSVP
+  subscribed: Subscribed
+  paid: Paid
+  notPaid: Didn't Pay
