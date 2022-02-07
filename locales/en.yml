@@ -244,6 +244,10 @@ profile:
     username: Username
     registered: Registered
     lastSeen: Last seen
+  chat:
+    label: Chat
+  partnerSearch:
+    title: I am looking for a dance partner
 radiusOptions:
   ten: around 10km
   twenty: around 20km
@@ -283,14 +287,10 @@ myprofile:
   profile:
     height: '{height}cm'
     weight: '{weight}kg'
-  chat:
-    label: Chat
-Wteaser: I am looking for a dance partner
 TPostList:
   loadMore: Load more
 TPost:
-  dropdown:
-    title: report or share
+  dropdown: report or share
   showLess: Show less
   showMore: Show more
 TCardActions:

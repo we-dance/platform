@@ -145,7 +145,7 @@
           v-if="uid !== profile.id"
           type="primary"
           :to="`/chat/${profile.username}`"
-          >{{ $t('myprofile.chat.label') }}</TButton
+          >{{ $t('profile.chat.label') }}</TButton
         >
       </div>
 
@@ -162,7 +162,7 @@
 
     <WTeaser
       v-if="profile.partner === 'Yes'"
-      :title="$t('Wteaser')"
+      :title="$t('profile.partnerSearch.title')"
       :description="profile.partnerBio"
       class="w-full mt-4"
     />

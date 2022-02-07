@@ -37,7 +37,7 @@
 
       <TDropdown
         v-if="!item.hideMeta || can('edit', 'posts', item)"
-        :title="$t('TPost.dropdown.title')"
+        :title="$t('TPost.dropdown')"
         class="-mr-4"
       >
         <TButton

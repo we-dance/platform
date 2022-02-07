@@ -19,12 +19,7 @@
         :label="$t('profiles.title')"
         type="nav"
       />
-      <TButton
-        to="/chat"
-        icon="chat"
-        :label="$t('myprofile.chat.label')"
-        type="nav"
-      />
+      <TButton to="/chat" icon="chat" :label="$t('chat.title')" type="nav" />
       <TButton :to="`/${username}`" type="nav">
         <TProfilePhoto size="xs" :uid="uid" class="mr-1" />
         <span>{{ $t('myprofile.title') }}</span>
