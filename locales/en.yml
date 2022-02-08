@@ -1,3 +1,22 @@
+yes: 'Yes'
+no: 'No'
+female: Female
+male: Male
+other: Other
+Monday: Monday
+Tuesday: Tuesday
+Wednesday: Wednesday
+Thursday: Thursday
+Friday: Friday
+Saturday: Saturday
+Sunday: Sunday
+report: Report
+cancel: Cancel
+delete: Delete
+visibilityOptions:
+  public: Public
+  members: Members
+  unlisted: Unlisted
 hero:
   title: Do you like dancing?
   subtitle: We help each other find interesting dance events and dance partners.
@@ -86,15 +105,217 @@ eventView:
 posts:
   add: Add post
   title: Feed
+  edit:
+    post: Post
+    event: Event
+postFields:
+  username:
+    label: Username
+  type:
+    label: Type
+  title:
+    placeholder: Title
+  description:
+    placeholder: Text (markdown)
+    tips: 'Pitch yourself: Who are you? What do you offer? What do you want?\n\nTips for effective pitch:\n- Uncomplicated: It should be catchy and roll off the tongue\n- Concise: It shouldn’t take more than a minute to say or read\n- Unique: It reflects your skills, goals, and desires\n- Storyline: It covers who you are, what you offer, and where you want to be\n- Appealing: Your elevator pitch is essentially a persuasive sales pitch; the emphasis should be on what you offer'
+    description: Use [widgets](https://wedance.vip/markdown), including images and videos
+  url:
+    placeholder: Link
+  styles:
+    label: Dance Styles
 profiles:
   add: Add profile
   title: Community
+profile:
+  username:
+    label: Username
+    before: Use only letters, numbers, underscores and periods.
+  community: I dance in
+  type: Type
+  name:
+    label: Name
+    before: If you want to remain anonym use your first name.
+    placeholder: (Required)
+  bio:
+    label: Teaser
+    before: Short introduction on top of your photo
+  hometown:
+    label: Hometown
+    before: Where were you born and raised?
+  birthday:
+    label: Birthday
+    description: We will show only your age
+  gender:
+    label: Gender
+    placeholder: Gender
+  style: Dance styles
+  joined: Joined
+  languages: Languages
+  story:
+    label: Description
+    before: Tell your dance story. You can also use [widgets](https://wedance.vip/markdown), including images and videos
+    tips: 'Pitch yourself: Who are you? What do you offer? What do you want?
+
+
+    Tips for effective pitch:
+
+    - Uncomplicated: It should be catchy and roll off the tongue
+
+    - Concise: It shouldn’t take more than a minute to say or read
+
+    - Unique: It reflects your skills, goals, and desires
+
+    - Storyline: It covers who you are, what you offer, and where you want to be
+
+    - Appealing: Your elevator pitch is essentially a persuasive sales pitch; the emphasis should be on what you offer'
+    placeholder: Text (markdown)
+  locales: Your languages
+  skills: Non-dancing skills
+  days: Days
+  learning:
+    label: Which dance topics you are interested in?
+    description: 'For example: Musicality in Salsa, Men Styling, etc.'
+  teacher: Are you teaching?
+  partner: Are you looking for a dance partner?
+  height: Your height (cm)
+  weight:
+    label: Your weight (kg)
+    description: Leave this field blank if you think it's irrelevant.
+  partnerBio:
+    label: Question
+    description: 'What is important in your partner? Put it as a question, for example: Do you love dogs?'
+  objectives: Objectives
+  objective:
+    placeholder: Objective
+  meetingPlace: Where to meet?
+  visibility:
+    label: Visibility
+    description: '- Public profiles are searchable in Google and used in our social media to attract new members.
+
+    - Members profile are only visible for logged-in users.
+
+    - Unlisted profiles are possible to open with exact link, but they are not listed in members lists and search.'
+  photo: Photo
+  add: Add profile
+  title: Community
+  styles:
+    label: Dance
+    tips: Mark up to 4 favorite dances that will be highlighted in your poster
+  place:
+    label: Your city
+    placeholder: City
+  dance:
+    placeholder: Style
+  permission:
+    label: Do you want free promo?
+    description: 'Send us link to your profile on [Instagram](https://instagram.com/wedancevip) and we will promote it on our social media channels: Telegram, Instagram, Facebook and Twitter.'
+  jobs:
+    label: I can help with
+    description: 'How can you help our community? What are you good at? For example: design, programming, marketing, social media, etc.'
+  contacts: Do you use social media?
+  instagram:
+   label: instagram.com/
+   placeholder: username
+  facebook:
+    label: fb.com/
+    placeholder: username
+  whatsapp:
+    label: whatsapp.com/
+    placeholder: whatsapp chat
+  telegram:
+    label: t.me/
+    placeholder: username
+  twitter:
+    label: twitter.com/
+    placeholder: username
+  tiktok:
+    label: tiktok.com/
+    placeholder: username
+  youtube:
+    label: youtube.com/
+    placeholder: username
+  email:
+    label: Email
+    placeholder: for business requests
+  website:
+    label: Website
+    placeholder: for business requests
+  meetingPlaces:
+    myPlace: My place
+    yourPlace: Your place
+    private: Somewhere private
+    public: Somewhere public
+  typeList:
+    dancer: Dancer
+    artist: Artist
+    organiser: Organiser
+    venue: Venue
+    city: City
+  objectivesList:
+    talk: Talk about dance
+    learn: Learn together
+    outdoors: Dance outdoors
+    indoors: Dance indoors
+    teach: Teach together
+    project: Dance project
+  profileSorts:
+    username: Username
+    registered: Registered
+    lastSeen: Last seen
+  chat:
+    label: Chat
+  partnerSearch:
+    title: I am looking for a dance partner
+radiusOptions:
+  ten: around 10km
+  twenty: around 20km
+  fifty: around 50km
+  hundred: around 100km
+  fiveHundred: around 500km
+  thousand: around 1000km
+  anywhere: Anywhere
 myprofile:
-  events:
-    add: Add event
-  posts:
-    add: Write a post
+  addEvent: Add event
+  addPost: Write a post
   title: My Profile
+  edit: Edit Profile
+  share: Share
+  intro:
+    photo: your photo
+    gender: your gender
+    styles: what do you dance
+    bio: teaser (short introduction)
+    place: your city
+    objectives: your objectives
+    title: Welcome to WeDance!
+    description1: This is your profile. A square below is a poster – your visual
+                  introduction.
+    description2: Your poster is also shown in {0} among other dancers.
+    community: Community
+    description3: 'Click {0} and add:'
+  ambassador:
+    description1:
+            WeDance is represented by Ambassador in local dance communities.
+            Volunteers help Ambassador with different initiatives to unite local
+            dancers. WeDance is created and supported by volunteers. Get
+            Involved, become volunteer!
+    description2: Ambassador in {community} is
+    description3: 'Help us build a dance network in your city, follow and interact with
+          our local social media accounts:'
+  profile:
+    height: '{height}cm'
+    weight: '{weight}kg'
+TPostList:
+  loadMore: Load more
+TPost:
+  dropdown: report or share
+  showLess: Show less
+  showMore: Show more
+TCardActions:
+  reason: Reason
+  options:
+   spam: spam
+   other: other
 chat:
   title: Chat
   empty: Start conversations and they will appear here.
@@ -110,6 +331,9 @@ conversation:
   newMessage:
     placeholder: Write a message
     submit: Send
+  welcome: Start conversation with something nice.
+  with: Chat with {username}
+  dateDiff: '{diff} ago'
 cities:
   choose: Choose city
 settings:
@@ -121,6 +345,12 @@ settings:
       will be shared with service providers or sellers only with your agreement.
     changepassword: Change Password
     delete: Delete Account
+    popup:
+      delete:
+        title: Confirm account deletion
+        deleteReason: Why are you leaving?
+        usernameConfirmation: Enter username
+  passwordError: Error
   profile:
     title: Profile
     description:
@@ -137,37 +367,25 @@ city:
   change: Change city
 role:
   label: Role
-profile:
-  username: Username
-  community: I dance in
-  type: Type
-  name: Name
-  bio: Teaser
-  hometown: Hometown
-  birthday: Birthday
-  gender: Gender
-  styles: Your dance styles and level
-  style: Dance styles
-  story: Description
-  languages: Your languages
-  skills: Non-dancing skills
-  days: Days
-  topics: Which dance topics you are interested in?
-  teacher: Are you teaching?
-  partner: Are you looking for a dance partner?
-  height: Your height (cm)
-  weight: Your weight (kg)
-  partnerBio: About your partner
-  objectives: Objectives
-  place: Where to meet?
-  visibility: Visibility
-  photo: Photo
 account:
   email: Email
   password: Password
   name: Full Name
   phone: Phone
-  newsletter: What kind of updated would you like to receive weekly?
+  zone: Timezone
+  newsletter:
+    label: What kind of updated would you like to receive weekly?
+    options:
+      party: 'Social/party events'
+      class: Dance classes
+      workshop: Workshops and bootcamps
+      online: Online dance classes
+      festival: International festivals
+  comment: Comment
+  withPartner:
+    label: Do you have a partner?
+  partnerName: Partner's name
+  partnerEmail: Partner's email
 agreement: By signing in, you agree to {terms} and {privacy}.
 terms: Terms of service
 privacy: Privacy policy
@@ -186,6 +404,8 @@ contacts:
   email: Email
   website: Website
 save: Save
+add: Add
+cancel: Cancel
 teaser:
   partner:
     title: Need a partner?
@@ -249,10 +469,9 @@ feed:
   post: Post
 comments:
   empty: There are no comments yet.
-edit:
-  label: Edit
-dashboard:
-  label: Dashboard
+  label: Comments
+edit: Edit
+dashboard: Dashboard
 sort:
   popular: Popular
   newest: Newest
@@ -282,3 +501,26 @@ TInputProfile:
   remove: Remove
   import: Import
   placeholder: Search on WeDance, Instagram or Facebook
+popup:
+  auth:
+    title: Members only
+    body: Sign in to {action}
+    signin: Sign in
+TButton:
+  title: Login to {action}
+TDropdown:
+  title: report or share
+TReaction:
+    watch: Watch
+    star: Star
+EventDashboard:
+  noAccess: Only event owner can access this area.
+  unlink: Unlink
+  couple: Couple
+  cancel: Cancel
+  checkIn: CheckIn
+  rsvp: RSVP
+  subscribed: Subscribed
+  paid: Paid
+  notPaid: Didn't Pay
+  

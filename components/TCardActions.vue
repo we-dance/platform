@@ -3,26 +3,35 @@
     <TButton
       :type="type"
       icon="fire"
-      label="Report"
+      :label="$t('report')"
       @click="isReportShown = true"
     />
-    <TPopup v-if="isReportShown" title="Report" @close="isReportShown = false">
+    <TPopup
+      v-if="isReportShown"
+      :title="$t('report')"
+      @close="isReportShown = false"
+    >
       <div class="p-4">
         <TField
           v-model="reportCategory"
-          label="Reason"
+          :label="$t('TCardActions.Reason')"
           component="TInputSelect"
-          :options="['spam', 'other']"
+          :options="[
+            { value: 'spam', label: $t('TCardActions.options.spam') },
+            { value: 'other', label: $t('TCardActions.options.other') },
+          ]"
         />
         <TField
           v-model="reportReason"
           class="mt-2"
-          label="Comments"
+          :label="$t('comments.label')"
           component="TInputTextarea"
         />
         <div class="mt-4 flex justify-end">
-          <TButton class="mr-2" @click="cancelReport">Cancel</TButton>
-          <TButton type="danger" @click="report">Report</TButton>
+          <TButton class="mr-2" @click="cancelReport">{{
+            $t('cancel')
+          }}</TButton>
+          <TButton type="danger" @click="report">{{ $t('report') }}</TButton>
         </div>
       </div>
     </TPopup>

@@ -30,14 +30,14 @@
             @click="show = !show"
             class="p-2 text-blue-700 cursor-pointer underline hover:no-underline text-xs text-center mb-2"
           >
-            {{ show ? 'Show less' : 'Show more' }}
+            {{ show ? $t('TPost.showLess') : $t('TPost.showMore') }}
           </div>
         </div>
       </div>
 
       <TDropdown
         v-if="!item.hideMeta || can('edit', 'posts', item)"
-        title="report or share"
+        :title="$t('TPost.dropdown')"
         class="-mr-4"
       >
         <TButton
@@ -45,20 +45,20 @@
           type="context"
           icon="edit"
           :to="`/posts/${item.id}/edit`"
-          label="Edit"
+          :label="$t('edit')"
         />
         <TButton
           v-if="can('edit', 'posts', item) && item.type === 'event'"
           type="context"
           icon="edit"
           :to="`/events/${item.id}/edit`"
-          label="Edit"
+          :label="$t('edit')"
         />
         <TButton
           v-if="can('edit', 'posts', item)"
           type="context"
           icon="delete"
-          label="Delete"
+          :label="$t('delete')"
           @click="remove(item.id)"
         />
         <TCardActions
@@ -75,7 +75,7 @@
           :url="`https://wedance.vip/posts/${item.id}`"
           :text="item.description"
           type="context"
-          label="Share"
+          :label="$t('share.title')"
         />
       </TDropdown>
     </div>

@@ -90,20 +90,6 @@ export default {
         .filter((f) => f)
         .filter((field) => !field.when || field.when(this.value))
 
-      if (this.editCreator) {
-        fields.push({
-          name: 'createdBy',
-          label: 'Creator',
-          component: 'TInputCollection',
-          collection: 'profiles',
-          keyValue: 'id',
-          keyLabel: 'username',
-          orderBy: 'username',
-          canAdd: true,
-          admin: true,
-        })
-      }
-
       return fields.map((f) => ({ ...f, ...this.fieldConfig }))
     },
   },

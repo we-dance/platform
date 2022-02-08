@@ -5,7 +5,7 @@
     v-else-if="!can('edit', 'posts', item)"
     class="mt-4 mx-auto max-w-md p-4 text-sm text-center"
   >
-    Only event owner can access this area.
+    {{ $t('EventDashboard.noAccess') }}
   </main>
   <div v-else>
     <TPopup v-if="compose" title="Compose email" @close="compose = false">
@@ -88,7 +88,7 @@
                     update(item.partnerId, { partnerId: '' })
                     update(item.id, { partnerId: '' })
                   "
-                  >Unlink</TButton
+                  >{{ $t('EventDashboard.unlink') }}</TButton
                 >
               </div>
               <div
@@ -166,7 +166,7 @@
                 </div>
                 <div v-if="tab === ''">
                   <div>
-                    Couple:
+                    {{ $t('EventDashboard.couple') }}
                     <button
                       class="underline hover:no-underline"
                       @click="
@@ -227,37 +227,38 @@
                 v-if="tab === ''"
                 type="danger"
                 @click="update(item.id, { rsvp: 'down', state: 'out' })"
-                >Cancel</TButton
+              >
+                {{ $t('EventDashboard.cancel') }}</TButton
               >
               <TButton
                 v-if="tab === 'canceled'"
                 type="danger"
                 @click="update(item.id, { rsvp: 'up', state: 'out' })"
-                >RSVP</TButton
+                >{{ $t('EventDashboard.rsvp') }}</TButton
               >
               <TButton
                 v-if="item.state !== 'in' && tab === 'out'"
                 type="danger"
                 @click="update(item.id, { rsvp: 'up', state: 'in' })"
-                >Check In</TButton
+                >{{ $t('EventDashboard.checkIn') }}</TButton
               >
               <TButton
                 v-if="tab === 'payment'"
                 :type="item.package === 'Subscribed' ? 'success' : 'base'"
                 @click="update(item.id, { package: 'Subscribed' })"
-                >Subscribed</TButton
+                >{{ $t('EventDashboard.subscribed') }}</TButton
               >
               <TButton
                 v-if="tab === 'payment'"
                 :type="item.package === 'Paid' ? 'success' : 'base'"
                 @click="update(item.id, { package: 'Paid' })"
-                >Paid</TButton
+                >{{ $t('EventDashboard.paid') }}</TButton
               >
               <TButton
                 v-if="tab === 'payment'"
                 :type="!item.package ? 'success' : 'base'"
                 @click="update(item.id, { package: '' })"
-                >Didn't pay</TButton
+                >{{ $t('EventDashboard.notPaid') }}</TButton
               >
             </div>
           </template>
