@@ -11,25 +11,25 @@
     />
 
     <template v-if="uid">
-      <TButton to="/feed" icon="news" :label="$t('posts.title')" type="nav" />
+      <TButton to="/feed" icon="news" :label="$t('nav.feed')" type="nav" />
       <TButton
         to="/events"
         icon="calendar"
-        :label="$t('nav.events')"
+        :label="$t('nav.calendar')"
         type="nav"
       />
       <TButton
         to="/community"
         icon="people"
-        :label="$t('profiles.title')"
+        :label="$t('nav.community')"
         type="nav"
       />
-      <TButton to="/chat" icon="chat" :label="$t('chat.title')" type="nav" />
+      <TButton to="/chat" icon="chat" :label="$t('nav.chat')" type="nav" />
       <TButton :to="`/${username}`" type="nav">
         <TProfilePhoto size="xs" :uid="uid" class="mr-1" />
-        <span>{{ $t('myprofile.title') }}</span>
+        <span>{{ $t('nav.myProfile') }}</span>
       </TButton>
-      <TButton to="/settings" type="nav" :label="$t('settings.title')" />
+      <TButton to="/settings" type="nav" :label="$t('nav.settings')" />
       <TButton to="/signout" type="nav" :label="$t('auth.signout')" />
     </template>
     <template v-else>
