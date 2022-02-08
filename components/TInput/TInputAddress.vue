@@ -2,17 +2,17 @@
   <div>
     <div
       v-if="value"
-      class="bg-gray-100 rounded p-4 flex items-center space-x-4"
+      class="flex items-center space-x-4 rounded bg-gray-100 p-4"
     >
       <div>
-        <img :src="value.icon" class="w-8 h-8" alt="" />
+        <img :src="value.icon" class="h-8 w-8" alt="" />
       </div>
       <div class="flex-grow">
         <div class="font-bold">{{ value.name }}</div>
         <a
           :href="value.url"
           target="_blank"
-          class="underline text-blue-500 hover:no-underline"
+          class="text-blue-500 underline hover:no-underline"
           >{{ value.formatted_address }}</a
         >
       </div>
@@ -34,7 +34,7 @@
       type="text"
       :placeholder="placeholder"
       autocomplete="off"
-      class="w-full px-3 py-2 bg-gray-50 text-sm rounded border focus:outline-none focus:shadow-outline border-gray-300"
+      class="focus:shadow-outline w-full rounded border border-gray-300 bg-gray-50 px-3 py-2 text-sm focus:outline-none"
     />
     <div v-if="!autocomplete" class="text-gray-500">Loading...</div>
   </div>

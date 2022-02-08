@@ -1,13 +1,13 @@
 <template>
   <div class="text-center">
     <div v-for="category in categories" :key="category" class="mb-4">
-      <h4 class="font-bold text-lg">{{ category }}</h4>
+      <h4 class="text-lg font-bold">{{ category }}</h4>
       <div class="text-center">
         <template v-for="style in subStyles(category)">
           <div
             :key="style.id"
             :class="{ 'bg-primary text-white': contains(style.id) }"
-            class="rounded px-2 py-1 border m-1 inline-block cursor-pointer"
+            class="m-1 inline-block cursor-pointer rounded border px-2 py-1"
             @click="trigger(style.id)"
           >
             <span>{{ style.name }}</span>
@@ -17,7 +17,7 @@
               <div
                 :key="kid.id"
                 :class="{ 'bg-primary text-white': contains(kid.id) }"
-                class="rounded bg-red-200 px-2 py-1 border m-1 inline-block cursor-pointer"
+                class="m-1 inline-block cursor-pointer rounded border bg-red-200 px-2 py-1"
                 @click="trigger(kid.id)"
               >
                 <span>{{ kid.name }}</span>

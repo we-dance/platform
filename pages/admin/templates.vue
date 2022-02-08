@@ -9,7 +9,7 @@
       <template v-slot:card-toolbar="{ item }">
         <button
           v-if="can('analytics', collection, item)"
-          class="p-2 hover:text-primary flex"
+          class="flex p-2 hover:text-primary"
           @click="
             peopleId !== item.id ? (peopleId = item.id) : (peopleId = false)
           "
@@ -31,10 +31,10 @@
           @close="peopleId = false"
         />
 
-        <div class="p-4 border rounded mb-4 bg-white">
-          <div class="flex justify-between items-start">
+        <div class="mb-4 rounded border bg-white p-4">
+          <div class="flex items-start justify-between">
             <div>
-              <div class="font-bold text-xs">
+              <div class="text-xs font-bold">
                 {{ item.name }}
               </div>
               <div class="text-sm">{{ item.from }}</div>

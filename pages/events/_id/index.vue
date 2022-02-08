@@ -48,9 +48,9 @@
       <div class="md:border-l">
         <div
           v-if="item.type"
-          class="flex items-center justify-start w-full leading-tight border-b py-2 px-4"
+          class="flex w-full items-center justify-start border-b py-2 px-4 leading-tight"
         >
-          <div class="w-4 mr-4 text-center">
+          <div class="mr-4 w-4 text-center">
             {{ getEventIcon(item.eventType) }}
           </div>
           <div>{{ item.eventType }}</div>
@@ -59,17 +59,17 @@
         <TStyles
           :value="item.styles"
           hide-level
-          class="flex flex-wrap justify-center border-b text-xs p-2"
+          class="flex flex-wrap justify-center border-b p-2 text-xs"
         />
 
         <a
           v-if="item.venue"
           :href="item.venue.url"
           target="_blank"
-          class="hover:bg-gray-200 block py-2 px-4 border-b"
+          class="block border-b py-2 px-4 hover:bg-gray-200"
         >
           <div class="flex items-center justify-start leading-tight">
-            <TIcon name="place" class="w-4 h-4 mr-4" />
+            <TIcon name="place" class="mr-4 h-4 w-4" />
             <div>
               <h4 class="font-bold">
                 {{ item.venue.name
@@ -84,25 +84,25 @@
 
         <div
           v-if="item.online === 'Yes'"
-          class="flex items-center justify-start w-full leading-tight border-b py-2 px-4"
+          class="flex w-full items-center justify-start border-b py-2 px-4 leading-tight"
         >
-          <TIcon name="youtube" class="w-4 h-4 mr-4" />
+          <TIcon name="youtube" class="mr-4 h-4 w-4" />
           <div>{{ $t('eventView.online') }}</div>
         </div>
 
         <div
-          class="flex items-center justify-start w-full leading-tight border-b py-2 px-4"
+          class="flex w-full items-center justify-start border-b py-2 px-4 leading-tight"
         >
-          <TIcon name="calendar" class="w-4 h-4 mr-4" />
+          <TIcon name="calendar" class="mr-4 h-4 w-4" />
           <div>
             {{ getDateTime(item.startDate) }} - {{ getDateTime(item.endDate) }}
           </div>
         </div>
 
         <div
-          class="flex items-center justify-start w-full leading-tight border-b py-2 px-4"
+          class="flex w-full items-center justify-start border-b py-2 px-4 leading-tight"
         >
-          <TIcon name="ticket" class="w-4 h-4 mr-4" />
+          <TIcon name="ticket" class="mr-4 h-4 w-4" />
           <div>{{ item.price }}</div>
         </div>
       </div>
@@ -113,7 +113,7 @@
     </div>
 
     <div
-      class="flex justify-center space-y-2 sticky bg-white p-4 border-b z-50 top-0"
+      class="sticky top-0 z-50 flex justify-center space-y-2 border-b bg-white p-4"
     >
       <TButton
         v-if="item.link"
@@ -151,8 +151,8 @@
       />
     </div>
 
-    <div v-if="item.venue && item.venue.map" class="p-4 bg-gray-100">
-      <div class="font-bold text-sm mb-4 leading-none text-gray-700">
+    <div v-if="item.venue && item.venue.map" class="bg-gray-100 p-4">
+      <div class="mb-4 text-sm font-bold leading-none text-gray-700">
         {{ $t('eventView.venueMap') }}
       </div>
       <img :src="item.venue.map" alt="Venue Map" class="mt-4" />
@@ -164,7 +164,7 @@
     </div>
 
     <div v-if="item.facebook" class="m-4 text-right text-sm">
-      <a :href="item.facebook" class="hover:underline text-gray-700">{{
+      <a :href="item.facebook" class="text-gray-700 hover:underline">{{
         $t('eventView.source')
       }}</a>
     </div>
@@ -176,7 +176,7 @@
       :title="$t('eventView.reservationPopup.title')"
       @close="reservationPopup = false"
     >
-      <div class="max-w-md mx-auto py-4 max-h-screen overflow-y-scroll">
+      <div class="mx-auto max-h-screen max-w-md overflow-y-scroll py-4">
         <div v-if="reservationPopup === 'reserve'">
           <div>
             <TForm
@@ -201,7 +201,7 @@
         </div>
         <div v-if="reservationPopup === 'finish'" class="p-4">
           <template v-if="item.link">
-            <h2 class="font-bold mb-4">
+            <h2 class="mb-4 font-bold">
               {{ $t('eventView.reservationPopup.finish.title') }}
             </h2>
             <TButton class="mt-4 mr-4" type="danger" :href="item.link">{{
@@ -209,7 +209,7 @@
             }}</TButton>
           </template>
           <template v-else>
-            <h2 class="font-bold mb-4">
+            <h2 class="mb-4 font-bold">
               {{ $t('eventView.reservationPopup.finish.title') }}
             </h2>
             <p v-if="uid">
@@ -343,13 +343,8 @@ export default {
     }
   },
   setup() {
-    const {
-      uid,
-      can,
-      account,
-      updateAccount,
-      sendSignInLinkToEmail,
-    } = useAuth()
+    const { uid, can, account, updateAccount, sendSignInLinkToEmail } =
+      useAuth()
     const { getEventIcon } = useEvents()
     const { currentCity } = useCities()
     const { accountFields } = useAccounts()

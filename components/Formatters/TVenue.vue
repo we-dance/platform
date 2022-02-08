@@ -3,7 +3,7 @@
     <h4>
       {{ node.name }}<span v-if="node.room"> • {{ node.room }}</span>
     </h4>
-    <div v-if="showAddress" class="text-gray-700 text-xs">
+    <div v-if="showAddress" class="text-xs text-gray-700">
       {{ node.formatted_address }}
     </div>
   </div>

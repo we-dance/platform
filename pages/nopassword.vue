@@ -43,7 +43,7 @@
         </TButton>
       </div>
       <div class="mt-4 text-xs">
-        <div class="mt-4 border-t pt-4 flex space-x-2 text-xs">
+        <div class="mt-4 flex space-x-2 border-t pt-4 text-xs">
           <NuxtLink to="/signin" class="underline hover:no-underline">{{
             $t('nopassword.signin')
           }}</NuxtLink>

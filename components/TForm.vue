@@ -9,12 +9,12 @@
         @input="(val) => onFieldChange(field, val)"
       />
     </div>
-    <div v-if="error" class="text-red-500 py-4 text-right">
+    <div v-if="error" class="py-4 text-right text-red-500">
       {{ error.message }}
     </div>
     <slot name="bottom" />
     <div
-      class="flex justify-end space-x-2 bg-white py-4 border-t z-10 items-center bottom-0 sticky"
+      class="sticky bottom-0 z-10 flex items-center justify-end space-x-2 border-t bg-white py-4"
     >
       <TButton v-if="showRemove" :label="$t('form.delete')" @click="remove" />
       <TButton v-if="showCancel" :label="$t('form.cancel')" @click="cancel" />

@@ -10,7 +10,7 @@
       <template v-slot:card-toolbar="{ item }">
         <button
           v-if="can('analytics', collection, item)"
-          class="p-2 hover:text-primary flex"
+          class="flex p-2 hover:text-primary"
           @click="
             peopleId !== item.id ? (peopleId = item.id) : (peopleId = false)
           "
@@ -30,11 +30,11 @@
           @close="peopleId = false"
         />
 
-        <div class="p-4 border rounded mb-4 bg-white">
-          <div class="flex justify-between items-start">
+        <div class="mb-4 rounded border bg-white p-4">
+          <div class="flex items-start justify-between">
             <div>
               <div class="flex text-xs">
-                <div class="mb-2 text-gray-500 mr-2">
+                <div class="mb-2 mr-2 text-gray-500">
                   <span class="font-bold">Created</span> at
                   {{ getDate(item.createdAt) }} at
                   {{ getTime(item.createdAt) }}
@@ -45,13 +45,13 @@
                   {{ getTime(item.scheduledAt) }}
                 </div>
               </div>
-              <div class="font-bold text-lg">
+              <div class="text-lg font-bold">
                 {{ item.subject }}
               </div>
             </div>
             <div>
               <div
-                class="text-xs text-white font-bold px-2 py-1 rounded-full"
+                class="rounded-full px-2 py-1 text-xs font-bold text-white"
                 :class="emailStatusClass[item.status]"
               >
                 {{ item.status }}
@@ -68,7 +68,7 @@
             class="mt-2"
           />
 
-          <div v-if="item.status === 'error'" class="text-red-500 text-xs">
+          <div v-if="item.status === 'error'" class="text-xs text-red-500">
             <span class="font-bold">Error:</span> {{ item.error }}
           </div>
         </div>

@@ -1,7 +1,7 @@
 <template>
   <div class="p-4">
     <dl v-for="field in fields" :key="field.value" class="flex space-x-2">
-      <dt class="font-bold w-1/3 text-right">{{ field.label }}</dt>
+      <dt class="w-1/3 text-right font-bold">{{ field.label }}</dt>
       <dd>{{ item[field.value] }}</dd>
     </dl>
   </div>

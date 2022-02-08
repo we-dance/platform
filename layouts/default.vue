@@ -1,13 +1,13 @@
 <template>
   <div
-    class="font-sans leading-normal tracking-normal antialiased min-h-screen flex flex-col mx-auto max-w-2xl border-r"
+    class="mx-auto flex min-h-screen max-w-2xl flex-col border-r font-sans leading-normal tracking-normal antialiased"
   >
     <TPopup
       v-if="showAuthPopup"
       :title="$t('popup.auth.title')"
       @close="showAuthPopup = false"
     >
-      <div class="my-4 w-64 flex flex-col justify-center text-center">
+      <div class="my-4 flex w-64 flex-col justify-center text-center">
         <div class="p-4">
           {{ $t('popup.auth.body', { action: showAuthPopup }) }}
         </div>
@@ -23,13 +23,13 @@
 
     <div
       v-if="isMenuOpen"
-      class="fixed w-full h-full top-0 left-0 bg-black opacity-50 z-20"
+      class="fixed top-0 left-0 z-20 h-full w-full bg-black opacity-50"
       @click="isMenuOpen = false"
     />
     <transition name="slide">
       <div
         v-if="isMenuOpen"
-        class="bg-white fixed left-0 w-56 bottom-0 top-0 z-30 shadow-lg md:hidden"
+        class="fixed left-0 bottom-0 top-0 z-30 w-56 bg-white shadow-lg md:hidden"
       >
         <MainNavigation :uid="uid" :username="username" />
       </div>
@@ -37,13 +37,13 @@
 
     <THamburger v-model="isMenuOpen" class="absolute mt-2 md:hidden" />
 
-    <div class="flex-grow flex">
+    <div class="flex flex-grow">
       <MainNavigation
         :uid="uid"
         :username="username"
-        class="hidden md:block flex-initial w-64"
+        class="hidden w-64 flex-initial md:block"
       />
-      <nuxt class="flex-grow w-full" />
+      <nuxt class="w-full flex-grow" />
     </div>
   </div>
 </template>
@@ -166,14 +166,8 @@ export default {
     }
   },
   setup() {
-    const {
-      uid,
-      account,
-      profile,
-      username,
-      isAdmin,
-      showAuthPopup,
-    } = useAuth()
+    const { uid, account, profile, username, isAdmin, showAuthPopup } =
+      useAuth()
     const { changeCityByName } = useCities()
     const { getCity } = useApp()
 

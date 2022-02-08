@@ -1,6 +1,6 @@
 <template>
   <div class="flex flex-col" style="height: 100vh">
-    <div class="p-4 flex space-x-4">
+    <div class="flex space-x-4 p-4">
       <div>{{ venues.length }} venues</div>
       <TInputButtons v-model="onlyLast" :options="onlyLastOptions" />
     </div>

@@ -1,13 +1,13 @@
 <template>
-  <pre v-if="$route.query.debug" class="border p-4 m-4 rounded">{{ item }}</pre>
-  <div v-else class="rounded bg-white mb-4 shadow border max-w-sm">
+  <pre v-if="$route.query.debug" class="m-4 rounded border p-4">{{ item }}</pre>
+  <div v-else class="mb-4 max-w-sm rounded border bg-white shadow">
     <div>
       <img class="rounded-t" :src="item.cover" :alt="item.name" />
     </div>
-    <div class="font-bold leading-tight px-4 my-2">
+    <div class="my-2 px-4 font-bold leading-tight">
       {{ item.name }}
     </div>
-    <div class="flex justify-between px-4 mb-4 items-center">
+    <div class="mb-4 flex items-center justify-between px-4">
       <div>{{ getDateTime(item.startTime) }}</div>
       <TButton :href="item.url">Open</TButton>
     </div>

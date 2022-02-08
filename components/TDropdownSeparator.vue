@@ -1,5 +1,5 @@
 <template>
-  <div class="font-bold p-2 text-xs text-gray-700 border-b">{{ label }}</div>
+  <div class="border-b p-2 text-xs font-bold text-gray-700">{{ label }}</div>
 </template>
 
 <script>

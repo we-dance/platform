@@ -12,11 +12,11 @@
 
     <slot name="header" />
 
-    <div v-if="currentId === 'add'" class="mt-4 rounded bg-white mb-4 shadow">
+    <div v-if="currentId === 'add'" class="mt-4 mb-4 rounded bg-white shadow">
       <TForm
         :fields="fields"
         show-cancel
-        class="px-6 py-4 space-y-4"
+        class="space-y-4 px-6 py-4"
         @save="createItem"
         @cancel="cancelItem"
       />
@@ -24,7 +24,7 @@
 
     <div
       v-if="filters && filters.length > 1"
-      class="mt-4 md:flex bg-orange-100 rounded shadow"
+      class="mt-4 rounded bg-orange-100 shadow md:flex"
     >
       <button
         v-for="filter in filters"

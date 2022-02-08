@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div class="flex justify-start mb-4">
+    <div class="mb-4 flex justify-start">
       <TInputSelect
         v-model="lang"
         :options="localesDropdown"

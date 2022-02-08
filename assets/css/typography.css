@@ -3,7 +3,7 @@ html {
   font-size: 19px;
 }
 .typo {
-  @apply leading-normal break-words text-black;
+  @apply break-words leading-normal text-black;
 }
 .typo li + li {
   @apply mt-1;
@@ -29,34 +29,34 @@ html {
   @apply mb-4;
 }
 .typo h1 {
-  @apply leading-tight border-b text-4xl font-sans font-extrabold mb-4 mt-6 pb-2;
+  @apply mb-4 mt-6 border-b pb-2 font-sans text-4xl font-extrabold leading-tight;
 }
 .typo h2 {
-  @apply leading-tight border-b text-2xl font-sans font-semibold mb-4 mt-6 pb-2;
+  @apply mb-4 mt-6 border-b pb-2 font-sans text-2xl font-semibold leading-tight;
 }
 .typo h3 {
-  @apply leading-snug text-lg font-sans font-semibold mb-4 mt-6;
+  @apply mb-4 mt-6 font-sans text-lg font-semibold leading-snug;
 }
 .typo h4 {
-  @apply leading-none text-base font-sans font-semibold mb-4 mt-6;
+  @apply mb-4 mt-6 font-sans text-base font-semibold leading-none;
 }
 .typo h5 {
-  @apply leading-tight text-sm font-sans font-semibold mb-4 mt-6;
+  @apply mb-4 mt-6 font-sans text-sm font-semibold leading-tight;
 }
 .typo h6 {
-  @apply leading-tight text-sm font-sans font-semibold text-gray-600 mb-4 mt-6;
+  @apply mb-4 mt-6 font-sans text-sm font-semibold leading-tight text-gray-600;
 }
 .typo blockquote {
-  @apply text-base border-l-4 border-gray-300 pl-4 pr-4 text-gray-600;
+  @apply border-l-4 border-gray-300 pl-4 pr-4 text-base text-gray-600;
 }
 .typo ul {
-  @apply text-base pl-8 list-disc;
+  @apply list-disc pl-8 text-base;
 }
 .typo ol {
-  @apply text-base pl-8 list-decimal;
+  @apply list-decimal pl-8 text-base;
 }
 .typo table {
-  @apply text-base border-gray-600;
+  @apply border-gray-600 text-base;
 }
 .typo th {
   @apply border py-1 px-3;
@@ -69,7 +69,7 @@ html {
   @apply mx-auto block;
 }
 .typo figcaption {
-  @apply font-semibold text-center text-gray-800 mt-2;
+  @apply mt-2 text-center font-semibold text-gray-800;
 }
 .details {
   @apply p-2;

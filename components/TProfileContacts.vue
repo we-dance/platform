@@ -1,7 +1,7 @@
 <template>
-  <div class="md:flex items-center justify-center space-x-2 space-y-2">
+  <div class="items-center justify-center space-x-2 space-y-2 md:flex">
     <div v-if="title" class="pl-2 font-bold">{{ title }}</div>
-    <div class="p-4 flex flex-wrap gap-2 items-center justify-center">
+    <div class="flex flex-wrap items-center justify-center gap-2 p-4">
       <TButton
         v-if="!short && profile.website"
         :href="profile.website"

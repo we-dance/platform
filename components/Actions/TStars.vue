@@ -1,5 +1,5 @@
 <template>
-  <div class="inline-flex border rounded divide-x items-center">
+  <div class="inline-flex items-center divide-x rounded border">
     <div>
       <TReaction
         :label="$t('TReaction.star')"
@@ -14,37 +14,35 @@
       <TMenu>
         <template v-slot:button>
           <TButton type="xs" class="border-none">
-            <ChevronDownIcon class="w-3 h-3" />
+            <ChevronDownIcon class="h-3 w-3" />
           </TButton>
         </template>
         <template v-slot:menu>
           <div
-            class="w-32 bg-white rounded shadow border text-xs flex flex-col"
+            class="flex w-32 flex-col rounded border bg-white text-xs shadow"
           >
-            <div class="px-2 py-1">
-              Add to list
-            </div>
+            <div class="px-2 py-1">Add to list</div>
             <label
               v-for="list in lists"
               :key="list.id"
-              class="px-2 py-1 flex items-center space-x-1"
+              class="flex items-center space-x-1 px-2 py-1"
               @click.prevent="toggle(list)"
             >
               <input type="checkbox" :checked="isSelected(list)" />
               <span>{{ list.label }}</span>
             </label>
             <button
-              class="border-t px-2 py-1 hover:bg-gray-100 text-left flex items-center space-x-1"
+              class="flex items-center space-x-1 border-t px-2 py-1 text-left hover:bg-gray-100"
               @click="showPopup = true"
             >
-              <PlusIcon class="w-3 h-3" />
+              <PlusIcon class="h-3 w-3" />
               <span>Create list</span>
             </button>
           </div>
         </template>
       </TMenu>
       <TPopup v-if="showPopup" title="Create list" @close="showPopup = false">
-        <div class="p-4 space-y-2">
+        <div class="space-y-2 p-4">
           <TField v-model="newListLabel" hide-label placeholder="List name" />
           <div class="flex justify-end">
             <TButton label="Add" @click="addList" />

@@ -3,7 +3,7 @@
     <div
       v-for="style in styles"
       :key="style.id"
-      class="flex items-center justify-between space-x-2 p-2 border rounded"
+      class="flex items-center justify-between space-x-2 rounded border p-2"
     >
       <TButton
         v-if="!hideHighlight"

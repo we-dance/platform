@@ -121,19 +121,16 @@ export default {
           'bg-green-500 no-underline text-white font-semibold py-2 px-4 rounded-full hover:text-white hover:bg-green-700 shadow',
         danger:
           'bg-red-500 no-underline text-white font-semibold py-2 px-4 rounded-full hover:text-white hover:bg-red-700 shadow',
-        base:
-          'bg-white hover:bg-gray-100 text-gray-800 font-semibold py-1 px-4 border border-gray-400 rounded-full shadow',
+        base: 'bg-white hover:bg-gray-100 text-gray-800 font-semibold py-1 px-4 border border-gray-400 rounded-full shadow',
         secondary:
           'bg-transparent text-primary font-semibold py-2 px-4 border border-primary rounded-full no-underline hover:bg-primary hover:text-white hover:border-transparent',
         link: 'underline font-semibold hover:no-underline',
         context:
           'text-left w-full px-4 py-2 hover:bg-indigo-500 hover:text-white',
         'context-active': 'text-left w-full px-4 py-2 bg-indigo-500 text-white',
-        nav:
-          'p-2 font-semibold items-center flex rounded-full hover:bg-red-100 hover:text-primary',
+        nav: 'p-2 font-semibold items-center flex rounded-full hover:bg-red-100 hover:text-primary',
         void: '',
-        xs:
-          'inline-flex items-center px-2 py-1 border border-gray-300 shadow-sm text-xs font-medium rounded text-gray-700 bg-white hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500',
+        xs: 'inline-flex items-center px-2 py-1 border border-gray-300 shadow-sm text-xs font-medium rounded text-gray-700 bg-white hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500',
       }
 
       let classes =

@@ -9,17 +9,17 @@
         class="font-bold leading-none underline hover:no-underline"
         >{{ node.name }}</NuxtLink
       >
-      <div class="mt-2 text-sm text-gray-700 space-y-1">
-        <div class="flex gap-2 items-center">
-          <CalendarIcon class="w-4 h-4" />
+      <div class="mt-2 space-y-1 text-sm text-gray-700">
+        <div class="flex items-center gap-2">
+          <CalendarIcon class="h-4 w-4" />
           <TDateTime :value="node.startDate" />
         </div>
-        <div class="flex gap-2 items-center">
-          <LocationMarkerIcon class="w-4 h-4" />
+        <div class="flex items-center gap-2">
+          <LocationMarkerIcon class="h-4 w-4" />
           <TVenue :node="node.venue" />
         </div>
-        <div v-if="node.price" class="flex gap-2 items-center">
-          <TicketIcon class="w-4 h-4" />
+        <div v-if="node.price" class="flex items-center gap-2">
+          <TicketIcon class="h-4 w-4" />
           {{ node.price }}
         </div>
         <TStyles :value="node.styles" />

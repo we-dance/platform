@@ -1,9 +1,9 @@
 <template>
-  <div class="flex-shrink-0 relative">
+  <div class="relative flex-shrink-0">
     <select
       :value="value"
       v-bind="$attrs"
-      class="block appearance-none w-full bg-white border border-gray-400 hover:border-gray-500 px-4 py-2 pr-8 rounded shadow text-sm leading-tight focus:outline-none focus:shadow-outline"
+      class="focus:shadow-outline block w-full appearance-none rounded border border-gray-400 bg-white px-4 py-2 pr-8 text-sm leading-tight shadow hover:border-gray-500 focus:outline-none"
       @change="change($event)"
     >
       <option
@@ -18,7 +18,7 @@
       class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700"
     >
       <svg
-        class="fill-current h-4 w-4"
+        class="h-4 w-4 fill-current"
         xmlns="http://www.w3.org/2000/svg"
         viewBox="0 0 20 20"
       >

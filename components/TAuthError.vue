@@ -1,8 +1,8 @@
 <template>
   <div>
     <div>
-      <h2 class="font-bold text-xl text-red-500">Oops</h2>
-      <div class="text-red-500 mt-4">
+      <h2 class="text-xl font-bold text-red-500">Oops</h2>
+      <div class="mt-4 text-red-500">
         {{ error.message }}
       </div>
       <div v-if="error.code === 'auth/web-storage-unsupported'" class="mt-4">
@@ -11,7 +11,7 @@
         third-party cookies."
       </div>
     </div>
-    <div class="border-t mt-4 pt-4">
+    <div class="mt-4 border-t pt-4">
       If you have any problems please contact support:
       <a
         class="text-blue-500 underline hover:no-underline"

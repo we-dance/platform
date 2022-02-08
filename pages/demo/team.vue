@@ -1,5 +1,5 @@
 <template>
-  <div class="p-4 space-y-4">
+  <div class="space-y-4 p-4">
     <TField
       v-model="single"
       component="TInputProfile"
@@ -33,14 +33,14 @@
     <textarea
       :value="JSON.stringify(single, null, 2)"
       :rows="10"
-      class="mt-4 w-full border text-xs font-mono"
+      class="mt-4 w-full border font-mono text-xs"
     ></textarea>
 
     <div class="font-bold">multiple</div>
     <textarea
       :value="JSON.stringify(multiple, null, 2)"
       :rows="30"
-      class="mt-4 w-full border text-xs font-mono"
+      class="mt-4 w-full border font-mono text-xs"
     ></textarea>
   </div>
 </template>

@@ -18,10 +18,7 @@ import { getExcerpt } from '~/utils'
 export default {
   layout: 'empty',
   async asyncData({ params, error }) {
-    const ref = await db
-      .collection('posts')
-      .doc(params.id)
-      .get()
+    const ref = await db.collection('posts').doc(params.id).get()
 
     if (!ref.exists) {
       error({ statusCode: 404 })

@@ -2,7 +2,7 @@
   <div>
     <TButton @click="showPopup = true"> Edit Profile </TButton>
     <TPopup v-if="showPopup" title="Edit Profile" @close="showPopup = false">
-      <div class="max-w-md mx-auto py-4 h-64 overflow-y-scroll">
+      <div class="mx-auto h-64 max-w-md overflow-y-scroll py-4">
         <TForm
           v-model="profile"
           :fields="profileFields"

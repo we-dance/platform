@@ -8,7 +8,7 @@ if (!process.env.firebase.config?.apiKey) {
 }
 
 // eslint-disable-next-line import/no-mutable-exports
-let track = function(...params) {
+let track = function (...params) {
   if (process.env.firebase.analyticsDebug) {
     console.log('[track]', ...params)
   }

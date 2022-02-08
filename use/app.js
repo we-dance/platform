@@ -55,13 +55,10 @@ export async function warmup() {
     'location',
   ])
 
-  await db
-    .collection('app')
-    .doc('v2')
-    .set({
-      profiles,
-      cities,
-    })
+  await db.collection('app').doc('v2').set({
+    profiles,
+    cities,
+  })
 }
 
 export async function cacheCity(placeId, data) {

@@ -3,7 +3,7 @@
   <div v-else>
     <button
       v-if="!showComments"
-      class="p-2 text-blue-700 cursor-pointer underline hover:no-underline text-xs text-center mb-2 block w-full"
+      class="mb-2 block w-full cursor-pointer p-2 text-center text-xs text-blue-700 underline hover:no-underline"
       @click="showComments = true"
     >
       {{ item.commentsCount || 0 }} comments
