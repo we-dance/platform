@@ -15,7 +15,6 @@ const updateEndDate = (e) => {
 export const useEvents = () => {
   const { t } = useI18n()
   const { currentCity } = useCities()
-  const { t } = useI18n()
   const { visibilityOptions, yesNoOptions } = useCommon()
 
   const eventRoleOptions = [
