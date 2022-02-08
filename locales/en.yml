@@ -549,7 +549,6 @@ event:
   confirmation:
     label: Confirmation email for guests
     placeholder: 'Example: Dear guest, you are confirmed to our event.'
-
 TInputProfile:
   changeRole: Change Role
   actions: Actions
