@@ -2,7 +2,7 @@
   <button
     v-if="!allowGuests && !uid"
     type="button"
-    :title="$t('TButton.login', { action })"
+    :title="$t('TButton.title', { action: title })"
     :class="classes"
     @click="showAuthPopup = title"
   >

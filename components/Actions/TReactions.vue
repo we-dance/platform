@@ -2,7 +2,7 @@
   <div v-if="item.hideReactions"></div>
   <div v-else class="flex flex-wrap gap-2 items-center">
     <TReaction
-      :label="$t('TReaction.label.watch')"
+      :label="$t('TReaction.watch')"
       toggledLabel="Watching"
       field="watch"
       icon="EyeIcon"

@@ -463,11 +463,10 @@ popup:
     body: Sign in to {action}
     signin: Sign in
 TButton:
-  login: Login to {action}
+  title: Login to {action}
 TDropdown:
   title: report or share
 TReaction:
-  label:
     watch: Watch
     star: Star
 EventDashboard:
@@ -480,3 +479,4 @@ EventDashboard:
   subscribed: Subscribed
   paid: Paid
   notPaid: Didn't Pay
+  
