@@ -161,15 +161,7 @@ export const onProfileChange = functions.firestore
       return
     }
 
-    const cacheFields = [
-      'username',
-      'photo',
-      'height',
-      'weight',
-      'bio',
-      'community',
-      'locales',
-    ]
+    const cacheFields = ['username', 'photo']
 
     const needsCacheUpdate = wasChanged(oldProfile, profile, cacheFields)
 
