@@ -25,10 +25,10 @@
 </template>
 
 <script>
-import { useDocs } from '~/use/docs'
 import firebase from 'firebase/app'
 import 'firebase/firestore'
 import { onUnmounted, watch } from '@nuxtjs/composition-api'
+import { useDocs } from '~/use/docs'
 
 export default {
   name: 'TPostList',

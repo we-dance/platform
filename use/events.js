@@ -1,7 +1,6 @@
 import { addMinutes, parseISO } from 'date-fns'
-import { useI18n } from '~/use/i18n'
-import { usePosts } from '~/use/posts'
 import { useCities } from './cities'
+import { useI18n } from '~/use/i18n'
 import { getYmd } from '~/utils'
 
 const updateEndDate = (e) => {
@@ -14,7 +13,6 @@ const updateEndDate = (e) => {
 
 export const useEvents = () => {
   const { currentCity } = useCities()
-  const { postTypeList } = usePosts()
   const { t } = useI18n()
 
   const eventRoleOptions = [

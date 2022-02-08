@@ -21,8 +21,8 @@
       <TButton v-if="showCopy" label="Copy" @click="copy" />
       <slot name="buttons" />
       <TButton
-        :allow-guests="allowGuests"
         v-if="submitLabel"
+        :allow-guests="allowGuests"
         type="primary"
         :label="submitLabel"
         @click="save"

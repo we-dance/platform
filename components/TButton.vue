@@ -19,8 +19,8 @@
     target="_blank"
     rel="noopener noreferrer"
     :class="classes"
-    v-on="$listeners"
     :title="title"
+    v-on="$listeners"
   >
     <slot>
       <div class="flex items-center space-x-2">

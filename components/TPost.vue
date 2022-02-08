@@ -27,8 +27,8 @@
           <TPreview :excerpt="!show" :content="item.description" />
           <div
             v-if="item.description && item.description.length > 140"
-            @click="show = !show"
             class="p-2 text-blue-700 cursor-pointer underline hover:no-underline text-xs text-center mb-2"
+            @click="show = !show"
           >
             {{ show ? $t('TPost.showLess') : $t('TPost.showMore') }}
           </div>

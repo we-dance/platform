@@ -38,10 +38,10 @@
 </template>
 
 <script>
+import { computed } from 'vue-demi'
 import { useDoc } from '~/use/doc'
 import { getLabel } from '~/utils'
 import { useEvents } from '~/use/events'
-import { computed } from 'vue-demi'
 
 export default {
   setup(props) {

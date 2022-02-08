@@ -1,5 +1,5 @@
 <template>
-  <component v-if="component" :is="component" :url="url" />
+  <component :is="component" v-if="component" :url="url" />
   <div v-else class="p-4 text-xs text-center">
     <a
       :href="url"

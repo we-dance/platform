@@ -16,8 +16,6 @@
 <script>
 import firebase from 'firebase/app'
 import 'firebase/firestore'
-import { useAuth } from '~/use/auth'
-import { useDoc } from '~/use/doc'
 import {
   EyeIcon,
   StarIcon,
@@ -25,6 +23,8 @@ import {
   EyeOffIcon,
 } from '@vue-hero-icons/outline'
 import { computed } from 'vue-demi'
+import { useAuth } from '~/use/auth'
+import { useDoc } from '~/use/doc'
 
 export default {
   components: {

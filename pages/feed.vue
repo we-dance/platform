@@ -15,7 +15,7 @@
         ></textarea>
         <div class="flex justify-between">
           <TInputSelectSmall v-model="postType" :options="postTypeList" />
-          <TButton @click="send" :title="$t('feed.newMessage.intent')">{{
+          <TButton :title="$t('feed.newMessage.intent')" @click="send">{{
             $t('feed.newMessage.submit')
           }}</TButton>
         </div>

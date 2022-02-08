@@ -148,8 +148,8 @@ export const usePosts = () => {
     {
       name: 'styles',
       component: 'TInputStylesSelect2',
-      label: t('postFields.styles.label')
-    }
+      label: t('postFields.styles.label'),
+    },
   ]
 
   return {

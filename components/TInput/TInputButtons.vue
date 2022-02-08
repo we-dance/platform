@@ -3,8 +3,8 @@
     <div class="flex flex-nowrap">
       <TButton
         v-for="option in options"
-        allow-guests
         :key="getValue(option)"
+        allow-guests
         :value="getValue(option)"
         :to="option.to"
         class="m-1"
