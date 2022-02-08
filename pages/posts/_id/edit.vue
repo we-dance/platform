@@ -8,12 +8,12 @@
           value="posts"
           :options="[
             {
-              label: $t('posts.edit.post'),
+              label: $t('feed.post'),
               value: 'posts',
               to: `/posts/${item.id || '-'}/edit`,
             },
             {
-              label: $t('posts.edit.event'),
+              label: $t('feed.event'),
               value: 'events',
               to: `/events/${item.id || '-'}/edit`,
             },

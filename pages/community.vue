@@ -1,6 +1,6 @@
 <template>
   <div>
-    <THeader title="Community">
+    <THeader :title="$t('community.title')">
       <TButton type="nav" icon="search" to="/search" />
     </THeader>
 
@@ -14,7 +14,7 @@
 
         <t-rich-select
           v-model="radius"
-          placeholder="Radius"
+          :placeholder="$t('filter.radius')"
           :options="radiusOptions"
           hide-search-box
         />
@@ -30,7 +30,7 @@
         />
 
         <TButton v-if="facetFilters" type="base" @click="load()">
-          Reset filters
+          {{ $t('filter.reset') }}
         </TButton>
       </div>
 
@@ -95,7 +95,7 @@ import { useRouter } from '~/use/router'
 import { useApp } from '~/use/app'
 
 export default {
-  name: 'ProfilesIndex',
+  name: 'Community',
   setup() {
     const radius = ref(10)
     const query = ref('')

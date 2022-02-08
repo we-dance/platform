@@ -17,7 +17,12 @@ post:
   edit: Edit
   dashboard: Dashboard
 nav:
-  events: Calendar
+  feed: Feed
+  calendar: Calendar
+  community: Community
+  chat: Chat
+  myProfile: My Profile
+  settings: Settings
 form:
   clear: Clear
   delete: Delete
@@ -123,12 +128,6 @@ eventView:
   organiser: Organised by
   venueMap: Venue Map
   source: Event Source
-posts:
-  add: Add post
-  title: Feed
-  edit:
-    post: Post
-    event: Event
 postFields:
   username:
     label: Username
@@ -144,8 +143,10 @@ postFields:
     placeholder: Link
   styles:
     label: Dance Styles
-profiles:
-  add: Add profile
+filter:
+  radius: Radius
+  reset: Reset filters
+community:
   title: Community
 profile:
   username:
@@ -175,20 +176,20 @@ profile:
   story:
     label: Description
     before: Tell your dance story. You can also use [widgets](https://wedance.vip/markdown), including images and videos
-    tips: 'Pitch yourself: Who are you? What do you offer? What do you want?
+    tips: '
+      Pitch yourself: Who are you? What do you offer? What do you want?
 
+      Tips for effective pitch:
 
-    Tips for effective pitch:
+      - Uncomplicated: It should be catchy and roll off the tongue
 
-    - Uncomplicated: It should be catchy and roll off the tongue
+      - Concise: It shouldn’t take more than a minute to say or read
 
-    - Concise: It shouldn’t take more than a minute to say or read
+      - Unique: It reflects your skills, goals, and desires
 
-    - Unique: It reflects your skills, goals, and desires
+      - Storyline: It covers who you are, what you offer, and where you want to be
 
-    - Storyline: It covers who you are, what you offer, and where you want to be
-
-    - Appealing: Your elevator pitch is essentially a persuasive sales pitch; the emphasis should be on what you offer'
+      - Appealing: Your elevator pitch is essentially a persuasive sales pitch; the emphasis should be on what you offer'
     placeholder: Text (markdown)
   locales: Your languages
   skills: Non-dancing skills
@@ -228,8 +229,8 @@ profile:
     description: 'How can you help our community? What are you good at? For example: design, programming, marketing, social media, etc.'
   contacts: Do you use social media?
   instagram:
-   label: instagram.com/
-   placeholder: username
+    label: instagram.com/
+    placeholder: username
   facebook:
     label: fb.com/
     placeholder: username
@@ -291,7 +292,6 @@ radiusOptions:
 myprofile:
   addEvent: Add event
   addPost: Write a post
-  title: My Profile
   edit: Edit Profile
   share: Share
   intro:
@@ -303,19 +303,20 @@ myprofile:
     objectives: your objectives
     title: Welcome to WeDance!
     description1: This is your profile. A square below is a poster – your visual
-                  introduction.
+      introduction.
     description2: Your poster is also shown in {0} among other dancers.
     community: Community
     description3: 'Click {0} and add:'
   ambassador:
     description1:
-            WeDance is represented by Ambassador in local dance communities.
-            Volunteers help Ambassador with different initiatives to unite local
-            dancers. WeDance is created and supported by volunteers. Get
-            Involved, become volunteer!
+      WeDance is represented by Ambassador in local dance communities.
+      Volunteers help Ambassador with different initiatives to unite local
+      dancers. WeDance is created and supported by volunteers. Get
+      Involved, become volunteer!
     description2: Ambassador in {community} is
-    description3: 'Help us build a dance network in your city, follow and interact with
-          our local social media accounts:'
+    description3:
+      'Help us build a dance network in your city, follow and interact with
+      our local social media accounts:'
   profile:
     height: '{height}cm'
     weight: '{weight}kg'
@@ -328,8 +329,8 @@ TPost:
 TCardActions:
   reason: Reason
   options:
-   spam: spam
-   other: other
+    spam: spam
+    other: other
 chat:
   title: Chat
   empty: Start conversations and they will appear here.
@@ -459,17 +460,19 @@ footer:
   coc: Code of Conduct
   faq: FAQ
 feed:
+  add: Add post
   title: Feed
   newMessage:
     input: Ask or share something about dance...
     intent: post a message
     submit: Send
   category: Choose category
+  post: Post
+  event: Event
   needPartner: Looking for partner
   needEvents: Looking for events
   needInstructor: Looking for instructor
   trip: Offering trip
-  event: Event
   artist: Artist
   venue: Venue
   app: App
@@ -477,7 +480,6 @@ feed:
   inspiration: Inspiration
   question: Question
   poll: Poll
-  post: Post
 comments:
   empty: There are no comments yet.
   label: Comments
@@ -572,8 +574,8 @@ TButton:
 TDropdown:
   title: report or share
 TReaction:
-    watch: Watch
-    star: Star
+  watch: Watch
+  star: Star
 EventDashboard:
   noAccess: Only event owner can access this area.
   unlink: Unlink

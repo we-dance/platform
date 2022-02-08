@@ -40,6 +40,7 @@ import { getUrlFromText } from '~/utils'
 import { usePosts } from '~/use/posts'
 
 export default {
+  name: 'Feed',
   setup() {
     const { uid, username } = useAuth()
     const { currentCity } = useCities()
