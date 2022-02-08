@@ -86,8 +86,7 @@
               <p
                 class="mt-8 max-w-lg mx-auto text-center sm:max-w-3xl text-white"
               >
-                Salsa, Bachata, Kizomba, Urban Kiz, Raggaeton, Casino, Tango and
-                130 more dance styles
+                {{ $t('hero.submotto') }}
               </p>
             </div>
           </div>
