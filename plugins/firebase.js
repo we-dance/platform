@@ -7,14 +7,17 @@ if (!process.env.firebase.config?.apiKey) {
   throw new Error('Missing Firebase Configuration')
 }
 
+// eslint-disable-next-line import/no-mutable-exports
 let track = function(...params) {
   if (process.env.firebase.analyticsDebug) {
     console.log('[track]', ...params)
   }
 }
 
+// eslint-disable-next-line import/no-mutable-exports
 let analytics
 
+// eslint-disable-next-line import/no-mutable-exports
 let googleApiKey
 
 if (!firebase.apps.length) {

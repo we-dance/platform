@@ -4,8 +4,8 @@ import MarkdownIt from 'markdown-it'
 import excerptHtml from 'excerpt-html'
 import saveAs from 'file-saver'
 import { dsvFormat } from 'd3'
-import languages from '~/assets/languages'
 import { db } from './plugins/firebase'
+import languages from '~/assets/languages'
 
 export const getObjectKeysFromArray = (arr) => {
   const obj = {}

@@ -39,8 +39,8 @@
       v-else
       v-model="query"
       :placeholder="placeholder"
-      @input="search"
       autocomplete="off"
+      @input="search"
     />
     <div
       v-if="query"

@@ -6,8 +6,8 @@
     </div>
     <div class="flex justify-center">
       <TButton
-        allow-guests
         v-if="button"
+        allow-guests
         class="my-2"
         type="primary"
         :to="url"

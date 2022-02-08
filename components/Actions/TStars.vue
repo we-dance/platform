@@ -3,7 +3,7 @@
     <div>
       <TReaction
         :label="$t('TReaction.star')"
-        toggledLabel="Starred"
+        toggled-label="Starred"
         field="star"
         icon="StarIcon"
         class="border-none"
@@ -45,7 +45,7 @@
       </TMenu>
       <TPopup v-if="showPopup" title="Create list" @close="showPopup = false">
         <div class="p-4 space-y-2">
-          <TField hide-label placeholder="List name" v-model="newListLabel" />
+          <TField v-model="newListLabel" hide-label placeholder="List name" />
           <div class="flex justify-end">
             <TButton label="Add" @click="addList" />
           </div>

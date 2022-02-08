@@ -24,6 +24,8 @@
 </template>
 
 <script>
+import { camelcase } from '~/utils'
+
 export default {
   props: {
     icon: {

@@ -23,15 +23,15 @@
 </template>
 
 <script>
-import { camelcase } from '~/utils'
 import { ChevronDownIcon } from '@vue-hero-icons/outline'
+import { camelcase } from '~/utils'
 
 export default {
   name: 'TInputSelect',
-  inheritAttrs: false,
   components: {
     ChevronDownIcon,
   },
+  inheritAttrs: false,
   props: {
     options: {
       type: Array,

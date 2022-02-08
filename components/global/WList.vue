@@ -28,6 +28,9 @@ export default {
       loaded: false,
     }
   },
+  async mounted() {
+    await this.load()
+  },
   methods: {
     async load() {
       this.id = this.url.replace('https://wedance.vip/lists/', '')
@@ -46,9 +49,6 @@ export default {
       this.items = items
       this.loaded = true
     },
-  },
-  async mounted() {
-    await this.load()
   },
 }
 </script>

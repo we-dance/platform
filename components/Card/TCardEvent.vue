@@ -37,12 +37,17 @@ import {
   CalendarIcon,
   TicketIcon,
 } from '@vue-hero-icons/outline'
-import { useAuth } from '~/use/auth'
 import { computed, onMounted, ref } from 'vue-demi'
+import { useAuth } from '~/use/auth'
 import { useEvents } from '~/use/events'
 import { useDoc } from '~/use/doc'
 
 export default {
+  components: {
+    LocationMarkerIcon,
+    CalendarIcon,
+    TicketIcon,
+  },
   props: {
     node: {
       type: Object,
@@ -52,11 +57,6 @@ export default {
       type: Boolean,
       default: false,
     },
-  },
-  components: {
-    LocationMarkerIcon,
-    CalendarIcon,
-    TicketIcon,
   },
   methods: {
     saveNode(data) {

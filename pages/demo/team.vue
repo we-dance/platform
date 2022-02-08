@@ -1,13 +1,14 @@
 <template>
   <div class="p-4 space-y-4">
     <TField
-      component="TInputProfile"
       v-model="single"
+      component="TInputProfile"
       label="Organiser"
       label-position="top"
     />
 
     <TField
+      v-model="multiple"
       component="TInputArray"
       :children="{
         component: 'TInputProfile',
@@ -15,7 +16,6 @@
           .filter((item) => !!item)
           .map((item) => item.username),
       }"
-      v-model="multiple"
       label="Team"
       label-position="top"
     />

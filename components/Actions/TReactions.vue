@@ -3,7 +3,7 @@
   <div v-else class="flex flex-wrap gap-2 items-center">
     <TReaction
       :label="$t('TReaction.watch')"
-      toggledLabel="Watching"
+      toggled-label="Watching"
       field="watch"
       icon="EyeIcon"
       :item="item"
