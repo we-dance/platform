@@ -40,7 +40,7 @@
     </dl>
 
     <dl class="mt-4 md:flex">
-      <dt class="font-bold mr-1">{{ $t('profile.visibility.label') }}:</dt>
+      <dt class="font-bold mr-1">{{ $t('visibility.label') }}:</dt>
       <dd>{{ profile.visibility }}</dd>
     </dl>
   </div>
