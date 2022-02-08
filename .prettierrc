@@ -5,6 +5,5 @@
   "useTabs": false,
   "tabWidth": 2,
   "endOfLine": "lf",
-  "trailingComma": "es5",
-  "tailwindConfig": "./tailwind.config.js"
+  "trailingComma": "es5"
 }
