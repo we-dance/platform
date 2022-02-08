@@ -9,6 +9,24 @@ export const app = {
   cover: '/cover/wide.png',
 }
 
+const locales = [
+  { code: 'en', name: 'English', file: 'en.yml' },
+  { code: 'es', name: 'Español', file: 'es.yml' },
+  { code: 'de', name: 'Deutsch', file: 'de.yml' },
+  { code: 'fr', name: 'Français', file: 'fr.yml' },
+  { code: 'it', name: 'Italiano', file: 'it.yml' },
+  { code: 'pl', name: 'Polski', file: 'pl.yml' },
+  { code: 'pt', name: 'Português', file: 'pt.yml' },
+  { code: 'ro', name: 'Română', file: 'ro.yml' },
+  { code: 'tr', name: 'Türkçe', file: 'tr.yml' },
+  { code: 'ru', name: 'Русский', file: 'ru.yml' },
+  { code: 'sr', name: 'Српски', file: 'sr.yml' },
+]
+
+if (process.env.DEBUG_I18N) {
+  locales.push({ code: 'debug', name: 'DEBUG', file: 'debug.yml' })
+}
+
 export default {
   target: 'static',
   ssr: false,
@@ -196,25 +214,13 @@ export default {
     routes: ['/'],
   },
   i18n: {
-    locales: [
-      { code: 'en', name: 'English', file: 'en.yml' },
-      { code: 'es', name: 'Español', file: 'es.yml' },
-      { code: 'de', name: 'Deutsch', file: 'de.yml' },
-      { code: 'fr', name: 'Français', file: 'fr.yml' },
-      { code: 'it', name: 'Italiano', file: 'it.yml' },
-      { code: 'pl', name: 'Polski', file: 'pl.yml' },
-      { code: 'pt', name: 'Português', file: 'pt.yml' },
-      { code: 'ro', name: 'Română', file: 'ro.yml' },
-      { code: 'tr', name: 'Türkçe', file: 'tr.yml' },
-      { code: 'ru', name: 'Русский', file: 'ru.yml' },
-      { code: 'sr', name: 'Српски', file: 'sr.yml' },
-    ],
+    locales,
     defaultLocale: 'en',
     strategy: 'no_prefix',
     lazy: true,
     langDir: 'locales/',
     vueI18n: {
-      fallbackLocale: 'en',
+      fallbackLocale: process.env.DEBUG_I18N ? 'debug' : 'en',
     },
     detectBrowserLanguage: {
       useCookie: true,
