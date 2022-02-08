@@ -14,7 +14,23 @@ export const useCommon = () => {
     },
   ]
 
+  const visibilityOptions = [
+    {
+      label: t('visibility.public'),
+      value: 'Public',
+    },
+    {
+      label: t('visibility.members'),
+      value: 'Members',
+    },
+    {
+      label: t('visibility.unlisted'),
+      value: 'Unlisted',
+    },
+  ]
+
   return {
     yesNoOptions,
+    visibilityOptions,
   }
 }

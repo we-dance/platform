@@ -2,6 +2,7 @@ import { addMinutes, parseISO } from 'date-fns'
 import { useCities } from './cities'
 import { useI18n } from '~/use/i18n'
 import { getYmd } from '~/utils'
+import { useCommon } from '~/use/common'
 
 const updateEndDate = (e) => {
   if (!e.duration || e.duration === 'custom') {
@@ -15,6 +16,7 @@ export const useEvents = () => {
   const { t } = useI18n()
   const { currentCity } = useCities()
   const { t } = useI18n()
+  const { visibilityOptions, yesNoOptions } = useCommon()
 
   const eventRoleOptions = [
     {
@@ -153,6 +155,7 @@ export const useEvents = () => {
   const eventFields = [
     {
       name: 'cover',
+      label: t('event.cover'),
       component: 'TInputPhoto',
       labelPosition: 'top',
       width: 500,
@@ -161,6 +164,7 @@ export const useEvents = () => {
     },
     {
       name: 'eventType',
+      label: t('event.type'),
       labelPosition: 'top',
       component: 'TInputSelect',
       options: eventTypeList,
@@ -168,7 +172,7 @@ export const useEvents = () => {
     {
       name: 'styles',
       labelPosition: 'top',
-      label: 'Dance styles',
+      label: t('event.styles'),
       component: 'TInputStylesSelect2',
     },
     {
@@ -181,28 +185,28 @@ export const useEvents = () => {
       name: 'description',
       labelPosition: 'top',
       component: 'TInputTextarea',
-      placeholder: t('profile.story.placeholder'),
-      tips: t('profile.story.tips'),
-      description: t('event.description'),
+      placeholder: t('event.description.placeholder'),
+      tips: t('event.description.tips'),
+      description: t('event.description.description'),
     },
     {
       name: 'startDate',
       type: 'datetime-local',
-      label: t('event.when'),
       labelPosition: 'top',
+      label: t('event.startDate'),
       simple: true,
       onChange: updateEndDate,
     },
     {
       name: 'venue',
-      label: t('event.where'),
+      label: t('event.venue'),
       labelPosition: 'top',
       component: 'TInputVenue',
       simple: true,
     },
     {
       name: 'duration',
-      label: t('event.duration'),
+      label: t('event.duration.label'),
       labelPosition: 'top',
       onChange: updateEndDate,
       component: 'TInputSelect',
@@ -249,15 +253,16 @@ export const useEvents = () => {
     {
       name: 'price',
       labelPosition: 'top',
-      placeholder: '',
+      label: t('event.price.label'),
       description: t('event.price.description'),
     },
     {
       name: 'visibility',
       labelPosition: 'top',
       component: 'TInputButtons',
-      options: ['Public', 'Members', 'Unlisted'],
-      description: `- Public - searchable in Google.\n- Members - visible only for logged-in users.\n- Unlisted - possible to open with exact link, but they are not listed nor not shown in the search.`,
+      options: visibilityOptions,
+      label: t('visibility.label'),
+      description: t('visibility.description'),
     },
     {
       name: 'artists',
@@ -276,61 +281,61 @@ export const useEvents = () => {
     },
     {
       name: 'online',
-      label: t('event.mode.online'),
+      label: t('event.online.label'),
       component: 'TInputButtons',
-      options: ['Yes', 'No'],
-      description: 'Streaming via Zoom, Google Meet, Instagram Live, etc.?',
+      options: yesNoOptions,
+      description: t('event.online.description'),
       labelPosition: 'top',
     },
     {
       name: 'international',
-      label: t('event.location.international'),
+      label: t('event.international.label'),
       labelPosition: 'top',
       component: 'TInputButtons',
-      options: ['Yes', 'No'],
-      description:
-        'Is it a big event with >500 guests, like festival or congress?',
+      options: yesNoOptions,
+      description: t('event.international.description'),
     },
     {
       name: 'place',
-      label: t('event.place.community'),
+      label: t('event.place.label'),
       labelPosition: 'top',
       component: 'TInputPlace',
       clearable: true,
     },
     {
       name: 'form',
-      label: t('event.external.registration'),
+      label: t('event.form.label'),
       labelPosition: 'top',
-      before: 'Do you use external platform to register for your event?',
+      before: t('event.form.before'),
       component: 'TInputButtons',
-      options: ['Yes', 'No'],
+      options: yesNoOptions,
     },
     {
       name: 'link',
       labelPosition: 'top',
       description: t('event.link.description'),
+      label: t('event.link.label'),
     },
     {
       name: 'facebook',
       labelPosition: 'top',
       description: t('event.facebook.description'),
+      label: t('event.facebook.label'),
     },
     {
       name: 'confirmation',
       labelPosition: 'top',
-      label: t('event.confirmation.email'),
+      label: t('event.confirmation.label'),
       component: 'TInputTextarea',
       placeholder: t('event.confirmation.placeholder'),
     },
     {
       name: 'promo',
-      label: 'Do you want free promo?',
+      label: t('event.promo.label'),
       labelPosition: 'top',
       component: 'TInputButtons',
-      options: ['Yes', 'No'],
-      description:
-        'Send us link to your event on [Instagram](https://instagram.com/wedancevip) and we will promote it on our social media channels: Telegram, Instagram, Facebook and Twitter.',
+      options: yesNoOptions,
+      description: t('event.promo.description'),
     },
   ]
 
