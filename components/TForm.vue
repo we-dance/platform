@@ -21,9 +21,10 @@
       <TButton v-if="showCopy" :label="$t('form.copy')" @click="copy" />
       <slot name="buttons" />
       <TButton
+        v-if="!hideSubmit"
         :allow-guests="allowGuests"
         type="primary"
-        :label="submitLabel"
+        :label="submitLabel || $t('form.save')"
         @click="save"
       />
     </div>
@@ -57,9 +58,11 @@ export default {
     },
     submitLabel: {
       type: String,
-      default: () => {
-        this.$t('form.save')
-      },
+      default: '',
+    },
+    hideSubmit: {
+      type: Boolean,
+      default: false,
     },
     showCancel: {
       type: Boolean,

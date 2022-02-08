@@ -10,9 +10,11 @@ Thursday: Thursday
 Friday: Friday
 Saturday: Saturday
 Sunday: Sunday
-report: Report
-cancel: Cancel
-delete: Delete
+post:
+  report: Report
+  delete: Delete
+  edit: Edit
+  dashboard: Dashboard
 nav:
   events: Calendar
 form:
@@ -412,8 +414,6 @@ nopassword:
 contacts:
   email: Email
   website: Website
-save: Save
-add: Add
 teaser:
   partner:
     title: Need a partner?
@@ -478,8 +478,6 @@ feed:
 comments:
   empty: There are no comments yet.
   label: Comments
-edit: Edit
-dashboard: Dashboard
 sort:
   popular: Popular
   newest: Newest
@@ -508,7 +506,7 @@ event:
     label: Name
   description:
     label: Description
-    placeholder: placeholder: Text (markdown)
+    placeholder: Text (markdown)
     description: 'Use [widgets](https://wedance.vip/markdown), including images and videos'
   startDate: When?
   endDate: End Date
