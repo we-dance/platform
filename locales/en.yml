@@ -10,6 +10,9 @@ Thursday: Thursday
 Friday: Friday
 Saturday: Saturday
 Sunday: Sunday
+report: Report
+cancel: Cancel
+delete: Delete
 visibilityOptions:
   public: Public
   members: Members
@@ -141,11 +144,13 @@ profile:
     before: Where were you born and raised?
   birthday:
     label: Birthday
-    description: We will show only your age'
+    description: We will show only your age
   gender:
     label: Gender
     placeholder: Gender
   style: Dance styles
+  joined: Joined
+  languages: Languages
   story:
     label: Description
     before: Tell your dance story. You can also use [widgets](https://wedance.vip/markdown), including images and videos
@@ -257,6 +262,10 @@ profile:
     username: Username
     registered: Registered
     lastSeen: Last seen
+  chat:
+    label: Chat
+  partnerSearch:
+    title: I am looking for a dance partner
 radiusOptions:
   ten: around 10km
   twenty: around 20km
@@ -266,11 +275,47 @@ radiusOptions:
   thousand: around 1000km
   anywhere: Anywhere
 myprofile:
-  events:
-    add: Add event
-  posts:
-    add: Write a post
+  addEvent: Add event
+  addPost: Write a post
   title: My Profile
+  edit: Edit Profile
+  share: Share
+  intro:
+    photo: your photo
+    gender: your gender
+    styles: what do you dance
+    bio: teaser (short introduction)
+    place: your city
+    objectives: your objectives
+    title: Welcome to WeDance!
+    description1: This is your profile. A square below is a poster – your visual
+                  introduction.
+    description2: Your poster is also shown in {0} among other dancers.
+    community: Community
+    description3: 'Click {0} and add:'
+  ambassador:
+    description1:
+            WeDance is represented by Ambassador in local dance communities.
+            Volunteers help Ambassador with different initiatives to unite local
+            dancers. WeDance is created and supported by volunteers. Get
+            Involved, become volunteer!
+    description2: Ambassador in {community} is
+    description3: 'Help us build a dance network in your city, follow and interact with
+          our local social media accounts:'
+  profile:
+    height: '{height}cm'
+    weight: '{weight}kg'
+TPostList:
+  loadMore: Load more
+TPost:
+  dropdown: report or share
+  showLess: Show less
+  showMore: Show more
+TCardActions:
+  reason: Reason
+  options:
+   spam: spam
+   other: other
 chat:
   title: Chat
   empty: Start conversations and they will appear here.
@@ -424,10 +469,9 @@ feed:
   post: Post
 comments:
   empty: There are no comments yet.
-edit:
-  label: Edit
-dashboard:
-  label: Dashboard
+  label: Comments
+edit: Edit
+dashboard: Dashboard
 sort:
   popular: Popular
   newest: Newest

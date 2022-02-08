@@ -18,7 +18,7 @@
       </div>
 
       <div class="mt-4 p-4 flex justify-center items-center">
-        <TButton @click="loadMore">Load more</TButton>
+        <TButton @click="loadMore">{{ $t('TPostList.loadMore') }}</TButton>
       </div>
     </div>
   </div>
