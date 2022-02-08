@@ -13,6 +13,16 @@ Sunday: Sunday
 report: Report
 cancel: Cancel
 delete: Delete
+nav:
+  events: Calendar
+form:
+  delete: Delete
+  cancel: Cancel
+  copy: Copy
+  save: Save
+photo:
+  placeholder: Change photo
+  selectLabel: Upload photo
 visibility:
   label: Visibility
   description: '- Public: searchable in Google and can be used in social media.
@@ -72,10 +82,6 @@ events:
     concert: Concert
     show: Show
     other: Other
-  edit:
-    post: Post
-    event: Event
-    save: Save
   add: Add event
   title: Dance Calendar
   list:
@@ -327,7 +333,7 @@ chat:
   receiver:
     deleted: DELETED
 conversation:
-  userName: Chat with { username }
+  userName: Chat with {username}
   empty: Start conversation with something nice.
   lastSeen: opened chat last time
   unread: haven't opened this chat yet

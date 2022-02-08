@@ -12,7 +12,12 @@
 
     <template v-if="uid">
       <TButton to="/feed" icon="news" :label="$t('posts.title')" type="nav" />
-      <TButton to="/events" icon="calendar" label="Calendar" type="nav" />
+      <TButton
+        to="/events"
+        icon="calendar"
+        :label="$t('nav.events')"
+        type="nav"
+      />
       <TButton
         to="/community"
         icon="people"

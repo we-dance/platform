@@ -72,11 +72,15 @@ export default {
     },
     placeholder: {
       type: String,
-      default: 'Change photo',
+      default: () => {
+        this.$t('photo.placeholder')
+      },
     },
     selectLabel: {
       type: String,
-      default: 'Upload photo',
+      default: () => {
+        this.$t('photo.selectLabel')
+      },
     },
     item: {
       type: Object,

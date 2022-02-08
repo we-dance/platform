@@ -182,6 +182,7 @@ export const useEvents = () => {
     },
     {
       name: 'description',
+      label: t('event.description.label'),
       labelPosition: 'top',
       component: 'TInputTextarea',
       placeholder: t('event.description.placeholder'),
