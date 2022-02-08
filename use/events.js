@@ -2,6 +2,7 @@ import { addMinutes, parseISO } from 'date-fns'
 import { useCities } from './cities'
 import { useI18n } from '~/use/i18n'
 import { getYmd } from '~/utils'
+import { useCommon } from '~/use/common'
 
 const updateEndDate = (e) => {
   if (!e.duration || e.duration === 'custom') {
@@ -12,8 +13,9 @@ const updateEndDate = (e) => {
 }
 
 export const useEvents = () => {
-  const { currentCity } = useCities()
   const { t } = useI18n()
+  const { currentCity } = useCities()
+  const { visibilityOptions, yesNoOptions } = useCommon()
 
   const eventRoleOptions = [
     {
@@ -152,6 +154,7 @@ export const useEvents = () => {
   const eventFields = [
     {
       name: 'cover',
+      label: t('event.cover'),
       component: 'TInputPhoto',
       labelPosition: 'top',
       width: 500,
@@ -160,6 +163,7 @@ export const useEvents = () => {
     },
     {
       name: 'eventType',
+      label: t('event.type'),
       labelPosition: 'top',
       component: 'TInputSelect',
       options: eventTypeList,
@@ -167,77 +171,77 @@ export const useEvents = () => {
     {
       name: 'styles',
       labelPosition: 'top',
-      label: 'Dance styles',
+      label: t('event.styles'),
       component: 'TInputStylesSelect2',
     },
     {
       name: 'name',
       labelPosition: 'top',
-      placeholder: 'Event Name',
+      placeholder: t('event.name.placeholder'),
+      label: t('event.name.label'),
     },
     {
       name: 'description',
+      label: t('event.description.label'),
       labelPosition: 'top',
       component: 'TInputTextarea',
-      placeholder: 'Details (markdown)',
-      tips:
-        'Pitch yourself: Who are you? What do you offer? What do you want?\n\nTips for effective pitch:\n- Uncomplicated: It should be catchy and roll off the tongue\n- Concise: It shouldn’t take more than a minute to say or read\n- Unique: It reflects your skills, goals, and desires\n- Storyline: It covers who you are, what you offer, and where you want to be\n- Appealing: Your elevator pitch is essentially a persuasive sales pitch; the emphasis should be on what you offer',
-      description:
-        'Use [widgets](https://wedance.vip/markdown), including images and videos',
+      placeholder: t('event.description.placeholder'),
+      tips: t('event.description.tips'),
+      description: t('event.description.description'),
     },
     {
       name: 'startDate',
       type: 'datetime-local',
-      label: 'When?',
       labelPosition: 'top',
+      label: t('event.startDate'),
       simple: true,
       onChange: updateEndDate,
     },
     {
       name: 'venue',
-      label: 'Where?',
+      label: t('event.venue'),
       labelPosition: 'top',
       component: 'TInputVenue',
       simple: true,
     },
     {
       name: 'duration',
-      label: 'How long?',
+      label: t('event.duration.label'),
       labelPosition: 'top',
       onChange: updateEndDate,
       component: 'TInputSelect',
       options: [
         {
           value: 30,
-          label: '30 min',
+          label: t('event.duration.thirtyMinutes'),
         },
         {
           value: 60,
-          label: '1 hour',
+          label: t('event.duration.oneHour'),
         },
         {
           value: 90,
-          label: '1.5 hour',
+          label: t('event.duration.ninetyMinutes'),
         },
         {
           value: 120,
-          label: '2 hours',
+          label: t('event.duration.twoHours'),
         },
         {
           value: 180,
-          label: '3 hours',
+          label: t('event.duration.threeHours'),
         },
         {
           value: 240,
-          label: '4 hours',
+          label: t('event.duration.fourHours'),
         },
         {
           value: 300,
-          label: '5 hours',
+          label: t('event.duration.fiveHours'),
         },
         {
           value: 'custom',
-          label: 'Custom',
+          label: t('event.duration.custom'),
         },
       ],
     },
@@ -249,15 +253,16 @@ export const useEvents = () => {
     {
       name: 'price',
       labelPosition: 'top',
-      placeholder: '',
-      description: 'Please include currency, i.e. EUR, USD',
+      label: t('event.price.label'),
+      description: t('event.price.description'),
     },
     {
       name: 'visibility',
       labelPosition: 'top',
       component: 'TInputButtons',
-      options: ['Public', 'Members', 'Unlisted'],
-      description: `- Public - searchable in Google.\n- Members - visible only for logged-in users.\n- Unlisted - possible to open with exact link, but they are not listed nor not shown in the search.`,
+      options: visibilityOptions,
+      label: t('visibility.label'),
+      description: t('visibility.description'),
     },
     {
       name: 'artists',
@@ -271,67 +276,66 @@ export const useEvents = () => {
     {
       name: 'org',
       component: 'TInputProfile',
-      label: 'Organiser',
+      label: t('event.org.label'),
       labelPosition: 'top',
     },
     {
       name: 'online',
-      label: 'Online?',
+      label: t('event.online.label'),
       component: 'TInputButtons',
-      options: ['Yes', 'No'],
-      description: 'Streaming via Zoom, Google Meet, Instagram Live, etc.?',
+      options: yesNoOptions,
+      description: t('event.online.description'),
       labelPosition: 'top',
     },
     {
       name: 'international',
-      label: 'International?',
+      label: t('event.international.label'),
       labelPosition: 'top',
       component: 'TInputButtons',
-      options: ['Yes', 'No'],
-      description:
-        'Is it a big event with >500 guests, like festival or congress?',
+      options: yesNoOptions,
+      description: t('event.international.description'),
     },
     {
       name: 'place',
-      label: 'Community',
+      label: t('event.place.label'),
       labelPosition: 'top',
       component: 'TInputPlace',
       clearable: true,
     },
     {
       name: 'form',
-      label: 'External registration?',
+      label: t('event.form.label'),
       labelPosition: 'top',
-      before: 'Do you use external platform to register for your event?',
+      before: t('event.form.before'),
       component: 'TInputButtons',
-      options: ['Yes', 'No'],
+      options: yesNoOptions,
     },
     {
       name: 'link',
       labelPosition: 'top',
-      description:
-        'Direct booking link on ticket platform (ti.to, Eventbrite, Google Form, etc.)',
+      description: t('event.link.description'),
+      label: t('event.link.label'),
     },
     {
       name: 'facebook',
       labelPosition: 'top',
-      description: 'Facebook event',
+      description: t('event.facebook.description'),
+      label: t('event.facebook.label'),
     },
     {
       name: 'confirmation',
       labelPosition: 'top',
-      label: 'Confirmation email for guests',
+      label: t('event.confirmation.label'),
       component: 'TInputTextarea',
-      placeholder: 'Example: Dear guest, you are confirmed to our event.',
+      placeholder: t('event.confirmation.placeholder'),
     },
     {
       name: 'promo',
-      label: 'Do you want free promo?',
+      label: t('event.promo.label'),
       labelPosition: 'top',
       component: 'TInputButtons',
-      options: ['Yes', 'No'],
-      description:
-        'Send us link to your event on [Instagram](https://instagram.com/wedancevip) and we will promote it on our social media channels: Telegram, Instagram, Facebook and Twitter.',
+      options: yesNoOptions,
+      description: t('event.promo.description'),
     },
   ]
 

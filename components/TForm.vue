@@ -16,12 +16,11 @@
     <div
       class="flex justify-end space-x-2 bg-white py-4 border-t z-10 items-center bottom-0 sticky"
     >
-      <TButton v-if="showRemove" label="Delete" @click="remove" />
-      <TButton v-if="showCancel" label="Cancel" @click="cancel" />
-      <TButton v-if="showCopy" label="Copy" @click="copy" />
+      <TButton v-if="showRemove" :label="$t('form.delete')" @click="remove" />
+      <TButton v-if="showCancel" :label="$t('form.cancel')" @click="cancel" />
+      <TButton v-if="showCopy" :label="$t('form.copy')" @click="copy" />
       <slot name="buttons" />
       <TButton
-        v-if="submitLabel"
         :allow-guests="allowGuests"
         type="primary"
         :label="submitLabel"
@@ -58,7 +57,9 @@ export default {
     },
     submitLabel: {
       type: String,
-      default: 'Save',
+      default: () => {
+        this.$t('form.save')
+      },
     },
     showCancel: {
       type: Boolean,

@@ -30,7 +30,6 @@
         :fields="eventFields"
         show-cancel
         vertical
-        submit-label="Save"
         class="bg-white p-4 space-y-4"
         @save="saveItem"
         @cancel="view(item.id)"

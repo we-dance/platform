@@ -7,7 +7,7 @@ import { useCommon } from '~/use/common'
 export const useProfiles = () => {
   const { t } = useI18n()
   const { accountFields } = useAccounts()
-  const { yesNoOptions } = useCommon()
+  const { yesNoOptions, visibilityOptions } = useCommon()
 
   const { read, loading } = useApp()
   const { getById } = useCollection('profiles')
@@ -187,21 +187,6 @@ export const useProfiles = () => {
     },
   ]
 
-  const visibilityOptions = [
-    {
-      label: t('visibilityOptions.public'),
-      value: 'Public',
-    },
-    {
-      label: t('visibilityOptions.members'),
-      value: 'Members',
-    },
-    {
-      label: t('visibilityOptions.unlisted'),
-      value: 'Unlisted',
-    },
-  ]
-
   const profileFields = [
     {
       name: 'photo',
@@ -260,11 +245,11 @@ export const useProfiles = () => {
     },
     {
       name: 'visibility',
-      label: t('profile.visibility.label'),
+      label: t('visibility.label'),
       poster: true,
       component: 'TInputButtons',
       options: visibilityOptions,
-      description: t('profile.visibility.description'),
+      description: t('visibility.description'),
     },
     {
       name: 'permission',
