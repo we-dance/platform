@@ -66,7 +66,46 @@ events:
   edit:
     post: Post
     event: Event
-    save: save
+    save: Save
+    form:
+      eventName: Event Name
+      description: 'Use [widgets](https://wedance.vip/markdown), including images and videos',
+      when: When?
+      where: Where?
+      duration: How long?
+        thirtyMinutes: 30 minutes
+        oneHour: 60 minutes
+        ninetyMinutes: 1.5 hour
+        twoHours: 2 hours
+        threeHours: 3 hours
+        fourHours: 4 hours
+        fiveHours: 5 hours
+        custom: Custom
+      price: 
+        description: Please include currency, i.e. EUR, USD
+      styles: Dance styles
+      organiser: Organiser
+      mode: 
+        online: Online?
+        description: Streaming via Zoom, Google Meet, Instagram Live, etc.?
+      location: 
+        international: International
+        description: Is it a big event with >500 guests, like festival or online?
+      place: 
+        community: Community
+        description: Leave empty if you want your event to be shown in all cities
+      external: 
+        registration: External registration?
+      link: 
+        description: Direct booking link on ticket platform ([ti.to](https://ti.to/home), Eventbrite, Google Form, etc.)
+      facebook: 
+        description: Facebook event
+      promo: 
+        free: Do you want free promo?
+        description: 'Send us link to your event on [Instagram](https://instagram.com/wedancevip) and we will promote it on our social media channels: Telegram, Instagram, Facebook and Twitter.'
+      confirmation: 
+        email: Confirmation email for guests
+        placeholder: 'Example: Dear guest, you are confirmed to our event.'
   add: Add event
   title: Dance Calendar
   list:
