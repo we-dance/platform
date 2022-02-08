@@ -12,11 +12,15 @@
         class="underline text-blue-500 p-4 hover:no-underline"
         @click="showPopup = true"
       >
-        {{ placeholder }}
+        {{ placeholder || $t('photo.placeholder') }}
       </button>
     </div>
 
-    <TPopup v-if="showPopup" :title="selectLabel" @close="showPopup = false">
+    <TPopup
+      v-if="showPopup"
+      :title="selectLabel || $t('photo.selectLabel')"
+      @close="showPopup = false"
+    >
       <div class="p-4 overflow-hidden">
         <div :class="!editing ? 'cursor-pointer' : ''" class="mx-auto">
           <croppa
@@ -25,7 +29,7 @@
             :height="height"
             prevent-white-space
             :show-remove-button="false"
-            :placeholder="selectLabel"
+            :placeholder="selectLabel || $t('photo.selectLabel')"
           />
         </div>
 
@@ -43,8 +47,10 @@
         </div>
 
         <div class="mt-4 flex justify-end space-x-2">
-          <TButton @click="clear()">Clear</TButton>
-          <TButton type="primary" @click="save()">Save</TButton>
+          <TButton @click="clear()">{{ $t('form.clear') }}</TButton>
+          <TButton type="primary" @click="save()">{{
+            $t('form.save')
+          }}</TButton>
         </div>
       </div>
     </TPopup>
@@ -72,15 +78,11 @@ export default {
     },
     placeholder: {
       type: String,
-      default: () => {
-        this.$t('photo.placeholder')
-      },
+      default: '',
     },
     selectLabel: {
       type: String,
-      default: () => {
-        this.$t('photo.selectLabel')
-      },
+      default: '',
     },
     item: {
       type: Object,

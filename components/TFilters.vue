@@ -3,8 +3,8 @@
     <TForm
       v-model="internalValue"
       :fields="fields"
+      hide-submit
       class="flex flex-no-wrap space-x-2"
-      submit-label=""
     />
   </div>
 </template>

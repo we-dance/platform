@@ -45,20 +45,20 @@
           type="context"
           icon="edit"
           :to="`/posts/${item.id}/edit`"
-          :label="$t('edit')"
+          :label="$t('post.edit')"
         />
         <TButton
           v-if="can('edit', 'posts', item) && item.type === 'event'"
           type="context"
           icon="edit"
           :to="`/events/${item.id}/edit`"
-          :label="$t('edit')"
+          :label="$t('post.edit')"
         />
         <TButton
           v-if="can('edit', 'posts', item)"
           type="context"
           icon="delete"
-          :label="$t('delete')"
+          :label="$t('post.delete')"
           @click="remove(item.id)"
         />
         <TCardActions

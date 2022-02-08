@@ -32,7 +32,6 @@
             <TForm
               v-model="account"
               :fields="accountFields"
-              :submit-label="$t('save')"
               class="space-y-4"
               @save="saveAccount"
             />
@@ -77,7 +76,7 @@
           <div v-if="currentTab === 'password'" class="border-t mt-4 pt-4">
             <TField v-model="password" v-bind="passwordField" />
             <div class="flex justify-end mt-4">
-              <TButton @click="changePassword">{{ $t('save') }}</TButton>
+              <TButton @click="changePassword">{{ $t('form.save') }}</TButton>
             </div>
           </div>
           <TPopup
@@ -126,7 +125,6 @@
             v-if="currentTab === 'profile'"
             v-model="profile"
             :fields="profileFields"
-            :submit-label="$t('save')"
             class="border-t mt-4 pt-4 space-y-4"
             @save="saveProfile"
           />
