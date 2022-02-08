@@ -6,7 +6,7 @@
 
     <div v-for="city in results" :key="city.value" class="flex border-b">
       <div
-        class="hover:bg -red-100 flex-grow cursor-pointer p-4 text-lg"
+        class="hover:bg-red-100 flex-grow cursor-pointer p-4 text-lg"
         @click="changeCity(city.value)"
       >
         {{ city.label }}
