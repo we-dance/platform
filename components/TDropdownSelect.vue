@@ -8,7 +8,7 @@
       />
     </template>
     <template v-slot:menu>
-      <div class="w-40 py-2 bg-white rounded-lg shadow-xl border">
+      <div class="w-40 rounded-lg border bg-white py-2 shadow-xl">
         <TButton
           v-for="option in options"
           :key="getValue(option)"

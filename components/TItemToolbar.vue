@@ -1,10 +1,10 @@
 <template>
-  <div v-if="can('edit', collection, item)" class="flex space-x-2 justify-end">
+  <div v-if="can('edit', collection, item)" class="flex justify-end space-x-2">
     <TButton
       v-if="dashboard"
       icon="people"
       :to="`/${collection}/${item.id}/dashboard`"
-      class="hover:text-blue-500 mr-2"
+      class="mr-2 hover:text-blue-500"
       :label="$('post.dashboard')"
     />
     <TButton

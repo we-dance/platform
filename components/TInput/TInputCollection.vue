@@ -19,7 +19,7 @@
       :title="`Adding to ${collection}`"
       @close="isAdding = false"
     >
-      <div class="max-w-md mx-auto py-4 h-64 overflow-y-scroll">
+      <div class="mx-auto h-64 max-w-md overflow-y-scroll py-4">
         <TForm
           v-model="newItem"
           :fields="getFields(collection)"

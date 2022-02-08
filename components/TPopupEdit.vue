@@ -15,7 +15,7 @@
       :title="title || label"
       @close="isPopupOpen = false"
     >
-      <div class="max-w-md mx-auto py-4 max-h-screen overflow-y-scroll">
+      <div class="mx-auto max-h-screen max-w-md overflow-y-scroll py-4">
         <TItemEdit
           :id="item.id"
           :title="title"

@@ -2,26 +2,26 @@
   <div>
     <div
       id="canvas"
-      class="relative leading-none font-lato"
+      class="relative font-lato leading-none"
       :style="`width: ${size}px; height: ${size}px;`"
     >
       <TCover :width="size" :height="size" :src="photo" />
       <div
-        class="relative p-8 text-white flex flex-col bg-gradient-to-t from-black via-transparent to-transparent"
+        class="relative flex flex-col bg-gradient-to-t from-black via-transparent to-transparent p-8 text-white"
         :style="`margin-top: -${size}px; width: ${size}px; height: ${size}px;`"
       >
-        <div class="flex-grow-0 flex flex-col items-end">
+        <div class="flex flex-grow-0 flex-col items-end">
           <div
-            class="uppercase py-4 px-8 -mr-8 text-4xl font-bold"
+            class="-mr-8 py-4 px-8 text-4xl font-bold uppercase"
             :class="labelColor"
           >
             {{ type }}
           </div>
-          <div class="mt-8 text-shadow-md text-right space-y-2">
+          <div class="text-shadow-md mt-8 space-y-2 text-right">
             <div
               v-for="dance in dances"
               :key="dance.id"
-              class="uppercase text-3xl flex space-x-2 justify-end items-center"
+              class="flex items-center justify-end space-x-2 text-3xl uppercase"
             >
               <span>{{ dance.name }}</span
               ><TIcon :name="getIcon(dance.level)" size="8" />
@@ -36,8 +36,8 @@
           <div class="text-3xl leading-normal">
             {{ description }}
           </div>
-          <div class="flex justify-between items-end">
-            <div class="flex items-center mt-4">
+          <div class="flex items-end justify-between">
+            <div class="mt-4 flex items-center">
               <div v-if="collection === 'events'">
                 <div v-if="claimed === 'Yes'" class="mr-4 text-2xl">
                   Organised by
@@ -46,7 +46,7 @@
                   Promoted by
                 </div>
               </div>
-              <TIcon class="w-8 h-8 mr-2" name="icon" />
+              <TIcon class="mr-2 h-8 w-8" name="icon" />
               <div class="text-4xl font-bold">{{ username }}</div>
               <div class="ml-2 text-2xl">on www.wedance.vip</div>
             </div>

@@ -3,7 +3,7 @@
     <button
       v-for="tab in tabs"
       :key="tab.value"
-      class="border border-gray-200 w-full rounded-t focus:outline-none hover:bg-gray-100"
+      class="w-full rounded-t border border-gray-200 hover:bg-gray-100 focus:outline-none"
       @click="$emit('input', tab.value)"
     >
       <div class="p-2">

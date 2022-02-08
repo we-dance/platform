@@ -1,5 +1,5 @@
 <template>
-  <div v-if="showEditor" class="border p-4 space-y-2">
+  <div v-if="showEditor" class="space-y-2 border p-4">
     <TInput
       v-for="(answer, key) in data.answers"
       :key="`answer-${key}`"

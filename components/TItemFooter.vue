@@ -1,6 +1,6 @@
 <template>
   <div
-    class="border-t mt-4 p-4 bg-white flex justify-between posts-center sticky bottom-0"
+    class="posts-center sticky bottom-0 mt-4 flex justify-between border-t bg-white p-4"
   >
     <TButtonFav :collection="collection" :item="item" />
     <div class="flex space-x-2">

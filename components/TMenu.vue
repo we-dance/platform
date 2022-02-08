@@ -5,10 +5,10 @@
     </div>
     <div
       v-if="show"
-      class="fixed w-full h-full top-0 left-0 bg-black opacity-0 z-40"
+      class="fixed top-0 left-0 z-40 h-full w-full bg-black opacity-0"
       @click="closeMenu"
     ></div>
-    <div v-if="show" class="absolute text-left z-50" :class="classes">
+    <div v-if="show" class="absolute z-50 text-left" :class="classes">
       <slot name="menu" :closeMenu="closeMenu" />
     </div>
   </div>

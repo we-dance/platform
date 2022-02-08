@@ -6,9 +6,9 @@
     :data-names="names"
     @click="toggle"
   >
-    <component :is="icon" class="w-4 h-4" />
+    <component :is="icon" class="h-4 w-4" />
     <div class="ml-1">{{ clicked ? toggledLabel : label }}</div>
-    <div class="ml-1 text-xs rounded-full bg-gray-200 px-1 block">
+    <div class="ml-1 block rounded-full bg-gray-200 px-1 text-xs">
       {{ count }}
     </div>
   </TButton>
@@ -90,7 +90,8 @@ export default {
       } else {
         change = {
           [`${props.field}.count`]: count.value - 1,
-          [`${props.field}.list.${username.value}`]: firebase.firestore.FieldValue.delete(),
+          [`${props.field}.list.${username.value}`]:
+            firebase.firestore.FieldValue.delete(),
         }
       }
 

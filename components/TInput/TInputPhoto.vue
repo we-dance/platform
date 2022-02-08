@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div class="w-full flex flex-col items-center">
+    <div class="flex w-full flex-col items-center">
       <img
         v-if="value"
         :src="value"
@@ -9,7 +9,7 @@
         :class="{ 'rounded-full': circle }"
       />
       <button
-        class="underline text-blue-500 p-4 hover:no-underline"
+        class="p-4 text-blue-500 underline hover:no-underline"
         @click="showPopup = true"
       >
         {{ placeholder || $t('photo.placeholder') }}
@@ -21,7 +21,7 @@
       :title="selectLabel || $t('photo.selectLabel')"
       @close="showPopup = false"
     >
-      <div class="p-4 overflow-hidden">
+      <div class="overflow-hidden p-4">
         <div :class="!editing ? 'cursor-pointer' : ''" class="mx-auto">
           <croppa
             v-model="croppa"

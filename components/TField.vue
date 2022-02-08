@@ -1,6 +1,6 @@
 <template>
   <div v-if="hidden"></div>
-  <div v-else :class="wrapperClasses" class="w-full grid">
+  <div v-else :class="wrapperClasses" class="grid w-full">
     <div v-if="!hideLabel" :class="labelClasses">
       <label :for="elementId">
         <div v-if="tips" class="float-right">
@@ -11,7 +11,7 @@
             @click="showTips = true"
           />
         </div>
-        <div class="text-gray-700 font-bold">{{ label }}</div>
+        <div class="font-bold text-gray-700">{{ label }}</div>
       </label>
     </div>
     <div :class="inputWrapperClasses">
@@ -20,7 +20,7 @@
         v-if="before"
         :content="before"
         no-typo
-        class="text-gray-500 text-sm mb-2"
+        class="mb-2 text-sm text-gray-500"
       />
       <slot>
         <component
@@ -36,7 +36,7 @@
         v-if="description"
         :content="description"
         no-typo
-        class="text-gray-500 text-sm mt-2"
+        class="mt-2 text-sm text-gray-500"
       />
       <slot name="bottom" />
     </div>

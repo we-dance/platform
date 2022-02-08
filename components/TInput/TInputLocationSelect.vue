@@ -1,15 +1,15 @@
 <template>
   <div>
-    <div class="inline-block w-full relative cursor-pointer">
+    <div class="relative inline-block w-full cursor-pointer">
       <div
-        class="block appearance-none w-full bg-white border border-gray-400 hover:border-gray-500 px-4 py-2 pr-8 rounded shadow leading-tight focus:outline-none focus:shadow-outline"
+        class="focus:shadow-outline block w-full appearance-none rounded border border-gray-400 bg-white px-4 py-2 pr-8 leading-tight shadow hover:border-gray-500 focus:outline-none"
         @click="showPopup = true"
       >
         <div v-if="!loading">
           {{ getLabel(value) }}
           <span
             v-if="gpsIsBlocked"
-            class="w-2 h-2 rounded-full bg-red-500"
+            class="h-2 w-2 rounded-full bg-red-500"
           ></span>
         </div>
         <div v-else>Locating...</div>
@@ -18,7 +18,7 @@
         class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700"
       >
         <svg
-          class="fill-current h-4 w-4"
+          class="h-4 w-4 fill-current"
           xmlns="http://www.w3.org/2000/svg"
           viewBox="0 0 20 20"
         >
@@ -30,10 +30,10 @@
     </div>
 
     <TPopup v-if="showPopup">
-      <div class="flex justify-between border-b pb-2 mb-4">
+      <div class="mb-4 flex justify-between border-b pb-2">
         <div class="font-bold">{{ popupTitle }}</div>
         <button class="cursor-pointer" @click="showPopup = false">
-          <TIcon name="close" class="cursor-pointer w-4 h-4" />
+          <TIcon name="close" class="h-4 w-4 cursor-pointer" />
         </button>
       </div>
 
@@ -43,14 +43,14 @@
 
       <div
         v-if="!gpsIsBlocked"
-        class="p-2 hover:bg-indigo-500 text-black hover:text-white cursor-pointer flex items-center"
+        class="flex cursor-pointer items-center p-2 text-black hover:bg-indigo-500 hover:text-white"
         @click="locate"
       >
-        <TIcon :name="loading ? 'coffee' : 'gps_fixed'" class="h-4 w-4 mr-2" />
+        <TIcon :name="loading ? 'coffee' : 'gps_fixed'" class="mr-2 h-4 w-4" />
         <span>Locate me</span>
       </div>
       <div
-        class="p-2 hover:bg-indigo-500 text-black hover:text-white cursor-pointer flex items-center"
+        class="flex cursor-pointer items-center p-2 text-black hover:bg-indigo-500 hover:text-white"
         @click="change('')"
       >
         <span>(Empty)</span>
@@ -59,7 +59,7 @@
         <div
           v-for="prediction in predictions"
           :key="prediction.place_id"
-          class="p-2 hover:bg-indigo-500 text-black hover:text-white cursor-pointer text-left"
+          class="cursor-pointer p-2 text-left text-black hover:bg-indigo-500 hover:text-white"
           @click="select(prediction.place_id)"
         >
           {{ prediction.description }}
@@ -69,7 +69,7 @@
         <div
           v-for="city in cities"
           :key="city.locality"
-          class="p-2 hover:bg-indigo-500 text-black hover:text-white cursor-pointer text-left"
+          class="cursor-pointer p-2 text-left text-black hover:bg-indigo-500 hover:text-white"
           @click="change(city)"
         >
           {{ city.locality }}

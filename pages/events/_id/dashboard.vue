@@ -3,14 +3,14 @@
   <div v-else-if="!exists" class="text-center">Event not found</div>
   <main
     v-else-if="!can('edit', 'posts', item)"
-    class="mt-4 mx-auto max-w-md p-4 text-sm text-center"
+    class="mx-auto mt-4 max-w-md p-4 text-center text-sm"
   >
     {{ $t('EventDashboard.noAccess') }}
   </main>
   <div v-else>
     <TPopup v-if="compose" title="Compose email" @close="compose = false">
       <div class="max-w-lg">
-        <div class="text-xs mt-4">
+        <div class="mt-4 text-xs">
           {{ selectedParticipantsList.length }} recipients:
           {{ selectedParticipantsList.join(', ') }}
         </div>
@@ -24,7 +24,7 @@
       </div>
     </TPopup>
     <TPopup v-if="addingGuest" title="Add Guest" @close="addingGuest = false">
-      <div class="max-w-md mx-auto py-4 max-h-screen overflow-y-scroll">
+      <div class="mx-auto max-h-screen max-w-md overflow-y-scroll py-4">
         <TForm
           v-model="guestAccount"
           class="mt-4 space-y-4"
@@ -75,7 +75,7 @@
               <div>
                 <TProfilePhoto size="lg" :uid="item.uid" />
                 <div
-                  class="font-bold mt-2"
+                  class="mt-2 font-bold"
                   :class="{ 'text-red-500': item.rsvp === 'down' }"
                 >
                   {{ item.name }}
@@ -97,7 +97,7 @@
               >
                 <TProfilePhoto size="lg" :uid="item.partner.uid" />
                 <div
-                  class="font-bold mt-2"
+                  class="mt-2 font-bold"
                   :class="{ 'text-red-500': item.partner.rsvp === 'down' }"
                 >
                   {{ item.partner.name }}
@@ -112,7 +112,7 @@
                 <TIcon
                   v-if="selectedParticipants[item.id]"
                   name="check"
-                  class="w-10 h-10 border-2 rounded-full bg-green-500 text-white"
+                  class="h-10 w-10 rounded-full border-2 bg-green-500 text-white"
                 />
                 <TProfilePhoto
                   v-else
@@ -128,7 +128,7 @@
                     type="round"
                     @click="update(item.id, { rsvp: 'up', state: 'out' })"
                   >
-                    <TIcon name="rotate_right" class="text-red-500 w-4 h-4" />
+                    <TIcon name="rotate_right" class="h-4 w-4 text-red-500" />
                   </TButton>
                 </div>
                 <div
@@ -142,7 +142,7 @@
                     <div
                       v-for="(note, noteId) in item.notesArray"
                       :key="noteId"
-                      class="p-2 bg-gray-200 rounded"
+                      class="rounded bg-gray-200 p-2"
                     >
                       {{ note }}
                     </div>

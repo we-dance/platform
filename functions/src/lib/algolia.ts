@@ -51,10 +51,7 @@ export function profileToAlgolia(profile: any, cache: any) {
 
 export async function indexProfiles() {
   const cache = (
-    await firestore
-      .collection('app')
-      .doc('v2')
-      .get()
+    await firestore.collection('app').doc('v2').get()
   ).data() as any
 
   const index = initIndex('profiles')

@@ -1,9 +1,9 @@
 <template>
-  <div class="bg-dark md:py-4 min-h-screen">
+  <div class="min-h-screen bg-dark md:py-4">
     <div
-      class="mx-auto w-full max-w-lg md:rounded md:border md:shadow bg-white"
+      class="mx-auto w-full max-w-lg bg-white md:rounded md:border md:shadow"
     >
-      <div class="flex justify-between m-4">
+      <div class="m-4 flex justify-between">
         <TInputButtons
           value="posts"
           :options="[
@@ -21,7 +21,7 @@
         />
 
         <button class="cursor-pointer" @click="$router.back()">
-          <TIcon name="close" class="cursor-pointer w-4 h-4" />
+          <TIcon name="close" class="h-4 w-4 cursor-pointer" />
         </button>
       </div>
 
@@ -31,7 +31,7 @@
         :fields="postFields"
         vertical
         show-cancel
-        class="bg-white p-4 space-y-4"
+        class="space-y-4 bg-white p-4"
         @save="saveItem"
         @cancel="cancelItem"
       />
@@ -90,9 +90,15 @@ export default {
 
     const collection = 'posts'
 
-    const { doc: item, id, load, update, remove, create, loading } = useDoc(
-      collection
-    )
+    const {
+      doc: item,
+      id,
+      load,
+      update,
+      remove,
+      create,
+      loading,
+    } = useDoc(collection)
 
     if (params.id !== '-') {
       load(params.id)

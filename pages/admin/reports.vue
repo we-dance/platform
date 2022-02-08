@@ -1,5 +1,5 @@
 <template>
-  <div v-if="!isAdmin" class="mt-4 mx-auto max-w-md p-4 text-sm text-center">
+  <div v-if="!isAdmin" class="mx-auto mt-4 max-w-md p-4 text-center text-sm">
     Only admin can access this area.
   </div>
   <div v-else>
@@ -11,8 +11,8 @@
       :filters="filters"
     >
       <template v-slot:default="{ item }">
-        <div class="mb-4 bg-white max-w-sm">
-          <div class="bg-white p-4 max-w-sm">
+        <div class="mb-4 max-w-sm bg-white">
+          <div class="max-w-sm bg-white p-4">
             <div>Reported by {{ getAccount(item.createdBy).name }}</div>
             <div class="text-xs">
               {{ getDateTime(item.createdAt) }}

@@ -3,7 +3,7 @@
     <textarea
       v-model="comment"
       :placeholder="`Say something nice to ${getProfile(replyTo).username}...`"
-      class="border rounded p-4 w-full overflow-hidden h-auto"
+      class="h-auto w-full overflow-hidden rounded border p-4"
     />
 
     <div class="flex justify-end">

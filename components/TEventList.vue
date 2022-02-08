@@ -4,17 +4,17 @@
     <div v-else-if="!count && showEmpty">
       {{ emptyLabel }}
     </div>
-    <div class="flex justify-between items-center px-2">
-      <h2 v-if="title" class="font-bold text-lg">{{ title }}</h2>
+    <div class="flex items-center justify-between px-2">
+      <h2 v-if="title" class="text-lg font-bold">{{ title }}</h2>
       <div v-else></div>
       <TButton type="nav" icon="copy" @click="copyToClipboard" />
     </div>
-    <div v-if="items.length" class="space-y-8 mt-4">
+    <div v-if="items.length" class="mt-4 space-y-8">
       <div v-for="(items, date) in itemsByDate" :key="date">
-        <h2 class="font-bold bg-dark text-white py-2 px-4 rounded">
+        <h2 class="rounded bg-dark py-2 px-4 font-bold text-white">
           {{ getDay(date) }}, {{ getDate(date) }}
         </h2>
-        <div v-for="item in items" :key="item.id" class="px-4 mt-4">
+        <div v-for="item in items" :key="item.id" class="mt-4 px-4">
           <TEventText :item="item" />
         </div>
       </div>

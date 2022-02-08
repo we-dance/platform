@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div v-if="label" class="font-bold text-sm mb-4 leading-none text-gray-700">
+    <div v-if="label" class="mb-4 text-sm font-bold leading-none text-gray-700">
       {{ label }}
     </div>
     <div class="flex">
@@ -15,14 +15,12 @@
           {{ profile.username }}
         </NuxtLink>
         <div class="text-xs text-gray-800">{{ profile.bio }}</div>
-        <div v-if="showDetails" class="text-sm text-gray-700 mt-4">
+        <div v-if="showDetails" class="mt-4 text-sm text-gray-700">
           <dl class="flex space-x-1">
             <dt class="font-bold">Address:</dt>
             <dd>
               <a
-                :href="
-                  `https://maps.google.com/?q=${profile.zipcode} ${profile.community}`
-                "
+                :href="`https://maps.google.com/?q=${profile.zipcode} ${profile.community}`"
                 class="underline hover:no-underline"
                 target="_blank"
                 >{{ profile.community }} {{ profile.zipcode }}</a
@@ -37,7 +35,7 @@
             <dt class="font-bold">Weight:</dt>
             <dd>{{ profile.weight }}kg</dd>
           </dl>
-          <dl v-if="profile.locales" class="md:flex space-x-1">
+          <dl v-if="profile.locales" class="space-x-1 md:flex">
             <dt class="font-bold">Languages:</dt>
             <dd>{{ getLabels(languages, profile.locales) }}</dd>
           </dl>

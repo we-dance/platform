@@ -1,7 +1,7 @@
 <template>
   <div>
     <THeader :title="$t('chat.title')" />
-    <div v-if="!chats" class="p-16 text-xs text-center">
+    <div v-if="!chats" class="p-16 text-center text-xs">
       {{ $t('chat.empty') }}
     </div>
     <div v-else>
@@ -9,14 +9,14 @@
         v-for="chat in chats"
         :key="chat.receiver.id"
         :to="`/chat/${chat.receiver.username}`"
-        class="border-b p-4 flex items-start hover:bg-gray-100"
+        class="flex items-start border-b p-4 hover:bg-gray-100"
         :class="{ 'font-bold': chat.unread }"
       >
         <div class="w-12 flex-shrink-0">
           <TProfilePhoto2 size="md" :src="chat.receiver.photo" />
         </div>
         <div class="flex-grow">
-          <div class="text-xs space-x-1 text-gray-900 flex">
+          <div class="flex space-x-1 text-xs text-gray-900">
             <span>{{
               chat.receiver.username || $t('chat.receiver.deleted')
             }}</span>

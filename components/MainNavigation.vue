@@ -1,6 +1,6 @@
 <template>
   <nav
-    class="p-4 flex flex-col space-y-2 text-dark h-screen overflow-y-scroll sticky top-0 border-r"
+    class="sticky top-0 flex h-screen flex-col space-y-2 overflow-y-scroll border-r p-4 text-dark"
   >
     <TButton
       allow-guests
@@ -44,7 +44,7 @@
         to="/register"
         type="nav"
         :label="$t('auth.signup')"
-        class="bg-primary border-none text-white hover:bg-dark"
+        class="border-none bg-primary text-white hover:bg-dark"
       />
     </template>
 
@@ -127,6 +127,6 @@ export default {
 
 <style>
 nav .nuxt-link-exact-active {
-  @apply text-primary border-primary;
+  @apply border-primary text-primary;
 }
 </style>

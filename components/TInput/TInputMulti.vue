@@ -3,11 +3,11 @@
     <label
       v-for="option in options"
       :key="getValue(option)"
-      class="inline-flex items-center mt-3"
+      class="mt-3 inline-flex items-center"
     >
       <input
         v-model="internalValue"
-        class="h-5 w-5 text-blue-600 rounded-sm"
+        class="h-5 w-5 rounded-sm text-blue-600"
         :value="getValue(option)"
         type="checkbox"
       />

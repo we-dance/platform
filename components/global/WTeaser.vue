@@ -1,7 +1,7 @@
 <template>
-  <div class="border bg-gray-100 text-sm text-center p-4 my-4">
+  <div class="my-4 border bg-gray-100 p-4 text-center text-sm">
     <div>
-      <h4 class="font-bold text-xl my-0">{{ title }}</h4>
+      <h4 class="my-0 text-xl font-bold">{{ title }}</h4>
       <p>{{ description }}</p>
     </div>
     <div class="flex justify-center">

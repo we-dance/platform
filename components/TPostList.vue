@@ -7,17 +7,17 @@
     >
       {{ emptyLabel }}
     </div>
-    <h2 v-if="title" class="font-bold text-lg mb-4">{{ title }}</h2>
+    <h2 v-if="title" class="mb-4 text-lg font-bold">{{ title }}</h2>
     <div v-if="docs.length">
       <div v-for="item in docs" :key="item.id">
         <TPost :item="item" :hide-media="hideMedia">
-          <TReactions :item="item" class="pt-4 justify-center" />
+          <TReactions :item="item" class="justify-center pt-4" />
 
           <TCommentsInline v-if="!item.hideComments" :item="item" class="p-4" />
         </TPost>
       </div>
 
-      <div class="mt-4 p-4 flex justify-center items-center">
+      <div class="mt-4 flex items-center justify-center p-4">
         <TButton @click="loadMore">{{ $t('TPostList.loadMore') }}</TButton>
       </div>
     </div>

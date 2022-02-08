@@ -5,12 +5,12 @@
         <textarea
           v-model="input"
           v-bind="$attrs"
-          class="w-full block bg-gray-200 appearance-none font-mono border-2 border-gray-200 rounded py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-purple-500"
+          class="block w-full appearance-none rounded border-2 border-gray-200 bg-gray-200 py-2 px-4 font-mono leading-tight text-gray-700 focus:border-purple-500 focus:bg-white focus:outline-none"
           @input="resize"
         />
         <div
           v-if="max > 0"
-          class="text-gray-500 text-sm text-right"
+          class="text-right text-sm text-gray-500"
           :class="{ 'text-red-500': value.length > max }"
         >
           {{ value.length }} / {{ max }}

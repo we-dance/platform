@@ -4,7 +4,7 @@
       v-model="internalValue"
       :fields="fields"
       hide-submit
-      class="flex flex-no-wrap space-x-2"
+      class="flex-no-wrap flex space-x-2"
     />
   </div>
 </template>

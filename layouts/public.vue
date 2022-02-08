@@ -1,18 +1,18 @@
 <template>
   <div
-    class="font-sans leading-normal tracking-normal antialiased flex flex-col min-h-screen"
+    class="flex min-h-screen flex-col font-sans leading-normal tracking-normal antialiased"
   >
     <div class="flex-grow">
       <nuxt />
     </div>
 
     <TFooter>
-      <div class="flex items-center justify-between flex-wrap mb-8">
+      <div class="mb-8 flex flex-wrap items-center justify-between">
         <div class="flex items-center justify-start">
           <NuxtLink to="/" class="flex items-center pb-2">
-            <TIcon class="w-6 h-6 pt-1 mr-2" name="icon" />
+            <TIcon class="mr-2 h-6 w-6 pt-1" name="icon" />
             <TIcon
-              class="h-4 w-32 hidden md:block text-white"
+              class="hidden h-4 w-32 text-white md:block"
               name="logo-text"
             />
           </NuxtLink>
