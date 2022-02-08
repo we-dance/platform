@@ -405,7 +405,6 @@ contacts:
   website: Website
 save: Save
 add: Add
-cancel: Cancel
 teaser:
   partner:
     title: Need a partner?
@@ -523,4 +522,3 @@ EventDashboard:
   subscribed: Subscribed
   paid: Paid
   notPaid: Didn't Pay
-  
