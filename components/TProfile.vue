@@ -37,7 +37,7 @@
         <h2 class="-m-4 mb-4 border-b p-4 text-lg font-bold">
           {{ $t('myprofile.intro.title') }}
         </h2>
-        <div class="typo">
+        <div class="prose prose-base prose-slate">
           <p>
             {{ $t('myprofile.intro.description1') }}
           </p>

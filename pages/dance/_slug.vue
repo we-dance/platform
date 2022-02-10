@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div class="typo border-b p-4">
+    <div class="prose prose-base prose-slate border-b p-4">
       <h1>{{ page.name }}</h1>
       <p v-if="page.synonyms" class="italic">
         Also known as {{ page.synonyms }}

@@ -1,7 +1,7 @@
 <template>
   <TAuthError v-if="error" :error="error" />
   <TLoader v-else-if="loading || signingIn" />
-  <div v-else-if="emailSent" class="typo">
+  <div v-else-if="emailSent" class="prose prose-base prose-slate">
     <h2>Check your email</h2>
     <p>Email might come in 5-10 minutes and might land in spam.</p>
     <p>

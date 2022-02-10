@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div class="typo p-4">
+    <div class="prose prose-base prose-slate p-4">
       <h1>Dance Styles</h1>
       <div>
         <a
