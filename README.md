@@ -20,7 +20,7 @@
 4. Go to `Cloud Firestore`, click `Create database`, select `Start in test mode`, click `Next`, choose region `eur3`.
 5. Transform `firebaseConfig` value (from step 2) to one line JSON. [This tool](https://www.convertjson.com/javascript-object-to-json.htm) might help you.
 6. Clone this repository and open the project folder.
-7. Copy `.env.example` file to `.env` file and set value of `FIREBASE_CONFIG` to one line JSON you got from step 6.
+7. Copy `.env.example` file to `.env` file and set value of `FIREBASE_CONFIG` to one line JSON you got from step 5.
 
 To activate all services and features see section `Services` below.
 

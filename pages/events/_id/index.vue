@@ -116,7 +116,13 @@
       class="sticky top-0 z-50 flex justify-center space-y-2 border-b bg-white p-4"
     >
       <TButton
-        v-if="item.link"
+        v-if="uid && item.response === 'up'"
+        type="secondary"
+        @click="updateRsvp(item.id, 'events', 'down')"
+        >{{ $t('eventView.reservation.cancel') }}</TButton
+      >
+      <TButton
+        v-else-if="item.link"
         type="primary"
         :title="$t('eventView.reservation.guest')"
         allow-guests
@@ -125,17 +131,11 @@
         >{{ $t('eventView.reservation.guest') }}</TButton
       >
       <TButton
-        v-else-if="uid && item.response !== 'up'"
+        v-else
         type="primary"
         :title="$t('eventView.reservation.guest')"
         @click="reservationPopup = 'reserve'"
         >{{ $t('eventView.reservation.guest') }}</TButton
-      >
-      <TButton
-        v-else-if="uid && item.response === 'up'"
-        type="secondary"
-        @click="updateRsvp(item.id, 'events', 'down')"
-        >{{ $t('eventView.reservation.cancel') }}</TButton
       >
     </div>
 
