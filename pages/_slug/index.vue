@@ -54,7 +54,7 @@ export default {
 
       if (this.page) {
         classes += this.page.container + ' p-4 '
-        classes += this.page.notypo ? '' : 'typo'
+        classes += this.page.notypo ? '' : 'prose prose-base prose-slate'
       }
 
       return classes

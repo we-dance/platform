@@ -123,9 +123,7 @@ export default {
 
     try {
       page = await $content(`styles/${slug}`).fetch()
-      related = await $content(`styles`)
-        .where({ family: page.family })
-        .fetch()
+      related = await $content(`styles`).where({ family: page.family }).fetch()
       pageFound = true
     } catch (e) {}
 
