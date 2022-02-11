@@ -343,8 +343,13 @@ export default {
     }
   },
   setup() {
-    const { uid, can, account, updateAccount, sendSignInLinkToEmail } =
-      useAuth()
+    const {
+      uid,
+      can,
+      account,
+      updateAccount,
+      sendSignInLinkToEmail,
+    } = useAuth()
     const { getEventIcon } = useEvents()
     const { currentCity } = useCities()
     const { accountFields } = useAccounts()
