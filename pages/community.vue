@@ -104,10 +104,9 @@ export default {
     const filters = ref({})
     const { uid } = useAuth()
     const { city, currentCity, cityName } = useCities()
-    const { router } = useRouter()
+    const { router, route } = useRouter()
     const { getCity } = useApp()
     const { objectivesList, typeList, radiusOptions } = useProfiles()
-
     if (!currentCity.value) {
       router.push('/cities')
     }
@@ -122,7 +121,7 @@ export default {
     }))
 
     function load() {
-      filters.value = {}
+      filters.value = Object.assign({}, route.query)
       query.value = ''
     }
 
@@ -146,6 +145,11 @@ export default {
     })
 
     watch([currentPage, facetFilters, radius, city], () => {
+      router.push({
+        path: '/community',
+        query: Object.assign({}, filters.value),
+      })
+
       if (!city.value?.location) {
         return
       }
