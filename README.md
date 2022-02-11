@@ -4,7 +4,7 @@
 
 ## Built with
 
-- [Nuxt.js](https://nextjs.org/) – Vuejs framework, which is used as Static Site Generator.
+- [Nuxt.js](https://nuxtjs.org/) – Vuejs framework, which is used as Static Site Generator.
 - [Tailwind CSS](https://tailwindcss.com/) – utility-first CSS framework.
 - [Nuxt Composition Api](https://composition-api.nuxtjs.org/) – provides a way to use the Vue 3 Composition API with Nuxt-specific features.
 - [Firebase](https://firebase.google.com/) – used as Serverless framework with Firestore realtime database, authentication and cloud functions.
