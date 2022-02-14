@@ -412,6 +412,9 @@ signin:
   nopassword: Forgot password
   submit: Login
 nopassword:
+  title: Check your email
+  description: Email might come in 5-10 minutes and might land in spam.
+  issues: Please report if you have any issues to
   signin: I have a password
   google: Sign in with Google
   submit: Send a magic link

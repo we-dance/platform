@@ -5,7 +5,7 @@
     <h2>Check your email</h2>
     <p>Email might come in 5-10 minutes and might land in spam.</p>
     <p>
-      Please report if you have any issues to
+      {{ $t('nopassword.issues') }}
       <a
         class="text-blue-500 underline hover:no-underline"
         href="mailto:support@wedance.vip"
