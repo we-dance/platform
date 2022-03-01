@@ -24,7 +24,7 @@
 <script>
 import { onMounted, ref, watch } from 'vue-demi'
 import { useCities } from '~/use/cities'
-import { useRouter } from '~/use/router'
+import { useRouter } from '@nuxtjs/composition-api'
 import { useApp } from '~/use/app'
 import { getPlacePredictions } from '~/use/google'
 import { searchByStart, sortBy } from '~/utils'

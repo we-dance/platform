@@ -42,7 +42,7 @@
 import { pickBy } from 'lodash'
 import { useAuth } from '~/use/auth'
 import { useDoc } from '~/use/doc'
-import { useRouter } from '~/use/router'
+import { useRouter } from '@nuxtjs/composition-api'
 import { useEvents } from '~/use/events'
 import { track } from '~/plugins/firebase'
 

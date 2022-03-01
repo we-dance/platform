@@ -108,7 +108,7 @@ import {
   getEventDescription,
   getDateObect,
 } from '~/utils'
-import { useRouter } from '~/use/router'
+import { useRouter } from '@nuxtjs/composition-api'
 
 export default {
   name: 'Calendar',

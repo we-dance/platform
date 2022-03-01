@@ -7,7 +7,7 @@ import { computed, toRefs } from '@nuxtjs/composition-api'
 import firebase from 'firebase/app'
 import 'firebase/auth'
 import 'firebase/firestore'
-import { useRouter } from '~/use/router'
+import { useRouter } from '@nuxtjs/composition-api'
 import { getDateObect, getLanguages } from '~/utils'
 import { useDoc } from '~/use/doc'
 

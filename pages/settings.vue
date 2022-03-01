@@ -139,7 +139,7 @@ import { ref } from '@nuxtjs/composition-api'
 import { useAuth } from '~/use/auth'
 import { useProfiles } from '~/use/profiles'
 import { useAccounts } from '~/use/accounts'
-import { useRouter } from '~/use/router'
+import { useRouter } from '@nuxtjs/composition-api'
 import { db, track } from '~/plugins/firebase'
 
 export default {

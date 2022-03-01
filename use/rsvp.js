@@ -1,6 +1,6 @@
 import { useAuth } from '~/use/auth'
 import { useDoc } from '~/use/doc'
-import { useRouter } from '~/use/router'
+import { useRouter } from '@nuxtjs/composition-api'
 import { useCollection } from '~/use/collection'
 
 export const useRsvp = () => {

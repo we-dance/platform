@@ -280,7 +280,7 @@
 <script>
 import { onMounted, watch } from 'vue-demi'
 import { useAuth } from '~/use/auth'
-import { useRouter } from '~/use/router'
+import { useRouter } from '@nuxtjs/composition-api'
 
 export default {
   name: 'Index',

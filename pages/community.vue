@@ -91,7 +91,7 @@ import { useProfiles } from '~/use/profiles'
 import { useStyles } from '~/use/styles'
 import { useAuth } from '~/use/auth'
 import { useCities } from '~/use/cities'
-import { useRouter } from '~/use/router'
+import { useRouter } from '@nuxtjs/composition-api'
 import { useApp } from '~/use/app'
 
 export default {
