@@ -29,11 +29,10 @@
 </template>
 
 <script>
-import { computed } from '@nuxtjs/composition-api'
+import { computed, useRouter } from '@nuxtjs/composition-api'
 import { track } from '~/plugins/firebase'
 import { useAuth } from '~/use/auth'
 import { useDoc } from '~/use/doc'
-import { useRouter } from '@nuxtjs/composition-api'
 
 export default {
   name: 'TItemEdit',

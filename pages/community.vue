@@ -85,13 +85,13 @@
 
 <script>
 import { computed, onMounted, ref, watch } from 'vue-demi'
+import { useRouter } from '@nuxtjs/composition-api'
 import { getExcerpt, getOptions } from '~/utils'
 import { useAlgolia } from '~/use/algolia'
 import { useProfiles } from '~/use/profiles'
 import { useStyles } from '~/use/styles'
 import { useAuth } from '~/use/auth'
 import { useCities } from '~/use/cities'
-import { useRouter } from '@nuxtjs/composition-api'
 import { useApp } from '~/use/app'
 
 export default {

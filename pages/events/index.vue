@@ -89,7 +89,7 @@
 </template>
 
 <script>
-import { computed, onMounted, ref } from '@nuxtjs/composition-api'
+import { computed, onMounted, ref, useRouter } from '@nuxtjs/composition-api'
 import { startOfWeek, addDays } from 'date-fns'
 import { useCollection } from '~/use/collection'
 import { useAuth } from '~/use/auth'
@@ -108,7 +108,6 @@ import {
   getEventDescription,
   getDateObect,
 } from '~/utils'
-import { useRouter } from '@nuxtjs/composition-api'
 
 export default {
   name: 'Calendar',

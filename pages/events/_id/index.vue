@@ -234,11 +234,11 @@
 
 <script>
 import googleCalendarEventUrl from 'generate-google-calendar-url'
-import { computed, ref } from '@nuxtjs/composition-api'
+import { computed, ref, useRouter } from '@nuxtjs/composition-api'
 import { useAuth } from '~/use/auth'
 import { useDoc } from '~/use/doc'
 import { useRsvp } from '~/use/rsvp'
-import { useRouter } from '@nuxtjs/composition-api'
+
 import { useProfiles } from '~/use/profiles'
 import { useReactions } from '~/use/reactions'
 import { useAccounts } from '~/use/accounts'
@@ -343,13 +343,8 @@ export default {
     }
   },
   setup() {
-    const {
-      uid,
-      can,
-      account,
-      updateAccount,
-      sendSignInLinkToEmail,
-    } = useAuth()
+    const { uid, can, account, updateAccount, sendSignInLinkToEmail } =
+      useAuth()
     const { getEventIcon } = useEvents()
     const { currentCity } = useCities()
     const { accountFields } = useAccounts()

@@ -40,9 +40,9 @@
 
 <script>
 import { pickBy } from 'lodash'
+import { useRouter } from '@nuxtjs/composition-api'
 import { useAuth } from '~/use/auth'
 import { useDoc } from '~/use/doc'
-import { useRouter } from '@nuxtjs/composition-api'
 import { useEvents } from '~/use/events'
 import { track } from '~/plugins/firebase'
 

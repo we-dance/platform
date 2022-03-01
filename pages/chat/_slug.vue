@@ -63,9 +63,9 @@
 <script>
 import firebase from 'firebase/app'
 import { onMounted, onUnmounted, ref } from 'vue-demi'
+import { useRouter } from '@nuxtjs/composition-api'
 import { dateDiff } from '~/utils'
 import { useAuth } from '~/use/auth'
-import { useRouter } from '@nuxtjs/composition-api'
 import { useDoc } from '~/use/doc'
 import { useFirestore } from '~/use/collection'
 

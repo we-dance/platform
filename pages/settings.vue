@@ -135,11 +135,11 @@
 </template>
 
 <script>
-import { ref } from '@nuxtjs/composition-api'
+import { ref, useRouter } from '@nuxtjs/composition-api'
 import { useAuth } from '~/use/auth'
 import { useProfiles } from '~/use/profiles'
 import { useAccounts } from '~/use/accounts'
-import { useRouter } from '@nuxtjs/composition-api'
+
 import { db, track } from '~/plugins/firebase'
 
 export default {
