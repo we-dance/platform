@@ -4,8 +4,51 @@ import MarkdownIt from 'markdown-it'
 import excerptHtml from 'excerpt-html'
 import saveAs from 'file-saver'
 import { dsvFormat } from 'd3'
+import firebase from 'firebase/app'
 import { db } from './plugins/firebase'
 import languages from '~/assets/languages'
+import 'firebase/firestore'
+import { getGoogle } from '~/use/google'
+
+export const getVenueFromText = async (text) => {
+  const google = await getGoogle()
+  const service = new google.maps.places.PlacesService(
+    document.createElement('div')
+  )
+  const request = {
+    query: text,
+    fields: ['place_id', 'formatted_address', 'name'],
+  }
+
+  return new Promise((resolve, reject) => {
+    service.findPlaceFromQuery(request, async (results, status) => {
+      if (status === google.maps.places.PlacesServiceStatus.OK) {
+        try {
+          let doc
+          const firestore = firebase.firestore()
+          const collection = firestore.collection('venues')
+          doc = await collection.doc(results[0].place_id).get()
+          if (!doc.exists) {
+            await collection.doc(results[0].place_id).set({
+              name: results[0].name,
+              id: results[0].place_id,
+              rooms: '',
+              map: '',
+              address: results[0].formatted_address,
+              createdAt: Date.now(),
+            })
+            doc = await collection.doc(results[0].place_id).get()
+          }
+          resolve(doc.data())
+        } catch (error) {
+          reject(new Error(error.message))
+        }
+      } else {
+        reject(new Error('Could not get location'))
+      }
+    })
+  })
+}
 
 export const getObjectKeysFromArray = (arr) => {
   const obj = {}
@@ -148,7 +191,7 @@ export const getId = (text) => {
 
 export const camelize = (str) => {
   return str
-    .replace(/(?:^\w|[A-Z]|\b\w)/g, function (word, index) {
+    .replace(/(?:^\w|[A-Z]|\b\w)/g, function(word, index) {
       return index === 0 ? word.toLowerCase() : word.toUpperCase()
     })
     .replace(/\s+/g, '')
@@ -202,7 +245,10 @@ export const getOptions = (items, label) => {
 }
 
 function getLang(languageString) {
-  const [language] = languageString.replace('-', '_').toLowerCase().split('_')
+  const [language] = languageString
+    .replace('-', '_')
+    .toLowerCase()
+    .split('_')
 
   return language
 }
@@ -529,8 +575,7 @@ export const getUrlFromText = (text) => {
 }
 
 export const getYoutubeId = (url) => {
-  const regExp =
-    /^.*((youtu.be\/)|(v\/)|(\/u\/\w\/)|(embed\/)|(watch\?))\??v?=?([^#&?]*).*/
+  const regExp = /^.*((youtu.be\/)|(v\/)|(\/u\/\w\/)|(embed\/)|(watch\?))\??v?=?([^#&?]*).*/
   const match = url.match(regExp)
   const videoId = match && match[7].length === 11 ? match[7] : ''
 
