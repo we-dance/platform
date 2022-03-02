@@ -131,7 +131,12 @@ export default {
       return camelcase(field.name)
     },
     validate() {
-      console.log(this.value)
+      const requiredFields = this.fields
+        .filter((f) => f.validation === 'required')
+        .filter((f) => !this.value[f.name])
+      if (requiredFields.length > 0) {
+        return false
+      }
       return true
     },
     copy() {
@@ -147,9 +152,10 @@ export default {
       this.error = false
 
       if (!this.validate()) {
+        console.log('error saving', this.value)
         return
       }
-
+      console.log('no error', this.value)
       this.$emit('save', this.value)
     },
     onFieldChange(field, value) {
