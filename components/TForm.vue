@@ -10,7 +10,7 @@
       />
     </div>
     <div v-if="error" class="py-4 text-right text-red-500">
-      {{ error.message }}
+      {{ errorMessage }}
     </div>
     <slot name="bottom" />
     <div
@@ -98,6 +98,7 @@ export default {
   },
   data: () => ({
     error: false,
+    errorMessage: '',
   }),
   computed: {
     visibleFields() {
@@ -131,10 +132,12 @@ export default {
       return camelcase(field.name)
     },
     validate() {
-      const requiredFields = this.fields
-        .filter((f) => f.validation === 'required')
-        .filter((f) => !this.value[f.name])
-      if (requiredFields.length > 0) {
+      const validatedFields = this.fields
+        .filter((f) => f.validation)
+       .filter((f) => !f.validation(this.value[f.name]))
+
+      if (validatedFields.length > 0) {
+        this.errorMessage = validatedFields[0].validationErrorMessage
         return false
       }
       return true
@@ -152,10 +155,9 @@ export default {
       this.error = false
 
       if (!this.validate()) {
-        console.log('error saving', this.value)
+        this.error = true
         return
       }
-      console.log('no error', this.value)
       this.$emit('save', this.value)
     },
     onFieldChange(field, value) {
