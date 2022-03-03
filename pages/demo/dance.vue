@@ -5,7 +5,7 @@
       <TInputStylesSelect v-if="variant === 'v1'" v-model="selected" />
       <TInputStylesSelect2 v-if="variant === 'v2'" v-model="selected" />
     </div>
-    <div v-if="$route.query.debug" class="p-4 bg-gray-200 rounded mt-4 w-full">
+    <div v-if="$route.query.debug" class="mt-4 w-full rounded bg-gray-200 p-4">
       <pre>{{ selected }}</pre>
     </div>
   </div>

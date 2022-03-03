@@ -59,7 +59,7 @@
       >
     </div>
 
-    <div v-if="step != 'photo' || profile.photo" class="flex justify-end mt-4">
+    <div v-if="step != 'photo' || profile.photo" class="mt-4 flex justify-end">
       <TButton type="primary" @click="next">Next</TButton>
     </div>
   </form>

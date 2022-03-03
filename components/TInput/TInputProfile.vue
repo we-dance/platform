@@ -39,42 +39,62 @@
       v-else
       v-model="query"
       :placeholder="placeholder"
-      @input="search"
       autocomplete="off"
+      @input="search"
     />
-    <div v-if="query" class="divide-y border rounded shadow absolute bg-white">
+    <div
+      v-if="query"
+      class="absolute z-50 divide-y rounded border bg-white shadow"
+    >
       <div
         v-for="item in suggestions"
         :key="item.id"
-        class="flex px-4 py-2 hover:bg-blue-100 items-center cursor-pointer space-x-1"
+        class="flex cursor-pointer items-center space-x-2 px-4 py-2 hover:bg-blue-100"
         @click="add(item)"
       >
-        <TProfilePhoto2 size="sm" :src="item.photo" />
+        <TProfilePhoto2 size="md" :src="item.photo" />
         <div class="flex-grow">
-          <div class="block text-sm">{{ item.username }}</div>
+          <div v-if="item.name" class="text-sm font-bold">{{ item.name }}</div>
+          <div class="flex space-x-2 text-xs text-gray-700">
+            <div>@{{ item.username }}</div>
+            <div v-if="item.instagram" class="flex space-x-1">
+              <TIcon name="instagram" size="4" />
+              <div>{{ item.instagram }}</div>
+            </div>
+            <div v-if="item.facebook" class="flex space-x-1">
+              <TIcon name="facebook" size="4" />
+              <div>{{ item.facebook }}</div>
+            </div>
+          </div>
         </div>
       </div>
-      <template v-if="isUsernameAvailable">
+      <template v-if="inviteUsername">
         <div
-          class="flex px-4 py-2 hover:bg-blue-100 items-center cursor-pointer space-x-1"
-          @click="create({ username: query, instagram: query })"
+          class="flex cursor-pointer items-center space-x-1 px-4 py-2 text-sm text-gray-700 hover:bg-blue-100"
+          @click="
+            create({ username: inviteUsername, instagram: inviteUsername })
+          "
         >
-          <div class="p-1">
-            <TIcon name="instagram" size="4" class="text-gray-700 " />
+          <div>
+            {{ $t('TInputProfile.import') }}
           </div>
-          <div class="text-sm">
-            {{ query }} {{ $t('TInputProfile.addInstagram') }}
+          <TIcon name="instagram" size="4" />
+          <div>
+            {{ inviteUsername }}
           </div>
         </div>
         <div
-          class="flex px-4 py-2 hover:bg-blue-100 items-center cursor-pointer space-x-1"
-          @click="create({ username: query, facebook: query })"
+          class="flex cursor-pointer items-center space-x-1 px-4 py-2 text-sm text-gray-700 hover:bg-blue-100"
+          @click="
+            create({ username: inviteUsername, facebook: inviteUsername })
+          "
         >
-          <div class="p-1">
-            <TIcon name="facebook" size="4" class="text-gray-700 " />
+          <div>
+            {{ $t('TInputProfile.import') }}
           </div>
-          <div class="text-sm">
-            {{ query }} {{ $t('TInputProfile.addFacebook') }}
+          <TIcon name="facebook" size="4" />
+          <div>
+            {{ inviteUsername }}
           </div>
         </div>
       </template>
@@ -82,7 +102,7 @@
   </div>
 </template>
 <script>
-import { computed, ref } from '@nuxtjs/composition-api'
+import { computed, ref, watch } from '@nuxtjs/composition-api'
 import { useAlgolia } from '~/use/algolia'
 import { useEvents } from '~/use/events'
 import { useDoc } from '~/use/doc'
@@ -123,6 +143,29 @@ export default {
       emit('input', data)
     }
 
+    watch(query, (value) => {
+      if (!value) {
+        return
+      }
+
+      if (
+        value.includes('facebook.com') ||
+        value.includes('instagram.com') ||
+        value.includes('wedance.vip')
+      ) {
+        const username = value
+          .replace('https://', '')
+          .replace('http://', '')
+          .replace('www.', '')
+          .replace('instagram.com/', '')
+          .replace('facebook.com/', '')
+          .replace('wedance.vip/', '')
+          .replace(/(\?.*)/g, '')
+
+        query.value = username
+      }
+    })
+
     const suggestions = computed(() => {
       const { hits } = response.value
       return hits
@@ -145,26 +188,31 @@ export default {
         })
     })
 
-    const isUsernameAvailable = computed(() => {
-      let result = true
+    const inviteUsername = computed(() => {
+      let username = query.value.toLowerCase().replaceAll(' ', '')
 
       if (
-        suggestions.value &&
-        suggestions.value.some((p) => p.username === query.value)
+        suggestions.value?.some((p) => p.username === username) ||
+        suggestions.value?.some((p) => p.instagram === username) ||
+        suggestions.value?.some((p) => p.facebook === username)
       ) {
-        result = false
+        username = false
       }
 
-      if (props.excludeUsernames.some((username) => username === query.value)) {
-        result = false
+      if (props.excludeUsernames.some((v) => v === username)) {
+        username = false
       }
 
-      return result
+      return username
     })
 
     const create = async (data) => {
       await createProfile({
         type: 'FanPage',
+        owned: false,
+        owner: '',
+        import: 'requested',
+        visibility: 'Public',
         ...data,
       })
 
@@ -179,7 +227,7 @@ export default {
       search,
       eventRoleOptions,
       create,
-      isUsernameAvailable,
+      inviteUsername,
     }
   },
 }

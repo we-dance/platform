@@ -27,8 +27,8 @@
           <TPreview :excerpt="!show" :content="item.description" />
           <div
             v-if="item.description && item.description.length > 140"
+            class="mb-2 cursor-pointer p-2 text-center text-xs text-blue-700 underline hover:no-underline"
             @click="show = !show"
-            class="p-2 text-blue-700 cursor-pointer underline hover:no-underline text-xs text-center mb-2"
           >
             {{ show ? $t('TPost.showLess') : $t('TPost.showMore') }}
           </div>
@@ -45,20 +45,20 @@
           type="context"
           icon="edit"
           :to="`/posts/${item.id}/edit`"
-          :label="$t('edit')"
+          :label="$t('post.edit')"
         />
         <TButton
           v-if="can('edit', 'posts', item) && item.type === 'event'"
           type="context"
           icon="edit"
           :to="`/events/${item.id}/edit`"
-          :label="$t('edit')"
+          :label="$t('post.edit')"
         />
         <TButton
           v-if="can('edit', 'posts', item)"
           type="context"
           icon="delete"
-          :label="$t('delete')"
+          :label="$t('post.delete')"
           @click="remove(item.id)"
         />
         <TCardActions
@@ -86,7 +86,7 @@
         class="hover:opacity-75"
       >
         <TSharePreviewPost
-          :username="item.username"
+          :username="item.org ? item.org.username : ''"
           collection="events"
           :title="item.name"
           :type="item.type"

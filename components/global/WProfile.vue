@@ -1,26 +1,26 @@
 <template>
   <div
     v-if="!fallback && !exists"
-    class="border rounded p-4 text-red-500 flex justify-between"
+    class="flex justify-between rounded border p-4 text-red-500"
   >
     <div>Profile {{ username }} not found</div>
     <slot />
   </div>
   <div v-else>
     <div
-      class="flex-row gap-2 flex justify-between items-center py-2 m-1 border-t border-gray-200 px-2 h-full"
+      class="m-1 flex h-full flex-row items-center justify-between gap-2 border-t border-gray-200 py-2 px-2"
     >
-      <div class="flex-shrink-0 w-12">
+      <div class="w-12 flex-shrink-0">
         <TProfilePhoto2 size="lg" :src="profile.photo" />
       </div>
-      <div class="flex flex-col w-full">
+      <div class="flex w-full flex-col">
         <NuxtLink :to="`/${profile.username}`" class="font-bold">
           {{ profile.name || profile.username }}
         </NuxtLink>
-        <div v-if="profile.role" class="text-xs">
+        <div v-show="profile.role" class="text-xs">
           {{ getLabel(eventRoleOptions, profile.role) }}
         </div>
-        <div v-if="profile.bio" class="text-gray-700 text-xs">
+        <div v-show="profile.bio" class="text-xs text-gray-700">
           {{ profile.bio }}
         </div>
       </div>
@@ -38,10 +38,10 @@
 </template>
 
 <script>
+import { computed } from 'vue-demi'
 import { useDoc } from '~/use/doc'
 import { getLabel } from '~/utils'
 import { useEvents } from '~/use/events'
-import { computed } from 'vue-demi'
 
 export default {
   setup(props) {
@@ -57,6 +57,7 @@ export default {
         return {
           ...props.fallback,
           ...loadedProfile.value,
+          role: props?.fallback?.role,
         }
       }
 

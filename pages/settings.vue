@@ -4,8 +4,8 @@
     <div v-else>
       <THeader :title="$t('settings.title')" />
 
-      <div class="p-4 space-y-4">
-        <div class="rounded shadow border p-4 bg-white">
+      <div class="space-y-4 p-4">
+        <div class="rounded border bg-white bg-white p-4 shadow">
           <div class="flex items-center">
             <div>
               <NuxtLink
@@ -19,7 +19,7 @@
               </NuxtLink>
             </div>
             <div class="ml-2">
-              <div class="font-bold text-xl">
+              <div class="text-xl font-bold">
                 {{ $t('settings.account.title') }}
               </div>
               <div class="text-sm text-gray-700">
@@ -28,18 +28,17 @@
             </div>
           </div>
 
-          <div v-if="currentTab === 'account'" class="border-t mt-4 pt-4">
+          <div v-if="currentTab === 'account'" class="mt-4 border-t pt-4">
             <TForm
               v-model="account"
               :fields="accountFields"
-              :submit-label="$t('save')"
               class="space-y-4"
               @save="saveAccount"
             />
             <TButton to="/settings?tab=password" class="mt-4">{{
               $t('settings.account.changePassword')
             }}</TButton>
-            <div class="bg-red-200 mt-4 -mb-4 -mx-4 p-4">
+            <div class="-mx-4 mt-4 -mb-4 bg-red-200 p-4">
               <TButton
                 type="danger"
                 @click="deleteAccountPopupVisible = true"
@@ -50,7 +49,7 @@
                 :title="$t('settings.account.popup.delete.title')"
                 @close="deleteAccountPopupVisible = false"
               >
-                <div class="py-4 space-y-4">
+                <div class="space-y-4 py-4">
                   <TField
                     v-model="deleteReason"
                     label-position="vertical"
@@ -74,10 +73,10 @@
               </TPopup>
             </div>
           </div>
-          <div v-if="currentTab === 'password'" class="border-t mt-4 pt-4">
+          <div v-if="currentTab === 'password'" class="mt-4 border-t pt-4">
             <TField v-model="password" v-bind="passwordField" />
-            <div class="flex justify-end mt-4">
-              <TButton @click="changePassword">{{ $t('save') }}</TButton>
+            <div class="mt-4 flex justify-end">
+              <TButton @click="changePassword">{{ $t('form.save') }}</TButton>
             </div>
           </div>
           <TPopup
@@ -85,8 +84,8 @@
             :title="$t('settings.passwordError')"
             @close="passwordError = ''"
           >
-            <div class="py-4 max-w-md">{{ passwordError.message }}</div>
-            <div class="flex justify-end mb-4">
+            <div class="max-w-md py-4">{{ passwordError.message }}</div>
+            <div class="mb-4 flex justify-end">
               <TButton
                 v-if="passwordError.code === 'auth/requires-recent-login'"
                 type="primary"
@@ -97,7 +96,7 @@
             </div>
           </TPopup>
         </div>
-        <div class="rounded shadow border p-4 bg-white">
+        <div class="rounded border bg-white bg-white p-4 shadow">
           <div class="flex items-center">
             <div>
               <NuxtLink
@@ -111,7 +110,7 @@
               </NuxtLink>
             </div>
             <div class="ml-2">
-              <div class="font-bold text-xl">
+              <div class="text-xl font-bold">
                 {{ $t('settings.profile.title') }}
               </div>
               <div class="text-sm text-gray-700">
@@ -126,8 +125,7 @@
             v-if="currentTab === 'profile'"
             v-model="profile"
             :fields="profileFields"
-            :submit-label="$t('save')"
-            class="border-t mt-4 pt-4 space-y-4"
+            class="mt-4 space-y-4 border-t pt-4"
             @save="saveProfile"
           />
         </div>

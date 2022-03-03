@@ -1,16 +1,16 @@
 <template>
   <TCardList v-bind="config">
     <template v-slot="{ item }">
-      <div class="p-4 border rounded mb-4 bg-white">
-        <div class="flex justify-between items-start">
+      <div class="mb-4 rounded border bg-white p-4">
+        <div class="flex items-start justify-between">
           <div>
             <div class="text-xs">Hits: {{ item.hits || 0 }}</div>
-            <div class="font-bold text-lg">
+            <div class="text-lg font-bold">
               {{ item.name }}
             </div>
             <div>
               {{ item.location.country }} –
-              <span class="text-xs font-mono bg-gray-200 p-1 rounded">{{
+              <span class="rounded bg-gray-200 p-1 font-mono text-xs">{{
                 item.location.place_id
               }}</span>
             </div>
@@ -18,7 +18,7 @@
           </div>
           <div>
             <div
-              class="text-xs text-white font-bold px-2 py-1 rounded-full"
+              class="rounded-full px-2 py-1 text-xs font-bold text-white"
               :class="cityStatusClass[item.status]"
             >
               {{ item.status }}

@@ -5,7 +5,7 @@
     </THeader>
 
     <div>
-      <div v-if="uid && response.facets" class="mb-4 gap-2 flex flex-wrap p-4">
+      <div v-if="uid && response.facets" class="mb-4 flex flex-wrap gap-2 p-4">
         <TButton
           to="/cities?target=/community"
           icon="place"
@@ -14,7 +14,7 @@
 
         <t-rich-select
           v-model="radius"
-          :placeholder="$t('community.radius.select')"
+          :placeholder="$t('filter.radius')"
           :options="radiusOptions"
           hide-search-box
         />
@@ -30,11 +30,11 @@
         />
 
         <TButton v-if="facetFilters" type="base" @click="load()">
-          {{ $t('community.reset.button') }}
+          {{ $t('filter.reset') }}
         </TButton>
       </div>
 
-      <div class="grid grid-cols-1 md:grid-cols-2 gap-2">
+      <div class="grid grid-cols-1 gap-2 md:grid-cols-2">
         <NuxtLink
           v-for="item in response.hits"
           :key="item.id"
@@ -95,7 +95,7 @@ import { useRouter } from '~/use/router'
 import { useApp } from '~/use/app'
 
 export default {
-  name: 'ProfilesIndex',
+  name: 'Community',
   setup() {
     const radius = ref(10)
     const query = ref('')

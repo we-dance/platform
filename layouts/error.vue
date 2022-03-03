@@ -1,14 +1,14 @@
 <template>
   <div
-    class="flex-grow flex flex-col justify-center items-center bg-white min-h-screen"
+    class="flex min-h-screen flex-grow flex-col items-center justify-center bg-white"
   >
-    <h1 class="font-bold text-4xl mb-2 leading-tight">
+    <h1 class="mb-2 text-4xl font-bold leading-tight">
       {{ statusCode }}
     </h1>
-    <h1 class="font-bold text-2xl mb-2 leading-tight">
+    <h1 class="mb-2 text-2xl font-bold leading-tight">
       {{ message }}
     </h1>
-    <TIcon name="undraw_compose_music" class="w-64 mt-8" />
+    <TIcon name="undraw_compose_music" class="mt-8 w-64" />
   </div>
 </template>
 

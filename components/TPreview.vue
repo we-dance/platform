@@ -85,7 +85,7 @@ export default {
       }
 
       if (!this.noTypo) {
-        classes.push('typo')
+        classes.push('prose prose-base prose-slate')
       } else {
         classes.push('preview')
       }

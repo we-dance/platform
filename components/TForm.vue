@@ -8,28 +8,23 @@
         :label="getLabel(field)"
         @input="(val) => onFieldChange(field, val)"
       />
-      <div v-for="error in errors" :key="error.field">
-        <div
-          v-if="error.field === field.name"
-          class="text-red-500 py-4 text-right"
-        >
-          {{ error.message }}
-        </div>
-      </div>
+    </div>
+    <div v-if="error" class="py-4 text-right text-red-500">
+      {{ error.message }}
     </div>
     <slot name="bottom" />
     <div
-      class="flex justify-end space-x-2 bg-white py-4 border-t z-10 items-center bottom-0 sticky"
+      class="sticky bottom-0 z-10 flex items-center justify-end space-x-2 border-t bg-white py-4"
     >
-      <TButton v-if="showRemove" label="Delete" @click="remove" />
-      <TButton v-if="showCancel" label="Cancel" @click="cancel" />
-      <TButton v-if="showCopy" label="Copy" @click="copy" />
+      <TButton v-if="showRemove" :label="$t('form.delete')" @click="remove" />
+      <TButton v-if="showCancel" :label="$t('form.cancel')" @click="cancel" />
+      <TButton v-if="showCopy" :label="$t('form.copy')" @click="copy" />
       <slot name="buttons" />
       <TButton
-        v-if="submitLabel"
+        v-if="!hideSubmit"
         :allow-guests="allowGuests"
         type="primary"
-        :label="submitLabel"
+        :label="submitLabel || $t('form.save')"
         @click="save"
       />
     </div>
@@ -63,7 +58,11 @@ export default {
     },
     submitLabel: {
       type: String,
-      default: 'Save',
+      default: '',
+    },
+    hideSubmit: {
+      type: Boolean,
+      default: false,
     },
     showCancel: {
       type: Boolean,

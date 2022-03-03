@@ -13,7 +13,7 @@
       v-for="item in response.hits"
       :key="item.id"
       :to="`/${item.username}`"
-      class="border-b p-4 flex items-center hover:bg-blue-200"
+      class="flex items-center border-b p-4 hover:bg-blue-200"
     >
       <div class="w-12 flex-shrink-0">
         <TProfilePhoto2 size="sm" :src="item.photo" />

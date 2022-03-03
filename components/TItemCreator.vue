@@ -1,5 +1,5 @@
 <template>
-  <div class="p-4 bg-gray-100">
+  <div class="bg-gray-100 p-4">
     <TProfileCard3
       :label="`Published on ${publishedAt} by`"
       :profile="creator"
@@ -12,7 +12,7 @@
     <TProfileContacts
       v-if="full"
       :profile="creator"
-      class="mt-4 p-2 bg-gray-100"
+      class="mt-4 bg-gray-100 p-2"
     />
   </div>
 </template>

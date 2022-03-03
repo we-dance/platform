@@ -1,23 +1,23 @@
 <template>
   <TLoader v-if="loading" />
-  <div v-else class="flex flex-col h-full">
+  <div v-else class="flex h-full flex-col">
     <THeader
       :title="$t('conversation.userName', { username: receiver.username })"
     />
-    <div v-if="!chat || !chat.createdAt" class="p-16 text-xs text-center">
+    <div v-if="!chat || !chat.createdAt" class="p-16 text-center text-xs">
       {{ $t('conversation.empty') }}
     </div>
-    <div v-else class="overflow-y-scroll flex-grow">
+    <div v-else class="flex-grow overflow-y-scroll">
       <div
         v-for="item in chat.messages"
         :key="item.createdAt"
-        class="border-b p-4 flex items-start"
+        class="flex items-start border-b p-4"
       >
         <div class="w-12 flex-shrink-0">
           <TAvatar photo size="md" :uid="item.createdBy" />
         </div>
         <div class="flex-grow">
-          <div class="text-xs space-x-1 text-gray-900 flex">
+          <div class="flex space-x-1 text-xs text-gray-900">
             <TAvatar name :uid="item.createdBy" />
             <span>•</span>
             <div>{{ dateDiff(item.createdAt) }}</div>
@@ -26,7 +26,7 @@
           <TPreview class="text-sm leading-tight" :content="item.text" />
         </div>
       </div>
-      <div class="text-xs p-4 text-center">
+      <div class="p-4 text-center text-xs">
         <div v-if="chat.lastSeen[receiverUid]">
           <NuxtLink :to="`/${receiver.username}`" class="underline">{{
             receiver.username
@@ -48,7 +48,7 @@
         cols="30"
         rows="2"
         :placeholder="$t('conversation.newMessage.placeholder')"
-        class="w-full p-4 border-t border-b"
+        class="w-full border-t border-b p-4"
         @keyup.enter="send"
       ></textarea>
       <div class="flex justify-end">

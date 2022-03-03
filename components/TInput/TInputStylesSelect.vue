@@ -3,7 +3,7 @@
     <div
       v-for="style in getStyles(value)"
       :key="style.id"
-      class="flex mb-2 items-center"
+      class="mb-2 flex items-center"
     >
       <div class="w-1/2">
         {{ style.name }}

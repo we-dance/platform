@@ -34,10 +34,10 @@
 
     <template v-if="uid === profile.id">
       <div v-if="intro.visible" class="m-4 rounded border p-4">
-        <h2 class="border-b p-4 font-bold text-lg -m-4 mb-4">
+        <h2 class="-m-4 mb-4 border-b p-4 text-lg font-bold">
           {{ $t('myprofile.intro.title') }}
         </h2>
-        <div class="typo">
+        <div class="prose prose-base prose-slate">
           <p>
             {{ $t('myprofile.intro.description1') }}
           </p>
@@ -121,9 +121,9 @@
         size="sm"
       />
 
-      <div class="my-2 px-4 flex justify-between">
+      <div class="my-2 flex justify-between px-4">
         <div class="flex items-center">
-          <div class="font-bold text-lg leading-none">
+          <div class="text-lg font-bold leading-none">
             {{ profile.name }}
           </div>
           <div class="ml-2 text-sm text-gray-700">
@@ -149,12 +149,12 @@
         >
       </div>
 
-      <div v-if="profile.bio && profile.bio.length > 140" class="mb-2">
+      <div v-if="profile.bio && profile.bio.length > 140" class="mb-2 px-4">
         {{ profile.bio }}
       </div>
     </template>
 
-    <TProfileContacts :profile="profile" class="p-2 mb-4 bg-gray-100" />
+    <TProfileContacts :profile="profile" class="mb-4 bg-gray-100 p-2" />
 
     <div v-if="uid === profile.id" class="flex justify-center space-x-2">
       <TButton :label="$t('myprofile.edit')" to="/settings?tab=profile" />
@@ -164,14 +164,14 @@
       v-if="profile.partner === 'Yes'"
       :title="$t('profile.partnerSearch.title')"
       :description="profile.partnerBio"
-      class="w-full mt-4"
+      class="mt-4 w-full"
     />
 
     <TPreview v-if="profile.story" :content="profile.story" class="p-4" />
 
     <TEventList
       v-if="profile.type !== 'City'"
-      :filter="{ createdBy: profile.createdBy }"
+      :filter="{ 'org.username': profile.username }"
       class="mt-4 w-full"
     />
 
@@ -182,7 +182,7 @@
       class="mt-4 w-full"
     />
 
-    <div v-if="uid === profile.id" class="w-full flex justify-center p-4">
+    <div v-if="uid === profile.id" class="flex w-full justify-center p-4">
       <TButton to="/events/-/edit" type="primary">{{
         $t('myprofile.addEvent')
       }}</TButton>
@@ -190,16 +190,14 @@
 
     <TProfileDetails v-if="profile.type !== 'City'" :profile="profile" />
 
-    <div v-if="uid === profile.id" class="w-full flex justify-center p-4 mt-4">
+    <div v-if="uid === profile.id" class="mt-4 flex w-full justify-center p-4">
       <TButton to="/posts/-/edit" type="primary">{{
         $t('myprofile.addPost')
       }}</TButton>
     </div>
 
     <TPostList
-      :filter="{ createdBy: profile.createdBy }"
-      hide-media
-      hide-comments
+      :filter="{ username: profile.username }"
       class="mt-4 w-full border-t"
     />
   </div>

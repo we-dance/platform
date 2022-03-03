@@ -1,3 +1,4 @@
+import * as Sentry from '@sentry/node'
 import * as functions from 'firebase-functions'
 import * as express from 'express'
 import * as cors from 'cors'
@@ -8,6 +9,10 @@ import { initIndex, profileToAlgolia, removeObject } from './lib/algolia'
 import { generateSocialCover } from './lib/migrations'
 import { firestore as db, admin } from './firebase'
 import { notifySlackAboutEvents, notifySlackAboutUsers } from './lib/slack'
+import config from './env'
+import { wrap } from './sentry'
+
+Sentry.init(config.sentry)
 
 const app = express()
 app.use(cors({ origin: true }))
@@ -108,7 +113,9 @@ type RecipientList = {
   }
 }
 
-export const hooks = functions.runWith({ memory: '1GB' }).https.onRequest(app)
+export const hooks = functions
+  .runWith({ memory: '1GB' })
+  .https.onRequest(wrap(app))
 
 const render = (templateString: string, data: Object) => {
   const templator = Handlebars.compile(templateString)
@@ -116,6 +123,10 @@ const render = (templateString: string, data: Object) => {
 }
 
 function wasChanged(prev: any, next: any, fields: string[]) {
+  if (!prev || !next) {
+    return true
+  }
+
   return !fields.every((field: string) => prev[field] === next[field])
 }
 
@@ -146,19 +157,11 @@ export const onProfileChange = functions.firestore
       await removeObject(profileId)
     }
 
-    if (!profile || !profile.username || !profile.place) {
+    if (!profile || !profile.username) {
       return
     }
 
-    const cacheFields = [
-      'username',
-      'photo',
-      'height',
-      'weight',
-      'bio',
-      'community',
-      'locales',
-    ]
+    const cacheFields = ['username', 'photo']
 
     const needsCacheUpdate = wasChanged(oldProfile, profile, cacheFields)
 
@@ -171,23 +174,7 @@ export const onProfileChange = functions.firestore
         .update({ [`profiles.${profileId}`]: profileCache })
     }
 
-    const canBoost =
-      profile.permission === 'Yes' &&
-      profile.photo &&
-      profile.styles &&
-      profile.bio &&
-      profile.type
-
-    if (canBoost && oldProfile?.photo !== profile.photo) {
-      await generateSocialCover(profile)
-    }
-
-    const cache = (
-      await db
-        .collection('app')
-        .doc('v2')
-        .get()
-    ).data() as any
+    const cache = (await db.collection('app').doc('v2').get()).data() as any
 
     const index = initIndex('profiles')
 
@@ -203,84 +190,37 @@ export const onProfileChange = functions.firestore
       )
     }
 
-    if (oldProfile?.place === profile.place) {
-      return
+    const canBoost =
+      profile.permission === 'Yes' &&
+      profile.photo &&
+      profile.styles &&
+      profile.bio &&
+      profile.type
+
+    if (canBoost && oldProfile?.photo !== profile.photo) {
+      await generateSocialCover(profile)
     }
+  })
 
-    const account = (
-      await db
-        .collection('accounts')
-        .doc(profileId)
-        .get()
-    ).data()
+export const profileCreated = functions.firestore
+  .document('profiles/{profileId}')
+  .onCreate(async (snapshot, context) => {
+    const profile = snapshot.data() as any
+    const profileId = context.params.profileId
+    const cache = (await db.collection('app').doc('v2').get()).data() as any
 
-    if (!account) {
-      throw Error(`Account ${profileId} not found`)
-    }
+    const cityName = cache.cities[profile.place]?.name || 'International'
 
-    const rsvps = await db
-      .collection('participants')
-      .where('participant.email', '==', account.email)
-      .get()
+    const message = `New dancer in ${cityName} - https://wedance.vip/${profile.username}\n\nUID:${profileId}`
 
-    const accountInfo = {
-      name: '',
-      phone: '',
-    }
+    await notifySlackAboutUsers(message)
+  })
 
-    rsvps.forEach(async (currentRsvp) => {
-      const rsvp = currentRsvp.data()
-
-      if (rsvp && rsvp.participant && rsvp.participant.name) {
-        accountInfo.name = rsvp.participant.name
-      }
-
-      if (rsvp && rsvp.participant && rsvp.participant.phone) {
-        accountInfo.phone = rsvp.participant.phone
-      }
-
-      await currentRsvp.ref.update({ uid: profileId })
-    })
-
-    await db
-      .collection('accounts')
-      .doc(profileId)
-      .update(accountInfo)
-
-    const cities = await db
-      .collection('cities')
-      .where('location.place_id', '==', profile.place)
-      .get()
-
-    let city: any
-
-    cities.forEach((currentCity) => {
-      city = currentCity.data()
-    })
-
-    if (!city || !city.name) {
-      await db.collection('errors').add({
-        uid: profileId,
-        username: profile.username,
-        context: {
-          placeId: profile.place,
-        },
-        error: 'City not found',
-      })
-
-      throw Error(`City ${profile.place} not found for ${profile.username}`)
-    }
-
-    if (!city.telegram) {
-      await db.collection('errors').add({
-        uid: profileId,
-        username: profile.username,
-        context: {
-          city: city.name,
-        },
-        error: 'No chat for city',
-      })
-    }
+export const accountCreated = functions.firestore
+  .document('accounts/{accountId}')
+  .onCreate(async (snapshot, context) => {
+    const account = snapshot.data() as any
+    const accountId = context.params.accountId
 
     let emailTemplate: any
     let emailTemplateId: any
@@ -301,18 +241,16 @@ export const onProfileChange = functions.firestore
       !emailTemplate.subject ||
       !emailTemplate.content
     ) {
-      throw Error(`Email template welcome not found`)
+      return
     }
 
     const data = {
-      profile,
       account,
-      city,
     }
 
     const recipients = {
-      [profileId]: {
-        name: account.name || account.name,
+      [accountId]: {
+        name: account.name,
         email: account.email,
       },
     }
@@ -330,29 +268,10 @@ export const onProfileChange = functions.firestore
       .collection('templates')
       .doc(emailTemplate.id)
       .update({
-        [`recipients.${profileId}`]: recipients[profileId],
+        [`recipients.${accountId}`]: recipients[accountId],
       })
 
     return await sendEmail(emailData)
-  })
-
-export const profileCreated = functions.firestore
-  .document('profiles/{profileId}')
-  .onCreate(async (snapshot, context) => {
-    const profile = snapshot.data() as any
-    const profileId = context.params.profileId
-    const cache = (
-      await db
-        .collection('app')
-        .doc('v2')
-        .get()
-    ).data() as any
-
-    const cityName = cache.cities[profile.place]?.name || 'International'
-
-    const message = `New dancer in ${cityName} - https://wedance.vip/${profile.username}\n\nUID:${profileId}`
-
-    await notifySlackAboutUsers(message)
   })
 
 export const eventCreated = functions.firestore
@@ -365,12 +284,7 @@ export const eventCreated = functions.firestore
       return
     }
 
-    const cache = (
-      await db
-        .collection('app')
-        .doc('v2')
-        .get()
-    ).data() as any
+    const cache = (await db.collection('app').doc('v2').get()).data() as any
 
     const cityName = cache.cities[event.place]?.name || 'International'
     const promoter = cache.profiles[event.promotedBy]?.username || 'Unknown'
@@ -422,10 +336,7 @@ export const eventConfirmation = functions.firestore
     }
 
     const event: any = (
-      await db
-        .collection('posts')
-        .doc(rsvp.eventId)
-        .get()
+      await db.collection('posts').doc(rsvp.eventId).get()
     ).data()
 
     const subject = event.name
@@ -464,12 +375,7 @@ async function getAccountByUsername(username: string) {
 
   const id = profiles.docs[0].id
 
-  const account: any = (
-    await db
-      .collection('accounts')
-      .doc(id)
-      .get()
-  ).data()
+  const account: any = (await db.collection('accounts').doc(id).get()).data()
 
   account.id = id
 
@@ -483,10 +389,7 @@ export const commentNotification = functions.firestore
     const commentId = context.params.commentId
 
     const post: any = (
-      await db
-        .collection('posts')
-        .doc(comment.postId)
-        .get()
+      await db.collection('posts').doc(comment.postId).get()
     ).data()
 
     if (!post.watch) {
@@ -552,15 +455,10 @@ export const matchNotification = functions.firestore
     delete after.members[after.lastMessageBy]
     const to = Object.keys(after.members)[0]
 
-    const toAccount = (
-      await db
-        .collection('accounts')
-        .doc(to)
-        .get()
-    ).data()
+    const toAccount = (await db.collection('accounts').doc(to).get()).data()
 
     if (!toAccount) {
-      throw Error('toAccount not found')
+      throw new Error('toAccount not found')
     }
 
     const subject = 'You’ve got a new message'

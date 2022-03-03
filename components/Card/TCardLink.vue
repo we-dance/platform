@@ -1,10 +1,10 @@
 <template>
-  <component v-if="component" :is="component" :url="url" />
-  <div v-else class="p-4 text-xs text-center">
+  <component :is="component" v-if="component" :url="url" />
+  <div v-else class="p-4 text-center text-xs">
     <a
       :href="url"
       target="_blank"
-      class="underline text-blue-500 hover:no-underline "
+      class="text-blue-500 underline hover:no-underline"
       >{{ url }}</a
     >
   </div>

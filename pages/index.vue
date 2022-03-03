@@ -1,5 +1,5 @@
 <template>
-  <div class="font-noto bg-dark min-h-screen">
+  <div class="min-h-screen bg-dark font-noto">
     <main>
       <div class="relative sm:overflow-hidden">
         <div class="absolute inset-x-0 bottom-0 h-1/2 bg-gray-100" />
@@ -23,7 +23,7 @@
               <div class="absolute inset-0 bg-black opacity-50" />
             </div>
 
-            <nav class="relative flex p-4 justify-end">
+            <nav class="relative flex justify-end p-4">
               <TButton
                 allow-guests
                 type="simple"
@@ -38,19 +38,19 @@
               </div>
 
               <p
-                class="mt-2 max-w-lg mx-auto text-center sm:max-w-3xl text-white"
+                class="mx-auto mt-2 max-w-lg text-center text-white sm:max-w-3xl"
               >
                 {{ $t('hero.motto') }}
               </p>
 
-              <div class="max-w-lg mx-auto">
+              <div class="mx-auto max-w-lg">
                 <TButton
                   allow-guests
                   icon="search"
                   :label="$t('hero.search')"
                   to="/search"
                   type="void"
-                  class="mt-8 w-full text-gray-500 bg-white hover:bg-gray-100 font-semibold py-2 px-4 border border-gray-400 rounded-full shadow"
+                  class="mt-8 w-full rounded-full border border-gray-400 bg-white py-2 px-4 font-semibold text-gray-500 shadow hover:bg-gray-100"
                 />
               </div>
 
@@ -84,23 +84,22 @@
               </div>
 
               <p
-                class="mt-8 max-w-lg mx-auto text-center sm:max-w-3xl text-white"
+                class="mx-auto mt-8 max-w-lg text-center text-white sm:max-w-3xl"
               >
-                Salsa, Bachata, Kizomba, Urban Kiz, Raggaeton, Casino, Tango and
-                130 more dance styles
+                {{ $t('hero.submotto') }}
               </p>
             </div>
           </div>
         </div>
       </div>
-      <div class="p-4 bg-light">
+      <div class="bg-light p-4">
         <div
-          class="md:grid md:grid-cols-2 lg:grid-cols-3 md:gap-4 max-w-4xl mx-auto"
+          class="mx-auto max-w-4xl md:grid md:grid-cols-2 md:gap-4 lg:grid-cols-3"
         >
-          <div class="py-8 space-y-1 bg-light">
-            <div class="flex justify-center ">
+          <div class="space-y-1 bg-light py-8">
+            <div class="flex justify-center">
               <div
-                class="flex items-center justify-center w-20 h-20 bg-white rounded-full "
+                class="flex h-20 w-20 items-center justify-center rounded-full bg-white"
               >
                 <img
                   src="/img/event-calendar.svg"
@@ -108,17 +107,17 @@
                 />
               </div>
             </div>
-            <h3 class="text-2xl font-extrabold text-center">
+            <h3 class="text-center text-2xl font-extrabold">
               {{ $t('features.calendar.title') }}
             </h3>
             <p class="text-center">
               {{ $t('features.calendar.description') }}
             </p>
           </div>
-          <div class="py-8 space-y-1 bg-light">
-            <div class="flex justify-center ">
+          <div class="space-y-1 bg-light py-8">
+            <div class="flex justify-center">
               <div
-                class="flex items-center justify-center w-20 h-20 bg-white rounded-full "
+                class="flex h-20 w-20 items-center justify-center rounded-full bg-white"
               >
                 <img
                   src="/img/dance-partners.svg"
@@ -126,17 +125,17 @@
                 />
               </div>
             </div>
-            <h3 class="text-2xl font-extrabold text-center">
+            <h3 class="text-center text-2xl font-extrabold">
               {{ $t('features.dancePartners.title') }}
             </h3>
             <p class="text-center">
               {{ $t('features.dancePartners.description') }}
             </p>
           </div>
-          <div class="py-8 space-y-1 bg-light">
-            <div class="flex justify-center ">
+          <div class="space-y-1 bg-light py-8">
+            <div class="flex justify-center">
               <div
-                class="flex items-center justify-center w-20 h-20 bg-white rounded-full "
+                class="flex h-20 w-20 items-center justify-center rounded-full bg-white"
               >
                 <img
                   src="/img/city-chats.svg"
@@ -144,17 +143,17 @@
                 />
               </div>
             </div>
-            <h3 class="text-2xl font-extrabold text-center">
+            <h3 class="text-center text-2xl font-extrabold">
               {{ $t('features.cityChats.title') }}
             </h3>
             <p class="text-center">
               {{ $t('features.cityChats.description') }}
             </p>
           </div>
-          <div class="py-8 space-y-1 bg-light">
-            <div class="flex justify-center ">
+          <div class="space-y-1 bg-light py-8">
+            <div class="flex justify-center">
               <div
-                class="flex items-center justify-center w-20 h-20 bg-white rounded-full "
+                class="flex h-20 w-20 items-center justify-center rounded-full bg-white"
               >
                 <img
                   src="/img/dance-travel.svg"
@@ -162,17 +161,17 @@
                 />
               </div>
             </div>
-            <h3 class="text-2xl font-extrabold text-center">
+            <h3 class="text-center text-2xl font-extrabold">
               {{ $t('features.danceTravel.title') }}
             </h3>
             <p class="text-center">
               {{ $t('features.danceTravel.description') }}
             </p>
           </div>
-          <div class="py-8 space-y-1 bg-light">
-            <div class="flex justify-center ">
+          <div class="space-y-1 bg-light py-8">
+            <div class="flex justify-center">
               <div
-                class="flex items-center justify-center w-20 h-20 bg-white rounded-full "
+                class="flex h-20 w-20 items-center justify-center rounded-full bg-white"
               >
                 <img
                   src="/img/volunteer.svg"
@@ -180,27 +179,27 @@
                 />
               </div>
             </div>
-            <h3 class="text-2xl font-extrabold text-center">
+            <h3 class="text-center text-2xl font-extrabold">
               {{ $t('features.volunteer.title') }}
             </h3>
             <p class="text-center">
               {{ $t('features.volunteer.description') }}<br />
               <NuxtLink
                 to="/get-involved"
-                class="underline font-bold hover:no-underline"
+                class="font-bold underline hover:no-underline"
                 >{{ $t('features.volunteer.action') }}</NuxtLink
               >
             </p>
           </div>
-          <div class="py-8 space-y-1 bg-light">
-            <div class="flex justify-center ">
+          <div class="space-y-1 bg-light py-8">
+            <div class="flex justify-center">
               <div
-                class="flex items-center justify-center w-20 h-20 bg-white rounded-full "
+                class="flex h-20 w-20 items-center justify-center rounded-full bg-white"
               >
                 <img src="/img/interviews.svg" alt="Interviews" />
               </div>
             </div>
-            <h3 class="text-2xl font-extrabold text-center">
+            <h3 class="text-center text-2xl font-extrabold">
               {{ $t('features.interviews.title') }}
             </h3>
             <p class="text-center">
@@ -208,23 +207,23 @@
               <a
                 href="https://anchor.fm/wedance"
                 target="_blank"
-                class="underline font-bold hover:no-underline"
+                class="font-bold underline hover:no-underline"
                 >{{ $t('features.interviews.action') }}</a
               >
             </p>
           </div>
         </div>
       </div>
-      <div class="bg-gray-100 py-4 flex justify-center">
-        <div class="max-w-md py-4 space-y-1">
+      <div class="flex justify-center bg-gray-100 py-4">
+        <div class="max-w-md space-y-1 py-4">
           <div class="flex justify-center"></div>
-          <h3 class="text-2xl font-extrabold text-center">
+          <h3 class="text-center text-2xl font-extrabold">
             {{ $t('international.title') }}
           </h3>
           <p class="text-center">
             {{ $t('international.description') }}
           </p>
-          <div class="p-4 flex flex-wrap gap-2 items-center justify-center">
+          <div class="flex flex-wrap items-center justify-center gap-2 p-4">
             <TButton
               allow-guests
               icon="youtube"
@@ -273,7 +272,7 @@
     </main>
 
     <div class="bg-dark text-white">
-      <TFooter class="p-4 mx-auto max-w-4xl" />
+      <TFooter class="mx-auto max-w-4xl p-4" />
     </div>
   </div>
 </template>

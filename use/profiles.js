@@ -7,59 +7,13 @@ import { useCommon } from '~/use/common'
 export const useProfiles = () => {
   const { t } = useI18n()
   const { accountFields } = useAccounts()
-  const { yesNoOptions } = useCommon()
+  const { yesNoOptions, visibilityOptions, genderList, days } = useCommon()
 
   const { read, loading } = useApp()
   const { getById } = useCollection('profiles')
 
   const getFullProfile = (uid) => getById(uid) || {}
   const getProfile = (uid) => read('profiles', uid) || {}
-
-  const genderList = [
-    {
-      label: t('female'),
-      value: 'Female',
-    },
-    {
-      label: t('male'),
-      value: 'Male',
-    },
-    {
-      label: t('other'),
-      value: 'Other',
-    },
-  ]
-
-  const days = [
-    {
-      label: t('Monday'),
-      value: 'Monday',
-    },
-    {
-      label: t('Tuesday'),
-      value: 'Tuesday',
-    },
-    {
-      label: t('Wednesday'),
-      value: 'Wednesday',
-    },
-    {
-      label: t('Thursday'),
-      value: 'Thursday',
-    },
-    {
-      label: t('Friday'),
-      value: 'Friday',
-    },
-    {
-      label: t('Saturday'),
-      value: 'Saturday',
-    },
-    {
-      label: t('Sunday'),
-      value: 'Sunday',
-    },
-  ]
 
   const meetingPlaces = [
     {
@@ -187,21 +141,6 @@ export const useProfiles = () => {
     },
   ]
 
-  const visibilityOptions = [
-    {
-      label: t('visibilityOptions.public'),
-      value: 'Public',
-    },
-    {
-      label: t('visibilityOptions.members'),
-      value: 'Members',
-    },
-    {
-      label: t('visibilityOptions.unlisted'),
-      value: 'Unlisted',
-    },
-  ]
-
   const profileFields = [
     {
       name: 'photo',
@@ -260,11 +199,11 @@ export const useProfiles = () => {
     },
     {
       name: 'visibility',
-      label: t('profile.visibility.label'),
+      label: t('visibility.label'),
       poster: true,
       component: 'TInputButtons',
       options: visibilityOptions,
-      description: t('profile.visibility.description'),
+      description: t('visibility.description'),
     },
     {
       name: 'permission',

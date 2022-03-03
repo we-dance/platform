@@ -1,7 +1,7 @@
 <template>
   <div>
     <THeader :title="$t('feed.title')" />
-    <div class="border-b p-4 flex items-start">
+    <div class="flex items-start border-b p-4">
       <div class="w-10 flex-shrink-0">
         <TAvatar photo size="md" :uid="uid" />
       </div>
@@ -11,7 +11,7 @@
           cols="30"
           rows="2"
           :placeholder="$t('feed.newMessage.input')"
-          class="w-full p-4 border text-sm"
+          class="w-full border p-4 text-sm"
         ></textarea>
         <div class="flex justify-between">
           <TInputSelectSmall v-model="postType" :options="postTypeList" />
@@ -22,7 +22,7 @@
       </div>
     </div>
 
-    <div class="border-b p-4 flex">
+    <div class="flex border-b p-4">
       <TInputSelect v-model="filterType" :options="filterTypeList" />
     </div>
 
@@ -40,6 +40,7 @@ import { getUrlFromText } from '~/utils'
 import { usePosts } from '~/use/posts'
 
 export default {
+  name: 'Feed',
   setup() {
     const { uid, username } = useAuth()
     const { currentCity } = useCities()

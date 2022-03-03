@@ -8,10 +8,10 @@
     <template v-slot:item="{ item }">
       <NuxtLink
         :to="`/lists/${item.id}`"
-        class="rounded bg-white shadow border hover:bg-gray-100 px-4 py-2 block"
+        class="block rounded border bg-white px-4 py-2 shadow hover:bg-gray-100"
       >
         <h3 class="text-sm font-bold">{{ item.label }}</h3>
-        <div class="text-gray-700 text-xs">
+        <div class="text-xs text-gray-700">
           {{ Object.keys(item.posts).length }} items
         </div>
       </NuxtLink>

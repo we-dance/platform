@@ -1,12 +1,12 @@
 {
   "name": "we-dance",
-  "version": "2.6.0",
+  "version": "2.7.0",
   "description": "Uniting dancers worldwide",
   "author": "WeDance",
   "private": true,
   "scripts": {
     "dev": "nuxt dev --spa",
-    "build": "nuxt generate",
+    "build": "yarn lint && nuxt generate",
     "start": "nuxt start",
     "lint": "eslint --ext .js,.vue --ignore-path .gitignore .",
     "test": "jest"
@@ -76,6 +76,7 @@
     "@nuxtjs/eslint-module": "^1.0.0",
     "@nuxtjs/google-fonts": "^1.2.0",
     "@nuxtjs/stylelint-module": "^3.1.0",
+    "@tailwindcss/typography": "^0.5.1",
     "@vue/test-utils": "^1.0.0-beta.27",
     "autoprefixer": "^10.4.2",
     "babel-eslint": "^10.0.1",
@@ -89,7 +90,8 @@
     "lint-staged": "^10.0.0",
     "node-sass": "4.14",
     "postcss": "^8.4.5",
-    "prettier": "^1.19.1",
+    "prettier": "2.5.1",
+    "prettier-plugin-tailwindcss": "^0.1.6",
     "sass-loader": "10.1.1",
     "stylelint": "^10.1.0",
     "tailwindcss": "^3.0.16",

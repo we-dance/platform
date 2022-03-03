@@ -2,8 +2,8 @@
   <div>
     <NuxtLink
       v-for="style in getStyles(value, 0, false, max)"
-      :to="`/dance/${style.id}`"
       :key="style.id"
+      :to="`/dance/${style.id}`"
       :class="getClasses(style)"
     >
       {{ style.name

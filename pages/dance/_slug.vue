@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div class="typo p-4 border-b">
+    <div class="prose prose-base prose-slate border-b p-4">
       <h1>{{ page.name }}</h1>
       <p v-if="page.synonyms" class="italic">
         Also known as {{ page.synonyms }}
@@ -33,58 +33,58 @@
       </div>
 
       <table class="mt-4 min-w-full divide-y divide-gray-200">
-        <tbody class="bg-white divide-y divide-gray-200">
+        <tbody class="divide-y divide-gray-200 bg-white">
           <tr>
             <th
-              class="bg-gray-100 px-3 py-2 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
+              class="bg-gray-100 px-3 py-2 text-left text-xs font-medium uppercase tracking-wider text-gray-500"
             >
               Region
             </th>
-            <td class="px-3 py-2 whitespace-nowrap text-sm text-gray-500">
+            <td class="whitespace-nowrap px-3 py-2 text-sm text-gray-500">
               {{ page.region }}
             </td>
           </tr>
 
           <tr>
             <th
-              class="bg-gray-100 px-3 py-2 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
+              class="bg-gray-100 px-3 py-2 text-left text-xs font-medium uppercase tracking-wider text-gray-500"
             >
               Origins
             </th>
-            <td class="px-3 py-2 whitespace-nowrap text-sm text-gray-500">
+            <td class="whitespace-nowrap px-3 py-2 text-sm text-gray-500">
               {{ page.origins }}
             </td>
           </tr>
 
           <tr>
             <th
-              class="bg-gray-100 px-3 py-2 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
+              class="bg-gray-100 px-3 py-2 text-left text-xs font-medium uppercase tracking-wider text-gray-500"
             >
               Parent
             </th>
-            <td class="px-3 py-2 whitespace-nowrap text-sm text-gray-500">
+            <td class="whitespace-nowrap px-3 py-2 text-sm text-gray-500">
               {{ page.parent }}
             </td>
           </tr>
 
           <tr>
             <th
-              class="bg-gray-100 px-3 py-2 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
+              class="bg-gray-100 px-3 py-2 text-left text-xs font-medium uppercase tracking-wider text-gray-500"
             >
               Type
             </th>
-            <td class="px-3 py-2 whitespace-nowrap text-sm text-gray-500">
+            <td class="whitespace-nowrap px-3 py-2 text-sm text-gray-500">
               {{ page.type }}
             </td>
           </tr>
 
           <tr>
             <th
-              class="bg-gray-100 px-3 py-2 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
+              class="bg-gray-100 px-3 py-2 text-left text-xs font-medium uppercase tracking-wider text-gray-500"
             >
               Year
             </th>
-            <td class="px-3 py-2 whitespace-nowrap text-sm text-gray-500">
+            <td class="whitespace-nowrap px-3 py-2 text-sm text-gray-500">
               {{ page.year }}
             </td>
           </tr>
@@ -123,9 +123,7 @@ export default {
 
     try {
       page = await $content(`styles/${slug}`).fetch()
-      related = await $content(`styles`)
-        .where({ family: page.family })
-        .fetch()
+      related = await $content(`styles`).where({ family: page.family }).fetch()
       pageFound = true
     } catch (e) {}
 

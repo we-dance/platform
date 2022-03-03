@@ -1,9 +1,9 @@
 <template>
   <div>
     <component
+      :is="children.component"
       v-for="(item, index) in value"
       :key="`${children.component}-${index}`"
-      :is="children.component"
       v-model="internalValue[index]"
       v-bind="children"
     />
@@ -17,9 +17,6 @@
 
 <script>
 export default {
-  data: () => ({
-    internalValue: [],
-  }),
   props: {
     value: {
       type: [Array, String],
@@ -30,10 +27,20 @@ export default {
       default: () => ({}),
     },
   },
+  data: () => ({
+    internalValue: [],
+  }),
   watch: {
+    value(val) {
+      this.internalValue = val
+    },
     internalValue: {
       deep: true,
-      handler(val) {
+      handler(val, old) {
+        if (val && old && val.length === old.length) {
+          return
+        }
+
         let filtered = []
 
         if (val) {

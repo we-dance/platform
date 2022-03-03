@@ -2,11 +2,8 @@
   <TSharePreview
     :type="event.type"
     collection="events"
-    :claimed="event.claimed"
-    :username="
-      (event.claimed === 'Yes' ? event.organiser : event.promoter) ||
-        author.username
-    "
+    claimed="Yes"
+    :username="event.org ? event.org.username : ''"
     :title="event.name"
     :description="eventDate"
     :photo="event.cover"
@@ -22,10 +19,7 @@ import { db } from '~/plugins/firebase'
 export default {
   layout: 'empty',
   async asyncData({ app, params, error }) {
-    const ref = await db
-      .collection('posts')
-      .doc(params.id)
-      .get()
+    const ref = await db.collection('posts').doc(params.id).get()
 
     if (!ref.exists) {
       error({ statusCode: 404 })
@@ -35,10 +29,7 @@ export default {
     const event = ref.data()
     event.locality = addressPart(event.venue, 'locality')
 
-    const authorRef = await db
-      .collection('profiles')
-      .doc(event.createdBy)
-      .get()
+    const authorRef = await db.collection('profiles').doc(event.createdBy).get()
 
     const author = authorRef.data()
 

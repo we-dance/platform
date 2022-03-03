@@ -3,12 +3,12 @@
     <TButton
       :type="type"
       icon="fire"
-      :label="$t('report')"
+      :label="$t('post.report')"
       @click="isReportShown = true"
     />
     <TPopup
       v-if="isReportShown"
-      :title="$t('report')"
+      :title="$t('post.report')"
       @close="isReportShown = false"
     >
       <div class="p-4">
@@ -29,9 +29,11 @@
         />
         <div class="mt-4 flex justify-end">
           <TButton class="mr-2" @click="cancelReport">{{
-            $t('cancel')
+            $t('form.cancel')
           }}</TButton>
-          <TButton type="danger" @click="report">{{ $t('report') }}</TButton>
+          <TButton type="danger" @click="report">{{
+            $t('post.report')
+          }}</TButton>
         </div>
       </div>
     </TPopup>

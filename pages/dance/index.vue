@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div class="typo p-4">
+    <div class="prose prose-base prose-slate p-4">
       <h1>Dance Styles</h1>
       <div>
         <a
@@ -12,13 +12,13 @@
     </div>
     <div class="text-center">
       <div v-for="category in categories" :key="category" class="mb-4">
-        <h4 class="font-bold text-lg">{{ category }}</h4>
+        <h4 class="text-lg font-bold">{{ category }}</h4>
         <div class="text-center">
           <NuxtLink
             v-for="style in subStyles(category)"
             :key="style.id"
             :class="{ 'bg-primary text-white': contains(style.id) }"
-            class="rounded px-2 py-1 border m-1 inline-block cursor-pointer"
+            class="m-1 inline-block cursor-pointer rounded border px-2 py-1"
             :to="`/dance/${style.id}`"
           >
             <span>{{ style.name }}</span>

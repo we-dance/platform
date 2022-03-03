@@ -1,6 +1,6 @@
 <template>
   <nav
-    class="p-4 flex flex-col space-y-2 text-dark h-screen overflow-y-scroll sticky top-0 border-r"
+    class="sticky top-0 flex h-screen flex-col space-y-2 overflow-y-scroll border-r p-4 text-dark"
   >
     <TButton
       allow-guests
@@ -11,20 +11,25 @@
     />
 
     <template v-if="uid">
-      <TButton to="/feed" icon="news" :label="$t('posts.title')" type="nav" />
-      <TButton to="/events" icon="calendar" label="Calendar" type="nav" />
+      <TButton to="/feed" icon="news" :label="$t('nav.feed')" type="nav" />
+      <TButton
+        to="/events"
+        icon="calendar"
+        :label="$t('nav.calendar')"
+        type="nav"
+      />
       <TButton
         to="/community"
         icon="people"
-        :label="$t('profiles.title')"
+        :label="$t('nav.community')"
         type="nav"
       />
-      <TButton to="/chat" icon="chat" :label="$t('chat.title')" type="nav" />
+      <TButton to="/chat" icon="chat" :label="$t('nav.chat')" type="nav" />
       <TButton :to="`/${username}`" type="nav">
         <TProfilePhoto size="xs" :uid="uid" class="mr-1" />
-        <span>{{ $t('myprofile.title') }}</span>
+        <span>{{ $t('nav.myProfile') }}</span>
       </TButton>
-      <TButton to="/settings" type="nav" :label="$t('settings.title')" />
+      <TButton to="/settings" type="nav" :label="$t('nav.settings')" />
       <TButton to="/signout" type="nav" :label="$t('auth.signout')" />
     </template>
     <template v-else>
@@ -39,7 +44,7 @@
         to="/register"
         type="nav"
         :label="$t('auth.signup')"
-        class="bg-primary border-none text-white hover:bg-dark"
+        class="border-none bg-primary text-white hover:bg-dark"
       />
     </template>
 
@@ -122,6 +127,6 @@ export default {
 
 <style>
 nav .nuxt-link-exact-active {
-  @apply text-primary border-primary;
+  @apply border-primary text-primary;
 }
 </style>

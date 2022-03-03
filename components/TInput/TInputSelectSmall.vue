@@ -1,9 +1,9 @@
 <template>
-  <div class="flex-shrink-0 relative">
+  <div class="relative flex-shrink-0">
     <select
       :value="value"
       v-bind="$attrs"
-      class="block appearance-none text-xs text-gray-700 rounded px-1 pr-4"
+      class="block appearance-none rounded px-1 pr-4 text-xs text-gray-700"
       @change="change($event)"
     >
       <option
@@ -15,23 +15,23 @@
       </option>
     </select>
     <div
-      class="pointer-events-none absolute inset-y-0 right-0 flex items-center mr-1 -mt-4 text-gray-700"
+      class="pointer-events-none absolute inset-y-0 right-0 mr-1 -mt-4 flex items-center text-gray-700"
     >
-      <ChevronDownIcon class="w-3 h-3" />
+      <ChevronDownIcon class="h-3 w-3" />
     </div>
   </div>
 </template>
 
 <script>
-import { camelcase } from '~/utils'
 import { ChevronDownIcon } from '@vue-hero-icons/outline'
+import { camelcase } from '~/utils'
 
 export default {
   name: 'TInputSelect',
-  inheritAttrs: false,
   components: {
     ChevronDownIcon,
   },
+  inheritAttrs: false,
   props: {
     options: {
       type: Array,

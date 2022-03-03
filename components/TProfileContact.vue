@@ -13,10 +13,10 @@
       <div class="my-4 flex flex-col justify-center">
         <div
           v-if="!myProfile.bio || !myProfile.photo || !myProfile.languages"
-          class="mb-4 p-4 rounded border"
+          class="mb-4 rounded border p-4"
         >
           <p class="font-bold">Your profile is the best introduction:</p>
-          <ul class="list-disc ml-4">
+          <ul class="ml-4 list-disc">
             <li
               class="text-red-500"
               :class="{ 'text-green-500': myProfile.photo }"
@@ -48,7 +48,7 @@
           rows="10"
         />
 
-        <div class="flex mt-2 justify-end">
+        <div class="mt-2 flex justify-end">
           <TButton class="mr-2" @click="isWritingMessage = false"
             >Cancel</TButton
           >
@@ -58,10 +58,10 @@
     </TPopup>
 
     <TPopup v-if="showPopup">
-      <div class="flex justify-between border-b pb-2 mb-4">
+      <div class="mb-4 flex justify-between border-b pb-2">
         <div class="font-bold">Members only</div>
         <button class="cursor-pointer" @click="showPopup = false">
-          <TIcon name="close" class="cursor-pointer w-4 h-4" />
+          <TIcon name="close" class="h-4 w-4 cursor-pointer" />
         </button>
       </div>
       <div class="my-4 flex flex-col justify-center">

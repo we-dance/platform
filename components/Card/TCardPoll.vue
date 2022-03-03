@@ -1,5 +1,5 @@
 <template>
-  <div v-if="showEditor" class="border p-4 space-y-2">
+  <div v-if="showEditor" class="space-y-2 border p-4">
     <TInput
       v-for="(answer, key) in data.answers"
       :key="`answer-${key}`"
@@ -13,7 +13,7 @@
       v-for="(answer, key) in node.answers"
       :key="`answer-${key}`"
       :label="answer"
-      :toggledLabel="answer"
+      :toggled-label="answer"
       :field="answer"
       :item="node"
     />
@@ -21,13 +21,8 @@
 </template>
 
 <script>
-import {
-  LocationMarkerIcon,
-  CalendarIcon,
-  TicketIcon,
-} from '@vue-hero-icons/outline'
-import { useAuth } from '~/use/auth'
 import { computed, onMounted, ref } from 'vue-demi'
+import { useAuth } from '~/use/auth'
 import { useDoc } from '~/use/doc'
 
 export default {
@@ -41,11 +36,6 @@ export default {
       type: Boolean,
       default: false,
     },
-  },
-  components: {
-    LocationMarkerIcon,
-    CalendarIcon,
-    TicketIcon,
   },
   methods: {
     addAnswer() {

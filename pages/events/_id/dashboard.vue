@@ -5,9 +5,9 @@
   </div>
   <main
     v-else-if="!can('edit', 'posts', item)"
-    class="mt-4 mx-auto max-w-md p-4 text-sm text-center"
+    class="mx-auto mt-4 max-w-md p-4 text-center text-sm"
   >
-    {{ $t('events.dashboard.description') }}
+    {{ $t('EventDashboard.noAccess') }}
   </main>
   <div v-else>
     <TPopup
@@ -16,11 +16,8 @@
       @close="compose = false"
     >
       <div class="max-w-lg">
-        <div class="text-xs mt-4">
-          {{ selectedParticipantsList.length }}
-          {{
-            $t('events.dashboard.recipient', selectedParticipantsList.length)
-          }}:
+        <div class="mt-4 text-xs">
+          {{ selectedParticipantsList.length }} recipients:
           {{ selectedParticipantsList.join(', ') }}
         </div>
         <TForm
@@ -32,12 +29,8 @@
         />
       </div>
     </TPopup>
-    <TPopup
-      v-if="addingGuest"
-      :title="$t('events.dashboard.addGuest')"
-      @close="addingGuest = false"
-    >
-      <div class="max-w-md mx-auto py-4 max-h-screen overflow-y-scroll">
+    <TPopup v-if="addingGuest" title="Add Guest" @close="addingGuest = false">
+      <div class="mx-auto max-h-screen max-w-md overflow-y-scroll py-4">
         <TForm
           v-model="guestAccount"
           class="mt-4 space-y-4"
@@ -88,7 +81,7 @@
               <div>
                 <TProfilePhoto size="lg" :uid="item.uid" />
                 <div
-                  class="font-bold mt-2"
+                  class="mt-2 font-bold"
                   :class="{ 'text-red-500': item.rsvp === 'down' }"
                 >
                   {{ item.name }}
@@ -101,7 +94,7 @@
                     update(item.partnerId, { partnerId: '' })
                     update(item.id, { partnerId: '' })
                   "
-                  >{{ $t('events.dashboard.unlink.label') }}</TButton
+                  >{{ $t('EventDashboard.unlink') }}</TButton
                 >
               </div>
               <div
@@ -110,7 +103,7 @@
               >
                 <TProfilePhoto size="lg" :uid="item.partner.uid" />
                 <div
-                  class="font-bold mt-2"
+                  class="mt-2 font-bold"
                   :class="{ 'text-red-500': item.partner.rsvp === 'down' }"
                 >
                   {{ item.partner.name }}
@@ -128,7 +121,7 @@
                 <TIcon
                   v-if="selectedParticipants[item.id]"
                   name="check"
-                  class="w-10 h-10 border-2 rounded-full bg-green-500 text-white"
+                  class="h-10 w-10 rounded-full border-2 bg-green-500 text-white"
                 />
                 <TProfilePhoto
                   v-else
@@ -144,7 +137,7 @@
                     type="round"
                     @click="update(item.id, { rsvp: 'up', state: 'out' })"
                   >
-                    <TIcon name="rotate_right" class="text-red-500 w-4 h-4" />
+                    <TIcon name="rotate_right" class="h-4 w-4 text-red-500" />
                   </TButton>
                 </div>
                 <div
@@ -158,7 +151,7 @@
                     <div
                       v-for="(note, noteId) in item.notesArray"
                       :key="noteId"
-                      class="p-2 bg-gray-200 rounded"
+                      class="rounded bg-gray-200 p-2"
                     >
                       {{ note }}
                     </div>
@@ -190,7 +183,7 @@
                 </div>
                 <div v-if="tab === ''">
                   <div>
-                    {{ $t('events.dashboard.couple') }}:
+                    {{ $t('EventDashboard.couple') }}
                     <button
                       class="underline hover:no-underline"
                       @click="
@@ -253,37 +246,38 @@
                 v-if="tab === ''"
                 type="danger"
                 @click="update(item.id, { rsvp: 'down', state: 'out' })"
-                >{{ $t('events.dashboard.cancel') }}</TButton
+              >
+                {{ $t('EventDashboard.cancel') }}</TButton
               >
               <TButton
                 v-if="tab === 'canceled'"
                 type="danger"
                 @click="update(item.id, { rsvp: 'up', state: 'out' })"
-                >RSVP</TButton
+                >{{ $t('EventDashboard.rsvp') }}</TButton
               >
               <TButton
                 v-if="item.state !== 'in' && tab === 'out'"
                 type="danger"
                 @click="update(item.id, { rsvp: 'up', state: 'in' })"
-                >{{ $t('events.dashboard.checkIn') }}</TButton
+                >{{ $t('EventDashboard.checkIn') }}</TButton
               >
               <TButton
                 v-if="tab === 'payment'"
                 :type="item.package === 'Subscribed' ? 'success' : 'base'"
                 @click="update(item.id, { package: 'Subscribed' })"
-                >{{ $t('events.dashboard.subscribed') }}</TButton
+                >{{ $t('EventDashboard.subscribed') }}</TButton
               >
               <TButton
                 v-if="tab === 'payment'"
                 :type="item.package === 'Paid' ? 'success' : 'base'"
                 @click="update(item.id, { package: 'Paid' })"
-                >{{ $t('events.dashboard.paid') }}</TButton
+                >{{ $t('EventDashboard.paid') }}</TButton
               >
               <TButton
                 v-if="tab === 'payment'"
                 :type="!item.package ? 'success' : 'base'"
                 @click="update(item.id, { package: '' })"
-                >{{ $t('events.dashboard.notPaid') }}</TButton
+                >{{ $t('EventDashboard.notPaid') }}</TButton
               >
             </div>
           </template>

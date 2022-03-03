@@ -1,10 +1,10 @@
 <template>
   <TCardList v-bind="config" class="mx-4">
     <template v-slot:default="{ item }">
-      <div class="space-y-2 border rounded overflow-hidden">
-        <div class="flex justify-between p-4 w-full">
+      <div class="space-y-2 overflow-hidden rounded border">
+        <div class="flex w-full justify-between p-4">
           <div>
-            <div class="font-bold text-xs text-red-500">
+            <div class="text-xs font-bold text-red-500">
               {{ getDateTime(item.deletedAt) }}
             </div>
             <div><span class="font-bold">Reason:</span> {{ item.reason }}</div>

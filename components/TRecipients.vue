@@ -1,14 +1,14 @@
 <template>
   <TPopup
     title="Recipients"
-    class="p-4 border rounded mb-4"
+    class="mb-4 rounded border p-4"
     @close="$emit('close')"
   >
-    <div class="w-64 py-4 h-64 overflow-y-scroll">
+    <div class="h-64 w-64 overflow-y-scroll py-4">
       <div v-for="(items, folder) in folders" :key="folder" class="mb-2">
         <div
           v-if="items.length"
-          class="px-2 py-1 rounded font-bold cursor-pointer"
+          class="cursor-pointer rounded px-2 py-1 font-bold"
           :class="states[folder]"
           @click="current === folder ? (current = '') : (current = folder)"
         >
@@ -19,10 +19,10 @@
           <div
             v-for="(recipient, uid) in items"
             :key="uid"
-            class="flex items-center my-1"
+            class="my-1 flex items-center"
           >
             <div class="mr-4">
-              <div class="text-xs text-gray-500 leading-none">
+              <div class="text-xs leading-none text-gray-500">
                 {{ getDateTime(recipient[folder]) }}
               </div>
               <div>{{ recipient.name || recipient.email }}</div>

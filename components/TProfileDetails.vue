@@ -1,11 +1,11 @@
 <template>
-  <div class="space-y-4 mt-8 p-4 bg-gray-100">
+  <div class="mt-8 space-y-4 bg-gray-100 p-4">
     <dl v-if="profile.locales">
-      <dt class="font-bold mr-1">{{ $t('profile.languages') }}:</dt>
+      <dt class="mr-1 font-bold">{{ $t('profile.languages') }}:</dt>
       <dd>{{ getLabels(languages, profile.locales) }}</dd>
     </dl>
     <dl v-else-if="profile.languages">
-      <dt class="font-bold mr-1">{{ $t('profile.languages') }}:</dt>
+      <dt class="mr-1 font-bold">{{ $t('profile.languages') }}:</dt>
       <dd>{{ profile.languages }}</dd>
     </dl>
     <div v-if="profile.objectives">
@@ -30,17 +30,17 @@
     </div>
 
     <dl class="mt-4 md:flex">
-      <dt class="font-bold mr-1">{{ $t('profile.joined') }}:</dt>
+      <dt class="mr-1 font-bold">{{ $t('profile.joined') }}:</dt>
       <dd>{{ getDateTimeYear(profile.createdAt) }}</dd>
     </dl>
 
     <dl v-if="profile.lastLoginAt" class="mt-4 md:flex">
-      <dt class="font-bold mr-1">{{ $t('profile.profileSorts.lastSeen') }}:</dt>
+      <dt class="mr-1 font-bold">{{ $t('profile.profileSorts.lastSeen') }}:</dt>
       <dd>{{ getDateTimeYear(profile.lastLoginAt) }}</dd>
     </dl>
 
     <dl class="mt-4 md:flex">
-      <dt class="font-bold mr-1">{{ $t('profile.visibility.label') }}:</dt>
+      <dt class="mr-1 font-bold">{{ $t('visibility.label') }}:</dt>
       <dd>{{ profile.visibility }}</dd>
     </dl>
   </div>
@@ -59,11 +59,8 @@ export default {
     },
   },
   setup() {
-    const {
-      objectivesList,
-      profilePosterFields,
-      profileDetailFields,
-    } = useProfiles()
+    const { objectivesList, profilePosterFields, profileDetailFields } =
+      useProfiles()
 
     return {
       objectivesList,

@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div class="w-full flex flex-col items-center">
+    <div class="flex w-full flex-col items-center">
       <img
         v-if="value"
         :src="value"
@@ -9,15 +9,19 @@
         :class="{ 'rounded-full': circle }"
       />
       <button
-        class="underline text-blue-500 p-4 hover:no-underline"
+        class="p-4 text-blue-500 underline hover:no-underline"
         @click="showPopup = true"
       >
-        {{ placeholder }}
+        {{ placeholder || $t('photo.placeholder') }}
       </button>
     </div>
 
-    <TPopup v-if="showPopup" :title="selectLabel" @close="showPopup = false">
-      <div class="p-4 overflow-hidden">
+    <TPopup
+      v-if="showPopup"
+      :title="selectLabel || $t('photo.selectLabel')"
+      @close="showPopup = false"
+    >
+      <div class="overflow-hidden p-4">
         <div :class="!editing ? 'cursor-pointer' : ''" class="mx-auto">
           <croppa
             v-model="croppa"
@@ -25,7 +29,7 @@
             :height="height"
             prevent-white-space
             :show-remove-button="false"
-            :placeholder="selectLabel"
+            :placeholder="selectLabel || $t('photo.selectLabel')"
           />
         </div>
 
@@ -43,8 +47,10 @@
         </div>
 
         <div class="mt-4 flex justify-end space-x-2">
-          <TButton @click="clear()">Clear</TButton>
-          <TButton type="primary" @click="save()">Save</TButton>
+          <TButton @click="clear()">{{ $t('form.clear') }}</TButton>
+          <TButton type="primary" @click="save()">{{
+            $t('form.save')
+          }}</TButton>
         </div>
       </div>
     </TPopup>
@@ -72,11 +78,11 @@ export default {
     },
     placeholder: {
       type: String,
-      default: 'Change photo',
+      default: '',
     },
     selectLabel: {
       type: String,
-      default: 'Upload photo',
+      default: '',
     },
     item: {
       type: Object,

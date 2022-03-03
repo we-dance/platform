@@ -4,9 +4,9 @@
       <t-input v-model="query" placeholder="Search city" />
     </THeader>
 
-    <div v-for="city in results" :key="city.value" class="border-b flex">
+    <div v-for="city in results" :key="city.value" class="flex border-b">
       <div
-        class="flex-grow text-lg p-4 cursor-pointer hover:bg-red-100"
+        class="flex-grow cursor-pointer p-4 text-lg hover:bg-red-100"
         @click="changeCity(city.value)"
       >
         {{ city.label }}

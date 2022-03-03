@@ -1,26 +1,26 @@
 <template>
-  <div class="bg-dark md:py-4 min-h-screen">
+  <div class="min-h-screen bg-dark md:py-4">
     <div
-      class="mx-auto w-full max-w-lg md:rounded md:border md:shadow bg-white"
+      class="mx-auto w-full max-w-lg bg-white md:rounded md:border md:shadow"
     >
-      <div class="flex justify-between m-4">
+      <div class="m-4 flex justify-between">
         <TInputButtons
           value="events"
           :options="[
             {
-              label: 'Post',
+              label: $t('feed.post'),
               value: 'posts',
               to: `/posts/${item.id || '-'}/edit`,
             },
             {
-              label: 'Event',
+              label: $t('feed.event'),
               value: 'events',
               to: `/events/${item.id || '-'}/edit`,
             },
           ]"
         />
         <button class="cursor-pointer" @click="$router.back()">
-          <TIcon name="close" class="cursor-pointer w-4 h-4" />
+          <TIcon name="close" class="h-4 w-4 cursor-pointer" />
         </button>
       </div>
 
@@ -30,10 +30,7 @@
         :fields="eventFields"
         show-cancel
         vertical
-        :show-remove="!!item.id"
-        :show-copy="!!item.id"
-        :submit-label="$t('events.edit.submit.label')"
-        class="bg-white p-4 space-y-4"
+        class="space-y-4 bg-white p-4"
         @save="saveItem"
         @cancel="view(item.id)"
       />
@@ -53,12 +50,6 @@ export default {
   name: 'EventEdit',
   layout: 'empty',
   middleware: ['auth'],
-  props: {
-    id: {
-      type: String,
-      default: '-',
-    },
-  },
   watch: {
     loading(loading) {
       if (!loading && this.item) {
@@ -69,7 +60,7 @@ export default {
     },
   },
   mounted() {
-    if (this.id === '-') {
+    if (this.$route.params.id === '-') {
       this.item = {
         type: 'event',
         place: this.profile?.place,
@@ -91,6 +82,12 @@ export default {
           role: 'organiser',
         },
         username: this.profile?.username,
+        watch: {
+          count: 1,
+          list: {
+            [this.profile?.username]: true,
+          },
+        },
       }
     }
   },
@@ -138,9 +135,14 @@ export default {
 
     const collection = 'posts'
 
-    const { doc: item, load, update, remove, create, loading } = useDoc(
-      collection
-    )
+    const {
+      doc: item,
+      load,
+      update,
+      remove,
+      create,
+      loading,
+    } = useDoc(collection)
 
     if (params.id !== '-') {
       load(params.id)

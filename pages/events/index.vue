@@ -4,7 +4,7 @@
       <TButton type="nav" icon="plus" to="/events/-/edit" />
     </THeader>
 
-    <div class="space-y-2 p-2 border-b">
+    <div class="space-y-2 border-b p-2">
       <div class="flex justify-center overflow-x-scroll">
         <div class="flex flex-nowrap text-center">
           <TButton
@@ -19,7 +19,7 @@
         </div>
       </div>
 
-      <div class="md:flex md:space-x-2 space-y-2 md:space-y-0">
+      <div class="space-y-2 md:flex md:space-x-2 md:space-y-0">
         <TButton
           to="/cities?target=/events"
           icon="place"
@@ -58,10 +58,10 @@
 
       <div v-else>
         <div v-for="(items, date) in itemsByDate" :key="date" class="mb-8">
-          <h2 class="font-bold bg-dark text-white py-2 px-4">
+          <h2 class="bg-dark py-2 px-4 font-bold text-white">
             {{ getDay(date) }}, {{ getDate(date) }}
           </h2>
-          <div v-for="item in items" :key="item.id" class="px-4 mt-4">
+          <div v-for="item in items" :key="item.id" class="mt-4 px-4">
             <TEventText :item="item" />
           </div>
         </div>
@@ -117,7 +117,11 @@ export default {
     const { route, router } = useRouter()
     const { eventCategoryOptions, addLabelIcons } = useEvents()
     const { cityName, changeCityByName } = useCities()
-    const { docs, loading: loadingPosts, getById } = useCollection('posts', {
+    const {
+      docs,
+      loading: loadingPosts,
+      getById,
+    } = useCollection('posts', {
       type: 'event',
     })
     const { getProfile } = useProfiles()

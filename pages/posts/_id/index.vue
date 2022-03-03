@@ -14,7 +14,7 @@
       align="center"
     />
 
-    <TReactions :item="doc" class="p-4 justify-center" />
+    <TReactions :item="doc" class="justify-center p-4" />
 
     <TPost :item="doc" hide-comments show-all />
 

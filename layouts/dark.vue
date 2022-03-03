@@ -1,7 +1,7 @@
 <template>
-  <div class="bg-dark md:py-4 min-h-screen">
+  <div class="min-h-screen bg-dark md:py-4">
     <div
-      class="mx-auto w-full max-w-lg md:rounded md:border md:shadow bg-white"
+      class="mx-auto w-full max-w-lg bg-white md:rounded md:border md:shadow"
     >
       <nuxt />
     </div>

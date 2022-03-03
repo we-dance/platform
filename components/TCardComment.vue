@@ -5,7 +5,7 @@
       <div>{{ dateDiff(item.createdAt) }}</div>
     </TAvatar>
     <div class="mt-1">{{ item.body }}</div>
-    <div class="text-sm flex items-start mt-1">
+    <div class="mt-1 flex items-start text-sm">
       <TButton type="xs" @click="onShowForm">Reply</TButton>
     </div>
 

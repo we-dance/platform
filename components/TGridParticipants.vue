@@ -4,9 +4,9 @@
 
     <TInput v-model="nameFilter" class="mt-4" placeholder="Search" />
 
-    <div :class="{ 'overflow-y-scroll h-64': verticalScroll }" class="mt-4">
-      <div class="flex justify-center mb-4 text-xs space-x-2">
-        <div class="underline cursor-pointer" @click="selectAll(!selectedAll)">
+    <div :class="{ 'h-64 overflow-y-scroll': verticalScroll }" class="mt-4">
+      <div class="mb-4 flex justify-center space-x-2 text-xs">
+        <div class="cursor-pointer underline" @click="selectAll(!selectedAll)">
           {{ filteredItems.length }} shown
         </div>
         <div>{{ coupleCount * 2 + femaleCount + maleCount }} total</div>
@@ -17,7 +17,7 @@
       <div
         v-for="item in filteredItems"
         :key="item.id"
-        class="p-4 mb-4 border rounded"
+        class="mb-4 rounded border p-4"
         :class="selected[item.id] ? 'border-green-500' : 'border-gray-500'"
       >
         <slot :item="item" :tab="activeFilter" :view="view" :select="select" />
@@ -32,8 +32,8 @@
       :options="['name', 'contacts']"
     />
 
-    <div class="mt-4 justify-end flex">
-      <a href="#" class="underline text-blue-500" @click="download"
+    <div class="mt-4 flex justify-end">
+      <a href="#" class="text-blue-500 underline" @click="download"
         >Export CSV</a
       >
     </div>

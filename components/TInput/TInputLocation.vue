@@ -1,17 +1,17 @@
 <template>
   <div>
-    <div class="flex justify-between items-center p-2 rounded border">
+    <div class="flex items-center justify-between rounded border p-2">
       <div class="text-gray-700">{{ getLabel(value) }}</div>
-      <button class="underline text-blue-500 hover:no-underline" @click="open">
+      <button class="text-blue-500 underline hover:no-underline" @click="open">
         {{ buttonLabel }}
       </button>
     </div>
 
     <TPopup v-if="showPopup">
-      <div class="flex justify-between border-b pb-2 mb-4">
+      <div class="mb-4 flex justify-between border-b pb-2">
         <div class="font-bold">{{ popupTitle }}</div>
         <button class="cursor-pointer" @click="showPopup = false">
-          <TIcon name="close" class="cursor-pointer w-4 h-4" />
+          <TIcon name="close" class="h-4 w-4 cursor-pointer" />
         </button>
       </div>
 
@@ -19,21 +19,21 @@
       <div v-else>
         <TInput v-model="input" :placeholder="searchPlaceholder" />
 
-        <div class="border divide-y">
+        <div class="divide-y border">
           <div
             v-for="prediction in predictions"
             :key="prediction.place_id"
-            class="p-2 hover:bg-indigo-500 hover:text-white cursor-pointer"
+            class="cursor-pointer p-2 hover:bg-indigo-500 hover:text-white"
             @click="select(prediction.place_id)"
           >
             {{ prediction.description }}
           </div>
         </div>
 
-        <div class="flex justify-start mt-4">
+        <div class="mt-4 flex justify-start">
           <TButton :disabled="gpsIsBlocked" @click="requestBrowserLocation()">
             <div class="flex items-center">
-              <TIcon name="gps_fixed" class="h-4 w-4 mr-1" />
+              <TIcon name="gps_fixed" class="mr-1 h-4 w-4" />
               <div>Use my current position</div>
             </div>
           </TButton>

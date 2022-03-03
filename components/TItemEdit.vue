@@ -1,12 +1,12 @@
 <template>
   <TLoader v-if="loading" />
   <div v-else>
-    <div v-if="indexUrl" class="flex justify-between m-4">
+    <div v-if="indexUrl" class="m-4 flex justify-between">
       <div class="font-bold">{{ title }}</div>
       <TButton
         icon="close"
         type="icon"
-        class="cursor-pointer w-4 h-4"
+        class="h-4 w-4 cursor-pointer"
         :to="indexUrl"
       />
     </div>
@@ -20,7 +20,7 @@
       :show-remove="showRemove"
       :submit-label="exists ? saveLabel : addLabel"
       :edit-creator="editCreator"
-      class="p-4 space-y-4"
+      class="space-y-4 p-4"
       @save="saveItem"
       @cancel="cancelItem"
       @remove="removeItem"
