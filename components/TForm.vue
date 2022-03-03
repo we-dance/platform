@@ -134,7 +134,7 @@ export default {
     validate() {
       const validatedFields = this.fields
         .filter((f) => f.validation)
-       .filter((f) => !f.validation(this.value[f.name]))
+        .filter((f) => !f.validation(this.value[f.name]))
 
       if (validatedFields.length > 0) {
         this.errorMessage = validatedFields[0].validationErrorMessage
