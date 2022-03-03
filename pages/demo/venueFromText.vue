@@ -2,7 +2,7 @@
   <div class="block h-screen w-full">
     <input ref="place" v-model="value" class="h-5 w-1/2 bg-gray-200" />
     <button class="bg-blue-500" @click="save">{{ title }}</button>
-    <pre>{{ result }}</pre>
+    <pre class="h-full max-w-xs overflow-y-auto">{{ result }}</pre>
   </div>
 </template>
 

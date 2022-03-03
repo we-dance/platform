@@ -17,13 +17,45 @@ export const getVenueFromText = async (text) => {
   )
   const request = {
     query: text,
-    fields: ['place_id', 'formatted_address', 'name'],
+    fields: ['place_id', 'name'],
+  }
+
+  const getPlaceDetails = (requestDetails) => {
+    return new Promise((resolve, reject) => {
+      service.getDetails(requestDetails, (results, status) => {
+        if (status === google.maps.places.PlacesServiceStatus.OK) {
+          resolve(results)
+        } else {
+          reject(new Error(`Could not getDetails for place: ${status}`))
+        }
+      })
+    })
   }
 
   return new Promise((resolve, reject) => {
     service.findPlaceFromQuery(request, async (results, status) => {
       if (status === google.maps.places.PlacesServiceStatus.OK) {
         try {
+          const requestDetails = {
+            placeId: results[0].place_id,
+            fields: [
+              'place_id',
+              'formatted_address',
+              'address_components',
+              'geometry',
+              'icon',
+              'name',
+              'url',
+              'website',
+              'international_phone_number',
+            ],
+          }
+
+          const addressComponents = await getPlaceDetails(
+            requestDetails,
+            service
+          )
+
           let doc
           const firestore = firebase.firestore()
           const collection = firestore.collection('venues')
@@ -34,7 +66,7 @@ export const getVenueFromText = async (text) => {
               id: results[0].place_id,
               rooms: '',
               map: '',
-              address: results[0].formatted_address,
+              address: addressComponents,
               createdAt: Date.now(),
             })
             doc = await collection.doc(results[0].place_id).get()
@@ -44,7 +76,7 @@ export const getVenueFromText = async (text) => {
           reject(new Error(error.message))
         }
       } else {
-        reject(new Error('Could not get location'))
+        reject(new Error(`Could not get location: ${status}`))
       }
     })
   })
