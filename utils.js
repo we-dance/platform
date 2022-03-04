@@ -4,8 +4,80 @@ import MarkdownIt from 'markdown-it'
 import excerptHtml from 'excerpt-html'
 import saveAs from 'file-saver'
 import { dsvFormat } from 'd3'
+import firebase from 'firebase/app'
 import { db } from './plugins/firebase'
 import languages from '~/assets/languages'
+import 'firebase/firestore'
+import { getGoogle } from '~/use/google'
+
+export const getVenueFromText = async (text) => {
+  const google = await getGoogle()
+  const service = new google.maps.places.PlacesService(
+    document.createElement('div')
+  )
+  const request = {
+    query: text,
+    fields: ['place_id', 'name'],
+  }
+
+  const getPlaceDetails = (requestDetails) => {
+    return new Promise((resolve, reject) => {
+      service.getDetails(requestDetails, (results, status) => {
+        if (status === google.maps.places.PlacesServiceStatus.OK) {
+          resolve(results)
+        } else {
+          reject(new Error(`Could not getDetails for place: ${status}`))
+        }
+      })
+    })
+  }
+
+  return new Promise((resolve, reject) => {
+    service.findPlaceFromQuery(request, async (results, status) => {
+      if (status === google.maps.places.PlacesServiceStatus.OK) {
+        try {
+          const requestDetails = {
+            placeId: results[0].place_id,
+            fields: [
+              'place_id',
+              'formatted_address',
+              'address_components',
+              'geometry',
+              'icon',
+              'name',
+              'url',
+              'website',
+              'international_phone_number',
+            ],
+          }
+
+          const addressComponents = await getPlaceDetails(requestDetails)
+
+          let doc
+          const firestore = firebase.firestore()
+          const collection = firestore.collection('venues')
+          doc = await collection.doc(results[0].place_id).get()
+          if (!doc.exists) {
+            await collection.doc(results[0].place_id).set({
+              name: results[0].name,
+              id: results[0].place_id,
+              rooms: '',
+              map: '',
+              address: addressComponents,
+              createdAt: Date.now(),
+            })
+            doc = await collection.doc(results[0].place_id).get()
+          }
+          resolve(doc.data())
+        } catch (error) {
+          reject(new Error(error.message))
+        }
+      } else {
+        reject(new Error(`Could not get location: ${status}`))
+      }
+    })
+  })
+}
 
 export const getObjectKeysFromArray = (arr) => {
   const obj = {}
