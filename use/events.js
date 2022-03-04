@@ -181,7 +181,7 @@ export const useEvents = () => {
       labelPosition: 'top',
       placeholder: t('event.name.placeholder'),
       label: t('event.name.label'),
-      validation: (val) => !!val,
+      validation: (val) => !!val.trim(),
       validationError: 'please enter event name',
     },
     {

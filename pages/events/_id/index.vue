@@ -48,16 +48,7 @@
       <div class="md:border-l">
         <div
           v-if="item.type"
-          class="
-            flex
-            w-full
-            items-center
-            justify-start
-            border-b
-            py-2
-            px-4
-            leading-tight
-          "
+          class="flex w-full items-center justify-start border-b py-2 px-4 leading-tight"
         >
           <div class="mr-4 w-4 text-center">
             {{ getEventIcon(item.eventType) }}
@@ -93,32 +84,14 @@
 
         <div
           v-if="item.online === 'Yes'"
-          class="
-            flex
-            w-full
-            items-center
-            justify-start
-            border-b
-            py-2
-            px-4
-            leading-tight
-          "
+          class="flex w-full items-center justify-start border-b py-2 px-4 leading-tight"
         >
           <TIcon name="youtube" class="mr-4 h-4 w-4" />
           <div>{{ $t('eventView.online') }}</div>
         </div>
 
         <div
-          class="
-            flex
-            w-full
-            items-center
-            justify-start
-            border-b
-            py-2
-            px-4
-            leading-tight
-          "
+          class="flex w-full items-center justify-start border-b py-2 px-4 leading-tight"
         >
           <TIcon name="calendar" class="mr-4 h-4 w-4" />
           <div>
@@ -127,16 +100,7 @@
         </div>
 
         <div
-          class="
-            flex
-            w-full
-            items-center
-            justify-start
-            border-b
-            py-2
-            px-4
-            leading-tight
-          "
+          class="flex w-full items-center justify-start border-b py-2 px-4 leading-tight"
         >
           <TIcon name="ticket" class="mr-4 h-4 w-4" />
           <div>{{ item.price }}</div>
@@ -149,17 +113,7 @@
     </div>
 
     <div
-      class="
-        sticky
-        top-0
-        z-50
-        flex
-        justify-center
-        space-y-2
-        border-b
-        bg-white
-        p-4
-      "
+      class="sticky top-0 z-50 flex justify-center space-y-2 border-b bg-white p-4"
     >
       <TButton
         v-if="uid && item.response === 'up'"
