@@ -14,18 +14,7 @@
     </div>
     <slot name="bottom" />
     <div
-      class="
-        sticky
-        bottom-0
-        z-10
-        flex
-        items-center
-        justify-end
-        space-x-2
-        border-t
-        bg-white
-        py-4
-      "
+      class="sticky bottom-0 z-10 flex items-center justify-end space-x-2 border-t bg-white py-4"
     >
       <TButton v-if="showRemove" :label="$t('form.delete')" @click="remove" />
       <TButton v-if="showCancel" :label="$t('form.cancel')" @click="cancel" />
