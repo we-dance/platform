@@ -168,7 +168,7 @@ export const useEvents = () => {
       component: 'TInputSelect',
       options: eventTypeList,
       validation: (val) => !!val,
-      validationErrorMessage: 'please select event type',
+      validationError: 'please select event type',
     },
     {
       name: 'styles',
@@ -181,8 +181,8 @@ export const useEvents = () => {
       labelPosition: 'top',
       placeholder: t('event.name.placeholder'),
       label: t('event.name.label'),
-      validation: (val) => !!val,
-      validationErrorMessage: 'please enter event name',
+      validation: (val) => !!val?.trim(),
+      validationError: 'please enter event name',
     },
     {
       name: 'description',
@@ -201,7 +201,7 @@ export const useEvents = () => {
       simple: true,
       onChange: updateEndDate,
       validation: (val) => !!val,
-      validationErrorMessage: 'please enter a valid event start date',
+      validationError: 'please enter a valid event start date',
     },
     {
       name: 'venue',
