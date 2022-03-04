@@ -6,6 +6,7 @@
         :item="value"
         v-bind="field"
         :label="getLabel(field)"
+        :error="error[field.name]"
         @input="(val) => onFieldChange(field, val)"
       />
     </div>
@@ -14,7 +15,18 @@
     </div>
     <slot name="bottom" />
     <div
-      class="sticky bottom-0 z-10 flex items-center justify-end space-x-2 border-t bg-white py-4"
+      class="
+        sticky
+        bottom-0
+        z-10
+        flex
+        items-center
+        justify-end
+        space-x-2
+        border-t
+        bg-white
+        py-4
+      "
     >
       <TButton v-if="showRemove" :label="$t('form.delete')" @click="remove" />
       <TButton v-if="showCancel" :label="$t('form.cancel')" @click="cancel" />
@@ -121,12 +133,15 @@ export default {
       return camelcase(field.name)
     },
     validate() {
+      this.error = {}
       const failedFields = this.fields
         .filter((f) => f.validation)
         .filter((f) => !f.validation(this.value[f.name]))
 
       if (failedFields.length > 0) {
-        this.errorMessage = failedFields[0].validationError
+        for (const field of failedFields) {
+          this.error[field.name] = field.validationError
+        }
         return false
       }
       return true
@@ -144,7 +159,6 @@ export default {
       this.error = false
 
       if (!this.validate()) {
-        this.error = true
         return
       }
       this.$emit('save', this.value)
