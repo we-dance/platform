@@ -14,7 +14,18 @@
     </div>
     <slot name="bottom" />
     <div
-      class="sticky bottom-0 z-10 flex items-center justify-end space-x-2 border-t bg-white py-4"
+      class="
+        sticky
+        bottom-0
+        z-10
+        flex
+        items-center
+        justify-end
+        space-x-2
+        border-t
+        bg-white
+        py-4
+      "
     >
       <TButton v-if="showRemove" :label="$t('form.delete')" @click="remove" />
       <TButton v-if="showCancel" :label="$t('form.cancel')" @click="cancel" />
@@ -121,12 +132,12 @@ export default {
       return camelcase(field.name)
     },
     validate() {
-      const validatedFields = this.fields
+      const failedFields = this.fields
         .filter((f) => f.validation)
         .filter((f) => !f.validation(this.value[f.name]))
 
-      if (validatedFields.length > 0) {
-        this.errorMessage = validatedFields[0].validationErrorMessage
+      if (failedFields.length > 0) {
+        this.errorMessage = failedFields[0].validationError
         return false
       }
       return true
