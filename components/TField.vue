@@ -40,6 +40,9 @@
       />
       <slot name="bottom" />
     </div>
+    <div v-if="error" class="mt-2 text-sm text-red-500">
+      {{ error }}
+    </div>
     <TPopup v-if="showTips" :title="label" @close="showTips = false">
       <TPreview :content="tips" class="my-4 max-w-sm" />
     </TPopup>
@@ -68,6 +71,10 @@ export default {
     description: {
       type: String,
       default: '',
+    },
+    error: {
+      type: String,
+      default: null,
     },
     before: {
       type: String,
@@ -114,6 +121,7 @@ export default {
     computedValue() {
       return this.get(this.value)
     },
+
     hidden() {
       return this.type === 'hidden'
     },
@@ -146,7 +154,6 @@ export default {
   },
   mounted() {
     this.elementId = camelize(this.label)
-
     if (!this.value && this.default) {
       this.$emit('input', this.default)
     }

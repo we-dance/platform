@@ -6,6 +6,7 @@
         :item="value"
         v-bind="field"
         :label="getLabel(field)"
+        :error="error[field.name]"
         @input="(val) => onFieldChange(field, val)"
       />
     </div>
@@ -120,6 +121,17 @@ export default {
       return camelcase(field.name)
     },
     validate() {
+      this.error = {}
+      const failedFields = this.fields
+        .filter((f) => f.validation)
+        .filter((f) => !f.validation(this.value[f.name]))
+
+      if (failedFields.length > 0) {
+        for (const field of failedFields) {
+          this.error[field.name] = field.validationError
+        }
+        return false
+      }
       return true
     },
     copy() {
@@ -137,7 +149,6 @@ export default {
       if (!this.validate()) {
         return
       }
-
       this.$emit('save', this.value)
     },
     onFieldChange(field, value) {
