@@ -73,6 +73,7 @@ export default {
     '~/plugins/router',
     '~/plugins/directives',
     '~/plugins/vue-tailwind',
+    { src: '~/plugins/editor.js', mode: 'client' },
   ],
   /*
    ** Nuxt.js dev-modules
