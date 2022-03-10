@@ -52,14 +52,25 @@ export const getVenueFromText = async (text) => {
           }
 
           const addressComponents = await getPlaceDetails(requestDetails)
-          if (
-            addressComponents.geometry?.location &&
-            typeof addressComponents.geometry.location.lat === 'function'
-          ) {
+          if (addressComponents.geometry?.location) {
             addressComponents.geometry.location.lat =
               await addressComponents.geometry.location.lat()
             addressComponents.geometry.location.lng =
               await addressComponents.geometry.location.lng()
+            for (const [key] of Object.entries(addressComponents.geometry)) {
+              addressComponents.geometry[key] = Object.assign(
+                {},
+                addressComponents.geometry[key]
+              )
+            }
+            for (const [key] of Object.entries(
+              addressComponents.geometry.viewport
+            )) {
+              addressComponents.geometry.viewport[key] = Object.assign(
+                {},
+                addressComponents.geometry.viewport[key]
+              )
+            }
           }
 
           let doc
