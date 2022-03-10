@@ -51,10 +51,16 @@ export const getVenueFromText = async (text) => {
             ],
           }
 
-          const addressComponents = await getPlaceDetails(
-            requestDetails,
-            service
-          )
+          const addressComponents = await getPlaceDetails(requestDetails)
+          if (
+            addressComponents.geometry?.location &&
+            typeof addressComponents.geometry.location.lat === 'function'
+          ) {
+            addressComponents.geometry.location.lat =
+              await addressComponents.geometry.location.lat()
+            addressComponents.geometry.location.lng =
+              await addressComponents.geometry.location.lng()
+          }
 
           let doc
           const firestore = firebase.firestore()
