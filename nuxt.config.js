@@ -237,4 +237,7 @@ export default {
       ignored: /(node_modules)|(.git)/,
     },
   },
+  storybook: {
+    addons: ['@storybook/addon-interactions', '@storybook/addon-essentials'],
+  },
 }

@@ -9,7 +9,8 @@
     "build": "yarn lint && nuxt generate",
     "start": "nuxt start",
     "lint": "eslint --ext .js,.vue --ignore-path .gitignore .",
-    "test": "jest"
+    "test": "jest",
+    "story": "nuxt storybook"
   },
   "lint-staged": {
     "*.{js,vue}": "yarn lint",
@@ -76,6 +77,11 @@
     "@nuxtjs/eslint-module": "^1.0.0",
     "@nuxtjs/google-fonts": "^1.2.0",
     "@nuxtjs/stylelint-module": "^3.1.0",
+    "@storybook/addon-essentials": "^6.4.19",
+    "@storybook/addon-interactions": "^6.4.19",
+    "@storybook/jest": "^0.0.9",
+    "@storybook/testing-library": "^0.0.9",
+    "@tailwindcss/typography": "^0.5.1",
     "@vue/test-utils": "^1.0.0-beta.27",
     "autoprefixer": "^10.4.2",
     "babel-eslint": "^10.0.1",

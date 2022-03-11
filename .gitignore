@@ -97,3 +97,7 @@ sw.*
 # Firebase
 .firebaserc
 .vscode
+
+# storybook
+.nuxt-storybook
+storybook-static
