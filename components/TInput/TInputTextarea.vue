@@ -3,8 +3,10 @@
     <template>
       <!-- v-slot:default="{ resize }" -->
       <div>
-        <Editor @contentChanged="onChange" />
-        <!-- v-model="input"
+        <Editor />
+        <!--
+          @contentChanged="onChange"
+           v-model="input"
           v-bind="$attrs"
           class="block w-full appearance-none rounded border-2 border-gray-200 bg-gray-200 py-2 px-4 font-mono leading-tight text-gray-700 focus:border-purple-500 focus:bg-white focus:outline-none"
           @input="resize" -->
