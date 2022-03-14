@@ -1,13 +1,13 @@
 <template>
   <TResizable>
-    <template v-slot:default="{ resize }">
+    <template>
+      <!-- v-slot:default="{ resize }" -->
       <div>
-        <textarea
-          v-model="input"
+        <Editor @contentChanged="onChange" />
+        <!-- v-model="input"
           v-bind="$attrs"
           class="block w-full appearance-none rounded border-2 border-gray-200 bg-gray-200 py-2 px-4 font-mono leading-tight text-gray-700 focus:border-purple-500 focus:bg-white focus:outline-none"
-          @input="resize"
-        />
+          @input="resize" -->
         <div
           v-if="max > 0"
           class="text-right text-sm text-gray-500"
@@ -21,6 +21,7 @@
 </template>
 
 <script>
+import Editor from '~/components/Editor.vue'
 export default {
   name: 'TInputTextarea',
   props: {
@@ -37,6 +38,7 @@ export default {
       default: 0,
     },
   },
+
   computed: {
     input: {
       get() {
