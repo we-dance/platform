@@ -45,7 +45,7 @@ export const getDateObect = (val) => {
     return null
   }
 
-  if (Object.prototype.toString.call(val) === "[object Date]") {
+  if (Object.prototype.toString.call(val) === '[object Date]') {
     if (isNaN(val)) {
       return null
     }
