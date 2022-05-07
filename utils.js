@@ -31,6 +31,8 @@ export const sortBy = (_key) => {
 }
 
 export const toDatetimeLocal = (date) => {
+  if (!date) return ''
+
   return format(date, "yyyy-MM-dd'T'HH:mm", {
     awareOfUnicodeTokens: true,
   })
@@ -41,6 +43,12 @@ export const getDateObect = (val) => {
 
   if (!val) {
     return null
+  }
+
+  if (Object.prototype.toString.call(val) === "[object Date]") {
+    if (isNaN(val)) {
+      return null
+    }
   }
 
   if (typeof val.toDate === 'function') {
@@ -59,7 +67,12 @@ export const dateDiff = (val) => {
 
 export const formatDate = (val, formatStr) => {
   if (!val) return ''
-  return format(getDateObect(val), formatStr)
+
+  const date = getDateObect(val)
+
+  if (!date) return ''
+
+  return format(date, formatStr)
 }
 
 export const getDateTime = (val) => {
