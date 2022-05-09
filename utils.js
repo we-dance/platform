@@ -410,7 +410,7 @@ export const getMeta = (collection, post) => {
   }
 
   return {
-    title: post.title || getExcerpt(post.description),
+    title: post.name || post.title || getExcerpt(post.description),
     meta: [
       {
         hid: 'description',

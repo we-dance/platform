@@ -143,12 +143,14 @@
 
     <div v-if="item.artists && item.artists.length" class="space-y-2 p-4">
       <h3 class="text-xl font-bold">{{ $t('event.artists') }}</h3>
-      <WProfile
-        v-for="profile in item.artists"
-        :key="profile.username"
-        :username="profile.username"
-        :fallback="profile"
-      />
+      <div v-for="(profile, profileIndex) in item.artists"
+        :key="`artist-${profileIndex}`">
+        <WProfile
+          v-if="profile"
+          :username="profile.username"
+          :fallback="profile"
+        />
+      </div>
     </div>
 
     <div v-if="item.venue && item.venue.map" class="bg-gray-100 p-4">
@@ -253,6 +255,7 @@ import {
   getEventDescription,
   openURL,
   getDateObect,
+  getMeta
 } from '~/utils'
 import { addressPart } from '~/use/google'
 
@@ -289,58 +292,7 @@ export default {
     },
   },
   head() {
-    if (!this.item) {
-      return {}
-    }
-
-    const item = this.item
-
-    return {
-      title: item.name,
-      canonical: this.eventUrl,
-      meta: [
-        {
-          hid: 'description',
-          name: 'description',
-          content: item.excerpt,
-        },
-        {
-          hid: 'author',
-          name: 'author',
-          content: this.creator.username,
-        },
-        {
-          hid: 'publisher',
-          name: 'publisher',
-          content: this.creator.username,
-        },
-        {
-          name: 'keywords',
-          content: item.keywords,
-          hid: 'keywords',
-        },
-        {
-          property: 'og:image',
-          content: item.socialCover || item.cover,
-          hid: 'og:image',
-        },
-        {
-          property: 'og:type',
-          content: 'event',
-          hid: 'og:type',
-        },
-        {
-          property: 'og:title',
-          content: item.name,
-          hid: 'og:title',
-        },
-        {
-          property: 'og:description',
-          content: item.excerpt,
-          hid: 'og:description',
-        },
-      ],
-    }
+    return getMeta('events', this.item)
   },
   setup() {
     const {
