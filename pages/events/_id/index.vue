@@ -294,7 +294,10 @@ export default {
     },
   },
   head() {
-    return getMeta('events', this.item)
+    return getMeta('events', this.doc)
+  },
+  async asyncData(ctx) {
+    return await loadDoc(ctx, 'posts')
   },
   setup() {
     const {
