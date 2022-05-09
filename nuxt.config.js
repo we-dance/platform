@@ -4,7 +4,7 @@ export const app = {
   social: {
     twitter: 'WeDanceVIP',
   },
-  url: process.env.URL,
+  url: 'https://wedance.vip/',
   author: 'WeDance',
   cover: '/cover/wide.png',
 }
