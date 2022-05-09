@@ -143,8 +143,10 @@
 
     <div v-if="item.artists && item.artists.length" class="space-y-2 p-4">
       <h3 class="text-xl font-bold">{{ $t('event.artists') }}</h3>
-      <div v-for="(profile, profileIndex) in item.artists"
-        :key="`artist-${profileIndex}`">
+      <div
+        v-for="(profile, profileIndex) in item.artists"
+        :key="`artist-${profileIndex}`"
+      >
         <WProfile
           v-if="profile"
           :username="profile.username"
@@ -255,7 +257,7 @@ import {
   getEventDescription,
   openURL,
   getDateObect,
-  getMeta
+  getMeta,
 } from '~/utils'
 import { addressPart } from '~/use/google'
 
