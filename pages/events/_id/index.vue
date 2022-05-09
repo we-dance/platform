@@ -265,6 +265,9 @@ import { addressPart } from '~/use/google'
 export default {
   name: 'EventView',
   layout: 'default',
+  async asyncData(ctx) {
+    return await loadDoc(ctx, 'posts')
+  },
   data: () => ({
     comment: '',
   }),
@@ -296,9 +299,6 @@ export default {
   },
   head() {
     return getMeta('events', this.doc)
-  },
-  async asyncData(ctx) {
-    return await loadDoc(ctx, 'posts')
   },
   setup() {
     const {
