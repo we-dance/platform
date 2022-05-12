@@ -369,6 +369,7 @@ export async function loadDoc({ app, params, error }, collection) {
 
   if (!doc) {
     error({ statusCode: 404 })
+    return
   }
 
   doc.id = snapshot.id
