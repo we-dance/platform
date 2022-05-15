@@ -1,25 +1,23 @@
 <template>
   <div>
     <THeader :title="$t('feed.title')" />
-    <div class="border-b p-4 flex items-start">
-      <div class="w-10 flex-shrink-0">
-        <TAvatar photo size="md" :uid="uid" />
+    <div class="border-b p-4">
+      <div class="text-sm mb-4 text-center">
+        We are working on a new version of the platform. Would you like to be
+        the first one to see it?
       </div>
-      <div class="w-full">
-        <textarea
-          v-model="newMessage"
-          cols="30"
-          rows="2"
-          :placeholder="$t('feed.newMessage.input')"
-          class="w-full p-4 border text-sm"
-        ></textarea>
-        <div class="flex justify-between">
-          <TInputSelectSmall v-model="postType" :options="postTypeList" />
-          <TButton :title="$t('feed.newMessage.intent')" @click="send">{{
-            $t('feed.newMessage.submit')
-          }}</TButton>
-        </div>
+      <div class="text-center">
+        <button
+          data-tf-slider="Flh9wptJ"
+          data-tf-width="550"
+          data-tf-iframe-props="title=Dance Content"
+          data-tf-medium="snippet"
+          class="rounded-full bg-primary text-white px-4 py-2"
+        >
+          Request Beta
+        </button>
       </div>
+      <script src="https://embed.typeform.com/next/embed.js"></script>
     </div>
 
     <div class="border-b p-4 flex">
