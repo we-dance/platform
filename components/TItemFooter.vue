@@ -11,7 +11,7 @@
         :place="item.place"
         :file="item.socialCover"
         :file-name="title"
-        :url="url"
+        :url="`https://wedance.vip/events/${item.id}`"
         :text="title"
         type="base"
         label="Share"

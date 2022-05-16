@@ -28,7 +28,7 @@
           :place="doc.place"
           :file="doc.socialCover"
           :file-name="doc.name"
-          :url="$route.fullPath"
+          :url="`https://wedance.vip/events/${item.id}`"
           :text="doc.name"
           type="context"
           :label="$t('eventView.dropdown.share')"

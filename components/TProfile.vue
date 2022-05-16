@@ -24,7 +24,7 @@
           :place="profile.place"
           :file="profile.socialCover"
           :file-name="profile.username"
-          :url="$route.fullPath"
+          :url="`https://wedance.vip/${profile.username}`"
           :text="profile.name"
           type="context"
           :label="$t('share.title')"
