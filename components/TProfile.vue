@@ -167,8 +167,6 @@
       class="w-full mt-4"
     />
 
-    <TPreview v-if="profile.story" :content="profile.story" class="p-4" />
-
     <TEventList
       v-if="profile.type !== 'City'"
       :filter="{ 'org.username': profile.username }"
@@ -181,6 +179,8 @@
       :community="profile.username"
       class="mt-4 w-full"
     />
+
+    <TPreview v-if="profile.story" :content="profile.story" class="p-4" />
 
     <div v-if="uid === profile.id" class="w-full flex justify-center p-4">
       <TButton to="/events/-/edit" type="primary">{{
