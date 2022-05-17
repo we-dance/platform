@@ -124,10 +124,17 @@
 
         <TButton
           v-if="uid !== profile.id && profile.type !== 'City'"
-          type="primary"
+          type="base"
           class="mt-4"
           :to="`/chat/${profile.username}`"
           >{{ $t('profile.chat.label') }}</TButton
+        >
+        <TButton
+          v-if="profile.type === 'City'"
+          type="base"
+          class="mt-4"
+          to="/events/-/edit"
+          >Add event</TButton
         >
       </div>
     </div>

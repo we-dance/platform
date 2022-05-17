@@ -257,14 +257,6 @@ export const useEvents = () => {
       description: t('event.price.description'),
     },
     {
-      name: 'visibility',
-      labelPosition: 'top',
-      component: 'TInputButtons',
-      options: visibilityOptions,
-      label: t('visibility.label'),
-      description: t('visibility.description'),
-    },
-    {
       name: 'artists',
       component: 'TInputArray',
       children: {
@@ -288,27 +280,11 @@ export const useEvents = () => {
       labelPosition: 'top',
     },
     {
-      name: 'international',
-      label: t('event.international.label'),
-      labelPosition: 'top',
-      component: 'TInputButtons',
-      options: yesNoOptions,
-      description: t('event.international.description'),
-    },
-    {
       name: 'place',
       label: t('event.place.label'),
       labelPosition: 'top',
       component: 'TInputPlace',
       clearable: true,
-    },
-    {
-      name: 'form',
-      label: t('event.form.label'),
-      labelPosition: 'top',
-      before: t('event.form.before'),
-      component: 'TInputButtons',
-      options: yesNoOptions,
     },
     {
       name: 'link',

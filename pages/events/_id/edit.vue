@@ -3,27 +3,6 @@
     <div
       class="mx-auto w-full max-w-lg md:rounded md:border md:shadow bg-white"
     >
-      <div class="flex justify-between m-4">
-        <TInputButtons
-          value="events"
-          :options="[
-            {
-              label: $t('feed.post'),
-              value: 'posts',
-              to: `/posts/${item.id || '-'}/edit`,
-            },
-            {
-              label: $t('feed.event'),
-              value: 'events',
-              to: `/events/${item.id || '-'}/edit`,
-            },
-          ]"
-        />
-        <button class="cursor-pointer" @click="$router.back()">
-          <TIcon name="close" class="cursor-pointer w-4 h-4" />
-        </button>
-      </div>
-
       <TForm
         v-model="item"
         :edit-creator="isAdmin()"
