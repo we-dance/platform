@@ -30,6 +30,7 @@ export default {
         md: 8,
         lg: 10,
         xl: 32,
+        '2xl': 64,
       }
 
       return sizes[this.size]
