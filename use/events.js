@@ -280,6 +280,14 @@ export const useEvents = () => {
       labelPosition: 'top',
     },
     {
+      name: 'international',
+      label: t('event.international.label'),
+      labelPosition: 'top',
+      component: 'TInputButtons',
+      options: yesNoOptions,
+      description: t('event.international.description'),
+    },
+    {
       name: 'place',
       label: t('event.place.label'),
       labelPosition: 'top',
