@@ -3,8 +3,14 @@ import config from '../env'
 
 function getBrowser() {
   return puppeteer.launch({
-    headless: true,
-    args: ['--no-sandbox', '--disable-setuid-sandbox'],
+    executablePath: '/opt/homebrew/bin/chromium',
+    headless: false,
+    args: [
+      '--no-sandbox',
+      '--disable-setuid-sandbox',
+      '--disable-web-security',
+      '--disable-features=IsolateOrigins,site-per-process',
+    ],
   })
 }
 
