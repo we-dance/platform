@@ -95,5 +95,4 @@ sw.*
 .netlify
 
 # Firebase
-.firebaserc
 .vscode
