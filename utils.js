@@ -31,6 +31,8 @@ export const sortBy = (_key) => {
 }
 
 export const toDatetimeLocal = (date) => {
+  if (!date) return ''
+
   return format(date, "yyyy-MM-dd'T'HH:mm", {
     awareOfUnicodeTokens: true,
   })
@@ -41,6 +43,12 @@ export const getDateObect = (val) => {
 
   if (!val) {
     return null
+  }
+
+  if (Object.prototype.toString.call(val) === '[object Date]') {
+    if (isNaN(val)) {
+      return null
+    }
   }
 
   if (typeof val.toDate === 'function') {
@@ -59,7 +67,12 @@ export const dateDiff = (val) => {
 
 export const formatDate = (val, formatStr) => {
   if (!val) return ''
-  return format(getDateObect(val), formatStr)
+
+  const date = getDateObect(val)
+
+  if (!date) return ''
+
+  return format(date, formatStr)
 }
 
 export const getDateTime = (val) => {
@@ -356,6 +369,7 @@ export async function loadDoc({ app, params, error }, collection) {
 
   if (!doc) {
     error({ statusCode: 404 })
+    return
   }
 
   doc.id = snapshot.id
@@ -391,13 +405,88 @@ export const getEventDescription = (event) => {
   return result
 }
 
+export const getListOfStyles = (styles, extra) => {
+  if (!styles) {
+    return extra
+  }
+
+  return [
+    ...extra,
+    ...Object.keys(styles).map((text) => text.replace(/([A-Z])/g, ' $1')),
+  ]
+}
+
 export const getMeta = (collection, post) => {
   if (!post) {
     return {}
   }
 
+  let schema = []
+
+  if (collection === 'events') {
+    schema = {
+      '@context': 'https://schema.org',
+      '@type': 'DanceEvent',
+      name: post.name,
+      description: post.description,
+      image: post.socialCover || post.cover,
+      startDate: post.startDate
+        ? getDateObect(post.startDate).toISOString()
+        : '',
+      endDate: post.endDate ? getDateObect(post.endDate).toISOString() : '',
+      url: `/events/${post.id}`,
+      eventStatus: 'https://schema.org/EventScheduled',
+      eventAttendanceMode: 'https://schema.org/OfflineEventAttendanceMode',
+      location: {
+        '@type': 'Place',
+        address: {
+          '@type': 'PostalAddress',
+          contactType: 'Venue Manager',
+          addressLocality: addressPart(post?.venue, 'locality'),
+          addressRegion: addressPart(
+            post?.venue,
+            'administrative_area_level_1'
+          ),
+          streetAddress:
+            addressPart(post?.venue, 'route') +
+            ' ' +
+            addressPart(post?.venue, 'street_number'),
+          postalCode: addressPart(post?.venue, 'postal_code'),
+        },
+        name: post.venue?.name,
+        url: post.venue?.url,
+      },
+      offers: {
+        '@type': 'Offer',
+        price: post.price,
+      },
+      organizer: {
+        '@type': 'Person',
+        image: post?.org?.photo,
+        name: post?.org?.name,
+        description: post?.org?.bio,
+        sameAs: [
+          `https://wedance.vip/${post?.org?.username}`,
+          `https://facebook.com/${post?.org?.facebook}`,
+          `https://instagram.com/${post?.org?.instagram}`,
+        ],
+      },
+      performer: post.artists?.map((artist) => ({
+        '@type': 'Person',
+        image: artist.photo,
+        name: artist.name,
+        description: artist.bio,
+        sameAs: [
+          `https://wedance.vip/${artist.username}`,
+          `https://facebook.com/${artist.facebook}`,
+          `https://instagram.com/${artist.instagram}`,
+        ],
+      })),
+    }
+  }
+
   return {
-    title: post.title || getExcerpt(post.description),
+    title: post.name || post.title || getExcerpt(post.description),
     meta: [
       {
         hid: 'description',
@@ -407,12 +496,24 @@ export const getMeta = (collection, post) => {
       {
         hid: 'keywords',
         name: 'keywords',
-        content: post.keywords,
+        content: getListOfStyles(post.styles, [
+          'WeDance',
+          'Dance',
+          addressPart(post?.venue, 'country'),
+          addressPart(post?.venue, 'locality'),
+          post.venue?.name,
+          post.eventType,
+        ]).join(', '),
       },
       {
         hid: 'og:title',
         property: 'og:title',
         content: post.title,
+      },
+      {
+        hid: 'og:type',
+        property: 'og:type',
+        content: collection === 'events' ? 'event' : 'website',
       },
       {
         hid: 'og:description',
@@ -433,6 +534,13 @@ export const getMeta = (collection, post) => {
         hid: 'publisher',
         name: 'publisher',
         content: post.username,
+      },
+    ],
+    script: [
+      {
+        hid: 'schema',
+        type: 'application/ld+json',
+        json: schema,
       },
     ],
   }

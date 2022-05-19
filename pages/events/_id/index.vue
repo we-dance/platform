@@ -1,35 +1,35 @@
 <template>
   <div>
-    <THeader :title="item.name">
+    <THeader :title="doc.name">
       <TDropdown>
         <TButton
-          v-if="can('edit', 'events', item)"
+          v-if="can('edit', 'events', doc)"
           type="context"
           icon="people"
-          :to="`/events/${item.id}/dashboard`"
+          :to="`/events/${doc.id}/dashboard`"
           :label="$t('eventView.dropdown.dashboard')"
         />
         <TButton
-          v-if="can('edit', 'events', item)"
+          v-if="can('edit', 'events', doc)"
           type="context"
           icon="edit"
-          :to="`/events/${item.id}/edit`"
+          :to="`/events/${doc.id}/edit`"
           :label="$t('eventView.dropdown.edit')"
         />
         <TCardActions
-          :id="item.id"
+          :id="doc.id"
           collection="events"
-          :item="item"
+          :item="doc"
           type="context"
         />
         <TButtonShare
-          :id="item.id"
+          :id="doc.id"
           collection="events"
-          :place="item.place"
-          :file="item.socialCover"
-          :file-name="item.name"
-          :url="$route.fullPath"
-          :text="item.name"
+          :place="doc.place"
+          :file="doc.socialCover"
+          :file-name="doc.name"
+          :url="`https://wedance.vip/events/${item.id}`"
+          :text="doc.name"
           type="context"
           :label="$t('eventView.dropdown.share')"
         />
@@ -40,31 +40,31 @@
       class="grid grid-cols-1"
       :class="$route.query.variant ? 'md:grid-cols-2' : ''"
     >
-      <div v-if="item.cover" class="relative">
-        <img :src="item.cover" :alt="item.name" class="absolute w-full" />
+      <div v-if="doc.cover" class="relative">
+        <img :src="doc.cover" :alt="doc.name" class="absolute w-full" />
         <div class="square bg-indigo-500"></div>
       </div>
 
       <div class="md:border-l">
         <div
-          v-if="item.type"
+          v-if="doc.type"
           class="flex w-full items-center justify-start border-b py-2 px-4 leading-tight"
         >
           <div class="mr-4 w-4 text-center">
-            {{ getEventIcon(item.eventType) }}
+            {{ getEventIcon(doc.eventType) }}
           </div>
-          <div>{{ item.eventType }}</div>
+          <div>{{ doc.eventType }}</div>
         </div>
 
         <TStyles
-          :value="item.styles"
+          :value="doc.styles"
           hide-level
           class="flex flex-wrap justify-center border-b p-2 text-xs"
         />
 
         <a
-          v-if="item.venue"
-          :href="item.venue.url"
+          v-if="doc.venue"
+          :href="doc.venue.url"
           target="_blank"
           class="block border-b py-2 px-4 hover:bg-gray-200"
         >
@@ -72,18 +72,18 @@
             <TIcon name="place" class="mr-4 h-4 w-4" />
             <div>
               <h4 class="font-bold">
-                {{ item.venue.name
-                }}<span v-if="item.venue.room"> • {{ item.venue.room }}</span>
+                {{ doc.venue.name
+                }}<span v-if="doc.venue.room"> • {{ doc.venue.room }}</span>
               </h4>
               <div class="text-gray-700">
-                {{ item.venue.formatted_address }}
+                {{ doc.venue.formatted_address }}
               </div>
             </div>
           </div>
         </a>
 
         <div
-          v-if="item.online === 'Yes'"
+          v-if="doc.online === 'Yes'"
           class="flex w-full items-center justify-start border-b py-2 px-4 leading-tight"
         >
           <TIcon name="youtube" class="mr-4 h-4 w-4" />
@@ -95,7 +95,7 @@
         >
           <TIcon name="calendar" class="mr-4 h-4 w-4" />
           <div>
-            {{ getDateTime(item.startDate) }} - {{ getDateTime(item.endDate) }}
+            {{ getDateTime(doc.startDate) }} - {{ getDateTime(doc.endDate) }}
           </div>
         </div>
 
@@ -103,13 +103,13 @@
           class="flex w-full items-center justify-start border-b py-2 px-4 leading-tight"
         >
           <TIcon name="ticket" class="mr-4 h-4 w-4" />
-          <div>{{ item.price }}</div>
+          <div>{{ doc.price }}</div>
         </div>
       </div>
     </div>
 
     <div class="mt-4 flex justify-center">
-      <TReactions :item="item" class="my-1" />
+      <TReactions :item="doc" class="my-1" />
     </div>
 
     <div
@@ -122,11 +122,11 @@
         >{{ $t('eventView.reservation.cancel') }}</TButton
       >
       <TButton
-        v-else-if="item.link"
+        v-else-if="doc.link"
         type="primary"
         :title="$t('eventView.reservation.guest')"
         allow-guests
-        :href="item.link"
+        :href="doc.link"
         target="_blank"
         >{{ $t('eventView.reservation.guest') }}</TButton
       >
@@ -139,37 +139,41 @@
       >
     </div>
 
-    <TPreview :content="item.description" class="p-4" />
+    <TPreview :content="doc.description" class="p-4" />
 
-    <div v-if="item.artists && item.artists.length" class="space-y-2 p-4">
+    <div v-if="doc.artists && doc.artists.length" class="space-y-2 p-4">
       <h3 class="text-xl font-bold">{{ $t('event.artists') }}</h3>
-      <WProfile
-        v-for="profile in item.artists"
-        :key="profile.username"
-        :username="profile.username"
-        :fallback="profile"
-      />
+      <div
+        v-for="(profile, profileIndex) in doc.artists"
+        :key="`artist-${profileIndex}`"
+      >
+        <WProfile
+          v-if="profile"
+          :username="profile.username"
+          :fallback="profile"
+        />
+      </div>
     </div>
 
-    <div v-if="item.venue && item.venue.map" class="bg-gray-100 p-4">
+    <div v-if="doc.venue && doc.venue.map" class="bg-gray-100 p-4">
       <div class="mb-4 text-sm font-bold leading-none text-gray-700">
         {{ $t('eventView.venueMap') }}
       </div>
-      <img :src="item.venue.map" alt="Venue Map" class="mt-4" />
+      <img :src="doc.venue.map" alt="Venue Map" class="mt-4" />
     </div>
 
-    <div v-if="item.org" class="space-y-2 p-4">
+    <div v-if="doc.org" class="space-y-2 p-4">
       <h4 class="text-xl font-bold">{{ $t('event.organiser') }}</h4>
-      <WProfile :username="item.org.username" :fallback="item.org" full />
+      <WProfile :username="doc.org.username" :fallback="doc.org" full />
     </div>
 
-    <div v-if="item.facebook" class="m-4 text-right text-sm">
-      <a :href="item.facebook" class="text-gray-700 hover:underline">{{
+    <div v-if="doc.facebook" class="m-4 text-right text-sm">
+      <a :href="doc.facebook" class="text-gray-700 hover:underline">{{
         $t('eventView.source')
       }}</a>
     </div>
 
-    <TCommentsInline :item="item" autoload class="border-t p-4" />
+    <TCommentsInline :item="doc" autoload class="border-t p-4" />
 
     <TPopup
       v-if="reservationPopup"
@@ -253,12 +257,17 @@ import {
   getEventDescription,
   openURL,
   getDateObect,
+  getMeta,
+  loadDoc,
 } from '~/utils'
 import { addressPart } from '~/use/google'
 
 export default {
   name: 'EventView',
   layout: 'default',
+  async asyncData(ctx) {
+    return await loadDoc(ctx, 'posts')
+  },
   data: () => ({
     comment: '',
   }),
@@ -289,58 +298,7 @@ export default {
     },
   },
   head() {
-    if (!this.item) {
-      return {}
-    }
-
-    const item = this.item
-
-    return {
-      title: item.name,
-      canonical: this.eventUrl,
-      meta: [
-        {
-          hid: 'description',
-          name: 'description',
-          content: item.excerpt,
-        },
-        {
-          hid: 'author',
-          name: 'author',
-          content: this.creator.username,
-        },
-        {
-          hid: 'publisher',
-          name: 'publisher',
-          content: this.creator.username,
-        },
-        {
-          name: 'keywords',
-          content: item.keywords,
-          hid: 'keywords',
-        },
-        {
-          property: 'og:image',
-          content: item.socialCover || item.cover,
-          hid: 'og:image',
-        },
-        {
-          property: 'og:type',
-          content: 'event',
-          hid: 'og:type',
-        },
-        {
-          property: 'og:title',
-          content: item.name,
-          hid: 'og:title',
-        },
-        {
-          property: 'og:description',
-          content: item.excerpt,
-          hid: 'og:description',
-        },
-      ],
-    }
+    return getMeta('events', this.doc)
   },
   setup() {
     const {

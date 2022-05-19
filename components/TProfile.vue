@@ -24,7 +24,7 @@
           :place="profile.place"
           :file="profile.socialCover"
           :file-name="profile.username"
-          :url="$route.fullPath"
+          :url="`https://wedance.vip/${profile.username}`"
           :text="profile.name"
           type="context"
           :label="$t('share.title')"
@@ -109,52 +109,41 @@
       </div>
     </template>
 
-    <template>
-      <TSharePreviewPost
-        collection="profiles"
-        :type="profile.type"
-        :username="profile.username"
-        :description="getExcerpt(profile.bio)"
-        :extra="community"
-        :photo="profile.photo"
-        :styles="profile.styles"
-        size="sm"
-      />
+    <div class="flex p-4 space-x-4">
+      <div class="w-32">
+        <img
+          :src="profile.photo"
+          :alt="profile.username"
+          class="w-full rounded-full"
+        />
+      </div>
 
-      <div class="my-2 px-4 flex justify-between">
-        <div class="flex items-center">
-          <div class="font-bold text-lg leading-none">
-            {{ profile.name }}
-          </div>
-          <div class="ml-2 text-sm text-gray-700">
-            <span v-if="profile.height"
-              >•
-              {{
-                $t('myprofile.profile.height', { height: profile.height })
-              }}</span
-            >
-            <span v-if="profile.weight"
-              >•
-              {{
-                $t('myprofile.profile.weight', { weight: profile.weight })
-              }}</span
-            >
-          </div>
-        </div>
+      <div>
+        <h1 class="leading-tight font-bold">{{ profile.name }}</h1>
+        <div class="text-sm">{{ profile.bio }}</div>
+
         <TButton
-          v-if="uid !== profile.id"
-          type="primary"
+          v-if="uid !== profile.id && profile.type !== 'City'"
+          type="base"
+          class="mt-4"
           :to="`/chat/${profile.username}`"
           >{{ $t('profile.chat.label') }}</TButton
         >
+        <TButton
+          v-if="profile.type === 'City'"
+          type="base"
+          class="mt-4"
+          to="/events/-/edit"
+          >Add event</TButton
+        >
       </div>
+    </div>
 
-      <div v-if="profile.bio && profile.bio.length > 140" class="mb-2 px-4">
-        {{ profile.bio }}
-      </div>
-    </template>
-
-    <TProfileContacts :profile="profile" class="p-2 mb-4 bg-gray-100" />
+    <TProfileContacts
+      v-if="profile.contacts === 'Yes'"
+      :profile="profile"
+      class="py-2 mb-4 bg-gray-100"
+    />
 
     <div v-if="uid === profile.id" class="flex justify-center space-x-2">
       <TButton :label="$t('myprofile.edit')" to="/settings?tab=profile" />
@@ -166,8 +155,6 @@
       :description="profile.partnerBio"
       class="w-full mt-4"
     />
-
-    <TPreview v-if="profile.story" :content="profile.story" class="p-4" />
 
     <TEventList
       v-if="profile.type !== 'City'"
@@ -181,6 +168,8 @@
       :community="profile.username"
       class="mt-4 w-full"
     />
+
+    <TPreview v-if="profile.story" :content="profile.story" class="p-4" />
 
     <div v-if="uid === profile.id" class="w-full flex justify-center p-4">
       <TButton to="/events/-/edit" type="primary">{{

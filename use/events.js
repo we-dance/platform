@@ -15,7 +15,7 @@ const updateEndDate = (e) => {
 export const useEvents = () => {
   const { t } = useI18n()
   const { currentCity } = useCities()
-  const { visibilityOptions, yesNoOptions } = useCommon()
+  const { yesNoOptions } = useCommon()
 
   const eventRoleOptions = [
     {
@@ -257,14 +257,6 @@ export const useEvents = () => {
       description: t('event.price.description'),
     },
     {
-      name: 'visibility',
-      labelPosition: 'top',
-      component: 'TInputButtons',
-      options: visibilityOptions,
-      label: t('visibility.label'),
-      description: t('visibility.description'),
-    },
-    {
       name: 'artists',
       component: 'TInputArray',
       children: {
@@ -301,14 +293,6 @@ export const useEvents = () => {
       labelPosition: 'top',
       component: 'TInputPlace',
       clearable: true,
-    },
-    {
-      name: 'form',
-      label: t('event.form.label'),
-      labelPosition: 'top',
-      before: t('event.form.before'),
-      component: 'TInputButtons',
-      options: yesNoOptions,
     },
     {
       name: 'link',
