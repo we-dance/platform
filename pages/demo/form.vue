@@ -3,7 +3,7 @@
 </template>
 
 <script>
-import { ref } from '@nuxt/composition-api'
+import { ref } from '@nuxtjs/composition-api'
 
 export default {
   setup() {

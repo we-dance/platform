@@ -112,10 +112,12 @@
     <div class="flex p-4 space-x-4">
       <div class="w-32">
         <img
+          v-if="profile.photo"
           :src="profile.photo"
           :alt="profile.username"
           class="w-full rounded-full"
         />
+        <TIcon v-else name="undraw_profile_pic" class="w-full rounded-full" />
       </div>
 
       <div>
