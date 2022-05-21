@@ -131,21 +131,13 @@
           :to="`/chat/${profile.username}`"
           >{{ $t('profile.chat.label') }}</TButton
         >
-        <TButton
-          v-if="profile.type === 'City'"
-          type="base"
-          class="mt-4"
-          to="/events/-/edit"
-          >Add event</TButton
-        >
+        <TButton type="base" class="mt-4" to="/events/-/edit">{{
+          $t('myprofile.addEvent')
+        }}</TButton>
       </div>
     </div>
 
-    <TProfileContacts
-      v-if="profile.contacts === 'Yes'"
-      :profile="profile"
-      class="py-2 mb-4 bg-gray-100"
-    />
+    <TProfileContacts :profile="profile" class="py-2 mb-4 bg-gray-100" />
 
     <div v-if="uid === profile.id" class="flex justify-center space-x-2">
       <TButton :label="$t('myprofile.edit')" to="/settings?tab=profile" />
@@ -172,12 +164,6 @@
     />
 
     <TPreview v-if="profile.story" :content="profile.story" class="p-4" />
-
-    <div v-if="uid === profile.id" class="w-full flex justify-center p-4">
-      <TButton to="/events/-/edit" type="primary">{{
-        $t('myprofile.addEvent')
-      }}</TButton>
-    </div>
 
     <TProfileDetails v-if="profile.type !== 'City'" :profile="profile" />
 

@@ -86,58 +86,65 @@ export const useProfiles = () => {
 
   const contactFields = [
     {
+      name: 'couchsurfing',
+      label: 'Couchsurfing',
+      placeholder: 'https://www.couchsurfing.com/people/username',
+    },
+    {
+      name: 'airbnb',
+      label: 'Airbnb',
+      placeholder: 'https://www.airbnb.com/users/show/00000000',
+    },
+    {
+      name: 'blablacar',
+      label: 'BlaBlaCar',
+      placeholder:
+        'https://www.blablacar.de/user/show/00000000-0000-0000-0000-000000000000',
+    },
+    {
       name: 'instagram',
-      label: t('profile.instagram.label'),
-      placeholder: t('profile.instagram.placeholder'),
-      when: (p) => p.contacts === 'Yes',
+      label: 'Instagram',
+      placeholder: 'https://www.instagram.com/username/',
     },
     {
       name: 'facebook',
-      label: t('profile.facebook.label'),
-      placeholder: t('profile.facebook.placeholder'),
-      when: (p) => p.contacts === 'Yes',
+      label: 'Facebook',
+      placeholder: 'https://www.facebook.com/username',
     },
     {
       name: 'whatsapp',
-      label: t('profile.whatsapp.label'),
-      placeholder: t('profile.whatsapp.placeholder'),
-      when: (p) => p.contacts === 'Yes',
+      label: 'Whatsapp',
+      placeholder: 'https://wa.me/0000000000000',
     },
     {
       name: 'telegram',
-      label: t('profile.telegram.label'),
-      placeholder: t('profile.telegram.placeholder'),
-      when: (p) => p.contacts === 'Yes',
+      label: 'Telegram',
+      placeholder: 'https://t.me/username',
     },
     {
       name: 'twitter',
-      label: t('profile.twitter.label'),
-      placeholder: t('profile.twitter.placeholder'),
-      when: (p) => p.contacts === 'Yes',
+      label: 'Twitter',
+      placeholder: 'https://twitter.com/username',
     },
     {
       name: 'tiktok',
-      label: t('profile.tiktok.label'),
-      placeholder: t('profile.tiktok.placeholder'),
-      when: (p) => p.contacts === 'Yes',
+      label: 'TikTok',
+      placeholder: 'https://www.tiktok.com/@username',
     },
     {
       name: 'youtube',
-      label: t('profile.youtube.label'),
-      placeholder: t('profile.youtube.placeholder'),
-      when: (p) => p.contacts === 'Yes',
+      label: 'Youtube',
+      placeholder: 'https://www.youtube.com/c/username',
     },
     {
       name: 'email',
-      label: t('profile.email.label'),
-      placeholder: t('profile.email.placeholder'),
-      when: (p) => p.contacts === 'Yes',
+      label: 'Email',
+      placeholder: 'name@example.com',
     },
     {
       name: 'website',
-      label: t('profile.website.label'),
-      placeholder: t('profile.website.placeholder'),
-      when: (p) => p.contacts === 'Yes',
+      label: 'Website',
+      placeholder: 'https://www.example.com/',
     },
   ]
 
@@ -305,12 +312,6 @@ export const useProfiles = () => {
       when: (p) => p.partner === 'Yes',
       component: 'TInputMulti',
       options: days,
-    },
-    {
-      name: 'contacts',
-      label: t('profile.contacts'),
-      component: 'TInputButtons',
-      options: yesNoOptions,
     },
     ...contactFields,
   ]

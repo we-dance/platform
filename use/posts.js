@@ -109,11 +109,6 @@ export const usePosts = () => {
 
   const postFields = [
     {
-      name: 'username',
-      label: t('postFields.username.label'),
-      admin: true,
-    },
-    {
       name: 'type',
       component: 'TInputSelect',
       label: t('postFields.type.label'),

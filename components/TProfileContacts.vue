@@ -10,53 +10,74 @@
         icon-size="6"
       />
       <TButton
+        v-if="!short && profile.couchsurfing"
+        icon="couchsurfing"
+        type="round"
+        icon-size="6"
+        :href="profile.couchsurfing"
+      />
+      <TButton
+        v-if="!short && profile.airbnb"
+        icon="airbnb"
+        type="round"
+        icon-size="6"
+        :href="profile.airbnb"
+      />
+      <TButton
+        v-if="!short && profile.blablacar"
+        icon="blablacar"
+        type="round"
+        icon-size="6"
+        :href="profile.blablacar"
+      />
+      <TButton
         v-if="!short && profile.whatsapp"
         icon="whatsapp"
         type="round"
         icon-size="6"
-        :href="`https://chat.whatsapp.com/${profile.whatsapp}`"
+        :href="profile.whatsapp"
       />
       <TButton
         v-if="!short && profile.telegram"
         icon="telegram"
         type="round"
         icon-size="6"
-        :href="`https://t.me/${profile.telegram}`"
+        :href="profile.telegram"
       />
       <TButton
         v-if="profile.instagram"
         icon="instagram"
         type="round"
         icon-size="6"
-        :href="`https://instagram.com/${profile.instagram}`"
+        :href="profile.instagram"
       />
       <TButton
         v-if="!short && profile.tiktok"
         icon="tiktok"
         type="round"
         icon-size="6"
-        :href="`https://tiktok.com/${profile.tiktok}`"
+        :href="profile.tiktok"
       />
       <TButton
         v-if="!short && profile.youtube"
         icon="youtube"
         type="round"
         icon-size="6"
-        :href="`https://youtube.com/${profile.youtube}`"
+        :href="profile.youtube"
       />
       <TButton
         v-if="!short && profile.twitter"
         icon="twitter"
         type="round"
         icon-size="6"
-        :href="`https://twitter.com/${profile.twitter}`"
+        :href="profile.twitter"
       />
       <TButton
         v-if="profile.facebook"
         icon="facebook"
         type="round"
         icon-size="6"
-        :href="`https://fb.com/${profile.facebook}`"
+        :href="profile.facebook"
       />
     </div>
   </div>
