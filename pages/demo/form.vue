@@ -19,7 +19,7 @@ export default {
       },
     ]
 
-    return { fields }
+    return { data, fields }
   },
 }
 </script>

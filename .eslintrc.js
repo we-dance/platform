@@ -20,5 +20,5 @@ module.exports = {
     'no-console': 'off',
     'vue/no-v-html': 'off',
   },
-  ignorePatterns: ['functions'],
+  ignorePatterns: ['services'],
 }

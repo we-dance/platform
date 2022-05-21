@@ -646,3 +646,7 @@ export const getYoutubeId = (url) => {
 
   return videoId
 }
+
+export function sum(a, b) {
+  return a + b
+}
