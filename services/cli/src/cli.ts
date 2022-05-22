@@ -13,7 +13,10 @@ async function logProfile(profile: any) {
 
   if (!owners[profile.createdBy]) {
     owners[profile.createdBy] = (
-      await db.collection('accounts').doc(profile.createdBy).get()
+      await db
+        .collection('accounts')
+        .doc(profile.createdBy)
+        .get()
     ).data()
   }
   const owner = owners[profile.createdBy]
@@ -59,32 +62,92 @@ yargs(hideBin(process.argv))
     }
   )
   .command(
-    'check:social',
-    'Check social links',
+    'fix:contacts',
+    'Fix social links',
     () => undefined,
     async () => {
       const profiles = await db.collection('profiles').get()
+      const total = profiles.docs.length
+      let changed = 0
+
       for (const profileRef of profiles.docs) {
         const profile = profileRef.data()
 
-        if (profile.instagram) {
-          if (
-            profile.instagram.includes('https://') ||
-            profile.instagram.includes(' ')
-          ) {
-            console.log(`${profile.username} instagram: "${profile.instagram}"`)
+        const logs = []
+
+        const fields = [
+          'website',
+          'couchsurfing',
+          'airbnb',
+          'blablacar',
+          'whatsapp',
+          'telegram',
+          'instagram',
+          'tiktok',
+          'youtube',
+          'twitter',
+          'facebook',
+        ]
+
+        for (const field of fields) {
+          if (profile[field] && !profile[field].includes('https://')) {
+            const oldValue = profile[field]
+            let newValue = profile[field].replace(' ', '')
+
+            if (field === 'website') {
+              newValue = 'https://' + newValue
+            }
+
+            if (field === 'telegram') {
+              newValue = 'https://t.me/' + newValue
+            }
+
+            if (field === 'instagram') {
+              newValue = 'https://instagram.com/' + newValue
+            }
+
+            if (field === 'tiktok') {
+              newValue = 'https://tiktok.com/' + newValue
+            }
+
+            if (field === 'youtube') {
+              newValue = 'https://youtube.com/' + newValue
+            }
+
+            if (field === 'twitter') {
+              newValue = 'https://twitter.com/' + newValue
+            }
+
+            if (field === 'facebook') {
+              newValue = 'https://facebook.com/' + newValue
+            }
+
+            if (field === 'whatsapp') {
+              newValue = 'https://whatsapp.com/' + newValue
+            }
+
+            profileRef.ref.update({
+              [field]: newValue,
+            })
+
+            logs.push(`${field}: "${oldValue}" to ${newValue}`)
           }
         }
 
-        if (profile.facebook) {
-          if (
-            profile.facebook.includes('https://') ||
-            profile.facebook.includes(' ')
-          ) {
-            console.log(`${profile.username} facebook: "${profile.facebook}"`)
+        if (logs.length) {
+          changed++
+          console.log()
+          console.log(`https://wedance.vip/${profile.username}`)
+          for (const log of logs) {
+            console.log(`- ${log}`)
           }
         }
       }
+
+      const progress = Math.round((changed / total) * 100)
+
+      console.log()
+      console.log(`${progress}% changed - ${changed} of ${total}`)
     }
   )
   .command(
@@ -100,7 +163,10 @@ yargs(hideBin(process.argv))
         const profile = profileRef.data()
 
         const owner = (
-          await db.collection('profiles').doc(profile.createdBy).get()
+          await db
+            .collection('profiles')
+            .doc(profile.createdBy)
+            .get()
         ).data()
 
         if (!owner) {
@@ -126,7 +192,10 @@ yargs(hideBin(process.argv))
         const profile = profileRef.data()
 
         const owner = (
-          await db.collection('profiles').doc(profile.createdBy).get()
+          await db
+            .collection('profiles')
+            .doc(profile.createdBy)
+            .get()
         ).data()
 
         if (!owner) {
@@ -183,7 +252,10 @@ yargs(hideBin(process.argv))
         }
 
         const owner = (
-          await db.collection('profiles').doc(profile.createdBy).get()
+          await db
+            .collection('profiles')
+            .doc(profile.createdBy)
+            .get()
         ).data()
 
         if (!owner) {
