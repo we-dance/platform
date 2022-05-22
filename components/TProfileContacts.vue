@@ -10,10 +10,11 @@
         :key="field"
         allow-guests
         :href="profile[field]"
-        :icon="field"
-        type="round"
-        icon-size="6"
-      />
+        type="void"
+        class="bg-white border flex justify-center items-center w-8 h-8"
+      >
+        <TIcon :name="field" class="w-full m-1" />
+      </TButton>
     </div>
   </div>
   <div v-else></div>
