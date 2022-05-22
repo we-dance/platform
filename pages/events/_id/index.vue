@@ -133,6 +133,7 @@
       <TButton
         v-else
         type="primary"
+        allow-guests
         :title="$t('eventView.reservation.guest')"
         @click="reservationPopup = 'reserve'"
         >{{ $t('eventView.reservation.guest') }}</TButton
@@ -359,6 +360,7 @@ export default {
     }
 
     const reserve = async (participant) => {
+      console.log('reserve', participant)
       if (!uid.value) {
         await createGuestRsvp(params.id, 'posts', 'up', participant)
         sendSignInLinkToEmail(participant.email)

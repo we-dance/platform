@@ -1,27 +1,49 @@
 <template>
   <div>
-    <TButton :icon="icon" :type="type" :label="label" @click="share()" />
+    <TButton
+      allow-guests
+      :icon="icon"
+      :type="type"
+      :label="label"
+      @click="share()"
+    />
     <TPopup v-if="generating" title="Generating poster">
       <div class="p-4">Generating Poster... Please wait...</div>
     </TPopup>
     <TPopup v-if="sharing" title="Share" @close="sharing = false">
       <div class="w-64 space-y-2 py-4">
-        <TButton type="nav" @click="copyToClipboard"> Copy Link </TButton>
-        <TButton type="nav" download :href="downloadUrl" @click="download">
+        <TButton allow-guests type="nav" @click="copyToClipboard">
+          Copy Link
+        </TButton>
+        <TButton
+          allow-guests
+          type="nav"
+          download
+          :href="downloadUrl"
+          @click="download"
+        >
           Download Poster
         </TButton>
         <TButton
           v-for="(_, platform) in platforms"
           :key="platform"
+          allow-guests
           type="nav"
           @click="shareTo(platform)"
         >
           {{ platform }}
         </TButton>
-        <TButton v-if="nativeShareSupported" type="nav" @click="nativeShare()">
+        <TButton
+          v-if="nativeShareSupported"
+          allow-guests
+          type="nav"
+          @click="nativeShare()"
+        >
           More
         </TButton>
-        <TButton type="nav" @click="refresh()"> Refresh Poster </TButton>
+        <TButton allow-guests type="nav" @click="refresh()">
+          Refresh Poster
+        </TButton>
       </div>
     </TPopup>
   </div>

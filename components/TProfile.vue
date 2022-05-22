@@ -153,14 +153,14 @@
     <TEventList
       v-if="profile.type !== 'City'"
       :filter="{ 'org.username': profile.username }"
-      class="mt-4 w-full"
+      class="mt-4 w-full border-b pb-8"
     />
 
     <TEventList
       v-if="profile.type === 'City'"
       :filter="{ place: profile.place }"
       :community="profile.username"
-      class="mt-4 w-full"
+      class="mt-4 w-full border-b pb-8"
     />
 
     <TPreview v-if="profile.story" :content="profile.story" class="p-4" />

@@ -158,7 +158,7 @@ export const useDoc = (name) => {
       updatedAt: +new Date(),
       createdBy: uid.value,
       updatedBy: uid.value,
-      username: username.value,
+      username: username?.value || '',
       ...data,
     })
 
