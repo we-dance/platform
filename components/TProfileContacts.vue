@@ -53,7 +53,7 @@ export default {
   }),
   computed: {
     filledFields() {
-      let fields = this.short ? this.shortFields : this.longFields
+      const fields = this.short ? this.shortFields : this.longFields
       return fields.filter((f) => this.profile[f])
     },
   },
