@@ -42,7 +42,7 @@ export default {
     if (this.$route.params.id === '-') {
       this.item = {
         type: 'event',
-        place: this.profile?.place,
+        place: this.profile?.place || '',
         visibility: 'Public',
         form: 'No',
         online: 'No',
@@ -55,9 +55,9 @@ export default {
         cover: '',
         artists: [],
         org: {
-          username: this.profile?.username,
-          name: this.profile?.name,
-          photo: this.profile?.photo,
+          username: this.profile?.username || '',
+          name: this.profile?.name || '',
+          photo: this.profile?.photo || '',
           role: 'organiser',
         },
         username: this.profile?.username,
