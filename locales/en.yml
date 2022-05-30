@@ -497,8 +497,8 @@ event:
   artists: Artists
   organiser: Organiser
   category:
-    meetup: Meetup
-    lesson: Lesson
+    meetup: Social
+    lesson: Practice
     online: Online
     travel: Travel
   role:
