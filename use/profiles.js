@@ -63,6 +63,14 @@ export const useProfiles = () => {
       value: 'talk',
     },
     {
+      label: t('profile.objectivesList.home'),
+      value: 'home',
+    },
+    {
+      label: t('profile.objectivesList.auto'),
+      value: 'auto',
+    },
+    {
       label: t('profile.objectivesList.learn'),
       value: 'learn',
     },
