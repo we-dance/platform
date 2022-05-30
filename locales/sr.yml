@@ -1,14 +1,96 @@
 ---
+common:
+  yes: 'Yes'
+  no: 'No'
+  female: Female
+  male: Male
+  other: Other
+  Monday: Monday
+  Tuesday: Tuesday
+  Wednesday: Wednesday
+  Thursday: Thursday
+  Friday: Friday
+  Saturday: Saturday
+  Sunday: Sunday
+post:
+  report: Report
+  delete: Delete
+  edit: Edit
+  dashboard: Dashboard
+nav:
+  feed: Коментар
+  calendar: Calendar
+  community: Community
+  chat: Разговор
+  myProfile: My Profile
+  settings: Подешавања
+form:
+  clear: Clear
+  delete: Delete
+  cancel: Cancel
+  copy: Copy
+  save: Save
+photo:
+  placeholder: Change photo
+  selectLabel: Upload photo
+visibility:
+  label: Visibility
+  description: '- Public: searchable in Google and can be used in social media. - Members: only visible for logged-in users. - Unlisted: only possible to open with exact link, but not listed anywhere.'
+  public: Public
+  members: Members
+  unlisted: Unlisted
 hero:
   title: Да ли волиш плес?
   subtitle: Помажемо једни другима у проналажењу занимљивих плесних догађаја и плесних партнера.
+  motto: We help everyone to dance everywhere and all dancers to help each other
+  submotto: Salsa, Bachata, Kizomba, Urban Kiz, Raggaeton, Casino, Tango and 130 more dance styles
+  alt: People dancing bachata
+  action: Join the community
+  search: Search dancers
+icons:
+  dancers: dancers
+  cities: cities
+  events: events
+features:
+  calendar:
+    title: Event Calendar
+    description: Find dance workshops, courses, socials and parties. We fill event calendar all together as a community. Everyone can share.
+  dancePartners:
+    title: Dance partners
+    description: Find a dance partner for your dance style and let them find you.
+  cityChats:
+    title: City Chats
+    description: Find dance chat in any city. Join your city chat and invite your friends to help new dancers in the city. Think globally, act locally.
+  danceTravel:
+    title: Dance Travel
+    description: Find international dance festivals and congresses. Share a ride, an appartment and find a buddy to experience a new city together.
+  volunteer:
+    title: Volunteer
+    description: We build a community, where everyone enters with mindset “I can help”, so whenever you need help you can count on it. We are one big family worldwide. We help each other.
+    action: Умешати се
+  interviews:
+    title: Interviews
+    description: Explore more about you favorite dance artists and catch their tips & tricks.
+    action: Listen to Podcast
+international:
+  title: International Community
+  description: We regularly post interviews, event announcements and introduce new members on our social media.
 auth:
   signin: Улазни
   signup: Пријавити
   signout: Одјавити се
 events:
+  typelist:
+    party: Party
+    workshop: Workshop
+    course: Course
+    festival: Festival
+    congress: Congress
+    concert: Concert
+    show: Show
+    other: Other
   add: Додај догађај
-  title: Догађаји
+  title: Dance Calendar
   list:
     empty: No events found. Would you like to add one?
   view:
@@ -16,24 +98,232 @@ events:
     covers: See list
   filter:
     type: Type
-    style: Стил
-posts:
-  add: Додај пост
-  title: Коментар
-profiles:
-  add: Додај профил
-  title: Заједница
+    style: Any Dance
+    level: Any Level
+eventView:
+  dropdown:
+    dashboard: Dashboard
+    edit: Edit
+    share: Објави
+  online: Online Event
+  reservation:
+    guest: Register for event
+    cancel: Cancel reservation
+  reservationPopup:
+    title: Регистровати
+    reserve:
+      submitLabel: Регистровати
+      label: Пријавите се
+    finish:
+      title: Almost there
+      btn: Complete registration
+      description: See you soon! Don't forget to check-in by the organiser when you come!
+      reminder: Check your email to finish creation of the WeDance profile.
+      calendar: Add to calendar
+  organiser: Organised by
+  venueMap: Venue Map
+  source: Event Source
+postFields:
+  username:
+    label: Username
+  type:
+    label: Type
+  title:
+    placeholder: Title
+  description:
+    placeholder: Text (markdown)
+    tips: "Pitch yourself: Who are you? What do you offer? What do you want?\n\nTips for effective pitch:\n- Uncomplicated: It should be catchy and roll off the tongue\n- Concise: It shouldn’t take more than a minute to say or read\n- Unique: It reflects your skills, goals, and desires\n- Storyline: It covers who you are, what you offer, and where you want to be\n- Appealing: Your elevator pitch is essentially a persuasive sales pitch; the emphasis should be on what you offer"
+    description: Use [widgets](https://wedance.vip/markdown), including images and videos
+  url:
+    placeholder: Link
+  styles:
+    label: Dance Styles
+filter:
+  radius: Radius
+  reset: Reset filters
+community:
+  title: Community
+profile:
+  username:
+    label: Username
+    before: Use only letters, numbers, underscores and periods.
+  community: Плешем у
+  type: Тип
+  name:
+    label: Name
+    before: If you want to remain anonym use your first name.
+    placeholder: (Required)
+  bio:
+    label: Teaser
+    before: Short introduction on top of your photo
+  hometown:
+    label: Hometown
+    before: Where were you born and raised?
+  birthday:
+    label: Birthday
+    description: We will show only your age
+  gender:
+    label: Gender
+    placeholder: Gender
+  style: Плесни стилови
+  joined: Joined
+  languages: Languages
+  story:
+    label: Description
+    before: Tell your dance story. You can also use [widgets](https://wedance.vip/markdown), including images and videos
+    tips: ' Pitch yourself: Who are you? What do you offer? What do you want? Tips for effective pitch: - Uncomplicated: It should be catchy and roll off the tongue - Concise: It shouldn’t take more than a minute to say or read - Unique: It reflects your skills, goals, and desires - Storyline: It covers who you are, what you offer, and where you want to be - Appealing: Your elevator pitch is essentially a persuasive sales pitch; the emphasis should be on what you offer'
+    placeholder: Text (markdown)
+  locales: Your languages
+  skills: Не-плесне вештине
+  days: Дани
+  learning:
+    label: Which dance topics you are interested in?
+    description: 'For example: Musicality in Salsa, Men Styling, etc.'
+  teacher: Да ли предајете?
+  partner: Да ли тражите плесног партнера?
+  height: Ваша висина (цм)
+  weight:
+    label: Your weight (kg)
+    description: Leave this field blank if you think it's irrelevant.
+  partnerBio:
+    label: Question
+    description: 'What is important in your partner? Put it as a question, for example: Do you love dogs?'
+  objectives: Циљеви
+  objective:
+    placeholder: Objective
+  meetingPlace: Where to meet?
+  photo: Пхото
+  add: Add profile
+  title: Community
+  styles:
+    label: Dance
+    tips: Mark up to 4 favorite dances that will be highlighted in your poster
+  place:
+    label: Your city
+    placeholder: City
+  dance:
+    placeholder: Style
+  permission:
+    label: Do you want free promo?
+    description: 'Send us link to your profile on [Instagram](https://instagram.com/wedancevip) and we will promote it on our social media channels: Telegram, Instagram, Facebook and Twitter.'
+  jobs:
+    label: I can help with
+    description: 'How can you help our community? What are you good at? For example: design, programming, marketing, social media, etc.'
+  contacts: Do you use social media?
+  instagram:
+    label: instagram.com/
+    placeholder: username
+  facebook:
+    label: fb.com/
+    placeholder: username
+  whatsapp:
+    label: whatsapp.com/
+    placeholder: whatsapp chat
+  telegram:
+    label: t.me/
+    placeholder: username
+  twitter:
+    label: twitter.com/
+    placeholder: username
+  tiktok:
+    label: tiktok.com/
+    placeholder: username
+  youtube:
+    label: youtube.com/
+    placeholder: username
+  email:
+    label: Емаил
+    placeholder: for business requests
+  website:
+    label: Веб сајт
+    placeholder: for business requests
+  meetingPlaces:
+    myPlace: My place
+    yourPlace: Your place
+    private: Somewhere private
+    public: Somewhere public
+  typeList:
+    dancer: Dancer
+    artist: Artist
+    organiser: Organiser
+    venue: Venue
+    city: City
+  objectivesList:
+    talk: Talk about dance
+    learn: Learn together
+    outdoors: Dance outdoors
+    indoors: Dance indoors
+    teach: Teach together
+    project: Dance project
+  profileSorts:
+    username: Username
+    registered: Registered
+    lastSeen: Last seen
+  chat:
+    label: Разговор
+  partnerSearch:
+    title: I am looking for a dance partner
+radiusOptions:
+  ten: around 10km
+  twenty: around 20km
+  fifty: around 50km
+  hundred: around 100km
+  fiveHundred: around 500km
+  thousand: around 1000km
+  anywhere: Било где
 myprofile:
-  events:
-    add: Додај догађај
-  posts:
-    add: Напишите пост
-  title: Мој профил
+  addEvent: Додај догађај
+  addPost: Write a post
+  edit: Edit Profile
+  share: Објави
+  intro:
+    photo: your photo
+    gender: your gender
+    styles: what do you dance
+    bio: teaser (short introduction)
+    place: your city
+    objectives: your objectives
+    title: Welcome to WeDance!
+    description1: This is your profile. A square below is a poster – your visual introduction.
+    description2: Your poster is also shown in {0} among other dancers.
+    community: Community
+    description3: 'Click {0} and add:'
+  ambassador:
+    description1: WeDance is represented by Ambassador in local dance communities. Volunteers help Ambassador with different initiatives to unite local dancers. WeDance is created and supported by volunteers. Get Involved, become volunteer!
+    description2: Ambassador in {community} is
+    description3: 'Help us build a dance network in your city, follow and interact with our local social media accounts:'
+  profile:
+    height: '{height}cm'
+    weight: '{weight}kg'
+TPostList:
+  loadMore: Load more
+TPost:
+  dropdown: report or share
+  showLess: Show less
+  showMore: Show more
+TCardActions:
+  reason: Reason
+  options:
+    spam: spam
+    other: other
 chat:
   title: Разговор
-  welcome: Започни разговор са нечим лепим
-  with: Ћаскај са {username}
-  dateDiff: 'Пре {diff}'
+  empty: Start conversations and they will appear here.
+  lastMessage:
+    byYou: by you
+  receiver:
+    deleted: DELETED
+conversation:
+  userName: Chat with {username}
+  empty: Start conversation with something nice.
+  lastSeen: opened chat last time
+  unread: haven't opened this chat yet
+  newMessage:
+    placeholder: Write a message
+    submit: Send
+  welcome: Start conversation with something nice.
+  with: Chat with {username}
+  dateDiff: '{diff} ago'
 cities:
   choose: Одаберите град
 settings:
@@ -43,6 +333,12 @@ settings:
     description: Ове информације ће се користити за обавештења и куповине. Делиће се са добављачима услуга или продавцима само уз ваш договор.
     changepassword: Промени лозинку
     delete: Обришите налог
+    popup:
+      delete:
+        title: Confirm account deletion
+        deleteReason: Why are you leaving?
+        usernameConfirmation: Enter username
+  passwordError: Error
   profile:
     title: Профил
     description: Шта желите да други плесачи знају о вама? То је место на којем можете поделити своју страст према плесу. Представи се, не стиди се!
@@ -54,37 +350,25 @@ city:
   change: Промени град
 role:
   label: Улога
-profile:
-  username: Корисничко име
-  community: Плешем у
-  type: Тип
-  name: Име
-  bio: Теасер
-  hometown: Родни град
-  birthday: Рођендан
-  gender: Пол
-  styles: Ваши плесни стилови и ниво
-  style: Плесни стилови
-  story: Опис
-  languages: Твоји језици
-  skills: Не-плесне вештине
-  days: Дани
-  topics: Које плесне теме вас занимају?
-  teacher: Да ли предајете?
-  partner: Да ли тражите плесног партнера?
-  height: Ваша висина (цм)
-  weight: Ваша тежина (кг)
-  partnerBio: О свом партнеру
-  objectives: Циљеви
-  place: Где да се састане?
-  visibility: Видљивост
-  photo: Пхото
 account:
   email: Емаил
   password: Лозинка
   name: Пуно име
   phone: Телефон
-  newsletter: Какву врсту ажурирања желите да примате недељно?
+  zone: Timezone
+  newsletter:
+    label: What kind of updated would you like to receive weekly?
+    options:
+      party: 'Social/party events'
+      class: Dance classes
+      workshop: Workshops and bootcamps
+      online: Online dance classes
+      festival: International festivals
+  comment: Comment
+  withPartner:
+    label: Do you have a partner?
+  partnerName: Partner's name
+  partnerEmail: Partner's email
 agreement: Пријавом се слажете са {terms} и {privacy}.
 terms: Услови коришћења
 privacy: Правила о приватности
@@ -102,7 +386,6 @@ nopassword:
 contacts:
   email: Емаил
   website: Веб сајт
-save: Сачувати
 teaser:
   partner:
     title: Треба вам партнер?
@@ -122,7 +405,7 @@ teaser:
     btn: Придружи се сад
   chat:
     title: Да ли ћаскамо?
-    description: 'У сваком граду имамо плесне разговоре'
+    description: "У сваком граду имамо плесне разговоре"
     btn: Придружите се {city} ћаскању
   involve:
     title: Треба нам твоја помоћ
@@ -139,17 +422,19 @@ footer:
   coc: Кодекс понашања
   faq: Питања и одговори
 feed:
+  add: Add post
   title: Коментар
   newMessage:
     input: Ask or share something about dance...
     intent: post a message
     submit: Send
   category: Choose category
+  post: Post
+  event: Event
   needPartner: Looking for partner
   needEvents: Looking for events
   needInstructor: Looking for instructor
   trip: Offering trip
-  event: Event
   artist: Artist
   venue: Venue
   app: App
@@ -157,13 +442,9 @@ feed:
   inspiration: Inspiration
   question: Question
   poll: Poll
-  post: Post
 comments:
   empty: There are no comments yet.
-edit:
-  label: Edit
-dashboard:
-  label: Dashboard
+  label: Comments
 sort:
   popular: Популарно
   newest: Најновије
@@ -172,3 +453,98 @@ sort:
   starred: Starred
   archived: Archived
   yours: Yours
+event:
+  artists: Artists
+  organiser: Organiser
+  category:
+    meetup: Meetup
+    lesson: Lesson
+    online: Online
+    travel: Travel
+  role:
+    dj: DJ
+    instructor: Instructor
+    taxi: Taxi Dancer
+    photographer: Photographer
+    musician: Musician
+    organiser: Organiser
+  name:
+    placeholder: Event Name
+    label: Name
+  description:
+    label: Description
+    placeholder: Text (markdown)
+    description: 'Use [widgets](https://wedance.vip/markdown), including images and videos'
+  startDate: When?
+  endDate: End Date
+  venue: Where?
+  cover: Cover
+  type: Event Type
+  duration:
+    label: How long?
+    thirtyMinutes: 30 minutes
+    oneHour: 60 minutes
+    ninetyMinutes: 1.5 hour
+    twoHours: 2 hours
+    threeHours: 3 hours
+    fourHours: 4 hours
+    fiveHours: 5 hours
+    custom: Custom
+  price:
+    label: Price
+    description: Please include currency, i.e. EUR, USD
+  styles: Плесни стилови
+  org:
+    label: Organiser
+  online:
+    label: Online?
+    description: Streaming via Zoom, Google Meet, Instagram Live, etc.?
+  international:
+    label: International
+    description: Is it a big event with >500 guests, like festival or congress?
+  place:
+    label: Community
+    description: Leave empty if you want your event to be shown in all cities
+  form:
+    label: External registration?
+    before: Do you use external platform to register for your event?
+  link:
+    label: Link
+    description: Direct booking link on ticket platform [ti.to](https://ti.to/home), Eventbrite, Google Form, etc.
+  facebook:
+    label: Facebook
+    description: Facebook event
+  promo:
+    label: Announce on social media?
+    description: 'Send us link to your event on [Telegram](https://t.me/+aRIIZcXpBhJkYmUy) and we will announce it on our Telegram, Instagram and Facebook.'
+  confirmation:
+    label: Confirmation email for guests
+    placeholder: 'Example: Dear guest, you are confirmed to our event.'
+TInputProfile:
+  changeRole: Change Role
+  actions: Actions
+  remove: Remove
+  import: Import
+  placeholder: Search on WeDance, Instagram or Facebook
+popup:
+  auth:
+    title: Members only
+    body: Sign in to {action}
+    signin: Улазни
+TButton:
+  title: Login to {action}
+TDropdown:
+  title: report or share
+TReaction:
+  watch: Watch
+  star: Star
+EventDashboard:
+  noAccess: Only event owner can access this area.
+  unlink: Unlink
+  couple: Couple
+  cancel: Cancel
+  checkIn: CheckIn
+  rsvp: RSVP
+  subscribed: Subscribed
+  paid: Paid
+  notPaid: Didn't Pay
