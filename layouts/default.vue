@@ -16,7 +16,9 @@
       desktop="Are you ready for WeDance v3?"
       mobile="Are you ready for WeDance v3?"
       action="Request Beta"
-      link="https://j4ripfl7ia1.typeform.com/to/Flh9wptJ"
+      :link="
+        `https://j4ripfl7ia1.typeform.com/to/Flh9wptJ#username=${profile.username}`
+      "
     />
 
     <div
