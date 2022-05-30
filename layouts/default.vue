@@ -6,7 +6,9 @@
       desktop="Can you take 30 seconds to help us?"
       mobile="30 seconds to help us?"
       action="Yes"
-      link="https://j4ripfl7ia1.typeform.com/to/bfWbw6EH"
+      :link="
+        `https://j4ripfl7ia1.typeform.com/to/bfWbw6EH#username=${profile.username}`
+      "
     />
     <TBanner
       v-if="bannerNps && profile && profile.daysUsed > 10"
