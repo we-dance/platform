@@ -102,6 +102,11 @@ export const useProfiles = () => {
         'https://www.blablacar.de/user/show/00000000-0000-0000-0000-000000000000',
     },
     {
+      name: 'spotify',
+      label: 'Spotify',
+      placeholder: 'https://open.spotify.com/user/000000000000000000000000',
+    },
+    {
       name: 'instagram',
       label: 'Instagram',
       placeholder: 'https://www.instagram.com/username/',
