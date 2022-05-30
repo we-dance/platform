@@ -1,24 +1,6 @@
 <template>
   <div>
     <THeader :title="$t('feed.title')" />
-    <div class="border-b p-4">
-      <div class="text-sm mb-4 text-center">
-        We are working on a new version of the platform. Would you like to be
-        the first one to see it?
-      </div>
-      <div class="text-center">
-        <button
-          data-tf-slider="Flh9wptJ"
-          data-tf-width="550"
-          data-tf-iframe-props="title=Dance Content"
-          data-tf-medium="snippet"
-          class="rounded-full bg-primary text-white px-4 py-2"
-        >
-          Request Beta
-        </button>
-      </div>
-      <script src="https://embed.typeform.com/next/embed.js"></script>
-    </div>
 
     <div class="border-b p-4 flex">
       <TInputSelect v-model="filterType" :options="filterTypeList" />
