@@ -70,12 +70,12 @@
 <script>
 import features from 'platform-detect'
 import ls from 'local-storage'
+import { ref, watch } from '@nuxtjs/composition-api'
 import { version } from '../package.json'
 import { useAuth } from '~/use/auth'
 import { useCities } from '~/use/cities'
 import { useApp } from '~/use/app'
 import { analytics, track } from '~/plugins/firebase'
-import { ref, watch } from '@nuxtjs/composition-api'
 
 export default {
   name: 'DefaultLayout',
