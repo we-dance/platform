@@ -250,6 +250,8 @@ profile:
     city: City
   objectivesList:
     talk: Talk about dance
+    home: Share home
+    auto: Share auto
     learn: Learn together
     outdoors: Dance outdoors
     indoors: Dance indoors
