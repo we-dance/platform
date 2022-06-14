@@ -1,41 +1,39 @@
 import * as puppeteer from 'puppeteer'
 import config from '../env'
+import axios from 'axios'
 
-function getBrowser() {
-  return puppeteer.launch({
-    executablePath: '/opt/homebrew/bin/chromium',
-    headless: false,
-    args: [
-      '--no-sandbox',
-      '--disable-setuid-sandbox',
-      '--disable-web-security',
-      '--disable-features=IsolateOrigins,site-per-process',
-    ],
+export function delay(time: any) {
+  return new Promise(function(resolve) {
+    setTimeout(resolve, time)
   })
 }
 
+let _browser: puppeteer.Browser
 let loggedIn = false
 
-export async function getInstagram(username: string) {
-  const browser = await getBrowser()
+async function getBrowser() {
+  if (!_browser) {
+    _browser = await puppeteer.launch({
+      executablePath: '/opt/homebrew/bin/chromium',
+      headless: true,
+      args: [
+        '--no-sandbox',
+        '--disable-setuid-sandbox',
+        '--disable-web-security',
+        '--disable-features=IsolateOrigins,site-per-process',
+      ],
+    })
+  }
 
-  const page = await browser.newPage()
+  return _browser
+}
 
-  await page.setExtraHTTPHeaders({
-    accept:
-      'text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9',
-    'user-agent':
-      'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/90.0.4430.212 Safari/537.36',
-    'upgrade-insecure-requests': '1',
-    'accept-encoding': 'gzip, deflate, br',
-    'accept-language': 'en-US,en;q=0.9,en;q=0.8',
-  })
-
+async function loginToInstagram(page: puppeteer.Page) {
   if (!loggedIn) {
     await page.goto(`https://instagram.com/accounts/login`)
 
     const [acceptCookiesButton] = await page.$x(
-      "//button[contains(., 'Accept All')]"
+      "//button[contains(., 'Allow')]"
     )
 
     if (!acceptCookiesButton) {
@@ -59,31 +57,77 @@ export async function getInstagram(username: string) {
     await page.waitForNavigation()
     loggedIn = true
   }
+}
 
-  const response = await page.goto(`https://instagram.com/${username}`)
-  const isLoginRequested = response?.url().includes('/accounts/login')
+async function getPage() {
+  const browser = await getBrowser()
 
-  if (isLoginRequested) {
-    await browser.close()
+  const page = await browser.newPage()
 
-    throw Error('Login required')
-  }
+  await page.setExtraHTTPHeaders({
+    accept:
+      'text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9',
+    'user-agent':
+      'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/90.0.4430.212 Safari/537.36',
+    'upgrade-insecure-requests': '1',
+    'accept-encoding': 'gzip, deflate, br',
+    'accept-language': 'en-US,en;q=0.9,en;q=0.8',
+  })
 
-  const isUsernameNotFound = await page.evaluate(
-    `document.getElementsByTagName('h2')[0]?.textContent == "Sorry, this page isn't available."`
+  return page
+}
+
+export async function getInstagramApi(instagramUrl: string) {
+  const page = await getPage()
+  await loginToInstagram(page)
+
+  const response = await page.goto(instagramUrl + '/?__a=1')
+  console.log(response.url())
+  console.log(await response.text())
+
+  await _browser.close()
+
+  return null
+}
+
+export async function getInstagramScraper(instagramUrl: string) {
+  const page = await getPage()
+
+  await loginToInstagram(page)
+
+  await page.goto(instagramUrl, { waitUntil: ['networkidle2'] })
+
+  // await delay(2000)
+
+  const profile_pic_url_hd = await page.evaluate(
+    `document.querySelector('main header img')?.src`
+  )
+  const full_name = await page.evaluate(
+    `document.querySelector('main header section>div>span').textContent`
+  )
+  const biography = await page.evaluate(
+    `document.querySelectorAll('main header section>div')[1].querySelectorAll('div')[2].textContent`
+  )
+  let external_url = await page.evaluate(
+    `document.querySelector('main header section div a').textContent`
   )
 
-  if (isUsernameNotFound) {
-    await browser.close()
-
-    return
+  if (external_url) {
+    external_url = 'https://' + external_url
   }
 
-  const user = await page.evaluate(
-    `window._sharedData?.entry_data.ProfilePage[0].graphql.user`
-  )
+  await _browser.close()
 
-  await browser.close()
+  return {
+    profile_pic_url_hd,
+    full_name,
+    biography,
+    external_url,
+  }
+}
 
-  return user
+export async function getInstagramFetch(instagramUrl: string) {
+  const res = await axios.get(instagramUrl + '/?__a=1')
+  console.log(res)
+  return res.data.graphql?.user as any
 }

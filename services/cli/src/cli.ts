@@ -1,6 +1,8 @@
 import axios from 'axios'
 import { db, admin } from './firebase'
-import { getInstagram } from './lib/browser'
+import { getInstagramScraper } from './lib/browser'
+
+require('dotenv').config()
 
 const yargs = require('yargs/yargs')
 const { hideBin } = require('yargs/helpers')
@@ -228,7 +230,7 @@ yargs(hideBin(process.argv))
       if (argv.username) {
         profiles = await db
           .collection('profiles')
-          .where('instagram', '==', argv.username)
+          .where('username', '==', argv.username)
           .get()
       } else {
         profiles = await db
@@ -251,6 +253,10 @@ yargs(hideBin(process.argv))
           continue
         }
 
+        console.log(``)
+        console.log(`---`)
+        console.log(`Importing ${profile.username}`)
+
         const owner = (
           await db
             .collection('profiles')
@@ -272,13 +278,20 @@ yargs(hideBin(process.argv))
 
           imported[profile.instagram] = true
 
-          const instagram = await getInstagram(profile.instagram)
+          let instagram
+
+          try {
+            instagram = await getInstagramScraper(profile.instagram)
+            console.log(instagram)
+          } catch (e) {
+            console.log((e as any).message)
+          }
 
           if (!instagram) {
             const error = 'Instagram not found'
 
             console.log(
-              `${profile.username} added by ${owner.username} failed: ${error}`
+              `${profile.username} added by ${owner?.username} failed: ${error}`
             )
 
             await profileRef.ref.update({
@@ -313,11 +326,10 @@ yargs(hideBin(process.argv))
             importedAt: now,
             updatedAt: now,
             source: 'instagram',
-            name: instagram.full_name || instagram.username,
-            bio: instagram.bio || '',
+            name: instagram.full_name,
+            bio: instagram.biography || '',
             type: 'FanPage',
             import: 'success',
-            instagram: instagram.username,
             website: instagram.external_url || '',
             photo,
             visibility: 'Public',
@@ -325,7 +337,7 @@ yargs(hideBin(process.argv))
 
           await profileRef.ref.update(changes)
           console.log(
-            `${profile.username} by ${owner.username}: imported from Instagram`
+            `${profile.username} by ${owner?.username}: imported from Instagram`
           )
           console.log(` name: ${changes.name}`)
           console.log(` bio: ${changes.bio}`)
