@@ -243,14 +243,14 @@
               icon="telegram"
               type="round"
               icon-size="6"
-              href="https://t.me/WeDanceVIP"
+              href="https://t.me/WeDanceTravel"
             />
             <TButton
               allow-guests
               icon="twitter"
               type="round"
               icon-size="6"
-              href="https://twitter.com/WeDanceVIP"
+              href="https://twitter.com/WeDancePlatform"
             />
             <TButton
               allow-guests
