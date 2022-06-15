@@ -28,6 +28,11 @@ async function getBrowser() {
   return _browser
 }
 
+export async function closeBrowser() {
+  const browser = await getBrowser()
+  await browser.close()
+}
+
 async function loginToInstagram(page: puppeteer.Page) {
   if (!loggedIn) {
     await page.goto(`https://instagram.com/accounts/login`)
@@ -85,9 +90,27 @@ export async function getInstagramApi(instagramUrl: string) {
   console.log(response.url())
   console.log(await response.text())
 
-  await _browser.close()
-
   return null
+}
+
+export async function getInstagramWebProfileInfo(
+  instagramUrl: string
+): Promise<any> {
+  const page = await getPage()
+  await loginToInstagram(page)
+
+  let result
+
+  page.on('response', async (response) => {
+    if (response.url().includes('web_profile_info')) {
+      const res = await response.json()
+      result = res.data.user
+    }
+  })
+
+  await page.goto(instagramUrl, { waitUntil: ['networkidle2'] })
+
+  return result
 }
 
 export async function getInstagramScraper(instagramUrl: string) {
@@ -115,8 +138,6 @@ export async function getInstagramScraper(instagramUrl: string) {
   if (external_url) {
     external_url = 'https://' + external_url
   }
-
-  await _browser.close()
 
   return {
     profile_pic_url_hd,
