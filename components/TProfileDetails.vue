@@ -87,7 +87,6 @@ import { getDateTimeYear, getLabels } from '~/utils'
 import { useProfiles } from '~/use/profiles'
 import languages from '~/assets/languages'
 import { useApp } from '~/use/app'
-import TButton from './TButton.vue'
 
 export default {
   props: {
@@ -116,6 +115,5 @@ export default {
       getCity,
     }
   },
-  components: { TButton },
 }
 </script>
