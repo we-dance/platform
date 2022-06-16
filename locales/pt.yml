@@ -156,9 +156,6 @@ profile:
   bio:
     label: Teaser
     before: Short introduction on top of your photo
-  hometown:
-    label: Hometown
-    before: Where were you born and raised?
   birthday:
     label: Birthday
     description: We will show only your age
@@ -199,8 +196,14 @@ profile:
     label: Dance
     tips: Mark up to 4 favorite dances that will be highlighted in your poster
   place:
-    label: Your city
-    placeholder: City
+    label: Living in
+    before: What's your permanent residence?
+  hometown:
+    label: Made in
+    before: Where were you born and raised?
+  current:
+    label: Dancing in
+    before: In which city are you currently dancing?
   dance:
     placeholder: Style
   permission:
