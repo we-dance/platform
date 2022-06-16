@@ -202,13 +202,22 @@ export const useProfiles = () => {
       before: t('profile.username.before'),
     },
     {
+      name: 'current',
+      label: t('profile.current.label'),
+      register: true,
+      poster: true,
+      required: true,
+      component: 'TInputPlace',
+      before: t('profile.current.before'),
+    },
+    {
       name: 'place',
       label: t('profile.place.label'),
       register: true,
       poster: true,
       required: true,
       component: 'TInputPlace',
-      placeholder: t('profile.place.placeholder'),
+      before: t('profile.place.before'),
     },
     {
       name: 'hometown',
