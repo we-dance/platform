@@ -4,9 +4,33 @@
       <dt class="font-bold mr-1">{{ $t('profile.current.label') }}:</dt>
       <dd>{{ getCity(profile.current) }}</dd>
     </dl>
+    <dl v-if="!profile.place && profile.import">
+      <dt class="font-bold mr-1">{{ $t('profile.place.label') }}:</dt>
+      <dd>
+        <TPopupEdit
+          :fields="profileFields.filter((f) => f.name === 'place')"
+          label="Add city"
+          collection="profiles"
+          singular="profile"
+          :item="profile"
+        />
+      </dd>
+    </dl>
     <dl v-if="profile.place">
       <dt class="font-bold mr-1">{{ $t('profile.place.label') }}:</dt>
       <dd>{{ getCity(profile.place) }}</dd>
+    </dl>
+    <dl v-if="!profile.hometown && profile.import">
+      <dt class="font-bold mr-1">{{ $t('profile.hometown.label') }}:</dt>
+      <dd>
+        <TPopupEdit
+          :fields="profileFields.filter((f) => f.name === 'hometown')"
+          label="Add city"
+          collection="profiles"
+          singular="profile"
+          :item="profile"
+        />
+      </dd>
     </dl>
     <dl v-if="profile.hometown">
       <dt class="font-bold mr-1">{{ $t('profile.hometown.label') }}:</dt>
@@ -63,6 +87,7 @@ import { getDateTimeYear, getLabels } from '~/utils'
 import { useProfiles } from '~/use/profiles'
 import languages from '~/assets/languages'
 import { useApp } from '~/use/app'
+import TButton from './TButton.vue'
 
 export default {
   props: {
@@ -76,6 +101,7 @@ export default {
       objectivesList,
       profilePosterFields,
       profileDetailFields,
+      profileFields,
     } = useProfiles()
     const { getCity } = useApp()
 
@@ -84,10 +110,12 @@ export default {
       profilePosterFields,
       profileDetailFields,
       languages,
+      profileFields,
       getDateTimeYear,
       getLabels,
       getCity,
     }
   },
+  components: { TButton },
 }
 </script>
