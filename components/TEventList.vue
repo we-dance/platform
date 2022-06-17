@@ -171,12 +171,15 @@ export default {
     })
 
     const itemsAsText = computed(() => {
-      let result = ''
-
-      result += `👉 Details about events on https://wedance.vip/${props.community}\n\n`
-      result += `👉 Announcements on https://instagram.com/WeDance${props.community}\n\n`
-      result += `👉 Festivals on https://t.me/WeDanceVIP\n\n`
-      result += `👉 Add your event via website.\n\n`
+      let result = `**Dance Calendar in ${props.community}**\n\n`
+      result += `We help everyone to dance everywhere and all dancers to help each other\n\n`
+      result += `🗓️ **Dance Calendar**\n`
+      result += `t.me/${props.community}\n\n`
+      result += `✈️ **Calendar of Dance Festivals**\n`
+      result += `t.me/WeDanceTravel\n\n`
+      result += `➕ **Add your event**\n`
+      result += `wedance.vip/${props.community}\n\n`
+      result += `🗓 **DANCE CALENDAR** 🗓 \n\n`
 
       _.forEach(itemsByDate.value, (items, date) => {
         result += String(`**${getDay(date)} ${getDate(date)}**\n`).toUpperCase()
@@ -186,7 +189,7 @@ export default {
             result += `📍 ${item.venue?.name}\n`
           }
           result += `💸 ${item.price}\n`
-          result += `https://wedance.vip/events/${item.id}\n`
+          result += `wedance.vip/${item.org.username}\n`
           result += `\n`
         })
       })
