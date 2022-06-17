@@ -10,7 +10,7 @@ export const useFirestore = () => {
   return firebase.firestore()
 }
 
-export const useCollection = (name, filter) => {
+export const useCollection = (name, filter, comparison = '==') => {
   let field = ''
   let value = ''
 
@@ -26,7 +26,7 @@ export const useCollection = (name, filter) => {
   let collection = firestore.collection(name)
 
   if (field) {
-    collection = collection.where(field, '==', value)
+    collection = collection.where(field, comparison, value)
   }
 
   if (!state[hash]) {

@@ -4,7 +4,7 @@
     <div v-else-if="!count && showEmpty">
       {{ emptyLabel }}
     </div>
-    <div class="flex justify-between items-center px-2">
+    <div v-if="items.length" class="flex justify-between items-center px-2">
       <h2 v-if="title" class="font-bold text-lg">{{ title }}</h2>
       <div v-else></div>
       <TButton type="nav" icon="copy" @click="copyToClipboard" />
@@ -46,6 +46,10 @@ export default {
       type: Object,
       default: null,
     },
+    comparison: {
+      type: String,
+      default: '==',
+    },
     tab: {
       type: String,
       default: 'all',
@@ -73,7 +77,11 @@ export default {
   },
   setup(props) {
     const { currentCity } = useCities()
-    const { docs, loading, getById } = useCollection('posts', props.filter)
+    const { docs, loading, getById } = useCollection(
+      'posts',
+      props.filter,
+      props.comparison
+    )
 
     const { uid } = useAuth()
 

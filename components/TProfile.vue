@@ -75,7 +75,16 @@
 
     <TEventList
       v-if="profile.type !== 'City'"
+      title="Organising"
       :filter="{ 'org.username': profile.username }"
+      class="mt-4 w-full border-b pb-8"
+    />
+
+    <TEventList
+      v-if="profile.type !== 'City'"
+      title="Attending"
+      :filter="{ artistsList: profile.username }"
+      comparison="array-contains"
       class="mt-4 w-full border-b pb-8"
     />
 
