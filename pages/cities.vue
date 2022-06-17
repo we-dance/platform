@@ -28,15 +28,18 @@ import { useRouter } from '~/use/router'
 import { useApp } from '~/use/app'
 import { getPlacePredictions } from '~/use/google'
 import { searchByStart, sortBy } from '~/utils'
+import { useAuth } from '~/use/auth'
 
 export default {
   setup() {
     const { currentCity } = useCities()
     const { router, route } = useRouter()
+    const { updateProfile } = useAuth()
     const { getCityHistory, removeCityHistory: removeCity, cities } = useApp()
 
-    function changeCity(placeId) {
+    async function changeCity(placeId) {
       currentCity.value = placeId
+      await updateProfile({ current: placeId })
       const target = route.query.target || '/feed'
       router.push(target)
     }
