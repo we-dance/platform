@@ -19,6 +19,7 @@ import 'firebase/firestore'
 import {
   EyeIcon,
   StarIcon,
+  BookmarkIcon,
   ArchiveIcon,
   EyeOffIcon,
 } from '@vue-hero-icons/outline'
@@ -32,6 +33,7 @@ export default {
     StarIcon,
     ArchiveIcon,
     EyeOffIcon,
+    BookmarkIcon,
   },
   props: {
     label: {

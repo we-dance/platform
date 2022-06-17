@@ -473,13 +473,13 @@ export const getMeta = (collection, post) => {
       },
       performer: post.artists?.map((artist) => ({
         '@type': 'Person',
-        image: artist.photo,
-        name: artist.name,
-        description: artist.bio,
+        image: artist?.photo,
+        name: artist?.name,
+        description: artist?.bio,
         sameAs: [
-          `https://wedance.vip/${artist.username}`,
-          `https://facebook.com/${artist.facebook}`,
-          `https://instagram.com/${artist.instagram}`,
+          `https://wedance.vip/${artist?.username}`,
+          `https://facebook.com/${artist?.facebook}`,
+          `https://instagram.com/${artist?.instagram}`,
         ],
       })),
     }

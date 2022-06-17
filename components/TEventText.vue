@@ -13,7 +13,12 @@
       >
         {{ item.name }}
       </NuxtLink>
-      <TReactions :item="item" class="my-1" />
+      <TReaction
+        field="star"
+        icon="BookmarkIcon"
+        class="border-none"
+        :item="item"
+      />
       <div>
         <div class="text-xs flex flex-wrap gap-1">
           <div v-if="item.online === 'Yes'">
