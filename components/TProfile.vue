@@ -89,7 +89,14 @@
     />
 
     <TEventList
-      v-if="profile.type === 'City'"
+      v-if="profile.type === 'City' && profile.username == 'Travel'"
+      :filter="{ eventType: 'Festival' }"
+      :community="profile.username"
+      class="mt-4 w-full border-b pb-8"
+    />
+
+    <TEventList
+      v-if="profile.type === 'City' && profile.username !== 'Travel'"
       :filter="{ place: profile.place }"
       :community="profile.username"
       class="mt-4 w-full border-b pb-8"
