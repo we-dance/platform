@@ -2,7 +2,7 @@ export const app = {
   name: 'WeDance',
   description: 'We bring dancers together',
   social: {
-    twitter: 'WeDanceVIP',
+    twitter: 'WeDancePlatform',
   },
   url: 'https://wedance.vip/',
   author: 'WeDance',

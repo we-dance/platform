@@ -236,7 +236,7 @@
               icon="instagram"
               type="round"
               icon-size="6"
-              href="https://instagram.com/WeDanceVIP"
+              href="https://instagram.com/WeDancePlatform"
             />
             <TButton
               allow-guests

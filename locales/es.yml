@@ -205,7 +205,7 @@ profile:
     placeholder: Style
   permission:
     label: Do you want free promo?
-    description: 'Send us link to your profile on [Instagram](https://instagram.com/wedancevip) and we will promote it on our social media channels: Telegram, Instagram, Facebook and Twitter.'
+    description: 'Send us link to your event on [Telegram](https://t.me/+aRIIZcXpBhJkYmUy) and we will announce it on our Telegram, Instagram and Facebook.'
   jobs:
     label: I can help with
     description: 'How can you help our community? What are you good at? For example: design, programming, marketing, social media, etc.'
@@ -405,7 +405,7 @@ teaser:
     btn: Únete ahora
   chat:
     title: Pregunte a los lugareños
-    description: "Tenemos un chat de baile de Telegram en cada ciudad. Únase al chat de su ciudad para ayudar a los bailarines que viajan, invite a sus amigos de baile. ¡Construyamos WeDance juntos!"
+    description: 'Tenemos un chat de baile de Telegram en cada ciudad. Únase al chat de su ciudad para ayudar a los bailarines que viajan, invite a sus amigos de baile. ¡Construyamos WeDance juntos!'
     btn: Únete al chat
   involve:
     title: Necesitamos tu ayuda
