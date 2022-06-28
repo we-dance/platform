@@ -5,11 +5,7 @@ import { getYmd } from '~/utils'
 import { useCommon } from '~/use/common'
 
 const updateEndDate = (e) => {
-  if (!e.duration || e.duration === 'custom') {
-    return
-  }
-
-  e.endDate = addMinutes(parseISO(e.startDate), e.duration)
+  e.endDate = addMinutes(parseISO(e.startDate), 60)
 }
 
 export const useEvents = () => {
@@ -190,6 +186,13 @@ export const useEvents = () => {
       description: t('event.description.description'),
     },
     {
+      name: 'venue',
+      label: t('event.venue'),
+      labelPosition: 'top',
+      component: 'TInputVenue',
+      simple: true,
+    },
+    {
       name: 'startDate',
       type: 'datetime-local',
       labelPosition: 'top',
@@ -198,57 +201,11 @@ export const useEvents = () => {
       onChange: updateEndDate,
     },
     {
-      name: 'venue',
-      label: t('event.venue'),
-      labelPosition: 'top',
-      component: 'TInputVenue',
-      simple: true,
-    },
-    {
-      name: 'duration',
-      label: t('event.duration.label'),
-      labelPosition: 'top',
-      onChange: updateEndDate,
-      component: 'TInputSelect',
-      options: [
-        {
-          value: 30,
-          label: t('event.duration.thirtyMinutes'),
-        },
-        {
-          value: 60,
-          label: t('event.duration.oneHour'),
-        },
-        {
-          value: 90,
-          label: t('event.duration.ninetyMinutes'),
-        },
-        {
-          value: 120,
-          label: t('event.duration.twoHours'),
-        },
-        {
-          value: 180,
-          label: t('event.duration.threeHours'),
-        },
-        {
-          value: 240,
-          label: t('event.duration.fourHours'),
-        },
-        {
-          value: 300,
-          label: t('event.duration.fiveHours'),
-        },
-        {
-          value: 'custom',
-          label: t('event.duration.custom'),
-        },
-      ],
-    },
-    {
       name: 'endDate',
       type: 'datetime-local',
-      when: (e) => e.duration === 'custom',
+      labelPosition: 'top',
+      label: t('event.endDate'),
+      simple: true,
     },
     {
       name: 'price',

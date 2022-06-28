@@ -16,6 +16,14 @@
           :to="`/events/${doc.id}/edit`"
           :label="$t('eventView.dropdown.edit')"
         />
+
+        <TButton
+          v-if="can('edit', 'events', doc)"
+          type="context"
+          icon="copy"
+          :to="`/events/${doc.id}/copy`"
+          :label="$t('eventView.dropdown.copy')"
+        />
         <TCardActions
           :id="doc.id"
           collection="events"
