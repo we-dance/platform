@@ -174,7 +174,7 @@ export default {
       let result = `**Dance Calendar in ${props.community}**\n\n`
       result += `We help everyone to dance everywhere and all dancers to help each other\n\n`
       result += `🗓️ **Dance Calendar**\n`
-      result += `t.me/${props.community}\n\n`
+      result += `t.me/WeDance${props.community}\n\n`
       result += `✈️ **Calendar of Dance Festivals**\n`
       result += `t.me/WeDanceTravel\n\n`
       result += `➕ **Add your event**\n`
