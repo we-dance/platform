@@ -528,12 +528,12 @@ export const getMeta = (collection, post) => {
       {
         hid: 'author',
         name: 'author',
-        content: post.username,
+        content: post?.org?.name || post.username,
       },
       {
         hid: 'publisher',
         name: 'publisher',
-        content: post.username,
+        content: post?.org?.name || post.username,
       },
     ],
     script: [
