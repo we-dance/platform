@@ -105,6 +105,7 @@ eventView:
     dashboard: Dashboard
     edit: Edit
     share: Compartilhar
+    copy: Copy
   online: Online Event
   reservation:
     guest: Register for event
