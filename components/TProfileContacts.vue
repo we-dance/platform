@@ -1,6 +1,19 @@
 <template>
   <TDropdown v-if="filledFields.length" :label="title" :type="type" icon="">
     <TButton
+      v-if="profile.email"
+      allow-guests
+      :href="profile.email"
+      label="email"
+      type="context"
+    />
+    <TButton
+      v-else
+      :to="`/chat/${profile.username}`"
+      label="email"
+      type="context"
+    />
+    <TButton
       v-for="field in filledFields"
       :key="field"
       allow-guests

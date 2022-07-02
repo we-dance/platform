@@ -48,13 +48,6 @@
         <div class="text-sm">{{ profile.bio }}</div>
 
         <TButton
-          v-if="uid !== profile.id && profile.type !== 'City'"
-          type="base"
-          class="mt-4"
-          :to="`/chat/${profile.username}`"
-          >{{ $t('profile.chat.label') }}</TButton
-        >
-        <TButton
           v-if="profile.type === 'City'"
           type="primary"
           class="mt-4"
