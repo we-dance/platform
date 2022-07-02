@@ -54,13 +54,31 @@
           :to="`/chat/${profile.username}`"
           >{{ $t('profile.chat.label') }}</TButton
         >
-        <TButton type="base" class="mt-4" to="/events/-/edit">{{
-          $t('myprofile.addEvent')
-        }}</TButton>
+        <TButton
+          v-if="profile.type === 'City'"
+          type="primary"
+          class="mt-4"
+          to="/events/-/edit"
+          >{{ $t('myprofile.addEvent') }}</TButton
+        >
+        <div
+          class="md:flex md:space-x-2 space-y-2 mt-4"
+          v-if="profile.type !== 'City'"
+        >
+          <TButton
+            v-if="profile.website"
+            type="primary"
+            :href="profile.website"
+            >{{ $t('profile.bookme') }}</TButton
+          >
+          <TProfileContacts
+            :profile="profile"
+            :title="$t('profile.contactme')"
+            type="base"
+          />
+        </div>
       </div>
     </div>
-
-    <TProfileContacts :profile="profile" class="py-2 mb-4 bg-gray-100" />
 
     <div v-if="uid === profile.id" class="flex justify-center space-x-2">
       <TButton :label="$t('myprofile.edit')" to="/settings?tab=profile" />

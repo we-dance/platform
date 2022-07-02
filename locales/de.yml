@@ -144,6 +144,7 @@ filter:
 community:
   title: Community
 profile:
+  bookme: Buche mich
   username:
     label: Username
     before: Use only letters, numbers, underscores and periods.
@@ -272,7 +273,7 @@ radiusOptions:
   thousand: around 1000km
   anywhere: Irgendwo
 myprofile:
-  addEvent: Hinzufügen
+  addEvent: Veranstaltung Hinzufügen
   addPost: Write a post
   edit: Edit Profile
   share: Teilen

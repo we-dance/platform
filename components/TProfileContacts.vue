@@ -1,22 +1,15 @@
 <template>
-  <div
-    v-if="filledFields.length"
-    class="md:flex items-center justify-center space-x-2 space-y-2"
-  >
-    <div v-if="title" class="pl-2 font-bold">{{ title }}</div>
-    <div class="p-4 flex flex-wrap gap-2 items-center justify-center">
-      <TButton
-        v-for="field in filledFields"
-        :key="field"
-        allow-guests
-        :href="profile[field]"
-        type="void"
-        class="bg-white border flex justify-center items-center w-8 h-8"
-      >
-        <TIcon :name="field" class="w-full m-1" />
-      </TButton>
-    </div>
-  </div>
+  <TDropdown v-if="filledFields.length" :label="title" :type="type" icon="">
+    <TButton
+      v-for="field in filledFields"
+      :key="field"
+      allow-guests
+      :href="profile[field]"
+      :label="field"
+      :icon="field"
+      type="context"
+    />
+  </TDropdown>
   <div v-else></div>
 </template>
 
@@ -26,6 +19,10 @@ export default {
     title: {
       type: String,
       default: '',
+    },
+    type: {
+      type: String,
+      default: 'nav',
     },
     profile: {
       type: Object,
@@ -39,7 +36,6 @@ export default {
   data: () => ({
     shortFields: ['instagram', 'facebook'],
     longFields: [
-      'website',
       'couchsurfing',
       'airbnb',
       'blablacar',

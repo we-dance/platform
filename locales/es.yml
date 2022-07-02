@@ -144,6 +144,7 @@ filter:
 community:
   title: Community
 profile:
+  bookme: Reservame
   username:
     label: Username
     before: Use only letters, numbers, underscores and periods.
@@ -272,7 +273,7 @@ radiusOptions:
   thousand: around 1000km
   anywhere: En cualquier sitio
 myprofile:
-  addEvent: Añadir
+  addEvent: Añadir evento
   addPost: Write a post
   edit: Edit Profile
   share: Compartir
