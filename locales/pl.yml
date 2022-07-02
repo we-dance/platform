@@ -145,6 +145,8 @@ filter:
 community:
   title: Community
 profile:
+  bookme: Book me
+  contactme: Contact me
   username:
     label: Username
     before: Use only letters, numbers, underscores and periods.
