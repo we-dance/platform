@@ -3,7 +3,7 @@
     <TButton
       v-if="profile.email"
       allow-guests
-      :href="profile.email"
+      :href="`mailto:${profile.email}`"
       label="email"
       type="context"
     />
