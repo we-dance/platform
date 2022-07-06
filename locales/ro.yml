@@ -391,6 +391,7 @@ signin:
 nopassword:
   signin: Am o parolă
   google: Conectați-vă cu Google
+  email: Sign in with Email
   submit: Trimiteți un link magic
 contacts:
   email: E-mail
