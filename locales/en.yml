@@ -423,6 +423,7 @@ signin:
 nopassword:
   signin: I have a password
   google: Sign in with Google
+  email: Sign in with Email
   submit: Send a magic link
 contacts:
   email: Email

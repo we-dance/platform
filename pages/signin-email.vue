@@ -1,25 +1,20 @@
 <template>
   <TAuthError v-if="error" :error="error" />
   <TLoader v-else-if="loading || signingIn" />
-  <div v-else-if="emailSent" class="typo">
-    <h2>Check your email</h2>
-    <p>Email might come in 5-10 minutes and might land in spam.</p>
-    <p>
-      Please report if you have any issues to
-      <a
-        class="text-blue-500 underline hover:no-underline"
-        href="mailto:support@wedance.vip"
-        >support@wedance.vip</a
-      >.
-    </p>
-  </div>
   <div v-else>
-    <form @submit="submit">
+    <form class="space-y-4" @submit="submit">
       <TField
         id="email"
         v-model="email"
         type="email"
         :label="$t('account.email')"
+        label-position="top"
+      />
+      <TField
+        id="password"
+        v-model="password"
+        type="password"
+        :label="$t('account.password')"
         label-position="top"
       />
 
@@ -38,8 +33,13 @@
         </i18n>
       </div>
       <div class="mt-4 flex justify-end">
-        <TButton allow-guests type="primary" @click="submit">
-          {{ $t('nopassword.submit') }}
+        <TButton
+          allow-guests
+          type="primary"
+          class="mt-2 w-full md:mt-0 md:w-32 md:ml-4"
+          @click="submit"
+        >
+          {{ $t('signin.submit') }}
         </TButton>
       </div>
       <div class="mt-4 text-xs">
@@ -47,8 +47,8 @@
           <NuxtLink to="/register" class="underline hover:no-underline">{{
             $t('signin.register')
           }}</NuxtLink>
-          <NuxtLink to="/signin-email" class="underline hover:no-underline">{{
-            $t('nopassword.signin')
+          <NuxtLink to="/nopassword" class="underline hover:no-underline">{{
+            $t('signin.nopassword')
           }}</NuxtLink>
         </div>
       </div>
@@ -62,22 +62,22 @@ import { track } from '~/plugins/firebase'
 import { useAuth } from '~/use/auth'
 
 export default {
-  name: 'NoPasswordPage',
+  name: 'SignInPage',
   layout: 'popup',
   data: () => ({
     email: '',
-    emailSent: false,
+    password: '',
   }),
   setup() {
     const {
       uid,
+      profile,
       loading,
       signingIn,
       signInWithGoogle,
-      sendSignInLinkToEmail,
+      signUserIn,
       signOut,
       error,
-      profile,
     } = useAuth()
 
     return {
@@ -85,7 +85,7 @@ export default {
       loading,
       signingIn,
       signInWithGoogle,
-      sendSignInLinkToEmail,
+      signUserIn,
       signOut,
       error,
       profile,
@@ -117,7 +117,8 @@ export default {
       ls.remove('target')
 
       if (!target) {
-        target = '/feed'
+        const page = this.profile?.username || 'onboarding'
+        target = '/' + page
       }
 
       this.$router.push(target)
@@ -130,11 +131,10 @@ export default {
       }
 
       track('login', {
-        method: 'NoPassword',
+        method: 'Password',
       })
 
-      await this.sendSignInLinkToEmail(this.email)
-      this.emailSent = true
+      await this.signUserIn(this.email, this.password)
     },
   },
 }
