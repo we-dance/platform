@@ -438,6 +438,13 @@ export const useAuth = () => {
     firebase.auth().signInWithRedirect(provider)
   }
 
+  function signInWithFacebook() {
+    state.signingIn = true
+
+    const provider = new firebase.auth.FacebookAuthProvider()
+    firebase.auth().signInWithRedirect(provider)
+  }
+
   async function getRedirectResult() {
     try {
       const result = await firebase.auth().getRedirectResult()
@@ -465,6 +472,7 @@ export const useAuth = () => {
     signInAnonymously,
     signUserIn,
     signInWithGoogle,
+    signInWithFacebook,
     sendSignInLinkToEmail,
     signInWithEmailLink,
     updatePassword,

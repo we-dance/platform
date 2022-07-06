@@ -3,6 +3,13 @@
   <TLoader v-else-if="loading || signingIn" />
   <div v-else class="flex flex-col space-y-2">
     <TButton
+      v-if="$route.query.beta"
+      :label="$t('nopassword.facebook')"
+      allow-guests
+      icon="facebook"
+      @click="signFacebook"
+    />
+    <TButton
       :label="$t('nopassword.google')"
       allow-guests
       icon="google"
@@ -27,6 +34,7 @@ export default {
       loading,
       signingIn,
       signInWithGoogle,
+      signInWithFacebook,
       signUserIn,
       signOut,
       error,
@@ -36,6 +44,7 @@ export default {
       loading,
       signingIn,
       signInWithGoogle,
+      signInWithFacebook,
       signUserIn,
       signOut,
       error,
@@ -61,6 +70,13 @@ export default {
     }
   },
   methods: {
+    async signFacebook() {
+      track('login', {
+        method: 'Facebook',
+      })
+
+      await this.signInWithFacebook()
+    },
     async signGoogle() {
       track('login', {
         method: 'Google',
