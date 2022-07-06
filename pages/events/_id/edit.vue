@@ -94,10 +94,12 @@ export default {
 
       if (data.id) {
         track('update_event')
+        console.log('update_event', data)
         await this.update(data.id, data)
         this.view(data.id)
       } else {
         track('create_event')
+        console.log('create_event', data)
         const result = await this.create(data)
         this.view(result.id)
       }

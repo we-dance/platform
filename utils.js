@@ -72,6 +72,8 @@ export const formatDate = (val, formatStr) => {
 
   if (!date) return ''
 
+  if (!date.getTime || isNaN(date.getTime())) return ''
+
   return format(date, formatStr)
 }
 
