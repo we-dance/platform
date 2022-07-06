@@ -391,6 +391,7 @@ signin:
 nopassword:
   signin: У меня есть пароль
   google: Войти через Google
+  email: Sign in with Email
   submit: Отправить волшебную ссылку
 contacts:
   email: Электронная почта
