@@ -391,6 +391,7 @@ signin:
 nopassword:
   signin: Ho una password
   google: Accedi con Google
+  email: Sign in with Email
   submit: Invia un collegamento magico
 contacts:
   email: E-mail
