@@ -391,6 +391,7 @@ signin:
 nopassword:
   signin: Bir şifrem var
   google: Google ile giriş yap
+  email: Sign in with Email
   submit: Sihirli bağlantı gönder
 contacts:
   email: E-posta adresi
