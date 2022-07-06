@@ -391,6 +391,7 @@ signin:
 nopassword:
   signin: Имам лозинку
   google: Пријавите се са Гоогле-ом
+  facebook: Sign in with Facebook
   email: Sign in with Email
   submit: Пошаљите магични линк
 contacts:
