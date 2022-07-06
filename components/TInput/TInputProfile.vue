@@ -72,7 +72,10 @@
         <div
           class="flex px-4 py-2 hover:bg-blue-100 items-center cursor-pointer space-x-1 text-sm text-gray-700"
           @click="
-            create({ username: inviteUsername, instagram: inviteUsername })
+            create({
+              username: inviteUsername,
+              instagram: `https://instagram.com/` + inviteUsername,
+            })
           "
         >
           <div>
@@ -86,7 +89,10 @@
         <div
           class="flex px-4 py-2 hover:bg-blue-100 items-center cursor-pointer space-x-1 text-sm text-gray-700"
           @click="
-            create({ username: inviteUsername, facebook: inviteUsername })
+            create({
+              username: inviteUsername,
+              facebook: `https://facebook.com/` + inviteUsername,
+            })
           "
         >
           <div>
@@ -161,6 +167,7 @@ export default {
           .replace('facebook.com/', '')
           .replace('wedance.vip/', '')
           .replace(/(\?.*)/g, '')
+          .replace('/', '')
 
         query.value = username
       }
