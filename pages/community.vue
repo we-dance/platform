@@ -76,7 +76,7 @@
         :title="$t('teaser.chat.title')"
         :description="$t('teaser.chat.description')"
         :button="$t('teaser.chat.btn', { city: 'Community' })"
-        href="https://t.me/joinchat/Vxw15sDG-dWpqHDj"
+        href="https://t.me/WeDanceTravel/12"
         class="mt-4"
       />
     </div>

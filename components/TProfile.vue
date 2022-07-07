@@ -125,8 +125,43 @@
     </div>
 
     <TPostList
+      v-if="profile.type !== 'City'"
       :filter="{ username: profile.username }"
       class="mt-4 w-full border-t"
+    />
+
+    <WTeaser
+      title="Event missing?"
+      description="You know a good dance event and it is not listed in calendar?"
+      button="Recommend an Event"
+      url="/events/-/edit"
+      class="mt-4"
+    />
+
+    <WTeaser
+      title="Need more?"
+      description="Ask local dancers, artists and organisers."
+      button="Ask Community"
+      url="/community"
+      class="mt-4"
+    />
+
+    <WTeaser
+      v-if="profile.telegram"
+      title="On Time!"
+      description="Be the first one to know about new events. Reserve a spot. Get the early bird price."
+      button="Follow on Telegram"
+      :href="profile.telegram"
+      class="mt-4"
+    />
+
+    <WTeaser
+      v-if="profile.instagram"
+      title="Photos and Videos"
+      description="Discover other dancers. Participate in dance challenges. Show your talent and tag us in your stories on Instagram."
+      button="Follow on Instagram"
+      :href="profile.instagram"
+      class="mt-4"
     />
   </div>
 </template>

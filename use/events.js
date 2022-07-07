@@ -110,13 +110,7 @@ export const useEvents = () => {
       filter: (item) =>
         ['Workshop', 'Course'].includes(item.eventType) &&
         isUpcoming(item) &&
-        isInSelectedCity(item),
-    },
-    {
-      label: t('event.category.online'),
-      value: 'online',
-      icon: '📺',
-      filter: (item) => item.online === 'Yes' && isUpcoming(item),
+        (isInSelectedCity(item) || item.online === 'Yes'),
     },
     {
       label: t('event.category.travel'),
