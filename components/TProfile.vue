@@ -1,7 +1,7 @@
 <template>
   <div>
     <THeader :title="profile.username">
-      <TButton type="nav" icon="search" to="/search" />
+      <TButton allow-guests type="nav" icon="search" to="/search" />
       <TDropdown>
         <TPopupEdit
           v-if="isAdmin()"
@@ -89,7 +89,7 @@
       v-if="profile.type !== 'City'"
       title="Organising"
       :filter="{ 'org.username': profile.username }"
-      class="mt-4 w-full border-b pb-8"
+      class="w-full border-b"
     />
 
     <TEventList
@@ -97,7 +97,7 @@
       title="Attending"
       :filter="{ artistsList: profile.username }"
       comparison="array-contains"
-      class="mt-4 w-full border-b pb-8"
+      class="w-full border-b"
     />
 
     <TEventList
@@ -112,6 +112,17 @@
       :filter="{ place: profile.place }"
       :community="profile.username"
       class="mt-4 w-full border-b pb-8"
+    />
+
+    <WTeaser
+      v-if="!uid && profile.type !== 'City' && profile.place"
+      :title="`${invitesLeft} invites left`"
+      :description="
+        `${profile.name} invites you to get a free VIP membership for faster networking, get rewards, discover dance flashmobs and VIP events`
+      "
+      button="Accept Invitation"
+      :url="`/signin?invitedBy=${profile.username}`"
+      class="my-0"
     />
 
     <TPreview v-if="profile.story" :content="profile.story" class="p-4" />
@@ -131,6 +142,7 @@
     />
 
     <WTeaser
+      v-if="profile.type === 'City'"
       title="Event missing?"
       description="You know a good dance event and it is not listed in calendar?"
       button="Recommend an Event"
@@ -139,6 +151,7 @@
     />
 
     <WTeaser
+      v-if="profile.type === 'City'"
       title="Need more?"
       description="Ask local dancers, artists and organisers."
       button="Ask Community"
@@ -147,7 +160,7 @@
     />
 
     <WTeaser
-      v-if="profile.telegram"
+      v-if="profile.type === 'City' && profile.telegram"
       title="On Time!"
       description="Be the first one to know about new events. Reserve a spot. Get the early bird price."
       button="Follow on Telegram"
@@ -156,7 +169,7 @@
     />
 
     <WTeaser
-      v-if="profile.instagram"
+      v-if="profile.type === 'City' && profile.instagram"
       title="Photos and Videos"
       description="Discover other dancers. Participate in dance challenges. Show your talent and tag us in your stories on Instagram."
       button="Follow on Instagram"
@@ -186,6 +199,7 @@ export default {
     const { profileFields } = useProfiles()
     const { getCity } = useApp()
     const { t } = useI18n()
+    const invitesLeft = 5
 
     const community = computed(() => getCity(props.profile?.place))
 
@@ -236,6 +250,7 @@ export default {
       getCity,
       isAdmin,
       community,
+      invitesLeft,
     }
   },
 }
