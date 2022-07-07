@@ -182,8 +182,7 @@ export const useEvents = () => {
       labelPosition: 'top',
       component: 'TInputTextarea',
       placeholder: t('event.description.placeholder'),
-      tips: t('event.description.tips'),
-      description: t('event.description.description'),
+      max: 140,
     },
     {
       name: 'venue',
