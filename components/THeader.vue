@@ -6,6 +6,7 @@
           {{ title }}
         </h1>
       </div>
+      <slot name="left" />
       <div class="flex-grow"></div>
       <slot />
     </div>

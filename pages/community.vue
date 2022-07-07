@@ -1,35 +1,41 @@
 <template>
   <div>
-    <THeader :title="$t('community.title')">
+    <THeader>
+      <TButton
+        slot="left"
+        to="/cities?target=/community"
+        icon="place"
+        :label="cityName || $t('cities.choose')"
+      />
       <TButton type="nav" icon="search" to="/search" />
     </THeader>
 
     <div>
-      <div v-if="uid && response.facets" class="mb-4 gap-2 flex flex-wrap p-4">
-        <TButton
-          to="/cities?target=/community"
-          icon="place"
-          :label="cityName || $t('cities.choose')"
-        />
+      <div
+        v-if="uid && response.facets"
+        class="mb-4 gap-2 flex flex-wrap p-4 items-center"
+      >
+        <TInputButtons v-model="filters['type']" :options="facets['type']" />
 
         <t-rich-select
-          v-model="radius"
-          :placeholder="$t('filter.radius')"
-          :options="radiusOptions"
-          hide-search-box
-        />
-
-        <t-rich-select
-          v-for="(options, field) in facets"
-          :key="field"
-          v-model="filters[field]"
-          :placeholder="$t(`profile.${field}`)"
-          :options="options"
+          v-if="filters['type']"
+          v-model="filters['style']"
+          :placeholder="$t(`profile.style`)"
+          :options="facets['style']"
           clearable
           hide-search-box
         />
 
-        <TButton v-if="facetFilters" type="base" @click="load()">
+        <t-rich-select
+          v-if="filters['style']"
+          v-model="filters['objectives']"
+          :placeholder="$t(`profile.objectives`)"
+          :options="facets['objectives']"
+          clearable
+          hide-search-box
+        />
+
+        <TButton v-if="facetFilters" type="link" @click="load()">
           {{ $t('filter.reset') }}
         </TButton>
       </div>
@@ -93,6 +99,7 @@ import { useAuth } from '~/use/auth'
 import { useCities } from '~/use/cities'
 import { useRouter } from '~/use/router'
 import { useApp } from '~/use/app'
+import TInputButtons from '~/components/TInput/TInputButtons.vue'
 
 export default {
   name: 'Community',
@@ -107,36 +114,30 @@ export default {
     const { router } = useRouter()
     const { getCity } = useApp()
     const { objectivesList, typeList, radiusOptions } = useProfiles()
-
     if (!currentCity.value) {
       router.push('/cities')
     }
-
     const { search, response } = useAlgolia('profiles')
-
     const facets = computed(() => ({
-      type: getFacetOptions('type'),
+      type: getFacetOptions('type').filter(
+        (o) => !['FanPage', 'City'].includes(o.value)
+      ),
       gender: getFacetOptions('gender'),
       objectives: getFacetOptions('objectives'),
       style: getFacetOptions('style'),
     }))
-
     function load() {
       filters.value = {}
       query.value = ''
     }
-
     onMounted(load)
-
     const typeOptions = getOptions(typeList, 'All')
-
     const facetFilters = computed(() => {
       return Object.keys(filters.value)
         .filter((field) => filters.value[field])
         .map((field) => `${field}:${filters.value[field]}`)
         .join(',')
     })
-
     const filterQuery = computed(() => {
       if (uid.value) {
         return `visibility:Public OR visibility:Members`
@@ -144,12 +145,10 @@ export default {
         return 'visibility:Public'
       }
     })
-
     watch([currentPage, facetFilters, radius, city], () => {
       if (!city.value?.location) {
         return
       }
-
       search('', {
         filters: filterQuery.value,
         facets: Object.keys(facets.value),
@@ -163,14 +162,11 @@ export default {
       })
       window.scrollTo(0, 0)
     })
-
     const { getStyleName } = useStyles()
-
     function getFacetOptions(field) {
       if (!response.value?.facets || !response.value.facets[field]) {
         return []
       }
-
       return Object.keys(response.value.facets[field]).map((val) => ({
         value: val,
         label: `${getFieldLabel(field, val)} (${
@@ -178,12 +174,10 @@ export default {
         })`,
       }))
     }
-
     function getFieldLabel(field, value) {
       if (!value) {
         return ''
       }
-
       switch (field) {
         case 'objectives':
           return objectivesList.find((o) => o.value === value).label
@@ -193,7 +187,6 @@ export default {
           return value
       }
     }
-
     return {
       radiusOptions,
       uid,
@@ -220,5 +213,6 @@ export default {
       title: 'WeDance Community',
     }
   },
+  components: { TInputButtons },
 }
 </script>
