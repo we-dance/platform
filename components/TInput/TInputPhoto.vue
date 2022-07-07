@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div class="w-full flex flex-col items-center">
+    <div class="w-full flex bg-gray-200 flex items-center justify-center">
       <img
         v-if="value"
         :src="value"
@@ -9,10 +9,15 @@
         :class="{ 'rounded-full': circle }"
       />
       <button
-        class="underline text-blue-500 p-4 hover:no-underline"
+        class="underline text-blue-500 p-8 hover:no-underline"
         @click="showPopup = true"
       >
-        {{ placeholder || $t('photo.placeholder') }}
+        <span v-if="value">
+          {{ placeholder || $t('photo.placeholder') }}
+        </span>
+        <span v-else>
+          {{ placeholder || $t('photo.selectLabel') }}
+        </span>
       </button>
     </div>
 

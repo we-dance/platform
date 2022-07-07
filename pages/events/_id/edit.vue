@@ -54,12 +54,7 @@ export default {
         styles: {},
         cover: '',
         artists: [],
-        org: {
-          username: this.profile?.username || '',
-          name: this.profile?.name || '',
-          photo: this.profile?.photo || '',
-          role: 'organiser',
-        },
+        org: {},
         username: this.profile?.username,
         watch: {
           count: 1,
