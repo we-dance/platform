@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div id="canvas" class="relative leading-none font-lato">
+    <div id="canvas" class="relative leading-none font-lato overflow-hidden">
       <img v-if="photo" :src="photo" :alt="title" class="absolute w-full" />
       <div class="square bg-indigo-500"></div>
 
@@ -45,7 +45,7 @@
             <div v-if="title" class="text-lg font-bold leading-tight">
               {{ title }}
             </div>
-            <div class="text-sm leading-tight mb-1">
+            <div v-if="false" class="text-sm leading-tight mb-1">
               {{ description }}
             </div>
           </template>

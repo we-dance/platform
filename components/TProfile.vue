@@ -49,7 +49,7 @@
 
         <TButton
           v-if="profile.type === 'City'"
-          type="primary"
+          type="base"
           class="mt-4"
           to="/events/-/edit"
           >{{ $t('myprofile.addEvent') }}</TButton
