@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div class="w-full flex bg-gray-200 flex items-center justify-center">
+    <div class="w-full flex flex-col bg-gray-200 items-center">
       <img
         v-if="value"
         :src="value"
