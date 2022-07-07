@@ -54,10 +54,7 @@
           to="/events/-/edit"
           >{{ $t('myprofile.addEvent') }}</TButton
         >
-        <div
-          class="md:flex md:space-x-2 space-y-2 mt-4"
-          v-if="profile.type !== 'City'"
-        >
+        <div class="flex space-x-2 mt-4" v-if="profile.type !== 'City'">
           <TButton
             v-if="profile.website"
             allow-guests
