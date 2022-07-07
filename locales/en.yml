@@ -506,8 +506,8 @@ event:
   artists: Artists
   organiser: Organiser
   category:
-    meetup: Social
-    lesson: Practice
+    meetup: Dance
+    lesson: Learn
     online: Online
     travel: Travel
   role:
