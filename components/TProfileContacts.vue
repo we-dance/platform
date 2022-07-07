@@ -1,5 +1,5 @@
 <template>
-  <TDropdown v-if="filledFields.length" :label="title" :type="type" icon="">
+  <TDropdown :label="title" :type="type" icon="">
     <TButton
       v-if="profile.email"
       allow-guests
@@ -23,7 +23,6 @@
       type="context"
     />
   </TDropdown>
-  <div v-else></div>
 </template>
 
 <script>

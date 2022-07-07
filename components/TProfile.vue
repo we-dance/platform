@@ -60,6 +60,7 @@
         >
           <TButton
             v-if="profile.website"
+            allow-guests
             type="primary"
             :href="profile.website"
             >{{ $t('profile.bookme') }}</TButton
