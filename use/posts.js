@@ -19,54 +19,6 @@ export const usePosts = () => {
       value: '',
     },
     {
-      label: t('feed.needPartner'),
-      value: 'needPartner',
-    },
-    {
-      label: t('feed.needEvents'),
-      value: 'needEvents',
-    },
-    {
-      label: t('feed.needInstructor'),
-      value: 'needInstructor',
-    },
-    {
-      label: t('feed.trip'),
-      value: 'trip',
-    },
-    {
-      label: t('feed.event'),
-      value: 'event',
-    },
-    {
-      label: t('feed.artist'),
-      value: 'artist',
-    },
-    {
-      label: t('feed.venue'),
-      value: 'venue',
-    },
-    {
-      label: t('feed.app'),
-      value: 'app',
-    },
-    {
-      label: t('feed.guide'),
-      value: 'guide',
-    },
-    {
-      label: t('feed.inspiration'),
-      value: 'inspiration',
-    },
-    {
-      label: t('feed.question'),
-      value: 'question',
-    },
-    {
-      label: t('feed.poll'),
-      value: 'poll',
-    },
-    {
       label: t('feed.post'),
       value: 'post',
     },
@@ -108,12 +60,6 @@ export const usePosts = () => {
   ]
 
   const postFields = [
-    {
-      name: 'type',
-      component: 'TInputSelect',
-      label: t('postFields.type.label'),
-      options: postTypeList,
-    },
     {
       name: 'title',
       hideLabel: true,
