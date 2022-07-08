@@ -85,6 +85,11 @@ export default {
     },
     async saveItem(data) {
       data = pickBy(data, (v) => v !== undefined)
+
+      if (!data.artists) {
+        data.artists = []
+      }
+
       data.artistsList = data.artists.map((a) => a.username)
 
       if (data.id) {

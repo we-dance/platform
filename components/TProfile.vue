@@ -122,15 +122,21 @@
       class="my-0"
     />
 
-    <TPreview v-if="profile.story" :content="profile.story" class="p-4" />
-
-    <TProfileDetails v-if="profile.type !== 'City'" :profile="profile" />
-
-    <div v-if="uid === profile.id" class="w-full flex justify-center p-4 mt-4">
-      <TButton to="/posts/-/edit" type="primary">{{
+    <div
+      v-if="uid === profile.id"
+      class="w-full flex justify-center p-4 mt-4 space-x-4"
+    >
+      <TButton to="/events/-/edit" type="primary">{{
+        $t('myprofile.addEvent')
+      }}</TButton>
+      <TButton to="/posts/-/edit" type="base">{{
         $t('myprofile.addPost')
       }}</TButton>
     </div>
+
+    <TPreview v-if="profile.story" :content="profile.story" class="p-4" />
+
+    <TProfileDetails v-if="profile.type !== 'City'" :profile="profile" />
 
     <TPostList
       v-if="profile.type !== 'City'"
