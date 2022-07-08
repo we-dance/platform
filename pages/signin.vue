@@ -61,10 +61,14 @@ export default {
     },
   },
   mounted() {
-    const target = this.$route.query.target
-    if (target) {
-      ls('target', target)
+    if (this.$route.query.invitedBy) {
+      ls('invitedBy', this.$route.query.invitedBy)
     }
+
+    if (this.$route.query.target) {
+      ls('target', this.$route.query.target)
+    }
+
     if (this.uid) {
       this.redirect()
     }

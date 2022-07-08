@@ -86,10 +86,12 @@ export default {
     },
   },
   mounted() {
-    const target = this.$route.query.target
+    if (this.$route.query.invitedBy) {
+      ls('invitedBy', this.$route.query.invitedBy)
+    }
 
-    if (target) {
-      ls('target', target)
+    if (this.$route.query.target) {
+      ls('target', this.$route.query.target)
     }
 
     this.$set(this.data, 'place', ls('city'))

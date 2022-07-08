@@ -101,12 +101,6 @@ export default {
     },
   },
   mounted() {
-    const target = this.$route.query.target
-
-    if (target) {
-      ls('target', target)
-    }
-
     if (this.uid) {
       this.redirect()
     }

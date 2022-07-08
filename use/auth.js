@@ -263,6 +263,7 @@ export const useAuth = () => {
         locales: getLanguages(),
         timezone: new Date().toString().match(/([A-Z]+[+-][0-9]+)/)[1],
         place: ls('city'),
+        invitedBy: ls('invitedBy'),
         username: ls('username'),
         visibility: 'Members',
         type: 'Dancer',
