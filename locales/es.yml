@@ -311,7 +311,7 @@ TPost:
   showLess: Show less
   showMore: Show more
 TCardActions:
-  reason: Reason
+  Reason: Reason
   options:
     spam: spam
     other: other
