@@ -49,7 +49,7 @@
 
         <TButton
           v-if="profile.type === 'City'"
-          type="base"
+          type="simple"
           class="mt-4"
           to="/events/-/edit"
           >{{ $t('myprofile.addEvent') }}</TButton
@@ -58,14 +58,14 @@
           <TButton
             v-if="profile.website"
             allow-guests
-            type="primary"
+            type="simple"
             :href="profile.website"
             >{{ $t('profile.bookme') }}</TButton
           >
           <TProfileContacts
             :profile="profile"
             :title="$t('profile.contactme')"
-            type="base"
+            type="simple"
           />
         </div>
       </div>
@@ -137,6 +137,17 @@
     <TPreview v-if="profile.story" :content="profile.story" class="p-4" />
 
     <TProfileDetails v-if="profile.type !== 'City'" :profile="profile" />
+
+    <div
+      v-if="profile.id !== profile.createdBy"
+      class="py-4 flex justify-center"
+    >
+      <TButton
+        type="simple"
+        label="Claim my profile"
+        :href="`mailto:support@wedance.vip?subject=Claim ${profile.username}`"
+      />
+    </div>
 
     <TPostList
       v-if="profile.type !== 'City'"
