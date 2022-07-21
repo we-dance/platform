@@ -39,6 +39,8 @@ To activate all services and features see section `Services` below.
 
 ## Deploy
 
+Watch [video tutorial](https://www.loom.com/share/408d3aca33dd426885beb8ef90289972).
+
 Read [How to deploy on Netlify?](https://nuxtjs.org/faq/netlify-deployment/).
 
 - Push your branch to github.
