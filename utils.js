@@ -33,6 +33,12 @@ export const sortBy = (_key) => {
 export const toDatetimeLocal = (date) => {
   if (!date) return ''
 
+  if (Object.prototype.toString.call(date) === '[object Date]') {
+    if (isNaN(date)) {
+      return ''
+    }
+  }
+
   return format(date, "yyyy-MM-dd'T'HH:mm", {
     awareOfUnicodeTokens: true,
   })

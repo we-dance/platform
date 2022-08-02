@@ -1,11 +1,11 @@
 import { addMinutes, parseISO } from 'date-fns'
 import { useCities } from './cities'
 import { useI18n } from '~/use/i18n'
-import { getYmd } from '~/utils'
+import { getYmd, toDatetimeLocal } from '~/utils'
 import { useCommon } from '~/use/common'
 
 const updateEndDate = (e) => {
-  e.endDate = addMinutes(parseISO(e.startDate), 60)
+  e.endDate = toDatetimeLocal(addMinutes(parseISO(e.startDate), 60))
 }
 
 export const useEvents = () => {
