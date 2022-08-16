@@ -90,7 +90,9 @@ export default {
         data.artists = []
       }
 
-      data.artistsList = data.artists.map((a) => a.username)
+      data.artistsList = data.artists
+        .map((a) => a.username)
+        .filter((item) => item)
 
       if (data.id) {
         track('update_event')
