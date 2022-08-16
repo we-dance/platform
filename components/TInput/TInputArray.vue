@@ -27,11 +27,13 @@ export default {
   }),
   watch: {
     value(val) {
-      if (JSON.stringify(val) === JSON.stringify(this.internalValue)) {
+      let extra = [...val, {}]
+
+      if (JSON.stringify(extra) === JSON.stringify(this.internalValue)) {
         return
       }
 
-      this.internalValue = val
+      this.internalValue = extra
     },
     internalValue: {
       deep: true,
@@ -42,14 +44,15 @@ export default {
           filtered = val.filter((item) => item && Object.keys(item).length)
         }
 
-        filtered.push({})
-
         this.$emit('input', filtered)
       },
     },
   },
   mounted() {
-    this.internalValue = this.value || []
+    let val = this.value || []
+    let extra = [...val, {}]
+
+    this.internalValue = extra
   },
 }
 </script>
