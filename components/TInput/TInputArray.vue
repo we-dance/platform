@@ -44,15 +44,6 @@ export default {
 
         filtered.push({})
 
-        console.log(
-          'val',
-          val.map((item) => item.username)
-        )
-        console.log(
-          'filtered',
-          filtered.map((item) => item.username)
-        )
-
         this.$emit('input', filtered)
       },
     },
