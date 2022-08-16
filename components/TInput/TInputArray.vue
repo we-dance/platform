@@ -2,14 +2,9 @@
   <div>
     <component
       :is="children.component"
-      v-for="(item, index) in value"
-      :key="`${children.component}-${index}`"
+      v-for="(item, index) in internalValue"
+      :key="`${children.component}-${item.username}-${index}`"
       v-model="internalValue[index]"
-      v-bind="children"
-    />
-    <component
-      :is="children.component"
-      v-model="internalValue[value.length]"
       v-bind="children"
     />
   </div>
@@ -32,20 +27,31 @@ export default {
   }),
   watch: {
     value(val) {
+      if (JSON.stringify(val) === JSON.stringify(this.internalValue)) {
+        return
+      }
+
       this.internalValue = val
     },
     internalValue: {
       deep: true,
-      handler(val, old) {
-        if (val && old && val.length === old.length) {
-          return
-        }
-
+      handler(val) {
         let filtered = []
 
         if (val) {
-          filtered = val.filter((item) => item && item !== '' && item !== null)
+          filtered = val.filter((item) => item && Object.keys(item).length)
         }
+
+        filtered.push({})
+
+        console.log(
+          'val',
+          val.map((item) => item.username)
+        )
+        console.log(
+          'filtered',
+          filtered.map((item) => item.username)
+        )
 
         this.$emit('input', filtered)
       },

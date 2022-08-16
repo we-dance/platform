@@ -7,7 +7,16 @@
     >
       <template v-slot:right>
         <TDropdown v-slot="{ closeMenu }">
-          <TDropdownSeparator :label="$t('TInputProfile.changeRole')" />
+          <TButton
+            allow-guests
+            type="context"
+            :label="$t('TInputProfile.remove')"
+            color="red-500 text-sm"
+            @click="
+              $emit('input', {})
+              closeMenu()
+            "
+          />
           <TButton
             v-for="role in eventRoleOptions"
             :key="role.value"
@@ -17,17 +26,6 @@
             class="text-sm"
             @click="
               value.role = role.value
-              closeMenu()
-            "
-          />
-          <TDropdownSeparator :label="$t('TInputProfile.actions')" />
-          <TButton
-            allow-guests
-            type="context"
-            :label="$t('TInputProfile.remove')"
-            color="red-500 text-sm"
-            @click="
-              $emit('input', null)
               closeMenu()
             "
           />
@@ -119,7 +117,7 @@ export default {
   props: {
     value: {
       type: [Object, String],
-      default: () => ({}),
+      default: '',
     },
     placeholder: {
       type: String,
