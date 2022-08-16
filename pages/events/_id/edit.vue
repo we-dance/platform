@@ -86,9 +86,7 @@ export default {
     async saveItem(data) {
       data = pickBy(data, (v) => v !== undefined)
 
-      if (!data.artists) {
-        data.artists = []
-      }
+      data.artists = (data.artists || []).filter((item) => item)
 
       data.artistsList = data.artists
         .map((a) => a.username)
