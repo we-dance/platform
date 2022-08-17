@@ -2,6 +2,9 @@
 
 > https://wedance.vip/ – community platform for dancers
 
+Do you want to get a practical experience in programming, learn to work in international team and participate in open source project?
+[Join Internship in WeDance](https://angel.co/l/2vAdxy)
+
 ## Built with
 
 - [Nuxt.js](https://nuxtjs.org) – Vuejs framework, which is used as Static Site Generator.
