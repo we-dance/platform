@@ -1,10 +1,11 @@
 <template>
   <div v-if="isEditing">
-    <TInput v-model="value.name" />
-    <TButton @click="isEditing = false" allow-guests>Save</TButton>
+    <TForm v-model="value.name" :fields="schema" />
+    <TInputDateTime v-model="value.startDate" />
+    <TButton allow-guests @click="isEditing = false">Save</TButton>
   </div>
   <div v-else-if="!value.name">
-    <TButton @click="isEditing = true" allow-guests>Add Event</TButton>
+    <TButton allow-guests @click="isEditing = true">Add Event</TButton>
   </div>
   <div v-else>
     <pre>{{ value.name }}</pre>
@@ -13,7 +14,6 @@
 
 <script>
 export default {
-  data: () => ({ isEditing: false }),
   props: {
     value: {
       type: [Object, String],
@@ -26,5 +26,6 @@ export default {
       },
     },
   },
+  data: () => ({ isEditing: false }),
 }
 </script>
