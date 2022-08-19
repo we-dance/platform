@@ -1,7 +1,6 @@
 <template>
   <div v-if="isEditing">
     <TForm v-model="value.name" :fields="schema" />
-    <TInputDateTime v-model="value.startDate" />
     <TButton allow-guests @click="isEditing = false">Save</TButton>
   </div>
   <div v-else-if="!value.name">
@@ -26,6 +25,30 @@ export default {
       },
     },
   },
-  data: () => ({ isEditing: false }),
+  data: () => ({
+    eventEditor: {
+      name: '',
+      starts: '',
+    },
+    isEditing: false,
+    schema: [
+      {
+        name: 'subEventName',
+        label: 'Name your sub-event',
+      },
+      {
+        name: 'subEventStart',
+        label: 'Sub-event start time',
+      },
+      {
+        name: 'subEventEnd',
+        label: 'Sub-event end time',
+      },
+      {
+        name: 'subEventDescription',
+        label: 'Sub-event description',
+      },
+    ],
+  }),
 }
 </script>
