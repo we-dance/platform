@@ -1,7 +1,6 @@
 import axios from 'axios'
 import { db, admin } from './firebase'
 import { closeBrowser, getInstagramWebProfileInfo } from './lib/browser'
-import { announceEvent } from './lib/telegram'
 
 require('dotenv').config()
 
@@ -33,18 +32,6 @@ async function logProfile(profile: any) {
 }
 
 yargs(hideBin(process.argv))
-  .command(
-    'announce',
-    'Announce event in Telegram',
-    () => undefined,
-    async () => {
-      const chatId = process.env.TELEGRAM_CHAT_ID || ''
-
-      const eventId = 'XCPny0Vam3aiqq7b4vsA'
-
-      await announceEvent(chatId, eventId)
-    }
-  )
   .command(
     'check:usernames',
     'Check usernames',
