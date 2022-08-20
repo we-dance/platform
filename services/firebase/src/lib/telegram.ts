@@ -1,9 +1,9 @@
 import { Telegram } from 'telegraf'
 import { firestore } from '../firebase'
-import env from '../env'
+require('dotenv').config()
 
 async function announceEvent(chatId: string, eventId: string) {
-  const token = env.telegram.botToken
+  const token = String(process.env.TELEGRAM_BOT_TOKEN)
   const telegram = new Telegram(token)
   const event = (
     await firestore
@@ -25,9 +25,11 @@ async function announceEvent(chatId: string, eventId: string) {
   const photo = event.socialCover
   const caption = `${hashtags}\n\n${description}\nhttps://wedance.vip/${event.org.username}`
 
-  await telegram.sendPhoto(chatId, photo, {
+  const response = await telegram.sendPhoto(chatId, photo, {
     caption,
   })
+
+  return response
 }
 
 export { announceEvent }

@@ -120,6 +120,18 @@
       <TReactions :item="doc" class="my-1" />
     </div>
 
+    <div v-if="can('edit', 'events', doc)" class="mt-4 flex justify-center">
+      <TButton
+        type="simple"
+        :label="$t('eventView.announce')"
+        @click="
+          update(doc.id, {
+            telegram: { state: 'requested', requestedAt: +new Date() },
+          })
+        "
+      />
+    </div>
+
     <div
       class="sticky top-0 z-50 flex justify-center space-y-2 border-b bg-white p-4"
     >
@@ -324,7 +336,7 @@ export default {
     const { params } = useRouter()
     const { getProfile } = useProfiles()
 
-    const { doc, load, exists, loading } = useDoc('posts')
+    const { doc, load, exists, loading, update } = useDoc('posts')
     const { map } = useReactions()
 
     const { updateRsvp, createGuestRsvp } = useRsvp()
@@ -385,6 +397,7 @@ export default {
     }
 
     return {
+      update,
       register,
       currentCity,
       isCreatingProfile,

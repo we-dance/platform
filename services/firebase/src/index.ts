@@ -9,11 +9,16 @@ import { initIndex, profileToAlgolia, removeObject } from './lib/algolia'
 import { generateSocialCover } from './lib/migrations'
 import { firestore as db, admin } from './firebase'
 import { notifySlackAboutEvents, notifySlackAboutUsers } from './lib/slack'
-import config from './env'
 import { wrap } from './sentry'
 import { announceEvent } from './lib/telegram'
 
-Sentry.init(config.sentry)
+require('dotenv').config()
+
+Sentry.init({
+  dsn: String(process.env.SENTRY_DSN),
+  tracesSampleRate: 1.0,
+  serverName: 'firebase-functions',
+})
 
 const app = express()
 app.use(cors({ origin: true }))
@@ -293,16 +298,30 @@ export const eventChanged = functions.firestore
     const event = change.after.data() as any
 
     if (
-      event?.type !== 'event' ||
-      !event?.socialCover ||
-      oldEvent?.socialCover
+      !wasChanged(oldEvent, event, ['telegram']) ||
+      event?.telegram?.state !== 'requested'
     ) {
       return
     }
 
     const chatId = '-1001764201490'
+    const chatUrl = 'https://t.me/+8l4IEhNjT3xlODNi'
 
-    await announceEvent(chatId, eventId)
+    const result = await announceEvent(chatId, eventId)
+
+    const telegram = event.telegram
+
+    telegram.state = 'published'
+    telegram.publishedAt = +new Date()
+    telegram.id = result.message_id
+    telegram.url = `${chatUrl}/${result.message_id}`
+
+    await db
+      .collection('posts')
+      .doc(eventId)
+      .update({
+        telegram,
+      })
   })
 
 export const eventCreated = functions.firestore

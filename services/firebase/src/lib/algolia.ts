@@ -1,9 +1,12 @@
 import algoliasearch from 'algoliasearch'
 import { firestore } from '../firebase'
-import env from '../env'
+require('dotenv').config()
 
 export function initIndex(indexName: string) {
-  const algolia = algoliasearch(env.algolia.appId, env.algolia.apiKey)
+  const algolia = algoliasearch(
+    String(process.env.ALGOLIA_APP_ID),
+    String(process.env.ALGOLIA_API_KEY)
+  )
   return algolia.initIndex(indexName)
 }
 
