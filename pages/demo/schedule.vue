@@ -9,17 +9,17 @@ export default {
     const data = ref({
       name: 'Salsa Party',
       schedule: [
-        // {
-        //   name: 'Check-in',
-        //   startDate: '2022-08-16 19:00',
-        //   endDate: '2022-08-16 20:00',
-        //   description: '',
-        // },
-        // {
-        //   name: 'Doors close',
-        //   startDate: '2022-08-16 23:59',
-        //   description: '',
-        // },
+        {
+          name: 'Check-in',
+          startDate: '2022-08-16 19:00',
+          endDate: '2022-08-16 20:00',
+          description: '',
+        },
+        {
+          name: 'Doors close',
+          startDate: '2022-08-16 23:59',
+          description: '',
+        },
       ],
     })
     const schema = [
