@@ -7,8 +7,8 @@ export default {
     apiKey: (process.env.ALGOLIA_API_KEY || config().algolia.api_key) as string,
   },
   slack: {
-    events: (process.env.SLACK_EVENTS || config().slack.events) as string,
-    users: (process.env.SLACK_USERS || config().algolia.users) as string,
+    events: String(process.env.SLACK_EVENTS),
+    users: String(process.env.SLACK_USERS),
   },
   sentry: {
     dsn: (process.env.SENTRY_DSN || config().sentry.dsn) as string,
