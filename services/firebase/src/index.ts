@@ -11,6 +11,7 @@ import { firestore as db, admin } from './firebase'
 import { notifySlackAboutEvents, notifySlackAboutUsers } from './lib/slack'
 import config from './env'
 import { wrap } from './sentry'
+import { announceEvent } from './lib/telegram'
 
 Sentry.init(config.sentry)
 
@@ -174,7 +175,12 @@ export const onProfileChange = functions.firestore
         .update({ [`profiles.${profileId}`]: profileCache })
     }
 
-    const cache = (await db.collection('app').doc('v2').get()).data() as any
+    const cache = (
+      await db
+        .collection('app')
+        .doc('v2')
+        .get()
+    ).data() as any
 
     const index = initIndex('profiles')
 
@@ -207,7 +213,12 @@ export const profileCreated = functions.firestore
   .onCreate(async (snapshot, context) => {
     const profile = snapshot.data() as any
     const profileId = context.params.profileId
-    const cache = (await db.collection('app').doc('v2').get()).data() as any
+    const cache = (
+      await db
+        .collection('app')
+        .doc('v2')
+        .get()
+    ).data() as any
 
     const cityName = cache.cities[profile.place]?.name || 'International'
 
@@ -274,6 +285,26 @@ export const accountCreated = functions.firestore
     return await sendEmail(emailData)
   })
 
+export const eventChanged = functions.firestore
+  .document('posts/{eventId}')
+  .onWrite(async (change, context) => {
+    const oldEvent = change.before.data() as any
+    const eventId = context.params.eventId
+    const event = change.after.data() as any
+
+    if (
+      event?.type !== 'event' ||
+      !event?.socialCover ||
+      oldEvent?.socialCover
+    ) {
+      return
+    }
+
+    const chatId = '-1001764201490'
+
+    await announceEvent(chatId, eventId)
+  })
+
 export const eventCreated = functions.firestore
   .document('posts/{eventId}')
   .onCreate(async (snapshot, context) => {
@@ -284,7 +315,12 @@ export const eventCreated = functions.firestore
       return
     }
 
-    const cache = (await db.collection('app').doc('v2').get()).data() as any
+    const cache = (
+      await db
+        .collection('app')
+        .doc('v2')
+        .get()
+    ).data() as any
 
     const cityName = cache.cities[event.place]?.name || 'International'
     const promoter = cache.profiles[event.promotedBy]?.username || 'Unknown'
@@ -336,7 +372,10 @@ export const eventConfirmation = functions.firestore
     }
 
     const event: any = (
-      await db.collection('posts').doc(rsvp.eventId).get()
+      await db
+        .collection('posts')
+        .doc(rsvp.eventId)
+        .get()
     ).data()
 
     const subject = event.name
@@ -375,7 +414,12 @@ async function getAccountByUsername(username: string) {
 
   const id = profiles.docs[0].id
 
-  const account: any = (await db.collection('accounts').doc(id).get()).data()
+  const account: any = (
+    await db
+      .collection('accounts')
+      .doc(id)
+      .get()
+  ).data()
 
   account.id = id
 
@@ -389,7 +433,10 @@ export const commentNotification = functions.firestore
     const commentId = context.params.commentId
 
     const post: any = (
-      await db.collection('posts').doc(comment.postId).get()
+      await db
+        .collection('posts')
+        .doc(comment.postId)
+        .get()
     ).data()
 
     if (!post.watch) {
@@ -455,7 +502,12 @@ export const matchNotification = functions.firestore
     delete after.members[after.lastMessageBy]
     const to = Object.keys(after.members)[0]
 
-    const toAccount = (await db.collection('accounts').doc(to).get()).data()
+    const toAccount = (
+      await db
+        .collection('accounts')
+        .doc(to)
+        .get()
+    ).data()
 
     if (!toAccount) {
       throw new Error('toAccount not found')

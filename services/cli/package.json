@@ -16,6 +16,7 @@
     "firebase-admin": "^8.13.0",
     "firebase-functions": "^3.3.0",
     "puppeteer": "^7.0.0",
+    "telegraf": "^4.8.6",
     "yargs": "^17.3.1"
   },
   "devDependencies": {

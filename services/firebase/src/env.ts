@@ -15,4 +15,8 @@ export default {
     tracesSampleRate: 1.0,
     serverName: 'firebase-functions',
   },
+  telegram: {
+    botToken: (process.env.TELEGRAM_BOT_TOKEN ||
+      config().telegram.bot_token) as string,
+  },
 }
