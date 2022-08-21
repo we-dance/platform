@@ -60,6 +60,7 @@ export default {
         count: 0,
         list: {},
       }
+      data.telegram = {}
 
       track('copy_event')
       const result = await this.create(data)
