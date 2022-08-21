@@ -299,28 +299,25 @@ export const eventChanged = functions.firestore
 
     if (
       !wasChanged(oldEvent, event, ['telegram']) ||
-      event?.telegram?.state !== 'requested'
+      event?.telegram?.state !== 'requested' ||
+      event.place !== 'ChIJ2V-Mo_l1nkcRfZixfUq4DAE'
     ) {
       return
     }
 
-    const chatId = '-1001764201490'
-    const chatUrl = 'https://t.me/+8l4IEhNjT3xlODNi'
+    const chatId = '-1001426068648'
+    const chatUrl = 'https://t.me/WeDanceMunich'
 
-    const result = await announceEvent(chatId, eventId)
-
-    const telegram = event.telegram
-
-    telegram.state = 'published'
-    telegram.publishedAt = +new Date()
-    telegram.id = result.message_id
-    telegram.url = `${chatUrl}/${result.message_id}`
+    const result = await announceEvent(chatId, event)
 
     await db
       .collection('posts')
       .doc(eventId)
       .update({
-        telegram,
+        'telegram.state': 'published',
+        'telegram.publishedAt': +new Date(),
+        'telegram.id': result.message_id,
+        'telegram.url': `${chatUrl}/${result.message_id}`,
       })
   })
 
@@ -342,7 +339,7 @@ export const eventCreated = functions.firestore
     ).data() as any
 
     const cityName = cache.cities[event.place]?.name || 'International'
-    const promoter = cache.profiles[event.promotedBy]?.username || 'Unknown'
+    const promoter = cache.profiles[event.createdBy]?.username || 'Unknown'
     const startDate = new Date(event.startDate)
 
     const lines = []
@@ -356,11 +353,8 @@ export const eventCreated = functions.firestore
     lines.push(event.name)
     lines.push(startDate)
 
-    if (event.claimed === 'Yes') {
-      lines.push(`Organised by ${event.organiser}`)
-    } else {
-      lines.push(`Promoted by ${promoter}`)
-    }
+    lines.push(`Organised by ${event.org?.username}`)
+    lines.push(`Promoted by ${promoter}`)
 
     lines.push(`https://wedance.vip/events/${eventId}`)
 

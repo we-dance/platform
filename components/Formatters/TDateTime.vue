@@ -8,7 +8,7 @@ import { getDateTime, getDateObect } from '~/utils'
 export default {
   props: {
     value: {
-      type: [String, Object],
+      type: [String, Object, Number],
       default: '',
     },
   },

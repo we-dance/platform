@@ -1,16 +1,9 @@
 import { Telegram } from 'telegraf'
-import { firestore } from '../firebase'
 require('dotenv').config()
 
-async function announceEvent(chatId: string, eventId: string) {
+async function announceEvent(chatId: string, event: any) {
   const token = String(process.env.TELEGRAM_BOT_TOKEN)
   const telegram = new Telegram(token)
-  const event = (
-    await firestore
-      .collection('posts')
-      .doc(eventId)
-      .get()
-  ).data() as any
 
   const hashtags = [event.eventType, ...Object.keys(event.styles)]
     .map((tag) => `#${tag}`)

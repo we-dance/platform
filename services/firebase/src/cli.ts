@@ -5,12 +5,14 @@ import {
   migrateUsernames,
   migrateChat,
   chatNotifications,
+  getDocs,
 } from './lib/migrations'
 import { screenshot } from './lib/screenshot'
 import { getCities } from './lib/stats'
 import { announceEvent } from './lib/telegram'
 const yargs = require('yargs/yargs')
 const { hideBin } = require('yargs/helpers')
+import { firestore } from './firebase'
 
 yargs(hideBin(process.argv))
   .command(
@@ -20,8 +22,35 @@ yargs(hideBin(process.argv))
     async (argv: any) => {
       const chatId = '-1001764201490'
       const chatUrl = 'https://t.me/+8l4IEhNjT3xlODNi'
-      const result = await announceEvent(chatId, argv.eventId)
+
+      const event = (
+        await firestore
+          .collection('posts')
+          .doc(argv.eventId)
+          .get()
+      ).data() as any
+
+      const result = await announceEvent(chatId, event)
+
       console.log(`Posted at ${chatUrl}/${result.message_id} at ${result.date}`)
+    }
+  )
+  .command(
+    'events:cleanup',
+    'Cleanup event announcements',
+    () => undefined,
+    async (argv: any) => {
+      const events = await getDocs(
+        firestore.collection('posts').where('telegram.state', '==', 'published')
+      )
+
+      for (const event of events) {
+        console.log(event.name)
+        await firestore
+          .collection('posts')
+          .doc(event.id)
+          .update({ telegram: {} })
+      }
     }
   )
   .command(
