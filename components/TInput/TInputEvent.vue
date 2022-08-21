@@ -1,44 +1,52 @@
 <template>
-  <div v-if="isEditing">
-    <TForm v-model="internalValue" :fields="schema" allow-guests @save="save" />
-  </div>
-  <div v-else-if="!value.name">
-    <TButton allow-guests @click="isEditing = true">Add Event</TButton>
-  </div>
-  <div v-else class="flex">
-    <div class="block">
-      <div class="block">
-        <strong>{{ value.name }} </strong>
-      </div>
-      <div>Starts at {{ value.startDate }}</div>
-      <div>Ends at {{ value.endDate }}</div>
-      <div>{{ value.description }}</div>
-      <br />
+  <div class="border-b mb-5 ">
+    <div v-if="isEditing">
+      <TForm
+        v-model="internalValue"
+        :fields="schema"
+        allow-guests
+        @save="save"
+      />
     </div>
-    <div>
-      <TDropdown v-slot="{ closeMenu }">
-        <TButton
-          allow-guests
-          type="context"
-          :label="$t('TInputProfile.remove')"
-          color="red-500 text-sm"
-          @click="
-            $emit('input', {})
-            closeMenu()
-          "
-        />
-        <TButton
-          allow-guests
-          type="context"
-          label="Edit"
-          color=" text-sm"
-          @click="
-            internalValue = value
-            isEditing = true
-            closeMenu()
-          "
-        />
-      </TDropdown>
+    <div v-else-if="!value.name">
+      <TButton allow-guests @click="isEditing = true">Add Event</TButton>
+    </div>
+    <div v-else class="grid grid-cols-5">
+      <div class=" ">
+        <strong> {{ value.startDate }} </strong>
+      </div>
+      <div class=" col-span-2">
+        <strong>{{ value.name }}</strong>
+      </div>
+      <div></div>
+      <div class="flex justify-end">
+        <TDropdown v-slot="{ closeMenu }">
+          <TButton
+            allow-guests
+            type="context"
+            label="Edit"
+            color=" text-sm"
+            @click="
+              internalValue = value
+              isEditing = true
+              closeMenu()
+            "
+          />
+          <TButton
+            allow-guests
+            type="context"
+            :label="$t('TInputProfile.remove')"
+            color="red-500 text-sm"
+            @click="
+              $emit('input', {})
+              closeMenu()
+            "
+          />
+        </TDropdown>
+      </div>
+      <div></div>
+
+      <div class=" col-span-4 mb-5">{{ value.description }}</div>
     </div>
   </div>
 </template>
@@ -70,14 +78,14 @@ export default {
         },
         {
           name: 'startDate',
-          type: 'datetime-local',
+          type: 'time',
           labelPosition: 'top',
           label: this.$t('event.startDate'),
           simple: true,
         },
         {
           name: 'endDate',
-          type: 'datetime-local',
+          type: 'time',
           labelPosition: 'top',
           label: this.$t('event.endDate'),
           simple: true,
@@ -89,6 +97,13 @@ export default {
           component: 'TInputTextarea',
           placeholder: this.$t('event.description.placeholder'),
           max: 140,
+        },
+        {
+          name: 'artists',
+          component: 'TInputArray',
+          children: {
+            component: 'TInputSelect',
+          },
         },
       ],
     }
