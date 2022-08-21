@@ -86,6 +86,7 @@
       v-if="profile.type !== 'City'"
       title="Organising"
       :filter="{ 'org.username': profile.username }"
+      :username="profile.username"
       class="w-full border-b"
     />
 
@@ -93,6 +94,7 @@
       v-if="profile.type !== 'City'"
       title="Attending"
       :filter="{ artistsList: profile.username }"
+      :username="profile.username"
       comparison="array-contains"
       class="w-full border-b"
     />
@@ -101,6 +103,7 @@
       v-if="profile.type === 'City' && profile.username == 'Travel'"
       :filter="{ eventType: 'Festival' }"
       :community="profile.username"
+      :username="profile.username"
       class="mt-4 w-full border-b pb-8"
     />
 
@@ -108,6 +111,7 @@
       v-if="profile.type === 'City' && profile.username !== 'Travel'"
       :filter="{ place: profile.place }"
       :community="profile.username"
+      :username="profile.username"
       class="mt-4 w-full border-b pb-8"
     />
 
