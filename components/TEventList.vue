@@ -1,5 +1,37 @@
 <template>
   <div>
+    <TPopup v-if="showPopup" title="Share" @close="showPopup = false">
+      <TInputButtons v-model="shareType" :options="shareTypeOptions" />
+      <div v-if="shareType === 'text'" class="flex flex-col py-4 gap-4">
+        <textarea
+          class="text-xs font-mono border"
+          cols="30"
+          rows="10"
+          v-model="itemsAsText"
+        ></textarea>
+        <TButton
+          type="primary"
+          icon="copy"
+          label="Copy"
+          @click="copyToClipboard(itemsAsText)"
+        />
+      </div>
+      <div v-if="shareType === 'embed'" class="flex flex-col py-4 gap-4">
+        <textarea
+          class="text-xs font-mono border"
+          cols="30"
+          rows="10"
+          v-model="iframeCode"
+        ></textarea>
+
+        <TButton
+          type="primary"
+          icon="copy"
+          label="Copy"
+          @click="copyToClipboard(iframeCode)"
+        />
+      </div>
+    </TPopup>
     <TLoader v-if="loading" />
     <div v-else-if="!count && showEmpty">
       {{ emptyLabel }}
@@ -7,7 +39,7 @@
     <div v-if="items.length" class="flex justify-between items-center px-2">
       <h2 v-if="title" class="font-bold text-lg">{{ title }}</h2>
       <div v-else></div>
-      <TButton type="nav" icon="copy" @click="copyToClipboard" />
+      <TButton type="nav" icon="share" @click="showPopup = true" />
     </div>
     <div v-if="items.length" class="space-y-8 mt-4">
       <div v-for="(items, date) in itemsByDate" :key="date">
@@ -43,6 +75,10 @@ import {
 export default {
   name: 'TEventList',
   props: {
+    username: {
+      type: String,
+      default: 'Travel',
+    },
     filter: {
       type: Object,
       default: null,
@@ -83,22 +119,17 @@ export default {
       props.filter,
       props.comparison
     )
-
     const { uid } = useAuth()
-
     const map = (item) => {
       if (!item.id) {
         return {}
       }
-
       const startDate = getDateObect(item.startDate)
-
       return {
         ...item,
         startDate,
       }
     }
-
     const now = new Date()
     const startOfWeekDate = startOfWeek(now, { weekStartsOn: 1 })
     const startOfWeekString = getYmd(startOfWeekDate)
@@ -107,13 +138,9 @@ export default {
     const in10daysString = getYmd(addDays(now, 10))
     const in7daysString = getYmd(addDays(now, 7))
     const endOfYearString = getYmd(endOfYear(now))
-
     const count = computed(() => items.value.length)
-
     const activeFilter = ref(props.tab)
-
     const isPublic = (item) => item.visibility !== 'Unlisted'
-
     const filterOptions = computed(() => [
       {
         value: 'thisYear',
@@ -146,31 +173,23 @@ export default {
           getYmd(item.startDate) >= startOfTodayString && isPublic(item),
       },
     ])
-
     const activeFilterItem = computed(() =>
       filterOptions.value.find((item) => item.value === activeFilter.value)
     )
-
     const items = computed(() => {
       let result = props.docs.length ? props.docs.map(map) : docs.value.map(map)
-
       result = result.filter(activeFilterItem.value.filter)
-
       return result.sort(sortBy('startDate'))
     })
-
     const itemsByDate = computed(() => {
       const result = {}
       items.value.forEach((item) => {
         const date = getYmd(item.startDate)
-
         result[date] = result[date] || []
         result[date].push(item)
       })
-
       return result
     })
-
     const itemsAsText = computed(() => {
       let result = `**Dance Calendar in ${props.community}**\n\n`
       result += `We help everyone to dance everywhere and all dancers to help each other\n\n`
@@ -181,7 +200,6 @@ export default {
       result += `➕ **Add your event**\n`
       result += `wedance.vip/${props.community}\n\n`
       result += `🗓 **DANCE CALENDAR** 🗓 \n\n`
-
       _.forEach(itemsByDate.value, (items, date) => {
         result += String(`**${getDay(date)} ${getDate(date)}**\n`).toUpperCase()
         items.forEach((item) => {
@@ -194,15 +212,37 @@ export default {
           result += `\n`
         })
       })
-
       return result
     })
 
-    async function copyToClipboard() {
-      await navigator.clipboard.writeText(itemsAsText.value)
+    const iframeCode = computed(() => {
+      return `<iframe width="100%" height="560" title="WeDance Calendar" frameborder="0" src="https://wedance.vip/${props.username}/embed"></iframe>`
+    })
+
+    async function copyToClipboard(val) {
+      await navigator.clipboard.writeText(val)
     }
 
+    const showPopup = ref(false)
+
+    const shareTypeOptions = [
+      {
+        value: 'text',
+        label: 'Text',
+      },
+      {
+        value: 'embed',
+        label: 'Embed',
+      },
+    ]
+    const shareType = ref('text')
+
     return {
+      itemsAsText,
+      iframeCode,
+      shareTypeOptions,
+      shareType,
+      showPopup,
       currentCity,
       count,
       itemsByDate,
