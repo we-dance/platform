@@ -148,6 +148,36 @@
       >
     </div>
 
+    <div
+      v-if="doc.telegram && doc.telegram.url"
+      class="mt-4 flex justify-center"
+    >
+      <TButton type="link" :href="doc.telegram.url">
+        Announced on&nbsp;
+        <TDateTime :value="doc.telegram.publishedAt" />
+      </TButton>
+    </div>
+    <div
+      v-else-if="can('edit', 'events', doc)"
+      class="mt-4 flex justify-center"
+    >
+      <TButton
+        v-if="!doc.telegram || !doc.telegram.state"
+        type="link"
+        :label="$t('eventView.announce')"
+        @click="
+          softUpdate(doc.id, {
+            telegram: { state: 'requested', requestedAt: +new Date() },
+          })
+        "
+      />
+      <TButton
+        v-else-if="doc.telegram.state === 'requested'"
+        type="link"
+        label="Announcing..."
+      />
+    </div>
+
     <TPreview :content="doc.description" class="p-4" />
 
     <div v-if="doc.artists && doc.artists.length" class="space-y-2 p-4">
@@ -290,19 +320,18 @@ export default {
     eventUrl() {
       const app = process.env.app
       const url = app.url + this.$route.fullPath
-
       return url
     },
     tweetUrl() {
       const text = encodeURI(`"${this.item.name}"`)
-
-      return `https://twitter.com/intent/tweet?text=${text} %23WeDance ${this.eventUrl}`
+      return `https://twitter.com/intent/tweet?text=${text} #WeDance ${this.eventUrl}`
     },
   },
   watch: {
     item() {
       if (this.item && this.item.place) {
         this.currentCity = this.item.place
+        this.doc = this.item
       }
     },
   },
@@ -320,26 +349,19 @@ export default {
     const { getEventIcon } = useEvents()
     const { currentCity } = useCities()
     const { accountFields } = useAccounts()
-
     const { params } = useRouter()
     const { getProfile } = useProfiles()
-
-    const { doc, load, exists, loading } = useDoc('posts')
+    const { doc, load, exists, loading, softUpdate } = useDoc('posts')
     const { map } = useReactions()
-
     const { updateRsvp, createGuestRsvp } = useRsvp()
-
     if (params.id) {
       load(params.id)
     }
-
     const item = computed(() => {
       const result = map(doc.value)
       result.locality = addressPart(result.venue, 'locality')
-
       return result
     })
-
     const calendarLink = computed(() =>
       googleCalendarEventUrl({
         start: getDateObect(item.value?.startDate),
@@ -349,24 +371,18 @@ export default {
         location: item.value?.address,
       })
     )
-
     const reservationFields = accountFields.filter((f) => f.event)
-
     const reservationPopup = ref(false)
     const isCreatingProfile = ref(false)
-
     const finishReservation = () => {
       reservationPopup.value = false
     }
-
     function register(id, link) {
       if (uid.value) {
         updateRsvp(id, 'posts', 'up')
       }
-
       openURL(link)
     }
-
     const reserve = async (participant) => {
       console.log('reserve', participant)
       if (!uid.value) {
@@ -376,15 +392,13 @@ export default {
         await updateAccount(participant)
         updateRsvp(params.id, 'posts', 'up')
       }
-
       reservationPopup.value = 'finish'
-
       if (item.value.link) {
         openURL(item.value.link)
       }
     }
-
     return {
+      softUpdate,
       register,
       currentCity,
       isCreatingProfile,
