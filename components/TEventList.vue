@@ -4,10 +4,10 @@
       <TInputButtons v-model="shareType" :options="shareTypeOptions" />
       <div v-if="shareType === 'text'" class="flex flex-col py-4 gap-4">
         <textarea
+          v-model="itemsAsText"
           class="text-xs font-mono border"
           cols="30"
           rows="10"
-          v-model="itemsAsText"
         ></textarea>
         <TButton
           type="primary"
@@ -18,10 +18,10 @@
       </div>
       <div v-if="shareType === 'embed'" class="flex flex-col py-4 gap-4">
         <textarea
+          v-model="iframeCode"
           class="text-xs font-mono border"
           cols="30"
           rows="10"
-          v-model="iframeCode"
         ></textarea>
 
         <TButton
