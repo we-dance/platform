@@ -41,6 +41,13 @@
           type="context"
           :label="$t('eventView.dropdown.share')"
         />
+        <TButton
+          v-if="isAdmin"
+          type="context"
+          class="red-500"
+          label="Reset"
+          @click="softUpdate(doc.id, { telegram: {} })"
+        />
       </TDropdown>
     </THeader>
 
@@ -350,6 +357,7 @@ export default {
       can,
       account,
       updateAccount,
+      isAdmin,
       sendSignInLinkToEmail,
     } = useAuth()
     const { getEventIcon } = useEvents()
@@ -404,6 +412,7 @@ export default {
       }
     }
     return {
+      isAdmin,
       softUpdate,
       register,
       currentCity,
