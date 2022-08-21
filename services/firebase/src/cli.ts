@@ -13,11 +13,12 @@ import { announceEvent } from './lib/telegram'
 const yargs = require('yargs/yargs')
 const { hideBin } = require('yargs/helpers')
 import { firestore } from './firebase'
+import { announceEventIG } from './lib/instagram'
 
 yargs(hideBin(process.argv))
   .command(
-    'announce <eventId>',
-    'Announce event',
+    'tg:announce <eventId>',
+    'Announce event on telegram',
     () => undefined,
     async (argv: any) => {
       const eventRef = await firestore
@@ -41,6 +42,21 @@ yargs(hideBin(process.argv))
       console.log(
         `City ${result.city.name} with ${result.city.telegramChannelId} at ${result.city.telegramChannel}`
       )
+    }
+  )
+  .command(
+    'ig:announce <eventId>',
+    'Announce event on telegram',
+    () => undefined,
+    async (argv: any) => {
+      const event = (
+        await firestore
+          .collection('posts')
+          .doc(argv.eventId)
+          .get()
+      ).data() as any
+
+      await announceEventIG(event)
     }
   )
   .command(
