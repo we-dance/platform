@@ -32,7 +32,7 @@ async function announceEvent(event: any, options: any = null) {
 
   const city = cities[0]
 
-  const chatId = options?.chatId || city.channelId
+  const chatId = options?.chatId || city.telegramChannelId
   const chatUrl = options?.chatUrl || city.telegramChannel
 
   if (!chatId) {
@@ -54,6 +54,7 @@ async function announceEvent(event: any, options: any = null) {
     messageId,
     messageUrl,
     publishedAt,
+    city,
   }
 }
 
