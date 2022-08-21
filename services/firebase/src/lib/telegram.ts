@@ -35,6 +35,11 @@ async function announceEvent(event: any, options: any = null) {
   const chatId = options?.chatId || city.channelId
   const chatUrl = options?.chatUrl || city.telegramChannel
 
+  if (!chatId) {
+    console.log(`Bot is not present in ${city.name}`)
+    return
+  }
+
   const response = await telegram.sendPhoto(chatId, photo, {
     caption,
   })
