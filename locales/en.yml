@@ -104,6 +104,7 @@ events:
     style: Any Dance
     level: Any Level
 eventView:
+  announce: Announce
   dropdown:
     dashboard: Dashboard
     edit: Edit
