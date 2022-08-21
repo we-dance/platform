@@ -99,7 +99,6 @@ import { useAuth } from '~/use/auth'
 import { useCities } from '~/use/cities'
 import { useRouter } from '~/use/router'
 import { useApp } from '~/use/app'
-import TInputButtons from '~/components/TInput/TInputButtons.vue'
 
 export default {
   name: 'Community',
@@ -213,6 +212,5 @@ export default {
       title: 'WeDance Community',
     }
   },
-  components: { TInputButtons },
 }
 </script>
