@@ -32,6 +32,7 @@
     "firebase-functions": "^3.22.0",
     "handlebars": "^4.7.6",
     "https-proxy-agent": "^5.0.0",
+    "instagram-private-api": "^1.45.3",
     "mailgun-js": "^0.22.0",
     "markdown-it": "^10.0.0",
     "puppeteer": "^7.0.0",

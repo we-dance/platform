@@ -13,11 +13,12 @@ import { announceEvent } from './lib/telegram'
 const yargs = require('yargs/yargs')
 const { hideBin } = require('yargs/helpers')
 import { firestore } from './firebase'
+import { announceEventIG } from './lib/instagram'
 
 yargs(hideBin(process.argv))
   .command(
-    'announce <eventId>',
-    'Announce event',
+    'tg:announce <eventId>',
+    'Announce event on telegram',
     () => undefined,
     async (argv: any) => {
       const chatId = '-1001764201490'
@@ -33,6 +34,21 @@ yargs(hideBin(process.argv))
       const result = await announceEvent(chatId, event)
 
       console.log(`Posted at ${chatUrl}/${result.message_id} at ${result.date}`)
+    }
+  )
+  .command(
+    'ig:announce <eventId>',
+    'Announce event on telegram',
+    () => undefined,
+    async (argv: any) => {
+      const event = (
+        await firestore
+          .collection('posts')
+          .doc(argv.eventId)
+          .get()
+      ).data() as any
+
+      await announceEventIG(event)
     }
   )
   .command(
