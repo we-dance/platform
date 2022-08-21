@@ -206,10 +206,15 @@
       <WProfile :username="doc.org.username" :fallback="doc.org" full />
     </div>
 
-    <div v-if="doc.facebook" class="m-4 text-right text-sm">
-      <a :href="doc.facebook" class="text-gray-700 hover:underline">{{
-        $t('eventView.source')
-      }}</a>
+    <div class="m-4 text-xs text-right gap-8">
+      <span>Published by {{ creator.username }}</span>
+      <span>at {{ getDateTimeYear(doc.createdAt) }}</span>
+    </div>
+
+    <div v-if="doc.facebook" class="m-4 text-right text-xs gap-8">
+      <a :href="doc.facebook" class="text-gray-700 hover:underline"
+        >Facebook Event</a
+      >
     </div>
 
     <TCommentsInline :item="doc" autoload class="border-t p-4" />
@@ -289,6 +294,7 @@ import { useCities } from '~/use/cities'
 import { useEvents } from '~/use/events'
 import {
   getDay,
+  getDateTimeYear,
   getDateTime,
   getDate,
   getTime,
@@ -416,6 +422,7 @@ export default {
       can,
       getProfile,
       getDateTime,
+      getDateTimeYear,
       dateDiff,
       getDate,
       getTime,
