@@ -299,8 +299,7 @@ export const eventChanged = functions.firestore
 
     if (
       !wasChanged(oldEvent, event, ['telegram']) ||
-      event?.telegram?.state !== 'requested' ||
-      event.place !== 'ChIJ2V-Mo_l1nkcRfZixfUq4DAE'
+      event?.telegram?.state !== 'requested'
     ) {
       return
     }
@@ -316,7 +315,7 @@ export const eventChanged = functions.firestore
       .doc(eventId)
       .update({
         'telegram.state': 'published',
-        'telegram.publishedAt': +new Date(),
+        'telegram.publishedAt': result.publishedAt,
         'telegram.messageId': result.messageId,
         'telegram.messageUrl': result.messageUrl,
       })
