@@ -47,9 +47,19 @@ export default {
     },
     async saveItem(data) {
       data = pickBy(data, (v) => v !== undefined)
-      data.artistsList = data.artists
         .map((a) => a.username)
         .filter((item) => item)
+
+      data.socialCover = ''
+      data.commentsCount = 0
+      data.downVotes = 0
+      data.upVotes = 0
+      data.viewsCount = 0
+      data.votes = 0
+      data.watch = {
+        count: 0,
+        list: {},
+      }
 
       track('copy_event')
       const result = await this.create(data)
