@@ -295,7 +295,7 @@ export const eventChanged = functions.firestore
   .onWrite(async (change, context) => {
     const oldEvent = change.before.data() as any
     const eventId = context.params.eventId
-    const event = change.after.data() as any
+    const event = { ...change.after.data(), id: eventId } as any
 
     if (
       !wasChanged(oldEvent, event, ['telegram']) ||
@@ -305,10 +305,11 @@ export const eventChanged = functions.firestore
       return
     }
 
-    const chatId = '-1001426068648'
-    const chatUrl = 'https://t.me/WeDanceMunich'
+    const result = await announceEvent(event)
 
-    const result = await announceEvent(chatId, event)
+    if (!result) {
+      return
+    }
 
     await db
       .collection('posts')
@@ -316,8 +317,8 @@ export const eventChanged = functions.firestore
       .update({
         'telegram.state': 'published',
         'telegram.publishedAt': +new Date(),
-        'telegram.id': result.message_id,
-        'telegram.url': `${chatUrl}/${result.message_id}`,
+        'telegram.messageId': result.messageId,
+        'telegram.messageUrl': result.messageUrl,
       })
   })
 

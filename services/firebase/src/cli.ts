@@ -20,19 +20,24 @@ yargs(hideBin(process.argv))
     'Announce event',
     () => undefined,
     async (argv: any) => {
-      const chatId = '-1001764201490'
-      const chatUrl = 'https://t.me/+8l4IEhNjT3xlODNi'
+      const eventRef = await firestore
+        .collection('posts')
+        .doc(argv.eventId)
+        .get()
 
-      const event = (
-        await firestore
-          .collection('posts')
-          .doc(argv.eventId)
-          .get()
-      ).data() as any
+      const event = { ...eventRef.data(), id: eventRef.id }
+      const result = await announceEvent(event, {
+        chatId: '-1001764201490',
+        chatUrl: 'https://t.me/+8l4IEhNjT3xlODNi',
+      })
 
-      const result = await announceEvent(chatId, event)
+      if (!result) {
+        return
+      }
 
-      console.log(`Posted at ${chatUrl}/${result.message_id} at ${result.date}`)
+      const date = new Date(result.publishedAt)
+
+      console.log(`Posted at ${result.messageUrl} at ${date}`)
     }
   )
   .command(

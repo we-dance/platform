@@ -149,10 +149,10 @@
     </div>
 
     <div
-      v-if="doc.telegram && doc.telegram.url"
+      v-if="doc.telegram && doc.telegram.messageUrl"
       class="mt-4 flex justify-center"
     >
-      <TButton type="link" :href="doc.telegram.url">
+      <TButton type="link" :href="doc.telegram.messageUrl">
         Announced on&nbsp;
         <TDateTime :value="doc.telegram.publishedAt" />
       </TButton>
