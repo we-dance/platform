@@ -55,7 +55,6 @@
 </template>
 
 <script>
-import TAvatar from '../TAvatar.vue'
 export default {
   props: {
     value: {
@@ -123,6 +122,5 @@ export default {
       this.isEditing = false
     },
   },
-  components: { TAvatar },
 }
 </script>
