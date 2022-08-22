@@ -1,6 +1,6 @@
 # WeDancePlatform
 
-**Ccommunity platform for dancers**
+**Community platform for dancers**
 
 Do you want to get a practical experience, learn to work in international team and participate in open source project?
 
