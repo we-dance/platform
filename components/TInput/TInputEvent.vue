@@ -1,14 +1,14 @@
 <template>
   <div class="border-b mb-5 ">
-    <div v-if="isEditing">
+    <TPopup v-if="isEditing" title="Edit Event" @close="isEditing = false">
       <TForm
         v-model="internalValue"
         :fields="schema"
         allow-guests
         @save="save"
       />
-    </div>
-    <div v-else-if="!value.name">
+    </TPopup>
+    <div v-if="!value.name">
       <TButton allow-guests @click="isEditing = true">Add Event</TButton>
     </div>
     <div v-else class="grid grid-cols-5">
@@ -47,11 +47,15 @@
       <div></div>
 
       <div class=" col-span-4 mb-5">{{ value.description }}</div>
+      <div v-for="artist in value.artists" :key="artist.username">
+        {{ artist.username }}
+      </div>
     </div>
   </div>
 </template>
 
 <script>
+import TAvatar from '../TAvatar.vue'
 export default {
   props: {
     value: {
@@ -63,6 +67,10 @@ export default {
       default() {
         return this.$t('TInputProfile.placeholder')
       },
+    },
+    item: {
+      type: Object,
+      default: () => ({}),
     },
   },
   data() {
@@ -102,7 +110,8 @@ export default {
           name: 'artists',
           component: 'TInputArray',
           children: {
-            component: 'TInputSelect',
+            component: 'TInputSelectProfile',
+            options: this.item.artists,
           },
         },
       ],
@@ -114,5 +123,6 @@ export default {
       this.isEditing = false
     },
   },
+  components: { TAvatar },
 }
 </script>

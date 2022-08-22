@@ -2,10 +2,11 @@
   <div>
     <component
       :is="children.component"
-      v-for="(item, index) in internalValue"
-      :key="`${children.component}-${item.username}-${index}`"
+      v-for="(child, index) in internalValue"
+      :key="`${children.component}-${child.username}-${index}`"
       v-model="internalValue[index]"
       v-bind="children"
+      :item="item"
     />
   </div>
 </template>
@@ -18,6 +19,10 @@ export default {
       default: () => [],
     },
     children: {
+      type: Object,
+      default: () => ({}),
+    },
+    item: {
       type: Object,
       default: () => ({}),
     },
