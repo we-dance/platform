@@ -1,56 +1,74 @@
 <template>
-  <div class="border-b mb-5 ">
-    <TPopup v-if="isEditing" title="Edit Event" @close="isEditing = false">
-      <TForm
-        v-model="internalValue"
-        :fields="schema"
-        allow-guests
-        @save="save"
-      />
-    </TPopup>
-    <div v-if="!value.name">
-      <TButton allow-guests @click="isEditing = true">Add Event</TButton>
-    </div>
-    <div v-else class="grid grid-cols-5">
-      <div class=" ">
-        <strong> {{ value.startDate }} </strong>
+  <div>
+    <div class="border-b mb-5 pb-3">
+      <TPopup v-if="isEditing" title="Edit Event" @close="isEditing = false">
+        <TForm
+          v-model="internalValue"
+          :fields="schema"
+          allow-guests
+          @save="save"
+        />
+      </TPopup>
+      <div v-if="!value.name">
+        <TButton allow-guests @click="isEditing = true">Add Event</TButton>
       </div>
-      <div class=" col-span-2">
-        <strong>{{ value.name }}</strong>
+      <div v-else class="grid grid-cols-5">
+        <div class=" ">
+          <strong> {{ value.startDate }} </strong>
+        </div>
+        <div class=" col-span-2">
+          <strong>{{ value.name }}</strong>
+        </div>
+        <div></div>
+        <div class="flex justify-end">
+          <TDropdown v-slot="{ closeMenu }">
+            <TButton
+              allow-guests
+              type="context"
+              label="Edit"
+              color=" text-sm"
+              @click="
+                internalValue = value
+                isEditing = true
+                closeMenu()
+              "
+            />
+            <TButton
+              allow-guests
+              type="context"
+              :label="$t('TInputProfile.remove')"
+              color="red-500 text-sm"
+              @click="
+                $emit('input', {})
+                closeMenu()
+              "
+            />
+          </TDropdown>
+        </div>
+        <div></div>
+        <div class="block col-span-4">
+          <div class="">{{ value.description }}</div>
+          <div class="block">
+            <div class="flex">
+              <div v-for="artist in value.artists" :key="artist.username">
+                <TProfileCardSmall :profile="artist" class=" mr-2" />
+              </div>
+            </div>
+            <div v-if="value.styles" class="flex">
+              <div
+                v-for="(style, index) in value.styles"
+                :key="index"
+                class="rounded-full text-red-300 border px-2 py-1 text-xs mr-1 mt-1"
+              >
+                {{ index }}
+              </div>
+              <!-- {{ Object.keys(value.styles).join('') }} -->
+              <!-- <pre>{{ iterate(value.styles) }}</pre> -->
+            </div>
+            <div v-else></div>
+          </div>
+        </div>
       </div>
-      <div></div>
-      <div class="flex justify-end">
-        <TDropdown v-slot="{ closeMenu }">
-          <TButton
-            allow-guests
-            type="context"
-            label="Edit"
-            color=" text-sm"
-            @click="
-              internalValue = value
-              isEditing = true
-              closeMenu()
-            "
-          />
-          <TButton
-            allow-guests
-            type="context"
-            :label="$t('TInputProfile.remove')"
-            color="red-500 text-sm"
-            @click="
-              $emit('input', {})
-              closeMenu()
-            "
-          />
-        </TDropdown>
-      </div>
-      <div></div>
-
-      <div class=" col-span-4 mb-5">{{ value.description }}</div>
-    </div>
-    <div v-if="value.artists" class=" mb-4"><strong>Artists</strong></div>
-    <div v-for="artist in value.artists" :key="artist.username">
-      <TProfileCard3 :profile="artist" class=" mb-4" />
     </div>
   </div>
 </template>
@@ -114,6 +132,12 @@ export default {
             options: this.item.artists,
           },
         },
+        {
+          name: 'styles',
+          labelPosition: 'top',
+          label: this.$t('event.styles'),
+          component: 'TInputStylesSelect2',
+        },
       ],
     }
   },
@@ -121,6 +145,9 @@ export default {
     save(val) {
       this.$emit('input', val)
       this.isEditing = false
+    },
+    iterate(styles) {
+      Object.keys(styles).join('')
     },
   },
 }

@@ -155,12 +155,29 @@ export default {
           startDate: '19:00',
           endDate: '2022-08-16 20:00',
           description: '',
+          artists: [{ username: 'laura.delvecchio87' }],
         },
         {
           name: 'Bachata Training',
           startDate: '23:59',
           description:
             'Jose Fernandez will teach us all about the passion of Bachata.',
+          artists: [
+            { username: 'laura.delvecchio87' },
+            { username: 'migo.bachatero' },
+          ],
+          styles: {
+            Allemande: {
+              selected: true,
+              highlighted: false,
+              level: 'Interested',
+            },
+            AfroHouse: {
+              selected: true,
+              highlighted: false,
+              level: 'Interested',
+            },
+          },
         },
       ],
     })
