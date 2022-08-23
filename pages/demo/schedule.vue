@@ -157,9 +157,10 @@ export default {
           description: '',
         },
         {
-          name: 'Doors close',
+          name: 'Bachata Training',
           startDate: '23:59',
-          description: 'This is a test description',
+          description:
+            'Jose Fernandez will teach us all about the passion of Bachata.',
         },
       ],
     })

@@ -6,11 +6,6 @@
 
 <script>
 export default {
-  data() {
-    return {
-      internalValue: this.value.username,
-    }
-  },
   props: {
     value: {
       type: [Object],
@@ -20,6 +15,11 @@ export default {
       type: Array,
       default: () => [],
     },
+  },
+  data() {
+    return {
+      internalValue: this.value.username,
+    }
   },
   computed: {
     profiles() {
