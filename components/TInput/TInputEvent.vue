@@ -55,13 +55,18 @@
               </div>
             </div>
             <div v-if="value.styles" class="flex">
-              <div
+              <TStyles
+                :value="value.styles"
+                hide-level
+                class="text-xs text-red-300 p-0 m-0"
+              />
+              <!-- <div
                 v-for="(style, index) in value.styles"
                 :key="index"
                 class="rounded-full text-red-300 border px-2 py-1 text-xs mr-1 mt-1"
               >
                 {{ index }}
-              </div>
+              </div> -->
               <!-- {{ Object.keys(value.styles).join('') }} -->
               <!-- <pre>{{ iterate(value.styles) }}</pre> -->
             </div>
