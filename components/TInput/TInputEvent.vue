@@ -48,10 +48,9 @@
 
       <div class=" col-span-4 mb-5">{{ value.description }}</div>
     </div>
-    <div v-if="value.artists" class=" mb-2"><strong>Artists</strong></div>
+    <div v-if="value.artists" class=" mb-4"><strong>Artists</strong></div>
     <div v-for="artist in value.artists" :key="artist.username">
-      <TProfileCard3 :profile="artist" class=" py-2" />
-      <!-- {{ artist.username }} -->
+      <TProfileCard3 :profile="artist" class=" mb-4" />
     </div>
   </div>
 </template>
