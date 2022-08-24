@@ -232,6 +232,13 @@ export const useEvents = () => {
       max: 140,
     },
     {
+      name: 'schedule',
+      component: 'TInputArray',
+      children: {
+        component: 'TInputEvent',
+      },
+    },
+    {
       name: 'cover',
       label: t('event.cover'),
       component: 'TInputPhoto',
