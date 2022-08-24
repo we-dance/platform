@@ -35,6 +35,7 @@ export default {
         if (!this.can('edit', 'posts', this.item)) {
           this.$nuxt.error({ statusCode: 405 })
         }
+        console.log('Loaded')
       }
     },
   },
@@ -138,6 +139,9 @@ export default {
       uid,
       eventFields,
     }
+  },
+  created() {
+    console.log('Event Edit')
   },
 }
 </script>

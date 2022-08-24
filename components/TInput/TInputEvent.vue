@@ -155,5 +155,10 @@ export default {
       Object.keys(styles).join('')
     },
   },
+  watch: {
+    'item.artists'(newVal) {
+      this.schema.find((f) => f.name === 'artists').children.options = newVal
+    },
+  },
 }
 </script>
