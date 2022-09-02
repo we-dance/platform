@@ -62,11 +62,7 @@
             :href="profile.website"
             >{{ $t('profile.bookme') }}</TButton
           >
-          <TProfileContacts
-            :profile="profile"
-            :title="$t('profile.contactme')"
-            type="simple"
-          />
+          <TProfileContacts :profile="profile" title="Contact" type="simple" />
         </div>
       </div>
     </div>
@@ -226,9 +222,7 @@ export default {
     const { getCity } = useApp()
     const { t } = useI18n()
     const invitesLeft = 5
-
     const community = computed(() => getCity(props.profile?.place))
-
     const intro = {
       fields: [
         {
@@ -259,14 +253,12 @@ export default {
       missing: [],
       visible: false,
     }
-
     for (const field of intro.fields) {
       if (!props.profile[field.name]) {
         intro.missing.push(field)
         intro.visible = true
       }
     }
-
     return {
       intro,
       uid,

@@ -1,6 +1,6 @@
 <template>
   <TButton
-    type="xs"
+    type="simple"
     :class="clicked ? 'font-bold' : ''"
     :title="label"
     :data-names="names"
@@ -62,10 +62,14 @@ export default {
       type: String,
       default: '',
     },
+    collection: {
+      type: String,
+      default: 'posts',
+    },
   },
   setup(props) {
     const { username } = useAuth()
-    const { softUpdate } = useDoc('posts')
+    const { softUpdate } = useDoc(props.collection)
 
     const count = computed(() => {
       return props.item[props.field]?.list

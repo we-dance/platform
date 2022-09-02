@@ -7,12 +7,7 @@
       label="email"
       type="context"
     />
-    <TButton
-      v-else
-      :to="`/chat/${profile.username}`"
-      label="email"
-      type="context"
-    />
+    <TButton :to="`/chat/${profile.username}`" label="chat" type="context" />
     <TButton
       v-for="field in filledFields"
       :key="field"

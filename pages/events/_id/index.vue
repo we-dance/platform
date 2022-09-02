@@ -144,7 +144,7 @@
         v-if="uid && item.response === 'up'"
         type="secondary"
         @click="ticketPopup = true"
-        >Show Ticket</TButton
+        >View Ticket</TButton
       >
       <TButton
         v-else-if="doc.link"
