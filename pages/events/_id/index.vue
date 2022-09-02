@@ -124,17 +124,27 @@
     </div>
 
     <div class="mt-4 flex justify-center">
-      <TReactions :item="doc" class="my-1" />
+      <div class="flex flex-wrap gap-2 items-center">
+        <div class="text-xs text-gray-500">{{ doc.viewsCount || 0 }} views</div>
+      </div>
     </div>
 
     <div
-      class="sticky top-0 z-50 flex justify-center space-y-2 border-b bg-white p-4"
+      class="sticky top-0 z-50 flex justify-center gap-2 border-b bg-white p-4"
     >
+      <TReaction
+        label="Save the date"
+        toggled-label="Saved"
+        field="star"
+        icon="BookmarkIcon"
+        class="rounded-full"
+        :item="doc"
+      />
       <TButton
         v-if="uid && item.response === 'up'"
         type="secondary"
-        @click="updateRsvp(item.id, 'events', 'down')"
-        >{{ $t('eventView.reservation.cancel') }}</TButton
+        @click="ticketPopup = true"
+        >Show Ticket</TButton
       >
       <TButton
         v-else-if="doc.link"
@@ -143,15 +153,14 @@
         allow-guests
         :href="doc.link"
         target="_blank"
-        >{{ $t('eventView.reservation.guest') }}</TButton
+        >Get Ticket *</TButton
       >
       <TButton
         v-else
         type="primary"
-        allow-guests
         :title="$t('eventView.reservation.guest')"
         @click="reservationPopup = 'reserve'"
-        >{{ $t('eventView.reservation.guest') }}</TButton
+        >Get Ticket</TButton
       >
     </div>
 
@@ -213,6 +222,13 @@
       <WProfile :username="doc.org.username" :fallback="doc.org" full />
     </div>
 
+    <div v-if="doc.star && doc.star.list" class="space-y-2 p-4">
+      <h3 class="text-xl font-bold">Guests</h3>
+      <div v-for="(val, username) in doc.star.list" :key="`guest-${username}`">
+        <WProfile :username="username" />
+      </div>
+    </div>
+
     <div class="m-4 text-xs text-right gap-8">
       <span>Published by {{ creator.username }}</span>
       <span>at {{ getDateTimeYear(doc.createdAt) }}</span>
@@ -224,11 +240,26 @@
       >
     </div>
 
+    <div class="px-4 py-2 flex justify-center items-center">
+      <TReaction
+        label="Subscribe to comments"
+        toggled-label="Unsubscribe"
+        field="watch"
+        icon="BellIcon"
+        :item="doc"
+      />
+    </div>
     <TCommentsInline :item="doc" autoload class="border-t p-4" />
+
+    <TPopup v-if="ticketPopup" title="Ticket" @close="ticketPopup = false">
+      <div class="mx-auto max-h-screen max-w-md overflow-y-scroll py-4">
+        <div>Reserved as {{ getRsvp(item.id).participant.name }}</div>
+      </div>
+    </TPopup>
 
     <TPopup
       v-if="reservationPopup"
-      :title="$t('eventView.reservationPopup.title')"
+      title="Get Ticket"
       @close="reservationPopup = false"
     >
       <div class="mx-auto max-h-screen max-w-md overflow-y-scroll py-4">
@@ -365,11 +396,11 @@ export default {
     const { accountFields } = useAccounts()
     const { params } = useRouter()
     const { getProfile } = useProfiles()
-    const { doc, load, exists, loading, softUpdate } = useDoc('posts')
+    const { doc, sync, exists, loading, softUpdate } = useDoc('posts')
     const { map } = useReactions()
-    const { updateRsvp, createGuestRsvp } = useRsvp()
+    const { updateRsvp, createGuestRsvp, getRsvp } = useRsvp()
     if (params.id) {
-      load(params.id)
+      sync(params.id)
     }
     const item = computed(() => {
       const result = map(doc.value)
@@ -386,6 +417,7 @@ export default {
       })
     )
     const reservationFields = accountFields.filter((f) => f.event)
+    const ticketPopup = ref(false)
     const reservationPopup = ref(false)
     const isCreatingProfile = ref(false)
     const finishReservation = () => {
@@ -418,6 +450,7 @@ export default {
       currentCity,
       isCreatingProfile,
       finishReservation,
+      ticketPopup,
       account,
       reservationPopup,
       reservationFields,
@@ -439,6 +472,7 @@ export default {
       getEventDescription,
       calendarLink,
       getEventIcon,
+      getRsvp,
     }
   },
 }

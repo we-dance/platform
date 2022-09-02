@@ -92,10 +92,18 @@
 
     <TEventList
       v-if="profile.type !== 'City'"
-      title="Attending"
+      title="Attending as Special Guest"
       :filter="{ artistsList: profile.username }"
       :username="profile.username"
       comparison="array-contains"
+      class="w-full border-b"
+    />
+
+    <TEventList
+      v-if="profile.type !== 'City'"
+      title="Attending as Guest"
+      :filter="{ [`star.list.${profile.username}`]: true }"
+      :username="profile.username"
       class="w-full border-b"
     />
 

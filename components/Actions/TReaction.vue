@@ -6,7 +6,11 @@
     :data-names="names"
     @click="toggle"
   >
-    <component :is="icon" class="w-4 h-4" />
+    <component
+      :is="icon"
+      class="w-4 h-4"
+      :class="clicked ? 'text-primary' : ''"
+    />
     <div class="ml-1">{{ clicked ? toggledLabel : label }}</div>
     <div class="ml-1 text-xs rounded-full bg-gray-200 px-1 block">
       {{ count }}
@@ -17,6 +21,7 @@
 import firebase from 'firebase/app'
 import 'firebase/firestore'
 import {
+  BellIcon,
   EyeIcon,
   StarIcon,
   BookmarkIcon,
@@ -34,6 +39,7 @@ export default {
     ArchiveIcon,
     EyeOffIcon,
     BookmarkIcon,
+    BellIcon,
   },
   props: {
     label: {
