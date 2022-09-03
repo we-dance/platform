@@ -29,6 +29,7 @@ export const useDoc = (name) => {
       if (doc.exists) {
         state.doc = doc.data()
         state.id = doc.id
+        state.doc.id = doc.id
       } else {
         state.doc = {}
         state.id = null
