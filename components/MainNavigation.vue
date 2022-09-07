@@ -38,12 +38,6 @@
         to="/signin"
         type="nav"
         :label="$t('auth.signin')"
-      />
-      <TButton
-        allow-guests
-        to="/register"
-        type="nav"
-        :label="$t('auth.signup')"
         class="bg-primary border-none text-white hover:bg-dark"
       />
     </template>

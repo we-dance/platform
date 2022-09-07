@@ -21,6 +21,7 @@
 
       <div class="md:flex md:space-x-2 space-y-2 md:space-y-0">
         <TButton
+          allow-guests
           to="/cities?target=/events"
           icon="place"
           :label="cityName || $t('cities.choose')"
@@ -123,7 +124,7 @@ export default {
     const { getProfile } = useProfiles()
     const { getStylesDropdown } = useStyles()
 
-    const defaultCategory = route.params.city ? 'meetup' : 'travel'
+    const defaultCategory = 'meetup'
 
     const category = ref(route.params.category || defaultCategory)
     const city = ref((route.params.city || '').replace('anywhere', ''))
