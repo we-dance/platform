@@ -328,7 +328,6 @@ import { useRouter } from '~/use/router'
 import { useProfiles } from '~/use/profiles'
 import { useReactions } from '~/use/reactions'
 import { useAccounts } from '~/use/accounts'
-import { useCities } from '~/use/cities'
 import { useEvents } from '~/use/events'
 import {
   getDay,
@@ -374,7 +373,6 @@ export default {
   watch: {
     item() {
       if (this.item && this.item.place) {
-        this.currentCity = this.item.place
         this.doc = this.item
       }
     },
@@ -392,7 +390,6 @@ export default {
       sendSignInLinkToEmail,
     } = useAuth()
     const { getEventIcon } = useEvents()
-    const { currentCity } = useCities()
     const { accountFields } = useAccounts()
     const { params } = useRouter()
     const { getProfile } = useProfiles()
@@ -447,7 +444,6 @@ export default {
       isAdmin,
       softUpdate,
       register,
-      currentCity,
       isCreatingProfile,
       finishReservation,
       ticketPopup,

@@ -3,7 +3,7 @@
     <THeader :title="$t('feed.title')" />
 
     <div class="border-b p-4 flex">
-      <TInputSelect v-model="filterType" :options="filterTypeList" />
+      <TInputButtons v-model="filterType" :options="filterTypeList" />
     </div>
 
     <TPostList v-bind="filter" />

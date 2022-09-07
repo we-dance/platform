@@ -4,13 +4,9 @@ export const usePosts = () => {
   const { t } = useI18n()
 
   const filterTypeList = [
-    { label: t('sort.newest'), value: 'Newest' },
-    { label: t('sort.hot'), value: 'Hot' },
-    { label: t('sort.popular'), value: 'Popular' },
-    { label: t('sort.watching'), value: 'Watching' },
-    { label: t('sort.starred'), value: 'Starred' },
-    { label: t('sort.archived'), value: 'Archived' },
-    { label: t('sort.yours'), value: 'Authored' },
+    { label: 'Newest', value: 'Newest' },
+    { label: 'Saved', value: 'Starred' },
+    { label: 'Mine', value: 'Authored' },
   ]
 
   const postTypeList = [
