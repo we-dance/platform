@@ -16,6 +16,13 @@
       @click="signGoogle"
     />
     <TButton allow-guests :label="$t('nopassword.email')" to="/nopassword" />
+
+    <div class="w-48 text-center text-xs">
+      By continuing you agree to WeDance's
+      <router-link class="underline" to="/terms">Terms of Service</router-link>
+      and have read the
+      <router-link class="underline" to="/privacy">Privacy Policy</router-link>.
+    </div>
   </div>
 </template>
 
