@@ -7,7 +7,12 @@
       label="email"
       type="context"
     />
-    <TButton :to="`/chat/${profile.username}`" label="chat" type="context" />
+    <TButton
+      v-if="profile.id === profile.createdBy"
+      :to="`/chat/${profile.username}`"
+      label="chat"
+      type="context"
+    />
     <TButton
       v-for="field in filledFields"
       :key="field"
