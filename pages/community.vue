@@ -73,7 +73,7 @@
         :title="$t('teaser.profile.title')"
         :description="$t('teaser.profile.description')"
         :button="$t('teaser.profile.btn')"
-        url="/signup"
+        url="/signin"
         class="mt-4"
       />
 

@@ -240,15 +240,6 @@
       >
     </div>
 
-    <div class="px-4 py-2 flex justify-center items-center">
-      <TReaction
-        label="Subscribe to comments"
-        toggled-label="Unsubscribe"
-        field="watch"
-        icon="BellIcon"
-        :item="doc"
-      />
-    </div>
     <TCommentsInline :item="doc" autoload class="border-t p-4" />
 
     <TPopup v-if="ticketPopup" title="Ticket" @close="ticketPopup = false">

@@ -73,7 +73,7 @@
         :title="$t('teaser.allevents.title')"
         :description="$t('teaser.allevents.description')"
         :button="$t('teaser.allevents.btn')"
-        url="/register"
+        url="/signin"
         class="mt-4"
       />
 

@@ -84,7 +84,7 @@ export default {
     })
 
     const clicked = computed(() => {
-      return !!props.item[props.field]?.list[username.value]
+      return !!username.value && !!props.item[props.field]?.list[username.value]
     })
 
     const toggle = () => {

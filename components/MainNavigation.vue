@@ -10,20 +10,28 @@
       type="void"
     />
 
+    <TButton
+      allow-guests
+      to="/feed"
+      icon="news"
+      :label="$t('nav.feed')"
+      type="nav"
+    />
+    <TButton
+      allow-guests
+      to="/events"
+      icon="calendar"
+      :label="$t('nav.calendar')"
+      type="nav"
+    />
+    <TButton
+      allow-guests
+      to="/community"
+      icon="people"
+      :label="$t('nav.community')"
+      type="nav"
+    />
     <template v-if="uid">
-      <TButton to="/feed" icon="news" :label="$t('nav.feed')" type="nav" />
-      <TButton
-        to="/events"
-        icon="calendar"
-        :label="$t('nav.calendar')"
-        type="nav"
-      />
-      <TButton
-        to="/community"
-        icon="people"
-        :label="$t('nav.community')"
-        type="nav"
-      />
       <TButton to="/chat" icon="chat" :label="$t('nav.chat')" type="nav" />
       <TButton :to="`/${username}`" type="nav">
         <TProfilePhoto size="xs" :uid="uid" class="mr-1" />
@@ -33,6 +41,10 @@
       <TButton to="/signout" type="nav" :label="$t('auth.signout')" />
     </template>
     <template v-else>
+      <div class="text-xs mt-4">
+        <h4 class="font-bold">Less chats. More dance.</h4>
+        <div>Discover dancers and dance events near you</div>
+      </div>
       <TButton
         allow-guests
         to="/signin"
