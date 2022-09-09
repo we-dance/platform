@@ -7,6 +7,7 @@
 
 <script>
 import { db } from '~/plugins/firebase'
+import { trackView } from '~/use/tracking'
 
 export default {
   name: 'Slug',
@@ -34,6 +35,8 @@ export default {
 
         profile = doc.data()
         profile.id = doc.id
+
+        trackView('profiles', profile.id, profile.viewsCount || 0)
 
         profileFound = true
       }

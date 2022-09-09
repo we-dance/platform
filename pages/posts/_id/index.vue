@@ -116,6 +116,7 @@ import { useDoc } from '~/use/doc'
 import { useProfiles } from '~/use/profiles'
 import { useRouter } from '~/use/router'
 import { getExcerpt, getMeta, loadDoc, getDateTime } from '~/utils'
+import { trackView } from '~/use/tracking'
 
 export default {
   async asyncData(ctx) {
@@ -153,6 +154,7 @@ export default {
     item() {
       if (this.item && this.item.title) {
         this.doc = this.item
+        trackView('posts', this.item.id, this.item.viewsCount || 0)
       }
     },
   },

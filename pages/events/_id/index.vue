@@ -334,6 +334,7 @@ import {
   loadDoc,
 } from '~/utils'
 import { addressPart } from '~/use/google'
+import { trackView } from '~/use/tracking'
 
 export default {
   name: 'EventView',
@@ -365,6 +366,7 @@ export default {
     item() {
       if (this.item && this.item.place) {
         this.doc = this.item
+        trackView('posts', this.item.id, this.item.viewsCount || 0)
       }
     },
   },

@@ -112,7 +112,6 @@ import { useApp } from '~/use/app'
 import { dateDiff, getEventDescription } from '~/utils'
 import { useAuth } from '~/use/auth'
 import { useDoc } from '~/use/doc'
-import { trackNodeView } from '~/use/tracking'
 
 export default {
   props: {
@@ -133,40 +132,12 @@ export default {
       default: false,
     },
   },
-  mounted() {
-    if (!this.$refs.postRef) {
-      return
-    }
-
-    const options = {
-      rootMargin: '0px',
-      threshold: 1.0,
-    }
-
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach((entry) => {
-        if (entry.intersectionRatio > 0) {
-          this.onView()
-        }
-      })
-    }, options)
-
-    observer.observe(this.$refs.postRef)
-  },
   setup(props) {
     const { can } = useAuth()
     const { getCity } = useApp()
     const { remove } = useDoc('posts')
 
     const show = ref(props.showAll)
-
-    const onView = () => {
-      if (!props.item?.id) {
-        return
-      }
-
-      trackNodeView(props.item.id, props.item.viewsCount || 0)
-    }
 
     return {
       dateDiff,
@@ -175,7 +146,6 @@ export default {
       can,
       remove,
       show,
-      onView,
     }
   },
 }
