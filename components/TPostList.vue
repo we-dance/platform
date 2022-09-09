@@ -52,7 +52,7 @@ export default {
     },
     orderBy: {
       type: String,
-      default: 'createdAt',
+      default: '',
     },
     orderByDirection: {
       type: String,

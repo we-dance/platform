@@ -9,26 +9,26 @@
       class="mb-8"
       type="void"
     />
-
-    <TButton
-      allow-guests
-      to="/feed"
-      icon="news"
-      :label="$t('nav.feed')"
-      type="nav"
-    />
     <TButton
       allow-guests
       to="/events"
       icon="calendar"
-      :label="$t('nav.calendar')"
+      label="Events"
       type="nav"
     />
+    <TButton allow-guests to="/feed" icon="news" label="News" type="nav" />
     <TButton
       allow-guests
       to="/community"
       icon="people"
       :label="$t('nav.community')"
+      type="nav"
+    />
+    <TButton
+      allow-guests
+      to="/dance"
+      icon="fire"
+      label="Dance Styles"
       type="nav"
     />
     <template v-if="uid">

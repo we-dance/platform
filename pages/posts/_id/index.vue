@@ -2,6 +2,12 @@
   <div>
     <THeader :title="doc.title || '...'" />
 
+    <TStyles
+      :value="doc.styles"
+      hide-level
+      class="flex flex-wrap justify-center border-b p-2 text-xs"
+    />
+
     <img v-if="doc.cover" :src="doc.cover" />
 
     <TPost :item="doc" show-all>

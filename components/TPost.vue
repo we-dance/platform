@@ -23,6 +23,7 @@
               <div>{{ item.region.name }}</div>
             </template>
           </div>
+          <h1 v-if="item.title" class="font-bold text-xl">{{ item.title }}</h1>
           <TPreview :excerpt="!show" :content="item.description" />
           <div
             v-if="item.description && item.description.length > 140"
