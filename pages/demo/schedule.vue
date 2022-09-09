@@ -2,15 +2,19 @@
     <div>
         <h3>schedule vue</h3>
         <TForm v-model="data" :fields="schema"   />
+        <TInputEvent />
     </div>
 </template>
 
 <script>
     import TForm from '~/components/TForm.vue';
+    import TInputEvent from '~/components/TInput/TInputEvent.vue';
+
 export default {
     components: {
-        TForm 
-    }, 
+    TForm,
+    TInputEvent,
+}, 
     data() {
         return {
             data : {
