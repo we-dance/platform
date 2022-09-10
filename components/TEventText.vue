@@ -62,6 +62,7 @@
           icon="BookmarkIcon"
           class="mt-2"
           label="Save"
+          toggled-label="Saved"
           :item="item"
         />
       </div>
