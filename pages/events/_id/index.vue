@@ -42,7 +42,7 @@
           :label="$t('eventView.dropdown.share')"
         />
         <TButton
-          v-if="can('edit', 'events', doc)"
+          v-if="isAdmin()"
           type="context"
           class="red-500"
           label="Reset"
