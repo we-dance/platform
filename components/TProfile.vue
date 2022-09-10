@@ -47,6 +47,10 @@
         <h1 class="leading-tight font-bold">{{ profile.name }}</h1>
         <div class="text-sm">{{ profile.bio }}</div>
 
+        <div class="text-xs text-gray-500">
+          {{ profile.viewsCount || 0 }} views
+        </div>
+
         <TButton
           v-if="profile.type === 'City'"
           type="simple"

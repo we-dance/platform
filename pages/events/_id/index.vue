@@ -123,17 +123,11 @@
       </div>
     </div>
 
-    <div class="mt-4 flex justify-center">
-      <div class="flex flex-wrap gap-2 items-center">
-        <div class="text-xs text-gray-500">{{ doc.viewsCount || 0 }} views</div>
-      </div>
-    </div>
-
     <div
-      class="sticky top-0 z-50 flex justify-center gap-2 border-b bg-white p-4"
+      class="sticky bottom-0 z-50 flex justify-center gap-2 border-b bg-white p-4"
     >
       <TReaction
-        label="Save the date"
+        label="Save"
         toggled-label="Saved"
         field="star"
         icon="BookmarkIcon"
@@ -162,6 +156,11 @@
         @click="reservationPopup = 'reserve'"
         >Get Ticket</TButton
       >
+      <div
+        class="rounded-full inline-flex items-center px-3 py-2 shadow-sm text-sm leading-4 font-medium rounded-md text-gray-700 bg-white hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 cursor-pointer outline-none focus:outline-none inline-block font-bold"
+      >
+        {{ doc.viewsCount || 0 }} views
+      </div>
     </div>
 
     <div

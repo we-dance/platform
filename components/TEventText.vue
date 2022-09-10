@@ -13,12 +13,6 @@
       >
         {{ item.name }}
       </NuxtLink>
-      <TReaction
-        field="star"
-        icon="BookmarkIcon"
-        class="border-none"
-        :item="item"
-      />
       <div>
         <div class="text-xs flex flex-wrap gap-1">
           <div v-if="item.online === 'Yes'">
@@ -53,10 +47,20 @@
               </p>
             </div>
           </div>
-          <div v-if="item.org" class="text-primary">
-            {{ item.org.username }}
+          <div v-if="item.org" class="text-primary hover:underline">
+            <router-link :to="`/${item.org.username}`">{{
+              item.org.username
+            }}</router-link>
           </div>
         </div>
+
+        <TReaction
+          field="star"
+          icon="BookmarkIcon"
+          class="mt-2"
+          label="Save"
+          :item="item"
+        />
       </div>
     </div>
   </div>
