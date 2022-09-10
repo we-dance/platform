@@ -47,7 +47,7 @@
           {{ getDay(date) }}, {{ getDate(date) }}
         </h2>
         <div v-for="item in items" :key="item.id" class="px-4 mt-4">
-          <TEventText :item="item" />
+          <TEventText :item="item" :is-embed="isEmbed" />
         </div>
       </div>
       <div></div>
@@ -75,6 +75,10 @@ import {
 export default {
   name: 'TEventList',
   props: {
+    isEmbed: {
+      type: Boolean,
+      default: false,
+    },
     username: {
       type: String,
       default: 'Travel',

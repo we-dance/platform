@@ -2,6 +2,7 @@
   <div :class="classes">
     <TEventList
       v-if="profile.type !== 'City'"
+      is-embed
       :title="`${profile.username} Calendar`"
       :filter="{ 'org.username': profile.username }"
       class="w-full border-b"
@@ -9,6 +10,7 @@
 
     <TEventList
       v-if="profile.type !== 'City'"
+      is-embed
       :title="`${profile.username} Calendar`"
       :filter="{ artistsList: profile.username }"
       comparison="array-contains"
@@ -17,6 +19,7 @@
 
     <TEventList
       v-if="profile.type === 'City' && profile.username == 'Travel'"
+      is-embed
       :title="`${profile.username} Calendar`"
       :filter="{ eventType: 'Festival' }"
       :community="profile.username"
@@ -25,6 +28,7 @@
 
     <TEventList
       v-if="profile.type === 'City' && profile.username !== 'Travel'"
+      is-embed
       :title="`${profile.username} Calendar`"
       :filter="{ place: profile.place }"
       :community="profile.username"
