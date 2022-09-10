@@ -34,29 +34,13 @@
                 />
               </div>
 
-              <div class="flex justify-center">
-                <div class="mt-8 flex space-x-4 font-bold">
-                  <div class="flex flex-col items-center justify-center">
-                    <TIcon name="group" class="h-16 w-16" />
-                    <div class="text-4xl">1309</div>
-                    <div class="text-sm">{{ $t('icons.dancers') }}</div>
-                  </div>
-                  <div class="flex flex-col items-center justify-center">
-                    <TIcon name="location" class="h-16 w-16" />
-                    <div class="text-4xl">102</div>
-                    <div class="text-sm">{{ $t('icons.cities') }}</div>
-                  </div>
-                  <div class="flex flex-col items-center justify-center">
-                    <TIcon name="calendar" class="h-16 w-16" />
-                    <div class="text-4xl">441</div>
-                    <div class="text-sm">{{ $t('icons.events') }}</div>
-                  </div>
-                </div>
+              <div class="mt-8 max-w-lg mx-auto text-center sm:max-w-3xl">
+                <h4 class="font-bold text-xl">
+                  <span class="text-primary">DANCE.</span> MEET. TRAVEL.
+                </h4>
+                <p>Discover dancers and dance events near you.</p>
+                <p>{{ $t('hero.submotto') }}</p>
               </div>
-
-              <p class="mt-8 max-w-lg mx-auto text-center sm:max-w-3xl">
-                {{ $t('hero.submotto') }}
-              </p>
             </div>
           </div>
         </div>
@@ -80,7 +64,12 @@
               {{ $t('features.calendar.title') }}
             </h3>
             <p class="text-center">
-              {{ $t('features.calendar.description') }}
+              {{ $t('features.calendar.description') }}<br />
+              <NuxtLink
+                to="/events"
+                class="underline font-bold hover:no-underline"
+                >Discover events</NuxtLink
+              >
             </p>
           </div>
           <div class="py-8 space-y-1 bg-light">
@@ -98,7 +87,12 @@
               {{ $t('features.dancePartners.title') }}
             </h3>
             <p class="text-center">
-              {{ $t('features.dancePartners.description') }}
+              {{ $t('features.dancePartners.description') }}<br />
+              <NuxtLink
+                to="/community"
+                class="underline font-bold hover:no-underline"
+                >Find dance partner</NuxtLink
+              >
             </p>
           </div>
           <div class="py-8 space-y-1 bg-light">
@@ -116,7 +110,13 @@
               {{ $t('features.cityChats.title') }}
             </h3>
             <p class="text-center">
-              {{ $t('features.cityChats.description') }}
+              {{ $t('features.cityChats.description') }}<br />
+              <a
+                href="https://t.me/WeDanceTravel"
+                target="_blank"
+                class="underline font-bold hover:no-underline"
+                >Join chat</a
+              >
             </p>
           </div>
           <div class="py-8 space-y-1 bg-light">
@@ -134,7 +134,12 @@
               {{ $t('features.danceTravel.title') }}
             </h3>
             <p class="text-center">
-              {{ $t('features.danceTravel.description') }}
+              {{ $t('features.danceTravel.description') }}<br />
+              <NuxtLink
+                to="/Travel"
+                class="underline font-bold hover:no-underline"
+                >Discover festivals</NuxtLink
+              >
             </p>
           </div>
           <div class="py-8 space-y-1 bg-light">
