@@ -136,6 +136,14 @@ export default {
       return getDateTime(this.doc?.createdAt)
     },
   },
+  watch: {
+    item() {
+      if (this.item && this.item.title) {
+        this.doc = this.item
+        trackView('posts', this.item.id, this.item.viewsCount || 0)
+      }
+    },
+  },
   head() {
     return getMeta('posts', this.doc)
   },
@@ -155,14 +163,6 @@ export default {
       getExcerpt,
       item,
     }
-  },
-  watch: {
-    item() {
-      if (this.item && this.item.title) {
-        this.doc = this.item
-        trackView('posts', this.item.id, this.item.viewsCount || 0)
-      }
-    },
   },
 }
 </script>

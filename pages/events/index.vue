@@ -167,7 +167,7 @@ export default {
   name: 'Calendar',
   setup() {
     const { levelOptions } = useStyles()
-    const { route, router } = useRouter()
+    const { route } = useRouter()
     const { eventCategoryOptions, addLabelIcons } = useEvents()
     const { currentCity, cityName, changeCityByName } = useCities()
     const { create } = useDoc('subscribers')
