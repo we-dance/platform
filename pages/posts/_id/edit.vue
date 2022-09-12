@@ -52,7 +52,7 @@ export default {
   },
   methods: {
     cancelItem() {
-      this.$router.push(`/feed`)
+      this.$router.push(`/events`)
     },
     async saveItem(data) {
       if (data.id) {

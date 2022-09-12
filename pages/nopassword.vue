@@ -117,7 +117,7 @@ export default {
       ls.remove('target')
 
       if (!target) {
-        target = '/feed'
+        target = '/events'
       }
 
       this.$router.push(target)
