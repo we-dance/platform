@@ -61,21 +61,18 @@
       </div>
 
       <div class="md:border-l">
-        <div
-          v-if="doc.type"
-          class="flex w-full items-center justify-start border-b py-2 px-4 leading-tight"
-        >
-          <div class="mr-4 w-4 text-center">
-            {{ getEventIcon(doc.eventType) }}
-          </div>
-          <div>{{ doc.eventType }}</div>
-        </div>
-
         <TStyles
           :value="doc.styles"
           hide-level
-          class="flex flex-wrap justify-center border-b p-2 text-xs"
-        />
+          class="flex flex-wrap justify-left items-center border-b px-4 py-2 text-xs"
+        >
+          <div v-if="doc.type" class="flex">
+            <div class="w-4 text-center">
+              {{ getEventIcon(doc.eventType) }}
+            </div>
+            <div>{{ doc.eventType }}</div>
+          </div>
+        </TStyles>
 
         <a
           v-if="doc.venue"
@@ -147,7 +144,7 @@
         allow-guests
         :href="doc.link"
         target="_blank"
-        >Get Ticket *</TButton
+        >Find Tickets</TButton
       >
       <TButton
         v-else

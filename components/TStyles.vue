@@ -1,5 +1,6 @@
 <template>
   <div>
+    <slot />
     <NuxtLink
       v-for="style in getStyles(value, 0, false, max)"
       :key="style.id"
