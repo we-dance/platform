@@ -17,20 +17,7 @@
       type="nav"
     />
     <TButton allow-guests to="/feed" icon="news" label="News" type="nav" />
-    <TButton
-      allow-guests
-      to="/community"
-      icon="people"
-      :label="$t('nav.community')"
-      type="nav"
-    />
-    <TButton
-      allow-guests
-      to="/dance"
-      icon="fire"
-      label="Dance Styles"
-      type="nav"
-    />
+    <TButton allow-guests to="/dance" icon="fire" label="Wiki" type="nav" />
     <template v-if="uid">
       <TButton to="/chat" icon="chat" :label="$t('nav.chat')" type="nav" />
       <TButton :to="`/${username}`" type="nav">
@@ -132,7 +119,7 @@ export default {
 </script>
 
 <style>
-nav .nuxt-link-exact-active {
+nav .nuxt-link-active {
   @apply text-primary border-primary;
 }
 </style>

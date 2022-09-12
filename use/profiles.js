@@ -36,20 +36,20 @@ export const useProfiles = () => {
 
   const typeList = [
     {
-      label: t('profile.typeList.dancer'),
-      value: 'Dancer',
-    },
-    {
-      label: t('profile.typeList.artist'),
-      value: 'Artist',
-    },
-    {
       label: t('profile.typeList.organiser'),
       value: 'Organiser',
     },
     {
       label: t('profile.typeList.venue'),
       value: 'Venue',
+    },
+    {
+      label: t('profile.typeList.artist'),
+      value: 'Artist',
+    },
+    {
+      label: t('profile.typeList.dancer'),
+      value: 'Dancer',
     },
     {
       label: t('profile.typeList.city'),

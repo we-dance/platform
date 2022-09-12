@@ -98,10 +98,7 @@ export const useEvents = () => {
       label: t('event.category.meetup'),
       value: 'meetup',
       icon: '🎵',
-      filter: (item) =>
-        ['Party', 'Show', 'Concert', 'Other'].includes(item.eventType) &&
-        isUpcoming(item) &&
-        isInSelectedCity(item),
+      filter: (item) => isUpcoming(item) && isInSelectedCity(item),
     },
     {
       label: t('event.category.lesson'),

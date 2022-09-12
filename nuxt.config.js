@@ -37,7 +37,7 @@ export default {
     extendRoutes(routes, resolve) {
       routes.push({
         name: 'Calendar',
-        path: '/:city/:category/:dance/:level',
+        path: '/events/:city/:dance?',
         component: resolve(__dirname, 'pages/events/index'),
       })
 

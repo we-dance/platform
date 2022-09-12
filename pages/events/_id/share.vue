@@ -1,6 +1,6 @@
 <template>
   <TSharePreview
-    :type="event.type"
+    :type="event.eventType"
     collection="events"
     claimed="Yes"
     :username="event.org ? event.org.username : ''"

@@ -38,8 +38,8 @@
                 <h4 class="font-bold text-xl">
                   <span class="text-primary">DANCE.</span> MEET. TRAVEL.
                 </h4>
-                <p>Discover dancers and dance events near you.</p>
-                <p>{{ $t('hero.submotto') }}</p>
+                <p>Discover dancers and dance events anywhere you travel.</p>
+                <p>{{ $t('hero.submotto') }}.</p>
               </div>
             </div>
           </div>

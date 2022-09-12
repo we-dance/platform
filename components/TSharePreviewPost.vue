@@ -21,8 +21,7 @@
               :key="dance.id"
               class="uppercase text-xs flex space-x-2 justify-end items-center"
             >
-              <span>{{ dance.name }}</span
-              ><TIcon :name="getIcon(dance.level)" size="4" />
+              <span>{{ dance.name }}</span>
             </div>
           </div>
         </div>
@@ -45,7 +44,7 @@
             <div v-if="title" class="text-lg font-bold leading-tight">
               {{ title }}
             </div>
-            <div v-if="false" class="text-sm leading-tight mb-1">
+            <div class="text-sm leading-tight mb-1">
               {{ description }}
             </div>
           </template>
