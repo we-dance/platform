@@ -1,4 +1,3 @@
-<!-- eslint-disable prettier/prettier -->
 <!-- components/TInput/TInputEvent.vue -->
 
 <template>
@@ -9,35 +8,42 @@
         <h1 class="improv-x" @click="showEdit = false">X</h1>
       </div>
       <div class="schedule-editor">
-
         <label>Name</label>
         <TInput v-model="value.name" label="Name" />
-        <br>
+        <br />
 
         <label>Start Date</label>
-        <TInput type="datetime-local" v-model="value.startDate" label="Start Date" />
-        <br>
+        <TInput
+          v-model="value.startDate"
+          type="datetime-local"
+          label="Start Date"
+        />
+        <br />
 
         <label>End Date</label>
-        <TInput type="datetime-local" v-model="value.endDate" label="End Date" />
-        <br>
+        <TInput
+          v-model="value.endDate"
+          type="datetime-local"
+          label="End Date"
+        />
+        <br />
 
         <label>Description</label>
         <TInputTextarea v-model="value.description" label="Description" />
-        <br>
+        <br />
 
         <label>Artists</label>
-          <TAccountListSelector v-model="value.artists" label="Artists" />
+        <TAccountListSelector v-model="value.artists" label="Artists" />
 
-        <br>
+        <br />
 
         <label>Room</label>
         <TInput v-model="value.room" label="Room" />
-        <br>
-        
+        <br />
+
         <label>Dance Style</label>
         <TInputStylesSelect2 v-model="value.danceStyle" label="Dance Style" />
-        <br>
+        <br />
       </div>
     </TPopup>
 
@@ -67,11 +73,9 @@
 
 <script>
 import TPopup from '../TPopup.vue'
-import TAccountListSelector from '../TAccountListSelector.vue';
-import TInputDateTime from './TInputDateTime.vue';
-import TInputTextarea from './TInputTextarea.vue';
-import TInputArray from './TInputArray.vue';
-import TInput from './TInput.vue';
+import TAccountListSelector from '../TAccountListSelector.vue'
+import TInputTextarea from './TInputTextarea.vue'
+import TInput from './TInput.vue'
 
 export default {
   props: {
@@ -89,10 +93,15 @@ export default {
   }),
   methods: {
     removeSchedule() {
-      this.$emit('input', null);
+      this.$emit('input', null)
     },
   },
-  components: { TPopup, TInputDateTime, TInputTextarea, TInputArray, TAccountListSelector, TInput },
+  components: {
+    TPopup,
+    TInputTextarea,
+    TAccountListSelector,
+    TInput,
+  },
 }
 </script>
 
@@ -107,8 +116,6 @@ export default {
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
-
-  /* bold text */
   font-weight: 600;
 }
 
@@ -117,7 +124,7 @@ export default {
   flex-direction: row;
   justify-content: space-between;
 
-  margin-top: 30px
+  margin-top: 30px;
 }
 
 .schedule-editor h1 {
