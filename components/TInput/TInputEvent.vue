@@ -1,5 +1,4 @@
 <!-- components/TInput/TInputEvent.vue -->
-
 <template>
   <div>
     <TPopup v-if="showEdit">
@@ -44,7 +43,6 @@
         <label>Dance Style</label>
         <TInputStylesSelect2 v-model="value.danceStyle" label="Dance Style" />
         <br />
-        
       </div>
     </TPopup>
 
