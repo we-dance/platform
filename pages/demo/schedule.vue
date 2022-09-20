@@ -1,7 +1,6 @@
 <!-- pages/demo/schedule.vue -->
 <template>
   <TForm v-model="data" :fields="schema" class="p-10" />
-  
 </template>
 
 <script>
