@@ -44,6 +44,7 @@
         <label>Dance Style</label>
         <TInputStylesSelect2 v-model="value.danceStyle" label="Dance Style" />
         <br />
+        
       </div>
     </TPopup>
 
