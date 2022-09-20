@@ -55,9 +55,8 @@
       <div>{{ value.description }}</div>
       <br />
 
-      <!-- on click create a modal that allows for edit -->
       <TButton @click="showEdit = !showEdit">Edit</TButton>
-      <TButton>Remove</TButton>
+      <TButton @click="removeSchedule">Remove</TButton>
 
       <!-- <TInput v-model="value" label="Value" /> -->
 
@@ -68,10 +67,10 @@
 
 <script>
 import TPopup from '../TPopup.vue'
+import TAccountListSelector from '../TAccountListSelector.vue';
 import TInputDateTime from './TInputDateTime.vue';
 import TInputTextarea from './TInputTextarea.vue';
 import TInputArray from './TInputArray.vue';
-import TAccountListSelector from '../TAccountListSelector.vue';
 import TInput from './TInput.vue';
 
 export default {
@@ -88,6 +87,11 @@ export default {
   data: () => ({
     showEdit: false,
   }),
+  methods: {
+    removeSchedule() {
+      this.$emit('input', null);
+    },
+  },
   components: { TPopup, TInputDateTime, TInputTextarea, TInputArray, TAccountListSelector, TInput },
 }
 </script>
@@ -122,6 +126,8 @@ export default {
 
 .improv-x {
   font-weight: 700;
+
+  cursor: pointer;
 }
 
 .schedule-editor {
