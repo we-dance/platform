@@ -62,9 +62,6 @@
 
       <TButton @click="showEdit = !showEdit">Edit</TButton>
       <TButton @click="removeSchedule">Remove</TButton>
-
-      <!-- <TInput v-model="value" label="Value" /> -->
-
       <!-- <pre>{{ value }}</pre> -->
     </div>
   </div>
