@@ -49,7 +49,7 @@
     </TPopup>
 
     <div v-if="!value.name">
-      <TButton allow-guests >Add Event</TButton>
+      <TButton allow-guests>Add Event</TButton>
     </div>
 
     <div v-else class="edit">
@@ -62,7 +62,6 @@
       <div>{{ value.description }}</div>
       <!-- show artist -->
       <br />
-
 
       <TButton allow-guests @click="showEdit = !showEdit">Edit</TButton>
       <TButton allow-guests @click="removeSchedule">Remove</TButton>
