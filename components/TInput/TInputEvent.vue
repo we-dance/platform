@@ -43,11 +43,13 @@
         <label>Dance Style</label>
         <TInputStylesSelect2 v-model="value.danceStyle" label="Dance Style" />
         <br />
+
+        <!-- add save button -->
       </div>
     </TPopup>
 
     <div v-if="!value.name">
-      <TButton>Add Event</TButton>
+      <TButton allow-guests >Add Event</TButton>
     </div>
 
     <div v-else class="edit">
@@ -58,10 +60,12 @@
         <div>{{ value.startDate }}</div>
       </div>
       <div>{{ value.description }}</div>
+      <!-- show artist -->
       <br />
 
-      <TButton @click="showEdit = !showEdit">Edit</TButton>
-      <TButton @click="removeSchedule">Remove</TButton>
+
+      <TButton allow-guests @click="showEdit = !showEdit">Edit</TButton>
+      <TButton allow-guests @click="removeSchedule">Remove</TButton>
       <!-- <pre>{{ value }}</pre> -->
     </div>
   </div>
