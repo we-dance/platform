@@ -1,6 +1,6 @@
 <template>
   <main>
-    <THeader title="Dance. Meet. Travel.">
+    <THeader :title="`${cityName} Dance Calendar`">
       <TButton type="nav" icon="plus" to="/events/-/edit" />
     </THeader>
 
@@ -390,7 +390,7 @@ export default {
   },
   head() {
     return {
-      title: 'WeDance Events',
+      title: `${this.cityName} Dance Calendar`,
     }
   },
 }

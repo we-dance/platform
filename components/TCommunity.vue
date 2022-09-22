@@ -182,10 +182,5 @@ export default {
       cityName,
     }
   },
-  head() {
-    return {
-      title: 'WeDance Community',
-    }
-  },
 }
 </script>
