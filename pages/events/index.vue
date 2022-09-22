@@ -391,6 +391,20 @@ export default {
   head() {
     return {
       title: `${this.cityName} Dance Calendar`,
+      meta: [
+        {
+          hid: 'description',
+          name: 'description',
+          content:
+            'The best dance events and artists in Salsa, Bachata, Kizomba, Tango, Forro, Dancehall and over 140 other dance styles',
+        },
+        {
+          hid: 'keywords',
+          name: 'keywords',
+          content:
+            'Dance Calendar, Tanzkalendar, Salsa, Bachata, Kizomba, Tanzveranstaltungen',
+        },
+      ],
     }
   },
 }
