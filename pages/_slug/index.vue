@@ -6,12 +6,27 @@
 </template>
 
 <script>
+import { ref } from 'vue-demi'
 import { db } from '~/plugins/firebase'
+import { useDoc } from '~/use/doc'
 import { trackView } from '~/use/tracking'
 
 export default {
   name: 'Slug',
-  async asyncData({ app, $content, params, error }) {
+  setup() {
+    const { doc: item, sync } = useDoc('profiles')
+
+    return {
+      item,
+      sync,
+    }
+  },
+  mounted() {
+    if (this.profile) {
+      this.sync(this.profile.id)
+    }
+  },
+  async asyncData({ $content, params, error }) {
     const slug = params.slug
 
     let page = null
@@ -50,6 +65,13 @@ export default {
       page,
       profile,
     }
+  },
+  watch: {
+    item() {
+      if (this.item) {
+        this.profile = this.item
+      }
+    },
   },
   computed: {
     classes() {

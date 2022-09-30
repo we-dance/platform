@@ -10,6 +10,15 @@
       type="void"
     />
     <TButton
+      v-if="cityName"
+      allow-guests
+      :to="`/${cityName}`"
+      icon="calendar"
+      :label="cityName"
+      type="nav"
+    />
+    <TButton
+      v-if="!cityName"
       allow-guests
       to="/events"
       icon="calendar"
@@ -98,12 +107,14 @@
 
 <script>
 import { useAuth } from '~/use/auth'
+import { useCities } from '~/use/cities'
 
 export default {
   setup() {
     const { isAdmin, isEditor } = useAuth()
+    const { cityName } = useCities()
 
-    return { isAdmin, isEditor }
+    return { isAdmin, isEditor, cityName }
   },
   props: {
     uid: {

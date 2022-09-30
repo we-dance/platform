@@ -51,21 +51,28 @@
           {{ profile.viewsCount || 0 }} views
         </div>
 
-        <TButton
-          v-if="profile.type === 'City'"
-          type="simple"
-          class="mt-4"
-          to="/events/-/edit"
-          >{{ $t('myprofile.addEvent') }}</TButton
-        >
+        <div v-if="profile.type === 'City'" class="flex space-x-2 mt-4">
+          <TReaction
+            label="Subscribe"
+            toggled-label="Unsubscribe"
+            field="watch"
+            icon="BellIcon"
+            :item="profile"
+            collection="profiles"
+          />
+          <TButton type="simple" to="/events/-/edit">{{
+            $t('myprofile.addEvent')
+          }}</TButton>
+        </div>
         <div v-if="profile.type !== 'City'" class="flex space-x-2 mt-4">
-          <TButton
-            v-if="profile.website"
-            allow-guests
-            type="simple"
-            :href="profile.website"
-            >{{ $t('profile.bookme') }}</TButton
-          >
+          <TReaction
+            label="Follow"
+            toggled-label="Unfollow"
+            field="watch"
+            icon="BellIcon"
+            :item="profile"
+            collection="profiles"
+          />
           <TProfileContacts :profile="profile" title="Contact" type="simple" />
         </div>
       </div>

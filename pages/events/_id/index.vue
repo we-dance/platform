@@ -144,7 +144,7 @@
         allow-guests
         :href="doc.link"
         target="_blank"
-        >Find Tickets</TButton
+        >Buy Ticket</TButton
       >
       <TButton
         v-else

@@ -1,6 +1,13 @@
 <template>
   <TDropdown :label="title" :type="type" icon="">
     <TButton
+      v-if="profile.website"
+      allow-guests
+      :href="profile.website"
+      label="website"
+      type="context"
+    />
+    <TButton
       v-if="profile.email"
       allow-guests
       :href="`mailto:${profile.email}`"
