@@ -46,7 +46,7 @@ yargs(hideBin(process.argv))
   )
   .command(
     'ig:announce <eventId>',
-    'Announce event on telegram',
+    'Announce event on instagram',
     () => undefined,
     async (argv: any) => {
       const event = (

@@ -35,6 +35,8 @@
     "instagram-private-api": "^1.45.3",
     "mailgun-js": "^0.22.0",
     "markdown-it": "^10.0.0",
+    "node-fetch": "^3.2.10",
+    "png-to-jpeg": "^1.0.1",
     "puppeteer": "^7.0.0",
     "telegraf": "^4.8.6",
     "yargs": "^17.3.1"

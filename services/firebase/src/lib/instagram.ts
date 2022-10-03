@@ -1,34 +1,52 @@
 import { IgApiClient } from 'instagram-private-api'
+import axios from 'axios'
+const pngToJpeg = require('png-to-jpeg')
+
 require('dotenv').config()
 
 export async function announceEventIG(event: any) {
-  //   const hashtags = [event.eventType, ...Object.keys(event.styles)]
-  //     .map((tag) => `#${tag}`)
-  //     .join(' ')
+  const hashtags = [event.eventType, ...Object.keys(event.styles)]
+    .map((tag) => `#${tag}`)
+    .join(' ')
 
-  //   let description = event.description
+  let description = event.description
 
-  //   if (description.length > 140) {
-  //     description = description.substring(0, 140) + '...'
-  //   }
+  if (description.length > 140) {
+    description = description.substring(0, 140) + '...'
+  }
 
-  //   const photo = event.socialCover
-  //   const caption = `${description}\nSee link in bio\n\n\n${hashtags}`
+  const photo = event.socialCover
 
-  // process.env.INSTAGRAM_USERNAME,
-  // process.env.INSTAGRAM_PASSWORD,
+  const caption = `${description}\nSee link in bio\n\n\n${hashtags}`
+
+  const response = await axios.get(photo, { responseType: 'arraybuffer' })
+  const buffer = Buffer.from(response.data, 'utf-8')
+
+  const file = await pngToJpeg({ quality: 90 })(buffer)
 
   const ig = new IgApiClient()
   ig.state.generateDevice(String(process.env.INSTAGRAM_USERNAME))
-  await ig.simulate.preLoginFlow()
-  const loggedInUser = await ig.account.login(
+
+  await ig.account.login(
     String(process.env.INSTAGRAM_USERNAME),
     String(process.env.INSTAGRAM_PASSWORD)
   )
-  process.nextTick(async () => await ig.simulate.postLoginFlow())
 
-  //   ig.upload.photo()
-  const userFeed = ig.feed.user(loggedInUser.pk)
-  const myPostsFirstPage = await userFeed.items()
-  console.log(myPostsFirstPage)
+  const publishResult = await ig.publish.photo({
+    // read the file into a Buffer
+    file,
+    // optional, default ''
+    caption,
+    // optional
+    // location: mediaLocation,
+    // optional
+    // usertags: {
+    //   in: [
+    //     // tag the user 'instagram' @ (0.5 | 0.5)
+    //     await generateUsertagFromName('instagram', 0.5, 0.5),
+    //   ],
+    // },
+  })
+
+  console.log('https://instagram.com/p/' + publishResult.media.code)
 }
