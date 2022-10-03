@@ -42,10 +42,10 @@
 
 <script>
 import TPopup from '../TPopup.vue'
+import TForm from '../TForm.vue'
 import TInputTextarea from './TInputTextarea.vue'
 import TInputArray from './TInputArray.vue'
 import TInput from './TInput.vue'
-import TForm from '../TForm.vue'
 
 export default {
   props: {
@@ -103,7 +103,6 @@ export default {
             value: 'room2',
           },
         ],
-
       },
       {
         name: 'danceStyle',
@@ -120,11 +119,7 @@ export default {
   },
   components: {
     TPopup,
-    TInputTextarea,
-    TInputArray,
-    TInput,
     TForm,
   },
 }
 </script>
-
