@@ -43,9 +43,6 @@
 <script>
 import TPopup from '../TPopup.vue'
 import TForm from '../TForm.vue'
-import TInputTextarea from './TInputTextarea.vue'
-import TInputArray from './TInputArray.vue'
-import TInput from './TInput.vue'
 
 export default {
   props: {
