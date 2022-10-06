@@ -61,18 +61,23 @@
       </div>
 
       <div class="md:border-l">
-        <TStyles
-          :value="doc.styles"
-          hide-level
-          class="flex flex-wrap justify-left items-center border-b px-4 py-2 text-xs"
+        <div
+          class="flex justify-between items-center px-4 py-2 text-xs border-b"
         >
-          <div v-if="doc.type" class="flex">
-            <div class="w-4 text-center">
-              {{ getEventIcon(doc.eventType) }}
+          <TStyles
+            :value="doc.styles"
+            hide-level
+            class="flex flex-wrap justify-left items-center"
+          >
+            <div v-if="doc.type" class="flex">
+              <div class="w-4 text-center">
+                {{ getEventIcon(doc.eventType) }}
+              </div>
+              <div>{{ doc.eventType }}</div>
             </div>
-            <div>{{ doc.eventType }}</div>
-          </div>
-        </TStyles>
+          </TStyles>
+          <div>{{ doc.viewsCount || 0 }} views</div>
+        </div>
 
         <a
           v-if="doc.venue"
@@ -153,42 +158,69 @@
         @click="reservationPopup = 'reserve'"
         >Get Ticket</TButton
       >
-      <div
-        class="rounded-full inline-flex items-center px-3 py-2 shadow-sm text-sm leading-4 font-medium rounded-md text-gray-700 bg-white hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 cursor-pointer outline-none focus:outline-none inline-block font-bold"
-      >
-        {{ doc.viewsCount || 0 }} views
-      </div>
+
+      <TButton
+        allow-guests
+        icon="share"
+        type="nav"
+        class="rounded-full"
+        @click="announcementPopupVisible = true"
+      />
     </div>
 
-    <div
-      v-if="doc.telegram && doc.telegram.messageUrl"
-      class="mt-4 flex justify-center"
+    <TPopup
+      v-if="announcementPopupVisible"
+      title="Share"
+      @close="announcementPopupVisible = false"
     >
-      <TButton type="link" :href="doc.telegram.messageUrl">
-        Announced on&nbsp;
-        <TDateTime :value="doc.telegram.publishedAt" />
-      </TButton>
-    </div>
-    <div
-      v-else-if="can('edit', 'events', doc)"
-      class="mt-4 flex justify-center"
-    >
-      <TButton
-        v-if="!doc.telegram || !doc.telegram.state"
-        type="link"
-        :label="$t('eventView.announce')"
-        @click="
-          softUpdate(doc.id, {
-            telegram: { state: 'requested', requestedAt: +new Date() },
-          })
-        "
-      />
-      <TButton
-        v-else-if="doc.telegram.state === 'requested'"
-        type="link"
-        label="Announcing..."
-      />
-    </div>
+      <div class="w-64 space-y-2 py-4">
+        <TButton
+          v-if="doc.telegram && doc.telegram.messageUrl"
+          allow-guests
+          :href="doc.telegram.messageUrl"
+          label="Telegram"
+          type="nav"
+        />
+        <TButton
+          v-else-if="can('edit', 'events', doc)"
+          label="Promote on Telegram"
+          type="nav"
+          @click="
+            softUpdate(doc.id, {
+              telegram: { state: 'requested', requestedAt: +new Date() },
+            })
+          "
+        />
+        <TButton
+          v-else-if="doc.telegram && doc.telegram.state === 'requested'"
+          label="Telegram..."
+          type="nav"
+        />
+
+        <TButton
+          v-if="doc.instagram && doc.instagram.messageUrl"
+          allow-guests
+          :href="doc.instagram.messageUrl"
+          label="Instagram"
+          type="nav"
+        />
+        <TButton
+          v-else-if="can('edit', 'events', doc)"
+          label="Promote on Instagram"
+          type="nav"
+          @click="
+            softUpdate(doc.id, {
+              instagram: { state: 'requested', requestedAt: +new Date() },
+            })
+          "
+        />
+        <TButton
+          v-else-if="doc.instagram && doc.instagram.state === 'requested'"
+          label="Instagram..."
+          type="nav"
+        />
+      </div>
+    </TPopup>
 
     <TPreview :content="doc.description" class="p-4" />
 
@@ -331,6 +363,7 @@ import {
 } from '~/utils'
 import { addressPart } from '~/use/google'
 import { trackView } from '~/use/tracking'
+import TPopup from '~/components/TPopup.vue'
 
 export default {
   name: 'EventView',
@@ -340,6 +373,7 @@ export default {
   },
   data: () => ({
     comment: '',
+    announcementPopupVisible: false,
   }),
   computed: {
     publishedAt() {
@@ -460,5 +494,6 @@ export default {
       getRsvp,
     }
   },
+  components: { TPopup },
 }
 </script>

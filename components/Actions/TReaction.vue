@@ -1,6 +1,6 @@
 <template>
   <TButton
-    type="simple"
+    :type="type"
     :class="clicked ? 'font-bold' : ''"
     :title="label"
     :data-names="names"
@@ -61,6 +61,10 @@ export default {
     field: {
       type: String,
       default: '',
+    },
+    type: {
+      type: String,
+      default: 'simple',
     },
     collection: {
       type: String,
