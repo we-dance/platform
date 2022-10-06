@@ -54,7 +54,13 @@ yargs(hideBin(process.argv))
           .get()
       ).data() as any
 
-      await announceEventIG(event)
+      const result = await announceEventIG(event)
+
+      if (!result) {
+        return
+      }
+
+      console.log(`Posted at ${result.messageUrl}`)
     }
   )
   .command(
