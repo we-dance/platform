@@ -4,8 +4,12 @@ import { useI18n } from '~/use/i18n'
 import { getYmd, toDatetimeLocal } from '~/utils'
 import { useCommon } from '~/use/common'
 
-const updateEndDate = (e) => {
-  e.endDate = toDatetimeLocal(addMinutes(parseISO(e.startDate), 60))
+const updateEndDate = (newItem, oldItem) => {
+  if (oldItem?.endDate) {
+    return
+  }
+
+  newItem.endDate = toDatetimeLocal(addMinutes(parseISO(newItem.startDate), 60))
 }
 
 export const useEvents = () => {
