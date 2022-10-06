@@ -25,11 +25,11 @@ export async function announceEventIG(event: any) {
   const file = await pngToJpeg({ quality: 90 })(buffer)
 
   const ig = new IgApiClient()
-  ig.state.generateDevice(String(process.env.INSTAGRAM_USERNAME))
+  ig.state.generateDevice(String(process.env.INSTAGRAM_MUNICH_USERNAME))
 
   await ig.account.login(
-    String(process.env.INSTAGRAM_USERNAME),
-    String(process.env.INSTAGRAM_PASSWORD)
+    String(process.env.INSTAGRAM_MUNICH_USERNAME),
+    String(process.env.INSTAGRAM_MUNICH_PASSWORD)
   )
 
   const publishResult = await ig.publish.photo({
@@ -48,5 +48,11 @@ export async function announceEventIG(event: any) {
     // },
   })
 
-  console.log('https://instagram.com/p/' + publishResult.media.code)
+  const messageId = publishResult.media.code
+  const messageUrl = 'https://instagram.com/p/' + publishResult.media.code
+
+  return {
+    messageId,
+    messageUrl,
+  }
 }

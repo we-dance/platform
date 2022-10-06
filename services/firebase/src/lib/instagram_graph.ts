@@ -17,13 +17,9 @@ export async function announceEventIG(event: any) {
   const token = `${process.env.FACEBOOK_APP_ID}|${process.env.FACEBOOK_APP_SECRET}`
   const igUserId = '38750331875'
 
-  try {
-    const response = await axios.post(
-      `https://graph.facebook.com/v14.0/${igUserId}/media?image_url=${photo}&caption=${caption}&access_token=${token}`
-    )
+  const response = await axios.post(
+    `https://graph.facebook.com/v14.0/${igUserId}/media?image_url=${photo}&caption=${caption}&access_token=${token}`
+  )
 
-    console.log(response)
-  } catch (error) {
-    console.log((error as any).message)
-  }
+  console.log(response)
 }

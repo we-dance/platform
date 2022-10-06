@@ -46,14 +46,12 @@ async function announceEvent(event: any, options: any = null) {
 
   const messageId = response.message_id
   const messageUrl = `${chatUrl}/${messageId}`
-  const publishedAt = +new Date()
 
   return {
     chatId,
     chatUrl,
     messageId,
     messageUrl,
-    publishedAt,
     city,
   }
 }

@@ -11,6 +11,7 @@ import { firestore as db, admin } from './firebase'
 import { notifySlackAboutEvents, notifySlackAboutUsers } from './lib/slack'
 import { wrap } from './sentry'
 import { announceEvent } from './lib/telegram'
+import { announceEventIG } from './lib/instagram'
 
 require('dotenv').config()
 
@@ -298,17 +299,40 @@ export const eventChanged = functions.firestore
     const event = { ...change.after.data(), id: eventId } as any
 
     if (
-      !wasChanged(oldEvent, event, ['telegram']) ||
-      event?.telegram?.state !== 'requested'
+      wasChanged(oldEvent, event, ['telegram']) &&
+      event?.telegram?.state === 'requested'
     ) {
-      return
+      const result = (await announceEvent(event)) as any
+
+      await db
+        .collection('posts')
+        .doc(eventId)
+        .update({
+          'telegram.state': 'published',
+          'telegram.publishedAt': +new Date(),
+          'telegram.messageId': result.messageId,
+          'telegram.messageUrl': result.messageUrl,
+        })
     }
 
-    const result = await announceEvent(event)
+    if (
+      wasChanged(oldEvent, event, ['instagram']) &&
+      event?.instagram?.state === 'requested' &&
+      event.place === 'ChIJ2V-Mo_l1nkcRfZixfUq4DAE'
+    ) {
+      const result = (await announceEventIG(event)) as any
 
-    if (!result) {
-      return
+      await db
+        .collection('posts')
+        .doc(eventId)
+        .update({
+          'instagram.state': 'published',
+          'instagram.publishedAt': +new Date(),
+          'instagram.messageId': result.messageId,
+          'instagram.messageUrl': result.messageUrl,
+        })
     }
+<<<<<<< HEAD
 
     await db
       .collection('posts')
@@ -319,6 +343,8 @@ export const eventChanged = functions.firestore
         'telegram.messageId': result.messageId,
         'telegram.messageUrl': result.messageUrl,
       })
+=======
+>>>>>>> db31111 (announce on instagram)
   })
 
 export const eventCreated = functions.firestore

@@ -36,9 +36,7 @@ yargs(hideBin(process.argv))
         return
       }
 
-      const date = new Date(result.publishedAt)
-
-      console.log(`Posted at ${result.messageUrl} at ${date}`)
+      console.log(`Posted at ${result.messageUrl}`)
       console.log(
         `City ${result.city.name} with ${result.city.telegramChannelId} at ${result.city.telegramChannel}`
       )
