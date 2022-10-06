@@ -41,13 +41,6 @@
           type="context"
           :label="$t('eventView.dropdown.share')"
         />
-        <TButton
-          v-if="isAdmin()"
-          type="context"
-          class="red-500"
-          label="Reset"
-          @click="softUpdate(doc.id, { telegram: {} })"
-        />
       </TDropdown>
     </THeader>
 
@@ -182,43 +175,61 @@
           type="nav"
         />
         <TButton
-          v-else-if="can('edit', 'events', doc)"
-          label="Promote on Telegram"
-          type="nav"
-          @click="
-            softUpdate(doc.id, {
-              telegram: { state: 'requested', requestedAt: +new Date() },
-            })
-          "
-        />
-        <TButton
-          v-else-if="doc.telegram && doc.telegram.state === 'requested'"
-          label="Telegram..."
-          type="nav"
-        />
-
-        <TButton
           v-if="doc.instagram && doc.instagram.messageUrl"
           allow-guests
           :href="doc.instagram.messageUrl"
           label="Instagram"
           type="nav"
         />
-        <TButton
-          v-else-if="can('edit', 'events', doc)"
-          label="Promote on Instagram"
-          type="nav"
-          @click="
-            softUpdate(doc.id, {
-              instagram: { state: 'requested', requestedAt: +new Date() },
-            })
-          "
-        />
-        <TButton
-          v-else-if="doc.instagram && doc.instagram.state === 'requested'"
-          label="Instagram..."
-          type="nav"
-        />
+
+        <template v-if="can('edit', 'events', doc)">
+          <TButton
+            v-if="!doc.telegram || !doc.telegram.state"
+            label="Promote on Telegram"
+            type="nav"
+            @click="
+              softUpdate(doc.id, {
+                telegram: { state: 'requested', requestedAt: +new Date() },
+              })
+            "
+          />
+          <TButton
+            v-else-if="doc.telegram && doc.telegram.state === 'requested'"
+            label="Telegram..."
+            type="nav"
+          />
+
+          <TButton
+            v-if="!doc.instagram || !doc.instagram.state"
+            label="Promote on Instagram"
+            type="nav"
+            @click="
+              softUpdate(doc.id, {
+                instagram: { state: 'requested', requestedAt: +new Date() },
+              })
+            "
+          />
+          <TButton
+            v-else-if="doc.instagram && doc.instagram.state === 'requested'"
+            label="Instagram..."
+            type="nav"
+          />
+        </template>
+
+        <template v-if="isAdmin()">
+          <TButton
+            type="nav"
+            class="red-500"
+            label="Reset Telegram"
+            @click="softUpdate(doc.id, { telegram: {} })"
+          />
+          <TButton
+            type="nav"
+            class="red-500"
+            label="Reset Instagram"
+            @click="softUpdate(doc.id, { instagram: {} })"
+          />
+        </template>
       </div>
     </TPopup>
 
