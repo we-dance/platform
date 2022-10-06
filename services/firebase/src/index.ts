@@ -332,19 +332,6 @@ export const eventChanged = functions.firestore
           'instagram.messageUrl': result.messageUrl,
         })
     }
-<<<<<<< HEAD
-
-    await db
-      .collection('posts')
-      .doc(eventId)
-      .update({
-        'telegram.state': 'published',
-        'telegram.publishedAt': result.publishedAt,
-        'telegram.messageId': result.messageId,
-        'telegram.messageUrl': result.messageUrl,
-      })
-=======
->>>>>>> db31111 (announce on instagram)
   })
 
 export const eventCreated = functions.firestore
