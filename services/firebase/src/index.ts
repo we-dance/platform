@@ -6,7 +6,7 @@ import * as Handlebars from 'handlebars'
 import sendEmail from './lib/sendEmail'
 import { screenshot } from './lib/screenshot'
 import { initIndex, profileToAlgolia, removeObject } from './lib/algolia'
-import { generateSocialCover } from './lib/migrations'
+import { generateSocialCover, updateEventPoster } from './lib/migrations'
 import { firestore as db, admin } from './firebase'
 import { notifySlackAboutEvents, notifySlackAboutUsers } from './lib/slack'
 import { wrap } from './sentry'
@@ -297,6 +297,18 @@ export const eventChanged = functions.firestore
     const oldEvent = change.before.data() as any
     const eventId = context.params.eventId
     const event = { ...change.after.data(), id: eventId } as any
+
+    if (
+      wasChanged(oldEvent, event, [
+        'cover',
+        'startDate',
+        'endDate',
+        'name',
+        'org',
+      ])
+    ) {
+      await updateEventPoster(event)
+    }
 
     if (
       wasChanged(oldEvent, event, ['telegram']) &&

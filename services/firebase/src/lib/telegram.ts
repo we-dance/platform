@@ -12,7 +12,7 @@ async function announceEvent(event: any, options: any = null) {
     .map((tag) => `#${tag}`)
     .join(' ')
 
-  let description = event.description
+  let description = event.description || ''
 
   if (description.length > 140) {
     description = description.substring(0, 140) + '...'

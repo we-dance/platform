@@ -9,7 +9,7 @@ export async function announceEventIG(event: any) {
     .map((tag) => `#${tag}`)
     .join(' ')
 
-  let description = event.description
+  let description = event.description || ''
 
   if (description.length > 140) {
     description = description.substring(0, 140) + '...'
