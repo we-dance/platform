@@ -23,12 +23,21 @@
         <div v-show="profile.bio" class="text-gray-700 text-xs">
           {{ profile.bio }}
         </div>
+        <div class="flex space-x-2 mt-4">
+          <TReaction
+            label="Follow"
+            toggled-label="Unfollow"
+            field="watch"
+            icon="BellIcon"
+            :item="profile"
+            collection="profiles"
+          />
+          <TProfileContacts :profile="profile" title="Contact" type="simple" />
+        </div>
       </div>
       <slot name="right" />
     </div>
-    <slot>
-      <TProfileContacts :profile="profile" short />
-    </slot>
+    <slot />
     <TPreview
       v-if="full && profile.story"
       :content="profile.story"
