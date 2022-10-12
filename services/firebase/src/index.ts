@@ -569,44 +569,44 @@ export const matchNotification = functions.firestore
     await sendEmail(data)
   })
 
-export const taskRunner = functions
-  .runWith({ memory: '2GB' })
-  .pubsub.schedule('* * * * *')
-  .onRun(async () => {
-    const now = admin.firestore.Timestamp.now()
+// export const taskRunner = functions
+//   .runWith({ memory: '2GB' })
+//   .pubsub.schedule('* * * * *')
+//   .onRun(async () => {
+//     const now = admin.firestore.Timestamp.now()
 
-    const query = db
-      .collection('emails')
-      .where('scheduledAt', '<=', now)
-      .where('status', '==', 'scheduled')
+//     const query = db
+//       .collection('emails')
+//       .where('scheduledAt', '<=', now)
+//       .where('status', '==', 'scheduled')
 
-    const tasks = await query.get()
+//     const tasks = await query.get()
 
-    const jobs: Promise<any>[] = []
+//     const jobs: Promise<any>[] = []
 
-    tasks.forEach((snapshot) => {
-      const data = {
-        ...snapshot.data(),
-        id: snapshot.id,
-      }
-      const job = sendEmail(data)
-        .then(() =>
-          snapshot.ref.update({
-            status: 'sent',
-            processedAt: admin.firestore.Timestamp.now(),
-            error: '',
-          })
-        )
-        .catch((err) =>
-          snapshot.ref.update({
-            status: 'error',
-            processedAt: admin.firestore.Timestamp.now(),
-            error: err.message,
-          })
-        )
+//     tasks.forEach((snapshot) => {
+//       const data = {
+//         ...snapshot.data(),
+//         id: snapshot.id,
+//       }
+//       const job = sendEmail(data)
+//         .then(() =>
+//           snapshot.ref.update({
+//             status: 'sent',
+//             processedAt: admin.firestore.Timestamp.now(),
+//             error: '',
+//           })
+//         )
+//         .catch((err) =>
+//           snapshot.ref.update({
+//             status: 'error',
+//             processedAt: admin.firestore.Timestamp.now(),
+//             error: err.message,
+//           })
+//         )
 
-      jobs.push(job)
-    })
+//       jobs.push(job)
+//     })
 
-    return await Promise.all(jobs)
-  })
+//     return await Promise.all(jobs)
+//   })
