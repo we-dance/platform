@@ -8,13 +8,16 @@
   </div>
   <div v-else>
     <div
-      class="flex-row gap-2 flex justify-between items-center py-2 m-1 border-t border-gray-200 px-2 h-full"
+      class="flex-row gap-2 flex justify-between items-top py-2 m-1 border-t border-gray-200 px-2 h-full"
     >
       <div class="flex-shrink-0 w-12">
         <TProfilePhoto2 size="lg" :src="profile.photo" />
       </div>
       <div class="flex flex-col w-full">
-        <NuxtLink :to="`/${profile.username}`" class="font-bold">
+        <NuxtLink
+          :to="`/${profile.username}`"
+          class="font-bold leading-none mb-1"
+        >
           {{ profile.name || profile.username }}
         </NuxtLink>
         <div v-show="profile.role" class="text-xs">
@@ -54,11 +57,13 @@ import { useEvents } from '~/use/events'
 
 export default {
   setup(props) {
-    const { id, doc: loadedProfile, sync } = useDoc('profiles')
+    const { id, doc: loadedProfile, find, sync } = useDoc('profiles')
     const { eventRoleOptions } = useEvents()
 
     if (props.fallback?.id) {
       sync(props.fallback.id)
+    } else {
+      find('username', props.username)
     }
 
     const profile = computed(() => {
