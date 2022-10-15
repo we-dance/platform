@@ -7,7 +7,7 @@
     @click="showAuthPopup = title"
   >
     <slot>
-      <div class="flex items-center space-x-2">
+      <div class="flex items-center justify-center space-x-2">
         <TIcon v-if="icon" :size="iconSize" :name="icon" />
         <span v-if="label !== false">{{ label }}</span>
       </div>
@@ -23,7 +23,7 @@
     v-on="$listeners"
   >
     <slot>
-      <div class="flex items-center space-x-2">
+      <div class="flex items-center justify-center space-x-2">
         <TIcon v-if="icon" :size="iconSize" :name="icon" />
         <span v-if="label !== false">{{ label }}</span>
       </div>
@@ -37,7 +37,7 @@
     v-on="$listeners"
   >
     <slot>
-      <div class="flex items-center space-x-2">
+      <div class="flex items-center justify-center space-x-2">
         <TIcon v-if="icon" :size="iconSize" :name="icon" />
         <span v-if="label !== false">{{ label }}</span>
       </div>
@@ -51,7 +51,7 @@
     v-on="$listeners"
   >
     <slot>
-      <div class="flex items-center space-x-2">
+      <div class="flex items-center justify-center space-x-2">
         <TIcon v-if="icon" :size="iconSize" :name="icon" />
         <span v-if="label !== false">{{ label }}</span>
       </div>

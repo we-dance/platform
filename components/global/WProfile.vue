@@ -1,6 +1,6 @@
 <template>
   <div
-    v-if="!fallback && !exists"
+    v-if="!fallback"
     class="border rounded p-4 text-red-500 flex justify-between"
   >
     <div>Profile {{ username }} not found</div>
@@ -54,11 +54,11 @@ import { useEvents } from '~/use/events'
 
 export default {
   setup(props) {
-    const { id, doc: loadedProfile, loading, exists, find } = useDoc('profiles')
+    const { id, doc: loadedProfile, sync } = useDoc('profiles')
     const { eventRoleOptions } = useEvents()
 
-    if (props.username) {
-      find('username', props.username)
+    if (props.fallback?.id) {
+      sync(props.fallback.id)
     }
 
     const profile = computed(() => {
@@ -77,8 +77,6 @@ export default {
       id,
       eventRoleOptions,
       profile,
-      loading,
-      exists,
       getLabel,
     }
   },
