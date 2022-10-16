@@ -62,6 +62,51 @@ export default {
             [this.profile?.username]: true,
           },
         },
+        program: [
+          {
+            startDate: '2022-10-15 20:00',
+            endDate: '2022-10-15 21:00',
+            eventType: 'Workshop',
+            name: 'Choreographie - Lady & Man Styling',
+            description: '',
+            artists: [
+              {
+                username: 'damir_mona',
+                name: 'Damir & Mona',
+              },
+            ],
+          },
+          {
+            startDate: '2022-10-15 21:00',
+            endDate: '2022-10-15 22:00',
+            eventType: 'Workshop',
+            name: 'Urbankiz (Open Level)',
+            description: '',
+            artists: [
+              {
+                username: 'damir_mona',
+                name: 'Damir & Mona',
+              },
+            ],
+          },
+          {
+            startDate: '2022-10-15 22:00',
+            endDate: '2022-10-16 04:00',
+            eventType: 'Party',
+            name: 'Party All Night Long',
+            description: '',
+            artists: [
+              {
+                username: 'MingaKizz',
+                name: 'Bobby SweetKiz (Dj Longchamp)',
+              },
+              {
+                username: 'raymdtc',
+                name: 'Charley Raymdtc',
+              },
+            ],
+          },
+        ],
       }
     }
   },
