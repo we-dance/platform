@@ -13,16 +13,16 @@
       v-if="cityName"
       allow-guests
       :to="`/${cityName}`"
-      icon="calendar"
+      icon="place"
       :label="cityName"
       type="nav"
     />
     <TButton
       v-if="!cityName"
       allow-guests
-      to="/events"
-      icon="calendar"
-      label="Events"
+      to="/cities"
+      icon="place"
+      label="Choose City"
       type="nav"
     />
     <TButton allow-guests to="/feed" icon="news" label="News" type="nav" />

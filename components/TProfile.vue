@@ -1,6 +1,13 @@
 <template>
   <div>
-    <THeader :title="profile.username">
+    <THeader>
+      <TButton
+        v-if="profile.type === 'City'"
+        slot="left"
+        to="/cities"
+        icon="place"
+        :label="profile.username"
+      />
       <TButton allow-guests type="nav" icon="search" to="/search" />
       <TDropdown>
         <TPopupEdit
