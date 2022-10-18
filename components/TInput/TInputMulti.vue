@@ -30,7 +30,7 @@ export default {
       default: () => [],
     },
     value: {
-      type: [Object, String],
+      type: Object,
       default: () => {},
     },
     item: {

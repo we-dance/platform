@@ -225,6 +225,14 @@ export const useEvents = () => {
       labelPosition: 'top',
     },
     {
+      name: 'program',
+      component: 'TInputArray',
+      children: {
+        component: 'TInputEvent',
+      },
+      labelPosition: 'top',
+    },
+    {
       name: 'description',
       label: t('event.description.label'),
       labelPosition: 'top',

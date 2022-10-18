@@ -231,11 +231,7 @@
       <img :src="doc.venue.map" alt="Venue Map" class="mt-4" />
     </div>
 
-    <TAgenda
-      v-if="item.id === 'tN7O5UvdVZLmZ0BHlawc'"
-      :events="program"
-      class="w-full space-y-2 p-4"
-    />
+    <TAgenda :events="doc.program" class="w-full space-y-2 p-4" />
 
     <div v-if="doc.org" class="space-y-2 p-4">
       <h4 class="text-xl font-bold">{{ $t('event.organiser') }}</h4>
@@ -381,51 +377,6 @@ export default {
   data: () => ({
     comment: '',
     announcementPopupVisible: false,
-    program: [
-      {
-        startDate: '2022-10-15 20:00',
-        endDate: '2022-10-15 21:00',
-        eventType: 'Workshop',
-        name: 'Choreographie - Lady & Man Styling',
-        description: '',
-        artists: [
-          {
-            username: 'damir_mona',
-            name: 'Damir & Mona',
-          },
-        ],
-      },
-      {
-        startDate: '2022-10-15 21:00',
-        endDate: '2022-10-15 22:00',
-        eventType: 'Workshop',
-        name: 'Urbankiz (Open Level)',
-        description: '',
-        artists: [
-          {
-            username: 'damir_mona',
-            name: 'Damir & Mona',
-          },
-        ],
-      },
-      {
-        startDate: '2022-10-15 22:00',
-        endDate: '2022-10-16 04:00',
-        eventType: 'Party',
-        name: 'Party All Night Long',
-        description: '',
-        artists: [
-          {
-            username: 'MingaKizz',
-            name: 'Bobby SweetKiz (Dj Longchamp)',
-          },
-          {
-            username: 'raymdtc',
-            name: 'Charley Raymdtc',
-          },
-        ],
-      },
-    ],
   }),
   computed: {
     publishedAt() {
