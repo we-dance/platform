@@ -2,13 +2,9 @@
   <nav
     class="p-4 flex flex-col space-y-2 text-dark h-screen overflow-y-scroll sticky top-0 border-r"
   >
-    <TButton
-      allow-guests
-      to="/"
-      icon="logo-horizontal-dark"
-      class="mb-8"
-      type="void"
-    />
+    <TButton allow-guests to="/" class="mb-8" type="void">
+      <TIcon name="logo-horizontal-dark" />
+    </TButton>
     <TButton
       v-if="cityName"
       allow-guests
@@ -108,12 +104,12 @@
 <script>
 import { useAuth } from '~/use/auth'
 import { useCities } from '~/use/cities'
+import TIcon from './TIcon.vue'
 
 export default {
   setup() {
     const { isAdmin, isEditor } = useAuth()
     const { cityName } = useCities()
-
     return { isAdmin, isEditor, cityName }
   },
   props: {
@@ -126,6 +122,7 @@ export default {
       default: '',
     },
   },
+  components: { TIcon },
 }
 </script>
 
