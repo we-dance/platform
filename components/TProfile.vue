@@ -8,6 +8,16 @@
         icon="place"
         :label="profile.username"
       />
+      <div
+        v-else
+        slot="left"
+        class="flex flex-no-wrap items-center ml-8 md:ml-0"
+      >
+        <h1 class="ml-1 font-lato text-lg font-bold">
+          {{ profile.username }}
+        </h1>
+      </div>
+
       <TButton allow-guests type="nav" icon="search" to="/search" />
       <TDropdown>
         <TPopupEdit
