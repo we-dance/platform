@@ -24,7 +24,7 @@
           v-if="isAdmin()"
           type="context"
           :fields="profileFields"
-          :label="$t('myprofile.edit')"
+          label="Edit"
           collection="profiles"
           singular="profile"
           :item="profile"
@@ -45,6 +45,13 @@
           :text="profile.name"
           type="context"
           :label="$t('share.title')"
+        />
+        <TButton
+          v-if="isAdmin()"
+          type="context"
+          icon="delete"
+          label="Delete"
+          @click="remove(profile.id)"
         />
       </TDropdown>
     </THeader>
@@ -236,6 +243,7 @@ import { useAuth } from '~/use/auth'
 import { useProfiles } from '~/use/profiles'
 import { getExcerpt } from '~/utils'
 import { useI18n } from '~/use/i18n'
+import { useDoc } from '~/use/doc'
 
 export default {
   props: {
@@ -249,6 +257,7 @@ export default {
     const { profileFields } = useProfiles()
     const { getCity } = useApp()
     const { t } = useI18n()
+    const { remove } = useDoc('profiles')
     const invitesLeft = 5
     const community = computed(() => getCity(props.profile?.place))
     const intro = {
@@ -297,6 +306,7 @@ export default {
       isAdmin,
       community,
       invitesLeft,
+      remove,
     }
   },
 }

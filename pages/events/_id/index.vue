@@ -41,6 +41,13 @@
           type="context"
           :label="$t('eventView.dropdown.share')"
         />
+        <TButton
+          v-if="can('edit', 'events', doc)"
+          type="context"
+          icon="delete"
+          label="Delete"
+          @click="remove(doc.id)"
+        />
       </TDropdown>
     </THeader>
 
@@ -370,7 +377,6 @@ import {
 } from '~/utils'
 import { addressPart } from '~/use/google'
 import { trackView } from '~/use/tracking'
-import TPopup from '~/components/TPopup.vue'
 
 export default {
   name: 'EventView',
@@ -423,7 +429,7 @@ export default {
     const { accountFields } = useAccounts()
     const { params } = useRouter()
     const { getProfile } = useProfiles()
-    const { doc, sync, exists, loading, softUpdate } = useDoc('posts')
+    const { doc, sync, exists, loading, softUpdate, remove } = useDoc('posts')
     const { map } = useReactions()
     const { updateRsvp, createGuestRsvp, getRsvp } = useRsvp()
     if (params.id) {
@@ -499,8 +505,8 @@ export default {
       calendarLink,
       getEventIcon,
       getRsvp,
+      remove,
     }
   },
-  components: { TPopup },
 }
 </script>
