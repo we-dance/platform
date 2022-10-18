@@ -231,7 +231,11 @@
       <img :src="doc.venue.map" alt="Venue Map" class="mt-4" />
     </div>
 
-    <TAgenda :events="doc.program" class="w-full space-y-2 p-4" />
+    <TAgenda
+      v-if="doc.program"
+      :events="doc.program"
+      class="w-full space-y-2 p-4"
+    />
 
     <div v-if="doc.org" class="space-y-2 p-4">
       <h4 class="text-xl font-bold">{{ $t('event.organiser') }}</h4>
