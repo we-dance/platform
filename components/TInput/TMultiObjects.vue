@@ -1,14 +1,11 @@
 <template>
-  <component v-model="internalValue" :is="editor" :options="scalarOptions" />
+  <component :is="editor" v-model="internalValue" :options="scalarOptions" />
 </template>
 
 <script>
 import { getObjectKeysFromArray } from '~/utils'
 
 export default {
-  data: () => ({
-    internalValue: {},
-  }),
   props: {
     value: {
       type: [Array, Object],
@@ -31,6 +28,9 @@ export default {
       default: 'TInputMulti',
     },
   },
+  data: () => ({
+    internalValue: {},
+  }),
   computed: {
     scalarOptions() {
       return this.options.map((item) => ({
@@ -38,15 +38,6 @@ export default {
         label: item[this.labelField],
       }))
     },
-  },
-  mounted() {
-    if (!this.value) {
-      return
-    }
-
-    this.internalValue = getObjectKeysFromArray(
-      this.value.map((item) => item[this.valueField])
-    )
   },
   watch: {
     internalValue() {
@@ -68,6 +59,15 @@ export default {
         this.value.map((item) => item[this.valueField])
       )
     },
+  },
+  mounted() {
+    if (!this.value) {
+      return
+    }
+
+    this.internalValue = getObjectKeysFromArray(
+      this.value.map((item) => item[this.valueField])
+    )
   },
 }
 </script>

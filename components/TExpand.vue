@@ -17,9 +17,6 @@
 
 <script>
 export default {
-  data: () => ({
-    expanded: false,
-  }),
   props: {
     show: {
       type: String,
@@ -30,5 +27,8 @@ export default {
       default: 'Show less',
     },
   },
+  data: () => ({
+    expanded: false,
+  }),
 }
 </script>

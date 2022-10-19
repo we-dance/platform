@@ -104,7 +104,6 @@
 <script>
 import { useAuth } from '~/use/auth'
 import { useCities } from '~/use/cities'
-import TIcon from './TIcon.vue'
 
 export default {
   setup() {
@@ -122,7 +121,6 @@ export default {
       default: '',
     },
   },
-  components: { TIcon },
 }
 </script>
 
