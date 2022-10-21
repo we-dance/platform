@@ -41,7 +41,6 @@ export const useCities = () => {
 
     if (!exists.value) {
       const location = await getLocality({ placeId })
-      console.log(location)
       const cityName = sanitize(location.locality, ' ')
 
       await create({
