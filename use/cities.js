@@ -3,7 +3,7 @@ import { watch, toRefs, computed } from '@nuxtjs/composition-api'
 import ls from 'local-storage'
 import { useDoc } from '~/use/doc'
 import { sanitize } from '~/utils'
-import { getLocality } from './google'
+import { getLocality } from '~/use/google'
 
 const state = Vue.observable({
   currentCity: ls('city'),
