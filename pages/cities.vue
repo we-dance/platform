@@ -43,14 +43,14 @@ import { useCollection } from '~/use/collection'
 
 export default {
   setup() {
-    const { currentCity } = useCities()
+    const { switchCity } = useCities()
     const { router, route } = useRouter()
     const { updateProfile } = useAuth()
     const { removeCityHistory: removeCity, cities } = useApp()
     const { docs, load } = useCollection('cities')
 
     async function changeCity(placeId) {
-      currentCity.value = placeId
+      await switchCity(placeId)
       await updateProfile({ current: placeId })
       const target = route.query.target || '/events'
       router.push(target)
@@ -122,7 +122,6 @@ export default {
     })
 
     return {
-      currentCity,
       cities,
       changeCity,
       query,
