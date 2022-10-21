@@ -67,7 +67,7 @@ Activate only those services that you need. In most cases you don't need all of 
 
 ### City auto-complete
 
-- Enable [Maps JavaScript API](https://console.cloud.google.com/apis/library/maps-backend.googleapis.com) and [Places API](https://console.cloud.google.com/marketplace/product/google/places-backend.googleapis.com) in the Google Cloud Console.
+- Enable [Maps JavaScript API](https://console.cloud.google.com/apis/library/maps-backend.googleapis.com), [Places API](https://console.cloud.google.com/marketplace/product/google/places-backend.googleapis.com) and [Geocoding API](https://console.cloud.google.com/apis/library/geocoding-backend.googleapis.com) in the Google Cloud Console.
 - [Enable Billing](https://console.cloud.google.com/project/_/billing/enable) on the Google Cloud Project.
 
 ### Mailgun
