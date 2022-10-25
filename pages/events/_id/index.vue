@@ -122,19 +122,37 @@
           <TIcon name="ticket" class="mr-4 h-4 w-4" />
           <div class="flex w-full justify-between">
             <div>{{ doc.price }}</div>
-            <TButton
-              v-if="doc.link"
-              type="link"
-              class="text-primary text-sm"
-              allow-guests
-              :href="doc.link"
-              target="_blank"
-              >Buy Ticket</TButton
-            >
+            <template v-if="doc.link">
+              <TButton
+                v-if="doc.link.includes('https://www.tickettailor.com/')"
+                type="link"
+                class="text-primary text-sm"
+                allow-guests
+                @click="ticketTailorPopup = true"
+                >Buy Ticket</TButton
+              >
+              <TButton
+                v-else
+                type="link"
+                class="text-primary text-sm"
+                allow-guests
+                :href="doc.link"
+                target="_blank"
+                >Buy Ticket</TButton
+              >
+            </template>
           </div>
         </div>
       </div>
     </div>
+
+    <TPopup
+      v-if="ticketTailorPopup"
+      title="Buy Ticket"
+      @close="ticketTailorPopup = false"
+    >
+      <WTicketTailor :href="doc.link" />
+    </TPopup>
 
     <div
       class="sticky bottom-0 z-50 flex justify-center items-center gap-2 border-b bg-white p-4"
@@ -452,6 +470,7 @@ export default {
     const reservationFields = accountFields.filter((f) => f.event)
     const ticketPopup = ref(false)
     const reservationPopup = ref(false)
+    const ticketTailorPopup = ref(false)
     const isCreatingProfile = ref(false)
     const finishReservation = () => {
       reservationPopup.value = false
@@ -506,6 +525,7 @@ export default {
       getEventIcon,
       getRsvp,
       remove,
+      ticketTailorPopup,
     }
   },
 }
