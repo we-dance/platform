@@ -1,4 +1,4 @@
-import { indexProfiles } from './lib/algolia'
+import { indexEvents, indexProfiles } from './lib/algolia'
 import {
   migrateFavs,
   migrateShares,
@@ -96,11 +96,19 @@ yargs(hideBin(process.argv))
     }
   )
   .command(
-    'algolia',
+    'algolia:profiles',
     'Send profiles to algolia',
     () => undefined,
     async (argv: any) => {
       await indexProfiles()
+    }
+  )
+  .command(
+    'algolia:events',
+    'Send events to algolia',
+    () => undefined,
+    async (argv: any) => {
+      await indexEvents()
     }
   )
   .command(

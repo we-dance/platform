@@ -52,6 +52,73 @@ export function profileToAlgolia(profile: any, cache: any) {
   }
 }
 
+export function eventToAlgolia(event: any) {
+  let result = {
+    objectID: event.id,
+    id: event.id,
+    orgaiser: event.org.username,
+    name: event.name,
+    cover: event.cover,
+    description: event.description,
+    place: event.place,
+    price: event.price,
+    style: event.styles ? Object.keys(event.styles) : [],
+    type: event.eventType,
+    createdAt: event.createdAt,
+    startDate: +new Date(event.startDate),
+    endDate: +new Date(event.endDate),
+    online: event.online,
+    _tags: event.styles ? Object.keys(event.styles) : [],
+  }
+
+  if (event.venue) {
+    const venue = {
+      venue: event.venue.name,
+      address: event.venue.formatted_address,
+      locality:
+        event.venue.address_components.find((c: any) =>
+          c.types.includes('locality')
+        )?.long_name || '',
+      country:
+        event.venue.address_components.find((c: any) =>
+          c.types.includes('country')
+        )?.long_name || '',
+      _geoloc: {
+        lat: event.venue?.geometry.location.lat,
+        lng: event.venue?.geometry.location.lng,
+      },
+    }
+    result = { ...result, ...venue }
+  }
+
+  return result
+}
+
+export async function indexEvents() {
+  const eventDocs = (
+    await firestore
+      .collection('posts')
+      .where('startDate', '>', '2022-11-05')
+      .get()
+  ).docs
+
+  const objects = []
+
+  const index = initIndex('events')
+  for (const doc of eventDocs) {
+    const event = {
+      id: doc.id,
+      ...doc.data(),
+    } as any
+
+    objects.push(eventToAlgolia(event))
+  }
+
+  await index.saveObjects(objects)
+
+  console.log(`Indexed ${objects.length} events`)
+}
+
 export async function indexProfiles() {
   const cache = (
     await firestore
