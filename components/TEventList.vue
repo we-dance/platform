@@ -36,18 +36,19 @@
     <div v-else-if="!count && showEmpty">
       {{ emptyLabel }}
     </div>
-    <div v-if="items.length" class="flex justify-between items-center px-2">
-      <h2 v-if="title" class="font-bold text-lg">{{ title }}</h2>
+    <div v-if="items.length" class="flex justify-between items-center px-4">
+      <h2 v-if="title" class="text-xs text-gray-700">{{ title }}</h2>
       <div v-else></div>
       <TButton type="nav" icon="share" @click="showPopup = true" />
     </div>
     <div v-if="items.length" class="space-y-8 mt-4">
       <div v-for="(items, date) in itemsByDate" :key="date">
-        <h2 class="font-bold bg-dark text-white py-2 px-4 rounded">
-          {{ getDay(date) }}, {{ getDate(date) }}
+        <h2 class="font-bold text-xl p-4 border-b">
+          <span class="text-primary">{{ getDay(date) }}</span> ·
+          {{ getDate(date) }}
         </h2>
-        <div v-for="item in items" :key="item.id" class="px-4 mt-4">
-          <TEventText :item="item" :is-embed="isEmbed" />
+        <div v-for="item in items" :key="item.id">
+          <TEventText2 :item="item" :is-embed="isEmbed" />
         </div>
       </div>
       <div></div>
