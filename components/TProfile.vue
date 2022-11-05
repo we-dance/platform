@@ -64,7 +64,11 @@
           :alt="profile.username"
           class="w-full rounded-full"
         />
-        <TIcon v-else name="undraw_profile_pic" class="w-full rounded-full" />
+        <TIcon
+          v-else-if="profile.type !== 'City'"
+          name="undraw_profile_pic"
+          class="w-full rounded-full"
+        />
       </div>
 
       <div>
@@ -148,14 +152,23 @@
       class="mt-4 w-full border-b pb-8"
     />
 
-    <TEventList
-      v-if="profile.type === 'City' && profile.username !== 'Travel'"
-      title="Upcoming Events"
-      :filter="{ place: profile.place }"
-      :community="profile.username"
-      :username="profile.username"
-      class="mt-4 w-full border-t pt-4 pb-8"
-    />
+    <template v-if="$route.query.beta">
+      <TCalendar
+        v-if="profile.type === 'City' && profile.username !== 'Travel'"
+        class="mt-4 w-full border-t pt-4 pb-8"
+      />
+    </template>
+
+    <template v-if="!$route.query.beta">
+      <TEventList
+        v-if="profile.type === 'City' && profile.username !== 'Travel'"
+        title="Upcoming Events"
+        :filter="{ place: profile.place }"
+        :community="profile.username"
+        :username="profile.username"
+        class="mt-4 w-full border-t pt-4 pb-8"
+      />
+    </template>
 
     <WTeaser
       v-if="!uid && profile.type !== 'City' && profile.place"
@@ -201,23 +214,71 @@
       class="mt-4 w-full border-t"
     />
 
-    <WTeaser
-      v-if="profile.type === 'City' && profile.telegram"
-      title="On Time!"
-      description="Be the first one to know about new events. Reserve a spot. Get the early bird price."
-      button="Follow on Telegram"
-      :href="profile.telegram"
-      class="mt-4"
-    />
-
-    <WTeaser
+    <div
       v-if="profile.type === 'City' && profile.instagram"
-      title="Photos and Videos"
-      description="Discover other dancers. Participate in dance challenges. Show your talent and tag us in your stories on Instagram."
-      button="Follow on Instagram"
-      :href="profile.instagram"
-      class="mt-4"
-    />
+      class="bg-gray-100 py-4 flex justify-center"
+    >
+      <div class="max-w-md py-4 space-y-1">
+        <div class="flex justify-center"></div>
+        <h3 class="text-2xl font-extrabold text-center">
+          Follow us
+        </h3>
+        <p class="text-center">
+          We regularly post event announcements and introduce new members on our
+          social media.
+        </p>
+        <div class="p-4 flex flex-wrap gap-2 items-center justify-center">
+          <TButton
+            v-if="profile.youtube"
+            allow-guests
+            icon="youtube"
+            type="round"
+            icon-size="6"
+            :href="profile.youtube"
+          />
+          <TButton
+            v-if="profile.instagram"
+            allow-guests
+            icon="instagram"
+            type="round"
+            icon-size="6"
+            :href="profile.instagram"
+          />
+          <TButton
+            v-if="profile.telegram"
+            allow-guests
+            icon="telegram"
+            type="round"
+            icon-size="6"
+            :href="profile.telegram"
+          />
+          <TButton
+            v-if="profile.twitter"
+            allow-guests
+            icon="twitter"
+            type="round"
+            icon-size="6"
+            :href="profile.twitter"
+          />
+          <TButton
+            v-if="profile.tiktok"
+            allow-guests
+            icon="tiktok"
+            type="round"
+            icon-size="6"
+            :href="profile.tiktok"
+          />
+          <TButton
+            v-if="profile.facebook"
+            allow-guests
+            icon="facebook"
+            type="round"
+            icon-size="6"
+            :href="profile.facebook"
+          />
+        </div>
+      </div>
+    </div>
   </div>
 </template>
 
