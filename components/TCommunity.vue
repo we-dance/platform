@@ -36,7 +36,7 @@
       </TButton>
     </div>
 
-    <div class="grid grid-cols-1 md:grid-cols-2 gap-2">
+    <div v-if="filters['type']" class="grid grid-cols-1 md:grid-cols-2 gap-2">
       <NuxtLink
         v-for="item in response.hits"
         :key="item.id"
@@ -56,7 +56,9 @@
     </div>
 
     <t-pagination
-      v-if="uid && response.nbPages > 1 && !$route.query.search"
+      v-if="
+        filters['type'] && uid && response.nbPages > 1 && !$route.query.search
+      "
       v-model="currentPage"
       :total-items="response.nbHits"
       :per-page="response.hitsPerPage"

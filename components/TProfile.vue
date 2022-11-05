@@ -113,6 +113,8 @@
       class="w-full mt-4"
     />
 
+    <TCommunity v-if="profile.type === 'City'" class="pt-4 border-t" />
+
     <TEventList
       v-if="profile.type !== 'City'"
       title="Organising"
@@ -148,10 +150,11 @@
 
     <TEventList
       v-if="profile.type === 'City' && profile.username !== 'Travel'"
+      title="Upcoming Events"
       :filter="{ place: profile.place }"
       :community="profile.username"
       :username="profile.username"
-      class="mt-4 w-full border-b pb-8"
+      class="mt-4 w-full border-t pt-4 pb-8"
     />
 
     <WTeaser
@@ -182,7 +185,7 @@
     <TProfileDetails v-if="profile.type !== 'City'" :profile="profile" />
 
     <div
-      v-if="profile.id !== profile.createdBy"
+      v-if="profile.id !== profile.createdBy && profile.type !== 'City'"
       class="py-4 flex justify-center"
     >
       <TButton
@@ -196,24 +199,6 @@
       v-if="profile.type !== 'City'"
       :filter="{ username: profile.username }"
       class="mt-4 w-full border-t"
-    />
-
-    <WTeaser
-      v-if="profile.type === 'City'"
-      title="Event missing?"
-      description="You know a good dance event and it is not listed in calendar?"
-      button="Recommend an Event"
-      url="/events/-/edit"
-      class="mt-4"
-    />
-
-    <WTeaser
-      v-if="profile.type === 'City'"
-      title="Need more?"
-      description="Ask local dancers, artists and organisers."
-      button="Ask Community"
-      url="/community"
-      class="mt-4"
     />
 
     <WTeaser
