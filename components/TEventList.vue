@@ -41,6 +41,22 @@
       <div v-else></div>
       <TButton type="nav" icon="share" @click="showPopup = true" />
     </div>
+    <div v-if="items.length" class="flex gap-2 px-4">
+      <t-rich-select
+        v-model="filters['style']"
+        placeholder="Style"
+        :options="styles"
+        clearable
+        hide-search-box
+      />
+      <t-rich-select
+        v-model="filters['type']"
+        placeholder="Format"
+        :options="formats"
+        clearable
+        hide-search-box
+      />
+    </div>
     <div v-if="items.length" class="space-y-8 mt-4">
       <div v-for="(items, date) in itemsByDate" :key="date">
         <h2 class="font-bold text-xl p-4 border-b">
@@ -135,57 +151,46 @@ export default {
         startDate,
       }
     }
+    const filters = ref({})
+    const formats = [
+      {
+        label: 'Party',
+        value: 'Party',
+      },
+      {
+        label: 'Workshop',
+        value: 'Workshop',
+      },
+    ]
+    const styles = [
+      {
+        label: 'Salsa',
+        value: 'Salsa',
+      },
+      {
+        label: 'Bachata',
+        value: 'Bachata',
+      },
+      {
+        label: 'Kizomba',
+        value: 'Kizomba',
+      },
+    ]
     const now = new Date()
     const startOfWeekDate = startOfWeek(now, { weekStartsOn: 1 })
     const startOfWeekString = getYmd(startOfWeekDate)
     const startOfTodayString = getYmd(now)
     const endOfWeekString = getYmd(addDays(startOfWeekDate, 7))
-    const in10daysString = getYmd(addDays(now, 10))
-    const in7daysString = getYmd(addDays(now, 7))
-    const endOfYearString = getYmd(endOfYear(now))
     const count = computed(() => items.value.length)
     const activeFilter = ref(props.tab)
-    const isPublic = (item) => item.visibility !== 'Unlisted'
-    const filterOptions = computed(() => [
-      {
-        value: 'thisYear',
-        label: 'This Year',
-        filter: (item) =>
-          getYmd(item.startDate) >= startOfTodayString &&
-          getYmd(item.startDate) <= endOfYearString &&
-          isPublic(item),
-      },
-      {
-        value: '10days',
-        label: '10 days',
-        filter: (item) =>
-          getYmd(item.startDate) >= startOfTodayString &&
-          getYmd(item.startDate) <= in10daysString &&
-          isPublic(item),
-      },
-      {
-        value: '7days',
-        label: '7 days',
-        filter: (item) =>
-          getYmd(item.startDate) >= startOfTodayString &&
-          getYmd(item.startDate) <= in7daysString &&
-          isPublic(item),
-      },
-      {
-        value: 'all',
-        label: 'All',
-        filter: (item) =>
-          getYmd(item.startDate) >= startOfTodayString && isPublic(item),
-      },
-    ])
-    const activeFilterItem = computed(() =>
-      filterOptions.value.find((item) => item.value === activeFilter.value)
-    )
+    const inFuture = (item) => getYmd(item.startDate) >= startOfTodayString
+
     const items = computed(() => {
       let result = props.docs.length ? props.docs.map(map) : docs.value.map(map)
-      result = result.filter(activeFilterItem.value.filter)
+      result = result.filter(inFuture)
       return result.sort(sortBy('startDate'))
     })
+
     const itemsByDate = computed(() => {
       const result = {}
       items.value.forEach((item) => {
@@ -243,6 +248,9 @@ export default {
     const shareType = ref('text')
 
     return {
+      filters,
+      styles,
+      formats,
       itemsAsText,
       iframeCode,
       shareTypeOptions,
@@ -261,8 +269,6 @@ export default {
       getDate,
       startOfWeekString,
       endOfWeekString,
-      activeFilter,
-      filterOptions,
       copyToClipboard,
     }
   },

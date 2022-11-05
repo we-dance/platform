@@ -39,6 +39,9 @@
             .join(' · ')
         }}
       </div>
+      <div class="text-xs text-gray-500 pt-1">
+        {{ item.viewsCount || 0 }} views
+      </div>
     </div>
     <div>
       <img class="w-20 rounded" :src="item.cover" />
