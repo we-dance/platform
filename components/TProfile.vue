@@ -119,27 +119,9 @@
 
     <TCommunity v-if="profile.type === 'City'" class="pt-4 border-t" />
 
-    <TEventList
+    <TEventListNoLoad
       v-if="profile.type !== 'City'"
-      title="Organising"
-      :filter="{ 'org.username': profile.username }"
-      :username="profile.username"
-      class="w-full border-b"
-    />
-
-    <TEventList
-      v-if="profile.type !== 'City'"
-      title="Attending as Special Guest"
-      :filter="{ artistsList: profile.username }"
-      :username="profile.username"
-      comparison="array-contains"
-      class="w-full border-b"
-    />
-
-    <TEventList
-      v-if="profile.type !== 'City'"
-      title="Attending as Guest"
-      :filter="{ [`star.list.${profile.username}`]: true }"
+      :docs="events"
       :username="profile.username"
       class="w-full border-b"
     />
@@ -283,13 +265,18 @@
 </template>
 
 <script>
-import { computed } from 'vue-demi'
+import { computed, onMounted, ref } from 'vue-demi'
 import { useApp } from '~/use/app'
 import { useAuth } from '~/use/auth'
 import { useProfiles } from '~/use/profiles'
 import { getExcerpt } from '~/utils'
 import { useI18n } from '~/use/i18n'
 import { useDoc } from '~/use/doc'
+import {
+  getEventsOrganisedBy,
+  getEventsWithArtist,
+  getEventsWithGuest,
+} from '~/use/events'
 
 export default {
   props: {
@@ -342,6 +329,27 @@ export default {
         intro.visible = true
       }
     }
+
+    const events = ref([])
+
+    onMounted(async () => {
+      let result = []
+      result = [
+        ...result,
+        ...(await getEventsOrganisedBy(props.profile?.username)),
+      ]
+      result = [
+        ...result,
+        ...(await getEventsWithArtist(props.profile?.username)),
+      ]
+      result = [
+        ...result,
+        ...(await getEventsWithGuest(props.profile?.username)),
+      ]
+
+      events.value = result
+    })
+
     return {
       intro,
       uid,
@@ -353,6 +361,7 @@ export default {
       community,
       invitesLeft,
       remove,
+      events,
     }
   },
 }

@@ -1,4 +1,6 @@
 import { addMinutes, parseISO } from 'date-fns'
+import firebase from 'firebase/app'
+import 'firebase/firestore'
 import { useCities } from './cities'
 import { useI18n } from '~/use/i18n'
 import { getYmd, toDatetimeLocal } from '~/utils'
@@ -10,6 +12,61 @@ const updateEndDate = (newItem, oldItem) => {
   }
 
   newItem.endDate = toDatetimeLocal(addMinutes(parseISO(newItem.startDate), 60))
+}
+
+export async function getEventsOrganisedBy(username) {
+  const result = await firebase
+    .firestore()
+    .collection('posts')
+    .where('org.username', '==', username)
+    .get()
+
+  return result.docs.map((doc) => ({
+    ...doc.data(),
+    id: doc.id,
+    role: 'Organiser',
+  }))
+}
+
+export async function getEventsWithArtist(username) {
+  const result = await firebase
+    .firestore()
+    .collection('posts')
+    .where('artistsList', 'array-contains', username)
+    .get()
+
+  return result.docs.map((doc) => ({
+    ...doc.data(),
+    id: doc.id,
+    role: 'Artist',
+  }))
+}
+
+export async function getEventsWithGuest(username) {
+  const result = await firebase
+    .firestore()
+    .collection('posts')
+    .where(`star.list.${username}`, '==', true)
+    .get()
+
+  return result.docs.map((doc) => ({
+    ...doc.data(),
+    id: doc.id,
+    role: 'Guest',
+  }))
+}
+
+export async function getEventsInPlace(placeId) {
+  const result = await firebase
+    .firestore()
+    .collection('posts')
+    .where('place', '==', placeId)
+    .get()
+
+  return result.docs.map((doc) => ({
+    ...doc.data(),
+    id: doc.id,
+  }))
 }
 
 export const useEvents = () => {
