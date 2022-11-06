@@ -62,6 +62,11 @@ export default {
         count: 0,
         list: {},
       }
+      data.star = {
+        count: 0,
+        list: {},
+      }
+      data.createdAt = +new Date()
       data.telegram = {}
 
       track('copy_event')
