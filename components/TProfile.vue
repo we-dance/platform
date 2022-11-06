@@ -117,21 +117,9 @@
       class="w-full mt-4"
     />
 
-    <TCommunity v-if="profile.type === 'City'" class="pt-4 border-t" />
-
-    <TEventListNoLoad
-      v-if="profile.type !== 'City'"
-      :docs="events"
-      :username="profile.username"
-      class="w-full border-b"
-    />
-
-    <TEventList
-      v-if="profile.type === 'City' && profile.username == 'Travel'"
-      :filter="{ eventType: 'Festival' }"
-      :community="profile.username"
-      :username="profile.username"
-      class="mt-4 w-full border-b pb-8"
+    <TCommunity
+      v-if="profile.type === 'City' && profile.username !== 'Travel'"
+      class="pt-4 border-t"
     />
 
     <template v-if="$route.query.beta">
@@ -142,13 +130,11 @@
     </template>
 
     <template v-if="!$route.query.beta">
-      <TEventList
-        v-if="profile.type === 'City' && profile.username !== 'Travel'"
-        title="Upcoming Events"
-        :filter="{ place: profile.place }"
+      <TEventListNoLoad
         :community="profile.username"
         :username="profile.username"
-        class="mt-4 w-full border-t pt-4 pb-8"
+        :docs="events"
+        class="w-full border-b border-t pt-4"
       />
     </template>
 
@@ -273,9 +259,11 @@ import { getExcerpt } from '~/utils'
 import { useI18n } from '~/use/i18n'
 import { useDoc } from '~/use/doc'
 import {
+  getEventsInPlace,
   getEventsOrganisedBy,
   getEventsWithArtist,
   getEventsWithGuest,
+  getFestivals,
 } from '~/use/events'
 
 export default {
@@ -334,18 +322,29 @@ export default {
 
     onMounted(async () => {
       let result = []
-      result = [
-        ...result,
-        ...(await getEventsOrganisedBy(props.profile?.username)),
-      ]
-      result = [
-        ...result,
-        ...(await getEventsWithArtist(props.profile?.username)),
-      ]
-      result = [
-        ...result,
-        ...(await getEventsWithGuest(props.profile?.username)),
-      ]
+
+      if (props.profile.username === 'Travel') {
+        result = await getFestivals()
+      } else if (props.profile.type === 'City') {
+        result = await getEventsInPlace(props.profile.place)
+      } else {
+        result = [
+          ...result,
+          ...(await getEventsOrganisedBy(props.profile?.username)),
+        ]
+        result = [
+          ...result,
+          ...(await getEventsWithArtist(props.profile?.username)).filter(
+            (item) => !result.find((existing) => existing.id === item.id)
+          ),
+        ]
+        result = [
+          ...result,
+          ...(await getEventsWithGuest(props.profile?.username)).filter(
+            (item) => !result.find((existing) => existing.id === item.id)
+          ),
+        ]
+      }
 
       events.value = result
     })

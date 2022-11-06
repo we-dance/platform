@@ -17,7 +17,8 @@
       </div>
       <div>
         <div class="text-xs pt-1 leading-none">
-          {{ item.org.username }}
+          <template v-if="item.role">{{ item.role }} · </template>
+          {{ item.org ? item.org.username : '' }}
           <template v-if="item.online === 'Yes'">
             · Online
           </template>

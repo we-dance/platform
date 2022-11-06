@@ -32,10 +32,17 @@
         />
       </div>
     </TPopup>
+    <div class="px-4">
+      <h4 class="font-bold text-xl pb-4">Dance Event Calendar</h4>
+    </div>
     <div class="flex justify-between items-center px-4">
+      <TInputButtons v-model="tab" :options="tabs" />
       <TButton type="nav" icon="share" @click="showPopup = true" />
     </div>
     <div class="space-y-8 mt-4">
+      <div v-if="!items.length" class="text-center text-sm p-4">
+        No events found
+      </div>
       <div v-for="(items, date) in itemsByDate" :key="date">
         <h2 class="font-bold text-xl p-4 border-b">
           <span class="text-primary">{{ getDay(date) }}</span> ·
@@ -53,10 +60,6 @@
 <script>
 import _ from 'lodash'
 import { computed, ref } from '@nuxtjs/composition-api'
-import { startOfWeek, addDays, endOfYear } from 'date-fns'
-import { useCollection } from '~/use/collection'
-import { useAuth } from '~/use/auth'
-import { useCities } from '~/use/cities'
 import {
   dateDiff,
   sortBy,
@@ -78,89 +81,71 @@ export default {
       type: String,
       default: 'Travel',
     },
+    community: {
+      type: String,
+      default: 'Travel',
+    },
     docs: {
       type: Array,
       default: () => [],
     },
   },
   setup(props) {
-    const { currentCity } = useCities()
-    const { docs, loading, getById } = useCollection(
-      'posts',
-      props.filter,
-      props.comparison
-    )
-    const { uid } = useAuth()
     const map = (item) => {
       if (!item.id) {
         return {}
       }
+
       const startDate = getDateObect(item.startDate)
+
       return {
         ...item,
         startDate,
       }
     }
+
     const now = new Date()
-    const startOfWeekDate = startOfWeek(now, { weekStartsOn: 1 })
-    const startOfWeekString = getYmd(startOfWeekDate)
     const startOfTodayString = getYmd(now)
-    const endOfWeekString = getYmd(addDays(startOfWeekDate, 7))
-    const in10daysString = getYmd(addDays(now, 10))
-    const in7daysString = getYmd(addDays(now, 7))
-    const endOfYearString = getYmd(endOfYear(now))
-    const count = computed(() => items.value.length)
-    const activeFilter = ref(props.tab)
-    const isPublic = (item) => item.visibility !== 'Unlisted'
-    const filterOptions = computed(() => [
+    const inFuture = (item) => getYmd(item.startDate) >= startOfTodayString
+    const inPast = (item) => getYmd(item.startDate) < startOfTodayString
+    const tab = ref('upcoming')
+    const tabs = [
       {
-        value: 'thisYear',
-        label: 'This Year',
-        filter: (item) =>
-          getYmd(item.startDate) >= startOfTodayString &&
-          getYmd(item.startDate) <= endOfYearString &&
-          isPublic(item),
+        label: 'Upcoming',
+        value: 'upcoming',
       },
       {
-        value: '10days',
-        label: '10 days',
-        filter: (item) =>
-          getYmd(item.startDate) >= startOfTodayString &&
-          getYmd(item.startDate) <= in10daysString &&
-          isPublic(item),
+        label: 'Past',
+        value: 'past',
       },
-      {
-        value: '7days',
-        label: '7 days',
-        filter: (item) =>
-          getYmd(item.startDate) >= startOfTodayString &&
-          getYmd(item.startDate) <= in7daysString &&
-          isPublic(item),
-      },
-      {
-        value: 'all',
-        label: 'All',
-        filter: (item) =>
-          getYmd(item.startDate) >= startOfTodayString && isPublic(item),
-      },
-    ])
-    const activeFilterItem = computed(() =>
-      filterOptions.value.find((item) => item.value === activeFilter.value)
-    )
+    ]
+
     const items = computed(() => {
-      let result = props.docs.length ? props.docs.map(map) : docs.value.map(map)
-      result = result.filter(activeFilterItem.value.filter)
-      return result.sort(sortBy('startDate'))
+      let result = props.docs.map(map)
+
+      if (tab.value === 'upcoming') {
+        result = result.filter(inFuture)
+        result = result.sort(sortBy('startDate'))
+      } else {
+        result = result.filter(inPast)
+        result = result.sort(sortBy('-startDate'))
+      }
+
+      return result
     })
+
     const itemsByDate = computed(() => {
       const result = {}
+
       items.value.forEach((item) => {
         const date = getYmd(item.startDate)
         result[date] = result[date] || []
         result[date].push(item)
       })
+
       return result
     })
+
     const itemsAsText = computed(() => {
       let result = `**Dance Calendar in ${props.community}**\n\n`
       result += `We help everyone to dance everywhere and all dancers to help each other\n\n`
@@ -179,10 +164,11 @@ export default {
             result += `📍 ${item.venue?.name}\n`
           }
           result += `💸 ${item.price}\n`
-          result += `wedance.vip/${item.org.username}\n`
+          result += `wedance.vip/${item.org?.username}\n`
           result += `\n`
         })
       })
+
       return result
     })
 
@@ -209,26 +195,19 @@ export default {
     const shareType = ref('text')
 
     return {
+      tab,
+      tabs,
       itemsAsText,
       iframeCode,
       shareTypeOptions,
       shareType,
       showPopup,
-      currentCity,
-      count,
       itemsByDate,
       items,
       dateDiff,
-      loading,
-      getById,
-      uid,
       getTime,
       getDay,
       getDate,
-      startOfWeekString,
-      endOfWeekString,
-      activeFilter,
-      filterOptions,
       copyToClipboard,
     }
   },

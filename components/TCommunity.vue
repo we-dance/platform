@@ -1,7 +1,7 @@
 <template>
   <div>
     <div class="px-4">
-      <h4 class="font-bold text-xl">Meet {{ cityName }} Dance Community</h4>
+      <h4 class="font-bold text-xl">Dance Community</h4>
       <p class="text-xs">
         Looking for dance partner or new dance events? Filter profiles of local
         dancers and contact them.

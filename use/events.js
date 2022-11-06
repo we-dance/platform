@@ -38,7 +38,7 @@ export async function getEventsWithArtist(username) {
   return result.docs.map((doc) => ({
     ...doc.data(),
     id: doc.id,
-    role: 'Artist',
+    role: 'Special Guest',
   }))
 }
 
@@ -61,6 +61,19 @@ export async function getEventsInPlace(placeId) {
     .firestore()
     .collection('posts')
     .where('place', '==', placeId)
+    .get()
+
+  return result.docs.map((doc) => ({
+    ...doc.data(),
+    id: doc.id,
+  }))
+}
+
+export async function getFestivals() {
+  const result = await firebase
+    .firestore()
+    .collection('posts')
+    .where('eventType', '==', 'Festival')
     .get()
 
   return result.docs.map((doc) => ({
