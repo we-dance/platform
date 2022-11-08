@@ -265,6 +265,7 @@ import {
   getEventsWithGuest,
   getFestivals,
 } from '~/use/events'
+import { useCities } from '~/use/cities'
 
 export default {
   props: {
@@ -276,6 +277,7 @@ export default {
   setup(props) {
     const { uid, isAdmin, can } = useAuth()
     const { profileFields } = useProfiles()
+    const { switchCity } = useCities()
     const { getCity } = useApp()
     const { t } = useI18n()
     const { remove } = useDoc('profiles')
@@ -326,6 +328,7 @@ export default {
       if (props.profile.username === 'Travel') {
         result = await getFestivals()
       } else if (props.profile.type === 'City') {
+        await switchCity(props.profile.place)
         result = await getEventsInPlace(props.profile.place)
       } else {
         result = [
