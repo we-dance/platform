@@ -4,6 +4,7 @@ https://we-dance.app/* https://wedance.vip/:splat 301!
 http://wedance.netlify.app/* https://wedance.vip/:splat 301!
 https://wedance.netlify.app/* https://wedance.vip/:splat 301!
 /api/styles/* https://dance-styles.herokuapp.com/styles/:splat 200!
+/api/events/* https://us-central1-wedance-4abe3.cloudfunctions.net/hooks/events/:splat 200!
 /wiki https://plant-xylophone-e69.notion.site/WeDance-Wiki-3ca6f10c593942729f5d66af17758a0c 301!
 /slack https://join.slack.com/t/wedanceclub/shared_invite/zt-tzzzwh6v-y9NPMN83FUlzZFqZmto3IQ 301!
 /trello https://trello.com/invite/b/8NwjoY9W/31146a069641c55f000e3f73c505a661/wedance-tasks 301!

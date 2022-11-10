@@ -52,6 +52,46 @@ export function profileToAlgolia(profile: any, cache: any) {
   }
 }
 
+export function eventForApi(event: any) {
+  let result = {
+    id: event.id,
+    organiser: event.org.username,
+    name: event.name,
+    cover: event.cover,
+    description: event.description,
+    price: event.price,
+    styles: event.styles ? Object.keys(event.styles) : [],
+    type: event.eventType,
+    online: event.online === 'Yes' ? true : false,
+    createdAt: new Date(event.createdAt),
+    updateAt: new Date(event.updateAt),
+    startDate: new Date(event.startDate),
+    endDate: new Date(event.endDate),
+  }
+
+  if (event.venue) {
+    const venue = {
+      venue: event.venue.name,
+      address: event.venue.formatted_address,
+      locality:
+        event.venue.address_components.find((c: any) =>
+          c.types.includes('locality')
+        )?.long_name || '',
+      country:
+        event.venue.address_components.find((c: any) =>
+          c.types.includes('country')
+        )?.long_name || '',
+      location: {
+        lat: event.venue?.geometry.location.lat,
+        lng: event.venue?.geometry.location.lng,
+      },
+    }
+    result = { ...result, ...venue }
+  }
+
+  return result
+}
+
 export function eventToAlgolia(event: any) {
   let result = {
     objectID: event.id,

@@ -5,9 +5,14 @@ import * as cors from 'cors'
 import * as Handlebars from 'handlebars'
 import sendEmail from './lib/sendEmail'
 import { screenshot } from './lib/screenshot'
-import { initIndex, profileToAlgolia, removeObject } from './lib/algolia'
+import {
+  eventForApi,
+  initIndex,
+  profileToAlgolia,
+  removeObject,
+} from './lib/algolia'
 import { generateSocialCover } from './lib/migrations'
-import { firestore as db, admin } from './firebase'
+import { firestore as db, admin, firestore } from './firebase'
 import { notifySlackAboutEvents, notifySlackAboutUsers } from './lib/slack'
 import { wrap } from './sentry'
 import { announceEvent } from './lib/telegram'
@@ -23,6 +28,33 @@ Sentry.init({
 
 const app = express()
 app.use(cors({ origin: true }))
+
+app.get('/events', async (req, res) => {
+  const today = new Date().toISOString().slice(0, 10)
+
+  const eventDocs = (
+    await firestore
+      .collection('posts')
+      .where('startDate', '>', today)
+      .get()
+  ).docs
+
+  const data = []
+
+  for (const doc of eventDocs) {
+    const event = {
+      id: doc.id,
+      ...doc.data(),
+    } as any
+
+    data.push(eventForApi(event))
+  }
+
+  res.json({
+    success: true,
+    data,
+  })
+})
 
 app.post('/track/:action', async (req, res) => {
   const vars = req.body['event-data']['user-variables']
