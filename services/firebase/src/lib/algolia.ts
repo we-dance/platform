@@ -55,7 +55,8 @@ export function profileToAlgolia(profile: any, cache: any) {
 export function eventForApi(event: any) {
   let result = {
     id: event.id,
-    organiser: event.org.username,
+    url: 'https://wedance.vip/events/' + event.id,
+    organiser: 'https://wedance.vip/' + event.org.username,
     name: event.name,
     cover: event.cover,
     description: event.description,
@@ -64,7 +65,7 @@ export function eventForApi(event: any) {
     type: event.eventType,
     online: event.online === 'Yes' ? true : false,
     createdAt: new Date(event.createdAt),
-    updateAt: new Date(event.updateAt),
+    updatedAt: new Date(event.updatedAt),
     startDate: new Date(event.startDate),
     endDate: new Date(event.endDate),
   }
