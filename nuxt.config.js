@@ -73,6 +73,7 @@ export default {
     '~/plugins/router',
     '~/plugins/directives',
     '~/plugins/vue-tailwind',
+    '~/plugins/vue-datepicker',
   ],
   /*
    ** Nuxt.js dev-modules

@@ -49,6 +49,15 @@ export default {
     editing: false,
     internalValue: {},
   }),
+  beforeUpdate() {
+    if (!this.internalValue?.startDate) {
+      this.internalValue = {
+        startDate: this.item.startDate,
+        endDate: this.item.startDate,
+        eventType: 'Party',
+      }
+    }
+  },
   setup(props) {
     const { eventTypeList } = useEvents()
 
@@ -75,14 +84,22 @@ export default {
 
       {
         name: 'startDate',
-        type: 'datetime-local',
+        component: 'DatePicker',
+        type: 'time',
+        format: 'YYYY-MM-DDTHH:mm',
+        'minute-step': 5,
+        'value-type': 'format',
         labelPosition: 'top',
         label: 'Start',
         simple: true,
       },
       {
         name: 'endDate',
-        type: 'datetime-local',
+        component: 'DatePicker',
+        type: 'time',
+        format: 'YYYY-MM-DDTHH:mm',
+        'minute-step': 5,
+        'value-type': 'format',
         labelPosition: 'top',
         label: 'End',
         simple: true,
