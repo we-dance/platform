@@ -2,6 +2,7 @@
   <div :class="expanded ? '' : 'h-20 overflow-hidden relative'">
     <slot />
     <TButton
+      allow-guests
       :label="expanded ? hide : show"
       type="link"
       class="text-sm text-primary"
