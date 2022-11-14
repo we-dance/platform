@@ -56,7 +56,7 @@ export function eventForApi(event: any) {
   let result = {
     id: event.id,
     url: 'https://wedance.vip/events/' + event.id,
-    organiser: 'https://wedance.vip/' + event.org.username,
+    organizer: 'https://wedance.vip/' + event.org.username,
     name: event.name,
     cover: event.cover,
     description: event.description,
@@ -97,7 +97,7 @@ export function eventToAlgolia(event: any) {
   let result = {
     objectID: event.id,
     id: event.id,
-    organiser: event.org.username,
+    organizer: event.org.username,
     name: event.name,
     cover: event.cover,
     description: event.description,
