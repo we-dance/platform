@@ -14,6 +14,7 @@ const yargs = require('yargs/yargs')
 const { hideBin } = require('yargs/helpers')
 import { firestore } from './firebase'
 import { announceEventIG } from './lib/instagram'
+import { getInstagramWebProfileInfo } from './lib/browser'
 
 yargs(hideBin(process.argv))
   .command(
@@ -61,6 +62,18 @@ yargs(hideBin(process.argv))
       }
 
       console.log(`Posted at ${result.messageUrl}`)
+    }
+  )
+  .command(
+    'ig:profile <username>',
+    'Get instagram profile',
+    () => undefined,
+    async (argv: any) => {
+      const result = await getInstagramWebProfileInfo(
+        'https://instagram.com/' + argv.username
+      )
+
+      console.log(result)
     }
   )
   .command(

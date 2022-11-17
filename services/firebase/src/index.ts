@@ -1,3 +1,4 @@
+import axios from 'axios'
 import * as Sentry from '@sentry/node'
 import * as functions from 'firebase-functions'
 import * as express from 'express'
@@ -17,6 +18,7 @@ import { notifySlackAboutEvents, notifySlackAboutUsers } from './lib/slack'
 import { wrap } from './sentry'
 import { announceEvent } from './lib/telegram'
 import { announceEventIG } from './lib/instagram'
+import { getInstagramWebProfileInfo } from './lib/browser'
 
 require('dotenv').config()
 
@@ -188,6 +190,7 @@ export const onProfileChange = functions.firestore
     const profileId = context.params.profileId
 
     const wasDeleted = oldProfile?.username && !profile?.username
+    const wasCreated = !oldProfile?.username && profile?.username
     const becameUnlisted =
       profile?.visibility === 'Unlisted' &&
       oldProfile?.visibility !== 'Unlisted'
@@ -198,6 +201,11 @@ export const onProfileChange = functions.firestore
 
     if (!profile || !profile.username) {
       return
+    }
+
+    if (wasCreated) {
+      const message = `New dancer - https://wedance.vip/${profile.username}\n\nUID:${profileId}`
+      await notifySlackAboutUsers(message)
     }
 
     const cacheFields = ['username', 'photo']
@@ -246,23 +254,70 @@ export const onProfileChange = functions.firestore
     }
   })
 
-export const profileCreated = functions.firestore
-  .document('profiles/{profileId}')
+export const profileCreated = functions
+  .runWith({ memory: '1GB' })
+  .firestore.document('profiles/{profileId}')
   .onCreate(async (snapshot, context) => {
     const profile = snapshot.data() as any
-    const profileId = context.params.profileId
-    const cache = (
-      await db
-        .collection('app')
-        .doc('v2')
-        .get()
-    ).data() as any
+    if (profile.import === 'requested2') {
+      let instagram
 
-    const cityName = cache.cities[profile.place]?.name || 'International'
+      await snapshot.ref.update({
+        import: 'importing',
+        importError: '',
+      })
 
-    const message = `New dancer in ${cityName} - https://wedance.vip/${profile.username}\n\nUID:${profileId}`
+      try {
+        instagram = await getInstagramWebProfileInfo(profile.instagram)
+        if (!instagram) {
+          throw new Error('Instagram not found')
+        }
+      } catch (e) {
+        await snapshot.ref.update({
+          import: 'failed',
+          importError: e.message,
+        })
 
-    await notifySlackAboutUsers(message)
+        return
+      }
+
+      let photo = ''
+
+      if (instagram.profile_pic_url_hd) {
+        const imageBuffer = (
+          await axios.get(instagram.profile_pic_url_hd, {
+            responseType: 'arraybuffer',
+          })
+        ).data
+        const bucket = admin.storage().bucket()
+        const filePath = 'share/' + profile.username + '.png'
+        const file = bucket.file(filePath)
+
+        await file.save(imageBuffer, {
+          public: true,
+        })
+
+        const [metadata] = await file.getMetadata()
+
+        photo = metadata.mediaLink
+      }
+
+      const now = +new Date()
+      const changes = {
+        importedAt: now,
+        updatedAt: now,
+        source: 'instagram',
+        name: instagram.full_name,
+        bio: instagram.biography || '',
+        type: 'FanPage',
+        import: 'success',
+        website: instagram.external_url || '',
+        photo,
+        visibility: 'Public',
+      }
+
+      await snapshot.ref.update(changes)
+    }
   })
 
 export const accountCreated = functions.firestore
