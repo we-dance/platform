@@ -5,7 +5,8 @@
         <div class="absolute inset-x-0 bottom-0 h-1/2 bg-white" />
         <div>
           <div class="relative sm:overflow-hidden">
-            <nav class="relative flex p-4 justify-end">
+            <nav class="relative flex p-4 justify-between">
+              <TIcon size="4" name="logo-horizontal-dark" />
               <TButton
                 allow-guests
                 type="primary"
@@ -15,13 +16,12 @@
             </nav>
 
             <div class="relative p-4 sm:p-10 lg:p-14">
-              <div class="flex justify-center">
-                <TIcon name="logo-vertical-dark" />
+              <div class="text-center">
+                <h4 class="font-bold text-2xl">
+                  <span class="text-primary">Dance.</span> Meet. Travel.
+                </h4>
+                <p>Discover dancers and dance events in any city.</p>
               </div>
-
-              <p class="mt-2 max-w-lg mx-auto text-center sm:max-w-3xl">
-                Less chats. More dance.
-              </p>
 
               <div class="max-w-lg mx-auto">
                 <TButton
@@ -34,11 +34,9 @@
                 />
               </div>
 
-              <div class="mt-8 max-w-lg mx-auto text-center sm:max-w-3xl">
-                <h4 class="font-bold text-xl">
-                  <span class="text-primary">DANCE.</span> MEET. TRAVEL.
-                </h4>
-                <p>Discover dancers and dance events anywhere you travel.</p>
+              <div
+                class="mt-2 max-w-lg text-xs mx-auto text-center sm:max-w-3xl"
+              >
                 <p>{{ $t('hero.submotto') }}.</p>
               </div>
             </div>
@@ -101,30 +99,6 @@
                 class="flex items-center justify-center w-20 h-20 bg-white rounded-full "
               >
                 <img
-                  src="/img/city-chats.svg"
-                  :alt="$t('features.cityChats.title')"
-                />
-              </div>
-            </div>
-            <h3 class="text-2xl font-extrabold text-center">
-              {{ $t('features.cityChats.title') }}
-            </h3>
-            <p class="text-center">
-              {{ $t('features.cityChats.description') }}<br />
-              <a
-                href="https://t.me/WeDanceTravel"
-                target="_blank"
-                class="underline font-bold hover:no-underline"
-                >Join chat</a
-              >
-            </p>
-          </div>
-          <div class="py-8 space-y-1 bg-light">
-            <div class="flex justify-center ">
-              <div
-                class="flex items-center justify-center w-20 h-20 bg-white rounded-full "
-              >
-                <img
                   src="/img/dance-travel.svg"
                   :alt="$t('features.danceTravel.title')"
                 />
@@ -139,50 +113,6 @@
                 to="/Travel"
                 class="underline font-bold hover:no-underline"
                 >Discover festivals</NuxtLink
-              >
-            </p>
-          </div>
-          <div class="py-8 space-y-1 bg-light">
-            <div class="flex justify-center ">
-              <div
-                class="flex items-center justify-center w-20 h-20 bg-white rounded-full "
-              >
-                <img
-                  src="/img/volunteer.svg"
-                  :alt="$t('features.volunteer.title')"
-                />
-              </div>
-            </div>
-            <h3 class="text-2xl font-extrabold text-center">
-              {{ $t('features.volunteer.title') }}
-            </h3>
-            <p class="text-center">
-              {{ $t('features.volunteer.description') }}<br />
-              <NuxtLink
-                to="/get-involved"
-                class="underline font-bold hover:no-underline"
-                >{{ $t('features.volunteer.action') }}</NuxtLink
-              >
-            </p>
-          </div>
-          <div class="py-8 space-y-1 bg-light">
-            <div class="flex justify-center ">
-              <div
-                class="flex items-center justify-center w-20 h-20 bg-white rounded-full "
-              >
-                <img src="/img/interviews.svg" alt="Interviews" />
-              </div>
-            </div>
-            <h3 class="text-2xl font-extrabold text-center">
-              {{ $t('features.interviews.title') }}
-            </h3>
-            <p class="text-center">
-              {{ $t('features.interviews.description') }}<br />
-              <a
-                href="https://anchor.fm/wedance"
-                target="_blank"
-                class="underline font-bold hover:no-underline"
-                >{{ $t('features.interviews.action') }}</a
               >
             </p>
           </div>
