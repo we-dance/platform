@@ -21,6 +21,11 @@ import { usePosts } from '~/use/posts'
 
 export default {
   name: 'Feed',
+  head() {
+    return {
+      title: 'WeDance Feed',
+    }
+  },
   setup() {
     const { uid, username } = useAuth()
     const { currentCity } = useCities()

@@ -5,6 +5,7 @@
     <TButton allow-guests to="/" class="mb-8" type="void">
       <TIcon name="logo-horizontal-dark" />
     </TButton>
+    <TButton allow-guests to="/Travel" icon="place" label="Travel" type="nav" />
     <TButton
       v-if="cityName"
       allow-guests
