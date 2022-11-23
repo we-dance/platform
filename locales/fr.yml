@@ -427,7 +427,7 @@ teaser:
     btn: Adhérer maintenant
   chat:
     title: On bavarde?
-    description: 'Nous avons des discussions de danse dans chaque ville'
+    description: "Nous avons des discussions de danse dans chaque ville"
     btn: Rejoignez le chat de {city}
   involve:
     title: Nous avons besoin de votre aide
