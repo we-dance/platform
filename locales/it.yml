@@ -17,11 +17,19 @@ post:
   delete: Delete
   edit: Edit
   dashboard: Dashboard
+home:
+  cta:
+    header: Less chats. More dance.
+    description: Discover dancers and dance events near you
+    action: Find your city
 nav:
+  travel: Travel
+  chooseCity: Choose City
   feed: Commento
   calendar: Calendar
   community: Community
   chat: Conversazione
+  dance: Dances
   myProfile: My Profile
   settings: Impostazioni
 form:
@@ -42,7 +50,6 @@ visibility:
 hero:
   title: Ti piace ballare?
   subtitle: Ci aiutiamo a vicenda a trovare interessanti eventi di danza e partner di ballo.
-  motto: We help everyone to dance everywhere and all dancers to help each other
   submotto: Salsa, Bachata, Kizomba, Urban Kiz, Raggaeton, Casino, Tango and 130 more dance styles
   alt: People dancing bachata
   action: Join the community
@@ -55,15 +62,18 @@ features:
   calendar:
     title: Event Calendar
     description: Find dance workshops, courses, socials and parties. We fill event calendar all together as a community. Everyone can share.
+    action: Discover events
   dancePartners:
     title: Dance partners
     description: Find a dance partner for your dance style and let them find you.
+    action: Find dance partner
   cityChats:
     title: City Chats
     description: Find dance chat in any city. Join your city chat and invite your friends to help new dancers in the city. Think globally, act locally.
   danceTravel:
     title: Dance Travel
     description: Find international dance festivals and congresses. Share a ride, an appartment and find a buddy to experience a new city together.
+    action: Discover festivals
   volunteer:
     title: Volunteer
     description: We build a community, where everyone enters with mindset “I can help”, so whenever you need help you can count on it. We are one big family worldwide. We help each other.
@@ -428,11 +438,13 @@ share:
   copy: Copia link
 footer:
   about: Chi siamo
+  getInvolved: Mettersi in gioco
   support: Supporto
   privacy: Privacy
   terms: Termini
   coc: Codice di comportamento
   faq: FAQ
+  copyright: All rights reserved.
 feed:
   add: Add post
   title: Commento
