@@ -28,8 +28,8 @@ form:
   clear: Clear
   delete: Delete
   cancel: Cancel
-  copy: Copy
-  save: Save
+  copy: Kopyala
+  save: Kaydet
 photo:
   placeholder: Change photo
   selectLabel: Upload photo
@@ -106,7 +106,7 @@ eventView:
     dashboard: Dashboard
     edit: Edit
     share: Paylaş
-    copy: Copy
+    copy: Kopyala
   online: Online Event
   reservation:
     guest: Register for event
