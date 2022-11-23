@@ -17,11 +17,19 @@ post:
   delete: Sil
   edit: Düzenle
   dashboard: Kontrol Paneli
+home:
+  cta:
+    header: Less chats. More dance.
+    description: Discover dancers and dance events near you
+    action: Find your city
 nav:
+  travel: Travel
+  chooseCity: Choose City
   feed: Yorum
   calendar: Takvim
   community: Topluluk
   chat: Konuşma
+  dance: Dances
   myProfile: Profilim
   settings: Ayarlar
 form:
@@ -42,7 +50,6 @@ visibility:
 hero:
   title: Dans etmeyi sever misin?
   subtitle: İlginç dans etkinlikleri ve dans partnerleri bulma konusunda birbirimize yardımcı oluyoruz.
-  motto: Herkesin her yerde dans etmesine ve tüm dansçıların birbirlerine yardım etmesine yardımcı oluyoruz
   submotto: Salsa, Bachata, Kizomba, Urban Kiz, Raggaeton, Casino, Tango ve daha 130 dans stili
   alt: Bachata dansı yapan insanlar
   action: Topluluğa katıl
@@ -55,15 +62,18 @@ features:
   calendar:
     title: Etkinlik Takvimi
     description: Dans atölyeleri, kurslar, sosyal etkinlikler ve partiler bulun. Etkinlik takvimini hep birlikte bir topluluk olarak dolduruyoruz. Herkes paylaşabilir.
+    action: Discover events
   dancePartners:
     title: Dans partnerleri
     description: Dans tarzınıza uygun bir dans partneri bulun ve onlar da sizi bulsun.
+    action: Find dance partner
   cityChats:
     title: Şehir Sohbetleri
     description: Herhangi bir şehirde dans sohbeti bulun. Şehrinizdeki sohbete katılın ve arkadaşlarınızı şehirdeki yeni dansçılara yardım etmeye davet edin. Küresel düşünün, yerel hareket edin.
   danceTravel:
     title: Dans Seyahati
     description: Uluslararası dans festivalleri ve kongreleri bulun. Bir yolculuğu, bir daireyi paylaşın ve yeni bir şehri birlikte deneyimlemek için bir arkadaş bulun.
+    action: Discover festivals
   volunteer:
     title: Gönüllü
     description: Herkesin "yardım edebilirim" zihniyetiyle girdiği bir topluluk oluşturuyoruz, böylece yardıma ihtiyacınız olduğunda buna güvenebilirsiniz. Biz dünya çapında büyük bir aileyiz. Birbirimize yardım ediyoruz.
@@ -428,11 +438,13 @@ share:
   copy: Bağlantıyı kopyala
 footer:
   about: Hakkımızda
+  getInvolved: Katıl
   support: Destek
   privacy: Gizlilik
   terms: Koşullar
   coc: Davranış kodu
   faq: SSS
+  copyright: All rights reserved.
 feed:
   add: Add post
   title: Yorum
