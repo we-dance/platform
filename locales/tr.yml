@@ -13,77 +13,77 @@ common:
   Saturday: Cumartesi
   Sunday: Pazar
 post:
-  report: Report
-  delete: Delete
-  edit: Edit
-  dashboard: Dashboard
+  report: Rapor
+  delete: Sil
+  edit: Düzenle
+  dashboard: Kontrol Paneli
 nav:
   feed: Yorum
-  calendar: Calendar
-  community: Community
+  calendar: Takvim
+  community: Topluluk
   chat: Konuşma
-  myProfile: My Profile
+  myProfile: Profilim
   settings: Ayarlar
 form:
-  clear: Clear
-  delete: Delete
-  cancel: Cancel
+  clear: Temizle
+  delete: Sil
+  cancel: İptal
   copy: Kopyala
   save: Kaydet
 photo:
-  placeholder: Change photo
-  selectLabel: Upload photo
+  placeholder: Fotoğrafı değiştir
+  selectLabel: Fotoğraf yükle
 visibility:
-  label: Visibility
-  description: '- Public: searchable in Google and can be used in social media. - Members: only visible for logged-in users. - Unlisted: only possible to open with exact link, but not listed anywhere.'
-  public: Public
-  members: Members
-  unlisted: Unlisted
+  label: Görünürlük
+  description: '- Herkese açık: Google''da aranabilir ve sosyal medyada kullanılabilir. - Üyeler: sadece giriş yapmış kullanıcılar tarafından görülebilir. - Listelenmemiş: yalnızca tam bağlantı ile açmak mümkündür, ancak hiçbir yerde listelenmez.'
+  public: Genel
+  members: Üyeler
+  unlisted: Listelenmemiş
 hero:
   title: Dans etmeyi sever misin?
   subtitle: İlginç dans etkinlikleri ve dans partnerleri bulma konusunda birbirimize yardımcı oluyoruz.
-  motto: We help everyone to dance everywhere and all dancers to help each other
-  submotto: Salsa, Bachata, Kizomba, Urban Kiz, Raggaeton, Casino, Tango and 130 more dance styles
-  alt: People dancing bachata
-  action: Join the community
-  search: Search dancers
+  motto: Herkesin her yerde dans etmesine ve tüm dansçıların birbirlerine yardım etmesine yardımcı oluyoruz
+  submotto: Salsa, Bachata, Kizomba, Urban Kiz, Raggaeton, Casino, Tango ve daha 130 dans stili
+  alt: Bachata dansı yapan insanlar
+  action: Topluluğa katıl
+  search: Dansçıları ara
 icons:
-  dancers: dancers
-  cities: cities
-  events: events
+  dancers: dansçılar
+  cities: şehirler
+  events: etkinlikler
 features:
   calendar:
-    title: Event Calendar
-    description: Find dance workshops, courses, socials and parties. We fill event calendar all together as a community. Everyone can share.
+    title: Etkinlik Takvimi
+    description: Dans atölyeleri, kurslar, sosyal etkinlikler ve partiler bulun. Etkinlik takvimini hep birlikte bir topluluk olarak dolduruyoruz. Herkes paylaşabilir.
   dancePartners:
-    title: Dance partners
-    description: Find a dance partner for your dance style and let them find you.
+    title: Dans partnerleri
+    description: Dans tarzınıza uygun bir dans partneri bulun ve onlar da sizi bulsun.
   cityChats:
-    title: City Chats
-    description: Find dance chat in any city. Join your city chat and invite your friends to help new dancers in the city. Think globally, act locally.
+    title: Şehir Sohbetleri
+    description: Herhangi bir şehirde dans sohbeti bulun. Şehrinizdeki sohbete katılın ve arkadaşlarınızı şehirdeki yeni dansçılara yardım etmeye davet edin. Küresel düşünün, yerel hareket edin.
   danceTravel:
-    title: Dance Travel
-    description: Find international dance festivals and congresses. Share a ride, an appartment and find a buddy to experience a new city together.
+    title: Dans Seyahati
+    description: Uluslararası dans festivalleri ve kongreleri bulun. Bir yolculuğu, bir daireyi paylaşın ve yeni bir şehri birlikte deneyimlemek için bir arkadaş bulun.
   volunteer:
-    title: Volunteer
-    description: We build a community, where everyone enters with mindset “I can help”, so whenever you need help you can count on it. We are one big family worldwide. We help each other.
+    title: Gönüllü
+    description: Herkesin "yardım edebilirim" zihniyetiyle girdiği bir topluluk oluşturuyoruz, böylece yardıma ihtiyacınız olduğunda buna güvenebilirsiniz. Biz dünya çapında büyük bir aileyiz. Birbirimize yardım ediyoruz.
     action: Katıl
   interviews:
-    title: Interviews
-    description: Explore more about you favorite dance artists and catch their tips & tricks.
-    action: Listen to Podcast
+    title: Röportaj
+    description: En sevdiğiniz dans sanatçıları hakkında daha fazlasını keşfedin ve onların ipuçlarını ve püf noktalarını yakalayın.
+    action: Podcast dinle
 international:
-  title: International Community
-  description: We regularly post interviews, event announcements and introduce new members on our social media.
+  title: Uluslararası Topluluk
+  description: Sosyal medyamızda düzenli olarak röportajlar, etkinlik duyuruları yayınlıyor ve yeni üyelerimizi tanıtıyoruz.
 auth:
   signin: Oturum aç
   signup: Kayıt ol
   signout: Çıkış Yap
 events:
   typelist:
-    party: Party
-    workshop: Workshop
-    course: Course
+    party: Parti
+    workshop: Atölye
+    course: Kurs
     festival: Festival
     congress: Congress
     concert: Concert
@@ -144,7 +144,7 @@ filter:
   radius: Radius
   reset: Reset filters
 community:
-  title: Community
+  title: Topluluk
 profile:
   bookme: Book me
   contactme: Contact me
@@ -195,7 +195,7 @@ profile:
   meetingPlace: Where to meet?
   photo: Fotoğraf
   add: Add profile
-  title: Community
+  title: Topluluk
   styles:
     label: Dance
     tips: Mark up to 4 favorite dances that will be highlighted in your poster
@@ -296,7 +296,7 @@ myprofile:
     title: Welcome to WeDance!
     description1: This is your profile. A square below is a poster – your visual introduction.
     description2: Your poster is also shown in {0} among other dancers.
-    community: Community
+    community: Topluluk
     description3: 'Click {0} and add:'
   ambassador:
     description1: WeDance is represented by Ambassador in local dance communities. Volunteers help Ambassador with different initiatives to unite local dancers. WeDance is created and supported by volunteers. Get Involved, become volunteer!
@@ -516,7 +516,7 @@ event:
     label: International
     description: Is it a big event with >500 guests, like festival or congress?
   place:
-    label: Community
+    label: Topluluk
     description: Leave empty if you want your event to be shown in all cities
   form:
     label: External registration?
@@ -555,7 +555,7 @@ EventDashboard:
   noAccess: Only event owner can access this area.
   unlink: Unlink
   couple: Couple
-  cancel: Cancel
+  cancel: İptal
   checkIn: CheckIn
   rsvp: RSVP
   subscribed: Subscribed
