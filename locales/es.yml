@@ -1,69 +1,79 @@
 ---
 common:
-  yes: 'Yes'
+  yes: 'Si'
   no: 'No'
-  female: Female
-  male: Male
-  other: Other
-  Monday: Monday
-  Tuesday: Tuesday
-  Wednesday: Wednesday
-  Thursday: Thursday
-  Friday: Friday
-  Saturday: Saturday
-  Sunday: Sunday
+  female: Mujer
+  male: Hombre
+  other: Otro
+  Monday: Lunes
+  Tuesday: Martes
+  Wednesday: Miércoles
+  Thursday: Jueves
+  Friday: Viernes
+  Saturday: Sábado
+  Sunday: Domingo	
 post:
-  report: Report
-  delete: Delete
-  edit: Edit
-  dashboard: Dashboard
+  report: Reportar
+  delete: Borrar
+  edit: Editar
+  dashboard: Panel de control
+home:
+  cta:
+    header: Less chats. More dance.
+    description: Discover dancers and dance events near you
+    action: Find your city
 nav:
+  travel: Travel
+  chooseCity: Choose City
   feed: Comentario
-  calendar: Calendar
-  community: Community
+  calendar: Calendario
+  community: Comunidad
   chat: Conversaciones
-  myProfile: My Profile
+  dance: Dances
+  myProfile: Mi perfil
   settings: Configuraciones
 form:
-  clear: Clear
-  delete: Delete
-  cancel: Cancel
-  copy: Copy
-  save: Save
+  clear: Limpiar
+  delete: Borrar
+  cancel: Cancelar
+  copy: Copiar
+  save: Guardar
 photo:
-  placeholder: Change photo
-  selectLabel: Upload photo
+  placeholder: Cambiar foto
+  selectLabel: Subir la foto
 visibility:
-  label: Visibility
-  description: '- Public: searchable in Google and can be used in social media. - Members: only visible for logged-in users. - Unlisted: only possible to open with exact link, but not listed anywhere.'
-  public: Public
-  members: Members
-  unlisted: Unlisted
+  label: Visibilidad
+  description: '- Pública: se puede buscar en Google y se puede utilizar en las redes sociales. - Miembros: sólo visible para usuarios conectados. - Sin lista: sólo es posible abrir con un enlace exacto, pero no aparece en ninguna parte.'
+  public: Público
+  members: Miembros
+  unlisted: Sin listar
 hero:
   title: '¿Te gusta bailar?'
   subtitle: Nos ayudamos mutuamente a encontrar eventos de baile interesantes y parejas de baile.
-  motto: We help everyone to dance everywhere and all dancers to help each other
-  submotto: Salsa, Bachata, Kizomba, Urban Kiz, Raggaeton, Casino, Tango and 130 more dance styles
-  alt: People dancing bachata
-  action: Join the community
-  search: Search dancers
+  submotto: Salsa, Bachata, Kizomba, Kiz, Raggaeton, Casino, Tango y 130 estilos de baile más
+  alt: Bachata bailando gente
+  action: Únete a la comunidad
+  search: Buscar bailarines
 icons:
-  dancers: dancers
-  cities: cities
-  events: events
+  dancers: bailarines
+  cities: ciudades
+  events: eventos
 features:
   calendar:
-    title: Event Calendar
+    title: Calendário de Eventos
     description: Find dance workshops, courses, socials and parties. We fill event calendar all together as a community. Everyone can share.
+    action: Discover events
   dancePartners:
     title: Dance partners
     description: Find a dance partner for your dance style and let them find you.
+    action: Find dance partner
   cityChats:
     title: City Chats
     description: Find dance chat in any city. Join your city chat and invite your friends to help new dancers in the city. Think globally, act locally.
   danceTravel:
     title: Dance Travel
     description: Find international dance festivals and congresses. Share a ride, an appartment and find a buddy to experience a new city together.
+    action: Discover festivals
   volunteer:
     title: Volunteer
     description: We build a community, where everyone enters with mindset “I can help”, so whenever you need help you can count on it. We are one big family worldwide. We help each other.
@@ -106,7 +116,7 @@ eventView:
     dashboard: Dashboard
     edit: Edit
     share: Compartir
-    copy: Copy
+    copy: Copiar
   online: Online Event
   reservation:
     guest: Register for event
@@ -144,7 +154,7 @@ filter:
   radius: Radius
   reset: Reset filters
 community:
-  title: Community
+  title: Comunidad
 profile:
   bookme: Book me
   contactme: Contact me
@@ -195,7 +205,7 @@ profile:
   meetingPlace: Where to meet?
   photo: Foto
   add: Add profile
-  title: Community
+  title: Comunidad
   styles:
     label: Dance
     tips: Mark up to 4 favorite dances that will be highlighted in your poster
@@ -296,7 +306,7 @@ myprofile:
     title: Welcome to WeDance!
     description1: This is your profile. A square below is a poster – your visual introduction.
     description2: Your poster is also shown in {0} among other dancers.
-    community: Community
+    community: Comunidad
     description3: 'Click {0} and add:'
   ambassador:
     description1: WeDance is represented by Ambassador in local dance communities. Volunteers help Ambassador with different initiatives to unite local dancers. WeDance is created and supported by volunteers. Get Involved, become volunteer!
@@ -428,11 +438,13 @@ share:
   copy: Copiar link
 footer:
   about: Sobre nosotros
+  getInvolved: Involucrarse
   support: Apoyo
   privacy: Intimidad
   terms: Condiciones
   coc: Código de conducta
   faq: Preguntas más frecuentes
+  copyright: All rights reserved.
 feed:
   add: Add post
   title: Comentario
@@ -516,7 +528,7 @@ event:
     label: International
     description: Is it a big event with >500 guests, like festival or congress?
   place:
-    label: Community
+    label: Comunidad
     description: Leave empty if you want your event to be shown in all cities
   form:
     label: External registration?
@@ -555,7 +567,7 @@ EventDashboard:
   noAccess: Only event owner can access this area.
   unlink: Unlink
   couple: Couple
-  cancel: Cancel
+  cancel: Cancelar
   checkIn: CheckIn
   rsvp: RSVP
   subscribed: Subscribed
