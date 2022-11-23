@@ -246,27 +246,6 @@ profile:
     label: I can help with
     description: 'How can you help our community? What are you good at? For example: design, programming, marketing, social media, etc.'
   contacts: Do you use social media?
-  instagram:
-    label: instagram.com/
-    placeholder: username
-  facebook:
-    label: fb.com/
-    placeholder: username
-  whatsapp:
-    label: whatsapp.com/
-    placeholder: whatsapp chat
-  telegram:
-    label: t.me/
-    placeholder: username
-  twitter:
-    label: twitter.com/
-    placeholder: username
-  tiktok:
-    label: tiktok.com/
-    placeholder: username
-  youtube:
-    label: youtube.com/
-    placeholder: username
   email:
     label: Email
     placeholder: for business requests
