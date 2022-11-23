@@ -292,7 +292,7 @@ radiusOptions:
   thousand: around 1000km
   anywhere: En cualquier sitio
 myprofile:
-  addEvent: Añadir evento
+  addEvent: Añadir
   addPost: Write a post
   edit: Edit Profile
   share: Compartir
@@ -427,7 +427,7 @@ teaser:
     btn: Únete ahora
   chat:
     title: Pregunte a los lugareños
-    description: 'Tenemos un chat de baile de Telegram en cada ciudad. Únase al chat de su ciudad para ayudar a los bailarines que viajan, invite a sus amigos de baile. ¡Construyamos WeDance juntos!'
+    description: "Tenemos un chat de baile de Telegram en cada ciudad. Únase al chat de su ciudad para ayudar a los bailarines que viajan, invite a sus amigos de baile. ¡Construyamos WeDance juntos!"
     btn: Únete al chat
   involve:
     title: Necesitamos tu ayuda

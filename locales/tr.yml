@@ -19,9 +19,9 @@ post:
   dashboard: Kontrol Paneli
 home:
   cta:
-    header: Less chats. More dance.
-    description: Discover dancers and dance events near you
-    action: Find your city
+    header: Daha az sohbet. Daha fazla dans.
+    description: Yakınınızdaki dansçıları ve dans etkinliklerini keşfedin
+    action: Şehrini bul
 nav:
   travel: Travel
   chooseCity: Choose City
@@ -427,7 +427,7 @@ teaser:
     btn: Şimdi Katıl
   chat:
     title: Sohbet ediyor muyuz?
-    description: 'Her şehirde dans sohbetleri var'
+    description: "Her şehirde dans sohbetleri var"
     btn: '{city} Sohbetine Katıl'
   involve:
     title: Yardımına ihtiyacımız var

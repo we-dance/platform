@@ -427,7 +427,7 @@ teaser:
     btn: Iscriviti adesso
   chat:
     title: Chiacchieriamo?
-    description: 'Abbiamo chat di ballo in ogni città'
+    description: "Abbiamo chat di ballo in ogni città"
     btn: Entra nella chat di {city}
   involve:
     title: Abbiamo bisogno del tuo aiuto
