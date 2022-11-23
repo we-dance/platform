@@ -1,13 +1,30 @@
 <template>
   <div>
-    <THeader :title="profile.username">
-      <TButton type="nav" icon="search" to="/search" />
+    <THeader>
+      <TButton
+        v-if="profile.type === 'City'"
+        slot="left"
+        to="/cities"
+        icon="place"
+        :label="profile.username"
+      />
+      <div
+        v-else
+        slot="left"
+        class="flex flex-no-wrap items-center ml-8 md:ml-0"
+      >
+        <h1 class="ml-1 font-lato text-lg font-bold">
+          {{ profile.username }}
+        </h1>
+      </div>
+
+      <TButton allow-guests type="nav" icon="search" to="/search" />
       <TDropdown>
         <TPopupEdit
           v-if="isAdmin()"
           type="context"
           :fields="profileFields"
-          :label="$t('myprofile.edit')"
+          label="Edit"
           collection="profiles"
           singular="profile"
           :item="profile"
@@ -29,85 +46,15 @@
           type="context"
           :label="$t('share.title')"
         />
+        <TButton
+          v-if="isAdmin()"
+          type="context"
+          icon="delete"
+          label="Delete"
+          @click="remove(profile.id)"
+        />
       </TDropdown>
     </THeader>
-
-    <template v-if="uid === profile.id">
-      <div v-if="intro.visible" class="m-4 rounded border p-4">
-        <h2 class="border-b p-4 font-bold text-lg -m-4 mb-4">
-          {{ $t('myprofile.intro.title') }}
-        </h2>
-        <div class="typo">
-          <p>
-            {{ $t('myprofile.intro.description1') }}
-          </p>
-          <div>
-            <i18n
-              path="myprofile.intro.description2"
-              tag="p"
-              for="myprofile.intro.community"
-            >
-              <NuxtLink to="/community">{{
-                $t('myprofile.intro.community')
-              }}</NuxtLink>
-            </i18n>
-          </div>
-          <i18n
-            path="myprofile.intro.description3"
-            tag="p"
-            for="myprofile.edit"
-          >
-            <NuxtLink to="/settings?tab=profile">{{
-              $t('myprofile.edit')
-            }}</NuxtLink>
-          </i18n>
-          <ul>
-            <li v-for="field in intro.missing" :key="field.name">
-              {{ field.label }}
-            </li>
-          </ul>
-        </div>
-      </div>
-
-      <div v-if="false">
-        <div>
-          <p>
-            {{ $t('myprofile.ambassador.description1') }}
-          </p>
-          <p>
-            {{
-              $t('myprofile.ambassador.description2', { community: community })
-            }}
-          </p>
-        </div>
-
-        <w-profile username="CharlyAl"></w-profile>
-
-        <div class="mt-4">
-          {{ $t('myprofile.ambassador.description2') }}
-          <div class="mt-4 flex flex-col items-center space-y-2">
-            <TButton
-              icon="instagram"
-              icon-size="6"
-              :href="`https://instagram.com/WeDance${community}`"
-              :label="`WeDance${community}`"
-            />
-            <TButton
-              icon="facebook"
-              icon-size="6"
-              :href="`https://fb.com/WeDance${community}`"
-              :label="`WeDance${community}`"
-            />
-            <TButton
-              icon="telegram"
-              icon-size="6"
-              :href="`https://t.me/WeDance${community}`"
-              :label="`WeDance${community}`"
-            />
-          </div>
-        </div>
-      </div>
-    </template>
 
     <div class="flex p-4 space-x-4">
       <div class="w-32">
@@ -117,27 +64,47 @@
           :alt="profile.username"
           class="w-full rounded-full"
         />
-        <TIcon v-else name="undraw_profile_pic" class="w-full rounded-full" />
+        <TIcon
+          v-else-if="profile.type !== 'City'"
+          name="undraw_profile_pic"
+          class="w-full rounded-full"
+        />
       </div>
 
       <div>
         <h1 class="leading-tight font-bold">{{ profile.name }}</h1>
         <div class="text-sm">{{ profile.bio }}</div>
 
-        <TButton
-          v-if="uid !== profile.id && profile.type !== 'City'"
-          type="base"
-          class="mt-4"
-          :to="`/chat/${profile.username}`"
-          >{{ $t('profile.chat.label') }}</TButton
-        >
-        <TButton type="base" class="mt-4" to="/events/-/edit">{{
-          $t('myprofile.addEvent')
-        }}</TButton>
+        <div class="text-xs text-gray-500">
+          {{ profile.viewsCount || 0 }} views
+        </div>
+
+        <div v-if="profile.type === 'City'" class="flex space-x-2 mt-4">
+          <TReaction
+            label="Subscribe"
+            toggled-label="Unsubscribe"
+            field="watch"
+            icon="BellIcon"
+            :item="profile"
+            collection="profiles"
+          />
+          <TButton type="simple" to="/events/-/edit">{{
+            $t('myprofile.addEvent')
+          }}</TButton>
+        </div>
+        <div v-if="profile.type !== 'City'" class="flex space-x-2 mt-4">
+          <TReaction
+            label="Follow"
+            toggled-label="Unfollow"
+            field="watch"
+            icon="BellIcon"
+            :item="profile"
+            collection="profiles"
+          />
+          <TProfileContacts :profile="profile" title="Contact" type="simple" />
+        </div>
       </div>
     </div>
-
-    <TProfileContacts :profile="profile" class="py-2 mb-4 bg-gray-100" />
 
     <div v-if="uid === profile.id" class="flex justify-center space-x-2">
       <TButton :label="$t('myprofile.edit')" to="/settings?tab=profile" />
@@ -150,43 +117,155 @@
       class="w-full mt-4"
     />
 
-    <TEventList
-      v-if="profile.type !== 'City'"
-      :filter="{ 'org.username': profile.username }"
-      class="mt-4 w-full border-b pb-8"
+    <TCommunity
+      v-if="profile.type === 'City' && profile.username !== 'Travel'"
+      class="pt-4 border-t"
     />
 
-    <TEventList
-      v-if="profile.type === 'City'"
-      :filter="{ place: profile.place }"
-      :community="profile.username"
-      class="mt-4 w-full border-b pb-8"
+    <template v-if="$route.query.beta">
+      <TCalendar
+        v-if="profile.type === 'City' && profile.username !== 'Travel'"
+        class="mt-4 w-full border-t pt-4 pb-8"
+      />
+    </template>
+
+    <template v-if="!$route.query.beta">
+      <TEventListNoLoad
+        :community="profile.username"
+        :username="profile.username"
+        :docs="events"
+        class="w-full border-b border-t pt-4"
+      />
+    </template>
+
+    <WTeaser
+      v-if="!uid && profile.type !== 'City' && profile.place"
+      :title="`${invitesLeft} invites left`"
+      :description="
+        `${profile.name} invites you to get a free VIP membership for faster networking, get rewards, discover dance flashmobs and VIP events`
+      "
+      button="Accept Invitation"
+      :url="`/signin?invitedBy=${profile.username}`"
+      class="my-0"
     />
+
+    <div
+      v-if="uid === profile.id"
+      class="w-full flex justify-center p-4 mt-4 space-x-4"
+    >
+      <TButton to="/events/-/edit" type="primary">{{
+        $t('myprofile.addEvent')
+      }}</TButton>
+      <TButton to="/posts/-/edit" type="base">{{
+        $t('myprofile.addPost')
+      }}</TButton>
+    </div>
 
     <TPreview v-if="profile.story" :content="profile.story" class="p-4" />
 
     <TProfileDetails v-if="profile.type !== 'City'" :profile="profile" />
 
-    <div v-if="uid === profile.id" class="w-full flex justify-center p-4 mt-4">
-      <TButton to="/posts/-/edit" type="primary">{{
-        $t('myprofile.addPost')
-      }}</TButton>
+    <div
+      v-if="profile.id !== profile.createdBy && profile.type !== 'City'"
+      class="py-4 flex justify-center"
+    >
+      <TButton
+        type="simple"
+        label="Claim my profile"
+        :href="`mailto:support@wedance.vip?subject=Claim ${profile.username}`"
+      />
     </div>
 
     <TPostList
+      v-if="profile.type !== 'City'"
       :filter="{ username: profile.username }"
       class="mt-4 w-full border-t"
     />
+
+    <div
+      v-if="profile.type === 'City' && profile.instagram"
+      class="bg-gray-100 py-4 flex justify-center"
+    >
+      <div class="max-w-md py-4 space-y-1">
+        <div class="flex justify-center"></div>
+        <h3 class="text-2xl font-extrabold text-center">
+          Follow us
+        </h3>
+        <p class="text-center">
+          We regularly post event announcements and introduce new members on our
+          social media.
+        </p>
+        <div class="p-4 flex flex-wrap gap-2 items-center justify-center">
+          <TButton
+            v-if="profile.youtube"
+            allow-guests
+            icon="youtube"
+            type="round"
+            icon-size="6"
+            :href="profile.youtube"
+          />
+          <TButton
+            v-if="profile.instagram"
+            allow-guests
+            icon="instagram"
+            type="round"
+            icon-size="6"
+            :href="profile.instagram"
+          />
+          <TButton
+            v-if="profile.telegram"
+            allow-guests
+            icon="telegram"
+            type="round"
+            icon-size="6"
+            :href="profile.telegram"
+          />
+          <TButton
+            v-if="profile.twitter"
+            allow-guests
+            icon="twitter"
+            type="round"
+            icon-size="6"
+            :href="profile.twitter"
+          />
+          <TButton
+            v-if="profile.tiktok"
+            allow-guests
+            icon="tiktok"
+            type="round"
+            icon-size="6"
+            :href="profile.tiktok"
+          />
+          <TButton
+            v-if="profile.facebook"
+            allow-guests
+            icon="facebook"
+            type="round"
+            icon-size="6"
+            :href="profile.facebook"
+          />
+        </div>
+      </div>
+    </div>
   </div>
 </template>
 
 <script>
-import { computed } from 'vue-demi'
+import { computed, onMounted, ref } from 'vue-demi'
 import { useApp } from '~/use/app'
 import { useAuth } from '~/use/auth'
 import { useProfiles } from '~/use/profiles'
 import { getExcerpt } from '~/utils'
 import { useI18n } from '~/use/i18n'
+import { useDoc } from '~/use/doc'
+import {
+  getEventsInPlace,
+  getEventsOrganisedBy,
+  getEventsWithArtist,
+  getEventsWithGuest,
+  getFestivals,
+} from '~/use/events'
+import { useCities } from '~/use/cities'
 
 export default {
   props: {
@@ -198,11 +277,12 @@ export default {
   setup(props) {
     const { uid, isAdmin, can } = useAuth()
     const { profileFields } = useProfiles()
+    const { switchCity } = useCities()
     const { getCity } = useApp()
     const { t } = useI18n()
-
+    const { remove } = useDoc('profiles')
+    const invitesLeft = 5
     const community = computed(() => getCity(props.profile?.place))
-
     const intro = {
       fields: [
         {
@@ -233,13 +313,44 @@ export default {
       missing: [],
       visible: false,
     }
-
     for (const field of intro.fields) {
       if (!props.profile[field.name]) {
         intro.missing.push(field)
         intro.visible = true
       }
     }
+
+    const events = ref([])
+
+    onMounted(async () => {
+      let result = []
+
+      if (props.profile.username === 'Travel') {
+        result = await getFestivals()
+      } else if (props.profile.type === 'City') {
+        await switchCity(props.profile.place)
+        result = await getEventsInPlace(props.profile.place)
+      } else {
+        result = [
+          ...result,
+          ...(await getEventsOrganisedBy(props.profile?.username)),
+        ]
+        result = [
+          ...result,
+          ...(await getEventsWithArtist(props.profile?.username)).filter(
+            (item) => !result.find((existing) => existing.id === item.id)
+          ),
+        ]
+        result = [
+          ...result,
+          ...(await getEventsWithGuest(props.profile?.username)).filter(
+            (item) => !result.find((existing) => existing.id === item.id)
+          ),
+        ]
+      }
+
+      events.value = result
+    })
 
     return {
       intro,
@@ -250,6 +361,9 @@ export default {
       getCity,
       isAdmin,
       community,
+      invitesLeft,
+      remove,
+      events,
     }
   },
 }

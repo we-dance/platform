@@ -2,28 +2,47 @@
   <nav
     class="p-4 flex flex-col space-y-2 text-dark h-screen overflow-y-scroll sticky top-0 border-r"
   >
+    <TButton allow-guests to="/" class="mb-8" type="void">
+      <TIcon name="logo-horizontal-dark" />
+    </TButton>
     <TButton
       allow-guests
-      to="/"
-      icon="logo-horizontal-dark"
-      class="mb-8"
-      type="void"
+      to="/Travel"
+      icon="place"
+      :label="$t('nav.travel')"
+      type="nav"
     />
-
+    <TButton
+      v-if="cityName"
+      allow-guests
+      :to="`/${cityName}`"
+      icon="place"
+      :label="cityName"
+      type="nav"
+    />
+    <TButton
+      v-if="!cityName"
+      allow-guests
+      to="/cities"
+      icon="place"
+      :label="$t('nav.chooseCity')"
+      type="nav"
+    />
+    <TButton
+      allow-guests
+      to="/feed"
+      icon="news"
+      :label="$t('nav.feed')"
+      type="nav"
+    />
+    <TButton
+      allow-guests
+      to="/dance"
+      icon="fire"
+      :label="$t('nav.dance')"
+      type="nav"
+    />
     <template v-if="uid">
-      <TButton to="/feed" icon="news" :label="$t('nav.feed')" type="nav" />
-      <TButton
-        to="/events"
-        icon="calendar"
-        :label="$t('nav.calendar')"
-        type="nav"
-      />
-      <TButton
-        to="/community"
-        icon="people"
-        :label="$t('nav.community')"
-        type="nav"
-      />
       <TButton to="/chat" icon="chat" :label="$t('nav.chat')" type="nav" />
       <TButton :to="`/${username}`" type="nav">
         <TProfilePhoto size="xs" :uid="uid" class="mr-1" />
@@ -33,17 +52,15 @@
       <TButton to="/signout" type="nav" :label="$t('auth.signout')" />
     </template>
     <template v-else>
+      <div class="text-xs mt-4">
+        <h4 class="font-bold">{{ $t('home.cta.header') }}</h4>
+        <div>{{ $t('home.cta.description') }}</div>
+      </div>
       <TButton
         allow-guests
         to="/signin"
         type="nav"
         :label="$t('auth.signin')"
-      />
-      <TButton
-        allow-guests
-        to="/register"
-        type="nav"
-        :label="$t('auth.signup')"
         class="bg-primary border-none text-white hover:bg-dark"
       />
     </template>
@@ -105,12 +122,13 @@
 
 <script>
 import { useAuth } from '~/use/auth'
+import { useCities } from '~/use/cities'
 
 export default {
   setup() {
     const { isAdmin, isEditor } = useAuth()
-
-    return { isAdmin, isEditor }
+    const { cityName } = useCities()
+    return { isAdmin, isEditor, cityName }
   },
   props: {
     uid: {
@@ -126,7 +144,7 @@ export default {
 </script>
 
 <style>
-nav .nuxt-link-exact-active {
+nav .nuxt-link-active {
   @apply text-primary border-primary;
 }
 </style>

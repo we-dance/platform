@@ -150,7 +150,7 @@ export default {
       }
 
       if (field && field.onChange) {
-        field.onChange(val)
+        field.onChange(val, this.value)
       }
 
       this.$emit('input', val)

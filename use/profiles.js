@@ -36,20 +36,20 @@ export const useProfiles = () => {
 
   const typeList = [
     {
-      label: t('profile.typeList.dancer'),
-      value: 'Dancer',
-    },
-    {
-      label: t('profile.typeList.artist'),
-      value: 'Artist',
-    },
-    {
       label: t('profile.typeList.organiser'),
       value: 'Organiser',
     },
     {
       label: t('profile.typeList.venue'),
       value: 'Venue',
+    },
+    {
+      label: t('profile.typeList.artist'),
+      value: 'Artist',
+    },
+    {
+      label: t('profile.typeList.dancer'),
+      value: 'Dancer',
     },
     {
       label: t('profile.typeList.city'),
@@ -61,6 +61,14 @@ export const useProfiles = () => {
     {
       label: t('profile.objectivesList.talk'),
       value: 'talk',
+    },
+    {
+      label: t('profile.objectivesList.home'),
+      value: 'home',
+    },
+    {
+      label: t('profile.objectivesList.auto'),
+      value: 'auto',
     },
     {
       label: t('profile.objectivesList.learn'),
@@ -100,6 +108,11 @@ export const useProfiles = () => {
       label: 'BlaBlaCar',
       placeholder:
         'https://www.blablacar.de/user/show/00000000-0000-0000-0000-000000000000',
+    },
+    {
+      name: 'spotify',
+      label: 'Spotify',
+      placeholder: 'https://open.spotify.com/user/000000000000000000000000',
     },
     {
       name: 'instagram',
@@ -189,13 +202,22 @@ export const useProfiles = () => {
       before: t('profile.username.before'),
     },
     {
+      name: 'current',
+      label: t('profile.current.label'),
+      register: true,
+      poster: true,
+      required: true,
+      component: 'TInputPlace',
+      before: t('profile.current.before'),
+    },
+    {
       name: 'place',
       label: t('profile.place.label'),
       register: true,
       poster: true,
       required: true,
       component: 'TInputPlace',
-      placeholder: t('profile.place.placeholder'),
+      before: t('profile.place.before'),
     },
     {
       name: 'hometown',

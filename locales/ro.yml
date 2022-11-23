@@ -427,7 +427,7 @@ teaser:
     btn: Alătură-te acum
   chat:
     title: Vorbim?
-    description: "Avem discuții de dans în fiecare oraș"
+    description: 'Avem discuții de dans în fiecare oraș'
     btn: Alăturați-vă chatului {city}
   involve:
     title: Noi avem nevoie de ajutorul tau

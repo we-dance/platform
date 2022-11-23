@@ -61,11 +61,8 @@ export default {
           name: 'name',
         },
         {
-          name: 'telegram',
-        },
-        {
           name: 'location',
-          component: 'TInputPlace',
+          component: 'TInputLocation',
         },
         {
           name: 'hits',
@@ -74,6 +71,24 @@ export default {
           name: 'status',
           component: 'TInputSelect',
           options: ['requested', 'active'],
+        },
+        {
+          name: 'ambassador',
+          component: 'TInputProfile',
+          label: 'Ambassador',
+          labelPosition: 'top',
+        },
+        {
+          name: 'instagram',
+        },
+        {
+          name: 'telegram',
+        },
+        {
+          name: 'telegramChannel',
+        },
+        {
+          name: 'telegramChannelId',
         },
       ],
       filters: [

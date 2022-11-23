@@ -7,7 +7,7 @@
     @click="showAuthPopup = title"
   >
     <slot>
-      <div class="flex items-center space-x-2">
+      <div class="flex items-center justify-center space-x-2">
         <TIcon v-if="icon" :size="iconSize" :name="icon" />
         <span v-if="label !== false">{{ label }}</span>
       </div>
@@ -23,7 +23,7 @@
     v-on="$listeners"
   >
     <slot>
-      <div class="flex items-center space-x-2">
+      <div class="flex items-center justify-center space-x-2">
         <TIcon v-if="icon" :size="iconSize" :name="icon" />
         <span v-if="label !== false">{{ label }}</span>
       </div>
@@ -37,7 +37,7 @@
     v-on="$listeners"
   >
     <slot>
-      <div class="flex items-center space-x-2">
+      <div class="flex items-center justify-center space-x-2">
         <TIcon v-if="icon" :size="iconSize" :name="icon" />
         <span v-if="label !== false">{{ label }}</span>
       </div>
@@ -51,7 +51,7 @@
     v-on="$listeners"
   >
     <slot>
-      <div class="flex items-center space-x-2">
+      <div class="flex items-center justify-center space-x-2">
         <TIcon v-if="icon" :size="iconSize" :name="icon" />
         <span v-if="label !== false">{{ label }}</span>
       </div>
@@ -122,7 +122,7 @@ export default {
         danger:
           'bg-red-500 no-underline text-white font-semibold py-2 px-4 rounded-full hover:text-white hover:bg-red-700 shadow',
         base:
-          'bg-white hover:bg-gray-100 text-gray-800 font-semibold py-1 px-4 border border-gray-400 rounded-full shadow',
+          'bg-white hover:bg-gray-100 text-gray-800 font-semibold py-2 px-4 border border-gray-400 rounded-full shadow',
         secondary:
           'bg-transparent text-primary font-semibold py-2 px-4 border border-primary rounded-full no-underline hover:bg-primary hover:text-white hover:border-transparent',
         link: 'underline font-semibold hover:no-underline',

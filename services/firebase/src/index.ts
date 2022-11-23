@@ -1,3 +1,4 @@
+import axios from 'axios'
 import * as Sentry from '@sentry/node'
 import * as functions from 'firebase-functions'
 import * as express from 'express'
@@ -5,17 +6,57 @@ import * as cors from 'cors'
 import * as Handlebars from 'handlebars'
 import sendEmail from './lib/sendEmail'
 import { screenshot } from './lib/screenshot'
-import { initIndex, profileToAlgolia, removeObject } from './lib/algolia'
+import {
+  eventForApi,
+  initIndex,
+  profileToAlgolia,
+  removeObject,
+} from './lib/algolia'
 import { generateSocialCover } from './lib/migrations'
-import { firestore as db, admin } from './firebase'
+import { firestore as db, admin, firestore } from './firebase'
 import { notifySlackAboutEvents, notifySlackAboutUsers } from './lib/slack'
-import config from './env'
 import { wrap } from './sentry'
+import { announceEvent } from './lib/telegram'
+import { announceEventIG } from './lib/instagram'
+import { getInstagramWebProfileInfo } from './lib/browser'
 
-Sentry.init(config.sentry)
+require('dotenv').config()
+
+Sentry.init({
+  dsn: String(process.env.SENTRY_DSN),
+  tracesSampleRate: 1.0,
+  serverName: 'firebase-functions',
+})
 
 const app = express()
 app.use(cors({ origin: true }))
+
+app.get('/events', async (req, res) => {
+  const today = new Date().toISOString().slice(0, 10)
+
+  const eventDocs = (
+    await firestore
+      .collection('posts')
+      .where('startDate', '>', today)
+      .get()
+  ).docs
+
+  const data = []
+
+  for (const doc of eventDocs) {
+    const event = {
+      id: doc.id,
+      ...doc.data(),
+    } as any
+
+    data.push(eventForApi(event))
+  }
+
+  res.json({
+    success: true,
+    data,
+  })
+})
 
 app.post('/track/:action', async (req, res) => {
   const vars = req.body['event-data']['user-variables']
@@ -149,6 +190,7 @@ export const onProfileChange = functions.firestore
     const profileId = context.params.profileId
 
     const wasDeleted = oldProfile?.username && !profile?.username
+    const wasCreated = !oldProfile?.username && profile?.username
     const becameUnlisted =
       profile?.visibility === 'Unlisted' &&
       oldProfile?.visibility !== 'Unlisted'
@@ -159,6 +201,11 @@ export const onProfileChange = functions.firestore
 
     if (!profile || !profile.username) {
       return
+    }
+
+    if (wasCreated) {
+      const message = `New dancer - https://wedance.vip/${profile.username}\n\nUID:${profileId}`
+      await notifySlackAboutUsers(message)
     }
 
     const cacheFields = ['username', 'photo']
@@ -174,7 +221,12 @@ export const onProfileChange = functions.firestore
         .update({ [`profiles.${profileId}`]: profileCache })
     }
 
-    const cache = (await db.collection('app').doc('v2').get()).data() as any
+    const cache = (
+      await db
+        .collection('app')
+        .doc('v2')
+        .get()
+    ).data() as any
 
     const index = initIndex('profiles')
 
@@ -202,18 +254,70 @@ export const onProfileChange = functions.firestore
     }
   })
 
-export const profileCreated = functions.firestore
-  .document('profiles/{profileId}')
+export const profileCreated = functions
+  .runWith({ memory: '1GB' })
+  .firestore.document('profiles/{profileId}')
   .onCreate(async (snapshot, context) => {
     const profile = snapshot.data() as any
-    const profileId = context.params.profileId
-    const cache = (await db.collection('app').doc('v2').get()).data() as any
+    if (profile.import === 'requested2') {
+      let instagram
 
-    const cityName = cache.cities[profile.place]?.name || 'International'
+      await snapshot.ref.update({
+        import: 'importing',
+        importError: '',
+      })
 
-    const message = `New dancer in ${cityName} - https://wedance.vip/${profile.username}\n\nUID:${profileId}`
+      try {
+        instagram = await getInstagramWebProfileInfo(profile.instagram)
+        if (!instagram) {
+          throw new Error('Instagram not found')
+        }
+      } catch (e) {
+        await snapshot.ref.update({
+          import: 'failed',
+          importError: e.message,
+        })
 
-    await notifySlackAboutUsers(message)
+        return
+      }
+
+      let photo = ''
+
+      if (instagram.profile_pic_url_hd) {
+        const imageBuffer = (
+          await axios.get(instagram.profile_pic_url_hd, {
+            responseType: 'arraybuffer',
+          })
+        ).data
+        const bucket = admin.storage().bucket()
+        const filePath = 'share/' + profile.username + '.png'
+        const file = bucket.file(filePath)
+
+        await file.save(imageBuffer, {
+          public: true,
+        })
+
+        const [metadata] = await file.getMetadata()
+
+        photo = metadata.mediaLink
+      }
+
+      const now = +new Date()
+      const changes = {
+        importedAt: now,
+        updatedAt: now,
+        source: 'instagram',
+        name: instagram.full_name,
+        bio: instagram.biography || '',
+        type: 'FanPage',
+        import: 'success',
+        website: instagram.external_url || '',
+        photo,
+        visibility: 'Public',
+      }
+
+      await snapshot.ref.update(changes)
+    }
   })
 
 export const accountCreated = functions.firestore
@@ -274,6 +378,49 @@ export const accountCreated = functions.firestore
     return await sendEmail(emailData)
   })
 
+export const eventChanged = functions.firestore
+  .document('posts/{eventId}')
+  .onWrite(async (change, context) => {
+    const oldEvent = change.before.data() as any
+    const eventId = context.params.eventId
+    const event = { ...change.after.data(), id: eventId } as any
+
+    if (
+      wasChanged(oldEvent, event, ['telegram']) &&
+      event?.telegram?.state === 'requested'
+    ) {
+      const result = (await announceEvent(event)) as any
+
+      await db
+        .collection('posts')
+        .doc(eventId)
+        .update({
+          'telegram.state': 'published',
+          'telegram.publishedAt': +new Date(),
+          'telegram.messageId': result.messageId,
+          'telegram.messageUrl': result.messageUrl,
+        })
+    }
+
+    if (
+      wasChanged(oldEvent, event, ['instagram']) &&
+      event?.instagram?.state === 'requested' &&
+      event.place === 'ChIJ2V-Mo_l1nkcRfZixfUq4DAE'
+    ) {
+      const result = (await announceEventIG(event)) as any
+
+      await db
+        .collection('posts')
+        .doc(eventId)
+        .update({
+          'instagram.state': 'published',
+          'instagram.publishedAt': +new Date(),
+          'instagram.messageId': result.messageId,
+          'instagram.messageUrl': result.messageUrl,
+        })
+    }
+  })
+
 export const eventCreated = functions.firestore
   .document('posts/{eventId}')
   .onCreate(async (snapshot, context) => {
@@ -284,10 +431,15 @@ export const eventCreated = functions.firestore
       return
     }
 
-    const cache = (await db.collection('app').doc('v2').get()).data() as any
+    const cache = (
+      await db
+        .collection('app')
+        .doc('v2')
+        .get()
+    ).data() as any
 
     const cityName = cache.cities[event.place]?.name || 'International'
-    const promoter = cache.profiles[event.promotedBy]?.username || 'Unknown'
+    const promoter = cache.profiles[event.createdBy]?.username || 'Unknown'
     const startDate = new Date(event.startDate)
 
     const lines = []
@@ -301,11 +453,8 @@ export const eventCreated = functions.firestore
     lines.push(event.name)
     lines.push(startDate)
 
-    if (event.claimed === 'Yes') {
-      lines.push(`Organised by ${event.organiser}`)
-    } else {
-      lines.push(`Promoted by ${promoter}`)
-    }
+    lines.push(`Organised by ${event.org?.username}`)
+    lines.push(`Promoted by ${promoter}`)
 
     lines.push(`https://wedance.vip/events/${eventId}`)
 
@@ -336,7 +485,10 @@ export const eventConfirmation = functions.firestore
     }
 
     const event: any = (
-      await db.collection('posts').doc(rsvp.eventId).get()
+      await db
+        .collection('posts')
+        .doc(rsvp.eventId)
+        .get()
     ).data()
 
     const subject = event.name
@@ -375,7 +527,12 @@ async function getAccountByUsername(username: string) {
 
   const id = profiles.docs[0].id
 
-  const account: any = (await db.collection('accounts').doc(id).get()).data()
+  const account: any = (
+    await db
+      .collection('accounts')
+      .doc(id)
+      .get()
+  ).data()
 
   account.id = id
 
@@ -389,7 +546,10 @@ export const commentNotification = functions.firestore
     const commentId = context.params.commentId
 
     const post: any = (
-      await db.collection('posts').doc(comment.postId).get()
+      await db
+        .collection('posts')
+        .doc(comment.postId)
+        .get()
     ).data()
 
     if (!post.watch) {
@@ -455,7 +615,12 @@ export const matchNotification = functions.firestore
     delete after.members[after.lastMessageBy]
     const to = Object.keys(after.members)[0]
 
-    const toAccount = (await db.collection('accounts').doc(to).get()).data()
+    const toAccount = (
+      await db
+        .collection('accounts')
+        .doc(to)
+        .get()
+    ).data()
 
     if (!toAccount) {
       throw new Error('toAccount not found')
@@ -491,44 +656,44 @@ export const matchNotification = functions.firestore
     await sendEmail(data)
   })
 
-export const taskRunner = functions
-  .runWith({ memory: '2GB' })
-  .pubsub.schedule('* * * * *')
-  .onRun(async () => {
-    const now = admin.firestore.Timestamp.now()
+// export const taskRunner = functions
+//   .runWith({ memory: '2GB' })
+//   .pubsub.schedule('* * * * *')
+//   .onRun(async () => {
+//     const now = admin.firestore.Timestamp.now()
 
-    const query = db
-      .collection('emails')
-      .where('scheduledAt', '<=', now)
-      .where('status', '==', 'scheduled')
+//     const query = db
+//       .collection('emails')
+//       .where('scheduledAt', '<=', now)
+//       .where('status', '==', 'scheduled')
 
-    const tasks = await query.get()
+//     const tasks = await query.get()
 
-    const jobs: Promise<any>[] = []
+//     const jobs: Promise<any>[] = []
 
-    tasks.forEach((snapshot) => {
-      const data = {
-        ...snapshot.data(),
-        id: snapshot.id,
-      }
-      const job = sendEmail(data)
-        .then(() =>
-          snapshot.ref.update({
-            status: 'sent',
-            processedAt: admin.firestore.Timestamp.now(),
-            error: '',
-          })
-        )
-        .catch((err) =>
-          snapshot.ref.update({
-            status: 'error',
-            processedAt: admin.firestore.Timestamp.now(),
-            error: err.message,
-          })
-        )
+//     tasks.forEach((snapshot) => {
+//       const data = {
+//         ...snapshot.data(),
+//         id: snapshot.id,
+//       }
+//       const job = sendEmail(data)
+//         .then(() =>
+//           snapshot.ref.update({
+//             status: 'sent',
+//             processedAt: admin.firestore.Timestamp.now(),
+//             error: '',
+//           })
+//         )
+//         .catch((err) =>
+//           snapshot.ref.update({
+//             status: 'error',
+//             processedAt: admin.firestore.Timestamp.now(),
+//             error: err.message,
+//           })
+//         )
 
-      jobs.push(job)
-    })
+//       jobs.push(job)
+//     })
 
-    return await Promise.all(jobs)
-  })
+//     return await Promise.all(jobs)
+//   })

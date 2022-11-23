@@ -29,6 +29,7 @@ export const useDoc = (name) => {
       if (doc.exists) {
         state.doc = doc.data()
         state.id = doc.id
+        state.doc.id = doc.id
       } else {
         state.doc = {}
         state.id = null
@@ -100,6 +101,7 @@ export const useDoc = (name) => {
     state.saving = true
 
     const result = await collection.doc(id).update(data)
+    state.doc = { ...state.doc, ...data }
 
     state.saving = false
 
@@ -118,6 +120,7 @@ export const useDoc = (name) => {
     const result = await collection.doc(id).update(changes)
 
     state.saving = false
+    state.doc = { ...state.doc, ...data }
 
     return result
   }

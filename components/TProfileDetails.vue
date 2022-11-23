@@ -1,5 +1,41 @@
 <template>
   <div class="space-y-4 mt-8 p-4 bg-gray-100">
+    <dl v-if="profile.current">
+      <dt class="font-bold mr-1">{{ $t('profile.current.label') }}:</dt>
+      <dd>{{ getCity(profile.current) }}</dd>
+    </dl>
+    <dl v-if="!profile.place && profile.import">
+      <dt class="font-bold mr-1">{{ $t('profile.place.label') }}:</dt>
+      <dd>
+        <TPopupEdit
+          :fields="profileFields.filter((f) => f.name === 'place')"
+          label="Add city"
+          collection="profiles"
+          singular="profile"
+          :item="profile"
+        />
+      </dd>
+    </dl>
+    <dl v-if="profile.place">
+      <dt class="font-bold mr-1">{{ $t('profile.place.label') }}:</dt>
+      <dd>{{ getCity(profile.place) }}</dd>
+    </dl>
+    <dl v-if="!profile.hometown && profile.import">
+      <dt class="font-bold mr-1">{{ $t('profile.hometown.label') }}:</dt>
+      <dd>
+        <TPopupEdit
+          :fields="profileFields.filter((f) => f.name === 'hometown')"
+          label="Add city"
+          collection="profiles"
+          singular="profile"
+          :item="profile"
+        />
+      </dd>
+    </dl>
+    <dl v-if="profile.hometown">
+      <dt class="font-bold mr-1">{{ $t('profile.hometown.label') }}:</dt>
+      <dd>{{ getCity(profile.hometown) }}</dd>
+    </dl>
     <dl v-if="profile.locales">
       <dt class="font-bold mr-1">{{ $t('profile.languages') }}:</dt>
       <dd>{{ getLabels(languages, profile.locales) }}</dd>
@@ -50,6 +86,7 @@
 import { getDateTimeYear, getLabels } from '~/utils'
 import { useProfiles } from '~/use/profiles'
 import languages from '~/assets/languages'
+import { useApp } from '~/use/app'
 
 export default {
   props: {
@@ -63,15 +100,19 @@ export default {
       objectivesList,
       profilePosterFields,
       profileDetailFields,
+      profileFields,
     } = useProfiles()
+    const { getCity } = useApp()
 
     return {
       objectivesList,
       profilePosterFields,
       profileDetailFields,
       languages,
+      profileFields,
       getDateTimeYear,
       getLabels,
+      getCity,
     }
   },
 }

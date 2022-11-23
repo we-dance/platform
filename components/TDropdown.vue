@@ -1,7 +1,13 @@
 <template>
   <TMenu>
     <template v-slot:button>
-      <TButton :icon="icon" :type="type" :label="label" :title="title" />
+      <TButton
+        allow-guests
+        :icon="icon"
+        :type="type"
+        :label="label"
+        :title="title"
+      />
     </template>
     <template v-slot:menu="{ closeMenu }">
       <div class="w-32 py-2 bg-white rounded-lg shadow-xl border">

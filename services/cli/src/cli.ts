@@ -1,6 +1,8 @@
 import axios from 'axios'
 import { db, admin } from './firebase'
-import { getInstagram } from './lib/browser'
+import { closeBrowser, getInstagramWebProfileInfo } from './lib/browser'
+
+require('dotenv').config()
 
 const yargs = require('yargs/yargs')
 const { hideBin } = require('yargs/helpers')
@@ -228,7 +230,7 @@ yargs(hideBin(process.argv))
       if (argv.username) {
         profiles = await db
           .collection('profiles')
-          .where('instagram', '==', argv.username)
+          .where('username', '==', argv.username)
           .get()
       } else {
         profiles = await db
@@ -244,12 +246,22 @@ yargs(hideBin(process.argv))
 
       console.log(`Importing ${profiles.docs.length} profiles`)
 
+      let current = 0
       for (const profileRef of profiles.docs) {
         const profile = profileRef.data()
 
-        if (!profile) {
+        console.log(``)
+        console.log(`---`)
+        current++
+
+        if (!profile?.instagram) {
+          console.log('Skipping no instagram link')
           continue
         }
+
+        console.log(
+          `${current} of ${profiles.docs.length} - importing ${profile.instagram}`
+        )
 
         const owner = (
           await db
@@ -263,6 +275,8 @@ yargs(hideBin(process.argv))
           continue
         }
 
+        console.log(`Added by ${owner?.username}`)
+
         if (profile.instagram) {
           if (imported[profile.instagram]) {
             await profileRef.ref.delete()
@@ -272,18 +286,19 @@ yargs(hideBin(process.argv))
 
           imported[profile.instagram] = true
 
-          const instagram = await getInstagram(profile.instagram)
+          let instagram
 
-          if (!instagram) {
-            const error = 'Instagram not found'
+          try {
+            instagram = await getInstagramWebProfileInfo(profile.instagram)
+            if (!instagram) {
+              throw new Error('Instagram not found')
+            }
+          } catch (e) {
+            console.log(`[status] failed`)
+            console.log((e as any).message)
 
-            console.log(
-              `${profile.username} added by ${owner.username} failed: ${error}`
-            )
+            await profileRef.ref.update({ import: 'failed' })
 
-            await profileRef.ref.update({
-              import: 'failed',
-            })
             continue
           }
 
@@ -313,11 +328,10 @@ yargs(hideBin(process.argv))
             importedAt: now,
             updatedAt: now,
             source: 'instagram',
-            name: instagram.full_name || instagram.username,
-            bio: instagram.bio || '',
+            name: instagram.full_name,
+            bio: instagram.biography || '',
             type: 'FanPage',
             import: 'success',
-            instagram: instagram.username,
             website: instagram.external_url || '',
             photo,
             visibility: 'Public',
@@ -325,14 +339,16 @@ yargs(hideBin(process.argv))
 
           await profileRef.ref.update(changes)
           console.log(
-            `${profile.username} by ${owner.username}: imported from Instagram`
+            `[status] success - https://wedance.vip/${profile.username}`
           )
-          console.log(` name: ${changes.name}`)
-          console.log(` bio: ${changes.bio}`)
-          console.log(` website: ${changes.website}`)
+          console.log(`• name: ${changes.name}`)
+          console.log(`• bio: ${changes.bio}`)
+          console.log(`• website: ${changes.website}`)
           console.log(``)
         }
       }
+
+      await closeBrowser()
     }
   )
   .help('h')

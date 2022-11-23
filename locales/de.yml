@@ -156,7 +156,7 @@ filter:
 community:
   title: Community
 profile:
-  bookme: Book me
+  bookme: Buche mich
   contactme: Contact me
   username:
     label: Username
@@ -292,7 +292,7 @@ radiusOptions:
   thousand: around 1000km
   anywhere: Irgendwo
 myprofile:
-  addEvent: Hinzufügen
+  addEvent: Veranstaltung Hinzufügen
   addPost: Write a post
   edit: Edit Profile
   share: Teilen
@@ -427,7 +427,7 @@ teaser:
     btn: Jetzt beitreten
   chat:
     title: Einheimische fragen
-    description: "Wir haben in jeder Stadt einen Telegram-Tanzchat. Treten Sie Ihrem Stadt-Chat bei, um reisenden Tänzern zu helfen, und laden Sie Ihre Tanzfreunde ein. Lass uns zusammen WeDance aufbauen!"
+    description: 'Wir haben in jeder Stadt einen Telegram-Tanzchat. Treten Sie Ihrem Stadt-Chat bei, um reisenden Tänzern zu helfen, und laden Sie Ihre Tanzfreunde ein. Lass uns zusammen WeDance aufbauen!'
     btn: Chat beitreten
   involve:
     title: Wir brauchen Deine Hilfe

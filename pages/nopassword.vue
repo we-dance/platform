@@ -44,12 +44,12 @@
       </div>
       <div class="mt-4 text-xs">
         <div class="mt-4 border-t pt-4 flex space-x-2 text-xs">
-          <NuxtLink to="/signin" class="underline hover:no-underline">{{
+          <NuxtLink to="/register" class="underline hover:no-underline">{{
+            $t('signin.register')
+          }}</NuxtLink>
+          <NuxtLink to="/signin-email" class="underline hover:no-underline">{{
             $t('nopassword.signin')
           }}</NuxtLink>
-          <button class="underline hover:no-underline" @click="signGoogle">
-            {{ $t('nopassword.google') }}
-          </button>
         </div>
       </div>
     </form>
@@ -117,7 +117,7 @@ export default {
       ls.remove('target')
 
       if (!target) {
-        target = '/feed'
+        target = '/events'
       }
 
       this.$router.push(target)
@@ -135,13 +135,6 @@ export default {
 
       await this.sendSignInLinkToEmail(this.email)
       this.emailSent = true
-    },
-    async signGoogle() {
-      track('login', {
-        method: 'Google',
-      })
-
-      await this.signInWithGoogle()
     },
   },
 }

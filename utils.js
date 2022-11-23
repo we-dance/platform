@@ -33,6 +33,12 @@ export const sortBy = (_key) => {
 export const toDatetimeLocal = (date) => {
   if (!date) return ''
 
+  if (Object.prototype.toString.call(date) === '[object Date]') {
+    if (isNaN(date)) {
+      return ''
+    }
+  }
+
   return format(date, "yyyy-MM-dd'T'HH:mm", {
     awareOfUnicodeTokens: true,
   })
@@ -71,6 +77,8 @@ export const formatDate = (val, formatStr) => {
   const date = getDateObect(val)
 
   if (!date) return ''
+
+  if (!date.getTime || isNaN(date.getTime())) return ''
 
   return format(date, formatStr)
 }
@@ -473,13 +481,13 @@ export const getMeta = (collection, post) => {
       },
       performer: post.artists?.map((artist) => ({
         '@type': 'Person',
-        image: artist.photo,
-        name: artist.name,
-        description: artist.bio,
+        image: artist?.photo,
+        name: artist?.name,
+        description: artist?.bio,
         sameAs: [
-          `https://wedance.vip/${artist.username}`,
-          `https://facebook.com/${artist.facebook}`,
-          `https://instagram.com/${artist.instagram}`,
+          `https://wedance.vip/${artist?.username}`,
+          `https://facebook.com/${artist?.facebook}`,
+          `https://instagram.com/${artist?.instagram}`,
         ],
       })),
     }
@@ -528,12 +536,12 @@ export const getMeta = (collection, post) => {
       {
         hid: 'author',
         name: 'author',
-        content: post.username,
+        content: post?.org?.name || post.username,
       },
       {
         hid: 'publisher',
         name: 'publisher',
-        content: post.username,
+        content: post?.org?.name || post.username,
       },
     ],
     script: [

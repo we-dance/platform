@@ -54,12 +54,7 @@ export default {
         styles: {},
         cover: '',
         artists: [],
-        org: {
-          username: this.profile?.username || '',
-          name: this.profile?.name || '',
-          photo: this.profile?.photo || '',
-          role: 'organiser',
-        },
+        org: {},
         username: this.profile?.username,
         watch: {
           count: 1,
@@ -67,6 +62,7 @@ export default {
             [this.profile?.username]: true,
           },
         },
+        program: [],
       }
     }
   },
@@ -91,12 +87,20 @@ export default {
     async saveItem(data) {
       data = pickBy(data, (v) => v !== undefined)
 
+      data.artists = (data.artists || []).filter((item) => item)
+
+      data.artistsList = data.artists
+        .map((a) => a.username)
+        .filter((item) => item)
+
       if (data.id) {
         track('update_event')
+        console.log('update_event', data)
         await this.update(data.id, data)
         this.view(data.id)
       } else {
         track('create_event')
+        console.log('create_event', data)
         const result = await this.create(data)
         this.view(result.id)
       }

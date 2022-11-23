@@ -27,6 +27,7 @@
           :is="component"
           :id="elementId"
           v-bind="$attrs"
+          :item="item"
           :value.sync="computedValue"
           v-on="$attrs.listeners"
           @input="(val) => $emit('input', set(val))"

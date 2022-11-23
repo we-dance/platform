@@ -2,7 +2,7 @@ export const app = {
   name: 'WeDance',
   description: 'We bring dancers together',
   social: {
-    twitter: 'WeDanceVIP',
+    twitter: 'WeDancePlatform',
   },
   url: 'https://wedance.vip/',
   author: 'WeDance',
@@ -37,7 +37,7 @@ export default {
     extendRoutes(routes, resolve) {
       routes.push({
         name: 'Calendar',
-        path: '/:city/:category/:dance/:level',
+        path: '/events/:city/:dance?',
         component: resolve(__dirname, 'pages/events/index'),
       })
 
@@ -73,6 +73,7 @@ export default {
     '~/plugins/router',
     '~/plugins/directives',
     '~/plugins/vue-tailwind',
+    '~/plugins/vue-datepicker',
   ],
   /*
    ** Nuxt.js dev-modules

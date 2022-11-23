@@ -176,7 +176,7 @@ const settings = {
         optionsList: '',
         searchWrapper: 'p-2 placeholder-gray-400',
         searchBox:
-          'px-3 py-2 bg-gray-50 text-sm rounded border focus:outline-none focus:shadow-outline border-gray-300',
+          'px-3 py-2 text-sm rounded border focus:outline-none focus:shadow-outline border-gray-300',
         optgroup: 'text-gray-400 uppercase text-xs py-1 px-2 font-semibold',
         option: '',
         disabledOption: '',

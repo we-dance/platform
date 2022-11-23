@@ -263,6 +263,7 @@ export const useAuth = () => {
         locales: getLanguages(),
         timezone: new Date().toString().match(/([A-Z]+[+-][0-9]+)/)[1],
         place: ls('city'),
+        invitedBy: ls('invitedBy'),
         username: ls('username'),
         visibility: 'Members',
         type: 'Dancer',
@@ -438,6 +439,13 @@ export const useAuth = () => {
     firebase.auth().signInWithRedirect(provider)
   }
 
+  function signInWithFacebook() {
+    state.signingIn = true
+
+    const provider = new firebase.auth.FacebookAuthProvider()
+    firebase.auth().signInWithRedirect(provider)
+  }
+
   async function getRedirectResult() {
     try {
       const result = await firebase.auth().getRedirectResult()
@@ -465,6 +473,7 @@ export const useAuth = () => {
     signInAnonymously,
     signUserIn,
     signInWithGoogle,
+    signInWithFacebook,
     sendSignInLinkToEmail,
     signInWithEmailLink,
     updatePassword,

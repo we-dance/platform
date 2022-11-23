@@ -427,7 +427,7 @@ teaser:
     btn: Şimdi Katıl
   chat:
     title: Sohbet ediyor muyuz?
-    description: "Her şehirde dans sohbetleri var"
+    description: 'Her şehirde dans sohbetleri var'
     btn: '{city} Sohbetine Katıl'
   involve:
     title: Yardımına ihtiyacımız var

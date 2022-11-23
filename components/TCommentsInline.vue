@@ -1,6 +1,6 @@
 <template>
   <TLoader v-if="!item" />
-  <div v-else>
+  <div v-else id="comments">
     <button
       v-if="!showComments"
       class="p-2 text-blue-700 cursor-pointer underline hover:no-underline text-xs text-center mb-2 block w-full"
@@ -9,13 +9,27 @@
       {{ item.commentsCount || 0 }} comments
     </button>
     <div v-if="showComments">
+      <div class="px-4 py-2 flex justify-center items-center">
+        <TReaction
+          label="Subscribe to comments"
+          toggled-label="Unsubscribe"
+          field="watch"
+          icon="BellIcon"
+          :item="item"
+        />
+      </div>
       <textarea
         v-model="newReply"
         rows="1"
         placeholder="Add to the discussion"
         class="w-full border p-2 text-xs text-gray-900"
-        @keyup.enter="sendReply"
       ></textarea>
+      <TButton
+        title="Post comment"
+        label="Post comment"
+        type="xs"
+        @click="sendReply"
+      />
     </div>
     <TItemComments v-if="showComments" :post-id="item.id" />
   </div>

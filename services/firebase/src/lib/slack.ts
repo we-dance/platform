@@ -1,8 +1,8 @@
 import { IncomingWebhook } from '@slack/client'
-import env from '../env'
+require('dotenv').config()
 
-const eventsWebhook = new IncomingWebhook(env.slack.events)
-const usersWebhook = new IncomingWebhook(env.slack.users)
+const eventsWebhook = new IncomingWebhook(String(process.env.SLACK_EVENTS))
+const usersWebhook = new IncomingWebhook(String(process.env.SLACK_USERS))
 
 export async function notifySlackAboutEvents(message: string) {
   await eventsWebhook.send(message)

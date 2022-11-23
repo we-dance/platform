@@ -3,7 +3,7 @@
     <THeader :title="$t('feed.title')" />
 
     <div class="border-b p-4 flex">
-      <TInputSelect v-model="filterType" :options="filterTypeList" />
+      <TInputButtons v-model="filterType" :options="filterTypeList" />
     </div>
 
     <TPostList v-bind="filter" />
@@ -21,6 +21,11 @@ import { usePosts } from '~/use/posts'
 
 export default {
   name: 'Feed',
+  head() {
+    return {
+      title: 'WeDance Feed',
+    }
+  },
   setup() {
     const { uid, username } = useAuth()
     const { currentCity } = useCities()

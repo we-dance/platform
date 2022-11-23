@@ -2,15 +2,11 @@
   <div>
     <component
       :is="children.component"
-      v-for="(item, index) in value"
+      v-for="(child, index) in internalValue"
       :key="`${children.component}-${index}`"
       v-model="internalValue[index]"
       v-bind="children"
-    />
-    <component
-      :is="children.component"
-      v-model="internalValue[value.length]"
-      v-bind="children"
+      :item="item"
     />
   </div>
 </template>
@@ -22,6 +18,10 @@ export default {
       type: [Array, String],
       default: () => [],
     },
+    item: {
+      type: Object,
+      default: () => ({}),
+    },
     children: {
       type: Object,
       default: () => ({}),
@@ -32,19 +32,21 @@ export default {
   }),
   watch: {
     value(val) {
-      this.internalValue = val
+      const extra = [...val, {}]
+
+      if (JSON.stringify(extra) === JSON.stringify(this.internalValue)) {
+        return
+      }
+
+      this.internalValue = extra
     },
     internalValue: {
       deep: true,
-      handler(val, old) {
-        if (val && old && val.length === old.length) {
-          return
-        }
-
+      handler(val) {
         let filtered = []
 
         if (val) {
-          filtered = val.filter((item) => item && item !== '' && item !== null)
+          filtered = val.filter((item) => item && Object.keys(item).length)
         }
 
         this.$emit('input', filtered)
@@ -52,7 +54,10 @@ export default {
     },
   },
   mounted() {
-    this.internalValue = this.value || []
+    const val = this.value || []
+    const extra = [...val, {}]
+
+    this.internalValue = extra
   },
 }
 </script>

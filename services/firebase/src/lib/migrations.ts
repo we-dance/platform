@@ -217,3 +217,18 @@ export async function generateSocialCover(profile: any) {
       socialCover,
     })
 }
+
+export async function updateEventPoster(event: any) {
+  const result = await axios.get(
+    `https://us-central1-wedance-4abe3.cloudfunctions.net/hooks/share/events/${event.id}?timezone=Europe/Berlin`
+  )
+
+  const socialCover = result.data.url
+
+  await db
+    .collection('posts')
+    .doc(event.id)
+    .update({
+      socialCover,
+    })
+}

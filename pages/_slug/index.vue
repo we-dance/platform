@@ -7,10 +7,12 @@
 
 <script>
 import { db } from '~/plugins/firebase'
+import { useDoc } from '~/use/doc'
+import { trackView } from '~/use/tracking'
 
 export default {
   name: 'Slug',
-  async asyncData({ app, $content, params, error }) {
+  async asyncData({ $content, params, error }) {
     const slug = params.slug
 
     let page = null
@@ -35,6 +37,8 @@ export default {
         profile = doc.data()
         profile.id = doc.id
 
+        trackView('profiles', profile.id, profile.viewsCount || 0)
+
         profileFound = true
       }
     }
@@ -48,6 +52,14 @@ export default {
       profile,
     }
   },
+  setup() {
+    const { doc: item, sync } = useDoc('profiles')
+
+    return {
+      item,
+      sync,
+    }
+  },
   computed: {
     classes() {
       let classes = ''
@@ -59,6 +71,18 @@ export default {
 
       return classes
     },
+  },
+  watch: {
+    item() {
+      if (this.item) {
+        this.profile = this.item
+      }
+    },
+  },
+  mounted() {
+    if (this.profile) {
+      this.sync(this.profile.id)
+    }
   },
   head() {
     if (this.profile) {

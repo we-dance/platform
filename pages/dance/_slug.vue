@@ -104,10 +104,7 @@
         <a target="_blank" :href="page.source">Source</a>
       </div>
     </div>
-    <TPostList
-      :filter="{ [`styles.${page.name}.selected`]: true }"
-      order-by="star.count"
-    />
+    <TPostList :filter="{ [`styles.${page.name}.selected`]: true }" />
   </div>
 </template>
 

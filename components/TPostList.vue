@@ -11,7 +11,16 @@
     <div v-if="docs.length">
       <div v-for="item in docs" :key="item.id">
         <TPost :item="item" :hide-media="hideMedia">
-          <TReactions :item="item" class="pt-4 justify-center" />
+          <div class="flex justify-center gap-2 p-4">
+            <TReaction
+              label="Save"
+              toggled-label="Saved"
+              field="star"
+              icon="BookmarkIcon"
+              class="rounded-full"
+              :item="item"
+            />
+          </div>
 
           <TCommentsInline v-if="!item.hideComments" :item="item" class="p-4" />
         </TPost>
@@ -43,7 +52,7 @@ export default {
     },
     orderBy: {
       type: String,
-      default: 'createdAt',
+      default: '',
     },
     orderByDirection: {
       type: String,

@@ -1,15 +1,85 @@
 import { addMinutes, parseISO } from 'date-fns'
+import firebase from 'firebase/app'
+import 'firebase/firestore'
 import { useCities } from './cities'
 import { useI18n } from '~/use/i18n'
-import { getYmd } from '~/utils'
+import { getYmd, toDatetimeLocal } from '~/utils'
 import { useCommon } from '~/use/common'
 
-const updateEndDate = (e) => {
-  if (!e.duration || e.duration === 'custom') {
+const updateEndDate = (newItem, oldItem) => {
+  if (oldItem?.endDate) {
     return
   }
 
-  e.endDate = addMinutes(parseISO(e.startDate), e.duration)
+  newItem.endDate = toDatetimeLocal(addMinutes(parseISO(newItem.startDate), 60))
+}
+
+export async function getEventsOrganisedBy(username) {
+  const result = await firebase
+    .firestore()
+    .collection('posts')
+    .where('org.username', '==', username)
+    .get()
+
+  return result.docs.map((doc) => ({
+    ...doc.data(),
+    id: doc.id,
+    role: 'Organiser',
+  }))
+}
+
+export async function getEventsWithArtist(username) {
+  const result = await firebase
+    .firestore()
+    .collection('posts')
+    .where('artistsList', 'array-contains', username)
+    .get()
+
+  return result.docs.map((doc) => ({
+    ...doc.data(),
+    id: doc.id,
+    role: 'Special Guest',
+  }))
+}
+
+export async function getEventsWithGuest(username) {
+  const result = await firebase
+    .firestore()
+    .collection('posts')
+    .where(`star.list.${username}`, '==', true)
+    .get()
+
+  return result.docs.map((doc) => ({
+    ...doc.data(),
+    id: doc.id,
+    role: 'Guest',
+  }))
+}
+
+export async function getEventsInPlace(placeId) {
+  const result = await firebase
+    .firestore()
+    .collection('posts')
+    .where('place', '==', placeId)
+    .get()
+
+  return result.docs.map((doc) => ({
+    ...doc.data(),
+    id: doc.id,
+  }))
+}
+
+export async function getFestivals() {
+  const result = await firebase
+    .firestore()
+    .collection('posts')
+    .where('eventType', '==', 'Festival')
+    .get()
+
+  return result.docs.map((doc) => ({
+    ...doc.data(),
+    id: doc.id,
+  }))
 }
 
 export const useEvents = () => {
@@ -102,10 +172,7 @@ export const useEvents = () => {
       label: t('event.category.meetup'),
       value: 'meetup',
       icon: '🎵',
-      filter: (item) =>
-        ['Party', 'Show', 'Concert', 'Other'].includes(item.eventType) &&
-        isUpcoming(item) &&
-        isInSelectedCity(item),
+      filter: (item) => isUpcoming(item) && isInSelectedCity(item),
     },
     {
       label: t('event.category.lesson'),
@@ -114,13 +181,7 @@ export const useEvents = () => {
       filter: (item) =>
         ['Workshop', 'Course'].includes(item.eventType) &&
         isUpcoming(item) &&
-        isInSelectedCity(item),
-    },
-    {
-      label: t('event.category.online'),
-      value: 'online',
-      icon: '📺',
-      filter: (item) => item.online === 'Yes' && isUpcoming(item),
+        (isInSelectedCity(item) || item.online === 'Yes'),
     },
     {
       label: t('event.category.travel'),
@@ -153,13 +214,81 @@ export const useEvents = () => {
 
   const eventFields = [
     {
-      name: 'cover',
-      label: t('event.cover'),
-      component: 'TInputPhoto',
+      name: 'org',
+      component: 'TInputProfile',
+      label: t('event.org.label'),
       labelPosition: 'top',
-      width: 500,
-      height: 500,
-      circle: false,
+    },
+    {
+      name: 'name',
+      labelPosition: 'top',
+      placeholder: t('event.name.placeholder'),
+      label: t('event.name.label'),
+    },
+    {
+      name: 'link',
+      labelPosition: 'top',
+      description: t('event.link.description'),
+      label: t('event.link.label'),
+    },
+    {
+      name: 'facebook',
+      labelPosition: 'top',
+      description: t('event.facebook.description'),
+      label: t('event.facebook.label'),
+    },
+    {
+      name: 'startDate',
+      component: 'DatePicker',
+      labelPosition: 'top',
+      type: 'datetime',
+      format: 'YYYY-MM-DDTHH:mm',
+      'time-picker-options': {
+        start: '08:00',
+        step: '00:30',
+        end: '23:30',
+        format: 'HH:mm',
+      },
+      'value-type': 'format',
+      label: 'Start date',
+      simple: true,
+      onChange: updateEndDate,
+    },
+    {
+      name: 'endDate',
+      component: 'DatePicker',
+      type: 'datetime',
+      format: 'YYYY-MM-DDTHH:mm',
+      'time-picker-options': {
+        start: '08:00',
+        step: '00:30',
+        end: '23:30',
+        format: 'HH:mm',
+      },
+      'value-type': 'format',
+      labelPosition: 'top',
+      label: 'End date',
+      simple: true,
+    },
+    {
+      name: 'venue',
+      label: t('event.venue'),
+      labelPosition: 'top',
+      component: 'TInputVenue',
+      simple: true,
+    },
+    {
+      name: 'place',
+      label: t('event.place.label'),
+      labelPosition: 'top',
+      component: 'TInputPlace',
+      clearable: true,
+    },
+    {
+      name: 'price',
+      labelPosition: 'top',
+      label: t('event.price.label'),
+      description: t('event.price.description'),
     },
     {
       name: 'eventType',
@@ -175,88 +304,6 @@ export const useEvents = () => {
       component: 'TInputStylesSelect2',
     },
     {
-      name: 'name',
-      labelPosition: 'top',
-      placeholder: t('event.name.placeholder'),
-      label: t('event.name.label'),
-    },
-    {
-      name: 'description',
-      label: t('event.description.label'),
-      labelPosition: 'top',
-      component: 'TInputTextarea',
-      placeholder: t('event.description.placeholder'),
-      tips: t('event.description.tips'),
-      description: t('event.description.description'),
-    },
-    {
-      name: 'startDate',
-      type: 'datetime-local',
-      labelPosition: 'top',
-      label: t('event.startDate'),
-      simple: true,
-      onChange: updateEndDate,
-    },
-    {
-      name: 'venue',
-      label: t('event.venue'),
-      labelPosition: 'top',
-      component: 'TInputVenue',
-      simple: true,
-    },
-    {
-      name: 'duration',
-      label: t('event.duration.label'),
-      labelPosition: 'top',
-      onChange: updateEndDate,
-      component: 'TInputSelect',
-      options: [
-        {
-          value: 30,
-          label: t('event.duration.thirtyMinutes'),
-        },
-        {
-          value: 60,
-          label: t('event.duration.oneHour'),
-        },
-        {
-          value: 90,
-          label: t('event.duration.ninetyMinutes'),
-        },
-        {
-          value: 120,
-          label: t('event.duration.twoHours'),
-        },
-        {
-          value: 180,
-          label: t('event.duration.threeHours'),
-        },
-        {
-          value: 240,
-          label: t('event.duration.fourHours'),
-        },
-        {
-          value: 300,
-          label: t('event.duration.fiveHours'),
-        },
-        {
-          value: 'custom',
-          label: t('event.duration.custom'),
-        },
-      ],
-    },
-    {
-      name: 'endDate',
-      type: 'datetime-local',
-      when: (e) => e.duration === 'custom',
-    },
-    {
-      name: 'price',
-      labelPosition: 'top',
-      label: t('event.price.label'),
-      description: t('event.price.description'),
-    },
-    {
       name: 'artists',
       component: 'TInputArray',
       children: {
@@ -266,10 +313,36 @@ export const useEvents = () => {
       labelPosition: 'top',
     },
     {
-      name: 'org',
-      component: 'TInputProfile',
-      label: t('event.org.label'),
+      name: 'program',
+      component: 'TInputArray',
+      children: {
+        component: 'TInputEvent',
+      },
       labelPosition: 'top',
+    },
+    {
+      name: 'description',
+      label: t('event.description.label'),
+      labelPosition: 'top',
+      component: 'TInputTextarea',
+      placeholder: t('event.description.placeholder'),
+      max: 140,
+    },
+    {
+      name: 'cover',
+      label: t('event.cover'),
+      component: 'TInputPhoto',
+      labelPosition: 'top',
+      width: 500,
+      height: 500,
+      circle: false,
+    },
+    {
+      name: 'confirmation',
+      labelPosition: 'top',
+      label: t('event.confirmation.label'),
+      component: 'TInputTextarea',
+      placeholder: t('event.confirmation.placeholder'),
     },
     {
       name: 'online',
@@ -286,32 +359,6 @@ export const useEvents = () => {
       component: 'TInputButtons',
       options: yesNoOptions,
       description: t('event.international.description'),
-    },
-    {
-      name: 'place',
-      label: t('event.place.label'),
-      labelPosition: 'top',
-      component: 'TInputPlace',
-      clearable: true,
-    },
-    {
-      name: 'link',
-      labelPosition: 'top',
-      description: t('event.link.description'),
-      label: t('event.link.label'),
-    },
-    {
-      name: 'facebook',
-      labelPosition: 'top',
-      description: t('event.facebook.description'),
-      label: t('event.facebook.label'),
-    },
-    {
-      name: 'confirmation',
-      labelPosition: 'top',
-      label: t('event.confirmation.label'),
-      component: 'TInputTextarea',
-      placeholder: t('event.confirmation.placeholder'),
     },
     {
       name: 'promo',

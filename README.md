@@ -1,6 +1,10 @@
 # WeDancePlatform
 
-> https://wedance.vip/ – community platform for dancers
+**Community platform for dancers**
+
+Do you want to get a practical experience, learn to work in international team and participate in open source project?
+
+[Get Involved](https://wedance.vip/get-involved)
 
 ## Built with
 
@@ -32,12 +36,11 @@ To activate all services and features see section `Services` below.
 4. Run `yarn install`
 5. Run `yarn dev`
 
-## Run in docker
-
-1. [Download Docker](https://www.docker.com/products/docker-desktop).
-2. Run `docker-compose up`.
+To activate all services and features see section `Services` below.
 
 ## Deploy
+
+Watch [video tutorial](https://www.loom.com/share/408d3aca33dd426885beb8ef90289972).
 
 Read [How to deploy on Netlify?](https://nuxtjs.org/faq/netlify-deployment/).
 
@@ -56,13 +59,15 @@ To activate all services and features see section `Services` below.
 
 ## Services
 
+Activate only those services that you need. In most cases you don't need all of them.
+
 ### Authentication for custom domains
 
 - Go to `Authentication`, switch to tab `Sign-in method` find section `Authorized domains`, click `Add domain` and add new.
 
 ### City auto-complete
 
-- Enable [Maps JavaScript API](https://console.cloud.google.com/apis/library/maps-backend.googleapis.com) and [Places API](https://console.cloud.google.com/marketplace/product/google/places-backend.googleapis.com) in the Google Cloud Console.
+- Enable [Maps JavaScript API](https://console.cloud.google.com/apis/library/maps-backend.googleapis.com), [Places API](https://console.cloud.google.com/marketplace/product/google/places-backend.googleapis.com) and [Geocoding API](https://console.cloud.google.com/apis/library/geocoding-backend.googleapis.com) in the Google Cloud Console.
 - [Enable Billing](https://console.cloud.google.com/project/_/billing/enable) on the Google Cloud Project.
 
 ### Mailgun

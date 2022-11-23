@@ -7,7 +7,16 @@
     >
       <template v-slot:right>
         <TDropdown v-slot="{ closeMenu }">
-          <TDropdownSeparator :label="$t('TInputProfile.changeRole')" />
+          <TButton
+            allow-guests
+            type="context"
+            :label="$t('TInputProfile.remove')"
+            color="red-500 text-sm"
+            @click="
+              $emit('input', {})
+              closeMenu()
+            "
+          />
           <TButton
             v-for="role in eventRoleOptions"
             :key="role.value"
@@ -17,17 +26,6 @@
             class="text-sm"
             @click="
               value.role = role.value
-              closeMenu()
-            "
-          />
-          <TDropdownSeparator :label="$t('TInputProfile.actions')" />
-          <TButton
-            allow-guests
-            type="context"
-            :label="$t('TInputProfile.remove')"
-            color="red-500 text-sm"
-            @click="
-              $emit('input', null)
               closeMenu()
             "
           />
@@ -72,7 +70,10 @@
         <div
           class="flex px-4 py-2 hover:bg-blue-100 items-center cursor-pointer space-x-1 text-sm text-gray-700"
           @click="
-            create({ username: inviteUsername, instagram: inviteUsername })
+            create({
+              username: inviteUsername,
+              instagram: `https://instagram.com/` + inviteUsername,
+            })
           "
         >
           <div>
@@ -86,7 +87,10 @@
         <div
           class="flex px-4 py-2 hover:bg-blue-100 items-center cursor-pointer space-x-1 text-sm text-gray-700"
           @click="
-            create({ username: inviteUsername, facebook: inviteUsername })
+            create({
+              username: inviteUsername,
+              facebook: `https://facebook.com/` + inviteUsername,
+            })
           "
         >
           <div>
@@ -113,7 +117,7 @@ export default {
   props: {
     value: {
       type: [Object, String],
-      default: () => ({}),
+      default: '',
     },
     placeholder: {
       type: String,
@@ -161,6 +165,7 @@ export default {
           .replace('facebook.com/', '')
           .replace('wedance.vip/', '')
           .replace(/(\?.*)/g, '')
+          .replace('/', '')
 
         query.value = username
       }

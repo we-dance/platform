@@ -6,7 +6,7 @@
     </TAvatar>
     <div class="mt-1">{{ item.body }}</div>
     <div class="text-sm flex items-start mt-1">
-      <TButton type="xs" @click="onShowForm">Reply</TButton>
+      <TButton title="Reply" label="Reply" type="xs" @click="onShowForm" />
     </div>
 
     <TFormComment

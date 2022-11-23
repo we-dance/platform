@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div id="canvas" class="relative leading-none font-lato">
+    <div id="canvas" class="relative leading-none font-lato overflow-hidden">
       <img v-if="photo" :src="photo" :alt="title" class="absolute w-full" />
       <div class="square bg-indigo-500"></div>
 
@@ -21,8 +21,7 @@
               :key="dance.id"
               class="uppercase text-xs flex space-x-2 justify-end items-center"
             >
-              <span>{{ dance.name }}</span
-              ><TIcon :name="getIcon(dance.level)" size="4" />
+              <span>{{ dance.name }}</span>
             </div>
           </div>
         </div>
@@ -145,7 +144,7 @@ export default {
   },
   computed: {
     dances() {
-      return this.getStyles(this.styles, 0, true, 5)
+      return this.getStyles(this.styles, 0, true, 3)
     },
   },
   methods: {
