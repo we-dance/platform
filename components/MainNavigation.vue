@@ -5,7 +5,13 @@
     <TButton allow-guests to="/" class="mb-8" type="void">
       <TIcon name="logo-horizontal-dark" />
     </TButton>
-    <TButton allow-guests to="/Travel" icon="place" label="Travel" type="nav" />
+    <TButton
+      allow-guests
+      to="/Travel"
+      icon="place"
+      :label="$t('nav.travel')"
+      type="nav"
+    />
     <TButton
       v-if="cityName"
       allow-guests
@@ -19,11 +25,23 @@
       allow-guests
       to="/cities"
       icon="place"
-      label="Choose City"
+      :label="$t('nav.chooseCity')"
       type="nav"
     />
-    <TButton allow-guests to="/feed" icon="news" label="News" type="nav" />
-    <TButton allow-guests to="/dance" icon="fire" label="Wiki" type="nav" />
+    <TButton
+      allow-guests
+      to="/feed"
+      icon="news"
+      :label="$t('nav.feed')"
+      type="nav"
+    />
+    <TButton
+      allow-guests
+      to="/dance"
+      icon="fire"
+      :label="$t('nav.dance')"
+      type="nav"
+    />
     <template v-if="uid">
       <TButton to="/chat" icon="chat" :label="$t('nav.chat')" type="nav" />
       <TButton :to="`/${username}`" type="nav">
@@ -35,8 +53,8 @@
     </template>
     <template v-else>
       <div class="text-xs mt-4">
-        <h4 class="font-bold">Less chats. More dance.</h4>
-        <div>Discover dancers and dance events near you</div>
+        <h4 class="font-bold">{{ $t('home.cta.header') }}</h4>
+        <div>{{ $t('home.cta.description') }}</div>
       </div>
       <TButton
         allow-guests

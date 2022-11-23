@@ -18,16 +18,16 @@
             <div class="relative p-4 sm:p-10 lg:p-14">
               <div class="text-center">
                 <h4 class="font-bold text-2xl">
-                  <span class="text-primary">Dance.</span> Meet. Travel.
+                  {{ $t('home.cta.header') }}
                 </h4>
-                <p>Discover dancers and dance events in any city.</p>
+                <p>{{ $t('home.cta.description') }}</p>
               </div>
 
               <div class="max-w-lg mx-auto">
                 <TButton
                   allow-guests
                   icon="search"
-                  label="Find your city"
+                  :label="$t('home.cta.action')"
                   to="/cities"
                   type="void"
                   class="mt-8 w-full text-gray-500 bg-white hover:bg-gray-100 font-semibold py-2 px-4 border border-gray-400 rounded-full shadow"
@@ -66,7 +66,7 @@
               <NuxtLink
                 to="/events"
                 class="underline font-bold hover:no-underline"
-                >Discover events</NuxtLink
+                >{{ $t('features.calendar.action') }}</NuxtLink
               >
             </p>
           </div>
@@ -89,7 +89,7 @@
               <NuxtLink
                 to="/community"
                 class="underline font-bold hover:no-underline"
-                >Find dance partner</NuxtLink
+                >{{ $t('features.dancePartners.action') }}</NuxtLink
               >
             </p>
           </div>
@@ -112,7 +112,7 @@
               <NuxtLink
                 to="/Travel"
                 class="underline font-bold hover:no-underline"
-                >Discover festivals</NuxtLink
+                >{{ $t('features.danceTravel.action') }}</NuxtLink
               >
             </p>
           </div>

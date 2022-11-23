@@ -19,13 +19,17 @@
         $t('footer.about')
       }}</NuxtLink>
       <NuxtLink class="hover:underline" to="/get-involved">
-        Get Involved
+        {{ $t('footer.getInvolved') }}
       </NuxtLink>
-      <NuxtLink class="hover:underline" to="/support">Support</NuxtLink>
-      <NuxtLink class="hover:underline" to="/privacy"
-        >Datenschutzerklärung</NuxtLink
-      >
-      <NuxtLink class="hover:underline" to="/terms">Impressum/Terms</NuxtLink>
+      <NuxtLink class="hover:underline" to="/support">{{
+        $t('footer.support')
+      }}</NuxtLink>
+      <NuxtLink class="hover:underline" to="/privacy">{{
+        $t('footer.privacy')
+      }}</NuxtLink>
+      <NuxtLink class="hover:underline" to="/terms">{{
+        $t('footer.terms')
+      }}</NuxtLink>
       <NuxtLink class="hover:underline" to="/coc">{{
         $t('footer.coc')
       }}</NuxtLink>
@@ -33,7 +37,9 @@
         $t('footer.faq')
       }}</NuxtLink>
     </div>
-    <div class="mt-4 text-xs">© WeDance 2021 – All rights reserved.</div>
+    <div class="mt-4 text-xs">
+      © WeDance 2022 – {{ $t('footer.copyright') }}
+    </div>
   </div>
 </template>
 
