@@ -228,27 +228,6 @@ profile:
     label: Puedo ayudar con
     description: '¿Cómo puedes ayudar a nuestra comunidad? ¿En qué estás? Por ejemplo: diseño, programación, marketing, redes sociales, etc.'
   contacts: '¿Utilizas las redes sociales?'
-  instagram:
-    label: instagram.com/
-    placeholder: username
-  facebook:
-    label: fb.com/
-    placeholder: username
-  whatsapp:
-    label: whatsapp.com/
-    placeholder: whatsapp chat
-  telegram:
-    label: t.me/
-    placeholder: username
-  twitter:
-    label: twitter.com/
-    placeholder: username
-  tiktok:
-    label: tiktok.com/
-    placeholder: username
-  youtube:
-    label: youtube.com/
-    placeholder: username
   email:
     label: Email
     placeholder: for business requests
