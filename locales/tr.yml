@@ -1,124 +1,136 @@
 ---
 common:
-  yes: 'Yes'
-  no: 'No'
-  female: Female
-  male: Male
-  other: Other
-  Monday: Monday
-  Tuesday: Tuesday
-  Wednesday: Wednesday
-  Thursday: Thursday
-  Friday: Friday
-  Saturday: Saturday
-  Sunday: Sunday
+  yes: 'Evet'
+  no: 'Hayır'
+  female: Kadın
+  male: Erkek
+  other: Diğer
+  Monday: Pazartesi
+  Tuesday: Salı
+  Wednesday: Çarşamba
+  Thursday: Perşembe
+  Friday: Cuma
+  Saturday: Cumartesi
+  Sunday: Pazar
 post:
-  report: Report
-  delete: Delete
-  edit: Edit
-  dashboard: Dashboard
+  report: Rapor
+  delete: Sil
+  edit: Düzenle
+  dashboard: Kontrol Paneli
+home:
+  cta:
+    header: Less chats. More dance.
+    description: Discover dancers and dance events near you
+    action: Find your city
 nav:
+  travel: Travel
+  chooseCity: Choose City
   feed: Yorum
-  calendar: Calendar
-  community: Community
+  calendar: Takvim
+  community: Topluluk
   chat: Konuşma
-  myProfile: My Profile
+  dance: Dances
+  myProfile: Profilim
   settings: Ayarlar
 form:
-  clear: Clear
-  delete: Delete
-  cancel: Cancel
-  copy: Copy
-  save: Save
+  clear: Temizle
+  delete: Sil
+  cancel: İptal
+  copy: Kopyala
+  save: Kaydet
 photo:
-  placeholder: Change photo
-  selectLabel: Upload photo
+  placeholder: Fotoğrafı değiştir
+  selectLabel: Fotoğraf yükle
 visibility:
-  label: Visibility
-  description: '- Public: searchable in Google and can be used in social media. - Members: only visible for logged-in users. - Unlisted: only possible to open with exact link, but not listed anywhere.'
-  public: Public
-  members: Members
-  unlisted: Unlisted
+  label: Görünürlük
+  description: '- Herkese açık: Google''da aranabilir ve sosyal medyada kullanılabilir. - Üyeler: sadece giriş yapmış kullanıcılar tarafından görülebilir. - Listelenmemiş: yalnızca tam bağlantı ile açmak mümkündür, ancak hiçbir yerde listelenmez.'
+  public: Genel
+  members: Üyeler
+  unlisted: Listelenmemiş
 hero:
   title: Dans etmeyi sever misin?
   subtitle: İlginç dans etkinlikleri ve dans partnerleri bulma konusunda birbirimize yardımcı oluyoruz.
-  motto: We help everyone to dance everywhere and all dancers to help each other
-  submotto: Salsa, Bachata, Kizomba, Urban Kiz, Raggaeton, Casino, Tango and 130 more dance styles
-  alt: People dancing bachata
-  action: Join the community
-  search: Search dancers
+  submotto: Salsa, Bachata, Kizomba, Urban Kiz, Raggaeton, Casino, Tango ve daha 130 dans stili
+  alt: Bachata dansı yapan insanlar
+  action: Topluluğa katıl
+  search: Dansçıları ara
 icons:
-  dancers: dancers
-  cities: cities
-  events: events
+  dancers: dansçılar
+  cities: şehirler
+  events: etkinlikler
 features:
   calendar:
-    title: Event Calendar
-    description: Find dance workshops, courses, socials and parties. We fill event calendar all together as a community. Everyone can share.
+    title: Etkinlik Takvimi
+    description: Dans atölyeleri, kurslar, sosyal etkinlikler ve partiler bulun. Etkinlik takvimini hep birlikte bir topluluk olarak dolduruyoruz. Herkes paylaşabilir.
+    action: Discover events
   dancePartners:
-    title: Dance partners
-    description: Find a dance partner for your dance style and let them find you.
+    title: Dans partnerleri
+    description: Dans tarzınıza uygun bir dans partneri bulun ve onlar da sizi bulsun.
+    action: Find dance partner
   cityChats:
-    title: City Chats
-    description: Find dance chat in any city. Join your city chat and invite your friends to help new dancers in the city. Think globally, act locally.
+    title: Şehir Sohbetleri
+    description: Herhangi bir şehirde dans sohbeti bulun. Şehrinizdeki sohbete katılın ve arkadaşlarınızı şehirdeki yeni dansçılara yardım etmeye davet edin. Küresel düşünün, yerel hareket edin.
   danceTravel:
-    title: Dance Travel
-    description: Find international dance festivals and congresses. Share a ride, an appartment and find a buddy to experience a new city together.
+    title: Dans Seyahati
+    description: Uluslararası dans festivalleri ve kongreleri bulun. Bir yolculuğu, bir daireyi paylaşın ve yeni bir şehri birlikte deneyimlemek için bir arkadaş bulun.
+    action: Discover festivals
   volunteer:
-    title: Volunteer
-    description: We build a community, where everyone enters with mindset “I can help”, so whenever you need help you can count on it. We are one big family worldwide. We help each other.
+    title: Gönüllü
+    description: Herkesin "yardım edebilirim" zihniyetiyle girdiği bir topluluk oluşturuyoruz, böylece yardıma ihtiyacınız olduğunda buna güvenebilirsiniz. Biz dünya çapında büyük bir aileyiz. Birbirimize yardım ediyoruz.
     action: Katıl
   interviews:
-    title: Interviews
-    description: Explore more about you favorite dance artists and catch their tips & tricks.
-    action: Listen to Podcast
+    title: Röportaj
+    description: En sevdiğiniz dans sanatçıları hakkında daha fazlasını keşfedin ve onların ipuçlarını ve püf noktalarını yakalayın.
+    action: Podcast dinle
 international:
-  title: International Community
-  description: We regularly post interviews, event announcements and introduce new members on our social media.
+  title: Uluslararası Topluluk
+  description: Sosyal medyamızda düzenli olarak röportajlar, etkinlik duyuruları yayınlıyor ve yeni üyelerimizi tanıtıyoruz.
 auth:
   signin: Oturum aç
   signup: Kayıt ol
   signout: Çıkış Yap
 events:
   typelist:
-    party: Party
-    workshop: Workshop
-    course: Course
+    party: Parti
+    workshop: Atölye
+    course: Kurs
     festival: Festival
-    congress: Congress
-    concert: Concert
-    show: Show
-    other: Other
+    congress: Kongre
+    concert: Konser
+    show: Göster
+    other: Diğer
   add: Etkinlik ekle
-  title: Dance Calendar
+  title: Dans Takvimi
   list:
-    empty: No events found. Would you like to add one?
+    empty: Hiçbir etkinlik bulunamadı. Bir tane eklemek ister misiniz?
   view:
-    list: See Photos
-    covers: See list
+    list: Fotoğraflara Bakın
+    covers: Listeyi gör
   filter:
-    type: Type
-    style: Any Dance
-    level: Any Level
+    type: Tip
+    style: Her Dans
+    level: Her Seviye
 eventView:
+  announce: Duyuru
   dropdown:
-    dashboard: Dashboard
-    edit: Edit
+    dashboard: Panel
+    edit: Düzenle
     share: Paylaş
-  online: Online Event
+    copy: Kopyala
+  online: Online Etkinlik
   reservation:
-    guest: Register for event
-    cancel: Cancel reservation
+    guest: Etkinlik için kayıt olun
+    cancel: Rezervasyonu iptal et
   reservationPopup:
     title: Kayıt ol
     reserve:
       submitLabel: Kayıt ol
       label: Oturum aç
     finish:
-      title: Almost there
-      btn: Complete registration
+      title: Neredeyse oldu
+      btn: Kayıt işlemini tamamlayın
       description: See you soon! Don't forget to check-in by the organiser when you come!
-      reminder: Check your email to finish creation of the WeDance profile.
+      reminder: WeDance profilinin oluşturulmasını tamamlamak için e-postanızı kontrol edin.
       calendar: Add to calendar
   organiser: Organised by
   venueMap: Venue Map
@@ -127,7 +139,7 @@ postFields:
   username:
     label: Username
   type:
-    label: Type
+    label: Tip
   title:
     placeholder: Title
   description:
@@ -142,8 +154,10 @@ filter:
   radius: Radius
   reset: Reset filters
 community:
-  title: Community
+  title: Topluluk
 profile:
+  bookme: Book me
+  contactme: Contact me
   username:
     label: Username
     before: Use only letters, numbers, underscores and periods.
@@ -156,18 +170,15 @@ profile:
   bio:
     label: Teaser
     before: Short introduction on top of your photo
-  hometown:
-    label: Hometown
-    before: Where were you born and raised?
   birthday:
     label: Birthday
-    description: We will show only your age
+    description: Sadece yaşınızı göstereceğiz
   gender:
-    label: Gender
-    placeholder: Gender
+    label: Cinsiyet
+    placeholder: Cinsiyet
   style: Dans stillerin
-  joined: Joined
-  languages: Languages
+  joined: Katıldı
+  languages: Diller
   story:
     label: Description
     before: Tell your dance story. You can also use [widgets](https://wedance.vip/markdown), including images and videos
@@ -178,37 +189,44 @@ profile:
   days: Günler
   learning:
     label: Which dance topics you are interested in?
-    description: 'For example: Musicality in Salsa, Men Styling, etc.'
+    description: 'Örneğin: Salsa''da Müzikalite, Erkek Stilistliği vb.'
   teacher: Ders veriyormusun?
   partner: Bir dans arkadası mı arıyorsun?
   height: Boyun (cm)
   weight:
-    label: Your weight (kg)
-    description: Leave this field blank if you think it's irrelevant.
+    label: Kilonuz (kg)
+    description: İlgisiz olduğunu düşünüyorsanız bu alanı boş bırakın.
   partnerBio:
-    label: Question
-    description: 'What is important in your partner? Put it as a question, for example: Do you love dogs?'
+    label: Soru
+    description: 'Partnerinizde önemli olan nedir? Bunu bir soru olarak ortaya koyun, örneğin: Köpekleri sever misin?'
   objectives: Hedefler
   objective:
-    placeholder: Objective
-  meetingPlace: Where to meet?
+    placeholder: Hedef
+  meetingPlace: Nerede buluşalım?
   photo: Fotoğraf
-  add: Add profile
-  title: Community
+  add: Profil ekle
+  title: Topluluk
   styles:
-    label: Dance
-    tips: Mark up to 4 favorite dances that will be highlighted in your poster
+    label: Dans
+    tips: Posterinizde vurgulanacak en fazla 4 favori dansı işaretleyin
   place:
-    label: Your city
-    placeholder: City
+    label: Living in
+    before: Daimi ikametgahınız nedir?
+    placeholder: Şehir
+  hometown:
+    label: Yapıldığı yer
+    before: Nerede doğdun ve büyüdün?
+  current:
+    label: Dans ediliyor
+    before: In which city are you currently dancing?
   dance:
-    placeholder: Style
+    placeholder: Stil
   permission:
     label: Do you want free promo?
-    description: 'Send us link to your event on [Telegram](https://t.me/+aRIIZcXpBhJkYmUy) and we will announce it on our Telegram, Instagram and Facebook.'
+    description: 'Etkinliğinizin linkini [Telegram](https://t.me/+aRIIZcXpBhJkYmUy) adresinden bize gönderin, biz de Telegram, Instagram ve Facebook hesaplarımızdan duyuralım.'
   jobs:
     label: I can help with
-    description: 'How can you help our community? What are you good at? For example: design, programming, marketing, social media, etc.'
+    description: 'Toplumumuza nasıl yardımcı olabilirsiniz? Hangi konuda iyisiniz? Örneğin: tasarım, programlama, pazarlama, sosyal medya vb.'
   contacts: Do you use social media?
   instagram:
     label: instagram.com/
@@ -230,7 +248,7 @@ profile:
     placeholder: username
   youtube:
     label: youtube.com/
-    placeholder: username
+    placeholder: kullanıcı adı
   email:
     label: E-posta adresi
     placeholder: for business requests
@@ -241,15 +259,17 @@ profile:
     myPlace: My place
     yourPlace: Your place
     private: Somewhere private
-    public: Somewhere public
+    public: Halka açık bir yerde
   typeList:
     dancer: Dancer
     artist: Artist
     organiser: Organiser
     venue: Venue
-    city: City
+    city: Şehir
   objectivesList:
     talk: Talk about dance
+    home: Share home
+    auto: Share auto
     learn: Learn together
     outdoors: Dance outdoors
     indoors: Dance indoors
@@ -284,14 +304,14 @@ myprofile:
     place: your city
     objectives: your objectives
     title: Welcome to WeDance!
-    description1: This is your profile. A square below is a poster – your visual introduction.
-    description2: Your poster is also shown in {0} among other dancers.
-    community: Community
+    description1: Bu sizin profiliniz. Aşağıdaki kare bir posterdir - görsel tanıtımınız.
+    description2: Posteriniz diğer dansçıların yanı sıra {0}'da da gösterilmektedir.
+    community: Topluluk
     description3: 'Click {0} and add:'
   ambassador:
-    description1: WeDance is represented by Ambassador in local dance communities. Volunteers help Ambassador with different initiatives to unite local dancers. WeDance is created and supported by volunteers. Get Involved, become volunteer!
+    description1: WeDance, yerel dans topluluklarında Ambassador tarafından temsil edilmektedir. Gönüllüler, yerel dansçıları bir araya getirmek için farklı girişimlerde Ambassador'a yardımcı olurlar. WeDance gönüllüler tarafından oluşturulur ve desteklenir. Katılın, gönüllü olun!
     description2: Ambassador in {community} is
-    description3: 'Help us build a dance network in your city, follow and interact with our local social media accounts:'
+    description3: 'Şehrinizde bir dans ağı oluşturmamıza yardımcı olun, yerel sosyal medya hesaplarımızı takip edin ve etkileşimde bulunun:'
   profile:
     height: '{height}cm'
     weight: '{weight}kg'
@@ -302,13 +322,13 @@ TPost:
   showLess: Show less
   showMore: Show more
 TCardActions:
-  reason: Reason
+  Reason: Reason
   options:
     spam: spam
     other: other
 chat:
   title: Konuşma
-  empty: Start conversations and they will appear here.
+  empty: Konuşmaları başlatın ve burada görünsünler.
   lastMessage:
     byYou: by you
   receiver:
@@ -316,14 +336,14 @@ chat:
 conversation:
   userName: Chat with {username}
   empty: Start conversation with something nice.
-  lastSeen: opened chat last time
-  unread: haven't opened this chat yet
+  lastSeen: son kez sohbet açtı
+  unread: henüz bu sohbeti açmadı
   newMessage:
-    placeholder: Write a message
-    submit: Send
-  welcome: Start conversation with something nice.
-  with: Chat with {username}
-  dateDiff: '{diff} ago'
+    placeholder: Mesaj yaz
+    submit: Gönder
+  welcome: Sohbete hoş bir şeyle başlayın.
+  with: '{username} ile sohbet et'
+  dateDiff: '{diff} önce'
 cities:
   choose: Bir şehir seçin
 settings:
@@ -335,9 +355,9 @@ settings:
     delete: Hesabı sil
     popup:
       delete:
-        title: Confirm account deletion
-        deleteReason: Why are you leaving?
-        usernameConfirmation: Enter username
+        title: Hesap silme işlemini onayla
+        deleteReason: Neden gidiyorsun?
+        usernameConfirmation: Kullanıcı adını girin
   passwordError: Error
   profile:
     title: Profil
@@ -357,9 +377,9 @@ account:
   phone: Telefon
   zone: Timezone
   newsletter:
-    label: What kind of updated would you like to receive weekly?
+    label: Haftalık olarak ne tür güncellemeler almak istersin?
     options:
-      party: 'Social/party events'
+      party: 'Sosyal/parti etkinlikleri'
       class: Dance classes
       workshop: Workshops and bootcamps
       online: Online dance classes
@@ -367,7 +387,7 @@ account:
   comment: Comment
   withPartner:
     label: Do you have a partner?
-  partnerName: Partner's name
+  partnerName: Partnerin adı
   partnerEmail: Partner's email
 agreement: Oturum açarak, {terms} ve {privacy} 'nı kabul etmiş olursunuz.
 terms: Kullanım Şartları
@@ -382,6 +402,8 @@ signin:
 nopassword:
   signin: Bir şifrem var
   google: Google ile giriş yap
+  facebook: Sign in with Facebook
+  email: Sign in with Email
   submit: Sihirli bağlantı gönder
 contacts:
   email: E-posta adresi
@@ -416,16 +438,18 @@ share:
   copy: Bağlantıyı kopyala
 footer:
   about: Hakkımızda
+  getInvolved: Katıl
   support: Destek
   privacy: Gizlilik
   terms: Koşullar
   coc: Davranış kodu
   faq: SSS
+  copyright: All rights reserved.
 feed:
   add: Add post
   title: Yorum
   newMessage:
-    input: Ask or share something about dance...
+    input: Dans hakkında bir şey sorun veya paylaşın...
     intent: post a message
     submit: Send
   category: Choose category
@@ -443,7 +467,7 @@ feed:
   question: Question
   poll: Poll
 comments:
-  empty: There are no comments yet.
+  empty: Henüz herhangi bir yorum yok.
   label: Comments
 sort:
   popular: Popüler
@@ -457,8 +481,8 @@ event:
   artists: Artists
   organiser: Organiser
   category:
-    meetup: Meetup
-    lesson: Lesson
+    meetup: Dans
+    lesson: Learn
     online: Online
     travel: Travel
   role:
@@ -469,12 +493,13 @@ event:
     musician: Musician
     organiser: Organiser
   name:
-    placeholder: Event Name
-    label: Name
+    placeholder: Etkinlik İsmi
+    label: İsim
   description:
-    label: Description
-    placeholder: Text (markdown)
+    label: Announcement
+    placeholder: Unique Value Proposition
     description: 'Use [widgets](https://wedance.vip/markdown), including images and videos'
+    tips: "Kendinizi tanıtın: Siz kimsiniz? Ne teklif ediyorsunuz? Ne istiyorsunuz?\n\nEtkili sunum için ipuçları:\n- Karmaşık olmayan: Akılda kalıcı olmalı ve dilden dökülmeli\n- Kısa ve öz: Söylemesi veya okuması bir dakikadan fazla sürmemeli\n- Eşsiz: Becerilerinizi, hedeflerinizi ve arzularınızı yansıtır\n- Hikaye: Kim olduğunuzu, ne sunduğunuzu ve nerede olmak istediğinizi kapsar\n- İlgi çekici: Asansör konuşmanız esasen ikna edici bir satış konuşmasıdır; vurgu ne sunduğunuz üzerinde olmalıdır"
   startDate: When?
   endDate: End Date
   venue: Where?
@@ -482,29 +507,29 @@ event:
   type: Event Type
   duration:
     label: How long?
-    thirtyMinutes: 30 minutes
-    oneHour: 60 minutes
-    ninetyMinutes: 1.5 hour
-    twoHours: 2 hours
-    threeHours: 3 hours
-    fourHours: 4 hours
-    fiveHours: 5 hours
-    custom: Custom
+    thirtyMinutes: 30 dakika
+    oneHour: 60 dakika
+    ninetyMinutes: 1.5 saat
+    twoHours: 2 saat
+    threeHours: 3 saat
+    fourHours: 4 saat
+    fiveHours: 5 saat
+    custom: Özel
   price:
-    label: Price
-    description: Please include currency, i.e. EUR, USD
+    label: Fiyat
+    description: Lütfen para birimini belirtin, örn. EUR, USD
   styles: Dans stillerin
   org:
-    label: Organiser
+    label: Organizatör
   online:
-    label: Online?
-    description: Streaming via Zoom, Google Meet, Instagram Live, etc.?
+    label: Online mı?
+    description: Zoom, Google Meet, Instagram Live vb. aracılığıyla yayın mı yapıyorsunuz.?
   international:
-    label: International
-    description: Is it a big event with >500 guests, like festival or congress?
+    label: Uluslararası
+    description: Festival veya kongre gibi 500'den fazla konuğu olan büyük bir etkinlik mi?
   place:
-    label: Community
-    description: Leave empty if you want your event to be shown in all cities
+    label: Topluluk
+    description: Etkinliğinizin tüm şehirlerde gösterilmesini istiyorsanız boş bırakın
   form:
     label: External registration?
     before: Do you use external platform to register for your event?
@@ -516,10 +541,10 @@ event:
     description: Facebook event
   promo:
     label: Announce on social media?
-    description: 'Send us link to your event on [Telegram](https://t.me/+aRIIZcXpBhJkYmUy) and we will announce it on our Telegram, Instagram and Facebook.'
+    description: 'Etkinliğinizin linkini [Telegram](https://t.me/+aRIIZcXpBhJkYmUy) adresinden bize gönderin, biz de Telegram, Instagram ve Facebook hesaplarımızdan duyuralım.'
   confirmation:
     label: Confirmation email for guests
-    placeholder: 'Example: Dear guest, you are confirmed to our event.'
+    placeholder: 'Örnek: Sayın misafirimiz, etkinliğimize katılımınız onaylanmıştır.'
 TInputProfile:
   changeRole: Change Role
   actions: Actions
@@ -542,9 +567,9 @@ EventDashboard:
   noAccess: Only event owner can access this area.
   unlink: Unlink
   couple: Couple
-  cancel: Cancel
+  cancel: İptal
   checkIn: CheckIn
-  rsvp: RSVP
-  subscribed: Subscribed
-  paid: Paid
-  notPaid: Didn't Pay
+  rsvp: LCV (Lütfen cevap veriniz)
+  subscribed: Abone olundu
+  paid: Ödendi
+  notPaid: Ödeme yapmadı

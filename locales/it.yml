@@ -17,11 +17,19 @@ post:
   delete: Delete
   edit: Edit
   dashboard: Dashboard
+home:
+  cta:
+    header: Less chats. More dance.
+    description: Discover dancers and dance events near you
+    action: Find your city
 nav:
+  travel: Travel
+  chooseCity: Choose City
   feed: Commento
   calendar: Calendar
   community: Community
   chat: Conversazione
+  dance: Dances
   myProfile: My Profile
   settings: Impostazioni
 form:
@@ -42,7 +50,6 @@ visibility:
 hero:
   title: Ti piace ballare?
   subtitle: Ci aiutiamo a vicenda a trovare interessanti eventi di danza e partner di ballo.
-  motto: We help everyone to dance everywhere and all dancers to help each other
   submotto: Salsa, Bachata, Kizomba, Urban Kiz, Raggaeton, Casino, Tango and 130 more dance styles
   alt: People dancing bachata
   action: Join the community
@@ -55,15 +62,18 @@ features:
   calendar:
     title: Event Calendar
     description: Find dance workshops, courses, socials and parties. We fill event calendar all together as a community. Everyone can share.
+    action: Discover events
   dancePartners:
     title: Dance partners
     description: Find a dance partner for your dance style and let them find you.
+    action: Find dance partner
   cityChats:
     title: City Chats
     description: Find dance chat in any city. Join your city chat and invite your friends to help new dancers in the city. Think globally, act locally.
   danceTravel:
     title: Dance Travel
     description: Find international dance festivals and congresses. Share a ride, an appartment and find a buddy to experience a new city together.
+    action: Discover festivals
   volunteer:
     title: Volunteer
     description: We build a community, where everyone enters with mindset “I can help”, so whenever you need help you can count on it. We are one big family worldwide. We help each other.
@@ -101,10 +111,12 @@ events:
     style: Any Dance
     level: Any Level
 eventView:
+  announce: Announce
   dropdown:
     dashboard: Dashboard
     edit: Edit
     share: Condividere
+    copy: Copy
   online: Online Event
   reservation:
     guest: Register for event
@@ -144,6 +156,8 @@ filter:
 community:
   title: Community
 profile:
+  bookme: Book me
+  contactme: Contact me
   username:
     label: Username
     before: Use only letters, numbers, underscores and periods.
@@ -156,9 +170,6 @@ profile:
   bio:
     label: Teaser
     before: Short introduction on top of your photo
-  hometown:
-    label: Hometown
-    before: Where were you born and raised?
   birthday:
     label: Birthday
     description: We will show only your age
@@ -199,8 +210,15 @@ profile:
     label: Dance
     tips: Mark up to 4 favorite dances that will be highlighted in your poster
   place:
-    label: Your city
+    label: Living in
+    before: What's your permanent residence?
     placeholder: City
+  hometown:
+    label: Made in
+    before: Where were you born and raised?
+  current:
+    label: Dancing in
+    before: In which city are you currently dancing?
   dance:
     placeholder: Style
   permission:
@@ -250,6 +268,8 @@ profile:
     city: City
   objectivesList:
     talk: Talk about dance
+    home: Share home
+    auto: Share auto
     learn: Learn together
     outdoors: Dance outdoors
     indoors: Dance indoors
@@ -302,7 +322,7 @@ TPost:
   showLess: Show less
   showMore: Show more
 TCardActions:
-  reason: Reason
+  Reason: Reason
   options:
     spam: spam
     other: other
@@ -382,6 +402,8 @@ signin:
 nopassword:
   signin: Ho una password
   google: Accedi con Google
+  facebook: Sign in with Facebook
+  email: Sign in with Email
   submit: Invia un collegamento magico
 contacts:
   email: E-mail
@@ -416,11 +438,13 @@ share:
   copy: Copia link
 footer:
   about: Chi siamo
+  getInvolved: Mettersi in gioco
   support: Supporto
   privacy: Privacy
   terms: Termini
   coc: Codice di comportamento
   faq: FAQ
+  copyright: All rights reserved.
 feed:
   add: Add post
   title: Commento
@@ -457,8 +481,8 @@ event:
   artists: Artists
   organiser: Organiser
   category:
-    meetup: Meetup
-    lesson: Lesson
+    meetup: Dance
+    lesson: Learn
     online: Online
     travel: Travel
   role:
@@ -472,9 +496,10 @@ event:
     placeholder: Event Name
     label: Name
   description:
-    label: Description
-    placeholder: Text (markdown)
+    label: Announcement
+    placeholder: Unique Value Proposition
     description: 'Use [widgets](https://wedance.vip/markdown), including images and videos'
+    tips: "Pitch yourself: Who are you? What do you offer? What do you want?\n\nTips for effective pitch:\n- Uncomplicated: It should be catchy and roll off the tongue\n- Concise: It shouldn’t take more than a minute to say or read\n- Unique: It reflects your skills, goals, and desires\n- Storyline: It covers who you are, what you offer, and where you want to be\n- Appealing: Your elevator pitch is essentially a persuasive sales pitch; the emphasis should be on what you offer"
   startDate: When?
   endDate: End Date
   venue: Where?

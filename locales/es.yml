@@ -1,111 +1,123 @@
 ---
 common:
-  yes: 'Yes'
+  yes: 'Si'
   no: 'No'
-  female: Female
-  male: Male
-  other: Other
-  Monday: Monday
-  Tuesday: Tuesday
-  Wednesday: Wednesday
-  Thursday: Thursday
-  Friday: Friday
-  Saturday: Saturday
-  Sunday: Sunday
+  female: Mujer
+  male: Hombre
+  other: Otro
+  Monday: Lunes
+  Tuesday: Martes
+  Wednesday: Miércoles
+  Thursday: Jueves
+  Friday: Viernes
+  Saturday: Sábado
+  Sunday: Domingo	
 post:
-  report: Report
-  delete: Delete
-  edit: Edit
-  dashboard: Dashboard
+  report: Reportar
+  delete: Borrar
+  edit: Editar
+  dashboard: Panel de control
+home:
+  cta:
+    header: Menos chat. Más danza.
+    description: Descubre bailarines y eventos de baile cerca de ti
+    action: Encuentra tu ciudad
 nav:
+  travel: Viaje
+  chooseCity: Elegir ciudad
   feed: Comentario
-  calendar: Calendar
-  community: Community
+  calendar: Calendario
+  community: Comunidad
   chat: Conversaciones
-  myProfile: My Profile
+  dance: Bailes
+  myProfile: Mi perfil
   settings: Configuraciones
 form:
-  clear: Clear
-  delete: Delete
-  cancel: Cancel
-  copy: Copy
-  save: Save
+  clear: Limpiar
+  delete: Borrar
+  cancel: Cancelar
+  copy: Copiar
+  save: Guardar
 photo:
-  placeholder: Change photo
-  selectLabel: Upload photo
+  placeholder: Cambiar foto
+  selectLabel: Subir la foto
 visibility:
-  label: Visibility
-  description: '- Public: searchable in Google and can be used in social media. - Members: only visible for logged-in users. - Unlisted: only possible to open with exact link, but not listed anywhere.'
-  public: Public
-  members: Members
-  unlisted: Unlisted
+  label: Visibilidad
+  description: '- Pública: se puede buscar en Google y se puede utilizar en las redes sociales. - Miembros: sólo visible para usuarios conectados. - Sin lista: sólo es posible abrir con un enlace exacto, pero no aparece en ninguna parte.'
+  public: Público
+  members: Miembros
+  unlisted: Sin listar
 hero:
   title: '¿Te gusta bailar?'
   subtitle: Nos ayudamos mutuamente a encontrar eventos de baile interesantes y parejas de baile.
-  motto: We help everyone to dance everywhere and all dancers to help each other
-  submotto: Salsa, Bachata, Kizomba, Urban Kiz, Raggaeton, Casino, Tango and 130 more dance styles
-  alt: People dancing bachata
-  action: Join the community
-  search: Search dancers
+  submotto: Salsa, Bachata, Kizomba, Kiz, Raggaeton, Casino, Tango y 130 estilos de baile más
+  alt: Bachata bailando gente
+  action: Únete a la comunidad
+  search: Buscar bailarines
 icons:
-  dancers: dancers
-  cities: cities
-  events: events
+  dancers: bailarines
+  cities: ciudades
+  events: eventos
 features:
   calendar:
-    title: Event Calendar
-    description: Find dance workshops, courses, socials and parties. We fill event calendar all together as a community. Everyone can share.
+    title: Calendário de Eventos
+    description: Encuentre talleres de baile, cursos, clases sociales y fiestas. Completamos el calendario de eventos todos juntos como comunidad. Todo el mundo puede compartir.
+    action: Descubre eventos
   dancePartners:
-    title: Dance partners
-    description: Find a dance partner for your dance style and let them find you.
+    title: Pareja de Baile
+    description: Encuentra un compañero de baile para tu estilo de baile y deja que te encuentres.
+    action: Encontrar pareja de baile
   cityChats:
-    title: City Chats
-    description: Find dance chat in any city. Join your city chat and invite your friends to help new dancers in the city. Think globally, act locally.
+    title: Chat de Ciudad
+    description: Encuentra un chat de baile en cualquier ciudad. Únete a tu ciudad e invita a tus amigos a ayudar a los nuevos bailarines de la ciudad. Piensa globalmente, actúa localmente.
   danceTravel:
-    title: Dance Travel
-    description: Find international dance festivals and congresses. Share a ride, an appartment and find a buddy to experience a new city together.
+    title: Viaje de Baile
+    description: Encuentre festivales y congresos de baile internacional. Comparta un viaje, un aprendiz y encuentre un amigo para experimentar juntos una nueva ciudad.
+    action: Descubre festivales
   volunteer:
-    title: Volunteer
-    description: We build a community, where everyone enters with mindset “I can help”, so whenever you need help you can count on it. We are one big family worldwide. We help each other.
+    title: Voluntario
+    description: Construimos una comunidad, donde todos entran con mentalidad “Puedo ayudar”, así que siempre que necesites ayuda puedes contar con ella. Somos una gran familia en todo el mundo. Nos ayudamos unos a otros.
     action: Involucrarse
   interviews:
-    title: Interviews
-    description: Explore more about you favorite dance artists and catch their tips & tricks.
-    action: Listen to Podcast
+    title: Entrevistas
+    description: Explora más sobre tus artistas favoritos de baile y toma sus consejos y trucos.
+    action: Escucha Podcast
 international:
-  title: International Community
-  description: We regularly post interviews, event announcements and introduce new members on our social media.
+  title: Comunidad internacional
+  description: Regularmente publicamos entrevistas, anuncios de eventos e introducimos nuevos miembros en nuestras redes sociales.
 auth:
   signin: Ingresar
   signup: Registrarse
   signout: Cerrar sesión
 events:
   typelist:
-    party: Party
-    workshop: Workshop
-    course: Course
+    party: Fiesta
+    workshop: Taller
+    course: Curso
     festival: Festival
-    congress: Congress
-    concert: Concert
+    congress: Congreso
+    concert: Concierto
     show: Show
-    other: Other
+    other: Otro
   add: Añadir
-  title: Dance Calendar
+  title: Calendario de Baile
   list:
-    empty: No events found. Would you like to add one?
+    empty: No se han encontrado eventos. ¿Quieres añadir uno?
   view:
-    list: See Photos
-    covers: See list
+    list: Ver Fotos
+    covers: Ver lista
   filter:
-    type: Type
-    style: Any Dance
-    level: Any Level
+    type: Tipo
+    style: Cualquier Baile
+    level: Cualquier Nivel
 eventView:
+  announce: Anunciar
   dropdown:
-    dashboard: Dashboard
-    edit: Edit
+    dashboard: Panel de control
+    edit: Editar
     share: Compartir
-  online: Online Event
+    copy: Copiar
+  online: Evento en línea
   reservation:
     guest: Register for event
     cancel: Cancel reservation
@@ -127,7 +139,7 @@ postFields:
   username:
     label: Username
   type:
-    label: Type
+    label: Tipo
   title:
     placeholder: Title
   description:
@@ -140,77 +152,82 @@ postFields:
     label: Dance Styles
 filter:
   radius: Radius
-  reset: Reset filters
+  reset: Limpiar filtros
 community:
-  title: Community
+  title: Comunidad
 profile:
   bookme: Reservame
+  contactme: Contáctame
   username:
-    label: Username
-    before: Use only letters, numbers, underscores and periods.
+    label: Nombre de usuario
+    before: Utilice sólo letras, números, guiones bajos y puntos.
   community: Yo bailo en
   type: Tipo
   name:
-    label: Name
-    before: If you want to remain anonym use your first name.
-    placeholder: (Required)
+    label: Nombre
+    before: Si desea permanecer anónimo utilice su nombre.
+    placeholder: (Obligatorio)
   bio:
-    label: Teaser
-    before: Short introduction on top of your photo
-  hometown:
-    label: Hometown
-    before: Where were you born and raised?
+    label: Resumen
+    before: Breve introducción en la parte superior de tu foto
   birthday:
-    label: Birthday
-    description: We will show only your age
+    label: Cumpleaños
+    description: Sólo mostraremos tu edad
   gender:
-    label: Gender
-    placeholder: Gender
+    label: Género
+    placeholder: Género
   style: Estilos de baile
-  joined: Joined
-  languages: Languages
+  joined: Unido
+  languages: Idiomas
   story:
-    label: Description
-    before: Tell your dance story. You can also use [widgets](https://wedance.vip/markdown), including images and videos
-    tips: ' Pitch yourself: Who are you? What do you offer? What do you want? Tips for effective pitch: - Uncomplicated: It should be catchy and roll off the tongue - Concise: It shouldn’t take more than a minute to say or read - Unique: It reflects your skills, goals, and desires - Storyline: It covers who you are, what you offer, and where you want to be - Appealing: Your elevator pitch is essentially a persuasive sales pitch; the emphasis should be on what you offer'
-    placeholder: Text (markdown)
-  locales: Your languages
+    label: Descripción
+    before: Dile tu historia de baile. También puedes usar [widgets](https://wedance.vip/markdown), incluyendo imágenes y vídeos
+    tips: ' Apúntate a ti mismo: ¿Quién eres? ¿Qué ofreces? ¿Qué quieres? Consejos para una fosa efectiva: - Sin complicar: Debe ser pegajosa y deshacerse de la lengua - Conciencia: No debería tomar más de un minuto decir o leer - Único: Refleja tus habilidades, metas, y deseos - Historia: Cubre quiénes eres, qué ofreces, y donde quieras estar - Apelación: Su alza de ascensor es esencialmente una persuasiva piscina de ventas; el énfasis debe estar en lo que ofreces'
+    placeholder: Texto (markdown)
+  locales: Tus idiomas
   skills: Habilidades para no bailar
   days: Dias
   learning:
-    label: Which dance topics you are interested in?
-    description: 'For example: Musicality in Salsa, Men Styling, etc.'
+    label: '¿Qué temas de baile te interesan?'
+    description: 'Por ejemplo: Musicalidad en Salsa, Estilo Hombre, etc.'
   teacher: Estas enseñando
   partner: '¿Buscas pareja de baile?'
   height: Tu altura (cm)
   weight:
-    label: Your weight (kg)
-    description: Leave this field blank if you think it's irrelevant.
+    label: Tu peso (kg)
+    description: Deja este campo en blanco si crees que es irrelevante.
   partnerBio:
-    label: Question
-    description: 'What is important in your partner? Put it as a question, for example: Do you love dogs?'
+    label: Pregunta
+    description: '¿Qué es importante en tu pareja? Póngalo como una pregunta, por ejemplo: ¿Te encantan los perros?'
   objectives: Objetivos
   objective:
-    placeholder: Objective
-  meetingPlace: Where to meet?
+    placeholder: Objetivo
+  meetingPlace: '¿Dónde reunirse?'
   photo: Foto
-  add: Add profile
-  title: Community
+  add: Añadir perfil
+  title: Comunidad
   styles:
-    label: Dance
-    tips: Mark up to 4 favorite dances that will be highlighted in your poster
+    label: Baile
+    tips: Marca hasta 4 danzas favoritas que serán destacadas en tu póster
   place:
-    label: Your city
-    placeholder: City
+    label: Viviendo en
+    before: '¿Cuál es tu residencia permanente?'
+    placeholder: Ciudad
+  hometown:
+    label: Hecho en
+    before: '¿Dónde naciste y levantó?'
+  current:
+    label: Bailando en
+    before: '¿En qué ciudad estás bailando actualmente?'
   dance:
-    placeholder: Style
+    placeholder: Estilo
   permission:
-    label: Do you want free promo?
-    description: 'Send us link to your event on [Telegram](https://t.me/+aRIIZcXpBhJkYmUy) and we will announce it on our Telegram, Instagram and Facebook.'
+    label: '¿Quieres promoción gratuita?'
+    description: 'Envíanos un enlace a tu evento en [Telegram](https://t.me/+aRIZcXpBhJkYmUy) y lo anunciaremos en nuestro Telegram, Instagram y Facebook.'
   jobs:
-    label: I can help with
-    description: 'How can you help our community? What are you good at? For example: design, programming, marketing, social media, etc.'
-  contacts: Do you use social media?
+    label: Puedo ayudar con
+    description: '¿Cómo puedes ayudar a nuestra comunidad? ¿En qué estás? Por ejemplo: diseño, programación, marketing, redes sociales, etc.'
+  contacts: '¿Utilizas las redes sociales?'
   instagram:
     label: instagram.com/
     placeholder: username
@@ -251,6 +268,8 @@ profile:
     city: City
   objectivesList:
     talk: Talk about dance
+    home: Share home
+    auto: Share auto
     learn: Learn together
     outdoors: Dance outdoors
     indoors: Dance indoors
@@ -287,7 +306,7 @@ myprofile:
     title: Welcome to WeDance!
     description1: This is your profile. A square below is a poster – your visual introduction.
     description2: Your poster is also shown in {0} among other dancers.
-    community: Community
+    community: Comunidad
     description3: 'Click {0} and add:'
   ambassador:
     description1: WeDance is represented by Ambassador in local dance communities. Volunteers help Ambassador with different initiatives to unite local dancers. WeDance is created and supported by volunteers. Get Involved, become volunteer!
@@ -303,7 +322,7 @@ TPost:
   showLess: Show less
   showMore: Show more
 TCardActions:
-  reason: Reason
+  Reason: Reason
   options:
     spam: spam
     other: other
@@ -383,6 +402,8 @@ signin:
 nopassword:
   signin: Tengo una contraseña
   google: Inicia sesión con Google
+  facebook: Sign in with Facebook
+  email: Sign in with Email
   submit: Envía un enlace mágico
 contacts:
   email: Email
@@ -417,11 +438,13 @@ share:
   copy: Copiar link
 footer:
   about: Sobre nosotros
+  getInvolved: Involucrarse
   support: Apoyo
   privacy: Intimidad
   terms: Condiciones
   coc: Código de conducta
   faq: Preguntas más frecuentes
+  copyright: All rights reserved.
 feed:
   add: Add post
   title: Comentario
@@ -458,8 +481,8 @@ event:
   artists: Artists
   organiser: Organiser
   category:
-    meetup: Meetup
-    lesson: Lesson
+    meetup: Baile
+    lesson: Learn
     online: Online
     travel: Travel
   role:
@@ -471,11 +494,12 @@ event:
     organiser: Organiser
   name:
     placeholder: Event Name
-    label: Name
+    label: Nombre
   description:
-    label: Description
-    placeholder: Text (markdown)
+    label: Announcement
+    placeholder: Unique Value Proposition
     description: 'Use [widgets](https://wedance.vip/markdown), including images and videos'
+    tips: "Pitch yourself: Who are you? What do you offer? What do you want?\n\nTips for effective pitch:\n- Uncomplicated: It should be catchy and roll off the tongue\n- Concise: It shouldn’t take more than a minute to say or read\n- Unique: It reflects your skills, goals, and desires\n- Storyline: It covers who you are, what you offer, and where you want to be\n- Appealing: Your elevator pitch is essentially a persuasive sales pitch; the emphasis should be on what you offer"
   startDate: When?
   endDate: End Date
   venue: Where?
@@ -504,7 +528,7 @@ event:
     label: International
     description: Is it a big event with >500 guests, like festival or congress?
   place:
-    label: Community
+    label: Comunidad
     description: Leave empty if you want your event to be shown in all cities
   form:
     label: External registration?
@@ -543,7 +567,7 @@ EventDashboard:
   noAccess: Only event owner can access this area.
   unlink: Unlink
   couple: Couple
-  cancel: Cancel
+  cancel: Cancelar
   checkIn: CheckIn
   rsvp: RSVP
   subscribed: Subscribed
