@@ -141,37 +141,37 @@ postFields:
   type:
     label: Tip
   title:
-    placeholder: Title
+    placeholder: Başlık
   description:
-    placeholder: Text (markdown)
+    placeholder: Metin (markdown)
     tips: "Kendinizi tanıtın: Siz kimsiniz? Ne teklif ediyorsunuz? Ne istiyorsunuz?\n\nEtkili sunum için ipuçları:\n- Karmaşık olmayan: Akılda kalıcı olmalı ve dilden dökülmeli\n- Kısa ve öz: Söylemesi veya okuması bir dakikadan fazla sürmemeli\n- Eşsiz: Becerilerinizi, hedeflerinizi ve arzularınızı yansıtır\n- Hikaye: Kim olduğunuzu, ne sunduğunuzu ve nerede olmak istediğinizi kapsar\n- İlgi çekici: Asansör konuşmanız esasen ikna edici bir satış konuşmasıdır; vurgu ne sunduğunuz üzerinde olmalıdır"
-    description: Use [widgets](https://wedance.vip/markdown), including images and videos
+    description: Görüntüler ve videolar dahil olmak üzere [widgets] (https://wedance.vip/markdown) kullanın
   url:
     placeholder: Link
   styles:
     label: Dans Stilleri
 filter:
-  radius: Radius
-  reset: Reset filters
+  radius: Yarıçap
+  reset: Filtreleri sıfırla
 community:
   title: Topluluk
 profile:
-  bookme: Book me
-  contactme: Contact me
+  bookme: Rezervasyon yap
+  contactme: Bana ulaşın
   username:
     label: Kullanıcı Adı
     before: Yalnızca harf, rakam, alt çizgi ve nokta kullanın.
   community: Dans ediyorum
   type: Tip
   name:
-    label: Name
+    label: İsim
     before: Anonim kalmak istiyorsanız ilk adınızı kullanın.
     placeholder: (Gerekli)
   bio:
     label: Teaser
     before: Fotoğrafınızın üstünde kısa tanıtım
   birthday:
-    label: Birthday
+    label: Doğum günü
     description: Sadece yaşınızı göstereceğiz
   gender:
     label: Cinsiyet
@@ -180,7 +180,7 @@ profile:
   joined: Katıldı
   languages: Diller
   story:
-    label: Description
+    label: Açıklama
     before: Dans hikayenizi anlatın. Resimler ve videolar dahil olmak üzere [widgets] (https://wedance.vip/markdown) da kullanabilirsiniz
     tips: ' Kendinizi tanıtın: Siz kimsiniz? Ne teklif ediyorsunuz? Ne istiyorsunuz? Etkili bir sunum için ipuçları: - Karmaşık olmayan: Akılda kalıcı olmalı ve dilden dökülmeli - Kısa ve öz: Söylemesi veya okuması bir dakikadan fazla sürmemelidir - Benzersiz: Becerilerinizi, hedeflerinizi ve arzularınızı yansıtır - Hikaye: Kim olduğunuzu, ne sunduğunuzu ve nerede olmak istediğinizi kapsar - Çekici: Asansör konuşmanız esasen ikna edici bir satış konuşmasıdır; vurgu sunduğunuz şey üzerinde olmalıdır'
     placeholder: Metin (markdown)
@@ -257,7 +257,7 @@ profile:
   profileSorts:
     username: Kullanıcı Adı
     registered: Kayıtlı
-    lastSeen: Last seen
+    lastSeen: Son görülme
   chat:
     label: Konuşma
   partnerSearch:
@@ -266,8 +266,8 @@ radiusOptions:
   ten: yaklaşık 10 km
   twenty: yaklaşık 20km
   fifty: yaklaşık 50km
-  hundred: around 100km
-  fiveHundred: around 500km
+  hundred: yaklaşık 100 km
+  fiveHundred: yaklaşık 500km
   thousand: around 1000km
   anywhere: Herhangi bir yer
 myprofile:
@@ -453,22 +453,22 @@ sort:
   newest: En yeni
   hot: Popüler
   watching: İzlemek
-  starred: Starred
-  archived: Archived
-  yours: Yours
+  starred: Yıldızlı
+  archived: Arşivlenmiş
+  yours: Sizin
 event:
-  artists: Artists
-  organiser: Organiser
+  artists: Sanatçılar
+  organiser: Organizatör
   category:
     meetup: Dans
-    lesson: Learn
-    online: Online
+    lesson: Öğren
+    online: Çevrimiçi
     travel: Seyahat
   role:
     dj: DJ
     instructor: Eğitmen
     taxi: Taksi Dansçısı
-    photographer: Photographer
+    photographer: Fotoğrafçı
     musician: Müzisyen
     organiser: Organizatör
   name:
@@ -477,12 +477,12 @@ event:
   description:
     label: Duyuru
     placeholder: Benzersiz Değer Önerisi
-    description: 'Use [widgets](https://wedance.vip/markdown), including images and videos'
+    description: 'Görüntüler ve videolar dahil olmak üzere [widgets] (https://wedance.vip/markdown) kullanın'
     tips: "Kendinizi tanıtın: Siz kimsiniz? Ne teklif ediyorsunuz? Ne istiyorsunuz?\n\nEtkili sunum için ipuçları:\n- Karmaşık olmayan: Akılda kalıcı olmalı ve dilden dökülmeli\n- Kısa ve öz: Söylemesi veya okuması bir dakikadan fazla sürmemeli\n- Eşsiz: Becerilerinizi, hedeflerinizi ve arzularınızı yansıtır\n- Hikaye: Kim olduğunuzu, ne sunduğunuzu ve nerede olmak istediğinizi kapsar\n- İlgi çekici: Asansör konuşmanız esasen ikna edici bir satış konuşmasıdır; vurgu ne sunduğunuz üzerinde olmalıdır"
   startDate: Ne zaman?
   endDate: Bitiş Tarihi
-  venue: Where?
-  cover: Cover
+  venue: Nerede?
+  cover: Kapak
   type: Etkinlik Türü
   duration:
     label: Ne kadar sürecek?
@@ -517,7 +517,7 @@ event:
     description: Bilet platformunda doğrudan rezervasyon bağlantısı [ti.to](https://ti.to/home), Eventbrite, Google Form, vb.
   facebook:
     label: Facebook
-    description: Facebook event
+    description: Facebook etkinliği
   promo:
     label: Sosyal medyada duyurmak mı?
     description: 'Etkinliğinizin linkini [Telegram](https://t.me/+aRIIZcXpBhJkYmUy) adresinden bize gönderin, biz de Telegram, Instagram ve Facebook hesaplarımızdan duyuralım.'
@@ -526,7 +526,7 @@ event:
     placeholder: 'Örnek: Sayın misafirimiz, etkinliğimize katılımınız onaylanmıştır.'
 TInputProfile:
   changeRole: Rolü Değiştir
-  actions: Actions
+  actions: Eylemler
   remove: Kaldır
   import: Import
   placeholder: WeDance, Instagram veya Facebook'ta arama yapın
@@ -536,7 +536,7 @@ popup:
     body: '{action} için oturum açın'
     signin: Oturum aç
 TButton:
-  title: Login to {action}
+  title: '{action}''a giriş yapın'
 TDropdown:
   title: rapor veya paylaşım
 TReaction:
