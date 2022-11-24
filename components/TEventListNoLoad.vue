@@ -33,7 +33,7 @@
       </div>
     </TPopup>
     <div class="px-4">
-      <h4 class="font-bold text-xl pb-4">Dance Event Calendar</h4>
+      <h4 class="font-bold text-xl pb-4">{{ $t('calendar.title') }}</h4>
     </div>
     <div class="flex justify-between items-center px-4">
       <TInputButtons v-model="tab" :options="tabs" />
@@ -41,7 +41,7 @@
     </div>
     <div class="space-y-8 mt-4">
       <div v-if="!items.length" class="text-center text-sm p-4">
-        No events found
+        {{ $t('calendar.empty') }}
       </div>
       <div v-for="(items, date) in itemsByDate" :key="date">
         <h2 class="font-bold text-xl p-4 border-b">
@@ -69,6 +69,7 @@ import {
   getYmd,
   getDateObect,
 } from '~/utils'
+import { useI18n } from '~/use/i18n'
 
 export default {
   name: 'TEventListNoLoad',
@@ -91,6 +92,8 @@ export default {
     },
   },
   setup(props) {
+    const { t } = useI18n()
+
     const map = (item) => {
       if (!item.id) {
         return {}
@@ -111,11 +114,11 @@ export default {
     const tab = ref('upcoming')
     const tabs = [
       {
-        label: 'Upcoming',
+        label: t('calendar.upcoming'),
         value: 'upcoming',
       },
       {
-        label: 'Past',
+        label: t('calendar.past'),
         value: 'past',
       },
     ]
@@ -185,11 +188,11 @@ export default {
     const shareTypeOptions = [
       {
         value: 'text',
-        label: 'Text',
+        label: t('calendar.share.text'),
       },
       {
         value: 'embed',
-        label: 'Embed',
+        label: t('calendar.share.embed'),
       },
     ]
     const shareType = ref('text')

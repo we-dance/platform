@@ -24,7 +24,7 @@
           v-if="isAdmin()"
           type="context"
           :fields="profileFields"
-          label="Edit"
+          :label="$t('Edit')"
           collection="profiles"
           singular="profile"
           :item="profile"
@@ -50,7 +50,7 @@
           v-if="isAdmin()"
           type="context"
           icon="delete"
-          label="Delete"
+          :label="$t('Delete')"
           @click="remove(profile.id)"
         />
       </TDropdown>
@@ -76,13 +76,13 @@
         <div class="text-sm">{{ profile.bio }}</div>
 
         <div class="text-xs text-gray-500">
-          {{ profile.viewsCount || 0 }} views
+          {{ $tc('views', profile.viewsCount, { count: profile.viewsCount }) }}
         </div>
 
         <div v-if="profile.type === 'City'" class="flex space-x-2 mt-4">
           <TReaction
-            label="Subscribe"
-            toggled-label="Unsubscribe"
+            :label="$t('Subscribe')"
+            :toggled-label="$t('Unsubscribe')"
             field="watch"
             icon="BellIcon"
             :item="profile"
@@ -94,14 +94,18 @@
         </div>
         <div v-if="profile.type !== 'City'" class="flex space-x-2 mt-4">
           <TReaction
-            label="Follow"
-            toggled-label="Unfollow"
+            :label="$t('Follow')"
+            :toggled-label="$t('Unfollow')"
             field="watch"
             icon="BellIcon"
             :item="profile"
             collection="profiles"
           />
-          <TProfileContacts :profile="profile" title="Contact" type="simple" />
+          <TProfileContacts
+            :profile="profile"
+            :title="$t('Contact')"
+            type="simple"
+          />
         </div>
       </div>
     </div>
@@ -140,11 +144,9 @@
 
     <WTeaser
       v-if="!uid && profile.type !== 'City' && profile.place"
-      :title="`${invitesLeft} invites left`"
-      :description="
-        `${profile.name} invites you to get a free VIP membership for faster networking, get rewards, discover dance flashmobs and VIP events`
-      "
-      button="Accept Invitation"
+      :title="$t('profile.invite.header', { count: invitesLeft })"
+      :description="$t('profile.invite.description', { name: profile.name })"
+      :button="$t('profile.invite.action')"
       :url="`/signin?invitedBy=${profile.username}`"
       class="my-0"
     />
@@ -171,7 +173,7 @@
     >
       <TButton
         type="simple"
-        label="Claim my profile"
+        :label="$t('profile.claim')"
         :href="`mailto:support@wedance.vip?subject=Claim ${profile.username}`"
       />
     </div>
@@ -189,11 +191,10 @@
       <div class="max-w-md py-4 space-y-1">
         <div class="flex justify-center"></div>
         <h3 class="text-2xl font-extrabold text-center">
-          Follow us
+          {{ $t('profile.follow.title') }}
         </h3>
         <p class="text-center">
-          We regularly post event announcements and introduce new members on our
-          social media.
+          {{ $t('profile.follow.description') }}
         </p>
         <div class="p-4 flex flex-wrap gap-2 items-center justify-center">
           <TButton
