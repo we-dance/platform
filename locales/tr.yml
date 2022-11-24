@@ -29,7 +29,7 @@ nav:
   calendar: Takvim
   community: Topluluk
   chat: Konuşma
-  dance: Dances
+  dance: Danslar
   myProfile: Profilim
   settings: Ayarlar
 form:
@@ -62,18 +62,18 @@ features:
   calendar:
     title: Etkinlik Takvimi
     description: Dans atölyeleri, kurslar, sosyal etkinlikler ve partiler bulun. Etkinlik takvimini hep birlikte bir topluluk olarak dolduruyoruz. Herkes paylaşabilir.
-    action: Discover events
+    action: Etkinlikleri keşfet
   dancePartners:
     title: Dans partnerleri
     description: Dans tarzınıza uygun bir dans partneri bulun ve onlar da sizi bulsun.
-    action: Find dance partner
+    action: Dans partneri bul
   cityChats:
     title: Şehir Sohbetleri
     description: Herhangi bir şehirde dans sohbeti bulun. Şehrinizdeki sohbete katılın ve arkadaşlarınızı şehirdeki yeni dansçılara yardım etmeye davet edin. Küresel düşünün, yerel hareket edin.
   danceTravel:
     title: Dans Seyahati
     description: Uluslararası dans festivalleri ve kongreleri bulun. Bir yolculuğu, bir daireyi paylaşın ve yeni bir şehri birlikte deneyimlemek için bir arkadaş bulun.
-    action: Discover festivals
+    action: Festivalleri keşfet
   volunteer:
     title: Gönüllü
     description: Herkesin "yardım edebilirim" zihniyetiyle girdiği bir topluluk oluşturuyoruz, böylece yardıma ihtiyacınız olduğunda buna güvenebilirsiniz. Biz dünya çapında büyük bir aileyiz. Birbirimize yardım ediyoruz.
@@ -129,15 +129,15 @@ eventView:
     finish:
       title: Neredeyse oldu
       btn: Kayıt işlemini tamamlayın
-      description: See you soon! Don't forget to check-in by the organiser when you come!
+      description: Yakında görüşmek üzere! Geldiğinizde organizatör tarafından check-in yapmayı unutmayın!
       reminder: WeDance profilinin oluşturulmasını tamamlamak için e-postanızı kontrol edin.
-      calendar: Add to calendar
-  organiser: Organised by
-  venueMap: Venue Map
-  source: Event Source
+      calendar: Takvime ekle
+  organiser: Tarafından organize edildi
+  venueMap: Mekan Haritası
+  source: Etkinlik Kaynağı
 postFields:
   username:
-    label: Username
+    label: Kullanıcı Adı
   type:
     label: Tip
   title:
@@ -159,7 +159,7 @@ profile:
   bookme: Book me
   contactme: Contact me
   username:
-    label: Username
+    label: Kullanıcı Adı
     before: Use only letters, numbers, underscores and periods.
   community: Dans ediyorum
   type: Tip
@@ -183,12 +183,12 @@ profile:
     label: Description
     before: Tell your dance story. You can also use [widgets](https://wedance.vip/markdown), including images and videos
     tips: ' Pitch yourself: Who are you? What do you offer? What do you want? Tips for effective pitch: - Uncomplicated: It should be catchy and roll off the tongue - Concise: It shouldn’t take more than a minute to say or read - Unique: It reflects your skills, goals, and desires - Storyline: It covers who you are, what you offer, and where you want to be - Appealing: Your elevator pitch is essentially a persuasive sales pitch; the emphasis should be on what you offer'
-    placeholder: Text (markdown)
-  locales: Your languages
+    placeholder: Metin (markdown)
+  locales: Senin dillerin
   skills: Baska beceriler
   days: Günler
   learning:
-    label: Which dance topics you are interested in?
+    label: Hangi dans konularıyla ilgileniyorsun?
     description: 'Örneğin: Salsa''da Müzikalite, Erkek Stilistliği vb.'
   teacher: Ders veriyormusun?
   partner: Bir dans arkadası mı arıyorsun?
@@ -210,7 +210,7 @@ profile:
     label: Dans
     tips: Posterinizde vurgulanacak en fazla 4 favori dansı işaretleyin
   place:
-    label: Living in
+    label: Yaşayan
     before: Daimi ikametgahınız nedir?
     placeholder: Şehir
   hometown:
@@ -218,32 +218,32 @@ profile:
     before: Nerede doğdun ve büyüdün?
   current:
     label: Dans ediliyor
-    before: In which city are you currently dancing?
+    before: Şu anda hangi şehirde dans ediyorsun?
   dance:
     placeholder: Stil
   permission:
-    label: Do you want free promo?
+    label: Ücretsiz promosyon ister misin?
     description: 'Etkinliğinizin linkini [Telegram](https://t.me/+aRIIZcXpBhJkYmUy) adresinden bize gönderin, biz de Telegram, Instagram ve Facebook hesaplarımızdan duyuralım.'
   jobs:
-    label: I can help with
+    label: Şu konularda yardımcı olabilirim
     description: 'Toplumumuza nasıl yardımcı olabilirsiniz? Hangi konuda iyisiniz? Örneğin: tasarım, programlama, pazarlama, sosyal medya vb.'
-  contacts: Do you use social media?
+  contacts: Sosyal medya kullanıyor musun?
   email:
     label: E-posta adresi
-    placeholder: for business requests
+    placeholder: iş talepleri için
   website:
     label: İnternet sitesi
-    placeholder: for business requests
+    placeholder: iş talepleri için
   meetingPlaces:
-    myPlace: My place
-    yourPlace: Your place
-    private: Somewhere private
+    myPlace: Benim yerim
+    yourPlace: Senin yerin
+    private: Özel bir yerde
     public: Halka açık bir yerde
   typeList:
-    dancer: Dancer
-    artist: Artist
-    organiser: Organiser
-    venue: Venue
+    dancer: Dansçı
+    artist: Sanatçı
+    organiser: Organizatör
+    venue: Salon
     city: Şehir
   objectivesList:
     talk: Talk about dance
@@ -255,7 +255,7 @@ profile:
     teach: Teach together
     project: Dance project
   profileSorts:
-    username: Username
+    username: Kullanıcı Adı
     registered: Registered
     lastSeen: Last seen
   chat:
@@ -295,21 +295,21 @@ myprofile:
     height: '{height}cm'
     weight: '{weight}kg'
 TPostList:
-  loadMore: Load more
+  loadMore: Daha Yükle
 TPost:
-  dropdown: report or share
-  showLess: Show less
-  showMore: Show more
+  dropdown: rapor veya paylaşım
+  showLess: Daha az göster
+  showMore: Daha fazla göster
 TCardActions:
-  Reason: Reason
+  Reason: Sebep
   options:
     spam: spam
-    other: other
+    other: diğer
 chat:
   title: Konuşma
   empty: Konuşmaları başlatın ve burada görünsünler.
   lastMessage:
-    byYou: by you
+    byYou: senin tarafından
   receiver:
     deleted: DELETED
 conversation:
@@ -442,7 +442,7 @@ feed:
   venue: Venue
   app: App
   guide: Guide / How To
-  inspiration: Inspiration
+  inspiration: İlham
   question: Question
   poll: Poll
 comments:
@@ -538,7 +538,7 @@ popup:
 TButton:
   title: Login to {action}
 TDropdown:
-  title: report or share
+  title: rapor veya paylaşım
 TReaction:
   watch: Watch
   star: Star
