@@ -23,8 +23,8 @@ home:
     description: Yakınınızdaki dansçıları ve dans etkinliklerini keşfedin
     action: Şehrini bul
 nav:
-  travel: Travel
-  chooseCity: Choose City
+  travel: Seyahat
+  chooseCity: Şehir seçiniz
   feed: Yorum
   calendar: Takvim
   community: Topluluk
