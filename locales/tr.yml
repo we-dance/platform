@@ -144,12 +144,12 @@ postFields:
     placeholder: Title
   description:
     placeholder: Text (markdown)
-    tips: "Pitch yourself: Who are you? What do you offer? What do you want?\n\nTips for effective pitch:\n- Uncomplicated: It should be catchy and roll off the tongue\n- Concise: It shouldn’t take more than a minute to say or read\n- Unique: It reflects your skills, goals, and desires\n- Storyline: It covers who you are, what you offer, and where you want to be\n- Appealing: Your elevator pitch is essentially a persuasive sales pitch; the emphasis should be on what you offer"
+    tips: "Kendinizi tanıtın: Siz kimsiniz? Ne teklif ediyorsunuz? Ne istiyorsunuz?\n\nEtkili sunum için ipuçları:\n- Karmaşık olmayan: Akılda kalıcı olmalı ve dilden dökülmeli\n- Kısa ve öz: Söylemesi veya okuması bir dakikadan fazla sürmemeli\n- Eşsiz: Becerilerinizi, hedeflerinizi ve arzularınızı yansıtır\n- Hikaye: Kim olduğunuzu, ne sunduğunuzu ve nerede olmak istediğinizi kapsar\n- İlgi çekici: Asansör konuşmanız esasen ikna edici bir satış konuşmasıdır; vurgu ne sunduğunuz üzerinde olmalıdır"
     description: Use [widgets](https://wedance.vip/markdown), including images and videos
   url:
     placeholder: Link
   styles:
-    label: Dance Styles
+    label: Dans Stilleri
 filter:
   radius: Radius
   reset: Reset filters
@@ -160,16 +160,16 @@ profile:
   contactme: Contact me
   username:
     label: Kullanıcı Adı
-    before: Use only letters, numbers, underscores and periods.
+    before: Yalnızca harf, rakam, alt çizgi ve nokta kullanın.
   community: Dans ediyorum
   type: Tip
   name:
     label: Name
-    before: If you want to remain anonym use your first name.
-    placeholder: (Required)
+    before: Anonim kalmak istiyorsanız ilk adınızı kullanın.
+    placeholder: (Gerekli)
   bio:
     label: Teaser
-    before: Short introduction on top of your photo
+    before: Fotoğrafınızın üstünde kısa tanıtım
   birthday:
     label: Birthday
     description: Sadece yaşınızı göstereceğiz
@@ -181,8 +181,8 @@ profile:
   languages: Diller
   story:
     label: Description
-    before: Tell your dance story. You can also use [widgets](https://wedance.vip/markdown), including images and videos
-    tips: ' Pitch yourself: Who are you? What do you offer? What do you want? Tips for effective pitch: - Uncomplicated: It should be catchy and roll off the tongue - Concise: It shouldn’t take more than a minute to say or read - Unique: It reflects your skills, goals, and desires - Storyline: It covers who you are, what you offer, and where you want to be - Appealing: Your elevator pitch is essentially a persuasive sales pitch; the emphasis should be on what you offer'
+    before: Dans hikayenizi anlatın. Resimler ve videolar dahil olmak üzere [widgets] (https://wedance.vip/markdown) da kullanabilirsiniz
+    tips: ' Kendinizi tanıtın: Siz kimsiniz? Ne teklif ediyorsunuz? Ne istiyorsunuz? Etkili bir sunum için ipuçları: - Karmaşık olmayan: Akılda kalıcı olmalı ve dilden dökülmeli - Kısa ve öz: Söylemesi veya okuması bir dakikadan fazla sürmemelidir - Benzersiz: Becerilerinizi, hedeflerinizi ve arzularınızı yansıtır - Hikaye: Kim olduğunuzu, ne sunduğunuzu ve nerede olmak istediğinizi kapsar - Çekici: Asansör konuşmanız esasen ikna edici bir satış konuşmasıdır; vurgu sunduğunuz şey üzerinde olmalıdır'
     placeholder: Metin (markdown)
   locales: Senin dillerin
   skills: Baska beceriler
@@ -246,43 +246,43 @@ profile:
     venue: Salon
     city: Şehir
   objectivesList:
-    talk: Talk about dance
-    home: Share home
-    auto: Share auto
-    learn: Learn together
-    outdoors: Dance outdoors
-    indoors: Dance indoors
-    teach: Teach together
-    project: Dance project
+    talk: Dans hakkında konuşun
+    home: Evi paylaşın
+    auto: Otomatik paylaş
+    learn: Birlikte öğrenin
+    outdoors: Açık havada dans edin
+    indoors: Kapalı alanda dans
+    teach: Birlikte öğretin
+    project: Dans projesi
   profileSorts:
     username: Kullanıcı Adı
-    registered: Registered
+    registered: Kayıtlı
     lastSeen: Last seen
   chat:
     label: Konuşma
   partnerSearch:
-    title: I am looking for a dance partner
+    title: Bir dans partneri arıyorum
 radiusOptions:
-  ten: around 10km
-  twenty: around 20km
-  fifty: around 50km
+  ten: yaklaşık 10 km
+  twenty: yaklaşık 20km
+  fifty: yaklaşık 50km
   hundred: around 100km
   fiveHundred: around 500km
   thousand: around 1000km
   anywhere: Herhangi bir yer
 myprofile:
   addEvent: Etkinlik ekle
-  addPost: Write a post
+  addPost: Bir yazı yazın
   edit: Edit Profile
   share: Paylaş
   intro:
     photo: your photo
     gender: your gender
-    styles: what do you dance
-    bio: teaser (short introduction)
-    place: your city
-    objectives: your objectives
-    title: Welcome to WeDance!
+    styles: ne dansı yapıyorsun
+    bio: teaser (kısa tanıtım)
+    place: sizin şehriniz
+    objectives: hedefleriniz
+    title: WeDance'e hoş geldiniz!
     description1: Bu sizin profiliniz. Aşağıdaki kare bir posterdir - görsel tanıtımınız.
     description2: Posteriniz diğer dansçıların yanı sıra {0}'da da gösterilmektedir.
     community: Topluluk
@@ -311,10 +311,10 @@ chat:
   lastMessage:
     byYou: senin tarafından
   receiver:
-    deleted: DELETED
+    deleted: SİLİNDİ
 conversation:
-  userName: Chat with {username}
-  empty: Start conversation with something nice.
+  userName: '{username} ile sohbet et'
+  empty: Sohbete güzel bir şeyle başlayın.
   lastSeen: son kez sohbet açtı
   unread: henüz bu sohbeti açmadı
   newMessage:
@@ -359,15 +359,15 @@ account:
     label: Haftalık olarak ne tür güncellemeler almak istersin?
     options:
       party: 'Sosyal/parti etkinlikleri'
-      class: Dance classes
-      workshop: Workshops and bootcamps
-      online: Online dance classes
+      class: Dans dersleri
+      workshop: Atölye çalışmaları ve bootcamp'ler
+      online: Online dans dersleri
       festival: International festivals
   comment: Comment
   withPartner:
-    label: Do you have a partner?
+    label: Ortağınız var mı?
   partnerName: Partnerin adı
-  partnerEmail: Partner's email
+  partnerEmail: Ortağın e-postası
 agreement: Oturum açarak, {terms} ve {privacy} 'nı kabul etmiş olursunuz.
 terms: Kullanım Şartları
 privacy: Gizlilik Politikası
@@ -381,7 +381,7 @@ signin:
 nopassword:
   signin: Bir şifrem var
   google: Google ile giriş yap
-  facebook: Sign in with Facebook
+  facebook: Facebook ile oturum açın
   email: Sign in with Email
   submit: Sihirli bağlantı gönder
 contacts:
@@ -423,20 +423,20 @@ footer:
   terms: Koşullar
   coc: Davranış kodu
   faq: SSS
-  copyright: All rights reserved.
+  copyright: Tüm hakları saklıdır.
 feed:
   add: Add post
   title: Yorum
   newMessage:
     input: Dans hakkında bir şey sorun veya paylaşın...
-    intent: post a message
+    intent: bir mesaj gönderin
     submit: Send
-  category: Choose category
+  category: Kategori seçin
   post: Post
   event: Event
-  needPartner: Looking for partner
-  needEvents: Looking for events
-  needInstructor: Looking for instructor
+  needPartner: Partner arıyorum
+  needEvents: Etkinlik aranıyor
+  needInstructor: Eğitmen aranıyor
   trip: Offering trip
   artist: Artist
   venue: Venue
@@ -447,12 +447,12 @@ feed:
   poll: Poll
 comments:
   empty: Henüz herhangi bir yorum yok.
-  label: Comments
+  label: Yorumlar
 sort:
   popular: Popüler
   newest: En yeni
-  hot: Hot
-  watching: Watching
+  hot: Popüler
+  watching: İzlemek
   starred: Starred
   archived: Archived
   yours: Yours
@@ -463,29 +463,29 @@ event:
     meetup: Dans
     lesson: Learn
     online: Online
-    travel: Travel
+    travel: Seyahat
   role:
     dj: DJ
-    instructor: Instructor
-    taxi: Taxi Dancer
+    instructor: Eğitmen
+    taxi: Taksi Dansçısı
     photographer: Photographer
-    musician: Musician
-    organiser: Organiser
+    musician: Müzisyen
+    organiser: Organizatör
   name:
     placeholder: Etkinlik İsmi
     label: İsim
   description:
-    label: Announcement
-    placeholder: Unique Value Proposition
+    label: Duyuru
+    placeholder: Benzersiz Değer Önerisi
     description: 'Use [widgets](https://wedance.vip/markdown), including images and videos'
     tips: "Kendinizi tanıtın: Siz kimsiniz? Ne teklif ediyorsunuz? Ne istiyorsunuz?\n\nEtkili sunum için ipuçları:\n- Karmaşık olmayan: Akılda kalıcı olmalı ve dilden dökülmeli\n- Kısa ve öz: Söylemesi veya okuması bir dakikadan fazla sürmemeli\n- Eşsiz: Becerilerinizi, hedeflerinizi ve arzularınızı yansıtır\n- Hikaye: Kim olduğunuzu, ne sunduğunuzu ve nerede olmak istediğinizi kapsar\n- İlgi çekici: Asansör konuşmanız esasen ikna edici bir satış konuşmasıdır; vurgu ne sunduğunuz üzerinde olmalıdır"
-  startDate: When?
-  endDate: End Date
+  startDate: Ne zaman?
+  endDate: Bitiş Tarihi
   venue: Where?
   cover: Cover
-  type: Event Type
+  type: Etkinlik Türü
   duration:
-    label: How long?
+    label: Ne kadar sürecek?
     thirtyMinutes: 30 dakika
     oneHour: 60 dakika
     ninetyMinutes: 1.5 saat
@@ -510,44 +510,44 @@ event:
     label: Topluluk
     description: Etkinliğinizin tüm şehirlerde gösterilmesini istiyorsanız boş bırakın
   form:
-    label: External registration?
-    before: Do you use external platform to register for your event?
+    label: Harici kayıt mı?
+    before: Etkinliğinize kaydolmak için harici bir platform kullanıyor musunuz?
   link:
     label: Link
-    description: Direct booking link on ticket platform [ti.to](https://ti.to/home), Eventbrite, Google Form, etc.
+    description: Bilet platformunda doğrudan rezervasyon bağlantısı [ti.to](https://ti.to/home), Eventbrite, Google Form, vb.
   facebook:
     label: Facebook
     description: Facebook event
   promo:
-    label: Announce on social media?
+    label: Sosyal medyada duyurmak mı?
     description: 'Etkinliğinizin linkini [Telegram](https://t.me/+aRIIZcXpBhJkYmUy) adresinden bize gönderin, biz de Telegram, Instagram ve Facebook hesaplarımızdan duyuralım.'
   confirmation:
-    label: Confirmation email for guests
+    label: Misafirler için onay e-postası
     placeholder: 'Örnek: Sayın misafirimiz, etkinliğimize katılımınız onaylanmıştır.'
 TInputProfile:
-  changeRole: Change Role
+  changeRole: Rolü Değiştir
   actions: Actions
-  remove: Remove
+  remove: Kaldır
   import: Import
-  placeholder: Search on WeDance, Instagram or Facebook
+  placeholder: WeDance, Instagram veya Facebook'ta arama yapın
 popup:
   auth:
-    title: Members only
-    body: Sign in to {action}
+    title: Sadece üyeler
+    body: '{action} için oturum açın'
     signin: Oturum aç
 TButton:
   title: Login to {action}
 TDropdown:
   title: rapor veya paylaşım
 TReaction:
-  watch: Watch
-  star: Star
+  watch: İzle
+  star: Yıldız
 EventDashboard:
-  noAccess: Only event owner can access this area.
-  unlink: Unlink
-  couple: Couple
+  noAccess: Bu alana yalnızca etkinlik sahibi erişebilir.
+  unlink: Bağlantıyı Kaldır
+  couple: Çift
   cancel: İptal
-  checkIn: CheckIn
+  checkIn: Giriş Yap
   rsvp: LCV (Lütfen cevap veriniz)
   subscribed: Abone olundu
   paid: Ödendi
