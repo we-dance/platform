@@ -268,16 +268,16 @@ radiusOptions:
   fifty: yaklaşık 50km
   hundred: yaklaşık 100 km
   fiveHundred: yaklaşık 500km
-  thousand: around 1000km
+  thousand: yaklaşık 1000km
   anywhere: Herhangi bir yer
 myprofile:
   addEvent: Etkinlik ekle
   addPost: Bir yazı yazın
-  edit: Edit Profile
+  edit: Profil Düzenle
   share: Paylaş
   intro:
-    photo: your photo
-    gender: your gender
+    photo: senin fotoğrafın
+    gender: cinsiyetin
     styles: ne dansı yapıyorsun
     bio: teaser (kısa tanıtım)
     place: sizin şehriniz
@@ -286,10 +286,10 @@ myprofile:
     description1: Bu sizin profiliniz. Aşağıdaki kare bir posterdir - görsel tanıtımınız.
     description2: Posteriniz diğer dansçıların yanı sıra {0}'da da gösterilmektedir.
     community: Topluluk
-    description3: 'Click {0} and add:'
+    description3: '{0} tıklayın ve ekleyin:'
   ambassador:
     description1: WeDance, yerel dans topluluklarında Ambassador tarafından temsil edilmektedir. Gönüllüler, yerel dansçıları bir araya getirmek için farklı girişimlerde Ambassador'a yardımcı olurlar. WeDance gönüllüler tarafından oluşturulur ve desteklenir. Katılın, gönüllü olun!
-    description2: Ambassador in {community} is
+    description2: '{community} büyükelçi'
     description3: 'Şehrinizde bir dans ağı oluşturmamıza yardımcı olun, yerel sosyal medya hesaplarımızı takip edin ve etkileşimde bulunun:'
   profile:
     height: '{height}cm'
@@ -337,7 +337,7 @@ settings:
         title: Hesap silme işlemini onayla
         deleteReason: Neden gidiyorsun?
         usernameConfirmation: Kullanıcı adını girin
-  passwordError: Error
+  passwordError: Hata
   profile:
     title: Profil
     description: Diğer dansçıların hakkında ne bilmesini istiyorsun? Burası dans tutkunu paylaşabileceğin bir yer. Kendini tanıt, utanma!
@@ -354,7 +354,7 @@ account:
   password: Parola
   name: Ad Soyad
   phone: Telefon
-  zone: Timezone
+  zone: Saat dilimi
   newsletter:
     label: Haftalık olarak ne tür güncellemeler almak istersin?
     options:
@@ -362,8 +362,8 @@ account:
       class: Dans dersleri
       workshop: Atölye çalışmaları ve bootcamp'ler
       online: Online dans dersleri
-      festival: International festivals
-  comment: Comment
+      festival: Uluslararası festivaller
+  comment: Yorum
   withPartner:
     label: Ortağınız var mı?
   partnerName: Partnerin adı
@@ -382,7 +382,7 @@ nopassword:
   signin: Bir şifrem var
   google: Google ile giriş yap
   facebook: Facebook ile oturum açın
-  email: Sign in with Email
+  email: E-posta ile giriş yapın
   submit: Sihirli bağlantı gönder
 contacts:
   email: E-posta adresi
@@ -425,26 +425,26 @@ footer:
   faq: SSS
   copyright: Tüm hakları saklıdır.
 feed:
-  add: Add post
+  add: Gönderi ekle
   title: Yorum
   newMessage:
     input: Dans hakkında bir şey sorun veya paylaşın...
     intent: bir mesaj gönderin
-    submit: Send
+    submit: Gönder
   category: Kategori seçin
-  post: Post
-  event: Event
+  post: Gönderi
+  event: Etkinlik
   needPartner: Partner arıyorum
   needEvents: Etkinlik aranıyor
   needInstructor: Eğitmen aranıyor
-  trip: Offering trip
-  artist: Artist
-  venue: Venue
-  app: App
-  guide: Guide / How To
+  trip: Yolculuk teklifi
+  artist: Sanatçı
+  venue: Mekan
+  app: Uygulama
+  guide: Kılavuz / Nasıl Yapılır
   inspiration: İlham
-  question: Question
-  poll: Poll
+  question: Soru
+  poll: Anket
 comments:
   empty: Henüz herhangi bir yorum yok.
   label: Yorumlar
@@ -528,7 +528,7 @@ TInputProfile:
   changeRole: Rolü Değiştir
   actions: Eylemler
   remove: Kaldır
-  import: Import
+  import: İçe aktar
   placeholder: WeDance, Instagram veya Facebook'ta arama yapın
 popup:
   auth:
