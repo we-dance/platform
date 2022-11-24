@@ -11,6 +11,14 @@ common:
   Friday: Friday
   Saturday: Saturday
   Sunday: Sunday
+Edit: Edit
+Delete: Delete
+views: 'no views | 1 view | {count} views'
+Subscribe: Subscribe
+Unsubscribe: Unsubscribe
+Follow: Follow
+Unfollow: Unfollow
+Contact: Contact
 post:
   report: Report
   delete: Delete
@@ -159,8 +167,25 @@ filter:
   radius: Radius
   reset: Reset filters
 community:
-  title: Community
+  title: Dance Community
+  description: Looking for dance partner or new dance events? Filter profiles of local dancers and contact them.
+calendar:
+  title: Dance Event Calendar
+  empty: No events found
+  upcoming: Upcoming
+  past: Past
+  share:
+    text: Text
+    embed: Embed
 profile:
+  claim: Claim my profile
+  follow:
+    title: Follow us
+    description: We regularly post event announcements and introduce new members on our social media.
+  invite:
+    header: '{count} invites left'
+    description: '{name} invites you to get a free VIP membership for faster networking, get rewards, discover dance flashmobs and VIP events'
+    action: Accept Invitation
   bookme: Book me
   contactme: Contact me
   username:
