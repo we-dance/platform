@@ -14,12 +14,12 @@ common:
   Sunday: Pazar
 Edit: Düzenle
 Delete: Sil
-views: 'no views | 1 view | {count} views'
-Subscribe: Subscribe
-Unsubscribe: Unsubscribe
-Follow: Follow
-Unfollow: Unfollow
-Contact: Contact
+views: 'görüntüleme yok | 1 görüntüleme | {count} görüntüleme'
+Subscribe: Abone ol
+Unsubscribe: Abonelikten çık
+Follow: Takip et
+Unfollow: Takibi bırak
+Contact: İletişim
 post:
   report: Rapor
   delete: Sil
@@ -162,25 +162,25 @@ filter:
   radius: Yarıçap
   reset: Filtreleri sıfırla
 community:
-  title: Dance Community
-  description: Looking for dance partner or new dance events? Filter profiles of local dancers and contact them.
+  title: Dans Topluluğu
+  description: Dans partneri veya yeni dans etkinlikleri mi arıyorsunuz? Yerel dansçıların profillerini filtreleyin ve onlarla iletişime geçin.
 calendar:
-  title: Dance Event Calendar
-  empty: No events found
-  upcoming: Upcoming
-  past: Past
+  title: Dans Etkinlik Takvimi
+  empty: Etkinlik bulunamadı
+  upcoming: Yaklaşan
+  past: Geçmiş
   share:
-    text: Text
-    embed: Embed
+    text: Metin
+    embed: Yerleştir
 profile:
-  claim: Claim my profile
+  claim: Profilimi talep edin
   follow:
-    title: Follow us
-    description: We regularly post event announcements and introduce new members on our social media.
+    title: Bizi takip edin
+    description: Sosyal medyamızda düzenli olarak etkinlik duyuruları yayınlıyor ve yeni üyelerimizi tanıtıyoruz.
   invite:
-    header: '{count} invites left'
-    description: '{name} invites you to get a free VIP membership for faster networking, get rewards, discover dance flashmobs and VIP events'
-    action: Accept Invitation
+    header: '{count} davetiye kaldı'
+    description: '{name} sizi daha hızlı ağ kurmak, ödüller kazanmak, dans flashmob''larını ve VIP etkinlikleri keşfetmek için ücretsiz VIP üyelik almaya davet ediyor'
+    action: Daveti Kabul Et
   bookme: Rezervasyon yap
   contactme: Bana ulaşın
   username:
