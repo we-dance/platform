@@ -7,12 +7,6 @@ import { dsvFormat } from 'd3'
 import { db } from './plugins/firebase'
 import languages from '~/assets/languages'
 
-let locale
-
-export const setDateLocale = (value) => {
-  locale = value
-}
-
 export const getObjectKeysFromArray = (arr) => {
   const obj = {}
 
@@ -86,7 +80,7 @@ export const formatDate = (val, formatStr) => {
 
   if (!date.getTime || isNaN(date.getTime())) return ''
 
-  return format(date, formatStr, { locale })
+  return format(date, formatStr)
 }
 
 export const getDateTime = (val) => {
