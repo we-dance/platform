@@ -46,31 +46,31 @@ export const useCommon = () => {
 
   const days = [
     {
-      label: t('common.Monday'),
+      label: t('Monday'),
       value: 'Monday',
     },
     {
-      label: t('common.Tuesday'),
+      label: t('Tuesday'),
       value: 'Tuesday',
     },
     {
-      label: t('common.Wednesday'),
+      label: t('Wednesday'),
       value: 'Wednesday',
     },
     {
-      label: t('common.Thursday'),
+      label: t('Thursday'),
       value: 'Thursday',
     },
     {
-      label: t('common.Friday'),
+      label: t('Friday'),
       value: 'Friday',
     },
     {
-      label: t('common.Saturday'),
+      label: t('Saturday'),
       value: 'Saturday',
     },
     {
-      label: t('common.Sunday'),
+      label: t('Sunday'),
       value: 'Sunday',
     },
   ]
