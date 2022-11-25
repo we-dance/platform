@@ -1,6 +1,6 @@
 <template>
   <div>
-    <TPopup v-if="showPopup" title="Share" @close="showPopup = false">
+    <TPopup v-if="showPopup" :title="$t('Share')" @close="showPopup = false">
       <TInputButtons v-model="shareType" :options="shareTypeOptions" />
       <div v-if="shareType === 'text'" class="flex flex-col py-4 gap-4">
         <textarea
@@ -12,7 +12,7 @@
         <TButton
           type="primary"
           icon="copy"
-          label="Copy"
+          :label="$t('Copy')"
           @click="copyToClipboard(itemsAsText)"
         />
       </div>
@@ -45,7 +45,7 @@
       </div>
       <div v-for="(items, date) in itemsByDate" :key="date">
         <h2 class="font-bold text-xl p-4 border-b">
-          <span class="text-primary">{{ getDay(date) }}</span> ·
+          <span class="text-primary">{{ $t(getDay(date)) }}</span> ·
           {{ getDate(date) }}
         </h2>
         <div v-for="item in items" :key="item.id">
