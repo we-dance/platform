@@ -4,15 +4,17 @@ common:
   female: Female
   male: Male
   other: Other
-  Monday: Monday
-  Tuesday: Tuesday
-  Wednesday: Wednesday
-  Thursday: Thursday
-  Friday: Friday
-  Saturday: Saturday
-  Sunday: Sunday
+Monday: Monday
+Tuesday: Tuesday
+Wednesday: Wednesday
+Thursday: Thursday
+Friday: Friday
+Saturday: Saturday
+Sunday: Sunday
 Edit: Edit
 Delete: Delete
+Copy: Copy
+Share: Share
 views: 'no views | 1 view | {count} views'
 Subscribe: Subscribe
 Unsubscribe: Unsubscribe
