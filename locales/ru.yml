@@ -5,15 +5,17 @@ common:
   female: Женщина
   male: Мужчина
   other: Прочее
-  Monday: Понедельник
-  Tuesday: Вторник
-  Wednesday: Среда
-  Thursday: Четверг
-  Friday: Пятница
-  Saturday: Суббота
-  Sunday: Воскресенье
+Monday: Monday
+Tuesday: Tuesday
+Wednesday: Wednesday
+Thursday: Thursday
+Friday: Friday
+Saturday: Saturday
+Sunday: Sunday
 Edit: Edit
 Delete: Удалить
+Copy: Copy
+Share: Поделиться
 views: 'no views | 1 view | {count} views'
 Subscribe: Subscribe
 Unsubscribe: Unsubscribe

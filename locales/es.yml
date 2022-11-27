@@ -5,15 +5,17 @@ common:
   female: Mujer
   male: Hombre
   other: Otro
-  Monday: Lunes
-  Tuesday: Martes
-  Wednesday: Miércoles
-  Thursday: Jueves
-  Friday: Viernes
-  Saturday: Sábado
-  Sunday: Domingo	
+Monday: Monday
+Tuesday: Tuesday
+Wednesday: Wednesday
+Thursday: Thursday
+Friday: Friday
+Saturday: Saturday
+Sunday: Sunday
 Edit: Editar
 Delete: Borrar
+Copy: Copiar
+Share: Compartir
 views: 'no views | 1 view | {count} views'
 Subscribe: Subscribe
 Unsubscribe: Unsubscribe

@@ -5,15 +5,17 @@ common:
   female: Kadın
   male: Erkek
   other: Diğer
-  Monday: Pazartesi
-  Tuesday: Salı
-  Wednesday: Çarşamba
-  Thursday: Perşembe
-  Friday: Cuma
-  Saturday: Cumartesi
-  Sunday: Pazar
+Monday: Pazartesi
+Tuesday: Salı
+Wednesday: Çarşamba
+Thursday: Perşembe
+Friday: Cuma
+Saturday: Cumartesi
+Sunday: Pazar
 Edit: Düzenle
 Delete: Sil
+Copy: Kopyala
+Share: Paylaş
 views: 'görüntüleme yok | 1 görüntüleme | {count} görüntüleme'
 Subscribe: Abone ol
 Unsubscribe: Abonelikten çık
