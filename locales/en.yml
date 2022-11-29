@@ -464,12 +464,13 @@ teaser:
     description: Become a member of WeDance Community to see more
     btn: Join Now
   chat:
-    title: Ask Locals
+    title: Looking for more events?
     description:
       "We have a Telegram dance chat in every city. Join your city chat
       to help traveling dancers, invite your dance friends. Let's build WeDance
       together! "
-    btn: Join Chat
+    btnChatExists: Ask Locals
+    btnChatMissing: Ask Travelers
   involve:
     title: We need your help
     description:
