@@ -110,6 +110,7 @@ import { computed, ref, watch } from '@nuxtjs/composition-api'
 import { useAlgolia } from '~/use/algolia'
 import { useEvents } from '~/use/events'
 import { useDoc } from '~/use/doc'
+import { useAuth } from '~/use/auth'
 
 export default {
   name: 'TInputProfile',
@@ -131,6 +132,7 @@ export default {
     },
   },
   setup(props, { emit }) {
+    const { profile } = useAuth()
     const { search, response } = useAlgolia('profiles')
     const query = ref('')
     const selected = ref(props.value)
@@ -218,6 +220,7 @@ export default {
         owner: '',
         import: 'requested',
         visibility: 'Public',
+        place: profile?.place,
         ...data,
       })
 
