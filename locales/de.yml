@@ -45,9 +45,9 @@ nav:
 form:
   clear: Löschen
   delete: Löschen
-  cancel: Cancel
-  copy: Copy
-  save: Save
+  cancel: Abbrechen
+  copy: Kopieren
+  save: Speichern
 photo:
   placeholder: Change photo
   selectLabel: Upload photo
@@ -126,7 +126,7 @@ eventView:
     dashboard: Dashboard
     edit: Edit
     share: Teilen
-    copy: Copy
+    copy: Kopieren
   online: Online Event
   reservation:
     guest: Register for event
@@ -574,7 +574,7 @@ EventDashboard:
   noAccess: Only event owner can access this area.
   unlink: Unlink
   couple: Couple
-  cancel: Cancel
+  cancel: Abbrechen
   checkIn: CheckIn
   rsvp: RSVP
   subscribed: Subscribed
