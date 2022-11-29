@@ -26,24 +26,24 @@ post:
   report: Melden
   delete: Löschen
   edit: Bearbeiten
-  dashboard: Dashboard
+  dashboard: Übersicht
 home:
   cta:
-    header: Less chats. More dance.
-    description: Discover dancers and dance events near you
-    action: Find your city
+    header: Weniger Chats. Mehr Tanzen.
+    description: Entdecke Tänzer*innen und Tanzevents in deiner Nähe
+    action: Finde deine Stadt
 nav:
-  travel: Travel
-  chooseCity: Choose City
+  travel: Reisen
+  chooseCity: Stadt auswählen
   feed: Kommentar
-  calendar: Calendar
+  calendar: Kalender
   community: Community
   chat: Plaudern
-  dance: Dances
-  myProfile: My Profile
+  dance: Tanzstile
+  myProfile: Mein Profil
   settings: Einstellungen
 form:
-  clear: Clear
+  clear: Löschen
   delete: Löschen
   cancel: Cancel
   copy: Copy
