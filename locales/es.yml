@@ -432,9 +432,10 @@ teaser:
     description: Hágase miembro de WeDance Community para ver más
     btn: Únete ahora
   chat:
-    title: Pregunte a los lugareños
+    title: Looking for more events?
     description: "Tenemos un chat de baile de Telegram en cada ciudad. Únase al chat de su ciudad para ayudar a los bailarines que viajan, invite a sus amigos de baile. ¡Construyamos WeDance juntos!"
-    btn: Únete al chat
+    btnChatExists: Ask Locals
+    btnChatMissing: Ask Travelers
   involve:
     title: Necesitamos tu ayuda
     description: Somos una comunidad internacional de danza sin fines de lucro. Queremos que vayas a cualquier ciudad de cualquier país y encuentres eventos de danza y bailarines. Todo comienza con la comunidad local.
