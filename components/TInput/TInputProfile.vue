@@ -220,7 +220,7 @@ export default {
         owner: '',
         import: 'requested',
         visibility: 'Public',
-        place: profile?.place,
+        place: profile.value?.place,
         ...data,
       })
 
