@@ -432,9 +432,10 @@ teaser:
     description: Zostań członkiem społeczności WeDance, aby zobaczyć więcej
     btn: Dołącz teraz
   chat:
-    title: Czy rozmawiamy?
+    title: Looking for more events?
     description: "Prowadzimy rozmowy taneczne w każdym mieście"
-    btn: Dołącz do czatu {city}
+    btnChatExists: Ask Locals
+    btnChatMissing: Ask Travelers
   involve:
     title: Potrzebujemy Twojej pomocy
     description: Jesteśmy międzynarodową społecznością taneczną non-profit. Chcemy, abyś udał się do dowolnego miasta w dowolnym kraju i znalazł imprezy taneczne i tancerzy. Wszystko zaczyna się od lokalnej społeczności.
