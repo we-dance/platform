@@ -7,7 +7,8 @@
     <div class="flex justify-center">
       <TButton
         v-if="button"
-        allow-guests
+        :allow-guests="allowGuests"
+        :title="button"
         class="my-2"
         type="base"
         :to="url"
@@ -22,6 +23,10 @@
 <script>
 export default {
   props: {
+    allowGuests: {
+      type: Boolean,
+      default: true,
+    },
     title: {
       type: String,
       default: '',

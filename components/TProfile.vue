@@ -165,6 +165,26 @@
 
     <TPreview v-if="profile.story" :content="profile.story" class="p-4" />
 
+    <WTeaser
+      v-if="profile.type === 'City' && profile.website"
+      :allow-guests="false"
+      :title="$t('teaser.chat.title')"
+      :description="$t('teaser.chat.description')"
+      :button="$t('teaser.chat.btnChatExists')"
+      :href="profile.website"
+      class="w-full mt-4"
+    />
+
+    <WTeaser
+      v-if="profile.type === 'City' && !profile.website"
+      :allow-guests="false"
+      :title="$t('teaser.chat.title')"
+      :description="$t('teaser.chat.description')"
+      :button="$t('teaser.chat.btnChatMissing')"
+      :href="internationalChatLink"
+      class="w-full mt-4"
+    />
+
     <TProfileDetails v-if="profile.type !== 'City'" :profile="profile" />
 
     <div
@@ -276,6 +296,7 @@ export default {
     },
   },
   setup(props) {
+    const internationalChatLink = 'https://t.me/+Vxw15sDG-dWpqHDj'
     const { uid, isAdmin, can } = useAuth()
     const { profileFields } = useProfiles()
     const { switchCity } = useCities()
@@ -354,6 +375,7 @@ export default {
     })
 
     return {
+      internationalChatLink,
       intro,
       uid,
       can,
