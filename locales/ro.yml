@@ -432,9 +432,10 @@ teaser:
     description: Deveniți membru al comunității WeDance pentru a vedea mai multe
     btn: Alătură-te acum
   chat:
-    title: Vorbim?
+    title: Looking for more events?
     description: "Avem discuții de dans în fiecare oraș"
-    btn: Alăturați-vă chatului {city}
+    btnChatExists: Ask Locals
+    btnChatMissing: Ask Travelers
   involve:
     title: Noi avem nevoie de ajutorul tau
     description: Suntem o comunitate internațională de dans non-profit. Vrem să mergeți în orice oraș din orice țară și să găsiți evenimente de dans și dansatori. Totul începe cu comunitatea locală.
