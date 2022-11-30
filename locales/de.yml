@@ -1,53 +1,53 @@
 ---
 common:
-  yes: 'Yes'
-  no: 'No'
-  female: Female
-  male: Male
-  other: Other
-Monday: Monday
-Tuesday: Tuesday
-Wednesday: Wednesday
-Thursday: Thursday
-Friday: Friday
-Saturday: Saturday
-Sunday: Sunday
-Edit: Edit
-Delete: Delete
-Copy: Copy
+  yes: 'Ja'
+  no: 'Nein'
+  female: Weiblich
+  male: Männlich
+  other: Anderes
+Monday: Montag
+Tuesday: Dienstag
+Wednesday: Mittwoch
+Thursday: Donnerstag
+Friday: Freitag
+Saturday: Samstag
+Sunday: Sonntag
+Edit: Bearbeiten
+Delete: Löschen
+Copy: Kopieren
 Share: Teilen
-views: 'no views | 1 view | {count} views'
-Subscribe: Subscribe
-Unsubscribe: Unsubscribe
-Follow: Follow
-Unfollow: Unfollow
-Contact: Contact
+views: 'keine Aufrufe | 1 Aufruf | {count} Aufrufe'
+Subscribe: Abonnieren
+Unsubscribe: Abo beenden
+Follow: Folgen
+Unfollow: Entfolgen
+Contact: Kontakt
 post:
-  report: Report
-  delete: Delete
-  edit: Edit
-  dashboard: Dashboard
+  report: Melden
+  delete: Löschen
+  edit: Bearbeiten
+  dashboard: Übersicht
 home:
   cta:
-    header: Less chats. More dance.
-    description: Discover dancers and dance events near you
-    action: Find your city
+    header: Weniger Chats. Mehr Tanzen.
+    description: Entdecke Tänzer*innen und Tanzevents in deiner Nähe
+    action: Finde deine Stadt
 nav:
-  travel: Travel
-  chooseCity: Choose City
+  travel: Reisen
+  chooseCity: Stadt auswählen
   feed: Kommentar
-  calendar: Calendar
+  calendar: Kalender
   community: Community
   chat: Plaudern
-  dance: Dances
-  myProfile: My Profile
+  dance: Tanzstile
+  myProfile: Mein Profil
   settings: Einstellungen
 form:
-  clear: Clear
-  delete: Delete
-  cancel: Cancel
-  copy: Copy
-  save: Save
+  clear: Löschen
+  delete: Löschen
+  cancel: Abbrechen
+  copy: Kopieren
+  save: Speichern
 photo:
   placeholder: Change photo
   selectLabel: Upload photo
@@ -126,7 +126,7 @@ eventView:
     dashboard: Dashboard
     edit: Edit
     share: Teilen
-    copy: Copy
+    copy: Kopieren
   online: Online Event
   reservation:
     guest: Register for event
@@ -432,9 +432,10 @@ teaser:
     description: Werde Mitglied der WeDance Community, um mehr zu sehen
     btn: Jetzt beitreten
   chat:
-    title: Einheimische fragen
+    title: Looking for more events?
     description: "Wir haben in jeder Stadt einen Telegram-Tanzchat. Treten Sie Ihrem Stadt-Chat bei, um reisenden Tänzern zu helfen, und laden Sie Ihre Tanzfreunde ein. Lass uns zusammen WeDance aufbauen!"
-    btn: Chat beitreten
+    btnChatExists: Ask Locals
+    btnChatMissing: Ask Travelers
   involve:
     title: Wir brauchen Deine Hilfe
     description: Wir sind eine gemeinnützige internationale Tanzgemeinschaft. Wir möchten, dass Sie in jede Stadt in jedem Land gehen und Tanzveranstaltungen und Tänzer finden. Alles beginnt mit der örtlichen Gemeinde.
@@ -573,7 +574,7 @@ EventDashboard:
   noAccess: Only event owner can access this area.
   unlink: Unlink
   couple: Couple
-  cancel: Cancel
+  cancel: Abbrechen
   checkIn: CheckIn
   rsvp: RSVP
   subscribed: Subscribed

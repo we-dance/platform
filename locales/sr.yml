@@ -432,9 +432,10 @@ teaser:
     description: Постаните члан WeDance заједнице да бисте видели више
     btn: Придружи се сад
   chat:
-    title: Да ли ћаскамо?
+    title: Looking for more events?
     description: "У сваком граду имамо плесне разговоре"
-    btn: Придружите се {city} ћаскању
+    btnChatExists: Ask Locals
+    btnChatMissing: Ask Travelers
   involve:
     title: Треба нам твоја помоћ
     description: Ми смо непрофитна међународна плесна заједница. Желимо да одете у било који град у било којој земљи и пронађете плесне догађаје и плесаче. Све почиње од локалне заједнице.

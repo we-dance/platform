@@ -432,9 +432,10 @@ teaser:
     description: Diventa un membro della comunità WeDance per vedere di più
     btn: Iscriviti adesso
   chat:
-    title: Chiacchieriamo?
+    title: Looking for more events?
     description: "Abbiamo chat di ballo in ogni città"
-    btn: Entra nella chat di {city}
+    btnChatExists: Ask Locals
+    btnChatMissing: Ask Travelers
   involve:
     title: Abbiamo bisogno del tuo aiuto
     description: Siamo una comunità di danza internazionale senza scopo di lucro. Vogliamo che tu trovi eventi di danza e ballerini in qualsiasi città di qualsiasi paese Tutto inizia con la comunità locale.
