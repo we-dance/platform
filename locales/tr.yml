@@ -432,10 +432,10 @@ teaser:
     description: Daha fazlasını görmek için WeDance Topluluğu'nun bir üyesi ol
     btn: Şimdi Katıl
   chat:
-    title: Looking for more events?
+    title: Daha fazla etkinlik mi arıyorsunuz?
     description: "Her şehirde dans sohbetleri var"
-    btnChatExists: Ask Locals
-    btnChatMissing: Ask Travelers
+    btnChatExists: Yerel Halka Sor
+    btnChatMissing: Gezginlere Sor
   involve:
     title: Yardımına ihtiyacımız var
     description: Kar amacı gütmeyen uluslararası dans topluluğuyuz. Herhangi bir ülke ve şehre gitmeni ve dans etkinlikleri ve dansçılar bulmanı sağlıyoruz. Her şey yerel toplulukla başlar.
