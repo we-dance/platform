@@ -35,10 +35,10 @@ home:
 nav:
   travel: Reisen
   chooseCity: Stadt auswählen
-  feed: Kommentar
+  feed: Feed
   calendar: Kalender
   community: Community
-  chat: Plaudern
+  chat: Chat
   dance: Tanzstile
   myProfile: Mein Profil
   settings: Einstellungen
@@ -109,7 +109,7 @@ events:
     concert: Concert
     show: Show
     other: Other
-  add: Hinzufügen
+  add: + Veranstaltung
   title: Dance Calendar
   list:
     empty: No events found. Would you like to add one?
@@ -286,7 +286,7 @@ profile:
     registered: Registered
     lastSeen: Last seen
   chat:
-    label: Plaudern
+    label: Chat
   partnerSearch:
     title: I am looking for a dance partner
 radiusOptions:
@@ -298,7 +298,7 @@ radiusOptions:
   thousand: around 1000km
   anywhere: Irgendwo
 myprofile:
-  addEvent: Hinzufügen
+  addEvent: + Veranstaltung
   addPost: Write a post
   edit: Edit Profile
   share: Teilen
@@ -333,7 +333,7 @@ TCardActions:
     spam: spam
     other: other
 chat:
-  title: Plaudern
+  title: Chat
   empty: Start conversations and they will appear here.
   lastMessage:
     byYou: by you
@@ -454,7 +454,7 @@ footer:
   copyright: All rights reserved.
 feed:
   add: Add post
-  title: Kommentar
+  title: Feed
   newMessage:
     input: Ask or share something about dance...
     intent: post a message
