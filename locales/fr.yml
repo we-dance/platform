@@ -1,69 +1,69 @@
 ---
 common:
-  yes: 'Yes'
-  no: 'No'
-  female: Female
-  male: Male
-  other: Other
-Monday: Monday
-Tuesday: Tuesday
-Wednesday: Wednesday
-Thursday: Thursday
-Friday: Friday
-Saturday: Saturday
-Sunday: Sunday
-Edit: Edit
-Delete: Delete
-Copy: Copy
+  yes: 'Oui'
+  no: 'Non'
+  female: Femme
+  male: Homme
+  other: Autre
+Monday: Lundi
+Tuesday: Mardi
+Wednesday: Mercredi
+Thursday: Jeudi
+Friday: Vendredi
+Saturday: Samedi
+Sunday: Dimanche
+Edit: Modifier
+Delete: Supprimer
+Copy: Copier
 Share: Partager
-views: 'no views | 1 view | {count} views'
-Subscribe: Subscribe
-Unsubscribe: Unsubscribe
-Follow: Follow
-Unfollow: Unfollow
+views: 'aucune vue | 1 vue | {count} vues'
+Subscribe: S'abonner
+Unsubscribe: Se désabonner
+Follow: Suivre
+Unfollow: Ne plus suivre
 Contact: Contact
 post:
-  report: Report
-  delete: Delete
-  edit: Edit
-  dashboard: Dashboard
+  report: Signaler
+  delete: Supprimer
+  edit: Modifier
+  dashboard: Tableau de bord
 home:
   cta:
-    header: Less chats. More dance.
-    description: Discover dancers and dance events near you
-    action: Find your city
+    header: Moins de discussions. Plus de danse.
+    description: Découvrez des danseurs et des événements de danse près de chez vous
+    action: Trouver votre ville
 nav:
-  travel: Travel
-  chooseCity: Choose City
+  travel: Voyage
+  chooseCity: Choisissez une ville
   feed: Commentaire
-  calendar: Calendar
-  community: Community
+  calendar: Calendrier
+  community: Communauté
   chat: Conversation
-  dance: Dances
-  myProfile: My Profile
+  dance: Syles de danse
+  myProfile: Mon profil
   settings: Paramètres
 form:
-  clear: Clear
-  delete: Delete
-  cancel: Cancel
-  copy: Copy
-  save: Save
+  clear: Nettoyer
+  delete: Supprimer
+  cancel: Annuler
+  copy: Copier
+  save: Enregistrer
 photo:
-  placeholder: Change photo
-  selectLabel: Upload photo
+  placeholder: Changer de photo
+  selectLabel: Ajouter une photo
 visibility:
-  label: Visibility
-  description: '- Public: searchable in Google and can be used in social media. - Members: only visible for logged-in users. - Unlisted: only possible to open with exact link, but not listed anywhere.'
+  label: Visibilité
+  description: '- Public : recherche possible dans Google et peut être utilisé dans les réseaux sociaux. - Membres : uniquement visibles pour les utilisateurs connectés. - Non listé : seulement possible d''ouvrir avec un lien précis, mais non listé nulle part.'
   public: Public
-  members: Members
-  unlisted: Unlisted
+  members: Membres
+  unlisted: Non répertorié
 hero:
   title: Aimez-vous danser?
   subtitle: Nous nous aidons mutuellement à trouver des événements de danse intéressants et des partenaires de danse.
-  submotto: Salsa, Bachata, Kizomba, Urban Kiz, Raggaeton, Casino, Tango and 130 more dance styles
-  alt: People dancing bachata
-  action: Join the community
-  search: Search dancers
+  submotto: Salsa, Bachata, Kizomba, Kizomba, Kiz, Kiz, Raggaeton, Casino, Tango et 130 autres styles de danse
+  alt: Danseurs/ Danceuses de bachata
+  action: Rejoins la communauté
+  search: Rechercher des danseurs
 icons:
   dancers: dancers
   cities: cities
@@ -126,7 +126,7 @@ eventView:
     dashboard: Dashboard
     edit: Edit
     share: Partager
-    copy: Copy
+    copy: Copier
   online: Online Event
   reservation:
     guest: Register for event
@@ -232,7 +232,7 @@ profile:
   meetingPlace: Where to meet?
   photo: Photo
   add: Add profile
-  title: Community
+  title: Communauté
   styles:
     label: Dance
     tips: Mark up to 4 favorite dances that will be highlighted in your poster
@@ -312,7 +312,7 @@ myprofile:
     title: Welcome to WeDance!
     description1: This is your profile. A square below is a poster – your visual introduction.
     description2: Your poster is also shown in {0} among other dancers.
-    community: Community
+    community: Communauté
     description3: 'Click {0} and add:'
   ambassador:
     description1: WeDance is represented by Ambassador in local dance communities. Volunteers help Ambassador with different initiatives to unite local dancers. WeDance is created and supported by volunteers. Get Involved, become volunteer!
@@ -535,7 +535,7 @@ event:
     label: International
     description: Is it a big event with >500 guests, like festival or congress?
   place:
-    label: Community
+    label: Communauté
     description: Leave empty if you want your event to be shown in all cities
   form:
     label: External registration?
@@ -574,7 +574,7 @@ EventDashboard:
   noAccess: Only event owner can access this area.
   unlink: Unlink
   couple: Couple
-  cancel: Cancel
+  cancel: Annuler
   checkIn: CheckIn
   rsvp: RSVP
   subscribed: Subscribed
