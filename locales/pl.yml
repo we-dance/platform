@@ -1,11 +1,11 @@
 ---
 common:
-  yes: 'Yes'
-  no: 'No'
-  female: Female
-  male: Male
+  yes: 'Tak'
+  no: 'Nie'
+  female: Kobieta
+  male: Mężczyzna
   other: Other
-Monday: Monday
+Monday: Poniedziałek
 Tuesday: Tuesday
 Wednesday: Wednesday
 Thursday: Thursday
@@ -60,7 +60,7 @@ visibility:
 hero:
   title: Czy lubisz tańczyć?
   subtitle: Pomagamy sobie nawzajem znaleźć ciekawe imprezy taneczne i partnerów tanecznych.
-  submotto: Salsa, Bachata, Kizomba, Urban Kiz, Raggaeton, Casino, Tango and 130 more dance styles
+  submotto: Salsa, Bachata, Kizomba, Urban Kiz, Raggaeton, Casino, Tango oraz 130 innych styli tańca
   alt: People dancing bachata
   action: Join the community
   search: Search dancers
