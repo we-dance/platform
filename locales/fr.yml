@@ -65,24 +65,24 @@ hero:
   action: Rejoins la communauté
   search: Rechercher des danseurs
 icons:
-  dancers: dancers
-  cities: cities
-  events: events
+  dancers: Danseur
+  cities: Villes
+  events: Évènements
 features:
   calendar:
-    title: Event Calendar
-    description: Find dance workshops, courses, socials and parties. We fill event calendar all together as a community. Everyone can share.
-    action: Discover events
+    title: Calendrier des évènements
+    description: Trouvez des ateliers de danse, des cours, des réseaux sociaux et des soirées. Nous remplissons le calendrier des évènements en tant que communauté. Tout le monde peut partager.
+    action: Découvrir des événements
   dancePartners:
-    title: Dance partners
-    description: Find a dance partner for your dance style and let them find you.
-    action: Find dance partner
+    title: Partenaire de danse
+    description: Trouvez un/une partenaire de danse pour votre style de danse et laissez-le/la vous trouver.
+    action: Trouver un/une partenaire de danse
   cityChats:
-    title: City Chats
-    description: Find dance chat in any city. Join your city chat and invite your friends to help new dancers in the city. Think globally, act locally.
+    title: Tchats de la Ville
+    description: Trouvez le tchat de danse dans n'importe quelle ville. Rejoignez le tchat de votre ville et invitez vos amis pour aider de nouveaux danseurs/euses dans la ville. Pensez à partout dans le monde, agissez localement.
   danceTravel:
-    title: Dance Travel
-    description: Find international dance festivals and congresses. Share a ride, an appartment and find a buddy to experience a new city together.
+    title: Voyage de danse
+    description: Trouvez des festivals internationaux de danse et des congrès. Partagez un voyage, un appartement et trouvez un copain ou une copine pour découvrir une nouvelle ville ensemble.
     action: Discover festivals
   volunteer:
     title: Volunteer
