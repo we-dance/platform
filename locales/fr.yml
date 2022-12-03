@@ -71,7 +71,7 @@ icons:
 features:
   calendar:
     title: Calendrier des évènements
-    description: Trouvez des ateliers de danse, des cours, des réseaux sociaux et des soirées. Nous remplissons le calendrier des évènements en tant que communauté. Tout le monde peut partager.
+    description: Trouvez des workshops de danse, des cours, des réseaux sociaux et des soirées. Nous remplissons le calendrier des évènements en tant que communauté. Tout le monde peut partager.
     action: Découvrir des événements
   dancePartners:
     title: Partenaire de danse
@@ -83,68 +83,68 @@ features:
   danceTravel:
     title: Voyage de danse
     description: Trouvez des festivals internationaux de danse et des congrès. Partagez un voyage, un appartement et trouvez un copain ou une copine pour découvrir une nouvelle ville ensemble.
-    action: Discover festivals
+    action: Découvrir des festivals
   volunteer:
-    title: Volunteer
-    description: We build a community, where everyone enters with mindset “I can help”, so whenever you need help you can count on it. We are one big family worldwide. We help each other.
+    title: Bénévole
+    description: Nous construisons une communauté, où tout le monde entre dans l'esprit "Je peux aider", donc chaque fois que vous avez besoin d'aide, vous pouvez compter sur elle. Nous sommes une grande famille dans le monde entier et nous nous entraidons.
     action: Être impliqué
   interviews:
-    title: Interviews
-    description: Explore more about you favorite dance artists and catch their tips & tricks.
-    action: Listen to Podcast
+    title: Entretiens
+    description: Découvrez davantage à propos de vos artistes de danse préférés et trouvez leurs trucs et astuces.
+    action: Ecouter les podcasts
 international:
-  title: International Community
-  description: We regularly post interviews, event announcements and introduce new members on our social media.
+  title: Communauté internationale
+  description: Nous publions régulièrement des entrevues, des annonces d'événements et présentons de nouveaux membres sur nos réseaux sociaux.
 auth:
   signin: Se connecter
   signup: S'inscrire
   signout: Se déconnecter
 events:
   typelist:
-    party: Party
+    party: Soirée
     workshop: Workshop
-    course: Course
+    course: Cours
     festival: Festival
-    congress: Congress
+    congress: Congrès
     concert: Concert
-    show: Show
-    other: Other
+    show: Performance
+    other: Autres
   add: Ajouter
-  title: Dance Calendar
+  title: Calendrier de danse
   list:
-    empty: No events found. Would you like to add one?
+    empty: Aucun événement trouvé. Voulez-vous en ajouter un?
   view:
-    list: See Photos
-    covers: See list
+    list: Voir les photos
+    covers: Voir la liste
   filter:
     type: Type
-    style: Any Dance
-    level: Any Level
+    style: Toutes les danses
+    level: Tout niveau
 eventView:
-  announce: Announce
+  announce: Annoncer
   dropdown:
-    dashboard: Dashboard
-    edit: Edit
+    dashboard: Tableau de bord
+    edit: Éditer
     share: Partager
     copy: Copier
-  online: Online Event
+  online: Évènement en ligne
   reservation:
-    guest: Register for event
-    cancel: Cancel reservation
+    guest: S'inscrire à l'événement
+    cancel: Annuler la réservation
   reservationPopup:
     title: S'inscrire
     reserve:
       submitLabel: S'inscrire
       label: S'identifier
     finish:
-      title: Almost there
-      btn: Complete registration
-      description: See you soon! Don't forget to check-in by the organiser when you come!
-      reminder: Check your email to finish creation of the WeDance profile.
-      calendar: Add to calendar
-  organiser: Organised by
-  venueMap: Venue Map
-  source: Event Source
+      title: Vous y êtes presque
+      btn: Terminer l'inscription
+      description: Rendez-vous bientôt! N'oubliez pas de vous enregistrer auprès de l'organisateur á votre arrivée!
+      reminder: Vérifiez vos e-mails pour terminer la création du profil WeDance.
+      calendar: Ajouter à l'agenda
+  organiser: Organisé par
+  venueMap: Carte du lieu
+  source: Sources d'événements
 postFields:
   username:
     label: Username
