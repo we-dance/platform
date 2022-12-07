@@ -49,52 +49,52 @@ form:
   copy: Kopieren
   save: Speichern
 photo:
-  placeholder: Change photo
-  selectLabel: Upload photo
+  placeholder: Foto ändern
+  selectLabel: Foto hochladen
 visibility:
-  label: Visibility
+  label: Sichtbarkeit
   description: '- Public: searchable in Google and can be used in social media. - Members: only visible for logged-in users. - Unlisted: only possible to open with exact link, but not listed anywhere.'
-  public: Public
-  members: Members
-  unlisted: Unlisted
+  public: Öffentlich
+  members: Mitglieder
+  unlisted: Nicht gelistet
 hero:
   title: Tanzt du gerne?
   subtitle: Wir helfen uns gegenseitig, interessante Tanzveranstaltungen und Tanzpartner zu finden.
-  submotto: Salsa, Bachata, Kizomba, Urban Kiz, Raggaeton, Casino, Tango and 130 more dance styles
+  submotto: Salsa, Bachata, Kizomba, Urban Kiz, Reggaeton, Casino, Tango und 130 weitere Tanzstile
   alt: People dancing bachata
   action: Join the community
-  search: Search dancers
+  search: Tänzer*innen suchen
 icons:
-  dancers: dancers
-  cities: cities
-  events: events
+  dancers: Tänzer*innen
+  cities: Städte
+  events: Events
 features:
   calendar:
-    title: Event Calendar
+    title: Veranstaltungskalender
     description: Find dance workshops, courses, socials and parties. We fill event calendar all together as a community. Everyone can share.
-    action: Discover events
+    action: Events entdecken
   dancePartners:
-    title: Dance partners
+    title: Tanzpartner*innen
     description: Find a dance partner for your dance style and let them find you.
-    action: Find dance partner
+    action: Tanzpartner*in finden
   cityChats:
-    title: City Chats
+    title: Stadt-Chats
     description: Find dance chat in any city. Join your city chat and invite your friends to help new dancers in the city. Think globally, act locally.
   danceTravel:
-    title: Dance Travel
-    description: Find international dance festivals and congresses. Share a ride, an appartment and find a buddy to experience a new city together.
-    action: Discover festivals
+    title: Tanzreisen
+    description: Finde internationale Tanzfestivals und Kongresse. Teile ein Taxi, eine Wohnung und finde eine Person, mit der du die neue Stadt gemeinsam entdecken kannst.
+    action: Festivals entdecken
   volunteer:
-    title: Volunteer
+    title: Mithelfen
     description: We build a community, where everyone enters with mindset “I can help”, so whenever you need help you can count on it. We are one big family worldwide. We help each other.
     action: Mach mit
   interviews:
     title: Interviews
-    description: Explore more about you favorite dance artists and catch their tips & tricks.
-    action: Listen to Podcast
+    description: Erfahre mehr über deine Lieblingstanzstars und hol dir ihre Tipps & Tricks.
+    action: Podcast anhören
 international:
-  title: International Community
-  description: We regularly post interviews, event announcements and introduce new members on our social media.
+  title: Internationale Gemeinschaft
+  description: Auf unseren Social Media Kanälen posten wir regelmäßig Interviews und Veranstaltungshinweise und stellen neue Mitglieder vor.
 auth:
   signin: Einloggen
   signup: Registrieren
@@ -103,53 +103,53 @@ events:
   typelist:
     party: Party
     workshop: Workshop
-    course: Course
+    course: Kurs
     festival: Festival
-    congress: Congress
-    concert: Concert
+    congress: Kongress
+    concert: Konzert
     show: Show
-    other: Other
+    other: Sonstiges
   add: + Veranstaltung
-  title: Dance Calendar
+  title: Tanzkalender
   list:
-    empty: No events found. Would you like to add one?
+    empty: Keine Events gefunden. Möchtest du eins hinzufügen?
   view:
-    list: See Photos
-    covers: See list
+    list: Fotos ansehen
+    covers: Liste ansehen
   filter:
-    type: Type
-    style: Any Dance
-    level: Any Level
+    type: Art
+    style: Alle Tanzstile
+    level: Jedes Niveau
 eventView:
-  announce: Announce
+  announce: Ankündigung
   dropdown:
-    dashboard: Dashboard
-    edit: Edit
+    dashboard: Übersicht
+    edit: Bearbeiten
     share: Teilen
     copy: Kopieren
   online: Online Event
   reservation:
-    guest: Register for event
-    cancel: Cancel reservation
+    guest: Für das Event anmelden
+    cancel: Reservierung stornieren
   reservationPopup:
     title: Registrieren
     reserve:
       submitLabel: Registrieren
       label: Anmeldung
     finish:
-      title: Almost there
-      btn: Complete registration
+      title: Fast geschafft
+      btn: Registrierung abschließen
       description: See you soon! Don't forget to check-in by the organiser when you come!
       reminder: Check your email to finish creation of the WeDance profile.
-      calendar: Add to calendar
-  organiser: Organised by
+      calendar: Zum Kalender hinzufügen
+  organiser: Organisiert von
   venueMap: Venue Map
   source: Event Source
 postFields:
   username:
     label: Username
   type:
-    label: Type
+    label: Art
   title:
     placeholder: Title
   description:

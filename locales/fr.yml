@@ -1,150 +1,150 @@
 ---
 common:
-  yes: 'Yes'
-  no: 'No'
-  female: Female
-  male: Male
-  other: Other
-Monday: Monday
-Tuesday: Tuesday
-Wednesday: Wednesday
-Thursday: Thursday
-Friday: Friday
-Saturday: Saturday
-Sunday: Sunday
-Edit: Edit
-Delete: Delete
-Copy: Copy
+  yes: 'Oui'
+  no: 'Non'
+  female: Femme
+  male: Homme
+  other: Autre
+Monday: Lundi
+Tuesday: Mardi
+Wednesday: Mercredi
+Thursday: Jeudi
+Friday: Vendredi
+Saturday: Samedi
+Sunday: Dimanche
+Edit: Modifier
+Delete: Supprimer
+Copy: Copier
 Share: Partager
-views: 'no views | 1 view | {count} views'
-Subscribe: Subscribe
-Unsubscribe: Unsubscribe
-Follow: Follow
-Unfollow: Unfollow
+views: 'aucune vue | 1 vue | {count} vues'
+Subscribe: S'abonner
+Unsubscribe: Se désabonner
+Follow: Suivre
+Unfollow: Ne plus suivre
 Contact: Contact
 post:
-  report: Report
-  delete: Delete
-  edit: Edit
-  dashboard: Dashboard
+  report: Signaler
+  delete: Supprimer
+  edit: Modifier
+  dashboard: Tableau de bord
 home:
   cta:
-    header: Less chats. More dance.
-    description: Discover dancers and dance events near you
-    action: Find your city
+    header: Moins de discussions. Plus de danse.
+    description: Découvrez des danseurs et des événements de danse près de chez vous
+    action: Trouver votre ville
 nav:
-  travel: Travel
-  chooseCity: Choose City
+  travel: Voyage
+  chooseCity: Choisissez une ville
   feed: Commentaire
-  calendar: Calendar
-  community: Community
+  calendar: Calendrier
+  community: Communauté
   chat: Conversation
-  dance: Dances
-  myProfile: My Profile
+  dance: Syles de danse
+  myProfile: Mon profil
   settings: Paramètres
 form:
-  clear: Clear
-  delete: Delete
-  cancel: Cancel
-  copy: Copy
-  save: Save
+  clear: Nettoyer
+  delete: Supprimer
+  cancel: Annuler
+  copy: Copier
+  save: Enregistrer
 photo:
-  placeholder: Change photo
-  selectLabel: Upload photo
+  placeholder: Changer de photo
+  selectLabel: Ajouter une photo
 visibility:
-  label: Visibility
-  description: '- Public: searchable in Google and can be used in social media. - Members: only visible for logged-in users. - Unlisted: only possible to open with exact link, but not listed anywhere.'
+  label: Visibilité
+  description: '- Public : recherche possible dans Google et peut être utilisé dans les réseaux sociaux. - Membres : uniquement visibles pour les utilisateurs connectés. - Non listé : seulement possible d''ouvrir avec un lien précis, mais non listé nulle part.'
   public: Public
-  members: Members
-  unlisted: Unlisted
+  members: Membres
+  unlisted: Non répertorié
 hero:
   title: Aimez-vous danser?
   subtitle: Nous nous aidons mutuellement à trouver des événements de danse intéressants et des partenaires de danse.
-  submotto: Salsa, Bachata, Kizomba, Urban Kiz, Raggaeton, Casino, Tango and 130 more dance styles
-  alt: People dancing bachata
-  action: Join the community
-  search: Search dancers
+  submotto: Salsa, Bachata, Kizomba, Kizomba, Kiz, Kiz, Raggaeton, Casino, Tango et 130 autres styles de danse
+  alt: Danseurs/ Danceuses de bachata
+  action: Rejoins la communauté
+  search: Rechercher des danseurs
 icons:
-  dancers: dancers
-  cities: cities
-  events: events
+  dancers: Danseur
+  cities: Villes
+  events: Évènements
 features:
   calendar:
-    title: Event Calendar
-    description: Find dance workshops, courses, socials and parties. We fill event calendar all together as a community. Everyone can share.
-    action: Discover events
+    title: Calendrier des évènements
+    description: Trouvez des workshops de danse, des cours, des réseaux sociaux et des soirées. Nous remplissons le calendrier des évènements en tant que communauté. Tout le monde peut partager.
+    action: Découvrir des événements
   dancePartners:
-    title: Dance partners
-    description: Find a dance partner for your dance style and let them find you.
-    action: Find dance partner
+    title: Partenaire de danse
+    description: Trouvez un/une partenaire de danse pour votre style de danse et laissez-le/la vous trouver.
+    action: Trouver un/une partenaire de danse
   cityChats:
-    title: City Chats
-    description: Find dance chat in any city. Join your city chat and invite your friends to help new dancers in the city. Think globally, act locally.
+    title: Tchats de la Ville
+    description: Trouvez le tchat de danse dans n'importe quelle ville. Rejoignez le tchat de votre ville et invitez vos amis pour aider de nouveaux danseurs/euses dans la ville. Pensez à partout dans le monde, agissez localement.
   danceTravel:
-    title: Dance Travel
-    description: Find international dance festivals and congresses. Share a ride, an appartment and find a buddy to experience a new city together.
-    action: Discover festivals
+    title: Voyage de danse
+    description: Trouvez des festivals internationaux de danse et des congrès. Partagez un voyage, un appartement et trouvez un copain ou une copine pour découvrir une nouvelle ville ensemble.
+    action: Découvrir des festivals
   volunteer:
-    title: Volunteer
-    description: We build a community, where everyone enters with mindset “I can help”, so whenever you need help you can count on it. We are one big family worldwide. We help each other.
+    title: Bénévole
+    description: Nous construisons une communauté, où tout le monde entre dans l'esprit "Je peux aider", donc chaque fois que vous avez besoin d'aide, vous pouvez compter sur elle. Nous sommes une grande famille dans le monde entier et nous nous entraidons.
     action: Être impliqué
   interviews:
-    title: Interviews
-    description: Explore more about you favorite dance artists and catch their tips & tricks.
-    action: Listen to Podcast
+    title: Entretiens
+    description: Découvrez davantage à propos de vos artistes de danse préférés et trouvez leurs trucs et astuces.
+    action: Ecouter les podcasts
 international:
-  title: International Community
-  description: We regularly post interviews, event announcements and introduce new members on our social media.
+  title: Communauté internationale
+  description: Nous publions régulièrement des entrevues, des annonces d'événements et présentons de nouveaux membres sur nos réseaux sociaux.
 auth:
   signin: Se connecter
   signup: S'inscrire
   signout: Se déconnecter
 events:
   typelist:
-    party: Party
+    party: Soirée
     workshop: Workshop
-    course: Course
+    course: Cours
     festival: Festival
-    congress: Congress
+    congress: Congrès
     concert: Concert
-    show: Show
-    other: Other
+    show: Performance
+    other: Autres
   add: Ajouter
-  title: Dance Calendar
+  title: Calendrier de danse
   list:
-    empty: No events found. Would you like to add one?
+    empty: Aucun événement trouvé. Voulez-vous en ajouter un?
   view:
-    list: See Photos
-    covers: See list
+    list: Voir les photos
+    covers: Voir la liste
   filter:
     type: Type
-    style: Any Dance
-    level: Any Level
+    style: Toutes les danses
+    level: Tout niveau
 eventView:
-  announce: Announce
+  announce: Annoncer
   dropdown:
-    dashboard: Dashboard
-    edit: Edit
+    dashboard: Tableau de bord
+    edit: Éditer
     share: Partager
-    copy: Copy
-  online: Online Event
+    copy: Copier
+  online: Évènement en ligne
   reservation:
-    guest: Register for event
-    cancel: Cancel reservation
+    guest: S'inscrire à l'événement
+    cancel: Annuler la réservation
   reservationPopup:
     title: S'inscrire
     reserve:
       submitLabel: S'inscrire
       label: S'identifier
     finish:
-      title: Almost there
-      btn: Complete registration
-      description: See you soon! Don't forget to check-in by the organiser when you come!
-      reminder: Check your email to finish creation of the WeDance profile.
-      calendar: Add to calendar
-  organiser: Organised by
-  venueMap: Venue Map
-  source: Event Source
+      title: Vous y êtes presque
+      btn: Terminer l'inscription
+      description: Rendez-vous bientôt! N'oubliez pas de vous enregistrer auprès de l'organisateur á votre arrivée!
+      reminder: Vérifiez vos e-mails pour terminer la création du profil WeDance.
+      calendar: Ajouter à l'agenda
+  organiser: Organisé par
+  venueMap: Carte du lieu
+  source: Sources d'événements
 postFields:
   username:
     label: Username
@@ -232,7 +232,7 @@ profile:
   meetingPlace: Where to meet?
   photo: Photo
   add: Add profile
-  title: Community
+  title: Communauté
   styles:
     label: Dance
     tips: Mark up to 4 favorite dances that will be highlighted in your poster
@@ -312,7 +312,7 @@ myprofile:
     title: Welcome to WeDance!
     description1: This is your profile. A square below is a poster – your visual introduction.
     description2: Your poster is also shown in {0} among other dancers.
-    community: Community
+    community: Communauté
     description3: 'Click {0} and add:'
   ambassador:
     description1: WeDance is represented by Ambassador in local dance communities. Volunteers help Ambassador with different initiatives to unite local dancers. WeDance is created and supported by volunteers. Get Involved, become volunteer!
@@ -535,7 +535,7 @@ event:
     label: International
     description: Is it a big event with >500 guests, like festival or congress?
   place:
-    label: Community
+    label: Communauté
     description: Leave empty if you want your event to be shown in all cities
   form:
     label: External registration?
@@ -574,7 +574,7 @@ EventDashboard:
   noAccess: Only event owner can access this area.
   unlink: Unlink
   couple: Couple
-  cancel: Cancel
+  cancel: Annuler
   checkIn: CheckIn
   rsvp: RSVP
   subscribed: Subscribed

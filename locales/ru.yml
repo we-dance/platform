@@ -5,23 +5,23 @@ common:
   female: Женщина
   male: Мужчина
   other: Прочее
-Monday: Monday
-Tuesday: Tuesday
-Wednesday: Wednesday
-Thursday: Thursday
-Friday: Friday
-Saturday: Saturday
-Sunday: Sunday
-Edit: Edit
+Monday: Понедельник
+Tuesday: Вторник
+Wednesday: Среда
+Thursday: Четверг
+Friday: Пятница
+Saturday: Суббота
+Sunday: Воскресенье
+Edit: Изменить
 Delete: Удалить
-Copy: Copy
+Copy: Копировать
 Share: Поделиться
-views: 'no views | 1 view | {count} views'
-Subscribe: Subscribe
-Unsubscribe: Unsubscribe
-Follow: Follow
-Unfollow: Unfollow
-Contact: Contact
+views: 'нет просмотров | 1 просмотр | {count} просмотров'
+Subscribe: Подписаться
+Unsubscribe: Отписаться
+Follow: Следить
+Unfollow: Не следить
+Contact: Контакт
 post:
   report: Пожаловаться
   delete: Удалить
@@ -29,60 +29,60 @@ post:
   dashboard: Панель
 home:
   cta:
-    header: Less chats. More dance.
-    description: Discover dancers and dance events near you
-    action: Find your city
+    header: Меньше чатов. Больше танцев.
+    description: Находи танцоров и танцевальные мероприятия рядом с тобой
+    action: Найти город
 nav:
-  travel: Travel
-  chooseCity: Choose City
+  travel: Путешествия
+  chooseCity: Выбрать город
   feed: Комментарий
   calendar: Календарь
   community: Сообщество
   chat: Беседа
-  dance: Dances
-  myProfile: My Profile
+  dance: Танцы
+  myProfile: Мой Профиль
   settings: Настройки
 form:
-  clear: Clear
+  clear: Очистить 
   delete: Удалить
-  cancel: Cancel
-  copy: Copy
-  save: Save
+  cancel: Отмена
+  copy: Копировать
+  save: Сохранить
 photo:
-  placeholder: Change photo
-  selectLabel: Upload photo
+  placeholder: Сменить фото
+  selectLabel: Загрузить фото
 visibility:
-  label: Visibility
-  description: '- Public: searchable in Google and can be used in social media. - Members: only visible for logged-in users. - Unlisted: only possible to open with exact link, but not listed anywhere.'
-  public: Public
-  members: Members
-  unlisted: Unlisted
+  label: Видимость
+  description: '- Публичный: можно искать в Google и может быть использован в социальных сетях. - Участники: видны только авторизованным пользователям. - Не публиковать: можно открыть только с точной ссылкой, но не указана нигде.'
+  public: Публичный
+  members: Участники
+  unlisted: Не публиковать
 hero:
   title: Нравится танцевать?
   subtitle: Мы помогаем друг другу находить интересные танцевальные мероприятия и танц-партнёров.
-  submotto: Salsa, Bachata, Kizomba, Urban Kiz, Raggaeton, Casino, Tango and 130 more dance styles
-  alt: People dancing bachata
-  action: Join the community
-  search: Search dancers
+  submotto: Сальса, бачата, кизомба, урбан киз, реггетон, касино, танго и 130 других стилей
+  alt: Люди танцуют бачату
+  action: Вступить в сообщество
+  search: Поиск танцоров
 icons:
-  dancers: dancers
-  cities: cities
-  events: events
+  dancers: танцоры
+  cities: города
+  events: мероприятия
 features:
   calendar:
-    title: Event Calendar
-    description: Find dance workshops, courses, socials and parties. We fill event calendar all together as a community. Everyone can share.
-    action: Discover events
+    title: Календарь мероприятий
+    description: Поиск танц занятий, курсов и вечеринок. Мы заполняем календарь мероприятий вместе как сообщество. Каждый может поделиться.
+    action: Поиск мероприятий
   dancePartners:
-    title: Dance partners
-    description: Find a dance partner for your dance style and let them find you.
-    action: Find dance partner
+    title: Танцевальные партнеры
+    description: Найди танц-партнера по танц-стилю и позволь им найти тебя.
+    action: Найти танц-партнера
   cityChats:
-    title: City Chats
-    description: Find dance chat in any city. Join your city chat and invite your friends to help new dancers in the city. Think globally, act locally.
+    title: Чаты городов
+    description: Находи танц-чаты в любом городе. Присоединяйся к городскому чату и приглашай своих друзей, чтобы помочь новым танцорам в городе. Думай глобально, действуй локально.
   danceTravel:
-    title: Dance Travel
-    description: Find international dance festivals and congresses. Share a ride, an appartment and find a buddy to experience a new city together.
+    title: Танц-путешествия
+    description: Находи танц-фестивали и конгрессы. Находи попутчиков и со-жителей.
     action: Discover festivals
   volunteer:
     title: Волонтёр
@@ -126,7 +126,7 @@ eventView:
     dashboard: Dashboard
     edit: Edit
     share: Поделиться
-    copy: Copy
+    copy: Копировать
   online: Online Event
   reservation:
     guest: Register for event
@@ -169,53 +169,53 @@ community:
 calendar:
   title: Dance Event Calendar
   empty: No events found
-  upcoming: Upcoming
-  past: Past
+  upcoming: Предстоящие
+  past: Прошлые
   share:
-    text: Text
-    embed: Embed
+    text: Текст
+    embed: Код для вставки
 profile:
-  claim: Claim my profile
+  claim: Забрать мой профиль
   follow:
-    title: Follow us
-    description: We regularly post event announcements and introduce new members on our social media.
+    title: Следите за нами
+    description: Мы регулярно публикуем анонсы мероприятий и представляем новых пользователей в наших социальных сетях.
   invite:
-    header: '{count} invites left'
-    description: '{name} invites you to get a free VIP membership for faster networking, get rewards, discover dance flashmobs and VIP events'
-    action: Accept Invitation
-  bookme: Book me
-  contactme: Contact me
+    header: 'Осталось {count} приглашений'
+    description: '{name} приглашает тебя получить бесплатное VIP-членство для быстрого нетворкинга и поиска мероприятий'
+    action: Принять приглашение
+  bookme: Забронировать
+  contactme: Связаться со мной
   username:
-    label: Username
-    before: Use only letters, numbers, underscores and periods.
+    label: Имя пользователя
+    before: Используй только буквы, цифры, подчеркивания и точки.
   community: Я танцую в
   type: Тип
   name:
-    label: Name
-    before: If you want to remain anonym use your first name.
-    placeholder: (Required)
+    label: Имя
+    before: Если хочешь остаться анонимом используй имя без фамилии.
+    placeholder: (Обязательно)
   bio:
-    label: Teaser
-    before: Short introduction on top of your photo
+    label: Тизер
+    before: Короткое введение поверх фотографии
   birthday:
-    label: Birthday
-    description: We will show only your age
+    label: Дата рождения
+    description: Мы покажем только твой возраст
   gender:
-    label: Gender
-    placeholder: Gender
+    label: Пол
+    placeholder: Пол
   style: Танц-стили
-  joined: Joined
-  languages: Languages
+  joined: Участник с
+  languages: Языки
   story:
-    label: Description
-    before: Tell your dance story. You can also use [widgets](https://wedance.vip/markdown), including images and videos
+    label: Описание
+    before: Расскажи свою танц-историю. Также можно использовать [виджеты](https://wedance.vip/markdown), включая фотографии и видео
     tips: ' Pitch yourself: Who are you? What do you offer? What do you want? Tips for effective pitch: - Uncomplicated: It should be catchy and roll off the tongue - Concise: It shouldn’t take more than a minute to say or read - Unique: It reflects your skills, goals, and desires - Storyline: It covers who you are, what you offer, and where you want to be - Appealing: Your elevator pitch is essentially a persuasive sales pitch; the emphasis should be on what you offer'
     placeholder: Text (markdown)
-  locales: Your languages
+  locales: Твои языки
   skills: Не танцевальные навыки
   days: Дни
   learning:
-    label: Which dance topics you are interested in?
+    label: Какие танцевальные темы тебя интересуют?
     description: 'For example: Musicality in Salsa, Men Styling, etc.'
   teacher: Вы преподаете?
   partner: Вы ищете партнера для танцев?
@@ -501,7 +501,7 @@ event:
     organiser: Organiser
   name:
     placeholder: Event Name
-    label: Name
+    label: Имя
   description:
     label: Announcement
     placeholder: Unique Value Proposition
@@ -574,7 +574,7 @@ EventDashboard:
   noAccess: Only event owner can access this area.
   unlink: Unlink
   couple: Couple
-  cancel: Cancel
+  cancel: Отмена
   checkIn: CheckIn
   rsvp: RSVP
   subscribed: Subscribed
