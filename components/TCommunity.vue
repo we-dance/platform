@@ -68,7 +68,7 @@
 
 <script>
 import { computed, onMounted, ref, watch } from 'vue-demi'
-import { getExcerpt, getOptions } from '~/utils'
+import { getExcerpt } from '~/utils'
 import { useAlgolia } from '~/use/algolia'
 import { useProfiles } from '~/use/profiles'
 import { useStyles } from '~/use/styles'
