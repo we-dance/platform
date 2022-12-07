@@ -1,4 +1,5 @@
 import format from 'date-fns/format'
+import { enUS, de, ru, es, fr, tr, it, pl, ro, sr } from 'date-fns/esm/locale'
 import formatDistance from 'date-fns/formatDistance'
 import MarkdownIt from 'markdown-it'
 import excerptHtml from 'excerpt-html'
@@ -6,6 +7,19 @@ import saveAs from 'file-saver'
 import { dsvFormat } from 'd3'
 import { db } from './plugins/firebase'
 import languages from '~/assets/languages'
+
+const dateLocales = {
+  en: enUS,
+  de,
+  ru,
+  es,
+  fr,
+  tr,
+  it,
+  pl,
+  ro,
+  sr,
+}
 
 export const getObjectKeysFromArray = (arr) => {
   const obj = {}
@@ -71,7 +85,7 @@ export const dateDiff = (val) => {
   return formatDistance(getDateObect(val), new Date(), { addSuffix: true })
 }
 
-export const formatDate = (val, formatStr) => {
+export const formatDate = (val, formatStr, locale) => {
   if (!val) return ''
 
   const date = getDateObect(val)
@@ -80,31 +94,37 @@ export const formatDate = (val, formatStr) => {
 
   if (!date.getTime || isNaN(date.getTime())) return ''
 
-  return format(date, formatStr)
+  let options = {}
+
+  if (dateLocales[locale]) {
+    options = { locale: dateLocales[locale] }
+  }
+
+  return format(date, formatStr, options)
 }
 
-export const getDateTime = (val) => {
-  return formatDate(val, "d MMM' at 'H:mm")
+export const getDateTime = (val, locale) => {
+  return formatDate(val, 'd MMM H:mm', locale)
 }
 
-export const getDateTimeYear = (val) => {
-  return formatDate(val, 'd MMM yyyy')
+export const getDateTimeYear = (val, locale) => {
+  return formatDate(val, 'd MMM yyyy', locale)
 }
 
-export const getYmdHms = (val) => {
-  return formatDate(val, 'yyyy-MM-dd HH:mm:ss')
+export const getYmdHms = (val, locale) => {
+  return formatDate(val, 'yyyy-MM-dd HH:mm:ss', locale)
 }
 
-export const getYmd = (val) => {
-  return formatDate(val, 'yyyy-MM-dd')
+export const getYmd = (val, locale) => {
+  return formatDate(val, 'yyyy-MM-dd', locale)
 }
 
-export const getDate = (val) => {
-  return formatDate(val, 'd MMM')
+export const getDate = (val, locale) => {
+  return formatDate(val, 'd MMM', locale)
 }
 
-export const getDay = (val) => {
-  return formatDate(val, 'iiii')
+export const getDay = (val, locale) => {
+  return formatDate(val, 'iiii', locale)
 }
 
 export const getTime = (val) => {

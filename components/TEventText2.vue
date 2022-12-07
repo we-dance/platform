@@ -33,7 +33,10 @@
         </div>
       </div>
       <div class="text-xs text-gray-700 pt-1">
-        <span class="text-primary">{{ item.eventType }}</span> ·
+        <span class="text-primary">{{
+          getEventTypeLabel(item.eventType)
+        }}</span>
+        ·
         {{
           getStyles(item.styles, 0, false, 3)
             .map((s) => s.name)
@@ -62,7 +65,7 @@ export default {
     const { updateRsvp } = useRsvp()
     const { getCity } = useApp()
     const { currentCity } = useCities()
-    const { getEventIcon } = useEvents()
+    const { getEventTypeLabel } = useEvents()
     const { getStyles } = useStyles()
 
     return {
@@ -71,7 +74,7 @@ export default {
       getCity,
       currentCity,
       addressPart,
-      getEventIcon,
+      getEventTypeLabel,
       getStyles,
     }
   },

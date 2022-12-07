@@ -107,7 +107,6 @@ export default {
       query.value = ''
     }
     onMounted(load)
-    const typeOptions = getOptions(typeList, 'All')
     const facetFilters = computed(() => {
       return Object.keys(filters.value)
         .filter((field) => filters.value[field])
@@ -153,9 +152,12 @@ export default {
       if (!value) {
         return ''
       }
+
       switch (field) {
+        case 'type':
+          return typeList.find((o) => o.value === value)?.label || value
         case 'objectives':
-          return objectivesList.find((o) => o.value === value).label
+          return objectivesList.find((o) => o.value === value)?.label || value
         case 'style':
           return getStyleName(value)
         default:
@@ -171,7 +173,6 @@ export default {
       search,
       query,
       response,
-      typeOptions,
       filters,
       currentPage,
       profileType,

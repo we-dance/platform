@@ -112,7 +112,8 @@
         >
           <TIcon name="calendar" class="mr-4 h-4 w-4" />
           <div>
-            {{ getDateTime(doc.startDate) }} - {{ getDateTime(doc.endDate) }}
+            {{ getDateTime(doc.startDate, $i18n.locale) }} -
+            {{ getDateTime(doc.endDate, $i18n.locale) }}
           </div>
         </div>
 
@@ -291,7 +292,7 @@
 
     <div class="m-4 text-xs text-right gap-8">
       <span>Published by {{ creator.username }}</span>
-      <span>at {{ getDateTimeYear(doc.createdAt) }}</span>
+      <span>at {{ getDateTimeYear(doc.createdAt, $i18n.locale) }}</span>
     </div>
 
     <div v-if="doc.facebook" class="m-4 text-right text-xs gap-8">

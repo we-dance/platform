@@ -212,6 +212,12 @@ export const useEvents = () => {
     return typeOption.icon
   }
 
+  function getEventTypeLabel(eventType) {
+    return (
+      eventTypeList.find((type) => type.value === eventType)?.label || eventType
+    )
+  }
+
   const eventFields = [
     {
       name: 'org',
@@ -378,5 +384,6 @@ export const useEvents = () => {
     eventFields,
     addLabelIcons,
     eventRoleOptions,
+    getEventTypeLabel,
   }
 }

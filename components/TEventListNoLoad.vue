@@ -45,8 +45,8 @@
       </div>
       <div v-for="(items, date) in itemsByDate" :key="date">
         <h2 class="font-bold text-xl p-4 border-b">
-          <span class="text-primary">{{ $t(getDay(date)) }}</span> ·
-          {{ getDate(date) }}
+          <span class="text-primary">{{ getDay(date, $i18n.locale) }}</span> ·
+          {{ getDate(date, $i18n.locale) }}
         </h2>
         <div v-for="item in items" :key="item.id">
           <TEventText2 :item="item" :is-embed="isEmbed" />
