@@ -49,30 +49,30 @@ form:
   copy: Kopieren
   save: Speichern
 photo:
-  placeholder: Change photo
-  selectLabel: Upload photo
+  placeholder: Foto ändern
+  selectLabel: Foto hochladen
 visibility:
-  label: Visibility
+  label: Sichtbarkeit
   description: '- Public: searchable in Google and can be used in social media. - Members: only visible for logged-in users. - Unlisted: only possible to open with exact link, but not listed anywhere.'
-  public: Public
-  members: Members
-  unlisted: Unlisted
+  public: Öffentlich
+  members: Mitglieder
+  unlisted: Nicht gelistet
 hero:
   title: Tanzt du gerne?
   subtitle: Wir helfen uns gegenseitig, interessante Tanzveranstaltungen und Tanzpartner zu finden.
-  submotto: Salsa, Bachata, Kizomba, Urban Kiz, Raggaeton, Casino, Tango and 130 more dance styles
+  submotto: Salsa, Bachata, Kizomba, Urban Kiz, Reggaeton, Casino, Tango und 130 weitere Tanzstile
   alt: People dancing bachata
   action: Join the community
-  search: Search dancers
+  search: Tänzer*innen suchen
 icons:
-  dancers: dancers
-  cities: cities
-  events: events
+  dancers: Tänzer*innen
+  cities: Städte
+  events: Events
 features:
   calendar:
-    title: Event Calendar
+    title: Veranstaltungskalender
     description: Find dance workshops, courses, socials and parties. We fill event calendar all together as a community. Everyone can share.
-    action: Discover events
+    action: Events entdecken
   dancePartners:
     title: Dance partners
     description: Find a dance partner for your dance style and let them find you.
@@ -142,7 +142,7 @@ eventView:
       description: See you soon! Don't forget to check-in by the organiser when you come!
       reminder: Check your email to finish creation of the WeDance profile.
       calendar: Add to calendar
-  organiser: Organised by
+  organiser: Organisiert von
   venueMap: Venue Map
   source: Event Source
 postFields:
