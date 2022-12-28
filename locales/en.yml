@@ -16,6 +16,7 @@ Delete: Delete
 Copy: Copy
 Share: Share
 views: 'no views | 1 view | {count} views'
+guests: 'no guests | 1 guest | {count} guests'
 Subscribe: Subscribe
 Unsubscribe: Unsubscribe
 Follow: Follow
@@ -523,6 +524,9 @@ sort:
   archived: Archived
   yours: Yours
 event:
+  addToAgenda: My Agenda
+  getTicket: Get Ticket
+  share: Share
   artists: Artists
   organiser: Organiser
   category:

@@ -2,6 +2,7 @@
   <div>
     <THeader :title="doc.name">
       <TDropdown>
+        <TButton type="context" icon="add" :href="calendarLink" label="GCal" />
         <TButton
           v-if="can('edit', 'events', doc)"
           type="context"
@@ -62,21 +63,25 @@
 
       <div class="md:border-l">
         <div
-          class="flex justify-between items-center px-4 py-2 text-xs border-b"
+          class="flex justify-start items-center px-4 py-2 space-x-1 text-xs border-b"
         >
-          <TStyles
-            :value="doc.styles"
-            hide-level
-            class="flex flex-wrap justify-left items-center"
-          >
-            <div v-if="doc.type" class="flex">
-              <div class="w-4 text-center">
-                {{ getEventIcon(doc.eventType) }}
-              </div>
-              <div>{{ doc.eventType }}</div>
-            </div>
-          </TStyles>
-          <div>{{ doc.viewsCount || 0 }} views</div>
+          <div>
+            {{ $tc('guests', guestCount, { count: guestCount }) }}
+          </div>
+          <div>·</div>
+          <div>
+            {{ $tc('views', doc.viewsCount, { count: doc.viewsCount }) }}
+          </div>
+          <div>·</div>
+          <div>{{ getEventTypeLabel(doc.eventType) }}</div>
+          <div>·</div>
+          <div>
+            {{
+              getStyles(doc.styles, 0, false, 3)
+                .map((s) => s.name)
+                .join(' · ')
+            }}
+          </div>
         </div>
 
         <a
@@ -123,25 +128,6 @@
           <TIcon name="ticket" class="mr-4 h-4 w-4" />
           <div class="flex w-full justify-between">
             <div>{{ doc.price }}</div>
-            <template v-if="doc.link">
-              <TButton
-                v-if="doc.link.includes('https://www.tickettailor.com/')"
-                type="link"
-                class="text-primary text-sm"
-                allow-guests
-                @click="ticketTailorPopup = true"
-                >Buy Ticket</TButton
-              >
-              <TButton
-                v-else
-                type="link"
-                class="text-primary text-sm"
-                allow-guests
-                :href="doc.link"
-                target="_blank"
-                >Buy Ticket</TButton
-              >
-            </template>
           </div>
         </div>
       </div>
@@ -159,16 +145,33 @@
       class="sticky bottom-0 z-50 flex justify-center items-center gap-2 border-b bg-white p-4"
     >
       <TReaction
-        label="Attend"
-        toggled-label="Attending"
+        :label="$t('event.addToAgenda')"
+        icon="PlusIcon"
+        toggled-icon="CheckIcon"
         field="star"
-        class="rounded-full"
+        class="rounded-full text-dark"
+        hide-count
         :item="doc"
       />
+      <template v-if="doc.link">
+        <TButton
+          v-if="doc.link.includes('https://www.tickettailor.com/')"
+          type="primary"
+          :label="$t('event.getTicket')"
+          @click="ticketTailorPopup = true"
+        />
+        <TButton
+          v-else
+          type="primary"
+          :href="doc.link"
+          target="_blank"
+          :label="$t('event.getTicket')"
+        />
+      </template>
       <TButton
         allow-guests
         icon="share"
-        type="nav"
+        :label="$t('event.share')"
         class="rounded-full"
         @click="announcementPopupVisible = true"
       />
@@ -396,6 +399,7 @@ import {
 } from '~/utils'
 import { addressPart } from '~/use/google'
 import { trackView } from '~/use/tracking'
+import { useStyles } from '~/use/styles'
 
 export default {
   name: 'EventView',
@@ -408,6 +412,12 @@ export default {
     announcementPopupVisible: false,
   }),
   computed: {
+    guestCount() {
+      const guestsCount = this.doc.star?.count || 0
+      const artistsCount = this.doc.artists?.length || 0
+
+      return guestsCount + artistsCount + 1
+    },
     publishedAt() {
       return getDateTime(this.item?.createdAt)
     },
@@ -444,7 +454,7 @@ export default {
       isAdmin,
       sendSignInLinkToEmail,
     } = useAuth()
-    const { getEventIcon } = useEvents()
+    const { getEventIcon, getEventTypeLabel } = useEvents()
     const { accountFields } = useAccounts()
     const { params } = useRouter()
     const { getProfile } = useProfiles()
@@ -454,6 +464,7 @@ export default {
     if (params.id) {
       sync(params.id)
     }
+    const { getStyles } = useStyles()
     const item = computed(() => {
       const result = map(doc.value)
       result.locality = addressPart(result.venue, 'locality')
@@ -527,6 +538,8 @@ export default {
       getRsvp,
       remove,
       ticketTailorPopup,
+      getEventTypeLabel,
+      getStyles,
     }
   },
 }

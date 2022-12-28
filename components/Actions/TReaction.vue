@@ -1,18 +1,17 @@
 <template>
   <TButton
     :type="type"
-    :class="clicked ? 'font-bold' : ''"
+    :class="clicked ? 'bg-gray-200' : ''"
     :title="label"
     :data-names="names"
     @click="toggle"
   >
-    <component
-      :is="icon"
-      class="w-4 h-4"
-      :class="clicked ? 'text-primary' : ''"
-    />
-    <div class="ml-1">{{ clicked ? toggledLabel : label }}</div>
-    <div class="ml-1 text-xs rounded-full bg-gray-200 px-1 block">
+    <component :is="clicked ? toggledIcon || icon : icon" class="w-4 h-4" />
+    <div class="ml-1">{{ clicked ? toggledLabel || label : label }}</div>
+    <div
+      v-if="!hideCount"
+      class="ml-1 text-xs rounded-full bg-gray-200 px-1 block"
+    >
       {{ count }}
     </div>
   </TButton>
@@ -27,6 +26,8 @@ import {
   BookmarkIcon,
   ArchiveIcon,
   EyeOffIcon,
+  PlusIcon,
+  CheckIcon,
 } from '@vue-hero-icons/outline'
 import { computed } from 'vue-demi'
 import { useAuth } from '~/use/auth'
@@ -40,6 +41,8 @@ export default {
     EyeOffIcon,
     BookmarkIcon,
     BellIcon,
+    PlusIcon,
+    CheckIcon,
   },
   props: {
     label: {
@@ -51,6 +54,10 @@ export default {
       default: '',
     },
     icon: {
+      type: String,
+      default: '',
+    },
+    toggledIcon: {
       type: String,
       default: '',
     },
@@ -69,6 +76,10 @@ export default {
     collection: {
       type: String,
       default: 'posts',
+    },
+    hideCount: {
+      type: Boolean,
+      default: false,
     },
   },
   setup(props) {
