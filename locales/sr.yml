@@ -17,6 +17,7 @@ Delete: Delete
 Copy: Copy
 Share: Објави
 views: 'no views | 1 view | {count} views'
+guests: 'no guests | 1 guest | {count} guests'
 Subscribe: Subscribe
 Unsubscribe: Unsubscribe
 Follow: Follow
@@ -139,7 +140,9 @@ eventView:
     finish:
       title: Almost there
       btn: Complete registration
-      description: See you soon! Don't forget to check-in by the organiser when you come!
+      description:
+        - See you soon! Don't forget to check-in by the organiser when you
+        - come!
       reminder: Check your email to finish creation of the WeDance profile.
       calendar: Add to calendar
   organiser: Organised by
@@ -315,11 +318,16 @@ myprofile:
     community: Community
     description3: 'Click {0} and add:'
   ambassador:
-    description1: WeDance is represented by Ambassador in local dance communities. Volunteers help Ambassador with different initiatives to unite local dancers. WeDance is created and supported by volunteers. Get Involved, become volunteer!
+    description1:
+      - WeDance is represented by Ambassador in local dance communities.
+      - Volunteers help Ambassador with different initiatives to unite local
+      - dancers. WeDance is created and supported by volunteers. Get
+      - Involved, become volunteer!
     description2: Ambassador in {community} is
-    description3: 'Help us build a dance network in your city, follow and interact with our local social media accounts:'
-  profile:
-    height: '{height}cm'
+    description3:
+      0: '''Help us build a dance network in your city, follow and interact with'
+      "our local social media accounts:' profile":
+        height: '{height}cm'
     weight: '{weight}kg'
 TPostList:
   loadMore: Load more
@@ -356,7 +364,9 @@ settings:
   title: Подешавања
   account:
     title: Рачун
-    description: Ове информације ће се користити за обавештења и куповине. Делиће се са добављачима услуга или продавцима само уз ваш договор.
+    description:
+      - This information will be used for notifications and purchases. It
+      - will be shared with service providers or sellers only with your agreement.
     changepassword: Промени лозинку
     delete: Обришите налог
     popup:
@@ -367,10 +377,15 @@ settings:
   passwordError: Error
   profile:
     title: Профил
-    description: Шта желите да други плесачи знају о вама? То је место на којем можете поделити своју страст према плесу. Представи се, не стиди се!
+    description:
+      - What do you want other dancers to know about you? That's a place to
+      - share your passion to dance. Present yourself, don't be shy!
   contacts:
     title: Контакти
-    description: Ове информације ће бити јавно доступне. Поделите своје контакте само ако желите да вас контактирају чланови. Такође је лепо место за дељење друштвених мрежа како бисте привукли пажњу.
+    description:
+      - This information will be publicly available. Share your contacts
+      - only if you want to be contacted by members. It's also nice place to share
+      - your social media to get some attention.
 city:
   anywhere: Било где
   change: Промени град
@@ -433,12 +448,18 @@ teaser:
     btn: Придружи се сад
   chat:
     title: Looking for more events?
-    description: "У сваком граду имамо плесне разговоре"
+    description:
+      - '"We have a Telegram dance chat in every city. Join your city chat'
+      - to help traveling dancers, invite your dance friends. Let's build WeDance
+      - together! "
     btnChatExists: Ask Locals
     btnChatMissing: Ask Travelers
   involve:
     title: Треба нам твоја помоћ
-    description: Ми смо непрофитна међународна плесна заједница. Желимо да одете у било који град у било којој земљи и пронађете плесне догађаје и плесаче. Све почиње од локалне заједнице.
+    description:
+      - We are non-profit international dance community. We want you go to
+      - any city in any country and find dance events and dancers. It all starts
+      - with the local community.
     btn: Умешати се
 share:
   title: Објави
@@ -485,6 +506,9 @@ sort:
   archived: Archived
   yours: Yours
 event:
+  addToAgenda: My Agenda
+  getTicket: Get Ticket
+  share: Објави
   artists: Artists
   organiser: Organiser
   category:
