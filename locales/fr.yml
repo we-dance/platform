@@ -17,6 +17,7 @@ Delete: Supprimer
 Copy: Copier
 Share: Partager
 views: 'aucune vue | 1 vue | {count} vues'
+guests: 'no guests | 1 guest | {count} guests'
 Subscribe: S'abonner
 Unsubscribe: Se désabonner
 Follow: Suivre
@@ -139,7 +140,9 @@ eventView:
     finish:
       title: Vous y êtes presque
       btn: Terminer l'inscription
-      description: Rendez-vous bientôt! N'oubliez pas de vous enregistrer auprès de l'organisateur á votre arrivée!
+      description:
+        - See you soon! Don't forget to check-in by the organiser when you
+        - come!
       reminder: Vérifiez vos e-mails pour terminer la création du profil WeDance.
       calendar: Ajouter à l'agenda
   organiser: Organisé par
@@ -315,11 +318,16 @@ myprofile:
     community: Communauté
     description3: 'Click {0} and add:'
   ambassador:
-    description1: WeDance is represented by Ambassador in local dance communities. Volunteers help Ambassador with different initiatives to unite local dancers. WeDance is created and supported by volunteers. Get Involved, become volunteer!
+    description1:
+      - WeDance is represented by Ambassador in local dance communities.
+      - Volunteers help Ambassador with different initiatives to unite local
+      - dancers. WeDance is created and supported by volunteers. Get
+      - Involved, become volunteer!
     description2: Ambassador in {community} is
-    description3: 'Help us build a dance network in your city, follow and interact with our local social media accounts:'
-  profile:
-    height: '{height}cm'
+    description3:
+      0: '''Help us build a dance network in your city, follow and interact with'
+      "our local social media accounts:' profile":
+        height: '{height}cm'
     weight: '{weight}kg'
 TPostList:
   loadMore: Load more
@@ -356,7 +364,9 @@ settings:
   title: Paramètres
   account:
     title: Compte
-    description: Ces informations seront utilisées pour les notifications et les achats. Il ne sera partagé avec les fournisseurs de services ou les vendeurs qu'avec votre accord.
+    description:
+      - This information will be used for notifications and purchases. It
+      - will be shared with service providers or sellers only with your agreement.
     changepassword: Changer le mot de passe
     delete: Supprimer le compte
     popup:
@@ -367,10 +377,15 @@ settings:
   passwordError: Error
   profile:
     title: Profil
-    description: Que voulez-vous que les autres danseurs sachent sur vous? C'est un endroit pour partager votre passion pour la danse. Présentez-vous, ne soyez pas timide!
+    description:
+      - What do you want other dancers to know about you? That's a place to
+      - share your passion to dance. Present yourself, don't be shy!
   contacts:
     title: Contacts
-    description: Ces informations seront accessibles au public. Partagez vos contacts uniquement si vous souhaitez être contacté par les membres. C'est aussi un endroit agréable pour partager vos médias sociaux pour attirer l'attention.
+    description:
+      - This information will be publicly available. Share your contacts
+      - only if you want to be contacted by members. It's also nice place to share
+      - your social media to get some attention.
 city:
   anywhere: Nulle part
   change: Changer de ville
@@ -433,12 +448,18 @@ teaser:
     btn: Adhérer maintenant
   chat:
     title: Looking for more events?
-    description: "Nous avons des discussions de danse dans chaque ville"
+    description:
+      - '"We have a Telegram dance chat in every city. Join your city chat'
+      - to help traveling dancers, invite your dance friends. Let's build WeDance
+      - together! "
     btnChatExists: Ask Locals
     btnChatMissing: Ask Travelers
   involve:
     title: Nous avons besoin de votre aide
-    description: Nous sommes une communauté de danse internationale à but non lucratif. Nous voulons que vous alliez dans n'importe quelle ville de n'importe quel pays et que vous trouviez des événements de danse et des danseurs. Tout commence avec la communauté locale.
+    description:
+      - We are non-profit international dance community. We want you go to
+      - any city in any country and find dance events and dancers. It all starts
+      - with the local community.
     btn: Être impliqué
 share:
   title: Partager
@@ -485,6 +506,9 @@ sort:
   archived: Archived
   yours: Yours
 event:
+  addToAgenda: My Agenda
+  getTicket: Get Ticket
+  share: Partager
   artists: Artists
   organiser: Organiser
   category:
