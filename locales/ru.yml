@@ -17,6 +17,7 @@ Delete: Удалить
 Copy: Копировать
 Share: Поделиться
 views: 'нет просмотров | 1 просмотр | {count} просмотров'
+guests: 'no guests | 1 guest | {count} guests'
 Subscribe: Подписаться
 Unsubscribe: Отписаться
 Follow: Следить
@@ -26,7 +27,7 @@ post:
   report: Пожаловаться
   delete: Удалить
   edit: Изменить
-  dashboard: Панель
+  dashboard: Панель управления
 home:
   cta:
     header: Меньше чатов. Больше танцев.
@@ -83,86 +84,88 @@ features:
   danceTravel:
     title: Танц-путешествия
     description: Находи танц-фестивали и конгрессы. Находи попутчиков и со-жителей.
-    action: Discover festivals
+    action: Находи фестивали
   volunteer:
     title: Волонтёр
-    description: We build a community, where everyone enters with mindset “I can help”, so whenever you need help you can count on it. We are one big family worldwide. We help each other.
+    description: Мы строим сообщество, где каждый приходит с менталитетом «Я могу помочь», так что всякий раз, когда тебе нужна помощь, ты можете рассчитывать на это. Мы одна большая семья. Мы помогаем друг другу.
     action: Увлекаться
   interviews:
-    title: Interviews
-    description: Explore more about you favorite dance artists and catch their tips & tricks.
-    action: Listen to Podcast
+    title: Интервью
+    description: Узнай больше о любимых артистах танца и следи за их советами.
+    action: Слушать подкаст
 international:
-  title: International Community
-  description: We regularly post interviews, event announcements and introduce new members on our social media.
+  title: Международное Сообщество
+  description: Мы регулярно публикуем анонсы мероприятий и представляем новых пользователей в наших социальных сетях.
 auth:
   signin: Войти
   signup: Зарегистрироваться
   signout: Выйти
 events:
   typelist:
-    party: Party
-    workshop: Workshop
-    course: Course
-    festival: Festival
-    congress: Congress
-    concert: Concert
-    show: Show
-    other: Other
+    party: Вечеринка
+    workshop: Воркшоп
+    course: Курс
+    festival: Фестиваль
+    congress: Конгресс
+    concert: Концерт
+    show: Шоу
+    other: Другое
   add: Добавить
-  title: Dance Calendar
+  title: Танц Календарь
   list:
-    empty: No events found. Would you like to add one?
+    empty: Мероприятия не найдены. Хочешь добавить?
   view:
-    list: See Photos
-    covers: See list
+    list: Постерами
+    covers: Списком
   filter:
-    type: Type
-    style: Any Dance
-    level: Any Level
+    type: Тип
+    style: Любой танец
+    level: Любой уровень
 eventView:
-  announce: Announce
+  announce: Анонс
   dropdown:
-    dashboard: Dashboard
-    edit: Edit
+    dashboard: Панель управления
+    edit: Изменить
     share: Поделиться
     copy: Копировать
-  online: Online Event
+  online: Онлайн событие
   reservation:
-    guest: Register for event
-    cancel: Cancel reservation
+    guest: Зарегистрироваться на мероприятие
+    cancel: Отменить резервирование
   reservationPopup:
     title: Зарегистрироваться
     reserve:
       submitLabel: Зарегистрироваться
       label: Вход
     finish:
-      title: Almost there
-      btn: Complete registration
-      description: See you soon! Don't forget to check-in by the organiser when you come!
-      reminder: Check your email to finish creation of the WeDance profile.
-      calendar: Add to calendar
-  organiser: Organised by
-  venueMap: Venue Map
-  source: Event Source
+      title: Почти готово
+      btn: Завершить регистрацию
+      description:
+        - See you soon! Don't forget to check-in by the organiser when you
+        - come!
+      reminder: Проверь свою электронную почту, чтобы завершить создание профиля на WeDance.
+      calendar: Добавить в календарь
+  organiser: 'Организатор:'
+  venueMap: Карта места
+  source: Источник мероприятия
 postFields:
   username:
-    label: Username
+    label: Имя пользователя
   type:
-    label: Type
+    label: Тип
   title:
-    placeholder: Title
+    placeholder: Название
   description:
-    placeholder: Text (markdown)
+    placeholder: Текст (markdown)
     tips: "Pitch yourself: Who are you? What do you offer? What do you want?\n\nTips for effective pitch:\n- Uncomplicated: It should be catchy and roll off the tongue\n- Concise: It shouldn’t take more than a minute to say or read\n- Unique: It reflects your skills, goals, and desires\n- Storyline: It covers who you are, what you offer, and where you want to be\n- Appealing: Your elevator pitch is essentially a persuasive sales pitch; the emphasis should be on what you offer"
     description: Use [widgets](https://wedance.vip/markdown), including images and videos
   url:
-    placeholder: Link
+    placeholder: Ссылка
   styles:
-    label: Dance Styles
+    label: Танц-стили
 filter:
-  radius: Radius
-  reset: Reset filters
+  radius: Радиус
+  reset: Сбросить фильтры
 community:
   title: Dance Community
   description: Looking for dance partner or new dance events? Filter profiles of local dancers and contact them.
@@ -210,7 +213,7 @@ profile:
     label: Описание
     before: Расскажи свою танц-историю. Также можно использовать [виджеты](https://wedance.vip/markdown), включая фотографии и видео
     tips: ' Pitch yourself: Who are you? What do you offer? What do you want? Tips for effective pitch: - Uncomplicated: It should be catchy and roll off the tongue - Concise: It shouldn’t take more than a minute to say or read - Unique: It reflects your skills, goals, and desires - Storyline: It covers who you are, what you offer, and where you want to be - Appealing: Your elevator pitch is essentially a persuasive sales pitch; the emphasis should be on what you offer'
-    placeholder: Text (markdown)
+    placeholder: Текст (markdown)
   locales: Твои языки
   skills: Не танцевальные навыки
   days: Дни
@@ -282,7 +285,7 @@ profile:
     teach: Teach together
     project: Dance project
   profileSorts:
-    username: Username
+    username: Имя пользователя
     registered: Registered
     lastSeen: Last seen
   chat:
@@ -315,11 +318,16 @@ myprofile:
     community: Сообщество
     description3: 'Click {0} and add:'
   ambassador:
-    description1: WeDance is represented by Ambassador in local dance communities. Volunteers help Ambassador with different initiatives to unite local dancers. WeDance is created and supported by volunteers. Get Involved, become volunteer!
+    description1:
+      - WeDance is represented by Ambassador in local dance communities.
+      - Volunteers help Ambassador with different initiatives to unite local
+      - dancers. WeDance is created and supported by volunteers. Get
+      - Involved, become volunteer!
     description2: Ambassador in {community} is
-    description3: 'Help us build a dance network in your city, follow and interact with our local social media accounts:'
-  profile:
-    height: '{height}cm'
+    description3:
+      0: '''Help us build a dance network in your city, follow and interact with'
+      "our local social media accounts:' profile":
+        height: '{height}cm'
     weight: '{weight}kg'
 TPostList:
   loadMore: Load more
@@ -356,7 +364,9 @@ settings:
   title: Настройки
   account:
     title: Учетная запись
-    description: Эта информация будет использоваться для уведомлений и покупок. Он будет передан поставщикам услуг или продавцам только с вашего согласия.
+    description:
+      - This information will be used for notifications and purchases. It
+      - will be shared with service providers or sellers only with your agreement.
     changepassword: Изменить пароль
     delete: Удалить аккаунт
     popup:
@@ -367,10 +377,15 @@ settings:
   passwordError: Error
   profile:
     title: Профиль
-    description: Что вы хотите, чтобы другие танцоры знали о вас? Это место, где можно поделиться своей страстью к танцам. Представь себя, не стесняйся!
+    description:
+      - What do you want other dancers to know about you? That's a place to
+      - share your passion to dance. Present yourself, don't be shy!
   contacts:
     title: Контакты
-    description: Эта информация будет общедоступной. Делитесь своими контактами только в том случае, если вы хотите, чтобы с вами связались участники. Это также хорошее место, чтобы поделиться своими социальными сетями, чтобы привлечь внимание.
+    description:
+      - This information will be publicly available. Share your contacts
+      - only if you want to be contacted by members. It's also nice place to share
+      - your social media to get some attention.
 city:
   anywhere: Куда угодно
   change: Сменить город
@@ -433,12 +448,18 @@ teaser:
     btn: Присоединяйся сейчас
   chat:
     title: Looking for more events?
-    description: "У нас есть танцевальный чат Telegram в каждом городе. Присоединяйтесь к своему городскому чату, чтобы помогать путешествующим танцорам, приглашайте своих танцевальных друзей. Давайте вместе создадим WeDance!"
+    description:
+      - '"We have a Telegram dance chat in every city. Join your city chat'
+      - to help traveling dancers, invite your dance friends. Let's build WeDance
+      - together! "
     btnChatExists: Ask Locals
     btnChatMissing: Ask Travelers
   involve:
     title: Нам нужна твоя помощь
-    description: Мы некоммерческое международное танцевальное сообщество. Мы хотим, чтобы вы побывали в любом городе любой страны и нашли танцевальные мероприятия и танцоров. Все начинается с местного сообщества.
+    description:
+      - We are non-profit international dance community. We want you go to
+      - any city in any country and find dance events and dancers. It all starts
+      - with the local community.
     btn: Увлекаться
 share:
   title: Поделиться
@@ -485,6 +506,9 @@ sort:
   archived: Archived
   yours: Yours
 event:
+  addToAgenda: My Agenda
+  getTicket: Get Ticket
+  share: Поделиться
   artists: Artists
   organiser: Organiser
   category:
@@ -541,7 +565,7 @@ event:
     label: External registration?
     before: Do you use external platform to register for your event?
   link:
-    label: Link
+    label: Ссылка
     description: Direct booking link on ticket platform [ti.to](https://ti.to/home), Eventbrite, Google Form, etc.
   facebook:
     label: Facebook
