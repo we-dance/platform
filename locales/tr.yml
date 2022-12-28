@@ -17,6 +17,7 @@ Delete: Sil
 Copy: Kopyala
 Share: Paylaş
 views: 'görüntüleme yok | 1 görüntüleme | {count} görüntüleme'
+guests: 'no guests | 1 guest | {count} guests'
 Subscribe: Abone ol
 Unsubscribe: Abonelikten çık
 Follow: Takip et
@@ -139,7 +140,9 @@ eventView:
     finish:
       title: Neredeyse oldu
       btn: Kayıt işlemini tamamlayın
-      description: Yakında görüşmek üzere! Geldiğinizde organizatör tarafından check-in yapmayı unutmayın!
+      description:
+        - See you soon! Don't forget to check-in by the organiser when you
+        - come!
       reminder: WeDance profilinin oluşturulmasını tamamlamak için e-postanızı kontrol edin.
       calendar: Takvime ekle
   organiser: Tarafından organize edildi
@@ -315,11 +318,16 @@ myprofile:
     community: Topluluk
     description3: '{0} tıklayın ve ekleyin:'
   ambassador:
-    description1: WeDance, yerel dans topluluklarında Ambassador tarafından temsil edilmektedir. Gönüllüler, yerel dansçıları bir araya getirmek için farklı girişimlerde Ambassador'a yardımcı olurlar. WeDance gönüllüler tarafından oluşturulur ve desteklenir. Katılın, gönüllü olun!
+    description1:
+      - WeDance is represented by Ambassador in local dance communities.
+      - Volunteers help Ambassador with different initiatives to unite local
+      - dancers. WeDance is created and supported by volunteers. Get
+      - Involved, become volunteer!
     description2: '{community} büyükelçi'
-    description3: 'Şehrinizde bir dans ağı oluşturmamıza yardımcı olun, yerel sosyal medya hesaplarımızı takip edin ve etkileşimde bulunun:'
-  profile:
-    height: '{height}cm'
+    description3:
+      0: '''Help us build a dance network in your city, follow and interact with'
+      "our local social media accounts:' profile":
+        height: '{height}cm'
     weight: '{weight}kg'
 TPostList:
   loadMore: Daha Yükle
@@ -356,7 +364,9 @@ settings:
   title: Ayarlar
   account:
     title: Hesap
-    description: Bu bilgiler, bildirimler ve satın alımlar için kullanılacaktır. Yalnızca onayınla hizmet sağlayıcılarla veya satıcılarla paylaşılacaktır.
+    description:
+      - This information will be used for notifications and purchases. It
+      - will be shared with service providers or sellers only with your agreement.
     changepassword: Şifre değiştir
     delete: Hesabı sil
     popup:
@@ -367,10 +377,15 @@ settings:
   passwordError: Hata
   profile:
     title: Profil
-    description: Diğer dansçıların hakkında ne bilmesini istiyorsun? Burası dans tutkunu paylaşabileceğin bir yer. Kendini tanıt, utanma!
+    description:
+      - What do you want other dancers to know about you? That's a place to
+      - share your passion to dance. Present yourself, don't be shy!
   contacts:
     title: Kişiler
-    description: Bu bilgiler halka açık olacaktır. Kişilerinizi yalnızca üyelerin sizinle iletişime geçmesini istiyorsan paylaş. Dikkat çekmek ve sosyal medyanı paylaşmak için iyi bir imkan olabilir.
+    description:
+      - This information will be publicly available. Share your contacts
+      - only if you want to be contacted by members. It's also nice place to share
+      - your social media to get some attention.
 city:
   anywhere: Herhangi bir yer
   change: Şehri değiştir
@@ -433,12 +448,18 @@ teaser:
     btn: Şimdi Katıl
   chat:
     title: Daha fazla etkinlik mi arıyorsunuz?
-    description: "Her şehirde dans sohbetleri var"
+    description:
+      - '"We have a Telegram dance chat in every city. Join your city chat'
+      - to help traveling dancers, invite your dance friends. Let's build WeDance
+      - together! "
     btnChatExists: Yerel Halka Sor
     btnChatMissing: Gezginlere Sor
   involve:
     title: Yardımına ihtiyacımız var
-    description: Kar amacı gütmeyen uluslararası dans topluluğuyuz. Herhangi bir ülke ve şehre gitmeni ve dans etkinlikleri ve dansçılar bulmanı sağlıyoruz. Her şey yerel toplulukla başlar.
+    description:
+      - We are non-profit international dance community. We want you go to
+      - any city in any country and find dance events and dancers. It all starts
+      - with the local community.
     btn: Katıl
 share:
   title: Paylaş
@@ -485,6 +506,9 @@ sort:
   archived: Arşivlenmiş
   yours: Sizin
 event:
+  addToAgenda: My Agenda
+  getTicket: Get Ticket
+  share: Paylaş
   artists: Sanatçılar
   organiser: Organizatör
   category:
