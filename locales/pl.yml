@@ -17,6 +17,7 @@ Delete: Usuń
 Copy: Kopiuj
 Share: Dzielić
 views: 'brak wyświetleń | 1 wyświetlenie| {count} wyświetleń'
+guests: 'no guests | 1 guest | {count} guests'
 Subscribe: Subskrybuj
 Unsubscribe: Wypisz się
 Follow: Obserwuj
@@ -139,7 +140,9 @@ eventView:
     finish:
       title: Almost there
       btn: Complete registration
-      description: See you soon! Don't forget to check-in by the organiser when you come!
+      description:
+        - See you soon! Don't forget to check-in by the organiser when you
+        - come!
       reminder: Check your email to finish creation of the WeDance profile.
       calendar: Add to calendar
   organiser: Organised by
@@ -315,11 +318,16 @@ myprofile:
     community: Społeczność
     description3: 'Click {0} and add:'
   ambassador:
-    description1: WeDance is represented by Ambassador in local dance communities. Volunteers help Ambassador with different initiatives to unite local dancers. WeDance is created and supported by volunteers. Get Involved, become volunteer!
+    description1:
+      - WeDance is represented by Ambassador in local dance communities.
+      - Volunteers help Ambassador with different initiatives to unite local
+      - dancers. WeDance is created and supported by volunteers. Get
+      - Involved, become volunteer!
     description2: Ambassador in {community} is
-    description3: 'Help us build a dance network in your city, follow and interact with our local social media accounts:'
-  profile:
-    height: '{height}cm'
+    description3:
+      0: '''Help us build a dance network in your city, follow and interact with'
+      "our local social media accounts:' profile":
+        height: '{height}cm'
     weight: '{weight}kg'
 TPostList:
   loadMore: Load more
@@ -356,7 +364,9 @@ settings:
   title: Ustawienia
   account:
     title: Konto
-    description: Informacje te będą wykorzystywane do powiadomień i zakupów. Zostaną one udostępnione usługodawcom lub sprzedawcom tylko za Twoją zgodą.
+    description:
+      - This information will be used for notifications and purchases. It
+      - will be shared with service providers or sellers only with your agreement.
     changepassword: Zmień hasło
     delete: Usuń konto
     popup:
@@ -367,10 +377,15 @@ settings:
   passwordError: Error
   profile:
     title: Profil
-    description: Co chcesz, aby inni tancerze wiedzieli o tobie? To miejsce, w którym możesz podzielić się swoją pasją do tańca. Przedstaw się, nie wstydź się!
+    description:
+      - What do you want other dancers to know about you? That's a place to
+      - share your passion to dance. Present yourself, don't be shy!
   contacts:
     title: Łączność
-    description: Informacje te będą publicznie dostępne. Udostępnij swoje kontakty tylko wtedy, gdy chcesz, aby członkowie kontaktowali się z Tobą. Jest to również miłe miejsce do udostępniania mediów społecznościowych, aby zwrócić na siebie uwagę.
+    description:
+      - This information will be publicly available. Share your contacts
+      - only if you want to be contacted by members. It's also nice place to share
+      - your social media to get some attention.
 city:
   anywhere: Gdziekolwiek
   change: Zmień miasto
@@ -433,12 +448,18 @@ teaser:
     btn: Dołącz teraz
   chat:
     title: Looking for more events?
-    description: "Prowadzimy rozmowy taneczne w każdym mieście"
+    description:
+      - '"We have a Telegram dance chat in every city. Join your city chat'
+      - to help traveling dancers, invite your dance friends. Let's build WeDance
+      - together! "
     btnChatExists: Ask Locals
     btnChatMissing: Ask Travelers
   involve:
     title: Potrzebujemy Twojej pomocy
-    description: Jesteśmy międzynarodową społecznością taneczną non-profit. Chcemy, abyś udał się do dowolnego miasta w dowolnym kraju i znalazł imprezy taneczne i tancerzy. Wszystko zaczyna się od lokalnej społeczności.
+    description:
+      - We are non-profit international dance community. We want you go to
+      - any city in any country and find dance events and dancers. It all starts
+      - with the local community.
     btn: Zaangażować się
 share:
   title: Dzielić
@@ -485,6 +506,9 @@ sort:
   archived: Archived
   yours: Yours
 event:
+  addToAgenda: My Agenda
+  getTicket: Get Ticket
+  share: Dzielić
   artists: Artists
   organiser: Organiser
   category:
