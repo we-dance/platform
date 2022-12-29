@@ -494,7 +494,6 @@ export default {
       openURL(link)
     }
     const reserve = async (participant) => {
-      console.log('reserve', participant)
       if (!uid.value) {
         await createGuestRsvp(params.id, 'posts', 'up', participant)
         sendSignInLinkToEmail(participant.email)

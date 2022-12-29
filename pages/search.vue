@@ -19,7 +19,10 @@
         <TProfilePhoto2 size="sm" :src="item.photo" />
       </div>
       <div class="flex-grow">
-        <div class="block text-sm leading-tight">{{ item.username }}</div>
+        <div class="block leading-tight">{{ item.name }}</div>
+        <div class="block text-xs leading-tight">
+          {{ item.type }} • @{{ item.username }}
+        </div>
       </div>
     </NuxtLink>
   </div>

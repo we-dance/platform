@@ -77,7 +77,6 @@ import ls from 'local-storage'
 import { ref, watch } from '@nuxtjs/composition-api'
 import { version } from '../package.json'
 import { useAuth } from '~/use/auth'
-import { useCities } from '~/use/cities'
 import { useApp } from '~/use/app'
 import { analytics, track } from '~/plugins/firebase'
 
@@ -111,12 +110,6 @@ export default {
         event.preventDefault()
         window.deferredPrompt = event
       })
-
-    const routedCity = this.$route.query.city
-
-    if (routedCity) {
-      this.changeCityByName(routedCity)
-    }
   },
   methods: {
     showSearch() {
@@ -200,7 +193,6 @@ export default {
       showAuthPopup,
       updateProfile,
     } = useAuth()
-    const { changeCityByName } = useCities()
     const { getCity } = useApp()
 
     const bannerNps = ref(ls('bannerNps'))
@@ -225,7 +217,6 @@ export default {
       uid,
       isAdmin,
       getCity,
-      changeCityByName,
       showAuthPopup,
     }
   },

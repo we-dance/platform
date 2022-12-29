@@ -5,18 +5,23 @@
     </THeader>
 
     <div v-if="!query">
-      <div
+      <router-link
         v-for="city in recommendations"
-        :key="city.value"
-        class="border-b flex"
+        :key="city.username"
+        class="border-b block p-4 cursor-pointer hover:bg-red-100"
+        :to="`/${city.username}`"
       >
-        <div
-          class="flex-grow text-lg p-4 cursor-pointer hover:bg-red-100"
-          @click="changeCity(city.value)"
-        >
-          {{ city.label }}
+        <div class="text-lg">
+          {{ city.name }}
         </div>
-      </div>
+        <div class="flex space-x-2 items-center">
+          <div class="text-xs">{{ city.viewsCount }} views</div>
+          <div
+            v-if="city.website"
+            class="rounded-full w-2 h-2 bg-green-500"
+          ></div>
+        </div>
+      </router-link>
     </div>
     <div v-if="query">
       <div v-for="city in results" :key="city.value" class="border-b flex">
@@ -32,39 +37,36 @@
 </template>
 
 <script>
+import { orderBy } from 'lodash'
 import { computed, onMounted, ref, watch } from 'vue-demi'
 import { useCities } from '~/use/cities'
 import { useRouter } from '~/use/router'
 import { useApp } from '~/use/app'
 import { getPlacePredictions } from '~/use/google'
-import { searchByStart, sortBy } from '~/utils'
 import { useAuth } from '~/use/auth'
 import { useCollection } from '~/use/collection'
 
 export default {
   setup() {
-    const { switchCity } = useCities()
+    const { switchCity, city } = useCities()
     const { router, route } = useRouter()
     const { updateProfile } = useAuth()
     const { removeCityHistory: removeCity, cities } = useApp()
-    const { docs, load } = useCollection('cities')
+    const { docs, load } = useCollection('profiles', { type: 'City' })
 
     async function changeCity(placeId) {
       await switchCity(placeId)
       await updateProfile({ current: placeId })
-      const target = route.query.target || '/events'
+      const target = route.query.target || `/${city.value.username}`
       router.push(target)
     }
 
     const query = ref('')
 
     const recommendations = computed(() => {
-      let results = docs.value.sort(sortBy('-hits'))
-
-      results = results.map((c) => ({
-        label: `${c.location.locality}, ${c.location.country}`,
-        value: c.location.place_id,
-      }))
+      const results = orderBy(docs.value, 'viewsCount', 'desc').filter(
+        (c) => c.username
+      )
 
       return results
     })
@@ -72,30 +74,19 @@ export default {
     const fetchOptions = async (q) => {
       let results = []
 
-      if (q) {
-        results = cities.value.filter(searchByStart('name', q))
+      if (!q) {
+        return { results }
       }
 
-      results = results.map((c) => ({
-        label: `${c.location.locality}, ${c.location.country}`,
-        value: c.location.place_id,
-      }))
+      const places = await getPlacePredictions(q)
 
-      results = results.sort(sortBy('label'))
-
-      if (q && results.length < 3) {
-        const places = await getPlacePredictions(q)
-
-        if (places.length) {
-          results.push(
-            ...places
-              .map((i) => ({
-                label: `${i.description} *`,
-                value: i.place_id,
-              }))
-              .filter((n) => !results.find((o) => n.value === o.value))
-          )
-        }
+      if (places.length) {
+        results.push(
+          ...places.map((i) => ({
+            label: `${i.description}`,
+            value: i.place_id,
+          }))
+        )
       }
 
       return { results }

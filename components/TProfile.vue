@@ -4,9 +4,10 @@
       <TButton
         v-if="profile.type === 'City'"
         slot="left"
+        allow-guests
         to="/cities"
         icon="place"
-        :label="profile.username"
+        :label="profile.name"
       />
       <div
         v-else

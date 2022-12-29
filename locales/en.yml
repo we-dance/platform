@@ -34,6 +34,7 @@ home:
     action: Find your city
 nav:
   travel: Travel
+  festivals: Festivals
   chooseCity: Choose City
   feed: Feed
   calendar: Calendar

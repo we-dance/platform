@@ -156,17 +156,21 @@ export const useDoc = (name) => {
   async function create(data) {
     state.saving = true
 
-    const doc = await collection.add({
+    const docData = {
       createdAt: +new Date(),
       updatedAt: +new Date(),
       createdBy: uid.value,
       updatedBy: uid.value,
       username: username?.value || '',
       ...data,
-    })
+    }
 
+    const doc = await collection.add(docData)
+
+    docData.id = doc.id
     state.id = doc.id
     state.saving = false
+    state.doc = docData
 
     return doc
   }

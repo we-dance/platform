@@ -100,9 +100,10 @@ export default {
   computed: {
     classes() {
       const xbase =
-        'flex justify-start items-center py-2 px-4 text-sm leading-4 font-medium space-x-2 cursor-pointer outline-none focus:outline-none focus:ring-2 focus:ring-offset-2'
+        'flex justify-start items-center py-2 px-4 font-medium space-x-2 cursor-pointer outline-none focus:outline-none focus:ring-2 focus:ring-offset-2'
 
-      const xrounded = xbase + ' justify-center shadow rounded-full'
+      const xrounded =
+        xbase + ' text-sm leading-4 justify-center shadow rounded-full'
 
       const primaryColor =
         ' bg-dark text-white border-gray-900 hover:bg-gray-800'

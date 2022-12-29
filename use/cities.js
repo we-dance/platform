@@ -2,7 +2,7 @@ import Vue from 'vue'
 import { watch, toRefs, computed } from '@nuxtjs/composition-api'
 import ls from 'local-storage'
 import { useDoc } from '~/use/doc'
-import { sanitize } from '~/utils'
+import { slugify } from '~/utils'
 import { getLocality } from '~/use/google'
 
 const state = Vue.observable({
@@ -10,7 +10,9 @@ const state = Vue.observable({
 })
 
 export const useCities = () => {
-  const { doc: city, exists, find, create } = useDoc('cities')
+  const { doc: city, id: cityId, exists, find, create, softUpdate } = useDoc(
+    'profiles'
+  )
 
   const currentCity = computed(() => state.currentCity || ls('city'))
 
@@ -18,36 +20,40 @@ export const useCities = () => {
     return city.value?.name
   })
 
-  find('location.place_id', currentCity.value)
+  find('cityPlaceId', currentCity.value)
 
   watch(currentCity, (currentCity) => {
     ls('city', currentCity || '')
 
     if (currentCity) {
-      find('location.place_id', currentCity)
+      find('cityPlaceId', currentCity)
     } else {
       city.value = {}
     }
   })
 
-  async function changeCityByName(cityName) {
-    await find('name', cityName)
-
-    state.currentCity = city.value?.location?.place_id || ''
-  }
-
   async function switchCity(placeId) {
-    await find('location.place_id', placeId)
+    await find('cityPlaceId', placeId)
 
     if (!exists.value) {
       const location = await getLocality({ placeId })
-      const cityName = sanitize(location.locality, ' ')
 
-      await create({
-        name: cityName,
+      const cityProfile = {
+        username: slugify(location.country + '-' + location.locality),
+        name: location.locality + ', ' + location.country,
+        type: 'City',
+        place: placeId,
+        cityPlaceId: placeId,
         location,
-        status: 'requested',
-        hits: 1,
+      }
+
+      await create(cityProfile)
+    }
+
+    if (!city.value.location?.latitude) {
+      const location = await getLocality({ placeId })
+      await softUpdate(cityId.value, {
+        location,
       })
     }
 
@@ -58,7 +64,6 @@ export const useCities = () => {
     ...toRefs(state),
     city,
     cityName,
-    changeCityByName,
     switchCity,
   }
 }

@@ -8,20 +8,20 @@
     <TButton
       allow-guests
       to="/Travel"
-      icon="place"
-      :label="$t('nav.travel')"
+      icon="directions"
+      :label="$t('nav.festivals')"
       type="nav"
     />
     <TButton
-      v-if="cityName"
+      v-if="currentCity"
       allow-guests
-      :to="`/${cityName}`"
+      :to="`/${city.username}`"
       icon="place"
-      :label="cityName"
+      :label="city.name"
       type="nav"
     />
     <TButton
-      v-if="!cityName"
+      v-if="!currentCity"
       allow-guests
       to="/cities"
       icon="place"
@@ -127,8 +127,8 @@ import { useCities } from '~/use/cities'
 export default {
   setup() {
     const { isAdmin, isEditor } = useAuth()
-    const { cityName } = useCities()
-    return { isAdmin, isEditor, cityName }
+    const { city, currentCity } = useCities()
+    return { isAdmin, isEditor, city, currentCity }
   },
   props: {
     uid: {

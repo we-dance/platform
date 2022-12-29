@@ -173,6 +173,80 @@ yargs(hideBin(process.argv))
       await getCities()
     }
   )
+  .command(
+    'cleanup:cities',
+    'Cleanup cities',
+    () => undefined,
+    async (argv: any) => {
+      const allCities = await getDocs(
+        firestore.collection('profiles').where('type', '==', 'City')
+      )
+
+      const corruptCities = allCities.filter(
+        (c) => !c.viewsCount || !c.username
+      )
+
+      for (const city of corruptCities) {
+        console.log(`Removing ${city.name} • id: ${city.id}`)
+        // await firestore
+        //   .collection('profiles')
+        //   .doc(city.id)
+        //   .delete()
+      }
+
+      // const usernames = {} as any
+
+      // for (const city of cities) {
+      //   usernames[city.username] = usernames[city.username]
+      //     ? 1
+      //     : usernames[city.username] + 1
+      // }
+
+      // for (const username of Object.keys(usernames)) {
+      //   if (usernames[username] > 1) {
+      //     console.log(`${username} listed ${usernames[username]} times`)
+      //   }
+      // }
+
+      for (const city of allCities) {
+        const instances = allCities.filter((c) => c.place === city.place)
+
+        if (instances.length > 1) {
+          console.log(`${instances.length} x ${city.name}`)
+
+          for (const instance of instances) {
+            console.log(
+              ` <${instance.username}> x ${instance.viewsCount} x ${instance
+                .star?.count || 0} x ${instance.website}`
+            )
+
+            // if (!instance.website) {
+            //   console.log(`Removing ${instance.username} • id: ${instance.id}`)
+            //   await firestore
+            //     .collection('profiles')
+            //     .doc(instance.id)
+            //     .delete()
+            // }
+          }
+          console.log(``)
+        }
+      }
+
+      const missingCityPlace = allCities.filter(
+        (c) => !c.cityPlaceId && c.place
+      )
+
+      for (const city of missingCityPlace) {
+        console.log(`Updating cityPlaceId for ${city.name}`)
+        await firestore
+          .collection('profiles')
+          .doc(city.id)
+          .update({
+            cityPlaceId: city.place,
+          })
+      }
+    }
+  )
   .help('h')
   .alias('h', 'help')
   .strict().argv

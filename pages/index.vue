@@ -194,12 +194,12 @@ export default {
     const { router } = useRouter()
 
     watch(profile, (p) => {
-      router.push('/events')
+      router.push('/feed')
     })
 
     onMounted(() => {
       if (profile.value?.username) {
-        router.push('/events')
+        router.push('/feed')
       }
     })
   },
