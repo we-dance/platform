@@ -277,7 +277,7 @@ import { computed, onMounted, ref } from 'vue-demi'
 import { useApp } from '~/use/app'
 import { useAuth } from '~/use/auth'
 import { useProfiles } from '~/use/profiles'
-import { getExcerpt } from '~/utils'
+import { getExcerpt, getMeta } from '~/utils'
 import { useI18n } from '~/use/i18n'
 import { useDoc } from '~/use/doc'
 import {
@@ -295,6 +295,9 @@ export default {
       type: Object,
       default: () => ({}),
     },
+  },
+  head() {
+    return getMeta('profiles', this.profile)
   },
   setup(props) {
     const internationalChatLink = 'https://t.me/+Vxw15sDG-dWpqHDj'

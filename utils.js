@@ -539,6 +539,9 @@ export const getMeta = (collection, post) => {
     }
   }
 
+  if (collection === 'profiles') {
+  }
+
   return {
     title: post.name || post.title || getExcerpt(post.description),
     meta: [
