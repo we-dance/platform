@@ -35,6 +35,7 @@ home:
     action: Найти город
 nav:
   travel: Путешествия
+  festivals: Festivals
   chooseCity: Выбрать город
   feed: Комментарий
   calendar: Календарь
