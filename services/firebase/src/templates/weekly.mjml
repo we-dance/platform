@@ -1,0 +1,176 @@
+<mjml>
+  <mj-head>
+    <mj-attributes>
+      <mj-all font-family="Helvetica Neue" />
+    </mj-attributes>
+  </mj-head>
+  <mj-body background-color="#FFFFFF">
+    <mj-section padding="16px 0 0 0">
+      <mj-column>
+        <mj-text font-size="14px" line-height="18px" align="right"
+          ><a :href="link(links.city, 'view-in-browser')" style="color: #f1023d"
+            >View calendar in browser</a
+          ></mj-text
+        >
+      </mj-column>
+    </mj-section>
+    <mj-section padding="16px 0 0 0">
+      <mj-column>
+        <mj-image
+          width="140px"
+          :href="link('https://wedance.vip/', 'logo')"
+          src="https://wedance.vip/svg/logo-horizontal-dark.svg"
+        ></mj-image>
+      </mj-column>
+    </mj-section>
+    <mj-wrapper border-radius="8px" padding="1px" background-color="#E4E4E7">
+      <mj-section padding="0" border-radius="8px" background-color="#FFFFFF">
+        <mj-column padding="8px 0">
+          <mj-text font-size="16px" line-height="21px">{{ intro }}</mj-text>
+          <mj-text font-size="20px" line-height="30px" font-weight="700"
+            >{{ title }}</mj-text
+          >
+          <mj-table v-for="group in days" :key="group.day" padding-top="0">
+            <tr>
+              <td colspan="3">
+                <div
+                  style="
+                    font-size: 16px;
+                    line-height: 24px;
+                    font-weight: 700;
+                    padding: 8px 0;
+                  "
+                >
+                  <span style="color: #f1023d">{{ group.day }}</span> • {{
+                  group.date }}
+                </div>
+              </td>
+            </tr>
+            <tr
+              v-for="event in group.events"
+              style="border-top: solid 1px #f4f4f5"
+            >
+              <td
+                style="
+                  width: 50px;
+                  vertical-align: top;
+                  font-size: 16px;
+                  padding-top: 4px;
+                "
+              >
+                {{ event.time }}
+              </td>
+              <td
+                style="
+                  vertical-align: top;
+                  padding-left: 8px;
+                  padding-right: 8px;
+                  padding-top: 4px;
+                "
+              >
+                <div style="font-size: 16px; font-weight: bold">
+                  <a :href="link(event.link, 'event-card')" style="color: #000"
+                    >{{ event.title }}</a
+                  >
+                </div>
+                <div style="overflow: hidden; height: 1.5em; font-size: 14px">
+                  {{ event.organizer }} • {{ event.venue }}
+                </div>
+                <div style="overflow: hidden; height: 1.5em; font-size: 14px">
+                  <span style="color: #f1023d">{{ event.format }}</span> • {{
+                  event.styles.join(' • ') }}
+                </div>
+              </td>
+              <td style="width: 100px; padding-top: 4px">
+                <img width="100px" :src="event.cover" />
+              </td>
+            </tr>
+          </mj-table>
+
+          <mj-button
+            align="center"
+            background-color="#f1023d"
+            color="#FFFFFF"
+            border-radius="24px"
+            :href="link(links.city, 'show-more')"
+            font-size="16px"
+            inner-padding="10px 18px"
+            padding-bottom="16px"
+            padding-top="24px"
+            >Show More</mj-button
+          >
+          <mj-text
+            align="center"
+            font-size="14px"
+            padding-top="0"
+            padding-bottom="16px"
+          >
+            Something is missing?
+            <a :href="link(links.addEvent, 'add-event')" style="color: #f1023d"
+              >Add event.</a
+            >
+          </mj-text>
+        </mj-column>
+      </mj-section>
+      <mj-section background-color="#F4F4F5">
+        <mj-column>
+          <mj-text
+            align="center"
+            font-size="16px"
+            line-height="21px"
+            font-weight="bold"
+            padding-top="0"
+            padding-bottom="0"
+          >
+            Follow us
+          </mj-text>
+          <mj-text
+            align="center"
+            font-size="14px"
+            line-height="18px"
+            padding-top="0"
+            padding-bottom="4px"
+          >
+            We regularly post event announcements and introduce new members on
+            our social media.
+          </mj-text>
+          <mj-social
+            padding="0"
+            font-size="15px"
+            icon-size="24px"
+            mode="horizontal"
+          >
+            <mj-social-element
+              src="https://wedance.vip/svg/telegram.svg"
+              :href="links.telegram"
+            />
+
+            <mj-social-element
+              src="https://wedance.vip/svg/instagram.svg"
+              :href="links.instagram"
+            />
+            <mj-social-element
+              src="https://wedance.vip/svg/facebook.svg"
+              :href="links.facebook"
+            />
+          </mj-social>
+        </mj-column>
+      </mj-section>
+    </mj-wrapper>
+    <mj-section>
+      <mj-column>
+        <mj-text
+          align="center"
+          font-size="12px"
+          line-height="18px"
+          padding="8px"
+        >
+          You are subscribed to
+          <a :href="link(links.city, 'footer')" style="color: #f1023d"
+            >{{ title }}</a
+          >. Visit the page to Unsubscribe.
+        </mj-text>
+      </mj-column>
+    </mj-section>
+  </mj-body>
+</mjml>

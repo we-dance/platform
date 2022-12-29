@@ -15,6 +15,7 @@ const { hideBin } = require('yargs/helpers')
 import { firestore } from './firebase'
 import { announceEventIG } from './lib/instagram'
 import { getInstagramWebProfileInfo } from './lib/browser'
+const { getWeeklyData, renderEmail } = require('./lib/digest.js')
 
 yargs(hideBin(process.argv))
   .command(
@@ -171,6 +172,16 @@ yargs(hideBin(process.argv))
     () => undefined,
     async (argv: any) => {
       await getCities()
+    }
+  )
+  .command(
+    'newsletter',
+    'Generate Weekly Newsletter',
+    () => undefined,
+    async (argv: any) => {
+      const data = await getWeeklyData('Munich')
+      const html = await renderEmail('weekly', data)
+      console.log(html)
     }
   )
   .command(
