@@ -35,6 +35,7 @@ home:
     action: Encuentra tu ciudad
 nav:
   travel: Viaje
+  festivals: Festivals
   chooseCity: Elegir ciudad
   feed: Comentario
   calendar: Calendario
