@@ -72,7 +72,7 @@ export default {
     })
 
     const fetchOptions = async (q) => {
-      let results = []
+      const results = []
 
       if (!q) {
         return { results }
