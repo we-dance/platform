@@ -14,9 +14,18 @@
             >
             <span>•</span>
             <div>
-              <NuxtLink :to="`/posts/${item.id}`" class="hover:underline">{{
-                dateDiff(item.createdAt)
-              }}</NuxtLink>
+              <NuxtLink
+                v-if="item.type === 'event'"
+                :to="`/events/${item.id}`"
+                class="hover:underline"
+                >{{ dateDiff(item.createdAt) }}</NuxtLink
+              >
+              <NuxtLink
+                v-else
+                :to="`/posts/${item.id}`"
+                class="hover:underline"
+                >{{ dateDiff(item.createdAt) }}</NuxtLink
+              >
             </div>
             <template v-if="item.region">
               <span>•</span>
