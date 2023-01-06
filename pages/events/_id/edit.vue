@@ -71,7 +71,7 @@ export default {
       if (id && id !== '-') {
         this.$router.push(`/events/${id}`)
       } else {
-        this.$router.push(`/events`)
+        this.$router.push(`/${this.profile?.username}`)
       }
     },
     async copyItem(data) {
