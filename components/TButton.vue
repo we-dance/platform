@@ -114,7 +114,7 @@ export default {
       const baseColor =
         ' bg-white text-gray-700 border-gray-300 hover:bg-gray-100'
       const toggledColor =
-        ' text-indigo-700 border-indigo-700 bg-indigo-100 hover:bg-indigo-200'
+        ' text-primary border-primary bg-red-100 hover:bg-red-200'
 
       const map = {
         round: xrounded + baseColor,
