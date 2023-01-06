@@ -1,7 +1,7 @@
 <template>
   <div>
     <THeader :title="$t('chat.title')" />
-    <div v-if="!chats" class="p-16 text-xs text-center">
+    <div v-if="!chats.length" class="p-16 text-xs text-center">
       {{ $t('chat.empty') }}
     </div>
     <div v-else>
