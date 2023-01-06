@@ -39,5 +39,8 @@ export default {
 
     return { query, search, response }
   },
+  mounted() {
+    this.search()
+  },
 }
 </script>
