@@ -13,7 +13,7 @@
       />
     </TPopup>
     <div
-      v-if="value.name"
+      v-if="value.startDate"
       class="p-2 hover:bg-gray-200 cursor-pointer"
       @click="
         internalValue = value
@@ -109,7 +109,7 @@ export default {
         component: 'TMultiObjects',
         options: props.item.artists,
         valueField: 'username',
-        labelField: 'name',
+        labelField: 'username',
         label: 'Artists',
         labelPosition: 'top',
       },

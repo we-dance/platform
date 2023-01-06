@@ -17,7 +17,7 @@
             <router-link
               :to="`/${artist.username}`"
               class="text-primary hover:underline"
-              >{{ artist.name }}</router-link
+              >{{ artist.username }}</router-link
             >
           </span>
         </div>
