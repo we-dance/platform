@@ -67,7 +67,11 @@ export default {
         list: {},
       }
       data.createdAt = +new Date()
+      data.updatedAt = +new Date()
+      data.createdBy = this.uid
+      data.updatedBy = this.uid
       data.telegram = {}
+      data.instagram = {}
 
       track('copy_event')
       const result = await this.create(data)
