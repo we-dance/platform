@@ -4,6 +4,13 @@
       <TForm
         v-model="internalValue"
         :fields="subEvent"
+        show-remove
+        @remove="
+          (val) => {
+            $emit('input', null)
+            editing = false
+          }
+        "
         @save="
           (val) => {
             $emit('input', val)
@@ -13,7 +20,7 @@
       />
     </TPopup>
     <div
-      v-if="value.startDate"
+      v-if="value.eventType"
       class="p-2 hover:bg-gray-200 cursor-pointer"
       @click="
         internalValue = value
