@@ -4,6 +4,7 @@ import { getDocs } from './migrations'
 
 require('dotenv').config()
 
+// see https://api.telegram.org/bot<YourBOTToken>/getUpdates to get chatID
 async function announceEvent(event: any, options: any = null) {
   const token = String(process.env.TELEGRAM_BOT_TOKEN)
   const telegram = new Telegram(token)
