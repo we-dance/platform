@@ -250,7 +250,7 @@ export const useEvents = () => {
       type: 'datetime',
       format: 'YYYY-MM-DDTHH:mm',
       'time-picker-options': {
-        start: '08:00',
+        start: '00:00',
         step: '00:30',
         end: '23:30',
         format: 'HH:mm',
@@ -266,7 +266,7 @@ export const useEvents = () => {
       type: 'datetime',
       format: 'YYYY-MM-DDTHH:mm',
       'time-picker-options': {
-        start: '08:00',
+        start: '00:00',
         step: '00:30',
         end: '23:30',
         format: 'HH:mm',
