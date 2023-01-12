@@ -287,12 +287,32 @@
     </div>
 
     <div v-if="doc.star && doc.star.list" class="space-y-2 p-4">
-      <h3 class="text-xl font-bold">Guests</h3>
-      <div v-for="(val, username) in doc.star.list" :key="`guest-${username}`">
-        <WProfile :username="username" />
+      <h3 class="text-xl font-bold">{{ $t('event.guests') }}</h3>
+      <div v-if="!uid" class="flex justify-center p-4">
+        <TButton
+          type="link"
+          allow-guests
+          :to="`/signin?target=${$route.path}`"
+          >{{ $t('event.guestsHidden') }}</TButton
+        >
       </div>
-      <div v-if="!doc.star.count">There are no other guests yet.</div>
+      <div v-else>
+        <div
+          v-for="(val, username) in doc.star.list"
+          :key="`guest-${username}`"
+        >
+          <WProfile :username="username" />
+        </div>
+        <div v-if="!doc.star.count">There are no other guests yet.</div>
+      </div>
     </div>
+
+    <div v-if="!uid" class="flex justify-center p-4">
+      <TButton type="link" allow-guests :to="`/signin?target=${$route.path}`">{{
+        $t('event.commentsHidden')
+      }}</TButton>
+    </div>
+    <TCommentsInline v-else :item="doc" autoload class="border-t p-4" />
 
     <div class="m-4 text-xs text-right gap-8">
       <span>Published by {{ creator.username }}</span>
@@ -304,9 +324,6 @@
         >Facebook Event</a
       >
     </div>
-
-    <TCommentsInline :item="doc" autoload class="border-t p-4" />
-
     <TPopup v-if="ticketPopup" title="Ticket" @close="ticketPopup = false">
       <div class="mx-auto max-h-screen max-w-md overflow-y-scroll py-4">
         <div>Reserved as {{ getRsvp(item.id).participant.name }}</div>

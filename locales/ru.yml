@@ -34,11 +34,12 @@ home:
     action: Найти город
 nav:
   travel: Путешествия
+  festivals: Фестивали
   chooseCity: Выбрать город
-  feed: Комментарий
+  feed: Лента
   calendar: Календарь
   community: Сообщество
-  chat: Беседа
+  chat: Чат
   dance: Танцы
   myProfile: Мой Профиль
   settings: Настройки
@@ -488,6 +489,9 @@ event:
   attend: Записаться
   attending: В списке гостей
   share: Поделиться
+  guests: Гости
+  guestsHidden: Войдите, чтобы просмотреть список гостей
+  commentsHidden: Войдите, чтобы просматривать и оставлять комментарии
   artists: Артисты
   organiser: Организатор
   category:
