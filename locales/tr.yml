@@ -507,9 +507,13 @@ sort:
   archived: Arşivlenmiş
   yours: Sizin
 event:
-  addToAgenda: My Agenda
+  attend: Join Guest List
+  attending: On the Guest List
   getTicket: Get Ticket
   share: Paylaş
+  guests: Guests
+  guestsHidden: Sign in to view guest list
+  commentsHidden: Sign in to view and write comments
   artists: Sanatçılar
   organiser: Organizatör
   category:
