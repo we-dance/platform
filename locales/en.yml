@@ -525,7 +525,8 @@ sort:
   archived: Archived
   yours: Yours
 event:
-  addToAgenda: My Agenda
+  attend: Join Guest List
+  attending: On the Guest List
   getTicket: Get Ticket
   share: Share
   artists: Artists

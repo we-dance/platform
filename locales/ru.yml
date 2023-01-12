@@ -43,7 +43,7 @@ nav:
   myProfile: Мой Профиль
   settings: Настройки
 form:
-  clear: Очистить 
+  clear: Очистить
   delete: Удалить
   cancel: Отмена
   copy: Копировать
@@ -433,7 +433,7 @@ teaser:
     btn: Присоединяйся сейчас
   chat:
     title: Looking for more events?
-    description: "У нас есть танцевальный чат Telegram в каждом городе. Присоединяйтесь к своему городскому чату, чтобы помогать путешествующим танцорам, приглашайте своих танцевальных друзей. Давайте вместе создадим WeDance!"
+    description: 'У нас есть танцевальный чат Telegram в каждом городе. Присоединяйтесь к своему городскому чату, чтобы помогать путешествующим танцорам, приглашайте своих танцевальных друзей. Давайте вместе создадим WeDance!'
     btnChatExists: Ask Locals
     btnChatMissing: Ask Travelers
   involve:
@@ -485,8 +485,11 @@ sort:
   archived: Archived
   yours: Yours
 event:
-  artists: Artists
-  organiser: Organiser
+  attend: Записаться
+  attending: В списке гостей
+  share: Поделиться
+  artists: Артисты
+  organiser: Организатор
   category:
     meetup: Dance
     lesson: Learn

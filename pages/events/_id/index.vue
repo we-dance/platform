@@ -145,7 +145,8 @@
       class="sticky bottom-0 z-50 flex justify-center items-center gap-2 border-b bg-white p-4"
     >
       <TReaction
-        :label="$t('event.addToAgenda')"
+        :label="$t('event.attend')"
+        :toggled-label="$t('event.attending')"
         icon="PlusIcon"
         toggled-icon="CheckIcon"
         field="star"

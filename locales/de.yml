@@ -433,7 +433,7 @@ teaser:
     btn: Jetzt beitreten
   chat:
     title: Looking for more events?
-    description: "Wir haben in jeder Stadt einen Telegram-Tanzchat. Treten Sie Ihrem Stadt-Chat bei, um reisenden Tänzern zu helfen, und laden Sie Ihre Tanzfreunde ein. Lass uns zusammen WeDance aufbauen!"
+    description: 'Wir haben in jeder Stadt einen Telegram-Tanzchat. Treten Sie Ihrem Stadt-Chat bei, um reisenden Tänzern zu helfen, und laden Sie Ihre Tanzfreunde ein. Lass uns zusammen WeDance aufbauen!'
     btnChatExists: Ask Locals
     btnChatMissing: Ask Travelers
   involve:
@@ -485,6 +485,8 @@ sort:
   archived: Archived
   yours: Deine
 event:
+  attend: Gästeliste beitreten
+  attending: Auf der Gästeliste
   artists: Artists
   organiser: Organiser
   category:
