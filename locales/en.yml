@@ -525,9 +525,13 @@ sort:
   archived: Archived
   yours: Yours
 event:
-  addToAgenda: My Agenda
+  attend: Join Guest List
+  attending: On the Guest List
   getTicket: Get Ticket
   share: Share
+  guests: Guests
+  guestsHidden: Sign in to view guest list
+  commentsHidden: Sign in to view and write comments
   artists: Artists
   organiser: Organiser
   category:
