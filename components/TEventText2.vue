@@ -43,6 +43,9 @@
             .join(' · ')
         }}
       </div>
+      <div class="text-xs text-gray-700">
+        {{ item.price }}
+      </div>
     </div>
     <div>
       <img class="w-20 rounded" :src="item.cover" />

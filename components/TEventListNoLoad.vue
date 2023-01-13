@@ -37,6 +37,9 @@
     </div>
     <div class="flex justify-between items-center px-4">
       <TInputButtons v-model="tab" :options="tabs" />
+      <TButton to="/events/-/edit" type="primary">{{
+        $t('myprofile.addEvent')
+      }}</TButton>
       <TButton type="nav" icon="share" @click="showPopup = true" />
     </div>
     <div class="space-y-8 mt-4">

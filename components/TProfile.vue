@@ -89,30 +89,34 @@
             :item="profile"
             collection="profiles"
           />
-          <TButton type="simple" to="/events/-/edit">{{
-            $t('myprofile.addEvent')
-          }}</TButton>
-        </div>
-        <div v-if="profile.type !== 'City'" class="flex space-x-2 mt-4">
-          <TReaction
-            :label="$t('Follow')"
-            :toggled-label="$t('Unfollow')"
-            field="watch"
-            icon="BellIcon"
-            :item="profile"
-            collection="profiles"
-          />
-          <TProfileContacts
-            :profile="profile"
-            :title="$t('Contact')"
-            type="simple"
-          />
         </div>
       </div>
     </div>
 
-    <div v-if="uid === profile.id" class="flex justify-center space-x-2">
-      <TButton :label="$t('myprofile.edit')" to="/settings?tab=profile" />
+    <div v-if="profile.type !== 'City'" class="flex space-x-2 p-4 justify-end">
+      <TButton
+        v-if="uid === profile.id"
+        type="primary"
+        :label="$t('myprofile.edit')"
+        to="/settings?tab=profile"
+      />
+      <TButton v-if="uid === profile.id" to="/posts/-/edit" type="base">{{
+        $t('myprofile.addPost')
+      }}</TButton>
+      <TReaction
+        v-if="uid !== profile.id"
+        :label="$t('Follow')"
+        :toggled-label="$t('Unfollow')"
+        field="watch"
+        icon="BellIcon"
+        :item="profile"
+        collection="profiles"
+      />
+      <TProfileContacts
+        :profile="profile"
+        :title="$t('Contact')"
+        type="simple"
+      />
     </div>
 
     <WTeaser
@@ -151,18 +155,6 @@
       :url="`/signin?invitedBy=${profile.username}`"
       class="my-0"
     />
-
-    <div
-      v-if="uid === profile.id"
-      class="w-full flex justify-center p-4 mt-4 space-x-4"
-    >
-      <TButton to="/events/-/edit" type="primary">{{
-        $t('myprofile.addEvent')
-      }}</TButton>
-      <TButton to="/posts/-/edit" type="base">{{
-        $t('myprofile.addPost')
-      }}</TButton>
-    </div>
 
     <TPreview v-if="profile.story" :content="profile.story" class="p-4" />
 
