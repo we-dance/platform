@@ -167,7 +167,7 @@ community:
   title: Dance Community
   description: Looking for dance partner or new dance events? Filter profiles of local dancers and contact them.
 calendar:
-  title: Dance Event Calendar
+  title: Dance Calendar
   empty: Brak wydarzeń
   upcoming: Nadchodzące
   past: Past
@@ -433,7 +433,7 @@ teaser:
     btn: Dołącz teraz
   chat:
     title: Looking for more events?
-    description: "Prowadzimy rozmowy taneczne w każdym mieście"
+    description: 'Prowadzimy rozmowy taneczne w każdym mieście'
     btnChatExists: Ask Locals
     btnChatMissing: Ask Travelers
   involve:

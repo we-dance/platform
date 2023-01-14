@@ -53,7 +53,7 @@ photo:
   selectLabel: Ajouter une photo
 visibility:
   label: Visibilité
-  description: '- Public : recherche possible dans Google et peut être utilisé dans les réseaux sociaux. - Membres : uniquement visibles pour les utilisateurs connectés. - Non listé : seulement possible d''ouvrir avec un lien précis, mais non listé nulle part.'
+  description: "- Public : recherche possible dans Google et peut être utilisé dans les réseaux sociaux. - Membres : uniquement visibles pour les utilisateurs connectés. - Non listé : seulement possible d'ouvrir avec un lien précis, mais non listé nulle part."
   public: Public
   members: Membres
   unlisted: Non répertorié
@@ -167,7 +167,7 @@ community:
   title: Dance Community
   description: Looking for dance partner or new dance events? Filter profiles of local dancers and contact them.
 calendar:
-  title: Dance Event Calendar
+  title: Dance Calendar
   empty: No events found
   upcoming: Upcoming
   past: Past
@@ -433,7 +433,7 @@ teaser:
     btn: Adhérer maintenant
   chat:
     title: Looking for more events?
-    description: "Nous avons des discussions de danse dans chaque ville"
+    description: 'Nous avons des discussions de danse dans chaque ville'
     btnChatExists: Ask Locals
     btnChatMissing: Ask Travelers
   involve:

@@ -167,7 +167,7 @@ community:
   title: Dance Community
   description: Looking for dance partner or new dance events? Filter profiles of local dancers and contact them.
 calendar:
-  title: Dance Event Calendar
+  title: Dance Calendar
   empty: No events found
   upcoming: Upcoming
   past: Past
@@ -433,7 +433,7 @@ teaser:
     btn: Alătură-te acum
   chat:
     title: Looking for more events?
-    description: "Avem discuții de dans în fiecare oraș"
+    description: 'Avem discuții de dans în fiecare oraș'
     btnChatExists: Ask Locals
     btnChatMissing: Ask Travelers
   involve:

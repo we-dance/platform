@@ -168,7 +168,7 @@ community:
   title: Dance Community
   description: Looking for dance partner or new dance events? Filter profiles of local dancers and contact them.
 calendar:
-  title: Dance Event Calendar
+  title: Dance Calendar
   empty: No events found
   upcoming: Предстоящие
   past: Прошлые
