@@ -171,7 +171,7 @@ community:
   title: Dance Community
   description: Looking for dance partner or new dance events? Filter profiles of local dancers and contact them.
 calendar:
-  title: Dance Event Calendar
+  title: Dance Calendar
   empty: No events found
   upcoming: Upcoming
   past: Past
@@ -508,6 +508,7 @@ sort:
   yours: Yours
 event:
   attend: Join Guest List
+  attendCallToAction: Join guest list to find tickets, see who is coming, write and read comments, request songs and exchange videos.
   attending: On the Guest List
   getTicket: Get Ticket
   share: Compartilhar
@@ -516,6 +517,16 @@ event:
   commentsHidden: Sign in to view and write comments
   artists: Artists
   organiser: Organiser
+  gallery:
+    label: Photo Gallery
+    placeholder: https://
+    description: Here you can include link to Shared Google Photos Album for your guests to upload photos and videos of your event
+    action: Exchange Videos
+  playlist:
+    label: Playlist
+    placeholder: https://
+    description: Here you can include link to Shared Spotify Playlist for your guests to request songs during your event
+    action: Request a song
   category:
     meetup: Dance
     lesson: Learn
@@ -570,8 +581,8 @@ event:
     label: External registration?
     before: Do you use external platform to register for your event?
   link:
-    label: Link
-    description: Direct booking link on ticket platform [ti.to](https://ti.to/home), Eventbrite, Google Form, etc.
+    label: Tickets
+    description: Direct link where to buy ticket or register. Try [TicketTailor](https://www.tickettailor.com/?ref=wedance), Eventbrite, Google Form or TiTo.
   facebook:
     label: Facebook
     description: Facebook event
