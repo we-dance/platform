@@ -336,6 +336,24 @@ export const useProfiles = () => {
       options: days,
     },
     ...contactFields,
+    {
+      name: 'team',
+      component: 'TInputArray',
+      children: {
+        component: 'TInputProfile',
+      },
+      label: t('profile.team'),
+      labelPosition: 'top',
+    },
+    {
+      name: 'reviews',
+      component: 'TInputArray',
+      children: {
+        component: 'TInputReview',
+      },
+      label: t('reviews.title'),
+      labelPosition: 'top',
+    },
   ]
 
   const profilePosterFields = profileFields.filter((f) => f.poster)

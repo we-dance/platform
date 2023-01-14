@@ -182,7 +182,11 @@ calendar:
   share:
     text: Text
     embed: Embed
+reviews:
+  title: Reviews
+  count: 'No Reviews | 1 Review | {count} Reviews'
 profile:
+  team: Team
   claim: Claim my profile
   follow:
     title: Follow us

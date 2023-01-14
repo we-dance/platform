@@ -333,7 +333,10 @@
         $t('event.commentsHidden')
       }}</TButton>
     </div>
+
     <TCommentsInline v-else :item="doc" autoload class="border-t p-4" />
+
+    <TReviewList :reviews="reviews" />
 
     <div class="m-4 text-xs text-right gap-8">
       <span>Published by {{ creator.username }}</span>
@@ -463,6 +466,12 @@ export default {
     creator() {
       return this.getProfile(this.item?.createdBy)
     },
+    org() {
+      return this.getFullProfile(this.item?.org?.id)
+    },
+    reviews() {
+      return this.org?.reviews
+    },
     eventUrl() {
       const app = process.env.app
       const url = app.url + this.$route.fullPath
@@ -497,7 +506,7 @@ export default {
     const { getEventIcon, getEventTypeLabel } = useEvents()
     const { accountFields } = useAccounts()
     const { params } = useRouter()
-    const { getProfile } = useProfiles()
+    const { getProfile, getFullProfile } = useProfiles()
     const { doc, sync, exists, loading, softUpdate, remove } = useDoc('posts')
     const { map } = useReactions()
     const { updateRsvp, createGuestRsvp, getRsvp } = useRsvp()
@@ -575,6 +584,7 @@ export default {
       updateRsvp,
       can,
       getProfile,
+      getFullProfile,
       getDateTime,
       getDateTimeYear,
       dateDiff,

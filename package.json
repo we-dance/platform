@@ -55,6 +55,7 @@
     "nuxt": "^2.15.8",
     "nuxt-i18n": "^6.10.1",
     "platform-detect": "^3.0.0",
+    "swiper": "6",
     "url-utm-params": "^0.1.0",
     "uuid": "^8.1.0",
     "v-runtime-template": "^1.10.0",

@@ -166,6 +166,8 @@
 
     <TPreview v-if="profile.story" :content="profile.story" class="p-4" />
 
+    <TReviewList v-if="profile.reviews" :reviews="profile.reviews" />
+
     <WTeaser
       v-if="profile.type === 'City' && profile.website"
       :allow-guests="false"
