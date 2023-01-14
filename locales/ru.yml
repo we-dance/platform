@@ -17,6 +17,7 @@ Delete: Удалить
 Copy: Копировать
 Share: Поделиться
 views: 'нет просмотров | 1 просмотр | {count} просмотров'
+subscribers: 'no subscribers | 1 subscriber | {count} subscribers'
 guests: 'no guests | 1 guest | {count} guests'
 Subscribe: Подписаться
 Unsubscribe: Отписаться
