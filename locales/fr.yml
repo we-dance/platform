@@ -17,6 +17,7 @@ Delete: Supprimer
 Copy: Copier
 Share: Partager
 views: 'aucune vue | 1 vue | {count} vues'
+subscribers: 'no subscribers | 1 subscriber | {count} subscribers'
 guests: 'no guests | 1 guest | {count} guests'
 Subscribe: S'abonner
 Unsubscribe: Se désabonner
