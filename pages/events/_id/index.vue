@@ -145,6 +145,8 @@
       class="sticky bottom-0 z-50 flex justify-center items-center gap-2 border-b bg-white p-4"
     >
       <TReaction
+        type="primary"
+        toggled-class="bg-green-500"
         :label="$t('event.attend')"
         :toggled-label="$t('event.attending')"
         icon="PlusIcon"
@@ -154,6 +156,19 @@
         hide-count
         :item="doc"
       />
+      <TButton
+        allow-guests
+        icon="share"
+        :label="$t('event.share')"
+        class="rounded-full"
+        @click="announcementPopupVisible = true"
+      />
+    </div>
+
+    <div
+      v-if="isGoing"
+      class="flex justify-center items-center gap-2 border-b bg-white p-4"
+    >
       <template v-if="doc.link">
         <TButton
           v-if="doc.link.includes('https://www.tickettailor.com/')"
@@ -170,12 +185,18 @@
         />
       </template>
       <TButton
-        allow-guests
-        icon="share"
-        :label="$t('event.share')"
-        class="rounded-full"
-        @click="announcementPopupVisible = true"
+        v-if="doc.gallery"
+        :href="doc.gallery"
+        :label="$t('event.gallery.action')"
       />
+      <TButton
+        v-if="doc.playlist"
+        :href="doc.playlist"
+        :label="$t('event.playlist.action')"
+      />
+    </div>
+    <div v-else class="text-xs p-4 text-center font-bold">
+      {{ $t('event.attendCallToAction') }}
     </div>
 
     <TPopup
@@ -469,6 +490,7 @@ export default {
       can,
       account,
       updateAccount,
+      username,
       isAdmin,
       sendSignInLinkToEmail,
     } = useAuth()
@@ -488,6 +510,15 @@ export default {
       result.locality = addressPart(result.venue, 'locality')
       return result
     })
+
+    const isGoing = computed(() => {
+      return (
+        doc.value.star?.list &&
+        username.value &&
+        doc.value.star.list[username.value]
+      )
+    })
+
     const calendarLink = computed(() =>
       googleCalendarEventUrl({
         start: getDateObect(item.value?.startDate),
@@ -525,6 +556,7 @@ export default {
       }
     }
     return {
+      isGoing,
       isAdmin,
       softUpdate,
       register,

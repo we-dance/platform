@@ -367,12 +367,18 @@ export const useEvents = () => {
       description: t('event.international.description'),
     },
     {
-      name: 'promo',
-      label: t('event.promo.label'),
+      name: 'gallery',
       labelPosition: 'top',
-      component: 'TInputButtons',
-      options: yesNoOptions,
-      description: t('event.promo.description'),
+      placeholder: t('event.gallery.placeholder'),
+      label: t('event.gallery.label'),
+      description: t('event.gallery.description'),
+    },
+    {
+      name: 'playlist',
+      labelPosition: 'top',
+      placeholder: t('event.playlist.placeholder'),
+      label: t('event.playlist.label'),
+      description: t('event.playlist.description'),
     },
   ]
 

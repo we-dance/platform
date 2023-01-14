@@ -1,7 +1,7 @@
 <template>
   <TButton
     :type="type"
-    :class="clicked ? 'bg-gray-200' : ''"
+    :class="clicked ? toggledClass : ''"
     :title="label"
     :data-names="names"
     @click="toggle"
@@ -48,6 +48,10 @@ export default {
     label: {
       type: String,
       default: '',
+    },
+    toggledClass: {
+      type: String,
+      default: 'bg-gray-200',
     },
     toggledLabel: {
       type: String,
