@@ -17,6 +17,7 @@ Delete: Sil
 Copy: Kopyala
 Share: Paylaş
 views: 'görüntüleme yok | 1 görüntüleme | {count} görüntüleme'
+subscribers: 'no subscribers | 1 subscriber | {count} subscribers'
 guests: 'no guests | 1 guest | {count} guests'
 Subscribe: Abone ol
 Unsubscribe: Abonelikten çık
