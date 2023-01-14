@@ -171,7 +171,7 @@ community:
   title: Dans Topluluğu
   description: Dans partneri veya yeni dans etkinlikleri mi arıyorsunuz? Yerel dansçıların profillerini filtreleyin ve onlarla iletişime geçin.
 calendar:
-  title: Dans Etkinlik Takvimi
+  title: Dans Takvimi
   empty: Etkinlik bulunamadı
   upcoming: Yaklaşan
   past: Geçmiş
@@ -508,6 +508,7 @@ sort:
   yours: Sizin
 event:
   attend: Join Guest List
+  attendCallToAction: Join guest list to find tickets, see who is coming, write and read comments, request songs and exchange videos.
   attending: On the Guest List
   getTicket: Get Ticket
   share: Paylaş
@@ -516,6 +517,16 @@ event:
   commentsHidden: Sign in to view and write comments
   artists: Sanatçılar
   organiser: Organizatör
+  gallery:
+    label: Photo Gallery
+    placeholder: https://
+    description: Here you can include link to Shared Google Photos Album for your guests to upload photos and videos of your event
+    action: Exchange Videos
+  playlist:
+    label: Playlist
+    placeholder: https://
+    description: Here you can include link to Shared Spotify Playlist for your guests to request songs during your event
+    action: Request a song
   category:
     meetup: Dans
     lesson: Öğren
@@ -570,8 +581,8 @@ event:
     label: Harici kayıt mı?
     before: Etkinliğinize kaydolmak için harici bir platform kullanıyor musunuz?
   link:
-    label: Link
-    description: Bilet platformunda doğrudan rezervasyon bağlantısı [ti.to](https://ti.to/home), Eventbrite, Google Form, vb.
+    label: Tickets
+    description: Direct link where to buy ticket or register. Try [TicketTailor](https://www.tickettailor.com/?ref=wedance), Eventbrite, Google Form or TiTo.
   facebook:
     label: Facebook
     description: Facebook etkinliği
