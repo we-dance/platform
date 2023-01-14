@@ -15,7 +15,8 @@ const { hideBin } = require('yargs/helpers')
 import { firestore } from './firebase'
 import { announceEventIG } from './lib/instagram'
 import { getInstagramWebProfileInfo } from './lib/browser'
-const { getWeeklyData, renderEmail } = require('./lib/digest.js')
+import { getWeeklyData, renderEmail } from "./lib/digest"; 
+import * as fs from "fs";
 
 yargs(hideBin(process.argv))
   .command(
@@ -181,7 +182,7 @@ yargs(hideBin(process.argv))
     async (argv: any) => {
       const data = await getWeeklyData('Munich')
       const html = await renderEmail('weekly', data)
-      console.log(html)
+      fs.writeFileSync("./emails/weekly.html", html);
     }
   )
   .command(

@@ -48,7 +48,9 @@
   },
   "devDependencies": {
     "@types/dotenv": "^8.2.0",
-    "@types/puppeteer": "^5.4.2",
+    "@types/mjml": "^4.7.0",
+    "@types/puppeteer": "^5.4.2", 
+    "@types/vue": "^2.0.0",
     "copyfiles": "^2.4.1",
     "firebase-functions-test": "^0.1.6",
     "rimraf": "^3.0.2",
