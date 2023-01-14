@@ -44,6 +44,8 @@
         }}
       </div>
       <div class="text-xs text-gray-700">
+        {{ $tc('guests', guestCount, { count: guestCount }) }} ·
+        {{ $tc('views', item.viewsCount, { count: item.viewsCount }) }} ·
         {{ item.price }}
       </div>
     </div>
@@ -89,6 +91,14 @@ export default {
     isEmbed: {
       type: Boolean,
       default: false,
+    },
+  },
+  computed: {
+    guestCount() {
+      const guestsCount = this.item.star?.count || 0
+      const artistsCount = this.item.artists?.length || 0
+
+      return guestsCount + artistsCount + 1
     },
   },
 }

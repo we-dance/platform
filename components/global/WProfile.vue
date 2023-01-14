@@ -26,12 +26,22 @@
         <div v-show="profile.bio" class="text-gray-700 text-xs">
           {{ profile.bio }}
         </div>
+        <div class="text-xs text-gray-500">
+          {{ $tc('views', profile.viewsCount, { count: profile.viewsCount }) }}
+          ·
+          {{
+            $tc('subscribers', subscribersCount, {
+              count: subscribersCount,
+            })
+          }}
+        </div>
         <div class="flex space-x-2 mt-4">
           <TReaction
-            label="Follow"
-            toggled-label="Unfollow"
+            :label="$t('Subscribe')"
+            :toggled-label="$t('Unsubscribe')"
             field="watch"
             icon="BellIcon"
+            hide-count
             :item="profile"
             collection="profiles"
           />
@@ -78,11 +88,16 @@ export default {
       return props.fallback
     })
 
+    const subscribersCount = computed(() => {
+      return profile.value?.watch?.count || 0
+    })
+
     return {
       id,
       eventRoleOptions,
       profile,
       getLabel,
+      subscribersCount,
     }
   },
   props: {

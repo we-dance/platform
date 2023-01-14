@@ -78,6 +78,12 @@
 
         <div class="text-xs text-gray-500">
           {{ $tc('views', profile.viewsCount, { count: profile.viewsCount }) }}
+          ·
+          {{
+            $tc('subscribers', subscribersCount, {
+              count: subscribersCount,
+            })
+          }}
         </div>
 
         <div v-if="profile.type === 'City'" class="flex space-x-2 mt-4">
@@ -86,6 +92,7 @@
             :toggled-label="$t('Unsubscribe')"
             field="watch"
             icon="BellIcon"
+            hide-count
             :item="profile"
             collection="profiles"
           />
@@ -105,10 +112,11 @@
       }}</TButton>
       <TReaction
         v-if="uid !== profile.id"
-        :label="$t('Follow')"
-        :toggled-label="$t('Unfollow')"
+        :label="$t('Subscribe')"
+        :toggled-label="$t('Unsubscribe')"
         field="watch"
         icon="BellIcon"
+        hide-count
         :item="profile"
         collection="profiles"
       />
@@ -340,6 +348,10 @@ export default {
 
     const events = ref([])
 
+    const subscribersCount = computed(() => {
+      return props.profile?.watch?.count || 0
+    })
+
     onMounted(async () => {
       let result = []
 
@@ -381,6 +393,7 @@ export default {
       isAdmin,
       community,
       invitesLeft,
+      subscribersCount,
       remove,
       events,
     }
