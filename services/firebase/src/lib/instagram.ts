@@ -4,6 +4,18 @@ const pngToJpeg = require('png-to-jpeg')
 
 require('dotenv').config()
 
+function getMention(link: string) {
+  if (!link) {
+    return ''
+  }
+
+  let result = link
+  result = result.replace('https://instagram.com/', '@')
+  result = result.replace('https://www.instagram.com/', '@')
+
+  return result
+}
+
 export async function announceEventIG(event: any) {
   const hashtags = [event.eventType, ...Object.keys(event.styles)]
     .map((tag) => `#${tag}`)
@@ -15,9 +27,17 @@ export async function announceEventIG(event: any) {
     description = description.substring(0, 140) + '...'
   }
 
+  const mentionsList = [getMention(event.org?.instagram)]
+
+  for (const artist of event.artists) {
+    mentionsList.push(getMention(artist?.instagram))
+  }
+
+  const mentions = mentionsList.join(' ')
+
   const photo = event.socialCover
 
-  const caption = `${description}\nSee link in bio\n\n\n${hashtags}`
+  const caption = `See link in bio\n${description}\n\n${mentions}\n\n${hashtags}`
 
   const response = await axios.get(photo, { responseType: 'arraybuffer' })
   const buffer = Buffer.from(response.data, 'utf-8')
