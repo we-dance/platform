@@ -1,7 +1,7 @@
 <template>
   <div>
     <TBanner
-      v-if="uid && profile"
+      v-if="false"
       v-model="bannerNps"
       desktop="Can you take 30 seconds to help us?"
       mobile="30 seconds to help us?"
@@ -11,7 +11,7 @@
       "
     />
     <TBanner
-      v-if="bannerNps && profile && profile.daysUsed > 10"
+      v-if="false"
       v-model="bannerV3Beta"
       desktop="Are you ready for WeDance v3?"
       mobile="Are you ready for WeDance v3?"
