@@ -380,6 +380,13 @@ export const useEvents = () => {
       label: t('event.playlist.label'),
       description: t('event.playlist.description'),
     },
+    {
+      name: 'paypal',
+      labelPosition: 'top',
+      placeholder: t('event.paypal.placeholder'),
+      label: t('event.paypal.label'),
+      description: t('event.paypal.description'),
+    },
   ]
 
   return {

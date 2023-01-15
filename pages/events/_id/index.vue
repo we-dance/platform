@@ -167,11 +167,12 @@
 
     <div
       v-if="isGoing"
-      class="flex justify-center items-center gap-2 border-b bg-white p-4"
+      class="flex flex-col md:flex-row justify-center items-center gap-2 border-b bg-white p-4"
     >
       <template v-if="doc.link">
         <TButton
           v-if="doc.link.includes('https://www.tickettailor.com/')"
+          icon="ticket"
           type="primary"
           :label="$t('event.getTicket')"
           @click="ticketTailorPopup = true"
@@ -179,6 +180,7 @@
         <TButton
           v-else
           type="primary"
+          icon="ticket"
           :href="doc.link"
           target="_blank"
           :label="$t('event.getTicket')"
@@ -186,13 +188,21 @@
       </template>
       <TButton
         v-if="doc.gallery"
+        icon="upload"
         :href="doc.gallery"
         :label="$t('event.gallery.action')"
       />
       <TButton
         v-if="doc.playlist"
+        icon="lobby"
         :href="doc.playlist"
         :label="$t('event.playlist.action')"
+      />
+      <TButton
+        v-if="doc.paypal"
+        icon="coffee"
+        :href="doc.paypal"
+        :label="$t('event.paypal.action')"
       />
     </div>
     <div v-else class="text-xs p-4 text-center font-bold">
