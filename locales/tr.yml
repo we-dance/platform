@@ -179,7 +179,11 @@ calendar:
   share:
     text: Metin
     embed: Yerleştir
+reviews:
+  title: Reviews
+  count: 'No Reviews | 1 Review | {count} Reviews'
 profile:
+  team: Team
   claim: Profilimi talep edin
   follow:
     title: Bizi takip edin
@@ -522,12 +526,17 @@ event:
     label: Photo Gallery
     placeholder: https://
     description: Here you can include link to Shared Google Photos Album for your guests to upload photos and videos of your event
-    action: Exchange Videos
+    action: Upload Videos
   playlist:
     label: Playlist
     placeholder: https://
     description: Here you can include link to Shared Spotify Playlist for your guests to request songs during your event
     action: Request a song
+  paypal:
+    label: Paypal
+    placeholder: https://
+    description: Here you can include link to gather donations after your event
+    action: Donate
   category:
     meetup: Dans
     lesson: Öğren
