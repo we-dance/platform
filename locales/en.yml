@@ -530,9 +530,9 @@ sort:
   archived: Archived
   yours: Yours
 event:
-  attend: Join Guest List
-  attendCallToAction: Join guest list to find tickets, see who is coming, write and read comments, request songs and exchange videos.
-  attending: On the Guest List
+  attend: Attend
+  attendCallToAction: Click "Attend" to find tickets, see who is coming, write and read comments, request songs and see video gallery.
+  attending: Attending
   getTicket: Get Ticket
   share: Share
   guests: Guests
@@ -541,10 +541,10 @@ event:
   artists: Artists
   organiser: Organiser
   gallery:
-    label: Photo Gallery
+    label: Video Gallery
     placeholder: https://
     description: Here you can include link to Shared Google Photos Album for your guests to upload photos and videos of your event
-    action: Upload Videos
+    action: Video Gallery
   playlist:
     label: Playlist
     placeholder: https://
