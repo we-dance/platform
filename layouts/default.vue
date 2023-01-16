@@ -1,6 +1,13 @@
 <template>
   <div>
     <TBanner
+      v-if="profile && !profile.photo"
+      desktop="Upload your photo"
+      mobile="Upload your photo"
+      action="Upload"
+      link="https://wedance.vip/settings?tab=profile"
+    />
+    <TBanner
       v-if="false"
       v-model="bannerNps"
       desktop="Can you take 30 seconds to help us?"
