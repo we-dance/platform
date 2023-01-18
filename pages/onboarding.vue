@@ -93,6 +93,7 @@ export default {
   },
 
   data: () => ({
+    redirecting: false,
     step: 'name',
     profile: {},
     skip: {},
@@ -135,9 +136,13 @@ export default {
       this.skip.photo = true
       this.next()
     },
-    load() {
+    async load() {
       if (this.loadedProfile && !this.profile.name) {
         this.profile = this.loadedProfile
+      }
+
+      if (this.profile?.username && this.profile?.place && this.profile?.name) {
+        await this.finish()
       }
     },
     next() {
@@ -155,6 +160,12 @@ export default {
       }
     },
     async finish() {
+      if (this.redirecting) {
+        return
+      }
+
+      this.redirecting = true
+
       await this.updateAccount({
         confirmed: true,
       })

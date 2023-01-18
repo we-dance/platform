@@ -108,17 +108,19 @@ export default {
   watch: {
     '$route.path': 'onPageView',
     'profile.username': 'onProfileLoad',
+    loading: 'checkOnboarding',
   },
   mounted() {
     this.onPageView()
 
-    window &&
-      window.addEventListener('beforeinstallprompt', (event) => {
-        event.preventDefault()
-        window.deferredPrompt = event
-      })
+    this.checkOnboarding()
   },
   methods: {
+    checkOnboarding() {
+      if (this.uid && !this.loading && !this.profile?.username) {
+        this.$router.push('/onboarding')
+      }
+    },
     showSearch() {
       this.isSearchShown = true
     },
@@ -199,6 +201,7 @@ export default {
       isAdmin,
       showAuthPopup,
       updateProfile,
+      loading,
     } = useAuth()
     const { getCity } = useApp()
 
@@ -225,6 +228,7 @@ export default {
       isAdmin,
       getCity,
       showAuthPopup,
+      loading,
     }
   },
 }

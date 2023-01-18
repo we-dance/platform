@@ -1,13 +1,13 @@
 import { useAuth } from '~/use/auth'
 
 export default async ({ route, redirect }) => {
-  const { getAccount, uid } = useAuth()
+  const { getAccount, username } = useAuth()
 
   await getAccount()
 
-  const routes = ['/onboarding', '/signout']
+  const routes = ['/onboarding', '/signout', '/signin']
 
-  if (!uid.value && !routes.includes(route.path)) {
+  if (!username.value && !routes.includes(route.path)) {
     redirect('/onboarding')
   }
 }

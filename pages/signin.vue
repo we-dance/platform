@@ -59,13 +59,7 @@ export default {
     }
   },
   watch: {
-    loading: {
-      handler(val) {
-        if (!val && this.profile) {
-          this.redirect()
-        }
-      },
-    },
+    loading: 'redirect',
   },
   mounted() {
     if (this.$route.query.invitedBy) {
@@ -73,12 +67,12 @@ export default {
     }
 
     if (this.$route.query.target) {
-      ls('target', this.$route.query.target)
+      const target = this.$route.query.target
+
+      ls('target', target)
     }
 
-    if (this.uid) {
-      this.redirect()
-    }
+    this.redirect()
   },
   methods: {
     async signFacebook() {
@@ -96,12 +90,26 @@ export default {
       await this.signInWithGoogle()
     },
     redirect() {
+      if (this.loading) {
+        return
+      }
+
+      if (this.uid && !this.profile?.username) {
+        this.$router.push('/onboarding')
+        return
+      }
+
+      if (!this.uid) {
+        return
+      }
+
       let target = ls('target')
       ls.remove('target')
       if (!target) {
-        const page = this.profile?.username || 'onboarding'
+        const page = this.profile?.username
         target = '/' + page
       }
+
       this.$router.push(target)
     },
   },
