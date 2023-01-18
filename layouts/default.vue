@@ -117,7 +117,11 @@ export default {
   },
   methods: {
     checkOnboarding() {
-      if (this.uid && !this.loading && !this.profile?.username) {
+      if (this.loading) {
+        return
+      }
+
+      if (this.uid && !this.profile?.username) {
         this.$router.push('/onboarding')
       }
     },
