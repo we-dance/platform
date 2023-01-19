@@ -44,6 +44,7 @@ export default {
       signInWithFacebook,
       signUserIn,
       signOut,
+      profileLoaded,
       error,
     } = useAuth()
     return {
@@ -56,6 +57,7 @@ export default {
       signOut,
       error,
       profile,
+      profileLoaded,
     }
   },
   watch: {
@@ -94,7 +96,7 @@ export default {
         return
       }
 
-      if (this.uid && !this.profile?.username) {
+      if (this.profileLoaded && !this.profile?.username) {
         this.$router.push('/onboarding')
         return
       }
