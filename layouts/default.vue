@@ -117,7 +117,7 @@ export default {
   },
   methods: {
     checkOnboarding() {
-      if (this.loading) {
+      if (!this.profileLoaded) {
         return
       }
 
@@ -204,6 +204,7 @@ export default {
       username,
       isAdmin,
       showAuthPopup,
+      profileLoaded,
       updateProfile,
       loading,
     } = useAuth()
@@ -233,6 +234,7 @@ export default {
       getCity,
       showAuthPopup,
       loading,
+      profileLoaded,
     }
   },
 }

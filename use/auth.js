@@ -13,6 +13,7 @@ import { useDoc } from '~/use/doc'
 
 const state = Vue.observable({
   loading: true,
+  profileLoaded: false,
   signingIn: false,
   uid: null,
   profile: null,
@@ -288,6 +289,7 @@ export const useAuth = () => {
     }
 
     state.loading = false
+    state.profileLoaded = true
   }
 
   async function updateProfile(data) {
