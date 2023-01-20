@@ -149,7 +149,7 @@
     >
       <TReaction
         type="primary"
-        toggled-class="bg-green-500"
+        toggled-class="bg-green-500 hover:bg-green-800"
         :label="$t('event.attend')"
         :toggled-label="$t('event.attending')"
         icon="PlusIcon"
