@@ -16,8 +16,8 @@
       v-if="currentCity"
       allow-guests
       :to="`/${city.username}`"
-      icon="place"
-      :label="city.name"
+      icon="calendar"
+      :label="$t('nav.calendar')"
       type="nav"
     />
     <TButton
