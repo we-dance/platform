@@ -630,3 +630,5 @@ EventDashboard:
   subscribed: Abone olundu
   paid: Ödendi
   notPaid: Ödeme yapmadı
+leadersCount: no leaders | 1 leader | {count} leaders
+followersCount: no followers | 1 follower | {count} followers
