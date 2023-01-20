@@ -141,6 +141,9 @@
       <WTicketTailor :href="doc.link" />
     </TPopup>
 
+    <div v-if="!isGoing" class="text-xs p-4 text-center font-bold">
+      {{ $t('event.attendCallToAction') }}
+    </div>
     <div
       class="sticky bottom-0 z-50 flex justify-center items-center gap-2 border-b bg-white p-4"
     >
@@ -204,9 +207,6 @@
         :href="doc.paypal"
         :label="$t('event.paypal.action')"
       />
-    </div>
-    <div v-else class="text-xs p-4 text-center font-bold">
-      {{ $t('event.attendCallToAction') }}
     </div>
 
     <TPopup
@@ -319,6 +319,22 @@
 
     <div v-if="doc.star && doc.star.list" class="space-y-2 p-4">
       <h3 class="text-xl font-bold">{{ $t('event.guests') }}</h3>
+      <div
+        v-if="guests.followersCount || guests.leadersCount"
+        class="text-xs pt-0"
+      >
+        <span>{{
+          $tc('followersCount', guests.followersCount, {
+            count: guests.followersCount,
+          })
+        }}</span>
+        <span>·</span>
+        <span>{{
+          $tc('leadersCount', guests.leadersCount, {
+            count: guests.leadersCount,
+          })
+        }}</span>
+      </div>
       <div v-if="!uid" class="flex justify-center p-4">
         <TButton
           type="link"
@@ -338,15 +354,24 @@
       </div>
     </div>
 
-    <div v-if="!uid" class="flex justify-center p-4">
-      <TButton type="link" allow-guests :to="`/signin?target=${$route.path}`">{{
-        $t('event.commentsHidden')
-      }}</TButton>
+    <div>
+      <h3 class="text-xl font-bold p-4 border-t">{{ $t('comments.label') }}</h3>
+      <div v-if="!uid" class="flex justify-center p-4">
+        <TButton
+          type="link"
+          allow-guests
+          :to="`/signin?target=${$route.path}`"
+          >{{ $t('event.commentsHidden') }}</TButton
+        >
+      </div>
+
+      <TCommentsInline v-else :item="doc" autoload class="px-4" />
     </div>
 
-    <TCommentsInline v-else :item="doc" autoload class="border-t p-4" />
-
-    <TReviewList :reviews="reviews" />
+    <div>
+      <h3 class="text-xl font-bold p-4 border-t">{{ $t('reviews.title') }}</h3>
+      <TReviewList :reviews="reviews" class="px-4" />
+    </div>
 
     <div class="m-4 text-xs text-right gap-8">
       <span>Published by {{ creator.username }}</span>
@@ -427,7 +452,7 @@
 
 <script>
 import googleCalendarEventUrl from 'generate-google-calendar-url'
-import { computed, ref } from '@nuxtjs/composition-api'
+import { computed, ref, watch } from '@nuxtjs/composition-api'
 import { useAuth } from '~/use/auth'
 import { useDoc } from '~/use/doc'
 import { useRsvp } from '~/use/rsvp'
@@ -518,6 +543,7 @@ export default {
     const { params } = useRouter()
     const { getProfile, getFullProfile } = useProfiles()
     const { doc, sync, exists, loading, softUpdate, remove } = useDoc('posts')
+    const { find: findProfile } = useDoc('profiles')
     const { map } = useReactions()
     const { updateRsvp, createGuestRsvp, getRsvp } = useRsvp()
     if (params.id) {
@@ -528,6 +554,50 @@ export default {
       const result = map(doc.value)
       result.locality = addressPart(result.venue, 'locality')
       return result
+    })
+
+    const profileCache = {}
+    const guests = ref({})
+
+    async function getCachedProfile(username) {
+      if (!profileCache[username]) {
+        profileCache[username] = await findProfile('username', username)
+      }
+
+      return profileCache[username]
+    }
+
+    watch(doc, async () => {
+      const list = doc.value.star?.list
+
+      const result = {
+        list: [],
+        followersCount: 0,
+        leadersCount: 0,
+      }
+
+      if (!list) {
+        guests.value = result
+
+        return
+      }
+
+      if (guests.value?.list?.length) {
+        return
+      }
+
+      for (const guestUsername of Object.keys(list)) {
+        const guestProfile = await getCachedProfile(guestUsername)
+
+        result.list.push(guestProfile)
+        if (guestProfile.gender === 'Female') {
+          result.followersCount++
+        } else {
+          result.leadersCount++
+        }
+      }
+
+      guests.value = result
     })
 
     const isGoing = computed(() => {
@@ -587,6 +657,7 @@ export default {
       reservationFields,
       reserve,
       exists,
+      guests,
       uid,
       loading,
       item,

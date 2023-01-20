@@ -20,8 +20,12 @@
         >
           {{ profile.name || profile.username }}
         </NuxtLink>
-        <div v-show="profile.role" class="text-xs">
+        <div v-if="profile.role" class="text-xs">
           {{ getLabel(eventRoleOptions, profile.role) }}
+        </div>
+        <div v-else class="text-xs">
+          <span v-if="profile.gender === 'Male'">Leader</span>
+          <span v-else>Follower</span>
         </div>
         <div v-show="profile.bio" class="text-gray-700 text-xs">
           {{ profile.bio }}

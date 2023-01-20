@@ -1,7 +1,7 @@
 <template>
-  <div class="p-4">
+  <div>
     <div class="flex flex-row items-center justify-left gap-2">
-      <div class="text-xl font-semibold">
+      <div>
         {{ $tc('reviews.count', reviews.length, { count: reviews.length }) }}
       </div>
     </div>

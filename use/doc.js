@@ -94,7 +94,7 @@ export const useDoc = (name) => {
     state.exists = true
     state.loading = false
 
-    return true
+    return state.doc
   }
 
   async function softUpdate(id, data) {
