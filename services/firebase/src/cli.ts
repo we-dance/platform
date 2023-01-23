@@ -16,6 +16,23 @@ import { firestore } from './firebase'
 import { announceEventIG } from './lib/instagram'
 import { getInstagramWebProfileInfo } from './lib/browser'
 
+function getDomain(url: string): string {
+  let hostname
+
+  if (url.indexOf('//') > -1) {
+    hostname = url.split('/')[2]
+  } else {
+    hostname = url.split('/')[0]
+  }
+
+  hostname = hostname.split(':')[0]
+  hostname = hostname.split('?')[0]
+  hostname = hostname.toLowerCase()
+  hostname = hostname.replace('www.', '')
+
+  return hostname
+}
+
 yargs(hideBin(process.argv))
   .command(
     'tg:announce <eventId>',
@@ -245,6 +262,33 @@ yargs(hideBin(process.argv))
             cityPlaceId: city.place,
           })
       }
+    }
+  )
+  .command(
+    'ticketing',
+    'Get ticketing platforms overview',
+    () => undefined,
+    async (argv: any) => {
+      const allEvents = await getDocs(
+        firestore.collection('posts').where('type', '==', 'event')
+      )
+
+      const domains = {} as any
+
+      const eventsWithLinks = allEvents.filter((e) => !!e.link)
+
+      for (const event of eventsWithLinks) {
+        const link = event.link
+        const domain = getDomain(link)
+
+        if (domains[domain]) {
+          domains[domain]++
+        } else {
+          domains[domain] = 1
+        }
+      }
+
+      console.log(domains)
     }
   )
   .help('h')
