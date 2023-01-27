@@ -9,6 +9,7 @@ import VRuntimeTemplate from 'v-runtime-template'
 import MarkdownAttrs from 'markdown-it-attrs'
 import excerptHtml from 'excerpt-html'
 import mila from 'markdown-it-link-attributes'
+import mentions from 'markdown-it-mentions'
 
 const md = new MarkdownIt({
   html: true,
@@ -56,6 +57,12 @@ md.use(MarkdownContainer, 'hero', {
     }
   },
 })
+
+function parseURL(username) {
+  return `/${username}`
+}
+
+md.use(mentions, { parseURL, external: true })
 
 export default {
   components: {
