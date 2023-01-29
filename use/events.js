@@ -387,6 +387,13 @@ export const useEvents = () => {
       label: t('event.paypal.label'),
       description: t('event.paypal.description'),
     },
+    {
+      name: 'review',
+      labelPosition: 'top',
+      placeholder: t('event.review.placeholder'),
+      label: t('event.review.label'),
+      description: t('event.review.description'),
+    },
   ]
 
   return {

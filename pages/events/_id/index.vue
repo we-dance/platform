@@ -63,8 +63,13 @@
 
       <div class="md:border-l">
         <div
-          class="flex justify-start items-center px-4 py-2 space-x-1 text-xs border-b"
+          class="flex flex-wrap justify-start items-center px-4 py-2 space-x-1 text-xs border-b"
         >
+          <div v-if="reviewsCount" class="flex">
+            <TIcon class="h-4 w-4" name="star" />
+            <span>{{ reviewsAvg }} ({{ reviewsCount }})</span>
+          </div>
+          <div v-if="reviewsCount">·</div>
           <div>
             {{ $tc('guests', guestCount, { count: guestCount }) }}
           </div>
@@ -191,21 +196,27 @@
       </template>
       <TButton
         v-if="doc.gallery"
-        icon="upload"
+        icon="spotlight"
         :href="doc.gallery"
         :label="$t('event.gallery.action')"
       />
       <TButton
         v-if="doc.playlist"
-        icon="lobby"
+        icon="spotify"
         :href="doc.playlist"
         :label="$t('event.playlist.action')"
       />
       <TButton
         v-if="doc.paypal"
-        icon="coffee"
+        icon="favorite"
         :href="doc.paypal"
         :label="$t('event.paypal.action')"
+      />
+      <TButton
+        v-if="doc.review"
+        icon="chat"
+        :href="doc.review"
+        :label="$t('event.review.action')"
       />
     </div>
 
@@ -505,7 +516,20 @@ export default {
       return this.getFullProfile(this.item?.org?.id)
     },
     reviews() {
-      return this.org?.reviews
+      return this.org?.reviews || []
+    },
+    reviewsAvg() {
+      if (!this.reviewsCount) {
+        return 0
+      }
+
+      return (
+        this.reviews.map((r) => Number(r.stars)).reduce((p, c) => p + c, 0) /
+        this.reviewsCount
+      )
+    },
+    reviewsCount() {
+      return this.reviews.length || 0
     },
     eventUrl() {
       const app = process.env.app
