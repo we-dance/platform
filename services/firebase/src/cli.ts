@@ -180,7 +180,7 @@ yargs(hideBin(process.argv))
     'Generate Weekly Newsletter',
     () => undefined,
     async (argv: any) => {
-      const data = await getWeeklyData('Munich')
+      const data = await getWeeklyData('Munich');
       const html = await renderEmail('weekly', data)
       fs.writeFileSync("./emails/weekly.html", html);
     }

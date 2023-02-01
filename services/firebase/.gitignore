@@ -7,3 +7,5 @@ typings/
 
 node_modules/
 var/
+
+serviceAccountKey.json 
