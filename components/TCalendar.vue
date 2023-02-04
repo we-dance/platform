@@ -82,7 +82,7 @@ export default {
     const { router } = useRouter()
     const { getCity } = useApp()
     if (!currentCity.value) {
-      router.push('/cities')
+      return
     }
     const { search, response } = useAlgolia('events')
     const facets = computed(() => ({

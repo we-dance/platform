@@ -91,7 +91,7 @@ export default {
     const { getCity } = useApp()
     const { objectivesList, typeList, radiusOptions } = useProfiles()
     if (!currentCity.value) {
-      router.push('/cities')
+      return
     }
     const { search, response } = useAlgolia('profiles')
     const facets = computed(() => ({

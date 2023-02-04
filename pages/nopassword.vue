@@ -114,7 +114,6 @@ export default {
   methods: {
     redirect() {
       let target = ls('target')
-      ls.remove('target')
 
       if (!target) {
         target = '/events'
