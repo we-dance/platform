@@ -544,17 +544,22 @@ event:
     label: Photo Gallery
     placeholder: https://
     description: Here you can include link to Shared Google Photos Album for your guests to upload photos and videos of your event
-    action: Upload Videos
+    action: Gallery
   playlist:
     label: Playlist
     placeholder: https://
     description: Here you can include link to Shared Spotify Playlist for your guests to request songs during your event
-    action: Request a song
+    action: Playlist
   paypal:
     label: Paypal
     placeholder: https://
     description: Here you can include link to gather donations after your event
     action: Donate
+  review:
+    label: Review
+    placeholder: https://
+    description: Here you can include link to gather reviews after your event
+    action: Review
   category:
     meetup: Dance
     lesson: Learn
