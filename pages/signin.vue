@@ -28,6 +28,7 @@
 
 <script>
 import ls from 'local-storage'
+import { ref } from 'vue-demi'
 import { track } from '~/plugins/firebase'
 import { useAuth } from '~/use/auth'
 
@@ -47,7 +48,11 @@ export default {
       profileLoaded,
       error,
     } = useAuth()
+
+    const isRedirecting = ref(false)
+
     return {
+      isRedirecting,
       uid,
       loading,
       signingIn,
@@ -62,6 +67,7 @@ export default {
   },
   watch: {
     loading: 'redirect',
+    profileLoaded: 'redirect',
   },
   mounted() {
     if (this.$route.query.invitedBy) {
@@ -92,7 +98,14 @@ export default {
       await this.signInWithGoogle()
     },
     redirect() {
+      if (this.isRedirecting) {
+        return
+      }
+
+      this.isRedirecting = true
+
       if (this.loading) {
+        this.isRedirecting = false
         return
       }
 
@@ -102,11 +115,18 @@ export default {
       }
 
       if (!this.uid) {
+        this.isRedirecting = false
+        return
+      }
+
+      if (!this.profileLoaded) {
+        this.isRedirecting = false
         return
       }
 
       let target = ls('target')
       ls.remove('target')
+
       if (!target) {
         const page = this.profile?.username
         target = '/' + page
