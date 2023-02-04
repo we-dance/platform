@@ -74,7 +74,6 @@ import { useProfiles } from '~/use/profiles'
 import { useStyles } from '~/use/styles'
 import { useAuth } from '~/use/auth'
 import { useCities } from '~/use/cities'
-import { useRouter } from '~/use/router'
 import { useApp } from '~/use/app'
 
 export default {
@@ -87,7 +86,6 @@ export default {
     const filters = ref({})
     const { uid } = useAuth()
     const { city, currentCity, cityName } = useCities()
-    const { router } = useRouter()
     const { getCity } = useApp()
     const { objectivesList, typeList, radiusOptions } = useProfiles()
     if (!currentCity.value) {
