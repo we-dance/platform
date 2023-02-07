@@ -48,18 +48,48 @@ export async function renderEmail(type: string, data:any, customUtms = {}) {
 
 export async function getWeeklyData(city:string) {
 
+  const today = new Date().toISOString().slice(0, 10)
+
   const eventDocs = (
     await firestore
-      .collection('events')
+      .collection('posts')
+      .where('startDate', '>', today)
       .get()
   ).docs
-  
-  let data;
+
+  const data = []
+
   for (const doc of eventDocs) {
-     data = {
+    const event = {
       id: doc.id,
       ...doc.data(),
-    };
+    } as any
+
+    data.push(event)
   }
-  return data; 
+  
+  const events: any = {
+    intro:'Hope you had a great weekend and are ready with your dancing shoes on for a fantastic week ahead.', 
+    title:'Munich Dance Calendar', 
+    links: {
+      telegram: "https://t.me/WeDanceMunich",
+      instagram: "https://instagram.com/WeDanceMunich",
+      facebook: "https://fb.com/WeDanceMunich",
+      addEvent: "https://wedance.vip/events/-/edit",
+      city: "https://wedance.vip/Munich",
+    },
+    days: data.map(event=>({
+      title:event.name,
+      organizer:event.org.name, 
+      venue:event.venue.name, 
+      format:event.eventType, 
+      time:event.startDate, 
+      link:event.link, 
+      cover:event.cover, 
+      styles:Object.keys(event.styles)
+    }))
+  }
+
+  return events; 
+
 }

@@ -1,7 +1,7 @@
 {
   "projects": {
     "live": "wedance-4abe3",
-    "we-dance-dev": "wedancedev-aa00e",
+    "dev": "wedancedev-aa00e"
   },
   "targets": {},
   "etags": {}
