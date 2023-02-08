@@ -48,14 +48,37 @@ export async function renderEmail(type: string, data:any, customUtms = {}) {
 
 export async function getWeeklyData(city:string) {
 
-  const today = new Date().toISOString().slice(0, 10)
+  const today = new Date().toISOString().slice(0,10)
+  const then = new Date();
+  then.setDate(then.getDate() + 7);
+  const sevenDaysFromNow = then.toISOString().slice(0,10); 
 
+  const cityDocs = (await firestore
+  .collection('profiles') 
+  .where('username', '==', city)
+  .get()
+).docs
+
+  const cityData: any = []; 
+
+  for(const doc of cityDocs ) {
+    const city = {
+      id: doc.id, 
+      ...doc.data()
+    } as any 
+    cityData.push(city)
+  } 
+  
+  
   const eventDocs = (
     await firestore
-      .collection('posts')
+      .collection('posts') 
       .where('startDate', '>', today)
+      .where('startDate','<', sevenDaysFromNow) 
+      .where('place','==',cityData[0].place)
       .get()
   ).docs
+
 
   const data = []
 
@@ -67,7 +90,7 @@ export async function getWeeklyData(city:string) {
 
     data.push(event)
   }
-  
+    
   const events: any = {
     intro:'Hope you had a great weekend and are ready with your dancing shoes on for a fantastic week ahead.', 
     title:'Munich Dance Calendar', 
@@ -81,7 +104,7 @@ export async function getWeeklyData(city:string) {
     days: data.map(event=>({
       title:event.name,
       organizer:event.org.name, 
-      venue:event.venue.name, 
+      venue:event.venue?.name, 
       format:event.eventType, 
       time:event.startDate, 
       link:event.link, 
@@ -91,5 +114,4 @@ export async function getWeeklyData(city:string) {
   }
 
   return events; 
-
 }
