@@ -52,35 +52,48 @@ export async function getWeeklyData(city:string) {
   const then = new Date();
   then.setDate(then.getDate() + 7);
   const sevenDaysFromNow = then.toISOString().slice(0,10); 
+  const data = []
+  let cityData: any = {}; 
+  let profile: any =  {};
 
   const cityDocs = (await firestore
   .collection('profiles') 
   .where('username', '==', city)
   .get()
-).docs
-
-  const cityData: any = []; 
+  ).docs
 
   for(const doc of cityDocs ) {
     const city = {
       id: doc.id, 
       ...doc.data()
     } as any 
-    cityData.push(city)
+
+    cityData = {...city}; 
   } 
-  
-  
+
+  const profileDocs = (
+    await firestore
+      .collection('profiles') 
+      .where('username', '==', city)
+      .get()
+  ).docs
+
+  for(const doc of profileDocs ) {
+    const user = {
+      id:doc.id, 
+      ...doc.data()
+    }
+    profile = {...user} 
+  }
+      
   const eventDocs = (
     await firestore
       .collection('posts') 
       .where('startDate', '>', today)
       .where('startDate','<', sevenDaysFromNow) 
-      .where('place','==',cityData[0].place)
+      .where('place','==',cityData.place)
       .get()
   ).docs
-
-
-  const data = []
 
   for (const doc of eventDocs) {
     const event = {
@@ -93,13 +106,13 @@ export async function getWeeklyData(city:string) {
     
   const events: any = {
     intro:'Hope you had a great weekend and are ready with your dancing shoes on for a fantastic week ahead.', 
-    title:'Munich Dance Calendar', 
+    title:`${city} Dance Calendar`, 
     links: {
-      telegram: "https://t.me/WeDanceMunich",
-      instagram: "https://instagram.com/WeDanceMunich",
-      facebook: "https://fb.com/WeDanceMunich",
+      telegram: profile.telegram,
+      instagram: profile.instagram,
+      facebook: profile.facebook,
       addEvent: "https://wedance.vip/events/-/edit",
-      city: "https://wedance.vip/Munich",
+      city: `https://wedance.vip/${city}`,
     },
     days: data.map(event=>({
       title:event.name,
