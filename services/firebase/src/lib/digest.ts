@@ -52,32 +52,14 @@ export async function getWeeklyData(city: string) {
   then.setDate(then.getDate() + 7);
   const sevenDaysFromNow = then.toISOString().slice(0, 10);
   const data = [];
-  let cityData: any = {};
   let profile: any = {};
-
-  const cityDocs = (
-    await firestore.collection("profiles").where("username", "==", city).get()
-  ).docs;
-
-  for (const doc of cityDocs) {
-    const getCity = {
-      id: doc.id,
-      ...doc.data(),
-    } as any;
-
-    cityData = { ...getCity };
-  }
 
   const profileDocs = (
     await firestore.collection("profiles").where("username", "==", city).get()
   ).docs;
 
   for (const doc of profileDocs) {
-    const user = {
-      id: doc.id,
-      ...doc.data(),
-    };
-    profile = { ...user };
+    profile = { id: doc.id, ...doc.data() };
   }
 
   const eventDocs = (
@@ -85,7 +67,7 @@ export async function getWeeklyData(city: string) {
       .collection("posts")
       .where("startDate", ">", today)
       .where("startDate", "<", sevenDaysFromNow)
-      .where("place", "==", cityData.place)
+      .where("place", "==", profile.place)
       .get()
   ).docs;
 
