@@ -35,23 +35,14 @@
       </TButton>
     </div>
 
-    <div v-if="filters['type']" class="grid grid-cols-1 md:grid-cols-2 gap-2">
-      <NuxtLink
-        v-for="item in response.hits"
-        :key="item.id"
-        :to="`/${item.username}`"
-        class="hover:opacity-75"
-      >
-        <TSharePreviewPost
-          :type="item.type"
-          collection="profiles"
-          :username="item.username"
-          :extra="getCity(item.place)"
-          :photo="item.photo"
-          :styles="item.styles"
-          size="sm"
+    <div v-if="filters['type']" class="space-y-2 p-4">
+      <div v-for="profile in response.hits" :key="`artist-${profile.username}`">
+        <WProfile
+          v-if="profile"
+          :username="profile.username"
+          :fallback="profile"
         />
-      </NuxtLink>
+      </div>
     </div>
 
     <t-pagination
