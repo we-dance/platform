@@ -10,22 +10,8 @@
     <h2 v-if="title" class="font-bold text-lg mb-4">{{ title }}</h2>
     <div v-if="docs.length">
       <div v-for="item in docs" :key="item.id">
-        <TPost :item="item" :hide-media="hideMedia">
-          <div class="flex justify-center gap-2 p-4">
-            <TReaction
-              label="Save"
-              toggled-label="Saved"
-              field="star"
-              icon="BookmarkIcon"
-              class="rounded-full"
-              :item="item"
-            />
-          </div>
-
-          <TCommentsInline v-if="!item.hideComments" :item="item" class="p-4" />
-        </TPost>
+        <TPost :item="item" :hide-media="hideMedia" />
       </div>
-
       <div class="mt-4 p-4 flex justify-center items-center">
         <TButton @click="loadMore">{{ $t('TPostList.loadMore') }}</TButton>
       </div>

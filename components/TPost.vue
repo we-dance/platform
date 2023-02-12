@@ -32,15 +32,7 @@
               <div>{{ item.region.name }}</div>
             </template>
           </div>
-          <h1 v-if="item.title" class="font-bold text-xl">{{ item.title }}</h1>
-          <TPreview :excerpt="!show" :content="item.description" />
-          <div
-            v-if="item.description && item.description.length > 140"
-            class="p-2 text-blue-700 cursor-pointer underline hover:no-underline text-xs text-center mb-2"
-            @click="show = !show"
-          >
-            {{ show ? $t('TPost.showLess') : $t('TPost.showMore') }}
-          </div>
+          <div class="text-xs">announced an event</div>
         </div>
       </div>
 
@@ -88,24 +80,17 @@
         />
       </TDropdown>
     </div>
+    <h1 v-if="item.title" class="font-bold text-xl">{{ item.title }}</h1>
+    <TExpand v-if="item.description" class="p-4 w-auto">
+      <TPreview :content="item.description" />
+    </TExpand>
     <div v-if="!hideMedia">
-      <NuxtLink
+      <TEventText2
         v-if="item.type === 'event'"
-        :to="`/events/${item.id}`"
-        class="hover:opacity-75"
-      >
-        <TSharePreviewPost
-          :username="item.org ? item.org.username : ''"
-          collection="events"
-          :title="item.name"
-          :type="item.type"
-          :description="getEventDescription(item)"
-          :extra="item.locality"
-          :photo="item.cover"
-          :styles="item.styles"
-          size="sm"
-        />
-      </NuxtLink>
+        :item="item"
+        show-date
+        class="p-4 border m-4 rounded shadow"
+      />
 
       <TCardPoll v-else-if="item.type === 'poll'" :node="item" />
 
