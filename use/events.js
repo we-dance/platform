@@ -247,6 +247,7 @@ export const useEvents = () => {
     {
       name: 'link',
       labelPosition: 'top',
+      placeholder: t('event.link.placeholder'),
       description: t('event.link.description'),
       label: t('event.link.label'),
     },
