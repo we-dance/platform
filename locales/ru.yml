@@ -601,11 +601,12 @@ event:
     label: External registration?
     before: Do you use external platform to register for your event?
   link:
-    label: Tickets
-    description: Direct link where to buy ticket or register. Try [TicketTailor](https://www.tickettailor.com/?ref=wedance), Eventbrite, Google Form or TiTo.
+    label: Link to get tickets
+    placeholder: https://www.tickettailor.com/events/event-example
+    description: Provide a valid link, starting with https:// where to buy ticket or register. Try [TicketTailor](https://www.tickettailor.com/?ref=wedance), Eventbrite, Google Form or TiTo. Leave it blank if you don't have one.
   facebook:
     label: Facebook event
-    description: Url of your facebook event (leave empty if you don't have one)
+    description: Link to your facebook event. Leave empty if you don't have one.
   promo:
     label: Announce on social media?
     description: 'Send us link to your event on [Telegram](https://t.me/+aRIIZcXpBhJkYmUy) and we will announce it on our Telegram, Instagram and Facebook.'
