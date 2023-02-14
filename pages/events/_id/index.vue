@@ -177,6 +177,8 @@
       v-if="isGoing"
       class="flex flex-col md:flex-row justify-center items-center gap-2 border-b bg-white p-4"
     >
+      <TPreview v-if="doc.confirmation" :content="doc.confirmation" />
+
       <template v-if="doc.link">
         <TButton
           v-if="doc.link.includes('https://www.tickettailor.com/')"
