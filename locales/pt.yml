@@ -558,15 +558,17 @@ event:
     placeholder: Event Name
     label: Name
   description:
-    label: Announcement
-    placeholder: Unique Value Proposition
-    description: 'Use [widgets](https://wedance.vip/markdown), including images and videos'
+    label: Description
+    placeholder: What do you offer? It shouldn’t take more than a minute to say or read
+    description: We will use only first 140 symbols of this text in our social media posts
     tips: "Pitch yourself: Who are you? What do you offer? What do you want?\n\nTips for effective pitch:\n- Uncomplicated: It should be catchy and roll off the tongue\n- Concise: It shouldn’t take more than a minute to say or read\n- Unique: It reflects your skills, goals, and desires\n- Storyline: It covers who you are, what you offer, and where you want to be\n- Appealing: Your elevator pitch is essentially a persuasive sales pitch; the emphasis should be on what you offer"
   startDate: When?
   endDate: End Date
-  venue: Where?
-  cover: Cover
-  type: Event Type
+  venue: Venue
+  cover:
+    label: Cover
+    description: Instagram post size (1024x1024px). Better use photo from the last event, show the atmosphere. Images with white background don't look good on our flyers. We will add details of your event on top of this cover to create a flyer. You can see examples of our flyers on Instagram WeDanceMunich.
+  type: Event Format
   duration:
     label: How long?
     thirtyMinutes: 30 minutes
@@ -580,9 +582,12 @@ event:
   price:
     label: Price
     description: Please include currency, i.e. EUR, USD
-  styles: Estilo de dança
+  styles:
+    label: Estilo de dança
+    description: We will use it as hashtags for Instagram and Telegram. Don't use more than three.
   org:
     label: Organiser
+    description: Who can answer questions about the event (is it still happening, how to find entrance, etc.)
   online:
     label: Online?
     description: Streaming via Zoom, Google Meet, Instagram Live, etc.?
@@ -590,8 +595,8 @@ event:
     label: International
     description: Is it a big event with >500 guests, like festival or congress?
   place:
-    label: Community
-    description: Leave empty if you want your event to be shown in all cities
+    label: Region
+    description: In which Instagram and Telegram channel shall we announce this event? Pick biggest city near the event.
   form:
     label: External registration?
     before: Do you use external platform to register for your event?
@@ -599,20 +604,20 @@ event:
     label: Tickets
     description: Direct link where to buy ticket or register. Try [TicketTailor](https://www.tickettailor.com/?ref=wedance), Eventbrite, Google Form or TiTo.
   facebook:
-    label: Facebook
-    description: Facebook event
+    label: Facebook event
+    description: Url of your facebook event (leave empty if you don't have one)
   promo:
     label: Announce on social media?
     description: 'Send us link to your event on [Telegram](https://t.me/+aRIIZcXpBhJkYmUy) and we will announce it on our Telegram, Instagram and Facebook.'
   confirmation:
-    label: Confirmation email for guests
+    label: Confirmation for guests
     placeholder: 'Example: Dear guest, you are confirmed to our event.'
 TInputProfile:
   changeRole: Change Role
   actions: Actions
   remove: Remove
   import: Import
-  placeholder: Search on WeDance, Instagram or Facebook
+  placeholder: Search on WeDance
 popup:
   auth:
     title: Members only
