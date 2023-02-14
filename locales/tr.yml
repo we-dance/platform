@@ -558,15 +558,17 @@ event:
     placeholder: Etkinlik İsmi
     label: İsim
   description:
-    label: Duyuru
-    placeholder: Benzersiz Değer Önerisi
-    description: 'Görüntüler ve videolar dahil olmak üzere [widgets] (https://wedance.vip/markdown) kullanın'
+    label: Açıklama
+    placeholder: What do you offer? It shouldn’t take more than a minute to say or read
+    description: We will use only first 140 symbols of this text in our social media posts
     tips: "Kendinizi tanıtın: Siz kimsiniz? Ne teklif ediyorsunuz? Ne istiyorsunuz?\n\nEtkili sunum için ipuçları:\n- Karmaşık olmayan: Akılda kalıcı olmalı ve dilden dökülmeli\n- Kısa ve öz: Söylemesi veya okuması bir dakikadan fazla sürmemeli\n- Eşsiz: Becerilerinizi, hedeflerinizi ve arzularınızı yansıtır\n- Hikaye: Kim olduğunuzu, ne sunduğunuzu ve nerede olmak istediğinizi kapsar\n- İlgi çekici: Asansör konuşmanız esasen ikna edici bir satış konuşmasıdır; vurgu ne sunduğunuz üzerinde olmalıdır"
   startDate: Ne zaman?
   endDate: Bitiş Tarihi
-  venue: Nerede?
-  cover: Kapak
-  type: Etkinlik Türü
+  venue: Mekan
+  cover:
+    label: Cover
+    description: Instagram post size (1024x1024px). Better use photo from the last event, show the atmosphere. Images with white background don't look good on our flyers. We will add details of your event on top of this cover to create a flyer. You can see examples of our flyers on Instagram WeDanceMunich.
+  type: Event Format
   duration:
     label: Ne kadar sürecek?
     thirtyMinutes: 30 dakika
@@ -580,9 +582,12 @@ event:
   price:
     label: Fiyat
     description: Lütfen para birimini belirtin, örn. EUR, USD
-  styles: Dans stillerin
+  styles:
+    label: Dans stillerin
+    description: We will use it as hashtags for Instagram and Telegram. Don't use more than three.
   org:
     label: Organizatör
+    description: Who can answer questions about the event (is it still happening, how to find entrance, etc.)
   online:
     label: Online mı?
     description: Zoom, Google Meet, Instagram Live vb. aracılığıyla yayın mı yapıyorsunuz.?
@@ -590,8 +595,8 @@ event:
     label: Uluslararası
     description: Festival veya kongre gibi 500'den fazla konuğu olan büyük bir etkinlik mi?
   place:
-    label: Topluluk
-    description: Etkinliğinizin tüm şehirlerde gösterilmesini istiyorsanız boş bırakın
+    label: Region
+    description: In which Instagram and Telegram channel shall we announce this event? Pick biggest city near the event.
   form:
     label: Harici kayıt mı?
     before: Etkinliğinize kaydolmak için harici bir platform kullanıyor musunuz?
@@ -599,20 +604,20 @@ event:
     label: Tickets
     description: Direct link where to buy ticket or register. Try [TicketTailor](https://www.tickettailor.com/?ref=wedance), Eventbrite, Google Form or TiTo.
   facebook:
-    label: Facebook
-    description: Facebook etkinliği
+    label: Facebook event
+    description: Url of your facebook event (leave empty if you don't have one)
   promo:
     label: Sosyal medyada duyurmak mı?
     description: 'Etkinliğinizin linkini [Telegram](https://t.me/+aRIIZcXpBhJkYmUy) adresinden bize gönderin, biz de Telegram, Instagram ve Facebook hesaplarımızdan duyuralım.'
   confirmation:
-    label: Misafirler için onay e-postası
+    label: Confirmation for guests
     placeholder: 'Örnek: Sayın misafirimiz, etkinliğimize katılımınız onaylanmıştır.'
 TInputProfile:
   changeRole: Rolü Değiştir
   actions: Eylemler
   remove: Kaldır
   import: İçe aktar
-  placeholder: WeDance, Instagram veya Facebook'ta arama yapın
+  placeholder: Search on WeDance
 popup:
   auth:
     title: Sadece üyeler
