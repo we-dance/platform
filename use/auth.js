@@ -362,6 +362,7 @@ export const useAuth = () => {
     state.loading = false
     state.signingIn = false
     state.error = null
+    state.profileLoaded = false
   }
 
   async function signInAnonymously() {
