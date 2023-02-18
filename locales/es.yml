@@ -560,7 +560,7 @@ event:
   description:
     label: Descripción
     placeholder: What do you offer? It shouldn’t take more than a minute to say or read
-    description: We will use only first 140 symbols of this text in our social media posts
+    description: We will use only first 140 symbols of this text in our social media posts. Use this field to explain why people should join. Conditions on participation in the next field.
     tips: "Pitch yourself: Who are you? What do you offer? What do you want?\n\nTips for effective pitch:\n- Uncomplicated: It should be catchy and roll off the tongue\n- Concise: It shouldn’t take more than a minute to say or read\n- Unique: It reflects your skills, goals, and desires\n- Storyline: It covers who you are, what you offer, and where you want to be\n- Appealing: Your elevator pitch is essentially a persuasive sales pitch; the emphasis should be on what you offer"
   startDate: When?
   endDate: End Date
@@ -611,8 +611,9 @@ event:
     label: Announce on social media?
     description: 'Send us link to your event on [Telegram](https://t.me/+aRIIZcXpBhJkYmUy) and we will announce it on our Telegram, Instagram and Facebook.'
   confirmation:
-    label: Confirmation for guests
-    placeholder: 'Example: Dear guest, you are confirmed to our event.'
+    label: Confirmation
+    description: This message will be shown after people joined the guest list. Explain next steps to participate in the event (ticket, payments, dress-code, invite friends, etc.)
+    placeholder: 'Example: You are on the guest list. Take your big smile and see you at the event!'
 TInputProfile:
   changeRole: Change Role
   actions: Actions
