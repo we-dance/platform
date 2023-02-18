@@ -173,53 +173,52 @@
       />
     </div>
 
-    <div
-      v-if="isGoing"
-      class="flex flex-col md:flex-row justify-center items-center gap-2 border-b bg-white p-4"
-    >
+    <div v-if="isGoing" class="border-b bg-white p-4">
       <TPreview v-if="doc.confirmation" :content="doc.confirmation" />
 
-      <template v-if="doc.link">
+      <div class="flex flex-col md:flex-row justify-center items-center gap-2">
+        <template v-if="doc.link">
+          <TButton
+            v-if="doc.link.includes('https://www.tickettailor.com/')"
+            icon="ticket"
+            type="primary"
+            :label="$t('event.getTicket')"
+            @click="ticketTailorPopup = true"
+          />
+          <TButton
+            v-else
+            type="primary"
+            icon="ticket"
+            :href="doc.link"
+            target="_blank"
+            :label="$t('event.getTicket')"
+          />
+        </template>
         <TButton
-          v-if="doc.link.includes('https://www.tickettailor.com/')"
-          icon="ticket"
-          type="primary"
-          :label="$t('event.getTicket')"
-          @click="ticketTailorPopup = true"
+          v-if="doc.gallery"
+          icon="spotlight"
+          :href="doc.gallery"
+          :label="$t('event.gallery.action')"
         />
         <TButton
-          v-else
-          type="primary"
-          icon="ticket"
-          :href="doc.link"
-          target="_blank"
-          :label="$t('event.getTicket')"
+          v-if="doc.playlist"
+          icon="spotify"
+          :href="doc.playlist"
+          :label="$t('event.playlist.action')"
         />
-      </template>
-      <TButton
-        v-if="doc.gallery"
-        icon="spotlight"
-        :href="doc.gallery"
-        :label="$t('event.gallery.action')"
-      />
-      <TButton
-        v-if="doc.playlist"
-        icon="spotify"
-        :href="doc.playlist"
-        :label="$t('event.playlist.action')"
-      />
-      <TButton
-        v-if="doc.paypal"
-        icon="favorite"
-        :href="doc.paypal"
-        :label="$t('event.paypal.action')"
-      />
-      <TButton
-        v-if="doc.review"
-        icon="chat"
-        :href="doc.review"
-        :label="$t('event.review.action')"
-      />
+        <TButton
+          v-if="doc.paypal"
+          icon="favorite"
+          :href="doc.paypal"
+          :label="$t('event.paypal.action')"
+        />
+        <TButton
+          v-if="doc.review"
+          icon="chat"
+          :href="doc.review"
+          :label="$t('event.review.action')"
+        />
+      </div>
     </div>
 
     <TPopup

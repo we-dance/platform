@@ -235,6 +235,14 @@ export const useEvents = () => {
       max: 140,
     },
     {
+      name: 'confirmation',
+      labelPosition: 'top',
+      label: t('event.confirmation.label'),
+      description: t('event.confirmation.description'),
+      component: 'TInputTextarea',
+      placeholder: t('event.confirmation.placeholder'),
+    },
+    {
       name: 'cover',
       label: t('event.cover.label'),
       description: t('event.cover.description'),
@@ -358,13 +366,6 @@ export const useEvents = () => {
         component: 'TInputEvent',
       },
       labelPosition: 'top',
-    },
-    {
-      name: 'confirmation',
-      labelPosition: 'top',
-      label: t('event.confirmation.label'),
-      component: 'TInputTextarea',
-      placeholder: t('event.confirmation.placeholder'),
     },
     {
       name: 'gallery',
