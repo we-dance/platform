@@ -1,5 +1,7 @@
 <template>
-  <div>
+
+  <div
+  >
     <TBanner
       v-if="profile && !profile.photo"
       desktop="Upload your photo"
@@ -76,6 +78,8 @@
       </div>
     </div>
   </div>
+
+
 </template>
 
 <script>

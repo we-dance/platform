@@ -1,5 +1,5 @@
 <template>
-  <div class="flex justify-center overflow-x-scroll">
+  <div class="flex justify-center overflow-x-scroll scrollbar-thin scrollbar-thumb-rose-250 scrollbar-track-slate-500">
     <div class="flex flex-nowrap">
       <TButton
         v-for="option in options"
