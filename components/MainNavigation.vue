@@ -1,7 +1,8 @@
+
 <template>
 
   <nav
-    class="p-4 flex flex-col space-y-2 text-dark h-screen overflow-y-scroll sticky top-0 border-r scrollbar-thin scrollbar-thumb-rose-400 scrollbar-track-slate-600 rounded"
+    class="p-4 flex flex-col space-y-2 text-dark h-screen  top-0 border-r"
   >
     <TButton allow-guests to="/" class="mb-8" type="void">
       <TIcon name="logo-horizontal-dark" />
