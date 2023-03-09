@@ -19,6 +19,7 @@ import { wrap } from './sentry'
 import { announceEvent } from './lib/telegram'
 import { announceEventIG } from './lib/instagram'
 import { getInstagramWebProfileInfo } from './lib/browser'
+import { renderEmail, getWeeklyData } from './lib/digest'
 
 require('dotenv').config()
 
@@ -655,6 +656,88 @@ export const matchNotification = functions.firestore
 
     await sendEmail(data)
   })
+
+  export const scheduleEmail = functions.pubsub
+  .schedule('every monday 18:00')
+  .timeZone('America/New_York')
+  .onRun(async (context) => {
+    const cityDocs = (
+      await firestore.collection('profiles').where('type', '==', 'City').get()
+    ).docs;
+    const cities: any = [];
+    for (let doc of cityDocs) {
+      cities.push({ id: doc.id, ...doc.data() });
+    }
+    let data;
+    let recipients: any = {};
+    for (let city of cities) {            
+
+      if (!city.watch?.list) {
+        continue;
+      }
+
+      data = await getWeeklyData(city.username);            
+      const html = await renderEmail('weekly', data);
+
+      let subscribers = Object.keys(city.watch?.list);
+
+      for (let subscriber of subscribers) {
+        const profilesOfSubscriber = (
+          await firestore
+            .collection('profiles')
+            .where('username', '==', subscriber)
+            .get()
+        ).docs;
+
+        if (profilesOfSubscriber.length !== 1) {
+          continue;
+        }
+
+        const profileId = profilesOfSubscriber[0].id;
+
+        const accountDoc = await firestore
+          .collection('accounts')
+          .doc(profileId)
+          .get();
+
+        if (!accountDoc.exists) {
+          continue;
+        }
+
+        const account = accountDoc.data();
+
+        recipients[profileId] = { 
+            name:account?.name, 
+            email:account?.email 
+        }
+
+        let userIds = [];
+        userIds.push(profileId);
+
+        const weeklyNewsLetter = await firestore
+          .collection('weekly-newsletters')
+          .add({
+            city: city?.username,
+            createdAt: Date.now(),
+            sentAt: Date.now(),
+            scheduledAt: Date.now(),
+            userIds: [...userIds],
+          });
+
+        const email: any = {
+          from: `WeDance <noreply@wedance.vip>`,
+          recipients,
+          subject: 'Weekly Newsletter',
+          content: html,
+          id: weeklyNewsLetter.id,
+          type: 'City',
+        };
+        return await sendEmail(email);
+      }
+    }
+    return null;
+});
+
 
 // export const taskRunner = functions
 //   .runWith({ memory: '2GB' })

@@ -2,7 +2,9 @@ const { createSSRApp } = require("vue");
 const { renderToString } = require("vue/server-renderer");
 import mjml2html = require("mjml");
 import * as fs from "fs";
+import * as moment from "moment"; 
 import { firestore } from "../firebase";
+  
 
 export async function renderEmail(type: string, data: any, customUtms = {}) {
   const template = fs.readFileSync(`./templates/${type}.mjml`, "utf8");
@@ -61,25 +63,29 @@ export async function getWeeklyData(city: string) {
   for (const doc of profileDocs) {
     profile = { id: doc.id, ...doc.data() };
   }
+  
+  let usernames = Object.keys(profile.watch?.list);
 
-  const eventDocs = (
-    await firestore
-      .collection("posts")
-      .where("startDate", ">", today)
-      .where("startDate", "<", sevenDaysFromNow)
-      .where("place", "==", profile.place)
-      .get()
-  ).docs;
+  for(let username of usernames) {
+    const eventDocs = (
+      await firestore
+        .collection("posts")
+        .where("startDate", ">", today)
+        .where("startDate", "<", sevenDaysFromNow)
+        .where("username", "==", username)
+        .get()
+    ).docs;
 
-  for (const doc of eventDocs) {
-    const event = {
-      id: doc.id,
-      ...doc.data(),
-    } as any;
-
-    data.push(event);
+      for (const doc of eventDocs) {
+        const event = {
+          id: doc.id,
+          ...doc.data(),
+        } as any;
+    
+        data.push(event);
+      }
   }
-
+    
   const events: any = {
     intro:
       "Hope you had a great weekend and are ready with your dancing shoes on for a fantastic week ahead.",
@@ -92,14 +98,20 @@ export async function getWeeklyData(city: string) {
       city: `https://wedance.vip/${city}`,
     },
     days: data.map((event) => ({
-      title: event.name,
-      organizer: event.org.name,
-      venue: event.venue?.name,
-      format: event.eventType,
-      time: event.startDate,
-      link: event.link,
-      cover: event.cover,
-      styles: Object.keys(event.styles),
+      day: moment(event.startDate).format("dddd"), 
+      date: moment(event.startDate).format("D MMM") ,
+      events: [
+        {
+          title: event.name,
+          organizer: event.org.name,
+          venue: event.venue?.name,
+          format: event.eventType,
+          time: moment(event.startDate).format("hh:mm") ,
+          link: event.link,
+          cover: event.cover,
+          styles: Object.keys(event.styles),
+        }
+      ]
     })),
   };
 

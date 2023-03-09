@@ -38,7 +38,6 @@ export default async (data: any) => {
       'v:campaignId': data.id,
       'v:type': data.type,
     })
-
     jobs.push(job)
   })
 
