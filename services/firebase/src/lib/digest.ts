@@ -2,9 +2,8 @@ const { createSSRApp } = require("vue");
 const { renderToString } = require("vue/server-renderer");
 import mjml2html = require("mjml");
 import * as fs from "fs";
-import * as moment from "moment"; 
+import * as moment from "moment";
 import { firestore } from "../firebase";
-  
 
 export async function renderEmail(type: string, data: any, customUtms = {}) {
   const template = fs.readFileSync(`./templates/${type}.mjml`, "utf8");
@@ -63,10 +62,10 @@ export async function getWeeklyData(city: string) {
   for (const doc of profileDocs) {
     profile = { id: doc.id, ...doc.data() };
   }
-  
+
   let usernames = Object.keys(profile.watch?.list);
 
-  for(let username of usernames) {
+  for (let username of usernames) {
     const eventDocs = (
       await firestore
         .collection("posts")
@@ -76,16 +75,16 @@ export async function getWeeklyData(city: string) {
         .get()
     ).docs;
 
-      for (const doc of eventDocs) {
-        const event = {
-          id: doc.id,
-          ...doc.data(),
-        } as any;
-    
-        data.push(event);
-      }
+    for (const doc of eventDocs) {
+      const event = {
+        id: doc.id,
+        ...doc.data(),
+      } as any;
+
+      data.push(event);
+    }
   }
-    
+
   const events: any = {
     intro:
       "Hope you had a great weekend and are ready with your dancing shoes on for a fantastic week ahead.",
@@ -98,20 +97,20 @@ export async function getWeeklyData(city: string) {
       city: `https://wedance.vip/${city}`,
     },
     days: data.map((event) => ({
-      day: moment(event.startDate).format("dddd"), 
-      date: moment(event.startDate).format("D MMM") ,
+      day: moment(event.startDate).format("dddd"),
+      date: moment(event.startDate).format("D MMM"),
       events: [
         {
           title: event.name,
           organizer: event.org.name,
           venue: event.venue?.name,
           format: event.eventType,
-          time: moment(event.startDate).format("hh:mm") ,
+          time: moment(event.startDate).format("hh:mm"),
           link: event.link,
           cover: event.cover,
           styles: Object.keys(event.styles),
-        }
-      ]
+        },
+      ],
     })),
   };
 
