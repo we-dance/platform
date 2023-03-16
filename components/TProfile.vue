@@ -90,6 +90,12 @@
         </div>
 
         <div v-if="profile.type === 'City'" class="flex space-x-2 mt-4">
+          <TButton
+            to="/events/-/edit"
+            type="primary"
+            icon="plus"
+            label="Add Event"
+          />
           <TReaction
             :label="$t('Subscribe')"
             :toggled-label="$t('Unsubscribe')"
@@ -137,11 +143,6 @@
       class="w-full mt-4"
     />
 
-    <TCommunity
-      v-if="profile.type === 'City' && profile.username !== 'Travel'"
-      class="pt-4 border-t"
-    />
-
     <template v-if="$route.query.beta">
       <TCalendar
         v-if="profile.type === 'City' && profile.username !== 'Travel'"
@@ -150,13 +151,20 @@
     </template>
 
     <template v-if="!$route.query.beta">
+      <TLoader v-if="!loaded" class="py-4" />
       <TEventListNoLoad
+        v-else
         :community="profile.username"
         :username="profile.username"
         :docs="events"
         class="w-full border-b border-t pt-4"
       />
     </template>
+
+    <TCommunity
+      v-if="profile.type === 'City' && profile.username !== 'Travel'"
+      class="pt-4 border-t"
+    />
 
     <WTeaser
       v-if="!uid && profile.type !== 'City' && profile.place"
@@ -303,7 +311,7 @@ export default {
   head() {
     return getMeta('profiles', this.profile)
   },
-  setup(props) {
+  setup(props, { root }) {
     const internationalChatLink = 'https://t.me/+Vxw15sDG-dWpqHDj'
     const { uid, isAdmin, can } = useAuth()
     const { profileFields } = useProfiles()
@@ -351,6 +359,7 @@ export default {
     }
 
     const events = ref([])
+    const loaded = ref(false)
 
     const subscribersCount = computed(() => {
       return props.profile?.watch?.count || 0
@@ -384,11 +393,13 @@ export default {
       }
 
       events.value = result
+      loaded.value = true
     })
 
     return {
       internationalChatLink,
       intro,
+      loaded,
       uid,
       can,
       getExcerpt,
