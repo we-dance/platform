@@ -1,42 +1,42 @@
 <template>
-  <div class="font-sans bg-white leading-normal tracking-normal antialiased min-h-screen flex flex-col mx-auto max-w-xl border-r border-l">
+  <div class="font-sans bg-white leading-normal tracking-tight antialiased min-h-screen flex flex-col mx-auto max-w-xl border-r border-l">
     <header class="max-w-sm m-auto pt-8 pb-7 px-3">
       <img src="/img/brand.png" class="max-w-md m-auto"/>
-      <h1 class="font-bold text-center text-3xl px-3 pt-4">Share your social media instantly</h1>
+      <h1 class="text-3xl text-center font-extrabold px-3 pt-4">Share your social media instantly</h1>
       <img src="/img/screenshot.png"/>
       <p class="max-w-sm m-auto text-center px-3 pb-6 text-lg font-medium">Turn a simple handshake into a lasting connection</p>
       
-      <div class="max-w-max m-auto w-72">
-        <TButton to="/signin" type="primary" label="Link your Profile" allowGuests="true" class="w-72"/> 
+      <div class="max-w-max m-auto w-fit">
+        <TButton to="/signin" type="primary" label="Link your Profile" allowGuests=true class="w-64"/> 
       </div>
     </header>
      
     <section class="px-3 m-auto pb-2">
-      <h1 class="font-bold text-center text-3xl mb-4">Power of VIP Cards</h1>
+      <h1 class="text-3xl text-center font-extrabold mb-4">Power of VIP Cards</h1>
 
       <div class="flex gap-2">
         <TIcon name="check-green" class="grid content-center"/>
-        <p class="text-lg my-2">Instant contact exchange</p>
+        <p class="text-lg my-1">Instant contact exchange</p>
       </div>
 
       <div class="flex gap-2">
         <TIcon name="check-green" class="grid content-center"/>
-        <p class="text-lg my-2">Environmentally friendly</p>
+        <p class="text-lg my-1">Environmentally friendly</p>
       </div>
 
       <div class="flex gap-2">
         <TIcon name="check-green" class="grid content-center"/>
-        <p class="text-lg my-2">Convenient and easy to use</p>
+        <p class="text-lg my-1">Convenient and easy to use</p>
       </div>
 
       <div class="flex gap-2">
         <TIcon name="check-green" class="grid content-center"/>
-        <p class="text-lg my-2">Affordable</p>
+        <p class="text-lg my-1">Affordable</p>
       </div>
 
       <div class="flex gap-2">
         <TIcon name="check-green" class="grid content-center"/>
-        <p class="text-lg my-2">Don&rsquo;t have space constraints</p>
+        <p class="text-lg my-1">Don&rsquo;t have space constraints</p>
       </div>
 
       <div class="flex gap-2">
@@ -46,7 +46,7 @@
     </section>
 
     <section class="bg-gray-200 p-4 mb-6">
-      <h2 class="font-bold text-center text-2xl p-3">How it works</h2>
+      <h2 class="text-3xl text-center font-extrabold p-3">How it works</h2>
       
       <div class="max-w-md m-auto">
         <div class="flex items-center">
@@ -80,23 +80,23 @@
     </section>
 
     <section class="px-3 m-auto pb-2">
-      <h2 class="font-bold text-center text-3xl mb-4">Premium Membership</h2>
+      <h2 class="text-3xl text-center font-extrabold mb-4">Premium Membership</h2>
       <div class="flex gap-2">
         <TIcon name="check-green" class="grid content-center"/>
-        <p class="text-lg my-2">Get special offers from organisers</p>
+        <p class="text-lg my-1">Get special offers from organisers</p>
       </div>
       <div class="flex gap-2">
         <TIcon name="check-green" class="grid content-center"/>
-        <p class="text-lg my-2">Exclusive discounts</p>
+        <p class="text-lg my-1">Exclusive discounts</p>
       </div>
       <div class="flex gap-2">
         <TIcon name="check-green" class="grid content-center"/>
-        <p class="text-lg my-2">Access to online classes</p>
+        <p class="text-lg my-1">Access to online classes</p>
       </div>
     </section>
 
     <section class="max-w-md m-auto h-64 p-3 mt-8">
-      <h2 class="font-bold text-center text-2xl">Follow us</h2>
+      <h2 class="text-3xl text-center font-extrabold mb-2">Follow us</h2>
       <p class="font-normal text-lg text-center">We regularly post event announcements and introduce new members on our social media.</p>
       <div class="max-w-md m-auto pb-16">
         <div class="flex justify-center gap-3 pt-8">
