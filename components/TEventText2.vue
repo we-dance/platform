@@ -5,7 +5,13 @@
     class="flex border-b p-4 leading-none gap-2"
   >
     <div class="text-center">
-      <div class="font-bold text-sm leading-none">
+      <div v-if="showDate" class="font-bold text-sm leading-none">
+        <div class="text-xl font-bold leading-none text-primary">
+          {{ formatDate(item.startDate, 'd') }}
+        </div>
+        <div>{{ formatDate(item.startDate, 'MMM') }}</div>
+      </div>
+      <div v-else class="font-bold text-sm leading-none">
         {{ formatDate(item.startDate, 'HH:mm') }}
       </div>
     </div>
@@ -89,6 +95,10 @@ export default {
       default: () => ({}),
     },
     isEmbed: {
+      type: Boolean,
+      default: false,
+    },
+    showDate: {
       type: Boolean,
       default: false,
     },

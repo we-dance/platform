@@ -112,7 +112,7 @@ export default {
       const dangerColor =
         ' bg-red-500 text-white border-red-500 hover:bg-red-800'
       const baseColor =
-        ' bg-white text-gray-700 border-gray-300 hover:bg-gray-100'
+        ' bg-white text-gray-700 border border-gray-300 hover:bg-gray-100'
       const toggledColor =
         ' text-primary border-primary bg-red-100 hover:bg-red-200'
 

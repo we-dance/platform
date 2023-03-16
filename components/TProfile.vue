@@ -57,8 +57,8 @@
       </TDropdown>
     </THeader>
 
-    <div class="flex p-4 space-x-4">
-      <div class="w-32">
+    <div class="grid grid-cols-4 gap-4 p-4">
+      <div>
         <img
           v-if="profile.photo"
           :src="profile.photo"
@@ -72,9 +72,12 @@
         />
       </div>
 
-      <div>
+      <div class="col-span-3">
         <h1 class="leading-tight font-bold">{{ profile.name }}</h1>
-        <div class="text-sm">{{ profile.bio }}</div>
+        <TExpand class="text-sm mb-4">
+          <TPreview :content="profile.bio" />
+          <TProfileDetails v-if="profile.type !== 'City'" :profile="profile" />
+        </TExpand>
 
         <div class="text-xs text-gray-500">
           {{ $tc('views', profile.viewsCount, { count: profile.viewsCount }) }}
@@ -87,6 +90,12 @@
         </div>
 
         <div v-if="profile.type === 'City'" class="flex space-x-2 mt-4">
+          <TButton
+            to="/events/-/edit"
+            type="primary"
+            icon="plus"
+            label="Add Event"
+          />
           <TReaction
             :label="$t('Subscribe')"
             :toggled-label="$t('Unsubscribe')"
@@ -134,11 +143,6 @@
       class="w-full mt-4"
     />
 
-    <TCommunity
-      v-if="profile.type === 'City' && profile.username !== 'Travel'"
-      class="pt-4 border-t"
-    />
-
     <template v-if="$route.query.beta">
       <TCalendar
         v-if="profile.type === 'City' && profile.username !== 'Travel'"
@@ -147,13 +151,20 @@
     </template>
 
     <template v-if="!$route.query.beta">
+      <TLoader v-if="!loaded" class="py-4" />
       <TEventListNoLoad
+        v-else
         :community="profile.username"
         :username="profile.username"
         :docs="events"
         class="w-full border-b border-t pt-4"
       />
     </template>
+
+    <TCommunity
+      v-if="profile.type === 'City' && profile.username !== 'Travel'"
+      class="pt-4 border-t"
+    />
 
     <WTeaser
       v-if="!uid && profile.type !== 'City' && profile.place"
@@ -164,9 +175,10 @@
       class="my-0"
     />
 
-    <TPreview v-if="profile.story" :content="profile.story" class="p-4" />
-
-    <TReviewList v-if="profile.reviews" :reviews="profile.reviews" />
+    <div v-if="profile.reviews">
+      <h3 class="text-xl font-bold p-4 border-t">{{ $t('reviews.title') }}</h3>
+      <TReviewList :reviews="profile.reviews" class="p-4" />
+    </div>
 
     <WTeaser
       v-if="profile.type === 'City' && profile.website"
@@ -187,8 +199,6 @@
       :href="internationalChatLink"
       class="w-full mt-4"
     />
-
-    <TProfileDetails v-if="profile.type !== 'City'" :profile="profile" />
 
     <div
       v-if="profile.id !== profile.createdBy && profile.type !== 'City'"
@@ -301,7 +311,7 @@ export default {
   head() {
     return getMeta('profiles', this.profile)
   },
-  setup(props) {
+  setup(props, { root }) {
     const internationalChatLink = 'https://t.me/+Vxw15sDG-dWpqHDj'
     const { uid, isAdmin, can } = useAuth()
     const { profileFields } = useProfiles()
@@ -349,6 +359,7 @@ export default {
     }
 
     const events = ref([])
+    const loaded = ref(false)
 
     const subscribersCount = computed(() => {
       return props.profile?.watch?.count || 0
@@ -382,11 +393,13 @@ export default {
       }
 
       events.value = result
+      loaded.value = true
     })
 
     return {
       internationalChatLink,
       intro,
+      loaded,
       uid,
       can,
       getExcerpt,

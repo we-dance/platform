@@ -28,7 +28,7 @@
           <span v-else>Follower</span>
         </div>
         <div v-show="profile.bio" class="text-gray-700 text-xs">
-          {{ profile.bio }}
+          {{ getExcerpt(profile.bio) }}
         </div>
         <div class="text-xs text-gray-500">
           {{ $tc('views', profile.viewsCount, { count: profile.viewsCount }) }}
@@ -66,7 +66,7 @@
 <script>
 import { computed } from 'vue-demi'
 import { useDoc } from '~/use/doc'
-import { getLabel } from '~/utils'
+import { getLabel, getExcerpt } from '~/utils'
 import { useEvents } from '~/use/events'
 
 export default {
@@ -101,6 +101,7 @@ export default {
       eventRoleOptions,
       profile,
       getLabel,
+      getExcerpt,
       subscribersCount,
     }
   },

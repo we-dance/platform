@@ -48,6 +48,10 @@ export default {
    ** Customize the progress-bar color
    */
   loading: { color: '#210309' },
+  loadingIndicator: {
+    name: 'chasing-dots',
+    color: '#210309',
+  },
   components: [
     '~/components',
     '~/components/global',

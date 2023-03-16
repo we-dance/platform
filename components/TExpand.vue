@@ -1,5 +1,5 @@
 <template>
-  <div :class="expanded ? '' : 'h-20 overflow-hidden relative'">
+  <div :class="expanded ? '' : 'h-20 overflow-y-hidden relative'">
     <slot />
     <TButton
       allow-guests
@@ -9,7 +9,7 @@
       :class="
         expanded
           ? ''
-          : 'absolute inset-0 w-full pt-16 text-center bg-gradient-to-b from-transparent to-white'
+          : 'absolute inset-0 pt-16 text-center bg-gradient-to-b from-transparent to-white'
       "
       @click="expanded = !expanded"
     />
