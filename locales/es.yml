@@ -644,3 +644,4 @@ EventDashboard:
   notPaid: Didn't Pay
 leadersCount: no leaders | 1 leader | {count} leaders
 followersCount: no followers | 1 follower | {count} followers
+loading: Loading...
