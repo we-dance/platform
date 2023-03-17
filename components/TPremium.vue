@@ -1,6 +1,6 @@
 <template>
-  <div class="px-3 font-sans tracking-tight">
-    <div class="h-14 flex justify-end items-center">
+  <div class="px-3 font-sans tracking-tight" v-if="isVisible">
+    <div class="h-14 flex justify-end items-center" @click="closePopUp">
       <TIcon name="close" size="3" class="mr-3"/>
     </div>
 
@@ -38,6 +38,16 @@
 
 <script>
   export default {
-    components() { TIcon }
+    components() { TIcon },
+    data() {
+      return {
+        isVisible: true
+      }
+    },
+    methods: {
+      closePopUp() {
+        this.isVisible = false
+      }
+    }
   }
 </script>
