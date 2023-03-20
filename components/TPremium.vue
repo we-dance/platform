@@ -1,30 +1,26 @@
 <template>
-  <div class="px-3 font-sans tracking-tight" v-if="isVisible">
-    <div class="h-14 flex justify-end items-center" @click="closePopUp">
+  <div class="max-w-sm px-3 font-sans tracking-tight">
+    <!-- <div class="h-14 flex justify-end items-center" @click="closePopUp">
       <TIcon name="close" size="3" class="mr-3"/>
-    </div>
+    </div> -->
 
-    <section class="bg-gray-200 p-4 rounded-lg">
+    <section class="bg-gray-200 p-4 rounded-lg mb-3">
       <div class="m-auto w-fit"><img src="img/gift.png"/></div>
       <h1 class="text-3xl text-center font-extrabold">Try Premium</h1>
       <p class="text-lg text-center py-3">Invite 5 friends to get a card from your profile and get premium for free for 1 month. Limited offer, 200 left!</p>
     </section>
     
-    <section class="max-w-fit px-3 m-auto pb-2 mt-3">
-      <h2 class="font-extrabold text-center text-2xl py-3">Why get Premium?</h2>
-      <div class="flex gap-2">
-        <TIcon name="check-green" class="grid content-center"/>
-        <p class="text-lg my-1">Get special offers from organisers</p>
-      </div>
-      <div class="flex gap-2">
-        <TIcon name="check-green" class="grid content-center"/>
-        <p class="text-lg my-1">Exclusive discounts</p>
-      </div>
-      <div class="flex gap-2">
-        <TIcon name="check-green" class="grid content-center"/>
-        <p class="text-lg my-1">Access to online classes</p>
-      </div>
-    </section>
+    <TBenefits 
+      title="Why get Premium?"
+      icon="check-green"
+      :benefits="[
+        'Get special offers from organisers', 
+        'Exclusive discounts', 
+        'Access to online classes'
+      ]"
+      class="max-w-fit"
+    />
+
     <section class="max-w-fit m-auto">
       <TButton to="/" type="primary" label="Get Premium" class="w-72"/>
     </section>
@@ -37,8 +33,11 @@
 </template>
 
 <script>
+  import TIcon from "/components/TIcon.vue"
+  import TBenefits from "/components/TBenefits.vue"
+
   export default {
-    components() { TIcon },
+    components: { TIcon, TBenefits },
     data() {
       return {
         isVisible: true

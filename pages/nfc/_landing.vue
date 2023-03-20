@@ -11,39 +11,18 @@
       </div>
     </header>
      
-    <section class="px-3 m-auto pb-2">
-      <h1 class="text-3xl text-center font-extrabold mb-4">Power of VIP Cards</h1>
-
-      <div class="flex gap-2">
-        <TIcon name="check-green" class="grid content-center"/>
-        <p class="text-lg my-1">Instant contact exchange</p>
-      </div>
-
-      <div class="flex gap-2">
-        <TIcon name="check-green" class="grid content-center"/>
-        <p class="text-lg my-1">Environmentally friendly</p>
-      </div>
-
-      <div class="flex gap-2">
-        <TIcon name="check-green" class="grid content-center"/>
-        <p class="text-lg my-1">Convenient and easy to use</p>
-      </div>
-
-      <div class="flex gap-2">
-        <TIcon name="check-green" class="grid content-center"/>
-        <p class="text-lg my-1">Affordable</p>
-      </div>
-
-      <div class="flex gap-2">
-        <TIcon name="check-green" class="grid content-center"/>
-        <p class="text-lg my-1">Don&rsquo;t have space constraints</p>
-      </div>
-
-      <div class="flex gap-2">
-        <TIcon name="check-green" class="grid content-center"/>
-        <p class="text-lg my-2">More secure</p>
-      </div>   
-    </section>
+    <TBenefits 
+      title="Power of VIP Cards"
+      icon="check-green"
+      :benefits="[
+        'Instant contact exchange', 
+        'Environmentally friendly', 
+        'Convenient and easy to use',
+        'Affordable',
+        'Don&rsquo;t have space constraints',
+        'More secure'
+      ]"
+    />
 
     <section class="bg-gray-200 p-4 mb-6">
       <h2 class="text-3xl text-center font-extrabold p-3">How it works</h2>
@@ -79,21 +58,15 @@
       </div>
     </section>
 
-    <section class="px-3 m-auto pb-2">
-      <h2 class="text-3xl text-center font-extrabold mb-4">Premium Membership</h2>
-      <div class="flex gap-2">
-        <TIcon name="check-green" class="grid content-center"/>
-        <p class="text-lg my-1">Get special offers from organisers</p>
-      </div>
-      <div class="flex gap-2">
-        <TIcon name="check-green" class="grid content-center"/>
-        <p class="text-lg my-1">Exclusive discounts</p>
-      </div>
-      <div class="flex gap-2">
-        <TIcon name="check-green" class="grid content-center"/>
-        <p class="text-lg my-1">Access to online classes</p>
-      </div>
-    </section>
+    <TBenefits 
+      title="Premium Membership"
+      icon="check-green"
+      :benefits="[
+        'Get special offers from organisers', 
+        'Exclusive discounts', 
+        'Access to online classes'
+      ]"
+    />
 
     <section class="max-w-md m-auto h-64 p-3 mt-8">
       <h2 class="text-3xl text-center font-extrabold mb-2">Follow us</h2>
@@ -122,9 +95,10 @@
 <script>
 import TIcon from "/components/TIcon.vue";
 import TButton from "/components/TButton.vue";
+import TBenefits from "/components/TBenefits.vue";
 
 export default {
   layout: "empty",
-  components: { TIcon, TButton }
+  components: { TIcon, TButton, TBenefits }
 };
 </script>
