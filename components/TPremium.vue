@@ -22,12 +22,12 @@
     />
 
     <section class="max-w-fit m-auto">
-      <TButton to="/" type="primary" label="Get Premium" class="w-72"/>
+      <TButton href="mailto:support@wedance.vip" type="primary" label="Get Premium" class="w-72"/>
     </section>
 
     <div class="w-fit m-auto my-4 flex flex-col gap-2">
-      <a href="/" class="underline text-center text-sm font-bold py-2">Are you an Organizer?</a>
-      <a href="/" class="underline text-center text-sm font-bold py-2">Are you an Artist?</a>
+      <a href="mailto:support@wedance.vip" class="underline text-center text-sm font-bold py-2">Are you an Organizer?</a>
+      <a href="mailto:support@wedance.vip" class="underline text-center text-sm font-bold py-2">Are you an Artist?</a>
     </div>
   </div>
 </template>
