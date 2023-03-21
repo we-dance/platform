@@ -1,5 +1,5 @@
 <template>
-  <div class="max-w-sm px-3 font-sans tracking-tight">
+  <div class="max-w-sm px-3 font-sans tracking-tight mt-2 h-full">
     <!-- <div class="h-14 flex justify-end items-center" @click="closePopUp">
       <TIcon name="close" size="3" class="mr-3"/>
     </div> -->
@@ -21,8 +21,8 @@
       class="max-w-fit"
     />
 
-    <section class="max-w-fit m-auto">
-      <TButton href="mailto:support@wedance.vip" type="primary" label="Get Premium" class="w-72"/>
+    <section class="max-w-sm m-auto w-fit">
+      <TButton href="mailto:support@wedance.vip" type="primary" label="Get Premium" class="w-64"/>
     </section>
 
     <div class="w-fit m-auto my-4 flex flex-col gap-2">
@@ -38,15 +38,15 @@
 
   export default {
     components: { TIcon, TBenefits },
-    data() {
-      return {
-        isVisible: true
-      }
-    },
-    methods: {
-      closePopUp() {
-        this.isVisible = false
-      }
-    }
+    // data() {
+    //   return {
+    //     isVisible: true
+    //   }
+    // },
+    // methods: {
+    //   closePopUp() {
+    //     this.isVisible = false
+    //   }
+    // }
   }
 </script>
