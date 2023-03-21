@@ -1,5 +1,10 @@
 <template>
   <div>
+    <TPopup v-if=showPopup @close="showPopup = false"> 
+      <TPremium @close="showPopup = false"/>
+    </TPopup> 
+    
+
     <THeader>
       <TButton
         v-if="profile.type === 'City'"
@@ -292,6 +297,7 @@ import {
   getFestivals,
 } from '~/use/events'
 import { useCities } from '~/use/cities'
+import TPremium from "/components/TPremium.vue"
 
 export default {
   props: {
@@ -303,6 +309,12 @@ export default {
   head() {
     return getMeta('profiles', this.profile)
   },
+  data() {
+    return {
+      showPopup: true
+    }
+  },
+  components: { TPremium },
   setup(props) {
     const internationalChatLink = 'https://t.me/+Vxw15sDG-dWpqHDj'
     const { uid, isAdmin, can } = useAuth()
