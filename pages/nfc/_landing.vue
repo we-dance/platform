@@ -7,7 +7,9 @@
       <p class="max-w-sm m-auto text-center px-3 pb-6 text-lg font-medium">Turn a simple handshake into a lasting connection</p>
       
       <div class="max-w-max m-auto w-fit">
-        <TButton to="/signin" type="primary" label="Link your Profile" allowGuests=true class="w-64"/> 
+        <!-- <NuxtLink to="/signin"> -->
+          <TButton type="primary" label="Link your Profile" class="w-64"/> 
+        <!-- </NuxtLink> -->
       </div>
     </header>
      
