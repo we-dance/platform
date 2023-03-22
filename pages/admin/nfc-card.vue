@@ -9,23 +9,19 @@
             </div>
             <div>
               Link:
-              <span class="text-xs font-mono bg-gray-200 p-1 rounded">https://wedance.vip/nfc/{{
-                item.id
-              }}</span>
+              <span class="text-xs font-mono bg-gray-200 p-1 rounded"
+                >https://wedance.vip/nfc/{{ item.id }}</span
+              >
             </div>
             <div>
-                To:  
-                <span class="text-xs font-mono bg-gray-200 p-1 rounded">  https://wedance.vip/{{
-                  item.username
-                }}</span>
-              </div>
+              To:
+              <span class="text-xs font-mono bg-gray-200 p-1 rounded"
+                >https://wedance.vip/{{ item.username }}</span
+              >
+            </div>
           </div>
           <div>
-            <div
-             class="text-xs font-bold p-1 "
-            >
-              State: {{ item.state }}
-            </div>
+            <div class="text-xs font-bold p-1 ">State: {{ item.state }}</div>
           </div>
         </div>
 
@@ -41,12 +37,9 @@
     </template>
   </TCardList>
 </template>
-
 <script>
-
 export default {
   middleware: ['auth'],
-  
   setup() {
     const config = {
       collection: 'nfc-card',
@@ -64,7 +57,6 @@ export default {
         },
       ],
     }
-
     return {
       config,
     }

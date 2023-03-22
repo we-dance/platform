@@ -20,7 +20,6 @@
       :label="$t('nav.calendar')"
       type="nav"
     />
-    
     <TButton
       v-if="!currentCity"
       allow-guests
@@ -36,7 +35,6 @@
       :label="$t('nav.feed')"
       type="nav"
     />
-    
     <TButton
       allow-guests
       to="/dance"
@@ -44,7 +42,6 @@
       :label="$t('nav.dance')"
       type="nav"
     />
-    
     <template v-if="uid">
       <TButton to="/chat" icon="chat" :label="$t('nav.chat')" type="nav" />
       <TButton :to="`/${username}`" type="nav">
@@ -77,12 +74,11 @@
       label="Shares"
     />
     <TButton
-    v-if="isAdmin() || isEditor()"
-    to="/admin/nfc-card"
-    type="nav"
-    class="text-gray-700"
-    label="Cards"
-    
+      v-if="isAdmin() || isEditor()"
+      to="/admin/nfc-card"
+      type="nav"
+      class="text-gray-700"
+      label="Cards"
     />
     <TButton
       v-if="isAdmin()"
