@@ -1,5 +1,5 @@
 <template>
-  <div class="font-sans bg-white leading-normal tracking-tight antialiased min-h-screen flex flex-col mx-auto max-w-xl border-r border-l">
+  <div v-if="!this.haveUsername" class="font-sans bg-white leading-normal tracking-tight antialiased min-h-screen flex flex-col mx-auto max-w-xl border-r border-l">
     <header class="max-w-sm m-auto pt-8 pb-7 px-3">
       <img src="/img/brand.png" class="max-w-md m-auto"/>
       <h1 class="text-3xl text-center font-extrabold px-3 pt-4">Share your social media instantly</h1>
@@ -8,17 +8,17 @@
       
       <div class="max-w-max m-auto w-fit">
         <!-- <NuxtLink to="/signin"> -->
-          <TButton type="primary" label="Link your Profile" class="w-64"/> 
+        <TButton type="primary" label="Link your Profile" class="w-64"/>
         <!-- </NuxtLink> -->
       </div>
     </header>
-     
-    <TBenefits 
+
+    <TBenefits
       title="Power of VIP Cards"
       icon="check-green"
       :benefits="[
-        'Instant contact exchange', 
-        'Environmentally friendly', 
+        'Instant contact exchange',
+        'Environmentally friendly',
         'Convenient and easy to use',
         'Affordable',
         'Don&rsquo;t have space constraints',
@@ -28,44 +28,54 @@
 
     <section class="bg-gray-200 p-4 mb-6">
       <h2 class="text-3xl text-center font-extrabold p-3">How it works</h2>
-      
+
       <div class="max-w-md m-auto">
         <div class="flex items-center">
-          <TIcon name="tap-card"/>
+          <TIcon name="tap-card" />
           <div class="ml-2">
             <h3 class="text-slate-700 text-bold text-lg">Tap the card</h3>
-            <p class="text-gray-500 text-sm">Tap your VIP Card on your own phone device</p>
+            <p class="text-gray-500 text-sm">
+              Tap your VIP Card on your own phone device
+            </p>
           </div>
         </div>
 
-        <img src="/img/divider.png" class="my-1"/>
+        <img src="/img/divider.png" class="my-1" />
 
         <div class="flex items-center">
-          <TIcon name="phone"/>
+          <TIcon name="phone" />
           <div class="ml-2">
-            <h3 class="text-slate-700 text-bold text-lg">Create and link your profile</h3>
-            <p class="text-gray-500 text-sm">Sign-in and create your WeDance profile so it can be linked to your VIP Card</p>
+            <h3 class="text-slate-700 text-bold text-lg">
+              Create and link your profile
+            </h3>
+            <p class="text-gray-500 text-sm">
+              Sign-in and create your WeDance profile so it can be linked to
+              your VIP Card
+            </p>
           </div>
         </div>
 
-        <img src="/img/divider.png" class="my-1"/>
+        <img src="/img/divider.png" class="my-1" />
 
         <div class="flex items-center">
           <TIcon name="card-network" />
           <div class="ml-2">
-            <h3 class="text-slate-700 text-bold text-lg">Start networking </h3>
-            <p class="text-gray-500 text-sm">Share your profile by tapping your VIP Card on other people&rsquo;s mobiles and start networking faster</p>
+            <h3 class="text-slate-700 text-bold text-lg">Start networking</h3>
+            <p class="text-gray-500 text-sm">
+              Share your profile by tapping your VIP Card on other
+              people&rsquo;s mobiles and start networking faster
+            </p>
           </div>
         </div>
       </div>
     </section>
 
-    <TBenefits 
+    <TBenefits
       title="Premium Membership"
       icon="check-green"
       :benefits="[
-        'Get special offers from organisers', 
-        'Exclusive discounts', 
+        'Get special offers from organisers',
+        'Exclusive discounts',
         'Access to online classes'
       ]"
     />
@@ -76,7 +86,12 @@
       <div class="max-w-md m-auto pb-16">
         <div class="flex justify-center gap-3 pt-8">
           <a href="https://www.instagram.com/WeDancePlatform/" target="_blank">
-            <TIcon name="instagram" size="10" class="rounded-full p-2" style="box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.1), 0px 1px 2px rgba(0, 0, 0, 0.06);"/>
+            <TIcon
+              name="instagram"
+              size="10"
+              class="rounded-full p-2"
+              style="box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.1), 0px 1px 2px rgba(0, 0, 0, 0.06);"
+            />
           </a>
           <a href="https://t.me/WeDanceTravel" target="_blank">
             <TIcon name="telegram" size="10" class="rounded-full p-2" style="box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.1), 0px 1px 2px rgba(0, 0, 0, 0.06);"/>
@@ -90,17 +105,38 @@
         </div>
       </div>
     </section>
-    
+  </div>
+  <div v-else>
+    Page have username
   </div>
 </template>
 
 <script>
-import TIcon from "/components/TIcon.vue";
-import TButton from "/components/TButton.vue";
-import TBenefits from "/components/TBenefits.vue";
+// components
+import TIcon from '/components/TIcon.vue'
+import TButton from '/components/TButton.vue'
+import TBenefits from '/components/TBenefits.vue'
+
+import { db } from '~/plugins/firebase'
 
 export default {
-  layout: "empty",
-  components: { TIcon, TButton, TBenefits }
-};
+  layout: 'empty',
+  components: { TIcon, TButton, TBenefits },
+  data() {
+    return {
+      username: "",
+      idExist: false
+    }
+  },
+  async asyncData() {
+    // get username data from firebase
+    const pageId = $nuxt.$route.params.landing;
+    const collection = await db.collection('nfc-card').doc(pageId).get()
+    const haveUsername = collection.data().username != "undefined" ? true : false
+      
+    return {
+      haveUsername
+    }
+  },
+}
 </script>
