@@ -112,7 +112,6 @@
 </template>
 
 <script>
-// components
 import TIcon from '/components/TIcon.vue'
 import TButton from '/components/TButton.vue'
 import TBenefits from '/components/TBenefits.vue'
@@ -122,12 +121,6 @@ import { db } from '~/plugins/firebase'
 export default {
   layout: 'empty',
   components: { TIcon, TButton, TBenefits },
-  data() {
-    return {
-      username: "",
-      idExist: false
-    }
-  },
   async asyncData() {
     // get username data from firebase
     const pageId = $nuxt.$route.params.landing;
