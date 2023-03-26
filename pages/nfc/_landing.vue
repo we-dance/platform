@@ -7,7 +7,7 @@
       <p class="max-w-sm m-auto text-center px-3 pb-6 text-lg font-medium">Turn a simple handshake into a lasting connection</p>
       
       <div class="max-w-max m-auto w-fit">
-        <TButton type="primary" to="/signin" :allow-guests="true" label="Link your Profile" class="w-64"/>
+        <TButton type="primary" :to="'/signin?target=nfc/' + this.pageId" :allow-guests="true" label="Link your Profile" class="w-64"/>
       </div>
     </header>
 
@@ -115,18 +115,43 @@ import TButton from '/components/TButton.vue'
 import TBenefits from '/components/TBenefits.vue'
 
 import { db } from '~/plugins/firebase'
+import { useDoc } from '~/use/doc'
+import { useAuth } from '~/use/auth'
 
 export default {
   layout: 'empty',
   components: { TIcon, TButton, TBenefits },
-  async asyncData() {
-    // get username data from firebase
-    const pageId = $nuxt.$route.params.landing;
+  async asyncData({ redirect }) {
+    const { softUpdate } = useDoc('nfc-card')
+    let username = ""
+
+    let pageId = $nuxt.$route.params.landing;
+    // when page is loaded after signIn
+    if (pageId === undefined) {
+      // get pageId
+      let path = $nuxt.$route.query.target;
+      path = path.split("/");
+      pageId = path[1];
+
+      // get user username
+      username = useAuth().username.value
+
+      // handle update database
+      softUpdate(pageId, { username })
+
+      // redirect to user profile
+      redirect(302, `/${username}`)
+
+    }
     const collection = await db.collection('nfc-card').doc(pageId).get()
-    const haveUsername = collection.data().username != "undefined" ? true : false
+    console.log(collection.data())
+
+    let haveUsername = false;
+    haveUsername = collection.data().username != "" ? true : false
       
     return {
-      haveUsername
+      haveUsername,
+      pageId
     }
   },
 }
