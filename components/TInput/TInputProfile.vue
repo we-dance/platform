@@ -52,7 +52,9 @@
       >
         <TProfilePhoto2 size="md" :src="item.photo" />
         <div class="flex-grow">
-          <div v-if="item.name" class="font-bold text-sm">{{ item.name }}</div>
+          <div v-if="item.name" class="font-bold text-sm">
+            {{ item.name }}
+          </div>
           <div class="text-xs text-gray-700 flex space-x-2">
             <div>@{{ item.username }}</div>
             <div v-if="item.instagram" class="space-x-1 flex">
@@ -68,39 +70,47 @@
       </div>
       <template v-if="inviteUsername">
         <div
-          class="flex px-4 py-2 hover:bg-blue-100 items-center cursor-pointer space-x-1 text-sm text-gray-700"
-          @click="
-            create({
-              username: inviteUsername,
-              instagram: `https://instagram.com/` + inviteUsername,
-            })
-          "
+          class="flex justify-center px-4 py-2 hover:bg-blue-100 items-center cursor-pointer space-x-1 text-sm text-gray-700"
         >
-          <div>
-            {{ $t('TInputProfile.import') }}
-          </div>
-          <TIcon name="instagram" size="4" />
-          <div>
-            {{ inviteUsername }}
-          </div>
+          <h3 @click="showPopup = !showPopup" class="text-center">
+            + Add New Organizer
+          </h3>
         </div>
-        <div
-          class="flex px-4 py-2 hover:bg-blue-100 items-center cursor-pointer space-x-1 text-sm text-gray-700"
-          @click="
-            create({
-              username: inviteUsername,
-              facebook: `https://facebook.com/` + inviteUsername,
-            })
-          "
-        >
-          <div>
-            {{ $t('TInputProfile.import') }}
+        <TPopup v-if="showPopup">
+          <div class="flex justify-between border-b pb-2 mb-4">
+            <div class="grow font-bold text-center ">
+              Add New Organizer
+            </div>
+            <button class=" cursor-pointer" @click="showPopup = false">
+              <TIcon name="close" class="cursor-pointer w-4 h-4" />
+            </button>
           </div>
-          <TIcon name="facebook" size="4" />
-          <div>
-            {{ inviteUsername }}
+          <div class="my-4 flex flex-col justify-center">
+            <div>Social Media or Website</div>
+            <input
+              class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+              type="text"
+              placeholder="https://"
+              v-model.trim="socialMediaOrWebsite"
+            />
+            <p>
+              You can use link to their Instagram or Facebook or anything else
+            </p>
+            <div class="flex justify-end gap-x-2 ">
+              <TButton @click="showPopup = false" label="Cancel" />
+              <TButton
+                @click="
+                  create({
+                    username: inviteUsername,
+                    socialMediaOrWebsite,
+                  })
+                "
+                label="Save"
+                type="primary"
+              />
+            </div>
           </div>
-        </div>
+        </TPopup>
       </template>
     </div>
   </div>
@@ -111,10 +121,16 @@ import { useAlgolia } from '~/use/algolia'
 import { useEvents } from '~/use/events'
 import { useDoc } from '~/use/doc'
 import { useAuth } from '~/use/auth'
+import TPopup from '../TPopup.vue'
 
 export default {
   name: 'TInputProfile',
   inheritAttrs: false,
+
+  components: {
+    TPopup,
+  },
+
   props: {
     value: {
       type: [Object, String],
@@ -138,6 +154,9 @@ export default {
     const selected = ref(props.value)
     const { eventRoleOptions } = useEvents()
     const { create: createProfile } = useDoc('profiles')
+
+    const showPopup = ref(false)
+    const socialMediaOrWebsite = ref('')
 
     if (typeof props.value === 'string') {
       emit('input', { username: props.value })
@@ -236,6 +255,8 @@ export default {
       eventRoleOptions,
       create,
       inviteUsername,
+      showPopup,
+      socialMediaOrWebsite,
     }
   },
 }
