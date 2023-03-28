@@ -1,7 +1,7 @@
 <template>
   <div>
-    <TPopup v-if=showPopup @close="showPopup = false"> 
-      <TPremium @close="showPopup = false"/>
+    <TPopup v-if=showPopup title="Try Premium" @close="showPopup = false"> 
+      <TPremium />
     </TPopup> 
     
 
@@ -311,7 +311,7 @@ export default {
   },
   data() {
     return {
-      showPopup: true
+      showPopup: false
     }
   },
   components: { TPremium },
@@ -414,5 +414,13 @@ export default {
       events,
     }
   },
+  mounted() {
+    // show tryPremium modal
+    let query = $nuxt.$route.query
+    // check does query have tryPremium key
+    if(query.hasOwnProperty("tryPremium")) {
+      this.showPopup = query.tryPremium;
+    }
+  }
 }
 </script>

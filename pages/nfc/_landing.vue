@@ -140,7 +140,7 @@ export default {
       softUpdate(pageId, { username })
 
       // redirect to user profile
-      redirect(302, `/${username}`)
+      redirect(302, `/${username}?tryPremium=true`)
 
     }
     const collection = await db.collection('nfc-card').doc(pageId).get()
