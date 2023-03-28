@@ -102,7 +102,7 @@
                 @click="
                   create({
                     username: inviteUsername,
-                    socialMediaOrWebsite,
+                    ...dynamicData,
                   })
                 "
                 label="Save"
@@ -116,7 +116,7 @@
   </div>
 </template>
 <script>
-import { computed, ref, watch } from '@nuxtjs/composition-api'
+import { computed, onMounted, ref, watch } from '@nuxtjs/composition-api'
 import { useAlgolia } from '~/use/algolia'
 import { useEvents } from '~/use/events'
 import { useDoc } from '~/use/doc'
@@ -157,6 +157,17 @@ export default {
 
     const showPopup = ref(false)
     const socialMediaOrWebsite = ref('')
+
+    const dynamicData = computed(() => {
+      const data = {}
+      if (socialMediaOrWebsite.value.includes('facebook.com')) {
+        data.facebook = socialMediaOrWebsite.value
+      }
+      if (socialMediaOrWebsite.value.includes('instagram.com')) {
+        data.instagram = socialMediaOrWebsite.value
+      }
+      return data
+    })
 
     if (typeof props.value === 'string') {
       emit('input', { username: props.value })
@@ -257,6 +268,7 @@ export default {
       inviteUsername,
       showPopup,
       socialMediaOrWebsite,
+      dynamicData,
     }
   },
 }
