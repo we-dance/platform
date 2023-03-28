@@ -1,8 +1,8 @@
 <template>
   <div>
-    <TPopup v-if=showPopup title="Try Premium" @close="showPopup = false"> 
+    <TPopup v-if="showPopup" title="Try Premium" @close="showPopup = false">
       <TPremium />
-    </TPopup> 
+    </TPopup>
 
     <THeader>
       <TButton
@@ -312,13 +312,21 @@ export default {
       default: () => ({}),
     },
   },
-  head() {
-    return getMeta('profiles', this.profile)
-  },
   data() {
     return {
-      showPopup: false
+      showPopup: false,
     }
+  },
+  mounted() {
+    // show tryPremium modal
+    const query = $nuxt.$route.query
+    // check does query have tryPremium key
+    if (Object.prototype.hasOwnProperty.call(query, 'tryPremium')) {
+      this.showPopup = query.tryPremium
+    }
+  },
+  head() {
+    return getMeta('profiles', this.profile)
   },
   setup(props, { root }) {
     const internationalChatLink = 'https://t.me/+Vxw15sDG-dWpqHDj'
@@ -422,13 +430,5 @@ export default {
       events,
     }
   },
-  mounted() {
-    // show tryPremium modal
-    let query = $nuxt.$route.query
-    // check does query have tryPremium key
-    if(query.hasOwnProperty("tryPremium")) {
-      this.showPopup = query.tryPremium;
-    }
-  }
 }
 </script>
