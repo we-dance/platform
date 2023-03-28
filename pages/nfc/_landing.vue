@@ -110,17 +110,12 @@
 </template>
 
 <script>
-import TIcon from '/components/TIcon.vue'
-import TButton from '/components/TButton.vue'
-import TBenefits from '/components/TBenefits.vue'
-
 import { db } from '~/plugins/firebase'
 import { useDoc } from '~/use/doc'
 import { useAuth } from '~/use/auth'
 
 export default {
   layout: 'empty',
-  components: { TIcon, TButton, TBenefits },
   async asyncData({ redirect }) {
     const { softUpdate } = useDoc('nfc-card')
     let username = ""

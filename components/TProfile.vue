@@ -3,7 +3,6 @@
     <TPopup v-if=showPopup title="Try Premium" @close="showPopup = false"> 
       <TPremium />
     </TPopup> 
-    
 
     <THeader>
       <TButton
@@ -297,7 +296,6 @@ import {
   getFestivals,
 } from '~/use/events'
 import { useCities } from '~/use/cities'
-import TPremium from "/components/TPremium.vue"
 
 export default {
   props: {
@@ -314,7 +312,6 @@ export default {
       showPopup: false
     }
   },
-  components: { TPremium },
   setup(props) {
     const internationalChatLink = 'https://t.me/+Vxw15sDG-dWpqHDj'
     const { uid, isAdmin, can } = useAuth()
