@@ -278,6 +278,7 @@
 </template>
 
 <script>
+import TOrderButton from './TOrderButton.vue'
 import { computed, onMounted, ref } from 'vue-demi'
 import { useApp } from '~/use/app'
 import { useAuth } from '~/use/auth'
@@ -293,7 +294,6 @@ import {
   getFestivals,
 } from '~/use/events'
 import { useCities } from '~/use/cities'
-import TOrderButton from './TOrderButton.vue'
 
 export default {
   components: {
