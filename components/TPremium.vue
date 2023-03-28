@@ -1,8 +1,5 @@
 <template>
-  <div class="max-w-sm px-3 font-sans tracking-tight mt-2 h-full">
-    <!-- <div class="h-14 flex justify-end items-center" @click="closePopUp">
-      <TIcon name="close" size="3" class="mr-3"/>
-    </div> -->
+  <div class="relative top-10 max-w-sm pt-3 pb-4 font-sans tracking-tight mx-auto">
 
     <section class="bg-gray-200 p-4 rounded-lg mb-3">
       <div class="m-auto w-fit"><img src="img/gift.png"/></div>
@@ -31,22 +28,3 @@
     </div>
   </div>
 </template>
-
-<script>
-  import TIcon from "/components/TIcon.vue"
-  import TBenefits from "/components/TBenefits.vue"
-
-  export default {
-    components: { TIcon, TBenefits },
-    // data() {
-    //   return {
-    //     isVisible: true
-    //   }
-    // },
-    // methods: {
-    //   closePopUp() {
-    //     this.isVisible = false
-    //   }
-    // }
-  }
-</script>
