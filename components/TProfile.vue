@@ -278,8 +278,8 @@
 </template>
 
 <script>
-import TOrderButton from './TOrderButton.vue'
 import { computed, onMounted, ref } from 'vue-demi'
+import TOrderButton from './TOrderButton.vue'
 import { useApp } from '~/use/app'
 import { useAuth } from '~/use/auth'
 import { useProfiles } from '~/use/profiles'
