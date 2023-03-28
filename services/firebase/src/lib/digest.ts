@@ -6,7 +6,7 @@ import * as moment from "moment";
 import { firestore } from "../firebase";
 
 export async function renderEmail(type: string, data: any, customUtms = {}) {
-  const template = fs.readFileSync(`./templates/${type}.mjml`, "utf8");
+  const template = fs.readFileSync(`./src/templates/${type}.mjml`, "utf8");
 
   const defaultUtms = {
     campaign: type,
@@ -48,41 +48,38 @@ export async function renderEmail(type: string, data: any, customUtms = {}) {
 }
 
 export async function getWeeklyData(city: string) {
-  const today = new Date().toISOString().slice(0, 10);
-  const then = new Date();
-  then.setDate(then.getDate() + 7);
-  const sevenDaysFromNow = then.toISOString().slice(0, 10);
+  const time = new Date();
+  const today = time.toISOString().slice(0, 10);
+  time.setDate(time.getDate() + 7);
+  const sevenDaysFromNow = time.toISOString().slice(0, 10);
+
   const data = [];
-  let profile: any = {};
+  let cityProfile: any = {};
 
   const profileDocs = (
     await firestore.collection("profiles").where("username", "==", city).get()
   ).docs;
 
   for (const doc of profileDocs) {
-    profile = { id: doc.id, ...doc.data() };
+    cityProfile = { id: doc.id, ...doc.data() };
   }
 
-  let usernames = Object.keys(profile.watch?.list);
+  const eventDocs = (
+    await firestore
+      .collection("posts")
+      .where("startDate", ">", today)
+      .where("startDate", "<", sevenDaysFromNow)
+      .where("place", "==", cityProfile.place)
+      .get()
+  ).docs;
 
-  for (let username of usernames) {
-    const eventDocs = (
-      await firestore
-        .collection("posts")
-        .where("startDate", ">", today)
-        .where("startDate", "<", sevenDaysFromNow)
-        .where("username", "==", username)
-        .get()
-    ).docs;
+  for (const doc of eventDocs) {
+    const event = {
+      id: doc.id,
+      ...doc.data(),
+    } as any;
 
-    for (const doc of eventDocs) {
-      const event = {
-        id: doc.id,
-        ...doc.data(),
-      } as any;
-
-      data.push(event);
-    }
+    data.push(event);
   }
 
   const events: any = {
@@ -90,9 +87,9 @@ export async function getWeeklyData(city: string) {
       "Hope you had a great weekend and are ready with your dancing shoes on for a fantastic week ahead.",
     title: `${city} Dance Calendar`,
     links: {
-      telegram: profile.telegram,
-      instagram: profile.instagram,
-      facebook: profile.facebook,
+      telegram: cityProfile.telegram,
+      instagram: cityProfile.instagram,
+      facebook: cityProfile.facebook,
       addEvent: "https://wedance.vip/events/-/edit",
       city: `https://wedance.vip/${city}`,
     },
