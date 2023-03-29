@@ -26,7 +26,6 @@
 
     <TBenefits
       title="Power of VIP Cards"
-      icon="check-green"
       :benefits="[
         'Instant contact exchange',
         'Environmentally friendly',
@@ -83,7 +82,6 @@
 
     <TBenefits
       title="Premium Membership"
-      icon="check-green"
       :benefits="[
         'Get special offers from organisers',
         'Exclusive discounts',
@@ -155,13 +153,10 @@ export default {
     let username = ''
 
     const pageId = route.params.landing
-    // when page is loaded after signIn
     if (Object.prototype.hasOwnProperty.call(route.query, 'updateUsername')) {
       if (route.query.updateUsername) {
-        // get user username
         username = useAuth().username.value
 
-        // handle update database
         softUpdate(pageId, { username })
 
         redirect(302, `/${username}?tryPremium=true`)
@@ -171,7 +166,6 @@ export default {
       .collection('nfc-card')
       .doc(pageId)
       .get()
-    console.log(collection.data())
 
     const haveUsername = collection.data().username !== ''
 

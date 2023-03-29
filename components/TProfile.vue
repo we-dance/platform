@@ -318,9 +318,7 @@ export default {
     }
   },
   mounted() {
-    // show tryPremium modal
     const query = this.$route.query
-    // check does query have tryPremium key
     if (Object.prototype.hasOwnProperty.call(query, 'tryPremium')) {
       this.showPopup = query.tryPremium
     }

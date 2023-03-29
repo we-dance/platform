@@ -13,7 +13,6 @@
 
     <TBenefits
       title="Why get Premium?"
-      icon="check-green"
       :benefits="[
         'Get special offers from organisers',
         'Exclusive discounts',
