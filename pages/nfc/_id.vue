@@ -152,7 +152,7 @@ export default {
     const { softUpdate } = useDoc('nfc-card')
     let username = ''
 
-    const pageId = route.params.landing
+    const pageId = route.params.id
     if (Object.prototype.hasOwnProperty.call(route.query, 'updateUsername')) {
       if (route.query.updateUsername) {
         username = useAuth().username.value
