@@ -4,7 +4,7 @@
     class="font-sans bg-white leading-normal tracking-tight antialiased min-h-screen flex flex-col mx-auto max-w-xl border-r border-l"
   >
     <header class="max-w-sm m-auto pt-8 pb-7 px-3">
-      <img src="/img/brand.png" class="max-w-md m-auto" />
+      <TIcon name="brand" class="flex justify-center" />
       <h1 class="text-3xl text-center font-extrabold px-3 pt-4">
         Share your social media instantly
       </h1>
