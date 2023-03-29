@@ -1,6 +1,6 @@
 <template>
   <div
-    v-if="!this.haveUsername"
+    v-if="!haveUsername"
     class="font-sans bg-white leading-normal tracking-tight antialiased min-h-screen flex flex-col mx-auto max-w-xl border-r border-l"
   >
     <header class="max-w-sm m-auto pt-8 pb-7 px-3">
@@ -16,7 +16,7 @@
       <div class="max-w-max m-auto w-fit">
         <TButton
           type="primary"
-          :to="'/signin?target=nfc/' + this.pageId"
+          :to="'/signin?target=nfc/' + pageId + '?updateUsername=true'"
           :allow-guests="true"
           label="Link your Profile"
           class="w-64"
@@ -150,26 +150,22 @@ import { useAuth } from '~/use/auth'
 
 export default {
   layout: 'empty',
-  async asyncData({ redirect }) {
+  async asyncData({ redirect, route }) {
     const { softUpdate } = useDoc('nfc-card')
     let username = ''
 
-    let pageId = $nuxt.$route.params.landing
+    const pageId = route.params.landing
     // when page is loaded after signIn
-    if (pageId === undefined) {
-      // get pageId
-      let path = $nuxt.$route.query.target
-      path = path.split('/')
-      pageId = path[1]
+    if (Object.prototype.hasOwnProperty.call(route.query, 'updateUsername')) {
+      if (route.query.updateUsername) {
+        // get user username
+        username = useAuth().username.value
 
-      // get user username
-      username = useAuth().username.value
+        // handle update database
+        softUpdate(pageId, { username })
 
-      // handle update database
-      softUpdate(pageId, { username })
-
-      // redirect to user profile
-      redirect(302, `/${username}?tryPremium=true`)
+        redirect(302, `/${username}?tryPremium=true`)
+      }
     }
     const collection = await db
       .collection('nfc-card')
@@ -177,9 +173,7 @@ export default {
       .get()
     console.log(collection.data())
 
-    let haveUsername = false
-    haveUsername = collection.data().username !== ''
-    // haveUsername = collection.data().username !== '' ? true : false
+    const haveUsername = collection.data().username !== ''
 
     return {
       haveUsername,
