@@ -98,39 +98,19 @@
       <div class="max-w-md m-auto pb-16">
         <div class="flex justify-center gap-3 pt-8">
           <a href="https://www.instagram.com/WeDancePlatform/" target="_blank">
-            <TIcon
-              name="instagram"
-              size="10"
-              class="rounded-full p-2"
-              style="box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.1), 0px 1px 2px rgba(0, 0, 0, 0.06);"
-            />
+            <TIcon name="instagram" size="10" class="rounded-full p-2 shadow" />
           </a>
           <a href="https://t.me/WeDanceTravel" target="_blank">
-            <TIcon
-              name="telegram"
-              size="10"
-              class="rounded-full p-2"
-              style="box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.1), 0px 1px 2px rgba(0, 0, 0, 0.06);"
-            />
+            <TIcon name="telegram" size="10" class="rounded-full p-2 shadow" />
           </a>
           <a href="https://twitter.com/WeDancePlatform" target="_blank">
-            <TIcon
-              name="twitter"
-              size="10"
-              class="rounded-full p-2"
-              style="box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.1), 0px 1px 2px rgba(0, 0, 0, 0.06);"
-            />
+            <TIcon name="twitter" size="10" class="rounded-full p-2 shadow" />
           </a>
           <a
             href="https://www.facebook.com/people/WeDance/100079633097491/"
             target="_blank"
           >
-            <TIcon
-              name="facebook"
-              size="10"
-              class="rounded-full p-2"
-              style="box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.1), 0px 1px 2px rgba(0, 0, 0, 0.06);"
-            />
+            <TIcon name="facebook" size="10" class="rounded-full p-2 shadow" />
           </a>
         </div>
       </div>
