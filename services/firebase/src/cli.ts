@@ -15,8 +15,8 @@ const { hideBin } = require('yargs/helpers')
 import { firestore } from './firebase'
 import { announceEventIG } from './lib/instagram'
 import { getInstagramWebProfileInfo } from './lib/browser'
-import { getWeeklyData, renderEmail } from './lib/digest'
-import * as fs from 'fs'
+import { scheduleWeeklyEmails } from './lib/digest'
+
 
 yargs(hideBin(process.argv))
   .command(

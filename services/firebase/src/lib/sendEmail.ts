@@ -1,6 +1,6 @@
-import * as mailgun from "mailgun-js";
-import { config } from "firebase-functions";
-import * as MarkdownIt from "markdown-it";
+import * as mailgun from 'mailgun-js';
+import { config } from 'firebase-functions';
+import * as MarkdownIt from 'markdown-it';
 
 const md = new MarkdownIt({
   html: true,
@@ -16,7 +16,7 @@ export default async (data: any) => {
   const mailgunConfig = config().mailgun;
 
   if (!mailgunConfig) {
-    throw new Error("Mailgun is not configured");
+    throw new Error('Mailgun is not configured');
   }
 
   const mg = mailgun({
@@ -34,9 +34,9 @@ export default async (data: any) => {
       to: `${data.recipients[uid].name} <${data.recipients[uid].email}>`,
       subject: data.subject,
       html: getHtml(data.content),
-      "v:uid": uid,
-      "v:campaignId": data.id,
-      "v:type": data.type,
+      'v:uid': uid,
+      'v:campaignId': data.id,
+      'v:type': data.type,
     });
     jobs.push(job);
   });

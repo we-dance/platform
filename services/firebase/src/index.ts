@@ -19,7 +19,7 @@ import { wrap } from './sentry'
 import { announceEvent } from './lib/telegram'
 import { announceEventIG } from './lib/instagram'
 import { getInstagramWebProfileInfo } from './lib/browser'
-import { renderEmail, getWeeklyData, scheduleWeeklyEmails } from './lib/digest'
+import { scheduleWeeklyEmails } from './lib/digest'
 
 require('dotenv').config()
 
