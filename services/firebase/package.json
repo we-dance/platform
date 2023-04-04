@@ -3,7 +3,7 @@
   "scripts": {
     "lint": "tslint --project tsconfig.json",
     "build": "yarn clean && tsc && yarn copy-files",
-    "copy-files": "copyfiles -u 1 src/**/*.js templates/**/*.mjml dist/",
+    "copy-files": "copyfiles -u 1 src/**/*.js src/**/*.mjml dist/",
     "clean": "rimraf dist/",
     "test": "npm run build && node dist/test.js",
     "cli": "npm run build && node dist/cli.js",

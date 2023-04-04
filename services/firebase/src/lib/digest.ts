@@ -1,27 +1,27 @@
-const { createSSRApp } = require('vue');
-const { renderToString } = require('vue/server-renderer');
-import mjml2html = require('mjml');
-import * as fs from 'fs';
-import * as moment from 'moment';
-import { firestore } from '../firebase';
+const { createSSRApp } = require('vue')
+const { renderToString } = require('vue/server-renderer')
+import mjml2html = require('mjml')
+import * as fs from 'fs'
+import * as moment from 'moment'
+import { firestore } from '../firebase'
 
 export async function renderEmail(type: string, data: any, customUtms = {}) {
-  const template = fs.readFileSync(`./src/templates/${type}.mjml`, 'utf8');
+  const template = fs.readFileSync(`./src/templates/${type}.mjml`, 'utf8')
 
   const defaultUtms = {
     campaign: type,
     medium: 'email',
     source: 'newsletter',
-  };
+  }
 
   const utm = {
     ...defaultUtms,
     ...customUtms,
-  };
+  }
 
   const app = createSSRApp({
     data: () => {
-      return data;
+      return data
     },
     template,
     methods: {
@@ -36,32 +36,32 @@ export async function renderEmail(type: string, data: any, customUtms = {}) {
           utm.source +
           '&utm_content=' +
           utmContent
-        );
+        )
       },
     },
-  });
+  })
 
   app.config.compilerOptions.isCustomElement = (tag: any) =>
-    tag.startsWith('mj');
+    tag.startsWith('mj')
 
-  return mjml2html(await renderToString(app)).html;
+  return mjml2html(await renderToString(app)).html
 }
 
 export async function getWeeklyData(city: string) {
-  const time = new Date();
-  const today = time.toISOString().slice(0, 10);
-  time.setDate(time.getDate() + 7);
-  const sevenDaysFromNow = time.toISOString().slice(0, 10);
+  const time = new Date()
+  const today = time.toISOString().slice(0, 10)
+  time.setDate(time.getDate() + 7)
+  const sevenDaysFromNow = time.toISOString().slice(0, 10)
 
-  const data = [];
-  let cityProfile: any = {};
+  const data = []
+  let cityProfile: any = {}
 
   const profileDocs = (
     await firestore.collection('profiles').where('username', '==', city).get()
-  ).docs;
+  ).docs
 
   for (const doc of profileDocs) {
-    cityProfile = { id: doc.id, ...doc.data() };
+    cityProfile = { id: doc.id, ...doc.data() }
   }
 
   const eventDocs = (
@@ -71,15 +71,15 @@ export async function getWeeklyData(city: string) {
       .where('startDate', '<', sevenDaysFromNow)
       .where('place', '==', cityProfile.place)
       .get()
-  ).docs;
+  ).docs
 
   for (const doc of eventDocs) {
     const event = {
       id: doc.id,
       ...doc.data(),
-    } as any;
+    } as any
 
-    data.push(event);
+    data.push(event)
   }
 
   const events: any = {
@@ -109,15 +109,15 @@ export async function getWeeklyData(city: string) {
         },
       ],
     })),
-  };
+  }
 
-  return events;
+  return events
 }
 
 export async function getSubscribers(cityProfile: any) {
-  const recipients = {} as any;
+  const recipients = {} as any
 
-  const subscribers = Object.keys(cityProfile.watch?.list);
+  const subscribers = Object.keys(cityProfile.watch?.list)
 
   for (let subscriber of subscribers) {
     const profilesOfSubscriber = (
@@ -125,32 +125,32 @@ export async function getSubscribers(cityProfile: any) {
         .collection('profiles')
         .where('username', '==', subscriber)
         .get()
-    ).docs;
+    ).docs
 
     if (profilesOfSubscriber.length !== 1) {
-      continue;
+      continue
     }
 
-    const profileId = profilesOfSubscriber[0].id;
+    const profileId = profilesOfSubscriber[0].id
 
     const accountDoc = await firestore
       .collection('accounts')
       .doc(profileId)
-      .get();
+      .get()
 
     if (!accountDoc.exists) {
-      continue;
+      continue
     }
 
-    const account = accountDoc.data();
+    const account = accountDoc.data()
 
     recipients[profileId] = {
       name: account?.name,
       email: account?.email,
-    };
+    }
   }
 
-  return recipients;
+  return recipients
 }
 
 function getNextMonday() {
@@ -159,28 +159,28 @@ function getNextMonday() {
     .day('Monday')
     .hour(18)
     .minute(0)
-    .second(0);
-  const formattedDate = nextMonday.format('MMMM DD, YYYY hh:mm A');
-  return formattedDate;
+    .second(0)
+  const formattedDate = nextMonday.format('MMMM DD, YYYY hh:mm A')
+  return formattedDate
 }
 
 export async function scheduleWeeklyEmails() {
   const cityDocs = (
     await firestore.collection('profiles').where('type', '==', 'City').get()
-  ).docs;
+  ).docs
 
-  const nextMonday = getNextMonday();
+  const nextMonday = getNextMonday()
 
   for (let cityDoc of cityDocs) {
-    const cityProfile = cityDoc.data();
+    const cityProfile = cityDoc.data()
 
     if (!cityProfile.watch?.list) {
-      continue;
+      continue
     }
 
-    const weeklyEmailDetails = await getWeeklyData(cityProfile.username);
-    const html = await renderEmail('weekly', weeklyEmailDetails);
-    const recipients = await getSubscribers(cityProfile);
+    const weeklyEmailDetails = await getWeeklyData(cityProfile.username)
+    const html = await renderEmail('weekly', weeklyEmailDetails)
+    const recipients = await getSubscribers(cityProfile)
 
     await firestore.collection('emails').add({
       status: 'scheduled',
@@ -190,8 +190,8 @@ export async function scheduleWeeklyEmails() {
       subject: 'Weekly Newsletter',
       recipients,
       content: html,
-    });
+    })
   }
 
-  return null;
+  return null
 }
