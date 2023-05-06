@@ -91,19 +91,23 @@ export default {
     const { softUpdate } = useDoc(props.collection)
 
     const count = computed(() => {
-      return props.item[props.field]?.list
-        ? Object.keys(props.item[props.field].list).length
+      return props.item[props.field]?.usernames
+        ? props.item[props.field]?.usernames.length
         : 0
     })
 
     const names = computed(() => {
-      return props.item[props.field]
-        ? Object.keys(props.item[props.field].list).join(', ')
+      return props.item[props.field]?.usernames
+        ? props.item[props.field].usernames.join(', ')
         : 'None'
     })
 
     const clicked = computed(() => {
-      return !!username.value && !!props.item[props.field]?.list[username.value]
+      return (
+        !!username.value &&
+        !!props.item[props.field]?.usernames &&
+        !!props.item[props.field]?.usernames.includes(username.value)
+      )
     })
 
     const toggle = () => {
@@ -117,11 +121,17 @@ export default {
         change = {
           [`${props.field}.count`]: count.value + 1,
           [`${props.field}.list.${username.value}`]: true,
+          [`${props.field}.usernames`]: firebase.firestore.FieldValue.arrayUnion(
+            username.value
+          ),
         }
       } else {
         change = {
           [`${props.field}.count`]: count.value - 1,
           [`${props.field}.list.${username.value}`]: firebase.firestore.FieldValue.delete(),
+          [`${props.field}.usernames`]: firebase.firestore.FieldValue.arrayRemove(
+            username.value
+          ),
         }
       }
 

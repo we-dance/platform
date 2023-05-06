@@ -362,7 +362,7 @@ export default {
     const loaded = ref(false)
 
     const subscribersCount = computed(() => {
-      return props.profile?.watch?.count || 0
+      return props.profile?.watch?.usernames?.length || 0
     })
 
     onMounted(async () => {
