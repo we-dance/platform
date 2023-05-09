@@ -15,7 +15,7 @@ const { hideBin } = require('yargs/helpers')
 import { firestore } from './firebase'
 import { announceEventIG } from './lib/instagram'
 import { getInstagramWebProfileInfo } from './lib/browser'
-import { scheduleWeeklyEmails } from './lib/digest'
+import { scheduleWeeklyNewsletter } from './lib/digest'
 
 yargs(hideBin(process.argv))
   .command(
@@ -50,7 +50,10 @@ yargs(hideBin(process.argv))
     () => undefined,
     async (argv: any) => {
       const event = (
-        await firestore.collection('posts').doc(argv.eventId).get()
+        await firestore
+          .collection('posts')
+          .doc(argv.eventId)
+          .get()
       ).data() as any
 
       const result = await announceEventIG(event)
@@ -176,7 +179,7 @@ yargs(hideBin(process.argv))
     'Generate Weekly Newsletter',
     () => undefined,
     async (argv: any) => {
-      await scheduleWeeklyEmails()
+      await scheduleWeeklyNewsletter()
     }
   )
   .command(
@@ -222,9 +225,8 @@ yargs(hideBin(process.argv))
 
           for (const instance of instances) {
             console.log(
-              ` <${instance.username}> x ${instance.viewsCount} x ${
-                instance.star?.count || 0
-              } x ${instance.website}`
+              ` <${instance.username}> x ${instance.viewsCount} x ${instance
+                .star?.count || 0} x ${instance.website}`
             )
 
             // if (!instance.website) {
@@ -245,9 +247,12 @@ yargs(hideBin(process.argv))
 
       for (const city of missingCityPlace) {
         console.log(`Updating cityPlaceId for ${city.name}`)
-        await firestore.collection('profiles').doc(city.id).update({
-          cityPlaceId: city.place,
-        })
+        await firestore
+          .collection('profiles')
+          .doc(city.id)
+          .update({
+            cityPlaceId: city.place,
+          })
       }
     }
   )

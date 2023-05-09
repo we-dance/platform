@@ -40,6 +40,7 @@
     "markdown-it": "^10.0.0",
     "mjml": "^4.13.0",
     "moment": "^2.29.4",
+    "moment-timezone": "^0.5.43",
     "node-fetch": "^3.2.10",
     "png-to-jpeg": "^1.0.1",
     "puppeteer": "^7.0.0",

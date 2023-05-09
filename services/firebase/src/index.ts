@@ -19,7 +19,6 @@ import { wrap } from './sentry'
 import { announceEvent } from './lib/telegram'
 import { announceEventIG } from './lib/instagram'
 import { getInstagramWebProfileInfo } from './lib/browser'
-import { scheduleWeeklyEmails } from './lib/digest'
 
 require('dotenv').config()
 
@@ -657,12 +656,12 @@ export const matchNotification = functions.firestore
     await sendEmail(data)
   })
 
-export const scheduleEmail = functions.pubsub
-  .schedule('every monday 18:00')
-  .timeZone('Europe/Berlin')
-  .onRun(async (context) => {
-    await scheduleWeeklyEmails()
-  })
+// export const scheduleEmail = functions.pubsub
+//   .schedule('every monday 18:00')
+//   .timeZone('Europe/Berlin')
+//   .onRun(async (context) => {
+//     await scheduleWeeklyEmails()
+//   })
 
 // export const taskRunner = functions
 //   .runWith({ memory: '2GB' })
