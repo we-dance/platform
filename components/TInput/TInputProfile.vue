@@ -78,25 +78,26 @@
         </div>
         <TPopup v-if="showPopup">
           <div class="flex justify-between border-b pb-2 mb-4">
-            <div class="grow font-bold text-center ">
-              Add New Organizer
-            </div>
-            <button class=" cursor-pointer" @click="showPopup = false">
+            <div class="grow font-bold text-center">Add New Organizer</div>
+            <button class="cursor-pointer" @click="showPopup = false">
               <TIcon name="close" class="cursor-pointer w-4 h-4" />
             </button>
           </div>
           <div class="my-4 flex flex-col justify-center">
             <div>Social Media or Website</div>
-            <input
-              class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-              type="text"
-              placeholder="https://"
-              v-model.trim="socialMediaOrWebsite"
+            <TField
+              v-model="websites"
+              component="TInputArray"
+              :children="{
+                component: 'TInput',
+                placeholder: 'https://',
+              }"
+              label-position="top"
             />
             <p>
               You can use link to their Instagram or Facebook or anything else
             </p>
-            <div class="flex justify-end gap-x-2 ">
+            <div class="flex justify-end gap-x-2">
               <TButton @click="showPopup = false" label="Cancel" />
               <TButton
                 @click="
@@ -122,6 +123,9 @@ import { useEvents } from '~/use/events'
 import { useDoc } from '~/use/doc'
 import { useAuth } from '~/use/auth'
 import TPopup from '../TPopup.vue'
+import TInputArray from './TInputArray.vue'
+import TInput from './TInput.vue'
+import TField from '../TField.vue'
 
 export default {
   name: 'TInputProfile',
@@ -129,6 +133,9 @@ export default {
 
   components: {
     TPopup,
+    TInputArray,
+    TInput,
+    TField,
   },
 
   props: {
@@ -156,16 +163,20 @@ export default {
     const { create: createProfile } = useDoc('profiles')
 
     const showPopup = ref(false)
-    const socialMediaOrWebsite = ref('')
+    const websites = ref([])
 
     const dynamicData = computed(() => {
-      const data = {}
-      if (socialMediaOrWebsite.value.includes('facebook.com')) {
-        data.facebook = socialMediaOrWebsite.value
-      }
-      if (socialMediaOrWebsite.value.includes('instagram.com')) {
-        data.instagram = socialMediaOrWebsite.value
-      }
+      let data = {}
+
+      websites.value.forEach((website) => {
+        if (website.includes('facebook')) {
+          data.facebook = website
+        } else if (website.includes('instagram')) {
+          data.instagram = website
+        } else if (website.includes('twitter')) {
+          data.twitter = website
+        }
+      })
       return data
     })
 
@@ -267,8 +278,8 @@ export default {
       create,
       inviteUsername,
       showPopup,
-      socialMediaOrWebsite,
       dynamicData,
+      websites,
     }
   },
 }
