@@ -1,8 +1,5 @@
 <template>
   <div>
-    <div class="px-4">
-      <h4 class="font-bold text-xl">Upcoming Events</h4>
-    </div>
     <div
       v-if="response.facets"
       class="mb-4 gap-2 flex flex-wrap p-4 items-center"
@@ -23,28 +20,44 @@
         hide-search-box
       />
 
+      <t-rich-select
+        v-model="filters['organizer']"
+        placeholder="Organizer"
+        :options="facets['organizer']"
+        clearable
+        hide-search-box
+      />
+
+      <t-rich-select
+        v-model="filters['venue']"
+        placeholder="Venue"
+        :options="facets['venue']"
+        clearable
+        hide-search-box
+      />
+
       <TButton v-if="facetFilters" allow-guests type="link" @click="load()">
         {{ $t('filter.reset') }}
       </TButton>
     </div>
 
-    <div class="grid grid-cols-1 md:grid-cols-2 gap-2">
+    <div>
       <NuxtLink
         v-for="item in response.hits"
         :key="item.id"
         :to="`/events/${item.id}`"
         class="hover:opacity-75"
       >
-        <TSharePreviewPost
-          :title="item.name"
-          :description="getDateTime(item.startDate)"
-          :type="item.type"
-          collection="events"
-          :username="item.organiser"
-          :extra="item.venue"
+        <TEventText4
+          :id="item.id"
+          :name="item.name"
+          :cover="item.cover"
+          :venue="item.venue"
+          :price="item.price"
+          :start-date="getDateObect(item.startDate)"
+          :event-type="item.type"
           :styles="item.styles"
-          :photo="item.cover"
-          size="sm"
+          :organiser="item.organizer"
         />
       </NuxtLink>
     </div>
@@ -61,7 +74,7 @@
 
 <script>
 import { computed, onMounted, ref, watch } from 'vue-demi'
-import { getExcerpt, getDateTime } from '~/utils'
+import { getExcerpt, getDateObect } from '~/utils'
 import { useAlgolia } from '~/use/algolia'
 import { useStyles } from '~/use/styles'
 import { useAuth } from '~/use/auth'
@@ -79,6 +92,7 @@ export default {
     const { uid } = useAuth()
     const { city, currentCity, cityName } = useCities()
     const { getCity } = useApp()
+    const today = Date.now()
     if (!currentCity.value) {
       return
     }
@@ -86,6 +100,8 @@ export default {
     const facets = computed(() => ({
       type: getFacetOptions('type'),
       style: getFacetOptions('style'),
+      venue: getFacetOptions('venue'),
+      organizer: getFacetOptions('organizer'),
     }))
     function load() {
       filters.value = {}
@@ -103,7 +119,7 @@ export default {
         return
       }
       search('', {
-        filters: '',
+        filters: `startDate>${today}`,
         facets: Object.keys(facets.value),
         facetFilters: facetFilters.value,
         page: currentPage.value - 1,
@@ -154,7 +170,7 @@ export default {
       load,
       getCity,
       cityName,
-      getDateTime,
+      getDateObect,
     }
   },
 }

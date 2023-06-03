@@ -88,7 +88,7 @@ export default {
         collection = collection.orderBy(props.orderBy, props.orderByDirection)
       }
 
-      collection = collection.limit(10)
+      collection = collection.limit(3)
 
       return collection
     }

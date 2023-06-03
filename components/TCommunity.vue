@@ -1,19 +1,10 @@
 <template>
   <div>
-    <div class="px-4">
-      <h4 class="font-bold text-xl">{{ $t('community.title') }}</h4>
-      <p class="text-xs">
-        {{ $t('community.description') }}
-      </p>
-    </div>
     <div
       v-if="response.facets"
       class="mb-4 gap-2 flex flex-wrap p-4 items-center"
     >
-      <TInputButtons v-model="filters['type']" :options="facets['type']" />
-
       <t-rich-select
-        v-if="filters['type']"
         v-model="filters['style']"
         :placeholder="$t(`profile.style`)"
         :options="facets['style']"
@@ -35,7 +26,7 @@
       </TButton>
     </div>
 
-    <div v-if="filters['type']" class="space-y-2 p-4">
+    <div class="space-y-2 p-4">
       <div v-for="profile in response.hits" :key="`artist-${profile.username}`">
         <WProfile
           v-if="profile"
@@ -46,9 +37,7 @@
     </div>
 
     <t-pagination
-      v-if="
-        filters['type'] && uid && response.nbPages > 1 && !$route.query.search
-      "
+      v-if="response.nbPages > 1 && !$route.query.search"
       v-model="currentPage"
       :total-items="response.nbHits"
       :per-page="response.hitsPerPage"
@@ -69,7 +58,13 @@ import { useApp } from '~/use/app'
 
 export default {
   name: 'Community',
-  setup() {
+  props: {
+    type: {
+      type: String,
+      default: '',
+    },
+  },
+  setup(props) {
     const radius = ref(10)
     const query = ref('')
     const profileType = ref('')
@@ -102,13 +97,11 @@ export default {
         .map((field) => `${field}:${filters.value[field]}`)
         .join(',')
     })
+
     const filterQuery = computed(() => {
-      if (uid.value) {
-        return `visibility:Public OR visibility:Members`
-      } else {
-        return 'visibility:Public'
-      }
+      return `type:${props.type}`
     })
+
     watch([currentPage, facetFilters, radius, city], () => {
       if (!city.value?.location) {
         return

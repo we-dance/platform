@@ -8,6 +8,7 @@ import sendEmail from './lib/sendEmail'
 import { screenshot } from './lib/screenshot'
 import {
   eventForApi,
+  eventToAlgolia,
   initIndex,
   profileToAlgolia,
   removeObject,
@@ -441,6 +442,15 @@ export const eventCreated = functions.firestore
     const cityName = cache.cities[event.place]?.name || 'International'
     const promoter = cache.profiles[event.createdBy]?.username || 'Unknown'
     const startDate = new Date(event.startDate)
+
+    const index = initIndex('events')
+
+    await index.saveObject(
+      eventToAlgolia({
+        ...event,
+        id: eventId,
+      })
+    )
 
     const lines = []
 

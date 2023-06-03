@@ -1,7 +1,11 @@
 <template>
   <div :class="classes">
     <nuxt-content v-if="page" :document="page" />
-    <TProfile v-else-if="profile" :profile="profile" />
+    <TCity
+      v-else-if="profile.type === 'City' && profile.username !== 'Travel'"
+      :profile="profile"
+    />
+    <TProfile v-else :profile="profile" />
   </div>
 </template>
 
