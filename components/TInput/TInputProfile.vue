@@ -94,6 +94,16 @@
               }"
               label-position="top"
             />
+            <div>Username</div>
+            <TField
+              v-model="query"
+              component="TInput"
+              :children="{
+                component: 'TInput',
+                placeholder: 'Username...',
+              }"
+              label-position="top"
+            />
             <p>
               You can use link to their Instagram or Facebook or anything else
             </p>
@@ -117,7 +127,7 @@
   </div>
 </template>
 <script>
-import { computed, onMounted, ref, watch } from '@nuxtjs/composition-api'
+import { computed, ref, watch } from '@nuxtjs/composition-api'
 import { useAlgolia } from '~/use/algolia'
 import { useEvents } from '~/use/events'
 import { useDoc } from '~/use/doc'
@@ -198,7 +208,8 @@ export default {
       if (
         value.includes('facebook.com') ||
         value.includes('instagram.com') ||
-        value.includes('wedance.vip')
+        value.includes('wedance.vip') ||
+        value.includes('twitter.com')
       ) {
         const username = value
           .replace('https://', '')
@@ -206,6 +217,7 @@ export default {
           .replace('www.', '')
           .replace('instagram.com/', '')
           .replace('facebook.com/', '')
+          .replace('twitter.com/', '')
           .replace('wedance.vip/', '')
           .replace(/(\?.*)/g, '')
           .replace('/', '')
