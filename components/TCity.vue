@@ -292,7 +292,7 @@
 </template>
 
 <script>
-import { computed, ref } from 'vue-demi'
+import { computed } from 'vue-demi'
 import { useApp } from '~/use/app'
 import { useAuth } from '~/use/auth'
 import { useProfiles } from '~/use/profiles'
