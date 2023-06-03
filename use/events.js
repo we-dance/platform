@@ -70,13 +70,25 @@ export async function getEventsInPlace(placeId) {
 }
 
 export async function getFestivals() {
-  const result = await firebase
-    .firestore()
-    .collection('posts')
-    .where('eventType', '==', 'Festival')
-    .get()
+  const festivals = (
+    await firebase
+      .firestore()
+      .collection('posts')
+      .where('eventType', '==', 'Festival')
+      .get()
+  ).docs
 
-  return result.docs.map((doc) => ({
+  const congresses = (
+    await firebase
+      .firestore()
+      .collection('posts')
+      .where('eventType', '==', 'Congress')
+      .get()
+  ).docs
+
+  const events = [...festivals, ...congresses]
+
+  return events.map((doc) => ({
     ...doc.data(),
     id: doc.id,
   }))
