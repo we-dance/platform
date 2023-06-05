@@ -59,7 +59,7 @@
 
     <div class="grid grid-cols-4 gap-4 p-4">
       <div>
-        <img
+        <EnlargeableImage
           v-if="profile.photo"
           :src="profile.photo"
           :alt="profile.username"
