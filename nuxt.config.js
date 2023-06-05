@@ -78,6 +78,7 @@ export default {
     '~/plugins/directives',
     '~/plugins/vue-tailwind',
     '~/plugins/vue-datepicker',
+    { src: '@/plugins/enlarge', mode: 'client', ssr: false },
   ],
   /*
    ** Nuxt.js dev-modules

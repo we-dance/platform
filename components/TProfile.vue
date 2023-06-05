@@ -62,6 +62,7 @@
         <EnlargeableImage
           v-if="profile.photo"
           :src="profile.photo"
+          :src_large="profile.photo"
           :alt="profile.username"
           class="w-full rounded-full"
         />

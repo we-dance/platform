@@ -1265,6 +1265,11 @@
   resolved "https://registry.yarnpkg.com/@csstools/convert-colors/-/convert-colors-1.4.0.tgz#ad495dc41b12e75d588c6db8b9834f08fa131eb7"
   integrity sha512-5a6wqoJV/xEdbRNKVo6I4hO3VjyDq//8q2f9I6PBAvMesJHFauXDorcNCsr9RzvsZnaWi5NYCcfyqP1QeFHFbw==
 
+"@diracleo/vue-enlargeable-image@^0.0.7":
+  version "0.0.7"
+  resolved "https://registry.yarnpkg.com/@diracleo/vue-enlargeable-image/-/vue-enlargeable-image-0.0.7.tgz#d1b9d9519effebb868c3840188a4d867e1507977"
+  integrity sha512-nwrDbNQPDptwj4QRUdhvCwOfHW3ZLitaCZfjx7i+OsF1LiVcbHCgikbzrkORqCXSY3caCu+gPftElNXk37cwoQ==
+
 "@firebase/analytics-types@0.4.0":
   version "0.4.0"
   resolved "https://registry.yarnpkg.com/@firebase/analytics-types/-/analytics-types-0.4.0.tgz#d6716f9fa36a6e340bc0ecfe68af325aa6f60508"
