@@ -479,7 +479,6 @@ import {
   getTime,
   dateDiff,
   getEventDescription,
-  openURL,
   getDateObect,
   getMeta,
   loadDoc,
@@ -552,15 +551,7 @@ export default {
     return getMeta('events', this.doc)
   },
   setup() {
-    const {
-      uid,
-      can,
-      account,
-      updateAccount,
-      username,
-      isAdmin,
-      sendSignInLinkToEmail,
-    } = useAuth()
+    const { uid, can, account, username, isAdmin } = useAuth()
     const { getEventIcon, getEventTypeLabel } = useEvents()
     const { accountFields } = useAccounts()
     const { params } = useRouter()
