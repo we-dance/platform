@@ -4,6 +4,8 @@ import 'firebase/firestore'
 import { useAuth } from '~/use/auth'
 import stats from '~/stats'
 
+const docs = {}
+
 export const useDoc = (name) => {
   const { uid, username } = useAuth()
 
@@ -44,7 +46,12 @@ export const useDoc = (name) => {
     let doc = {}
 
     if (id) {
-      doc = await collection.doc(id).get()
+      if (docs[id]) {
+        doc = docs[id]
+      } else {
+        doc = await collection.doc(id).get()
+        docs[id] = doc
+      }
     }
 
     state.id = id

@@ -1,8 +1,8 @@
 import { useI18n } from '~/use/i18n'
 import { useApp } from '~/use/app'
 import { useAccounts } from '~/use/accounts'
-import { useCollection } from '~/use/collection'
 import { useCommon } from '~/use/common'
+import { useDoc } from '~/use/doc'
 
 export const useProfiles = () => {
   const { t } = useI18n()
@@ -10,9 +10,9 @@ export const useProfiles = () => {
   const { yesNoOptions, visibilityOptions, genderList, days } = useCommon()
 
   const { read, loading } = useApp()
-  const { getById } = useCollection('profiles')
+  const { load } = useDoc('profiles')
 
-  const getFullProfile = (uid) => getById(uid) || {}
+  const getFullProfile = (uid) => load(uid) || {}
   const getProfile = (uid) => read('profiles', uid) || {}
 
   const meetingPlaces = [

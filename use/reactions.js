@@ -1,9 +1,7 @@
-import { useRsvp } from '~/use/rsvp'
 import { useComments } from '~/use/comments'
 import { getExcerpt } from '~/utils'
 
 export const useReactions = () => {
-  const { getCount, getRsvpResponse } = useRsvp()
   const { getCommentsCount } = useComments()
 
   const map = (item) => {
@@ -11,10 +9,10 @@ export const useReactions = () => {
       return {}
     }
 
-    const upVotes = getCount(item.id, 'up')
-    const downVotes = getCount(item.id, 'down')
+    const upVotes = 0
+    const downVotes = 0
     const votes = upVotes - downVotes
-    const response = getRsvpResponse(item.id)
+    const response = 'up'
     const multi = !response ? 3 : response === 'up' ? 2 : 1
     const order = multi * 100 + votes
     const commentsCount = getCommentsCount(item.id)

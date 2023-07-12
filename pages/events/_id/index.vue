@@ -417,7 +417,6 @@
                 $t('eventView.reservationPopup.reserve.submitLabel')
               "
               class="mt-4 space-y-4"
-              @save="reserve"
             >
               <template v-if="!uid" slot="buttons">
                 <TButton
@@ -467,7 +466,6 @@ import googleCalendarEventUrl from 'generate-google-calendar-url'
 import { computed, ref, watch } from '@nuxtjs/composition-api'
 import { useAuth } from '~/use/auth'
 import { useDoc } from '~/use/doc'
-import { useRsvp } from '~/use/rsvp'
 import { useRouter } from '~/use/router'
 import { useProfiles } from '~/use/profiles'
 import { useReactions } from '~/use/reactions'
@@ -570,7 +568,6 @@ export default {
     const { doc, sync, exists, loading, softUpdate, remove } = useDoc('posts')
     const { find: findProfile } = useDoc('profiles')
     const { map } = useReactions()
-    const { updateRsvp, createGuestRsvp, getRsvp } = useRsvp()
     if (params.id) {
       sync(params.id)
     }
@@ -650,44 +647,22 @@ export default {
     const finishReservation = () => {
       reservationPopup.value = false
     }
-    function register(id, link) {
-      if (uid.value) {
-        updateRsvp(id, 'posts', 'up')
-      }
-      openURL(link)
-    }
-    const reserve = async (participant) => {
-      if (!uid.value) {
-        await createGuestRsvp(params.id, 'posts', 'up', participant)
-        sendSignInLinkToEmail(participant.email)
-      } else {
-        await updateAccount(participant)
-        updateRsvp(params.id, 'posts', 'up')
-      }
-      reservationPopup.value = 'finish'
-      if (item.value.link) {
-        openURL(item.value.link)
-      }
-    }
     return {
       isGoing,
       isAdmin,
       softUpdate,
-      register,
       isCreatingProfile,
       finishReservation,
       ticketPopup,
       account,
       reservationPopup,
       reservationFields,
-      reserve,
       exists,
       guests,
       uid,
       loading,
       item,
       map,
-      updateRsvp,
       can,
       getProfile,
       getFullProfile,
@@ -700,7 +675,6 @@ export default {
       getEventDescription,
       calendarLink,
       getEventIcon,
-      getRsvp,
       remove,
       ticketTailorPopup,
       getEventTypeLabel,

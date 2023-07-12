@@ -1,14 +1,14 @@
 import moment from 'moment-timezone'
-import { useCollection } from '~/use/collection'
+import { useDoc } from '~/use/doc'
 import { useI18n } from '~/use/i18n'
 import { useCommon } from '~/use/common'
 
 export const useAccounts = () => {
   const { t } = useI18n()
-  const { getById, find } = useCollection('accounts')
+  const { load } = useDoc('accounts')
   const { yesNoOptions } = useCommon()
 
-  const getAccount = (uid) => getById(uid) || {}
+  const getAccount = (uid) => load(uid) || {}
   const getAccountByEmail = (email) => find('email', email)
 
   const accountFields = [
