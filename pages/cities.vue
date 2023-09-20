@@ -65,7 +65,7 @@ export default {
 
     const recommendations = computed(() => {
       const results = orderBy(docs.value, 'viewsCount', 'desc').filter(
-        (c) => c.username
+        (c) => c.username && c.viewsCount
       )
 
       return results
