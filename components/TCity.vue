@@ -143,12 +143,12 @@
       class="w-full mt-4"
     />
 
-    <TCollapse title="News">
-      <TPostList order-by="createdAt" :filter="{ place: profile.place }" />
+    <TCollapse title="Events" expanded>
+      <TCalendar class="mt-4 w-full border-t pt-4 pb-8" />
     </TCollapse>
 
-    <TCollapse title="Events">
-      <TCalendar class="mt-4 w-full border-t pt-4 pb-8" />
+    <TCollapse title="News">
+      <TPostList order-by="createdAt" :filter="{ place: profile.place }" />
     </TCollapse>
 
     <TCollapse title="Organisers">

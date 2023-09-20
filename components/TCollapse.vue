@@ -1,11 +1,11 @@
 <template>
   <div class="border-t border-b py-4">
-    <div class="cursor-pointer flex" @click="expanded = !expanded">
-      <TIcon v-if="expanded" name="arrow_up" size="8" />
+    <div class="cursor-pointer flex" @click="expandedValue = !expandedValue">
+      <TIcon v-if="expandedValue" name="arrow_up" size="8" />
       <TIcon v-else name="arrow_right" size="8" />
       <h4 class="font-bold text-xl">{{ title }}</h4>
     </div>
-    <div v-if="expanded">
+    <div v-if="expandedValue">
       <slot />
     </div>
   </div>
@@ -17,9 +17,15 @@ export default {
       type: String,
       default: '',
     },
+    expanded: {
+      type: Boolean,
+      default: false,
+    },
   },
-  data: () => ({
-    expanded: false,
-  }),
+  data() {
+    return {
+      expandedValue: this.expanded,
+    }
+  },
 }
 </script>
