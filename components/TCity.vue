@@ -292,13 +292,14 @@
 </template>
 
 <script>
-import { computed } from 'vue-demi'
+import { computed, onMounted } from 'vue-demi'
 import { useApp } from '~/use/app'
 import { useAuth } from '~/use/auth'
 import { useProfiles } from '~/use/profiles'
 import { getExcerpt, getMeta } from '~/utils'
 import { useI18n } from '~/use/i18n'
 import { useDoc } from '~/use/doc'
+import { useCities } from '~/use/cities'
 
 export default {
   props: {
@@ -318,6 +319,7 @@ export default {
     const { t } = useI18n()
     const { remove } = useDoc('profiles')
     const invitesLeft = 5
+    const { switchCity } = useCities()
     const community = computed(() => getCity(props.profile?.place))
     const intro = {
       fields: [
@@ -358,6 +360,10 @@ export default {
 
     const subscribersCount = computed(() => {
       return props.profile?.watch?.usernames?.length || 0
+    })
+
+    onMounted(async () => {
+      await switchCity(props.profile.place)
     })
 
     return {
