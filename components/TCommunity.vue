@@ -1,7 +1,7 @@
 <template>
   <div>
     <div
-      v-if="response.facets"
+      v-if="response.facets && response.nbHits > 0"
       class="mb-4 gap-2 flex flex-wrap p-4 items-center"
     >
       <t-rich-select
@@ -24,6 +24,12 @@
       <TButton v-if="facetFilters" allow-guests type="link" @click="load()">
         {{ $t('filter.reset') }}
       </TButton>
+    </div>
+
+    <div v-if="!response.nbHits" class="p-4 flex justify-center items-center">
+      <div>
+        There are no profiles yet. Ask locals.
+      </div>
     </div>
 
     <div class="space-y-2 p-4">

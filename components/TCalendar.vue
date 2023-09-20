@@ -1,7 +1,7 @@
 <template>
   <div>
     <div
-      v-if="response.facets"
+      v-if="response.facets && response.nbHits > 0"
       class="mb-4 gap-2 flex flex-wrap p-4 items-center"
     >
       <t-rich-select
@@ -60,6 +60,12 @@
           :organiser="item.organizer"
         />
       </NuxtLink>
+    </div>
+
+    <div v-if="!response.nbHits" class="p-4 flex justify-center items-center">
+      <div>
+        There are no events yet. Ask organisers.
+      </div>
     </div>
 
     <t-pagination
