@@ -386,7 +386,14 @@
     </div>
 
     <div class="m-4 text-xs text-right gap-8">
-      <span>Published by {{ creator.username }}</span>
+      <span
+        >Published by
+        <nuxt-link
+          class="underline text-primary"
+          :to="`/${creator.username}`"
+          >{{ creator.name }}</nuxt-link
+        ></span
+      >
       <span>at {{ getDateTimeYear(doc.createdAt, $i18n.locale) }}</span>
     </div>
 
@@ -507,12 +514,6 @@ export default {
     publishedAt() {
       return getDateTime(this.item?.createdAt)
     },
-    creator() {
-      return this.getProfile(this.item?.createdBy)
-    },
-    org() {
-      return this.getFullProfile(this.item?.org?.id)
-    },
     reviews() {
       return this.org?.reviews || []
     },
@@ -571,6 +572,8 @@ export default {
 
     const profileCache = {}
     const guests = ref({})
+    const creator = ref({})
+    const org = ref({})
 
     async function getCachedProfile(username) {
       if (!profileCache[username]) {
@@ -588,6 +591,9 @@ export default {
         followersCount: 0,
         leadersCount: 0,
       }
+
+      creator.value = await getFullProfile(doc.value.createdBy)
+      org.value = await getFullProfile(doc.value.org?.id)
 
       if (!list) {
         guests.value = result
@@ -639,6 +645,8 @@ export default {
       reservationPopup.value = false
     }
     return {
+      creator,
+      org,
       isGoing,
       isAdmin,
       softUpdate,
