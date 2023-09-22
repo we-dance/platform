@@ -7,7 +7,7 @@
     </div>
     <div v-if="name">
       <NuxtLink class="hover:underline" :to="`/${profile.username}`">
-        {{ profile.username }}
+        {{ profile.name }}
       </NuxtLink>
     </div>
     <slot />
@@ -15,6 +15,7 @@
 </template>
 
 <script>
+import { onMounted, ref } from '@nuxtjs/composition-api'
 import { useProfiles } from '~/use/profiles'
 
 export default {
@@ -38,9 +39,12 @@ export default {
     },
   },
   setup(props) {
-    const { getProfile } = useProfiles()
+    const { getFullProfile } = useProfiles()
 
-    const profile = getProfile(props.uid)
+    const profile = ref({})
+    onMounted(async () => {
+      profile.value = await getFullProfile(props.uid)
+    })
 
     return {
       profile,
