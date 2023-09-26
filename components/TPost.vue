@@ -1,5 +1,5 @@
 <template>
-  <div ref="postRef" class="border-b">
+  <div ref="postRef" class="border-b pb-4">
     <div class="flex items-start p-4">
       <div class="w-10 flex-shrink-0">
         <TAvatar photo size="md" :uid="item.createdBy" />
@@ -32,7 +32,10 @@
               <div>{{ item.region.name }}</div>
             </template>
           </div>
-          <div class="text-xs">announced an event</div>
+          <div v-if="item.type === 'event'" class="text-xs">
+            announced an event
+          </div>
+          <div v-else class="text-xs">published a post</div>
         </div>
       </div>
 
@@ -80,7 +83,7 @@
         />
       </TDropdown>
     </div>
-    <h1 v-if="item.title" class="font-bold text-xl">{{ item.title }}</h1>
+    <h1 v-if="item.title" class="px-4 font-bold text-xl">{{ item.title }}</h1>
     <TExpand v-if="item.description" class="p-4 w-auto">
       <TPreview :content="item.description" />
     </TExpand>
