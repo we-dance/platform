@@ -329,6 +329,12 @@ export const useEvents = () => {
       simple: true,
     },
     {
+      name: 'recurrence',
+      component: 'TRecurrenceEditor',
+      label: 'Repeat',      
+      labelPosition: 'top',
+    },
+    {
       name: 'venueProfile',
       component: 'TInputProfile',
       label: t('event.venueProfile.label'),
