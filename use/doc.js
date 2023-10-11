@@ -46,12 +46,8 @@ export const useDoc = (name) => {
     let doc = {}
 
     if (id) {
-      if (docs[id]) {
-        doc = docs[id]
-      } else {
-        doc = await collection.doc(id).get()
-        docs[id] = doc
-      }
+      doc = await collection.doc(id).get()
+      docs[id] = doc
     }
 
     state.id = id
