@@ -32,7 +32,7 @@ export default {
   }),
   watch: {
     value(val) {
-      const extra = [...val, {}]
+      const extra = [...val, '']
 
       if (JSON.stringify(extra) === JSON.stringify(this.internalValue)) {
         return
@@ -54,10 +54,7 @@ export default {
     },
   },
   mounted() {
-    const val = this.value || []
-    const extra = [...val, {}]
-
-    this.internalValue = extra
+    this.internalValue = this.value
   },
 }
 </script>

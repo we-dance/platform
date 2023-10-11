@@ -52,7 +52,9 @@
       >
         <TProfilePhoto2 size="md" :src="item.photo" />
         <div class="flex-grow">
-          <div v-if="item.name" class="font-bold text-sm">{{ item.name }}</div>
+          <div v-if="item.name" class="font-bold text-sm">
+            {{ item.name }}
+          </div>
           <div class="text-xs text-gray-700 flex space-x-2">
             <div>@{{ item.username }}</div>
             <div v-if="item.instagram" class="space-x-1 flex">
@@ -68,39 +70,58 @@
       </div>
       <template v-if="inviteUsername">
         <div
-          class="flex px-4 py-2 hover:bg-blue-100 items-center cursor-pointer space-x-1 text-sm text-gray-700"
-          @click="
-            create({
-              username: inviteUsername,
-              instagram: `https://instagram.com/` + inviteUsername,
-            })
-          "
+          class="flex justify-center px-4 py-2 hover:bg-blue-100 items-center cursor-pointer space-x-1 text-sm text-gray-700"
         >
-          <div>
-            {{ $t('TInputProfile.import') }}
-          </div>
-          <TIcon name="instagram" size="4" />
-          <div>
-            {{ inviteUsername }}
-          </div>
+          <h3 @click="showPopup = !showPopup" class="text-center">
+            + Add New Organizer
+          </h3>
         </div>
-        <div
-          class="flex px-4 py-2 hover:bg-blue-100 items-center cursor-pointer space-x-1 text-sm text-gray-700"
-          @click="
-            create({
-              username: inviteUsername,
-              facebook: `https://facebook.com/` + inviteUsername,
-            })
-          "
-        >
-          <div>
-            {{ $t('TInputProfile.import') }}
+        <TPopup v-if="showPopup">
+          <div class="flex justify-between border-b pb-2 mb-4">
+            <div class="grow font-bold text-center">Add New Organizer</div>
+            <button class="cursor-pointer" @click="showPopup = false">
+              <TIcon name="close" class="cursor-pointer w-4 h-4" />
+            </button>
           </div>
-          <TIcon name="facebook" size="4" />
-          <div>
-            {{ inviteUsername }}
+          <div class="my-4 flex flex-col justify-center">
+            <div>Social Media or Website</div>
+            <TField
+              v-model="websites"
+              component="TInputArray"
+              :children="{
+                component: 'TInput',
+                placeholder: 'https://',
+              }"
+              label-position="top"
+            />
+            <div>Username</div>
+            <TField
+              v-model="query"
+              component="TInput"
+              :children="{
+                component: 'TInput',
+                placeholder: 'Username...',
+              }"
+              label-position="top"
+            />
+            <p>
+              You can use link to their Instagram or Facebook or anything else
+            </p>
+            <div class="flex justify-end gap-x-2">
+              <TButton @click="showPopup = false" label="Cancel" />
+              <TButton
+                @click="
+                  create({
+                    username: inviteUsername,
+                    ...dynamicData,
+                  })
+                "
+                label="Save"
+                type="primary"
+              />
+            </div>
           </div>
-        </div>
+        </TPopup>
       </template>
     </div>
   </div>
@@ -111,10 +132,22 @@ import { useAlgolia } from '~/use/algolia'
 import { useEvents } from '~/use/events'
 import { useDoc } from '~/use/doc'
 import { useAuth } from '~/use/auth'
+import TPopup from '../TPopup.vue'
+import TInputArray from './TInputArray.vue'
+import TInput from './TInput.vue'
+import TField from '../TField.vue'
 
 export default {
   name: 'TInputProfile',
   inheritAttrs: false,
+
+  components: {
+    TPopup,
+    TInputArray,
+    TInput,
+    TField,
+  },
+
   props: {
     value: {
       type: [Object, String],
@@ -139,6 +172,24 @@ export default {
     const { eventRoleOptions } = useEvents()
     const { create: createProfile } = useDoc('profiles')
 
+    const showPopup = ref(false)
+    const websites = ref([])
+
+    const dynamicData = computed(() => {
+      let data = {}
+
+      websites.value.forEach((website) => {
+        if (website.includes('facebook')) {
+          data.facebook = website
+        } else if (website.includes('instagram')) {
+          data.instagram = website
+        } else if (website.includes('twitter')) {
+          data.twitter = website
+        }
+      })
+      return data
+    })
+
     if (typeof props.value === 'string') {
       emit('input', { username: props.value })
     }
@@ -157,7 +208,8 @@ export default {
       if (
         value.includes('facebook.com') ||
         value.includes('instagram.com') ||
-        value.includes('wedance.vip')
+        value.includes('wedance.vip') ||
+        value.includes('twitter.com')
       ) {
         const username = value
           .replace('https://', '')
@@ -165,6 +217,7 @@ export default {
           .replace('www.', '')
           .replace('instagram.com/', '')
           .replace('facebook.com/', '')
+          .replace('twitter.com/', '')
           .replace('wedance.vip/', '')
           .replace(/(\?.*)/g, '')
           .replace('/', '')
@@ -236,6 +289,9 @@ export default {
       eventRoleOptions,
       create,
       inviteUsername,
+      showPopup,
+      dynamicData,
+      websites,
     }
   },
 }
