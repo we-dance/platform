@@ -770,6 +770,7 @@ export default {
     const { accountFields } = useAccounts()
     const { params, router } = useRouter()
     const { getProfile, getFullProfile } = useProfiles()
+
     const {
       doc,
       sync,
@@ -780,6 +781,7 @@ export default {
       remove,
       create,
     } = useDoc('posts')
+    const { doc: parentDoc, load } = useDoc('posts')
     const { find: findProfile } = useDoc('profiles')
     const { map } = useReactions()
     if (params.id) {
@@ -787,8 +789,15 @@ export default {
     }
     const { getStyles } = useStyles()
     const item = computed(() => {
-      const result = map(doc.value)
+      let result = {}
+
+      if (doc.value.parentId) {
+        load(doc.value.parentId)
+      }
+
+      result = { ...parentDoc.value, ...map(doc.value) }
       result.locality = addressPart(result.venue, 'locality')
+
       return result
     })
 

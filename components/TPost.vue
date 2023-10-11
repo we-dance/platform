@@ -1,5 +1,6 @@
 <template>
-  <div ref="postRef" class="border-b pb-4">
+  <div v-if="item.parentId" />
+  <div v-else ref="postRef" class="border-b pb-4">
     <div class="flex items-start p-4">
       <div class="w-10 flex-shrink-0">
         <TAvatar photo size="md" :uid="item.createdBy" />

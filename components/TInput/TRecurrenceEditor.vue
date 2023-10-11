@@ -7,14 +7,12 @@
       <div class="font-bold">Until</div>
       <DatePicker v-model="untilDate" />
     </div>
-    <pre>{{ ruleOptions }}</pre>
-    <pre>{{ dates }}</pre>
   </div>
 </template>
 
 <script>
-import { datetime, RRule } from 'rrule'
-import { getObjectKeysFromArray } from '~/utils'
+import { RRule } from 'rrule'
+import { getDateObect } from '~/utils'
 
 export default {
   name: 'TRecurrenceEditor',
@@ -69,21 +67,37 @@ export default {
     },
   },
   watch: {
-    dates() {
-      this.$emit('value', {
-        options: this.ruleOptions,
+    value: {
+      handler(newValue) {
+        if (this.freq !== newValue.freq) {
+          this.freq = newValue.freq || 'never'
+        }
+
+        if (JSON.stringify(this.days) !== JSON.stringify(newValue.days)) {
+          this.days = newValue.days || {}
+        }
+
+        if (this.untilDate !== newValue.untilDate) {
+          this.untilDate = newValue.untilDate
+            ? getDateObect(newValue.untilDate)
+            : ''
+        }
+      },
+      immediate: true,
+    },
+    freq: 'updateModel',
+    days: 'updateModel',
+    untilDate: 'updateModel',
+  },
+  methods: {
+    updateModel() {
+      this.$emit('input', {
+        freq: this.freq,
+        days: this.days,
+        untilDate: this.untilDate,
         dates: this.dates,
       })
     },
-  },
-  mounted() {
-    if (!this.value.ruleOptions) {
-      return
-    }
-
-    this.freq = this.value.ruleOptions === 2 ? 'weekly' : 'never'
-    this.days = getObjectKeysFromArray(this.value.ruleOptions.byweekday)
-    this.untilDate = this.value.until
   },
 }
 </script>
