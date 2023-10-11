@@ -150,7 +150,7 @@
       {{ $t('event.attendCallToAction') }}
     </div>
     <div
-      class="sticky bottom-0 z-50 flex justify-center items-center gap-2 border-b bg-white p-4"
+      class="sticky bottom-0 z-40 flex justify-center items-center gap-2 border-b bg-white p-4"
     >
       <TReaction
         type="primary"
