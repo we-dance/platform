@@ -47,7 +47,7 @@
           type="context"
           icon="delete"
           label="Delete"
-          @click="remove(doc.id)"
+          @click="deleteEvent(doc.id)"
         />
       </TDropdown>
     </THeader>
@@ -493,6 +493,7 @@ import {
 import { addressPart } from '~/use/google'
 import { trackView } from '~/use/tracking'
 import { useStyles } from '~/use/styles'
+import router from '~/plugins/router'
 
 export default {
   name: 'EventView',
@@ -555,7 +556,7 @@ export default {
     const { uid, can, account, username, isAdmin } = useAuth()
     const { getEventIcon, getEventTypeLabel } = useEvents()
     const { accountFields } = useAccounts()
-    const { params } = useRouter()
+    const { params, router } = useRouter()
     const { getProfile, getFullProfile } = useProfiles()
     const { doc, sync, exists, loading, softUpdate, remove } = useDoc('posts')
     const { find: findProfile } = useDoc('profiles')
@@ -644,7 +645,14 @@ export default {
     const finishReservation = () => {
       reservationPopup.value = false
     }
+
+    async function deleteEvent(id) {
+      await remove(id)
+      router.push(`/${username.value}`)
+    }
+
     return {
+      deleteEvent,
       creator,
       org,
       isGoing,
@@ -674,7 +682,6 @@ export default {
       getEventDescription,
       calendarLink,
       getEventIcon,
-      remove,
       ticketTailorPopup,
       getEventTypeLabel,
       getStyles,
