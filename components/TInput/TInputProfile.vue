@@ -53,15 +53,28 @@
         <TProfilePhoto2 size="md" :src="item.photo" />
         <div class="flex-grow">
           <div v-if="item.name" class="font-bold text-sm">{{ item.name }}</div>
-          <div class="text-xs text-gray-700 flex space-x-2">
-            <div>@{{ item.username }}</div>
+          <div class="text-xs text-gray-700 flex flex-col gap-2">
+            <div>{{ item.username }}</div>
             <div v-if="item.instagram" class="space-x-1 flex">
               <TIcon name="instagram" size="4" />
-              <div>{{ item.instagram }}</div>
+              <div>
+                {{
+                  item.instagram
+                    .replace(/https:\/\/(www\.)?instagram\.com\//, '')
+                    .replace(/\?igshid=[^&]*$/, '')
+                    .replace(/\/$/, '')
+                }}
+              </div>
             </div>
             <div v-if="item.facebook" class="space-x-1 flex">
               <TIcon name="facebook" size="4" />
-              <div>{{ item.facebook }}</div>
+              <div>
+                {{
+                  item.facebook
+                    .replace(/https:\/\/(www\.)?facebook\.com\//, '')
+                    .replace(/\/$/, '')
+                }}
+              </div>
             </div>
           </div>
         </div>
@@ -154,6 +167,11 @@ export default {
         return
       }
 
+      if (value.includes('@')) {
+        query.value = value.replace('@', '')
+        return
+      }
+
       if (
         value.includes('facebook.com') ||
         value.includes('instagram.com') ||
@@ -196,7 +214,14 @@ export default {
     })
 
     const inviteUsername = computed(() => {
-      let username = query.value.toLowerCase().replaceAll(' ', '')
+      let username = query.value
+        .toLowerCase()
+        .replaceAll(' ', '')
+        .replaceAll('@', '')
+
+      if (username.includes('://')) {
+        username = false
+      }
 
       if (
         suggestions.value?.some((p) => p.username === username) ||
