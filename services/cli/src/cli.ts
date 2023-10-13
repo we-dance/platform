@@ -92,7 +92,7 @@ yargs(hideBin(process.argv))
         ]
 
         for (const field of fields) {
-          if (profile[field] && !profile[field].includes('https://')) {
+          if (profile[field] && !profile[field].includes('://')) {
             const oldValue = profile[field]
             let newValue = profile[field].replace(' ', '')
 
@@ -125,7 +125,7 @@ yargs(hideBin(process.argv))
             }
 
             if (field === 'whatsapp') {
-              newValue = 'https://whatsapp.com/' + newValue
+              newValue = 'https://wa.me/' + newValue
             }
 
             profileRef.ref.update({
