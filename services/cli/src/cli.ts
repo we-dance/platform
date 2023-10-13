@@ -1,6 +1,6 @@
 import axios from 'axios'
 import { db, admin } from './firebase'
-import { closeBrowser, getInstagramWebProfileInfo } from './lib/browser'
+import { getIgProfile } from './lib/instagram'
 
 require('dotenv').config()
 
@@ -255,7 +255,6 @@ yargs(hideBin(process.argv))
         current++
 
         if (!profile?.instagram) {
-          console.log('Skipping no instagram link')
           continue
         }
 
@@ -289,7 +288,9 @@ yargs(hideBin(process.argv))
           let instagram
 
           try {
-            instagram = await getInstagramWebProfileInfo(profile.instagram)
+            instagram = await getIgProfile(
+              profile.instagram.replace('https://instagram.com/', '')
+            )
             if (!instagram) {
               throw new Error('Instagram not found')
             }
@@ -304,9 +305,9 @@ yargs(hideBin(process.argv))
 
           let photo = ''
 
-          if (instagram.profile_pic_url_hd) {
+          if (instagram.hd_profile_pic_url_info.url) {
             const imageBuffer = (
-              await axios.get(instagram.profile_pic_url_hd, {
+              await axios.get(instagram.hd_profile_pic_url_info.url, {
                 responseType: 'arraybuffer',
               })
             ).data
@@ -347,8 +348,6 @@ yargs(hideBin(process.argv))
           console.log(``)
         }
       }
-
-      await closeBrowser()
     }
   )
   .help('h')
