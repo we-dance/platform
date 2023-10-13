@@ -20,46 +20,36 @@
         hide-search-box
       />
 
-      <t-rich-select
-        v-model="filters['organizer']"
-        placeholder="Organizer"
-        :options="facets['organizer']"
-        clearable
-        hide-search-box
-      />
-
-      <t-rich-select
-        v-model="filters['venue']"
-        placeholder="Venue"
-        :options="facets['venue']"
-        clearable
-        hide-search-box
-      />
-
       <TButton v-if="facetFilters" allow-guests type="link" @click="load()">
         {{ $t('filter.reset') }}
       </TButton>
     </div>
 
     <div>
-      <NuxtLink
-        v-for="item in response.hits"
-        :key="item.id"
-        :to="`/events/${item.id}`"
-        class="hover:opacity-75"
-      >
-        <TEventText4
-          :id="item.id"
-          :name="item.name"
-          :cover="item.cover"
-          :venue="item.venue"
-          :price="item.price"
-          :start-date="getDateObect(item.startDate)"
-          :event-type="item.type"
-          :styles="item.styles"
-          :organiser="item.organizer"
-        />
-      </NuxtLink>
+      <div v-for="(items, date) in itemsByDate" :key="date">
+        <h2 class="font-bold text-xl p-4 border-b">
+          <span class="text-primary">{{ getDay(date, $i18n.locale) }}</span> ·
+          {{ getDate(date, $i18n.locale) }}
+        </h2>
+        <NuxtLink
+          v-for="item in items"
+          :key="item.id"
+          :to="`/events/${item.id}`"
+          class="hover:opacity-75"
+        >
+          <TEventText4
+            :id="item.id"
+            :name="item.name"
+            :cover="item.cover"
+            :venue="item.venue"
+            :price="item.price"
+            :start-date="getDateObect(item.startDate)"
+            :event-type="item.type"
+            :styles="item.styles"
+            :organiser="item.organizer"
+          />
+        </NuxtLink>
+      </div>
     </div>
 
     <div v-if="!response.nbHits" class="p-4 flex justify-center items-center">
@@ -80,7 +70,7 @@
 
 <script>
 import { computed, onMounted, ref, watch } from 'vue-demi'
-import { getExcerpt, getDateObect } from '~/utils'
+import { getExcerpt, getDateObect, getYmd, getDate, getDay } from '~/utils'
 import { useAlgolia } from '~/use/algolia'
 import { useStyles } from '~/use/styles'
 import { useAuth } from '~/use/auth'
@@ -159,6 +149,21 @@ export default {
           return value
       }
     }
+    const itemsByDate = computed(() => {
+      const result = {}
+
+      if (!response.value?.hits) {
+        return result
+      }
+
+      response.value.hits.forEach((item) => {
+        const date = getYmd(item.startDate)
+        result[date] = result[date] || []
+        result[date].push(item)
+      })
+
+      return result
+    })
     return {
       uid,
       getFacetOptions,
@@ -177,6 +182,9 @@ export default {
       getCity,
       cityName,
       getDateObect,
+      itemsByDate,
+      getDay,
+      getDate,
     }
   },
 }

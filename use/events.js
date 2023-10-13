@@ -279,22 +279,6 @@ export const useEvents = () => {
       options: eventTypeList,
     },
     {
-      name: 'online',
-      label: t('event.online.label'),
-      component: 'TInputButtons',
-      options: yesNoOptions,
-      description: t('event.online.description'),
-      labelPosition: 'top',
-    },
-    {
-      name: 'international',
-      label: t('event.international.label'),
-      labelPosition: 'top',
-      component: 'TInputButtons',
-      options: yesNoOptions,
-      description: t('event.international.description'),
-    },
-    {
       name: 'startDate',
       component: 'DatePicker',
       labelPosition: 'top',

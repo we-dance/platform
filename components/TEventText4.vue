@@ -6,10 +6,7 @@
   >
     <div class="text-center">
       <div class="font-bold text-sm leading-none">
-        <div class="text-xl font-bold leading-none text-primary">
-          {{ formatDate(startDate, 'd') }}
-        </div>
-        <div>{{ formatDate(startDate, 'MMM') }}</div>
+        <div>{{ formatDate(startDate, 'HH:mm') }}</div>
       </div>
     </div>
     <div class="w-full">
@@ -35,7 +32,7 @@
         }}
       </div>
       <div class="text-xs text-gray-700">
-        {{ formatDate(startDate, 'EEEE HH:mm') }} · {{ price }}
+        {{ price }}
       </div>
     </div>
     <div>
