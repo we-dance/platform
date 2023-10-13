@@ -4,7 +4,6 @@ import 'firebase/firestore'
 import { useCities } from './cities'
 import { useI18n } from '~/use/i18n'
 import { getYmd, toDatetimeLocal } from '~/utils'
-import { useCommon } from '~/use/common'
 
 const updateEndDate = (newItem, oldItem) => {
   if (oldItem?.endDate) {
@@ -97,7 +96,6 @@ export async function getFestivals() {
 export const useEvents = () => {
   const { t } = useI18n()
   const { currentCity } = useCities()
-  const { yesNoOptions } = useCommon()
 
   const eventRoleOptions = [
     {

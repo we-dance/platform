@@ -493,7 +493,6 @@ import {
 import { addressPart } from '~/use/google'
 import { trackView } from '~/use/tracking'
 import { useStyles } from '~/use/styles'
-import router from '~/plugins/router'
 
 export default {
   name: 'EventView',
