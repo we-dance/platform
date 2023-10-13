@@ -38,6 +38,7 @@
           v-if="profile"
           :username="profile.username"
           :fallback="profile"
+          :hide-role="hideRole"
         />
       </div>
     </div>
@@ -68,6 +69,10 @@ export default {
     type: {
       type: String,
       default: '',
+    },
+    hideRole: {
+      type: Boolean,
+      default: false,
     },
   },
   setup(props) {

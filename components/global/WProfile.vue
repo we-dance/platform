@@ -20,13 +20,15 @@
         >
           {{ profile.name || profile.username }}
         </NuxtLink>
-        <div v-if="profile.role" class="text-xs">
-          {{ getLabel(eventRoleOptions, profile.role) }}
-        </div>
-        <div v-else class="text-xs">
-          <span v-if="profile.gender === 'Male'">Leader</span>
-          <span v-else>Follower</span>
-        </div>
+        <template v-if="!hideRole">
+          <div v-if="profile.role" class="text-xs">
+            {{ getLabel(eventRoleOptions, profile.role) }}
+          </div>
+          <div v-else class="text-xs">
+            <span v-if="profile.gender === 'Male'">Leader</span>
+            <span v-else>Follower</span>
+          </div>
+        </template>
         <div v-show="profile.bio" class="text-gray-700 text-xs">
           {{ getExcerpt(profile.bio) }}
         </div>
@@ -115,6 +117,10 @@ export default {
       default: () => ({}),
     },
     full: {
+      type: Boolean,
+      default: false,
+    },
+    hideRole: {
       type: Boolean,
       default: false,
     },

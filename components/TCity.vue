@@ -152,15 +152,15 @@
     </TCollapse>
 
     <TCollapse title="Organisers">
-      <TCommunity type="Organiser" class="pt-4 border-t" />
+      <TCommunity type="Organiser" class="pt-4 border-t" hide-role />
     </TCollapse>
 
     <TCollapse title="Venues">
-      <TCommunity type="Venue" class="pt-4 border-t" />
+      <TCommunity type="Venue" class="pt-4 border-t" hide-role />
     </TCollapse>
 
     <TCollapse title="Artists">
-      <TCommunity type="Artist" class="pt-4 border-t" />
+      <TCommunity type="Artist" class="pt-4 border-t" hide-role />
     </TCollapse>
 
     <TCollapse title="Dancers">
