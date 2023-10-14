@@ -386,6 +386,17 @@ export const eventChanged = functions.firestore
     const eventId = context.params.eventId
     const event = { ...change.after.data(), id: eventId } as any
 
+    if (wasChanged(oldEvent, event, ['updatedAt']) && event.type == 'event') {
+      const index = initIndex('events')
+
+      await index.saveObject(
+        eventToAlgolia({
+          ...event,
+          id: eventId,
+        })
+      )
+    }
+
     if (
       wasChanged(oldEvent, event, ['telegram']) &&
       event?.telegram?.state === 'requested'

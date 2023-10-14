@@ -387,14 +387,17 @@
 
     <div class="m-4 text-xs text-right gap-8">
       <span
-        >Published by
+        >Created by
         <nuxt-link
           class="underline text-primary"
           :to="`/${creator.username}`"
           >{{ creator.name }}</nuxt-link
         ></span
       >
-      <span>at {{ getDateTimeYear(doc.createdAt, $i18n.locale) }}</span>
+      <span>at {{ getYmdHms(doc.createdAt, $i18n.locale) }}</span>
+    </div>
+    <div class="m-4 text-xs text-right gap-8">
+      <span>Updated at {{ getYmdHms(doc.updatedAt, $i18n.locale) }}</span>
     </div>
 
     <div v-if="doc.facebook" class="m-4 text-right text-xs gap-8">
@@ -480,7 +483,7 @@ import { useAccounts } from '~/use/accounts'
 import { useEvents } from '~/use/events'
 import {
   getDay,
-  getDateTimeYear,
+  getYmdHms,
   getDateTime,
   getDate,
   getTime,
@@ -673,7 +676,7 @@ export default {
       getProfile,
       getFullProfile,
       getDateTime,
-      getDateTimeYear,
+      getYmdHms,
       dateDiff,
       getDate,
       getTime,

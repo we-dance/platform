@@ -263,10 +263,6 @@ export default {
         })
       } else {
         cityName = this.doc.name
-
-        this.update(this.id, {
-          hits: parseInt(this.doc.hits || 0) + 1,
-        })
       }
 
       this.change(cityName)

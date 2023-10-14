@@ -189,8 +189,6 @@ export const useApp = () => {
         name: item.name,
         location: item.location,
       })
-    } else {
-      await update(community.id, { hits: parseInt(community.hits || 1) + 1 })
     }
   }
 

@@ -264,10 +264,6 @@ export default {
           status: 'requested',
           hits: 1,
         })
-      } else {
-        this.update(this.id, {
-          hits: parseInt(this.doc.hits || 0) + 1,
-        })
       }
 
       this.change(location)
