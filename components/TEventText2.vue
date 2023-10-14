@@ -103,9 +103,8 @@ export default {
   computed: {
     guestCount() {
       const guestsCount = this.item.star?.count || 0
-      const artistsCount = this.item.artists?.length || 0
 
-      return guestsCount + artistsCount + 1
+      return guestsCount
     },
   },
 }
