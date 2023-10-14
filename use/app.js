@@ -97,7 +97,7 @@ export const getCityLabel = (doc) => `${doc.name}, ${doc.location.country}`
 export const useApp = () => {
   const db = firebase.firestore()
   const { uid, profile, updateProfile } = useAuth()
-  const { create, update } = useDoc('cities')
+  const { create } = useDoc('cities')
 
   const cache = useCache()
 
