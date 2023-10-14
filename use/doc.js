@@ -120,8 +120,6 @@ export const useDoc = (name) => {
       updatedBy: uid.value,
     }
 
-    console.log('update', changes)
-
     const result = await collection.doc(id).update(changes)
 
     state.saving = false

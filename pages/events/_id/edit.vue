@@ -35,6 +35,14 @@ export default {
         if (!this.can('edit', 'posts', this.item)) {
           this.$nuxt.error({ statusCode: 405 })
         }
+
+        if (typeof this.item.startDate === 'string') {
+          this.item.startDate = +new Date(this.item.startDate)
+        }
+
+        if (typeof this.item.endDate === 'string') {
+          this.item.endDate = +new Date(this.item.endDate)
+        }
       }
     },
   },
