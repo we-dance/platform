@@ -59,9 +59,10 @@
 
     <div class="grid grid-cols-4 gap-4 p-4">
       <div>
-        <img
+        <EnlargeableImage
           v-if="profile.photo"
           :src="profile.photo"
+          :src_large="profile.photo"
           :alt="profile.username"
           class="w-full rounded-full"
         />

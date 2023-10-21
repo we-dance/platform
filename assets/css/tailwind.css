@@ -111,6 +111,11 @@ html {
   min-width: 10rem;
 }
 
+.enlargeable-image > .slot > img.default {
+  border-radius: 50%;
+}
+
+/* purgecss end ignore */
 .typo {
   /* These are technically the same, but use both */
   overflow-wrap: break-word;
@@ -128,5 +133,3 @@ html {
   -webkit-hyphens: auto;
   hyphens: auto;
 }
-
-/* purgecss end ignore */
