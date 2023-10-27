@@ -168,7 +168,7 @@
       />
     </div>
 
-    <div v-if="can('edit', 'events', doc)" class="space-y-2 p-4">
+    <div v-if="can('edit', 'events', doc)" class="space-y-2 p-4 border-b">
       <h3 class="text-xl font-bold">Moderator Tools</h3>
       <div v-if="doc.promotion !== 'completed'" class="text-sm">
         As soon as event is published, you can promote it for free on WeDance
@@ -197,10 +197,15 @@
         label="Promoting..."
         class="rounded-full"
       />
-      <div v-else-if="doc.promotion === 'completed'">
+      <div v-else-if="doc.promotion === 'completed'" class="text-sm">
         Event announcement is published on
-        <a :href="doc.telegram.messageUrl">Telegram</a> and
-        <a :href="doc.instagram.messageUrl">Instagram</a>
+        <a class="underline text-primary" :href="doc.telegram.messageUrl"
+          >Telegram</a
+        >
+        and
+        <a class="underline text-primary" :href="doc.instagram.messageUrl"
+          >Instagram</a
+        >
       </div>
       <TButton
         v-else
