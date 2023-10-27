@@ -531,7 +531,7 @@ sort:
   yours: Yours
 event:
   attend: Join Guest List
-  attendCallToAction: Join guest list to receive special offers
+  attendCallToAction: Join guest list to find tickets
   attending: On the Guest List
   getTicket: Get Ticket
   share: Share
