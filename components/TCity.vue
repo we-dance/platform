@@ -136,7 +136,7 @@
       />
     </div>
 
-    <div class="border-t">
+    <div class="border-t bg-orange-50">
       <div class="text-xs pt-2 pr-2 text-right text-primary">SPONSORED</div>
       <NuxtLink
         v-if="promo && promo.id"
