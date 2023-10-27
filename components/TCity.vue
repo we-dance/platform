@@ -136,12 +136,16 @@
       />
     </div>
 
-    <WTeaser
-      v-if="profile.partner === 'Yes'"
-      :title="$t('profile.partnerSearch.title')"
-      :description="profile.partnerBio"
-      class="w-full mt-4"
-    />
+    <div class="border-t">
+      <div class="text-xs pt-2 pr-2 text-right text-primary">SPONSORED</div>
+      <NuxtLink
+        v-if="promo && promo.id"
+        :to="`/events/${promo.id}`"
+        class="hover:opacity-75"
+      >
+        <TEventText3 :item="promo" />
+      </NuxtLink>
+    </div>
 
     <TCollapse title="Events" expanded>
       <TCalendar class="mt-4 w-full border-t pt-4 pb-8" />
@@ -296,7 +300,7 @@ import { computed, onMounted } from 'vue-demi'
 import { useApp } from '~/use/app'
 import { useAuth } from '~/use/auth'
 import { useProfiles } from '~/use/profiles'
-import { getExcerpt, getMeta } from '~/utils'
+import { getExcerpt, getMeta, getDateObect } from '~/utils'
 import { useI18n } from '~/use/i18n'
 import { useDoc } from '~/use/doc'
 import { useCities } from '~/use/cities'
@@ -318,9 +322,11 @@ export default {
     const { getCity } = useApp()
     const { t } = useI18n()
     const { remove } = useDoc('profiles')
+    const { load, doc: promo } = useDoc('posts')
     const invitesLeft = 5
     const { switchCity } = useCities()
     const community = computed(() => getCity(props.profile?.place))
+
     const intro = {
       fields: [
         {
@@ -364,9 +370,12 @@ export default {
 
     onMounted(async () => {
       await switchCity(props.profile.place)
+      load('fi21VUplHl2yReD67CMl')
     })
 
     return {
+      getDateObect,
+      promo,
       internationalChatLink,
       intro,
       uid,

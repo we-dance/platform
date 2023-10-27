@@ -124,6 +124,16 @@
             <div>{{ doc.price }}</div>
           </div>
         </div>
+
+        <div
+          v-if="doc.specialOffer"
+          class="flex w-full items-center justify-start border-b py-2 px-4 leading-tight"
+        >
+          <TIcon name="fire" class="mr-4 h-4 w-4 text-primary" />
+          <div class="flex w-full justify-between text-primary">
+            <div>{{ doc.specialOffer }}</div>
+          </div>
+        </div>
       </div>
     </div>
 
@@ -135,7 +145,7 @@
       <WTicketTailor :href="doc.link" />
     </TPopup>
 
-    <div v-if="!isGoing" class="text-xs p-4 text-center font-bold">
+    <div v-if="!isGoing" class="text-xs p-4 pb-0 text-center font-bold">
       {{ $t('event.attendCallToAction') }}
     </div>
     <div
@@ -149,7 +159,7 @@
         icon="PlusIcon"
         toggled-icon="CheckIcon"
         field="star"
-        class="rounded-full text-dark"
+        class="rounded-full"
         hide-count
         :item="doc"
       />

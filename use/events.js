@@ -331,6 +331,12 @@ export const useEvents = () => {
       description: t('event.price.description'),
     },
     {
+      name: 'specialOffer',
+      labelPosition: 'top',
+      label: 'Special Offer',
+      description: 'For example: Get 10% off with WeDance discount',
+    },
+    {
       name: 'styles',
       labelPosition: 'top',
       label: t('event.styles.label'),

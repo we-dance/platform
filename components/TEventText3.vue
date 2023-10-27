@@ -37,6 +37,9 @@
           </template>
         </div>
       </div>
+      <div v-if="item.specialOffer" class="text-primary text-xs">
+        {{ item.specialOffer }}
+      </div>
     </div>
     <div>
       <img class="w-20 rounded" :src="item.cover" />
