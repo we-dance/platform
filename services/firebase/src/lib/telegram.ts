@@ -27,8 +27,7 @@ async function announceEvent(event: any, options: any = null) {
   )
 
   if (!cities.length) {
-    console.log(`Community ${event.place} not found`)
-    return
+    throw new Error(`Community for place "${event.place}" not found`)
   }
 
   const city = cities[0]
@@ -37,8 +36,7 @@ async function announceEvent(event: any, options: any = null) {
   const chatUrl = options?.chatUrl || city.telegramChannel
 
   if (!chatId) {
-    console.log(`Bot is not present in ${city.name}`)
-    return
+    throw new Error(`Telegram bot is not present in ${city.name}`)
   }
 
   const response = await telegram.sendPhoto(chatId, photo, {

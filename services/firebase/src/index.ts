@@ -13,7 +13,7 @@ import {
   profileToAlgolia,
   removeObject,
 } from './lib/algolia'
-import { generateSocialCover } from './lib/migrations'
+import { generateSocialCover, updateEventPoster } from './lib/migrations'
 import { firestore as db, admin, firestore } from './firebase'
 import { notifySlackAboutEvents, notifySlackAboutUsers } from './lib/slack'
 import { wrap } from './sentry'
@@ -386,50 +386,64 @@ export const eventChanged = functions.firestore
     const eventId = context.params.eventId
     const event = { ...change.after.data(), id: eventId } as any
 
-    if (wasChanged(oldEvent, event, ['updatedAt']) && event.type == 'event') {
+    if (wasChanged(oldEvent, event, ['updatedAt'])) {
       const index = initIndex('events')
 
-      await index.saveObject(
-        eventToAlgolia({
-          ...event,
-          id: eventId,
-        })
-      )
+      if (!event?.id && oldEvent.id) {
+        await index.deleteObject(oldEvent.id)
+      }
+
+      if (event?.type === 'event') {
+        await index.saveObject(
+          eventToAlgolia({
+            ...event,
+            id: eventId,
+          })
+        )
+      }
     }
 
     if (
-      wasChanged(oldEvent, event, ['telegram']) &&
-      event?.telegram?.state === 'requested'
+      wasChanged(oldEvent, event, ['cover']) &&
+      event?.type === 'event' &&
+      !event?.socialCover
     ) {
-      const result = (await announceEvent(event)) as any
-
-      await db
-        .collection('posts')
-        .doc(eventId)
-        .update({
-          'telegram.state': 'published',
-          'telegram.publishedAt': +new Date(),
-          'telegram.messageId': result.messageId,
-          'telegram.messageUrl': result.messageUrl,
-        })
+      await updateEventPoster(event)
+      return
     }
 
     if (
-      wasChanged(oldEvent, event, ['instagram']) &&
-      event?.instagram?.state === 'requested' &&
-      event.place === 'ChIJ2V-Mo_l1nkcRfZixfUq4DAE'
+      wasChanged(oldEvent, event, ['promotion']) &&
+      event?.promotion === 'requested'
     ) {
-      const result = (await announceEventIG(event)) as any
+      try {
+        const tg = (await announceEvent(event)) as any
+        const ig = (await announceEventIG(event)) as any
 
-      await db
-        .collection('posts')
-        .doc(eventId)
-        .update({
-          'instagram.state': 'published',
-          'instagram.publishedAt': +new Date(),
-          'instagram.messageId': result.messageId,
-          'instagram.messageUrl': result.messageUrl,
-        })
+        await db
+          .collection('posts')
+          .doc(eventId)
+          .update({
+            'telegram.state': 'published',
+            'telegram.publishedAt': +new Date(),
+            'telegram.messageId': tg.messageId,
+            'telegram.messageUrl': tg.messageUrl,
+            'instagram.state': 'published',
+            'instagram.publishedAt': +new Date(),
+            'instagram.messageId': ig.messageId,
+            'instagram.messageUrl': ig.messageUrl,
+            promotion: 'completed',
+            promotionError: '',
+          })
+      } catch (e) {
+        await db
+          .collection('posts')
+          .doc(eventId)
+          .update({
+            promotion: 'failed',
+            promotionError: e.message,
+          })
+      }
     }
   })
 

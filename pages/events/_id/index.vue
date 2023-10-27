@@ -31,17 +31,6 @@
           :item="doc"
           type="context"
         />
-        <TButtonShare
-          :id="doc.id"
-          collection="events"
-          :place="doc.place"
-          :file="doc.socialCover"
-          :file-name="doc.name"
-          :url="`https://wedance.vip/events/${item.id}`"
-          :text="doc.name"
-          type="context"
-          :label="$t('eventView.dropdown.share')"
-        />
         <TButton
           v-if="can('edit', 'events', doc)"
           type="context"
@@ -164,12 +153,65 @@
         hide-count
         :item="doc"
       />
-      <TButton
-        allow-guests
-        icon="share"
-        :label="$t('event.share')"
+      <TButtonShare
+        :id="doc.id"
+        collection="events"
+        :doc="doc"
+        :place="doc.place"
+        :file="doc.socialCover"
+        :file-name="doc.name"
+        :url="`https://wedance.vip/events/${item.id}`"
+        :text="doc.name"
+        type="simple"
         class="rounded-full"
-        @click="announcementPopupVisible = true"
+        :label="$t('eventView.dropdown.share')"
+      />
+    </div>
+
+    <div v-if="can('edit', 'events', doc)" class="space-y-2 p-4">
+      <h3 class="text-xl font-bold">Moderator Tools</h3>
+      <div v-if="doc.promotion !== 'completed'" class="text-sm">
+        As soon as event is published, you can promote it for free on WeDance
+        Instagram and Telegram by clicking Promote.
+        <div v-if="doc.promotion === 'failed'">
+          <div class="text-red-500">
+            Promotion failed: {{ doc.promotionError }}
+          </div>
+          <div>
+            Please
+            <a class="underline text-primary" href="mailto:support@wedance.vip"
+              >contact support</a
+            >
+            to resolve the issue.
+          </div>
+        </div>
+      </div>
+
+      <TButton
+        v-if="!doc.socialCover"
+        label="Publishing..."
+        class="rounded-full"
+      />
+      <TButton
+        v-else-if="doc.promotion === 'requested'"
+        label="Promoting..."
+        class="rounded-full"
+      />
+      <div v-else-if="doc.promotion === 'completed'">
+        Event announcement is published on
+        <a :href="doc.telegram.messageUrl">Telegram</a> and
+        <a :href="doc.instagram.messageUrl">Instagram</a>
+      </div>
+      <TButton
+        v-else
+        icon="trending"
+        label="Promote"
+        class="rounded-full"
+        @click="
+          softUpdate(doc.id, {
+            promotion: 'requested',
+          })
+        "
       />
     </div>
 
@@ -223,7 +265,7 @@
 
     <TPopup
       v-if="announcementPopupVisible"
-      title="Share"
+      title="Promote for free"
       @close="announcementPopupVisible = false"
     >
       <div class="w-64 space-y-2 py-4">

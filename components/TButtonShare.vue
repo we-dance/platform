@@ -107,6 +107,10 @@ export default {
       type: String,
       default: 'icon',
     },
+    doc: {
+      type: Object,
+      default: null,
+    },
   },
   data: () => ({
     sharing: false,
@@ -119,12 +123,22 @@ export default {
       const text = this.text
       const url = this.url
 
-      return {
-        Whatsapp: `whatsapp://send?text=${text} ${url}`,
+      const result = {
         Telegram: `https://t.me/share/url?url=${url}&text=${text}`,
+        Whatsapp: `whatsapp://send?text=${text} ${url}`,
         Facebook: `https://www.facebook.com/share.php?display=page&u=${url}&t=${text}`,
         Twitter: `https://twitter.com/intent/tweet?text=${text} ${url}`,
       }
+
+      if (this.doc?.instagram?.messageUrl) {
+        result.Instagram = this.doc?.instagram?.messageUrl
+      }
+
+      if (this.doc?.telegram?.messageUrl) {
+        result.Telegram = this.doc?.telegram?.messageUrl
+      }
+
+      return result
     },
   },
   mounted() {

@@ -17,6 +17,12 @@ function getMention(link: string) {
 }
 
 export async function announceEventIG(event: any) {
+  if (event.place !== 'ChIJ2V-Mo_l1nkcRfZixfUq4DAE') {
+    throw new Error(
+      `Instagram promotion is only available in Munich at the moment`
+    )
+  }
+
   const hashtags = [event.eventType, ...Object.keys(event.styles)]
     .map((tag) => `#${tag}`)
     .join(' ')
