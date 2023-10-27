@@ -513,7 +513,7 @@ sort:
   yours: Yours
 event:
   attend: Join Guest List
-  attendCallToAction: Join guest list to find tickets, see who is coming, write and read comments, request songs and exchange videos.
+  attendCallToAction: Join guest list to find tickets
   attending: On the Guest List
   getTicket: Get Ticket
   share: Објави
