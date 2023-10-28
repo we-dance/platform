@@ -560,7 +560,7 @@ event:
   description:
     label: Описание
     placeholder: What do you offer? It shouldn’t take more than a minute to say or read
-    description: We will use only first 140 symbols of this text in our social media posts. Use this field to explain why people should join. Conditions on participation in the next field.
+    description: We will use only first 280 symbols of this text in our social media posts. Use this field to explain why people should join. Conditions on participation in the next field.
     tips: "Pitch yourself: Who are you? What do you offer? What do you want?\n\nTips for effective pitch:\n- Uncomplicated: It should be catchy and roll off the tongue\n- Concise: It shouldn’t take more than a minute to say or read\n- Unique: It reflects your skills, goals, and desires\n- Storyline: It covers who you are, what you offer, and where you want to be\n- Appealing: Your elevator pitch is essentially a persuasive sales pitch; the emphasis should be on what you offer"
   startDate: When?
   endDate: End Date
