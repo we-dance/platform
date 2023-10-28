@@ -62,7 +62,7 @@
         href="https://bit.ly/49cYPoB"
         target="_blank"
         class="underline text-primary hover:no-underline"
-        >We are looking for Ambassadors!</a
+        >Become a Dance Promoter – Get Discounts!</a
       >
     </div>
 
