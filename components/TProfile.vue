@@ -57,6 +57,15 @@
       </TDropdown>
     </THeader>
 
+    <div v-if="profile.username === 'Travel'" class="p-2 border-b text-center">
+      <a
+        href="https://bit.ly/49cYPoB"
+        target="_blank"
+        class="underline text-primary hover:no-underline"
+        >We are looking for Ambassadors!</a
+      >
+    </div>
+
     <div class="grid grid-cols-4 gap-4 p-4">
       <div>
         <img
