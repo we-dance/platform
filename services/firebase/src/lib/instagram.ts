@@ -51,7 +51,7 @@ export async function announceEventIG(event: any) {
   let caption = ''
 
   if (specialOffer) {
-    caption += `🔥${specialOffer}\n`
+    caption += `🔥${specialOffer}\n\n`
   }
 
   caption += `${name}\n`

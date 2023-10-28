@@ -28,7 +28,7 @@ async function announceEvent(event: any, options: any = null) {
   let caption = ''
 
   if (specialOffer) {
-    caption += `🔥${specialOffer}\n`
+    caption += `🔥${specialOffer}\n\n`
   }
 
   caption += `<b>${name}</b>\n`
