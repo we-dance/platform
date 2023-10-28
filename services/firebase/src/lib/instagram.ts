@@ -12,6 +12,7 @@ function getMention(link: string) {
   let result = link
   result = result.replace('https://instagram.com/', '@')
   result = result.replace('https://www.instagram.com/', '@')
+  result = result.replace('/', '')
 
   return result
 }
@@ -27,10 +28,14 @@ export async function announceEventIG(event: any) {
     .map((tag) => `#${tag}`)
     .join(' ')
 
+  const name = event.name || ''
   let description = event.description || ''
+  const venue = event.venue?.name || ''
+  const price = event.price || ''
+  const specialOffer = event.specialOffer || ''
 
-  if (description.length > 140) {
-    description = description.substring(0, 140) + '...'
+  if (description.length > 280) {
+    description = description.substring(0, 280) + '...'
   }
 
   const mentionsList = [getMention(event.org?.instagram)]
@@ -43,7 +48,23 @@ export async function announceEventIG(event: any) {
 
   const photo = event.socialCover
 
-  const caption = `See link in bio\n${description}\n\n${mentions}\n\n${hashtags}`
+  let caption = ''
+
+  if (specialOffer) {
+    caption += `🔥${specialOffer}\n`
+  }
+
+  caption += `${name}\n`
+  caption += `📍${venue}\n`
+  caption += `💰${price}\n`
+  caption += `\n`
+  caption += `${description}\n`
+  caption += `\n`
+  caption += `👉 See link in bio\n`
+  caption += `\n`
+  caption += mentions
+  caption += `\n\n`
+  caption += hashtags
 
   const response = await axios.get(photo, { responseType: 'arraybuffer' })
   const buffer = Buffer.from(response.data, 'utf-8')

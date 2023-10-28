@@ -242,7 +242,7 @@ export const useEvents = () => {
       labelPosition: 'top',
       component: 'TInputTextarea',
       placeholder: t('event.description.placeholder'),
-      max: 140,
+      max: 280,
     },
     {
       name: 'confirmation',
