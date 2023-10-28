@@ -560,7 +560,7 @@ event:
   description:
     label: Açıklama
     placeholder: What do you offer? It shouldn’t take more than a minute to say or read
-    description: We will use only first 140 symbols of this text in our social media posts. Use this field to explain why people should join. Conditions on participation in the next field.
+    description: We will use only first 280 symbols of this text in our social media posts. Use this field to explain why people should join. Conditions on participation in the next field.
     tips: "Kendinizi tanıtın: Siz kimsiniz? Ne teklif ediyorsunuz? Ne istiyorsunuz?\n\nEtkili sunum için ipuçları:\n- Karmaşık olmayan: Akılda kalıcı olmalı ve dilden dökülmeli\n- Kısa ve öz: Söylemesi veya okuması bir dakikadan fazla sürmemeli\n- Eşsiz: Becerilerinizi, hedeflerinizi ve arzularınızı yansıtır\n- Hikaye: Kim olduğunuzu, ne sunduğunuzu ve nerede olmak istediğinizi kapsar\n- İlgi çekici: Asansör konuşmanız esasen ikna edici bir satış konuşmasıdır; vurgu ne sunduğunuz üzerinde olmalıdır"
   startDate: Ne zaman?
   endDate: Bitiş Tarihi
