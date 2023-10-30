@@ -20,6 +20,16 @@
         hide-search-box
       />
 
+      <DatePicker
+        v-model="fromDate"
+        :lang="{ formatLocale: { firstDayOfWeek: 1 } }"
+        value-type="timestamp"
+        class="w-32 py-4"
+        placeholder="Date"
+        format="D MMM YY"
+        :clearable="false"
+      />
+
       <TButton v-if="facetFilters" allow-guests type="link" @click="load()">
         {{ $t('filter.reset') }}
       </TButton>
@@ -82,13 +92,24 @@ export default {
   setup() {
     const radius = ref(10)
     const query = ref('')
+    const sorting = ref('Upcoming')
     const profileType = ref('')
     const currentPage = ref(1)
     const filters = ref({})
     const { uid } = useAuth()
     const { city, currentCity, cityName } = useCities()
     const { getCity } = useApp()
-    const today = Date.now()
+    let today = new Date(Date.now())
+    today.setHours(6, 0, 0, 0)
+    today = +today
+    const fromDate = ref(today)
+
+    const untilDate = computed(() => {
+      const oneWeekLater = new Date(fromDate.value)
+      oneWeekLater.setDate(oneWeekLater.getDate() + 7)
+      return +oneWeekLater
+    })
+
     if (!currentCity.value) {
       return
     }
@@ -110,12 +131,12 @@ export default {
         .map((field) => `${field}:${filters.value[field]}`)
         .join(',')
     })
-    watch([currentPage, facetFilters, radius, city], () => {
+    watch([currentPage, facetFilters, radius, city, fromDate], () => {
       if (!city.value?.location) {
         return
       }
-      search('', {
-        filters: `startDate>${today}`,
+      const searchParams = {
+        filters: `startDate>${fromDate.value} AND startDate<${untilDate.value}`,
         facets: Object.keys(facets.value),
         facetFilters: facetFilters.value,
         page: currentPage.value - 1,
@@ -123,8 +144,9 @@ export default {
           ? `${city.value.location.latitude}, ${city.value.location.longitude}`
           : '',
         aroundRadius: radius.value * 1000 || 1,
-        hitsPerPage: uid.value ? 10 : 4,
-      })
+        hitsPerPage: 100,
+      }
+      search('', searchParams)
     })
     const { getStyleName } = useStyles()
     function getFacetOptions(field) {
@@ -165,6 +187,8 @@ export default {
       return result
     })
     return {
+      fromDate,
+      sorting,
       uid,
       getFacetOptions,
       facets,

@@ -129,4 +129,7 @@ html {
   hyphens: auto;
 }
 
+.mx-input {
+  height: 40px !important;
+}
 /* purgecss end ignore */
