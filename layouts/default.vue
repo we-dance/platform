@@ -5,7 +5,7 @@
       desktop="Upload your photo"
       mobile="Upload your photo"
       action="Upload"
-      link="https://wedance.vip/settings?tab=profile"
+      to="/settings"
     />
     <TBanner
       v-if="false"
