@@ -182,7 +182,7 @@
       <h3 class="text-xl font-bold">Moderator Tools</h3>
       <div v-if="doc.promotion !== 'completed'" class="text-sm">
         As soon as event is published, you can promote it for free on WeDance
-        Instagram and Telegram by clicking Promote.
+        Instagram by clicking Promote.
         <div v-if="doc.promotion === 'failed'">
           <div class="text-red-500">
             Promotion failed: {{ doc.promotionError }}
@@ -209,10 +209,6 @@
       />
       <div v-else-if="doc.promotion === 'completed'" class="text-sm">
         Event announcement is published on
-        <a class="underline text-primary" :href="doc.telegram.messageUrl"
-          >Telegram</a
-        >
-        and
         <a class="underline text-primary" :href="doc.instagram.messageUrl"
           >Instagram</a
         >

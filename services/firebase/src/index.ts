@@ -17,7 +17,6 @@ import { generateSocialCover, updateEventPoster } from './lib/migrations'
 import { firestore as db, admin, firestore } from './firebase'
 import { notifySlackAboutEvents, notifySlackAboutUsers } from './lib/slack'
 import { wrap } from './sentry'
-import { announceEvent } from './lib/telegram'
 import { announceEventIG } from './lib/instagram'
 import { getInstagramWebProfileInfo } from './lib/browser'
 
@@ -417,17 +416,12 @@ export const eventChanged = functions.firestore
       event?.promotion === 'requested'
     ) {
       try {
-        const tg = (await announceEvent(event)) as any
         const ig = (await announceEventIG(event)) as any
 
         await db
           .collection('posts')
           .doc(eventId)
           .update({
-            'telegram.state': 'published',
-            'telegram.publishedAt': +new Date(),
-            'telegram.messageId': tg.messageId,
-            'telegram.messageUrl': tg.messageUrl,
             'instagram.state': 'published',
             'instagram.publishedAt': +new Date(),
             'instagram.messageId': ig.messageId,
