@@ -1,7 +1,7 @@
 import { addMinutes, parseISO } from 'date-fns'
 import firebase from 'firebase/app'
 import 'firebase/firestore'
-import { useCities } from './cities'
+import { useCities } from '~/use/cities'
 import { useI18n } from '~/use/i18n'
 import { getYmd, toDatetimeLocal } from '~/utils'
 

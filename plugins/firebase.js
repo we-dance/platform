@@ -3,13 +3,13 @@ import 'firebase/auth'
 import 'firebase/firestore'
 import 'firebase/analytics'
 
-if (!process.env.firebase.config?.apiKey) {
+if (!process.env.FIREBASE_CONFIG) {
   throw new Error('Missing Firebase Configuration')
 }
 
 // eslint-disable-next-line import/no-mutable-exports
 let track = function(...params) {
-  if (process.env.firebase.analyticsDebug) {
+  if (process.env.FIREBASE_ANALYTICS_DEBUG) {
     console.log('[track]', ...params)
   }
 }
@@ -21,11 +21,11 @@ let analytics
 let googleApiKey
 
 if (!firebase.apps.length) {
-  const config = process.env.firebase.config
+  const config = JSON.parse(process.env.FIREBASE_CONFIG || {})
   googleApiKey = config.apiKey
   firebase.initializeApp(config)
 
-  if (process.env.firebase.analytics) {
+  if (process.env.FIREBASE_ANALYTICS) {
     analytics = firebase.analytics()
 
     track = analytics.logEvent

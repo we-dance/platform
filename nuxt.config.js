@@ -1,3 +1,6 @@
+import { orderBy } from 'lodash'
+import { db } from './plugins/firebase'
+
 export const app = {
   name: 'WeDance',
   description: 'We bring dancers together',
@@ -187,11 +190,6 @@ export default {
   },
   env: {
     app,
-    firebase: {
-      config: JSON.parse(process.env.FIREBASE_CONFIG || {}),
-      analytics: process.env.FIREBASE_ANALYTICS,
-      analyticsDebug: process.env.FIREBASE_ANALYTICS_DEBUG,
-    },
   },
   sentry: {
     dsn: process.env.SENTRY_DSN,
@@ -216,7 +214,43 @@ export default {
   ],
   sitemap: {
     hostname: app.url,
-    routes: ['/'],
+    exclude: [
+      '/chat',
+      '/search',
+      '/community',
+      '/lists',
+      '/lists',
+      '/nopassword',
+      '/onboarding',
+      '/register',
+      '/settings',
+      '/signin',
+      '/signin-email',
+      '/signout',
+      '/demo/**',
+      '/admin/**',
+    ],
+    routes: async () => {
+      const citiesRef = await db
+        .collection('profiles')
+        .where('type', '==', 'City')
+        .get()
+
+      const cities = orderBy(
+        citiesRef.docs
+          .map((doc) => doc.data())
+          .filter((c) => c.username && c.viewsCount),
+        'viewsCount',
+        'desc'
+      )
+
+      return cities.map((city) => ({
+        url: `/${city.username}`,
+        changefreq: 'daily',
+        priority: 1,
+      }))
+    },
+    i18n: true,
   },
   i18n: {
     locales,
