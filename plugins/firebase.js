@@ -25,7 +25,7 @@ if (!firebase.apps.length) {
   googleApiKey = config.apiKey
   firebase.initializeApp(config)
 
-  if (process.env.FIREBASE_ANALYTICS) {
+  if (process.client && process.env.FIREBASE_ANALYTICS) {
     analytics = firebase.analytics()
 
     track = analytics.logEvent
