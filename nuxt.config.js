@@ -13,8 +13,12 @@ export const app = {
   cover: '/cover/wide.png',
 }
 
+if (!process.env.FIREBASE_CONFIG) {
+  throw new Error('Missing Firebase Configuration')
+}
+
 const firebaseEnv = {
-  config: JSON.parse(process.env.FIREBASE_CONFIG || {}),
+  config: JSON.parse(process.env.FIREBASE_CONFIG),
   analytics: process.env.FIREBASE_ANALYTICS,
   analyticsDebug: process.env.FIREBASE_ANALYTICS_DEBUG,
 }
