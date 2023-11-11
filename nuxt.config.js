@@ -23,6 +23,13 @@ const firebaseEnv = {
   analyticsDebug: process.env.FIREBASE_ANALYTICS_DEBUG,
 }
 
+let sitemapApp
+if (!firebase.apps.some((app) => app.name === 'sitemap')) {
+  sitemapApp = firebase.initializeApp(firebaseEnv.config, 'sitemap')
+} else {
+  sitemapApp = firebase.app('sitemap')
+}
+
 const locales = [
   { code: 'en', name: 'English', file: 'en.yml' },
   { code: 'es', name: 'Español', file: 'es.yml' },
@@ -244,8 +251,7 @@ export default {
       '/admin/**',
     ],
     routes: async () => {
-      firebase.initializeApp(firebaseEnv.config)
-      const db = firebase.firestore()
+      const db = sitemapApp.firestore()
 
       const citiesRef = await db
         .collection('profiles')
