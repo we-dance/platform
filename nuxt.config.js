@@ -1,5 +1,6 @@
 import { orderBy } from 'lodash'
-import { db } from './plugins/firebase'
+import firebase from 'firebase/app'
+import 'firebase/firestore'
 
 export const app = {
   name: 'WeDance',
@@ -10,6 +11,12 @@ export const app = {
   url: 'https://wedance.vip/',
   author: 'WeDance',
   cover: '/cover/wide.png',
+}
+
+const firebaseEnv = {
+  config: JSON.parse(process.env.FIREBASE_CONFIG || {}),
+  analytics: process.env.FIREBASE_ANALYTICS,
+  analyticsDebug: process.env.FIREBASE_ANALYTICS_DEBUG,
 }
 
 const locales = [
@@ -190,6 +197,7 @@ export default {
   },
   env: {
     app,
+    firebase: firebaseEnv,
   },
   sentry: {
     dsn: process.env.SENTRY_DSN,
@@ -232,6 +240,9 @@ export default {
       '/admin/**',
     ],
     routes: async () => {
+      firebase.initializeApp(firebaseEnv.config)
+      const db = firebase.firestore()
+
       const citiesRef = await db
         .collection('profiles')
         .where('type', '==', 'City')
