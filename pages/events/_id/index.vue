@@ -543,8 +543,8 @@ import {
   dateDiff,
   getEventDescription,
   getDateObect,
-  getMeta,
   loadDoc,
+  getEventMeta,
 } from '~/utils'
 import { addressPart } from '~/use/google'
 import { trackView } from '~/use/tracking'
@@ -604,7 +604,7 @@ export default {
     },
   },
   head() {
-    return getMeta('events', this.doc)
+    return getEventMeta(this.doc)
   },
   setup() {
     const { uid, can, account, username, isAdmin } = useAuth()

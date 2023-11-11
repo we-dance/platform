@@ -470,97 +470,332 @@ export const getListOfStyles = (styles, extra) => {
   ]
 }
 
-export const getMeta = (collection, post) => {
-  if (!post) {
+export const getCityMeta = (profile, events = null, style = '') => {
+  if (!profile) {
     return {}
   }
 
-  let schema = []
+  const cityName = profile.name.replace(',', '')
+  const title = `${cityName} ${style} Dance Calendar`
+  const description = `Explore a variety of ${style} dance events happening in ${cityName}. From ${style ||
+    'salsa'} nights to bachata workshops, find your next dance adventure here.`
+  const keywords = `Where can I dance ${style} in ${cityName}, ${cityName} ${style} Dance Events, ${style} Dance Classes in ${cityName}, ${cityName} ${style} Dance Workshops, ${cityName} ${style} Dance Parties, ${cityName} ${style} Dance Calendar, ${style} Dance Studios ${cityName}, ${style} ${cityName} Dance Community, Popular ${style} Dance Styles ${cityName}`
 
-  if (collection === 'events') {
-    schema = {
-      '@context': 'https://schema.org',
-      '@type': 'DanceEvent',
-      name: post.name,
-      description: post.description,
-      image: post.socialCover || post.cover,
-      startDate: post.startDate
-        ? getDateObect(post.startDate).toISOString()
-        : '',
-      endDate: post.endDate ? getDateObect(post.endDate).toISOString() : '',
-      url: `/events/${post.id}`,
-      eventStatus: 'https://schema.org/EventScheduled',
-      eventAttendanceMode: 'https://schema.org/OfflineEventAttendanceMode',
-      location: {
-        '@type': 'Place',
-        address: {
-          '@type': 'PostalAddress',
-          contactType: 'Venue Manager',
-          addressLocality: addressPart(post?.venue, 'locality'),
-          addressRegion: addressPart(
-            post?.venue,
-            'administrative_area_level_1'
-          ),
-          streetAddress:
-            addressPart(post?.venue, 'route') +
-            ' ' +
-            addressPart(post?.venue, 'street_number'),
-          postalCode: addressPart(post?.venue, 'postal_code'),
-        },
-        name: post.venue?.name,
-        url: post.venue?.url,
-      },
-      offers: {
-        '@type': 'Offer',
-        price: post.price,
-      },
-      organizer: {
-        '@type': 'Person',
-        image: post?.org?.photo,
-        name: post?.org?.name,
-        description: post?.org?.bio,
-        sameAs: [
-          `https://wedance.vip/${post?.org?.username}`,
-          `https://facebook.com/${post?.org?.facebook}`,
-          `https://instagram.com/${post?.org?.instagram}`,
-        ],
-      },
-      performer: post.artists?.map((artist) => ({
-        '@type': 'Person',
-        image: artist?.photo,
-        name: artist?.name,
-        description: artist?.bio,
-        sameAs: [
-          `https://wedance.vip/${artist?.username}`,
-          `https://facebook.com/${artist?.facebook}`,
-          `https://instagram.com/${artist?.instagram}`,
-        ],
+  const schema = {
+    '@context': 'https://schema.org',
+    '@type': 'CollectionPage',
+    name: title,
+    description,
+    image: profile.photo,
+    url: `https://wedance.vip/${profile.username}`,
+    mainEntity: {
+      '@type': 'ItemList',
+      itemListElement: events.map((event, index) => ({
+        '@type': 'ListItem',
+        position: index + 1,
+        url: `https://wedance.vip/events/${event.id}`,
       })),
-    }
-  }
-
-  if (collection === 'profiles') {
+    },
   }
 
   return {
-    title: post.name || post.title || getExcerpt(post.description),
+    title,
     meta: [
       {
         hid: 'description',
         name: 'description',
-        content: getExcerpt(post.description),
+        content: description,
       },
       {
         hid: 'keywords',
         name: 'keywords',
-        content: getListOfStyles(post.styles, [
+        content: keywords,
+      },
+      {
+        hid: 'og:title',
+        property: 'og:title',
+        content: title,
+      },
+      {
+        hid: 'og:type',
+        property: 'og:type',
+        content: 'website',
+      },
+      {
+        hid: 'og:description',
+        property: 'og:description',
+        content: description,
+      },
+      {
+        hid: 'og:image',
+        property: 'og:image',
+        content: profile.photo,
+      },
+    ],
+    script: [
+      {
+        hid: 'schema',
+        type: 'application/ld+json',
+        json: schema,
+      },
+    ],
+  }
+}
+
+export const getProfileMeta = (profile) => {
+  const sameAs = [
+    profile.website,
+    profile.telegram,
+    profile.instagram,
+    profile.tiktok,
+    profile.youtube,
+    profile.twitter,
+    profile.facebook,
+  ].filter((n) => !!n)
+
+  const schema = {
+    '@context': 'http://schema.org',
+    '@type': profile.type === 'Venue' ? 'Place' : 'Person',
+    name: profile.name,
+    alternateName: profile.username,
+    url: `https://wedance.vip/${profile.username}`,
+    mainEntityOfPage: `https://wedance.vip/${profile.username}`,
+    image: profile.photo,
+    description: getExcerpt(profile.bio),
+    sameAs,
+  }
+
+  return {
+    title: profile.name,
+    meta: [
+      {
+        hid: 'description',
+        name: 'description',
+        content: getExcerpt(profile.bio),
+      },
+      {
+        hid: 'keywords',
+        name: 'keywords',
+        content: getListOfStyles(profile.styles, [
           'WeDance',
           'Dance',
-          addressPart(post?.venue, 'country'),
-          addressPart(post?.venue, 'locality'),
-          post.venue?.name,
-          post.eventType,
-        ]).join(', '),
+          profile.name,
+          profile.username,
+          profile.bio,
+        ])
+          .filter((n) => !!n)
+          .join(', '),
+      },
+      {
+        hid: 'og:title',
+        property: 'og:title',
+        content: profile.name,
+      },
+      {
+        hid: 'og:type',
+        property: 'og:type',
+        content: 'profile',
+      },
+      {
+        hid: 'og:description',
+        property: 'og:description',
+        content: getExcerpt(profile.bio),
+      },
+      {
+        hid: 'og:image',
+        property: 'og:image',
+        content: profile.photo,
+      },
+      {
+        hid: 'author',
+        name: 'author',
+        content: profile.name,
+      },
+      {
+        hid: 'publisher',
+        name: 'publisher',
+        content: profile.name,
+      },
+    ],
+    script: [
+      {
+        hid: 'schema',
+        type: 'application/ld+json',
+        json: schema,
+      },
+    ],
+  }
+}
+
+export const getEventMeta = (event) => {
+  if (!event) {
+    return {}
+  }
+
+  const schema = {
+    '@context': 'https://schema.org',
+    '@type': 'DanceEvent',
+    name: event.name,
+    description: event.description,
+    image: event.socialCover || event.cover,
+    startDate: event.startDate
+      ? getDateObect(event.startDate).toISOString()
+      : '',
+    endDate: event.endDate ? getDateObect(event.endDate).toISOString() : '',
+    url: `https://wedance.vip/events/${event.id}`,
+    eventStatus: 'https://schema.org/EventScheduled',
+    eventAttendanceMode: 'https://schema.org/OfflineEventAttendanceMode',
+    location: {
+      '@type': 'Place',
+      address: {
+        '@type': 'PostalAddress',
+        contactType: 'Venue Manager',
+        addressLocality: addressPart(event?.venue, 'locality'),
+        addressRegion: addressPart(event?.venue, 'administrative_area_level_1'),
+        streetAddress:
+          addressPart(event?.venue, 'route') +
+          ' ' +
+          addressPart(event?.venue, 'street_number'),
+        postalCode: addressPart(event?.venue, 'postal_code'),
+      },
+      name: event.venue?.name,
+      url: event.venue?.url,
+    },
+    offers: {
+      '@type': 'Offer',
+      price: event.price,
+    },
+    organizer: {
+      '@type': 'Person',
+      image: event?.org?.photo,
+      name: event?.org?.name,
+      description: event?.org?.bio,
+      sameAs: [
+        `https://wedance.vip/${event?.org?.username}`,
+        event?.org?.website,
+        event?.org?.facebook,
+        event?.org?.instagram,
+      ].filter((n) => !!n),
+    },
+    performer: event.artists?.map((artist) => ({
+      '@type': 'Person',
+      image: artist?.photo,
+      name: artist?.name,
+      description: artist?.bio,
+      sameAs: [
+        `https://wedance.vip/${artist?.username}`,
+        artist?.website,
+        artist?.facebook,
+        artist?.instagram,
+      ].filter((n) => !!n),
+    })),
+  }
+
+  return {
+    title: event.name,
+    meta: [
+      {
+        hid: 'description',
+        name: 'description',
+        content: getExcerpt(event.description),
+      },
+      {
+        hid: 'keywords',
+        name: 'keywords',
+        content: getListOfStyles(event.styles, [
+          'WeDance',
+          'Dance',
+          addressPart(event?.venue, 'country'),
+          addressPart(event?.venue, 'locality'),
+          event.venue?.name,
+          event.eventType,
+        ])
+          .filter((n) => !!n)
+          .join(', '),
+      },
+      {
+        hid: 'og:title',
+        property: 'og:title',
+        content: event.name,
+      },
+      {
+        hid: 'og:type',
+        property: 'og:type',
+        content: 'event',
+      },
+      {
+        hid: 'og:description',
+        property: 'og:description',
+        content: getExcerpt(event.description),
+      },
+      {
+        hid: 'og:image',
+        property: 'og:image',
+        content: event.socialCover || event.cover,
+      },
+      {
+        hid: 'author',
+        name: 'author',
+        content: event?.org?.name || event.username,
+      },
+      {
+        hid: 'publisher',
+        name: 'publisher',
+        content: event?.org?.name || event.username,
+      },
+    ],
+    script: [
+      {
+        hid: 'schema',
+        type: 'application/ld+json',
+        json: schema,
+      },
+    ],
+  }
+}
+
+export const getPostMeta = (post) => {
+  if (!post) {
+    return {}
+  }
+
+  const schema = {
+    '@context': 'https://schema.org',
+    '@type': 'BlogPosting',
+    url: `https://wedance.vip/posts/${post.id}`,
+    headline: post.title,
+    image: post.cover,
+    datePublished: post.createdAt.toISOString(),
+    dateModified: post.updatedAt.toISOString(),
+    articleBody: getExcerpt(post.body),
+    mainEntityOfPage: {
+      '@type': 'WebPage',
+      url: `https://wedance.vip/posts/${post.id}`,
+    },
+    author: {
+      '@type': 'Person',
+      name: post.username,
+    },
+    publisher: {
+      '@type': 'Organization',
+      name: 'WeDance',
+    },
+  }
+
+  return {
+    title: post.title,
+    meta: [
+      {
+        hid: 'description',
+        name: 'description',
+        content: getExcerpt(post.body),
+      },
+      {
+        hid: 'keywords',
+        name: 'keywords',
+        content: getListOfStyles(post.styles, ['WeDance', 'Dance', post.title])
+          .filter((n) => !!n)
+          .join(', '),
       },
       {
         hid: 'og:title',
@@ -570,27 +805,27 @@ export const getMeta = (collection, post) => {
       {
         hid: 'og:type',
         property: 'og:type',
-        content: collection === 'events' ? 'event' : 'website',
+        content: 'article',
       },
       {
         hid: 'og:description',
         property: 'og:description',
-        content: getExcerpt(post.description),
+        content: getExcerpt(post.body),
       },
       {
         hid: 'og:image',
         property: 'og:image',
-        content: post.socialCover || post.cover,
+        content: post.cover,
       },
       {
         hid: 'author',
         name: 'author',
-        content: post?.org?.name || post.username,
+        content: post.username,
       },
       {
         hid: 'publisher',
         name: 'publisher',
-        content: post?.org?.name || post.username,
+        content: post.username,
       },
     ],
     script: [

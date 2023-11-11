@@ -121,7 +121,7 @@ import { useAuth } from '~/use/auth'
 import { useDoc } from '~/use/doc'
 import { useProfiles } from '~/use/profiles'
 import { useRouter } from '~/use/router'
-import { getExcerpt, getMeta, loadDoc, getDateTime } from '~/utils'
+import { getExcerpt, getPostMeta, loadDoc, getDateTime } from '~/utils'
 import { trackView } from '~/use/tracking'
 
 export default {
@@ -145,7 +145,7 @@ export default {
     },
   },
   head() {
-    return getMeta('posts', this.doc)
+    return getPostMeta(this.doc)
   },
   setup() {
     const { uid } = useAuth()

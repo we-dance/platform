@@ -60,6 +60,7 @@ export async function getEventsInPlace(placeId) {
     .firestore()
     .collection('posts')
     .where('place', '==', placeId)
+    .where('startDate', '>=', +new Date())
     .get()
 
   return result.docs.map((doc) => ({

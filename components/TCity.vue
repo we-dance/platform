@@ -305,14 +305,15 @@
 </template>
 
 <script>
-import { computed, onMounted } from 'vue-demi'
+import { computed, onMounted, ref } from 'vue-demi'
 import { useApp } from '~/use/app'
 import { useAuth } from '~/use/auth'
 import { useProfiles } from '~/use/profiles'
-import { getExcerpt, getMeta, getDateObect } from '~/utils'
+import { getExcerpt, getCityMeta, getDateObect } from '~/utils'
 import { useI18n } from '~/use/i18n'
 import { useDoc } from '~/use/doc'
 import { useCities } from '~/use/cities'
+import { getEventsInPlace } from '~/use/events'
 
 export default {
   props: {
@@ -322,7 +323,7 @@ export default {
     },
   },
   head() {
-    return getMeta('profiles', this.profile)
+    return getCityMeta(this.profile, this.events)
   },
   setup(props, { root }) {
     const internationalChatLink = 'https://t.me/+Vxw15sDG-dWpqHDj'
@@ -335,6 +336,7 @@ export default {
     const invitesLeft = 5
     const { switchCity } = useCities()
     const community = computed(() => getCity(props.profile?.place))
+    const events = ref([])
 
     const intro = {
       fields: [
@@ -379,10 +381,12 @@ export default {
 
     onMounted(async () => {
       await switchCity(props.profile.place)
+      events.value = await getEventsInPlace(props.profile?.place)
       load('fi21VUplHl2yReD67CMl')
     })
 
     return {
+      events,
       getDateObect,
       promo,
       internationalChatLink,
