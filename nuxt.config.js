@@ -215,6 +215,7 @@ export default {
   sitemap: {
     hostname: app.url,
     exclude: [
+      '/events',
       '/chat',
       '/search',
       '/community',
@@ -244,11 +245,23 @@ export default {
         'desc'
       )
 
-      return cities.map((city) => ({
-        url: `/${city.username}`,
-        changefreq: 'daily',
-        priority: 1,
-      }))
+      const routes = [
+        {
+          url: `/feed`,
+          changefreq: 'daily',
+          priority: 1,
+        },
+      ]
+
+      routes.push(
+        ...cities.map((city) => ({
+          url: `/${city.username}`,
+          changefreq: 'daily',
+          priority: 1,
+        }))
+      )
+
+      return routes
     },
     i18n: true,
   },
