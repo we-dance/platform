@@ -157,7 +157,7 @@
     </div>
 
     <TCollapse title="Events" expanded>
-      <TCalendar class="mt-4 w-full border-t pt-4 pb-8" />
+      <TCalendar :profile="profile" class="mt-4 w-full border-t pt-4 pb-8" />
     </TCollapse>
 
     <TCollapse title="News">

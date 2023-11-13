@@ -33,7 +33,26 @@
       <TButton v-if="facetFilters" allow-guests type="link" @click="load()">
         {{ $t('filter.reset') }}
       </TButton>
+
+      <TButton type="nav" icon="share" @click="showPopup = true" />
     </div>
+
+    <TPopup v-if="showPopup" title="Share" @close="showPopup = false">
+      <div class="mb-4">
+        <textarea
+          v-model="itemsAsText"
+          class="text-xs font-mono border"
+          cols="30"
+          rows="10"
+        ></textarea>
+        <TButton
+          type="primary"
+          icon="copy"
+          label="Copy"
+          @click="copyToClipboard(itemsAsText)"
+        />
+      </div>
+    </TPopup>
 
     <div>
       <div v-for="(items, date) in itemsByDate" :key="date">
@@ -79,8 +98,16 @@
 </template>
 
 <script>
+import _ from 'lodash'
 import { computed, onMounted, ref, watch } from 'vue-demi'
-import { getExcerpt, getDateObect, getYmd, getDate, getDay } from '~/utils'
+import {
+  getExcerpt,
+  getDateObect,
+  getYmd,
+  getDate,
+  getDay,
+  getTime,
+} from '~/utils'
 import { useAlgolia } from '~/use/algolia'
 import { useStyles } from '~/use/styles'
 import { useAuth } from '~/use/auth'
@@ -89,7 +116,13 @@ import { useApp } from '~/use/app'
 
 export default {
   name: 'TCalendar',
-  setup() {
+  props: {
+    profile: {
+      type: Object,
+      default: null,
+    },
+  },
+  setup(props) {
     const radius = ref(10)
     const query = ref('')
     const sorting = ref('Upcoming')
@@ -186,7 +219,40 @@ export default {
 
       return result
     })
+
+    const itemsAsText = computed(() => {
+      let result = `**Dance Calendar in ${props.profile.name}**\n\n`
+      result += `We help everyone to dance everywhere and all dancers to help each other\n\n`
+      result += `🗓️ **Dance Calendar**\n`
+      result += `${props.profile.telegram}\n\n`
+      result += `➕ **Add your event**\n`
+      result += `wedance.vip/${props.profile.username}\n\n`
+      result += `🗓 **DANCE CALENDAR** 🗓 \n\n`
+      _.forEach(itemsByDate.value, (items, date) => {
+        result += String(`**${getDay(date)} ${getDate(date)}**\n`).toUpperCase()
+        items.forEach((item) => {
+          result += `${getTime(item.startDate)} ❤️ ${item.name}\n`
+          if (item.venue) {
+            result += `📍 ${item.venue}\n`
+          }
+          result += `💸 ${item.price}\n`
+          result += `wedance.vip/events/${item.id}\n`
+          result += `\n`
+        })
+      })
+      return result
+    })
+
+    async function copyToClipboard(val) {
+      await navigator.clipboard.writeText(val)
+    }
+
+    const showPopup = ref(false)
+
     return {
+      itemsAsText,
+      copyToClipboard,
+      showPopup,
       fromDate,
       sorting,
       uid,

@@ -29,14 +29,10 @@ export async function announceEventIG(event: any) {
     .join(' ')
 
   const name = event.name || ''
-  let description = event.description || ''
+  const description = event.description || ''
   const venue = event.venue?.name || ''
   const price = event.price || ''
   const specialOffer = event.specialOffer || ''
-
-  if (description.length > 280) {
-    description = description.substring(0, 280) + '...'
-  }
 
   const mentionsList = [getMention(event.org?.instagram)]
 
