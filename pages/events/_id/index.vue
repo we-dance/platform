@@ -178,54 +178,6 @@
       />
     </div>
 
-    <div v-if="can('edit', 'events', doc)" class="space-y-2 p-4 border-b">
-      <h3 class="text-xl font-bold">Moderator Tools</h3>
-      <div v-if="doc.promotion !== 'completed'" class="text-sm">
-        As soon as event is published, you can promote it for free on WeDance
-        Instagram by clicking Promote.
-        <div v-if="doc.promotion === 'failed'">
-          <div class="text-red-500">
-            Promotion failed: {{ doc.promotionError }}
-          </div>
-          <div>
-            Please
-            <a class="underline text-primary" href="mailto:support@wedance.vip"
-              >contact support</a
-            >
-            to resolve the issue.
-          </div>
-        </div>
-      </div>
-
-      <TButton
-        v-if="!doc.socialCover"
-        label="Publishing..."
-        class="rounded-full"
-      />
-      <TButton
-        v-else-if="doc.promotion === 'requested'"
-        label="Promoting..."
-        class="rounded-full"
-      />
-      <div v-else-if="doc.promotion === 'completed'" class="text-sm">
-        Event announcement is published on
-        <a class="underline text-primary" :href="doc.instagram.messageUrl"
-          >Instagram</a
-        >
-      </div>
-      <TButton
-        v-else
-        icon="trending"
-        label="Promote"
-        class="rounded-full"
-        @click="
-          softUpdate(doc.id, {
-            promotion: 'requested',
-          })
-        "
-      />
-    </div>
-
     <div v-if="isGoing" class="border-b bg-white p-4">
       <TPreview v-if="doc.confirmation" :content="doc.confirmation" />
 
@@ -345,6 +297,64 @@
         </template>
       </div>
     </TPopup>
+
+    <div v-if="can('edit', 'events', doc)" class="space-y-2 p-4 border-b">
+      <h3 class="text-xl font-bold">Moderator Tools</h3>
+      <div v-if="doc.promotion !== 'completed'" class="text-sm">
+        As soon as event is published, you can promote it for free on WeDance
+        Instagram by clicking Promote.
+        <div v-if="doc.promotion === 'failed'">
+          <div class="text-red-500">
+            Promotion failed: {{ doc.promotionError }}
+          </div>
+          <div>
+            Please
+            <a class="underline text-primary" href="mailto:support@wedance.vip"
+              >contact support</a
+            >
+            to resolve the issue.
+          </div>
+        </div>
+      </div>
+
+      <TButton
+        v-if="!doc.socialCover"
+        label="Publishing..."
+        class="rounded-full"
+      />
+      <TButton
+        v-else-if="doc.promotion === 'requested'"
+        label="Promoting..."
+        class="rounded-full"
+      />
+      <div v-else-if="doc.promotion === 'completed'" class="text-sm">
+        Event announcement is published on
+        <a class="underline text-primary" :href="doc.instagram.messageUrl"
+          >Instagram</a
+        >
+      </div>
+      <TButton
+        v-else
+        icon="trending"
+        label="Promote"
+        class="rounded-full"
+        @click="
+          softUpdate(doc.id, {
+            promotion: 'requested',
+          })
+        "
+      />
+      <TButton
+        v-if="isAdmin() && doc.promotion === 'completed'"
+        label="Reset"
+        class="rounded-full"
+        @click="
+          softUpdate(doc.id, {
+            promotion: '',
+          })
+        "
+      />
+    </div>
 
     <TExpand class="p-4">
       <TPreview :content="doc.description" />
