@@ -15,6 +15,7 @@ const { hideBin } = require('yargs/helpers')
 import { firestore } from './firebase'
 import { announceEventIG } from './lib/instagram'
 import { getInstagramWebProfileInfo } from './lib/browser'
+import { scheduleWeeklyNewsletter } from './lib/digest'
 
 function getDomain(url: string): string {
   let hostname
@@ -188,6 +189,14 @@ yargs(hideBin(process.argv))
     () => undefined,
     async (argv: any) => {
       await getCities()
+    }
+  )
+  .command(
+    'newsletter',
+    'Generate Weekly Newsletter',
+    () => undefined,
+    async (argv: any) => {
+      await scheduleWeeklyNewsletter()
     }
   )
   .command(

@@ -1,5 +1,4 @@
 import * as mailgun from 'mailgun-js'
-import { config } from 'firebase-functions'
 import * as MarkdownIt from 'markdown-it'
 
 const md = new MarkdownIt({
@@ -13,16 +12,10 @@ const getHtml = (content: any) => {
 }
 
 export default async (data: any) => {
-  const mailgunConfig = config().mailgun
-
-  if (!mailgunConfig) {
-    throw new Error('Mailgun is not configured')
-  }
-
   const mg = mailgun({
-    apiKey: mailgunConfig.key,
-    domain: mailgunConfig.domain,
-    host: mailgunConfig.host,
+    apiKey: String(process.env.MAILGUN_KEY),
+    domain: String(process.env.MAILGUN_DOMAIN),
+    host: String(process.env.MAILGUN_HOST),
   })
 
   const jobs: Promise<any>[] = []
@@ -33,12 +26,11 @@ export default async (data: any) => {
       from: data.from,
       to: `${data.recipients[uid].name} <${data.recipients[uid].email}>`,
       subject: data.subject,
-      html: getHtml(data.content),
+      html: data.html || getHtml(data.content),
       'v:uid': uid,
       'v:campaignId': data.id,
       'v:type': data.type,
     })
-
     jobs.push(job)
   })
 

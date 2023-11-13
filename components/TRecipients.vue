@@ -55,6 +55,7 @@ export default {
       unsubscribedAt: 'bg-orange-500',
     },
     folderNames: {
+      scheduled: 'Scheduled',
       deliveredAt: 'Unread',
       openedAt: 'Opened',
       clickedAt: 'Clicked',
@@ -78,6 +79,7 @@ export default {
       const recipients = this.itemsList
 
       return {
+        scheduled: recipients,
         failedAt: recipients.filter(
           (item) => item.failedAt && !item.deliveredAt
         ),

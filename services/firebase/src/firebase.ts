@@ -1,6 +1,8 @@
 import * as admin from 'firebase-admin'
 
-admin.initializeApp()
+admin.initializeApp({
+    credential: admin.credential.applicationDefault()
+}); 
 
 const firestore = admin.firestore()
 
