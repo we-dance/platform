@@ -129,8 +129,7 @@ export async function getWeeklyData(city: string) {
 export async function getSubscribers(cityProfile: any) {
   const recipients = {} as any
 
-  // const subscribers = cityProfile.watch?.usernames || []
-  const subscribers = ['alexrazbakov']
+  const subscribers = cityProfile.watch?.usernames || []
 
   for (let subscriber of subscribers) {
     const profilesOfSubscriber = (

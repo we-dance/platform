@@ -19,7 +19,7 @@
         <mj-image
           width="140px"
           :href="link('https://wedance.vip/', 'logo')"
-          src="https://wedance.vip/svg/logo-horizontal-dark.svg"
+          src="https://wedance.vip/img/logo-horizontal-dark.png"
         ></mj-image>
       </mj-column>
     </mj-section>
@@ -141,16 +141,16 @@
             mode="horizontal"
           >
             <mj-social-element
-              src="https://wedance.vip/svg/telegram.svg"
+              src="https://wedance.vip/img/telegram.png"
               :href="links.telegram"
             />
 
             <mj-social-element
-              src="https://wedance.vip/svg/instagram.svg"
+              src="https://wedance.vip/img/instagram.png"
               :href="links.instagram"
             />
             <mj-social-element
-              src="https://wedance.vip/svg/facebook.svg"
+              src="https://wedance.vip/img/facebook.png"
               :href="links.facebook"
             />
           </mj-social>
