@@ -5,6 +5,7 @@ import * as fs from 'fs'
 import * as moment from 'moment'
 import { firestore } from '../firebase'
 import sendEmail from './sendEmail'
+import { orderBy } from 'lodash'
 
 export async function renderEmail(type: string, data: any, customUtms = {}) {
   const template = fs.readFileSync(`./src/templates/${type}.mjml`, 'utf8')
@@ -49,11 +50,6 @@ export async function renderEmail(type: string, data: any, customUtms = {}) {
 }
 
 export async function getWeeklyData(city: string) {
-  const time = new Date()
-  const today = time.toISOString().slice(0, 10)
-  time.setDate(time.getDate() + 7)
-  const sevenDaysFromNow = time.toISOString().slice(0, 10)
-
   let cityProfile: any = {}
 
   const profileDocs = (
@@ -67,23 +63,30 @@ export async function getWeeklyData(city: string) {
     cityProfile = { id: doc.id, ...doc.data() }
   }
 
-  const eventDocs = (
+  const today = moment(new Date())
+  const sevenDaysFromNow = moment(today).add(7, 'days')
+
+  let eventDocs = (
     await firestore
       .collection('posts')
-      .where('startDate', '>', today)
-      .where('startDate', '<', sevenDaysFromNow)
+      .where('startDate', '>', today.unix())
       .where('place', '==', cityProfile.place)
       .get()
-  ).docs
+  ).docs.map((doc: any) => ({ id: doc.id, ...doc.data() }))
+
+  eventDocs = orderBy(eventDocs, ['startDate'], ['asc'])
+  eventDocs = eventDocs.filter((event: any) =>
+    ['Party', 'Festival', 'Show', 'Concert'].includes(event.eventType)
+  )
+  eventDocs = eventDocs.filter(
+    (event: any) =>
+      moment(event.startDate).unix() >= today.unix() &&
+      moment(event.startDate).unix() <= sevenDaysFromNow.unix()
+  )
 
   const days: any = {}
 
-  for (const doc of eventDocs) {
-    const event = {
-      id: doc.id,
-      ...doc.data(),
-    } as any
-
+  for (const event of eventDocs) {
     const group = moment(event.startDate).format('YYYY-MM-DD')
 
     if (!days[group]) {
@@ -126,7 +129,8 @@ export async function getWeeklyData(city: string) {
 export async function getSubscribers(cityProfile: any) {
   const recipients = {} as any
 
-  const subscribers = cityProfile.watch?.usernames || []
+  // const subscribers = cityProfile.watch?.usernames || []
+  const subscribers = ['alexrazbakov']
 
   for (let subscriber of subscribers) {
     const profilesOfSubscriber = (
@@ -180,6 +184,7 @@ export async function scheduleWeeklyNewsletter() {
     }
 
     const weeklyEmailDetails = await getWeeklyData(cityProfile.username)
+
     const html = await renderEmail('weekly', weeklyEmailDetails)
     const recipients = await getSubscribers(cityProfile)
 
