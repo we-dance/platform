@@ -9,13 +9,7 @@
       icon="facebook"
       @click="signFacebook"
     />
-    <TButton
-      :label="$t('nopassword.google')"
-      allow-guests
-      icon="google"
-      @click="signGoogle"
-    />
-    <TButton allow-guests :label="$t('nopassword.email')" to="/nopassword" />
+    <TButton allow-guests :label="$t('nopassword.email')" to="/signin-email" />
 
     <div class="w-48 text-center text-xs">
       By continuing you agree to WeDance's
