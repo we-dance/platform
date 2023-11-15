@@ -157,7 +157,13 @@
     </div>
 
     <TCollapse title="Events" expanded>
-      <TCalendar :profile="profile" class="mt-4 w-full border-t pt-4 pb-8" />
+      <TCalendar :profile="profile" class="mt-4 w-full border-t pt-4 pb-8">
+        <TEventListNoLoad
+          :community="profile.username"
+          :username="profile.username"
+          :docs="events"
+        />
+      </TCalendar>
     </TCollapse>
 
     <TCollapse title="News">
@@ -301,6 +307,23 @@
         </div>
       </div>
     </div>
+
+    <div>
+      <h3 class="text-2xl font-extrabold text-center p-4">
+        People also look for
+      </h3>
+      <ul>
+        <li
+          v-for="style in ['Salsa', 'Bachata', 'Kizomba', 'Zouk', 'Afrobeats']"
+          :key="style"
+          class="p-4 border-t w-full"
+        >
+          <nuxt-link :to="`/${profile.username}?style=${style}`"
+            >{{ style }} in {{ profile.name }}</nuxt-link
+          >
+        </li>
+      </ul>
+    </div>
   </div>
 </template>
 
@@ -323,7 +346,7 @@ export default {
     },
   },
   head() {
-    return getCityMeta(this.profile, this.events)
+    return getCityMeta(this.profile, this.events, this.$route.query.style)
   },
   setup(props, { root }) {
     const internationalChatLink = 'https://t.me/+Vxw15sDG-dWpqHDj'

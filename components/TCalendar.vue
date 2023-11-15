@@ -1,9 +1,6 @@
 <template>
-  <div>
-    <div
-      v-if="response.facets && response.nbHits > 0"
-      class="mb-4 gap-2 flex flex-wrap p-4 items-center"
-    >
+  <div v-if="response.facets">
+    <div class="mb-4 gap-2 flex flex-wrap p-4 items-center">
       <t-rich-select
         v-model="filters['style']"
         placeholder="Style"
@@ -94,6 +91,9 @@
       :per-page="response.hitsPerPage"
       class="my-4"
     />
+  </div>
+  <div v-else>
+    <slot />
   </div>
 </template>
 

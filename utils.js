@@ -483,19 +483,64 @@ export const getCityMeta = (profile, events = null, style = '') => {
 
   const schema = {
     '@context': 'https://schema.org',
-    '@type': 'CollectionPage',
+    '@type': 'ItemList',
     name: title,
     description,
     image: profile.photo,
     url: `https://wedance.vip/${profile.username}`,
-    mainEntity: {
-      '@type': 'ItemList',
-      itemListElement: events.map((event, index) => ({
-        '@type': 'ListItem',
-        position: index + 1,
+    numberOfItems: events.length,
+    itemListElement: events.map((event, index) => ({
+      '@type': 'ListItem',
+      position: index + 1,
+      item: {
+        '@type': 'DanceEvent',
+        name: event.name,
+        description: event.description,
+        image: event.socialCover || event.cover,
+        startDate: event.startDate
+          ? getDateObect(event.startDate).toISOString()
+          : '',
+        endDate: event.endDate ? getDateObect(event.endDate).toISOString() : '',
         url: `https://wedance.vip/events/${event.id}`,
-      })),
-    },
+        eventStatus: 'https://schema.org/EventScheduled',
+        eventAttendanceMode: 'https://schema.org/OfflineEventAttendanceMode',
+        location: {
+          '@type': 'Place',
+          address: {
+            '@type': 'PostalAddress',
+            contactType: 'Venue Manager',
+            addressLocality: addressPart(event?.venue, 'locality'),
+            addressRegion: addressPart(
+              event?.venue,
+              'administrative_area_level_1'
+            ),
+            streetAddress:
+              addressPart(event?.venue, 'route') +
+              ' ' +
+              addressPart(event?.venue, 'street_number'),
+            postalCode: addressPart(event?.venue, 'postal_code'),
+          },
+          name: event.venue?.name,
+          url: event.venue?.url,
+        },
+        offers: {
+          '@type': 'Offer',
+          price: event.price,
+        },
+        organizer: {
+          '@type': 'Person',
+          image: event?.org?.photo,
+          name: event?.org?.name,
+          description: event?.org?.bio,
+          sameAs: [
+            `https://wedance.vip/${event?.org?.username}`,
+            event?.org?.website,
+            event?.org?.facebook,
+            event?.org?.instagram,
+          ].filter((n) => !!n),
+        },
+      },
+    })),
   }
 
   return {
