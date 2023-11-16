@@ -84,7 +84,7 @@
       </TDropdown>
     </div>
     <h1 v-if="item.title" class="px-4 font-bold text-xl">{{ item.title }}</h1>
-    <TExpand v-if="item.description" class="p-4 w-auto">
+    <TExpand v-if="item.description" class="p-4 w-auto" :expanded="expanded">
       <TPreview :content="item.description" />
     </TExpand>
     <div v-if="!hideMedia">
@@ -125,6 +125,10 @@ export default {
       default: false,
     },
     showAll: {
+      type: Boolean,
+      default: false,
+    },
+    expanded: {
       type: Boolean,
       default: false,
     },

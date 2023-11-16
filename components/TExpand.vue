@@ -1,17 +1,18 @@
 <template>
-  <div :class="expanded ? '' : 'h-20 overflow-y-hidden relative'">
+  <div :class="expandedValue ? '' : 'h-20 overflow-y-hidden relative'">
     <slot />
     <TButton
+      v-if="!expanded"
       allow-guests
-      :label="expanded ? hide : show"
+      :label="expandedValue ? hide : show"
       type="link"
       class="text-sm text-primary"
       :class="
-        expanded
+        expandedValue
           ? ''
           : 'absolute inset-0 pt-16 text-center bg-gradient-to-b from-transparent to-white'
       "
-      @click="expanded = !expanded"
+      @click="expandedValue = !expandedValue"
     />
   </div>
 </template>
@@ -27,9 +28,15 @@ export default {
       type: String,
       default: 'Show less',
     },
+    expanded: {
+      type: Boolean,
+      default: false,
+    },
   },
-  data: () => ({
-    expanded: false,
-  }),
+  data() {
+    return {
+      expandedValue: this.expanded,
+    }
+  },
 }
 </script>

@@ -10,23 +10,7 @@
 
     <img v-if="doc.cover" :src="doc.cover" />
 
-    <TPost :item="doc" show-all>
-      <TItemCreator :item="doc" full />
-
-      <div class="p-4 text-center bg-dark text-white">
-        <div>Discover dancers and dance events near you</div>
-        <div class="max-w-lg mx-auto">
-          <TButton
-            allow-guests
-            icon="search"
-            label="Find your city"
-            to="/cities"
-            type="void"
-            class="mt-2 w-full text-gray-500 bg-white hover:bg-gray-100 font-semibold py-2 px-4 border border-gray-400 rounded-full shadow"
-          />
-        </div>
-      </div>
-
+    <TPost :item="doc" show-all expanded>
       <TCommentsInline :item="doc" class="p-4" autoload />
     </TPost>
 

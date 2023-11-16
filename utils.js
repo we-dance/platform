@@ -800,7 +800,7 @@ export const getEventMeta = (event) => {
 }
 
 export const getPostMeta = (post) => {
-  if (!post) {
+  if (!post.createdAt) {
     return {}
   }
 
@@ -810,8 +810,8 @@ export const getPostMeta = (post) => {
     url: `https://wedance.vip/posts/${post.id}`,
     headline: post.title,
     image: post.cover,
-    datePublished: post.createdAt.toISOString(),
-    dateModified: post.updatedAt.toISOString(),
+    datePublished: getDateObect(post.createdAt).toISOString(),
+    dateModified: getDateObect(post.updatedAt).toISOString(),
     articleBody: getExcerpt(post.body),
     mainEntityOfPage: {
       '@type': 'WebPage',
