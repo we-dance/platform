@@ -274,13 +274,27 @@ export default {
         },
       ]
 
-      routes.push(
-        ...cities.map((city) => ({
+      for (const city of cities) {
+        routes.push({
           url: `/${city.username}`,
           changefreq: 'daily',
           priority: 1,
-        }))
-      )
+        })
+
+        for (const style of [
+          'Salsa',
+          'Bachata',
+          'Kizomba',
+          'Zouk',
+          'Afrobeats',
+        ]) {
+          routes.push({
+            url: `/${city.username}?style=${style}`,
+            changefreq: 'daily',
+            priority: 1,
+          })
+        }
+      }
 
       return routes
     },
