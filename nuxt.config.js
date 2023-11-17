@@ -253,6 +253,32 @@ export default {
     routes: async () => {
       const db = sitemapApp.firestore()
 
+      const routes = [
+        {
+          url: `/feed`,
+          changefreq: 'daily',
+          priority: 1,
+        },
+      ]
+
+      const eventsRef = await db
+        .collection('posts')
+        .where('startDate', '>=', +new Date())
+        .get()
+
+      const events = eventsRef.docs.map((doc) => ({
+        ...doc.data(),
+        id: doc.id,
+      }))
+
+      for (const event of events) {
+        routes.push({
+          url: `/events/${event.id}`,
+          changefreq: 'weekly',
+          priority: 0.8,
+        })
+      }
+
       const citiesRef = await db
         .collection('profiles')
         .where('type', '==', 'City')
@@ -265,14 +291,6 @@ export default {
         'viewsCount',
         'desc'
       )
-
-      const routes = [
-        {
-          url: `/feed`,
-          changefreq: 'daily',
-          priority: 1,
-        },
-      ]
 
       for (const city of cities) {
         routes.push({
@@ -291,7 +309,7 @@ export default {
           routes.push({
             url: `/${city.username}?style=${style}`,
             changefreq: 'daily',
-            priority: 1,
+            priority: 0.7,
           })
         }
       }
