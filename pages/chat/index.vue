@@ -49,22 +49,22 @@ export default {
     const { uid } = useAuth()
     const db = useFirestore()
     const chats = ref([])
-    const { getProfile } = useProfiles()
+    const { getFullProfile } = useProfiles()
     let unsubscribe = null
 
     onMounted(() => {
       unsubscribe = db
         .collection('chats')
         .where(`members.${uid.value}`, '==', true)
-        .onSnapshot((snapshot) => {
-          chats.value = snapshot.docs
-            .map((doc) => {
+        .onSnapshot(async (snapshot) => {
+          chats.value = await Promise.all(
+            snapshot.docs.map(async (doc) => {
               const data = doc.data()
               const members = data.members
               delete members[uid.value]
 
               const receiverUid = Object.keys(members)[0]
-              const receiver = getProfile(receiverUid)
+              const receiver = await getFullProfile(receiverUid)
               const unread =
                 data.lastMessageBy !== uid.value &&
                 data.lastMessageAt > data.lastSeen[uid.value]
@@ -75,7 +75,8 @@ export default {
                 unread,
               }
             })
-            .sort(sortBy('-lastMessageAt'))
+          )
+          chats.value.sort(sortBy('-lastMessageAt'))
         })
     })
 
