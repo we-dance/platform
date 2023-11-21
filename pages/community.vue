@@ -3,7 +3,7 @@
     <THeader>
       <TButton
         slot="left"
-        to="/cities?target=/community"
+        :to="localePath('/cities?target=/community')"
         icon="place"
         :label="cityName || $t('cities.choose')"
       />
@@ -44,7 +44,7 @@
         <NuxtLink
           v-for="item in response.hits"
           :key="item.id"
-          :to="`/${item.username}`"
+          :to="localePath(`/${item.username}`)"
           class="hover:opacity-75"
         >
           <TSharePreviewPost

@@ -49,7 +49,7 @@
         />
         <TButton
           type="context"
-          :to="`/events/${item.id}/`"
+          :to="localePath(`/events/${item.id}/`)"
           label="View Event"
         />
       </TDropdown>

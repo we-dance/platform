@@ -321,7 +321,7 @@ export default {
   i18n: {
     locales,
     defaultLocale: 'en',
-    strategy: 'no_prefix',
+    strategy: 'prefix_except_default',
     lazy: true,
     langDir: 'locales/',
     vueI18n: {

@@ -15,25 +15,25 @@
         class="hover:underline"
         >v{{ version }}</a
       >
-      <NuxtLink class="hover:underline" to="/about">{{
+      <NuxtLink class="hover:underline" :to="localePath('/about')">{{
         $t('footer.about')
       }}</NuxtLink>
-      <NuxtLink class="hover:underline" to="/get-involved">
+      <NuxtLink class="hover:underline" :to="localePath('/get-involved')">
         {{ $t('footer.getInvolved') }}
       </NuxtLink>
-      <NuxtLink class="hover:underline" to="/support">{{
+      <NuxtLink class="hover:underline" :to="localePath('/support')">{{
         $t('footer.support')
       }}</NuxtLink>
-      <NuxtLink class="hover:underline" to="/privacy">{{
+      <NuxtLink class="hover:underline" :to="localePath('/privacy')">{{
         $t('footer.privacy')
       }}</NuxtLink>
-      <NuxtLink class="hover:underline" to="/terms">{{
+      <NuxtLink class="hover:underline" :to="localePath('/terms')">{{
         $t('footer.terms')
       }}</NuxtLink>
-      <NuxtLink class="hover:underline" to="/coc">{{
+      <NuxtLink class="hover:underline" :to="localePath('/coc')">{{
         $t('footer.coc')
       }}</NuxtLink>
-      <NuxtLink class="hover:underline" to="/faq">{{
+      <NuxtLink class="hover:underline" :to="localePath('/faq')">{{
         $t('footer.faq')
       }}</NuxtLink>
     </div>

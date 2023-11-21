@@ -1,6 +1,6 @@
 <template>
   <NuxtLink
-    :to="`/events/${item.id}`"
+    :to="localePath(`/events/${item.id}`)"
     :target="isEmbed ? '_blank' : '_self'"
     class="flex border-b p-4 leading-none gap-2"
   >

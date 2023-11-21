@@ -15,14 +15,18 @@
         <div class="mt-4 text-xs">
           <i18n path="agreement" tag="p">
             <template v-slot:privacy>
-              <NuxtLink class="underline hover:no-underline" to="/privacy">{{
-                $t('privacy')
-              }}</NuxtLink>
+              <NuxtLink
+                class="underline hover:no-underline"
+                :to="localePath('/privacy')"
+                >{{ $t('privacy') }}</NuxtLink
+              >
             </template>
             <template v-slot:terms>
-              <NuxtLink class="underline hover:no-underline" to="/terms">{{
-                $t('terms')
-              }}</NuxtLink>
+              <NuxtLink
+                class="underline hover:no-underline"
+                :to="localePath('/terms')"
+                >{{ $t('terms') }}</NuxtLink
+              >
             </template>
           </i18n>
         </div>
@@ -31,9 +35,11 @@
 
     <div class="mt-4 text-xs">
       <div class="mt-4 border-t pt-4 flex space-x-2 text-xs">
-        <NuxtLink to="/signin" class="underline hover:no-underline">{{
-          $t('register.login')
-        }}</NuxtLink>
+        <NuxtLink
+          :to="localePath('/signin')"
+          class="underline hover:no-underline"
+          >{{ $t('register.login') }}</NuxtLink
+        >
       </div>
     </div>
   </div>

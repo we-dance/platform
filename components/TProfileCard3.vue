@@ -10,7 +10,7 @@
       <div class="ml-2">
         <NuxtLink
           class="font-bold hover:underline"
-          :to="`/${profile.username}`"
+          :to="localePath(`/${profile.username}`)"
         >
           {{ profile.username }}
         </NuxtLink>

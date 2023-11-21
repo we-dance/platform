@@ -28,16 +28,20 @@
       </div>
       <div class="text-xs p-4 text-center">
         <div v-if="chat.lastSeen[receiverUid]">
-          <NuxtLink :to="`/${receiver.username}`" class="underline">{{
-            receiver.username
-          }}</NuxtLink>
+          <NuxtLink
+            :to="localePath(`/${receiver.username}`)"
+            class="underline"
+            >{{ receiver.username }}</NuxtLink
+          >
           {{ $t('conversation.lastSeen') }}
           {{ dateDiff(chat.lastSeen[receiverUid]) }}
         </div>
         <div v-else>
-          <NuxtLink :to="`/${receiver.username}`" class="underline">{{
-            receiver.username
-          }}</NuxtLink>
+          <NuxtLink
+            :to="localePath(`/${receiver.username}`)"
+            class="underline"
+            >{{ receiver.username }}</NuxtLink
+          >
           {{ $t('conversation.unread') }}
         </div>
       </div>

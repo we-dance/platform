@@ -12,7 +12,7 @@
     <NuxtLink
       v-for="item in response.hits"
       :key="item.id"
-      :to="`/${item.username}`"
+      :to="localePath(`/${item.username}`)"
       class="border-b p-4 flex items-center hover:bg-blue-200"
     >
       <div class="w-12 flex-shrink-0">

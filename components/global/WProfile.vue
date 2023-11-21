@@ -15,7 +15,7 @@
       </div>
       <div class="flex flex-col w-full">
         <NuxtLink
-          :to="`/${profile.username}`"
+          :to="localePath(`/${profile.username}`)"
           class="font-bold leading-none mb-1"
         >
           {{ profile.name || profile.username }}

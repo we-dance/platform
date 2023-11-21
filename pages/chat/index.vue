@@ -8,7 +8,7 @@
       <NuxtLink
         v-for="chat in chats"
         :key="chat.receiver.id"
-        :to="`/chat/${chat.receiver.username}`"
+        :to="localePath(`/chat/${chat.receiver.username}`)"
         class="border-b p-4 flex items-start hover:bg-gray-100"
         :class="{ 'font-bold': chat.unread }"
       >

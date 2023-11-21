@@ -3,14 +3,14 @@
     <TButton
       v-if="dashboard"
       icon="people"
-      :to="`/${collection}/${item.id}/dashboard`"
+      :to="localePath(`/${collection}/${item.id}/dashboard`)"
       class="hover:text-blue-500 mr-2"
       :label="$('post.dashboard')"
     />
     <TButton
       v-if="edit"
       icon="edit"
-      :to="`/${collection}/${item.id}/edit`"
+      :to="localePath(`/${collection}/${item.id}/edit`)"
       class="hover:text-blue-500"
       :label="$t('post.edit')"
     />

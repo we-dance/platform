@@ -2,12 +2,12 @@
   <nav
     class="p-4 flex flex-col space-y-2 text-dark h-screen overflow-y-scroll sticky top-0 border-r"
   >
-    <TButton allow-guests to="/" class="mb-8" type="void">
+    <TButton allow-guests :to="localePath('/')" class="mb-8" type="void">
       <TIcon name="logo-horizontal-dark" />
     </TButton>
     <TButton
       allow-guests
-      to="/Travel"
+      :to="localePath('/Travel')"
       icon="directions"
       :label="$t('nav.festivals')"
       type="nav"
@@ -15,7 +15,7 @@
     <TButton
       v-if="currentCity"
       allow-guests
-      :to="`/${city.username}`"
+      :to="localePath(`/${city.username}`)"
       icon="calendar"
       :label="$t('nav.calendar')"
       type="nav"
@@ -23,33 +23,46 @@
     <TButton
       v-if="!currentCity"
       allow-guests
-      to="/cities"
+      :to="localePath('/cities')"
       icon="place"
       :label="$t('nav.chooseCity')"
       type="nav"
     />
     <TButton
       allow-guests
-      to="/feed"
+      :to="localePath('/feed')"
       icon="news"
       :label="$t('nav.feed')"
       type="nav"
     />
     <TButton
       allow-guests
-      to="/dance"
+      :to="localePath('/dance')"
       icon="fire"
       :label="$t('nav.dance')"
       type="nav"
     />
     <template v-if="uid">
-      <TButton to="/chat" icon="chat" :label="$t('nav.chat')" type="nav" />
-      <TButton :to="`/${username}`" type="nav">
+      <TButton
+        :to="localePath('/chat')"
+        icon="chat"
+        :label="$t('nav.chat')"
+        type="nav"
+      />
+      <TButton :to="localePath(`/${username}`)" type="nav">
         <TProfilePhoto size="xs" :uid="uid" class="mr-1" />
         <span>{{ $t('nav.myProfile') }}</span>
       </TButton>
-      <TButton to="/settings" type="nav" :label="$t('nav.settings')" />
-      <TButton to="/signout" type="nav" :label="$t('auth.signout')" />
+      <TButton
+        :to="localePath('/settings')"
+        type="nav"
+        :label="$t('nav.settings')"
+      />
+      <TButton
+        :to="localePath('/signout')"
+        type="nav"
+        :label="$t('auth.signout')"
+      />
     </template>
     <template v-else>
       <div class="text-xs mt-4">
@@ -58,7 +71,7 @@
       </div>
       <TButton
         allow-guests
-        to="/signin"
+        :to="localePath('/signin')"
         type="nav"
         :label="$t('auth.signin')"
         class="bg-primary border-none text-white hover:bg-dark"

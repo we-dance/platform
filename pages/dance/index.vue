@@ -19,7 +19,7 @@
             :key="style.id"
             :class="{ 'bg-primary text-white': contains(style.id) }"
             class="rounded px-2 py-1 border m-1 inline-block cursor-pointer"
-            :to="`/dance/${style.id}`"
+            :to="localePath(`/dance/${style.id}`)"
           >
             <span>{{ style.name }}</span>
           </NuxtLink>

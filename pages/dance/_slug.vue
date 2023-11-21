@@ -12,13 +12,15 @@
           >Edit this page</a
         >
         <span>•</span>
-        <NuxtLink to="/dance" class="block">List of all dance styles</NuxtLink>
+        <NuxtLink :to="localePath('/dance')" class="block"
+          >List of all dance styles</NuxtLink
+        >
       </div>
 
       <div class="mt-4">
         <span class="font-bold">Family</span>
         <span class="leading-loose">
-          <NuxtLink :to="`/dance/${page.family}`">{{
+          <NuxtLink :to="localePath(`/dance/${page.family}`)">{{
             page.family
           }}</NuxtLink></span
         >
@@ -27,7 +29,9 @@
       <div>
         <span class="font-bold">Related</span>
         <span v-for="style in related" :key="style.name" class="p-1">
-          <NuxtLink :to="`/dance/${style.id}`">{{ style.name }}</NuxtLink
+          <NuxtLink :to="localePath(`/dance/${style.id}`)">{{
+            style.name
+          }}</NuxtLink
           >{{ ' ' }}
         </span>
       </div>

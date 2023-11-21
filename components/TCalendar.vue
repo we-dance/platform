@@ -57,24 +57,20 @@
           <span class="text-primary">{{ getDay(date, $i18n.locale) }}</span> ·
           {{ getDate(date, $i18n.locale) }}
         </h2>
-        <NuxtLink
+        <TEventText4
           v-for="item in items"
+          :id="item.id"
           :key="item.id"
-          :to="`/events/${item.id}`"
           class="hover:opacity-75"
-        >
-          <TEventText4
-            :id="item.id"
-            :name="item.name"
-            :cover="item.cover"
-            :venue="item.venue"
-            :price="item.price"
-            :start-date="getDateObect(item.startDate)"
-            :event-type="item.type"
-            :styles="item.styles"
-            :organiser="item.organizer"
-          />
-        </NuxtLink>
+          :name="item.name"
+          :cover="item.cover"
+          :venue="item.venue"
+          :price="item.price"
+          :start-date="getDateObect(item.startDate)"
+          :event-type="item.type"
+          :styles="item.styles"
+          :organiser="item.organizer"
+        />
       </div>
     </div>
 

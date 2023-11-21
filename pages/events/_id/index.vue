@@ -7,14 +7,14 @@
           v-if="can('edit', 'events', doc)"
           type="context"
           icon="people"
-          :to="`/events/${doc.id}/dashboard`"
+          :to="localePath(`/events/${doc.id}/dashboard`)"
           :label="$t('eventView.dropdown.dashboard')"
         />
         <TButton
           v-if="can('edit', 'events', doc)"
           type="context"
           icon="edit"
-          :to="`/events/${doc.id}/edit`"
+          :to="localePath(`/events/${doc.id}/edit`)"
           :label="$t('eventView.dropdown.edit')"
         />
 
@@ -22,7 +22,7 @@
           v-if="can('edit', 'events', doc)"
           type="context"
           icon="copy"
-          :to="`/events/${doc.id}/copy`"
+          :to="localePath(`/events/${doc.id}/copy`)"
           :label="$t('eventView.dropdown.copy')"
         />
         <TCardActions
@@ -414,7 +414,7 @@
         <TButton
           type="link"
           allow-guests
-          :to="`/signin?target=${$route.path}`"
+          :to="localePath(`/signin?target=${$route.path}`)"
           >{{ $t('event.guestsHidden') }}</TButton
         >
       </div>
@@ -435,7 +435,7 @@
         <TButton
           type="link"
           allow-guests
-          :to="`/signin?target=${$route.path}`"
+          :to="localePath(`/signin?target=${$route.path}`)"
           >{{ $t('event.commentsHidden') }}</TButton
         >
       </div>
@@ -453,7 +453,7 @@
         >Created by
         <nuxt-link
           class="underline text-primary"
-          :to="`/${creator.username}`"
+          :to="localePath(`/${creator.username}`)"
           >{{ creator.name }}</nuxt-link
         ></span
       >
@@ -494,7 +494,7 @@
               <template v-if="!uid" slot="buttons">
                 <TButton
                   allow-guests
-                  :to="`/signin?target=${this.$route.fullPath}`"
+                  :to="localePath(`/signin?target=${this.$route.fullPath}`)"
                   :label="$t('eventView.reservationPopup.reserve.label')"
                 />
               </template>

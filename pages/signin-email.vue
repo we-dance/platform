@@ -21,14 +21,18 @@
       <div class="mt-4 text-xs">
         <i18n path="agreement" tag="p">
           <template v-slot:privacy>
-            <NuxtLink class="underline hover:no-underline" to="/privacy">{{
-              $t('privacy')
-            }}</NuxtLink>
+            <NuxtLink
+              class="underline hover:no-underline"
+              :to="localePath('/privacy')"
+              >{{ $t('privacy') }}</NuxtLink
+            >
           </template>
           <template v-slot:terms>
-            <NuxtLink class="underline hover:no-underline" to="/terms">{{
-              $t('terms')
-            }}</NuxtLink>
+            <NuxtLink
+              class="underline hover:no-underline"
+              :to="localePath('/terms')"
+              >{{ $t('terms') }}</NuxtLink
+            >
           </template>
         </i18n>
       </div>
@@ -44,12 +48,16 @@
       </div>
       <div class="mt-4 text-xs">
         <div class="mt-4 border-t pt-4 flex space-x-2 text-xs">
-          <NuxtLink to="/register" class="underline hover:no-underline">{{
-            $t('signin.register')
-          }}</NuxtLink>
-          <NuxtLink to="/nopassword" class="underline hover:no-underline">{{
-            $t('signin.nopassword')
-          }}</NuxtLink>
+          <NuxtLink
+            :to="localePath('/register')"
+            class="underline hover:no-underline"
+            >{{ $t('signin.register') }}</NuxtLink
+          >
+          <NuxtLink
+            :to="localePath('/nopassword')"
+            class="underline hover:no-underline"
+            >{{ $t('signin.nopassword') }}</NuxtLink
+          >
         </div>
       </div>
     </form>

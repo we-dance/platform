@@ -77,9 +77,9 @@ export default {
   methods: {
     view(id) {
       if (id && id !== '-') {
-        this.$router.push(`/events/${id}`)
+        this.$router.push(this.localePath(`/events/${id}`))
       } else {
-        this.$router.push(`/${this.profile?.username}`)
+        this.$router.push(this.localePath(`/${this.profile?.username}`))
       }
     },
     async copyItem(data) {
@@ -90,7 +90,7 @@ export default {
       track('copy_event')
       const doc = await this.create(data)
 
-      this.$router.push(`/events/${doc.id}`)
+      this.$router.push(this.localePath(`/events/${doc.id}`))
     },
     async saveItem(data) {
       data = pickBy(data, (v) => v !== undefined)

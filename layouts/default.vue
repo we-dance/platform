@@ -44,7 +44,7 @@
             allow-guests
             class="mt-2"
             type="primary"
-            :to="`/signin?target=${$route.path}`"
+            :to="localePath(`/signin?target=${$route.path}`)"
             >{{ $t('popup.auth.signin') }}</TButton
           >
         </div>

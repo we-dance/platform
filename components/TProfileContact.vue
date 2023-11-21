@@ -36,7 +36,7 @@
               Languages
             </li>
           </ul>
-          <TButton class="mt-4" to="/settings?tab=profile"
+          <TButton class="mt-4" :to="localePath('/settings?tab=profile')"
             >Edit my profile</TButton
           >
         </div>
@@ -66,7 +66,7 @@
       </div>
       <div class="my-4 flex flex-col justify-center">
         <div>You need a profile to send requests</div>
-        <TButton class="mt-2" to="/signin?target=/community"
+        <TButton class="mt-2" :to="localePath('/signin?target=/community')"
           >Create Profile</TButton
         >
       </div>

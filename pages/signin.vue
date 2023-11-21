@@ -15,13 +15,21 @@
       icon="google"
       @click="signGoogle"
     />
-    <TButton allow-guests :label="$t('nopassword.email')" to="/nopassword" />
+    <TButton
+      allow-guests
+      :label="$t('nopassword.email')"
+      :to="localePath('/nopassword')"
+    />
 
     <div class="w-48 text-center text-xs">
       By continuing you agree to WeDance's
-      <router-link class="underline" to="/terms">Terms of Service</router-link>
+      <router-link class="underline" :to="localePath('/terms')"
+        >Terms of Service</router-link
+      >
       and have read the
-      <router-link class="underline" to="/privacy">Privacy Policy</router-link>.
+      <router-link class="underline" :to="localePath('/privacy')"
+        >Privacy Policy</router-link
+      >.
     </div>
   </div>
 </template>

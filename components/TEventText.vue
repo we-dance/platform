@@ -8,7 +8,7 @@
     </div>
     <div>
       <NuxtLink
-        :to="`/events/${item.id}`"
+        :to="localePath(`/events/${item.id}`)"
         :target="isEmbed ? '_blank' : '_self'"
         class="font-bold leading-none hover:underline hover:text-primary"
       >
@@ -50,7 +50,7 @@
           </div>
           <div v-if="item.org" class="text-primary hover:underline">
             <router-link
-              :to="`/${item.org.username}`"
+              :to="localePath(`/${item.org.username}`)"
               :target="isEmbed ? '_blank' : '_self'"
               >{{ item.org.username }}</router-link
             >

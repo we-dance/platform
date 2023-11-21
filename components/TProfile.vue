@@ -5,7 +5,7 @@
         v-if="profile.type === 'City'"
         slot="left"
         allow-guests
-        to="/cities"
+        :to="localePath('/cities')"
         icon="place"
         :label="profile.name"
       />
@@ -14,12 +14,17 @@
         slot="left"
         class="flex flex-no-wrap items-center ml-8 md:ml-0"
       >
-        <h1 class="ml-1 font-lato text-lg font-bold">
+        <div class="ml-1 font-lato text-lg font-bold">
           {{ profile.username }}
-        </h1>
+        </div>
       </div>
 
-      <TButton allow-guests type="nav" icon="search" to="/search" />
+      <TButton
+        allow-guests
+        type="nav"
+        icon="search"
+        :to="localePath('/search')"
+      />
       <TDropdown>
         <TPopupEdit
           v-if="isAdmin()"
@@ -100,7 +105,7 @@
 
         <div v-if="profile.type === 'City'" class="flex space-x-2 mt-4">
           <TButton
-            to="/events/-/edit"
+            :to="localePath('/events/-/edit')"
             type="primary"
             icon="plus"
             label="Add Event"
@@ -123,11 +128,14 @@
         v-if="uid === profile.id"
         type="primary"
         :label="$t('myprofile.edit')"
-        to="/settings?tab=profile"
+        :to="localePath('/settings?tab=profile')"
       />
-      <TButton v-if="uid === profile.id" to="/posts/-/edit" type="base">{{
-        $t('myprofile.addPost')
-      }}</TButton>
+      <TButton
+        v-if="uid === profile.id"
+        :to="localePath('/posts/-/edit')"
+        type="base"
+        >{{ $t('myprofile.addPost') }}</TButton
+      >
       <TReaction
         v-if="uid !== profile.id"
         :label="$t('Subscribe')"

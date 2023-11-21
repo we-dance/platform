@@ -8,7 +8,7 @@
         <div class="block text-sm leading-tight">
           <div class="flex space-x-1 text-xs">
             <NuxtLink
-              :to="`/${item.username}`"
+              :to="localePath(`/${item.username}`)"
               class="font-bold hover:underline"
               >{{ item.username }}</NuxtLink
             >
@@ -16,13 +16,13 @@
             <div>
               <NuxtLink
                 v-if="item.type === 'event'"
-                :to="`/events/${item.id}`"
+                :to="localePath(`/events/${item.id}`)"
                 class="hover:underline"
                 >{{ dateDiff(item.createdAt) }}</NuxtLink
               >
               <NuxtLink
                 v-else
-                :to="`/posts/${item.id}`"
+                :to="localePath(`/posts/${item.id}`)"
                 class="hover:underline"
                 >{{ dateDiff(item.createdAt) }}</NuxtLink
               >
@@ -48,14 +48,14 @@
           v-if="can('edit', 'posts', item) && item.type !== 'event'"
           type="context"
           icon="edit"
-          :to="`/posts/${item.id}/edit`"
+          :to="localePath(`/posts/${item.id}/edit`)"
           :label="$t('post.edit')"
         />
         <TButton
           v-if="can('edit', 'posts', item) && item.type === 'event'"
           type="context"
           icon="edit"
-          :to="`/events/${item.id}/edit`"
+          :to="localePath(`/events/${item.id}/edit`)"
           :label="$t('post.edit')"
         />
         <TButton

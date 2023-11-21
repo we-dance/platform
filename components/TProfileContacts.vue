@@ -16,7 +16,7 @@
     />
     <TButton
       v-if="profile.id === profile.createdBy"
-      :to="`/chat/${profile.username}`"
+      :to="localePath(`/chat/${profile.username}`)"
       label="chat"
       type="context"
     />

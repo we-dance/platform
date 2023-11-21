@@ -5,7 +5,7 @@
   <div v-else class="flex space-x-4 border p-4">
     <div class="flex-grow">
       <NuxtLink
-        :to="`/events/${node.id}`"
+        :to="localePath(`/events/${node.id}`)"
         class="font-bold leading-none underline hover:no-underline"
         >{{ node.name }}</NuxtLink
       >

@@ -10,7 +10,7 @@
               <TButton
                 allow-guests
                 type="primary"
-                to="/signin"
+                :to="localePath('/signin')"
                 :label="$t('auth.signin')"
               />
             </nav>
@@ -28,7 +28,7 @@
                   allow-guests
                   icon="search"
                   :label="$t('home.cta.action')"
-                  to="/cities"
+                  :to="localePath('/cities')"
                   type="void"
                   class="mt-8 w-full text-gray-500 bg-white hover:bg-gray-100 font-semibold py-2 px-4 border border-gray-400 rounded-full shadow"
                 />
@@ -64,7 +64,7 @@
             <p class="text-center">
               {{ $t('features.calendar.description') }}<br />
               <NuxtLink
-                to="/events"
+                :to="localePath('/events')"
                 class="underline font-bold hover:no-underline"
                 >{{ $t('features.calendar.action') }}</NuxtLink
               >
@@ -87,7 +87,7 @@
             <p class="text-center">
               {{ $t('features.dancePartners.description') }}<br />
               <NuxtLink
-                to="/community"
+                :to="localePath('/community')"
                 class="underline font-bold hover:no-underline"
                 >{{ $t('features.dancePartners.action') }}</NuxtLink
               >
@@ -110,7 +110,7 @@
             <p class="text-center">
               {{ $t('features.danceTravel.description') }}<br />
               <NuxtLink
-                to="/Travel"
+                :to="localePath('/Travel')"
                 class="underline font-bold hover:no-underline"
                 >{{ $t('features.danceTravel.action') }}</NuxtLink
               >

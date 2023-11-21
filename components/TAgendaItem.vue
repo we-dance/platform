@@ -15,7 +15,7 @@
           <span v-for="artist in item.artists" :key="artist.username">
             <span class="w-2 text-center">·</span>
             <router-link
-              :to="`/${artist.username}`"
+              :to="localePath(`/${artist.username}`)"
               class="text-primary hover:underline"
               >{{ artist.username }}</router-link
             >

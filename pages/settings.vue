@@ -10,11 +10,11 @@
             <div>
               <NuxtLink
                 v-if="currentTab !== 'account'"
-                to="/settings?tab=account"
+                :to="localePath('/settings?tab=account')"
               >
                 <TIcon class="h-8 w-8" name="arrow_right" />
               </NuxtLink>
-              <NuxtLink v-else to="/settings">
+              <NuxtLink v-else :to="localePath('/settings')">
                 <TIcon class="h-8 w-8" name="arrow_drop_down" />
               </NuxtLink>
             </div>
@@ -35,7 +35,7 @@
               class="space-y-4"
               @save="saveAccount"
             />
-            <TButton to="/settings?tab=password" class="mt-4">{{
+            <TButton :to="localePath('/settings?tab=password')" class="mt-4">{{
               $t('settings.account.changepassword')
             }}</TButton>
             <div class="bg-red-200 mt-4 -mb-4 -mx-4 p-4">
@@ -89,7 +89,7 @@
               <TButton
                 v-if="passwordError.code === 'auth/requires-recent-login'"
                 type="primary"
-                to="/signout?target=/signin"
+                :to="localePath('/signout?target=/signin')"
                 class="float-right mt-4"
                 >{{ $t('auth.signout') }}</TButton
               >
@@ -101,11 +101,11 @@
             <div>
               <NuxtLink
                 v-if="currentTab !== 'profile'"
-                to="/settings?tab=profile"
+                :to="localePath('/settings?tab=profile')"
               >
                 <TIcon class="h-8 w-8" name="arrow_right" />
               </NuxtLink>
-              <NuxtLink v-else to="/settings">
+              <NuxtLink v-else :to="localePath('/settings')">
                 <TIcon class="h-8 w-8" name="arrow_drop_down" />
               </NuxtLink>
             </div>
@@ -258,7 +258,7 @@ export default {
       }
     },
     goToProfile() {
-      this.$router.push(`/${this.profile.username}`)
+      this.$router.push(this.localePath(`/${this.profile.username}`))
     },
     async saveProfile(data) {
       if (data.bio?.length > 140) {
@@ -279,7 +279,7 @@ export default {
         track('save_account')
 
         await this.updateAccount(data)
-        this.$router.push('/settings')
+        this.$router.push(this.localePath('/settings'))
       } catch (e) {
         this.passwordError = e
       }

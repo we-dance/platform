@@ -1,12 +1,15 @@
 <template>
   <div class="flex items-center space-x-1">
     <div v-if="photo">
-      <NuxtLink :to="`/${profile.username}`">
+      <NuxtLink :to="localePath(`/${profile.username}`)">
         <TProfilePhoto :uid="uid" :size="size" />
       </NuxtLink>
     </div>
     <div v-if="name">
-      <NuxtLink class="hover:underline" :to="`/${profile.username}`">
+      <NuxtLink
+        class="hover:underline"
+        :to="localePath(`/${profile.username}`)"
+      >
         {{ profile.name }}
       </NuxtLink>
     </div>

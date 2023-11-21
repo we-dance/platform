@@ -4,7 +4,7 @@
     <NuxtLink
       v-for="style in getStyles(value, 0, false, max)"
       :key="style.id"
-      :to="`/dance/${style.id}`"
+      :to="localePath(`/dance/${style.id}`)"
       :class="getClasses(style)"
     >
       {{ style.name

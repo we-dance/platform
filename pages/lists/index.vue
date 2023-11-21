@@ -7,7 +7,7 @@
   >
     <template v-slot:item="{ item }">
       <NuxtLink
-        :to="`/lists/${item.id}`"
+        :to="localePath(`/lists/${item.id}`)"
         class="rounded bg-white shadow border hover:bg-gray-100 px-4 py-2 block"
       >
         <h3 class="text-sm font-bold">{{ item.label }}</h3>

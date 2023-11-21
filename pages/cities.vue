@@ -9,7 +9,7 @@
         v-for="city in recommendations"
         :key="city.username"
         class="border-b block p-4 cursor-pointer hover:bg-red-100"
-        :to="`/${city.username}`"
+        :to="localePath(`/${city.username}`)"
       >
         <div class="text-lg">
           {{ city.name }}
