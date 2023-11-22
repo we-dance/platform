@@ -4,7 +4,12 @@
     name="undraw_profile_pic"
     :class="`rounded-full w-${dim} h-${dim}`"
   />
-  <img v-else :class="`rounded-full w-${dim} h-${dim}`" :src="photo" />
+  <img
+    v-else
+    :class="`rounded-full w-${dim} h-${dim}`"
+    :src="photo"
+    :alt="`${username} photo`"
+  />
 </template>
 
 <script>
@@ -24,6 +29,9 @@ export default {
     },
   },
   computed: {
+    username() {
+      return this.profile?.username
+    },
     photo() {
       return this.profile?.photo
     },

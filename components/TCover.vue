@@ -5,7 +5,12 @@
       :name="fallback"
       :style="`width: ${width}px; height: ${height}px;`"
     />
-    <img v-else :src="src" :style="`width: ${width}px; height: ${height}px;`" />
+    <img
+      v-else
+      :src="src"
+      :style="`width: ${width}px; height: ${height}px;`"
+      alt="Cover photo"
+    />
   </div>
 </template>
 

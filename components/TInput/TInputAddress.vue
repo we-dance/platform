@@ -5,7 +5,7 @@
       class="bg-gray-100 rounded p-4 flex items-center space-x-4"
     >
       <div>
-        <img :src="value.icon" class="w-8 h-8" alt="" />
+        <img :src="value.icon" class="w-8 h-8" alt="venue icon" />
       </div>
       <div class="flex-grow">
         <div class="font-bold">{{ value.name }}</div>

@@ -8,7 +8,7 @@
       class="flex flex-wrap justify-center border-b p-2 text-xs"
     />
 
-    <img v-if="doc.cover" :src="doc.cover" />
+    <img v-if="doc.cover" :src="doc.cover" :alt="`${doc.title} cover`" />
 
     <TPost :item="doc" show-all expanded>
       <TCommentsInline :item="doc" class="p-4" autoload />

@@ -36,7 +36,7 @@
       </div>
     </div>
     <div>
-      <img class="w-20 rounded" :src="cover" />
+      <img class="w-20 rounded" :src="cover" :alt="`${name} cover`" />
     </div>
   </NuxtLink>
 </template>

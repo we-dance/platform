@@ -5,7 +5,7 @@
       name="undraw_profile_pic"
       :class="`rounded-full w-${dim} h-${dim}`"
     />
-    <img v-else :class="`rounded-full w-full`" :src="src" />
+    <img v-else :class="`rounded-full w-full`" :src="src" alt="profile photo" />
   </div>
 </template>
 

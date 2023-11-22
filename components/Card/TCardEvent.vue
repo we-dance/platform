@@ -26,7 +26,7 @@
       </div>
     </div>
     <div v-if="showCover" class="aspect-square">
-      <img :src="node.cover" class="w-20" />
+      <img :src="node.cover" class="w-20" :alt="`${node.name} cover`" />
     </div>
   </div>
 </template>
