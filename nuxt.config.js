@@ -121,7 +121,7 @@ export default {
     '@nuxtjs/sentry',
     '@nuxtjs/robots',
     '@nuxtjs/device',
-    'nuxt-i18n',
+    '@nuxtjs/i18n',
     '@nuxtjs/sitemap',
     '@nuxt/content',
     '@nuxtjs/toast',
@@ -187,6 +187,12 @@ export default {
       const svgRule = config.module.rules.find((rule) => rule.test.test('.svg'))
 
       svgRule.test = /\.(png|jpe?g|gif|webp)$/
+
+      config.module.rules.push({
+        test: /\.mjs$/,
+        include: /node_modules/,
+        type: 'javascript/auto',
+      })
 
       config.module.rules.push({
         test: /\.svg$/,

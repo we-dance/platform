@@ -1,6 +1,6 @@
 <template>
   <TIcon
-    v-if="loading || !photo"
+    v-if="!photo"
     name="undraw_profile_pic"
     :class="`rounded-full w-${dim} h-${dim}`"
   />
@@ -40,13 +40,12 @@ export default {
     },
   },
   setup(props) {
-    const { getProfile, loading } = useProfiles()
+    const { getProfile } = useProfiles()
 
     const profile = computed(() => getProfile(props.uid))
 
     return {
       profile,
-      loading,
     }
   },
 }

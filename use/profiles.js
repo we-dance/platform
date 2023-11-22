@@ -9,7 +9,7 @@ export const useProfiles = () => {
   const { accountFields } = useAccounts()
   const { yesNoOptions, visibilityOptions, genderList, days } = useCommon()
 
-  const { read, loading } = useApp()
+  const { read } = useApp()
   const { load } = useDoc('profiles')
 
   const getFullProfile = (uid) => load(uid) || {}
@@ -457,7 +457,6 @@ export const useProfiles = () => {
     profilePosterFields,
     profileDetailFields,
     contactFields,
-    loading,
     objectivesList,
     typeList,
     genderList,

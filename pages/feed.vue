@@ -11,7 +11,7 @@
 </template>
 
 <script>
-import { computed, ref } from 'vue-demi'
+import { computed, ref } from '@nuxtjs/composition-api'
 import { useAuth } from '~/use/auth'
 import { useCities } from '~/use/cities'
 import { useDoc } from '~/use/doc'
