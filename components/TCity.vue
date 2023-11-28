@@ -172,6 +172,9 @@
           :docs="events"
         />
       </TCalendar>
+      <div class="text-xs p-2">
+        {{ mentions.join(' ') }}
+      </div>
     </TCollapse>
 
     <TCollapse title="News">
@@ -369,6 +372,27 @@ export default {
     const community = computed(() => getCity(props.profile?.place))
     const events = ref([])
 
+    const mentions = computed(() => {
+      const result = []
+
+      for (const event of events.value) {
+        result.push(event.org.instagram)
+
+        for (const artist of event.artists) {
+          result.push(artist.instagram)
+        }
+      }
+
+      return result
+        .filter((x) => x)
+        .map((x) =>
+          x
+            .replace(/https?:\/\/(www.)?instagram.com\//, '@')
+            .replace(/\/.*$/, '')
+        )
+        .filter((v, i, a) => a.indexOf(v) === i)
+    })
+
     const intro = {
       fields: [
         {
@@ -418,6 +442,7 @@ export default {
 
     return {
       events,
+      mentions,
       getDateObect,
       promo,
       internationalChatLink,
