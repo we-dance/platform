@@ -442,6 +442,22 @@ export const useAuth = () => {
     firebase.auth().signInWithRedirect(provider)
   }
 
+  function signInWithGooglePopup() {
+    state.signingIn = true
+
+    const provider = new firebase.auth.GoogleAuthProvider()
+    provider.addScope('profile')
+    provider.addScope('email')
+    firebase
+      .auth()
+      .signInWithPopup(provider)
+      .then(function(result) {
+        const user = result.user
+        setUser(user)
+        state.signingIn = false
+      })
+  }
+
   function signInWithFacebook() {
     state.signingIn = true
 
@@ -476,6 +492,7 @@ export const useAuth = () => {
     signInAnonymously,
     signUserIn,
     signInWithGoogle,
+    signInWithGooglePopup,
     signInWithFacebook,
     sendSignInLinkToEmail,
     signInWithEmailLink,
