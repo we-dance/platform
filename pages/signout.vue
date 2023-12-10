@@ -15,6 +15,7 @@ export default {
   },
   async mounted() {
     await this.signOut()
+    this.$posthog.reset()
 
     this.$router.back()
   },

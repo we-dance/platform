@@ -99,6 +99,7 @@ export default {
     '~/plugins/directives',
     '~/plugins/vue-tailwind',
     '~/plugins/vue-datepicker',
+    { src: '~/plugins/posthog', mode: 'client' },
   ],
   /*
    ** Nuxt.js dev-modules

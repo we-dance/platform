@@ -151,6 +151,14 @@ export default {
       const _hsq = (window._hsq = window._hsq || [])
       _hsq.push(['identify', contact])
 
+      this.$posthog.identify(this.uid, {
+        email: contact.email,
+        username: contact.username,
+        type: contact.type,
+        community: contact.community,
+        gender: this.profile?.gender,
+      })
+
       this.$sentry.setUser({
         email: contact.email,
         username: contact.username,
