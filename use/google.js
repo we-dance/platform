@@ -11,7 +11,7 @@ export const getPlusCode = async (address) => {
 }
 
 export const addressPart = (result, type) => {
-  if (!result) {
+  if (!result || !result.address_components) {
     return ''
   }
 

@@ -28,14 +28,7 @@
           <template v-if="item.online === 'Yes'">
             · Online
           </template>
-          <template v-if="item.venue">
-            <template v-if="currentCity === item.place">
-              · {{ item.venue.name }}
-            </template>
-            <template v-else>
-              · {{ addressPart(item.venue, 'locality') }}
-            </template>
-          </template>
+          <template v-if="item.venue"> · {{ item.venue.name }}</template>
         </div>
       </div>
       <div class="text-xs text-gray-700 pt-1">

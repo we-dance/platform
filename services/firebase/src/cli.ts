@@ -15,6 +15,7 @@ const { hideBin } = require('yargs/helpers')
 import { firestore } from './firebase'
 import { announceEventIG } from './lib/instagram'
 import { getInstagramWebProfileInfo } from './lib/browser'
+import { getFacebookEvent } from './lib/facebook_import'
 
 function getDomain(url: string): string {
   let hostname
@@ -34,6 +35,31 @@ function getDomain(url: string): string {
 }
 
 yargs(hideBin(process.argv))
+  .command(
+    'fb:import <url>',
+    'Import event from Facebook',
+    () => undefined,
+    async (argv: any) => {
+      const url = argv.url
+
+      const event = await getFacebookEvent(url)
+
+      await firestore.collection('posts').add(event)
+    }
+  )
+  .command(
+    'get <eventId>',
+    'Get event data',
+    () => undefined,
+    async (argv: any) => {
+      const eventRef = await firestore
+        .collection('posts')
+        .doc(argv.eventId)
+        .get()
+
+      console.log(eventRef.data())
+    }
+  )
   .command(
     'tg:announce <eventId>',
     'Announce event on telegram',

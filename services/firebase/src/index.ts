@@ -114,7 +114,7 @@ app.post('/track/:action', async (req, res) => {
 })
 
 app.get('/share/*', async (req, res) => {
-  const path = req.params[0]
+  const path = (req.params as string[])[0]
   const timezone = req.query.timezone as string
 
   try {
@@ -142,7 +142,7 @@ app.get('/share/*', async (req, res) => {
   } catch (e) {
     return res.json({
       success: false,
-      error: e.message,
+      error: (e as Error).message,
     })
   }
 })
@@ -275,7 +275,7 @@ export const profileCreated = functions
       } catch (e) {
         await snapshot.ref.update({
           import: 'failed',
-          importError: e.message,
+          importError: (e as Error).message,
         })
 
         return
@@ -435,7 +435,7 @@ export const eventChanged = functions.firestore
           .doc(eventId)
           .update({
             promotion: 'failed',
-            promotionError: e.message,
+            promotionError: (e as Error).message,
           })
       }
     }

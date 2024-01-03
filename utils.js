@@ -196,7 +196,7 @@ export const camelize = (str) => {
 }
 
 export const addressPart = (result, type) => {
-  if (!result) {
+  if (!result || !result.address_components) {
     return ''
   }
 
