@@ -1,6 +1,6 @@
 <template>
   <div
-    class="flex flex-col items-center p-2 gap-2 overflow-x-hidden shadow-md rounded-lg h-72"
+    class="flex flex-col items-center p-2 gap-2 overflow-x-hidden shadow-md rounded-lg"
   >
     <div class="flex flex-row items-center p-2 gap-4 w-full h-fit ">
       <TProfilePhoto2 size="lg" :src="item.author.photo" />
@@ -14,7 +14,7 @@
           <a
             v-if="item.link"
             :href="item.link"
-            class="text-gray-600 hover:text-gray-500"
+            class="text-gray-600 hover:text-gray-500 text-xs"
           >
             {{ item.createdAt || 'Source' }}
           </a>
