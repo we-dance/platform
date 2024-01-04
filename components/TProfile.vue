@@ -132,9 +132,9 @@
       />
       <TButton
         v-if="uid === profile.id"
-        :to="localePath('/posts/-/edit')"
+        :to="localePath('/events/-/edit')"
         type="base"
-        >{{ $t('myprofile.addPost') }}</TButton
+        >{{ $t('myprofile.addEvent') }}</TButton
       >
       <TReaction
         v-if="uid !== profile.id"
