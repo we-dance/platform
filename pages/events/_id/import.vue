@@ -50,6 +50,9 @@ export default {
       if (facebook) {
         const parts = facebook.replace(/\?.*/, '').split('/')
         const facebookId = parts.pop() || parts.pop()
+        if (!facebookId) {
+          return
+        }
         const firestore = firebase.firestore()
 
         firestore
@@ -59,7 +62,7 @@ export default {
           .then((querySnapshot) => {
             const duplicates = []
             querySnapshot.forEach((doc) => {
-              duplicates.push(doc.data())
+              duplicates.push({ ...doc.data(), id: doc.id })
             })
             this.duplicates = duplicates
           })
