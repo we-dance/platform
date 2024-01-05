@@ -13,7 +13,6 @@ function getDate(timestamp: any) {
 }
 
 // todos:
-// - idetify styles
 // - convert venues to profiles
 // - avoid duplicate events
 
@@ -112,7 +111,6 @@ export async function getFacebookEvent(url: string) {
     }
   }
 
-  console.log(event)
   const hash = getDate(event.startTimestamp) + '+' + place
 
   return {
