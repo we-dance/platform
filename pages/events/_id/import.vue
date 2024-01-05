@@ -14,6 +14,9 @@
         @save="saveItem"
         @cancel="view(item.id)"
       />
+      <div v-for="item in duplicates" :key="item.id">
+        <TEventText2 :item="item" />
+      </div>
       <div class="p-4">
         <div class="divider">or</div>
         <TButton
@@ -28,6 +31,8 @@
 
 <script>
 import { pickBy } from 'lodash'
+import firebase from 'firebase/app'
+import 'firebase/firestore'
 import { useAuth } from '~/use/auth'
 import { useDoc } from '~/use/doc'
 import { useI18n } from '~/use/i18n'
@@ -37,6 +42,9 @@ export default {
   name: 'EventImport',
   layout: 'empty',
   middleware: ['auth'],
+  data: () => ({
+    duplicates: [],
+  }),
   mounted() {
     if (this.$route.params.id === '-') {
       this.item = {
@@ -45,6 +53,27 @@ export default {
         username: this.profile?.username,
       }
     }
+  },
+  watch: {
+    'item.facebook'(facebook) {
+      if (facebook) {
+        const parts = facebook.replace(/\?.*/, '').split('/')
+        const facebookId = parts.pop() || parts.pop()
+        const firestore = firebase.firestore()
+
+        firestore
+          .collection('posts')
+          .where('facebookId', '==', facebookId)
+          .get()
+          .then((querySnapshot) => {
+            const duplicates = []
+            querySnapshot.forEach((doc) => {
+              duplicates.push(doc.data())
+            })
+            this.duplicates = duplicates
+          })
+      }
+    },
   },
   methods: {
     view(id) {
