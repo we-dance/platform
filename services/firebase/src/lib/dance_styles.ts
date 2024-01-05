@@ -1,6 +1,7 @@
 import * as path from 'path'
 import * as fs from 'fs'
 import * as YAML from 'yaml'
+import * as danceStyles from '../dance_styles'
 
 export function readFile(pathToFile: string) {
   if (!fs.existsSync(pathToFile)) {
@@ -39,19 +40,16 @@ export function generateStyles() {
     name: s.name,
   }))
 
-  const output = JSON.stringify(styles, null, 2)
+  const output = 'export default ' + JSON.stringify(styles, null, 2)
 
-  fs.writeFileSync(
-    __dirname + '/../../../../services/firebase/src/dance_styles.json',
-    output,
-    'utf8'
+  const pathToFile = path.join(
+    __dirname,
+    '/../../../../services/firebase/src/dance_styles.ts'
   )
+
+  fs.writeFileSync(pathToFile, output, 'utf8')
 }
 
 export function getStyles() {
-  const pathToFile =
-    __dirname + '/../../../../services/firebase/src/dance_styles.json'
-  const styles = JSON.parse(fs.readFileSync(pathToFile, 'utf8'))
-
-  return styles
+  return danceStyles.default
 }
