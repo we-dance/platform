@@ -2,6 +2,7 @@ import { scrapeFbEvent } from 'facebook-event-scraper'
 import { initIndex } from './algolia'
 import { firestore } from '../firebase'
 import { getCityId, getPlace } from './google_maps'
+import { getStyles } from './dance_styles'
 
 function getDate(timestamp: any) {
   if (!timestamp) {
@@ -14,6 +15,7 @@ function getDate(timestamp: any) {
 // todos:
 // - idetify styles
 // - convert venues to profiles
+// - avoid duplicate events
 
 export async function getFacebookEvent(url: string) {
   let event
@@ -94,9 +96,24 @@ export async function getFacebookEvent(url: string) {
   for (const e of eventTypes) {
     if (description.includes(e.toLowerCase())) {
       eventType = e
-      break
     }
   }
+
+  const stylesList: any = getStyles()
+  const styles: any = {}
+
+  for (const style of stylesList) {
+    if (description.includes(style.name.toLowerCase())) {
+      styles[style.id] = {
+        level: 'Interested',
+        highlighted: false,
+        selected: true,
+      }
+    }
+  }
+
+  console.log(event)
+  const hash = getDate(event.startTimestamp) + '+' + place
 
   return {
     name: event.name,
@@ -108,7 +125,6 @@ export async function getFacebookEvent(url: string) {
     venue,
     place,
     link: event.ticketUrl || '',
-    facebook: event.url,
     type: 'event',
     visibility: 'Public',
     form: 'No',
@@ -125,5 +141,8 @@ export async function getFacebookEvent(url: string) {
       count: 0,
       usernames: [],
     },
+    facebook: event.url,
+    facebookId: event.id,
+    hash,
   }
 }
