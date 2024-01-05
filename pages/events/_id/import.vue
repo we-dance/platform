@@ -45,15 +45,6 @@ export default {
   data: () => ({
     duplicates: [],
   }),
-  mounted() {
-    if (this.$route.params.id === '-') {
-      this.item = {
-        type: 'import_event',
-        place: this.profile?.place || '',
-        username: this.profile?.username,
-      }
-    }
-  },
   watch: {
     'item.facebook'(facebook) {
       if (facebook) {
@@ -74,6 +65,15 @@ export default {
           })
       }
     },
+  },
+  mounted() {
+    if (this.$route.params.id === '-') {
+      this.item = {
+        type: 'import_event',
+        place: this.profile?.place || '',
+        username: this.profile?.username,
+      }
+    }
   },
   methods: {
     view(id) {
