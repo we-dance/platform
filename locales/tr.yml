@@ -511,6 +511,11 @@ sort:
   starred: Yıldızlı
   archived: Arşivlenmiş
   yours: Sizin
+import:
+  event:
+    facebook:
+      label: Add event from Facebook
+      description: ''
 event:
   attend: Join Guest List
   attendCallToAction: Join guest list to find tickets
