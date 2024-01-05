@@ -43,22 +43,23 @@
 
     <div
       v-if="doc.type === 'import_error'"
-      class="flex justify-center items-center h-64"
+      class="flex flex-col justify-center items-center h-64 p-4 text-center"
     >
       <div class="text-sm text-red-500">{{ doc.error }}</div>
+      <TButton
+        v-if="can('edit', 'events', doc)"
+        type="primary"
+        icon="delete"
+        label="Delete Event"
+        class="mt-4"
+        @click="deleteEvent(doc.id)"
+      />
     </div>
     <div
       v-else-if="doc.type === 'import_event'"
       class="flex justify-center items-center h-64"
     >
       <div class="text-sm">Importing event from Facebook...</div>
-      <TButton
-        v-if="can('edit', 'events', doc)"
-        type="primary"
-        icon="delete"
-        label="Delete Event"
-        @click="deleteEvent(doc.id)"
-      />
     </div>
     <div v-else>
       <div
