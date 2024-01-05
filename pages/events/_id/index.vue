@@ -400,7 +400,7 @@
 
       <div v-if="doc.org" class="space-y-2 p-4">
         <h4 class="text-xl font-bold">{{ $t('event.organiser') }}</h4>
-        <WProfile :username="doc.org.username" :fallback="doc.org" />
+        <WProfile :username="doc.org.username" :fallback="doc.org" hide-role />
       </div>
 
       <div v-if="doc.artists && doc.artists.length" class="space-y-2 p-4">
@@ -413,6 +413,7 @@
             v-if="profile"
             :username="profile.username"
             :fallback="profile"
+            hide-role
           />
         </div>
       </div>
