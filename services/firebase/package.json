@@ -16,6 +16,7 @@
   },
   "main": "dist/index.js",
   "dependencies": {
+    "@googlemaps/google-maps-services-js": "^3.3.42",
     "@sentry/node": "^6.17.4",
     "@sentry/tracing": "^6.17.4",
     "@sentry/types": "^6.17.4",

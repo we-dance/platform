@@ -19,6 +19,7 @@ import { notifySlackAboutEvents, notifySlackAboutUsers } from './lib/slack'
 import { wrap } from './sentry'
 import { announceEventIG } from './lib/instagram'
 import { getInstagramWebProfileInfo } from './lib/browser'
+import { getFacebookEvent } from './lib/facebook_import'
 
 require('dotenv').config()
 
@@ -384,6 +385,16 @@ export const eventChanged = functions.firestore
     const oldEvent = change.before.data() as any
     const eventId = context.params.eventId
     const event = { ...change.after.data(), id: eventId } as any
+
+    if (event.type === 'import_event') {
+      const eventData = await getFacebookEvent(event.facebook)
+      await firestore
+        .collection('posts')
+        .doc(eventId)
+        .update(eventData)
+
+      return
+    }
 
     if (wasChanged(oldEvent, event, ['updatedAt'])) {
       const index = initIndex('events')

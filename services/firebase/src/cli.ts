@@ -16,6 +16,7 @@ import { firestore } from './firebase'
 import { announceEventIG } from './lib/instagram'
 import { getInstagramWebProfileInfo } from './lib/browser'
 import { getFacebookEvent } from './lib/facebook_import'
+import { getPlace } from './lib/google_maps'
 
 function getDomain(url: string): string {
   let hostname
@@ -36,7 +37,19 @@ function getDomain(url: string): string {
 
 yargs(hideBin(process.argv))
   .command(
-    'fb:import <url>',
+    'place <name>',
+    'Find place',
+    () => undefined,
+    async (argv: any) => {
+      const name = argv.name
+
+      const place = await getPlace(name)
+
+      console.log(place)
+    }
+  )
+  .command(
+    'fb <url>',
     'Import event from Facebook',
     () => undefined,
     async (argv: any) => {
@@ -44,7 +57,79 @@ yargs(hideBin(process.argv))
 
       const event = await getFacebookEvent(url)
 
-      await firestore.collection('posts').add(event)
+      console.log(event.name)
+    }
+  )
+  .command(
+    'claim <target> <fan>',
+    'Import event from Facebook',
+    () => undefined,
+    async (argv: any) => {
+      const targetDoc = (
+        await firestore
+          .collection('profiles')
+          .where('username', '==', argv.target)
+          .get()
+      ).docs[0]
+      const target = { ...targetDoc.data(), id: targetDoc.id } as any
+
+      const fanDoc = (
+        await firestore
+          .collection('profiles')
+          .where('username', '==', argv.fan)
+          .get()
+      ).docs[0]
+      const fan = { ...fanDoc.data(), id: fanDoc.id } as any
+
+      const targetEvents = (
+        await firestore
+          .collection('posts')
+          .where('org.username', '==', argv.target)
+          .get()
+      ).docs.map((d) => d.data())
+
+      for (const event of targetEvents) {
+        console.log(`Updating event • ${event.id} • ${event.name} `)
+
+        await firestore
+          .collection('posts')
+          .doc(event.id)
+          .update({
+            username: fan.username,
+            org: {
+              id: fan.id,
+              username: fan.username,
+              name: fan.name || fan.username || '',
+              photo: fan.photo || '',
+              bio: fan.bio || '',
+              instagram: fan.instagram || '',
+              facebook: fan.facebook || '',
+              tiktok: fan.tiktok || '',
+              youtube: fan.youtube || '',
+            },
+          })
+      }
+
+      console.log('target', target.watch?.usernames)
+      console.log('fan', fan.watch?.usernames)
+
+      await firestore
+        .collection('profiles')
+        .doc(target.id)
+        .update({
+          ...fan,
+          createdAt: target.createdAt,
+          createdBy: target.createdBy,
+          updatedAt: target.updatedAt,
+          updatedBy: target.updatedBy || target.createdBy,
+          fanCreatedBy: fan.createdBy,
+          fanCreatedAt: fan.createdAt,
+        })
+
+      await firestore
+        .collection('profiles')
+        .doc(fan.id)
+        .delete()
     }
   )
   .command(

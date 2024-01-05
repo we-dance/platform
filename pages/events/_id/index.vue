@@ -42,495 +42,511 @@
     </THeader>
 
     <div
-      class="grid grid-cols-1"
-      :class="$route.query.variant ? 'md:grid-cols-2' : ''"
+      v-if="doc.type === 'import_event'"
+      class="flex justify-center items-center h-64"
     >
-      <div v-if="doc.cover" class="relative aspect-square overflow-hidden">
-        <img :src="doc.cover" :alt="doc.name" class="absolute w-full" />
-        <div class="square bg-indigo-500"></div>
-      </div>
-
-      <div class="md:border-l">
-        <div
-          class="flex flex-wrap justify-start items-center px-4 py-2 space-x-1 text-xs border-b"
-        >
-          <div v-if="reviewsCount" class="flex">
-            <TIcon class="h-4 w-4" name="star" />
-            <span>{{ reviewsAvg }} ({{ reviewsCount }})</span>
-          </div>
-          <div v-if="reviewsCount">·</div>
-          <div>
-            {{ $tc('guests', guestCount, { count: guestCount }) }}
-          </div>
-          <div>·</div>
-          <div>
-            {{ $tc('views', doc.viewsCount, { count: doc.viewsCount }) }}
-          </div>
-          <div>·</div>
-          <div>{{ getEventTypeLabel(doc.eventType) }}</div>
-          <div>·</div>
-          <div>
-            {{
-              getStyles(doc.styles, 0, false, 3)
-                .map((s) => s.name)
-                .join(' · ')
-            }}
-          </div>
+      <div class="text-sm">Importing event from Facebook...</div>
+    </div>
+    <div v-else>
+      <div
+        class="grid grid-cols-1"
+        :class="$route.query.variant ? 'md:grid-cols-2' : ''"
+      >
+        <div v-if="doc.cover" class="relative aspect-square overflow-hidden">
+          <img :src="doc.cover" :alt="doc.name" class="absolute w-full" />
+          <div class="square bg-indigo-500"></div>
         </div>
 
-        <a
-          v-if="doc.venue"
-          :href="doc.venue.url"
-          target="_blank"
-          class="block border-b py-2 px-4 hover:bg-gray-200"
-        >
-          <div class="flex items-center justify-start leading-tight">
-            <TIcon name="place" class="mr-4 h-4 w-4" />
+        <div class="md:border-l">
+          <div
+            class="flex flex-wrap justify-start items-center px-4 py-2 space-x-1 text-xs border-b"
+          >
+            <div v-if="reviewsCount" class="flex">
+              <TIcon class="h-4 w-4" name="star" />
+              <span>{{ reviewsAvg }} ({{ reviewsCount }})</span>
+            </div>
+            <div v-if="reviewsCount">·</div>
             <div>
-              <h4 class="font-bold">
-                {{ doc.venue.name
-                }}<span v-if="doc.venue.room"> • {{ doc.venue.room }}</span>
-              </h4>
-              <div class="text-gray-700">
-                {{ doc.venue.formatted_address }}
+              {{ $tc('guests', guestCount, { count: guestCount }) }}
+            </div>
+            <div>·</div>
+            <div>
+              {{ $tc('views', doc.viewsCount, { count: doc.viewsCount }) }}
+            </div>
+            <div>·</div>
+            <div>{{ getEventTypeLabel(doc.eventType) }}</div>
+            <div>·</div>
+            <div>
+              {{
+                getStyles(doc.styles, 0, false, 3)
+                  .map((s) => s.name)
+                  .join(' · ')
+              }}
+            </div>
+          </div>
+
+          <a
+            v-if="doc.venue"
+            :href="doc.venue.url"
+            target="_blank"
+            class="block border-b py-2 px-4 hover:bg-gray-200"
+          >
+            <div class="flex items-center justify-start leading-tight">
+              <TIcon name="place" class="mr-4 h-4 w-4" />
+              <div>
+                <h4 class="font-bold">
+                  {{ doc.venue.name
+                  }}<span v-if="doc.venue.room"> • {{ doc.venue.room }}</span>
+                </h4>
+                <div class="text-gray-700">
+                  {{ doc.venue.formatted_address }}
+                </div>
               </div>
             </div>
+          </a>
+
+          <div
+            v-if="doc.online === 'Yes'"
+            class="flex w-full items-center justify-start border-b py-2 px-4 leading-tight"
+          >
+            <TIcon name="youtube" class="mr-4 h-4 w-4" />
+            <div>{{ $t('eventView.online') }}</div>
           </div>
-        </a>
 
-        <div
-          v-if="doc.online === 'Yes'"
-          class="flex w-full items-center justify-start border-b py-2 px-4 leading-tight"
-        >
-          <TIcon name="youtube" class="mr-4 h-4 w-4" />
-          <div>{{ $t('eventView.online') }}</div>
-        </div>
-
-        <div
-          class="flex w-full items-center justify-start border-b py-2 px-4 leading-tight"
-        >
-          <TIcon name="calendar" class="mr-4 h-4 w-4" />
-          <div>
-            {{ getDateTime(doc.startDate, $i18n.locale) }} -
-            {{ getDateTime(doc.endDate, $i18n.locale) }}
-          </div>
-        </div>
-
-        <div
-          class="flex w-full items-center justify-start border-b py-2 px-4 leading-tight"
-        >
-          <TIcon name="ticket" class="mr-4 h-4 w-4" />
-          <div class="flex w-full justify-between">
-            <div>{{ doc.price }}</div>
-          </div>
-        </div>
-
-        <div
-          v-if="doc.specialOffer"
-          class="flex w-full items-center justify-start border-b py-2 px-4 leading-tight"
-        >
-          <TIcon name="fire" class="mr-4 h-4 w-4 text-primary" />
-          <div class="flex w-full justify-between text-primary">
-            <div>{{ doc.specialOffer }}</div>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <TPopup
-      v-if="ticketTailorPopup"
-      title="Buy Ticket"
-      @close="ticketTailorPopup = false"
-    >
-      <WTicketTailor :href="doc.link" />
-    </TPopup>
-
-    <div v-if="!isGoing" class="text-xs p-4 pb-0 text-center font-bold">
-      {{ $t('event.attendCallToAction') }}
-    </div>
-    <div
-      class="sticky bottom-0 z-40 flex justify-center items-center gap-2 border-b bg-white p-4"
-    >
-      <TReaction
-        type="primary"
-        toggled-class="bg-green-500 hover:bg-green-800"
-        :label="$t('event.attend')"
-        :toggled-label="$t('event.attending')"
-        icon="PlusIcon"
-        toggled-icon="CheckIcon"
-        field="star"
-        class="rounded-full"
-        hide-count
-        :item="doc"
-      />
-      <TButtonShare
-        :id="doc.id"
-        collection="events"
-        :doc="doc"
-        :place="doc.place"
-        :file="doc.socialCover"
-        :file-name="doc.name"
-        :url="`https://wedance.vip/events/${item.id}`"
-        :text="doc.name"
-        type="simple"
-        class="rounded-full"
-        :label="$t('eventView.dropdown.share')"
-      />
-    </div>
-
-    <div v-if="isGoing" class="border-b bg-white p-4">
-      <TPreview v-if="doc.confirmation" :content="doc.confirmation" />
-
-      <div class="flex flex-col md:flex-row justify-center items-center gap-2">
-        <template v-if="doc.link">
-          <TButton
-            v-if="doc.link.includes('https://www.tickettailor.com/')"
-            icon="ticket"
-            type="primary"
-            :label="$t('event.getTicket')"
-            @click="ticketTailorPopup = true"
-          />
-          <TButton
-            v-else
-            type="primary"
-            icon="ticket"
-            :href="doc.link"
-            target="_blank"
-            :label="$t('event.getTicket')"
-          />
-        </template>
-        <TButton
-          v-if="doc.gallery"
-          icon="spotlight"
-          :href="doc.gallery"
-          :label="$t('event.gallery.action')"
-        />
-        <TButton
-          v-if="doc.playlist"
-          icon="spotify"
-          :href="doc.playlist"
-          :label="$t('event.playlist.action')"
-        />
-        <TButton
-          v-if="doc.paypal"
-          icon="favorite"
-          :href="doc.paypal"
-          :label="$t('event.paypal.action')"
-        />
-        <TButton
-          v-if="doc.review"
-          icon="chat"
-          :href="doc.review"
-          :label="$t('event.review.action')"
-        />
-      </div>
-    </div>
-
-    <TPopup
-      v-if="announcementPopupVisible"
-      title="Promote for free"
-      @close="announcementPopupVisible = false"
-    >
-      <div class="w-64 space-y-2 py-4">
-        <TButton
-          v-if="doc.telegram && doc.telegram.messageUrl"
-          allow-guests
-          :href="doc.telegram.messageUrl"
-          label="Telegram"
-          type="nav"
-        />
-        <TButton
-          v-if="doc.instagram && doc.instagram.messageUrl"
-          allow-guests
-          :href="doc.instagram.messageUrl"
-          label="Instagram"
-          type="nav"
-        />
-
-        <template v-if="can('edit', 'events', doc)">
-          <TButton
-            v-if="!doc.telegram || !doc.telegram.state"
-            label="Promote on Telegram"
-            type="nav"
-            @click="
-              softUpdate(doc.id, {
-                telegram: { state: 'requested', requestedAt: +new Date() },
-              })
-            "
-          />
-          <TButton
-            v-else-if="doc.telegram && doc.telegram.state === 'requested'"
-            label="Telegram..."
-            type="nav"
-          />
-
-          <TButton
-            v-if="!doc.instagram || !doc.instagram.state"
-            label="Promote on Instagram"
-            type="nav"
-            @click="
-              softUpdate(doc.id, {
-                instagram: { state: 'requested', requestedAt: +new Date() },
-              })
-            "
-          />
-          <TButton
-            v-else-if="doc.instagram && doc.instagram.state === 'requested'"
-            label="Instagram..."
-            type="nav"
-          />
-        </template>
-
-        <template v-if="isAdmin()">
-          <TButton
-            type="nav"
-            class="red-500"
-            label="Reset Telegram"
-            @click="softUpdate(doc.id, { telegram: {} })"
-          />
-          <TButton
-            type="nav"
-            class="red-500"
-            label="Reset Instagram"
-            @click="softUpdate(doc.id, { instagram: {} })"
-          />
-        </template>
-      </div>
-    </TPopup>
-
-    <div v-if="can('edit', 'events', doc)" class="space-y-2 p-4 border-b">
-      <h3 class="text-xl font-bold">Moderator Tools</h3>
-      <div v-if="doc.promotion !== 'completed'" class="text-sm">
-        As soon as event is published, you can promote it for free on WeDance
-        Instagram by clicking Promote.
-        <div v-if="doc.promotion === 'failed'">
-          <div class="text-red-500">
-            Promotion failed: {{ doc.promotionError }}
-          </div>
-          <div>
-            Please
-            <a class="underline text-primary" href="mailto:support@wedance.vip"
-              >contact support</a
-            >
-            to resolve the issue.
-          </div>
-        </div>
-      </div>
-
-      <TButton
-        v-if="!doc.socialCover"
-        label="Publishing..."
-        class="rounded-full"
-      />
-      <TButton
-        v-else-if="doc.promotion === 'requested'"
-        label="Promoting..."
-        class="rounded-full"
-      />
-      <div v-else-if="doc.promotion === 'completed'" class="text-sm">
-        Event announcement is published on
-        <a class="underline text-primary" :href="doc.instagram.messageUrl"
-          >Instagram</a
-        >
-      </div>
-      <TButton
-        v-else
-        icon="trending"
-        label="Promote"
-        class="rounded-full"
-        @click="
-          softUpdate(doc.id, {
-            promotion: 'requested',
-          })
-        "
-      />
-      <TButton
-        v-if="isAdmin() && doc.promotion === 'completed'"
-        label="Reset"
-        class="rounded-full"
-        @click="
-          softUpdate(doc.id, {
-            promotion: '',
-          })
-        "
-      />
-    </div>
-
-    <TExpand class="p-4">
-      <TPreview :content="doc.description" />
-    </TExpand>
-
-    <div v-if="doc.venue && doc.venue.map" class="bg-gray-100 p-4">
-      <div class="mb-4 text-sm font-bold leading-none text-gray-700">
-        {{ $t('eventView.venueMap') }}
-      </div>
-      <img :src="doc.venue.map" alt="Venue Map" class="mt-4" />
-    </div>
-
-    <TAgenda
-      v-if="doc.program"
-      :events="doc.program"
-      class="w-full space-y-2 p-4"
-    />
-
-    <div v-if="doc.org" class="space-y-2 p-4">
-      <h4 class="text-xl font-bold">{{ $t('event.organiser') }}</h4>
-      <WProfile :username="doc.org.username" :fallback="doc.org" />
-    </div>
-
-    <div v-if="doc.artists && doc.artists.length" class="space-y-2 p-4">
-      <h3 class="text-xl font-bold">{{ $t('event.artists') }}</h3>
-      <div
-        v-for="(profile, profileIndex) in doc.artists"
-        :key="`artist-${profileIndex}`"
-      >
-        <WProfile
-          v-if="profile"
-          :username="profile.username"
-          :fallback="profile"
-        />
-      </div>
-    </div>
-
-    <div v-if="doc.star && doc.star.list" class="space-y-2 p-4">
-      <h3 class="text-xl font-bold">{{ $t('event.guests') }}</h3>
-      <div
-        v-if="guests.followersCount || guests.leadersCount"
-        class="text-xs pt-0"
-      >
-        <span>{{
-          $tc('followersCount', guests.followersCount, {
-            count: guests.followersCount,
-          })
-        }}</span>
-        <span>·</span>
-        <span>{{
-          $tc('leadersCount', guests.leadersCount, {
-            count: guests.leadersCount,
-          })
-        }}</span>
-      </div>
-      <div v-if="!uid" class="flex justify-center p-4">
-        <TButton
-          type="link"
-          allow-guests
-          :to="localePath(`/signin?target=${$route.path}`)"
-          >{{ $t('event.guestsHidden') }}</TButton
-        >
-      </div>
-      <div v-else>
-        <div
-          v-for="(val, username) in doc.star.list"
-          :key="`guest-${username}`"
-        >
-          <WProfile :username="username" />
-        </div>
-        <div v-if="!doc.star.count">There are no other guests yet.</div>
-      </div>
-    </div>
-
-    <div>
-      <h3 class="text-xl font-bold p-4 border-t">{{ $t('comments.label') }}</h3>
-      <div v-if="!uid" class="flex justify-center p-4">
-        <TButton
-          type="link"
-          allow-guests
-          :to="localePath(`/signin?target=${$route.path}`)"
-          >{{ $t('event.commentsHidden') }}</TButton
-        >
-      </div>
-
-      <TCommentsInline v-else :item="doc" autoload class="px-4" />
-    </div>
-
-    <div>
-      <h3 class="text-xl font-bold p-4 border-t">{{ $t('reviews.title') }}</h3>
-      <TReviewList :reviews="reviews" class="px-4" />
-    </div>
-
-    <div class="m-4 text-xs text-right gap-8">
-      <span
-        >Created by
-        <nuxt-link
-          class="underline text-primary"
-          :to="localePath(`/${creator.username}`)"
-          >{{ creator.name }}</nuxt-link
-        ></span
-      >
-      <span>at {{ getYmdHms(doc.createdAt, $i18n.locale) }}</span>
-    </div>
-    <div class="m-4 text-xs text-right gap-8">
-      <span>Updated at {{ getYmdHms(doc.updatedAt, $i18n.locale) }}</span>
-    </div>
-
-    <div v-if="doc.facebook" class="m-4 text-right text-xs gap-8">
-      <a :href="doc.facebook" class="text-gray-700 hover:underline"
-        >Facebook Event</a
-      >
-    </div>
-    <TPopup v-if="ticketPopup" title="Ticket" @close="ticketPopup = false">
-      <div class="mx-auto max-h-screen max-w-md overflow-y-scroll py-4">
-        <div>Reserved as {{ getRsvp(item.id).participant.name }}</div>
-      </div>
-    </TPopup>
-
-    <TPopup
-      v-if="reservationPopup"
-      title="Get Ticket"
-      @close="reservationPopup = false"
-    >
-      <div class="mx-auto max-h-screen max-w-md overflow-y-scroll py-4">
-        <div v-if="reservationPopup === 'reserve'">
-          <div>
-            <TForm
-              v-model="account"
-              allow-guests
-              :fields="reservationFields"
-              :submit-label="
-                $t('eventView.reservationPopup.reserve.submitLabel')
-              "
-              class="mt-4 space-y-4"
-            >
-              <template v-if="!uid" slot="buttons">
-                <TButton
-                  allow-guests
-                  :to="localePath(`/signin?target=${this.$route.fullPath}`)"
-                  :label="$t('eventView.reservationPopup.reserve.label')"
-                />
-              </template>
-            </TForm>
-          </div>
-        </div>
-        <div v-if="reservationPopup === 'finish'" class="p-4">
-          <template v-if="item.link">
-            <h2 class="mb-4 font-bold">
-              {{ $t('eventView.reservationPopup.finish.title') }}
-            </h2>
-            <TButton class="mt-4 mr-4" type="danger" :href="item.link">{{
-              $t('eventView.reservationPopup.finish.btn')
-            }}</TButton>
-          </template>
-          <template v-else>
-            <h2 class="mb-4 font-bold">
-              {{ $t('eventView.reservationPopup.finish.title') }}
-            </h2>
-            <p v-if="uid">
-              {{ $t('eventView.reservationPopup.finish.description') }}
-            </p>
-            <p v-else>
-              {{ $t('eventView.reservationPopup.finish.reminder') }}
-            </p>
-            <div v-if="uid">
-              <TButton
-                :href="calendarLink"
-                :label="$t('eventView.reservationPopup.finish.calendar')"
-                class="mt-2"
-              />
+          <div
+            class="flex w-full items-center justify-start border-b py-2 px-4 leading-tight"
+          >
+            <TIcon name="calendar" class="mr-4 h-4 w-4" />
+            <div>
+              {{ getDateTime(doc.startDate, $i18n.locale) }} -
+              {{ getDateTime(doc.endDate, $i18n.locale) }}
             </div>
-          </template>
+          </div>
+
+          <div
+            class="flex w-full items-center justify-start border-b py-2 px-4 leading-tight"
+          >
+            <TIcon name="ticket" class="mr-4 h-4 w-4" />
+            <div class="flex w-full justify-between">
+              <div>{{ doc.price }}</div>
+            </div>
+          </div>
+
+          <div
+            v-if="doc.specialOffer"
+            class="flex w-full items-center justify-start border-b py-2 px-4 leading-tight"
+          >
+            <TIcon name="fire" class="mr-4 h-4 w-4 text-primary" />
+            <div class="flex w-full justify-between text-primary">
+              <div>{{ doc.specialOffer }}</div>
+            </div>
+          </div>
         </div>
       </div>
-    </TPopup>
+
+      <TPopup
+        v-if="ticketTailorPopup"
+        title="Buy Ticket"
+        @close="ticketTailorPopup = false"
+      >
+        <WTicketTailor :href="doc.link" />
+      </TPopup>
+
+      <div v-if="!isGoing" class="text-xs p-4 pb-0 text-center font-bold">
+        {{ $t('event.attendCallToAction') }}
+      </div>
+      <div
+        class="sticky bottom-0 z-40 flex justify-center items-center gap-2 border-b bg-white p-4"
+      >
+        <TReaction
+          type="primary"
+          toggled-class="bg-green-500 hover:bg-green-800"
+          :label="$t('event.attend')"
+          :toggled-label="$t('event.attending')"
+          icon="PlusIcon"
+          toggled-icon="CheckIcon"
+          field="star"
+          class="rounded-full"
+          hide-count
+          :item="doc"
+        />
+        <TButtonShare
+          :id="doc.id"
+          collection="events"
+          :doc="doc"
+          :place="doc.place"
+          :file="doc.socialCover"
+          :file-name="doc.name"
+          :url="`https://wedance.vip/events/${item.id}`"
+          :text="doc.name"
+          type="simple"
+          class="rounded-full"
+          :label="$t('eventView.dropdown.share')"
+        />
+      </div>
+
+      <div v-if="isGoing" class="border-b bg-white p-4">
+        <TPreview v-if="doc.confirmation" :content="doc.confirmation" />
+
+        <div
+          class="flex flex-col md:flex-row justify-center items-center gap-2"
+        >
+          <template v-if="doc.link">
+            <TButton
+              v-if="doc.link.includes('https://www.tickettailor.com/')"
+              icon="ticket"
+              type="primary"
+              :label="$t('event.getTicket')"
+              @click="ticketTailorPopup = true"
+            />
+            <TButton
+              v-else
+              type="primary"
+              icon="ticket"
+              :href="doc.link"
+              target="_blank"
+              :label="$t('event.getTicket')"
+            />
+          </template>
+          <TButton
+            v-if="doc.gallery"
+            icon="spotlight"
+            :href="doc.gallery"
+            :label="$t('event.gallery.action')"
+          />
+          <TButton
+            v-if="doc.playlist"
+            icon="spotify"
+            :href="doc.playlist"
+            :label="$t('event.playlist.action')"
+          />
+          <TButton
+            v-if="doc.paypal"
+            icon="favorite"
+            :href="doc.paypal"
+            :label="$t('event.paypal.action')"
+          />
+          <TButton
+            v-if="doc.review"
+            icon="chat"
+            :href="doc.review"
+            :label="$t('event.review.action')"
+          />
+        </div>
+      </div>
+
+      <TPopup
+        v-if="announcementPopupVisible"
+        title="Promote for free"
+        @close="announcementPopupVisible = false"
+      >
+        <div class="w-64 space-y-2 py-4">
+          <TButton
+            v-if="doc.telegram && doc.telegram.messageUrl"
+            allow-guests
+            :href="doc.telegram.messageUrl"
+            label="Telegram"
+            type="nav"
+          />
+          <TButton
+            v-if="doc.instagram && doc.instagram.messageUrl"
+            allow-guests
+            :href="doc.instagram.messageUrl"
+            label="Instagram"
+            type="nav"
+          />
+
+          <template v-if="can('edit', 'events', doc)">
+            <TButton
+              v-if="!doc.telegram || !doc.telegram.state"
+              label="Promote on Telegram"
+              type="nav"
+              @click="
+                softUpdate(doc.id, {
+                  telegram: { state: 'requested', requestedAt: +new Date() },
+                })
+              "
+            />
+            <TButton
+              v-else-if="doc.telegram && doc.telegram.state === 'requested'"
+              label="Telegram..."
+              type="nav"
+            />
+
+            <TButton
+              v-if="!doc.instagram || !doc.instagram.state"
+              label="Promote on Instagram"
+              type="nav"
+              @click="
+                softUpdate(doc.id, {
+                  instagram: { state: 'requested', requestedAt: +new Date() },
+                })
+              "
+            />
+            <TButton
+              v-else-if="doc.instagram && doc.instagram.state === 'requested'"
+              label="Instagram..."
+              type="nav"
+            />
+          </template>
+
+          <template v-if="isAdmin()">
+            <TButton
+              type="nav"
+              class="red-500"
+              label="Reset Telegram"
+              @click="softUpdate(doc.id, { telegram: {} })"
+            />
+            <TButton
+              type="nav"
+              class="red-500"
+              label="Reset Instagram"
+              @click="softUpdate(doc.id, { instagram: {} })"
+            />
+          </template>
+        </div>
+      </TPopup>
+
+      <div v-if="can('edit', 'events', doc)" class="space-y-2 p-4 border-b">
+        <h3 class="text-xl font-bold">Moderator Tools</h3>
+        <div v-if="doc.promotion !== 'completed'" class="text-sm">
+          As soon as event is published, you can promote it for free on WeDance
+          Instagram by clicking Promote.
+          <div v-if="doc.promotion === 'failed'">
+            <div class="text-red-500">
+              Promotion failed: {{ doc.promotionError }}
+            </div>
+            <div>
+              Please
+              <a
+                class="underline text-primary"
+                href="mailto:support@wedance.vip"
+                >contact support</a
+              >
+              to resolve the issue.
+            </div>
+          </div>
+        </div>
+
+        <TButton
+          v-if="!doc.socialCover"
+          label="Publishing..."
+          class="rounded-full"
+        />
+        <TButton
+          v-else-if="doc.promotion === 'requested'"
+          label="Promoting..."
+          class="rounded-full"
+        />
+        <div v-else-if="doc.promotion === 'completed'" class="text-sm">
+          Event announcement is published on
+          <a class="underline text-primary" :href="doc.instagram.messageUrl"
+            >Instagram</a
+          >
+        </div>
+        <TButton
+          v-else
+          icon="trending"
+          label="Promote"
+          class="rounded-full"
+          @click="
+            softUpdate(doc.id, {
+              promotion: 'requested',
+            })
+          "
+        />
+        <TButton
+          v-if="isAdmin() && doc.promotion === 'completed'"
+          label="Reset"
+          class="rounded-full"
+          @click="
+            softUpdate(doc.id, {
+              promotion: '',
+            })
+          "
+        />
+      </div>
+
+      <TExpand class="p-4">
+        <TPreview :content="doc.description" />
+      </TExpand>
+
+      <div v-if="doc.venue && doc.venue.map" class="bg-gray-100 p-4">
+        <div class="mb-4 text-sm font-bold leading-none text-gray-700">
+          {{ $t('eventView.venueMap') }}
+        </div>
+        <img :src="doc.venue.map" alt="Venue Map" class="mt-4" />
+      </div>
+
+      <TAgenda
+        v-if="doc.program"
+        :events="doc.program"
+        class="w-full space-y-2 p-4"
+      />
+
+      <div v-if="doc.org" class="space-y-2 p-4">
+        <h4 class="text-xl font-bold">{{ $t('event.organiser') }}</h4>
+        <WProfile :username="doc.org.username" :fallback="doc.org" />
+      </div>
+
+      <div v-if="doc.artists && doc.artists.length" class="space-y-2 p-4">
+        <h3 class="text-xl font-bold">{{ $t('event.artists') }}</h3>
+        <div
+          v-for="(profile, profileIndex) in doc.artists"
+          :key="`artist-${profileIndex}`"
+        >
+          <WProfile
+            v-if="profile"
+            :username="profile.username"
+            :fallback="profile"
+          />
+        </div>
+      </div>
+
+      <div v-if="doc.star && doc.star.list" class="space-y-2 p-4">
+        <h3 class="text-xl font-bold">{{ $t('event.guests') }}</h3>
+        <div
+          v-if="guests.followersCount || guests.leadersCount"
+          class="text-xs pt-0"
+        >
+          <span>{{
+            $tc('followersCount', guests.followersCount, {
+              count: guests.followersCount,
+            })
+          }}</span>
+          <span>·</span>
+          <span>{{
+            $tc('leadersCount', guests.leadersCount, {
+              count: guests.leadersCount,
+            })
+          }}</span>
+        </div>
+        <div v-if="!uid" class="flex justify-center p-4">
+          <TButton
+            type="link"
+            allow-guests
+            :to="localePath(`/signin?target=${$route.path}`)"
+            >{{ $t('event.guestsHidden') }}</TButton
+          >
+        </div>
+        <div v-else>
+          <div
+            v-for="(val, username) in doc.star.list"
+            :key="`guest-${username}`"
+          >
+            <WProfile :username="username" />
+          </div>
+          <div v-if="!doc.star.count">There are no other guests yet.</div>
+        </div>
+      </div>
+
+      <div>
+        <h3 class="text-xl font-bold p-4 border-t">
+          {{ $t('comments.label') }}
+        </h3>
+        <div v-if="!uid" class="flex justify-center p-4">
+          <TButton
+            type="link"
+            allow-guests
+            :to="localePath(`/signin?target=${$route.path}`)"
+            >{{ $t('event.commentsHidden') }}</TButton
+          >
+        </div>
+
+        <TCommentsInline v-else :item="doc" autoload class="px-4" />
+      </div>
+
+      <div>
+        <h3 class="text-xl font-bold p-4 border-t">
+          {{ $t('reviews.title') }}
+        </h3>
+        <TReviewList :reviews="reviews" class="px-4" />
+      </div>
+
+      <div class="m-4 text-xs text-right gap-8">
+        <span
+          >Created by
+          <nuxt-link
+            class="underline text-primary"
+            :to="localePath(`/${creator.username}`)"
+            >{{ creator.name }}</nuxt-link
+          ></span
+        >
+        <span>at {{ getYmdHms(doc.createdAt, $i18n.locale) }}</span>
+      </div>
+      <div class="m-4 text-xs text-right gap-8">
+        <span>Updated at {{ getYmdHms(doc.updatedAt, $i18n.locale) }}</span>
+      </div>
+
+      <div v-if="doc.facebook" class="m-4 text-right text-xs gap-8">
+        <a :href="doc.facebook" class="text-gray-700 hover:underline"
+          >Facebook Event</a
+        >
+      </div>
+      <TPopup v-if="ticketPopup" title="Ticket" @close="ticketPopup = false">
+        <div class="mx-auto max-h-screen max-w-md overflow-y-scroll py-4">
+          <div>Reserved as {{ getRsvp(item.id).participant.name }}</div>
+        </div>
+      </TPopup>
+
+      <TPopup
+        v-if="reservationPopup"
+        title="Get Ticket"
+        @close="reservationPopup = false"
+      >
+        <div class="mx-auto max-h-screen max-w-md overflow-y-scroll py-4">
+          <div v-if="reservationPopup === 'reserve'">
+            <div>
+              <TForm
+                v-model="account"
+                allow-guests
+                :fields="reservationFields"
+                :submit-label="
+                  $t('eventView.reservationPopup.reserve.submitLabel')
+                "
+                class="mt-4 space-y-4"
+              >
+                <template v-if="!uid" slot="buttons">
+                  <TButton
+                    allow-guests
+                    :to="localePath(`/signin?target=${this.$route.fullPath}`)"
+                    :label="$t('eventView.reservationPopup.reserve.label')"
+                  />
+                </template>
+              </TForm>
+            </div>
+          </div>
+          <div v-if="reservationPopup === 'finish'" class="p-4">
+            <template v-if="item.link">
+              <h2 class="mb-4 font-bold">
+                {{ $t('eventView.reservationPopup.finish.title') }}
+              </h2>
+              <TButton class="mt-4 mr-4" type="danger" :href="item.link">{{
+                $t('eventView.reservationPopup.finish.btn')
+              }}</TButton>
+            </template>
+            <template v-else>
+              <h2 class="mb-4 font-bold">
+                {{ $t('eventView.reservationPopup.finish.title') }}
+              </h2>
+              <p v-if="uid">
+                {{ $t('eventView.reservationPopup.finish.description') }}
+              </p>
+              <p v-else>
+                {{ $t('eventView.reservationPopup.finish.reminder') }}
+              </p>
+              <div v-if="uid">
+                <TButton
+                  :href="calendarLink"
+                  :label="$t('eventView.reservationPopup.finish.calendar')"
+                  class="mt-2"
+                />
+              </div>
+            </template>
+          </div>
+        </div>
+      </TPopup>
+    </div>
   </div>
 </template>
 

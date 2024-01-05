@@ -67,7 +67,8 @@
 
     <dl class="mt-4 md:flex">
       <dt class="font-bold mr-1">{{ $t('profile.joined') }}:</dt>
-      <dd>{{ getDateTimeYear(profile.createdAt) }}</dd>
+      <dd v-if="profile.joinedAt">{{ getDateTimeYear(profile.joinedAt) }}</dd>
+      <dd v-else>{{ getDateTimeYear(profile.createdAt) }}</dd>
     </dl>
 
     <dl v-if="profile.lastLoginAt" class="mt-4 md:flex">

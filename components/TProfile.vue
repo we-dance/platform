@@ -132,7 +132,7 @@
       />
       <TButton
         v-if="uid === profile.id"
-        :to="localePath('/events/-/edit')"
+        :to="localePath('/events/-/import')"
         type="base"
         >{{ $t('myprofile.addEvent') }}</TButton
       >
