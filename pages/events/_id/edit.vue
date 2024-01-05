@@ -13,23 +13,44 @@
         @save="saveItem"
         @cancel="view(item.id)"
       />
+      <div v-if="duplicates.length">
+        <div class="text-red-500 text-sm p-4">
+          Please check the following event before saving
+        </div>
+        <div v-for="item in duplicates" :key="item.id">
+          <TEventText2 :item="item" />
+        </div>
+      </div>
     </div>
   </div>
 </template>
 
 <script>
 import { pickBy } from 'lodash'
+import firebase from 'firebase/app'
+import 'firebase/firestore'
 import { useAuth } from '~/use/auth'
 import { useDoc } from '~/use/doc'
 import { useRouter } from '~/use/router'
 import { useEvents } from '~/use/events'
 import { track } from '~/plugins/firebase'
+import { ref } from '@nuxtjs/composition-api'
 
 export default {
   name: 'EventEdit',
   layout: 'empty',
   middleware: ['auth'],
   watch: {
+    'item.place'() {
+      this.updateHash()
+    },
+    'item.startDate'() {
+      this.updateHash()
+    },
+    'item.facebook'(facebook) {
+      const parts = facebook.replace(/\?.*/, '').split('/')
+      this.item.facebookId = parts.pop() || parts.pop()
+    },
     loading(loading) {
       if (!loading && this.item) {
         if (!this.can('edit', 'posts', this.item)) {
@@ -75,6 +96,27 @@ export default {
     }
   },
   methods: {
+    updateHash() {
+      if (!this.item.startDate || !this.item.place) {
+        return
+      }
+
+      this.item.hash = this.item.startDate + '+' + this.item.place
+
+      const firestore = firebase.firestore()
+
+      firestore
+        .collection('posts')
+        .where('hash', '==', this.item.hash)
+        .get()
+        .then((querySnapshot) => {
+          const duplicates = []
+          querySnapshot.forEach((doc) => {
+            duplicates.push({ ...doc.data(), id: doc.id })
+          })
+          this.duplicates = duplicates
+        })
+    },
     view(id) {
       if (id && id !== '-') {
         this.$router.push(this.localePath(`/events/${id}`))
@@ -124,6 +166,8 @@ export default {
 
     const collection = 'posts'
 
+    const duplicates = ref([])
+
     const { doc: item, load, update, remove, create, loading } = useDoc(
       collection
     )
@@ -133,6 +177,7 @@ export default {
     }
 
     return {
+      duplicates,
       loading,
       item,
       can,
