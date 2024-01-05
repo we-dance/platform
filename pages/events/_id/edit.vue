@@ -114,7 +114,9 @@ export default {
           querySnapshot.forEach((doc) => {
             duplicates.push({ ...doc.data(), id: doc.id })
           })
-          this.duplicates = duplicates
+          this.duplicates = duplicates.filter(
+            (item) => item.id !== this.item.id
+          )
         })
     },
     view(id) {
