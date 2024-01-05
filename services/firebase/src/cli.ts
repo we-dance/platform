@@ -18,6 +18,7 @@ import { getInstagramWebProfileInfo } from './lib/browser'
 import { getFacebookEvent } from './lib/facebook_import'
 import { getPlace } from './lib/google_maps'
 import { generateStyles } from './lib/dance_styles'
+import axios from 'axios'
 
 function getDomain(url: string): string {
   let hostname
@@ -37,6 +38,82 @@ function getDomain(url: string): string {
 }
 
 yargs(hideBin(process.argv))
+  .command(
+    'events',
+    'Rehash events',
+    () => undefined,
+    async (argv: any) => {
+      const facebookIds: any = {}
+
+      const today = +new Date()
+
+      const allEvents = await getDocs(
+        firestore.collection('posts').where('startDate', '>', today)
+      )
+
+      for (const event of allEvents) {
+        if (event.hash) {
+          if (event.facebookId) {
+            facebookIds[event.facebookId] = facebookIds[event.facebookId] || []
+            facebookIds[event.facebookId].push(event)
+          }
+
+          continue
+        }
+
+        console.log(event.name)
+        let hash = ''
+        if (event.startDate && event.place) {
+          hash = event.startDate + '+' + event.place
+        }
+        let facebookId = ''
+        if (event.facebook) {
+          if (event.facebook.includes('/events/')) {
+            const parts = event.facebook.replace(/\?.*/, '').split('/')
+            facebookId = parts.pop() || parts.pop()
+          } else if (event.facebook.includes('fb.me')) {
+            console.log('Requesting facebook url', event.facebook)
+            const response = await axios.get(event.facebook)
+            const parts = response.request.res.responseUrl
+              .replace(/\?.*/, '')
+              .split('/')
+            facebookId = parts.pop() || parts.pop()
+            console.log('Got facebook id', facebookId)
+          }
+        }
+        console.log([
+          'https://wedance.vip/events/' + event.id,
+          hash,
+          event.facebook,
+          facebookId,
+        ])
+        console.log()
+        await firestore
+          .collection('posts')
+          .doc(event.id)
+          .update({ hash, facebookId })
+
+        if (facebookId) {
+          facebookIds[facebookId] = facebookIds[facebookId] || []
+          facebookIds[facebookId].push(event)
+        }
+      }
+
+      for (const facebookId of Object.keys(facebookIds)) {
+        if (facebookIds[facebookId].length > 1) {
+          console.log(facebookId)
+          for (const event of facebookIds[facebookId]) {
+            console.log([
+              'https://wedance.vip/events/' + event.id,
+              event.name,
+              event.hash,
+            ])
+          }
+          console.log()
+        }
+      }
+    }
+  )
   .command(
     'styles',
     'Write dance styles',

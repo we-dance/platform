@@ -13,8 +13,8 @@ function getDate(timestamp: any) {
 }
 
 // todos:
-// - convert venues to profiles
 // - avoid duplicate events
+// - convert venues to profiles
 
 export async function getFacebookEvent(url: string) {
   let event
@@ -64,7 +64,13 @@ export async function getFacebookEvent(url: string) {
       username = username.split('/')[1].replace('-', '')
     }
 
+    const now = +new Date()
+
     org = {
+      createdAt: now,
+      importedAt: now,
+      updatedAt: now,
+      source: 'facebook',
       name: event.hosts[0]?.name,
       facebook: event.hosts[0]?.url,
       photo: event.hosts[0]?.photo?.imageUri,
@@ -72,7 +78,7 @@ export async function getFacebookEvent(url: string) {
       type: 'Organiser',
       owned: false,
       owner: '',
-      import: 'requested',
+      import: 'success',
       visibility: 'Public',
       place,
     }
@@ -142,5 +148,6 @@ export async function getFacebookEvent(url: string) {
     facebook: event.url,
     facebookId: event.id,
     hash,
+    source: 'facebook',
   }
 }
