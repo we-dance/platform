@@ -10,8 +10,8 @@ export function initIndex(indexName: string) {
   return algolia.initIndex(indexName)
 }
 
-export async function removeObject(objectID: string) {
-  const index = initIndex('profiles')
+export async function removeObject(indexName: string, objectID: string) {
+  const index = initIndex(indexName)
   await index.deleteObject(objectID)
 }
 

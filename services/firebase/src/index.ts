@@ -197,7 +197,7 @@ export const onProfileChange = functions.firestore
       oldProfile?.visibility !== 'Unlisted'
 
     if (wasDeleted || becameUnlisted) {
-      await removeObject(profileId)
+      await removeObject('profiles', profileId)
     }
 
     if (!profile || !profile.username) {
@@ -385,6 +385,13 @@ export const eventChanged = functions.firestore
     const oldEvent = change.before.data() as any
     const eventId = context.params.eventId
     const event = { ...change.after.data(), id: eventId } as any
+
+    const wasDeleted = oldEvent?.name && !event?.name
+
+    if (wasDeleted) {
+      await removeObject('events', eventId)
+      return
+    }
 
     if (event.type === 'import_event') {
       const eventData = await getFacebookEvent(event.facebook)
