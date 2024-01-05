@@ -131,7 +131,7 @@ export async function getFacebookEvent(url: string) {
     claimed: 'No',
     duration: 60,
     price: '',
-    styles: {},
+    styles,
     artists: [],
     org,
     program: [],

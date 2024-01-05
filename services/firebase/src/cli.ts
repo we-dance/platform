@@ -17,7 +17,7 @@ import { announceEventIG } from './lib/instagram'
 import { getInstagramWebProfileInfo } from './lib/browser'
 import { getFacebookEvent } from './lib/facebook_import'
 import { getPlace } from './lib/google_maps'
-import { getStyles } from './lib/dance_styles'
+import { generateStyles } from './lib/dance_styles'
 
 function getDomain(url: string): string {
   let hostname
@@ -42,8 +42,7 @@ yargs(hideBin(process.argv))
     'Write dance styles',
     () => undefined,
     async (argv: any) => {
-      const styles = getStyles()
-      console.log(styles)
+      generateStyles()
     }
   )
   .command(
@@ -67,7 +66,7 @@ yargs(hideBin(process.argv))
 
       const event = await getFacebookEvent(url)
 
-      console.log(event)
+      console.log(event.styles)
     }
   )
   .command(
