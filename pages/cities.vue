@@ -41,7 +41,6 @@ import { orderBy } from 'lodash'
 import { computed, onMounted, ref, watch } from 'vue-demi'
 import { useCities } from '~/use/cities'
 import { useRouter } from '~/use/router'
-import { useApp } from '~/use/app'
 import { getPlacePredictions } from '~/use/google'
 import { useAuth } from '~/use/auth'
 import { useCollection } from '~/use/collection'
@@ -51,7 +50,6 @@ export default {
     const { switchCity, city } = useCities()
     const { router, route } = useRouter()
     const { updateProfile } = useAuth()
-    const { removeCityHistory: removeCity, cities } = useApp()
     const { docs, load } = useCollection('profiles', { type: 'City' })
 
     async function changeCity(placeId) {
@@ -100,11 +98,6 @@ export default {
       results.value = res.results
     }
 
-    async function removeCityHistory(placeId) {
-      await removeCity(placeId)
-      await render()
-    }
-
     watch(query, render)
 
     onMounted(async () => {
@@ -113,11 +106,9 @@ export default {
     })
 
     return {
-      cities,
       changeCity,
       query,
       results,
-      removeCityHistory,
       recommendations,
     }
   },
