@@ -105,7 +105,7 @@
 
         <div v-if="profile.type === 'City'" class="flex space-x-2 mt-4">
           <TButton
-            :to="localePath('/events/-/edit')"
+            :to="localePath('/events/-/import')"
             type="primary"
             icon="plus"
             label="Add Event"

@@ -123,36 +123,6 @@
       </div>
     </div>
 
-    <div v-if="profile.type !== 'City'" class="flex space-x-2 p-4 justify-end">
-      <TButton
-        v-if="uid === profile.id"
-        type="primary"
-        :label="$t('myprofile.edit')"
-        :to="localePath('/settings?tab=profile')"
-      />
-      <TButton
-        v-if="uid === profile.id"
-        :to="localePath('/posts/-/edit')"
-        type="base"
-        >{{ $t('myprofile.addPost') }}</TButton
-      >
-      <TReaction
-        v-if="uid !== profile.id"
-        :label="$t('Subscribe')"
-        :toggled-label="$t('Unsubscribe')"
-        field="watch"
-        icon="BellIcon"
-        hide-count
-        :item="profile"
-        collection="profiles"
-      />
-      <TProfileContacts
-        :profile="profile"
-        :title="$t('Contact')"
-        type="simple"
-      />
-    </div>
-
     <div class="border-t bg-orange-50">
       <div class="text-xs pt-2 pr-2 text-right text-primary">SPONSORED</div>
       <NuxtLink
