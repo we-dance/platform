@@ -57,7 +57,7 @@ yargs(hideBin(process.argv))
 
       const event = await getFacebookEvent(url)
 
-      console.log(event)
+      console.log([event.name, event.eventType])
     }
   )
   .command(

@@ -79,9 +79,29 @@ export async function getFacebookEvent(url: string) {
     await firestore.collection('profiles').add(org)
   }
 
+  const description = event.description.toLowerCase()
+
+  let eventType = 'Party'
+  const eventTypes = [
+    'Course',
+    'Workshop',
+    'Party',
+    'Festival',
+    'Congress',
+    'Concert',
+  ]
+
+  for (const e of eventTypes) {
+    if (description.includes(e.toLowerCase())) {
+      eventType = e
+      break
+    }
+  }
+
   return {
     name: event.name,
     description: event.description,
+    eventType,
     cover: event.photo?.imageUri,
     startDate: getDate(event.startTimestamp),
     endDate: getDate(event.endTimestamp),
@@ -95,7 +115,6 @@ export async function getFacebookEvent(url: string) {
     online: 'No',
     international: 'No',
     claimed: 'No',
-    eventType: 'Party',
     duration: 60,
     price: '',
     styles: {},
