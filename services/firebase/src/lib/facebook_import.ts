@@ -16,7 +16,15 @@ function getDate(timestamp: any) {
 // - convert venues to profiles
 
 export async function getFacebookEvent(url: string) {
-  const event = await scrapeFbEvent(url)
+  let event
+  try {
+    event = await scrapeFbEvent(url)
+  } catch (e) {
+    return {
+      type: 'import_error',
+      error: (e as Error).message,
+    }
+  }
 
   const venueName = event.location?.name || ''
   const venueAddress = event.location?.address || ''

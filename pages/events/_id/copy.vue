@@ -72,6 +72,7 @@ export default {
       data.updatedBy = this.uid
       data.telegram = {}
       data.instagram = {}
+      data.promotion = ''
 
       track('copy_event')
       const result = await this.create(data)

@@ -42,10 +42,23 @@
     </THeader>
 
     <div
-      v-if="doc.type === 'import_event'"
+      v-if="doc.type === 'import_error'"
+      class="flex justify-center items-center h-64"
+    >
+      <div class="text-sm text-red-500">{{ doc.error }}</div>
+    </div>
+    <div
+      v-else-if="doc.type === 'import_event'"
       class="flex justify-center items-center h-64"
     >
       <div class="text-sm">Importing event from Facebook...</div>
+      <TButton
+        v-if="can('edit', 'events', doc)"
+        type="primary"
+        icon="delete"
+        label="Delete Event"
+        @click="deleteEvent(doc.id)"
+      />
     </div>
     <div v-else>
       <div
