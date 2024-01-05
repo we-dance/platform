@@ -12,10 +12,6 @@ function getDate(timestamp: any) {
   return timestamp * 1000
 }
 
-// todos:
-// - avoid duplicate events
-// - convert venues to profiles
-
 export async function getFacebookEvent(url: string) {
   let event
   try {
