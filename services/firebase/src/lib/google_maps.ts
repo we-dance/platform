@@ -4,7 +4,7 @@ import {
   PlaceData,
 } from '@googlemaps/google-maps-services-js'
 
-export async function getPlace(name: string) {
+export async function getPlace(name: string, region: string = 'de') {
   const client = new Client({})
   if (!name) {
     return {}
@@ -13,6 +13,7 @@ export async function getPlace(name: string) {
   const response = await client.textSearch({
     params: {
       query: name,
+      region,
       key: String(process.env.GOOGLE_MAPS_API_KEY),
     },
   })

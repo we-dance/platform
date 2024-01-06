@@ -27,7 +27,10 @@ export async function getFacebookEvent(url: string) {
   const venueAddress = event.location?.address || ''
   const venueCountry = event.location?.countryCode || ''
 
-  const venue = await getPlace(`${venueName} ${venueAddress} ${venueCountry}`)
+  const venue = await getPlace(
+    `${venueName} ${venueAddress}`,
+    venueCountry || 'de'
+  )
 
   const place = await getCityId(venue)
 
