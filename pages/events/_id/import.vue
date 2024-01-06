@@ -14,8 +14,13 @@
         @save="saveItem"
         @cancel="view(item.id)"
       />
-      <div v-for="item in duplicates" :key="item.id">
-        <TEventText2 :item="item" />
+      <div v-if="duplicates.length">
+        <div class="text-red-500 text-sm p-4">
+          The following event already exists
+        </div>
+        <div v-for="item in duplicates" :key="item.id">
+          <TEventText2 :item="item" />
+        </div>
       </div>
       <div class="p-4">
         <div class="divider">or</div>

@@ -15,7 +15,7 @@
       />
       <div v-if="duplicates.length">
         <div class="text-red-500 text-sm p-4">
-          Please check the following event before saving
+          The following event already exists
         </div>
         <div v-for="item in duplicates" :key="item.id">
           <TEventText2 :item="item" />
