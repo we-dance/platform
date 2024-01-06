@@ -53,36 +53,44 @@ export default {
   }),
   watch: {
     'item.facebook'(facebook) {
-      if (facebook) {
-        if (facebook.includes('fb.me/') || facebook.includes('/share/')) {
-          const url = `https://us-central1-wedance-4abe3.cloudfunctions.net/hooks/redirect?url=${facebook}`
-          axios.get(url).then((response) => {
-            this.item.facebook = response.data.url
-          })
-          return
-        }
-        if (!facebook.includes('/events/')) {
-          return
-        }
-        const parts = facebook.replace(/\?.*/, '').split('/')
-        const facebookId = parts.pop() || parts.pop()
-        if (!facebookId) {
-          return
-        }
-        const firestore = firebase.firestore()
+      this.duplicates = []
 
-        firestore
-          .collection('posts')
-          .where('facebookId', '==', facebookId)
-          .get()
-          .then((querySnapshot) => {
-            const duplicates = []
-            querySnapshot.forEach((doc) => {
-              duplicates.push({ ...doc.data(), id: doc.id })
-            })
-            this.duplicates = duplicates
-          })
+      if (!facebook) {
+        return
       }
+
+      if (facebook.includes('fb.me/') || facebook.includes('/share/')) {
+        const url = `https://us-central1-wedance-4abe3.cloudfunctions.net/hooks/redirect?url=${facebook}`
+        axios.get(url).then((response) => {
+          this.item.facebook = response.data.url
+        })
+        return
+      }
+
+      if (!facebook.includes('/events/')) {
+        return
+      }
+
+      const parts = facebook.replace(/\?.*/, '').split('/')
+      const facebookId = parts.pop() || parts.pop()
+
+      if (!facebookId) {
+        return
+      }
+
+      const firestore = firebase.firestore()
+
+      firestore
+        .collection('posts')
+        .where('facebookId', '==', facebookId)
+        .get()
+        .then((querySnapshot) => {
+          const duplicates = []
+          querySnapshot.forEach((doc) => {
+            duplicates.push({ ...doc.data(), id: doc.id })
+          })
+          this.duplicates = duplicates
+        })
     },
   },
   mounted() {

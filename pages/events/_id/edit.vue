@@ -29,12 +29,12 @@
 import { pickBy } from 'lodash'
 import firebase from 'firebase/app'
 import 'firebase/firestore'
+import { ref } from '@nuxtjs/composition-api'
 import { useAuth } from '~/use/auth'
 import { useDoc } from '~/use/doc'
 import { useRouter } from '~/use/router'
 import { useEvents } from '~/use/events'
 import { track } from '~/plugins/firebase'
-import { ref } from '@nuxtjs/composition-api'
 
 export default {
   name: 'EventEdit',
