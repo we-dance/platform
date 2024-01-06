@@ -1,4 +1,9 @@
-import { indexEvents, indexProfiles } from './lib/algolia'
+import {
+  eventToAlgolia,
+  indexEvents,
+  indexProfiles,
+  initIndex,
+} from './lib/algolia'
 import {
   migrateFavs,
   migrateShares,
@@ -336,6 +341,31 @@ yargs(hideBin(process.argv))
     () => undefined,
     async (argv: any) => {
       await indexEvents()
+    }
+  )
+
+  .command(
+    'algolia:event <eventId>',
+    'Send event to algolia',
+    () => undefined,
+    async (argv: any) => {
+      const eventId = argv.eventId
+
+      const event = (
+        await firestore
+          .collection('posts')
+          .doc(eventId)
+          .get()
+      ).data() as any
+
+      const index = initIndex('events')
+      const algoliaEvent = eventToAlgolia({ ...event, id: eventId })
+
+      console.log(algoliaEvent)
+
+      const result = await index.saveObject(algoliaEvent)
+
+      console.log(result)
     }
   )
   .command(
