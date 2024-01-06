@@ -24,6 +24,7 @@ import { getFacebookEvent } from './lib/facebook_import'
 import { getPlace } from './lib/google_maps'
 import { generateStyles } from './lib/dance_styles'
 import axios from 'axios'
+import { scrapeFbEvent } from 'facebook-event-scraper'
 
 function getDomain(url: string): string {
   let hostname
@@ -149,6 +150,18 @@ yargs(hideBin(process.argv))
     }
   )
   .command(
+    'fbd <url>',
+    'Import event from Facebook',
+    () => undefined,
+    async (argv: any) => {
+      const url = argv.url
+
+      const event = await scrapeFbEvent(url)
+
+      console.log(event)
+    }
+  )
+  .command(
     'fb <url>',
     'Import event from Facebook',
     () => undefined,
@@ -157,7 +170,7 @@ yargs(hideBin(process.argv))
 
       const event = await getFacebookEvent(url)
 
-      console.log(event.styles)
+      console.log(event.venue)
     }
   )
   .command(
