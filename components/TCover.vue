@@ -1,16 +1,8 @@
 <template>
   <div>
-    <TIcon
-      v-if="!src"
-      :name="fallback"
-      :style="`width: ${width}px; height: ${height}px;`"
-    />
-    <img
-      v-else
-      :src="src"
-      :style="`width: ${width}px; height: ${height}px;`"
-      alt="Cover photo"
-    />
+    <div class="bg-gray-900" :style="`width: ${width}px; height: ${height}px;`">
+      <img v-if="src" :src="src" class="w-full" alt="Cover photo" />
+    </div>
   </div>
 </template>
 

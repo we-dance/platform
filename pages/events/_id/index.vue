@@ -66,9 +66,8 @@
         class="grid grid-cols-1"
         :class="$route.query.variant ? 'md:grid-cols-2' : ''"
       >
-        <div v-if="doc.cover" class="relative aspect-square overflow-hidden">
-          <img :src="doc.cover" :alt="doc.name" class="absolute w-full" />
-          <div class="square bg-indigo-500"></div>
+        <div v-if="doc.cover" class="relative overflow-hidden">
+          <img :src="doc.cover" :alt="doc.name" class="w-full" />
         </div>
 
         <div class="md:border-l">
