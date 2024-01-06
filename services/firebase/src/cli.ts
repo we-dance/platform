@@ -44,6 +44,15 @@ function getDomain(url: string): string {
 
 yargs(hideBin(process.argv))
   .command(
+    'redirect <url>',
+    'Resolve redirect',
+    () => undefined,
+    async (argv: any) => {
+      const response = await axios.get(argv.url)
+      console.log(response.request.res.responseUrl)
+    }
+  )
+  .command(
     'events',
     'Rehash events',
     () => undefined,

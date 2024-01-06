@@ -30,6 +30,7 @@
 </template>
 
 <script>
+import axios from 'axios'
 import { pickBy } from 'lodash'
 import firebase from 'firebase/app'
 import 'firebase/firestore'
@@ -48,6 +49,16 @@ export default {
   watch: {
     'item.facebook'(facebook) {
       if (facebook) {
+        if (facebook.includes('fb.me/') || facebook.includes('/share/')) {
+          const url = `https://us-central1-wedance-4abe3.cloudfunctions.net/hooks/redirect?url=${facebook}`
+          axios.get(url).then((response) => {
+            this.item.facebook = response.data.url
+          })
+          return
+        }
+        if (!facebook.includes('/events/')) {
+          return
+        }
         const parts = facebook.replace(/\?.*/, '').split('/')
         const facebookId = parts.pop() || parts.pop()
         if (!facebookId) {

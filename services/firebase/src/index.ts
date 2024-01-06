@@ -32,6 +32,26 @@ Sentry.init({
 const app = express()
 app.use(cors({ origin: true }))
 
+app.get('/redirect', async (req, res) => {
+  const { url } = req.query
+
+  if (!url) {
+    res.json({
+      success: false,
+    })
+    return
+  }
+
+  const response = await axios.get(url as string)
+
+  res.json({
+    success: true,
+    url: response.request.res.responseUrl,
+  })
+
+  return
+})
+
 app.get('/events', async (req, res) => {
   const today = new Date().toISOString().slice(0, 10)
 
