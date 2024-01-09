@@ -54,6 +54,61 @@ yargs(hideBin(process.argv))
     }
   )
   .command(
+    'img <url>',
+    'Check image',
+    () => undefined,
+    async (argv: any) => {
+      const response = await axios.get(argv.url, {
+        validateStatus: () => true,
+      })
+      console.log(response.status)
+    }
+  )
+  .command(
+    'events:image <id>',
+    'Refresh events images',
+    () => undefined,
+    async (argv: any) => {
+      let allEvents
+
+      if (argv.id) {
+        allEvents = await getDocs(
+          firestore.collection('posts').where('id', '==', argv.id)
+        )
+      } else {
+        allEvents = await getDocs(
+          firestore.collection('posts').where('source', '==', 'facebook')
+        )
+      }
+
+      for (const event of allEvents) {
+        let imageExists = false
+
+        try {
+          const response = await axios.get(event.cover, {
+            validateStatus: () => true,
+          })
+          imageExists = response.status === 200
+        } catch (e) {}
+
+        if (!imageExists) {
+          const data: any = await scrapeFbEvent(event.facebook)
+
+          if (!data.photo?.imageUri) {
+            continue
+          }
+
+          await firestore
+            .collection('posts')
+            .doc(event.id)
+            .update({ cover: data.photo?.imageUri, source: 'facebook' })
+
+          console.log(event.name)
+        }
+      }
+    }
+  )
+  .command(
     'events:hash',
     'Rehash events',
     () => undefined,

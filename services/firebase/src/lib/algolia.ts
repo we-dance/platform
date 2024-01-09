@@ -70,7 +70,7 @@ export function eventForApi(event: any) {
     endDate: new Date(event.endDate),
   }
 
-  if (event.venue) {
+  if (event?.venue?.address_components?.length > 0) {
     const venue = {
       venue: event.venue.name,
       address: event.venue.formatted_address,
@@ -113,7 +113,7 @@ export function eventToAlgolia(event: any) {
     _tags: event.styles ? Object.keys(event.styles) : [],
   }
 
-  if (event.venue) {
+  if (event?.venue?.address_components?.length > 0) {
     const venue = {
       venue: event.venue.name,
       address: event.venue.formatted_address,
@@ -137,10 +137,11 @@ export function eventToAlgolia(event: any) {
 }
 
 export async function indexEvents() {
+  const now = +new Date()
   const eventDocs = (
     await firestore
       .collection('posts')
-      .where('startDate', '>', '2022-11-05')
+      .where('startDate', '>', now)
       .get()
   ).docs
 
