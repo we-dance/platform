@@ -1,5 +1,7 @@
 import { IgApiClient } from 'instagram-private-api'
 import axios from 'axios'
+import { DocumentSnapshot } from 'firebase-functions/v1/firestore'
+import { admin } from '../firebase'
 const pngToJpeg = require('png-to-jpeg')
 
 require('dotenv').config()
@@ -98,4 +100,83 @@ export async function announceEventIG(event: any) {
     messageId,
     messageUrl,
   }
+}
+
+export async function getIgProfile(username: string) {
+  const ig = new IgApiClient()
+  ig.state.generateDevice(String(process.env.INSTAGRAM_USERNAME))
+
+  await ig.account.login(
+    String(process.env.INSTAGRAM_USERNAME),
+    String(process.env.INSTAGRAM_PASSWORD)
+  )
+
+  const info = await ig.user.usernameinfo(username)
+
+  return info
+}
+
+export async function importInstagramProfile(snapshot: DocumentSnapshot) {
+  const profile = snapshot.data() as any
+
+  let instagram: any
+
+  await snapshot.ref.update({
+    import: 'importing',
+    importError: '',
+  })
+
+  try {
+    const username = profile.instagram.replace('https://instagram.com/', '')
+
+    instagram = await getIgProfile(username)
+
+    if (!instagram) {
+      throw new Error('Instagram not found')
+    }
+  } catch (e) {
+    await snapshot.ref.update({
+      import: 'failed',
+      importError: (e as Error).message,
+    })
+
+    return
+  }
+
+  let photo = ''
+
+  if (instagram.hd_profile_pic_url_info.url) {
+    const imageBuffer = (
+      await axios.get(instagram.hd_profile_pic_url_info.url, {
+        responseType: 'arraybuffer',
+      })
+    ).data
+    const bucket = admin.storage().bucket()
+    const filePath = 'share/' + profile.username + '.png'
+    const file = bucket.file(filePath)
+
+    await file.save(imageBuffer, {
+      public: true,
+    })
+
+    const [metadata] = await file.getMetadata()
+
+    photo = metadata.mediaLink
+  }
+
+  const now = +new Date()
+  const changes = {
+    importedAt: now,
+    updatedAt: now,
+    source: 'instagram',
+    name: instagram.full_name,
+    bio: instagram.biography || '',
+    type: 'FanPage',
+    import: 'success',
+    website: instagram.external_url || '',
+    photo,
+    visibility: 'Public',
+  }
+
+  await snapshot.ref.update(changes)
 }

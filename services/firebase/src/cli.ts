@@ -18,12 +18,8 @@ import { announceEvent } from './lib/telegram'
 const yargs = require('yargs/yargs')
 const { hideBin } = require('yargs/helpers')
 import { firestore } from './firebase'
-import { announceEventIG } from './lib/instagram'
-import {
-  closeBrowser,
-  getInstagramWebProfileInfo,
-  getPage,
-} from './lib/browser'
+import { announceEventIG, getIgProfile } from './lib/instagram'
+import { closeBrowser, getPage } from './lib/browser'
 import { getFacebookEvent } from './lib/facebook_import'
 import { getPlace } from './lib/google_maps'
 import { generateStyles } from './lib/dance_styles'
@@ -383,6 +379,31 @@ yargs(hideBin(process.argv))
     }
   )
   .command(
+    'ig <username>',
+    'Get Instagram Info',
+    () => undefined,
+    async (argv: any) => {
+      const instagram = await getIgProfile(argv.username)
+
+      const now = +new Date()
+      const changes = {
+        importedAt: now,
+        updatedAt: now,
+        source: 'instagram',
+        name: instagram.full_name,
+        bio: instagram.biography || '',
+        type: 'FanPage',
+        import: 'success',
+        website: instagram.external_url || '',
+        photo: instagram.hd_profile_pic_url_info.url || '',
+        visibility: 'Public',
+      }
+
+      console.log(changes)
+    }
+  )
+
+  .command(
     'list <url>',
     'Get list of facebook events',
     () => undefined,
@@ -424,18 +445,6 @@ yargs(hideBin(process.argv))
           })
         }
       }
-    }
-  )
-  .command(
-    'ig:profile <username>',
-    'Get instagram profile',
-    () => undefined,
-    async (argv: any) => {
-      const result = await getInstagramWebProfileInfo(
-        'https://instagram.com/' + argv.username
-      )
-
-      console.log(result)
     }
   )
   .command(

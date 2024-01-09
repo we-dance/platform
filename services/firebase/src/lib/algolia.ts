@@ -18,7 +18,7 @@ export async function removeObject(indexName: string, objectID: string) {
 export function profileToAlgolia(profile: any, cache: any) {
   const hasPlace = profile.place && cache.cities && cache.cities[profile.place]
 
-  return {
+  const result: any = {
     objectID: profile.id,
     id: profile.id,
     username: profile.username,
@@ -45,11 +45,16 @@ export function profileToAlgolia(profile: any, cache: any) {
     createdAt: profile.createdAt,
     daysUsed: profile.daysUsed,
     _tags: profile.styles ? Object.keys(profile.styles) : [],
-    _geoloc: {
-      lat: hasPlace ? cache.cities[profile.place].location.latitude : '',
-      lng: hasPlace ? cache.cities[profile.place].location.longitude : '',
-    },
   }
+
+  if (hasPlace) {
+    result._geoloc = {
+      lat: cache.cities[profile.place].location.latitude,
+      lng: cache.cities[profile.place].location.longitude,
+    }
+  }
+
+  return result
 }
 
 export function eventForApi(event: any) {

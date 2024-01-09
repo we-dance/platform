@@ -59,6 +59,13 @@
           :label="$t('Delete')"
           @click="remove(profile.id)"
         />
+        <TButton
+          v-if="isAdmin()"
+          type="context"
+          icon="upload"
+          label="Instagram"
+          @click="softUpdate(profile.id, { import: 'requested' })"
+        />
       </TDropdown>
     </THeader>
 
@@ -335,7 +342,7 @@ export default {
     const { switchCity } = useCities()
     const { getCity } = useApp()
     const { t } = useI18n()
-    const { remove } = useDoc('profiles')
+    const { remove, softUpdate } = useDoc('profiles')
     const invitesLeft = 5
     const community = computed(() => getCity(props.profile?.place))
     const intro = {
@@ -428,6 +435,7 @@ export default {
       subscribersCount,
       remove,
       events,
+      softUpdate,
     }
   },
 }

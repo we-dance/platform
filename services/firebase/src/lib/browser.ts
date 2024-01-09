@@ -7,7 +7,6 @@ export function delay(time: any) {
 }
 
 let _browser: puppeteer.Browser
-let loggedIn = false
 
 async function getBrowser() {
   if (!_browser) {
@@ -31,40 +30,6 @@ export async function closeBrowser() {
   await browser.close()
 }
 
-async function loginToInstagram(page: puppeteer.Page) {
-  if (!loggedIn) {
-    await page.goto(`https://instagram.com/accounts/login`)
-
-    const [acceptCookiesButton] = await page.$x(
-      "//button[contains(., 'Allow')]"
-    )
-
-    if (!acceptCookiesButton) {
-      throw new Error('Could not find accept cookies button')
-    }
-
-    await acceptCookiesButton.click()
-
-    await page.waitForSelector('[role=dialog]', {
-      hidden: true,
-    })
-
-    await page.waitForSelector('input[name="username"]', {
-      visible: true,
-    })
-
-    const username = process.env.INSTAGRAM_SCRAPER_USERNAME as string
-    const password = process.env.INSTAGRAM_SCRAPER_PASSWORD as string
-
-    await page.type('input[name="username"]', username)
-    await page.type('input[name="password"]', password)
-    await page.click('button[type="submit"]')
-
-    await page.waitForNavigation()
-    loggedIn = true
-  }
-}
-
 export async function getPage() {
   const browser = await getBrowser()
 
@@ -81,24 +46,4 @@ export async function getPage() {
   })
 
   return page
-}
-
-export async function getInstagramWebProfileInfo(
-  instagramUrl: string
-): Promise<any> {
-  const page = await getPage()
-  await loginToInstagram(page)
-
-  let result
-
-  page.on('response', async (response) => {
-    if (response.url().includes('web_profile_info')) {
-      const res = await response.json()
-      result = res.data.user
-    }
-  })
-
-  await page.goto(instagramUrl, { waitUntil: ['networkidle2'] })
-
-  return result
 }
