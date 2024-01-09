@@ -378,18 +378,26 @@ yargs(hideBin(process.argv))
 
       urls = urls
         .map((url: string) => url.replace(/\?.*/, ''))
-        .filter((url: string) => url.includes('/events/') && url.length > 33)
+        .filter(
+          (url: string) =>
+            url.includes('facebook.com/events/') && url.length > 33
+        )
 
       await closeBrowser()
 
       for (const url of urls) {
+        const parts = url.replace(/\?.*/, '').split('/')
+        const facebookId = parts.pop() || parts.pop()
+
         const docs = await getDocs(
-          firestore.collection('posts').where('facebook', '==', url)
+          firestore.collection('posts').where('facebookId', '==', facebookId)
         )
+
         if (!docs.length) {
           await firestore.collection('posts').add({
-            facebook: url,
+            facebook: `https://www.facebook.com/events/${facebookId}/`,
             source: 'facebook',
+            // provider: 'latindancecalendar.com',
             type: 'import_event',
             createdAt: +new Date(),
             updatedAt: +new Date(),
