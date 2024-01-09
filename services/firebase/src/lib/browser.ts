@@ -12,6 +12,7 @@ let loggedIn = false
 async function getBrowser() {
   if (!_browser) {
     _browser = await puppeteer.launch({
+      executablePath: '/opt/homebrew/bin/chromium',
       headless: true,
       args: [
         '--no-sandbox',
@@ -64,7 +65,7 @@ async function loginToInstagram(page: puppeteer.Page) {
   }
 }
 
-async function getPage() {
+export async function getPage() {
   const browser = await getBrowser()
 
   const page = await browser.newPage()

@@ -19,7 +19,11 @@ const yargs = require('yargs/yargs')
 const { hideBin } = require('yargs/helpers')
 import { firestore } from './firebase'
 import { announceEventIG } from './lib/instagram'
-import { getInstagramWebProfileInfo } from './lib/browser'
+import {
+  closeBrowser,
+  getInstagramWebProfileInfo,
+  getPage,
+} from './lib/browser'
 import { getFacebookEvent } from './lib/facebook_import'
 import { getPlace } from './lib/google_maps'
 import { generateStyles } from './lib/dance_styles'
@@ -358,6 +362,42 @@ yargs(hideBin(process.argv))
       }
 
       console.log(`Posted at ${result.messageUrl}`)
+    }
+  )
+  .command(
+    'list <url>',
+    'Get list of facebook events',
+    () => undefined,
+    async (argv: any) => {
+      const page = await getPage()
+      await page.goto(argv.url)
+
+      let urls: any = await page.$$eval('a', (links) => {
+        return links.map((link: any) => link.href)
+      })
+
+      urls = urls
+        .map((url: string) => url.replace(/\?.*/, ''))
+        .filter((url: string) => url.includes('/events/') && url.length > 33)
+
+      await closeBrowser()
+
+      for (const url of urls) {
+        const docs = await getDocs(
+          firestore.collection('posts').where('facebook', '==', url)
+        )
+        if (!docs.length) {
+          await firestore.collection('posts').add({
+            facebook: url,
+            source: 'facebook',
+            type: 'import_event',
+            createdAt: +new Date(),
+            updatedAt: +new Date(),
+            createdBy: 'k7cEjCraPdbQnhc8YsTN',
+            username: 'wedancebot',
+          })
+        }
+      }
     }
   )
   .command(
