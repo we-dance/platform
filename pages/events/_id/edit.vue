@@ -97,11 +97,11 @@ export default {
   },
   methods: {
     updateHash() {
-      if (!this.item.startDate || !this.item.place) {
+      if (!this.item.startDate || !this.item.venue?.place_id) {
         return
       }
 
-      this.item.hash = this.item.startDate + '+' + this.item.place
+      this.item.hash = this.item.startDate + '+' + this.item.venue.place_id
 
       const firestore = firebase.firestore()
 

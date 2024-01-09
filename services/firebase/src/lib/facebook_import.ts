@@ -12,34 +12,10 @@ function getDate(timestamp: any) {
   return timestamp * 1000
 }
 
-export async function getFacebookEvent(url: string) {
-  let event
-  try {
-    event = await scrapeFbEvent(url)
-  } catch (e) {
-    return {
-      type: 'import_error',
-      error: (e as Error).message,
-    }
-  }
+async function getOrg(host: any, place: any) {
+  let org: any = ''
 
-  const venueName = event.location?.name || ''
-  const venueAddress = event.location?.address || ''
-  const venueCountry = event.location?.countryCode || ''
-
-  const venue = await getPlace(
-    `${venueName} ${venueAddress}`,
-    venueCountry || 'de'
-  )
-
-  const place = await getCityId(venue)
-
-  const orgFacebook = event.hosts[0]?.url.replace(
-    'https://www.facebook.com/',
-    ''
-  )
-
-  let org
+  const orgFacebook = host?.url.replace('https://www.facebook.com/', '')
 
   const orgResults = await initIndex('profiles').search(orgFacebook)
   if (orgResults.hits.length) {
@@ -57,7 +33,7 @@ export async function getFacebookEvent(url: string) {
       youtube: p.youtube || '',
     }
   } else {
-    let username = event.hosts[0]?.url.replace('https://www.facebook.com/', '')
+    let username = host?.url.replace('https://www.facebook.com/', '')
 
     if (username.includes('people/')) {
       username = username.split('/')[1].replace('-', '')
@@ -70,19 +46,66 @@ export async function getFacebookEvent(url: string) {
       importedAt: now,
       updatedAt: now,
       source: 'facebook',
-      name: event.hosts[0]?.name,
-      facebook: event.hosts[0]?.url,
-      photo: event.hosts[0]?.photo?.imageUri,
+      name: host?.name,
+      facebook: host?.url,
+      photo: host?.photo?.imageUri,
       username,
       type: 'Organiser',
       owned: false,
       owner: '',
       import: 'success',
       visibility: 'Public',
-      place,
+    }
+
+    if (place) {
+      org.place = place
     }
 
     await firestore.collection('profiles').add(org)
+  }
+
+  return org
+}
+
+export async function getFacebookEvent(url: string) {
+  let event
+  try {
+    event = await scrapeFbEvent(url)
+  } catch (e) {
+    return {
+      type: 'import_error',
+      error: (e as Error).message,
+    }
+  }
+
+  const venueName = event.location?.name || ''
+  const venueAddress = event.location?.address || ''
+  const venueCountry = event.location?.countryCode || ''
+
+  let venue: any = ''
+
+  if (venueName || venueAddress) {
+    venue = await getPlace(`${venueName} ${venueAddress}`, venueCountry || 'de')
+  }
+
+  let place: any = ''
+
+  if (!venue?.place_id) {
+    venue = ''
+  }
+
+  if (venue) {
+    place = await getCityId(venue)
+  }
+
+  const org = await getOrg(event.hosts[0], place)
+
+  if (!venue) {
+    venue = await getPlace(org.name, 'de')
+  }
+
+  if (venue && !place) {
+    place = await getCityId(venue)
   }
 
   const description = event.description.toLowerCase()
@@ -116,7 +139,7 @@ export async function getFacebookEvent(url: string) {
     }
   }
 
-  const hash = getDate(event.startTimestamp) + '+' + place
+  const hash = getDate(event.startTimestamp) + '+' + venue?.place_id
 
   return {
     name: event.name,

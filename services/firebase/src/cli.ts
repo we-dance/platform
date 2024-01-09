@@ -54,7 +54,7 @@ yargs(hideBin(process.argv))
     }
   )
   .command(
-    'events',
+    'events:hash',
     'Rehash events',
     () => undefined,
     async (argv: any) => {
@@ -78,8 +78,8 @@ yargs(hideBin(process.argv))
 
         console.log(event.name)
         let hash = ''
-        if (event.startDate && event.place) {
-          hash = event.startDate + '+' + event.place
+        if (event.startDate && event.venue?.place_id) {
+          hash = event.startDate + '+' + event.venue.place_id
         }
         let facebookId = ''
         if (event.facebook) {
@@ -170,7 +170,7 @@ yargs(hideBin(process.argv))
 
       const event = await getFacebookEvent(url)
 
-      console.log(event.venue)
+      console.log(event)
     }
   )
   .command(
