@@ -51,7 +51,9 @@
 <script>
 export default {
   data: () => ({
-    data: {},
+    data: {
+      TInputPlace: 'ChIJ2V-Mo_l1nkcRfZixfUq4DAE',
+    },
   }),
   computed: {
     result() {

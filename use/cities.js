@@ -32,7 +32,7 @@ export const useCities = () => {
     }
   })
 
-  async function switchCity(placeId) {
+  async function ensureCity(placeId) {
     await find('cityPlaceId', placeId)
 
     if (!exists.value) {
@@ -56,7 +56,10 @@ export const useCities = () => {
         location,
       })
     }
+  }
 
+  async function switchCity(placeId) {
+    await ensureCity(placeId)
     state.currentCity = placeId
   }
 
@@ -65,5 +68,6 @@ export const useCities = () => {
     city,
     cityName,
     switchCity,
+    ensureCity,
   }
 }
