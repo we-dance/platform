@@ -365,6 +365,24 @@ yargs(hideBin(process.argv))
     }
   )
   .command(
+    'rm',
+    'Remove specific events',
+    () => undefined,
+    async (argv: any) => {
+      // const allEvents = await getDocs(
+      //   firestore.collection('posts').where('org.username', '==', 'TOCATOCA')
+      // )
+      // const events = allEvents.filter((e) => e.startDate > '2024-01-01')
+      // for (const event of events) {
+      //   console.log(event.startDate, event.name)
+      //   await firestore
+      //     .collection('posts')
+      //     .doc(event.id)
+      //     .delete()
+      // }
+    }
+  )
+  .command(
     'list <url>',
     'Get list of facebook events',
     () => undefined,
