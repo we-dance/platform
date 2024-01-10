@@ -65,7 +65,7 @@ yargs(hideBin(process.argv))
     }
   )
   .command(
-    'events:image <id>',
+    'events:image [id]',
     'Refresh events images',
     () => undefined,
     async (argv: any) => {
@@ -81,6 +81,8 @@ yargs(hideBin(process.argv))
         )
       }
 
+      console.log(`Found ${allEvents.length} events`)
+
       for (const event of allEvents) {
         let imageExists = false
 
@@ -91,19 +93,46 @@ yargs(hideBin(process.argv))
           imageExists = response.status === 200
         } catch (e) {}
 
-        if (!imageExists) {
-          const data: any = await scrapeFbEvent(event.facebook)
+        let data: any
 
-          if (!data.photo?.imageUri) {
-            continue
-          }
+        if (imageExists) {
+          console.log(`Skipping ${event.id} • ${event.name}`)
+          continue
+        }
 
-          await firestore
-            .collection('posts')
-            .doc(event.id)
-            .update({ cover: data.photo?.imageUri, source: 'facebook' })
+        try {
+          data = await scrapeFbEvent(event.facebook)
+        } catch (e) {
+          console.log([
+            'Error scraping',
+            'https://wedance.vip/events/' + event.id,
+            event.facebook,
+            (e as Error).message,
+          ])
+          continue
+        }
 
+        if (!data?.photo?.imageUri) {
+          continue
+        }
+
+        await firestore
+          .collection('posts')
+          .doc(event.id)
+          .update({ cover: data.photo?.imageUri, source: 'facebook' })
+
+        const index = initIndex('events')
+        const changes = {
+          ...event,
+          cover: data.photo?.imageUri,
+        } as any
+
+        index.saveObject(eventToAlgolia(changes))
+
+        if (event.name) {
           console.log(event.name)
+        } else {
+          console.log('Event name is empty', data.name)
         }
       }
     }
