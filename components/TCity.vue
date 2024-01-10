@@ -407,7 +407,11 @@ export default {
     onMounted(async () => {
       await switchCity(props.profile.place)
       events.value = await getEventsInPlace(props.profile?.place)
-      load('yEfJWBnepn0u6gOVmUor')
+      if (props.profile.username === 'Munich') {
+        load('L1loQ9ae9JYxhrHiVYfc')
+      } else {
+        load('yEfJWBnepn0u6gOVmUor')
+      }
     })
 
     return {
