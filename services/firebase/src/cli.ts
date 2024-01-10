@@ -18,7 +18,7 @@ import { announceEvent } from './lib/telegram'
 const yargs = require('yargs/yargs')
 const { hideBin } = require('yargs/helpers')
 import { firestore } from './firebase'
-import { announceEventIG, getIgProfile } from './lib/instagram'
+import { announceEventIG2, getIgProfile } from './lib/instagram'
 import { closeBrowser, getPage } from './lib/browser'
 import { getFacebookEvent } from './lib/facebook_import'
 import { getPlace } from './lib/google_maps'
@@ -380,7 +380,7 @@ yargs(hideBin(process.argv))
           .get()
       ).data() as any
 
-      const result = await announceEventIG(event)
+      const result = await announceEventIG2(event)
 
       if (!result) {
         return

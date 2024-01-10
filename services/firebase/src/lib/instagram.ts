@@ -1,7 +1,8 @@
 import { IgApiClient } from 'instagram-private-api'
 import axios from 'axios'
 import { DocumentSnapshot } from 'firebase-functions/v1/firestore'
-import { admin } from '../firebase'
+import { admin, firestore as db } from '../firebase'
+import { getDocs } from './migrations'
 const pngToJpeg = require('png-to-jpeg')
 
 require('dotenv').config()
@@ -14,9 +15,120 @@ function getMention(link: string) {
   let result = link
   result = result.replace('https://instagram.com/', '@')
   result = result.replace('https://www.instagram.com/', '@')
+  result = result.replace(/\?.*$/, '')
   result = result.replace('/', '')
 
   return result
+}
+
+export async function announceEventIG2(event: any) {
+  const cities = await getDocs(
+    db.collection('cities').where('location.place_id', '==', event.place)
+  )
+
+  if (!cities.length) {
+    throw new Error(`Community for place "${event.place}" not found`)
+  }
+
+  const city = cities[0]
+
+  const igUsername = city.instagramUsername
+  const igPassword = city.instagramPassword
+
+  if (!igUsername) {
+    throw new Error(`Instagram is not available yet for ${city.name}`)
+  }
+
+  const hashtags = [event.eventType, ...Object.keys(event.styles)]
+    .map((tag) => `#${tag}`)
+    .join(' ')
+
+  const name = event.name || ''
+  const description = event.description || ''
+  const venue = event.venue?.name || ''
+  const price = event.price || ''
+  const specialOffer = event.specialOffer || ''
+
+  const mentionsList = [getMention(event.org?.instagram)]
+
+  for (const artist of event.artists) {
+    mentionsList.push(getMention(artist?.instagram))
+  }
+
+  const mentions = mentionsList.join(' ')
+
+  const photo = event.socialCover
+
+  let caption = ''
+
+  if (specialOffer) {
+    caption += `🔥${specialOffer}\n\n`
+  }
+
+  caption += `${name}\n`
+  caption += `📍${venue}\n`
+  caption += `💰${price}\n`
+  caption += `\n`
+  caption += `${description}\n`
+  caption += `\n`
+  caption += `👉 See link in bio\n`
+  caption += `\n`
+  caption += mentions
+  caption += `\n\n`
+  caption += hashtags
+
+  const response = await axios.get(photo, { responseType: 'arraybuffer' })
+  const buffer = Buffer.from(response.data, 'utf-8')
+
+  const file = await pngToJpeg({ quality: 90 })(buffer)
+
+  const ig = new IgApiClient()
+  ig.state.generateDevice(igUsername)
+
+  try {
+    await ig.account.login(igUsername, igPassword)
+  } catch (e) {
+    const error: any = e
+    if (
+      error.response &&
+      error.response.body &&
+      error.response.body.error_type
+    ) {
+      const error_type = error.response.body.error_type
+
+      if (error_type === 'checkpoint_challenge_required') {
+        await ig.challenge.auto(true)
+      }
+
+      throw new Error(error.response.body)
+    }
+
+    throw new Error(error)
+  }
+
+  const publishResult = await ig.publish.photo({
+    // read the file into a Buffer
+    file,
+    // optional, default ''
+    caption,
+    // optional
+    // location: mediaLocation,
+    // optional
+    // usertags: {
+    //   in: [
+    //     // tag the user 'instagram' @ (0.5 | 0.5)
+    //     await generateUsertagFromName('instagram', 0.5, 0.5),
+    //   ],
+    // },
+  })
+
+  const messageId = publishResult.media.code
+  const messageUrl = 'https://instagram.com/p/' + publishResult.media.code
+
+  return {
+    messageId,
+    messageUrl,
+  }
 }
 
 export async function announceEventIG(event: any) {

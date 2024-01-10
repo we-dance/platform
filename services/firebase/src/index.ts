@@ -17,7 +17,7 @@ import { generateSocialCover, updateEventPoster } from './lib/migrations'
 import { firestore as db, admin, firestore } from './firebase'
 import { notifySlackAboutEvents, notifySlackAboutUsers } from './lib/slack'
 import { wrap } from './sentry'
-import { announceEventIG, importInstagramProfile } from './lib/instagram'
+import { announceEventIG2, importInstagramProfile } from './lib/instagram'
 import { getFacebookEvent } from './lib/facebook_import'
 
 require('dotenv').config()
@@ -392,7 +392,7 @@ export const eventChanged = functions.firestore
       event?.promotion === 'requested'
     ) {
       try {
-        const ig = (await announceEventIG(event)) as any
+        const ig = (await announceEventIG2(event)) as any
 
         await db
           .collection('posts')
