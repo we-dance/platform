@@ -119,6 +119,10 @@ export async function getIgProfile(username: string) {
 export async function importInstagramProfile(snapshot: DocumentSnapshot) {
   const profile = snapshot.data() as any
 
+  if (!profile.instagram) {
+    return
+  }
+
   let instagram: any
 
   await snapshot.ref.update({

@@ -125,7 +125,7 @@ yargs(hideBin(process.argv))
         const changes = {
           ...event,
           cover: data.photo?.imageUri,
-        } as any
+        }
 
         index.saveObject(eventToAlgolia(changes))
 
