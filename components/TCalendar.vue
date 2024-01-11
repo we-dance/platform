@@ -76,7 +76,49 @@
 
     <div v-if="!response.nbHits" class="p-4 flex justify-center items-center">
       <div>
-        There are no events yet. Ask organisers.
+        <h2 class="text-lg font-semibold">No Events Found</h2>
+        <p class="text-sm mt-2">
+          Dates: <span class="font-medium">{{ getDate(fromDate) }}</span> to
+          <span class="font-medium">{{ getDate(untilDate) }}</span>
+        </p>
+
+        <div class="mt-4 p-4 typo bg-orange-50">
+          <p>
+            It seems there are no events listed for your selected dates. But
+            don't worry, you've got options:
+          </p>
+
+          <ul>
+            <li>
+              <strong>Expand Your Search:</strong> Try adjusting your date range
+              or filters to explore other events.
+            </li>
+            <li>
+              <strong>Import an Event:</strong> Found something interesting
+              elsewhere? Easily
+              <router-link to="/events/-/import"
+                >import events from Facebook</router-link
+              >
+              or other platforms to share with the community.
+            </li>
+            <li>
+              <strong>Create and Share:</strong> Can’t find what you’re looking
+              for? You can manually
+              <router-link to="/events/-/edit"
+                >add details of events</router-link
+              >
+              you know about or host your own event on our platform.
+            </li>
+            <li>
+              <strong>Stay in the Loop:</strong> Subcribe to get updates on new
+              events in your areas of interest.
+            </li>
+          </ul>
+          <p class="mt-4">
+            Help grow our community by sharing events you’re excited about!
+            Thank you for being a part of WeDance.
+          </p>
+        </div>
       </div>
     </div>
 
@@ -250,6 +292,7 @@ export default {
       copyToClipboard,
       showPopup,
       fromDate,
+      untilDate,
       sorting,
       uid,
       getFacetOptions,
