@@ -12,10 +12,48 @@ function getDate(timestamp: any) {
   return timestamp * 1000
 }
 
+export const slugify = (str: string) => {
+  str = str.replace(/^\s+|\s+$/g, '')
+
+  // Make the string lowercase
+  str = str.toLowerCase()
+
+  // Remove accents, swap ñ for n, etc
+  const from =
+    'ÁÄÂÀÃÅČÇĆĎÉĚËÈÊẼĔȆÍÌÎÏŇÑÓÖÒÔÕØŘŔŠŤÚŮÜÙÛÝŸŽáäâàãåčçćďéěëèêẽĕȇíìîïňñóöòôõøðřŕšťúůüùûýÿžþÞĐđßÆa·/_,:;'
+  const to =
+    'AAAAAACCCDEEEEEEEEIIIINNOOOOOORRSTUUUUUYYZaaaaaacccdeeeeeeeeiiiinnooooooorrstuuuuuyyzbBDdBAa......'
+  for (let i = 0, l = from.length; i < l; i++) {
+    str = str.replace(new RegExp(from.charAt(i), 'g'), to.charAt(i))
+  }
+
+  // Remove invalid chars
+  str = str
+    .replace(/[^a-z0-9 -]/g, '')
+    // Collapse whitespace and replace by .
+    .replace(/\s+/g, '.')
+    // Collapse dots
+    .replace(/\.+/g, '.')
+
+  return str
+}
+
 async function getOrg(host: any, place: any) {
   let org: any = ''
 
-  const orgFacebook = host?.url.replace('https://www.facebook.com/', '')
+  if (!host?.id) {
+    return ''
+  }
+
+  let orgUrl = host.url || ''
+  if (!orgUrl) {
+    orgUrl = `https://www.facebook.com/${host?.id}`
+  }
+
+  const orgFacebook = orgUrl.replace('https://www.facebook.com/', '')
+  if (!orgFacebook) {
+    return ''
+  }
 
   const orgResults = await initIndex('profiles').search(orgFacebook)
   if (orgResults.hits.length) {
@@ -33,7 +71,7 @@ async function getOrg(host: any, place: any) {
       youtube: p.youtube || '',
     }
   } else {
-    let username = host?.url.replace('https://www.facebook.com/', '')
+    let username = orgFacebook
 
     if (username.includes('people/')) {
       username = username.split('/')[1].replace('-', '')
@@ -47,9 +85,9 @@ async function getOrg(host: any, place: any) {
       updatedAt: now,
       source: 'facebook',
       name: host?.name,
-      facebook: host?.url,
+      facebook: orgUrl,
       photo: host?.photo?.imageUri,
-      username,
+      username: slugify(host?.name),
       type: 'Organiser',
       owned: false,
       owner: '',
@@ -84,8 +122,12 @@ export async function getFacebookEvent(url: string) {
 
   let venue: any = ''
 
-  if (venueName || venueAddress) {
-    venue = await getPlace(`${venueName} ${venueAddress}`, venueCountry || 'de')
+  if (venueName) {
+    venue = await getPlace(venueName, venueCountry || 'de')
+  }
+
+  if (!venue?.place_id && venueAddress) {
+    venue = await getPlace(venueAddress, venueCountry || 'de')
   }
 
   let place: any = ''

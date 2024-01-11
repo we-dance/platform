@@ -15,7 +15,7 @@
             <span>•</span>
             <div>
               <NuxtLink
-                v-if="item.type === 'event'"
+                v-if="item.type === 'event' || item.type === 'import_event'"
                 :to="localePath(`/events/${item.id}`)"
                 class="hover:underline"
                 >{{ dateDiff(item.createdAt) }}</NuxtLink
@@ -32,7 +32,10 @@
               <div>{{ item.region.name }}</div>
             </template>
           </div>
-          <div v-if="item.type === 'event'" class="text-xs">
+          <div
+            v-if="item.type === 'event' || item.type === 'import_event'"
+            class="text-xs"
+          >
             announced an event
           </div>
           <div v-else class="text-xs">published a post</div>
