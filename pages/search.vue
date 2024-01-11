@@ -4,7 +4,7 @@
       <TInput
         v-model="query"
         auto-focus
-        placeholder="Search profiles"
+        placeholder="Search profiles and events"
         class="rounded-full"
         @input="search"
       />
@@ -25,19 +25,53 @@
         </div>
       </div>
     </NuxtLink>
+    <div class="font-bold p-4 border-b">Upcoming Events</div>
+    <TEventText4
+      v-for="item in responseEvents.hits"
+      :id="item.id"
+      :key="item.id"
+      class="hover:opacity-75"
+      :name="item.name"
+      :cover="item.cover"
+      :venue="item.venue"
+      :price="item.price"
+      :start-date="getDateObect(item.startDate)"
+      :event-type="item.type"
+      :styles="item.styles"
+      :organiser="item.organizer"
+      show-date
+    />
   </div>
 </template>
 
 <script>
 import { ref } from 'vue-demi'
 import { useAlgolia } from '~/use/algolia'
+import { getDateObect } from '~/utils'
 
 export default {
   setup() {
     const query = ref('')
-    const { search, response } = useAlgolia('profiles')
+    const { search: searchProfiles, response } = useAlgolia('profiles')
+    const { search: searchEvents, response: responseEvents } = useAlgolia(
+      'events'
+    )
 
-    return { query, search, response }
+    let today = new Date(Date.now())
+    today.setHours(6, 0, 0, 0)
+    today = +today
+    const fromDate = ref(today)
+
+    async function search() {
+      await searchProfiles(query.value)
+
+      const searchParams = {
+        filters: `startDate>${fromDate.value}`,
+      }
+      await searchEvents(query.value, searchParams)
+    }
+
+    return { query, search, response, responseEvents, getDateObect }
   },
   mounted() {
     this.search()

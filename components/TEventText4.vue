@@ -4,7 +4,18 @@
     :target="isEmbed ? '_blank' : '_self'"
     class="flex border-b p-4 leading-none gap-2"
   >
-    <div class="text-center">
+    <div v-if="showDate" class="text-center">
+      <div class="text-xl font-bold leading-none">
+        {{ formatDate(startDate, 'd') }}
+      </div>
+      <div class="w-12 text-sm">
+        {{ formatDate(startDate, 'MMM') }}
+      </div>
+      <div class="w-12 text-xs">
+        {{ formatDate(startDate, 'yyyy') }}
+      </div>
+    </div>
+    <div v-else class="text-center">
       <div class="font-bold text-sm leading-none">
         <div>{{ formatDate(startDate, 'HH:mm') }}</div>
       </div>
