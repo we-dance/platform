@@ -1,17 +1,22 @@
 <template>
-  <div class="flex flex-col" style="height: 100vh">
-    <div class="p-4 flex space-x-4">
-      <div>{{ venues.length }} venues</div>
-      <TInputButtons v-model="onlyLast" :options="onlyLastOptions" />
-    </div>
-    <ag-grid-vue
-      class="ag-theme-alpine mt-4"
-      style="width: 100%; height: 100%"
-      :column-defs="columns"
-      :row-data="venues"
-      @grid-ready="onGridReady"
-    />
+  <div v-if="!isAdmin()" class="mt-4 mx-auto max-w-md p-4 text-sm text-center">
+    Only admin can access this area.
   </div>
+  <main v-else>
+    <div class="flex flex-col" style="height: 100vh">
+      <div class="p-4 flex space-x-4">
+        <div>{{ venues.length }} venues</div>
+        <TInputButtons v-model="onlyLast" :options="onlyLastOptions" />
+      </div>
+      <ag-grid-vue
+        class="ag-theme-alpine mt-4"
+        style="width: 100%; height: 100%"
+        :column-defs="columns"
+        :row-data="venues"
+        @grid-ready="onGridReady"
+      />
+    </div>
+  </main>
 </template>
 
 <script>
@@ -21,6 +26,7 @@ import { computed, onMounted, ref, watch } from 'vue-demi'
 import 'ag-grid-community/dist/styles/ag-grid.css'
 import 'ag-grid-community/dist/styles/ag-theme-alpine.css'
 import { AgGridVue } from 'ag-grid-vue'
+import { useAuth } from '~/use/auth'
 
 export default {
   layout: 'empty',
@@ -29,6 +35,7 @@ export default {
     AgGridVue,
   },
   setup() {
+    const { isAdmin } = useAuth()
     const onlyLast = ref(true)
     const onlyLastOptions = [
       { value: false, label: 'All' },
@@ -86,6 +93,7 @@ export default {
       onGridReady,
       onlyLast,
       onlyLastOptions,
+      isAdmin,
     }
   },
 }

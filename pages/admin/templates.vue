@@ -1,5 +1,8 @@
 <template>
-  <main>
+  <div v-if="!isAdmin()" class="mt-4 mx-auto max-w-md p-4 text-sm text-center">
+    Only admin can access this area.
+  </div>
+  <main v-else>
     <TCardList
       :collection="collection"
       :title="title"
@@ -68,7 +71,7 @@ export default {
     peopleId: false,
   }),
   setup() {
-    const { can } = useAuth()
+    const { can, isAdmin } = useAuth()
     const title = 'Templates'
     const collection = 'templates'
     const add = 'Add'
@@ -114,6 +117,7 @@ export default {
       getDateTime,
       getTime,
       can,
+      isAdmin,
     }
   },
 }

@@ -1,5 +1,5 @@
 <template>
-  <div v-if="!isAdmin" class="mt-4 mx-auto max-w-md p-4 text-sm text-center">
+  <div v-if="!isAdmin()" class="mt-4 mx-auto max-w-md p-4 text-sm text-center">
     Only admin can access this area.
   </div>
   <div v-else>
@@ -13,9 +13,9 @@
       <template v-slot:default="{ item }">
         <div class="mb-4 bg-white max-w-sm">
           <div class="bg-white p-4 max-w-sm">
-            <div>Reported by {{ getAccount(item.createdBy).name }}</div>
+            <div>Reported by {{ item.createdBy }}</div>
             <div class="text-xs">
-              {{ getDateTime(item.createdAt) }}
+              {{ getYmdHms(item.createdAt) }}
             </div>
             <div>State: {{ item.state }}</div>
             <div>Category: {{ item.category }}</div>
@@ -30,9 +30,8 @@
 </template>
 
 <script>
-import { getDateTime } from '~/utils'
+import { getYmdHms } from '~/utils'
 import { useAuth } from '~/use/auth'
-import { useAccounts } from '~/use/accounts'
 
 export default {
   middleware: ['auth'],
@@ -67,24 +66,23 @@ export default {
     ]
 
     const { uid, isAdmin } = useAuth()
-    const { getAccount } = useAccounts()
 
     const filters = [
       {
         name: 'all',
         label: 'All',
         default: true,
+        sort: '-createdAt',
       },
     ]
 
     return {
       collection,
       fields,
-      getDateTime,
+      getYmdHms,
       filters,
       uid,
       isAdmin,
-      getAccount,
     }
   },
 }

@@ -80,20 +80,6 @@
 
     <div class="h-8"></div>
     <TButton
-      v-if="isAdmin() || isEditor()"
-      to="/admin/shares"
-      type="nav"
-      class="text-gray-700"
-      label="Shares"
-    />
-    <TButton
-      v-if="isAdmin()"
-      to="/admin/accounts"
-      type="nav"
-      class="text-gray-700"
-      label="Accounts"
-    />
-    <TButton
       v-if="isAdmin()"
       to="/admin/cities"
       type="nav"
