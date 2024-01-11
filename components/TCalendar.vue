@@ -1,5 +1,5 @@
 <template>
-  <div v-if="response && response.facets">
+  <div v-if="response && response.facets && response.nbHits">
     <div class="mb-4 gap-2 flex flex-wrap p-4 items-center">
       <t-rich-select
         v-model="filters['style']"
