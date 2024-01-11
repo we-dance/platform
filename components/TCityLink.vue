@@ -24,6 +24,10 @@ export default {
     const city = ref('')
 
     onMounted(() => {
+      if (!props.place) {
+        return
+      }
+
       const db = firebase.firestore()
       db.collection('profiles')
         .where('cityPlaceId', '==', props.place)
