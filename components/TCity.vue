@@ -72,25 +72,62 @@
     </div>
 
     <div class="grid grid-cols-4 gap-4 p-4">
-      <div>
+      <div v-if="profile.photo">
         <img
-          v-if="profile.photo"
           :src="profile.photo"
           :alt="profile.username"
           class="w-full rounded-full"
         />
-        <TIcon
-          v-else-if="profile.type !== 'City'"
-          name="undraw_profile_pic"
-          class="w-full rounded-full"
-        />
       </div>
 
-      <div class="col-span-3">
+      <div :class="profile.photo ? 'col-span-3' : 'col-span-4'">
         <h1 class="leading-tight font-bold">{{ profile.name }}</h1>
-        <TExpand class="text-sm mb-4">
+        <TExpand class="mb-4">
           <TPreview :content="profile.bio" />
-          <TProfileDetails v-if="profile.type !== 'City'" :profile="profile" />
+          <div v-if="!profile.bio" class="typo">
+            <p>Welcome to {{ profile.name }} on WeDance!</p>
+            <p>Hello, dancers and enthusiasts! 🕺💃</p>
+
+            <p>
+              We're excited to announce that WeDance has now arrived in
+              {{ profile.name }}! As we're just stepping into this vibrant city,
+              our dance event calendar might look a little empty - but not for
+              long, with your help.
+            </p>
+
+            <h3>Be a Part of Our Growing Community:</h3>
+
+            <ul>
+              <li>
+                <strong>Add Events:</strong> Know about a salsa night, a tango
+                workshop, or a swing dance party? Add it to our platform and let
+                others join in the fun.
+              </li>
+              <li>
+                <strong>Share Local Insights:</strong> Help us map out the dance
+                scene. Share information about dance organizers, popular venues,
+                or active WhatsApp groups. Your knowledge is invaluable!
+              </li>
+              <li>
+                <strong>Connect and Grow:</strong> We're more than just a
+                platform; we're a community of dancers helping each other. By
+                sharing and participating, you're not just finding events,
+                you're helping fellow dancers experience the joy of dance in
+                {{ profile.name }}.
+              </li>
+            </ul>
+            <p class="mt-4">
+              Together, we can make {{ profile.name }} a thriving hub for dance
+              lovers. Whether you're a local or just passing through, let's
+              create a space where every dancer can find their rhythm. Thank you
+              for joining us on this journey.
+            </p>
+            <p>Let's dance the night away!</p>
+            <p>
+              With excitement,<br />
+              WeDance Team
+            </p>
+          </div>
         </TExpand>
 
         <div class="text-xs text-gray-500">
