@@ -55,7 +55,7 @@ async function getOrg(host: any, place: any) {
     return ''
   }
 
-  const orgResults = await initIndex('profiles').search(orgFacebook)
+  const orgResults = await initIndex('profiles').search(orgUrl)
   if (orgResults.hits.length) {
     const p = orgResults.hits[0] as any
 
