@@ -7,11 +7,7 @@
       <div class="flex-grow">
         <div class="block text-sm leading-tight">
           <div class="flex space-x-1 text-xs">
-            <NuxtLink
-              :to="localePath(`/${item.username}`)"
-              class="font-bold hover:underline"
-              >{{ item.username }}</NuxtLink
-            >
+            <TAvatar name size="md" :uid="item.createdBy" />
             <span>•</span>
             <div>
               <NuxtLink

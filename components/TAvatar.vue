@@ -7,7 +7,7 @@
     </div>
     <div v-if="name">
       <NuxtLink
-        class="hover:underline"
+        class="hover:underline font-bold"
         :to="localePath(`/${profile.username}`)"
       >
         {{ profile.name }}
