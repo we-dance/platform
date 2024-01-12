@@ -26,7 +26,8 @@
           </div>
           <div v-else class="text-xs">
             <span v-if="profile.gender === 'Male'">Leader</span>
-            <span v-else>Follower</span>
+            <span v-else-if="profile.gender === 'Female'">Follower</span>
+            <span v-else>Unknown</span>
           </div>
         </template>
         <div v-show="profile.bio" class="text-gray-700 text-xs">

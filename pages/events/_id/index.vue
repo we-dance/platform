@@ -417,7 +417,7 @@
         </div>
       </div>
 
-      <div v-if="doc.star && doc.star.list" class="space-y-2 p-4">
+      <div v-if="doc.star && doc.star.usernames" class="space-y-2 p-4">
         <h3 class="text-xl font-bold">{{ $t('event.guests') }}</h3>
         <div
           v-if="guests.followersCount || guests.leadersCount"
@@ -445,7 +445,7 @@
         </div>
         <div v-else>
           <div
-            v-for="(val, username) in doc.star.list"
+            v-for="username in doc.star.usernames"
             :key="`guest-${username}`"
           >
             <WProfile :username="username" />
@@ -679,7 +679,7 @@ export default {
     }
 
     watch(doc, async () => {
-      const list = doc.value.star?.list
+      const list = doc.value.star?.usernames
 
       const result = {
         list: [],
@@ -700,13 +700,13 @@ export default {
         return
       }
 
-      for (const guestUsername of Object.keys(list)) {
+      for (const guestUsername of list) {
         const guestProfile = await getCachedProfile(guestUsername)
 
         result.list.push(guestProfile)
         if (guestProfile.gender === 'Female') {
           result.followersCount++
-        } else {
+        } else if (guestProfile.gender === 'Male') {
           result.leadersCount++
         }
       }
@@ -716,9 +716,9 @@ export default {
 
     const isGoing = computed(() => {
       return (
-        doc.value.star?.list &&
+        doc.value.star?.usernames &&
         username.value &&
-        doc.value.star.list[username.value]
+        doc.value.star.usernames.includes(username.value)
       )
     })
 
