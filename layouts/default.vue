@@ -4,7 +4,7 @@
       v-if="profile && !profile.photo"
       desktop="Upload your photo"
       mobile="Upload your photo"
-      action="Upload"
+      action="Edit Profile"
       link="https://wedance.vip/settings?tab=profile"
     />
     <TBanner
