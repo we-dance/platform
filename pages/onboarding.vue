@@ -136,13 +136,9 @@ export default {
       this.skip.photo = true
       this.next()
     },
-    async load() {
+    load() {
       if (this.loadedProfile && !this.profile.name) {
         this.profile = this.loadedProfile
-      }
-
-      if (this.profile?.username && this.profile?.place && this.profile?.name) {
-        await this.finish()
       }
     },
     next() {
