@@ -3,6 +3,7 @@ import { initIndex } from './algolia'
 import { firestore } from '../firebase'
 import { getCityId, getPlace } from './google_maps'
 import { getStyles } from './dance_styles'
+import { getUploadedImage } from './cloudinary'
 
 function getDate(timestamp: any) {
   if (!timestamp) {
@@ -78,6 +79,7 @@ async function getOrg(host: any, place: any) {
     }
 
     const now = +new Date()
+    const orgPhoto = await getUploadedImage(host?.photo?.imageUri)
 
     org = {
       createdAt: now,
@@ -86,7 +88,7 @@ async function getOrg(host: any, place: any) {
       source: 'facebook',
       name: host?.name,
       facebook: orgUrl,
-      photo: host?.photo?.imageUri,
+      photo: orgPhoto,
       username: slugify(host?.name),
       type: 'Organiser',
       owned: false,
@@ -182,12 +184,13 @@ export async function getFacebookEvent(url: string) {
   }
 
   const hash = getDate(event.startTimestamp) + '+' + venue?.place_id
+  const eventPhoto = await getUploadedImage(event.photo?.imageUri || '')
 
   return {
     name: event.name,
     description: event.description,
     eventType,
-    cover: event.photo?.imageUri,
+    cover: eventPhoto,
     startDate: getDate(event.startTimestamp),
     endDate: getDate(event.endTimestamp),
     venue,

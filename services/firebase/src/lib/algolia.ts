@@ -15,8 +15,27 @@ export async function removeObject(indexName: string, objectID: string) {
   await index.deleteObject(objectID)
 }
 
-export function profileToAlgolia(profile: any, cache: any) {
-  const hasPlace = profile.place && cache.cities && cache.cities[profile.place]
+export async function profileToAlgolia(profile: any) {
+  let hasPlace = !!profile.place
+  let cityProfile: any = {}
+
+  if (hasPlace) {
+    const cityProfileDocs = (
+      await firestore
+        .collection('profiles')
+        .where('cityPlaceId', '==', profile.place)
+        .get()
+    ).docs
+
+    if (!cityProfileDocs.length) {
+      hasPlace = false
+    } else {
+      cityProfile = cityProfileDocs[0].data()
+      if (!cityProfile.location) {
+        hasPlace = false
+      }
+    }
+  }
 
   const result: any = {
     objectID: profile.id,
@@ -31,8 +50,8 @@ export function profileToAlgolia(profile: any, cache: any) {
     bio: profile.bio,
     locales: profile.locales ? Object.keys(profile.locales) : [],
     place: profile.place,
-    country: hasPlace ? cache.cities[profile.place].location.country : '',
-    locality: hasPlace ? cache.cities[profile.place].location.locality : '',
+    country: hasPlace ? cityProfile.location.country : '',
+    locality: hasPlace ? cityProfile.location.locality : '',
     styles: profile.styles,
     style: profile.styles ? Object.keys(profile.styles) : [],
     partner: profile.partner,
@@ -49,8 +68,8 @@ export function profileToAlgolia(profile: any, cache: any) {
 
   if (hasPlace) {
     result._geoloc = {
-      lat: cache.cities[profile.place].location.latitude,
-      lng: cache.cities[profile.place].location.longitude,
+      lat: cityProfile.location.latitude,
+      lng: cityProfile.location.longitude,
     }
   }
 
@@ -168,20 +187,18 @@ export async function indexEvents() {
 }
 
 export async function indexProfiles() {
-  const cache = (
-    await firestore
-      .collection('app')
-      .doc('v2')
-      .get()
-  ).data() as any
-
   const index = initIndex('profiles')
 
   const profileDocs = (await firestore.collection('profiles').get()).docs
   const objects = []
   const removed = []
 
+  console.log(`Indexing ${profileDocs.length} profiles`)
+  let count = 0
+  const errors = []
+
   for (const doc of profileDocs) {
+    count++
     const profile = {
       id: doc.id,
       ...doc.data(),
@@ -194,7 +211,17 @@ export async function indexProfiles() {
       continue
     }
 
-    objects.push(profileToAlgolia(profile, cache))
+    const algoliaProfile = await profileToAlgolia(profile)
+    objects.push(algoliaProfile)
+    console.log(
+      `Added ${count} of ${profileDocs.length} profiles: ${algoliaProfile.username} in <${algoliaProfile.locality}, ${algoliaProfile.country}> (${algoliaProfile.place})`
+    )
+    if (!algoliaProfile.locality) {
+      errors.push({
+        username: algoliaProfile.username,
+        place: algoliaProfile.place,
+      })
+    }
   }
 
   await index.saveObjects(objects)
@@ -205,4 +232,7 @@ export async function indexProfiles() {
     console.log(`Removed ${removed.length} profiles`)
     console.log(removed)
   }
+
+  console.log(`Missing places: ${errors.length}`)
+  console.log(errors)
 }

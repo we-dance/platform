@@ -191,16 +191,6 @@ function wasChanged(prev: any, next: any, fields: string[]) {
   return !fields.every((field: string) => prev[field] === next[field])
 }
 
-function pick(object: any, fields: string[]) {
-  const result = {} as any
-
-  fields.forEach((field: string) => {
-    result[field] = object[field] || ''
-  })
-
-  return result
-}
-
 export const onProfileChange = functions.firestore
   .document('profiles/{profileId}')
   .onWrite(async (change, context) => {
@@ -233,37 +223,14 @@ export const onProfileChange = functions.firestore
       await notifySlackAboutUsers(message)
     }
 
-    const cacheFields = ['username', 'photo']
-
-    const needsCacheUpdate = wasChanged(oldProfile, profile, cacheFields)
-
-    if (needsCacheUpdate) {
-      const profileCache = pick(profile, cacheFields)
-
-      await db
-        .collection('app')
-        .doc('v2')
-        .update({ [`profiles.${profileId}`]: profileCache })
-    }
-
-    const cache = (
-      await db
-        .collection('app')
-        .doc('v2')
-        .get()
-    ).data() as any
-
     const index = initIndex('profiles')
 
     if (profile.visibility !== 'Unlisted') {
       await index.saveObject(
-        profileToAlgolia(
-          {
-            ...profile,
-            id: profileId,
-          },
-          cache
-        )
+        await profileToAlgolia({
+          ...profile,
+          id: profileId,
+        })
       )
     }
 

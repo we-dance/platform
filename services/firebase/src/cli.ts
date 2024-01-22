@@ -3,6 +3,7 @@ import {
   indexEvents,
   indexProfiles,
   initIndex,
+  profileToAlgolia,
 } from './lib/algolia'
 import {
   migrateFavs,
@@ -25,6 +26,7 @@ import { getPlace } from './lib/google_maps'
 import { generateStyles } from './lib/dance_styles'
 import axios from 'axios'
 import { scrapeFbEvent } from 'facebook-event-scraper'
+import { getUploadedImage } from './lib/cloudinary'
 
 function getDomain(url: string): string {
   let hostname
@@ -54,14 +56,76 @@ yargs(hideBin(process.argv))
     }
   )
   .command(
-    'img <url>',
-    'Check image',
+    'org:image',
+    'Refresh org photos',
     () => undefined,
     async (argv: any) => {
-      const response = await axios.get(argv.url, {
-        validateStatus: () => true,
-      })
-      console.log(response.status)
+      let allEvents
+
+      allEvents = await getDocs(
+        firestore.collection('posts').where('source', '==', 'facebook')
+      )
+
+      console.log(`Found ${allEvents.length} events`)
+
+      let count = 0
+      for (const event of allEvents) {
+        count++
+        console.log(count, 'of', allEvents.length)
+
+        if (!event.org?.photo) {
+          console.log([
+            'Photo is empty',
+            'https://wedance.vip/events/' + event.id,
+            event.facebook,
+          ])
+          continue
+        }
+
+        if (!event.org?.photo?.includes('fbcdn.net')) {
+          console.log(`Skipping ${event.id} • ${event.org.photo}`)
+          continue
+        }
+
+        let data: any
+
+        try {
+          data = await scrapeFbEvent(event.facebook)
+        } catch (e) {
+          console.log([
+            'Error scraping',
+            'https://wedance.vip/events/' + event.id,
+            event.facebook,
+            (e as Error).message,
+          ])
+          continue
+        }
+
+        if (!data?.hosts || !data?.hosts[0]?.photo?.imageUri) {
+          console.log([
+            'No org photo',
+            'https://wedance.vip/events/' + event.id,
+            event.facebook,
+          ])
+          continue
+        }
+
+        const now = +new Date()
+        const photo = await getUploadedImage(data.hosts[0].photo.imageUri)
+
+        const ref = await firestore
+          .collection('profiles')
+          .where('username', '==', event.org.username)
+          .get()
+
+        const doc = ref.docs[0]
+        await doc.ref.update({ photo, source: 'facebook', updatedAt: now })
+
+        console.log(
+          event.org.username,
+          'https://wedance.vip/events/' + event.id
+        )
+      }
     }
   )
   .command(
@@ -83,22 +147,16 @@ yargs(hideBin(process.argv))
 
       console.log(`Found ${allEvents.length} events`)
 
+      let count = 0
       for (const event of allEvents) {
-        let imageExists = false
-
-        try {
-          const response = await axios.get(event.cover, {
-            validateStatus: () => true,
-          })
-          imageExists = response.status === 200
-        } catch (e) {}
-
-        let data: any
-
-        if (imageExists) {
+        count++
+        console.log(count, 'of', allEvents.length)
+        if (!event.cover?.includes('fbcdn.net')) {
           console.log(`Skipping ${event.id} • ${event.name}`)
           continue
         }
+
+        let data: any
 
         try {
           data = await scrapeFbEvent(event.facebook)
@@ -113,26 +171,38 @@ yargs(hideBin(process.argv))
         }
 
         if (!data?.photo?.imageUri) {
+          console.log([
+            'No image',
+            'https://wedance.vip/events/' + event.id,
+            event.facebook,
+          ])
           continue
         }
+
+        const cover = await getUploadedImage(data.photo.imageUri)
 
         await firestore
           .collection('posts')
           .doc(event.id)
-          .update({ cover: data.photo?.imageUri, source: 'facebook' })
+          .update({ cover, source: 'facebook' })
 
         const index = initIndex('events')
         const changes = {
           ...event,
-          cover: data.photo?.imageUri,
+          cover,
         }
 
         index.saveObject(eventToAlgolia(changes))
 
         if (event.name) {
-          console.log(event.name)
+          console.log(event.name, 'https://wedance.vip/events/' + event.id)
         } else {
-          console.log('Event name is empty', data.name)
+          console.log([
+            'Event name is empty',
+            'https://wedance.vip/events/' + event.id,
+            event.facebook,
+            data.name,
+          ])
         }
       }
     }
@@ -514,6 +584,26 @@ yargs(hideBin(process.argv))
     () => undefined,
     async (argv: any) => {
       await indexProfiles()
+    }
+  )
+  .command(
+    'algolia:profile <username>',
+    'See profileToAlgolia',
+    () => undefined,
+    async (argv: any) => {
+      const profileDocs = (
+        await firestore
+          .collection('profiles')
+          .where('username', '==', argv.username)
+          .get()
+      ).docs
+      const profile = {
+        ...profileDocs[0].data(),
+        id: profileDocs[0].id,
+      }
+
+      const changes = await profileToAlgolia(profile)
+      console.log(changes)
     }
   )
   .command(
