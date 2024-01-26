@@ -161,7 +161,7 @@ export default {
     },
   },
   setup(props) {
-    const radius = ref(10)
+    const radius = ref(50)
     const query = ref('')
     const sorting = ref('Upcoming')
     const profileType = ref('')
