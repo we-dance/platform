@@ -328,7 +328,7 @@
 
     <div>
       <h3 class="text-2xl font-extrabold text-center p-4">
-        People also look for
+        Dance Events Near Me
       </h3>
       <ul>
         <li
