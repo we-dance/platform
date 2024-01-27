@@ -1,5 +1,9 @@
 <template>
   <div>
+    <TPopup v-if="showPopup" title="Try Premium" @close="showPopup = false">
+      <TPremium />
+    </TPopup>
+
     <THeader>
       <TButton
         v-if="profile.type === 'City'"
@@ -331,6 +335,17 @@ export default {
       type: Object,
       default: () => ({}),
     },
+  },
+  data() {
+    return {
+      showPopup: false,
+    }
+  },
+  mounted() {
+    const query = this.$route.query
+    if (Object.prototype.hasOwnProperty.call(query, 'tryPremium')) {
+      this.showPopup = query.tryPremium
+    }
   },
   head() {
     return getProfileMeta(this.profile)
