@@ -160,6 +160,16 @@
       </div>
     </div>
 
+    <div v-if="false" class="p-4">
+      <router-link to="/find-partner/start">
+        <div class="border rounded font-bold flex p-4 hover:bg-slate-200">
+          <div>Find Dance Partner</div>
+          <div class="flex-grow"></div>
+          <ChevronRightIcon />
+        </div>
+      </router-link>
+    </div>
+
     <div class="border-t bg-orange-50">
       <div class="text-xs pt-2 pr-2 text-right text-primary">SPONSORED</div>
       <NuxtLink
@@ -346,6 +356,7 @@
 </template>
 
 <script>
+import { ChevronRightIcon } from '@vue-hero-icons/outline'
 import { computed, onMounted, ref } from 'vue-demi'
 import { useApp } from '~/use/app'
 import { useAuth } from '~/use/auth'
@@ -357,6 +368,9 @@ import { useCities } from '~/use/cities'
 import { getEventsInPlace } from '~/use/events'
 
 export default {
+  components: {
+    ChevronRightIcon,
+  },
   props: {
     profile: {
       type: Object,
