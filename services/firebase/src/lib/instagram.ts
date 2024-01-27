@@ -99,10 +99,10 @@ export async function announceEventIG2(event: any) {
       if (error_type === 'checkpoint_challenge_required') {
         await ig.challenge.auto(true)
       } else {
-        throw new Error(error.response.body)
+        throw error
       }
     } else {
-      throw new Error(error)
+      throw error
     }
   }
 
