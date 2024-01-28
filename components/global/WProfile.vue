@@ -43,16 +43,22 @@
           }}
         </div>
         <div class="flex space-x-2 mt-4">
-          <TReaction
-            :label="$t('Subscribe')"
-            :toggled-label="$t('Unsubscribe')"
-            field="watch"
-            icon="BellIcon"
-            hide-count
-            :item="profile"
-            collection="profiles"
-          />
-          <TProfileContacts :profile="profile" title="Contact" type="simple" />
+          <slot name="actions">
+            <TReaction
+              :label="$t('Subscribe')"
+              :toggled-label="$t('Unsubscribe')"
+              field="watch"
+              icon="BellIcon"
+              hide-count
+              :item="profile"
+              collection="profiles"
+            />
+            <TProfileContacts
+              :profile="profile"
+              title="Contact"
+              type="simple"
+            />
+          </slot>
         </div>
       </div>
       <slot name="right" />

@@ -434,6 +434,10 @@
               count: guests.leadersCount,
             })
           }}</span>
+          <span>·</span>
+          <span v-if="can('edit', 'events', doc) && doc.checkin">
+            Present: {{ doc.checkin.count || 0 }}
+          </span>
         </div>
         <div v-if="!uid" class="flex justify-center p-4">
           <TButton
@@ -448,7 +452,21 @@
             v-for="username in doc.star.usernames"
             :key="`guest-${username}`"
           >
-            <WProfile :username="username" />
+            <WProfile :username="username">
+              <div v-if="can('edit', 'events', doc)" slot="actions">
+                <TReaction
+                  :username="username"
+                  type="primary"
+                  toggled-class="bg-green-500 hover:bg-green-800"
+                  icon="PlusIcon"
+                  toggled-icon="CheckIcon"
+                  field="checkin"
+                  class="rounded-full"
+                  hide-count
+                  :item="doc"
+                />
+              </div>
+            </WProfile>
           </div>
           <div v-if="!doc.star.count">There are no other guests yet.</div>
         </div>

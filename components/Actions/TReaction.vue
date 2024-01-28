@@ -3,7 +3,6 @@
     :type="type"
     :class="clicked ? toggledClass : ''"
     :title="label"
-    :data-names="names"
     @click="toggle"
   >
     <component :is="clicked ? toggledIcon || icon : icon" class="w-4 h-4" />
@@ -85,9 +84,18 @@ export default {
       type: Boolean,
       default: false,
     },
+    username: {
+      type: String,
+      default: '',
+    },
   },
   setup(props) {
-    const { username } = useAuth()
+    const { username: currentUsername } = useAuth()
+
+    const username = computed(() => {
+      return props.username || currentUsername.value
+    })
+
     const { softUpdate } = useDoc(props.collection)
 
     const count = computed(() => {
@@ -120,7 +128,6 @@ export default {
       if (!clicked.value) {
         change = {
           [`${props.field}.count`]: count.value + 1,
-          [`${props.field}.list.${username.value}`]: true,
           [`${props.field}.usernames`]: firebase.firestore.FieldValue.arrayUnion(
             username.value
           ),
@@ -128,7 +135,6 @@ export default {
       } else {
         change = {
           [`${props.field}.count`]: count.value - 1,
-          [`${props.field}.list.${username.value}`]: firebase.firestore.FieldValue.delete(),
           [`${props.field}.usernames`]: firebase.firestore.FieldValue.arrayRemove(
             username.value
           ),
