@@ -27,6 +27,9 @@ import { generateStyles } from './lib/dance_styles'
 import axios from 'axios'
 import { scrapeFbEvent } from 'facebook-event-scraper'
 import { getUploadedImage } from './lib/cloudinary'
+import _ = require('lodash')
+import * as YAML from 'yaml'
+import * as fs from 'fs'
 
 function getDomain(url: string): string {
   let hostname
@@ -436,6 +439,43 @@ yargs(hideBin(process.argv))
       console.log(
         `City ${result.city.name} with ${result.city.telegramChannelId} at ${result.city.telegramChannel}`
       )
+    }
+  )
+  .command(
+    'guests <username>',
+    'Get guests for events of the specific profile',
+    () => undefined,
+    async (argv: any) => {
+      const events = await getDocs(
+        firestore
+          .collection('posts')
+          .where('org.username', '==', argv.username)
+          .where('type', '==', 'event')
+      )
+
+      let guests = {} as any
+
+      for (const event of events) {
+        if (event?.star?.usernames?.length) {
+          for (const username of event.star.usernames) {
+            guests[username] = guests[username] || {}
+            guests[username].username = username
+            guests[username].count = guests[username].count || 0
+            guests[username].count++
+            guests[username].events = guests[username].events || []
+            guests[username].events.push({
+              name: event.name,
+              startDate: new Date(event.startDate),
+            })
+          }
+        }
+      }
+
+      guests = _.sortBy(guests, 'count').reverse()
+      const doc = new YAML.Document()
+      doc.contents = guests
+      const output = doc.toString()
+      fs.writeFileSync('guests.yml', output)
     }
   )
   .command(
