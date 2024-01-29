@@ -49,7 +49,7 @@ export default {
       profile,
       loading,
       signingIn,
-      signInWithGooglePopup,
+      signInWithGoogle,
       signInWithFacebook,
       signUserIn,
       signOut,
@@ -64,7 +64,7 @@ export default {
       uid,
       loading,
       signingIn,
-      signInWithGooglePopup,
+      signInWithGoogle,
       signInWithFacebook,
       signUserIn,
       signOut,
@@ -103,7 +103,7 @@ export default {
         method: 'Google',
       })
 
-      await this.signInWithGooglePopup()
+      await this.signInWithGoogle()
     },
     redirect() {
       if (this.isRedirecting) {
