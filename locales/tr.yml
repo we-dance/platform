@@ -46,6 +46,7 @@ nav:
   myProfile: Profilim
   settings: Ayarlar
 form:
+  required: This field is required
   clear: Temizle
   delete: Sil
   cancel: İptal
