@@ -107,7 +107,7 @@ export default {
       }
 
       return `partner:Yes AND style:${profile.value.searchStyle} AND gender:${
-        profile.value.gender === 'Male' ? 'Female' : 'Male'
+        profile.value.role === 'leader' ? 'Female' : 'Male'
       }`
     })
 

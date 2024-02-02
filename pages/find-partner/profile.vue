@@ -113,6 +113,10 @@ export default {
         return
       }
 
+      profile.value.partner = 'Yes'
+      profile.value.searchStartedAt = +new Date()
+      profile.value.searchExpiresAt = +new Date() + 7 * 24 * 60 * 60 * 1000
+
       await updateProfile(profile.value)
 
       router.push('/find-partner/')
