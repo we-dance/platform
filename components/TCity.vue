@@ -160,7 +160,7 @@
       </div>
     </div>
 
-    <div v-if="false" class="p-4">
+    <div v-if="$route.query.beta" class="p-4">
       <router-link to="/find-partner/start">
         <div class="border rounded font-bold flex p-4 hover:bg-slate-200">
           <div>Find Dance Partner</div>
