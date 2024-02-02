@@ -46,6 +46,7 @@ nav:
   myProfile: Mój profil
   settings: Ustawienia
 form:
+  required: This field is required
   clear: Clear
   delete: Usuń
   cancel: Anuluj
