@@ -69,7 +69,7 @@ export default {
         placeholder: 'Select Role',
       },
       {
-        name: 'current',
+        name: 'place',
         label: 'My City',
         required: true,
         component: 'TInputPlace',

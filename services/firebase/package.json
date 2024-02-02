@@ -36,6 +36,7 @@
     "handlebars": "^4.7.6",
     "https-proxy-agent": "^5.0.0",
     "instagram-private-api": "^1.45.3",
+    "lodash": "^4.17.21",
     "mailgun-js": "^0.22.0",
     "markdown-it": "^10.0.0",
     "node-fetch": "^3.2.10",
