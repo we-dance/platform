@@ -46,6 +46,7 @@ nav:
   myProfile: Мой Профиль
   settings: Настройки
 form:
+  required: This field is required
   clear: Очистить 
   delete: Удалить
   cancel: Отмена
