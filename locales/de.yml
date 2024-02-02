@@ -46,6 +46,7 @@ nav:
   myProfile: Mein Profil
   settings: Einstellungen
 form:
+  required: This field is required
   clear: Löschen
   delete: Löschen
   cancel: Abbrechen
