@@ -13,7 +13,7 @@ import { useAuth } from '~/use/auth'
 import { search } from '~/utils'
 
 export default {
-  name: 'TInputStylesSelect2',
+  name: 'TInputStyle',
   setup(props) {
     const { getStyles, levels, getAllStyles, getStylesDropdown } = useStyles()
     const { profile } = useAuth()
@@ -27,7 +27,13 @@ export default {
         }
       }
 
-      return getAllStyles(q)
+      let filter = null
+
+      if (!q && props.popularOnly) {
+        filter = { popular: true }
+      }
+
+      return getAllStyles(q, filter, 'popularity')
     }
 
     return {
@@ -47,6 +53,10 @@ export default {
       default: () => ({}),
     },
     mineOnly: {
+      type: Boolean,
+      default: false,
+    },
+    popularOnly: {
       type: Boolean,
       default: false,
     },

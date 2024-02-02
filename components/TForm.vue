@@ -3,6 +3,7 @@
     <div v-for="field in visibleFields" :key="field.name" :class="fieldWrapper">
       <TField
         :value="value ? value[field.name] : ''"
+        :error="errors[field.name]"
         :item="value"
         v-bind="field"
         :label="getLabel(field)"
@@ -87,6 +88,7 @@ export default {
   },
   data: () => ({
     error: false,
+    errors: {},
   }),
   computed: {
     visibleFields() {
@@ -120,11 +122,23 @@ export default {
       return camelcase(field.name)
     },
     validate() {
-      return true
-    },
-    copy() {
+      // check if all required fields are filled
+      this.errors = {}
       this.error = false
 
+      for (const field in this.fields) {
+        if (
+          this.fields[field].required &&
+          !this.value[this.fields[field].name]
+        ) {
+          this.errors[this.fields[field].name] = this.$t('form.required')
+          this.error = true
+        }
+      }
+
+      return !this.error
+    },
+    copy() {
       if (!this.validate()) {
         return
       }

@@ -1,6 +1,8 @@
 id: SalsaNewYork
-name: Salsa New York
-synonyms: Salsa NY, Salsa On2, Modern Mambo
+popular: true
+popularity: 7
+name: Salsa NY
+synonyms: Salsa New York, Salsa On2, Modern Mambo
 description: Characterized by vibrant, energetic hip swinging inflamed by an
   intense beat—coalesced in the 1960s as a blending of Cuban mambo and Latin
   jazz infused with choreographic and stylistic imprints from Puerto Ricans
@@ -12,16 +14,16 @@ type: Social dance
 holding: closed-couple
 year: 1960s
 predecessors: Mambo
-parent: ""
+parent: ''
 influence: Latin Jazz
 family: Salsa
 region: Afro-Caribbean
 source: |-
   https://www.britannica.com/art/Latin-American-dance/The-Caribbean
   https://en.wikipedia.org/wiki/Salsa_(dance)
-root: ""
+root: ''
 partner: yes
-group: ""
-related: ""
-music: ""
-timing: ""
+group: ''
+related: ''
+music: ''
+timing: ''

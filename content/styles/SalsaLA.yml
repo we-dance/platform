@@ -1,6 +1,8 @@
 id: SalsaLA
-name: Salsa Los Angeles
-synonyms: Salsa LA, Salsa On1
+popular: true
+popularity: 3
+name: Salsa LA
+synonyms: Salsa Los Angeles, Salsa On1
 description: LA style places strong emphasis on sensuousness, theatricality and
   acrobatics. The lifts, stunts and aerial works of today's salsa shows are
   derived mostly from LA style forms with origins in Latin Ballroom and Ballet
@@ -14,16 +16,16 @@ origins: LA, USA
 adjectives: elegant
 type: Social dance
 holding: closed-couple
-year: ""
+year: ''
 predecessors: Latin Hustle, Swing, Argentine Tango, Mambo, Latin Ballroom
-parent: ""
-influence: ""
+parent: ''
+influence: ''
 family: Salsa
 region: Afro-Caribbean
 source: https://en.wikipedia.org/wiki/Salsa_(dance)
-root: ""
+root: ''
 partner: yes
-group: ""
-related: ""
-music: ""
-timing: ""
+group: ''
+related: ''
+music: ''
+timing: ''

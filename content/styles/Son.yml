@@ -1,6 +1,8 @@
 id: Son
-name: Son
-synonyms: Cuban Son, Son Cubano
+name: Son Cubano
+popular: true
+popularity: 9
+synonyms: Son, Cuban Son
 description: Closed position is dominant, elements are simple, the dance is elegant.
 history: The Cuban danzón was refashioned into the Cuban son by the
   incorporation of more Afro-Cuban dance elements—such as hip isolation, the
@@ -12,16 +14,16 @@ type: Social dance
 holding: closed-couple
 year: 1920s
 predecessors: Danzón
-parent: ""
-influence: ""
+parent: ''
+influence: ''
 family: Salsa
 region: Afro-Caribbean
 source: |-
   https://www.britannica.com/art/Latin-American-dance/The-Caribbean
   https://la-candela-salsa.de/what-is-the-difference-between-salsa-and-son/
-root: ""
+root: ''
 partner: yes
-group: ""
-related: ""
-music: ""
-timing: ""
+group: ''
+related: ''
+music: ''
+timing: ''

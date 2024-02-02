@@ -30,16 +30,16 @@
             <span v-else>Unknown</span>
           </div>
         </template>
-        <div v-show="profile.bio" class="text-gray-700 text-xs">
-          <span class="font-bold">About me:</span> {{ profile.bio }}
-        </div>
-        <div v-show="profile.partnerBio" class="text-gray-700 text-xs">
-          <span class="font-bold">Looking for:</span>
-          {{ profile.partnerBio }}
-        </div>
-        <div class="flex space-x-2 mt-4">
-          <TButton>Select</TButton>
-        </div>
+        <TExpand>
+          <div v-show="profile.bio" class="text-gray-700 text-xs">
+            <span class="font-bold">About me:</span> {{ profile.bio }}
+          </div>
+          <div v-show="profile.partnerBio" class="text-gray-700 text-xs">
+            <span class="font-bold">Looking for:</span>
+            {{ profile.partnerBio }}
+          </div>
+        </TExpand>
+        <slot />
       </div>
       <slot name="right" />
     </div>

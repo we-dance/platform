@@ -117,7 +117,7 @@ export const useStyles = () => {
     return state.collection
   })
 
-  const getAllStyles = (q, filters) => {
+  const getAllStyles = (q, filters, sortKey) => {
     let results = state.collection
 
     if (filters) {
@@ -125,6 +125,10 @@ export const useStyles = () => {
       for (const field of fields) {
         results = results.filter((item) => item[field] === filters[field])
       }
+    }
+
+    if (sortKey) {
+      results = results.sort(sortBy(sortKey))
     }
 
     if (q) {

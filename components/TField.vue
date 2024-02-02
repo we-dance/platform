@@ -33,6 +33,7 @@
           @input="(val) => $emit('input', set(val))"
         />
       </slot>
+      <div v-if="error" class="text-red-500 text-sm mt-2">{{ error }}</div>
       <TPreview
         v-if="description"
         :content="description"
@@ -105,6 +106,10 @@ export default {
     set: {
       type: Function,
       default: (val) => val,
+    },
+    error: {
+      type: String,
+      default: '',
     },
   },
   data: () => ({
