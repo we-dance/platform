@@ -38,8 +38,8 @@
     <TButton
       allow-guests
       :to="localePath('/dance')"
-      icon="fire"
-      :label="$t('nav.dance')"
+      icon="help"
+      label="Dance Wiki"
       type="nav"
     />
     <template v-if="uid">
