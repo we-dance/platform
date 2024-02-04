@@ -66,6 +66,10 @@ export default {
         count: 0,
         list: {},
       }
+      data.checkin = {
+        count: 0,
+        list: {},
+      }
       data.createdAt = +new Date()
       data.updatedAt = +new Date()
       data.createdBy = this.uid
