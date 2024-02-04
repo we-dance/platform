@@ -365,7 +365,6 @@
 </template>
 
 <script>
-import { ChevronRightIcon } from '@vue-hero-icons/outline'
 import { computed, onMounted, ref } from 'vue-demi'
 import { useApp } from '~/use/app'
 import { useAuth } from '~/use/auth'
@@ -377,9 +376,6 @@ import { useCities } from '~/use/cities'
 import { getEventsInPlace } from '~/use/events'
 
 export default {
-  components: {
-    ChevronRightIcon,
-  },
   props: {
     profile: {
       type: Object,
