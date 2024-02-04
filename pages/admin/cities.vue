@@ -89,6 +89,12 @@ export default {
           name: 'instagram',
         },
         {
+          name: 'instagramUsername',
+        },
+        {
+          name: 'instagramPassword',
+        },
+        {
           name: 'telegram',
         },
         {
