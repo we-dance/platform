@@ -161,13 +161,22 @@
     </div>
 
     <div v-if="$route.query.beta" class="p-4">
-      <router-link to="/find-partner/start">
-        <div class="border rounded font-bold flex p-4 hover:bg-slate-200">
-          <div>Find Dance Partner</div>
-          <div class="flex-grow"></div>
-          <ChevronRightIcon />
+      <div class="rounded-md overflow-hidden shadow">
+        <div class="bg-orange-100 flex justify-center">
+          <TIcon name="find-partner" />
         </div>
-      </router-link>
+        <div class="p-4 flex flex-col items-center">
+          <div class="text-sm text-center pb-4">
+            Explore dancers in your city and connect with them to find your next
+            dance partner.
+          </div>
+          <TButton
+            to="/find-partner/start"
+            type="primary"
+            label="Find Dance Partner"
+          />
+        </div>
+      </div>
     </div>
 
     <div class="border-t bg-orange-50">

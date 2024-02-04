@@ -1,6 +1,9 @@
 <template>
   <div>
     <THeader show-logo class="md:hidden" />
+    <div class="bg-orange-100 flex justify-center pt-4">
+      <TIcon name="find-partner" />
+    </div>
     <div class="p-4">
       <h1 class="text-3xl font-extrabold text-center">
         Find Dance Partner
