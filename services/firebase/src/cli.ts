@@ -30,6 +30,7 @@ import { getUploadedImage } from './lib/cloudinary'
 import _ = require('lodash')
 import * as YAML from 'yaml'
 import * as fs from 'fs'
+import * as ical from 'ical'
 
 function getDomain(url: string): string {
   let hostname
@@ -49,6 +50,16 @@ function getDomain(url: string): string {
 }
 
 yargs(hideBin(process.argv))
+  .command(
+    'ical <url>',
+    'Get ical',
+    () => undefined,
+    async (argv: any) => {
+      const res = await axios(argv.url)
+      const ics = ical.parseICS(res.data)
+      console.log(ics)
+    }
+  )
   .command(
     'redirect <url>',
     'Resolve redirect',
