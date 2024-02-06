@@ -70,11 +70,13 @@ yargs(hideBin(process.argv))
       for (const id in ics) {
         const vevent = ics[id]
         const event: any = {
+          uid: vevent.uid,
           provider: `ical`,
           providerId: calendarId,
           name: vevent.summary,
           description: vevent.description,
           createdAt: vevent.created,
+          undefined: vevent.lastmodified,
           startDate: vevent.start,
           endDate: vevent.end,
           facebook: vevent.url,

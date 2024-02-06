@@ -1,6 +1,6 @@
 <template>
   <NuxtLink
-    :to="localePath(`/events/${item.id}`)"
+    :to="item.id ? localePath(`/events/${item.id}`) : '#'"
     :target="isEmbed ? '_blank' : '_self'"
     class="flex border-b p-4 leading-none gap-2"
   >
@@ -10,6 +10,7 @@
           {{ formatDate(item.startDate, 'd') }}
         </div>
         <div>{{ formatDate(item.startDate, 'MMM') }}</div>
+        <div class="text-xs">{{ formatDate(item.startDate, 'yyyy') }}</div>
       </div>
       <div v-else class="font-bold text-sm leading-none">
         {{ formatDate(item.startDate, 'HH:mm') }}
@@ -29,9 +30,10 @@
             · Online
           </template>
           <template v-if="item.venue"> · {{ item.venue.name }}</template>
+          <template v-if="item.location">{{ item.location }}</template>
         </div>
       </div>
-      <div class="text-xs text-gray-700 pt-1">
+      <div v-if="item.eventType" class="text-xs text-gray-700 pt-1">
         <span class="text-primary">{{
           getEventTypeLabel(item.eventType)
         }}</span>
@@ -42,14 +44,19 @@
             .join(' · ')
         }}
       </div>
-      <div class="text-xs text-gray-700">
+      <div v-if="item.viewsCount" class="text-xs text-gray-700">
         {{ $tc('guests', guestCount, { count: guestCount }) }} ·
         {{ $tc('views', item.viewsCount, { count: item.viewsCount }) }} ·
         {{ item.price }}
       </div>
     </div>
     <div>
-      <img class="w-20 rounded" :src="item.cover" :alt="`${item.name} cover`" />
+      <img
+        v-if="item.cover"
+        class="w-20 rounded"
+        :src="item.cover"
+        :alt="`${item.name} cover`"
+      />
     </div>
   </NuxtLink>
 </template>
