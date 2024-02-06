@@ -51,13 +51,44 @@ function getDomain(url: string): string {
 
 yargs(hideBin(process.argv))
   .command(
-    'ical <url>',
+    'ical <id>',
     'Get ical',
     () => undefined,
     async (argv: any) => {
-      const res = await axios(argv.url)
+      // 262LQz8uIYSRwrDAtGZ1
+      const calendarRef = await firestore
+        .collection('calendars')
+        .doc(argv.id)
+        .get()
+
+      const calendar = calendarRef.data() as any
+      const calendarId = calendarRef.id
+      const res = await axios(calendar.url)
       const ics = ical.parseICS(res.data)
-      console.log(ics)
+
+      const events = []
+      for (const id in ics) {
+        const vevent = ics[id]
+        const event: any = {
+          provider: `ical`,
+          providerId: calendarId,
+          name: vevent.summary,
+          description: vevent.description,
+          createdAt: vevent.created,
+          startDate: vevent.start,
+          endDate: vevent.end,
+          facebook: vevent.url,
+          location: vevent.location,
+        }
+
+        events.push(event)
+      }
+
+      const name = res.data.split('X-WR-CALNAME:')[1].split('\n')[0]
+      const lastSyncedAt = +new Date()
+      const state = 'processed'
+
+      calendarRef.ref.update({ name, state, lastSyncedAt, events })
     }
   )
   .command(
