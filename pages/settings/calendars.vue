@@ -1,9 +1,11 @@
 <template>
   <div>
-    <THeader title="Calendars" />    
+    <THeader title="Calendars" />
     <main class="p-4">
       <div class="mb-4">
-        <TButton v-if="$route.query.id" type="link" to="/settings/calendars">Back</TButton>
+        <TButton v-if="$route.query.id" type="link" to="/settings/calendars"
+          >Back</TButton
+        >
       </div>
       <div
         v-for="calendar in calendars"
@@ -11,20 +13,35 @@
         class="border p-4 rounded mb-4"
         v-show="!$route.query.id || $route.query.id === calendar.id"
       >
-        <h2 class="font-bold">
-          <router-link :to="`?id=${calendar.id}`">{{
-            calendar.name || '(noname)'
-          }}</router-link>
-        </h2>
-        <p class="text-xs font-bold">{{ calendar.state }}</p>
-        <a class="text-xs text-gray-700 underline" :href="calendar.url" target="_blank">ical</a>
+        <div class="flex justify-between gap-4">
+          <div>
+            <h2 class="font-bold">
+              <router-link :to="`?id=${calendar.id}`">{{
+                calendar.name || '(noname)'
+              }}</router-link>
+            </h2>
+            <p class="text-xs font-bold">{{ calendar.state }}</p>
+          </div>
+          <div>
+            <TButton icon="plus" type="icon" @click="refresh(calendar.id)" />
+          </div>
+        </div>
+
+        <a
+          class="text-xs text-gray-700 underline"
+          :href="calendar.url"
+          target="_blank"
+          >ical</a
+        >
         <p class="text-xs text-gray-500">
           Last synced:
           {{
             calendar.lastSyncedAt ? getYmdHms(calendar.lastSyncedAt) : 'Never'
           }}
         </p>
-        <p class="text-xs text-gray-500">Last count: {{ calendar.lastCount }}</p>
+        <p class="text-xs text-gray-500">
+          Last count: {{ calendar.lastCount }}
+        </p>
       </div>
 
       <div v-if="$route.query.id">
@@ -49,24 +66,24 @@
 <script>
 import firebase from 'firebase/app'
 import 'firebase/firestore'
-import { ref, onMounted, computed } from '@nuxtjs/composition-api'
+import { ref, onMounted } from '@nuxtjs/composition-api'
 import { useAuth } from '~/use/auth'
 import { getYmdHms, sortBy } from '~/utils'
 
 export default {
   computed: {
-    events: function () {
+    events() {
       const id = this.$route.query.id
 
       if (!id) {
         return []
       }
 
-      let calendar = {}      
+      let calendar = {}
       calendar = this.calendars.find((calendar) => calendar.id === id)
 
       return calendar?.events?.sort(sortBy('startDate')) || []
-    }
+    },
   },
   setup() {
     const { uid, profile } = useAuth()
@@ -74,6 +91,15 @@ export default {
     const calendars = ref([])
     const newCalendarUrl = ref('')
     const firestore = firebase.firestore()
+
+    function refresh(id) {
+      firestore
+        .collection('calendars')
+        .doc(id)
+        .update({
+          state: 'queued',
+        })
+    }
 
     function addCalendar() {
       const url = newCalendarUrl.value
@@ -105,7 +131,8 @@ export default {
       calendars,
       newCalendarUrl,
       addCalendar,
-      getYmdHms
+      getYmdHms,
+      refresh,
     }
   },
 }
