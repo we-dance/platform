@@ -22,7 +22,7 @@
         </p>
       </div>
 
-      <div v-if="events">
+      <div v-if="events.length">
         <div v-for="event in events" :key="event.id">
           <TEventText2 :item="event" show-date />
         </div>
