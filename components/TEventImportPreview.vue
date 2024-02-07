@@ -1,7 +1,5 @@
 <template>
-  <NuxtLink
-    :to="item.id ? localePath(`/events/${item.id}`) : '#'"
-    :target="isEmbed ? '_blank' : '_self'"
+  <div
     class="flex border-b p-4 leading-none gap-2"
   >
     <div class="text-center">
@@ -18,7 +16,7 @@
     </div>
     <div class="w-full">
       <div
-        class="font-bold text-sm leading-none hover:underline hover:text-primary"
+        class="font-bold text-sm leading-none"
       >
         {{ item.name }}
       </div>
@@ -33,7 +31,7 @@
           <template v-if="item.location">{{ item.location }}</template>
         </div>
       </div>
-      <div v-if="item.eventType || item.styles" class="text-xs text-gray-700 pt-1">
+      <div v-if="item.eventType" class="text-xs text-gray-700 pt-1">
         <span class="text-primary">{{
           getEventTypeLabel(item.eventType)
         }}</span>
@@ -44,10 +42,11 @@
             .join(' · ')
         }}
       </div>
-      <div v-if="item.viewsCount" class="text-xs text-gray-700">
-        {{ $tc('guests', guestCount, { count: guestCount }) }} ·
-        {{ $tc('views', item.viewsCount, { count: item.viewsCount }) }} ·
-        {{ item.price }}
+      <div class="mt-2 flex gap-4 items-center">
+        <span class="rounded text-xs text-white p-1" :class="item.approved ? 'bg-green-500' : 'bg-red-500'">
+          {{ item.approved ? 'Approved' : 'Rejected' }}
+        </span>
+        <router-link v-if="item.eventId" :to="`/events/${item.eventId}`" class="text-xs" target="_blank">View Event</router-link>
       </div>
     </div>
     <div>
@@ -58,7 +57,7 @@
         :alt="`${item.name} cover`"
       />
     </div>
-  </NuxtLink>
+  </div>
 </template>
 
 <script>
@@ -99,13 +98,6 @@ export default {
       type: Boolean,
       default: false,
     },
-  },
-  computed: {
-    guestCount() {
-      const guestsCount = this.item.star?.count || 0
-
-      return guestsCount
-    },
-  },
+  }
 }
 </script>

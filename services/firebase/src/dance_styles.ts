@@ -1,678 +1,685 @@
 export default [
   {
-    id: 'Adiyaman',
-    name: 'Adiyaman',
+    "id": "Adiyaman",
+    "name": "Adiyaman"
   },
   {
-    id: 'AfroHouse',
-    name: 'Afro House',
+    "id": "AfroHouse",
+    "name": "Afro House"
   },
   {
-    id: 'Afrobeats',
-    name: 'Afrobeats',
+    "id": "Afrobeats",
+    "name": "Afrobeats",
+    "regexp": "afrobeats"
   },
   {
-    id: 'Allemande',
-    name: 'Allemande',
+    "id": "Allemande",
+    "name": "Allemande"
   },
   {
-    id: 'Bachata',
-    name: 'Bachata',
+    "id": "Bachata",
+    "name": "Bachata",
+    "regexp": "bachata"
   },
   {
-    id: 'BachataModerna',
-    name: 'Bachata Moderna',
+    "id": "BachataModerna",
+    "name": "Bachata Moderna"
   },
   {
-    id: 'Bachatango',
-    name: 'Bachatango',
+    "id": "Bachatango",
+    "name": "Bachatango"
   },
   {
-    id: 'Balboa',
-    name: 'Balboa',
+    "id": "Balboa",
+    "name": "Balboa"
   },
   {
-    id: 'Ballet',
-    name: 'Ballet',
+    "id": "Ballet",
+    "name": "Ballet"
   },
   {
-    id: 'Ballroom',
-    name: 'Ballroom',
+    "id": "Ballroom",
+    "name": "Ballroom"
   },
   {
-    id: 'Bar',
-    name: 'Bar',
+    "id": "Bar",
+    "name": "Bar"
   },
   {
-    id: 'BavarianFolk',
-    name: 'Bavarian Folk',
+    "id": "BavarianFolk",
+    "name": "Bavarian Folk"
   },
   {
-    id: 'BellyDance',
-    name: 'Belly Dance',
+    "id": "BellyDance",
+    "name": "Belly Dance"
   },
   {
-    id: 'Bhangra',
-    name: 'Bhangra',
+    "id": "Bhangra",
+    "name": "Bhangra"
   },
   {
-    id: 'Bharatanatyam',
-    name: 'Bharatanatyam',
+    "id": "Bharatanatyam",
+    "name": "Bharatanatyam"
   },
   {
-    id: 'Bolero',
-    name: 'Bolero',
+    "id": "Bolero",
+    "name": "Bolero"
   },
   {
-    id: 'Bollywood',
-    name: 'Bollywood',
+    "id": "Bollywood",
+    "name": "Bollywood"
   },
   {
-    id: 'BoogieWoogie',
-    name: 'Boogie-woogie',
+    "id": "BoogieWoogie",
+    "name": "Boogie-woogie"
   },
   {
-    id: 'BrazilianZouk',
-    name: 'Brazilian Zouk',
+    "id": "BrazilianZouk",
+    "name": "Brazilian Zouk",
+    "regexp": "zouk"
   },
   {
-    id: 'Breakdance',
-    name: 'Breakdance',
+    "id": "Breakdance",
+    "name": "Breakdance"
   },
   {
-    id: 'Breaking',
-    name: 'Breaking',
+    "id": "Breaking",
+    "name": "Breaking"
   },
   {
-    id: 'Bump',
-    name: 'Bump',
+    "id": "Bump",
+    "name": "Bump"
   },
   {
-    id: 'Burlesque',
-    name: 'Burlesque',
+    "id": "Burlesque",
+    "name": "Burlesque"
   },
   {
-    id: 'Capoeira',
-    name: 'Capoeira',
+    "id": "Capoeira",
+    "name": "Capoeira"
   },
   {
-    id: 'Casino',
-    name: 'Casino',
+    "id": "Casino",
+    "name": "Salsa Cubana"
   },
   {
-    id: 'Ceili',
-    name: 'Ceili',
+    "id": "Ceili",
+    "name": "Ceili"
   },
   {
-    id: 'Ceilidh',
-    name: 'Ceilidh',
+    "id": "Ceilidh",
+    "name": "Ceilidh"
   },
   {
-    id: 'Ceroc',
-    name: 'Ceroc',
+    "id": "Ceroc",
+    "name": "Ceroc"
   },
   {
-    id: 'ChaChaCha',
-    name: 'Cha-cha-chá',
+    "id": "ChaChaCha",
+    "name": "Cha-cha-chá"
   },
   {
-    id: 'ChaChaChaBallroom',
-    name: 'Cha-cha-cha (ballroom)',
+    "id": "ChaChaChaBallroom",
+    "name": "Cha-cha-cha (ballroom)"
   },
   {
-    id: 'Chaconne',
-    name: 'Chaconne',
+    "id": "Chaconne",
+    "name": "Chaconne"
   },
   {
-    id: 'Chalusonga',
-    name: 'Chalusonga',
+    "id": "Chalusonga",
+    "name": "Chalusonga"
   },
   {
-    id: 'Champeta',
-    name: 'Champeta',
+    "id": "Champeta",
+    "name": "Champeta"
   },
   {
-    id: 'Charleston',
-    name: 'Charleston',
+    "id": "Charleston",
+    "name": "Charleston"
   },
   {
-    id: 'CollegiateShag',
-    name: 'Collegiate Shag',
+    "id": "CollegiateShag",
+    "name": "Collegiate Shag"
   },
   {
-    id: 'Commercial',
-    name: 'Commercial',
+    "id": "Commercial",
+    "name": "Commercial"
   },
   {
-    id: 'Compas',
-    name: 'Compas',
+    "id": "Compas",
+    "name": "Compas"
   },
   {
-    id: 'ContactTango',
-    name: 'Contact Tango',
+    "id": "ContactTango",
+    "name": "Contact Tango"
   },
   {
-    id: 'Contemporary',
-    name: 'Contemporary',
+    "id": "Contemporary",
+    "name": "Contemporary"
   },
   {
-    id: 'Contradanza',
-    name: 'Contredanse',
+    "id": "Contradanza",
+    "name": "Contredanse"
   },
   {
-    id: 'Cotillion',
-    name: 'Cotillion',
+    "id": "Cotillion",
+    "name": "Cotillion"
   },
   {
-    id: 'CountryDance',
-    name: 'Country Dance',
+    "id": "CountryDance",
+    "name": "Country Dance"
   },
   {
-    id: 'CubanBolero',
-    name: 'Cuban bolero',
+    "id": "CubanBolero",
+    "name": "Cuban bolero"
   },
   {
-    id: 'Cubaton',
-    name: 'Cubaton',
+    "id": "Cubaton",
+    "name": "Cubaton"
   },
   {
-    id: 'Cumbia',
-    name: 'Cumbia',
+    "id": "Cumbia",
+    "name": "Cumbia"
   },
   {
-    id: 'Dancehall',
-    name: 'Dancehall',
+    "id": "Dancehall",
+    "name": "Dancehall"
   },
   {
-    id: 'Danzon',
-    name: 'Danzón',
+    "id": "Danzon",
+    "name": "Danzón"
   },
   {
-    id: 'Dembow',
-    name: 'Dembow',
+    "id": "Dembow",
+    "name": "Dembow"
   },
   {
-    id: 'Discofox',
-    name: 'Discofox',
+    "id": "Discofox",
+    "name": "Discofox"
   },
   {
-    id: 'DominicanBachata',
-    name: 'Dominican Bachata',
+    "id": "DominicanBachata",
+    "name": "Bachata Dominicana"
   },
   {
-    id: 'Douceur',
-    name: 'Douceur',
+    "id": "Douceur",
+    "name": "Douceur"
   },
   {
-    id: 'EastCoastSwing',
-    name: 'East Coast Swing',
+    "id": "EastCoastSwing",
+    "name": "East Coast Swing"
   },
   {
-    id: 'ElectricBoogaloo',
-    name: 'Electric Boogaloo',
+    "id": "ElectricBoogaloo",
+    "name": "Electric Boogaloo"
   },
   {
-    id: 'FinnishTango',
-    name: 'Finnish Tango',
+    "id": "FinnishTango",
+    "name": "Finnish Tango"
   },
   {
-    id: 'Flamenco',
-    name: 'Flamenco',
+    "id": "Flamenco",
+    "name": "Flamenco"
   },
   {
-    id: 'ForroLove',
-    name: 'Forró',
+    "id": "ForroLove",
+    "name": "Forró"
   },
   {
-    id: 'Foxtrot',
-    name: 'Foxtrot',
+    "id": "Foxtrot",
+    "name": "Foxtrot"
   },
   {
-    id: 'FunkCarioca',
-    name: 'Funk Carioca',
+    "id": "FunkCarioca",
+    "name": "Funk Carioca"
   },
   {
-    id: 'Galliard',
-    name: 'Galliard',
+    "id": "Galliard",
+    "name": "Galliard"
   },
   {
-    id: 'Garba',
-    name: 'Garba',
+    "id": "Garba",
+    "name": "Garba"
   },
   {
-    id: 'Ghoomar',
-    name: 'Ghoomar',
+    "id": "Ghoomar",
+    "name": "Ghoomar"
   },
   {
-    id: 'Grinding',
-    name: 'Grinding',
+    "id": "Grinding",
+    "name": "Grinding"
   },
   {
-    id: 'Halay',
-    name: 'Halay',
+    "id": "Halay",
+    "name": "Halay"
   },
   {
-    id: 'HandDancing',
-    name: 'Hand Dancing',
+    "id": "HandDancing",
+    "name": "Hand Dancing"
   },
   {
-    id: 'HighHeels',
-    name: 'High Heels',
+    "id": "HighHeels",
+    "name": "High Heels"
   },
   {
-    id: 'HipHop',
-    name: 'Hip Hop',
+    "id": "HipHop",
+    "name": "Hip Hop"
   },
   {
-    id: 'Hora',
-    name: 'Hora',
+    "id": "Hora",
+    "name": "Hora"
   },
   {
-    id: 'Horon',
-    name: 'Horon',
+    "id": "Horon",
+    "name": "Horon"
   },
   {
-    id: 'House',
-    name: 'House',
+    "id": "House",
+    "name": "House"
   },
   {
-    id: 'Indian',
-    name: 'Indian',
+    "id": "Indian",
+    "name": "Indian"
   },
   {
-    id: 'IndianClassicalDance',
-    name: 'Indian Classical Dance',
+    "id": "IndianClassicalDance",
+    "name": "Indian Classical Dance"
   },
   {
-    id: 'IndianFolkDance',
-    name: 'Indian Folk Dance',
+    "id": "IndianFolkDance",
+    "name": "Indian Folk Dance"
   },
   {
-    id: 'Jazz',
-    name: 'Jazz',
+    "id": "Jazz",
+    "name": "Jazz"
   },
   {
-    id: 'Jig',
-    name: 'Jig',
+    "id": "Jig",
+    "name": "Jig"
   },
   {
-    id: 'Jive',
-    name: 'Jive',
+    "id": "Jive",
+    "name": "Jive"
   },
   {
-    id: 'K-Pop',
-    name: 'K-Pop',
+    "id": "K-Pop",
+    "name": "K-Pop"
   },
   {
-    id: 'KasikOyunyu',
-    name: 'Kasik Oyunyu',
+    "id": "KasikOyunyu",
+    "name": "Kasik Oyunyu"
   },
   {
-    id: 'Kathak',
-    name: 'Kathak',
+    "id": "Kathak",
+    "name": "Kathak"
   },
   {
-    id: 'Kathakali',
-    name: 'Kathakali',
+    "id": "Kathakali",
+    "name": "Kathakali"
   },
   {
-    id: 'Kizomba',
-    name: 'Kizomba',
+    "id": "Kizomba",
+    "name": "Kizomba",
+    "regexp": "kizomba"
   },
   {
-    id: 'Kolbash',
-    name: 'Kolbash',
+    "id": "Kolbash",
+    "name": "Kolbash"
   },
   {
-    id: 'Krump',
-    name: 'Krump',
+    "id": "Krump",
+    "name": "Krump"
   },
   {
-    id: 'Kuchipudi',
-    name: 'Kuchipudi',
+    "id": "Kuchipudi",
+    "name": "Kuchipudi"
   },
   {
-    id: 'Kuduru',
-    name: 'Kuduru',
+    "id": "Kuduru",
+    "name": "Kuduru"
   },
   {
-    id: 'Lambada',
-    name: 'Lambada',
+    "id": "Lambada",
+    "name": "Lambada"
   },
   {
-    id: 'Lancer',
-    name: 'Lancer',
+    "id": "Lancer",
+    "name": "Lancer"
   },
   {
-    id: 'Latin',
-    name: 'Latin',
+    "id": "Latin",
+    "name": "Latin"
   },
   {
-    id: 'LatinFusion',
-    name: 'Latin Fusion',
+    "id": "LatinFusion",
+    "name": "Latin Fusion"
   },
   {
-    id: 'Lavani',
-    name: 'Lavani',
+    "id": "Lavani",
+    "name": "Lavani"
   },
   {
-    id: 'LindyHop',
-    name: 'Lindy Hop',
+    "id": "LindyHop",
+    "name": "Lindy Hop"
   },
   {
-    id: 'Locking',
-    name: 'Locking',
+    "id": "Locking",
+    "name": "Locking"
   },
   {
-    id: 'Mambo',
-    name: 'Mambo',
+    "id": "Mambo",
+    "name": "Mambo"
   },
   {
-    id: 'Manipuri',
-    name: 'Manipuri',
+    "id": "Manipuri",
+    "name": "Manipuri"
   },
   {
-    id: 'Maxixe',
-    name: 'Maxixe',
+    "id": "Maxixe",
+    "name": "Maxixe"
   },
   {
-    id: 'Merengue',
-    name: 'Merengue',
+    "id": "Merengue",
+    "name": "Merengue"
   },
   {
-    id: 'Minuet',
-    name: 'Minuet',
+    "id": "Minuet",
+    "name": "Minuet"
   },
   {
-    id: 'Modern',
-    name: 'Modern',
+    "id": "Modern",
+    "name": "Modern"
   },
   {
-    id: 'ModernJive',
-    name: 'Modern Jive',
+    "id": "ModernJive",
+    "name": "Modern Jive"
   },
   {
-    id: 'Mohiniyattam',
-    name: 'Mohiniyattam',
+    "id": "Mohiniyattam",
+    "name": "Mohiniyattam"
   },
   {
-    id: 'Moonwalk',
-    name: 'Moonwalk',
+    "id": "Moonwalk",
+    "name": "Moonwalk"
   },
   {
-    id: 'Odissi',
-    name: 'Odissi',
+    "id": "Odissi",
+    "name": "Odissi"
   },
   {
-    id: 'Pachanga',
-    name: 'Pachanga',
+    "id": "Pachanga",
+    "name": "Pachanga"
   },
   {
-    id: 'Pasodoble',
-    name: 'Pasodoble',
+    "id": "Pasodoble",
+    "name": "Pasodoble"
   },
   {
-    id: 'Pavane',
-    name: 'Pavane',
+    "id": "Pavane",
+    "name": "Pavane"
   },
   {
-    id: 'Perreo',
-    name: 'Perreo',
+    "id": "Perreo",
+    "name": "Perreo"
   },
   {
-    id: 'PoleDancing',
-    name: 'Pole Dancing',
+    "id": "PoleDancing",
+    "name": "Pole Dancing"
   },
   {
-    id: 'Polka',
-    name: 'Polka',
+    "id": "Polka",
+    "name": "Polka"
   },
   {
-    id: 'Popping',
-    name: 'Popping',
+    "id": "Popping",
+    "name": "Popping"
   },
   {
-    id: 'Quadrille',
-    name: 'Quadrille',
+    "id": "Quadrille",
+    "name": "Quadrille"
   },
   {
-    id: 'Quickstep',
-    name: 'Quickstep',
+    "id": "Quickstep",
+    "name": "Quickstep"
   },
   {
-    id: 'Rasleela',
-    name: 'Rasleela',
+    "id": "Rasleela",
+    "name": "Rasleela"
   },
   {
-    id: 'Reggaeton',
-    name: 'Reggaeton',
+    "id": "Reggaeton",
+    "name": "Reggaeton",
+    "regexp": "reggaeton"
   },
   {
-    id: 'Rhumba',
-    name: 'Rhumba',
+    "id": "Rhumba",
+    "name": "Rhumba"
   },
   {
-    id: 'Robot',
-    name: 'Robot',
+    "id": "Robot",
+    "name": "Robot"
   },
   {
-    id: 'RockAndRoll',
-    name: 'Rock and Roll',
+    "id": "RockAndRoll",
+    "name": "Rock and Roll"
   },
   {
-    id: 'RuedaDeCasino',
-    name: 'Rueda de Casino',
+    "id": "RuedaDeCasino",
+    "name": "Rueda de Casino"
   },
   {
-    id: 'RumbaColumbia',
-    name: 'Columbia',
+    "id": "RumbaColumbia",
+    "name": "Columbia"
   },
   {
-    id: 'RumbaGuaguanco',
-    name: 'Guaguancó',
+    "id": "RumbaGuaguanco",
+    "name": "Guaguancó"
   },
   {
-    id: 'RumbaYambu',
-    name: 'Yambú',
+    "id": "RumbaYambu",
+    "name": "Yambú"
   },
   {
-    id: 'Salsa',
-    name: 'Salsa',
+    "id": "Salsa",
+    "name": "Salsa",
+    "regexp": "salsa"
   },
   {
-    id: 'SalsaCalena',
-    name: 'Salsa Colombian',
+    "id": "SalsaCalena",
+    "name": "Salsa Colombian"
   },
   {
-    id: 'SalsaLA',
-    name: 'Salsa Los Angeles',
+    "id": "SalsaLA",
+    "name": "Salsa LA"
   },
   {
-    id: 'SalsaNewYork',
-    name: 'Salsa New York',
+    "id": "SalsaNewYork",
+    "name": "Salsa NY"
   },
   {
-    id: 'Salsaton',
-    name: 'Salsaton',
+    "id": "Salsaton",
+    "name": "Salsaton"
   },
   {
-    id: 'Samah',
-    name: 'Samah',
+    "id": "Samah",
+    "name": "Samah"
   },
   {
-    id: 'Samba',
-    name: 'Samba',
+    "id": "Samba",
+    "name": "Samba"
   },
   {
-    id: 'Sarabande',
-    name: 'Sarabande',
+    "id": "Sarabande",
+    "name": "Sarabande"
   },
   {
-    id: 'Sattriya',
-    name: 'Sattriya',
+    "id": "Sattriya",
+    "name": "Sattriya"
   },
   {
-    id: 'Schottische',
-    name: 'Schottische',
+    "id": "Schottische",
+    "name": "Schottische"
   },
   {
-    id: 'Semba',
-    name: 'Semba',
+    "id": "Semba",
+    "name": "Semba"
   },
   {
-    id: 'SensualBachata',
-    name: 'Sensual Bachata',
+    "id": "SensualBachata",
+    "name": "Bachata Sensual"
   },
   {
-    id: 'Sevillanas',
-    name: 'Sevillanas',
+    "id": "Sevillanas",
+    "name": "Sevillanas"
   },
   {
-    id: 'Shiksaray',
-    name: 'Shiksaray',
+    "id": "Shiksaray",
+    "name": "Shiksaray"
   },
   {
-    id: 'Shimmy',
-    name: 'Shimmy',
+    "id": "Shimmy",
+    "name": "Shimmy"
   },
   {
-    id: 'ShowTango',
-    name: 'Show Tango',
+    "id": "ShowTango",
+    "name": "Show Tango"
   },
   {
-    id: 'Son',
-    name: 'Son',
+    "id": "Son",
+    "name": "Son Cubano"
   },
   {
-    id: 'SpanishBolero',
-    name: 'Spanish bolero',
+    "id": "SpanishBolero",
+    "name": "Spanish bolero"
   },
   {
-    id: 'StreetDance',
-    name: 'Street dance',
+    "id": "StreetDance",
+    "name": "Street dance"
   },
   {
-    id: 'Swing',
-    name: 'Swing',
+    "id": "Swing",
+    "name": "Swing"
   },
   {
-    id: 'Tango',
-    name: 'Tango',
+    "id": "Tango",
+    "name": "Tango"
   },
   {
-    id: 'TangoArgentino',
-    name: 'Tango Argentino',
+    "id": "TangoArgentino",
+    "name": "Tango Argentino",
+    "regexp": "tango"
   },
   {
-    id: 'TangoBallroom',
-    name: 'Tango (ballroom)',
+    "id": "TangoBallroom",
+    "name": "Tango (ballroom)"
   },
   {
-    id: 'TangoCamacupense',
-    name: 'Tango Camacupense',
+    "id": "TangoCamacupense",
+    "name": "Tango Camacupense"
   },
   {
-    id: 'TangoCanyengue',
-    name: 'Tango Canyengue',
+    "id": "TangoCanyengue",
+    "name": "Tango Canyengue"
   },
   {
-    id: 'TangoLiso',
-    name: 'Tango Liso',
+    "id": "TangoLiso",
+    "name": "Tango Liso"
   },
   {
-    id: 'TangoMilonguero',
-    name: 'Tango Milonguero',
+    "id": "TangoMilonguero",
+    "name": "Tango Milonguero"
   },
   {
-    id: 'TangoNuevo',
-    name: 'Tango Nuevo',
+    "id": "TangoNuevo",
+    "name": "Tango Nuevo"
   },
   {
-    id: 'TangoOrientalUruguayan',
-    name: 'Tango Oriental Uruguayan',
+    "id": "TangoOrientalUruguayan",
+    "name": "Tango Oriental Uruguayan"
   },
   {
-    id: 'TangoOrillero',
-    name: 'Tango Orillero',
+    "id": "TangoOrillero",
+    "name": "Tango Orillero"
   },
   {
-    id: 'TangoSalon',
-    name: 'Tango Salon',
+    "id": "TangoSalon",
+    "name": "Tango Salon"
   },
   {
-    id: 'TangoValparaisino',
-    name: 'Tango Valparaísino',
+    "id": "TangoValparaisino",
+    "name": "Tango Valparaísino"
   },
   {
-    id: 'TangoVals',
-    name: 'Tango Vals',
+    "id": "TangoVals",
+    "name": "Tango Vals"
   },
   {
-    id: 'Tarraxinha',
-    name: 'Tarraxa',
+    "id": "Tarraxinha",
+    "name": "Tarraxa"
   },
   {
-    id: 'Tarraxo',
-    name: 'Tarraxo',
+    "id": "Tarraxo",
+    "name": "Tarraxo"
   },
   {
-    id: 'Timba',
-    name: 'Timba',
+    "id": "Timba",
+    "name": "Timba"
   },
   {
-    id: 'Twerking',
-    name: 'Twerking',
+    "id": "Twerking",
+    "name": "Twerking"
   },
   {
-    id: 'UrbanKizz',
-    name: 'Urban Kiz',
+    "id": "UrbanKizz",
+    "name": "Urban Kiz"
   },
   {
-    id: 'UrbanTarraxa',
-    name: 'Urban Tarraxa',
+    "id": "UrbanTarraxa",
+    "name": "Urban Tarraxa"
   },
   {
-    id: 'Vallenato',
-    name: 'Vallenato',
+    "id": "Vallenato",
+    "name": "Vallenato"
   },
   {
-    id: 'Van',
-    name: 'Van',
+    "id": "Van",
+    "name": "Van"
   },
   {
-    id: 'VienneseWaltz',
-    name: 'Viennese Waltz',
+    "id": "VienneseWaltz",
+    "name": "Viennese Waltz"
   },
   {
-    id: 'Vogue',
-    name: 'Vogue',
+    "id": "Vogue",
+    "name": "Vogue"
   },
   {
-    id: 'Volta',
-    name: 'Volta',
+    "id": "Volta",
+    "name": "Volta"
   },
   {
-    id: 'Waltz',
-    name: 'Waltz',
+    "id": "Waltz",
+    "name": "Waltz"
   },
   {
-    id: 'WestCoastSwing',
-    name: 'West Coast Swing',
+    "id": "WestCoastSwing",
+    "name": "West Coast Swing"
   },
   {
-    id: 'Worm',
-    name: 'Worm',
+    "id": "Worm",
+    "name": "Worm"
   },
   {
-    id: 'Zeybek',
-    name: 'Zeybek',
+    "id": "Zeybek",
+    "name": "Zeybek"
   },
   {
-    id: 'Zouk',
-    name: 'Zouk',
+    "id": "Zouk",
+    "name": "Zouk"
   },
   {
-    id: 'Zumba',
-    name: 'Zumba',
-  },
+    "id": "Zumba",
+    "name": "Zumba"
+  }
 ]

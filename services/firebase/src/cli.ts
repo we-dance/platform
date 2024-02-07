@@ -1,3 +1,8 @@
+import axios from 'axios'
+import _ = require('lodash')
+import * as YAML from 'yaml'
+import * as fs from 'fs'
+
 import {
   eventToAlgolia,
   indexEvents,
@@ -24,13 +29,9 @@ import { closeBrowser, getPage } from './lib/browser'
 import { getFacebookEvent } from './lib/facebook_import'
 import { getPlace } from './lib/google_maps'
 import { generateStyles } from './lib/dance_styles'
-import axios from 'axios'
 import { scrapeFbEvent } from 'facebook-event-scraper'
 import { getUploadedImage } from './lib/cloudinary'
-import _ = require('lodash')
-import * as YAML from 'yaml'
-import * as fs from 'fs'
-import * as ical from 'ical'
+import { syncCalendar } from './lib/ical_import'
 
 function getDomain(url: string): string {
   let hostname
@@ -55,42 +56,12 @@ yargs(hideBin(process.argv))
     'Get ical',
     () => undefined,
     async (argv: any) => {
-      // 262LQz8uIYSRwrDAtGZ1
       const calendarRef = await firestore
         .collection('calendars')
         .doc(argv.id)
         .get()
 
-      const calendar = calendarRef.data() as any
-      const calendarId = calendarRef.id
-      const res = await axios(calendar.url)
-      const ics = ical.parseICS(res.data)
-
-      const events = []
-      for (const id in ics) {
-        const vevent = ics[id]
-        const event: any = {
-          uid: vevent.uid,
-          provider: `ical`,
-          providerId: calendarId,
-          name: vevent.summary,
-          description: vevent.description,
-          createdAt: vevent.created,
-          undefined: vevent.lastmodified,
-          startDate: vevent.start,
-          endDate: vevent.end,
-          facebook: vevent.url,
-          location: vevent.location,
-        }
-
-        events.push(event)
-      }
-
-      const name = res.data.split('X-WR-CALNAME:')[1].split('\n')[0]
-      const lastSyncedAt = +new Date()
-      const state = 'processed'
-
-      calendarRef.ref.update({ name, state, lastSyncedAt, events })
+      await syncCalendar(calendarRef)
     }
   )
   .command(

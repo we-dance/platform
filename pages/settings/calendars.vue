@@ -1,7 +1,10 @@
 <template>
   <div>
-    <THeader title="Calendars" />
+    <THeader title="Calendars" />    
     <main class="p-4">
+      <div class="mb-4">
+        <TButton v-if="$route.query.id" type="link" to="/settings/calendars">Back</TButton>
+      </div>
       <div
         v-for="calendar in calendars"
         :key="calendar.id"
@@ -20,11 +23,12 @@
             calendar.lastSyncedAt ? getYmdHms(calendar.lastSyncedAt) : 'Never'
           }}
         </p>
+        <p class="text-xs text-gray-500">Last count: {{ calendar.lastCount }}</p>
       </div>
 
-      <div v-if="events.length">
+      <div v-if="$route.query.id">
         <div v-for="event in events" :key="event.id">
-          <TEventText2 :item="event" show-date />
+          <TEventImportPreview :item="event" show-date />
         </div>
       </div>
       <div v-else class="flex gap-4">
@@ -51,7 +55,7 @@ import { useRouter } from '~/use/router'
 
 export default {
   setup() {
-    const { uid } = useAuth()
+    const { uid, profile } = useAuth()
     const { route } = useRouter()
 
     const calendars = ref([])
@@ -60,7 +64,8 @@ export default {
 
     const events = computed(() => {
       const id = route.query.id
-      const calendar = calendars.value.find((calendar) => calendar.id === id)
+      let calendar = {}
+      calendar = calendars.value.find((calendar) => calendar.id === id)
 
       return calendar?.events.sort(sortBy('startDate')) || []
     })
@@ -75,6 +80,7 @@ export default {
         lastSyncedAt: null,
         userId: uid.value,
         state: 'queued',
+        username: profile.value.username,
       })
     }
 
@@ -83,9 +89,6 @@ export default {
         .collection('calendars')
         .where('userId', '==', uid.value)
         .onSnapshot((snapshot) => {
-          console.log(
-            snapshot.docs.map((doc) => ({ id: doc.id, ...doc.data() }))
-          )
           calendars.value = snapshot.docs.map((doc) => ({
             id: doc.id,
             ...doc.data(),
