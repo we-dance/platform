@@ -9,6 +9,7 @@
         v-for="calendar in calendars"
         :key="calendar.id"
         class="border p-4 rounded mb-4"
+        v-show="!$route.query.id || $route.query.id === calendar.id"
       >
         <h2 class="font-bold">
           <router-link :to="`?id=${calendar.id}`">{{
@@ -16,7 +17,7 @@
           }}</router-link>
         </h2>
         <p class="text-xs font-bold">{{ calendar.state }}</p>
-        <p class="text-xs text-gray-700">{{ calendar.url }}</p>
+        <a class="text-xs text-gray-700 underline" :href="calendar.url" target="_blank">ical</a>
         <p class="text-xs text-gray-500">
           Last synced:
           {{
@@ -64,7 +65,7 @@ export default {
       let calendar = {}      
       calendar = this.calendars.find((calendar) => calendar.id === id)
 
-      return calendar?.events.sort(sortBy('startDate')) || []
+      return calendar?.events?.sort(sortBy('startDate')) || []
     }
   },
   setup() {
