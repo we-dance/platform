@@ -2,12 +2,14 @@ import axios from 'axios'
 import * as ical from 'ical'
 import { DocumentSnapshot } from 'firebase-functions/v1/firestore'
 import { getSuggestedStyles, getSuggestedType } from './linguist'
+import { firestore } from '../firebase'
 
 export async function syncCalendar(calendarRef: DocumentSnapshot) {
     const calendar = calendarRef.data() as any
       const calendarId = calendarRef.id
       const res = await axios(calendar.url)
       const ics = ical.parseICS(res.data)
+      const lastSyncedAt = +new Date()
 
       const events = []
       for (const id in ics) {
@@ -27,11 +29,14 @@ export async function syncCalendar(calendarRef: DocumentSnapshot) {
         const event: any = {
           facebookId,
           provider: `ical`,
+          createdAt: lastSyncedAt,
+          updatedAt: lastSyncedAt,
+          importedAt: lastSyncedAt,
           providerId: calendarId,
           name: vevent.summary,
           description: vevent.description,
-          createdAt: vevent.created,
-          updatedAt: vevent.lastmodified,
+          providerCreatedAt: vevent.created,
+          providerUpdatedAt: vevent.lastmodified,
           startDate: vevent.start,
           endDate: vevent.end,
           facebook: vevent.url,
@@ -58,7 +63,6 @@ export async function syncCalendar(calendarRef: DocumentSnapshot) {
       }
 
       const name = res.data.split('X-WR-CALNAME:')[1].split('\n')[0]
-      const lastSyncedAt = +new Date()
       const lastCount = events.length
       const state = 'processed'
 

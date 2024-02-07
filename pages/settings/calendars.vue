@@ -51,24 +51,28 @@ import 'firebase/firestore'
 import { ref, onMounted, computed } from '@nuxtjs/composition-api'
 import { useAuth } from '~/use/auth'
 import { getYmdHms, sortBy } from '~/utils'
-import { useRouter } from '~/use/router'
 
 export default {
+  computed: {
+    events: function () {
+      const id = this.$route.query.id
+
+      if (!id) {
+        return []
+      }
+
+      let calendar = {}      
+      calendar = this.calendars.find((calendar) => calendar.id === id)
+
+      return calendar?.events.sort(sortBy('startDate')) || []
+    }
+  },
   setup() {
     const { uid, profile } = useAuth()
-    const { route } = useRouter()
 
     const calendars = ref([])
     const newCalendarUrl = ref('')
     const firestore = firebase.firestore()
-
-    const events = computed(() => {
-      const id = route.query.id
-      let calendar = {}
-      calendar = calendars.value.find((calendar) => calendar.id === id)
-
-      return calendar?.events.sort(sortBy('startDate')) || []
-    })
 
     function addCalendar() {
       const url = newCalendarUrl.value
@@ -100,8 +104,7 @@ export default {
       calendars,
       newCalendarUrl,
       addCalendar,
-      getYmdHms,
-      events,
+      getYmdHms
     }
   },
 }

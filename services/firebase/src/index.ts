@@ -332,6 +332,19 @@ export const eventChanged = functions.firestore
 
     if (event.type === 'import_event') {
       const eventData = await getFacebookEvent(event.facebook)
+
+      if (event.facebookId) {
+        eventData.facebookId = event.facebookId
+      }
+
+      if (event.startDate) {
+        eventData.startDate = event.startDate
+      }
+
+      if (event.endDate) {
+        eventData.endDate = event.endDate
+      }
+
       await firestore
         .collection('posts')
         .doc(eventId)
