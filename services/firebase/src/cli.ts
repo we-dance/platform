@@ -1,3 +1,8 @@
+import axios from 'axios'
+import _ = require('lodash')
+import * as YAML from 'yaml'
+import * as fs from 'fs'
+
 import {
   eventToAlgolia,
   indexEvents,
@@ -24,12 +29,9 @@ import { closeBrowser, getPage } from './lib/browser'
 import { getFacebookEvent } from './lib/facebook_import'
 import { getPlace } from './lib/google_maps'
 import { generateStyles } from './lib/dance_styles'
-import axios from 'axios'
 import { scrapeFbEvent } from 'facebook-event-scraper'
 import { getUploadedImage } from './lib/cloudinary'
-import _ = require('lodash')
-import * as YAML from 'yaml'
-import * as fs from 'fs'
+import { syncCalendar } from './lib/ical_import'
 
 function getDomain(url: string): string {
   let hostname
@@ -49,6 +51,19 @@ function getDomain(url: string): string {
 }
 
 yargs(hideBin(process.argv))
+  .command(
+    'ical <id>',
+    'Get ical',
+    () => undefined,
+    async (argv: any) => {
+      const calendarRef = await firestore
+        .collection('calendars')
+        .doc(argv.id)
+        .get()
+
+      await syncCalendar(calendarRef)
+    }
+  )
   .command(
     'redirect <url>',
     'Resolve redirect',

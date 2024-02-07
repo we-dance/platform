@@ -2,6 +2,7 @@ id: BrazilianZouk
 popular: true
 popularity: 10
 name: Brazilian Zouk
+regexp: zouk
 synonyms: ''
 description: ''
 history: ''

@@ -2,6 +2,7 @@ id: TangoArgentino
 popular: true
 popularity: 6
 name: Tango Argentino
+regexp: tango
 synonyms: ''
 description: ''
 history: ''

@@ -19,6 +19,7 @@ import { notifySlackAboutEvents, notifySlackAboutUsers } from './lib/slack'
 import { wrap } from './sentry'
 import { announceEventIG2, importInstagramProfile } from './lib/instagram'
 import { getFacebookEvent } from './lib/facebook_import'
+import { syncCalendar } from './lib/ical_import'
 
 require('dotenv').config()
 
@@ -191,6 +192,17 @@ function wasChanged(prev: any, next: any, fields: string[]) {
   return !fields.every((field: string) => prev[field] === next[field])
 }
 
+export const onCalendarUpdate = functions.firestore
+  .document('calendars/{calendarId}')
+  .onWrite(async (change) => {
+    const calendarRef = change.after
+    const calendar = calendarRef.data() as any
+
+    if (calendar.state === 'queued') {
+      await syncCalendar(calendarRef)
+    }
+  })
+
 export const onProfileChange = functions.firestore
   .document('profiles/{profileId}')
   .onWrite(async (change, context) => {
@@ -320,6 +332,19 @@ export const eventChanged = functions.firestore
 
     if (event.type === 'import_event') {
       const eventData = await getFacebookEvent(event.facebook)
+
+      if (event.facebookId) {
+        eventData.facebookId = event.facebookId
+      }
+
+      if (event.startDate) {
+        eventData.startDate = event.startDate
+      }
+
+      if (event.endDate) {
+        eventData.endDate = event.endDate
+      }
+
       await firestore
         .collection('posts')
         .doc(eventId)

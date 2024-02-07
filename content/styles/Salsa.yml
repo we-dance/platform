@@ -1,6 +1,7 @@
 id: Salsa
 root: yes
 name: Salsa
+regexp: salsa
 region: Afro-Caribbean
 family: Salsa
 synonyms: ''

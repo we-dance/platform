@@ -38,6 +38,7 @@ export function generateStyles() {
   styles = styles.map((s: any) => ({
     id: s.id,
     name: s.name,
+    regexp: s.regexp,
   }))
 
   const output = 'export default ' + JSON.stringify(styles, null, 2)

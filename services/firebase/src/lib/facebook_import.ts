@@ -2,8 +2,8 @@ import { scrapeFbEvent } from 'facebook-event-scraper'
 import { initIndex } from './algolia'
 import { firestore } from '../firebase'
 import { getCityId, getPlace } from './google_maps'
-import { getStyles } from './dance_styles'
 import { getUploadedImage } from './cloudinary'
+import { getSuggestedStyles, getSuggestedType, slugify } from './linguist'
 
 function getDate(timestamp: any) {
   if (!timestamp) {
@@ -11,32 +11,6 @@ function getDate(timestamp: any) {
   }
 
   return timestamp * 1000
-}
-
-export const slugify = (str: string) => {
-  str = str.replace(/^\s+|\s+$/g, '')
-
-  // Make the string lowercase
-  str = str.toLowerCase()
-
-  // Remove accents, swap ñ for n, etc
-  const from =
-    'ÁÄÂÀÃÅČÇĆĎÉĚËÈÊẼĔȆÍÌÎÏŇÑÓÖÒÔÕØŘŔŠŤÚŮÜÙÛÝŸŽáäâàãåčçćďéěëèêẽĕȇíìîïňñóöòôõøðřŕšťúůüùûýÿžþÞĐđßÆa·/_,:;'
-  const to =
-    'AAAAAACCCDEEEEEEEEIIIINNOOOOOORRSTUUUUUYYZaaaaaacccdeeeeeeeeiiiinnooooooorrstuuuuuyyzbBDdBAa......'
-  for (let i = 0, l = from.length; i < l; i++) {
-    str = str.replace(new RegExp(from.charAt(i), 'g'), to.charAt(i))
-  }
-
-  // Remove invalid chars
-  str = str
-    .replace(/[^a-z0-9 -]/g, '')
-    // Collapse whitespace and replace by .
-    .replace(/\s+/g, '.')
-    // Collapse dots
-    .replace(/\.+/g, '.')
-
-  return str
 }
 
 async function getOrg(host: any, place: any) {
@@ -152,36 +126,8 @@ export async function getFacebookEvent(url: string) {
     place = await getCityId(venue)
   }
 
-  const description = event.description.toLowerCase()
-
-  let eventType = 'Party'
-  const eventTypes = [
-    'Course',
-    'Workshop',
-    'Party',
-    'Festival',
-    'Congress',
-    'Concert',
-  ]
-
-  for (const e of eventTypes) {
-    if (description.includes(e.toLowerCase())) {
-      eventType = e
-    }
-  }
-
-  const stylesList: any = getStyles()
-  const styles: any = {}
-
-  for (const style of stylesList) {
-    if (description.includes(style.name.toLowerCase())) {
-      styles[style.id] = {
-        level: 'Interested',
-        highlighted: false,
-        selected: true,
-      }
-    }
-  }
+  const eventType = getSuggestedType(event.name + ' ' + event.description)
+  const styles = getSuggestedStyles(event.name + ' ' + event.description)
 
   const hash = getDate(event.startTimestamp) + '+' + venue?.place_id
   const eventPhoto = await getUploadedImage(event.photo?.imageUri || '')
