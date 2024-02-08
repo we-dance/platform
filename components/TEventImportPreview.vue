@@ -39,7 +39,9 @@
         }}
       </div>
       <TExpand
-        ><div class="pt-2 text-xs whitespace-pre-wrap" v-html="item.description"
+        ><div
+          class="pt-2 text-xs whitespace-pre-wrap break-all"
+          v-html="item.description"
       /></TExpand>
       <div class="mt-2 flex gap-4 items-center">
         <span

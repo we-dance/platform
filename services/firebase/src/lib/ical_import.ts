@@ -51,9 +51,20 @@ export async function syncCalendar(calendarRef: DocumentSnapshot) {
     url = `https://ics.teamup.com/feed/${icalId}/0.ics`
   }
 
-  const res = await axios(url)
-  const ics = ical.parseICS(res.data)
+  let res
+  try {
+    res = await axios(url)
+  } catch (e) {}
+
+  const name = res?.data?.split('X-WR-CALNAME:')[1]?.split('\n')[0] || ''
+  const ics = ical.parseICS(res?.data || '')
   const now = +new Date()
+
+  if (res?.status !== 200 || !name) {
+    const state = 'failed'
+    await calendarRef.ref.update({ state, lastSyncedAt: now, url })
+    return
+  }
 
   const events: any[] = []
   for (const id in ics) {
@@ -140,7 +151,6 @@ export async function syncCalendar(calendarRef: DocumentSnapshot) {
     events.push(event)
   }
 
-  const name = res.data?.split('X-WR-CALNAME:')[1]?.split('\n')[0] || ''
   const upcomingCount = events.length
   const state = 'processed'
 
