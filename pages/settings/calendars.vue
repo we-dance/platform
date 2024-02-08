@@ -9,9 +9,9 @@
       </div>
       <div
         v-for="calendar in calendars"
+        v-show="!$route.query.id || $route.query.id === calendar.id"
         :key="calendar.id"
         class="border p-4 rounded mb-4"
-        v-show="!$route.query.id || $route.query.id === calendar.id"
       >
         <div class="flex justify-between gap-4">
           <div>

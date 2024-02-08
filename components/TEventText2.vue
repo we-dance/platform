@@ -33,7 +33,10 @@
           <template v-if="item.location">{{ item.location }}</template>
         </div>
       </div>
-      <div v-if="item.eventType || item.styles" class="text-xs text-gray-700 pt-1">
+      <div
+        v-if="item.eventType || item.styles"
+        class="text-xs text-gray-700 pt-1"
+      >
         <span class="text-primary">{{
           getEventTypeLabel(item.eventType)
         }}</span>

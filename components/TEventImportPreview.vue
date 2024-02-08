@@ -1,7 +1,5 @@
 <template>
-  <div
-    class="flex border-b p-4 leading-none gap-2"
-  >
+  <div class="flex border-b p-4 leading-none gap-2">
     <div class="text-center">
       <div v-if="showDate" class="font-bold text-sm leading-none">
         <div class="text-xl font-bold leading-none text-primary">
@@ -15,9 +13,7 @@
       </div>
     </div>
     <div class="w-full">
-      <div
-        class="font-bold text-sm leading-none"
-      >
+      <div class="font-bold text-sm leading-none">
         {{ item.name }}
       </div>
       <div>
@@ -43,10 +39,19 @@
         }}
       </div>
       <div class="mt-2 flex gap-4 items-center">
-        <span class="rounded text-xs text-white p-1" :class="item.approved ? 'bg-green-500' : 'bg-red-500'">
+        <span
+          class="rounded text-xs text-white p-1"
+          :class="item.approved ? 'bg-green-500' : 'bg-red-500'"
+        >
           {{ item.approved ? 'Approved' : 'Rejected' }}
         </span>
-        <router-link v-if="item.eventId" :to="`/events/${item.eventId}`" class="text-xs" target="_blank">View Event</router-link>
+        <router-link
+          v-if="item.eventId"
+          :to="`/events/${item.eventId}`"
+          class="text-xs"
+          target="_blank"
+          >View Event</router-link
+        >
       </div>
     </div>
     <div>
@@ -98,6 +103,6 @@ export default {
       type: Boolean,
       default: false,
     },
-  }
+  },
 }
 </script>
