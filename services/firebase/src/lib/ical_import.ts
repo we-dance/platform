@@ -31,6 +31,10 @@ export async function syncCalendar(calendarRef: DocumentSnapshot) {
   const calendar = calendarRef.data() as any
   const calendarId = calendarRef.id
   let url = calendar.url
+  let pastCount = 0
+  let newCount = 0
+  let totalCount = 0
+  let approvedCount = 0
 
   if (url.includes('calendar.google.com/calendar/u/0/embed')) {
     const icalId = getUrlParam(url, 'src')
@@ -44,13 +48,22 @@ export async function syncCalendar(calendarRef: DocumentSnapshot) {
 
   const res = await axios(url)
   const ics = ical.parseICS(res.data)
-  const lastSyncedAt = +new Date()
+  const now = +new Date()
 
   const events: any[] = []
   for (const id in ics) {
     const vevent = ics[id]
 
     if (!vevent.uid) {
+      continue
+    }
+
+    totalCount++
+
+    const startDate = vevent.start ? +vevent.start : 0
+
+    if (startDate < now) {
+      pastCount++
       continue
     }
 
@@ -61,6 +74,7 @@ export async function syncCalendar(calendarRef: DocumentSnapshot) {
     if (Object.keys(styles).length) {
       eventType = getSuggestedType(vevent.summary + ' ' + vevent.description)
       approved = true
+      approvedCount++
     }
 
     let facebookId = ''
@@ -69,13 +83,18 @@ export async function syncCalendar(calendarRef: DocumentSnapshot) {
       facebookId = vevent.uid?.split('@')[0].replace('e', '') || ''
     }
 
+    if (!calendar.events.find((e: any) => e.providerItemId === vevent.uid)) {
+      newCount++
+    }
+
     const event: any = {
       facebookId,
       provider: `ical`,
-      createdAt: lastSyncedAt,
-      updatedAt: lastSyncedAt,
-      importedAt: lastSyncedAt,
+      createdAt: now,
+      updatedAt: now,
+      importedAt: now,
       providerId: calendarId,
+      providerItemId: vevent.uid,
       name: vevent.summary,
       description: vevent.description || '',
       providerCreatedAt: vevent.created,
@@ -92,32 +111,34 @@ export async function syncCalendar(calendarRef: DocumentSnapshot) {
       createdBy: calendar.userId,
     }
 
-    if (approved && facebookId) {
-      const existingEvents = await firestore
-        .collection('posts')
-        .where('facebookId', '==', facebookId)
-        .get()
-      if (!existingEvents.docs.length) {
-        const newDocRef = await firestore.collection('posts').add(event)
-        event.eventId = newDocRef.id
-      } else {
-        event.eventId = existingEvents.docs[0].id
-      }
+    const existingEvents = await firestore
+      .collection('posts')
+      .where('facebookId', '==', facebookId)
+      .get()
+    if (!existingEvents.docs.length) {
+      const newDocRef = await firestore.collection('posts').add(event)
+      event.eventId = newDocRef.id
+    } else {
+      event.eventId = existingEvents.docs[0].id
     }
 
     events.push(event)
   }
 
   const name = res.data?.split('X-WR-CALNAME:')[1]?.split('\n')[0] || ''
-  const lastCount = events.length
+  const upcomingCount = events.length
   const state = 'processed'
 
   await calendarRef.ref.update({
     name,
     state,
-    lastSyncedAt,
+    lastSyncedAt: now,
     events,
-    lastCount,
+    upcomingCount,
+    approvedCount,
+    newCount,
+    pastCount,
+    totalCount,
     url,
   })
 }

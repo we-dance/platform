@@ -40,7 +40,9 @@
           }}
         </p>
         <p class="text-xs text-gray-500">
-          Last count: {{ calendar.lastCount }}
+          New: {{ calendar.newCount }} • Upcoming:
+          {{ calendar.approvedCount }} of {{ calendar.upcomingCount }} • Past:
+          {{ calendar.pastCount }}
         </p>
       </div>
 

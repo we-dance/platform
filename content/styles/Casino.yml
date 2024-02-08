@@ -1,6 +1,7 @@
 id: Casino
 name: Salsa Cubana
 synonyms: Casino, Son Casino, Cuban Salsa
+regexp: timba, salsa cubana, cuban salsa
 popular: true
 popularity: 2
 description: ''

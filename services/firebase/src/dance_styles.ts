@@ -100,7 +100,8 @@ export default [
   },
   {
     "id": "Casino",
-    "name": "Salsa Cubana"
+    "name": "Salsa Cubana",
+    "regexp": "timba, salsa cubana, cuban salsa"
   },
   {
     "id": "Ceili",
