@@ -81,3 +81,41 @@ export function getSuggestedStyles(description: string) {
 
   return styles
 }
+
+export function isFacebookEvent(url?: string): boolean {
+  if (!url) {
+    return false
+  }
+
+  return ['facebook.com/events/', 'fb.me/e/', 'fb.com/events'].some((word) =>
+    url.includes(word)
+  )
+}
+
+export function getUrlContentId(url?: string): string {
+  if (!url) {
+    throw new Error('getUrlContentId: no url')
+  }
+
+  const result = url
+    .replace(/(\?.*)/, '')
+    .replace(/\/$/, '')
+    .split('/')
+    .pop()
+
+  if (!result) {
+    throw new Error('Invalid url')
+  }
+
+  return result
+}
+
+export function getUrlsFromText(text: string): string[] {
+  const result = text.match(/(https?:\/\/[^\s"'<]+)/g)
+
+  if (result) {
+    return result
+  }
+
+  return []
+}

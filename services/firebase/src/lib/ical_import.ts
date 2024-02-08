@@ -1,7 +1,12 @@
 import axios from 'axios'
 import * as ical from 'ical'
 import { DocumentSnapshot } from 'firebase-functions/v1/firestore'
-import { getSuggestedStyles, getSuggestedType } from './linguist'
+import {
+  getSuggestedStyles,
+  getSuggestedType,
+  getUrlsFromText,
+  isFacebookEvent,
+} from './linguist'
 import { firestore } from '../firebase'
 
 function getUrlParam(url: string, param: string) {
@@ -83,8 +88,16 @@ export async function syncCalendar(calendarRef: DocumentSnapshot) {
       facebookId = vevent.uid?.split('@')[0].replace('e', '') || ''
     }
 
-    if (!calendar.events.find((e: any) => e.providerItemId === vevent.uid)) {
+    if (!calendar?.events?.find((e: any) => e.providerItemId === vevent.uid)) {
       newCount++
+    }
+
+    const facebookUrl = getUrlsFromText(vevent.description || '').find((u) =>
+      isFacebookEvent(u)
+    )
+
+    if (facebookUrl) {
+      facebookId = getUrlContentId(facebookUrl)
     }
 
     const event: any = {
@@ -101,7 +114,7 @@ export async function syncCalendar(calendarRef: DocumentSnapshot) {
       providerUpdatedAt: vevent.lastmodified || '',
       startDate: vevent.start,
       endDate: vevent.end || '',
-      facebook: vevent.url || '',
+      facebook: vevent.url || facebookUrl || '',
       location: vevent.location || '',
       styles,
       eventType,
@@ -111,15 +124,17 @@ export async function syncCalendar(calendarRef: DocumentSnapshot) {
       createdBy: calendar.userId,
     }
 
-    const existingEvents = await firestore
-      .collection('posts')
-      .where('facebookId', '==', facebookId)
-      .get()
-    if (!existingEvents.docs.length) {
-      const newDocRef = await firestore.collection('posts').add(event)
-      event.eventId = newDocRef.id
-    } else {
-      event.eventId = existingEvents.docs[0].id
+    if (facebookId) {
+      const existingEvents = await firestore
+        .collection('posts')
+        .where('facebookId', '==', facebookId)
+        .get()
+      if (!existingEvents.docs.length) {
+        const newDocRef = await firestore.collection('posts').add(event)
+        event.eventId = newDocRef.id
+      } else {
+        event.eventId = existingEvents.docs[0].id
+      }
     }
 
     events.push(event)

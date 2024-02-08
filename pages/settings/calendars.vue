@@ -23,7 +23,20 @@
             <p class="text-xs font-bold">{{ calendar.state }}</p>
           </div>
           <div>
-            <TButton icon="plus" type="icon" @click="refresh(calendar.id)" />
+            <TDropdown>
+              <TButton
+                icon="upload"
+                label="Sync"
+                type="context"
+                @click="refresh(calendar.id)"
+              />
+              <TButton
+                icon="delete"
+                label="Remove"
+                type="context"
+                @click="remove(calendar.id)"
+              />
+            </TDropdown>
           </div>
         </div>
 
@@ -103,6 +116,13 @@ export default {
         })
     }
 
+    function remove(id) {
+      firestore
+        .collection('calendars')
+        .doc(id)
+        .delete()
+    }
+
     function addCalendar() {
       const url = newCalendarUrl.value
       newCalendarUrl.value = ''
@@ -121,6 +141,7 @@ export default {
       firestore
         .collection('calendars')
         .where('userId', '==', uid.value)
+        .orderBy('createdAt', 'asc')
         .onSnapshot((snapshot) => {
           calendars.value = snapshot.docs.map((doc) => ({
             id: doc.id,
@@ -135,6 +156,7 @@ export default {
       addCalendar,
       getYmdHms,
       refresh,
+      remove,
     }
   },
 }
