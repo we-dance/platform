@@ -37,20 +37,22 @@
 </template>
 
 <script>
-import { orderBy } from 'lodash'
+import firebase from 'firebase/app'
+import 'firebase/firestore'
+import { orderBy, uniqBy } from 'lodash'
 import { computed, onMounted, ref, watch } from 'vue-demi'
 import { useCities } from '~/use/cities'
 import { useRouter } from '~/use/router'
 import { getPlacePredictions } from '~/use/google'
 import { useAuth } from '~/use/auth'
-import { useCollection } from '~/use/collection'
 
 export default {
   setup() {
     const { switchCity, city } = useCities()
     const { router, route } = useRouter()
     const { updateProfile } = useAuth()
-    const { docs, load } = useCollection('profiles', { type: 'City' })
+
+    const docs = ref([])
 
     async function changeCity(placeId) {
       await switchCity(placeId)
@@ -62,8 +64,11 @@ export default {
     const query = ref('')
 
     const recommendations = computed(() => {
-      const results = orderBy(docs.value, 'viewsCount', 'desc').filter(
-        (c) => c.username && c.viewsCount
+      const results = uniqBy(
+        orderBy(docs.value, 'viewsCount', 'desc').filter(
+          (c) => c.username && c.viewsCount
+        ),
+        'username'
       )
 
       return results
@@ -101,7 +106,17 @@ export default {
     watch(query, render)
 
     onMounted(async () => {
-      await load()
+      const firestore = firebase.firestore()
+
+      docs.value = (
+        await firestore
+          .collection('profiles')
+          .where('type', '==', 'City')
+          .orderBy('viewsCount', 'desc')
+          .limit(10)
+          .get()
+      ).docs.map((doc) => doc.data())
+
       await render()
     })
 

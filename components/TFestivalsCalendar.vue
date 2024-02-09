@@ -10,22 +10,21 @@
       />
 
       <t-rich-select
-        v-model="filters['type']"
-        placeholder="Format"
-        :options="facets['type']"
+        v-model="filters['country']"
+        placeholder="Country"
+        :options="facets['country']"
         clearable
         hide-search-box
       />
 
-      <DatePicker
-        v-model="fromDate"
-        :lang="{ formatLocale: { firstDayOfWeek: 1 } }"
-        value-type="timestamp"
-        class="w-32 py-4"
-        placeholder="Date"
-        format="D MMM YY"
-        :clearable="false"
+      <t-rich-select
+        v-model="filters['locality']"
+        placeholder="City"
+        :options="facets['locality']"
+        clearable
+        hide-search-box
       />
+
       <TButton type="nav" icon="share" @click="showPopup = true" />
     </div>
 
@@ -72,6 +71,9 @@
     <div v-if="!response.nbHits" class="p-4 flex justify-center items-center">
       <div>
         <h2 class="text-lg font-semibold">No Events Found</h2>
+        <p class="text-sm mt-2">
+          Dates: <span class="font-medium">{{ getDate(fromDate) }}</span>
+        </p>
 
         <div class="mt-4 p-4 typo bg-orange-50">
           <p>
@@ -136,8 +138,6 @@ import {
 import { useAlgolia } from '~/use/algolia'
 import { useStyles } from '~/use/styles'
 import { useAuth } from '~/use/auth'
-import { useCities } from '~/use/cities'
-import { useApp } from '~/use/app'
 
 export default {
   name: 'TCalendar',
@@ -148,35 +148,21 @@ export default {
     },
   },
   setup(props) {
-    const radius = ref(50)
     const query = ref('')
     const sorting = ref('Upcoming')
-    const profileType = ref('')
     const currentPage = ref(1)
     const filters = ref({})
     const { uid } = useAuth()
-    const { city, currentCity, cityName } = useCities()
-    const { getCity } = useApp()
     let today = new Date(Date.now())
     today.setHours(6, 0, 0, 0)
     today = +today
     const fromDate = ref(today)
 
-    const untilDate = computed(() => {
-      const oneWeekLater = new Date(fromDate.value)
-      oneWeekLater.setDate(oneWeekLater.getDate() + 7)
-      return +oneWeekLater
-    })
-
-    if (!currentCity.value) {
-      return
-    }
     const { search, response, loadMore } = useAlgolia('events')
     const facets = computed(() => ({
-      type: getFacetOptions('type'),
       style: getFacetOptions('style'),
-      venue: getFacetOptions('venue'),
-      organizer: getFacetOptions('organizer'),
+      country: getFacetOptions('country'),
+      locality: getFacetOptions('locality'),
     }))
     function load() {
       filters.value = {}
@@ -189,19 +175,12 @@ export default {
         .map((field) => `${field}:${filters.value[field]}`)
         .join(',')
     })
-    watch([currentPage, facetFilters, radius, city, fromDate], () => {
-      if (!city.value?.location) {
-        return
-      }
+    watch([currentPage, facetFilters, fromDate], () => {
       const searchParams = {
-        filters: `startDate>${fromDate.value}`,
+        filters: `startDate>${fromDate.value} AND (type:Festival OR type:Congress)`,
         facets: Object.keys(facets.value),
         facetFilters: facetFilters.value,
         page: currentPage.value - 1,
-        aroundLatLng: radius.value
-          ? `${city.value.location.latitude}, ${city.value.location.longitude}`
-          : '',
-        aroundRadius: radius.value * 1000 || 1,
         hitsPerPage: 10,
       }
       search('', searchParams)
@@ -279,7 +258,6 @@ export default {
       copyToClipboard,
       showPopup,
       fromDate,
-      untilDate,
       sorting,
       uid,
       getFacetOptions,
@@ -290,13 +268,9 @@ export default {
       response,
       filters,
       currentPage,
-      profileType,
       facetFilters,
       getFieldLabel,
-      radius,
       load,
-      getCity,
-      cityName,
       getDateObect,
       itemsByDate,
       getDay,

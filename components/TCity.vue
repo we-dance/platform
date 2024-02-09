@@ -191,16 +191,7 @@
     </div>
 
     <TCollapse title="Events" expanded>
-      <TCalendar :profile="profile" class="mt-4 w-full border-t pt-4 pb-8">
-        <TEventListNoLoad
-          :community="profile.username"
-          :username="profile.username"
-          :docs="events"
-        />
-      </TCalendar>
-      <div class="text-xs p-2">
-        {{ mentions.join(' ') }}
-      </div>
+      <TCalendar :profile="profile" class="mt-4 w-full border-t pt-4 pb-8" />
     </TCollapse>
 
     <TCollapse title="News">
@@ -365,15 +356,13 @@
 </template>
 
 <script>
-import { computed, onMounted, ref } from 'vue-demi'
+import { computed, onMounted } from 'vue-demi'
 import { useApp } from '~/use/app'
 import { useAuth } from '~/use/auth'
 import { useProfiles } from '~/use/profiles'
 import { getExcerpt, getCityMeta, getDateObect } from '~/utils'
-import { useI18n } from '~/use/i18n'
 import { useDoc } from '~/use/doc'
 import { useCities } from '~/use/cities'
-import { getEventsInPlace } from '~/use/events'
 
 export default {
   props: {
@@ -383,78 +372,18 @@ export default {
     },
   },
   head() {
-    return getCityMeta(this.profile, this.events, this.$route.query.style)
+    return getCityMeta(this.profile, [], this.$route.query.style)
   },
-  setup(props, { root }) {
+  setup(props) {
     const internationalChatLink = 'https://t.me/+Vxw15sDG-dWpqHDj'
     const { uid, isAdmin, can } = useAuth()
     const { profileFields } = useProfiles()
     const { getCity } = useApp()
-    const { t } = useI18n()
     const { remove } = useDoc('profiles')
     const { load, doc: promo } = useDoc('posts')
     const invitesLeft = 5
     const { switchCity } = useCities()
     const community = computed(() => getCity(props.profile?.place))
-    const events = ref([])
-
-    const mentions = computed(() => {
-      const result = []
-
-      for (const event of events.value) {
-        result.push(event.org.instagram)
-
-        for (const artist of event.artists) {
-          result.push(artist.instagram)
-        }
-      }
-
-      return result
-        .filter((x) => x)
-        .map((x) =>
-          x
-            .replace(/https?:\/\/(www.)?instagram.com\//, '@')
-            .replace(/\/.*$/, '')
-        )
-        .filter((v, i, a) => a.indexOf(v) === i)
-    })
-
-    const intro = {
-      fields: [
-        {
-          name: 'photo',
-          label: t('myprofile.intro.photo'),
-        },
-        {
-          name: 'gender',
-          label: t('myprofile.intro.gender'),
-        },
-        {
-          name: 'styles',
-          label: t('myprofile.intro.styles'),
-        },
-        {
-          name: 'bio',
-          label: t('myprofile.intro.bio'),
-        },
-        {
-          name: 'place',
-          label: t('myprofile.intro.place'),
-        },
-        {
-          name: 'objectives',
-          label: t('myprofile.intro.objectives'),
-        },
-      ],
-      missing: [],
-      visible: false,
-    }
-    for (const field of intro.fields) {
-      if (!props.profile[field.name]) {
-        intro.missing.push(field)
-        intro.visible = true
-      }
-    }
 
     const subscribersCount = computed(() => {
       return props.profile?.watch?.usernames?.length || 0
@@ -462,17 +391,13 @@ export default {
 
     onMounted(async () => {
       await switchCity(props.profile.place)
-      events.value = await getEventsInPlace(props.profile?.place)
       load('yEfJWBnepn0u6gOVmUor')
     })
 
     return {
-      events,
-      mentions,
       getDateObect,
       promo,
       internationalChatLink,
-      intro,
       uid,
       can,
       getExcerpt,
