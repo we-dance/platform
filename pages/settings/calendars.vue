@@ -77,12 +77,12 @@
 </template>
 
 <script>
+import { until } from '@vueuse/core'
 import firebase from 'firebase/app'
 import 'firebase/firestore'
 import { ref, onMounted } from '@nuxtjs/composition-api'
 import { useAuth } from '~/use/auth'
 import { getYmdHms, sortBy } from '~/utils'
-import { until } from '@vueuse/core'
 
 export default {
   computed: {
@@ -100,7 +100,7 @@ export default {
     },
   },
   setup() {
-    const { uid, profile, isAdmin, loading } = useAuth()
+    const { uid, profile, isAdmin } = useAuth()
 
     const calendars = ref([])
     const newCalendarUrl = ref('')
