@@ -31,7 +31,7 @@ import { getPlace } from './lib/google_maps'
 import { generateStyles } from './lib/dance_styles'
 import { scrapeFbEvent } from 'facebook-event-scraper'
 import { getUploadedImage } from './lib/cloudinary'
-import { syncCalendar } from './lib/ical_import'
+import { syncCalendar, syncDanceEventsInfo } from './lib/ical_import'
 
 function getDomain(url: string): string {
   let hostname
@@ -51,6 +51,14 @@ function getDomain(url: string): string {
 }
 
 yargs(hideBin(process.argv))
+  .command(
+    'dei',
+    'Sync dance-events.info',
+    () => undefined,
+    async (argv: any) => {
+      await syncDanceEventsInfo()
+    }
+  )
   .command(
     'ical <id>',
     'Get ical',

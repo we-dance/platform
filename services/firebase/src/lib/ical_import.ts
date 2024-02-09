@@ -32,6 +32,33 @@ function getUrlContentId(url?: string): string {
   return result
 }
 
+export async function syncDanceEventsInfo() {
+  const url = 'https://www.dance-events.info/api/v1/events.json?token=1'
+
+  let res
+  try {
+    res = await axios(url)
+  } catch (e) {}
+
+  if (res?.status !== 200) {
+    return
+  }
+
+  const now = +new Date()
+  let events = res.data.events
+  console.log(events.length, 'Total events')
+  events = events.filter((e: any) => +new Date(e.startDate) > now)
+  console.log(events.length, 'Future events')
+  events = events.filter((e: any) => !e.url?.includes('wedance.vip'))
+  console.log(events.length, 'New events')
+  events = events.filter((e: any) => !!e.url)
+  console.log(events.length, 'With urls')
+  events = events.filter((e: any) => !!e.image)
+  console.log(events.length, 'With images')
+
+  console.log(events.map((e: any) => e.url))
+}
+
 export async function syncCalendar(calendarRef: DocumentSnapshot) {
   const calendar = calendarRef.data() as any
   const calendarId = calendarRef.id
