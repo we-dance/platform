@@ -79,6 +79,14 @@
     </template>
 
     <div class="h-8"></div>
+
+    <TButton
+      v-if="isAdmin(true)"
+      :label="`Admin ${isAdmin() ? 'ON' : 'OFF'}`"
+      type="nav"
+      @click="toggleAdmin()"
+    />
+
     <TButton
       v-if="isAdmin()"
       to="/admin/cities"
@@ -120,14 +128,24 @@
 </template>
 
 <script>
+import ls from 'local-storage'
 import { useAuth } from '~/use/auth'
 import { useCities } from '~/use/cities'
+import { useRouter } from '~/use/router'
 
 export default {
   setup() {
     const { isAdmin, isEditor } = useAuth()
     const { city, currentCity } = useCities()
-    return { isAdmin, isEditor, city, currentCity }
+    const { router } = useRouter()
+
+    function toggleAdmin() {
+      const val = ls('admin') || false
+      ls('admin', !val)
+      router.go()
+    }
+
+    return { isAdmin, isEditor, city, currentCity, toggleAdmin }
   },
   props: {
     uid: {

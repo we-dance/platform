@@ -10,7 +10,7 @@ export default [
   {
     "id": "Afrobeats",
     "name": "Afrobeats",
-    "regexp": "afrobeats"
+    "regexp": "afrobeats, afro dance, afro-pop, afro-fusion, afropop"
   },
   {
     "id": "Allemande",
@@ -205,7 +205,8 @@ export default [
   },
   {
     "id": "Douceur",
-    "name": "Douceur"
+    "name": "Douceur",
+    "regexp": "douceur"
   },
   {
     "id": "EastCoastSwing",
@@ -322,7 +323,7 @@ export default [
   {
     "id": "Kizomba",
     "name": "Kizomba",
-    "regexp": "kizomba"
+    "regexp": "kizomba, kizz, sensualkiz"
   },
   {
     "id": "Kolbash",
@@ -621,7 +622,8 @@ export default [
   },
   {
     "id": "Tarraxo",
-    "name": "Tarraxo"
+    "name": "Tarraxo",
+    "regexp": "tarraxo, tarraxinha"
   },
   {
     "id": "Timba",
@@ -633,7 +635,8 @@ export default [
   },
   {
     "id": "UrbanKizz",
-    "name": "Urban Kiz"
+    "name": "Urban Kiz",
+    "regexp": "urban kiz, urbankiz"
   },
   {
     "id": "UrbanTarraxa",

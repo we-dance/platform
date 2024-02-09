@@ -40,12 +40,10 @@
           </div>
         </div>
 
-        <a
-          class="text-xs text-gray-700 underline"
-          :href="calendar.url"
-          target="_blank"
-          >ical</a
-        >
+        <div class="text-xs text-gray-700">
+          <span>{{ calendar.username }}</span> •
+          <a class="underline" :href="calendar.url" target="_blank">ical</a>
+        </div>
         <p class="text-xs text-gray-500">
           Last synced:
           {{
@@ -84,6 +82,7 @@ import 'firebase/firestore'
 import { ref, onMounted } from '@nuxtjs/composition-api'
 import { useAuth } from '~/use/auth'
 import { getYmdHms, sortBy } from '~/utils'
+import { until } from '@vueuse/core'
 
 export default {
   computed: {
@@ -101,7 +100,7 @@ export default {
     },
   },
   setup() {
-    const { uid, profile } = useAuth()
+    const { uid, profile, isAdmin, loading } = useAuth()
 
     const calendars = ref([])
     const newCalendarUrl = ref('')
@@ -137,17 +136,21 @@ export default {
       })
     }
 
-    onMounted(() => {
-      firestore
-        .collection('calendars')
-        .where('userId', '==', uid.value)
-        .orderBy('createdAt', 'asc')
-        .onSnapshot((snapshot) => {
-          calendars.value = snapshot.docs.map((doc) => ({
-            id: doc.id,
-            ...doc.data(),
-          }))
-        })
+    onMounted(async () => {
+      let collection = firestore.collection('calendars')
+
+      await until(uid).not.toBeNull()
+
+      if (!isAdmin()) {
+        collection = collection.where('userId', '==', uid.value)
+      }
+
+      collection.orderBy('createdAt', 'asc').onSnapshot((snapshot) => {
+        calendars.value = snapshot.docs.map((doc) => ({
+          id: doc.id,
+          ...doc.data(),
+        }))
+      })
     })
 
     return {

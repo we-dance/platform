@@ -28,7 +28,16 @@ const state = Vue.observable({
 export const useAuth = () => {
   const { router, route } = useRouter()
 
-  const isAdmin = () => !!state.uid && !!state.account && !!state.account.admin
+  const isAdmin = (forceCheck = false) => {
+    const permission = !!state.uid && !!state.account && !!state.account.admin
+
+    if (forceCheck) {
+      return permission
+    }
+
+    return ls('admin') && permission
+  }
+
   const isEditor = () =>
     !!state.uid && !!state.account && !!state.account.editor
 
