@@ -74,7 +74,7 @@ yargs(hideBin(process.argv))
     }
   )
   .command(
-    'org:image',
+    'fix:events:org:image',
     'Refresh org photos',
     () => undefined,
     async (argv: any) => {
@@ -147,7 +147,7 @@ yargs(hideBin(process.argv))
     }
   )
   .command(
-    'events:image [id]',
+    'fix:events:image [id]',
     'Refresh events images',
     () => undefined,
     async (argv: any) => {
@@ -222,6 +222,71 @@ yargs(hideBin(process.argv))
             data.name,
           ])
         }
+      }
+    }
+  )
+  .command(
+    'fix:events:dates',
+    'Refresh events dates',
+    () => undefined,
+    async (argv: any) => {
+      let allEvents
+
+      allEvents = await getDocs(
+        firestore.collection('posts').where('approved', '==', true)
+      )
+
+      console.log(`Found ${allEvents.length} events`)
+
+      let count = 0
+      for (const event of allEvents) {
+        count++
+        console.log(count, 'of', allEvents.length)
+        console.log(event.id, event.name, event.startDate)
+
+        const calendar = (
+          await firestore
+            .collection('calendars')
+            .doc(event.providerId)
+            .get()
+        ).data()
+
+        if (!calendar) {
+          console.log('No calendar')
+          continue
+        }
+
+        const backup = calendar.events.find(
+          (e: any) => e.facebookId === event.facebookId
+        )
+
+        if (!backup) {
+          console.log('No backup')
+          continue
+        }
+
+        const docChanges: any = {
+          startDate: +backup.startDate.toDate(),
+          endDate: +backup.endDate.toDate(),
+          providerCreatedAt: +backup.providerCreatedAt.toDate(),
+        }
+
+        await firestore
+          .collection('posts')
+          .doc(event.id)
+          .update(docChanges)
+
+        if (!event.org?.username) {
+          console.log('No org username')
+          continue
+        }
+
+        const index = initIndex('events')
+        const changes = {
+          ...event,
+          ...docChanges,
+        }
+        index.saveObject(eventToAlgolia(changes))
       }
     }
   )
