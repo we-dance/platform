@@ -1,23 +1,24 @@
 id: Bachata
 name: Bachata
-synonyms: ""
+synonyms: ''
 regexp: bachata
-description: ""
-history: ""
+description: ''
+history: ''
 origins: Dominican Republic
-adjectives: ""
+adjectives: ''
 type: Social dance
-holding: ""
-year: ""
-predecessors: ""
-parent: ""
-influence: ""
+holding: ''
+year: ''
+predecessors: ''
+parent: ''
+influence: ''
 family: Bachata
 region: Afro-Caribbean
-source: ""
+source: ''
 root: yes
 partner: yes
 group: no
-related: ""
-music: ""
-timing: ""
+related: ''
+music: ''
+timing: ''
+familyOnly: true

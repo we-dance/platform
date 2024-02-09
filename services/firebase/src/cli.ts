@@ -291,6 +291,76 @@ yargs(hideBin(process.argv))
     }
   )
   .command(
+    'mv:events:style [old] [new]',
+    'Rename dance style',
+    () => undefined,
+    async (argv: any) => {
+      let allEvents
+
+      allEvents = await getDocs(
+        firestore
+          .collection('posts')
+          .where(`styles.${argv.old}.selected`, '==', true)
+      )
+
+      console.log(`Found ${allEvents.length} events`)
+
+      let count = 0
+      for (const event of allEvents) {
+        count++
+        console.log(count, 'of', allEvents.length)
+        console.log(event.id, event.name)
+
+        const styles = event.styles
+
+        styles[argv.new] = styles[argv.old]
+        delete styles[argv.old]
+
+        await firestore
+          .collection('posts')
+          .doc(event.id)
+          .update({
+            styles,
+          })
+      }
+    }
+  )
+  .command(
+    'mv:profiles:style [old] [new]',
+    'Rename dance style',
+    () => undefined,
+    async (argv: any) => {
+      let allProfiles
+
+      allProfiles = await getDocs(
+        firestore
+          .collection('profiles')
+          .where(`styles.${argv.old}.selected`, '==', true)
+      )
+
+      console.log(`Found ${allProfiles.length} profiles`)
+
+      let count = 0
+      for (const profile of allProfiles) {
+        count++
+        console.log(count, 'of', allProfiles.length)
+        console.log(profile.id, profile.username)
+
+        const styles = profile.styles
+
+        styles[argv.new] = styles[argv.old]
+        delete styles[argv.old]
+
+        await firestore
+          .collection('profiles')
+          .doc(profile.id)
+          .update({
+            styles,
+          })
+      }
+    }
+  )
+  .command(
     'events:hash',
     'Rehash events',
     () => undefined,

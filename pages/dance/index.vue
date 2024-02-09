@@ -59,7 +59,7 @@ export default {
     subStyles(category) {
       return this.styles.filter(
         (item) =>
-          item && item.region && item.region === category && item.root === 'yes'
+          item && item.region && item.region === category && !item.familyOnly
       )
     },
     children(parentName) {

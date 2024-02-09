@@ -75,7 +75,7 @@ export default [
   },
   {
     "id": "BrazilianZouk",
-    "name": "Brazilian Zouk",
+    "name": "Zouk",
     "regexp": "zouk"
   },
   {
@@ -677,10 +677,6 @@ export default [
   {
     "id": "Zeybek",
     "name": "Zeybek"
-  },
-  {
-    "id": "Zouk",
-    "name": "Zouk"
   },
   {
     "id": "Zumba",
