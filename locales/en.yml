@@ -17,6 +17,7 @@ Copy: Copy
 Share: Share
 views: 'no views | 1 view | {count} views'
 subscribers: 'no subscribers | 1 subscriber | {count} subscribers'
+connections: 'no connections | 1 connection | {count} connections'
 guests: 'no guests | 1 guest | {count} guests'
 Subscribe: Subscribe
 Unsubscribe: Unsubscribe
@@ -34,6 +35,7 @@ home:
     description: Discover dancers and dance events near you
     action: Find your city
 nav:
+  search: Search
   travel: Travel
   festivals: Festivals
   chooseCity: Choose City

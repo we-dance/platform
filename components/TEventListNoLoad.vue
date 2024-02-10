@@ -32,9 +32,6 @@
         />
       </div>
     </TPopup>
-    <div class="px-4">
-      <h4 class="font-bold text-xl pb-4">{{ $t('calendar.title') }}</h4>
-    </div>
     <div class="flex justify-start items-center px-4">
       <TInputButtons v-model="tab" :options="tabs" />
       <div class="flex-grow"></div>

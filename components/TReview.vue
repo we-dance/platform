@@ -1,7 +1,5 @@
 <template>
-  <div
-    class="flex flex-col items-center p-2 gap-2 overflow-x-hidden shadow-md rounded-lg"
-  >
+  <div class="flex flex-col items-center p-2 gap-2 overflow-x-hidden border-b">
     <div class="flex flex-row items-center p-2 gap-4 w-full h-fit ">
       <TProfilePhoto2 size="lg" :src="item.author.photo" />
       <div class="flex flex-col items-start">

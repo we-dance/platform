@@ -7,6 +7,13 @@
     </TButton>
     <TButton
       allow-guests
+      :to="localePath('/search')"
+      icon="search"
+      :label="$t('nav.search')"
+      type="nav"
+    />
+    <TButton
+      allow-guests
       :to="localePath('/Travel')"
       icon="directions"
       :label="$t('nav.festivals')"

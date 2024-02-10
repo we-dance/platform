@@ -1,155 +1,135 @@
 <template>
   <div>
-    <THeader>
-      <TButton
-        v-if="profile.type === 'City'"
-        slot="left"
-        allow-guests
-        :to="localePath('/cities')"
-        icon="place"
-        :label="profile.name"
-      />
-      <div
-        v-else
-        slot="left"
-        class="flex flex-no-wrap items-center ml-8 md:ml-0"
-      >
-        <div class="ml-1 font-lato text-lg font-bold">
-          {{ profile.username }}
-        </div>
-      </div>
+    <THeader show-logo class="md:hidden" />
 
-      <TButton
-        allow-guests
-        type="nav"
-        icon="search"
-        :to="localePath('/search')"
-      />
-      <TDropdown>
-        <TPopupEdit
-          v-if="isAdmin()"
-          type="context"
-          :fields="profileFields"
-          :label="$t('Edit')"
-          collection="profiles"
-          singular="profile"
-          :item="profile"
-        />
-        <TCardActions
-          :id="profile.id"
-          collection="profiles"
-          :item="profile"
-          type="context"
-        />
-        <TButtonShare
-          :id="profile.id"
-          collection="profiles"
-          :place="profile.place"
-          :file="profile.socialCover"
-          :file-name="profile.username"
-          :url="`https://wedance.vip/${profile.username}`"
-          :text="profile.name"
-          type="context"
-          :label="$t('share.title')"
-        />
-        <TButton
-          v-if="isAdmin()"
-          type="context"
-          icon="delete"
-          :label="$t('Delete')"
-          @click="remove(profile.id)"
-        />
-        <TButton
-          v-if="isAdmin()"
-          type="context"
-          icon="upload"
-          label="Instagram"
-          @click="softUpdate(profile.id, { import: 'requested' })"
-        />
-      </TDropdown>
-    </THeader>
-
-    <div class="grid grid-cols-4 gap-4 p-4">
-      <div>
+    <div class="flex flex-col items-center">
+      <div class="bg-primary h-32 w-full"></div>
+      <div class="w-32 -mt-16">
         <img
           v-if="profile.photo"
           :src="profile.photo"
           :alt="profile.username"
-          class="w-full rounded-full"
+          class="w-full rounded-full border-4 border-white"
         />
         <TIcon v-else name="undraw_profile_pic" class="w-full rounded-full" />
       </div>
-
-      <div class="col-span-3">
-        <h1 class="leading-tight font-bold">{{ profile.name }}</h1>
-        <TExpand class="text-sm mb-4">
-          <TPreview :content="profile.bio" />
-          <TProfileDetails :profile="profile" />
-        </TExpand>
-
-        <div class="text-xs text-gray-500">
+      <h1 class="leading-none mb-2 px-4 text-center font-bold text-3xl mt-2">
+        {{ profile.name }}
+      </h1>
+      <div class="flex flex-wrap text-xs text-gray-500 space-x-1">
+        <router-link
+          v-if="reviewsCount"
+          :to="`/${profile.username}?view=reviews`"
+          class="flex"
+        >
+          <TIcon class="h-4 w-4" name="star" />
+          <span>{{ reviewsAvg }} ({{ reviewsCount }})</span>
+        </router-link>
+        <div v-if="reviewsCount">·</div>
+        <div>
           {{ $tc('views', profile.viewsCount, { count: profile.viewsCount }) }}
-          ·
+        </div>
+        <div>·</div>
+        <div>
           {{
-            $tc('subscribers', subscribersCount, {
+            $tc('connections', subscribersCount, {
               count: subscribersCount,
             })
           }}
         </div>
       </div>
+      <TPreview class="text-sm text-center px-4" :content="profile.bio" />
+      <div class="flex space-x-2 justify-center my-2 px-4">
+        <TReaction
+          v-if="uid !== profile.id"
+          :label="$t('Connect')"
+          :toggled-label="$t('Connected')"
+          field="watch"
+          type="primary"
+          hide-count
+          :item="profile"
+          collection="profiles"
+        />
+        <TButton label="Message" :to="`/chat/${profile.username}`" />
+        <TButton
+          v-if="uid === profile.id"
+          type="primary"
+          :label="$t('myprofile.edit')"
+          :to="localePath('/settings?tab=profile')"
+        />
+        <TButton
+          v-if="uid === profile.id"
+          :to="localePath('/events/-/import')"
+          type="base"
+          >{{ $t('myprofile.addEvent') }}</TButton
+        >
+        <TDropdown>
+          <TPopupEdit
+            v-if="isAdmin()"
+            type="context"
+            :fields="profileFields"
+            :label="$t('Edit')"
+            collection="profiles"
+            singular="profile"
+            :item="profile"
+          />
+          <TCardActions
+            :id="profile.id"
+            collection="profiles"
+            :item="profile"
+            type="context"
+          />
+          <TButtonShare
+            :id="profile.id"
+            collection="profiles"
+            :place="profile.place"
+            :file="profile.socialCover"
+            :file-name="profile.username"
+            :url="`https://wedance.vip/${profile.username}`"
+            :text="profile.name"
+            type="context"
+            :label="$t('share.title')"
+          />
+          <TButton
+            v-if="isAdmin()"
+            type="context"
+            icon="delete"
+            :label="$t('Delete')"
+            @click="remove(profile.id)"
+          />
+          <TButton
+            v-if="isAdmin()"
+            type="context"
+            icon="upload"
+            label="Instagram"
+            @click="softUpdate(profile.id, { import: 'requested' })"
+          />
+        </TDropdown>
+      </div>
+      <TContactsGrid :profile="profile" class="my-4" />
     </div>
 
-    <div class="flex space-x-2 p-4 justify-end">
-      <TButton
-        v-if="uid === profile.id"
-        type="primary"
-        :label="$t('myprofile.edit')"
-        :to="localePath('/settings?tab=profile')"
-      />
-      <TButton
-        v-if="uid === profile.id"
-        :to="localePath('/events/-/import')"
-        type="base"
-        >{{ $t('myprofile.addEvent') }}</TButton
-      >
-      <TReaction
-        v-if="uid !== profile.id"
-        :label="$t('Subscribe')"
-        :toggled-label="$t('Unsubscribe')"
-        field="watch"
-        icon="BellIcon"
-        hide-count
-        :item="profile"
-        collection="profiles"
-      />
-      <TProfileContacts
-        :profile="profile"
-        :title="$t('Contact')"
-        type="simple"
-      />
-    </div>
+    <TwTabs :tabs="tabs" id="tabs" />
 
-    <TLoader v-if="!loaded" class="py-4" />
-    <TEventListNoLoad
-      v-else
-      :community="profile.username"
-      :username="profile.username"
-      :docs="events"
-      class="w-full border-b border-t pt-4"
-    />
-
-    <WTeaser
-      v-if="!uid && profile.place"
-      :title="$t('profile.invite.header', { count: invitesLeft })"
-      :description="$t('profile.invite.description', { name: profile.name })"
-      :button="$t('profile.invite.action')"
-      :url="`/signin?invitedBy=${profile.username}`"
-      class="my-0"
-    />
-
-    <div v-if="profile.reviews">
-      <h3 class="text-xl font-bold p-4 border-t">{{ $t('reviews.title') }}</h3>
-      <TReviewList :reviews="profile.reviews" class="p-4" />
+    <div>
+      <TProfileDetails v-if="!$route.query.view" :profile="profile" />
+      <TEventListNoLoad
+        v-if="$route.query.view === 'events'"
+        :community="profile.username"
+        :username="profile.username"
+        :docs="events"
+        class="w-full border-b border-t pt-4"
+      />
+      <TReviewList
+        v-if="$route.query.view === 'reviews'"
+        :reviews="reviews"
+        class="px-4"
+      />
+      <TPostList
+        v-if="$route.query.view === 'posts'"
+        :filter="{ username: profile.username }"
+        class="mt-4 w-full border-t"
+      />
     </div>
 
     <div
@@ -162,11 +142,6 @@
         :href="`mailto:support@wedance.vip?subject=Claim ${profile.username}`"
       />
     </div>
-
-    <TPostList
-      :filter="{ username: profile.username }"
-      class="mt-4 w-full border-t"
-    />
   </div>
 </template>
 
@@ -182,6 +157,7 @@ import {
   getEventsWithArtist,
   getEventsWithGuest,
 } from '~/use/events'
+import { useRouter } from '~/use/router'
 
 export default {
   props: {
@@ -190,12 +166,10 @@ export default {
       default: () => ({}),
     },
   },
-  head() {
-    return getProfileMeta(this.profile)
-  },
   setup(props, { root }) {
     const { uid, isAdmin, can } = useAuth()
     const { profileFields } = useProfiles()
+    const { route } = useRouter()
     const { getCity } = useApp()
     const { remove, softUpdate } = useDoc('profiles')
     const invitesLeft = 5
@@ -207,6 +181,29 @@ export default {
     const subscribersCount = computed(() => {
       return props.profile?.watch?.usernames?.length || 0
     })
+
+    const tabs = [
+      {
+        name: 'About',
+        href: `/${props.profile.username}`,
+        current: !route.query.view,
+      },
+      {
+        name: 'Events',
+        href: `/${props.profile.username}?view=events#tabs`,
+        current: route.query.view === 'events',
+      },
+      {
+        name: 'Reviews',
+        href: `/${props.profile.username}?view=reviews#tabs`,
+        current: route.query.view === 'reviews',
+      },
+      {
+        name: 'Posts',
+        href: `/${props.profile.username}?view=posts#tabs`,
+        current: route.query.view === 'posts',
+      },
+    ]
 
     onMounted(async () => {
       let result = []
@@ -233,6 +230,7 @@ export default {
     })
 
     return {
+      tabs,
       loaded,
       uid,
       can,
@@ -247,6 +245,27 @@ export default {
       events,
       softUpdate,
     }
+  },
+  computed: {
+    reviews() {
+      return this.profile.reviews || []
+    },
+    reviewsAvg() {
+      if (!this.reviewsCount) {
+        return 0
+      }
+
+      return (
+        this.reviews.map((r) => Number(r.stars)).reduce((p, c) => p + c, 0) /
+        this.reviewsCount
+      )
+    },
+    reviewsCount() {
+      return this.reviews.length || 0
+    },
+  },
+  head() {
+    return getProfileMeta(this.profile)
   },
 }
 </script>
