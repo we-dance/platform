@@ -7,71 +7,74 @@
           >Back</TButton
         >
       </div>
-      <div
-        v-for="calendar in calendars"
-        v-show="!$route.query.id || $route.query.id === calendar.id"
-        :key="calendar.id"
-        class="border p-4 rounded mb-4"
-      >
-        <div class="flex justify-between gap-4">
-          <div>
-            <h2 class="font-bold">
-              <router-link :to="`?id=${calendar.id}`">{{
-                calendar.name || '(noname)'
-              }}</router-link>
-            </h2>
-            <p class="text-xs font-bold">{{ calendar.state }}</p>
+      <TLoader v-if="loading" />
+      <section v-else>
+        <div
+          v-for="calendar in calendars"
+          v-show="!$route.query.id || $route.query.id === calendar.id"
+          :key="calendar.id"
+          class="border p-4 rounded mb-4"
+        >
+          <div class="flex justify-between gap-4">
+            <div>
+              <h2 class="font-bold">
+                <router-link :to="`?id=${calendar.id}`">{{
+                  calendar.name || '(noname)'
+                }}</router-link>
+              </h2>
+              <p class="text-xs font-bold">{{ calendar.state }}</p>
+            </div>
+            <div>
+              <TDropdown>
+                <TButton
+                  icon="upload"
+                  label="Sync"
+                  type="context"
+                  @click="refresh(calendar.id)"
+                />
+                <TButton
+                  icon="delete"
+                  label="Remove"
+                  type="context"
+                  @click="remove(calendar.id)"
+                />
+              </TDropdown>
+            </div>
           </div>
-          <div>
-            <TDropdown>
-              <TButton
-                icon="upload"
-                label="Sync"
-                type="context"
-                @click="refresh(calendar.id)"
-              />
-              <TButton
-                icon="delete"
-                label="Remove"
-                type="context"
-                @click="remove(calendar.id)"
-              />
-            </TDropdown>
+
+          <div class="text-xs text-gray-700">
+            <span>{{ calendar.username }}</span> •
+            <a class="underline" :href="calendar.url" target="_blank">ical</a>
           </div>
+          <p class="text-xs text-gray-500">
+            Last synced:
+            {{
+              calendar.lastSyncedAt ? getYmdHms(calendar.lastSyncedAt) : 'Never'
+            }}
+          </p>
+          <p class="text-xs text-gray-500">
+            New: {{ calendar.newCount }} • Upcoming:
+            {{ calendar.approvedCount }} of {{ calendar.upcomingCount }} • Past:
+            {{ calendar.pastCount }}
+          </p>
         </div>
 
-        <div class="text-xs text-gray-700">
-          <span>{{ calendar.username }}</span> •
-          <a class="underline" :href="calendar.url" target="_blank">ical</a>
+        <div v-if="$route.query.id">
+          <div v-for="event in events" :key="event.id">
+            <TEventImportPreview :item="event" show-date />
+          </div>
         </div>
-        <p class="text-xs text-gray-500">
-          Last synced:
-          {{
-            calendar.lastSyncedAt ? getYmdHms(calendar.lastSyncedAt) : 'Never'
-          }}
-        </p>
-        <p class="text-xs text-gray-500">
-          New: {{ calendar.newCount }} • Upcoming:
-          {{ calendar.approvedCount }} of {{ calendar.upcomingCount }} • Past:
-          {{ calendar.pastCount }}
-        </p>
-      </div>
-
-      <div v-if="$route.query.id">
-        <div v-for="event in events" :key="event.id">
-          <TEventImportPreview :item="event" show-date />
+        <div v-else class="flex gap-4">
+          <TField
+            v-model="newCalendarUrl"
+            type="TInput"
+            label-position="top"
+            label="New Calendar Url"
+            placeholder="https://"
+          />
+          <TButton type="simple" @click="addCalendar">Add</TButton>
         </div>
-      </div>
-      <div v-else class="flex gap-4">
-        <TField
-          v-model="newCalendarUrl"
-          type="TInput"
-          label-position="top"
-          label="New Calendar Url"
-          placeholder="https://"
-        />
-        <TButton type="simple" @click="addCalendar">Add</TButton>
-      </div>
+      </section>
     </main>
   </div>
 </template>
@@ -100,8 +103,9 @@ export default {
     },
   },
   setup() {
-    const { uid, profile, isAdmin } = useAuth()
+    const { uid, profile, isAdmin, account } = useAuth()
 
+    const loading = ref(true)
     const calendars = ref([])
     const newCalendarUrl = ref('')
     const firestore = firebase.firestore()
@@ -139,7 +143,7 @@ export default {
     onMounted(async () => {
       let collection = firestore.collection('calendars')
 
-      await until(uid).not.toBeNull()
+      await until(account).not.toBeNull()
 
       if (!isAdmin()) {
         collection = collection.where('userId', '==', uid.value)
@@ -150,10 +154,12 @@ export default {
           id: doc.id,
           ...doc.data(),
         }))
+        loading.value = false
       })
     })
 
     return {
+      loading,
       calendars,
       newCalendarUrl,
       addCalendar,

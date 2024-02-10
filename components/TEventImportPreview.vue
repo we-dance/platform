@@ -45,8 +45,9 @@
       /></TExpand>
       <div class="mt-2 flex gap-4 items-center">
         <span
-          class="rounded text-xs text-white p-1"
+          class="rounded text-xs text-white p-1 cursor-pointer"
           :class="item.approved ? 'bg-green-500' : 'bg-red-500'"
+          @click="approveItem(item)"
         >
           {{ item.approved ? 'Approved' : 'Rejected' }}
         </span>
@@ -71,6 +72,8 @@
 </template>
 
 <script>
+import firebase from 'firebase/app'
+import 'firebase/firestore'
 import { formatDate } from '~/utils'
 import { useApp } from '~/use/app'
 import { useEvents } from '~/use/events'
@@ -86,7 +89,28 @@ export default {
     const { getEventTypeLabel } = useEvents()
     const { getStyles } = useStyles()
 
+    async function approveItem(item) {
+      const firestore = firebase.firestore()
+      const newDocRef = await firestore.collection('posts').add(item)
+
+      const calendarRef = await firestore
+        .collection('calendars')
+        .doc(item.providerId)
+        .get()
+
+      const calendar = calendarRef.data()
+      const events = calendar.events || []
+      const index = events.findIndex((e) => e.id === item.id)
+      events[index] = { ...item, eventId: newDocRef.id, approved: true }
+
+      await firestore
+        .collection('calendars')
+        .doc(item.providerId)
+        .update({ events })
+    }
+
     return {
+      approveItem,
       formatDate,
       getCity,
       currentCity,

@@ -135,7 +135,7 @@ export async function syncCalendar(calendarRef: DocumentSnapshot) {
       createdBy: calendar.userId,
     }
 
-    if (facebookId) {
+    if (approved && facebookId) {
       const existingEvents = await firestore
         .collection('posts')
         .where('facebookId', '==', facebookId)
