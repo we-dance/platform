@@ -39,7 +39,7 @@
   </NuxtLink>
   <button
     v-else
-    type="button"
+    :type="xtype"
     :title="title"
     :class="classes"
     v-on="$listeners"
@@ -88,6 +88,14 @@ export default {
       type: String,
       default: 'simple',
     },
+    xtype: {
+      type: String,
+      default: 'button',
+    },
+    variant: {
+      type: String,
+      default: '',
+    },
     label: {
       type: [String, Number, Boolean],
       default: false,
@@ -134,7 +142,7 @@ export default {
         void: xbase,
       }
 
-      return map[this.type]
+      return map[this.variant || this.type]
     },
   },
   setup() {

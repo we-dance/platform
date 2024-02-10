@@ -129,6 +129,27 @@
             @save="saveProfile"
           />
         </div>
+        <div class="rounded bg-white shadow border p-4 bg-white">
+          <div class="flex items-center">
+            <div>
+              <NuxtLink :to="localePath('/settings/calendars')">
+                <TIcon class="h-8 w-8" name="arrow_right" />
+              </NuxtLink>
+            </div>
+            <div class="ml-2">
+              <div class="font-bold text-xl">
+                <NuxtLink :to="localePath('/settings/calendars')">
+                  {{ $t('settings.calendars.title') }}
+                </NuxtLink>
+              </div>
+              <div class="text-sm text-gray-700">
+                <div>
+                  {{ $t('settings.calendars.description') }}
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   </main>

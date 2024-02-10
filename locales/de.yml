@@ -371,6 +371,13 @@ settings:
   contacts:
     title: Kontakte
     description: Diese Informationen werden öffentlich zugänglich sein. Teile Deine Kontakte nur, wenn Du von Mitgliedern kontaktiert werden möchtest. Es ist eine schöne Gelegenheit, um Deine sozialen Medien zu teilen und Aufmerksamkeit zu erregen.
+  calendars:
+    title: Kalender
+    description: Verbinden Sie Ihren Facebook- oder Google-Kalender, um Ihre Veranstaltungen automatisch hinzuzufügen.
+    newCalendarUrl:
+      label: Neue Kalender-URL
+      description: Sie können Ihren Facebook-Kalender, Google-Kalender, Teamup-Kalender oder jeden anderen Kalender, der das iCal-Format unterstützt, hinzufügen.
+    submit: Kalender hinzufügen
 city:
   anywhere: Irgendwo
   change: Stadt wechseln
@@ -577,3 +584,30 @@ EventDashboard:
   subscribed: Subscribed
   paid: Paid
   notPaid: Didn't Pay
+back: Zurück
+import:
+  event:
+    facebook:
+      label: Veranstaltung von Facebook hinzufügen
+      description: Sie können auch [alle Ihre Veranstaltungen synchronisieren](/settings/calendars) von Facebook.
+    add: Neue Veranstaltung erstellen
+faqs:
+  calendars:
+    - question: Wie finde ich meine Facebook-Kalender-URL?
+      answer: Öffnen Sie auf Ihrem Laptop https://www.facebook.com/events/calendar. Klicken Sie mit der rechten Maustaste auf "Zum Kalender hinzufügen" und wählen Sie "Linkadresse kopieren", um Ihre Facebook-Kalender-URL zu erhalten.
+    - question: Werden alle meine Veranstaltungen importiert?
+      answer: Nur bevorstehende Veranstaltungen, die bestimmte Kriterien erfüllen, werden in WeDance importiert. Um die Relevanz für unsere tanzorientierte Community zu gewährleisten, müssen importierte Veranstaltungen einen öffentlichen Facebook-Veranstaltungslink in ihrer Beschreibung enthalten und Schlüsselwörter enthalten, die verschiedenen Tanzstilen entsprechen. Dieser selektive Ansatz stellt sicher, dass unsere Plattform sich auf tanzbezogene Veranstaltungen konzentriert und unseren Nutzern Zugang zu den relevantesten und ansprechendsten Tanzaktivitäten bietet.
+    - question: Welche Kalender werden unterstützt?
+      answer: Wir unterstützen Kalender, die das iCal-Format verwenden. Dazu gehören die meisten gängigen Kalenderdienste wie Google Kalender, Apple Kalender, Facebook-Veranstaltungen, Teamup und andere. Wenn Ihr Kalender iCal unterstützt, können Sie ihn mit WeDance synchronisieren.
+    - question: Wie oft werden die Kalender synchronisiert?
+      answer: Kalender werden täglich synchronisiert. Dies stellt sicher, dass neue Veranstaltungen oder Aktualisierungen bestehender Veranstaltungen zeitnah auf WeDance widergespiegelt werden. Es kann jedoch eine geringfügige Verzögerung zwischen der Aktualisierung der Veranstaltung in Ihrem Kalender und dem Erscheinen der Aktualisierung auf WeDance geben.
+    - question: Kann ich importierte Veranstaltungen ändern?
+      answer: Ja, Sie können die Details der importierten Veranstaltungen auf WeDance ändern. Änderungen, die an Veranstaltungen auf WeDance vorgenommen werden, werden jedoch nicht in Ihrem ursprünglichen Kalender widergespiegelt. Es ist wichtig, dass die genauesten und aktuellsten Informationen an beiden Orten gepflegt werden.
+    - question: Werden Änderungen, die ich an meiner Facebook-Veranstaltung vornehme, auf WeDance aktualisiert?
+      answer: Veranstaltungen von Facebook werden nur einmal in WeDance importiert. Das bedeutet, dass nachfolgende Änderungen an der Veranstaltung auf Facebook, wie Terminänderungen, Absagen oder andere Updates, nicht automatisch auf WeDance widergespiegelt werden. Um Genauigkeit zu gewährleisten, ist es wichtig, dass Benutzer die Veranstaltungsinformationen auf WeDance manuell aktualisieren, wenn es nach dem ersten Import Änderungen gibt. Wir ermutigen Veranstaltungsorganisatoren, ihre Veranstaltungsdetails regelmäßig zu überprüfen und zu aktualisieren, um die aktuellsten Informationen für die WeDance-Community bereitzustellen.
+    - question: Was soll ich tun, wenn eine Veranstaltung abgesagt wird oder sich Details nach dem Import ändern?
+      answer: Sie müssen diese Informationen manuell auf WeDance aktualisieren. Wir empfehlen, Ihre Veranstaltungen regelmäßig zu überprüfen, um sicherzustellen, dass alle Informationen aktuell und korrekt sind.
+    - question: Wie kann ich meinen Kalender trennen, wenn ich keine Veranstaltungen mehr synchronisieren möchte?
+      answer: Sie können Ihren Kalender jederzeit im Bereich "Integrationen" in Ihren Einstellungen trennen. Sobald getrennt, werden keine weiteren Veranstaltungen von diesem Kalender importiert.
+    - question: Ist meine persönliche Information sicher, wenn ich meinen Kalender verbinde?
+      answer: Ja, Ihre Privatsphäre und Sicherheit sind uns sehr wichtig. Wir verwenden den Kalenderzugriff nur, um Veranstaltungen zu importieren und speichern keine persönlichen Informationen aus Ihrem Kalender.

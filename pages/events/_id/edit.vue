@@ -11,7 +11,7 @@
         vertical
         class="bg-white p-4 space-y-4"
         @save="saveItem"
-        @cancel="view(item.id)"
+        @cancel="cancel"
       />
       <div v-if="duplicates.length">
         <div class="text-red-500 text-sm p-4">
@@ -119,12 +119,8 @@ export default {
           )
         })
     },
-    view(id) {
-      if (id && id !== '-') {
-        this.$router.push(this.localePath(`/events/${id}`))
-      } else {
-        this.$router.push(this.localePath(`/${this.profile?.username}`))
-      }
+    cancel() {
+      this.$router.go(-1)
     },
     async copyItem(data) {
       if (!data.name) {

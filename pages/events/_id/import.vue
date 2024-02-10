@@ -12,7 +12,7 @@
         class="bg-white p-4 space-y-4"
         submit-label="Import"
         @save="saveItem"
-        @cancel="view(item.id)"
+        @cancel="cancel"
       />
       <div v-if="duplicates.length">
         <div class="text-red-500 text-sm p-4">
@@ -26,7 +26,7 @@
         <div class="divider">or</div>
         <TButton
           type="secondary"
-          label="Create new event"
+          :label="$t('import.event.add')"
           to="/events/-/edit"
         />
       </div>
@@ -103,12 +103,8 @@ export default {
     }
   },
   methods: {
-    view(id) {
-      if (id && id !== '-') {
-        this.$router.push(this.localePath(`/events/${id}`))
-      } else {
-        this.$router.push(this.localePath(`/${this.profile?.username}`))
-      }
+    cancel() {
+      this.$router.go(-1)
     },
     async saveItem(data) {
       data = pickBy(data, (v) => v !== undefined)

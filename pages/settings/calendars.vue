@@ -1,11 +1,11 @@
 <template>
   <div>
-    <THeader title="Calendars" />
+    <THeader :title="$t('settings.calendars.title')" />
     <main class="p-4">
       <div class="mb-4">
-        <TButton v-if="$route.query.id" type="link" to="/settings/calendars"
-          >Back</TButton
-        >
+        <TButton v-if="$route.query.id" type="link" to="/settings/calendars">{{
+          $t('back')
+        }}</TButton>
       </div>
       <TLoader v-if="loading" />
       <section v-else>
@@ -64,15 +64,27 @@
             <TEventImportPreview :item="event" show-date />
           </div>
         </div>
-        <div v-else class="flex gap-4">
-          <TField
-            v-model="newCalendarUrl"
-            type="TInput"
-            label-position="top"
-            label="New Calendar Url"
-            placeholder="https://"
-          />
-          <TButton type="simple" @click="addCalendar">Add</TButton>
+        <div v-else>
+          <form
+            class="flex flex-col gap-4 p-4 bg-gray-100 border rounded"
+            @submit.prevent="addCalendar"
+          >
+            <TField
+              v-model="newCalendarUrl"
+              required
+              type="url"
+              label-position="top"
+              :label="$t('settings.calendars.newCalendarUrl.label')"
+              :description="$t('settings.calendars.newCalendarUrl.description')"
+              placeholder="https://"
+            />
+            <div class="flex justify-end">
+              <TButton xtype="submit" variant="primary">{{
+                $t('settings.calendars.submit')
+              }}</TButton>
+            </div>
+          </form>
+          <TFaqCalendars class="my-4" :faqs="$t('faqs.calendars')" />
         </div>
       </section>
     </main>
@@ -88,6 +100,7 @@ import { useAuth } from '~/use/auth'
 import { getYmdHms, sortBy } from '~/utils'
 
 export default {
+  middleware: 'auth',
   computed: {
     events() {
       const id = this.$route.query.id
@@ -127,6 +140,10 @@ export default {
     }
 
     function addCalendar() {
+      if (!newCalendarUrl.value) {
+        return
+      }
+
       const url = newCalendarUrl.value
       newCalendarUrl.value = ''
 
