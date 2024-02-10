@@ -112,7 +112,7 @@
       <TPostList
         v-if="$route.query.view === 'posts'"
         :filter="{ username: profile.username }"
-        class="mt-4 w-full border-t"
+        class="w-full"
       />
     </div>
 
