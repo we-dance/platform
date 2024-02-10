@@ -74,11 +74,10 @@
           <div
             class="flex flex-wrap justify-start items-center px-4 py-2 space-x-1 text-xs border-b"
           >
-            <div v-if="reviewsCount" class="flex">
-              <TIcon class="h-4 w-4" name="star" />
-              <span>{{ reviewsAvg }} ({{ reviewsCount }})</span>
+            <TReviewCount :profile="org" />
+            <div v-if="org.reviews && org.reviews.length">
+              ·
             </div>
-            <div v-if="reviewsCount">·</div>
             <div>
               {{ $tc('guests', guestCount, { count: guestCount }) }}
             </div>
@@ -197,6 +196,22 @@
           :label="$t('eventView.dropdown.share')"
         />
       </div>
+
+      <TwTabs
+        id="tabs"
+        :tabs="[
+          {
+            name: 'About',
+            to: `/events/${doc.id}`,
+            current: !$route.query.view,
+          },
+          {
+            name: 'Guests',
+            to: `/events/${doc.id}?view=guests#tabs`,
+            current: $route.query.view === 'guests',
+          },
+        ]"
+      />
 
       <div v-if="isGoing" class="border-b bg-white p-4">
         <TPreview v-if="doc.confirmation" :content="doc.confirmation" />
@@ -380,44 +395,67 @@
         />
       </div>
 
-      <TExpand class="p-4">
-        <TPreview :content="doc.description" />
-      </TExpand>
+      <div v-if="!$route.query.view">
+        <TPreview :content="doc.description" class="p-4" />
 
-      <div v-if="doc.venue && doc.venue.map" class="bg-gray-100 p-4">
-        <div class="mb-4 text-sm font-bold leading-none text-gray-700">
-          {{ $t('eventView.venueMap') }}
+        <div v-if="doc.venue && doc.venue.map" class="bg-gray-100 p-4">
+          <div class="mb-4 text-sm font-bold leading-none text-gray-700">
+            {{ $t('eventView.venueMap') }}
+          </div>
+          <img :src="doc.venue.map" alt="Venue Map" class="mt-4" />
         </div>
-        <img :src="doc.venue.map" alt="Venue Map" class="mt-4" />
-      </div>
 
-      <TAgenda
-        v-if="doc.program"
-        :events="doc.program"
-        class="w-full space-y-2 p-4"
-      />
+        <TAgenda
+          v-if="doc.program"
+          :events="doc.program"
+          class="w-full space-y-2 p-4"
+        />
 
-      <div v-if="doc.org" class="space-y-2 p-4">
-        <h4 class="text-xl font-bold">{{ $t('event.organiser') }}</h4>
-        <WProfile :username="doc.org.username" :fallback="doc.org" hide-role />
-      </div>
-
-      <div v-if="doc.artists && doc.artists.length" class="space-y-2 p-4">
-        <h3 class="text-xl font-bold">{{ $t('event.artists') }}</h3>
-        <div
-          v-for="(profile, profileIndex) in doc.artists"
-          :key="`artist-${profileIndex}`"
-        >
+        <div v-if="doc.org" class="space-y-2 p-4">
+          <h4 class="text-xl font-bold">{{ $t('event.organiser') }}</h4>
           <WProfile
-            v-if="profile"
-            :username="profile.username"
-            :fallback="profile"
+            :username="doc.org.username"
+            :fallback="doc.org"
             hide-role
           />
         </div>
+
+        <div v-if="doc.artists && doc.artists.length" class="space-y-2 p-4">
+          <h3 class="text-xl font-bold">{{ $t('event.artists') }}</h3>
+          <div
+            v-for="(profile, profileIndex) in doc.artists"
+            :key="`artist-${profileIndex}`"
+          >
+            <WProfile
+              v-if="profile"
+              :username="profile.username"
+              :fallback="profile"
+              hide-role
+            />
+          </div>
+        </div>
+
+        <div>
+          <h3 class="text-xl font-bold p-4 border-t">
+            {{ $t('comments.label') }}
+          </h3>
+          <div v-if="!uid" class="flex justify-center p-4">
+            <TButton
+              type="link"
+              allow-guests
+              :to="localePath(`/signin?target=${$route.path}`)"
+              >{{ $t('event.commentsHidden') }}</TButton
+            >
+          </div>
+
+          <TCommentsInline v-else :item="doc" autoload class="px-4" />
+        </div>
       </div>
 
-      <div v-if="doc.star && doc.star.usernames" class="space-y-2 p-4">
+      <div
+        v-if="$route.query.view === 'guests' && doc.star && doc.star.usernames"
+        class="space-y-2 p-4"
+      >
         <h3 class="text-xl font-bold">{{ $t('event.guests') }}</h3>
         <div
           v-if="guests.followersCount || guests.leadersCount"
@@ -470,29 +508,6 @@
           </div>
           <div v-if="!doc.star.count">There are no other guests yet.</div>
         </div>
-      </div>
-
-      <div>
-        <h3 class="text-xl font-bold p-4 border-t">
-          {{ $t('comments.label') }}
-        </h3>
-        <div v-if="!uid" class="flex justify-center p-4">
-          <TButton
-            type="link"
-            allow-guests
-            :to="localePath(`/signin?target=${$route.path}`)"
-            >{{ $t('event.commentsHidden') }}</TButton
-          >
-        </div>
-
-        <TCommentsInline v-else :item="doc" autoload class="px-4" />
-      </div>
-
-      <div>
-        <h3 class="text-xl font-bold p-4 border-t">
-          {{ $t('reviews.title') }}
-        </h3>
-        <TReviewList :reviews="reviews" class="px-4" />
       </div>
 
       <div class="m-4 text-xs text-right gap-8">
@@ -626,22 +641,6 @@ export default {
     },
     publishedAt() {
       return getDateTime(this.item?.createdAt)
-    },
-    reviews() {
-      return this.org?.reviews || []
-    },
-    reviewsAvg() {
-      if (!this.reviewsCount) {
-        return 0
-      }
-
-      return (
-        this.reviews.map((r) => Number(r.stars)).reduce((p, c) => p + c, 0) /
-        this.reviewsCount
-      )
-    },
-    reviewsCount() {
-      return this.reviews.length || 0
     },
     eventUrl() {
       const app = process.env.app

@@ -5,10 +5,10 @@
         class="isolate flex divide-x divide-gray-200 rounded-lg shadow"
         aria-label="Tabs"
       >
-        <a
+        <router-link
           v-for="(tab, tabIdx) in tabs"
           :key="tab.name"
-          :href="tab.href"
+          :to="tab.to"
           :class="[
             tab.current ? 'text-gray-900' : 'text-gray-500 hover:text-gray-700',
             tabIdx === 0 ? 'rounded-l-lg' : '',
@@ -25,7 +25,7 @@
               'absolute inset-x-0 bottom-0 h-0.5',
             ]"
           />
-        </a>
+        </router-link>
       </nav>
     </div>
   </div>

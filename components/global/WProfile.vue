@@ -33,15 +33,7 @@
         <div v-show="profile.bio" class="text-gray-700 text-xs">
           {{ getExcerpt(profile.bio) }}
         </div>
-        <div class="text-xs text-gray-500">
-          {{ $tc('views', profile.viewsCount, { count: profile.viewsCount }) }}
-          ·
-          {{
-            $tc('subscribers', subscribersCount, {
-              count: subscribersCount,
-            })
-          }}
-        </div>
+        <TProfileStats :profile="profile" />
         <div class="flex space-x-2 mt-4">
           <slot name="actions">
             <TReaction

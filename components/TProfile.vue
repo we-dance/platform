@@ -16,28 +16,7 @@
       <h1 class="leading-none mb-2 px-4 text-center font-bold text-3xl mt-2">
         {{ profile.name }}
       </h1>
-      <div class="flex flex-wrap text-xs text-gray-500 space-x-1">
-        <router-link
-          v-if="reviewsCount"
-          :to="`/${profile.username}?view=reviews`"
-          class="flex"
-        >
-          <TIcon class="h-4 w-4" name="star" />
-          <span>{{ reviewsAvg }} ({{ reviewsCount }})</span>
-        </router-link>
-        <div v-if="reviewsCount">·</div>
-        <div>
-          {{ $tc('views', profile.viewsCount, { count: profile.viewsCount }) }}
-        </div>
-        <div>·</div>
-        <div>
-          {{
-            $tc('connections', subscribersCount, {
-              count: subscribersCount,
-            })
-          }}
-        </div>
-      </div>
+      <TProfileStats :profile="profile" />
       <TPreview class="text-sm text-center px-4" :content="profile.bio" />
       <div class="flex space-x-2 justify-center my-2 px-4">
         <TReaction
@@ -51,7 +30,7 @@
           collection="profiles"
         />
         <TButton
-          v-if="uid === profile.id"
+          v-if="uid !== profile.id"
           label="Message"
           :to="`/chat/${profile.username}`"
         />
@@ -115,7 +94,7 @@
 
     <TwTabs id="tabs" :tabs="tabs" />
 
-    <div>
+    <div class="min-h-screen">
       <TProfileDetails v-if="!$route.query.view" :profile="profile" />
       <TEventListNoLoad
         v-if="$route.query.view === 'events'"
@@ -126,7 +105,7 @@
       />
       <TReviewList
         v-if="$route.query.view === 'reviews'"
-        :reviews="reviews"
+        :reviews="profile.reviews"
         class="px-4"
       />
       <TPostList
@@ -161,7 +140,6 @@ import {
   getEventsWithArtist,
   getEventsWithGuest,
 } from '~/use/events'
-import { useRouter } from '~/use/router'
 
 export default {
   props: {
@@ -173,7 +151,6 @@ export default {
   setup(props, { root }) {
     const { uid, isAdmin, can } = useAuth()
     const { profileFields } = useProfiles()
-    const { route } = useRouter()
     const { getCity } = useApp()
     const { remove, softUpdate } = useDoc('profiles')
     const invitesLeft = 5
@@ -182,32 +159,30 @@ export default {
     const events = ref([])
     const loaded = ref(false)
 
-    const subscribersCount = computed(() => {
-      return props.profile?.watch?.usernames?.length || 0
-    })
+    const view = computed(() => root.$route.query.view)
 
-    const tabs = [
+    const tabs = computed(() => [
       {
         name: 'About',
-        href: `/${props.profile.username}`,
-        current: !route.query.view,
+        to: `/${props.profile.username}`,
+        current: !view.value,
       },
       {
         name: 'Events',
-        href: `/${props.profile.username}?view=events#tabs`,
-        current: route.query.view === 'events',
+        to: `/${props.profile.username}?view=events#tabs`,
+        current: view.value === 'events',
       },
       {
         name: 'Reviews',
-        href: `/${props.profile.username}?view=reviews#tabs`,
-        current: route.query.view === 'reviews',
+        to: `/${props.profile.username}?view=reviews#tabs`,
+        current: view.value === 'reviews',
       },
       {
         name: 'Posts',
-        href: `/${props.profile.username}?view=posts#tabs`,
-        current: route.query.view === 'posts',
+        to: `/${props.profile.username}?view=posts#tabs`,
+        current: view.value === 'posts',
       },
-    ]
+    ])
 
     onMounted(async () => {
       let result = []
@@ -244,29 +219,10 @@ export default {
       isAdmin,
       community,
       invitesLeft,
-      subscribersCount,
       remove,
       events,
       softUpdate,
     }
-  },
-  computed: {
-    reviews() {
-      return this.profile.reviews || []
-    },
-    reviewsAvg() {
-      if (!this.reviewsCount) {
-        return 0
-      }
-
-      return (
-        this.reviews.map((r) => Number(r.stars)).reduce((p, c) => p + c, 0) /
-        this.reviewsCount
-      )
-    },
-    reviewsCount() {
-      return this.reviews.length || 0
-    },
   },
   head() {
     return getProfileMeta(this.profile)
