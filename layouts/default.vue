@@ -1,23 +1,6 @@
 <template>
   <div>
     <TBanner
-      v-if="profile && !profile.photo"
-      desktop="Upload your photo"
-      mobile="Upload your photo"
-      action="Edit Profile"
-      link="https://wedance.vip/settings?tab=profile"
-    />
-    <TBanner
-      v-if="false"
-      v-model="bannerNps"
-      desktop="Can you take 30 seconds to help us?"
-      mobile="30 seconds to help us?"
-      action="Yes"
-      :link="
-        `https://j4ripfl7ia1.typeform.com/to/bfWbw6EH#username=${profile.username}`
-      "
-    />
-    <TBanner
       v-if="false"
       v-model="bannerV3Beta"
       desktop="Are you ready for WeDance v3?"
