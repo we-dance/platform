@@ -393,6 +393,13 @@ settings:
       - This information will be publicly available. Share your contacts
       - only if you want to be contacted by members. It's also nice place to share
       - your social media to get some attention.
+  calendars:
+    title: Calendars
+    description: Connect your Facebook or Google Calendar to add your events automatically.
+    newCalendarUrl:
+      label: New Calendar Url
+      description: You can add your Facebook Calendar, Google Calendar, Teamup calendar, or any other calendar that supports ical format.
+    submit: Add Calendar
 city:
   anywhere: Irgendwo
   change: Stadt wechseln
@@ -516,7 +523,8 @@ import:
   event:
     facebook:
       label: Add event from Facebook
-      description: ''
+      description: You can also [sync all your events](/settings/calendars) from Facebook.
+    add: Create new event
 event:
   attend: Join Guest List
   attendCallToAction: Join guest list to find tickets
@@ -651,3 +659,33 @@ EventDashboard:
 leadersCount: no leaders | 1 leader | {count} leaders
 followersCount: no followers | 1 follower | {count} followers
 loading: Loading...
+back: Back
+faqs:
+  calendars:
+    - 
+      question: How can I find my Facebook Calendar URL?
+      answer: Open on your laptop https://www.facebook.com/events/calendar. Right-click on "Add to Calendar" and select "Copy link address" to get your Facebook Calendar URL.
+    - 
+      question: Will all my events be imported?
+      answer: Only upcoming events that align with specific criteria will be imported to WeDance. To ensure relevance to our dance-focused community, imported events must include a public Facebook event link in their description and contain keywords that match various dance styles. This selective approach ensures that our platform remains dedicated to dance-related events, offering our users access to the most relevant and engaging dance activities available.
+    - 
+      question: Which calendars are supported?
+      answer: We support calendars that use the iCal format. This includes most popular calendar services like Google Calendar, Apple Calendar, Facebook Events, Teamup, and others. If your calendar supports iCal, you can sync it with WeDance.
+    - 
+      question: How often are the calendars synchronized?
+      answer: Calendars are synchronized daily. This ensures that any new events or updates to existing events are reflected on WeDance in a timely manner. However, there might be a slight delay between the event update in your calendar and the update appearing on WeDance.
+    - 
+      question: Can I modify imported events?
+      answer: Yes, you can modify the details of the imported events on WeDance. However, changes made to events on WeDance won't be reflected back in your original calendar. It's important to ensure that the most accurate and up-to-date information is maintained in both places.
+    - 
+      question: Will changes made to my Facebook event be updated on WeDance?
+      answer: Events from Facebook are imported to WeDance only once. This means that any subsequent changes made to the event on Facebook, such as date changes, cancellations, or other updates, will not be automatically reflected on WeDance. To ensure accuracy, it's important for users to manually update the event information on WeDance if there are any changes after the initial import. We encourage event organizers to regularly check and update their event details to provide the most current information to the WeDance community.
+    - 
+      question: What should I do if an event is canceled or details change after importing?
+      answer: You will need to manually update this information on WeDance. We recommend regularly checking your events to ensure all information is current and accurate.
+    - 
+      question: How can I disconnect my calendar if I no longer want to sync events?
+      answer: You can disconnect your calendar at any time from the Integrations section in your Settings. Once disconnected, no further events will be imported from that calendar.
+    - 
+      question: Is my personal information secure when I connect my calendar?
+      answer: Yes, your privacy and security are paramount to us. We only use calendar access to import events and do not store any personal information from your calendar.
