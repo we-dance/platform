@@ -50,7 +50,11 @@
           :item="profile"
           collection="profiles"
         />
-        <TButton label="Message" :to="`/chat/${profile.username}`" />
+        <TButton
+          v-if="uid === profile.id"
+          label="Message"
+          :to="`/chat/${profile.username}`"
+        />
         <TButton
           v-if="uid === profile.id"
           type="primary"
