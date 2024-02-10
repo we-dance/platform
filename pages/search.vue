@@ -25,7 +25,9 @@
         </div>
       </div>
     </NuxtLink>
-    <div class="font-bold p-4 border-b">Upcoming Events</div>
+    <div v-if="responseEvents.hits" class="font-bold p-4 border-b">
+      Upcoming Events
+    </div>
     <TEventText4
       v-for="item in responseEvents.hits"
       :id="item.id"
@@ -63,6 +65,10 @@ export default {
     const fromDate = ref(today)
 
     async function search() {
+      if (!query.value) {
+        return
+      }
+
       await searchProfiles(query.value)
 
       const searchParams = {
@@ -72,9 +78,6 @@ export default {
     }
 
     return { query, search, response, responseEvents, getDateObect }
-  },
-  mounted() {
-    this.search()
   },
 }
 </script>

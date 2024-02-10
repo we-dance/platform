@@ -1,6 +1,9 @@
 <template>
   <div>
     <THeader show-logo class="md:hidden" />
+    <div class="p-4">
+      <h1 class="text-2xl font-bold">Community in {{ cityName }}</h1>
+    </div>
 
     <div>
       <div
@@ -17,48 +20,21 @@
           clearable
           hide-search-box
         />
-
-        <t-rich-select
-          v-if="filters['style']"
-          v-model="filters['objectives']"
-          :placeholder="$t(`profile.objectives`)"
-          :options="facets['objectives']"
-          clearable
-          hide-search-box
-        />
-
-        <TButton v-if="facetFilters" type="link" @click="load()">
-          {{ $t('filter.reset') }}
-        </TButton>
       </div>
 
-      <div class="grid grid-cols-1 md:grid-cols-2 gap-2">
-        <NuxtLink
+      <div class="space-y-2 p-4">
+        <WProfile
           v-for="item in response.hits"
-          :key="item.id"
-          :to="localePath(`/${item.username}`)"
-          class="hover:opacity-75"
-        >
-          <TSharePreviewPost
-            :type="item.type"
-            collection="profiles"
-            :username="item.username"
-            :description="getExcerpt(item.bio)"
-            :extra="getCity(item.place)"
-            :photo="item.photo"
-            :styles="item.styles"
-            size="sm"
-          />
-        </NuxtLink>
+          :key="item.username"
+          :username="item.username"
+          :fallback="item"
+          hide-role
+        />
       </div>
 
-      <t-pagination
-        v-if="uid && response.nbPages > 1 && !$route.query.search"
-        v-model="currentPage"
-        :total-items="response.nbHits"
-        :per-page="response.hitsPerPage"
-        class="my-4"
-      />
+      <div v-if="response.nbPages > 1" class="my-4 flex justify-center">
+        <TButton label="Load More" type="primary" @click="loadMore" />
+      </div>
 
       <WTeaser
         v-if="!uid"
@@ -66,15 +42,6 @@
         :description="$t('teaser.profile.description')"
         :button="$t('teaser.profile.btn')"
         url="/signin"
-        class="mt-4"
-      />
-
-      <WTeaser
-        v-if="uid"
-        :title="$t('teaser.chat.title')"
-        :description="$t('teaser.chat.description')"
-        :button="$t('teaser.chat.btn', { city: 'Community' })"
-        href="https://t.me/WeDanceTravel/12"
         class="mt-4"
       />
     </div>
@@ -108,11 +75,9 @@ export default {
     if (!currentCity.value) {
       router.push('/cities')
     }
-    const { search, response } = useAlgolia('profiles')
+    const { search, response, loadMore } = useAlgolia('profiles')
     const facets = computed(() => ({
-      type: getFacetOptions('type').filter(
-        (o) => !['FanPage', 'City'].includes(o.value)
-      ),
+      type: getFacetOptions('type'),
       gender: getFacetOptions('gender'),
       objectives: getFacetOptions('objectives'),
       style: getFacetOptions('style'),
@@ -141,7 +106,7 @@ export default {
         return
       }
       search('', {
-        filters: filterQuery.value,
+        filters: `${filterQuery.value} AND (type:Organiser OR type:Artist OR type:Venue OR type:FanPage)`,
         facets: Object.keys(facets.value),
         facetFilters: facetFilters.value,
         page: currentPage.value - 1,
@@ -197,6 +162,7 @@ export default {
       load,
       getCity,
       cityName,
+      loadMore,
     }
   },
   head() {

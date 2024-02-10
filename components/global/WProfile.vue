@@ -37,10 +37,11 @@
         <div class="flex space-x-2 mt-4">
           <slot name="actions">
             <TReaction
-              :label="$t('Subscribe')"
-              :toggled-label="$t('Unsubscribe')"
+              :label="$t('Connect')"
+              :toggled-label="$t('Connected')"
+              toggled-class="bg-green-500"
               field="watch"
-              icon="BellIcon"
+              type="primary"
               hide-count
               :item="profile"
               collection="profiles"

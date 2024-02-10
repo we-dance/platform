@@ -23,6 +23,7 @@
           v-if="uid !== profile.id"
           :label="$t('Connect')"
           :toggled-label="$t('Connected')"
+          toggled-class="bg-green-500"
           field="watch"
           type="primary"
           hide-count
