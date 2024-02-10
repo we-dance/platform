@@ -109,7 +109,7 @@
       <TContactsGrid :profile="profile" class="my-4" />
     </div>
 
-    <TwTabs :tabs="tabs" id="tabs" />
+    <TwTabs id="tabs" :tabs="tabs" />
 
     <div>
       <TProfileDetails v-if="!$route.query.view" :profile="profile" />
