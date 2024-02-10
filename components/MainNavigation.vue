@@ -14,6 +14,13 @@
     />
     <TButton
       allow-guests
+      :to="localePath('/find-partner/start')"
+      icon="search"
+      label="Find Partner"
+      type="nav"
+    />
+    <TButton
+      allow-guests
       :to="localePath('/Travel')"
       icon="directions"
       :label="$t('nav.festivals')"
@@ -24,7 +31,23 @@
       allow-guests
       :to="localePath(`/${city.username}`)"
       icon="calendar"
-      :label="$t('nav.calendar')"
+      label="Parties"
+      type="nav"
+    />
+    <TButton
+      v-if="currentCity"
+      allow-guests
+      :to="localePath(`/${city.username}?view=classes`)"
+      icon="calendar"
+      label="Classes"
+      type="nav"
+    />
+    <TButton
+      v-if="currentCity"
+      allow-guests
+      :to="localePath(`/community`)"
+      icon="people"
+      label="Community"
       type="nav"
     />
     <TButton
@@ -168,7 +191,7 @@ export default {
 </script>
 
 <style>
-nav .nuxt-link-active {
+nav .nuxt-link-exact-active {
   @apply text-primary border-primary;
 }
 </style>

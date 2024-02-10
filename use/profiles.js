@@ -163,6 +163,28 @@ export const useProfiles = () => {
 
   const profileFields = [
     {
+      name: 'current',
+      label: t('profile.current.label'),
+      register: true,
+      poster: true,
+      component: 'TInputPlace',
+      before: t('profile.current.before'),
+    },
+    {
+      name: 'place',
+      label: t('profile.place.label'),
+      register: true,
+      poster: true,
+      component: 'TInputPlace',
+      before: t('profile.place.before'),
+    },
+    {
+      name: 'hometown',
+      label: t('profile.hometown.label'),
+      component: 'TInputPlace',
+      before: t('profile.hometown.before'),
+    },
+    {
       name: 'photo',
       label: t('profile.photo'),
       poster: true,
@@ -200,28 +222,6 @@ export const useProfiles = () => {
       required: true,
       component: 'TInputUsername',
       before: t('profile.username.before'),
-    },
-    {
-      name: 'current',
-      label: t('profile.current.label'),
-      register: true,
-      poster: true,
-      component: 'TInputPlace',
-      before: t('profile.current.before'),
-    },
-    {
-      name: 'place',
-      label: t('profile.place.label'),
-      register: true,
-      poster: true,
-      component: 'TInputPlace',
-      before: t('profile.place.before'),
-    },
-    {
-      name: 'hometown',
-      label: t('profile.hometown.label'),
-      component: 'TInputPlace',
-      before: t('profile.hometown.before'),
     },
     {
       name: 'visibility',

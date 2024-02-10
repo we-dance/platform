@@ -1,6 +1,6 @@
 <template>
   <div v-if="response && response.facets && response.nbHits">
-    <div class="mb-4 gap-2 flex flex-wrap p-4 items-center">
+    <div class="p-4 gap-2 flex items-center border-b">
       <t-rich-select
         v-model="filters['style']"
         placeholder="Style"
@@ -8,25 +8,6 @@
         clearable
         hide-search-box
       />
-
-      <t-rich-select
-        v-model="filters['type']"
-        placeholder="Format"
-        :options="facets['type']"
-        clearable
-        hide-search-box
-      />
-
-      <DatePicker
-        v-model="fromDate"
-        :lang="{ formatLocale: { firstDayOfWeek: 1 } }"
-        value-type="timestamp"
-        class="w-32 py-4"
-        placeholder="Date"
-        format="D MMM YY"
-        :clearable="false"
-      />
-      <TButton type="nav" icon="share" @click="showPopup = true" />
     </div>
 
     <TPopup v-if="showPopup" title="Share" @close="showPopup = false">
@@ -116,6 +97,20 @@
     <div v-if="response.nbPages > 1" class="my-4 flex justify-center">
       <TButton label="Load More" type="primary" @click="loadMore" />
     </div>
+
+    <div class="p-4 gap-2 flex items-center border-b">
+      <div>Show events from</div>
+      <DatePicker
+        v-model="fromDate"
+        :lang="{ formatLocale: { firstDayOfWeek: 1 } }"
+        value-type="timestamp"
+        class="w-32 py-4"
+        placeholder="Date"
+        format="D MMM YY"
+        :clearable="false"
+      />
+      <TButton type="nav" icon="share" @click="showPopup = true" />
+    </div>
   </div>
   <div v-else>
     <slot />
@@ -145,6 +140,10 @@ export default {
     profile: {
       type: Object,
       default: null,
+    },
+    view: {
+      type: String,
+      default: 'parties',
     },
   },
   setup(props) {
@@ -189,12 +188,20 @@ export default {
         .map((field) => `${field}:${filters.value[field]}`)
         .join(',')
     })
+    const filter = computed(() => {
+      if (props.view === 'parties') {
+        return '(type:Party OR type:Concert OR type:Festival OR type:Congress)'
+      }
+      if (props.view === 'classes') {
+        return '(type:Course OR type:Workshop OR type:Festival OR type:Congress)'
+      }
+    })
     watch([currentPage, facetFilters, radius, city, fromDate], () => {
       if (!city.value?.location) {
         return
       }
       const searchParams = {
-        filters: `startDate>${fromDate.value}`,
+        filters: `startDate>${fromDate.value} AND ${filter.value}`,
         facets: Object.keys(facets.value),
         facetFilters: facetFilters.value,
         page: currentPage.value - 1,

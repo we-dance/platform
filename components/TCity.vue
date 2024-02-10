@@ -1,241 +1,50 @@
 <template>
   <div>
-    <THeader>
-      <TButton
-        v-if="profile.type === 'City'"
-        slot="left"
-        allow-guests
-        :to="localePath('/cities')"
-        icon="place"
-        :label="profile.name"
-      />
-      <div
-        v-else
-        slot="left"
-        class="flex flex-no-wrap items-center ml-8 md:ml-0"
-      >
-        <div class="ml-1 font-lato text-lg font-bold">
-          {{ profile.username }}
-        </div>
-      </div>
-
-      <TButton
-        allow-guests
-        type="nav"
-        icon="search"
-        :to="localePath('/search')"
-      />
-      <TDropdown>
-        <TPopupEdit
-          v-if="isAdmin()"
-          type="context"
-          :fields="profileFields"
-          :label="$t('Edit')"
-          collection="profiles"
-          singular="profile"
-          :item="profile"
-        />
-        <TCardActions
-          :id="profile.id"
-          collection="profiles"
-          :item="profile"
-          type="context"
-        />
-        <TButtonShare
-          :id="profile.id"
-          collection="profiles"
-          :place="profile.place"
-          :file="profile.socialCover"
-          :file-name="profile.username"
-          :url="`https://wedance.vip/${profile.username}`"
-          :text="profile.name"
-          type="context"
-          :label="$t('share.title')"
-        />
-        <TButton
-          v-if="isAdmin()"
-          type="context"
-          icon="delete"
-          :label="$t('Delete')"
-          @click="remove(profile.id)"
-        />
-      </TDropdown>
-    </THeader>
-
-    <div class="p-2 border-b text-center">
-      <a
-        href="https://bit.ly/49cYPoB"
-        target="_blank"
-        class="underline text-primary hover:no-underline"
-        >Become a Dance Promoter – Get Discounts!</a
-      >
-    </div>
-
-    <div class="grid grid-cols-4 gap-4 p-4">
-      <div v-if="profile.photo">
-        <img
-          :src="profile.photo"
-          :alt="profile.username"
-          class="w-full rounded-full"
-        />
-      </div>
-
-      <div :class="profile.photo ? 'col-span-3' : 'col-span-4'">
-        <h1 class="leading-tight font-bold">{{ profile.name }}</h1>
-        <TExpand class="mb-4">
-          <TPreview :content="profile.bio" />
-          <div v-if="!profile.bio" class="typo">
-            <p>Welcome to {{ profile.name }} on WeDance!</p>
-            <p>Hello, dancers and enthusiasts! 🕺💃</p>
-
-            <p>
-              We're excited to announce that WeDance has now arrived in
-              {{ profile.name }}! As we're just stepping into this vibrant city,
-              our dance event calendar might look a little empty - but not for
-              long, with your help.
-            </p>
-
-            <h3>Be a Part of Our Growing Community:</h3>
-
-            <ul>
-              <li>
-                <strong>Add Events:</strong> Know about a salsa night, a tango
-                workshop, or a swing dance party? Add it to our platform and let
-                others join in the fun.
-              </li>
-              <li>
-                <strong>Share Local Insights:</strong> Help us map out the dance
-                scene. Share information about dance organizers, popular venues,
-                or active WhatsApp groups. Your knowledge is invaluable!
-              </li>
-              <li>
-                <strong>Connect and Grow:</strong> We're more than just a
-                platform; we're a community of dancers helping each other. By
-                sharing and participating, you're not just finding events,
-                you're helping fellow dancers experience the joy of dance in
-                {{ profile.name }}.
-              </li>
-            </ul>
-            <p class="mt-4">
-              Together, we can make {{ profile.name }} a thriving hub for dance
-              lovers. Whether you're a local or just passing through, let's
-              create a space where every dancer can find their rhythm. Thank you
-              for joining us on this journey.
-            </p>
-            <p>Let's dance the night away!</p>
-            <p>
-              With excitement,<br />
-              WeDance Team
-            </p>
-          </div>
-        </TExpand>
-
-        <div class="text-xs text-gray-500">
-          {{ $tc('views', profile.viewsCount, { count: profile.viewsCount }) }}
-          ·
-          {{
-            $tc('subscribers', subscribersCount, {
-              count: subscribersCount,
-            })
-          }}
-        </div>
-
-        <div v-if="profile.type === 'City'" class="flex space-x-2 mt-4">
-          <TButton
-            :to="localePath('/events/-/import')"
-            type="primary"
-            icon="plus"
-            label="Add Event"
-          />
-          <TReaction
-            :label="$t('Subscribe')"
-            :toggled-label="$t('Unsubscribe')"
-            field="watch"
-            icon="BellIcon"
-            hide-count
-            :item="profile"
-            collection="profiles"
-          />
-        </div>
+    <THeader show-logo class="md:hidden" />
+    <div class="p-4">
+      <h1 class="text-2xl font-bold">
+        {{ view === 'parties' ? 'Parties' : 'Classes' }} in {{ profile.name }}
+      </h1>
+      <TProfileStats :profile="profile" />
+      <div class="text-xs">
+        <ul class="list-disc pl-4 pt-4">
+          <li>
+            Looking for partner?
+            <router-link to="/find-partner/start" class="underline font-bold"
+              >Find a dance partner</router-link
+            >
+          </li>
+          <li v-if="!$route.query.view">
+            Want to learn to dance?
+            <router-link to="/Munich?view=classes" class="underline font-bold"
+              >See classes</router-link
+            >
+          </li>
+          <li v-if="$route.query.view === 'classes'">
+            Where can I dance?
+            <router-link to="/Munich" class="underline font-bold"
+              >See parties</router-link
+            >
+          </li>
+          <li>
+            Not in {{ profile.name }}?
+            <router-link to="/settings?tab=profile" class="underline font-bold"
+              >Change dancing city</router-link
+            >
+          </li>
+        </ul>
       </div>
     </div>
 
-    <div v-if="$route.query.beta" class="p-4">
-      <div class="rounded-md overflow-hidden shadow">
-        <div class="bg-orange-100 flex justify-center">
-          <TIcon name="find-partner" />
-        </div>
-        <div class="p-4 flex flex-col items-center">
-          <div class="text-sm text-center pb-4">
-            Explore dancers in your city and connect with them to find your next
-            dance partner.
-          </div>
-          <TButton
-            to="/find-partner/start"
-            type="primary"
-            label="Find Dance Partner"
-          />
-        </div>
-      </div>
-    </div>
-
-    <div class="border-t bg-orange-50">
-      <div class="text-xs pt-2 pr-2 text-right text-primary">SPONSORED</div>
-      <NuxtLink
-        v-if="promo && promo.id"
-        :to="localePath(`/events/${promo.id}`)"
-        class="hover:opacity-75"
-      >
-        <TEventText3 :item="promo" />
-      </NuxtLink>
-    </div>
-
-    <TCollapse title="Events" expanded>
-      <TCalendar :profile="profile" class="mt-4 w-full border-t pt-4 pb-8" />
-    </TCollapse>
-
-    <TCollapse title="News">
-      <TPostList order-by="createdAt" :filter="{ place: profile.place }" />
-    </TCollapse>
-
-    <TCollapse title="Organisers">
-      <TCommunity type="Organiser" class="pt-4 border-t" hide-role />
-    </TCollapse>
-
-    <TCollapse title="Venues">
-      <TCommunity type="Venue" class="pt-4 border-t" hide-role />
-    </TCollapse>
-
-    <TCollapse title="Artists">
-      <TCommunity type="Artist" class="pt-4 border-t" hide-role />
-    </TCollapse>
-
-    <TCollapse title="Dancers">
-      <TCommunity type="Dancer" class="pt-4 border-t" />
-    </TCollapse>
-
-    <WTeaser
-      v-if="!uid && profile.type !== 'City' && profile.place"
-      :title="$t('profile.invite.header', { count: invitesLeft })"
-      :description="$t('profile.invite.description', { name: profile.name })"
-      :button="$t('profile.invite.action')"
-      :url="localePath(`/signin?invitedBy=${profile.username}`)"
-      class="my-0"
+    <TCalendar
+      :key="view"
+      :profile="profile"
+      :view="view"
+      class="w-full border-t"
     />
 
-    <div
-      v-if="
-        profile.reviews &&
-          profile.type !== 'City' &&
-          profile.username !== 'Travel'
-      "
-    >
-      <h3 class="text-xl font-bold p-4 border-t">{{ $t('reviews.title') }}</h3>
-      <TReviewList :reviews="profile.reviews" class="p-4" />
-    </div>
-
     <WTeaser
-      v-if="profile.type === 'City' && profile.website"
+      v-if="profile.website"
       :allow-guests="false"
       :title="$t('teaser.chat.title')"
       :description="$t('teaser.chat.description')"
@@ -245,7 +54,7 @@
     />
 
     <WTeaser
-      v-if="profile.type === 'City' && !profile.website"
+      v-if="!profile.website"
       :allow-guests="false"
       :title="$t('teaser.chat.title')"
       :description="$t('teaser.chat.description')"
@@ -254,27 +63,7 @@
       class="w-full mt-4"
     />
 
-    <div
-      v-if="profile.id !== profile.createdBy && profile.type !== 'City'"
-      class="py-4 flex justify-center"
-    >
-      <TButton
-        type="simple"
-        :label="$t('profile.claim')"
-        :href="`mailto:support@wedance.vip?subject=Claim ${profile.username}`"
-      />
-    </div>
-
-    <TPostList
-      v-if="profile.type !== 'City'"
-      :filter="{ username: profile.username }"
-      class="mt-4 w-full border-t"
-    />
-
-    <div
-      v-if="profile.type === 'City' && profile.instagram"
-      class="bg-gray-100 py-4 flex justify-center"
-    >
+    <div v-if="profile.instagram" class="bg-gray-100 py-4 flex justify-center">
       <div class="max-w-md py-4 space-y-1">
         <div class="flex justify-center"></div>
         <h3 class="text-2xl font-extrabold text-center">
@@ -374,7 +163,7 @@ export default {
   head() {
     return getCityMeta(this.profile, [], this.$route.query.style)
   },
-  setup(props) {
+  setup(props, { root }) {
     const internationalChatLink = 'https://t.me/+Vxw15sDG-dWpqHDj'
     const { uid, isAdmin, can } = useAuth()
     const { profileFields } = useProfiles()
@@ -384,6 +173,7 @@ export default {
     const invitesLeft = 5
     const { switchCity } = useCities()
     const community = computed(() => getCity(props.profile?.place))
+    const view = computed(() => root.$route.query.view || 'parties')
 
     const subscribersCount = computed(() => {
       return props.profile?.watch?.usernames?.length || 0
@@ -408,6 +198,7 @@ export default {
       invitesLeft,
       subscribersCount,
       remove,
+      view,
     }
   },
 }

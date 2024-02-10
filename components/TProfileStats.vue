@@ -1,7 +1,9 @@
 <template>
   <div class="flex flex-wrap text-xs text-gray-500 space-x-1">
-    <TReviewCount :profile="profile" />
-    <div v-if="profile.reviews && profile.reviews.length">·</div>
+    <template v-if="profile.reviews && profile.reviews.length">
+      <TReviewCount :profile="profile" />
+      <div>·</div>
+    </template>
     <div>
       {{ $tc('views', profile.viewsCount, { count: profile.viewsCount }) }}
     </div>

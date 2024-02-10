@@ -1,14 +1,6 @@
 <template>
   <div>
-    <THeader>
-      <TButton
-        slot="left"
-        :to="localePath('/cities?target=/community')"
-        icon="place"
-        :label="cityName || $t('cities.choose')"
-      />
-      <TButton type="nav" icon="search" to="/search" />
-    </THeader>
+    <THeader show-logo class="md:hidden" />
 
     <div>
       <div
