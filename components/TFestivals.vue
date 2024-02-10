@@ -1,116 +1,15 @@
 <template>
   <div>
-    <THeader>
-      <TButton
-        slot="left"
-        allow-guests
-        :to="localePath('/cities')"
-        icon="place"
-        :label="profile.name"
-      />
+    <THeader show-logo class="md:hidden" />
 
-      <TButton
-        allow-guests
-        type="nav"
-        icon="search"
-        :to="localePath('/search')"
-      />
-      <TDropdown>
-        <TPopupEdit
-          v-if="isAdmin()"
-          type="context"
-          :fields="profileFields"
-          :label="$t('Edit')"
-          collection="profiles"
-          singular="profile"
-          :item="profile"
-        />
-        <TCardActions
-          :id="profile.id"
-          collection="profiles"
-          :item="profile"
-          type="context"
-        />
-        <TButtonShare
-          :id="profile.id"
-          collection="profiles"
-          :place="profile.place"
-          :file="profile.socialCover"
-          :file-name="profile.username"
-          :url="`https://wedance.vip/${profile.username}`"
-          :text="profile.name"
-          type="context"
-          :label="$t('share.title')"
-        />
-        <TButton
-          v-if="isAdmin()"
-          type="context"
-          icon="delete"
-          :label="$t('Delete')"
-          @click="remove(profile.id)"
-        />
-        <TButton
-          v-if="isAdmin()"
-          type="context"
-          icon="upload"
-          label="Instagram"
-          @click="softUpdate(profile.id, { import: 'requested' })"
-        />
-      </TDropdown>
-    </THeader>
-
-    <div class="p-2 border-b text-center">
-      <a
-        href="https://bit.ly/49cYPoB"
-        target="_blank"
-        class="underline text-primary hover:no-underline"
-        >Become a Dance Promoter – Get Discounts!</a
-      >
-    </div>
-
-    <div class="grid grid-cols-4 gap-4 p-4">
-      <div>
-        <img
-          v-if="profile.photo"
-          :src="profile.photo"
-          :alt="profile.username"
-          class="w-full rounded-full"
-        />
-      </div>
-
-      <div class="col-span-3">
-        <h1 class="leading-tight font-bold">{{ profile.name }}</h1>
-        <TExpand class="text-sm mb-4">
-          <TPreview :content="profile.bio" />
-        </TExpand>
-
-        <div class="text-xs text-gray-500">
-          {{ $tc('views', profile.viewsCount, { count: profile.viewsCount }) }}
-          ·
-          {{
-            $tc('subscribers', subscribersCount, {
-              count: subscribersCount,
-            })
-          }}
-        </div>
-
-        <div class="flex space-x-2 mt-4">
-          <TButton
-            :to="localePath('/events/-/import')"
-            type="primary"
-            icon="plus"
-            label="Add Event"
-          />
-          <TReaction
-            :label="$t('Subscribe')"
-            :toggled-label="$t('Unsubscribe')"
-            field="watch"
-            icon="BellIcon"
-            hide-count
-            :item="profile"
-            collection="profiles"
-          />
-        </div>
+    <div class="p-4">
+      <h1 class="text-2xl font-bold">
+        Dance Festivals Worldwide
+      </h1>
+      <TProfileStats :profile="profile" />
+      <div class="text-sm">
+        Dance Calendar for Travelers. Plan your holidays and weekends to dance
+        Salsa, Bachata, Kizomba, Zouk and 130 other dances around the world.
       </div>
     </div>
 

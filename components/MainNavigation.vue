@@ -7,6 +7,19 @@
     </TButton>
     <TButton
       allow-guests
+      :to="localePath('/cities')"
+      icon="place"
+      :label="currentCity ? city.name : $t('nav.chooseCity')"
+      type="nav"
+    />
+    <TButton
+      :to="localePath('/events/-/import')"
+      icon="plus"
+      label="Add Event"
+      type="nav"
+    />
+    <TButton
+      allow-guests
       :to="localePath('/search')"
       icon="search"
       :label="$t('nav.search')"
@@ -48,14 +61,6 @@
       :to="localePath(`/community`)"
       icon="people"
       label="Community"
-      type="nav"
-    />
-    <TButton
-      v-if="!currentCity"
-      allow-guests
-      :to="localePath('/cities')"
-      icon="place"
-      :label="$t('nav.chooseCity')"
       type="nav"
     />
     <TButton
