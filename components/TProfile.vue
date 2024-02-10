@@ -88,7 +88,7 @@
         <h1 class="leading-tight font-bold">{{ profile.name }}</h1>
         <TExpand class="text-sm mb-4">
           <TPreview :content="profile.bio" />
-          <TProfileDetails v-if="profile.type !== 'City'" :profile="profile" />
+          <TProfileDetails :profile="profile" />
         </TExpand>
 
         <div class="text-xs text-gray-500">
