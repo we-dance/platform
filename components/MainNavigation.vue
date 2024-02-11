@@ -13,32 +13,21 @@
       type="nav"
     />
     <TButton
-      :to="localePath('/events/-/import')"
-      icon="plus"
-      label="Add Event"
-      type="nav"
-    />
-    <TButton
       allow-guests
       :to="localePath('/search')"
       icon="search"
       :label="$t('nav.search')"
       type="nav"
     />
+
+    <div class="border-b pt-2 text-xs font-bold uppercase">Events</div>
     <TButton
-      allow-guests
-      :to="localePath('/find-partner/start')"
-      icon="search"
-      label="Find Partner"
+      :to="localePath('/events/-/import')"
+      icon="plus"
+      label="Add Event"
       type="nav"
     />
-    <TButton
-      allow-guests
-      :to="localePath('/Travel')"
-      icon="directions"
-      :label="$t('nav.festivals')"
-      type="nav"
-    />
+
     <TButton
       v-if="currentCity"
       allow-guests
@@ -56,18 +45,34 @@
       type="nav"
     />
     <TButton
+      allow-guests
+      :to="localePath('/Travel')"
+      icon="calendar"
+      :label="$t('nav.festivals')"
+      type="nav"
+    />
+
+    <div class="border-b pt-2 text-xs font-bold uppercase">Community</div>
+    <TButton
+      allow-guests
+      :to="localePath('/find-partner/start')"
+      icon="search"
+      label="Find Partner"
+      type="nav"
+    />
+    <TButton
       v-if="currentCity"
       allow-guests
       :to="localePath(`/community`)"
       icon="people"
-      label="Community"
+      label="Members"
       type="nav"
     />
     <TButton
       allow-guests
       :to="localePath('/feed')"
-      icon="news"
-      :label="$t('nav.feed')"
+      icon="chat"
+      label="Ask Locals"
       type="nav"
     />
     <TButton
@@ -77,7 +82,9 @@
       label="Dance Wiki"
       type="nav"
     />
+
     <template v-if="uid">
+      <div class="border-b pt-2 text-xs font-bold uppercase">My Profile</div>
       <TButton
         :to="localePath('/chat')"
         icon="chat"

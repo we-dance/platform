@@ -4,6 +4,8 @@
       v-if="value && value.username"
       :username="value.username"
       :fallback="value"
+      hide-role
+      hide-buttons
     >
       <template v-slot:right>
         <TDropdown v-slot="{ closeMenu }">

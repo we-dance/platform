@@ -7,7 +7,7 @@
         {{ view === 'parties' ? 'Parties' : 'Classes' }} in {{ profile.name }}
       </h1>
       <TProfileStats :profile="profile" />
-      <div class="text-xs">
+      <div>
         <ul class="list-disc pl-4 pt-4">
           <li>
             Looking for partner?
@@ -17,20 +17,26 @@
           </li>
           <li v-if="!$route.query.view">
             Want to learn to dance?
-            <router-link to="/Munich?view=classes" class="underline font-bold"
+            <router-link
+              :to="`/${profile.username}?view=classes`"
+              class="underline font-bold"
               >See classes</router-link
             >
           </li>
           <li v-if="$route.query.view === 'classes'">
-            Where can I dance?
-            <router-link to="/Munich" class="underline font-bold"
+            Where can I practice?
+            <router-link
+              :to="`/${profile.username}`"
+              class="underline font-bold"
               >See parties</router-link
             >
           </li>
           <li>
-            Not in {{ profile.name }}?
-            <router-link to="/settings?tab=profile" class="underline font-bold"
-              >Change dancing city</router-link
+            Want to help community?
+            <router-link
+              :to="`/reviews/add?city=${profile.username}`"
+              class="underline font-bold"
+              >Recommend a place</router-link
             >
           </li>
         </ul>
@@ -45,22 +51,11 @@
     />
 
     <WTeaser
-      v-if="profile.website"
       :allow-guests="false"
-      :title="$t('teaser.chat.title')"
-      :description="$t('teaser.chat.description')"
-      :button="$t('teaser.chat.btnChatExists')"
-      :href="profile.website"
-      class="w-full mt-4"
-    />
-
-    <WTeaser
-      v-if="!profile.website"
-      :allow-guests="false"
-      :title="$t('teaser.chat.title')"
-      :description="$t('teaser.chat.description')"
-      :button="$t('teaser.chat.btnChatMissing')"
-      :href="internationalChatLink"
+      :title="$t('teaser.feed.title')"
+      :description="$t('teaser.feed.description')"
+      :button="$t('teaser.feed.btn')"
+      url="/feed"
       class="w-full mt-4"
     />
 

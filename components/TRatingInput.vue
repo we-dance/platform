@@ -1,6 +1,11 @@
 <template>
-  <div class="flex">
-    <div v-for="n in stars" :key="n">
+  <div class="flex w-full justify-center">
+    <div
+      v-for="n in stars"
+      :key="n"
+      class="cursor-pointer"
+      @click="$emit('input', n)"
+    >
       <svg
         :class="
           `${ratio} ${
@@ -20,7 +25,7 @@
 </template>
 <script>
 export default {
-  name: 'RatingItem',
+  name: 'RatingInput',
   props: {
     value: {
       type: [Number, String],
@@ -28,7 +33,7 @@ export default {
     },
     size: {
       type: Number,
-      default: 5,
+      default: 12,
     },
   },
   data() {

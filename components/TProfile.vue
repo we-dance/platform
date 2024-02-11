@@ -14,7 +14,7 @@
         <TIcon v-else name="undraw_profile_pic" class="w-full rounded-full" />
       </div>
       <h1 class="leading-none mb-2 px-4 text-center font-bold text-3xl mt-2">
-        {{ profile.name }}
+        {{ profile.name || profile.username }}
       </h1>
       <TProfileStats :profile="profile" />
       <TPreview class="text-sm text-center px-4" :content="profile.bio" />
@@ -90,7 +90,33 @@
     <TwTabs id="tabs" :tabs="tabs" />
 
     <div class="min-h-screen">
-      <TProfileDetails v-if="!$route.query.view" :profile="profile" />
+      <div v-if="!$route.query.view && uid == profile.id">
+        <div class="typo p-4 border-b bg-gray-100">
+          <ul>
+            <li>
+              <strong>Share your experience</strong>:
+              <router-link to="/reviews/add">Recommend someone</router-link> who
+              was part of your dance journey to help your friends and other
+              dancers to have best experience. Your stories will appear hear.
+            </li>
+            <li>
+              <strong>Plan together</strong>:
+              <router-link to="/events/-/import">Add events</router-link> which
+              you would like to attend or discover existing events in
+              <TCityLink :place="profile.current" />.
+            </li>
+          </ul>
+          <p>
+            Send your profile to your friends to share your experience and dance
+            agenda.
+          </p>
+        </div>
+      </div>
+      <TStories
+        v-if="!$route.query.view"
+        :created-by="profile.id"
+        class="w-full"
+      />
       <TEventListNoLoad
         v-if="$route.query.view === 'events'"
         :community="profile.username"
@@ -100,13 +126,12 @@
       />
       <TReviewList
         v-if="$route.query.view === 'reviews'"
-        :reviews="profile.reviews"
+        :profile="profile"
         class="px-4"
       />
-      <TPostList
-        v-if="$route.query.view === 'posts'"
-        :filter="{ username: profile.username }"
-        class="w-full"
+      <TProfileDetails
+        v-if="$route.query.view === 'about'"
+        :profile="profile"
       />
     </div>
 
@@ -158,7 +183,7 @@ export default {
 
     const tabs = computed(() => [
       {
-        name: 'About',
+        name: 'Stories',
         to: `/${props.profile.username}`,
         current: !view.value,
       },
@@ -171,11 +196,12 @@ export default {
         name: 'Reviews',
         to: `/${props.profile.username}?view=reviews#tabs`,
         current: view.value === 'reviews',
+        hidden: props.profile.type === 'Dancer',
       },
       {
-        name: 'Posts',
-        to: `/${props.profile.username}?view=posts#tabs`,
-        current: view.value === 'posts',
+        name: 'About',
+        to: `/${props.profile.username}?view=posts#about`,
+        current: view.value === 'about',
       },
     ])
 

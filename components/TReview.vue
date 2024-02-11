@@ -1,32 +1,35 @@
 <template>
   <div class="flex flex-col items-center p-2 gap-2 overflow-x-hidden border-b">
-    <div class="flex flex-row items-center p-2 gap-4 w-full h-fit ">
-      <TProfilePhoto2 size="lg" :src="item.author.photo" />
-      <div class="flex flex-col items-start">
-        <h3 class="font-semibold text-black-500">
-          {{ item.author.username }}
-        </h3>
-
-        <div class="flex justify-left w-full h-fit items-center">
-          <TRatingItem :rating="item.stars" />
-          <a
-            v-if="item.link"
-            :href="item.link"
-            class="text-gray-600 hover:text-gray-500 text-xs"
-          >
-            {{ item.createdAt || 'Source' }}
-          </a>
+    <div class="flex flex-row items-center gap-2 w-full h-fit ">
+      <TAvatar photo size="md" :uid="item.createdBy" />
+      <div class="flex flex-col items-start w-full">
+        <TAvatar name size="md" :uid="item.createdBy" />
+        <div class="text-gray-600 text-xs">
+          {{ dateDiff(item.createdAt) }}
         </div>
       </div>
     </div>
-
-    <div v-if="item.description" class="p-2 text-left w-full text-sm">
+    <div class="flex justify-left w-full h-fit items-center gap-2">
+      <TRatingItem :value="item.stars" />
+      <div v-if="item.link">
+        <a :href="item.link" target="_blank" class="text-primary text-xs">
+          {{
+            item.link.includes('facebook.com')
+              ? 'Posted on Facebook'
+              : 'Posted on Google'
+          }}
+        </a>
+      </div>
+    </div>
+    <div v-if="item.description" class="w-full text-sm">
       {{ item.description }}
     </div>
   </div>
 </template>
 
 <script>
+import { dateDiff } from '~/utils'
+
 export default {
   name: 'TReview',
   props: {
@@ -34,6 +37,11 @@ export default {
       type: Object,
       default: () => ({}),
     },
+  },
+  setup() {
+    return {
+      dateDiff,
+    }
   },
 }
 </script>

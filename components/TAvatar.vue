@@ -7,11 +7,13 @@
     </div>
     <div v-if="name">
       <NuxtLink
+        v-if="profile.username"
         class="hover:underline font-bold"
         :to="localePath(`/${profile.username}`)"
       >
-        {{ profile.name }}
+        {{ profile.name || profile.username }}
       </NuxtLink>
+      <span v-else class="font-bold">{{ username }}</span>
     </div>
     <slot />
   </div>
@@ -39,6 +41,10 @@ export default {
     size: {
       type: String,
       default: 'xs',
+    },
+    username: {
+      type: String,
+      default: '',
     },
   },
   setup(props) {

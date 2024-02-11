@@ -6,7 +6,7 @@
         aria-label="Tabs"
       >
         <router-link
-          v-for="(tab, tabIdx) in tabs"
+          v-for="(tab, tabIdx) in visibleTabs"
           :key="tab.name"
           :to="tab.to"
           :class="[
@@ -37,6 +37,11 @@ export default {
     tabs: {
       type: Array,
       default: () => [],
+    },
+  },
+  computed: {
+    visibleTabs() {
+      return this.tabs.filter((tab) => !tab.hidden)
     },
   },
 }

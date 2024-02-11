@@ -1,103 +1,78 @@
 <template>
   <div>
-    <THeader :title="$t('feed.title')" />
+    <THeader show-logo class="md:hidden" />
 
-    <div class="border-b p-4 flex">
-      <TInputButtons v-model="filterType" :options="filterTypeList" />
+    <div class="p-4">
+      <h1 class="text-2xl font-bold">Ask {{ cityName }}</h1>
+      <div class="text-sm">
+        Explore our community feed for real-time recommendations and dance event
+        insights from dancers worldwide.
+      </div>
     </div>
 
-    <TPostList v-bind="filter" />
+    <div class="border-b">
+      <form class="flex flex-col gap-4 p-4" @submit.prevent="saveItem">
+        <TField
+          v-model="item.style"
+          label="Dance style"
+          label-position="top"
+          placeholder="Select dance style"
+          component="TInputStyle"
+          popular-only
+        />
+        <TField
+          v-model="item.description"
+          label-position="top"
+          component="TInputTextarea"
+          :placeholder="`Ask for recommendations in ${cityName}`"
+        />
+        <div class="flex justify-end gap-2">
+          <TButton xtype="submit" variant="primary">Post</TButton>
+        </div>
+      </form>
+    </div>
+
+    <TStories :place="currentCity" />
   </div>
 </template>
 
 <script>
-import { computed, ref } from 'vue-demi'
+import { ref } from '@nuxtjs/composition-api'
+import firebase from 'firebase/app'
+import 'firebase/firestore'
 import { useAuth } from '~/use/auth'
 import { useCities } from '~/use/cities'
-import { useDoc } from '~/use/doc'
-import { useApp } from '~/use/app'
-import { getUrlFromText } from '~/utils'
-import { usePosts } from '~/use/posts'
 
 export default {
   name: 'Feed',
-  head() {
-    return {
-      title: 'WeDance Feed',
-    }
+  methods: {
+    async saveItem() {
+      let data = this.item
+      this.item = {}
+
+      data = {
+        ...data,
+        place: this.currentCity,
+        createdAt: +new Date(),
+        createdBy: this.profile.id,
+        username: this.profile.username,
+        type: 'ask-for-recommendations',
+      }
+
+      const firestore = firebase.firestore()
+      await firestore.collection('stories').add(data)
+    },
   },
-  setup() {
-    const { uid, username } = useAuth()
-    const { currentCity } = useCities()
-    const { getPlace } = useApp()
-    const newMessage = ref('')
-    const postType = ref('')
-    const { postTypeList, filterTypeList } = usePosts()
-
-    const filterType = ref('Newest')
-    const { create } = useDoc('posts')
-
-    const filter = computed(() => {
-      const map = {
-        Newest: { orderBy: 'createdAt' },
-        Hot: { orderBy: 'watch.count' },
-        Popular: { orderBy: 'star.count' },
-        Unpopular: { orderBy: 'hide.count' },
-        Watching: { filter: { [`watch.list.${username.value}`]: true } },
-        Starred: { filter: { [`star.list.${username.value}`]: true } },
-        Archived: { filter: { [`hide.list.${username.value}`]: true } },
-        Authored: {
-          orderBy: 'createdAt',
-          filter: { username: username.value },
-        },
-      }
-
-      return map[filterType.value]
-    })
-
-    const send = () => {
-      let description = newMessage.value
-
-      if (!description) {
-        return
-      }
-
-      const url = getUrlFromText(description)
-      description = description.replace(url, '').trim()
-
-      const region = getPlace(currentCity.value)
-
-      newMessage.value = ''
-
-      const post = {
-        region,
-        description,
-        type: postType.value,
-        url,
-        commentsCount: 0,
-        commentsLast: null,
-        watch: {
-          count: 1,
-          list: {
-            [username.value]: true,
-          },
-        },
-        viewsCount: 0,
-      }
-
-      create(post)
-    }
+  setup(props, { root }) {
+    const { profile } = useAuth()
+    const { currentCity, cityName } = useCities()
+    const item = ref({})
 
     return {
+      item,
       currentCity,
-      uid,
-      newMessage,
-      send,
-      filterType,
-      filter,
-      postType,
-      filterTypeList,
-      postTypeList,
+      cityName,
+      profile,
     }
   },
 }

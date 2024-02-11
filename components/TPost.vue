@@ -7,7 +7,12 @@
       <div class="flex-grow">
         <div class="block text-sm leading-tight">
           <div class="flex space-x-1 text-xs">
-            <TAvatar name size="md" :uid="item.createdBy" />
+            <TAvatar
+              name
+              size="md"
+              :uid="item.createdBy"
+              :username="item.username"
+            />
             <span>•</span>
             <div>
               <NuxtLink
@@ -18,7 +23,7 @@
               >
               <NuxtLink
                 v-else
-                :to="localePath(`/posts/${item.id}`)"
+                :to="`#/stories/${item.id}`"
                 class="hover:underline"
                 >{{ dateDiff(item.createdAt) }}</NuxtLink
               >
@@ -33,6 +38,23 @@
             class="text-xs"
           >
             announced an event
+          </div>
+          <div v-else-if="item.type === 'review'" class="text-xs">
+            recommended
+            <span v-if="item.place">in <TCityLink :place="item.place"/></span>
+            <span v-if="item.style"
+              >for <strong class="font-bold">{{ item.style }}</strong></span
+            >
+          </div>
+          <div
+            v-else-if="item.type === 'ask-for-recommendations'"
+            class="text-xs"
+          >
+            asking
+            <span v-if="item.style"
+              >for <strong class="font-bold">{{ item.style }}</strong></span
+            >
+            <span v-if="item.place">in <TCityLink :place="item.place"/></span>
           </div>
           <div v-else class="text-xs">published a post</div>
         </div>
@@ -82,21 +104,63 @@
         />
       </TDropdown>
     </div>
-    <h1 v-if="item.title" class="px-4 font-bold text-xl">{{ item.title }}</h1>
-    <TExpand v-if="item.description" class="p-4 w-auto" :expanded="expanded">
-      <TPreview :content="item.description" />
-    </TExpand>
-    <div v-if="!hideMedia">
-      <TEventText2
-        v-if="item.type === 'event'"
+    <div v-if="item.type === 'review'">
+      <div class="p-4">
+        <div class="flex justify-left w-full h-fit items-center gap-2">
+          <TRatingItem :value="item.stars" />
+          <div v-if="item.link">
+            <a :href="item.link" target="_blank" class="text-primary text-xs">
+              {{
+                item.link.includes('facebook.com')
+                  ? 'Posted on Facebook'
+                  : 'Posted on Google'
+              }}
+            </a>
+          </div>
+        </div>
+        <TPreview :content="item.description" />
+        <WProfile
+          v-if="item.receiver && !hideReceiver"
+          :username="item.receiver.username"
+          class="border rounded shadow"
+        />
+      </div>
+    </div>
+    <div v-else>
+      <h1 v-if="item.title" class="px-4 font-bold text-xl">{{ item.title }}</h1>
+      <TPreview :content="item.description" class="p-4 w-auto" />
+      <div v-if="!hideMedia">
+        <TEventText2
+          v-if="item.type === 'event'"
+          :item="item"
+          show-date
+          class="p-4 border m-4 rounded shadow"
+        />
+
+        <TCardPoll v-else-if="item.type === 'poll'" :node="item" />
+
+        <TCardLink v-else-if="item.url" :url="item.url" :show="show" />
+      </div>
+    </div>
+    <div class="flex gap-2 px-4">
+      <TReaction
+        :label="$t('Helpful')"
+        field="upvotes"
         :item="item"
-        show-date
-        class="p-4 border m-4 rounded shadow"
+        collection="stories"
       />
-
-      <TCardPoll v-else-if="item.type === 'poll'" :node="item" />
-
-      <TCardLink v-else-if="item.url" :url="item.url" :show="show" />
+      <TReaction
+        :label="$t('Not Helpful')"
+        field="downvotes"
+        :item="item"
+        collection="stories"
+      />
+      <TButton
+        v-if="item.type === 'ask-for-recommendations'"
+        :to="`/reviews/add?city=${item.place}&style=${item.style}`"
+        variant="primary"
+        label="Reply"
+      />
     </div>
     <slot />
   </div>
@@ -114,6 +178,10 @@ export default {
     item: {
       type: Object,
       default: () => ({}),
+    },
+    hideReceiver: {
+      type: Boolean,
+      default: false,
     },
     hideMedia: {
       type: Boolean,
@@ -135,7 +203,7 @@ export default {
   setup(props) {
     const { can } = useAuth()
     const { getCity } = useApp()
-    const { remove } = useDoc('posts')
+    const { remove } = useDoc('stories')
 
     const show = ref(props.showAll)
 

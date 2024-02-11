@@ -6,10 +6,8 @@
     <div>Profile {{ username }} not found</div>
     <slot />
   </div>
-  <div v-else>
-    <div
-      class="flex-row gap-2 flex justify-between items-top py-2 m-1 border-t border-gray-200 px-2 h-full"
-    >
+  <div v-else class="py-2 border-t  border-gray-200 h-full">
+    <div class="flex-row gap-2 flex justify-between items-top m-1 px-2">
       <div class="flex-shrink-0 w-12">
         <TProfilePhoto2 size="lg" :src="profile.photo" />
       </div>
@@ -34,7 +32,7 @@
           {{ getExcerpt(profile.bio) }}
         </div>
         <TProfileStats :profile="profile" />
-        <div class="flex space-x-2 mt-4">
+        <div v-if="!hideButtons" class="flex space-x-2 mt-4">
           <slot name="actions">
             <TReaction
               :label="$t('Connect')"
@@ -121,6 +119,10 @@ export default {
       default: false,
     },
     hideRole: {
+      type: Boolean,
+      default: false,
+    },
+    hideButtons: {
       type: Boolean,
       default: false,
     },
