@@ -131,6 +131,14 @@
 
     <TButton
       v-if="isAdmin()"
+      to="/admin/feed"
+      type="nav"
+      class="text-gray-700"
+      label="Feed"
+    />
+
+    <TButton
+      v-if="isAdmin()"
       to="/admin/cities"
       type="nav"
       class="text-gray-700"
