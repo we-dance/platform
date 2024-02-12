@@ -6,6 +6,7 @@
     <TPost v-else-if="story.type === 'review'" :item="story" />
     <div v-else>
       <div class="p-4 border-b">
+        <div class="text-xs text-gray-700">{{ dateDiff(story.createdAt) }}</div>
         <h1 class="text-2xl font-bold">
           {{ story.description }}
         </h1>
@@ -43,6 +44,7 @@
 <script>
 import { onMounted, ref } from '@nuxtjs/composition-api'
 import { db } from '~/plugins/firebase'
+import { dateDiff } from '~/utils'
 
 export default {
   name: 'ViewStory',
@@ -76,6 +78,7 @@ export default {
       story,
       loading,
       replies,
+      dateDiff,
     }
   },
 }

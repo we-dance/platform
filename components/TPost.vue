@@ -6,7 +6,7 @@
       </div>
       <div class="flex-grow">
         <div class="block text-sm leading-tight">
-          <div class="flex space-x-1 text-xs">
+          <div class="flex flex-wrap space-x-1 text-xs">
             <TAvatar
               name
               size="md"
@@ -15,31 +15,13 @@
             />
             <span>•</span>
             <div>
-              <NuxtLink
-                v-if="item.type === 'event' || item.type === 'import_event'"
-                :to="localePath(`/events/${item.id}`)"
-                class="hover:underline"
-                >{{ dateDiff(item.createdAt) }}</NuxtLink
-              >
-              <NuxtLink
-                v-else
-                :to="`/stories/${item.id}`"
-                class="hover:underline"
-                >{{ dateDiff(item.createdAt) }}</NuxtLink
-              >
+              <NuxtLink :to="`/stories/${item.id}`" class="hover:underline">{{
+                dateDiff(item.createdAt)
+              }}</NuxtLink>
             </div>
-            <template v-if="item.region">
-              <span>•</span>
-              <div>{{ item.region.name }}</div>
-            </template>
           </div>
-          <div
-            v-if="item.type === 'event' || item.type === 'import_event'"
-            class="text-xs"
-          >
-            announced an event
-          </div>
-          <div v-else-if="item.type === 'review'" class="text-xs">
+
+          <div v-if="item.type === 'review'" class="text-xs">
             posted review
             <span v-if="item.place">in <TCityLink :place="item.place"/></span>
             <span v-if="item.style"
