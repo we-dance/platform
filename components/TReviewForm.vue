@@ -76,6 +76,10 @@ export default {
       type: Boolean,
       default: false,
     },
+    question: {
+      type: String,
+      default: '',
+    },
   },
   methods: {
     cancel() {
@@ -100,7 +104,7 @@ export default {
       data = {
         ...data,
         city: this.$route.query.city || '',
-        question: this.$route.query.question || '',
+        question: this.question || '',
         createdBy: this.uid,
         username: this.profile.username,
         type: 'review',

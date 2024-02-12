@@ -24,6 +24,7 @@
         class="border-b"
         :place="story.place"
         :dance="story.style"
+        :question="story.id"
         hide-place
         hide-dance
         hide-cancel

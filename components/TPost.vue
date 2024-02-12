@@ -164,18 +164,10 @@
       />
       <TButton
         v-if="item.type === 'ask-for-recommendations'"
-        :to="
-          `/reviews/add?city=${item.place}&style=${item.style}&question=${item.id}`
-        "
-        variant="primary"
-        label="Reply"
-      />
-      <router-link
-        v-if="item.replies"
         :to="`/stories/${item.id}`"
-        class="text-xs underline hover:no-underline"
-        >{{ item.replies.length }} replies</router-link
-      >
+        variant="primary"
+        :label="repliesCount ? `${repliesCount} replies` : 'Reply'"
+      />
     </div>
     <slot />
   </div>
@@ -234,6 +226,11 @@ export default {
       remove,
       show,
     }
+  },
+  computed: {
+    repliesCount() {
+      return this.item.replies?.length || 0
+    },
   },
 }
 </script>
