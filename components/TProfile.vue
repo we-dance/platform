@@ -103,7 +103,7 @@
               <strong>Plan together</strong>:
               <router-link to="/events/-/import">Add events</router-link> which
               you would like to attend or discover existing events in
-              <TCityLink :place="profile.current" />.
+              <TCityLink :place="currentCity" />.
             </li>
           </ul>
           <p>
@@ -160,6 +160,7 @@ import {
   getEventsWithArtist,
   getEventsWithGuest,
 } from '~/use/events'
+import { useCities } from '~/use/cities'
 
 export default {
   props: {
@@ -174,6 +175,7 @@ export default {
     const { getCity } = useApp()
     const { remove, softUpdate } = useDoc('profiles')
     const invitesLeft = 5
+    const { currentCity } = useCities()
     const community = computed(() => getCity(props.profile?.place))
 
     const events = ref([])
@@ -200,7 +202,7 @@ export default {
       },
       {
         name: 'About',
-        to: `/${props.profile.username}?view=posts#about`,
+        to: `/${props.profile.username}?view=about#tabs`,
         current: view.value === 'about',
       },
     ])
@@ -243,6 +245,7 @@ export default {
       remove,
       events,
       softUpdate,
+      currentCity
     }
   },
   head() {

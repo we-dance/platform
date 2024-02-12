@@ -54,7 +54,7 @@ export default {
         ...data,
         place: this.currentCity,
         createdAt: +new Date(),
-        createdBy: this.profile.id,
+        createdBy: this.uid,
         username: this.profile.username,
         type: 'ask-for-recommendations',
       }
@@ -64,7 +64,7 @@ export default {
     },
   },
   setup(props, { root }) {
-    const { profile } = useAuth()
+    const { uid, profile } = useAuth()
     const { currentCity, cityName } = useCities()
     const item = ref({})
 
@@ -73,6 +73,7 @@ export default {
       currentCity,
       cityName,
       profile,
+      uid
     }
   },
 }

@@ -18,7 +18,7 @@
           popular-only
         />
         <TField
-          v-model="item.profile"
+          v-model="item.receiver"
           component="TInputProfile"
           label="Who you want to recommend?"
           placeholder="Search on WeDance or paste a link to Instagram/Facebook"
@@ -54,6 +54,7 @@ import firebase from 'firebase/app'
 import 'firebase/firestore'
 import { until } from '@vueuse/core'
 import { useAuth } from '~/use/auth'
+import { useCities } from '~/use/cities'
 
 export default {
   name: 'ReviewAdd',
@@ -88,7 +89,7 @@ export default {
       data = {
         ...data,
         city: this.$route.query.city || '',
-        createdBy: this.profile.id,
+        createdBy: this.uid,
         username: this.profile.username,
         type: 'review',
       }
@@ -113,7 +114,8 @@ export default {
   setup(props, { root }) {
     const item = ref({})
     const id = ref(null)
-    const { profile } = useAuth()
+    const { profile, uid } = useAuth()
+    const { currentCity } = useCities()
 
     onMounted(async () => {
       item.value = {}
@@ -121,6 +123,10 @@ export default {
       const receiver = root.$route.query.receiver
 
       await until(profile).not.toBeNull()
+
+      if (currentCity.value) {
+        Vue.set(item.value, 'place', currentCity.value)
+      }
 
       if (root.$route.query.city) {
         Vue.set(item.value, 'place', root.$route.query.city)
@@ -130,17 +136,13 @@ export default {
         Vue.set(item.value, 'style', root.$route.query.style)
       }
 
-      if (profile.value.current) {
-        Vue.set(item.value, 'place', profile.value.current)
-      }
-
       if (receiver) {
         Vue.set(item.value, 'receiver', { username: receiver })
 
         const firestore = firebase.firestore()
         const myReviewsRef = await firestore
           .collection('stories')
-          .where('createdBy', '==', profile.value.id)
+          .where('createdBy', '==', uid.value)
           .get()
 
         const myReviews = myReviewsRef.docs.map((doc) => ({
@@ -163,6 +165,7 @@ export default {
       item,
       profile,
       id,
+      uid
     }
   },
 }
