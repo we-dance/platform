@@ -73,7 +73,7 @@ export default {
       currentCity,
       cityName,
       profile,
-      uid
+      uid,
     }
   },
 }

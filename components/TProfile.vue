@@ -245,7 +245,7 @@ export default {
       remove,
       events,
       softUpdate,
-      currentCity
+      currentCity,
     }
   },
   head() {

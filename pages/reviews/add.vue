@@ -165,7 +165,7 @@ export default {
       item,
       profile,
       id,
-      uid
+      uid,
     }
   },
 }
