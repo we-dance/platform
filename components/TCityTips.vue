@@ -5,10 +5,11 @@
     <div class="p-4">
       <h1 class="text-2xl font-bold">Ask {{ city.name }}</h1>
       <div class="text-sm">
-        Explore our community feed for real-time recommendations and dance event
-        insights from dancers in {{ city.name }}. Select a dance style to filter
-        tips or ask for recommendations. Community usually responds within 48
-        hours.
+        Find real-time recommendations and get local insights directly from
+        dancers from
+        {{ city.name }}. Choose your preferred dance style for tailored tips, or
+        ask the community for personalized recommendations. Expect responses
+        typically within 48 hours.
       </div>
     </div>
 

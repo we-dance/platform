@@ -56,7 +56,10 @@
       </div>
     </div>
 
-    <div v-if="!response.nbHits" class="p-4 flex justify-center items-center">
+    <div
+      v-if="!loading && !response.nbHits"
+      class="p-4 flex justify-center items-center"
+    >
       <div>
         <h2 class="text-lg font-semibold">No Events Found</h2>
 
@@ -172,7 +175,7 @@ export default {
     if (!currentCity.value) {
       return
     }
-    const { search, response, loadMore } = useAlgolia('events')
+    const { search, response, loadMore, loading } = useAlgolia('events')
     const facets = computed(() => ({
       type: getFacetOptions('type'),
       style: getFacetOptions('style'),
@@ -325,6 +328,7 @@ export default {
       getDay,
       getDate,
       loadMore,
+      loading,
     }
   },
 }
