@@ -60,13 +60,7 @@
       </div>
       <div v-else>
         <div class="text-xs text-center p-4">
-          There are no members yet.<br />
-          Want to help community?
-          <router-link
-            :to="`/reviews/add?city=${city.cityPlaceId}`"
-            class="underline font-bold"
-            >Recommend someone</router-link
-          >
+          There are no members yet.
         </div>
       </div>
 

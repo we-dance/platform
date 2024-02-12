@@ -1,5 +1,5 @@
 <template>
-  <div v-if="response && response.facets && response.nbHits">
+  <div>
     <div class="p-4 gap-2 flex items-center border-b">
       <t-rich-select
         v-model="filters['style']"
@@ -62,14 +62,17 @@
 
         <div class="mt-4 p-4 typo bg-orange-50">
           <p>
-            It seems there are no events listed for your selected dates. But
-            don't worry, you've got options:
+            It seems there are no events listed. But don't worry, you've got
+            options:
           </p>
 
           <ul>
             <li>
-              <strong>Expand Your Search:</strong> Try adjusting your date range
-              or filters to explore other events.
+              <strong>Recommendations:</strong>
+              <router-link :to="`/explore/${city.username}/tips`"
+                >see local tips</router-link
+              >
+              or ask locals.
             </li>
             <li>
               <strong>Import an Event:</strong> Found something interesting
@@ -86,10 +89,6 @@
                 >add details of events</router-link
               >
               you know about or host your own event on our platform.
-            </li>
-            <li>
-              <strong>Stay in the Loop:</strong> Subcribe to get updates on new
-              events in your areas of interest.
             </li>
           </ul>
           <p class="mt-4">
@@ -117,9 +116,6 @@
       />
       <TButton type="nav" icon="share" @click="showPopup = true" />
     </div>
-  </div>
-  <div v-else>
-    <slot />
   </div>
 </template>
 
@@ -323,6 +319,7 @@ export default {
       load,
       getCity,
       cityName,
+      city,
       getDateObect,
       itemsByDate,
       getDay,
