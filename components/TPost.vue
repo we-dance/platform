@@ -122,6 +122,7 @@
         <WProfile
           v-if="item.receiver && !hideReceiver"
           :username="item.receiver.username"
+          hide-role
           class="border rounded shadow"
         />
       </div>
