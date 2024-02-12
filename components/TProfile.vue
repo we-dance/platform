@@ -95,9 +95,9 @@
           <ul>
             <li>
               <strong>Share your experience</strong>:
-              <router-link to="/reviews/add">Recommend someone</router-link> who
-              was part of your dance journey to help your friends and other
-              dancers to have best experience. Your stories will appear hear.
+              <router-link to="/reviews/add">Recommend</router-link> dance
+              instructors, academies and organisers who were part of your dance
+              journey and help other dancers to have best experience.
             </li>
             <li>
               <strong>Plan together</strong>:
@@ -105,11 +105,11 @@
               you would like to attend or discover existing events in
               <TCityLink :place="currentCity" />.
             </li>
+            <li>
+              <strong>Connect with your friends</strong>: Share your profile
+              with 3 friends and ask them to do the same.
+            </li>
           </ul>
-          <p>
-            Send your profile to your friends to share your experience and dance
-            agenda.
-          </p>
         </div>
       </div>
       <TStories

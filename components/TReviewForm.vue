@@ -82,19 +82,13 @@ export default {
       this.$router.go(-1)
     },
     async remove() {
-      const receiver = this.item.receiver.username
-
       const firestore = firebase.firestore()
       await firestore
         .collection('stories')
         .doc(this.id)
         .delete()
 
-      if (receiver) {
-        this.$router.push(`/${this.item.receiver.username}?view=reviews#tabs`)
-      } else {
-        this.$router.push(`/${this.profile.username}`)
-      }
+      this.$router.push(`/${this.profile.username}`)
     },
     async saveItem() {
       let data = this.item
@@ -134,7 +128,7 @@ export default {
         }
       }
 
-      this.$router.push(`/${this.item.receiver.username}?view=reviews#tabs`)
+      this.$router.push(`/${this.profile.username}`)
     },
   },
   setup(props, { root }) {
