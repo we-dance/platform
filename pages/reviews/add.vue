@@ -20,7 +20,7 @@
         <TField
           v-model="item.receiver"
           component="TInputProfile"
-          label="Who you want to recommend?"
+          label="Recommmendation for"
           placeholder="Search on WeDance or paste a link to Instagram/Facebook"
           label-position="top"
         />

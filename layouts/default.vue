@@ -35,13 +35,13 @@
 
       <div
         v-if="isMenuOpen"
-        class="fixed w-full h-full top-0 left-0 bg-black opacity-50 z-20"
+        class="fixed w-full h-full top-0 left-0 bg-black opacity-50 z-50"
         @click="isMenuOpen = false"
       />
       <transition name="slide">
         <div
           v-if="isMenuOpen"
-          class="bg-white fixed left-0 w-56 bottom-0 top-0 z-30 shadow-lg md:hidden"
+          class="bg-white fixed left-0 w-56 bottom-0 top-0 z-50 shadow-lg md:hidden"
         >
           <MainNavigation :uid="uid" :username="username" />
         </div>

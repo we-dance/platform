@@ -8,6 +8,14 @@
             <nav class="relative flex p-4 justify-between">
               <TIcon size="4" name="logo-horizontal-dark" />
               <TButton
+                v-if="uid"
+                allow-guests
+                type="primary"
+                :to="localePath(`/${username}`)"
+                :label="$t('nav.myProfile')"
+              />
+              <TButton
+                v-else
                 allow-guests
                 type="primary"
                 :to="localePath('/signin')"
@@ -28,7 +36,7 @@
                   allow-guests
                   icon="search"
                   :label="$t('home.cta.action')"
-                  :to="localePath('/cities')"
+                  :to="localePath('/explore')"
                   type="void"
                   class="mt-8 w-full text-gray-500 bg-white hover:bg-gray-100 font-semibold py-2 px-4 border border-gray-400 rounded-full shadow"
                 />
@@ -38,6 +46,20 @@
                 class="mt-2 max-w-lg text-xs mx-auto text-center sm:max-w-3xl"
               >
                 <p>{{ $t('hero.submotto') }}.</p>
+                <p>
+                  Our biggest communities are in
+                  <router-link
+                    to="/explore/Munich"
+                    class="underline text-primary hover:no-underline"
+                    >Munich</router-link
+                  >
+                  and
+                  <router-link
+                    to="/explore/Berlin"
+                    class="underline text-primary hover:no-underline"
+                    >Berlin</router-link
+                  >.
+                </p>
               </div>
             </div>
           </div>
@@ -64,7 +86,7 @@
             <p class="text-center">
               {{ $t('features.calendar.description') }}<br />
               <NuxtLink
-                :to="localePath('/events')"
+                :to="localePath('/explore')"
                 class="underline font-bold hover:no-underline"
                 >{{ $t('features.calendar.action') }}</NuxtLink
               >
@@ -87,7 +109,7 @@
             <p class="text-center">
               {{ $t('features.dancePartners.description') }}<br />
               <NuxtLink
-                :to="localePath('/community')"
+                :to="localePath('/find-partner/start')"
                 class="underline font-bold hover:no-underline"
                 >{{ $t('features.dancePartners.action') }}</NuxtLink
               >
@@ -182,26 +204,15 @@
 </template>
 
 <script>
-import { onMounted, watch } from 'vue-demi'
 import { useAuth } from '~/use/auth'
-import { useRouter } from '~/use/router'
 
 export default {
   name: 'Index',
   layout: 'empty',
   setup() {
-    const { profile } = useAuth()
-    const { router } = useRouter()
+    const { uid, username } = useAuth()
 
-    watch(profile, (p) => {
-      router.push('/feed')
-    })
-
-    onMounted(() => {
-      if (profile.value?.username) {
-        router.push('/feed')
-      }
-    })
+    return { uid, username }
   },
 }
 </script>

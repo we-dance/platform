@@ -1,7 +1,10 @@
 <template>
   <div>
+    <h1 class="text-xl font-extrabold p-4 text-center border-b">
+      Find Matches
+    </h1>
     <div
-      class="sticky bg-white p-4 border-b z-50 top-0 shadow flex justify-between items-center"
+      class="sticky bg-white p-4 border-b z-40 top-0 shadow flex justify-between items-center"
     >
       <h1 v-if="!selectedCount()">
         Select up to 5 profiles

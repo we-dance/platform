@@ -1,16 +1,18 @@
 <template>
   <div>
-    <THeader show-logo class="md:hidden" />
+    <TCityHeader :profile="city" view="tips" />
 
     <div class="p-4">
-      <h1 class="text-2xl font-bold">Ask {{ cityName }}</h1>
+      <h1 class="text-2xl font-bold">Ask {{ city.name }}</h1>
       <div class="text-sm">
         Explore our community feed for real-time recommendations and dance event
-        insights from dancers worldwide.
+        insights from dancers in {{ city.name }}. Select a dance style to filter
+        tips or ask for recommendations. Community usually responds within 48
+        hours.
       </div>
     </div>
 
-    <div class="border-b">
+    <div class="border-b border-t">
       <form class="flex flex-col gap-4 p-4" @submit.prevent="saveItem">
         <TField
           v-model="item.style"
@@ -24,7 +26,7 @@
           v-model="item.description"
           label-position="top"
           component="TInputTextarea"
-          :placeholder="`Ask for recommendations in ${cityName}`"
+          :placeholder="`Ask for recommendations in ${city.name}`"
         />
         <div class="flex justify-end gap-2">
           <TButton xtype="submit" variant="primary">Post</TButton>
@@ -32,7 +34,7 @@
       </form>
     </div>
 
-    <TStories :place="currentCity" />
+    <TStories :place="city.cityPlaceId" />
   </div>
 </template>
 
@@ -41,10 +43,19 @@ import { ref } from '@nuxtjs/composition-api'
 import firebase from 'firebase/app'
 import 'firebase/firestore'
 import { useAuth } from '~/use/auth'
-import { useCities } from '~/use/cities'
 
 export default {
-  name: 'Feed',
+  name: 'ExploreTips',
+  props: {
+    city: {
+      type: Object,
+      default: () => ({}),
+    },
+    createdBy: {
+      type: String,
+      default: '',
+    },
+  },
   methods: {
     async saveItem() {
       let data = this.item
@@ -52,7 +63,7 @@ export default {
 
       data = {
         ...data,
-        place: this.currentCity,
+        place: this.city.cityPlaceId,
         createdAt: +new Date(),
         createdBy: this.uid,
         username: this.profile.username,
@@ -63,15 +74,12 @@ export default {
       await firestore.collection('stories').add(data)
     },
   },
-  setup(props, { root }) {
+  setup() {
     const { uid, profile } = useAuth()
-    const { currentCity, cityName } = useCities()
     const item = ref({})
 
     return {
       item,
-      currentCity,
-      cityName,
       profile,
       uid,
     }

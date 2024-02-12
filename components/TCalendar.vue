@@ -3,10 +3,16 @@
     <div class="p-4 gap-2 flex items-center border-b">
       <t-rich-select
         v-model="filters['style']"
-        placeholder="Style"
+        :placeholder="$t(`profile.style`)"
         :options="facets['style']"
         clearable
         hide-search-box
+      />
+      <TButton
+        :to="localePath('/events/-/import')"
+        icon="plus"
+        label="Add Event"
+        type="primary"
       />
     </div>
 
@@ -146,7 +152,7 @@ export default {
       default: 'parties',
     },
   },
-  setup(props) {
+  setup(props, { root }) {
     const radius = ref(50)
     const query = ref('')
     const sorting = ref('Upcoming')
@@ -178,7 +184,9 @@ export default {
       organizer: getFacetOptions('organizer'),
     }))
     function load() {
-      filters.value = {}
+      filters.value = {
+        style: root.$route.query.style || '',
+      }
       query.value = ''
     }
     onMounted(load)
@@ -196,6 +204,17 @@ export default {
         return '(type:Course OR type:Workshop OR type:Festival OR type:Congress)'
       }
     })
+
+    watch(
+      () => filters.value.style,
+      (newStyle) => {
+        if (newStyle) {
+          // root.$router.replace({ query: { style: newStyle } }, { silent: true })
+          history.pushState({}, null, root.$route.path + `?style=${newStyle}`)
+        }
+      }
+    )
+
     watch([currentPage, facetFilters, radius, city, fromDate], () => {
       if (!city.value?.location) {
         return

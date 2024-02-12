@@ -1,7 +1,7 @@
 <template>
   <div>
     <THeader>
-      <t-input v-model="query" placeholder="Search city" />
+      <t-input v-model="query" placeholder="Search city" auto-focus />
     </THeader>
 
     <div v-if="!query">
@@ -9,7 +9,7 @@
         v-for="city in recommendations"
         :key="city.username"
         class="border-b block p-4 cursor-pointer hover:bg-red-100"
-        :to="localePath(`/${city.username}`)"
+        :to="localePath(`/explore/${city.username}`)"
       >
         <div class="text-lg">
           {{ city.name }}
@@ -57,7 +57,7 @@ export default {
     async function changeCity(placeId) {
       await switchCity(placeId)
       await updateProfile({ current: placeId })
-      const target = route.query.target || `/${city.value.username}`
+      const target = route.query.target || `/explore/${city.value.username}`
       router.push(target)
     }
 

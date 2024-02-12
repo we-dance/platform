@@ -256,7 +256,7 @@ export default {
 
       const routes = [
         {
-          url: `/feed`,
+          url: `/`,
           changefreq: 'daily',
           priority: 1,
         },

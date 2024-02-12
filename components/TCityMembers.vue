@@ -1,19 +1,46 @@
 <template>
   <div>
-    <THeader show-logo class="md:hidden" />
+    <TCityHeader :profile="city" view="members" />
+
     <div class="p-4">
-      <h1 class="text-2xl font-bold">Community in {{ cityName }}</h1>
+      <h1 class="text-2xl font-bold">Members in {{ city.name }}</h1>
+      <div class="text-sm">
+        Connect with a diverse community of dancers, organizers, artists, and
+        venues in {{ city.name }}. Filter by role and dance style to find the
+        perfect match for your dance needs, whether it's Salsa, Bachata,
+        Kizomba, and more.
+      </div>
+      <div>
+        <ul class="list-disc pl-4 pt-4">
+          <li>
+            Looking for partner?
+            <router-link to="/find-partner/start" class="underline font-bold"
+              >Find a dance partner</router-link
+            >
+          </li>
+          <li>
+            Want to help community?
+            <router-link
+              :to="`/reviews/add?city=${city.cityPlaceId}`"
+              class="underline font-bold"
+              >Recommend someone</router-link
+            >
+          </li>
+        </ul>
+      </div>
     </div>
 
-    <div>
-      <div
-        v-if="uid && response.facets"
-        class="mb-4 gap-2 flex flex-wrap p-4 items-center"
-      >
-        <TInputButtons v-model="filters['type']" :options="facets['type']" />
+    <div class="border-t">
+      <div v-if="response.facets" class="gap-2 flex flex-wrap p-4 items-center">
+        <t-rich-select
+          v-model="filters['type']"
+          placeholder="Role"
+          :options="facets['type']"
+          clearable
+          hide-search-box
+        />
 
         <t-rich-select
-          v-if="filters['type']"
           v-model="filters['style']"
           :placeholder="$t(`profile.style`)"
           :options="facets['style']"
@@ -22,7 +49,7 @@
         />
       </div>
 
-      <div class="space-y-2 p-4">
+      <div v-if="response.hits && response.hits.length > 0" class="space-y-2">
         <WProfile
           v-for="item in response.hits"
           :key="item.username"
@@ -30,6 +57,17 @@
           :fallback="item"
           hide-role
         />
+      </div>
+      <div v-else>
+        <div class="text-xs text-center p-4">
+          There are no members yet.<br />
+          Want to help community?
+          <router-link
+            :to="`/reviews/add?city=${city.cityPlaceId}`"
+            class="underline font-bold"
+            >Recommend someone</router-link
+          >
+        </div>
       </div>
 
       <div v-if="response.nbPages > 1" class="my-4 flex justify-center">
@@ -55,26 +93,25 @@ import { useAlgolia } from '~/use/algolia'
 import { useProfiles } from '~/use/profiles'
 import { useStyles } from '~/use/styles'
 import { useAuth } from '~/use/auth'
-import { useCities } from '~/use/cities'
-import { useRouter } from '~/use/router'
 import { useApp } from '~/use/app'
 
 export default {
   name: 'Community',
-  setup() {
+  props: {
+    city: {
+      type: Object,
+      default: () => ({}),
+    },
+  },
+  setup(props) {
     const radius = ref(10)
     const query = ref('')
     const profileType = ref('')
     const currentPage = ref(1)
     const filters = ref({})
     const { uid } = useAuth()
-    const { city, currentCity, cityName } = useCities()
-    const { router } = useRouter()
     const { getCity } = useApp()
     const { objectivesList, typeList, radiusOptions } = useProfiles()
-    if (!currentCity.value) {
-      router.push('/cities')
-    }
     const { search, response, loadMore } = useAlgolia('profiles')
     const facets = computed(() => ({
       type: getFacetOptions('type'),
@@ -101,17 +138,14 @@ export default {
         return 'visibility:Public'
       }
     })
-    watch([currentPage, facetFilters, radius, city], () => {
-      if (!city.value?.location) {
-        return
-      }
+    watch([currentPage, facetFilters, radius], () => {
       search('', {
         filters: `${filterQuery.value} AND (type:Organiser OR type:Artist OR type:Venue OR type:FanPage)`,
         facets: Object.keys(facets.value),
         facetFilters: facetFilters.value,
         page: currentPage.value - 1,
         aroundLatLng: radius.value
-          ? `${city.value.location.latitude}, ${city.value.location.longitude}`
+          ? `${props.city.location.latitude}, ${props.city.location.longitude}`
           : '',
         aroundRadius: radius.value * 1000 || 1,
         hitsPerPage: uid.value ? 10 : 4,
@@ -161,7 +195,6 @@ export default {
       radius,
       load,
       getCity,
-      cityName,
       loadMore,
     }
   },

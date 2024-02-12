@@ -1,15 +1,18 @@
 <template>
   <div>
-    <div class="typo p-4">
-      <h1>Dance Styles</h1>
-      <div>
-        <a
-          href="https://docs.google.com/spreadsheets/d/1oCLW_c_Jr021AT6_gGngtFB94P_5ftSCJGp-XqdvRaM/edit#gid=0"
-          target="_blank"
-          >Edit this page</a
-        >
+    <THeader show-logo class="md:hidden" />
+
+    <div class="p-4 border-b">
+      <h1 class="text-2xl font-bold">
+        Dance Styles
+      </h1>
+
+      <div class="text-sm">
+        Discover history, culture, and dance styles from around the world.
+        Browse through a curated list of dance styles.
       </div>
     </div>
+
     <div class="text-center">
       <div v-for="category in categories" :key="category" class="mb-4">
         <h4 class="font-bold text-lg">{{ category }}</h4>
@@ -24,6 +27,15 @@
             <span>{{ style.name }}</span>
           </NuxtLink>
         </div>
+      </div>
+    </div>
+    <div>
+      <div>
+        <a
+          href="https://docs.google.com/spreadsheets/d/1oCLW_c_Jr021AT6_gGngtFB94P_5ftSCJGp-XqdvRaM/edit#gid=0"
+          target="_blank"
+          >Edit this page</a
+        >
       </div>
     </div>
   </div>

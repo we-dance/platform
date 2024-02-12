@@ -1,22 +1,18 @@
 <template>
   <div>
-    <div class="typo p-4 border-b">
-      <h1>{{ page.name }}</h1>
-      <p v-if="page.synonyms" class="italic">
-        Also known as {{ page.synonyms }}
-      </p>
-      <div class="flex space-x-2">
-        <a
-          href="https://docs.google.com/spreadsheets/d/1oCLW_c_Jr021AT6_gGngtFB94P_5ftSCJGp-XqdvRaM/edit#gid=0"
-          target="_blank"
-          >Edit this page</a
-        >
-        <span>•</span>
-        <NuxtLink :to="localePath('/dance')" class="block"
-          >List of all dance styles</NuxtLink
-        >
-      </div>
+    <THeader show-logo class="md:hidden" />
 
+    <div class="p-4 border-b">
+      <h1 class="text-2xl font-bold">
+        {{ page.name }}
+      </h1>
+
+      <div v-if="page.synonyms" class="text-sm">
+        Also known as {{ page.synonyms }}
+      </div>
+    </div>
+
+    <div class="typo p-4 border-b">
       <div class="mt-4">
         <span class="font-bold">Family</span>
         <span class="leading-loose">
@@ -104,11 +100,23 @@
         <div v-if="page.history">{{ page.history }}</div>
       </div>
 
-      <div class="mt-4 flex justify-end">
+      <div v-if="page.source" class="mt-4 flex justify-end">
         <a target="_blank" :href="page.source">Source</a>
       </div>
     </div>
-    <TPostList :filter="{ [`styles.${page.name}.selected`]: true }" />
+    <div class="p-4 typo">
+      <div class="flex space-x-2">
+        <a
+          href="https://docs.google.com/spreadsheets/d/1oCLW_c_Jr021AT6_gGngtFB94P_5ftSCJGp-XqdvRaM/edit#gid=0"
+          target="_blank"
+          >Edit this page</a
+        >
+        <span>•</span>
+        <NuxtLink :to="localePath('/dance')" class="block"
+          >List of all dance styles</NuxtLink
+        >
+      </div>
+    </div>
   </div>
 </template>
 

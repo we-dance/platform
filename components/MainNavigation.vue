@@ -5,13 +5,7 @@
     <TButton allow-guests :to="localePath('/')" class="mb-8" type="void">
       <TIcon name="logo-horizontal-dark" />
     </TButton>
-    <TButton
-      allow-guests
-      :to="localePath('/cities')"
-      icon="place"
-      :label="currentCity ? city.name : $t('nav.chooseCity')"
-      type="nav"
-    />
+
     <TButton
       allow-guests
       :to="localePath('/search')"
@@ -20,28 +14,15 @@
       type="nav"
     />
 
-    <div class="border-b pt-2 text-xs font-bold uppercase">Events</div>
     <TButton
-      :to="localePath('/events/-/import')"
-      icon="plus"
-      label="Add Event"
-      type="nav"
-    />
-
-    <TButton
-      v-if="currentCity"
       allow-guests
-      :to="localePath(`/${city.username}`)"
+      :to="
+        currentCity
+          ? localePath(`/explore/${city.username}`)
+          : localePath('/explore')
+      "
+      label="Explore"
       icon="calendar"
-      label="Parties"
-      type="nav"
-    />
-    <TButton
-      v-if="currentCity"
-      allow-guests
-      :to="localePath(`/${city.username}?view=classes`)"
-      icon="calendar"
-      label="Classes"
       type="nav"
     />
     <TButton
@@ -52,34 +33,34 @@
       type="nav"
     />
 
-    <div class="border-b pt-2 text-xs font-bold uppercase">Community</div>
     <TButton
       allow-guests
       :to="localePath('/find-partner/start')"
-      icon="search"
+      icon="people"
       label="Find Partner"
       type="nav"
     />
-    <TButton
-      v-if="currentCity"
-      allow-guests
-      :to="localePath(`/community`)"
-      icon="people"
-      label="Members"
-      type="nav"
-    />
-    <TButton
-      allow-guests
-      :to="localePath('/feed')"
-      icon="chat"
-      label="Ask Locals"
-      type="nav"
-    />
+
     <TButton
       allow-guests
       :to="localePath('/dance')"
       icon="help"
       label="Dance Wiki"
+      type="nav"
+    />
+
+    <div class="border-b pt-2 text-xs font-bold uppercase">Contribute</div>
+    <TButton
+      :to="localePath('/events/-/import')"
+      icon="plus"
+      label="Add Event"
+      type="nav"
+    />
+
+    <TButton
+      :to="localePath('/reviews/add')"
+      icon="plus"
+      label="Add Tip"
       type="nav"
     />
 
@@ -122,6 +103,9 @@
 
     <div class="h-8"></div>
 
+    <div v-if="isAdmin(true)" class="border-b pt-2 text-xs font-bold uppercase">
+      Administration
+    </div>
     <TButton
       v-if="isAdmin(true)"
       :label="`Admin ${isAdmin() ? 'ON' : 'OFF'}`"

@@ -1,50 +1,23 @@
 <template>
   <div>
-    <THeader show-logo class="md:hidden" />
+    <TCityHeader :profile="profile" :view="view" />
 
     <div class="p-4">
       <h1 class="text-2xl font-bold">
         {{ view === 'parties' ? 'Parties' : 'Classes' }} in {{ profile.name }}
       </h1>
-      <TProfileStats :profile="profile" />
-      <div>
-        <ul class="list-disc pl-4 pt-4">
-          <li>
-            Looking for partner?
-            <router-link to="/find-partner/start" class="underline font-bold"
-              >Find a dance partner</router-link
-            >
-          </li>
-          <li v-if="!$route.query.view">
-            Want to learn to dance?
-            <router-link
-              :to="`/${profile.username}?view=classes`"
-              class="underline font-bold"
-              >See classes</router-link
-            >
-          </li>
-          <li v-if="$route.query.view === 'classes'">
-            Where can I practice?
-            <router-link
-              :to="`/${profile.username}`"
-              class="underline font-bold"
-              >See parties</router-link
-            >
-          </li>
-          <li>
-            Want to help community?
-            <router-link
-              :to="`/reviews/add?city=${profile.username}`"
-              class="underline font-bold"
-              >Recommend a place</router-link
-            >
-          </li>
-        </ul>
+
+      <div class="text-sm">
+        Discover the vibrant dance scene in {{ profile.name }}. Browse through a
+        curated list of dance
+        {{ view === 'parties' ? 'parties' : 'classes' }} and filter by your
+        favorite styles like Salsa, Bachata, Kizomba, and more.
       </div>
+      <TProfileStats :profile="profile" />
     </div>
 
     <TCalendar
-      :key="view"
+      :key="view + ($route.query.style || '')"
       :profile="profile"
       :view="view"
       class="w-full border-t"
@@ -55,7 +28,7 @@
       :title="$t('teaser.feed.title')"
       :description="$t('teaser.feed.description')"
       :button="$t('teaser.feed.btn')"
-      url="/feed"
+      :url="`/explore/${profile.username}/tips`"
       class="w-full mt-4"
     />
 
@@ -121,17 +94,24 @@
       </div>
     </div>
 
-    <div>
-      <h3 class="text-2xl font-extrabold text-center p-4">
+    <div class="p-4 text-gray-600">
+      <h3 class="text-xs font-extrabold text-center">
         Dance Events Near Me
       </h3>
-      <ul>
+      <ul class="text-xs text-center">
         <li
-          v-for="style in ['Salsa', 'Bachata', 'Kizomba', 'Zouk', 'Afrobeats']"
+          v-for="style in [
+            'Salsa',
+            'Bachata',
+            'Kizomba',
+            'BrazilianZouk',
+            'Afrobeats',
+          ]"
           :key="style"
-          class="p-4 border-t w-full"
+          class="inline-block p-1"
         >
-          <nuxt-link :to="localePath(`/${profile.username}?style=${style}`)"
+          <nuxt-link
+            :to="localePath(`/explore/${profile.username}?style=${style}`)"
             >{{ style }} in {{ profile.name }}</nuxt-link
           >
         </li>
@@ -155,6 +135,10 @@ export default {
       type: Object,
       default: () => ({}),
     },
+    view: {
+      type: String,
+      default: 'parties',
+    },
   },
   head() {
     return getCityMeta(this.profile, [], this.$route.query.style)
@@ -169,7 +153,6 @@ export default {
     const invitesLeft = 5
     const { switchCity } = useCities()
     const community = computed(() => getCity(props.profile?.place))
-    const view = computed(() => root.$route.query.view || 'parties')
 
     const subscribersCount = computed(() => {
       return props.profile?.watch?.usernames?.length || 0
@@ -194,7 +177,6 @@ export default {
       invitesLeft,
       subscribersCount,
       remove,
-      view,
     }
   },
 }
