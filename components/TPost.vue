@@ -23,7 +23,7 @@
               >
               <NuxtLink
                 v-else
-                :to="`#/stories/${item.id}`"
+                :to="`/stories/${item.id}`"
                 class="hover:underline"
                 >{{ dateDiff(item.createdAt) }}</NuxtLink
               >
@@ -40,7 +40,7 @@
             announced an event
           </div>
           <div v-else-if="item.type === 'review'" class="text-xs">
-            recommended
+            posted review
             <span v-if="item.place">in <TCityLink :place="item.place"/></span>
             <span v-if="item.style"
               >for <strong class="font-bold">{{ item.style }}</strong></span
@@ -106,6 +106,12 @@
     </div>
     <div v-if="item.type === 'review'">
       <div class="p-4">
+        <WQuestion
+          v-if="item.question && !hideReplyFor"
+          :story-id="item.question"
+          label="Reply for"
+          class="text-xs"
+        />
         <div class="flex justify-left w-full h-fit items-center gap-2">
           <TRatingItem :value="item.stars" />
           <div v-if="item.link">
@@ -143,7 +149,7 @@
         <TCardLink v-else-if="item.url" :url="item.url" :show="show" />
       </div>
     </div>
-    <div class="flex gap-2 px-4">
+    <div class="flex flex-wrap gap-2 px-4 items-center">
       <TReaction
         :label="$t('Helpful')"
         field="upvotes"
@@ -158,10 +164,18 @@
       />
       <TButton
         v-if="item.type === 'ask-for-recommendations'"
-        :to="`/reviews/add?city=${item.place}&style=${item.style}`"
+        :to="
+          `/reviews/add?city=${item.place}&style=${item.style}&question=${item.id}`
+        "
         variant="primary"
         label="Reply"
       />
+      <router-link
+        v-if="item.replies"
+        :to="`/stories/${item.id}`"
+        class="text-xs underline hover:no-underline"
+        >{{ item.replies.length }} replies</router-link
+      >
     </div>
     <slot />
   </div>
@@ -179,6 +193,10 @@ export default {
     item: {
       type: Object,
       default: () => ({}),
+    },
+    hideReplyFor: {
+      type: Boolean,
+      default: false,
     },
     hideReceiver: {
       type: Boolean,
