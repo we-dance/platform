@@ -156,6 +156,13 @@ export default {
       await this.remove(id)
       this.view()
     },
+    view(id) {
+      if (!id) {
+        this.$router.push(this.localePath(`/${this.profile?.username}`))
+      }
+
+      this.$router.push(this.localePath(`/events/${id}`))
+    },
   },
   setup() {
     const { eventFields } = useEvents()
