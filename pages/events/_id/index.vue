@@ -2,29 +2,84 @@
   <div>
     <THeader show-logo class="md:hidden" />
 
-    <div class="p-4">
-      <div class="flex gap-1 text-xs uppercase">
-        <div class="text-primary">{{ getEventTypeLabel(doc.eventType) }}</div>
-        <div>·</div>
-        <div>
-          {{
-            getStyles(doc.styles, 0, false, 3)
-              .map((s) => s.name)
-              .join(' · ')
-          }}
+    <div class="p-4 flex gap-2 border-b">
+      <div class="text-center pt-2">
+        <div class="text-xl font-bold leading-none text-primary">
+          {{ formatDate(doc.startDate, 'd') }}
+        </div>
+        <div class="w-12 text-sm">
+          {{ formatDate(doc.startDate, 'MMM') }}
+        </div>
+        <div class="w-12 text-xs">
+          {{ formatDate(doc.startDate, 'yyyy') }}
         </div>
       </div>
-      <h1 class="text-2xl font-bold">{{ doc.name }}</h1>
-      <div class="flex gap-1 text-xs">
-        <div>
-          {{ $tc('guests', guestCount, { count: guestCount }) }}
+      <div>
+        <div class="flex gap-1 text-xs uppercase">
+          <div class="text-primary">{{ getEventTypeLabel(doc.eventType) }}</div>
+          <div>·</div>
+          <div>
+            {{
+              getStyles(doc.styles, 0, false, 3)
+                .map((s) => s.name)
+                .join(' · ')
+            }}
+          </div>
         </div>
-        <div>·</div>
-        <div>
-          {{ $tc('views', doc.viewsCount, { count: doc.viewsCount }) }}
+        <h1 class="text-2xl font-bold leading-none">{{ doc.name }}</h1>
+        <div class="mt-1 flex gap-1 text-xs">
+          <div>
+            {{ formatDate(doc.startDate, 'iii') }}
+          </div>
+          <div>
+            {{ formatDate(doc.startDate, 'HH:mm') }}
+            <span v-if="doc.endDate">
+              &mdash; {{ formatDate(doc.endDate, 'HH:mm') }}</span>
+          </div>
+          <div>·</div>
+          <div>
+            {{ $tc('guests', guestCount, { count: guestCount }) }}
+          </div>
+          <div>·</div>
+          <div>
+            {{ $tc('views', doc.viewsCount, { count: doc.viewsCount }) }}
+          </div>
         </div>
       </div>
     </div>
+
+    <div v-if="!isGoing" class="text-xs p-4 pb-0 text-center font-bold">
+      {{ $t('event.attendCallToAction') }}
+    </div>
+    <div
+        class="sticky top-0 z-40 flex justify-center items-center gap-2 bg-white p-4 shadow"
+      >
+        <TReaction
+          type="primary"
+          toggled-class="bg-green-500 hover:bg-green-800"
+          :label="$t('event.attend')"
+          :toggled-label="$t('event.attending')"
+          icon="PlusIcon"
+          toggled-icon="CheckIcon"
+          field="star"
+          class="rounded-full"
+          hide-count
+          :item="doc"
+        />
+        <TButtonShare
+          :id="doc.id"
+          collection="events"
+          :doc="doc"
+          :place="doc.place"
+          :file="doc.socialCover"
+          :file-name="doc.name"
+          :url="`https://wedance.vip/events/${item.id}`"
+          :text="doc.name"
+          type="simple"
+          class="rounded-full"
+          :label="$t('eventView.dropdown.share')"
+        />
+      </div>
 
     <div
       class="grid grid-cols-1"
@@ -32,7 +87,7 @@
     >
       <div class="md:border-l">
         <div
-          v-if="can('edit', 'events', doc)"
+          v-if="$route.query.as !== 'guest' && can('edit', 'events', doc)"
           class="space-y-2 p-4 border-b bg-orange-100"
         >
           <h3 class="text-xs font-bold uppercase">Moderator Tools</h3>
@@ -64,6 +119,12 @@
               icon="delete"
               label="Delete"
               @click="deleteEvent(doc.id)"
+            />
+
+            <TButton
+              type="secondary"
+              :to="localePath(`/events/${doc.id}?as=guest`)"
+              label="Preview as guest"
             />
           </div>
           <div v-if="doc.promotion !== 'completed'" class="text-sm">
@@ -162,16 +223,7 @@
         </div>
 
         <div
-          class="flex w-full items-center justify-start border-b py-2 px-4 leading-tight"
-        >
-          <TIcon name="calendar" class="mr-4 h-4 w-4" />
-          <div>
-            {{ getDateTime(doc.startDate, $i18n.locale) }} -
-            {{ getDateTime(doc.endDate, $i18n.locale) }}
-          </div>
-        </div>
-
-        <div
+          v-if="doc.price"
           class="flex w-full items-center justify-start border-b py-2 px-4 leading-tight"
         >
           <TIcon name="ticket" class="mr-4 h-4 w-4" />
@@ -220,40 +272,6 @@
       >
         <WTicketTailor :href="doc.link" />
       </TPopup>
-
-      <div v-if="!isGoing" class="text-xs p-4 pb-0 text-center font-bold">
-        {{ $t('event.attendCallToAction') }}
-      </div>
-
-      <div
-        class="sticky top-0 z-40 flex justify-center items-center gap-2 bg-white p-4 shadow"
-      >
-        <TReaction
-          type="primary"
-          toggled-class="bg-green-500 hover:bg-green-800"
-          :label="$t('event.attend')"
-          :toggled-label="$t('event.attending')"
-          icon="PlusIcon"
-          toggled-icon="CheckIcon"
-          field="star"
-          class="rounded-full"
-          hide-count
-          :item="doc"
-        />
-        <TButtonShare
-          :id="doc.id"
-          collection="events"
-          :doc="doc"
-          :place="doc.place"
-          :file="doc.socialCover"
-          :file-name="doc.name"
-          :url="`https://wedance.vip/events/${item.id}`"
-          :text="doc.name"
-          type="simple"
-          class="rounded-full"
-          :label="$t('eventView.dropdown.share')"
-        />
-      </div>
 
       <TwTabs
         id="tabs"
@@ -394,11 +412,11 @@
       </TPopup>
 
       <div v-if="!$route.query.view">
-        <TPreview :content="doc.description" class="p-4" />
-
         <div v-if="doc.cover" class="relative overflow-hidden">
           <img :src="doc.cover" :alt="doc.name" class="w-full" />
         </div>
+
+        <TPreview :content="doc.description" class="p-4" />
 
         <div class="flex justify-center p-4">
           <TButton
@@ -631,6 +649,7 @@ import {
   getDateObect,
   loadDoc,
   getEventMeta,
+  formatDate,
 } from '~/utils'
 import { addressPart } from '~/use/google'
 import { trackView } from '~/use/tracking'
@@ -776,6 +795,7 @@ export default {
     }
 
     return {
+      formatDate,
       deleteEvent,
       creator,
       org,
