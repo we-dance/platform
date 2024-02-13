@@ -1,45 +1,196 @@
 <template>
   <div>
-    <THeader :title="doc.name">
-      <TDropdown>
-        <TButton type="context" icon="add" :href="calendarLink" label="GCal" />
-        <TButton
-          v-if="can('edit', 'events', doc)"
-          type="context"
-          icon="people"
-          :to="localePath(`/events/${doc.id}/dashboard`)"
-          :label="$t('eventView.dropdown.dashboard')"
-        />
-        <TButton
-          v-if="can('edit', 'events', doc)"
-          type="context"
-          icon="edit"
-          :to="localePath(`/events/${doc.id}/edit`)"
-          :label="$t('eventView.dropdown.edit')"
-        />
+    <THeader show-logo class="md:hidden" />
 
-        <TButton
+    <div class="p-4">
+      <div class="flex gap-1 text-xs uppercase">
+        <div class="text-primary">{{ getEventTypeLabel(doc.eventType) }}</div>
+        <div>·</div>
+        <div>
+          {{
+            getStyles(doc.styles, 0, false, 3)
+              .map((s) => s.name)
+              .join(' · ')
+          }}
+        </div>
+      </div>
+      <h1 class="text-2xl font-bold">{{ doc.name }}</h1>
+      <div class="flex gap-1 text-xs">
+        <div>
+          {{ $tc('guests', guestCount, { count: guestCount }) }}
+        </div>
+        <div>·</div>
+        <div>
+          {{ $tc('views', doc.viewsCount, { count: doc.viewsCount }) }}
+        </div>
+      </div>
+    </div>
+
+    <div
+      class="grid grid-cols-1"
+      :class="$route.query.variant ? 'md:grid-cols-2' : ''"
+    >
+      <div class="md:border-l">
+        <div
           v-if="can('edit', 'events', doc)"
-          type="context"
-          icon="copy"
-          :to="localePath(`/events/${doc.id}/copy`)"
-          :label="$t('eventView.dropdown.copy')"
-        />
-        <TCardActions
-          :id="doc.id"
-          collection="events"
-          :item="doc"
-          type="context"
-        />
-        <TButton
-          v-if="can('edit', 'events', doc)"
-          type="context"
-          icon="delete"
-          label="Delete"
-          @click="deleteEvent(doc.id)"
-        />
-      </TDropdown>
-    </THeader>
+          class="space-y-2 p-4 border-b bg-orange-100"
+        >
+          <h3 class="text-xs font-bold uppercase">Moderator Tools</h3>
+          <div class="flex flex-wrap gap-2">
+            <TButton
+              type="secondary"
+              icon="people"
+              :to="localePath(`/events/${doc.id}/dashboard`)"
+              :label="$t('eventView.dropdown.dashboard')"
+            />
+
+            <TButton
+              type="secondary"
+              icon="edit"
+              :to="localePath(`/events/${doc.id}/edit`)"
+              :label="$t('eventView.dropdown.edit')"
+            />
+
+            <TButton
+              type="secondary"
+              icon="copy"
+              :to="localePath(`/events/${doc.id}/copy`)"
+              :label="$t('eventView.dropdown.copy')"
+            />
+
+            <TButton
+              v-if="can('edit', 'events', doc)"
+              type="secondary"
+              icon="delete"
+              label="Delete"
+              @click="deleteEvent(doc.id)"
+            />
+          </div>
+          <div v-if="doc.promotion !== 'completed'" class="text-sm">
+            As soon as event is published, you can promote it for free on
+            WeDance Instagram by clicking Promote.
+            <div v-if="doc.promotion === 'failed'">
+              <div class="text-red-500">
+                Promotion failed: {{ doc.promotionError }}
+              </div>
+              <div>
+                Please
+                <a
+                  class="underline text-primary"
+                  href="mailto:support@wedance.vip"
+                  >contact support</a
+                >
+                to resolve the issue.
+              </div>
+            </div>
+          </div>
+
+          <TButton
+            v-if="!doc.socialCover"
+            label="Publishing..."
+            class="rounded-full"
+          />
+          <TButton
+            v-else-if="doc.promotion === 'requested'"
+            label="Promoting..."
+            class="rounded-full"
+          />
+          <div v-else-if="doc.promotion === 'completed'" class="text-sm">
+            Event announcement is published on
+            <a class="underline text-primary" :href="doc.instagram.messageUrl"
+              >Instagram</a
+            >
+          </div>
+          <TButton
+            v-else
+            icon="trending"
+            label="Promote"
+            class="rounded-full"
+            @click="
+              softUpdate(doc.id, {
+                promotion: 'requested',
+              })
+            "
+          />
+          <TButton
+            v-if="isAdmin() && doc.promotion === 'completed'"
+            label="Reset"
+            class="rounded-full"
+            @click="
+              softUpdate(doc.id, {
+                promotion: '',
+              })
+            "
+          />
+        </div>
+
+        <div v-if="doc.org" class="border-b">
+          <WProfile
+            :username="doc.org.username"
+            :fallback="doc.org"
+            hide-role
+            class="border-none"
+          />
+        </div>
+
+        <a
+          v-if="doc.venue"
+          :href="doc.venue.url"
+          target="_blank"
+          class="block border-b py-2 px-4 hover:bg-gray-200"
+        >
+          <div class="flex items-center justify-start leading-tight">
+            <TIcon name="place" class="mr-4 h-4 w-4" />
+            <div>
+              <h4 class="font-bold">
+                {{ doc.venue.name
+                }}<span v-if="doc.venue.room"> • {{ doc.venue.room }}</span>
+              </h4>
+              <div class="text-gray-700">
+                {{ doc.venue.formatted_address }}
+              </div>
+            </div>
+          </div>
+        </a>
+
+        <div
+          v-if="doc.online === 'Yes'"
+          class="flex w-full items-center justify-start border-b py-2 px-4 leading-tight"
+        >
+          <TIcon name="youtube" class="mr-4 h-4 w-4" />
+          <div>{{ $t('eventView.online') }}</div>
+        </div>
+
+        <div
+          class="flex w-full items-center justify-start border-b py-2 px-4 leading-tight"
+        >
+          <TIcon name="calendar" class="mr-4 h-4 w-4" />
+          <div>
+            {{ getDateTime(doc.startDate, $i18n.locale) }} -
+            {{ getDateTime(doc.endDate, $i18n.locale) }}
+          </div>
+        </div>
+
+        <div
+          class="flex w-full items-center justify-start border-b py-2 px-4 leading-tight"
+        >
+          <TIcon name="ticket" class="mr-4 h-4 w-4" />
+          <div class="flex w-full justify-between">
+            <div>{{ doc.price }}</div>
+          </div>
+        </div>
+
+        <div
+          v-if="doc.specialOffer"
+          class="flex w-full items-center justify-start border-b py-2 px-4 leading-tight"
+        >
+          <TIcon name="fire" class="mr-4 h-4 w-4 text-primary" />
+          <div class="flex w-full justify-between text-primary">
+            <div>{{ doc.specialOffer }}</div>
+          </div>
+        </div>
+      </div>
+    </div>
 
     <div
       v-if="doc.type === 'import_error'"
@@ -62,100 +213,6 @@
       <div class="text-sm">Importing event from Facebook...</div>
     </div>
     <div v-else>
-      <div
-        class="grid grid-cols-1"
-        :class="$route.query.variant ? 'md:grid-cols-2' : ''"
-      >
-        <div v-if="doc.cover" class="relative overflow-hidden">
-          <img :src="doc.cover" :alt="doc.name" class="w-full" />
-        </div>
-
-        <div class="md:border-l">
-          <div
-            class="flex flex-wrap justify-start items-center px-4 py-2 space-x-1 text-xs border-b"
-          >
-            <TReviewCount :profile="org" />
-            <div v-if="org.reviews && org.reviews.length">
-              ·
-            </div>
-            <div>
-              {{ $tc('guests', guestCount, { count: guestCount }) }}
-            </div>
-            <div>·</div>
-            <div>
-              {{ $tc('views', doc.viewsCount, { count: doc.viewsCount }) }}
-            </div>
-            <div>·</div>
-            <div>{{ getEventTypeLabel(doc.eventType) }}</div>
-            <div>·</div>
-            <div>
-              {{
-                getStyles(doc.styles, 0, false, 3)
-                  .map((s) => s.name)
-                  .join(' · ')
-              }}
-            </div>
-          </div>
-
-          <a
-            v-if="doc.venue"
-            :href="doc.venue.url"
-            target="_blank"
-            class="block border-b py-2 px-4 hover:bg-gray-200"
-          >
-            <div class="flex items-center justify-start leading-tight">
-              <TIcon name="place" class="mr-4 h-4 w-4" />
-              <div>
-                <h4 class="font-bold">
-                  {{ doc.venue.name
-                  }}<span v-if="doc.venue.room"> • {{ doc.venue.room }}</span>
-                </h4>
-                <div class="text-gray-700">
-                  {{ doc.venue.formatted_address }}
-                </div>
-              </div>
-            </div>
-          </a>
-
-          <div
-            v-if="doc.online === 'Yes'"
-            class="flex w-full items-center justify-start border-b py-2 px-4 leading-tight"
-          >
-            <TIcon name="youtube" class="mr-4 h-4 w-4" />
-            <div>{{ $t('eventView.online') }}</div>
-          </div>
-
-          <div
-            class="flex w-full items-center justify-start border-b py-2 px-4 leading-tight"
-          >
-            <TIcon name="calendar" class="mr-4 h-4 w-4" />
-            <div>
-              {{ getDateTime(doc.startDate, $i18n.locale) }} -
-              {{ getDateTime(doc.endDate, $i18n.locale) }}
-            </div>
-          </div>
-
-          <div
-            class="flex w-full items-center justify-start border-b py-2 px-4 leading-tight"
-          >
-            <TIcon name="ticket" class="mr-4 h-4 w-4" />
-            <div class="flex w-full justify-between">
-              <div>{{ doc.price }}</div>
-            </div>
-          </div>
-
-          <div
-            v-if="doc.specialOffer"
-            class="flex w-full items-center justify-start border-b py-2 px-4 leading-tight"
-          >
-            <TIcon name="fire" class="mr-4 h-4 w-4 text-primary" />
-            <div class="flex w-full justify-between text-primary">
-              <div>{{ doc.specialOffer }}</div>
-            </div>
-          </div>
-        </div>
-      </div>
-
       <TPopup
         v-if="ticketTailorPopup"
         title="Buy Ticket"
@@ -167,8 +224,9 @@
       <div v-if="!isGoing" class="text-xs p-4 pb-0 text-center font-bold">
         {{ $t('event.attendCallToAction') }}
       </div>
+
       <div
-        class="sticky bottom-0 z-40 flex justify-center items-center gap-2 border-b bg-white p-4"
+        class="sticky top-0 z-40 flex justify-center items-center gap-2 bg-white p-4 shadow"
       >
         <TReaction
           type="primary"
@@ -335,68 +393,21 @@
         </div>
       </TPopup>
 
-      <div v-if="can('edit', 'events', doc)" class="space-y-2 p-4 border-b">
-        <h3 class="text-xl font-bold">Moderator Tools</h3>
-        <div v-if="doc.promotion !== 'completed'" class="text-sm">
-          As soon as event is published, you can promote it for free on WeDance
-          Instagram by clicking Promote.
-          <div v-if="doc.promotion === 'failed'">
-            <div class="text-red-500">
-              Promotion failed: {{ doc.promotionError }}
-            </div>
-            <div>
-              Please
-              <a
-                class="underline text-primary"
-                href="mailto:support@wedance.vip"
-                >contact support</a
-              >
-              to resolve the issue.
-            </div>
-          </div>
-        </div>
-
-        <TButton
-          v-if="!doc.socialCover"
-          label="Publishing..."
-          class="rounded-full"
-        />
-        <TButton
-          v-else-if="doc.promotion === 'requested'"
-          label="Promoting..."
-          class="rounded-full"
-        />
-        <div v-else-if="doc.promotion === 'completed'" class="text-sm">
-          Event announcement is published on
-          <a class="underline text-primary" :href="doc.instagram.messageUrl"
-            >Instagram</a
-          >
-        </div>
-        <TButton
-          v-else
-          icon="trending"
-          label="Promote"
-          class="rounded-full"
-          @click="
-            softUpdate(doc.id, {
-              promotion: 'requested',
-            })
-          "
-        />
-        <TButton
-          v-if="isAdmin() && doc.promotion === 'completed'"
-          label="Reset"
-          class="rounded-full"
-          @click="
-            softUpdate(doc.id, {
-              promotion: '',
-            })
-          "
-        />
-      </div>
-
       <div v-if="!$route.query.view">
         <TPreview :content="doc.description" class="p-4" />
+
+        <div v-if="doc.cover" class="relative overflow-hidden">
+          <img :src="doc.cover" :alt="doc.name" class="w-full" />
+        </div>
+
+        <div class="flex justify-center p-4">
+          <TButton
+            type="link"
+            :href="calendarLink"
+            label="Add to Google Calendar"
+            class="text-xs"
+          />
+        </div>
 
         <div v-if="doc.venue && doc.venue.map" class="bg-gray-100 p-4">
           <div class="mb-4 text-sm font-bold leading-none text-gray-700">
@@ -410,15 +421,6 @@
           :events="doc.program"
           class="w-full space-y-2 p-4"
         />
-
-        <div v-if="doc.org" class="space-y-2 p-4">
-          <h4 class="text-xl font-bold">{{ $t('event.organiser') }}</h4>
-          <WProfile
-            :username="doc.org.username"
-            :fallback="doc.org"
-            hide-role
-          />
-        </div>
 
         <div v-if="doc.artists && doc.artists.length" class="space-y-2 p-4">
           <h3 class="text-xl font-bold">{{ $t('event.artists') }}</h3>
@@ -530,6 +532,17 @@
           >Facebook Event</a
         >
       </div>
+
+      <div class="m-4 text-right gap-8">
+        <TCardActions
+          :id="doc.id"
+          collection="events"
+          :item="doc"
+          type="link"
+          icon=""
+        />
+      </div>
+
       <TPopup v-if="ticketPopup" title="Ticket" @close="ticketPopup = false">
         <div class="mx-auto max-h-screen max-w-md overflow-y-scroll py-4">
           <div>Reserved as {{ getRsvp(item.id).participant.name }}</div>
@@ -625,7 +638,7 @@ import { useStyles } from '~/use/styles'
 
 export default {
   name: 'EventView',
-  layout: 'default',
+  layout: 'full',
   async asyncData(ctx) {
     return await loadDoc(ctx, 'posts')
   },
