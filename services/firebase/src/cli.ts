@@ -226,6 +226,61 @@ yargs(hideBin(process.argv))
     }
   )
   .command(
+    'fix:events:duplicates',
+    'Remove duplicate events',
+    () => undefined,
+    async (argv: any) => {
+      let allEvents
+
+      allEvents = await getDocs(
+        // firestore.collection('posts').where('provider', '==', 'ical')
+        firestore.collection('posts').where('source', '==', 'facebook')
+      )
+
+      console.log(`Found ${allEvents.length} events`)
+
+      const facebookIds = {} as any
+      const hashes = {} as any
+      let count = 0
+      for (const event of allEvents) {
+        count++
+        console.log(count, 'of', allEvents.length)
+        let deleted = false
+
+        if (event.facebookId) {
+          const hash = event.startDate + '+' + event.org.username
+          hashes[hash] = hashes[hash] || []
+          hashes[hash].push(event.id)
+
+          facebookIds[event.facebookId] = facebookIds[event.facebookId] || []
+          facebookIds[event.facebookId].push(event.id)
+
+          if (facebookIds[event.facebookId].length > 1) {
+            console.log(event.id, event.name, event.startDate)
+            console.log('Duplicate facebookId', event.facebookId)
+            await firestore
+              .collection('posts')
+              .doc(event.id)
+              .delete()
+            deleted = true
+          }
+
+          if (hashes[hash].length > 1) {
+            console.log(event.id, event.name, event.startDate)
+            console.log('Duplicate hash', hash)
+
+            if (!deleted) {
+              await firestore
+                .collection('posts')
+                .doc(event.id)
+                .delete()
+            }
+          }
+        }
+      }
+    }
+  )
+  .command(
     'fix:events:dates',
     'Refresh events dates',
     () => undefined,
@@ -242,7 +297,6 @@ yargs(hideBin(process.argv))
       for (const event of allEvents) {
         count++
         console.log(count, 'of', allEvents.length)
-        console.log(event.id, event.name, event.startDate)
 
         const calendar = (
           await firestore
@@ -252,6 +306,7 @@ yargs(hideBin(process.argv))
         ).data()
 
         if (!calendar) {
+          console.log(event.id, event.name, event.startDate)
           console.log('No calendar')
           continue
         }
@@ -260,15 +315,32 @@ yargs(hideBin(process.argv))
           (e: any) => e.facebookId === event.facebookId
         )
 
-        if (!backup) {
-          console.log('No backup')
-          continue
-        }
+        let docChanges: any
 
-        const docChanges: any = {
-          startDate: +backup.startDate.toDate(),
-          endDate: +backup.endDate.toDate(),
-          providerCreatedAt: +backup.providerCreatedAt.toDate(),
+        if (!backup) {
+          if (event.startDate.toDate) {
+            docChanges = {
+              startDate: +event.startDate.toDate(),
+              endDate: +event.endDate.toDate(),
+              providerCreatedAt: +event.providerCreatedAt.toDate(),
+            }
+          } else {
+            console.log(event.id, event.name, event.startDate)
+            console.log('No backup and no toDate')
+            continue
+          }
+        } else if (backup.startDate.toDate) {
+          docChanges = {
+            startDate: +backup.startDate.toDate(),
+            endDate: +backup.endDate.toDate(),
+            providerCreatedAt: +backup.providerCreatedAt.toDate(),
+          }
+        } else {
+          docChanges = {
+            startDate: +backup.startDate,
+            endDate: +backup.endDate,
+            providerCreatedAt: +backup.providerCreatedAt,
+          }
         }
 
         await firestore

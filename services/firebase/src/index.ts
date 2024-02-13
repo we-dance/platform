@@ -353,7 +353,7 @@ export const eventChanged = functions.firestore
       return
     }
 
-    if (wasChanged(oldEvent, event, ['updatedAt'])) {
+    if (wasChanged(oldEvent, event, ['updatedAt', 'type'])) {
       const index = initIndex('events')
 
       if (!event?.id && oldEvent.id) {

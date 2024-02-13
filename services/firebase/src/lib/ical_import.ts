@@ -103,16 +103,18 @@ export async function syncCalendar(calendarRef: DocumentSnapshot) {
       newCount++
     }
 
-    const facebookUrl = getUrlsFromText(vevent.description || '').find((u) =>
-      isFacebookEvent(u)
-    )
+    const urls = getUrlsFromText(vevent.description || '')
+    const facebookUrlsList = urls.filter((u) => isFacebookEvent(u))
+    const facebookUrl = urls.find((u) => isFacebookEvent(u))
 
-    if (facebookUrl) {
+    if (facebookUrl && !facebookId) {
       facebookId = getUrlContentId(facebookUrl)
     }
 
     const event: any = {
       facebookId,
+      facebookUrlsList,
+      facebookUrlsCount: facebookUrlsList.length,
       provider: `ical`,
       createdAt: now,
       updatedAt: now,
