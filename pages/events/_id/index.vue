@@ -34,7 +34,8 @@
           <div>
             {{ formatDate(doc.startDate, 'HH:mm') }}
             <span v-if="doc.endDate">
-              &mdash; {{ formatDate(doc.endDate, 'HH:mm') }}</span>
+              &mdash; {{ formatDate(doc.endDate, 'HH:mm') }}</span
+            >
           </div>
           <div>·</div>
           <div>
@@ -52,34 +53,34 @@
       {{ $t('event.attendCallToAction') }}
     </div>
     <div
-        class="sticky top-0 z-40 flex justify-center items-center gap-2 bg-white p-4 shadow"
-      >
-        <TReaction
-          type="primary"
-          toggled-class="bg-green-500 hover:bg-green-800"
-          :label="$t('event.attend')"
-          :toggled-label="$t('event.attending')"
-          icon="PlusIcon"
-          toggled-icon="CheckIcon"
-          field="star"
-          class="rounded-full"
-          hide-count
-          :item="doc"
-        />
-        <TButtonShare
-          :id="doc.id"
-          collection="events"
-          :doc="doc"
-          :place="doc.place"
-          :file="doc.socialCover"
-          :file-name="doc.name"
-          :url="`https://wedance.vip/events/${item.id}`"
-          :text="doc.name"
-          type="simple"
-          class="rounded-full"
-          :label="$t('eventView.dropdown.share')"
-        />
-      </div>
+      class="sticky top-0 z-40 flex justify-center items-center gap-2 bg-white p-4 shadow"
+    >
+      <TReaction
+        type="primary"
+        toggled-class="bg-green-500 hover:bg-green-800"
+        :label="$t('event.attend')"
+        :toggled-label="$t('event.attending')"
+        icon="PlusIcon"
+        toggled-icon="CheckIcon"
+        field="star"
+        class="rounded-full"
+        hide-count
+        :item="doc"
+      />
+      <TButtonShare
+        :id="doc.id"
+        collection="events"
+        :doc="doc"
+        :place="doc.place"
+        :file="doc.socialCover"
+        :file-name="doc.name"
+        :url="`https://wedance.vip/events/${item.id}`"
+        :text="doc.name"
+        type="simple"
+        class="rounded-full"
+        :label="$t('eventView.dropdown.share')"
+      />
+    </div>
 
     <div
       class="grid grid-cols-1"
