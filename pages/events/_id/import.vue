@@ -113,6 +113,13 @@ export default {
       const result = await this.create(data)
       this.view(result.id)
     },
+    view(id) {
+      if (!id) {
+        this.$router.push(this.localePath(`/${this.profile?.username}`))
+      }
+
+      this.$router.push(this.localePath(`/events/${id}`))
+    },
   },
   setup() {
     const { t } = useI18n()
