@@ -176,7 +176,6 @@ import { useApp } from '~/use/app'
 import { useAuth } from '~/use/auth'
 import { useProfiles } from '~/use/profiles'
 import { getExcerpt, getProfileMeta } from '~/utils'
-import { useI18n } from '~/use/i18n'
 import { useDoc } from '~/use/doc'
 import {
   getEventsOrganisedBy,
