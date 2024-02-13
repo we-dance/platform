@@ -12,7 +12,7 @@
       </div>
     </div>
 
-    <div class="typo p-4 border-b">
+    <div class="typo p-4">
       <div class="mt-4">
         <span class="font-bold">Family</span>
         <span class="leading-loose">
@@ -104,7 +104,7 @@
         <a target="_blank" :href="page.source">Source</a>
       </div>
     </div>
-    <div class="p-4 typo">
+    <div class="p-4 typo border-t border-b">
       <div class="flex space-x-2">
         <a
           href="https://docs.google.com/spreadsheets/d/1oCLW_c_Jr021AT6_gGngtFB94P_5ftSCJGp-XqdvRaM/edit#gid=0"
@@ -117,6 +117,8 @@
         >
       </div>
     </div>
+
+    <TStories :dance="page.id" />
   </div>
 </template>
 

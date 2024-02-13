@@ -31,6 +31,10 @@ export default {
       type: String,
       default: '',
     },
+    dance: {
+      type: String,
+      default: '',
+    },
   },
   setup(props) {
     const loading = ref(true)
@@ -43,6 +47,10 @@ export default {
     onMounted(() => {
       const firestore = firebase.firestore()
       let collection = firestore.collection('stories')
+
+      if (props.dance) {
+        collection = collection.where('dances', 'array-contains', props.dance)
+      }
 
       if (props.createdBy) {
         collection = collection.where('createdBy', '==', props.createdBy)

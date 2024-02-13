@@ -2,7 +2,9 @@
   <header class="border-b p-4">
     <div class="flex items-center justify-between">
       <div class="flex flex-no-wrap items-center ml-8 md:ml-0">
-        <TIcon v-if="showLogo" name="logo-horizontal-dark" class="md:hidden" />
+        <router-link v-if="showLogo" to="/" :class="logoClass" >
+          <TIcon name="logo-horizontal-dark" />
+        </router-link>
         <h1 v-if="title" class="ml-1 font-lato text-lg font-bold">
           {{ title }}
         </h1>
@@ -25,6 +27,10 @@ export default {
       type: Boolean,
       default: false,
     },
+    logoClass: {
+      type: String,
+      default: 'md:hidden',
+    }
   },
 }
 </script>

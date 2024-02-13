@@ -3,7 +3,7 @@
     <THeader show-logo class="md:hidden" />
 
     <TLoader v-if="loading" />
-    <TPost v-else-if="story.type === 'review'" :item="story" />
+    <TPost v-else-if="story.type !== 'ask-for-recommendations'" :item="story" expanded />
     <div v-else>
       <div class="p-4 border-b">
         <div class="text-xs text-gray-700">{{ dateDiff(story.createdAt) }}</div>
@@ -48,6 +48,7 @@ import { dateDiff } from '~/utils'
 
 export default {
   name: 'ViewStory',
+  layout: 'full',
   setup(props, { root }) {
     const story = ref({})
     const replies = ref([])

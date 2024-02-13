@@ -117,7 +117,10 @@
     </div>
     <div v-else>
       <h1 v-if="item.title" class="px-4 font-bold text-xl">{{ item.title }}</h1>
-      <TPreview :content="item.description" class="p-4 w-auto" />
+
+      <TPreview v-if="expanded" :content="item.description" class="p-4 w-auto" />
+      <TPreview v-else :content="getExcerpt(item.description)" class="p-4 w-auto" />
+
       <div v-if="!hideMedia">
         <TEventText2
           v-if="item.type === 'event'"
@@ -150,6 +153,8 @@
         variant="primary"
         :label="repliesCount ? `${repliesCount} replies` : 'Reply'"
       />
+      <TButton v-if="item.title && !expanded" :to="`/stories/${item.id}`" type="primary" label="Read more" />
+
     </div>
     <slot />
   </div>
@@ -158,7 +163,7 @@
 <script>
 import { ref } from 'vue-demi'
 import { useApp } from '~/use/app'
-import { dateDiff, getEventDescription } from '~/utils'
+import { dateDiff, getEventDescription, getExcerpt } from '~/utils'
 import { useAuth } from '~/use/auth'
 import { useDoc } from '~/use/doc'
 
@@ -204,6 +209,7 @@ export default {
       dateDiff,
       getCity,
       getEventDescription,
+      getExcerpt,
       can,
       remove,
       show,
