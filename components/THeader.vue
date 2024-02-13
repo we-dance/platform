@@ -2,7 +2,7 @@
   <header class="border-b p-4">
     <div class="flex items-center justify-between">
       <div class="flex flex-no-wrap items-center ml-8 md:ml-0">
-        <router-link v-if="showLogo" to="/" :class="logoClass" >
+        <router-link v-if="showLogo" to="/" :class="logoClass">
           <TIcon name="logo-horizontal-dark" />
         </router-link>
         <h1 v-if="title" class="ml-1 font-lato text-lg font-bold">
@@ -30,7 +30,7 @@ export default {
     logoClass: {
       type: String,
       default: 'md:hidden',
-    }
+    },
   },
 }
 </script>

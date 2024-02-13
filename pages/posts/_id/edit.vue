@@ -60,7 +60,10 @@ export default {
       if (data.id) {
         track('update_post')
         await this.update(data.id, data)
-        await db.collection('stories').doc(data.id).set(data)
+        await db
+          .collection('stories')
+          .doc(data.id)
+          .set(data)
       } else {
         track('create_post')
         await this.create(data)
@@ -77,9 +80,7 @@ export default {
 
     const collection = 'posts'
 
-    const { doc: item, id, load, update, remove, create } = useDoc(
-      collection
-    )
+    const { doc: item, id, load, update, remove, create } = useDoc(collection)
 
     onMounted(async () => {
       await until(profile).not.toBeNull()

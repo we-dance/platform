@@ -3,7 +3,11 @@
     <THeader show-logo class="md:hidden" />
 
     <TLoader v-if="loading" />
-    <TPost v-else-if="story.type !== 'ask-for-recommendations'" :item="story" expanded />
+    <TPost
+      v-else-if="story.type !== 'ask-for-recommendations'"
+      :item="story"
+      expanded
+    />
     <div v-else>
       <div class="p-4 border-b">
         <div class="text-xs text-gray-700">{{ dateDiff(story.createdAt) }}</div>

@@ -118,8 +118,16 @@
     <div v-else>
       <h1 v-if="item.title" class="px-4 font-bold text-xl">{{ item.title }}</h1>
 
-      <TPreview v-if="expanded" :content="item.description" class="p-4 w-auto" />
-      <TPreview v-else :content="getExcerpt(item.description)" class="p-4 w-auto" />
+      <TPreview
+        v-if="expanded"
+        :content="item.description"
+        class="p-4 w-auto"
+      />
+      <TPreview
+        v-else
+        :content="getExcerpt(item.description)"
+        class="p-4 w-auto"
+      />
 
       <div v-if="!hideMedia">
         <TEventText2
@@ -153,8 +161,12 @@
         variant="primary"
         :label="repliesCount ? `${repliesCount} replies` : 'Reply'"
       />
-      <TButton v-if="item.title && !expanded" :to="`/stories/${item.id}`" type="primary" label="Read more" />
-
+      <TButton
+        v-if="item.title && !expanded"
+        :to="`/stories/${item.id}`"
+        type="primary"
+        label="Read more"
+      />
     </div>
     <slot />
   </div>

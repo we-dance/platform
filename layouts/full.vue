@@ -1,7 +1,7 @@
 <template>
   <div class="bg-gray-200 pb-4">
     <nav class="hidden md:flex p-4 justify-between">
-      <router-link :to="city.username ? `/explore/${city.username}` : '/'" >
+      <router-link :to="city.username ? `/explore/${city.username}` : '/'">
         <TIcon name="logo-horizontal-dark" />
       </router-link>
       <TButton
