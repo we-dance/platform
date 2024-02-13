@@ -21,7 +21,7 @@
           ? localePath(`/explore/${city.username}`)
           : localePath('/explore')
       "
-      label="Explore"
+      label="Events"
       icon="calendar"
       type="nav"
     />
