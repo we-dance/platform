@@ -226,6 +226,48 @@ yargs(hideBin(process.argv))
     }
   )
   .command(
+    'fix:profiles:duplicates',
+    'Remove duplicated profiles',
+    () => undefined,
+    async (argv: any) => {
+      let allProfiles
+
+      allProfiles = await getDocs(
+        firestore.collection('profiles').where('source', '==', 'facebook')
+      )
+
+      console.log(`Found ${allProfiles.length} profiles`)
+
+      const usernames = {} as any
+      const facebooks = {} as any
+      let count = 0
+      for (const profile of allProfiles) {
+        count++
+        usernames[profile.username] = usernames[profile.username] || []
+        usernames[profile.username].push(profile)
+
+        facebooks[profile.facebook] = facebooks[profile.facebook] || []
+        facebooks[profile.facebook].push(profile)
+      }
+
+      for (const username of Object.keys(usernames)) {
+        if (usernames[username].length > 1) {
+          console.log(username)
+          for (const profile of usernames[username]) {
+            console.log(
+              profile.username,
+              profile.id,
+              profile.facebook,
+              profile.viewsCount,
+              new Date(profile.createdAt)
+            )
+          }
+          console.log()
+        }
+      }
+    }
+  )
+  .command(
     'fix:events:duplicates',
     'Remove duplicate events',
     () => undefined,
