@@ -470,13 +470,20 @@ export const getListOfStyles = (styles, extra) => {
   ]
 }
 
-export const getCityMeta = (profile, events = null, style = '', view = 'parties') => {
+export const getCityMeta = (
+  profile,
+  events = null,
+  style = '',
+  view = 'parties'
+) => {
   if (!profile) {
     return {}
   }
 
   const cityName = profile.name.replace(',', '')
-  const title = `Dance ${style}${view ==='parties' ? ' Parties':' Classes'} in ${cityName} | Dance Calendar | WeDance`
+  const title = `Dance ${style}${
+    view === 'parties' ? ' Parties' : ' Classes'
+  } in ${cityName} | Dance Calendar | WeDance`
   const description = `Explore a variety of ${style} dance events happening in ${cityName}. From ${style ||
     'salsa'} nights to bachata workshops, find your next dance adventure here.`
   const keywords = `Where can I dance ${style} in ${cityName}, ${cityName} ${style} Dance Events, ${style} Dance Classes in ${cityName}, ${cityName} ${style} Dance Workshops, ${cityName} ${style} Dance Parties, ${cityName} ${style} Dance Calendar, ${style} Dance Studios ${cityName}, ${style} ${cityName} Dance Community, Popular ${style} Dance Styles ${cityName}`
