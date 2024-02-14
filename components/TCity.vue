@@ -142,7 +142,7 @@ export default {
     },
   },
   head() {
-    return getCityMeta(this.profile, [], this.$route.query.style)
+    return getCityMeta(this.profile, [], this.$route.query.style, this.view)
   },
   setup(props, { root }) {
     const internationalChatLink = 'https://t.me/+Vxw15sDG-dWpqHDj'

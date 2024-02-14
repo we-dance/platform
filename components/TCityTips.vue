@@ -96,5 +96,17 @@ export default {
       uid,
     }
   },
+  head() {
+    return {
+      title: `Ask Dancers in ${this.city.name} | WeDance`,
+      meta: [
+        {
+          hid: 'description',
+          name: 'description',
+          content: `Find real-time recommendations and get local insights directly from dancers from ${this.city.name}. Choose your preferred dance style for tailored tips, or ask the community for personalized recommendations. Expect responses typically within 48 hours.`,
+        },
+      ],
+    }
+  },
 }
 </script>

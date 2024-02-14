@@ -100,7 +100,7 @@ import { useAuth } from '~/use/auth'
 import { useApp } from '~/use/app'
 
 export default {
-  name: 'Community',
+  name: 'CityGroups',
   props: {
     city: {
       type: Object,
@@ -245,7 +245,14 @@ export default {
   },
   head() {
     return {
-      title: 'WeDance Community',
+      title: `Dance Groups in ${this.city.name} | WeDance`,
+      meta: [
+        {
+          hid: 'description',
+          name: 'description',
+          content: `Discover and connect with dance influencers and groups in ${this.city.name}. Find WhatsApp, Telegram, Instagram, Youtube communities tailored to your style, from Salsa to Bachata to Kizomba. Engage with influencers and join vibrant dance networks in ${this.city.name}.`,
+        },
+      ],
     }
   },
 }

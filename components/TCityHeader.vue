@@ -10,31 +10,33 @@
       class="m-4 border-b"
     />
 
-    <TwTabs
-      :tabs="[
-        {
-          name: 'Parties',
-          to: `/explore/${profile.username}`,
-          current: view === 'parties',
-        },
-        {
-          name: 'Classes',
-          to: `/explore/${profile.username}/classes`,
-          current: view === 'classes',
-        },
-        {
-          name: 'Groups',
-          to: `/explore/${profile.username}/groups`,
-          current: view === 'groups',
-        },
-        {
-          name: 'Tips',
-          to: `/explore/${profile.username}/tips`,
-          current: view === 'tips',
-        },
-      ]"
-      class="border-b"
-    />
+    <div class="overflow-x-auto">
+      <TwTabs
+        :tabs="[
+          {
+            name: 'Parties',
+            to: `/explore/${profile.username}`,
+            current: view === 'parties',
+          },
+          {
+            name: 'Classes',
+            to: `/explore/${profile.username}/classes`,
+            current: view === 'classes',
+          },
+          {
+            name: 'Groups',
+            to: `/explore/${profile.username}/groups`,
+            current: view === 'groups',
+          },
+          {
+            name: `Ask Locals`,
+            to: `/explore/${profile.username}/tips`,
+            current: view === 'tips',
+          },
+        ]"
+        class="border-b"
+      />
+    </div>
   </div>
 </template>
 
