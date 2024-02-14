@@ -38,7 +38,7 @@ nav:
   feed: Comentario
   calendar: Calendario
   community: Comunidad
-  chat: Conversaciones
+  chat: Chat
   dance: Bailes
   myProfile: Mi perfil
   settings: Configuraciones
@@ -166,14 +166,6 @@ filter:
 community:
   title: Dance Community
   description: Looking for dance partner or new dance events? Filter profiles of local dancers and contact them.
-calendar:
-  title: Dance Calendar
-  empty: No events found
-  upcoming: Upcoming
-  past: Past
-  share:
-    text: Text
-    embed: Embed
 profile:
   claim: Claim my profile
   follow:
@@ -582,3 +574,45 @@ EventDashboard:
   subscribed: Subscribed
   paid: Paid
   notPaid: Didn't Pay
+explore:
+  nav:
+    parties: Fiestas
+    classes: Clases
+    groups: Grupos
+    tips: Guía Local
+  parties:
+    title: Fiestas de Baile {style} en {city} | Calendario de Baile | WeDance
+    description: Explora una variedad de eventos de baile {style} que ocurren en {city}. Desde noches de {referenceStyle} hasta talleres de bachata, encuentra tu próxima aventura de baile aquí.
+    header: 'Fiestas {style} en {city}'
+    subheader: Descubre la vibrante escena de baile {style} en {city}. Navega a través de una lista curada de fiestas de baile y filtra por tus estilos favoritos como Salsa, Bachata, Kizomba y más.
+  classes:
+    title: Clases de Baile {style} en {city} | Calendario de Baile | WeDance
+    description: Explora una variedad de eventos de baile {style} que ocurren en {city}. Desde noches de {referenceStyle} hasta talleres de bachata, encuentra tu próxima aventura de baile aquí.
+    header: 'Clases {style} en {city}'
+    subheader: Descubre la vibrante escena de baile {style} en {city}. Navega a través de una lista curada de clases de baile y filtra por tus estilos favoritos como Salsa, Bachata, Kizomba y más.
+  groups:
+    title: Grupos de Baile en {city} | WeDance
+    description: Descubre y conecta con influencers y grupos de baile en {city}. Encuentra comunidades en WhatsApp, Telegram, Instagram, Youtube adaptadas a tu estilo, desde Salsa hasta Bachata y Kizomba. Interactúa con influencers y únete a vibrantes redes de baile en {city}.
+    header: Grupos en {city}
+    subheader: Descubre y conecta con influencers y grupos de baile en {city}. Encuentra comunidades en WhatsApp, Telegram, Instagram, Youtube adaptadas a tu estilo, desde Salsa hasta Bachata y Kizomba. Interactúa con influencers y únete a vibrantes redes de baile en {city}.
+  tips:
+    title: Pregunta a Bailarines en {city} | WeDance
+    description: Encuentra recomendaciones en tiempo real y obtén perspectivas locales directamente de bailarines de {city}. Elige tu estilo de baile preferido para consejos a medida, o pregunta a la comunidad por recomendaciones personalizadas. Espera respuestas típicamente en menos de 48 horas.
+    header: Pregunta en {city}
+    subheader: Encuentra recomendaciones en tiempo real y obtén perspectivas locales directamente de bailarines de {city}. Elige tu estilo de baile preferido para consejos a medida, o pregunta a la comunidad por recomendaciones personalizadas. Espera respuestas típicamente en menos de 48 horas.
+calendar:
+  title: Calendario de Baile
+  empty: No se encontraron eventos
+  upcoming: Próximos
+  past: Pasados
+  addEvent: Añadir
+  filters:
+    style: Estilo de Baile
+    level: Nivel
+  levels:
+    Beginner: Principiante
+    Intermediate: Intermedio
+    Advanced: Avanzado
+  share:
+    text: Texto
+    embed: Incrustar

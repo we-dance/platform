@@ -4,15 +4,21 @@
 
     <div class="p-4">
       <h1 class="text-2xl font-bold">
-        {{ $route.query.style }}
-        {{ view === 'parties' ? 'Parties' : 'Classes' }} in {{ profile.name }}
+        {{
+          $t(`explore.${view}.header`, {
+            city: profile.name,
+            style: $route.query.style,
+          })
+        }}
       </h1>
 
       <div class="text-sm">
-        Discover the vibrant {{ $route.query.style }} dance scene in
-        {{ profile.name }}. Browse through a curated list of dance
-        {{ view === 'parties' ? 'parties' : 'classes' }} and filter by your
-        favorite styles like Salsa, Bachata, Kizomba, and more.
+        {{
+          $t(`explore.${view}.subheader`, {
+            city: profile.name,
+            style: $route.query.style,
+          })
+        }}
       </div>
       <TProfileStats :profile="profile" />
     </div>
@@ -60,13 +66,15 @@ export default {
     const profile = this.profile
     const style = this.$route.query.style || ''
     const cityName = profile.name.replace(',', '')
+    const city = cityName
     const view = this.view
 
-    const title = `Dance ${style}${
-      view === 'parties' ? ' Parties' : ' Classes'
-    } in ${cityName} | Dance Calendar | WeDance`
-    const description = `Explore a variety of ${style} dance events happening in ${cityName}. From ${style ||
-      'salsa'} nights to bachata workshops, find your next dance adventure here.`
+    const title = this.$t(`explore.${view}.title`, { city, style })
+    const description = this.$t(`explore.${view}.description`, {
+      city,
+      style,
+      referenceStyle: style || 'Salsa',
+    })
     const keywords = `Where can I dance ${style} in ${cityName}, ${cityName} ${style} Dance Events, ${style} Dance Classes in ${cityName}, ${cityName} ${style} Dance Workshops, ${cityName} ${style} Dance Parties, ${cityName} ${style} Dance Calendar, ${style} Dance Studios ${cityName}, ${style} ${cityName} Dance Community, Popular ${style} Dance Styles ${cityName}`
 
     const schema = {

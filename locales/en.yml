@@ -177,14 +177,6 @@ filter:
 community:
   title: Dance Community
   description: Looking for dance partner or new dance events? Filter profiles of local dancers and contact them.
-calendar:
-  title: Dance Calendar
-  empty: No events found
-  upcoming: Upcoming
-  past: Past
-  share:
-    text: Text
-    embed: Embed
 reviews:
   title: Reviews
   count: 'No Reviews | 1 Review | {count} Reviews'
@@ -704,3 +696,45 @@ faqs:
       answer: You can disconnect your calendar at any time from the Integrations section in your Settings. Once disconnected, no further events will be imported from that calendar.
     - question: Is my personal information secure when I connect my calendar?
       answer: Yes, your privacy and security are paramount to us. We only use calendar access to import events and do not store any personal information from your calendar.
+explore:
+  nav:
+    parties: Parties
+    classes: Classes
+    groups: Groups
+    tips: Ask Locals
+  parties:
+    title: Dance {style} Parties in {city} | Dance Calendar | WeDance
+    description: Explore a variety of {style} dance events happening in {city}. From {referenceStyle} nights to bachata workshops, find your next dance adventure here.
+    header: '{style} Parties in {city}' 
+    subheader: Discover the vibrant {style} dance scene in {city}. Browse through a curated list of dance parties and filter by your favorite styles like Salsa, Bachata, Kizomba, and more.
+  classes:
+    title: Dance {style} Classes in {city} | Dance Calendar | WeDance
+    description: Explore a variety of {style} dance events happening in {city}. From {referenceStyle} nights to bachata workshops, find your next dance adventure here.
+    header: '{style} Classes in {city}' 
+    subheader: Discover the vibrant {style} dance scene in {city}. Browse through a curated list of dance classes and filter by your favorite styles like Salsa, Bachata, Kizomba, and more.
+  groups:
+    title: Dance Groups in {city} | WeDance
+    description: Discover and connect with dance influencers and groups in {city}. Find WhatsApp, Telegram, Instagram, Youtube communities tailored to your style, from Salsa to Bachata to Kizomba. Engage with influencers and join vibrant dance networks in {city}.
+    header: Groups in {city}
+    subheader: Discover and connect with dance influencers and groups in {city}. Find WhatsApp, Telegram, Instagram, Youtube communities tailored to your style, from Salsa to Bachata to Kizomba. Engage with influencers and join vibrant dance networks in {city}.
+  tips:
+    title: Ask Dancers in {city} | WeDance
+    description: Find real-time recommendations and get local insights directly from dancers from {city}. Choose your preferred dance style for tailored tips, or ask the community for personalized recommendations. Expect responses typically within 48 hours.
+    header: Ask {city}
+    subheader: Find real-time recommendations and get local insights directly from dancers from {city}. Choose your preferred dance style for tailored tips, or ask the community for personalized recommendations. Expect responses typically within 48 hours.
+calendar:
+  title: Dance Calendar
+  empty: No events found
+  upcoming: Upcoming
+  past: Past
+  addEvent: Add
+  filters:
+    style: Dance
+    level: Level
+  levels:
+    Beginner: Beginner
+    Intermediate: Intermediate
+    Advanced: Advanced
+  share:
+    text: Text
+    embed: Embed

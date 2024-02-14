@@ -3,7 +3,7 @@
     <div class="p-4 gap-2 flex flex-nowrap items-center border-b">
       <t-rich-select
         v-model="filters['style']"
-        placeholder="Dance"
+        :placeholder="$t('calendar.filters.style')"
         :options="facets['style']"
         clearable
         hide-search-box
@@ -12,7 +12,7 @@
       <t-rich-select
         v-if="view === 'classes'"
         v-model="level"
-        placeholder="Level"
+        :placeholder="$t('calendar.filters.level')"
         :options="levels"
         clearable
         hide-search-box
@@ -21,7 +21,7 @@
       <TButton
         :to="localePath('/events/-/import')"
         icon="plus"
-        label="Add"
+        :label="$t('calendar.addEvent')"
         type="primary"
       />
     </div>

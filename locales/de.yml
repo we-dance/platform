@@ -166,14 +166,6 @@ filter:
 community:
   title: Dance Community
   description: Looking for dance partner or new dance events? Filter profiles of local dancers and contact them.
-calendar:
-  title: Dance Calendar
-  empty: No events found
-  upcoming: Upcoming
-  past: Past
-  share:
-    text: Text
-    embed: Embed
 profile:
   claim: Claim my profile
   follow:
@@ -611,3 +603,47 @@ faqs:
       answer: Sie können Ihren Kalender jederzeit im Bereich "Integrationen" in Ihren Einstellungen trennen. Sobald getrennt, werden keine weiteren Veranstaltungen von diesem Kalender importiert.
     - question: Ist meine persönliche Information sicher, wenn ich meinen Kalender verbinde?
       answer: Ja, Ihre Privatsphäre und Sicherheit sind uns sehr wichtig. Wir verwenden den Kalenderzugriff nur, um Veranstaltungen zu importieren und speichern keine persönlichen Informationen aus Ihrem Kalender.
+explore:
+  nav:
+    parties: Partys
+    classes: Kurse
+    groups: Gruppen
+    tips: Locals fragen
+    addEvent: Neues Event
+  parties:
+    title: '{style} Tanzpartys in {city} | Tanzkalender | WeDance'
+    description: Entdecken Sie eine Vielzahl von {style} Tanzevents in {city}. Von {referenceStyle} Nächten bis zu Bachata-Workshops, finden Sie hier Ihr nächstes Tanzabenteuer.
+    header: '{style} Partys in {city}'
+    subheader: Entdecken Sie die lebendige {style} Tanzszene in {city}. Durchstöbern Sie eine kuratierte Liste von Tanzpartys und filtern nach Ihren Lieblingsstilen wie Salsa, Bachata, Kizomba und mehr.
+  classes:
+    title: '{style} Tanzkurse in {city} | Tanzkalender | WeDance'
+    description: Entdecken Sie eine Vielzahl von {style} Tanzevents in {city}. Von {referenceStyle} Nächten bis zu Bachata-Workshops, finden Sie hier Ihr nächstes Tanzabenteuer.
+    header: '{style} Kurse in {city}'
+    subheader: Entdecken Sie die lebendige {style} Tanzszene in {city}. Durchstöbern Sie eine kuratierte Liste von Tanzkursen und filtern nach Ihren Lieblingsstilen wie Salsa, Bachata, Kizomba und mehr.
+  groups:
+    title: Tanzgruppen in {city} | WeDance
+    description: Entdecken und verbinden Sie sich mit Tanz-Influencern und -Gruppen in {city}. Finden Sie WhatsApp, Telegram, Instagram, Youtube-Communities, die auf Ihren Stil zugeschnitten sind, von Salsa bis Bachata bis Kizomba. Engagieren Sie sich mit Influencern und treten Sie lebendigen Tanznetzwerken in {city} bei.
+    header: Gruppen in {city}
+    subheader: Entdecken und verbinden Sie sich mit Tanz-Influencern und -Gruppen in {city}. Finden Sie WhatsApp, Telegram, Instagram, Youtube-Communities, die auf Ihren Stil zugeschnitten sind, von Salsa bis Bachata bis Kizomba. Engagieren Sie sich mit Influencern und treten Sie lebendigen Tanznetzwerken in {city} bei.
+  tips:
+    title: Frag Tänzer in {city} | WeDance
+    description: Finden Sie Echtzeit-Empfehlungen und erhalten Sie lokale Einblicke direkt von Tänzern aus {city}. Wählen Sie Ihren bevorzugten Tanzstil für maßgeschneiderte Tipps oder fragen Sie die Community nach persönlichen Empfehlungen. Erwarten Sie typischerweise Antworten innerhalb von 48 Stunden.
+    header: Frag {city}
+    subheader: Finden Sie Echtzeit-Empfehlungen und erhalten Sie lokale Einblicke direkt von Tänzern aus {city}. Wählen Sie Ihren bevorzugten Tanzstil für maßgeschneiderte Tipps oder fragen Sie die Community nach persönlichen Empfehlungen. Erwarten Sie typischerweise Antworten innerhalb von 48 Stunden.
+calendar:
+  title: Tanzkalender
+  empty: Keine Veranstaltungen gefunden
+  upcoming: Bevorstehend
+  past: Vergangen
+  addEvent: Hinzufügen
+  filters:
+    style: Tanzstil
+    level: Niveau
+  levels:
+    Beginner: Anfänger
+    Intermediate: Intermediate
+    Advanced: Fortgeschritten
+  share:
+    text: Text
+    embed: Einbetten
+

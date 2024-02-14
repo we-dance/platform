@@ -3,12 +3,11 @@
     <TCityHeader :profile="city" view="groups" />
 
     <div class="p-4">
-      <h1 class="text-2xl font-bold">Groups in {{ city.name }}</h1>
+      <h1 class="text-2xl font-bold">
+        {{ $t('explore.groups.header', { city: city.name }) }}
+      </h1>
       <div class="text-sm">
-        Discover and connect with dance influencers and groups in
-        {{ city.name }}. Find WhatsApp, Telegram, Instagram, Youtube communities
-        tailored to your style, from Salsa to Bachata to Kizomba. Engage with
-        influencers and join vibrant dance networks in {{ city.name }}.
+        {{ $t('explore.groups.subheader', { city: city.name }) }}
       </div>
       <div>
         <ul class="list-disc pl-4 pt-4">
@@ -245,12 +244,14 @@ export default {
   },
   head() {
     return {
-      title: `Dance Groups in ${this.city.name} | WeDance`,
+      title: this.$t('explore.groups.title', { city: this.city.name }),
       meta: [
         {
           hid: 'description',
           name: 'description',
-          content: `Discover and connect with dance influencers and groups in ${this.city.name}. Find WhatsApp, Telegram, Instagram, Youtube communities tailored to your style, from Salsa to Bachata to Kizomba. Engage with influencers and join vibrant dance networks in ${this.city.name}.`,
+          content: this.$t('explore.groups.description', {
+            city: this.city.name,
+          }),
         },
       ],
     }

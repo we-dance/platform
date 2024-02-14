@@ -3,13 +3,11 @@
     <TCityHeader :profile="city" view="tips" />
 
     <div class="p-4">
-      <h1 class="text-2xl font-bold">Ask {{ city.name }}</h1>
+      <h1 class="text-2xl font-bold">
+        {{ $t('explore.tips.header', { city: city.name }) }}
+      </h1>
       <div class="text-sm">
-        Find real-time recommendations and get local insights directly from
-        dancers from
-        {{ city.name }}. Choose your preferred dance style for tailored tips, or
-        ask the community for personalized recommendations. Expect responses
-        typically within 48 hours.
+        {{ $t('explore.tips.subheader', { city: city.name }) }}
       </div>
     </div>
 
@@ -19,7 +17,7 @@
           <TField
             v-model="item.style"
             label-position="top"
-            placeholder="Dance style"
+            :placeholder="$t('calendar.filters.style')"
             component="TInputStyle"
             popular-only
           />
@@ -102,12 +100,14 @@ export default {
   },
   head() {
     return {
-      title: `Ask Dancers in ${this.city.name} | WeDance`,
+      title: this.$t('explore.tips.title', { city: this.city.name }),
       meta: [
         {
           hid: 'description',
           name: 'description',
-          content: `Find real-time recommendations and get local insights directly from dancers from ${this.city.name}. Choose your preferred dance style for tailored tips, or ask the community for personalized recommendations. Expect responses typically within 48 hours.`,
+          content: this.$t('explore.tips.description', {
+            city: this.city.name,
+          }),
         },
       ],
     }
