@@ -32,16 +32,6 @@ home:
     header: Reisen. Treffen. Tanzen.
     description: Entdecke Tänzer*innen und Tanzevents in deiner Nähe
     action: Finde deine Stadt
-nav:
-  travel: Reisen
-  chooseCity: Stadt auswählen
-  feed: Feed
-  calendar: Kalender
-  community: Community
-  chat: Chat
-  dance: Tanzstile
-  myProfile: Mein Profil
-  settings: Einstellungen
 form:
   clear: Löschen
   delete: Löschen
@@ -646,4 +636,16 @@ calendar:
   share:
     text: Text
     embed: Einbetten
+nav:
+  search: Suche 
+  events: Veranstaltungen
+  festivals: Festivals
+  partner: Partner finden
+  wiki: Wiki 
+  contribute: Mitmachen
+  addEvent: Event
+  addReview: Tipp
+  chat: Chat
+  myProfile: Mein Profil
+  settings: Einstellungen 
 

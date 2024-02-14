@@ -1,14 +1,6 @@
 <template>
   <div>
-    <div class="flex justify-start mb-4">
-      <TInputSelect
-        v-model="lang"
-        :options="localesDropdown"
-        class="text-dark"
-      />
-    </div>
-
-    <div class="text-xs">
+    <div class="text-xs flex flex-col gap-2">
       <a
         href="https://github.com/we-dance/platform/releases"
         target="_blank"
@@ -38,7 +30,7 @@
       }}</NuxtLink>
     </div>
     <div class="mt-4 text-xs">
-      © WeDance 2022 – {{ $t('footer.copyright') }}
+      © WeDance 2024 – {{ $t('footer.copyright') }}
     </div>
   </div>
 </template>
@@ -47,22 +39,6 @@
 import { version } from '~/package.json'
 
 export default {
-  computed: {
-    lang: {
-      get() {
-        return this.$i18n.locale
-      },
-      set(val) {
-        this.$i18n.setLocale(val)
-      },
-    },
-    localesDropdown() {
-      return this.$i18n.locales.map((locale) => ({
-        value: locale.code,
-        label: locale.name,
-      }))
-    },
-  },
   setup() {
     return {
       version,

@@ -1,33 +1,16 @@
 <template>
   <div class="font-noto bg-white min-h-screen">
+    <THeader show-logo class="md:hidden" />
     <main>
       <div class="relative sm:overflow-hidden">
         <div class="absolute inset-x-0 bottom-0 h-1/2 bg-white" />
         <div>
           <div class="relative sm:overflow-hidden">
-            <nav class="relative flex p-4 justify-between">
-              <TIcon size="4" name="logo-horizontal-dark" />
-              <TButton
-                v-if="uid"
-                allow-guests
-                type="primary"
-                :to="localePath(`/${username}`)"
-                :label="$t('nav.myProfile')"
-              />
-              <TButton
-                v-else
-                allow-guests
-                type="primary"
-                :to="localePath('/signin')"
-                :label="$t('auth.signin')"
-              />
-            </nav>
-
-            <div class="relative p-4 sm:p-10 lg:p-14">
+            <div class="relative py-10 lg:p-14 px-4 md:px-8">
               <div class="text-center">
-                <h4 class="font-bold text-2xl">
+                <h1 class="font-bold text-2xl">
                   {{ $t('home.cta.header') }}
-                </h4>
+                </h1>
                 <p>{{ $t('home.cta.description') }}</p>
               </div>
 
@@ -45,9 +28,8 @@
               <div
                 class="mt-2 max-w-lg text-xs mx-auto text-center sm:max-w-3xl"
               >
-                <p>{{ $t('hero.submotto') }}.</p>
                 <p>
-                  Our biggest communities are in
+                  {{ $t('hero.submotto') }}. Our biggest communities are in
                   <router-link
                     to="/explore/Munich"
                     class="underline text-primary hover:no-underline"
@@ -58,18 +40,27 @@
                     to="/explore/Berlin"
                     class="underline text-primary hover:no-underline"
                     >Berlin</router-link
-                  >.
+                  >. Our mission is to unite dancers worldwide.
+                  <router-link
+                    class="underline text-primary hover:no-underline"
+                    to="/about"
+                    >Read more</router-link
+                  >
                 </p>
               </div>
             </div>
           </div>
         </div>
       </div>
-      <div class="p-4 bg-light">
-        <div
-          class="md:grid md:grid-cols-2 lg:grid-cols-3 md:gap-4 max-w-4xl mx-auto"
-        >
-          <div class="py-8 space-y-1 bg-light">
+      <h2 class="px-4 text-lg font-bold">Why WeDance?</h2>
+      <div class="m-4 border rounded">
+        <TPreview :content="$t('home.founder')" class="p-4" />
+        <WProfile username="alexrazbakov" hide-role hide-buttons />
+      </div>
+      <div class="p-4">
+        <h2 class="text-lg font-bold mb-4">Features</h2>
+        <div class="grid grid-cols-1 gap-4 max-w-4xl mx-auto">
+          <div class="p-4 space-y-1 bg-light rounded shadow">
             <div class="flex justify-center ">
               <div
                 class="flex items-center justify-center w-20 h-20 bg-white rounded-full "
@@ -92,7 +83,7 @@
               >
             </p>
           </div>
-          <div class="py-8 space-y-1 bg-light">
+          <div class="p-4 space-y-1 bg-light rounded shadow">
             <div class="flex justify-center ">
               <div
                 class="flex items-center justify-center w-20 h-20 bg-white rounded-full "
@@ -115,7 +106,7 @@
               >
             </p>
           </div>
-          <div class="py-8 space-y-1 bg-light">
+          <div class="p-4 space-y-1 bg-light rounded shadow">
             <div class="flex justify-center ">
               <div
                 class="flex items-center justify-center w-20 h-20 bg-white rounded-full "
@@ -196,10 +187,6 @@
         </div>
       </div>
     </main>
-
-    <div class="bg-dark text-white">
-      <TFooter class="p-4 mx-auto max-w-4xl" />
-    </div>
   </div>
 </template>
 
@@ -208,7 +195,7 @@ import { useAuth } from '~/use/auth'
 
 export default {
   name: 'Index',
-  layout: 'empty',
+  layout: 'default',
   setup() {
     const { uid, username } = useAuth()
 

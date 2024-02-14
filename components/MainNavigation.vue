@@ -2,9 +2,13 @@
   <nav
     class="p-4 flex flex-col space-y-2 text-dark h-screen overflow-y-scroll sticky top-0 border-r"
   >
-    <TButton allow-guests :to="localePath('/')" class="mb-8" type="void">
+    <TButton allow-guests :to="localePath('/')" type="void">
       <TIcon name="logo-horizontal-dark" />
     </TButton>
+
+    <div class="flex justify-start">
+      <TLanguageSwitcher />
+    </div>
 
     <TButton
       allow-guests
@@ -21,7 +25,7 @@
           ? localePath(`/explore/${city.username}`)
           : localePath('/explore')
       "
-      label="Events"
+      :label="$t('nav.events')"
       icon="calendar"
       type="nav"
     />
@@ -37,7 +41,7 @@
       allow-guests
       :to="localePath('/find-partner/start')"
       icon="people"
-      label="Find Partner"
+      :label="$t('nav.partner')"
       type="nav"
     />
 
@@ -45,27 +49,31 @@
       allow-guests
       :to="localePath('/dance')"
       icon="help"
-      label="Dance Wiki"
+      :label="$t('nav.wiki')"
       type="nav"
     />
 
-    <div class="border-b pt-2 text-xs font-bold uppercase">Contribute</div>
+    <div class="border-b pt-2 text-xs font-bold uppercase">
+      {{ $t('nav.contribute') }}
+    </div>
     <TButton
       :to="localePath('/events/-/import')"
       icon="plus"
-      label="Add Event"
+      :label="$t('nav.addEvent')"
       type="nav"
     />
 
     <TButton
       :to="localePath('/reviews/add')"
       icon="plus"
-      label="Add Tip"
+      :label="$t('nav.addReview')"
       type="nav"
     />
 
     <template v-if="uid">
-      <div class="border-b pt-2 text-xs font-bold uppercase">My Profile</div>
+      <div class="border-b pt-2 text-xs font-bold uppercase">
+        {{ $t('nav.myProfile') }}
+      </div>
       <TButton
         :to="localePath('/chat')"
         icon="chat"

@@ -32,17 +32,6 @@ home:
     header: Путешествия. Встречи. Танцы.
     description: Находи танцоров и танцевальные мероприятия рядом с тобой
     action: Найти город
-nav:
-  travel: Путешествия
-  festivals: Фестивали
-  chooseCity: Выбрать город
-  feed: Лента
-  calendar: Календарь
-  community: Сообщество
-  chat: Чат
-  dance: Танцы
-  myProfile: Мой Профиль
-  settings: Настройки
 form:
   clear: Очистить
   delete: Удалить
@@ -622,3 +611,15 @@ calendar:
   share:
     text: Текст
     embed: Встроить
+nav:
+  search: Поиск
+  events: События
+  festivals: Фестивали
+  partner: Найти партнера
+  wiki: Вики
+  contribute: Внести вклад
+  addEvent: Событие
+  addReview: Совет 
+  chat: Чат
+  myProfile: Мой профиль
+  settings: Настройки

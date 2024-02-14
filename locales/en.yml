@@ -34,18 +34,26 @@ home:
     header: Travel. Meet. Dance.
     description: Discover dancers and dance events near you
     action: Find your city
-nav:
-  search: Search
-  travel: Travel
-  festivals: Festivals
-  chooseCity: Choose City
-  feed: Feed
-  calendar: Calendar
-  community: Community
-  chat: Chat
-  dance: Dances
-  myProfile: My Profile
-  settings: Settings
+  founder: "Imagine you are a dance-addict and you go to socials almost every day. You are in 10 different Whatsapp chats and know whats going around.
+
+
+    You meet a new dancers in town and they ask you where is the next party.
+
+
+    What are you going to do? 
+
+
+    1. Tell them one next party that you know
+
+    2. Exchange numbers and send them a list of few parties that you know 
+
+    3. Ask admin of each WhatsApp group to invite them?
+
+
+    That question was my initial motivation to create WeDance. After I got this question more and more often I thought it would be great to have one page per city with all events listed in one place.
+
+
+    Sometimes friends are asking me where I am planning to go, to which socials, to which festivals - and now I can proudly send them a link to my profile on WeDance and they can chose the one they'd like to go together."
 form:
   required: This field is required
   clear: Clear
@@ -738,3 +746,15 @@ calendar:
   share:
     text: Text
     embed: Embed
+nav:
+  search: Search
+  events: Events
+  festivals: Festivals
+  partner: Find Partner
+  wiki: Wiki
+  contribute: Contribute
+  addEvent: Event
+  addReview: Tip
+  chat: Chat
+  myProfile: My Profile
+  settings: Settings

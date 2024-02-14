@@ -32,16 +32,6 @@ home:
     header: Menos chat. Más danza.
     description: Descubre bailarines y eventos de baile cerca de ti
     action: Encuentra tu ciudad
-nav:
-  travel: Viaje
-  chooseCity: Elegir ciudad
-  feed: Comentario
-  calendar: Calendario
-  community: Comunidad
-  chat: Chat
-  dance: Bailes
-  myProfile: Mi perfil
-  settings: Configuraciones
 form:
   clear: Limpiar
   delete: Borrar
@@ -616,3 +606,15 @@ calendar:
   share:
     text: Texto
     embed: Incrustar
+nav:
+  search: Buscar
+  events: Eventos
+  festivals: Festivales
+  partner: Encontrar Pareja 
+  wiki: Wiki
+  contribute: Contribuir
+  addEvent: Evento
+  addReview: Consejo
+  chat: Chat
+  myProfile: Mi Perfil
+  settings: Ajustes 
