@@ -3,7 +3,7 @@
   <router-link
     v-else
     class="underline hover:no-underline"
-    :to="`/explore/${city.username}`"
+    :to="localePath(`/explore/${city.username}`)"
     >{{ city.name }}</router-link
   >
 </template>

@@ -15,9 +15,11 @@
             />
             <span>•</span>
             <div>
-              <NuxtLink :to="`/stories/${item.id}`" class="hover:underline">{{
-                dateDiff(item.createdAt)
-              }}</NuxtLink>
+              <NuxtLink
+                :to="localePath(`/stories/${item.id}`)"
+                class="hover:underline"
+                >{{ dateDiff(item.createdAt) }}</NuxtLink
+              >
             </div>
           </div>
 
@@ -157,13 +159,13 @@
       />
       <TButton
         v-if="item.type === 'ask-for-recommendations'"
-        :to="`/stories/${item.id}`"
+        :to="localePath(`/stories/${item.id}`)"
         variant="primary"
         :label="repliesCount ? `${repliesCount} replies` : 'Reply'"
       />
       <TButton
         v-if="item.title && !expanded"
-        :to="`/stories/${item.id}`"
+        :to="localePath(`/stories/${item.id}`)"
         type="primary"
         label="Read more"
       />
