@@ -165,7 +165,7 @@ export const useProfiles = () => {
     {
       name: 'current',
       label: t('profile.current.label'),
-      register: true,
+      register: false,
       poster: true,
       component: 'TInputPlace',
       before: t('profile.current.before'),
