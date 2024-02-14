@@ -54,7 +54,12 @@
       </div>
       <h2 class="px-4 text-lg font-bold">Why WeDance?</h2>
       <div class="m-4 border rounded">
-        <TPreview :content="$t('home.founder')" class="p-4" />
+        <TPreview
+          v-if="$route.query.v == '2'"
+          :content="$t('home.founder2')"
+          class="p-4"
+        />
+        <TPreview v-else :content="$t('home.founder')" class="p-4" />
         <WProfile username="alexrazbakov" hide-role hide-buttons />
       </div>
       <div class="p-4">

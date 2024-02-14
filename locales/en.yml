@@ -35,26 +35,42 @@ home:
     description: Discover dancers and dance events near you
     action: Find your city
   founder:
-    "Imagine you are a dance-addict and you go to socials almost every day. You are in 10 different Whatsapp chats and know whats going around.
+    '**Are you a passionate dancer overwhelmed by dance event information?**
 
 
-    You meet a new dancers in town and they ask you where is the next party.
+    Endless WhatsApp groups, scattered party dates, and trying to figure out which classes suit your level can be a hassle. That''s where WeDance steps in!
 
 
-    What are you going to do?
+    **WeDance is your all-in-one dance hub:**
+
+    - **Discover the hottest parties and classes in your city.** Say goodbye to chaotic chats! Find events easily using filters by style (Salsa, Bachata, Kizomba, etc.) and experience level.
+
+    - **Get insider tips from the local dance community.** Wondering where to find the best socials or which festivals are truly worth attending? Our "Ask Locals" feature connects you directly with experienced dancers in your city.
+
+    - **Stay organized with a personalized dance calendar.** Easily sync your existing calendar or add events directly to WeDance.
 
 
-    1. Tell them one next party that you know
-
-    2. Exchange numbers and send them a list of few parties that you know
-
-    3. Ask admin of each WhatsApp group to invite them?
+    Ready to dance more? Join WeDance today!'
+  founder2: "**The Problem**
 
 
-    That question was my initial motivation to create WeDance. After I got this question more and more often I thought it would be great to have one page per city with all events listed in one place.
+    I'm a dance fanatic, always plugged into the local scene through countless WhatsApp groups. New dancers often ask me about upcoming parties, and it got overwhelming to keep track of everything.
 
 
-    Sometimes friends are asking me where I am planning to go, to which socials, to which festivals - and now I can proudly send them a link to my profile on WeDance and they can chose the one they'd like to go together."
+    **The Solution**
+
+
+    That's why I created WeDance! It's the one-stop-shop for dance events in your city. No more juggling chats or scrambling for information.
+
+
+    **Benefits for Dancers**
+
+    - **New in town?** Find the hottest parties instantly.
+
+    - **Friends curious about your dance plans?** Just send them your WeDance profile and let them pick their favorite events to join you.
+
+
+    Sounds amazing, right? Explore WeDance today!"
 form:
   required: This field is required
   clear: Clear
