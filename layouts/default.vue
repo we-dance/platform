@@ -55,7 +55,7 @@
           :username="username"
           class="hidden md:block w-48 shrink-0"
         />
-        <nuxt class="min-w-0" />
+        <nuxt class="min-w-0 w-full" />
       </div>
     </div>
   </div>
