@@ -75,19 +75,6 @@
         toggled-label="Bookmarked"
         size="4"
       />
-      <TButtonShare
-        :id="doc.id"
-        collection="events"
-        :doc="doc"
-        :place="doc.place"
-        :file="doc.socialCover"
-        :file-name="doc.name"
-        :url="`https://wedance.vip/events/${item.id}`"
-        :text="doc.name"
-        type="simple"
-        class="rounded-full"
-        :label="$t('eventView.dropdown.share')"
-      />
     </div>
 
     <div
@@ -195,9 +182,24 @@
         </div>
 
         <div v-if="doc.org" class="border-b">
+          <div class="text-xs uppercase font-bold px-2 pt-4 text-gray-500">
+            Organiser
+          </div>
           <WProfile
             :username="doc.org.username"
             :fallback="doc.org"
+            hide-role
+            class="border-none"
+          />
+        </div>
+
+        <div v-if="doc.venueProfile" class="border-b">
+          <div class="text-xs uppercase font-bold px-2 pt-4 text-gray-500">
+            Venue
+          </div>
+          <WProfile
+            :username="doc.venueProfile.username"
+            :fallback="doc.venueProfile"
             hide-role
             class="border-none"
           />
@@ -294,6 +296,11 @@
             name: 'Guests',
             to: `/events/${doc.id}?view=guests#tabs`,
             current: $route.query.view === 'guests',
+          },
+          {
+            name: 'Q&A',
+            to: `/events/${doc.id}?view=comments#tabs`,
+            current: $route.query.view === 'comments',
           },
         ]"
       />
@@ -427,15 +434,6 @@
 
         <TPreview :content="doc.description" class="p-4" />
 
-        <div class="flex justify-center p-4">
-          <TButton
-            type="link"
-            :href="calendarLink"
-            label="Add to Google Calendar"
-            class="text-xs"
-          />
-        </div>
-
         <div v-if="doc.venue && doc.venue.map" class="bg-gray-100 p-4">
           <div class="mb-4 text-sm font-bold leading-none text-gray-700">
             {{ $t('eventView.venueMap') }}
@@ -444,12 +442,15 @@
         </div>
 
         <TAgenda
-          v-if="doc.program"
+          v-if="doc.program && doc.program.length"
           :events="doc.program"
           class="w-full space-y-2 p-4"
         />
 
-        <div v-if="doc.artists && doc.artists.length" class="space-y-2 p-4">
+        <div
+          v-if="doc.artists && doc.artists.length"
+          class="space-y-2 p-4 border-t"
+        >
           <h3 class="text-xl font-bold">{{ $t('event.artists') }}</h3>
           <div
             v-for="(profile, profileIndex) in doc.artists"
@@ -464,21 +465,77 @@
           </div>
         </div>
 
-        <div>
-          <h3 class="text-xl font-bold p-4 border-t">
-            {{ $t('comments.label') }}
-          </h3>
-          <div v-if="!uid" class="flex justify-center p-4">
+        <div class="space-y-2 p-4 border-t">
+          <h3 class="text-xl font-bold">Still not sure?</h3>
+          <div class="flex flex-wrap gap-2">
             <TButton
-              type="link"
-              allow-guests
-              :to="localePath(`/signin?target=${$route.path}`)"
-              >{{ $t('event.commentsHidden') }}</TButton
+              type="secondary"
+              :href="calendarLink"
+              label="Add to Google Calendar"
+              class="text-xs"
+            />
+
+            <TButtonShare
+              :id="doc.id"
+              collection="events"
+              :doc="doc"
+              :place="doc.place"
+              :file="doc.socialCover"
+              :file-name="doc.name"
+              :url="`https://wedance.vip/events/${item.id}`"
+              :text="doc.name"
+              type="simple"
+              class="rounded-full"
+              :label="$t('eventView.dropdown.share')"
+            />
+          </div>
+        </div>
+
+        <div class="border-t">
+          <div class="m-4 text-xs text-right gap-8">
+            <span
+              >Created by
+              <nuxt-link
+                class="underline text-primary"
+                :to="localePath(`/${creator.username}`)"
+                >{{ creator.name }}</nuxt-link
+              ></span
+            >
+            <span>at {{ getYmdHms(doc.createdAt, $i18n.locale) }}</span>
+          </div>
+          <div class="m-4 text-xs text-right gap-8">
+            <span>Updated at {{ getYmdHms(doc.updatedAt, $i18n.locale) }}</span>
+          </div>
+
+          <div v-if="doc.facebook" class="m-4 text-right text-xs gap-8">
+            <a :href="doc.facebook" class="text-gray-700 hover:underline"
+              >Facebook Event</a
             >
           </div>
 
-          <TCommentsInline v-else :item="doc" autoload class="px-4" />
+          <div class="m-4 text-right gap-8">
+            <TCardActions
+              :id="doc.id"
+              collection="events"
+              :item="doc"
+              type="link"
+              icon=""
+            />
+          </div>
         </div>
+      </div>
+
+      <div v-if="$route.query.view === 'comments'">
+        <div v-if="!uid" class="flex justify-center p-4">
+          <TButton
+            type="link"
+            allow-guests
+            :to="localePath(`/signin?target=${$route.path}`)"
+            >{{ $t('event.commentsHidden') }}</TButton
+          >
+        </div>
+
+        <TCommentsInline v-else :item="doc" autoload class="px-4" />
       </div>
 
       <div
@@ -537,37 +594,6 @@
           </div>
           <div v-if="!doc.star.count">There are no other guests yet.</div>
         </div>
-      </div>
-
-      <div class="m-4 text-xs text-right gap-8">
-        <span
-          >Created by
-          <nuxt-link
-            class="underline text-primary"
-            :to="localePath(`/${creator.username}`)"
-            >{{ creator.name }}</nuxt-link
-          ></span
-        >
-        <span>at {{ getYmdHms(doc.createdAt, $i18n.locale) }}</span>
-      </div>
-      <div class="m-4 text-xs text-right gap-8">
-        <span>Updated at {{ getYmdHms(doc.updatedAt, $i18n.locale) }}</span>
-      </div>
-
-      <div v-if="doc.facebook" class="m-4 text-right text-xs gap-8">
-        <a :href="doc.facebook" class="text-gray-700 hover:underline"
-          >Facebook Event</a
-        >
-      </div>
-
-      <div class="m-4 text-right gap-8">
-        <TCardActions
-          :id="doc.id"
-          collection="events"
-          :item="doc"
-          type="link"
-          icon=""
-        />
       </div>
 
       <TPopup v-if="ticketPopup" title="Ticket" @close="ticketPopup = false">

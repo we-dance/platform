@@ -607,6 +607,9 @@ event:
   org:
     label: Organiser
     description: Who can answer questions about the event (is it still happening, how to find entrance, etc.)
+  venueProfile:
+    label: Venue
+    description: Where is it happening?
   online:
     label: Online?
     description: Streaming via Zoom, Google Meet, Instagram Live, etc.?

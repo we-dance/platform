@@ -311,6 +311,13 @@ export const useEvents = () => {
       simple: true,
     },
     {
+      name: 'venueProfile',
+      component: 'TInputProfile',
+      label: t('event.venueProfile.label'),
+      before: t('event.venueProfile.description'),
+      labelPosition: 'top',
+    },
+    {
       name: 'venue',
       label: t('event.venue'),
       labelPosition: 'top',
