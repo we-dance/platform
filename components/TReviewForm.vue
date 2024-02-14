@@ -122,10 +122,10 @@ export default {
         data.createdAt = +new Date()
 
         const newStory = await firestore.collection('stories').add(data)
-        if (this.$route.query.question) {
+        if (this.question) {
           await firestore
             .collection('stories')
-            .doc(this.$route.query.question)
+            .doc(this.question)
             .update({
               replies: firebase.firestore.FieldValue.arrayUnion(newStory.id),
             })
