@@ -145,13 +145,11 @@ import {
 import { useAlgolia } from '~/use/algolia'
 import { useStyles } from '~/use/styles'
 import { useAuth } from '~/use/auth'
-import { useCities } from '~/use/cities'
-import { useApp } from '~/use/app'
 
 export default {
   name: 'TCalendar',
   props: {
-    profile: {
+    city: {
       type: Object,
       default: null,
     },
@@ -175,8 +173,6 @@ export default {
     const currentPage = ref(1)
     const filters = ref({})
     const { uid } = useAuth()
-    const { city, currentCity, cityName } = useCities()
-    const { getCity } = useApp()
     let today = new Date(Date.now())
     today.setHours(6, 0, 0, 0)
     today = +today
@@ -188,9 +184,10 @@ export default {
       return +oneWeekLater
     })
 
-    if (!currentCity.value) {
+    if (!props.city) {
       return
     }
+
     const { search, response, loadMore, loading } = useAlgolia('events')
     const facets = computed(() => ({
       type: getFacetOptions('type'),
@@ -230,8 +227,8 @@ export default {
       }
     )
 
-    watch([currentPage, facetFilters, radius, city, fromDate], () => {
-      if (!city.value?.location) {
+    watch([currentPage, facetFilters, radius, fromDate], () => {
+      if (!props.city?.location) {
         return
       }
       const searchParams = {
@@ -240,7 +237,7 @@ export default {
         facetFilters: facetFilters.value,
         page: currentPage.value - 1,
         aroundLatLng: radius.value
-          ? `${city.value.location.latitude}, ${city.value.location.longitude}`
+          ? `${props.city.location.latitude}, ${props.city.location.longitude}`
           : '',
         aroundRadius: radius.value * 1000 || 1,
         hitsPerPage: 10,
@@ -338,9 +335,6 @@ export default {
       getFieldLabel,
       radius,
       load,
-      getCity,
-      cityName,
-      city,
       getDateObect,
       itemsByDate,
       getDay,

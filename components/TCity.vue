@@ -25,7 +25,7 @@
 
     <TCalendar
       :key="view + ($route.query.style || '')"
-      :profile="profile"
+      :city="profile"
       :view="view"
       class="w-full border-t"
     />
