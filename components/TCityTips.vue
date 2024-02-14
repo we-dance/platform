@@ -44,7 +44,11 @@
       </form>
     </div>
 
-    <TStories :place="city.cityPlaceId" />
+    <TStories
+      :place="city.cityPlaceId"
+      :filter-dance="item.style"
+      :key="item.style"
+    />
   </div>
 </template>
 

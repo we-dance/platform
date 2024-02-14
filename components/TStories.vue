@@ -35,6 +35,10 @@ export default {
       type: String,
       default: '',
     },
+    filterDance: {
+      type: String,
+      default: '',
+    },
   },
   setup(props) {
     const loading = ref(true)
@@ -61,10 +65,16 @@ export default {
       }
 
       collection.orderBy('createdAt', 'desc').onSnapshot((storiesRef) => {
-        stories.value = storiesRef.docs.map((doc) => ({
+        let result = storiesRef.docs.map((doc) => ({
           ...doc.data(),
           id: doc.id,
         }))
+
+        if (props.filterDance) {
+          result = result.filter((item) => item.style === props.filterDance)
+        }
+
+        stories.value = result
 
         loading.value = false
       })
