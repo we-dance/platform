@@ -1,6 +1,6 @@
 <template>
   <div :class="classes">
-    <TCityMembers :city="profile" />
+    <TCityGroups :city="profile" />
   </div>
 </template>
 
@@ -10,7 +10,7 @@ import { useDoc } from '~/use/doc'
 import { trackView } from '~/use/tracking'
 
 export default {
-  name: 'ExploreMembers',
+  name: 'ExploreGroups',
   async asyncData({ params, error }) {
     const city = params.city
 

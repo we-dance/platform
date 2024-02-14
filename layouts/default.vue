@@ -12,7 +12,7 @@
     />
 
     <div
-      class="font-sans leading-normal tracking-normal antialiased min-h-screen flex flex-col mx-auto max-w-2xl border-r"
+      class="font-sans leading-normal tracking-normal antialiased min-h-screen mx-auto max-w-2xl border-r"
     >
       <TPopup
         v-if="showAuthPopup"
@@ -49,13 +49,13 @@
 
       <THamburger v-model="isMenuOpen" class="absolute mt-2 md:hidden" />
 
-      <div class="flex-grow flex">
+      <div class="flex">
         <MainNavigation
           :uid="uid"
           :username="username"
-          class="hidden md:block flex-initial w-64"
+          class="hidden md:block w-48 shrink-0"
         />
-        <nuxt class="flex-grow w-full" />
+        <nuxt class="min-w-0" />
       </div>
     </div>
   </div>

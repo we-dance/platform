@@ -1,5 +1,5 @@
 <template>
-  <div class="flex justify-center overflow-x-scroll">
+  <div class="w-full overflow-x-auto">
     <div class="flex flex-nowrap">
       <TButton
         v-for="option in options"

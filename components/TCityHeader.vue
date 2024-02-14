@@ -23,9 +23,9 @@
           current: view === 'classes',
         },
         {
-          name: 'Members',
-          to: `/explore/${profile.username}/members`,
-          current: view === 'members',
+          name: 'Groups',
+          to: `/explore/${profile.username}/groups`,
+          current: view === 'groups',
         },
         {
           name: 'Tips',

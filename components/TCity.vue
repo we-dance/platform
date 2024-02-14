@@ -4,12 +4,13 @@
 
     <div class="p-4">
       <h1 class="text-2xl font-bold">
+        {{ $route.query.style }}
         {{ view === 'parties' ? 'Parties' : 'Classes' }} in {{ profile.name }}
       </h1>
 
       <div class="text-sm">
-        Discover the vibrant dance scene in {{ profile.name }}. Browse through a
-        curated list of dance
+        Discover the vibrant {{ $route.query.style }} dance scene in
+        {{ profile.name }}. Browse through a curated list of dance
         {{ view === 'parties' ? 'parties' : 'classes' }} and filter by your
         favorite styles like Salsa, Bachata, Kizomba, and more.
       </div>

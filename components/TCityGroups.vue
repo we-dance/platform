@@ -1,14 +1,14 @@
 <template>
   <div>
-    <TCityHeader :profile="city" view="members" />
+    <TCityHeader :profile="city" view="groups" />
 
     <div class="p-4">
-      <h1 class="text-2xl font-bold">Members in {{ city.name }}</h1>
+      <h1 class="text-2xl font-bold">Groups in {{ city.name }}</h1>
       <div class="text-sm">
-        Connect with a diverse community of dancers, organizers, artists, and
-        venues in {{ city.name }}. Filter by role and dance style to find the
-        perfect match for your dance needs, whether it's Salsa, Bachata,
-        Kizomba, and more.
+        Discover and connect with dance influencers and groups in
+        {{ city.name }}. Find WhatsApp, Telegram, Instagram, Youtube communities
+        tailored to your style, from Salsa to Bachata to Kizomba. Engage with
+        influencers and join vibrant dance networks in {{ city.name }}.
       </div>
       <div>
         <ul class="list-disc pl-4 pt-4">
@@ -30,23 +30,33 @@
       </div>
     </div>
 
-    <div class="border-t">
-      <div v-if="response.facets" class="gap-2 flex flex-wrap p-4 items-center">
-        <t-rich-select
-          v-model="filters['type']"
-          placeholder="Role"
-          :options="facets['type']"
-          clearable
-          hide-search-box
-        />
+    <div class="border-t border-b">
+      <div class="space-y-2 p-4">
+        <div v-if="response.facets" class="gap-2 flex flex-wrap items-center">
+          <t-rich-select
+            v-model="groupType"
+            placeholder="Platform"
+            :options="groupTypes"
+            clearable
+            hide-search-box
+          />
 
-        <t-rich-select
-          v-model="filters['style']"
-          :placeholder="$t(`profile.style`)"
-          :options="facets['style']"
-          clearable
-          hide-search-box
-        />
+          <t-rich-select
+            v-model="filters['type']"
+            placeholder="Role"
+            :options="facets['type']"
+            clearable
+            hide-search-box
+          />
+
+          <t-rich-select
+            v-model="filters['style']"
+            :placeholder="$t(`profile.style`)"
+            :options="facets['style']"
+            clearable
+            hide-search-box
+          />
+        </div>
       </div>
 
       <div v-if="response.hits && response.hits.length > 0" class="space-y-2">
@@ -98,7 +108,46 @@ export default {
     },
   },
   setup(props) {
+    const groupTypes = [
+      {
+        label: 'Whatsapp',
+        value: 'whatsapp',
+      },
+      {
+        label: 'Telegram',
+        value: 'telegram',
+      },
+      {
+        label: 'Instagram',
+        value: 'instagram',
+      },
+      {
+        label: 'Facebook',
+        value: 'facebook',
+      },
+      {
+        label: 'Youtube',
+        value: 'youtube',
+      },
+      {
+        label: 'LinkedIn',
+        value: 'linkedin',
+      },
+      {
+        label: 'TikTok',
+        value: 'tiktok',
+      },
+      {
+        label: 'Couchsurfing',
+        value: 'couchsurfing',
+      },
+      {
+        label: 'X (Twitter)',
+        value: 'twitter',
+      },
+    ]
     const radius = ref(10)
+    const groupType = ref('')
     const query = ref('')
     const profileType = ref('')
     const currentPage = ref(1)
@@ -134,7 +183,7 @@ export default {
     })
     watch([currentPage, facetFilters, radius], () => {
       search('', {
-        filters: `${filterQuery.value} AND (type:Organiser OR type:Artist OR type:Venue OR type:FanPage)`,
+        filters: `${filterQuery.value}`,
         facets: Object.keys(facets.value),
         facetFilters: facetFilters.value,
         page: currentPage.value - 1,
@@ -172,6 +221,8 @@ export default {
       }
     }
     return {
+      groupType,
+      groupTypes,
       radiusOptions,
       uid,
       getFacetOptions,

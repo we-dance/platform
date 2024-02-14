@@ -8,7 +8,7 @@
       />
     </div>
 
-    <div class="flex flex-wrap gap-4 text-xs">
+    <div class="text-xs">
       <a
         href="https://github.com/we-dance/platform/releases"
         target="_blank"
