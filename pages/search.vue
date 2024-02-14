@@ -1,14 +1,14 @@
 <template>
   <div>
-    <div class="bg-gray-200 p-2 pl-12 md:pl-2">
+    <THeader>
       <TInput
         v-model="query"
         auto-focus
         placeholder="Search profiles and events"
-        class="rounded-full"
         @input="search"
       />
-    </div>
+    </THeader>
+
     <NuxtLink
       v-for="item in response.hits"
       :key="item.id"
