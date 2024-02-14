@@ -396,32 +396,6 @@ nopassword:
 contacts:
   email: Email
   website: Sitio web
-teaser:
-  partner:
-    title: '¿Necesitas un socio?'
-    description: Bailarines de todo el mundo crean sus perfiles para encontrar parejas de baile
-    btn: Ver comunidad
-  events:
-    title: Donde bailar
-    description: Todos los cursos de baile, fiestas y festivales en un solo lugar
-    btn: Ver eventos
-  profile:
-    title: Publica tu perfil
-    description: para que otros puedan contactarte
-    btn: Únete gratis
-  allevents:
-    title: Eventos privados
-    description: Hágase miembro de WeDance Community para ver más
-    btn: Únete ahora
-  chat:
-    title: Looking for more events?
-    description: 'Tenemos un chat de baile de Telegram en cada ciudad. Únase al chat de su ciudad para ayudar a los bailarines que viajan, invite a sus amigos de baile. ¡Construyamos WeDance juntos!'
-    btnChatExists: Ask Locals
-    btnChatMissing: Ask Travelers
-  involve:
-    title: Necesitamos tu ayuda
-    description: Somos una comunidad internacional de danza sin fines de lucro. Queremos que vayas a cualquier ciudad de cualquier país y encuentres eventos de danza y bailarines. Todo comienza con la comunidad local.
-    btn: Involucrarse
 share:
   title: Compartir
   copy: Copiar link
@@ -610,11 +584,20 @@ nav:
   search: Buscar
   events: Eventos
   festivals: Festivales
-  partner: Encontrar Pareja 
+  partner: Encontrar Pareja
   wiki: Wiki
   contribute: Contribuir
   addEvent: Evento
   addReview: Consejo
   chat: Chat
   myProfile: Mi Perfil
-  settings: Ajustes 
+  settings: Ajustes
+teaser:
+  profile:
+    title: Publica tu perfil
+    description: para que otros puedan contactarte
+    btn: Únete gratis
+  feed:
+    title: ¿Buscas más eventos?
+    description: En lugar de buscar en múltiples chats, pregunta directamente a nuestra comunidad local de baile en el sitio web. Obtén recomendaciones personalizadas para eventos en cualquier ciudad de bailarines locales.
+    btn: Pregunta a Locales

@@ -464,42 +464,6 @@ nopassword:
 contacts:
   email: Email
   website: Website
-teaser:
-  partner:
-    title: Need a partner?
-    description: Dancers worldwide create their profiles to find dance partners
-    btn: See Community
-  events:
-    title: Where to dance?
-    description: All dance courses, parties and festivals in one place
-    btn: See Events
-  profile:
-    title: Publish your profile
-    description: so that others can contact you
-    btn: Join for free
-  allevents:
-    title: Private events
-    description: Become a member of WeDance Community to see more
-    btn: Join Now
-  chat:
-    title: Looking for more events?
-    description:
-      "We have a Telegram dance chat in every city. Join your city chat
-      to help traveling dancers, invite your dance friends. Let's build WeDance
-      together! "
-    btnChatExists: Ask Locals
-    btnChatMissing: Ask Travelers
-  feed:
-    title: Looking for more events?
-    description: Instead of searching through multiple chats, directly ask our local dance community on the website. Get personalized recommendations for events in any city from local dancers.
-    btn: Ask Locals
-  involve:
-    title: We need your help
-    description:
-      We are non-profit international dance community. We want you go to
-      any city in any country and find dance events and dancers. It all starts
-      with the local community.
-    btn: Get Involved
 share:
   title: Share
   copy: Copy Link
@@ -760,3 +724,12 @@ nav:
   bookmarks: Bookmarks
   myProfile: My Profile
   settings: Settings
+teaser:
+  profile:
+    title: Publish your profile
+    description: so that others can contact you
+    btn: Join for free
+  feed:
+    title: Looking for more events?
+    description: Instead of searching through multiple chats, directly ask our local dance community on the website. Get personalized recommendations for events in any city from local dancers.
+    btn: Ask Locals

@@ -403,32 +403,6 @@ nopassword:
 contacts:
   email: Email
   website: Webseite
-teaser:
-  partner:
-    title: Benötigst Du einen Partner?
-    description: Tänzer weltweit erstellen ihre Profile, um Tanzpartner zu finden
-    btn: Siehe Community
-  events:
-    title: Wo kann man tanzen?
-    description: Alle Tanzkurse, Partys und Festivals an einem Ort
-    btn: Siehe Ereignisse
-  profile:
-    title: Veröffentliche Dein Profil
-    description: damit andere Dich kontaktieren können
-    btn: Kostenlos beitreten
-  allevents:
-    title: Private Veranstaltungen
-    description: Werde Mitglied der WeDance Community, um mehr zu sehen
-    btn: Jetzt beitreten
-  chat:
-    title: Looking for more events?
-    description: 'Wir haben in jeder Stadt einen Telegram-Tanzchat. Treten Sie Ihrem Stadt-Chat bei, um reisenden Tänzern zu helfen, und laden Sie Ihre Tanzfreunde ein. Lass uns zusammen WeDance aufbauen!'
-    btnChatExists: Ask Locals
-    btnChatMissing: Ask Travelers
-  involve:
-    title: Wir brauchen Deine Hilfe
-    description: Wir sind eine gemeinnützige internationale Tanzgemeinschaft. Wir möchten, dass Sie in jede Stadt in jedem Land gehen und Tanzveranstaltungen und Tänzer finden. Alles beginnt mit der örtlichen Gemeinde.
-    btn: Mach mit
 share:
   title: Teilen
   copy: Link kopieren
@@ -637,15 +611,23 @@ calendar:
     text: Text
     embed: Einbetten
 nav:
-  search: Suche 
+  search: Suche
   events: Veranstaltungen
   festivals: Festivals
   partner: Partner finden
-  wiki: Wiki 
+  wiki: Wiki
   contribute: Mitmachen
   addEvent: Event
   addReview: Tipp
   chat: Chat
   myProfile: Mein Profil
-  settings: Einstellungen 
-
+  settings: Einstellungen
+teaser:
+  profile:
+    title: Veröffentliche dein Profil
+    description: damit andere dich kontaktieren können
+    btn: Kostenlos beitreten
+  feed:
+    title: Auf der Suche nach mehr Events?
+    description: Statt in mehreren Chats zu suchen, frage direkt unsere lokale Tanzgemeinschaft auf der Website. Erhalte personalisierte Empfehlungen für Veranstaltungen in jeder Stadt von lokalen Tänzern.
+    btn: Locals fragen
