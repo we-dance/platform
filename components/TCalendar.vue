@@ -1,17 +1,27 @@
 <template>
   <div>
-    <div class="p-4 gap-2 flex items-center border-b">
+    <div class="p-4 gap-2 flex flex-nowrap items-center border-b">
       <t-rich-select
         v-model="filters['style']"
-        :placeholder="$t(`profile.style`)"
+        placeholder="Dance"
         :options="facets['style']"
         clearable
         hide-search-box
       />
+
+      <t-rich-select
+        v-if="view === 'classes'"
+        v-model="level"
+        placeholder="Level"
+        :options="levels"
+        clearable
+        hide-search-box
+      />
+
       <TButton
         :to="localePath('/events/-/import')"
         icon="plus"
-        label="Add Event"
+        label="Add"
         type="primary"
       />
     </div>
@@ -152,6 +162,13 @@ export default {
     },
   },
   setup(props, { root }) {
+    const level = ref('')
+    const levels = [
+      { value: 'Beginner', label: 'Beginner' },
+      { value: 'Intermediate', label: 'Intermediate' },
+      { value: 'Advanced', label: 'Advanced' },
+    ]
+
     const radius = ref(50)
     const query = ref('')
     const sorting = ref('Upcoming')
@@ -300,6 +317,8 @@ export default {
     const showPopup = ref(false)
 
     return {
+      level,
+      levels,
       itemsAsText,
       copyToClipboard,
       showPopup,

@@ -33,102 +33,17 @@
       class="w-full mt-4"
     />
 
-    <div v-if="profile.instagram" class="bg-gray-100 py-4 flex justify-center">
-      <div class="max-w-md py-4 space-y-1">
-        <div class="flex justify-center"></div>
-        <h3 class="text-2xl font-extrabold text-center">
-          {{ $t('profile.follow.title') }}
-        </h3>
-        <p class="text-center">
-          {{ $t('profile.follow.description') }}
-        </p>
-        <div class="p-4 flex flex-wrap gap-2 items-center justify-center">
-          <TButton
-            v-if="profile.youtube"
-            allow-guests
-            icon="youtube"
-            type="round"
-            icon-size="6"
-            :href="profile.youtube"
-          />
-          <TButton
-            v-if="profile.instagram"
-            allow-guests
-            icon="instagram"
-            type="round"
-            icon-size="6"
-            :href="profile.instagram"
-          />
-          <TButton
-            v-if="profile.telegram"
-            allow-guests
-            icon="telegram"
-            type="round"
-            icon-size="6"
-            :href="profile.telegram"
-          />
-          <TButton
-            v-if="profile.twitter"
-            allow-guests
-            icon="twitter"
-            type="round"
-            icon-size="6"
-            :href="profile.twitter"
-          />
-          <TButton
-            v-if="profile.tiktok"
-            allow-guests
-            icon="tiktok"
-            type="round"
-            icon-size="6"
-            :href="profile.tiktok"
-          />
-          <TButton
-            v-if="profile.facebook"
-            allow-guests
-            icon="facebook"
-            type="round"
-            icon-size="6"
-            :href="profile.facebook"
-          />
-        </div>
-      </div>
-    </div>
-
-    <div class="p-4 text-gray-600">
-      <h3 class="text-xs font-extrabold text-center">
-        Dance Events Near Me
-      </h3>
-      <ul class="text-xs text-center">
-        <li
-          v-for="style in [
-            'Salsa',
-            'Bachata',
-            'Kizomba',
-            'BrazilianZouk',
-            'Afrobeats',
-          ]"
-          :key="style"
-          class="inline-block p-1"
-        >
-          <nuxt-link
-            :to="localePath(`/explore/${profile.username}?style=${style}`)"
-            >{{ style }} in {{ profile.name }}</nuxt-link
-          >
-        </li>
-      </ul>
-    </div>
+    <TFollowOnSocialMedia
+      v-if="profile.instagram"
+      :profile="profile"
+      class="py-4"
+    />
+    <TSeoLinks :profile="profile" class="p-4" />
   </div>
 </template>
 
 <script>
-import { computed, onMounted } from 'vue-demi'
-import { useApp } from '~/use/app'
-import { useAuth } from '~/use/auth'
-import { useProfiles } from '~/use/profiles'
-import { getExcerpt, getCityMeta, getDateObect } from '~/utils'
-import { useDoc } from '~/use/doc'
-import { useCities } from '~/use/cities'
+import { getExcerpt, getDateObect } from '~/utils'
 
 export default {
   props: {
@@ -142,42 +57,78 @@ export default {
     },
   },
   head() {
-    return getCityMeta(this.profile, [], this.$route.query.style, this.view)
-  },
-  setup(props, { root }) {
-    const internationalChatLink = 'https://t.me/+Vxw15sDG-dWpqHDj'
-    const { uid, isAdmin, can } = useAuth()
-    const { profileFields } = useProfiles()
-    const { getCity } = useApp()
-    const { remove } = useDoc('profiles')
-    const { load, doc: promo } = useDoc('posts')
-    const invitesLeft = 5
-    const { switchCity } = useCities()
-    const community = computed(() => getCity(props.profile?.place))
+    const profile = this.profile
+    const style = this.$route.query.style || ''
+    const cityName = profile.name.replace(',', '')
+    const view = this.view
 
-    const subscribersCount = computed(() => {
-      return props.profile?.watch?.usernames?.length || 0
-    })
+    const title = `Dance ${style}${
+      view === 'parties' ? ' Parties' : ' Classes'
+    } in ${cityName} | Dance Calendar | WeDance`
+    const description = `Explore a variety of ${style} dance events happening in ${cityName}. From ${style ||
+      'salsa'} nights to bachata workshops, find your next dance adventure here.`
+    const keywords = `Where can I dance ${style} in ${cityName}, ${cityName} ${style} Dance Events, ${style} Dance Classes in ${cityName}, ${cityName} ${style} Dance Workshops, ${cityName} ${style} Dance Parties, ${cityName} ${style} Dance Calendar, ${style} Dance Studios ${cityName}, ${style} ${cityName} Dance Community, Popular ${style} Dance Styles ${cityName}`
 
-    onMounted(async () => {
-      await switchCity(props.profile.place)
-      load('yEfJWBnepn0u6gOVmUor')
-    })
+    const schema = {
+      '@context': 'https://schema.org',
+      '@type': 'WebPage',
+      name: title,
+      description,
+      url: `https://wedance.vip/explore/${profile.username}`,
+      isPartOf: {
+        '@type': 'WebSite',
+        name: 'WeDance',
+        url: 'https://wedance.vip',
+      },
+    }
 
     return {
+      title,
+      meta: [
+        {
+          hid: 'description',
+          name: 'description',
+          content: description,
+        },
+        {
+          hid: 'keywords',
+          name: 'keywords',
+          content: keywords,
+        },
+        {
+          hid: 'og:title',
+          property: 'og:title',
+          content: title,
+        },
+        {
+          hid: 'og:type',
+          property: 'og:type',
+          content: 'website',
+        },
+        {
+          hid: 'og:description',
+          property: 'og:description',
+          content: description,
+        },
+        {
+          hid: 'og:image',
+          property: 'og:image',
+          content: profile.photo,
+        },
+      ],
+      script: [
+        {
+          hid: 'schema',
+          type: 'application/ld+json',
+          json: schema,
+        },
+      ],
+    }
+  },
+  setup() {
+    return {
       getDateObect,
-      promo,
-      internationalChatLink,
-      uid,
-      can,
       getExcerpt,
-      profileFields,
-      getCity,
-      isAdmin,
-      community,
-      invitesLeft,
-      subscribersCount,
-      remove,
     }
   },
 }

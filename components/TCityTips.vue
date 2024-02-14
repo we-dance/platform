@@ -45,9 +45,9 @@
     </div>
 
     <TStories
+      :key="item.style"
       :place="city.cityPlaceId"
       :filter-dance="item.style"
-      :key="item.style"
     />
   </div>
 </template>
