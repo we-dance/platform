@@ -1,9 +1,5 @@
 <template>
-  <NuxtLink
-    :to="localePath(`/events/${id}`)"
-    :target="isEmbed ? '_blank' : '_self'"
-    class="flex border-b p-4 leading-none gap-2"
-  >
+  <div class="flex border-b p-4 leading-none gap-2">
     <div v-if="showDate" class="text-center">
       <div class="text-xl font-bold leading-none">
         {{ formatDate(startDate, 'd') }}
@@ -19,12 +15,17 @@
       <div class="font-bold text-sm leading-none">
         <div>{{ formatDate(startDate, 'HH:mm') }}</div>
       </div>
+      <TEventBookmark :event-id="id" class="mt-2" />
     </div>
     <div class="w-full">
-      <div
-        class="font-bold text-sm leading-none hover:underline hover:text-primary"
-      >
-        {{ name }}
+      <div class="font-bold text-sm leading-none">
+        <NuxtLink
+          :to="localePath(`/events/${id}`)"
+          class="hover:underline hover:text-primary"
+          :target="isEmbed ? '_blank' : '_self'"
+        >
+          {{ name }}
+        </NuxtLink>
       </div>
       <div>
         <div class="text-xs pt-1 leading-none">
@@ -47,9 +48,14 @@
       </div>
     </div>
     <div>
-      <img class="w-20 rounded" :src="cover" :alt="`${name} cover`" />
+      <NuxtLink
+        v-if="cover"
+        :to="localePath(`/events/${id}`)"
+        :target="isEmbed ? '_blank' : '_self'"
+        ><img class="w-20 rounded" :src="cover" :alt="`${name} cover`"
+      /></NuxtLink>
     </div>
-  </NuxtLink>
+  </div>
 </template>
 
 <script>

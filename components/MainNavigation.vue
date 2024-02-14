@@ -80,6 +80,13 @@
         :label="$t('nav.chat')"
         type="nav"
       />
+      <TButton
+        :to="localePath('/bookmarks')"
+        :label="$t('nav.bookmarks')"
+        type="nav"
+      >
+        <BookmarkIcon class="w-4 h-4" />
+      </TButton>
       <TButton :to="localePath(`/${username}`)" type="nav">
         <TProfilePhoto size="xs" :uid="uid" class="mr-1" />
         <span>{{ $t('nav.myProfile') }}</span>
@@ -171,11 +178,15 @@
 
 <script>
 import ls from 'local-storage'
+import { BookmarkIcon } from '@vue-hero-icons/outline'
 import { useAuth } from '~/use/auth'
 import { useCities } from '~/use/cities'
 import { useRouter } from '~/use/router'
 
 export default {
+  components: {
+    BookmarkIcon,
+  },
   setup() {
     const { isAdmin, isEditor } = useAuth()
     const { city, currentCity } = useCities()

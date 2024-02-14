@@ -8,8 +8,8 @@
   >
     <slot>
       <TIcon v-if="icon" :size="iconSize" :name="icon" />
-      <span v-if="label !== false">{{ label }}</span>
     </slot>
+    <span v-if="label !== false">{{ label }}</span>
   </button>
   <a
     v-else-if="href"
@@ -22,8 +22,8 @@
   >
     <slot>
       <TIcon v-if="icon" :size="iconSize" :name="icon" />
-      <span v-if="label !== false">{{ label }}</span>
     </slot>
+    <span v-if="label !== false">{{ label }}</span>
   </a>
   <NuxtLink
     v-else-if="to"
@@ -34,8 +34,8 @@
   >
     <slot>
       <TIcon v-if="icon" :size="iconSize" :name="icon" />
-      <span v-if="label !== false">{{ label }}</span>
     </slot>
+    <span v-if="label !== false">{{ label }}</span>
   </NuxtLink>
   <button
     v-else
@@ -46,8 +46,8 @@
   >
     <slot>
       <TIcon v-if="icon" :size="iconSize" :name="icon" />
-      <span v-if="label !== false">{{ label }}</span>
     </slot>
+    <span v-if="label !== false">{{ label }}</span>
   </button>
 </template>
 

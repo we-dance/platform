@@ -34,4 +34,4 @@ if (!firebase.apps.length) {
 
 const db = firebase.firestore()
 
-export { db, track, analytics, googleApiKey }
+export { db, track, analytics, googleApiKey, firebase }

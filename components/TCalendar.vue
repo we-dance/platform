@@ -53,7 +53,6 @@
           v-for="item in items"
           :id="item.id"
           :key="item.id"
-          class="hover:opacity-75"
           :name="item.name"
           :cover="item.cover"
           :venue="item.venue"

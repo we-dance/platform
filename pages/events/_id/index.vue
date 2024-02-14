@@ -53,7 +53,7 @@
       {{ $t('event.attendCallToAction') }}
     </div>
     <div
-      class="sticky top-0 z-40 flex justify-center items-center gap-2 bg-white p-4 shadow"
+      class="sticky top-0 z-40 flex flex-wrap justify-center items-center gap-2 bg-white p-4 shadow"
     >
       <TReaction
         type="primary"
@@ -66,6 +66,14 @@
         class="rounded-full"
         hide-count
         :item="doc"
+      />
+      <TEventBookmark
+        :event-id="doc.id"
+        show-label
+        type="secondary"
+        label="Bookmark"
+        toggled-label="Bookmarked"
+        size="4"
       />
       <TButtonShare
         :id="doc.id"

@@ -34,18 +34,19 @@ home:
     header: Travel. Meet. Dance.
     description: Discover dancers and dance events near you
     action: Find your city
-  founder: "Imagine you are a dance-addict and you go to socials almost every day. You are in 10 different Whatsapp chats and know whats going around.
+  founder:
+    "Imagine you are a dance-addict and you go to socials almost every day. You are in 10 different Whatsapp chats and know whats going around.
 
 
     You meet a new dancers in town and they ask you where is the next party.
 
 
-    What are you going to do? 
+    What are you going to do?
 
 
     1. Tell them one next party that you know
 
-    2. Exchange numbers and send them a list of few parties that you know 
+    2. Exchange numbers and send them a list of few parties that you know
 
     3. Ask admin of each WhatsApp group to invite them?
 
@@ -713,12 +714,12 @@ explore:
   parties:
     title: Dance {style} Parties in {city} | Dance Calendar | WeDance
     description: Explore a variety of {style} dance events happening in {city}. From {referenceStyle} nights to bachata workshops, find your next dance adventure here.
-    header: '{style} Parties in {city}' 
+    header: '{style} Parties in {city}'
     subheader: Discover the vibrant {style} dance scene in {city}. Browse through a curated list of dance parties and filter by your favorite styles like Salsa, Bachata, Kizomba, and more.
   classes:
     title: Dance {style} Classes in {city} | Dance Calendar | WeDance
     description: Explore a variety of {style} dance events happening in {city}. From {referenceStyle} nights to bachata workshops, find your next dance adventure here.
-    header: '{style} Classes in {city}' 
+    header: '{style} Classes in {city}'
     subheader: Discover the vibrant {style} dance scene in {city}. Browse through a curated list of dance classes and filter by your favorite styles like Salsa, Bachata, Kizomba, and more.
   groups:
     title: Dance Groups in {city} | WeDance
@@ -756,5 +757,6 @@ nav:
   addEvent: Event
   addReview: Tip
   chat: Chat
+  bookmarks: Bookmarks
   myProfile: My Profile
   settings: Settings

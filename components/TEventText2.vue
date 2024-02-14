@@ -1,9 +1,5 @@
 <template>
-  <NuxtLink
-    :to="item.id ? localePath(`/events/${item.id}`) : '#'"
-    :target="isEmbed ? '_blank' : '_self'"
-    class="flex border-b p-4 leading-none gap-2"
-  >
+  <div class="flex border-b p-4 leading-none gap-2">
     <div class="text-center">
       <div v-if="showDate" class="font-bold text-sm leading-none">
         <div class="text-xl font-bold leading-none text-primary">
@@ -15,12 +11,18 @@
       <div v-else class="font-bold text-sm leading-none">
         {{ formatDate(item.startDate, 'HH:mm') }}
       </div>
+      <TEventBookmark :event-id="item.id" class="mt-2" />
     </div>
     <div class="w-full">
       <div
         class="font-bold text-sm leading-none hover:underline hover:text-primary"
       >
-        {{ item.name }}
+        <NuxtLink
+          :to="item.id ? localePath(`/events/${item.id}`) : '#'"
+          :target="isEmbed ? '_blank' : '_self'"
+        >
+          {{ item.name }}
+        </NuxtLink>
       </div>
       <div>
         <div class="text-xs pt-1 leading-none">
@@ -54,14 +56,19 @@
       </div>
     </div>
     <div>
-      <img
+      <NuxtLink
         v-if="item.cover"
-        class="w-20 rounded"
-        :src="item.cover"
-        :alt="`${item.name} cover`"
-      />
+        :to="item.id ? localePath(`/events/${item.id}`) : '#'"
+        :target="isEmbed ? '_blank' : '_self'"
+      >
+        <img
+          class="w-20 rounded"
+          :src="item.cover"
+          :alt="`${item.name} cover`"
+        />
+      </NuxtLink>
     </div>
-  </NuxtLink>
+  </div>
 </template>
 
 <script>
@@ -73,7 +80,7 @@ import { addressPart } from '~/use/google'
 import { useStyles } from '~/use/styles'
 
 export default {
-  name: 'TEventText',
+  name: 'TEventText2',
   setup() {
     const { getCity } = useApp()
     const { currentCity } = useCities()
