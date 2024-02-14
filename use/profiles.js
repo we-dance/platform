@@ -99,6 +99,11 @@ export const useProfiles = () => {
       placeholder: 'https://www.couchsurfing.com/people/username',
     },
     {
+      name: 'linkedin',
+      label: 'LinkedIn',
+      placeholder: 'https://linkedin.com/in/username',
+    },
+    {
       name: 'airbnb',
       label: 'Airbnb',
       placeholder: 'https://www.airbnb.com/users/show/00000000',

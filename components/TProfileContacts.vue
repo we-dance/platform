@@ -57,6 +57,7 @@ export default {
   data: () => ({
     shortFields: ['instagram', 'facebook'],
     longFields: [
+      'linkedin',
       'couchsurfing',
       'airbnb',
       'blablacar',

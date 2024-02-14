@@ -56,6 +56,7 @@ export default {
   },
   data: () => ({
     fields: [
+      'linkedin',
       'whatsapp',
       'telegram',
       'twitter',
