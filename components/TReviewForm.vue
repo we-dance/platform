@@ -165,7 +165,7 @@ export default {
       }
 
       if (props.dance) {
-        Vue.set(item.value, 'place', props.dance)
+        Vue.set(item.value, 'style', props.dance)
       }
 
       if (receiver) {
