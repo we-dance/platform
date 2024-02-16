@@ -1,9 +1,9 @@
 <template>
   <div class="border rounded shadow hover:bg-gray-100">
     <a
+      v-if="item"
       :href="url"
       target="_blank"
-      v-if="item"
       class="flex space-x-2 items-center p-4"
     >
       <div v-if="item.image" class="w-12 h-12">

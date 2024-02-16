@@ -191,10 +191,8 @@ import { useApp } from '~/use/app'
 import { dateDiff, getEventDescription, getExcerpt } from '~/utils'
 import { useAuth } from '~/use/auth'
 import { useDoc } from '~/use/doc'
-import TLinkPreview from './TLinkPreview.vue'
 
 export default {
-  components: { TLinkPreview },
   props: {
     item: {
       type: Object,
