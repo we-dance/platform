@@ -41,6 +41,10 @@ export default {
       type: String,
       default: '',
     },
+    noPlace: {
+      type: Boolean,
+      default: false,
+    },
   },
   setup(props) {
     const loading = ref(true)
@@ -60,8 +64,14 @@ export default {
 
       if (props.createdBy) {
         collection = collection.where('createdBy', '==', props.createdBy)
-      } else {
+      }
+
+      if (props.place) {
         collection = collection.where('place', '==', props.place)
+      }
+
+      if (props.noPlace) {
+        collection = collection.where('place', '==', '')
       }
 
       collection.orderBy('createdAt', 'desc').onSnapshot((storiesRef) => {

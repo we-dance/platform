@@ -2,7 +2,7 @@
   <div>
     <TCityHeader :profile="profile" view="tips" global />
 
-    <TCityTips place="" :city="profile" name="Global" />
+    <TCityTips no-place :city="profile" name="Global" />
   </div>
 </template>
 

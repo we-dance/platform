@@ -56,6 +56,7 @@
         label="Which city?"
         component="TInputPlace"
         label-position="top"
+        global
       />
       <TField
         v-if="!hideDance"
@@ -148,6 +149,7 @@ export default {
 
       data = {
         ...data,
+        dances: Object.keys(data.style),
         receiver: data.receiver?.username ? data.receiver : '',
         link: data.link || '',
         venue: data.venue || '',

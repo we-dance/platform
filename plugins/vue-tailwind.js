@@ -182,9 +182,9 @@ const settings = {
         disabledOption: '',
         highlightedOption: 'bg-blue-100',
         selectedOption:
-          'font-semibold bg-gray-100 bg-blue-500 font-semibold text-white',
+          'font-semibold bg-gray-500 bg-blue-500 font-semibold text-white',
         selectedHighlightedOption:
-          'font-semibold bg-gray-100 bg-blue-600 font-semibold text-white',
+          'font-semibold bg-blue-300 bg-blue-600 font-semibold text-white',
         optionContent: 'flex justify-between items-center px-3 py-2',
         optionLabel: '',
         selectedIcon: '',

@@ -28,6 +28,10 @@ export default {
       type: Boolean,
       default: false,
     },
+    global: {
+      type: Boolean,
+      default: false,
+    },
   },
   setup(props, { emit }) {
     const { doc: city, find } = useDoc('profiles')
@@ -52,6 +56,13 @@ export default {
 
     const fetchOptions = async (q) => {
       const results = []
+
+      if (props.global) {
+        results.push({
+          label: 'Global',
+          value: '',
+        })
+      }
 
       if (!q) {
         await find('cityPlaceId', props.value)
