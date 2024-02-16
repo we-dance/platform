@@ -1,47 +1,91 @@
 <template>
-  <form class="flex flex-col gap-4 p-4" @submit.prevent="saveItem">
-    <TField
-      v-if="!hidePlace"
-      v-model="item.place"
-      label="Which city?"
-      component="TInputPlace"
-      label-position="top"
+  <div>
+    <tw-tabs
+      :tabs="[
+        {
+          name: 'Profile',
+          value: 'profile',
+          to: '?type=',
+          current: !$route.query.type,
+        },
+        {
+          name: 'Place',
+          value: 'place',
+          to: '?type=place',
+          current: $route.query.type === 'place',
+        },
+        {
+          name: 'Link',
+          value: 'link',
+          to: '?type=link',
+          current: $route.query.type === 'link',
+        },
+      ]"
     />
-    <TField
-      v-if="!hideDance"
-      v-model="item.style"
-      label="Dance style"
-      label-position="top"
-      component="TInputStyle"
-      popular-only
-    />
-    <TField
-      v-model="item.receiver"
-      component="TInputProfile"
-      label="Recommmendation for"
-      placeholder="Search on WeDance or paste a link to Instagram/Facebook"
-      label-position="top"
-    />
-    <TField
-      v-model="item.stars"
-      placeholder="stars"
-      hide-label
-      component="TRatingInput"
-    />
-    <TField
-      v-model="item.description"
-      label-position="top"
-      component="TInputTextarea"
-      placeholder="Share your experience"
-    />
-    <div class="flex justify-end gap-2">
-      <TButton v-if="!hideCancel" variant="secondary" @click="cancel"
-        >Cancel</TButton
-      >
-      <TButton v-if="id" variant="secondary" @click="remove">Delete</TButton>
-      <TButton xtype="submit" variant="primary">Submit</TButton>
-    </div>
-  </form>
+    <form class="flex flex-col gap-4 p-4" @submit.prevent="saveItem">
+      <TField
+        v-if="!$route.query.type"
+        v-model="item.receiver"
+        component="TInputProfile"
+        placeholder="Search on WeDance"
+        description="If you can't find a profile, use Place or Link tab"
+        hide-label
+      />
+      <TField
+        v-if="$route.query.type === 'place'"
+        v-model="item.venue"
+        component="TInputVenue"
+        hide-areas
+        placeholder="Search on Google Maps"
+        description="Better use a name of the place, rather than an address"
+        hide-label
+      />
+      <TField
+        v-if="$route.query.type === 'link'"
+        v-model="item.link"
+        component="TInput"
+        type="url"
+        required
+        placeholder="https://"
+        description="Link to a website, Instagram, Facebook page, Whatsapp group, etc."
+        hide-label
+      />
+      <TField
+        v-if="!hidePlace"
+        v-model="item.place"
+        label="Which city?"
+        component="TInputPlace"
+        label-position="top"
+      />
+      <TField
+        v-if="!hideDance"
+        v-model="item.style"
+        label="Dance style"
+        label-position="top"
+        component="TInputStyle"
+        popular-only
+      />
+      <TField
+        v-model="item.stars"
+        placeholder="stars"
+        hide-label
+        component="TRatingInput"
+      />
+      <TField
+        v-model="item.description"
+        label-position="top"
+        component="TInputTextarea"
+        placeholder="Share your experience"
+      />
+      <div class="flex justify-end gap-2">
+        <TButton v-if="!hideCancel" variant="secondary" @click="cancel"
+          >Cancel</TButton
+        >
+        <TButton v-if="id" variant="secondary" @click="remove">Delete</TButton>
+        <TButton xtype="submit" variant="primary">Submit</TButton>
+      </div>
+    </form>
+  </div>
 </template>
 
 <script>
