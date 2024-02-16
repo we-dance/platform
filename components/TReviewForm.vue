@@ -125,7 +125,7 @@ export default {
       type: String,
       default: '',
     },
-    id: {
+    storyId: {
       type: String,
       default: '',
     },
@@ -153,7 +153,7 @@ export default {
 
       data = {
         ...data,
-        dances: Object.keys(data.style),
+        dances: Object.keys(data.style || {}),
         receiver: data.receiver?.username ? data.receiver : '',
         link: data.link || '',
         venue: data.venue || '',
@@ -222,12 +222,12 @@ export default {
         Vue.set(item.value, 'style', props.dance)
       }
 
-      if (props.id) {
+      if (props.storyId) {
         const firestore = firebase.firestore()
 
         const doc = await firestore
           .collection('stories')
-          .doc(props.id)
+          .doc(props.storyId)
           .get()
 
         if (!doc.exists || !can('edit', 'stories', doc.data())) {
@@ -236,7 +236,7 @@ export default {
         }
 
         item.value = doc.data()
-        id.value = props.id
+        id.value = props.storyId
       }
 
       if (receiver) {

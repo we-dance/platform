@@ -3,7 +3,7 @@
     <div
       class="mx-auto w-full max-w-lg md:rounded md:border md:shadow bg-white"
     >
-      <TReviewForm :id="$route.params.storyId" />
+      <TReviewForm :story-id="$route.params.storyId" />
     </div>
   </div>
 </template>
