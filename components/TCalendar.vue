@@ -134,7 +134,7 @@ export default {
       { value: 'Advanced', label: 'Advanced' },
     ]
 
-    const radius = ref(50)
+    const radius = ref(root.$route.query.radius || 50)
     const query = ref('')
     const sorting = ref('Upcoming')
     const profileType = ref('')
