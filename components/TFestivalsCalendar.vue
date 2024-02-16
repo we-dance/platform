@@ -132,7 +132,7 @@ export default {
     today = +today
     const fromDate = ref(today)
 
-    const { search, response, loadMore } = useAlgolia('events')
+    const { search, response, loadMore, loading } = useAlgolia('events')
     const facets = computed(() => ({
       style: getFacetOptions('style'),
       country: getFacetOptions('country'),
@@ -228,6 +228,7 @@ export default {
     const showPopup = ref(false)
 
     return {
+      loading,
       itemsAsText,
       copyToClipboard,
       showPopup,

@@ -1,6 +1,6 @@
 <template>
   <div>
-    <TCityHeader :profile="city" view="tips" />
+    <TCityHeader :profile="profile" view="tips" />
 
     <TCityTips
       :place="profile.cityPlaceId"
