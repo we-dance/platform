@@ -96,7 +96,6 @@ import firebase from 'firebase/app'
 import 'firebase/firestore'
 import { until } from '@vueuse/core'
 import { useAuth } from '~/use/auth'
-import { useCities } from '~/use/cities'
 
 export default {
   name: 'TReviewForm',

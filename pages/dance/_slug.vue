@@ -193,6 +193,26 @@ export default {
       related,
     }
   },
+  methods: {
+    async saveItem() {
+      let data = this.item
+      this.item = {}
+
+      data = {
+        ...data,
+        place: '',
+        dances: [this.page.id],
+        createdAt: +new Date(),
+        createdBy: this.uid,
+        username: this.profile.username,
+        type: 'ask-for-recommendations',
+      }
+
+      const firestore = firebase.firestore()
+      await firestore.collection('stories').add(data)
+    },
+  },
+
   head() {
     if (this.page) {
       const page = this.page
@@ -224,25 +244,6 @@ export default {
         ],
       }
     }
-  },
-  methods: {
-    async saveItem() {
-      let data = this.item
-      this.item = {}
-
-      data = {
-        ...data,
-        place: '',
-        dances: [this.page.id],
-        createdAt: +new Date(),
-        createdBy: this.uid,
-        username: this.profile.username,
-        type: 'ask-for-recommendations',
-      }
-
-      const firestore = firebase.firestore()
-      await firestore.collection('stories').add(data)
-    },
   },
   setup() {
     const { uid, profile } = useAuth()
