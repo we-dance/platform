@@ -125,6 +125,10 @@ export default {
       type: String,
       default: '',
     },
+    id: {
+      type: String,
+      default: '',
+    },
   },
   methods: {
     cancel() {
@@ -187,7 +191,8 @@ export default {
   setup(props, { root }) {
     const item = ref({})
     const id = ref(null)
-    const { profile, uid } = useAuth()
+
+    const { profile, uid, can } = useAuth()
     const { currentCity } = useCities()
 
     onMounted(async () => {
@@ -215,6 +220,23 @@ export default {
 
       if (props.dance) {
         Vue.set(item.value, 'style', props.dance)
+      }
+
+      if (props.id) {
+        const firestore = firebase.firestore()
+
+        const doc = await firestore
+          .collection('stories')
+          .doc(props.id)
+          .get()
+
+        if (!doc.exists || !can('edit', 'stories', doc.data())) {
+          root.$toast.error('You are not allowed to edit this review.')
+          return
+        }
+
+        item.value = doc.data()
+        id.value = props.id
       }
 
       if (receiver) {

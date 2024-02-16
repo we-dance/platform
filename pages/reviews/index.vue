@@ -3,7 +3,7 @@
     <THeader show-logo class="md:hidden" />
 
     <div class="p-4 border-b">
-      <h1 class="text-2xl font-bold">Feed from Everywhere</h1>
+      <h1 class="text-2xl font-bold">Reviews from Everywhere</h1>
       <div class="text-sm">
         Explore our community feed for real-time recommendations and dance event
         insights from dancers worldwide.
@@ -16,6 +16,6 @@
 
 <script>
 export default {
-  name: 'Feed',
+  name: 'Reviews',
 }
 </script>

@@ -130,7 +130,7 @@
 
     <TButton
       v-if="isAdmin()"
-      to="/admin/feed"
+      to="/reviews"
       type="nav"
       class="text-gray-700"
       label="Feed"

@@ -15,7 +15,7 @@
           <TField
             v-model="item.style"
             label-position="top"
-            :placeholder="$t('calendar.filters.style')"
+            placeholder="Any Dance"
             component="TInputStyle"
             popular-only
           />
@@ -30,6 +30,7 @@
         <TField
           v-if="showForm"
           v-model="item.description"
+          required
           label-position="top"
           component="TInputTextarea"
           :placeholder="`Ask for recommendations in ${city.name}`"

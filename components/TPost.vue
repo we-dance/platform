@@ -53,14 +53,7 @@
           v-if="can('edit', 'posts', item) && item.type !== 'event'"
           type="context"
           icon="edit"
-          :to="localePath(`/posts/${item.id}/edit`)"
-          :label="$t('post.edit')"
-        />
-        <TButton
-          v-if="can('edit', 'posts', item) && item.type === 'event'"
-          type="context"
-          icon="edit"
-          :to="localePath(`/events/${item.id}/edit`)"
+          :to="localePath(`/stories/${item.id}/edit`)"
           :label="$t('post.edit')"
         />
         <TButton
@@ -72,7 +65,7 @@
         />
         <TCardActions
           :id="item.id"
-          collection="posts"
+          collection="stories"
           :item="item"
           type="context"
         />
@@ -81,7 +74,7 @@
           collection="posts"
           :file="item.socialCover"
           :file-name="item.id"
-          :url="`https://wedance.vip/posts/${item.id}`"
+          :url="`https://wedance.vip/stories/${item.id}`"
           :text="item.description"
           type="context"
           :label="$t('share.title')"
