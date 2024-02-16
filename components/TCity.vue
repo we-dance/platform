@@ -23,6 +23,23 @@
       <TProfileStats :profile="profile" />
     </div>
 
+    <div v-if="isAdmin()" class="flex gap-2 p-4 bg-orange-100">
+      <TPopupEdit
+        v-if="isAdmin()"
+        :fields="profileFields"
+        :label="$t('Edit')"
+        collection="profiles"
+        singular="profile"
+        :item="profile"
+      />
+      <TButton
+        v-if="isAdmin()"
+        icon="delete"
+        :label="$t('Delete')"
+        @click="remove(profile.id)"
+      />
+    </div>
+
     <TCalendar
       :key="view + ($route.query.style || '')"
       :city="profile"
@@ -44,11 +61,15 @@
       :profile="profile"
       class="py-4"
     />
+
     <TSeoLinks :profile="profile" class="p-4" />
   </div>
 </template>
 
 <script>
+import { useAuth } from '~/use/auth'
+import { useDoc } from '~/use/doc'
+import { useProfiles } from '~/use/profiles'
 import { getExcerpt, getDateObect } from '~/utils'
 
 export default {
@@ -134,9 +155,19 @@ export default {
     }
   },
   setup() {
+    const { uid, isAdmin, can } = useAuth()
+    const { profileFields } = useProfiles()
+    const { remove, softUpdate } = useDoc('profiles')
+
     return {
       getDateObect,
       getExcerpt,
+      uid,
+      isAdmin,
+      can,
+      profileFields,
+      remove,
+      softUpdate,
     }
   },
 }

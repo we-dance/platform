@@ -98,13 +98,22 @@
         />
         <div class="flex justify-left w-full h-fit items-center gap-2">
           <TRatingItem :value="item.stars" />
-          <div v-if="item.link">
-            <a :href="item.link" target="_blank" class="text-primary text-xs">
-              {{
-                item.link.includes('facebook.com')
-                  ? 'Posted on Facebook'
-                  : 'Posted on Google'
-              }}
+          <div v-if="item.sourceFacebook">
+            <a
+              :href="item.sourceFacebook"
+              target="_blank"
+              class="text-primary text-xs"
+            >
+              Review on Facebook
+            </a>
+          </div>
+          <div v-if="item.sourceGoogle">
+            <a
+              :href="item.sourceGoogle"
+              target="_blank"
+              class="text-primary text-xs"
+            >
+              Review on Google
             </a>
           </div>
         </div>
@@ -144,6 +153,8 @@
         <TCardLink v-else-if="item.url" :url="item.url" :show="show" />
       </div>
     </div>
+    <t-link-preview v-if="item.link" :url="item.link" class="m-4 mt-0" />
+    <t-venue-preview v-if="item.venue" :venue="item.venue" class="m-4 mt-0" />
     <div class="flex flex-wrap gap-2 px-4 items-center">
       <TReaction
         :label="$t('Helpful')"
@@ -180,8 +191,10 @@ import { useApp } from '~/use/app'
 import { dateDiff, getEventDescription, getExcerpt } from '~/utils'
 import { useAuth } from '~/use/auth'
 import { useDoc } from '~/use/doc'
+import TLinkPreview from './TLinkPreview.vue'
 
 export default {
+  components: { TLinkPreview },
   props: {
     item: {
       type: Object,

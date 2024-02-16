@@ -141,13 +141,15 @@ export default {
     async saveItem() {
       let data = this.item
 
-      if (!data.receiver?.username) {
+      if (!data.receiver?.username && !data.link && !data.venue?.place_id) {
+        this.$toast.error('Please choose a profile, place or link.')
         return
       }
 
       data = {
         ...data,
-        city: this.$route.query.city || '',
+        link: data.link || '',
+        venue: data.venue || '',
         question: this.question || '',
         createdBy: this.uid,
         username: this.profile.username,

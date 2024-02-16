@@ -11,13 +11,22 @@
     </div>
     <div class="flex justify-left w-full h-fit items-center gap-2">
       <TRatingItem :value="item.stars" />
-      <div v-if="item.link">
-        <a :href="item.link" target="_blank" class="text-primary text-xs">
-          {{
-            item.link.includes('facebook.com')
-              ? 'Posted on Facebook'
-              : 'Posted on Google'
-          }}
+      <div v-if="item.sourceFacebook">
+        <a
+          :href="item.sourceFacebook"
+          target="_blank"
+          class="text-primary text-xs"
+        >
+          Review on Facebook
+        </a>
+      </div>
+      <div v-if="item.sourceGoogle">
+        <a
+          :href="item.sourceGoogle"
+          target="_blank"
+          class="text-primary text-xs"
+        >
+          Review on Google
         </a>
       </div>
     </div>
