@@ -19,7 +19,7 @@ export default {
     const slug = params.slug
 
     if (slug === 'Travel') {
-      redirect(`/explore/festivals`)
+      redirect(`/explore/global`)
     }
 
     let page = null

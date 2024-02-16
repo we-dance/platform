@@ -58,9 +58,7 @@ export default {
 
       if (props.createdBy) {
         collection = collection.where('createdBy', '==', props.createdBy)
-      }
-
-      if (props.place) {
+      } else {
         collection = collection.where('place', '==', props.place)
       }
 

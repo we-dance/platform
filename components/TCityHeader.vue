@@ -14,23 +14,24 @@
       <TwTabs
         :tabs="[
           {
-            name: $t('explore.nav.parties'),
-            to: localePath(`/explore/${profile.username}`),
+            name: global ? 'Festivals' : $t('explore.nav.parties'),
+            to: localePath(`/explore/${slug}`),
             current: view === 'parties',
           },
           {
             name: $t('explore.nav.classes'),
-            to: localePath(`/explore/${profile.username}/classes`),
+            to: localePath(`/explore/${slug}/classes`),
             current: view === 'classes',
           },
           {
             name: $t('explore.nav.groups'),
-            to: localePath(`/explore/${profile.username}/groups`),
+            to: localePath(`/explore/${slug}/groups`),
             current: view === 'groups',
+            hidden: global,
           },
           {
-            name: $t('explore.nav.tips'),
-            to: localePath(`/explore/${profile.username}/tips`),
+            name: global ? 'Ask Experts' : $t('explore.nav.tips'),
+            to: localePath(`/explore/${slug}/tips`),
             current: view === 'tips',
           },
         ]"
@@ -51,6 +52,15 @@ export default {
     view: {
       type: String,
       default: 'parties',
+    },
+    global: {
+      type: Boolean,
+      default: false,
+    },
+  },
+  computed: {
+    slug() {
+      return this.global ? 'global' : this.profile.username
     },
   },
 }

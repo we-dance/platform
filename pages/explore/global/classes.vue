@@ -1,6 +1,13 @@
 <template>
   <div>
-    <TFestivals :profile="profile" />
+    <TCityHeader :profile="profile" view="classes" global />
+
+    <TCalendar
+      :key="'classes' + ($route.query.style || '')"
+      :city="profile"
+      view="classes"
+      class="w-full border-t"
+    />
   </div>
 </template>
 
@@ -9,14 +16,16 @@ import { db } from '~/plugins/firebase'
 import { trackView } from '~/use/tracking'
 
 export default {
-  name: 'ExploreFestivals',
+  name: 'ExploreClasses',
   async asyncData({ params, error }) {
+    const city = 'Travel'
+
     let profile = null
     let profileFound = false
 
     const collection = await db
       .collection('profiles')
-      .where('username', '==', 'Travel')
+      .where('username', '==', city)
       .get()
 
     if (collection.docs.length > 0) {

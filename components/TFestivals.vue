@@ -10,6 +10,7 @@
         Dance Calendar for Travelers. Plan your holidays and weekends to dance
         Salsa, Bachata, Kizomba, Zouk and 130 other dances around the world.
       </div>
+      <TProfileStats :profile="profile" />
     </div>
 
     <TFestivalsCalendar class="mt-4 w-full border-t pt-4 pb-8" />

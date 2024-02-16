@@ -1,7 +1,5 @@
 <template>
   <div>
-    <TCityHeader :profile="city" view="tips" />
-
     <div class="p-4">
       <h1 class="text-2xl font-bold">
         {{ $t('explore.tips.header', { city: city.name }) }}
@@ -42,11 +40,7 @@
       </form>
     </div>
 
-    <TStories
-      :key="item.style"
-      :place="city.cityPlaceId"
-      :filter-dance="item.style"
-    />
+    <TStories :key="item.style" :place="place" :filter-dance="item.style" />
   </div>
 </template>
 
@@ -59,13 +53,17 @@ import { useAuth } from '~/use/auth'
 export default {
   name: 'ExploreTips',
   props: {
-    city: {
-      type: Object,
-      default: () => ({}),
+    place: {
+      type: String,
+      default: '',
     },
     createdBy: {
       type: String,
       default: '',
+    },
+    city: {
+      type: Object,
+      default: () => ({}),
     },
   },
   methods: {
@@ -75,7 +73,7 @@ export default {
 
       data = {
         ...data,
-        place: this.city.cityPlaceId,
+        place: this.place,
         createdAt: +new Date(),
         createdBy: this.uid,
         username: this.profile.username,
@@ -106,7 +104,7 @@ export default {
           hid: 'description',
           name: 'description',
           content: this.$t('explore.tips.description', {
-            city: this.city.name,
+            city: this.name,
           }),
         },
       ],

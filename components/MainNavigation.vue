@@ -31,7 +31,7 @@
     />
     <TButton
       allow-guests
-      :to="localePath('/explore/festivals')"
+      :to="localePath('/explore/global')"
       icon="calendar"
       :label="$t('nav.festivals')"
       type="nav"
