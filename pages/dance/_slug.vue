@@ -128,7 +128,7 @@
           class="flex flex-col md:flex-row gap-2 justify-end"
         >
           <TButton
-            :to="`/reviews/add?damce=${page.id}`"
+            :to="`/reviews/add?type=link&style=${page.id}&city=`"
             label="Add a recommendation"
           />
           <TButton
@@ -156,8 +156,11 @@
 </template>
 
 <script>
+import firebase from 'firebase/app'
+import 'firebase/firestore'
 import { ref } from '@nuxtjs/composition-api'
 import { useAuth } from '~/use/auth'
+
 export default {
   name: 'DancePage',
   async asyncData({ $content, params, error }) {

@@ -193,7 +193,6 @@ export default {
     const id = ref(null)
 
     const { profile, uid, can } = useAuth()
-    const { currentCity } = useCities()
 
     onMounted(async () => {
       item.value = {}
@@ -201,10 +200,6 @@ export default {
       const receiver = root.$route.query.receiver
 
       await until(profile).not.toBeNull()
-
-      if (currentCity.value) {
-        Vue.set(item.value, 'place', currentCity.value)
-      }
 
       if (root.$route.query.city) {
         Vue.set(item.value, 'place', root.$route.query.city)
