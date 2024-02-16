@@ -47,7 +47,7 @@ import { getPlacePredictions } from '~/use/google'
 import { useAuth } from '~/use/auth'
 
 export default {
-  setup() {
+  setup(props, { root }) {
     const { switchCity, city } = useCities()
     const { router, route } = useRouter()
     const { updateProfile } = useAuth()
@@ -61,7 +61,11 @@ export default {
       router.push(target)
     }
 
-    const query = ref('')
+    const query = ref(root.$route.query.q || '')
+
+    watch(query, (q) => {
+      history.pushState({}, null, root.$route.path + `?q=${q}`)
+    })
 
     const recommendations = computed(() => {
       const results = uniqBy(
