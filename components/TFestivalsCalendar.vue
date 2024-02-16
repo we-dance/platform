@@ -1,6 +1,6 @@
 <template>
   <div v-if="response && response.facets && response.nbHits">
-    <div class="mb-4 gap-2 flex flex-wrap p-4 items-center">
+    <div class="mb-4 gap-2 flex flex-wrap p-4 items-center border-b">
       <t-rich-select
         v-model="filters['style']"
         placeholder="Style"
@@ -24,8 +24,6 @@
         clearable
         hide-search-box
       />
-
-      <TButton type="nav" icon="share" @click="showPopup = true" />
     </div>
 
     <TPopup v-if="showPopup" title="Share" @close="showPopup = false">
@@ -68,55 +66,31 @@
       </div>
     </div>
 
-    <div v-if="!response.nbHits" class="p-4 flex justify-center items-center">
+    <div
+      v-if="!loading && !response.nbHits"
+      class="p-4 flex justify-center items-center"
+    >
       <div>
-        <h2 class="text-lg font-semibold">No Events Found</h2>
-        <p class="text-sm mt-2">
-          Dates: <span class="font-medium">{{ getDate(fromDate) }}</span>
-        </p>
-
-        <div class="mt-4 p-4 typo bg-orange-50">
-          <p>
-            It seems there are no events listed for your selected dates. But
-            don't worry, you've got options:
-          </p>
-
-          <ul>
-            <li>
-              <strong>Expand Your Search:</strong> Try adjusting your date range
-              or filters to explore other events.
-            </li>
-            <li>
-              <strong>Import an Event:</strong> Found something interesting
-              elsewhere? Easily
-              <router-link to="/events/-/import"
-                >import events from Facebook</router-link
-              >
-              or other platforms to share with the community.
-            </li>
-            <li>
-              <strong>Create and Share:</strong> Can’t find what you’re looking
-              for? You can manually
-              <router-link to="/events/-/edit"
-                >add details of events</router-link
-              >
-              you know about or host your own event on our platform.
-            </li>
-            <li>
-              <strong>Stay in the Loop:</strong> Subcribe to get updates on new
-              events in your areas of interest.
-            </li>
-          </ul>
-          <p class="mt-4">
-            Help grow our community by sharing events you’re excited about!
-            Thank you for being a part of WeDance.
-          </p>
-        </div>
+        <h2 class="text-center text-xs">No Events Found</h2>
       </div>
     </div>
 
     <div v-if="response.nbPages > 1" class="my-4 flex justify-center">
       <TButton label="Load More" type="primary" @click="loadMore" />
+    </div>
+
+    <div class="p-4 gap-2 flex items-center border-b">
+      <div class="text-xs">After</div>
+      <DatePicker
+        v-model="fromDate"
+        :lang="{ formatLocale: { firstDayOfWeek: 1 } }"
+        value-type="timestamp"
+        class="w-32 py-4"
+        placeholder="Date"
+        format="D MMM YY"
+        :clearable="false"
+      />
+      <TButton label="Share" icon="share" @click="showPopup = true" />
     </div>
   </div>
   <div v-else>

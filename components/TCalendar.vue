@@ -79,7 +79,7 @@
     </div>
 
     <div class="p-4 gap-2 flex items-center border-b">
-      <div>Show events from</div>
+      <div class="text-xs">After</div>
       <DatePicker
         v-model="fromDate"
         :lang="{ formatLocale: { firstDayOfWeek: 1 } }"
@@ -89,7 +89,7 @@
         format="D MMM YY"
         :clearable="false"
       />
-      <TButton type="nav" icon="share" @click="showPopup = true" />
+      <TButton label="Share" icon="share" @click="showPopup = true" />
     </div>
   </div>
 </template>
