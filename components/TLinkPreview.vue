@@ -14,10 +14,16 @@
         <div class="text-gray-700 leading-tight text-sm mb-1">
           {{ item.description }}
         </div>
-        <div class="text-gray-500 text-xs">{{ item.siteName }} - {{ url }}</div>
+        <div class="text-indigo-500 text-xs">{{ shownUrl }}</div>
       </div>
     </a>
-    <a v-else :href="url" target="_blank" class="block p-4">{{ url }}</a>
+    <a
+      v-else
+      :href="url"
+      target="_blank"
+      class="block p-4 text-xs text-indigo-500"
+      >{{ shownUrl }}</a
+    >
   </div>
 </template>
 
@@ -34,7 +40,16 @@ export default {
       item: null,
     }
   },
+  computed: {
+    shownUrl() {
+      return this.url.replace(/(^\w+:|^)\/\//, '').replace(/\/.*/, '')
+    },
+  },
   mounted() {
+    if (this.url.includes('facebook.com')) {
+      return
+    }
+
     fetch(
       `https://link-preview-api.nivaldo.workers.dev/preview?url=${this.url}`
     )

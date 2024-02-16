@@ -148,6 +148,7 @@ export default {
 
       data = {
         ...data,
+        receiver: data.receiver?.username ? data.receiver : '',
         link: data.link || '',
         venue: data.venue || '',
         question: this.question || '',
