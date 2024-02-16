@@ -14,8 +14,12 @@ import { trackView } from '~/use/tracking'
 
 export default {
   name: 'Slug',
-  async asyncData({ $content, params, error }) {
+  async asyncData({ $content, params, error, redirect }) {
     const slug = params.slug
+
+    if (slug === 'Travel') {
+      redirect(`/explore/festivals`)
+    }
 
     let page = null
     let profile = null
@@ -42,6 +46,10 @@ export default {
         trackView('profiles', profile.id, profile.viewsCount || 0)
 
         profileFound = true
+
+        if (profile.type === 'City') {
+          redirect(`/explore/${profile.username}`)
+        }
       }
     }
 

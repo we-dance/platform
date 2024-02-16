@@ -6,7 +6,6 @@
       <h1 class="text-2xl font-bold">
         Dance Festivals Worldwide
       </h1>
-      <TProfileStats :profile="profile" />
       <div class="text-sm">
         Dance Calendar for Travelers. Plan your holidays and weekends to dance
         Salsa, Bachata, Kizomba, Zouk and 130 other dances around the world.
@@ -14,26 +13,6 @@
     </div>
 
     <TFestivalsCalendar class="mt-4 w-full border-t pt-4 pb-8" />
-
-    <WTeaser
-      v-if="profile.website"
-      :allow-guests="false"
-      :title="$t('teaser.chat.title')"
-      :description="$t('teaser.chat.description')"
-      :button="$t('teaser.chat.btnChatExists')"
-      :href="profile.website"
-      class="w-full mt-4"
-    />
-
-    <WTeaser
-      v-if="!profile.website"
-      :allow-guests="false"
-      :title="$t('teaser.chat.title')"
-      :description="$t('teaser.chat.description')"
-      :button="$t('teaser.chat.btnChatMissing')"
-      :href="internationalChatLink"
-      class="w-full mt-4"
-    />
 
     <div v-if="profile.instagram" class="bg-gray-100 py-4 flex justify-center">
       <div class="max-w-md py-4 space-y-1">
@@ -44,6 +23,7 @@
         <p class="text-center">
           {{ $t('profile.follow.description') }}
         </p>
+
         <div class="p-4 flex flex-wrap gap-2 items-center justify-center">
           <TButton
             v-if="profile.youtube"
@@ -100,10 +80,7 @@
 </template>
 
 <script>
-import { computed } from 'vue-demi'
-import { useAuth } from '~/use/auth'
-import { useProfiles } from '~/use/profiles'
-import { getExcerpt, getProfileMeta } from '~/utils'
+import { getProfileMeta } from '~/utils'
 
 export default {
   props: {
@@ -114,25 +91,6 @@ export default {
   },
   head() {
     return getProfileMeta(this.profile)
-  },
-  setup(props) {
-    const internationalChatLink = 'https://t.me/+Vxw15sDG-dWpqHDj'
-    const { uid, isAdmin, can } = useAuth()
-    const { profileFields } = useProfiles()
-
-    const subscribersCount = computed(() => {
-      return props.profile?.watch?.usernames?.length || 0
-    })
-
-    return {
-      internationalChatLink,
-      uid,
-      can,
-      getExcerpt,
-      profileFields,
-      isAdmin,
-      subscribersCount,
-    }
   },
 }
 </script>
