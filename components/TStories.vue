@@ -10,7 +10,9 @@
       </div>
     </div>
     <div v-else>
-      <div class="text-xs text-center p-4">There are no stories yet.</div>
+      <div class="text-xs text-center p-4">
+        There are no recommendations yet.
+      </div>
     </div>
   </div>
 </template>
