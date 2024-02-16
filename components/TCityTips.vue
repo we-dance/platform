@@ -42,6 +42,14 @@
     </div>
 
     <TStories :key="item.style" :place="place" :filter-dance="item.style" />
+
+    <div class="border-t flex justify-center py-4">
+      <TButton
+        type="primary"
+        :to="`/reviews/add?city=${city.cityPlaceId}`"
+        label="Add Recommendation"
+      />
+    </div>
   </div>
 </template>
 

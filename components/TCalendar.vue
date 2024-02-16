@@ -43,6 +43,8 @@
       </div>
     </TPopup>
 
+    <TFindPartnerTeaser v-if="view === 'classes'" class="p-4" />
+
     <div>
       <div v-for="(items, date) in itemsByDate" :key="date">
         <h2 class="font-bold text-xl p-4 border-b">

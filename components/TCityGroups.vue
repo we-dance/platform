@@ -9,24 +9,6 @@
       <div class="text-sm">
         {{ $t('explore.groups.subheader', { city: city.name }) }}
       </div>
-      <div>
-        <ul class="list-disc pl-4 pt-4">
-          <li>
-            Looking for partner?
-            <router-link to="/find-partner/start" class="underline font-bold"
-              >Find a dance partner</router-link
-            >
-          </li>
-          <li>
-            Want to help community?
-            <router-link
-              :to="`/reviews/add?city=${city.cityPlaceId}`"
-              class="underline font-bold"
-              >Recommend someone</router-link
-            >
-          </li>
-        </ul>
-      </div>
     </div>
 
     <div class="border-t border-b">

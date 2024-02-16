@@ -2,6 +2,24 @@
   <div>
     <TCityHeader :profile="profile" view="classes" global />
 
+    <div class="p-4">
+      <h1 class="text-2xl font-bold">
+        {{
+          $t(`explore.onlineclass.header`, {
+            style: $route.query.style,
+          })
+        }}
+      </h1>
+
+      <div class="text-sm">
+        {{
+          $t(`explore.onlineclass.subheader`, {
+            style: $route.query.style,
+          })
+        }}
+      </div>
+    </div>
+
     <TCalendar
       :key="'classes' + ($route.query.style || '')"
       :city="profile"

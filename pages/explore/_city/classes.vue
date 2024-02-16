@@ -1,12 +1,11 @@
 <template>
-  <div :class="classes">
+  <div>
     <TCity :profile="profile" view="classes" />
   </div>
 </template>
 
 <script>
 import { db } from '~/plugins/firebase'
-import { useDoc } from '~/use/doc'
 import { trackView } from '~/use/tracking'
 
 export default {
@@ -39,38 +38,6 @@ export default {
 
     return {
       profile,
-    }
-  },
-  setup() {
-    const { doc: item, sync } = useDoc('profiles')
-
-    return {
-      item,
-      sync,
-    }
-  },
-  computed: {
-    classes() {
-      let classes = ''
-
-      if (this.page) {
-        classes += this.page.container + ' p-4 '
-        classes += this.page.notypo ? '' : 'typo'
-      }
-
-      return classes
-    },
-  },
-  watch: {
-    item() {
-      if (this.item) {
-        this.profile = this.item
-      }
-    },
-  },
-  mounted() {
-    if (this.profile) {
-      this.sync(this.profile.id)
     }
   },
   head() {

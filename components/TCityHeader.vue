@@ -19,7 +19,7 @@
             current: view === 'parties',
           },
           {
-            name: $t('explore.nav.classes'),
+            name: global ? 'Online' : $t('explore.nav.classes'),
             to: localePath(`/explore/${slug}/classes`),
             current: view === 'classes',
           },

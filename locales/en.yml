@@ -704,6 +704,9 @@ explore:
     description: Explore a variety of {style} dance events happening in {city}. From {referenceStyle} nights to bachata workshops, find your next dance adventure here.
     header: '{style} Classes in {city}'
     subheader: Discover the vibrant {style} dance scene in {city}. Browse through a curated list of dance classes and filter by your favorite styles like Salsa, Bachata, Kizomba, and more.
+  onlineclass:
+    header: 'Online Classes'
+    subheader: Can't make it in person? Take your {style} moves to the next level with our online class selection.
   groups:
     title: Dance Groups in {city} | WeDance
     description: Discover and connect with dance influencers and groups in {city}. Find WhatsApp, Telegram, Instagram, Youtube communities tailored to your style, from Salsa to Bachata to Kizomba. Engage with influencers and join vibrant dance networks in {city}.
