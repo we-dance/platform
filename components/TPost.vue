@@ -27,8 +27,8 @@
             posted review
             <span v-if="item.place">in <TCityLink :place="item.place"/></span>
             <span v-if="item.style"
-              >for <strong class="font-bold">{{ item.style }}</strong></span
-            >
+              >for <TDanceLink :dance="item.style" class="fond-bold"
+            /></span>
           </div>
           <div
             v-else-if="item.type === 'ask-for-recommendations'"
@@ -36,8 +36,8 @@
           >
             asking
             <span v-if="item.style"
-              >for <strong class="font-bold">{{ item.style }}</strong></span
-            >
+              >for <TDanceLink :dance="item.style" class="fond-bold"
+            /></span>
             <span v-if="item.place">in <TCityLink :place="item.place"/></span>
           </div>
           <div v-else class="text-xs">published a post</div>
