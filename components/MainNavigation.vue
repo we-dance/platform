@@ -49,7 +49,7 @@
       allow-guests
       :to="localePath('/dance')"
       icon="help"
-      :label="$t('nav.wiki')"
+      :label="$t('nav.dance')"
       type="nav"
     />
 
