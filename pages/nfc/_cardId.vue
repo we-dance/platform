@@ -16,6 +16,7 @@
         <TButton
           type="primary"
           :to="`/nfc/${$route.params.cardId}?connect=true`"
+          target="_blank"
           >Link your Profile</TButton
         >
       </div>
@@ -77,6 +78,7 @@ import {
   LinkIcon,
   ThumbUpIcon,
 } from '@vue-hero-icons/outline'
+import { until } from '@vueuse/core'
 import { db } from '~/plugins/firebase'
 import { useAuth } from '~/use/auth'
 
@@ -101,13 +103,15 @@ export default {
     const card = cardRef.data()
 
     if (card.username) {
-      redirect(`/${card.username}`)
+      redirect(`/${card.username}?ref=nfc`)
     }
   },
   setup(props, { root }) {
-    const { username, uid } = useAuth()
+    const { profile, username, uid } = useAuth()
 
     onMounted(async () => {
+      await until(profile).not.toBeNull()
+
       if (username.value && root.$route.query.connect === 'true') {
         await db
           .collection('cards')
