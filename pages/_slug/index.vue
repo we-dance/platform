@@ -14,6 +14,7 @@ import { trackView } from '~/use/tracking'
 
 export default {
   name: 'Slug',
+  layout: 'full',
   async asyncData({ $content, params, error, redirect }) {
     const slug = params.slug
 

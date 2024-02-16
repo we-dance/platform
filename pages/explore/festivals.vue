@@ -6,7 +6,6 @@
 
 <script>
 import { db } from '~/plugins/firebase'
-import { useDoc } from '~/use/doc'
 import { trackView } from '~/use/tracking'
 
 export default {
