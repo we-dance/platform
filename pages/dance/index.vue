@@ -29,15 +29,6 @@
         </div>
       </div>
     </div>
-    <div>
-      <div>
-        <a
-          href="https://docs.google.com/spreadsheets/d/1oCLW_c_Jr021AT6_gGngtFB94P_5ftSCJGp-XqdvRaM/edit#gid=0"
-          target="_blank"
-          >Edit this page</a
-        >
-      </div>
-    </div>
   </div>
 </template>
 
