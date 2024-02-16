@@ -219,7 +219,7 @@ export default {
       this.generating = false
       this.$nuxt.$loading.finish()
     },
-    async share() {
+    share() {
       track('popup_share')
       this.sharing = true
 

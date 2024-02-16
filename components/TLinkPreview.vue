@@ -47,6 +47,16 @@ export default {
   },
   mounted() {
     if (this.url.includes('facebook.com')) {
+      this.item = {
+        title: 'Facebook',
+      }
+      return
+    }
+
+    if (this.url.includes('chat.whatsapp.com')) {
+      this.item = {
+        title: 'Whatsapp Group',
+      }
       return
     }
 
