@@ -7,15 +7,13 @@
     :label="label"
     @click="share()"
   />
-  <TPopup v-else-if="generating" title="Generating poster">
-    <div class="p-4">Generating Poster... Please wait...</div>
-  </TPopup>
   <TPopup v-else title="Share" @close="sharing = false">
     <div class="w-64 space-y-2 py-4">
       <TButton allow-guests type="nav" @click="copyToClipboard">
         Copy Link
       </TButton>
       <TButton
+        v-if="downloadUrl"
         allow-guests
         type="nav"
         download
@@ -41,8 +39,13 @@
       >
         More
       </TButton>
-      <TButton allow-guests type="nav" @click="refresh()">
-        Refresh Poster
+      <TButton
+        :disabled="generating"
+        allow-guests
+        type="nav"
+        @click="refresh()"
+      >
+        {{ generating ? 'Generating...' : 'Create New Poster' }}
       </TButton>
     </div>
   </TPopup>
@@ -159,7 +162,6 @@ export default {
       openURL(this.platforms[platform])
     },
     async refresh() {
-      this.sharing = false
       await this.generate()
       await this.share()
     },
@@ -218,10 +220,6 @@ export default {
       this.$nuxt.$loading.finish()
     },
     async share() {
-      if (!this.downloadUrl) {
-        await this.generate()
-      }
-
       track('popup_share')
       this.sharing = true
 
