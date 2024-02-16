@@ -41,7 +41,12 @@
       </form>
     </div>
 
-    <TStories :key="item.style" :place="place" :filter-dance="item.style" />
+    <TStories
+      :key="item.style"
+      :place="place"
+      :no-place="noPlace"
+      :filter-dance="item.style"
+    />
 
     <div class="border-t flex justify-center py-4">
       <TButton
@@ -73,6 +78,10 @@ export default {
     city: {
       type: Object,
       default: () => ({}),
+    },
+    noPlace: {
+      type: Boolean,
+      default: false,
     },
   },
   methods: {
