@@ -333,6 +333,14 @@ export const useEvents = () => {
       clearable: true,
     },
     {
+      name: 'online',
+      label: 'Is it available online?',
+      component: 'TInputButtons',
+      options: ['Yes', 'No'],
+      before: 'Streaming via Zoom, Google Meet, Instagram Live, etc.?',
+      labelPosition: 'top',
+    },
+    {
       name: 'price',
       labelPosition: 'top',
       label: t('event.price.label'),

@@ -21,9 +21,9 @@
     </div>
 
     <TCalendar
-      :key="'classes' + ($route.query.style || '')"
+      :key="'online' + ($route.query.style || '')"
       :city="profile"
-      view="classes"
+      view="online"
       class="w-full border-t"
     />
   </div>

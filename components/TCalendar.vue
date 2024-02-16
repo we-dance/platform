@@ -10,7 +10,7 @@
       />
 
       <t-rich-select
-        v-if="view === 'classes'"
+        v-if="view === 'classes' || view === 'online'"
         v-model="level"
         :placeholder="$t('calendar.filters.level')"
         :options="levels"
@@ -43,7 +43,10 @@
       </div>
     </TPopup>
 
-    <TFindPartnerTeaser v-if="view === 'classes'" class="p-4" />
+    <TFindPartnerTeaser
+      v-if="view === 'classes' || view === 'online'"
+      class="p-4"
+    />
 
     <div>
       <div v-for="(items, date) in itemsByDate" :key="date">
@@ -180,6 +183,9 @@ export default {
       if (props.view === 'classes') {
         return '(type:Course OR type:Workshop OR type:Festival OR type:Congress)'
       }
+      if (props.view === 'online') {
+        return '(online:Yes)'
+      }
     })
 
     watch(
@@ -193,20 +199,22 @@ export default {
     )
 
     watch([currentPage, facetFilters, radius, fromDate], () => {
-      if (!props.city?.location) {
-        return
-      }
       const searchParams = {
         filters: `startDate>${fromDate.value} AND ${filter.value}`,
         facets: Object.keys(facets.value),
         facetFilters: facetFilters.value,
         page: currentPage.value - 1,
-        aroundLatLng: radius.value
-          ? `${props.city.location.latitude}, ${props.city.location.longitude}`
-          : '',
-        aroundRadius: radius.value * 1000 || 1,
         hitsPerPage: 10,
       }
+
+      if (props.city?.location) {
+        searchParams.aroundLatLng = radius.value
+          ? `${props.city.location.latitude}, ${props.city.location.longitude}`
+          : ''
+
+        searchParams.aroundRadius = radius.value * 1000 || 1000
+      }
+
       search('', searchParams)
     })
     const { getStyleName } = useStyles()
