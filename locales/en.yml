@@ -752,3 +752,74 @@ teaser:
     title: Looking for more events?
     description: Instead of searching through multiple chats, directly ask our local dance community on the website. Get personalized recommendations for events in any city from local dancers.
     btn: Ask Locals
+mainfaqs:
+  _head:
+    title: FAQ | Your Questions Answered | WeDance
+    description: Find answers to the most common questions about WeDance
+    keywords: WeDance FAQ, WeDance, dance FAQ, dance styles, dance community
+    header: Frequently Asked Questions
+    subheader: Find answers to the most common questions about WeDance
+  _titles:
+    general: General Questions
+    calendars: Calendar Features
+    askLocals: '"Ask Locals" Feature'
+    stylesAndFilters: Styles and Filters
+    account: Account & Profile Questions
+  general:
+    - question: What is WeDance?
+      answer: WeDance is a platform that streamlines the dance event experience. Discover parties, classes, festivals, get insider tips, and manage your dance calendar – all in one place. 
+
+    - question: What cities are currently supported by WeDance?
+      answer: 'WeDance is currently active in [list of supported cities](/explore).'
+
+    - question: Is WeDance free to use?
+      answer: The core features of WeDance are free to use. We may offer premium features or subscriptions in the future, providing additional benefits for power users.
+
+    - question: How does WeDance make sure events are accurate and up-to-date?
+      answer: We use a combination of automated checks and community participation to maintain accurate event listings. Event organizers can submit events directly, and our users can flag outdated or incorrect information. 
+
+    - question: Do I need an account to browse events on WeDance?
+      answer: No, you can browse events on WeDance without an account. However, creating an account gives you access to additional features like calendar syncing, personalized recommendations, and the ability to ask questions within the community.
+
+  calendars: 
+    - question: How do I sync my existing calendar with WeDance?  
+      answer: 'The process varies slightly depending on your calendar provider. You can find detailed instructions on [calendars settings page](/settings/calendars).'
+
+    - question: Can I add events directly to WeDance?
+      answer: 'Yes! You can submit your own dance events to WeDance. To ensure events are relevant to the community, please follow our [submission guidelines](/coc).'
+
+    - question: If an imported event changes, will it automatically update on WeDance?
+      answer: This depends on your calendar source. Some calendar providers directly update synced events; with others, you may need to make changes manually on WeDance.
+
+    - question: How far in advance can I see events on WeDance?
+      answer: While there's no specific time limit, WeDance focuses on upcoming events for the best user experience.  
+
+  askLocals:
+    - question: What kind of questions can I ask the community?
+      answer:  Feel free to ask for dance-related recommendations, tips, and guidance! Examples include finding the best socials, workshops for your experience level, or insight into the local dance scene.
+
+    - question: Who are the "Locals" answering questions?
+      answer: "\"Locals\" are experienced dancers living in the city you're asking about.  They  have firsthand knowledge of the dance community and are passionate about sharing information."
+
+    - question: How long does it typically take to get a response?
+      answer: We aim for responses within 48 hours, though response times can vary depending on the question's complexity.
+
+  stylesAndFilters:
+    - question: Which dance styles are supported by WeDance?
+      answer: We support a wide variety of dance styles, including [list of supported styles](/dance). We're always expanding our list, so let us know if your favorite style isn't included!
+
+    - question: Can I filter events by experience level (e.g., beginner, intermediate)?
+      answer: Yes! Our filters help you find events that match your skill level.
+
+    - question: Can I search for events based on specific keywords?
+      answer: Absolutely! Use our search feature and use keywords like event type, dance style, or location to narrow your results. 
+
+  account:
+    - question: What benefits does creating an account provide?
+      answer: An account lets you sync your calendar, receive personalized recommendations, ask the "Locals" questions, save your favorite events, and more!
+
+    - question: Can I connect with other dancers or organizers through WeDance?
+      answer: Yes, WeDance is building features to help you connect with other members of the dance community. Stay tuned for exciting updates!
+
+    - question: How do I edit my WeDance profile?
+      answer: You can edit your profile from your account settings page. This lets you update your location, dance interests, and other information. 
