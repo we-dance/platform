@@ -9,3 +9,9 @@
   from = "/*"
   to = "/index.html"
   status = 200
+
+[[redirects]]
+  from = "https://montuno.club/*"
+  to = "https://wedance.vip/MontunoClub/:splat"
+  status = 200
+  force = true
