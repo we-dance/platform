@@ -24,20 +24,24 @@
     </div>
 
     <div v-if="isAdmin()" class="flex gap-2 p-4 bg-orange-100">
-      <TPopupEdit
-        v-if="isAdmin()"
-        :fields="profileFields"
-        :label="$t('Edit')"
-        collection="profiles"
-        singular="profile"
-        :item="profile"
-      />
-      <TButton
-        v-if="isAdmin()"
-        icon="delete"
-        :label="$t('Delete')"
-        @click="remove(profile.id)"
-      />
+      <TDropdown>
+        <TPopupEdit
+          v-if="isAdmin()"
+          type="context"
+          :fields="profileFields"
+          :label="$t('Edit')"
+          collection="profiles"
+          singular="profile"
+          :item="profile"
+        />
+        <TButton
+          v-if="isAdmin()"
+          type="context"
+          icon="delete"
+          :label="$t('Delete')"
+          @click="remove(profile.id)"
+        />
+      </TDropdown>
     </div>
 
     <TCalendar :city="profile" :view="view" class="w-full border-t" />

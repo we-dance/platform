@@ -52,6 +52,34 @@
           </div>
         </div>
       </div>
+      <div class="p-4">
+        <div class="grid grid-cols-3 gap-4 max-w-4xl mx-auto">
+          <div class="p-4 space-y-1 bg-light rounded shadow">
+            <h3 class="text-2xl font-extrabold text-center">
+              {{ numbers ? numbers.countries : '...' }}
+            </h3>
+            <p class="text-center">
+              {{ $t('home.numbers.countries') }}
+            </p>
+          </div>
+          <div class="p-4 space-y-1 bg-light rounded shadow">
+            <h3 class="text-2xl font-extrabold text-center">
+              {{ numbers ? numbers.profiles : '...' }}
+            </h3>
+            <p class="text-center">
+              {{ $t('home.numbers.profiles') }}
+            </p>
+          </div>
+          <div class="p-4 space-y-1 bg-light rounded shadow">
+            <h3 class="text-2xl font-extrabold text-center">
+              {{ numbers ? numbers.events : '...' }}
+            </h3>
+            <p class="text-center">
+              {{ $t('home.numbers.events') }}
+            </p>
+          </div>
+        </div>
+      </div>
       <h2 class="px-4 text-lg font-bold">Why WeDance?</h2>
       <div class="m-4 border rounded">
         <TPreview
@@ -196,7 +224,10 @@
 </template>
 
 <script>
+import { onMounted, ref } from '@nuxtjs/composition-api'
+import { useAlgolia } from '~/use/algolia'
 import { useAuth } from '~/use/auth'
+import { getFacetOptions } from '~/utils'
 
 export default {
   name: 'Index',
@@ -204,7 +235,42 @@ export default {
   setup() {
     const { uid, username } = useAuth()
 
-    return { uid, username }
+    const { response: responseProfiles, search: searchProfiles } = useAlgolia(
+      'profiles'
+    )
+
+    const { response: responseEvents, search: searchEvents } = useAlgolia(
+      'events'
+    )
+
+    const numbers = ref(null)
+
+    onMounted(async () => {
+      await searchProfiles('', {
+        filters: ``,
+        facets: ['style', 'locality', 'country'],
+        hitsPerPage: 0,
+        maxValuesPerFacet: 1000,
+        analytics: false,
+      })
+
+      await searchEvents('', {
+        filters: ``,
+        facets: ['style', 'locality', 'country'],
+        hitsPerPage: 0,
+        maxValuesPerFacet: 1000,
+        analytics: false,
+      })
+
+      numbers.value = {
+        profiles: responseProfiles.value.nbHits,
+        events: responseEvents.value.nbHits,
+        cities: Object.keys(responseProfiles.value.facets.locality).length,
+        countries: Object.keys(responseProfiles.value.facets.country).length,
+      }
+    })
+
+    return { uid, username, numbers }
   },
 }
 </script>

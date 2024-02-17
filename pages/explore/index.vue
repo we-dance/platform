@@ -16,10 +16,6 @@
         </div>
         <div class="flex space-x-2 items-center">
           <div class="text-xs">{{ city.viewsCount }} views</div>
-          <div
-            v-if="city.website"
-            class="rounded-full w-2 h-2 bg-green-500"
-          ></div>
         </div>
       </router-link>
     </div>

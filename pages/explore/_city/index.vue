@@ -1,18 +1,22 @@
 <template>
-  <div :class="classes">
+  <div>
     <TCity :key="$route.fullPath" :profile="profile" view="parties" />
   </div>
 </template>
 
 <script>
 import { db } from '~/plugins/firebase'
-import { useDoc } from '~/use/doc'
 import { trackView } from '~/use/tracking'
 
 export default {
   name: 'ExploreParties',
-  async asyncData({ params, error }) {
+  async asyncData({ params, error, redirect }) {
     const city = params.city
+
+    if (city === 'Travel') {
+      redirect('/explore/global')
+      return
+    }
 
     let profile = null
     let profileFound = false
@@ -39,38 +43,6 @@ export default {
 
     return {
       profile,
-    }
-  },
-  setup() {
-    const { doc: item, sync } = useDoc('profiles')
-
-    return {
-      item,
-      sync,
-    }
-  },
-  computed: {
-    classes() {
-      let classes = ''
-
-      if (this.page) {
-        classes += this.page.container + ' p-4 '
-        classes += this.page.notypo ? '' : 'typo'
-      }
-
-      return classes
-    },
-  },
-  watch: {
-    item() {
-      if (this.item) {
-        this.profile = this.item
-      }
-    },
-  },
-  mounted() {
-    if (this.profile) {
-      this.sync(this.profile.id)
     }
   },
   head() {
