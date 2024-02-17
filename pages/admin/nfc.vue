@@ -38,6 +38,11 @@
               </p>
             </div>
             <div>
+              <TButton
+                icon="copy"
+                type="nav"
+                @click="copyToClipboard(card.id)"
+              />
               <TDropdown>
                 <TButton
                   icon="delete"
@@ -62,7 +67,7 @@ import { getYmdHms } from '~/utils'
 
 export default {
   middleware: 'auth',
-  setup() {
+  setup(props, { root }) {
     const loading = ref(true)
     const cards = ref([])
     const firestore = firebase.firestore()
@@ -83,17 +88,25 @@ export default {
         .delete()
     }
 
-    function addCard() {
-      firestore.collection('cards').add({
+    async function addCard() {
+      const cardRef = await firestore.collection('cards').add({
         createdAt: +new Date(),
         state: 'new',
       })
+
+      await copyToClipboard(cardRef.id)
+    }
+
+    async function copyToClipboard(id) {
+      const baseUrl = window.location.origin
+      await navigator.clipboard.writeText(`${baseUrl}/nfc/${id}`)
+      root.$toast.success('Card link copied to clipboard')
     }
 
     onMounted(() => {
       const collection = firestore.collection('cards')
 
-      collection.orderBy('createdAt', 'asc').onSnapshot((snapshot) => {
+      collection.orderBy('createdAt', 'desc').onSnapshot((snapshot) => {
         cards.value = snapshot.docs.map((doc) => ({
           id: doc.id,
           ...doc.data(),
@@ -110,6 +123,7 @@ export default {
       getYmdHms,
       refresh,
       remove,
+      copyToClipboard,
     }
   },
 }
