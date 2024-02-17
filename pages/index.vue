@@ -227,7 +227,6 @@
 import { onMounted, ref } from '@nuxtjs/composition-api'
 import { useAlgolia } from '~/use/algolia'
 import { useAuth } from '~/use/auth'
-import { getFacetOptions } from '~/utils'
 
 export default {
   name: 'Index',
