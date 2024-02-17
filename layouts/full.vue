@@ -1,5 +1,5 @@
 <template>
-  <div class="bg-gray-200 pb-4">
+  <div class="bg-gray-200 pb-4 border-t-2 border-primary">
     <nav class="hidden md:flex p-4 gap-2 justify-start">
       <router-link :to="city.username ? `/explore/${city.username}` : '/'">
         <TIcon name="logo-horizontal-dark" />

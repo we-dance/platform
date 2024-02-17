@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="border-t-2 border-primary">
     <TBanner
       v-if="false"
       v-model="bannerV3Beta"

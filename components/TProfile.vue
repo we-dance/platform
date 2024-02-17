@@ -90,28 +90,10 @@
     <TwTabs id="tabs" :tabs="tabs" />
 
     <div class="min-h-screen">
-      <div v-if="!$route.query.view && uid == profile.id">
-        <div class="typo p-4 border-b bg-gray-100">
-          <ul>
-            <li>
-              <strong>Share your experience</strong>:
-              <router-link to="/reviews/add">Recommend</router-link> dance
-              instructors, academies and organisers who were part of your dance
-              journey and help other dancers to have best experience.
-            </li>
-            <li>
-              <strong>Plan together</strong>:
-              <router-link to="/events/-/import">Add events</router-link> which
-              you would like to attend or discover existing events in
-              <TCityLink :place="currentCity" />.
-            </li>
-            <li>
-              <strong>Connect with your friends</strong>: Share your profile
-              with 3 friends and ask them to do the same.
-            </li>
-          </ul>
-        </div>
-      </div>
+      <TMyActions
+        v-if="!$route.query.view && uid == profile.id"
+        :place="currentCity"
+      />
       <TStories
         v-if="!$route.query.view"
         :created-by="profile.id"

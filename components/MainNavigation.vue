@@ -65,10 +65,11 @@
 
     <TButton
       :to="localePath('/reviews/add')"
-      icon="plus"
       :label="$t('nav.addReview')"
       type="nav"
-    />
+    >
+      <StarIcon class="w-4 h-4" />
+    </TButton>
 
     <template v-if="uid">
       <div class="border-b pt-2 text-xs font-bold uppercase">
@@ -178,7 +179,7 @@
 
 <script>
 import ls from 'local-storage'
-import { BookmarkIcon } from '@vue-hero-icons/outline'
+import { BookmarkIcon, StarIcon } from '@vue-hero-icons/outline'
 import { useAuth } from '~/use/auth'
 import { useCities } from '~/use/cities'
 import { useRouter } from '~/use/router'
@@ -186,6 +187,7 @@ import { useRouter } from '~/use/router'
 export default {
   components: {
     BookmarkIcon,
+    StarIcon,
   },
   setup() {
     const { isAdmin, isEditor } = useAuth()
