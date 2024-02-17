@@ -892,7 +892,7 @@ yargs(hideBin(process.argv))
   )
   .command(
     'algolia:profile <username>',
-    'See profileToAlgolia',
+    'Send profileToAlgolia',
     () => undefined,
     async (argv: any) => {
       const profileDocs = (

@@ -284,12 +284,10 @@ export default {
     })
 
     const itemsAsText = computed(() => {
-      let result = `**Dance Calendar in ${props.profile.name}**\n\n`
+      let result = `**Dance Calendar in ${props.city.name}**\n\n`
       result += `We help everyone to dance everywhere and all dancers to help each other\n\n`
-      result += `🗓️ **Dance Calendar**\n`
-      result += `${props.profile.telegram}\n\n`
       result += `➕ **Add your event**\n`
-      result += `wedance.vip/${props.profile.username}\n\n`
+      result += `wedance.vip/${props.city.username}\n\n`
       result += `🗓 **DANCE CALENDAR** 🗓 \n\n`
       _.forEach(itemsByDate.value, (items, date) => {
         result += String(`**${getDay(date)} ${getDate(date)}**\n`).toUpperCase()
