@@ -28,6 +28,9 @@
       <NuxtLink class="hover:underline" :to="localePath('/faq')">{{
         $t('footer.faq')
       }}</NuxtLink>
+      <NuxtLink class="hover:underline" :to="localePath('/reviews')"
+        >Reviews</NuxtLink
+      >
     </div>
     <div class="mt-4 text-xs">
       © WeDance 2024 – {{ $t('footer.copyright') }}

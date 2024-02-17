@@ -131,10 +131,10 @@
 
     <TButton
       v-if="isAdmin()"
-      to="/reviews"
+      to="/admin/nfc"
       type="nav"
       class="text-gray-700"
-      label="Feed"
+      label="NFC"
     />
 
     <TButton
