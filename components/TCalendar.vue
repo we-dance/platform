@@ -306,7 +306,6 @@ export default {
       profileType,
       facetFilters,
       getFieldLabel,
-      radius,
       load,
       getDateObect,
       itemsByDate,

@@ -40,12 +40,7 @@
       />
     </div>
 
-    <TCalendar
-      :key="view + ($route.query.style || '')"
-      :city="profile"
-      :view="view"
-      class="w-full border-t"
-    />
+    <TCalendar :city="profile" :view="view" class="w-full border-t" />
 
     <WTeaser
       :allow-guests="false"

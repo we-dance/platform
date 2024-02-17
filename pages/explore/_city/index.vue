@@ -1,6 +1,6 @@
 <template>
   <div :class="classes">
-    <TCity :profile="profile" view="parties" />
+    <TCity :key="$route.fullPath" :profile="profile" view="parties" />
   </div>
 </template>
 
