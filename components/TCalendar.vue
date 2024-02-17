@@ -10,6 +10,24 @@
       />
 
       <t-rich-select
+        v-if="facets['country'].length > 1"
+        v-model="filters['country']"
+        placeholder="Country"
+        :options="facets['country']"
+        clearable
+        hide-search-box
+      />
+
+      <t-rich-select
+        v-if="facets['locality'].length > 1"
+        v-model="filters['locality']"
+        placeholder="City"
+        :options="facets['locality']"
+        clearable
+        hide-search-box
+      />
+
+      <t-rich-select
         v-if="view === 'classes' || view === 'online'"
         v-model="level"
         :placeholder="$t('calendar.filters.level')"
@@ -160,6 +178,8 @@ export default {
     const facets = computed(() => ({
       type: getFacetOptions('type'),
       style: getFacetOptions('style'),
+      country: getFacetOptions('country'),
+      locality: getFacetOptions('locality'),
       venue: getFacetOptions('venue'),
       organizer: getFacetOptions('organizer'),
     }))
@@ -185,6 +205,9 @@ export default {
       }
       if (props.view === 'online') {
         return '(online:Yes)'
+      }
+      if (props.view === 'festivals') {
+        return '(type:Festival OR type:Congress)'
       }
     })
 
@@ -250,7 +273,11 @@ export default {
       response.value.hits.forEach((item) => {
         const date = getYmd(item.startDate)
         result[date] = result[date] || []
-        result[date].push(item)
+        const event = {
+          ...item,
+          venue: [item.locality, item.country].filter((v) => v).join(', '),
+        }
+        result[date].push(event)
       })
 
       return result
