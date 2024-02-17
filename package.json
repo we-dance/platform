@@ -57,6 +57,7 @@
     "nuxt-i18n": "^6.10.1",
     "platform-detect": "^3.0.0",
     "posthog-js": "^1.94.1",
+    "qrcode.vue": "^1.7.0",
     "swiper": "6",
     "tailwind": "^4.0.0",
     "url-utm-params": "^0.1.0",

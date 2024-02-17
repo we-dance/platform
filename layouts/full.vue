@@ -1,9 +1,10 @@
 <template>
   <div class="bg-gray-200 pb-4">
-    <nav class="hidden md:flex p-4 justify-between">
+    <nav class="hidden md:flex p-4 gap-2 justify-start">
       <router-link :to="city.username ? `/explore/${city.username}` : '/'">
         <TIcon name="logo-horizontal-dark" />
       </router-link>
+      <div class="flex-grow"></div>
       <TButton
         v-if="uid"
         allow-guests
@@ -18,6 +19,7 @@
         :to="localePath('/signin')"
         :label="$t('auth.signin')"
       />
+      <TQrCodeButton label="Share" />
     </nav>
     <div
       class="font-sans leading-normal tracking-normal antialiased min-h-screen flex flex-col mx-auto max-w-xl bg-white rounded shadow"

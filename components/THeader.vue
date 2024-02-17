@@ -12,6 +12,7 @@
       <slot name="left" />
       <div class="flex-grow"></div>
       <slot />
+      <TQrCodeButton />
     </div>
   </header>
 </template>
