@@ -48,10 +48,44 @@
         </div>
       </div>
     </div>
+    <a
+      v-if="doc.venue"
+      :href="doc.venue.url"
+      target="_blank"
+      class="block border-b py-2 px-4 hover:bg-gray-200"
+    >
+      <div class="flex items-center justify-start leading-tight">
+        <TIcon name="place" class="mr-4 h-4 w-4" />
+        <div>
+          <h4 class="font-bold">
+            {{ doc.venue.name
+            }}<span v-if="doc.venue.room"> • {{ doc.venue.room }}</span>
+          </h4>
+          <div class="text-gray-700">
+            {{ doc.venue.formatted_address }}
+          </div>
+        </div>
+      </div>
+    </a>
 
-    <div v-if="!isGoing" class="text-xs p-4 pb-0 text-center font-bold">
-      {{ $t('event.attendCallToAction') }}
+    <div
+      v-if="doc.online === 'Yes'"
+      class="flex w-full items-center justify-start border-b py-2 px-4 leading-tight"
+    >
+      <TIcon name="youtube" class="mr-4 h-4 w-4" />
+      <div>{{ $t('eventView.online') }}</div>
     </div>
+
+    <div
+      v-if="doc.price"
+      class="flex w-full items-center justify-start border-b py-2 px-4 leading-tight"
+    >
+      <TIcon name="ticket" class="mr-4 h-4 w-4" />
+      <div class="flex w-full justify-between">
+        <div>{{ doc.price }}</div>
+      </div>
+    </div>
+
     <div
       class="sticky top-0 z-40 flex flex-wrap justify-center items-center gap-2 bg-white p-4 shadow"
     >
@@ -76,11 +110,37 @@
         size="4"
       />
     </div>
+    <div v-if="isGoing" class="border-b bg-white p-4">
+      <TPreview v-if="doc.confirmation" :content="doc.confirmation" />
 
-    <div
-      class="grid grid-cols-1"
-      :class="$route.query.variant ? 'md:grid-cols-2' : ''"
-    >
+      <div class="flex flex-col md:flex-row justify-center items-center gap-2">
+        <template v-if="doc.link">
+          <TButton
+            v-if="doc.link.includes('https://www.tickettailor.com/')"
+            icon="ticket"
+            type="primary"
+            :label="$t('event.getTicket')"
+            @click="ticketTailorPopup = true"
+          />
+          <TButton
+            v-else
+            type="primary"
+            icon="ticket"
+            :href="doc.link"
+            target="_blank"
+            :label="$t('event.getTicket')"
+          />
+        </template>
+        <TButton
+          v-if="doc.paypal"
+          icon="favorite"
+          :href="doc.paypal"
+          :label="$t('event.paypal.action')"
+        />
+      </div>
+    </div>
+
+    <div class="grid grid-cols-1">
       <div class="md:border-l">
         <div
           v-if="$route.query.as !== 'guest' && can('edit', 'events', doc)"
@@ -181,68 +241,6 @@
           />
         </div>
 
-        <div v-if="doc.org" class="border-b">
-          <div class="text-xs uppercase font-bold px-2 pt-4 text-gray-500">
-            Organiser
-          </div>
-          <WProfile
-            :username="doc.org.username"
-            :fallback="doc.org"
-            hide-role
-            class="border-none"
-          />
-        </div>
-
-        <div v-if="doc.venueProfile" class="border-b">
-          <div class="text-xs uppercase font-bold px-2 pt-4 text-gray-500">
-            Venue
-          </div>
-          <WProfile
-            :username="doc.venueProfile.username"
-            :fallback="doc.venueProfile"
-            hide-role
-            class="border-none"
-          />
-        </div>
-
-        <a
-          v-if="doc.venue"
-          :href="doc.venue.url"
-          target="_blank"
-          class="block border-b py-2 px-4 hover:bg-gray-200"
-        >
-          <div class="flex items-center justify-start leading-tight">
-            <TIcon name="place" class="mr-4 h-4 w-4" />
-            <div>
-              <h4 class="font-bold">
-                {{ doc.venue.name
-                }}<span v-if="doc.venue.room"> • {{ doc.venue.room }}</span>
-              </h4>
-              <div class="text-gray-700">
-                {{ doc.venue.formatted_address }}
-              </div>
-            </div>
-          </div>
-        </a>
-
-        <div
-          v-if="doc.online === 'Yes'"
-          class="flex w-full items-center justify-start border-b py-2 px-4 leading-tight"
-        >
-          <TIcon name="youtube" class="mr-4 h-4 w-4" />
-          <div>{{ $t('eventView.online') }}</div>
-        </div>
-
-        <div
-          v-if="doc.price"
-          class="flex w-full items-center justify-start border-b py-2 px-4 leading-tight"
-        >
-          <TIcon name="ticket" class="mr-4 h-4 w-4" />
-          <div class="flex w-full justify-between">
-            <div>{{ doc.price }}</div>
-          </div>
-        </div>
-
         <div
           v-if="doc.specialOffer"
           class="flex w-full items-center justify-start border-b py-2 px-4 leading-tight"
@@ -298,62 +296,12 @@
             current: $route.query.view === 'guests',
           },
           {
-            name: 'Q&A',
+            name: 'Updates',
             to: `/events/${doc.id}?view=comments#tabs`,
             current: $route.query.view === 'comments',
           },
         ]"
       />
-
-      <div v-if="isGoing" class="border-b bg-white p-4">
-        <TPreview v-if="doc.confirmation" :content="doc.confirmation" />
-
-        <div
-          class="flex flex-col md:flex-row justify-center items-center gap-2"
-        >
-          <template v-if="doc.link">
-            <TButton
-              v-if="doc.link.includes('https://www.tickettailor.com/')"
-              icon="ticket"
-              type="primary"
-              :label="$t('event.getTicket')"
-              @click="ticketTailorPopup = true"
-            />
-            <TButton
-              v-else
-              type="primary"
-              icon="ticket"
-              :href="doc.link"
-              target="_blank"
-              :label="$t('event.getTicket')"
-            />
-          </template>
-          <TButton
-            v-if="doc.gallery"
-            icon="spotlight"
-            :href="doc.gallery"
-            :label="$t('event.gallery.action')"
-          />
-          <TButton
-            v-if="doc.playlist"
-            icon="spotify"
-            :href="doc.playlist"
-            :label="$t('event.playlist.action')"
-          />
-          <TButton
-            v-if="doc.paypal"
-            icon="favorite"
-            :href="doc.paypal"
-            :label="$t('event.paypal.action')"
-          />
-          <TButton
-            v-if="doc.review"
-            icon="chat"
-            :href="doc.review"
-            :label="$t('event.review.action')"
-          />
-        </div>
-      </div>
 
       <TPopup
         v-if="announcementPopupVisible"
@@ -451,7 +399,9 @@
           v-if="doc.artists && doc.artists.length"
           class="space-y-2 p-4 border-t"
         >
-          <h3 class="text-xl font-bold">{{ $t('event.artists') }}</h3>
+          <h3 class="text-xs uppercase font-bold px-2 pt-4 text-gray-500">
+            {{ $t('event.artists') }}
+          </h3>
           <div
             v-for="(profile, profileIndex) in doc.artists"
             :key="`artist-${profileIndex}`"
@@ -463,6 +413,30 @@
               hide-role
             />
           </div>
+        </div>
+
+        <div v-if="doc.org" class="space-y-2 p-4 border-t">
+          <h3 class="text-xl font-bold">Have questions?</h3>
+
+          <h3 class="text-xs uppercase font-bold px-2 pt-4 text-gray-500">
+            Organiser
+          </h3>
+          <WProfile
+            :username="doc.org.username"
+            :fallback="doc.org"
+            hide-role
+          />
+        </div>
+
+        <div v-if="doc.venueProfile" class="border-b">
+          <h3 class="text-xs uppercase font-bold px-2 pt-4 text-gray-500">
+            Venue
+          </h3>
+          <WProfile
+            :username="doc.venueProfile.username"
+            :fallback="doc.venueProfile"
+            hide-role
+          />
         </div>
 
         <div class="space-y-2 p-4 border-t">
