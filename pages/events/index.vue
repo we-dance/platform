@@ -9,7 +9,7 @@
 export default {
   name: 'Events',
   mounted() {
-    this.$router.push('/explore')
+    this.$router.push('/')
   },
 }
 </script>

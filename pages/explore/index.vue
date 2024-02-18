@@ -45,7 +45,7 @@ import { useAuth } from '~/use/auth'
 export default {
   setup(props, { root }) {
     const { switchCity, city } = useCities()
-    const { router, route } = useRouter()
+    const { router } = useRouter()
     const { updateProfile } = useAuth()
 
     const docs = ref([])
@@ -53,8 +53,7 @@ export default {
     async function changeCity(placeId) {
       await switchCity(placeId)
       await updateProfile({ current: placeId })
-      const target = route.query.target || `/explore/${city.value.username}`
-      router.push(target)
+      router.push(`/explore/${city.value.username}`)
     }
 
     const query = ref(root.$route.query.q || '')
