@@ -54,17 +54,6 @@ export default {
   generate: {
     fallback: true,
   },
-  router: {
-    extendRoutes(routes, resolve) {
-      routes.push({
-        name: 'Calendar',
-        path: '/events/:city/:dance?',
-        component: resolve(__dirname, 'pages/events/index'),
-      })
-
-      return routes
-    },
-  },
   /*
    ** Customize the progress-bar color
    */
@@ -235,7 +224,6 @@ export default {
   sitemap: {
     hostname: app.url,
     exclude: [
-      '/events',
       '/chat',
       '/search',
       '/community',

@@ -124,7 +124,7 @@ export default {
       let target = ls('target')
 
       if (!target) {
-        target = '/events'
+        target = '/explore'
       }
 
       this.$router.push(target)
