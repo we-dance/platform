@@ -3,8 +3,8 @@ import firebase from 'firebase/app'
 import 'firebase/firestore'
 
 export const app = {
-  name: 'WeDance',
-  description: 'We bring dancers together',
+  name: 'Travel. Meet. Dance.',
+  description: 'Discover dance events near you',
   social: {
     twitter: 'WeDancePlatform',
   },
