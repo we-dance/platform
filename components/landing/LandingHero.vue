@@ -7,7 +7,8 @@
             <h1 class="font-bold text-2xl">
               Travel. Meet. <span class="text-primary">Dance.</span>
             </h1>
-            <p>{{ $t('home.cta.description') }}</p>
+            Find bachata, salsa, kizomba, and more dance events near you. Expand
+            your dance world with socials, classes, and festivals.
           </div>
 
           <div class="max-w-lg mx-auto">
@@ -23,7 +24,6 @@
 
           <div class="mt-2 max-w-lg text-xs mx-auto text-center sm:max-w-3xl">
             <p>
-              {{ $t('hero.submotto') }}.
               <router-link
                 class="underline text-primary hover:no-underline"
                 to="/about"

@@ -14,14 +14,14 @@
         <LandingFeature
           image="/img/dance-travel.svg"
           title="Recommendations"
-          description="Wondering where to find the best socials in a new city?"
+          description="Get insider tips on the best socials in any city."
           cta-label="Ask Locals"
           :cta-link="localePath('/explore')"
         />
         <LandingFeature
           image="/img/dance-partners.svg"
           title="Dance Partners"
-          :description="$t('features.dancePartners.description')"
+          description="Find dance partners for your dance style and let them find you."
           cta-label="Find Partner"
           :cta-link="localePath('/find-partner/start')"
         />
@@ -34,5 +34,18 @@
 </template>
 
 <script>
-export default {}
+export default {
+  head() {
+    return {
+      title: 'Travel. Meet. Dance.',
+      meta: [
+        {
+          hid: 'description',
+          name: 'description',
+          content: 'Discover dance events near you',
+        },
+      ],
+    }
+  },
+}
 </script>
