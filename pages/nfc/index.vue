@@ -1,13 +1,17 @@
 <template>
   <div>
     <THeader show-logo class="md:hidden" />
-    <div class="bg-orange-100 flex justify-center pt-4">
-      <TIcon name="find-partner" />
-    </div>
     <div class="p-4">
-      <h1 class="text-3xl font-extrabold text-center">
+      <h1 class="text-4xl font-extrabold text-center">
         Share your social media instantly
       </h1>
+      <div class="flex justify-center pt-4">
+        <img
+          src="/img/nfc-screenshot.png"
+          alt="WeDance Card Screenshot"
+          class="h-[50vh]"
+        />
+      </div>
       <div class="text-center text-xl text-gray-700 mb-4">
         Turn a simple handshake into a lasting connection
       </div>
@@ -22,6 +26,9 @@
         >
       </div>
 
+      <h2 class="text-3xl font-extrabold text-center mt-4 mb-2">
+        How it works
+      </h2>
       <div class="flex gap-4 items-start mb-4">
         <div>
           <DeviceMobileIcon class="mt-1 text-primary w-6" />
@@ -35,23 +42,12 @@
       </div>
       <div class="flex gap-4 items-start mb-4">
         <div>
-          <UserCircleIcon class="mt-1 text-primary w-6" />
-        </div>
-        <div>
-          <div class="text-lg font-bold">Create your profile</div>
-          <div class="text-sm text-gray-700">
-            Sign-in and create your profile
-          </div>
-        </div>
-      </div>
-      <div class="flex gap-4 items-start mb-4">
-        <div>
           <LinkIcon class="mt-1 text-primary w-6" />
         </div>
         <div>
           <div class="text-lg font-bold">Link your profile</div>
           <div class="text-sm text-gray-700">
-            Link your profile and start sharing with other artists
+            Add your social media links
           </div>
         </div>
       </div>
