@@ -1,7 +1,6 @@
 <template>
-  <TAuthError v-if="error" :error="error" />
-  <TLoader v-else-if="loading || signingIn" />
-  <div v-else-if="emailSent" class="typo">
+  <TLoader v-if="loading || signingIn" />
+  <div v-else-if="emailSent" class="typo p-4">
     <h2>Check your email</h2>
     <p>Email might come in 5-10 minutes and might land in spam.</p>
     <p>
@@ -14,7 +13,7 @@
     </p>
   </div>
   <div v-else>
-    <form @submit="submit">
+    <form class="space-y-4 p-4" @submit="submit">
       <TField
         id="email"
         v-model="email"
@@ -43,9 +42,10 @@
       </div>
       <div class="mt-4 flex justify-end">
         <TButton allow-guests type="primary" @click="submit">
-          {{ $t('nopassword.submit') }}
+          Reset Password
         </TButton>
       </div>
+      <TAuthError v-if="error" :error="error" />
       <div class="mt-4 text-xs">
         <div class="mt-4 border-t pt-4 flex space-x-2 text-xs">
           <NuxtLink
@@ -54,7 +54,7 @@
             >{{ $t('signin.register') }}</NuxtLink
           >
           <NuxtLink
-            :to="localePath('/signin-email')"
+            :to="localePath('/signin')"
             class="underline hover:no-underline"
             >{{ $t('nopassword.signin') }}</NuxtLink
           >
@@ -82,7 +82,7 @@ export default {
       loading,
       signingIn,
       signInWithGoogle,
-      sendSignInLinkToEmail,
+      sendPasswordResetEmail,
       signOut,
       error,
       profile,
@@ -93,7 +93,7 @@ export default {
       loading,
       signingIn,
       signInWithGoogle,
-      sendSignInLinkToEmail,
+      sendPasswordResetEmail,
       signOut,
       error,
       profile,
@@ -140,8 +140,9 @@ export default {
         method: 'NoPassword',
       })
 
-      await this.sendSignInLinkToEmail(this.email)
-      this.emailSent = true
+      if (await this.sendPasswordResetEmail(this.email)) {
+        this.emailSent = true
+      }
     },
   },
 }

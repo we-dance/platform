@@ -3,6 +3,7 @@ import { useApp } from '~/use/app'
 import { useAccounts } from '~/use/accounts'
 import { useCommon } from '~/use/common'
 import { useDoc } from '~/use/doc'
+import { db } from '~/plugins/firebase'
 
 export const useProfiles = () => {
   const { t } = useI18n()
@@ -227,6 +228,25 @@ export const useProfiles = () => {
       required: true,
       component: 'TInputUsername',
       before: t('profile.username.before'),
+      async validate(value, item) {
+        if (!value) {
+          return true
+        }
+
+        const profileRef = (
+          await db
+            .collection('profiles')
+            .where('username', '==', value)
+            .get()
+        ).docs[0]
+
+        if (profileRef?.exists && profileRef?.id !== item?.id) {
+          return false
+        }
+
+        return true
+      },
+      validationError: 'This username is already taken',
     },
     {
       name: 'visibility',

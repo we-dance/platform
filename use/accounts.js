@@ -30,12 +30,7 @@ export const useAccounts = () => {
       type: 'password',
       label: t('account.password'),
       register: true,
-    },
-    {
-      name: 'phone',
-      label: t('account.phone'),
       required: true,
-      event: true,
     },
     {
       name: 'zone',

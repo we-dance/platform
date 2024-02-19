@@ -1,6 +1,5 @@
 <template>
-  <TAuthError v-if="error" :error="error" />
-  <TLoader v-else-if="loading || signingIn" />
+  <TLoader v-if="loading || signingIn" />
   <div v-else>
     <TAuthHeader />
     <TForm
@@ -33,6 +32,7 @@
         </div>
       </template>
     </TForm>
+    <TAuthError v-if="error" :error="error" class="p-4" />
   </div>
 </template>
 

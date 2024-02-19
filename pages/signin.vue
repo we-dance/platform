@@ -1,12 +1,12 @@
 <template>
-  <TAuthError v-if="error" :error="error" />
-  <TLoader v-else-if="loading || signingIn" />
+  <TLoader v-if="loading || signingIn" />
   <div v-else>
     <TAuthHeader />
     <form class="space-y-4 p-4" @submit="submit">
       <TField
         id="email"
         v-model="email"
+        required
         type="email"
         :label="$t('account.email')"
         label-position="top"
@@ -14,6 +14,7 @@
       <TField
         id="password"
         v-model="password"
+        required
         type="password"
         :label="$t('account.password')"
         label-position="top"
@@ -46,12 +47,14 @@
         <TButton
           allow-guests
           type="primary"
+          xtype="submit"
           class="mt-2 w-full md:mt-0 md:w-32 md:ml-4"
           @click="submit"
         >
           {{ $t('signin.submit') }}
         </TButton>
       </div>
+      <TAuthError v-if="error" :error="error" />
     </form>
   </div>
 </template>

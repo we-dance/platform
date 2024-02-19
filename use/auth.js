@@ -407,8 +407,20 @@ export const useAuth = () => {
 
     try {
       await firebase.auth().sendSignInLinkToEmail(email, actionCodeSettings)
+      return true
     } catch (e) {
       state.error = e
+      return false
+    }
+  }
+
+  async function sendPasswordResetEmail(email) {
+    try {
+      await firebase.auth().sendPasswordResetEmail(email)
+      return true
+    } catch (e) {
+      state.error = e
+      return false
     }
   }
 
@@ -509,5 +521,6 @@ export const useAuth = () => {
     updateEmail,
     createUserWithEmailAndPassword,
     deleteAccount,
+    sendPasswordResetEmail,
   }
 }
