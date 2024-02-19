@@ -70,7 +70,6 @@
 <script>
 import {
   DeviceMobileIcon,
-  UserCircleIcon,
   LinkIcon,
   ThumbUpIcon,
 } from '@vue-hero-icons/outline'
@@ -78,7 +77,6 @@ import {
 export default {
   components: {
     DeviceMobileIcon,
-    UserCircleIcon,
     LinkIcon,
     ThumbUpIcon,
   },

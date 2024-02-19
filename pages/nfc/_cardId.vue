@@ -68,19 +68,13 @@
 
 <script>
 import { onMounted } from '@nuxtjs/composition-api'
-import {
-  DeviceMobileIcon,
-  UserCircleIcon,
-  LinkIcon,
-  ThumbUpIcon,
-} from '@vue-hero-icons/outline'
+import { UserCircleIcon, LinkIcon, ThumbUpIcon } from '@vue-hero-icons/outline'
 import { until } from '@vueuse/core'
 import { db } from '~/plugins/firebase'
 import { useAuth } from '~/use/auth'
 
 export default {
   components: {
-    DeviceMobileIcon,
     UserCircleIcon,
     LinkIcon,
     ThumbUpIcon,
