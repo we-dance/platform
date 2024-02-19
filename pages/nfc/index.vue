@@ -72,16 +72,12 @@
 </template>
 
 <script>
-import { onMounted } from '@nuxtjs/composition-api'
 import {
   DeviceMobileIcon,
   UserCircleIcon,
   LinkIcon,
   ThumbUpIcon,
 } from '@vue-hero-icons/outline'
-import { until } from '@vueuse/core'
-import { db } from '~/plugins/firebase'
-import { useAuth } from '~/use/auth'
 
 export default {
   components: {
@@ -89,44 +85,6 @@ export default {
     UserCircleIcon,
     LinkIcon,
     ThumbUpIcon,
-  },
-  async asyncData({ params, error, redirect }) {
-    const cardId = params.cardId
-    const cardRef = await db
-      .collection('cards')
-      .doc(cardId)
-      .get()
-
-    if (!cardRef.exists) {
-      error({ statusCode: 404, message: 'Card not found' })
-    }
-
-    const card = cardRef.data()
-
-    if (card.username) {
-      redirect(`/${card.username}?ref=nfc`)
-    }
-  },
-  setup(props, { root }) {
-    const { profile, username, uid } = useAuth()
-
-    onMounted(async () => {
-      await until(profile).not.toBeNull()
-
-      if (username.value && root.$route.query.connect === 'true') {
-        await db
-          .collection('cards')
-          .doc(root.$route.params.cardId)
-          .update({
-            username: username.value,
-            uid: uid.value,
-            connectedAt: +new Date(),
-            state: 'connected',
-          })
-
-        root.$router.push(`/${username.value}?nfc=connected`)
-      }
-    })
   },
 }
 </script>
