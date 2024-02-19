@@ -132,7 +132,7 @@ export default {
         }
 
         if (field.validate) {
-          const valid = await field.validate(this.value[field.name], field.item)
+          const valid = await field.validate(this.value[field.name], this.value)
 
           if (!valid) {
             Vue.set(this.errors, field.name, field.validationError)
