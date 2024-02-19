@@ -28,6 +28,9 @@
       <NuxtLink class="hover:underline" :to="localePath('/faq')">{{
         $t('footer.faq')
       }}</NuxtLink>
+      <NuxtLink class="hover:underline" :to="localePath('/nfc')"
+        >NFC cards</NuxtLink
+      >
       <NuxtLink class="hover:underline" :to="localePath('/reviews')"
         >Reviews</NuxtLink
       >
