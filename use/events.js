@@ -45,7 +45,7 @@ export async function getEventsWithGuest(username) {
   const result = await firebase
     .firestore()
     .collection('posts')
-    .where(`star.list.${username}`, '==', true)
+    .where(`star.usernames`, 'array-contains', username)
     .get()
 
   return result.docs.map((doc) => ({
