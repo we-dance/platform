@@ -16,11 +16,11 @@ html {
 }
 .preview a,
 .typo a {
-  @apply text-blue-600 underline;
+  @apply text-primary underline;
 }
 .preview a:hover,
 .typo a:hover {
-  @apply text-blue-800 no-underline;
+  @apply text-primary no-underline;
 }
 .typo strong a {
   @apply font-bold;

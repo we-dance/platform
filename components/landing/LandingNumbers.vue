@@ -1,6 +1,8 @@
 <template>
   <div ref="target" class="px-4">
-    <h2 class="text-center text-xl font-bold">WeDance in Numbers</h2>
+    <h2 class="text-center text-xl font-bold">
+      {{ $t('home.numbers.title') }}
+    </h2>
     <div class="mt-4 grid grid-cols-3 gap-4 max-w-4xl mx-auto">
       <div class="p-4 space-y-1 bg-light rounded shadow">
         <h3 class="text-2xl font-extrabold text-center">

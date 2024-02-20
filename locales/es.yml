@@ -27,11 +27,6 @@ post:
   delete: Borrar
   edit: Editar
   dashboard: Panel de control
-home:
-  cta:
-    header: Menos chat. Más danza.
-    description: Descubre bailarines y eventos de baile cerca de ti
-    action: Encuentra tu ciudad
 form:
   clear: Limpiar
   delete: Borrar
@@ -601,3 +596,48 @@ teaser:
     title: ¿Buscas más eventos?
     description: En lugar de buscar en múltiples chats, pregunta directamente a nuestra comunidad local de baile en el sitio web. Obtén recomendaciones personalizadas para eventos en cualquier ciudad de bailarines locales.
     btn: Pregunta a Locales
+home:
+  title: WeDance - Viajar. Conocer. Bailar.
+  hero:
+    header: Viajar. Conocer. **Bailar.**
+    subheader: Encuentra eventos de bachata, salsa, kizomba y más cerca de ti. Amplía tu mundo de baile con sociales, clases y festivales.
+    action: Encuentra tu ciudad
+    bottom: '[Nuestra misión](/about) es unir a bailarines de todo el mundo.'
+  features:
+    explore:
+      title: Sociales, Clases, Festivales
+      description: ¡Di adiós a los chats caóticos!
+      action: Explorar Eventos
+    travel:
+      title: Recomendaciones
+      description: Obtén consejos de expertos sobre los mejores sociales en cualquier ciudad.
+      action: Preguntar a Locales
+    partner:
+      title: Parejas de Baile
+      description: Encuentra parejas de baile para tu estilo y permite que ellos te encuentren.
+      action: Buscar Pareja
+  numbers:
+    title: WeDance en Números
+    countries: Países
+    profiles: Perfiles
+    events: Eventos
+  founder: "**El Problema**
+
+
+    Soy un fanático del baile, siempre conectado con la escena local a través de innumerables grupos de WhatsApp. Los nuevos bailarines a menudo me preguntan sobre las próximas fiestas, y se volvió abrumador llevar un registro de todo.
+
+
+    **La Solución**
+
+
+    ¡Por eso creé WeDance! Es la solución integral para eventos de baile en tu ciudad. No más malabares con chats o búsqueda frenética de información.
+
+
+    **Beneficios para Bailarines**
+
+    - **¿Nuevo en la ciudad?** Encuentra las fiestas más populares al instante.
+
+    - **¿Amigos curiosos sobre tus planes de baile?** Solo envíales tu perfil de WeDance y déjalos elegir sus eventos favoritos para unirse a ti.
+
+
+    ¿Suena increíble, verdad? ¡Explora WeDance hoy!"

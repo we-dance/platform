@@ -27,11 +27,6 @@ post:
   delete: Löschen
   edit: Bearbeiten
   dashboard: Übersicht
-home:
-  cta:
-    header: Reisen. Treffen. Tanzen.
-    description: Entdecke Tänzer*innen und Tanzevents in deiner Nähe
-    action: Finde deine Stadt
 form:
   clear: Löschen
   delete: Löschen
@@ -631,3 +626,48 @@ teaser:
     title: Auf der Suche nach mehr Events?
     description: Statt in mehreren Chats zu suchen, frage direkt unsere lokale Tanzgemeinschaft auf der Website. Erhalte personalisierte Empfehlungen für Veranstaltungen in jeder Stadt von lokalen Tänzern.
     btn: Locals fragen
+home:
+  title: WeDance - Reisen. Treffen. Tanzen.
+  hero:
+    header: Reisen. Treffen. **Tanzen.**
+    subheader: Finde Bachata, Salsa, Kizomba und weitere Tanzveranstaltungen in deiner Nähe. Erweitere deine Tanzwelt mit Socials, Kursen und Festivals.
+    action: Finde deine Stadt
+    bottom: '[Unsere Mission](/about) ist es, Tänzer weltweit zu vereinen.'
+  features:
+    explore:
+      title: Socials, Kurse, Festivals
+      description: Sag chaotischen Chats Lebewohl!
+      action: Veranstaltungen erkunden
+    travel:
+      title: Empfehlungen
+      description: Erhalte Insider-Tipps zu den besten Socials in jeder Stadt.
+      action: Frag die Einheimischen
+    partner:
+      title: Tanzpartner
+      description: Finde Tanzpartner für deinen Tanzstil und lass dich von ihnen finden.
+      action: Partner finden
+  numbers:
+    title: WeDance in Zahlen
+    countries: Länder
+    profiles: Profile
+    events: Veranstaltungen
+  founder: "**Das Problem**
+
+
+    Ich bin ein Tanzfanatiker, immer in die lokale Szene eingebunden durch unzählige WhatsApp-Gruppen. Neue Tänzer fragen mich oft nach anstehenden Partys, und es wurde überwältigend, alles im Blick zu behalten.
+
+
+    **Die Lösung**
+
+
+    Deshalb habe ich WeDance geschaffen! Es ist die Anlaufstelle für Tanzveranstaltungen in deiner Stadt. Kein Jonglieren mehr mit Chats oder hektische Suche nach Informationen.
+
+
+    **Vorteile für Tänzer**
+
+    - **Neu in der Stadt?** Finde sofort die heißesten Partys.
+
+    - **Freunde neugierig auf deine Tanzpläne?** Schick ihnen einfach dein WeDance-Profil und lass sie ihre Lieblingsveranstaltungen auswählen, um sich dir anzuschließen.
+
+
+    Klingt fantastisch, oder? Erkunde WeDance heute!"

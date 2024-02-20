@@ -104,10 +104,6 @@
       />
     </template>
     <template v-else>
-      <div class="text-xs mt-4">
-        <h4 class="font-bold">{{ $t('home.cta.header') }}</h4>
-        <div>{{ $t('home.cta.description') }}</div>
-      </div>
       <TButton
         allow-guests
         :to="localePath('/signin')"
