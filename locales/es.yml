@@ -618,9 +618,9 @@ home:
       action: Buscar Pareja
   numbers:
     title: WeDance en Números
-    countries: Países
-    profiles: Perfiles
-    events: Eventos
+    countries: países
+    profiles: perfiles
+    events: eventos
   founder: "**El Problema**
 
 

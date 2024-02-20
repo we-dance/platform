@@ -810,9 +810,9 @@ home:
       action: Find Partner
   numbers:
     title: WeDance in Numbers
-    countries: Countries
-    profiles: Profiles
-    events: Events
+    countries: countries
+    profiles: profiles
+    events: events
   founder: "**The Problem**
 
 
