@@ -2,8 +2,25 @@
   <div class="flex flex-col" style="height: 100vh">
     <div class="p-4 flex space-x-4">
       <div>{{ profiles.length }} profiles</div>
-      <TInputButtons v-model="onlyLast" :options="onlyLastOptions" />
-      <TInputButtons v-model="view" :options="viewOptions" />
+      <t-rich-select
+        v-model="orderBy"
+        placeholder="Sort"
+        :options="[
+          {
+            label: 'Created At',
+            value: 'createdAt',
+          },
+          {
+            label: 'Last Login At',
+            value: 'lastLoginAt',
+          },
+          {
+            label: 'Days Used',
+            value: 'daysUsed',
+          },
+        ]"
+        hide-search-box
+      />
     </div>
 
     <ag-grid-vue
@@ -24,7 +41,6 @@ import 'ag-grid-community/dist/styles/ag-grid.css'
 import 'ag-grid-community/dist/styles/ag-theme-alpine.css'
 import { AgGridVue } from 'ag-grid-vue'
 import { getDateTime } from '~/utils'
-import { useApp } from '~/use/app'
 
 export default {
   layout: 'empty',
@@ -33,22 +49,8 @@ export default {
     AgGridVue,
   },
   setup() {
-    const { getCity } = useApp()
-
-    const view = ref('profiles')
-    const viewOptions = [
-      { value: 'profiles', label: 'Profiles' },
-      { value: 'marketing', label: 'Marketing' },
-    ]
-
-    const onlyLast = ref(true)
-    const onlyLastOptions = [
-      { value: false, label: 'All' },
-      { value: true, label: 'Last 100' },
-    ]
-
     const columns = computed(() => [
-      { field: 'id' },
+      { field: 'id', resizable: true },
       {
         field: 'username',
         cellRenderer: (params) =>
@@ -56,17 +58,16 @@ export default {
             params.data.username
           }" class="underline text-primary">${params.data.username || ''}</a>`,
       },
+      { field: 'type', resizable: true },
       { field: 'jobs', resizable: true },
+      {
+        field: 'owned',
+        valueGetter: (params) =>
+          params.data.id === params.data.createdBy ? 'Yes' : 'No',
+      },
       {
         field: 'photo',
         valueGetter: (params) => (params.data.photo ? 'Yes' : 'No'),
-      },
-      {
-        field: 'partner',
-      },
-      {
-        field: 'city',
-        valueGetter: (params) => getCity(params.data.place),
       },
       {
         field: 'registrationDate',
@@ -77,83 +78,18 @@ export default {
         valueGetter: (params) => getDateTime(params.data.lastLoginAt),
       },
       { field: 'daysUsed' },
-      { field: 'visibility' },
-      {
-        field: 'permission',
-      },
       {
         field: 'languages',
-        valueGetter: (params) => Object.keys(params.data.locales).join(', '),
+        valueGetter: (params) =>
+          params.data.locales
+            ? Object.keys(params.data.locales).join(', ')
+            : '',
       },
-      { field: 'instagram' },
-      { field: 'telegram' },
-      {
-        field: 'sessionStart',
-        valueGetter: (params) => getDateTime(params.data.marketing?.updatedAt),
-        hide: view.value !== 'marketing',
-      },
-      {
-        field: 'campaign',
-        valueGetter: (params) => params.data.marketing?.utms?.utm_campaign,
-        hide: view.value !== 'marketing',
-      },
-      {
-        field: 'source',
-        valueGetter: (params) => params.data.marketing?.utms?.utm_source,
-        hide: view.value !== 'marketing',
-      },
-      {
-        field: 'medium',
-        valueGetter: (params) => params.data.marketing?.utms?.utm_medium,
-        hide: view.value !== 'marketing',
-      },
-      {
-        field: 'start',
-        valueGetter: (params) => params.data.marketing?.start,
-        hide: view.value !== 'marketing',
-        resizable: true,
-      },
-      {
-        field: 'target',
-        valueGetter: (params) => params.data.marketing?.target,
-        hide: view.value !== 'marketing',
-        resizable: true,
-      },
-      {
-        field: 'from',
-        valueGetter: (params) => params.data.marketing?.from,
-        hide: view.value !== 'marketing',
-      },
-      {
-        field: 'promo',
-        valueGetter: (params) => params.data.marketing?.promo,
-        hide: view.value !== 'marketing',
-      },
-      {
-        field: 'ref',
-        valueGetter: (params) => params.data.marketing?.ref,
-        hide: view.value !== 'marketing',
-      },
-      {
-        field: 'referrer',
-        valueGetter: (params) => params.data.marketing?.referrer,
-        hide: view.value !== 'marketing',
-        resizable: true,
-      },
-      {
-        field: 'fbclid',
-        valueGetter: (params) => params.data.marketing?.fbclid,
-        hide: view.value !== 'marketing',
-        resizable: true,
-      },
-      {
-        field: 'gclid',
-        valueGetter: (params) => params.data.marketing?.gclid,
-        hide: view.value !== 'marketing',
-        resizable: true,
-      },
+      { field: 'instagram', resizable: true },
+      { field: 'telegram', resizable: true },
     ])
 
+    const orderBy = ref('createdAt')
     const api = ref(null)
     const profiles = ref([])
 
@@ -166,55 +102,26 @@ export default {
     const load = () => {
       let collection = firestore
         .collection('profiles')
-        .orderBy('createdAt', 'desc')
+        .orderBy(orderBy.value, 'desc')
 
-      if (onlyLast.value) {
-        collection = collection.limit(100)
-      }
+      collection = collection.limit(100)
 
       collection.get().then((snapshot) => {
         profiles.value = snapshot.docs.map((doc) => ({
           ...doc.data(),
           id: doc.id,
         }))
-
-        if (view.value === 'marketing') {
-          snapshot.docs.forEach((doc) => {
-            firestore
-              .collection('marketing')
-              .where('uid', '==', doc.id)
-              .orderBy('updatedAt', 'asc')
-              .limit(1)
-              .get()
-              .then((snapshot) => {
-                if (snapshot.docs.length) {
-                  const marketing = snapshot.docs[0].data()
-
-                  profiles.value.find(
-                    (account) => account.id === marketing.uid
-                  ).marketing = marketing
-                }
-
-                api.value.redrawRows()
-              })
-          })
-        }
       })
     }
 
-    watch(view, load)
-    watch(onlyLast, load)
-
     onMounted(load)
+    watch(orderBy, load)
 
     return {
       profiles,
       columns,
       onGridReady,
-      view,
-      viewOptions,
-      onlyLast,
-      onlyLastOptions,
+      orderBy,
     }
   },
 }
