@@ -15,6 +15,7 @@ export function useAlgolia(indexName) {
     cachedOptions.value = options
     loading.value = false
     response.value = await index.search(query, options)
+    return response.value
   }
 
   async function loadMore() {

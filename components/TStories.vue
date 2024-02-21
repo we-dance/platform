@@ -21,6 +21,7 @@
 import firebase from 'firebase/app'
 import 'firebase/firestore'
 import { onMounted, ref } from '@nuxtjs/composition-api'
+import { useAlgolia } from '~/use/algolia'
 
 export default {
   name: 'TStories',
@@ -32,6 +33,10 @@ export default {
     place: {
       type: String,
       default: '',
+    },
+    city: {
+      type: Object,
+      default: () => ({}),
     },
     dance: {
       type: String,
@@ -46,15 +51,17 @@ export default {
       default: false,
     },
   },
-  setup(props) {
+  setup(props, { root }) {
     const loading = ref(true)
     const stories = ref([])
+    const radius = ref(root.$route.query.radius || 50)
+    const { search } = useAlgolia('profiles')
 
     function loadMore() {
       console.log('loadMore')
     }
 
-    onMounted(() => {
+    onMounted(async () => {
       const firestore = firebase.firestore()
       let collection = firestore.collection('stories')
 
@@ -67,7 +74,20 @@ export default {
       }
 
       if (props.place) {
-        collection = collection.where('place', '==', props.place)
+        const response = await search('', {
+          filters: 'type:City',
+          page: 0,
+          aroundLatLng: radius.value
+            ? `${props.city.location.latitude}, ${props.city.location.longitude}`
+            : '',
+          aroundRadius: radius.value * 1000 || 1,
+          hitsPerPage: 9,
+        })
+
+        const places = response.hits.map((item) => item.place)
+        places.push(props.place)
+
+        collection = collection.where('place', 'in', places)
       }
 
       if (props.noPlace) {

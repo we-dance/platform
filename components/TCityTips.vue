@@ -44,6 +44,7 @@
     <TStories
       :key="item.style"
       :place="place"
+      :city="city"
       :no-place="noPlace"
       :filter-dance="item.style"
     />

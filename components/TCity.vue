@@ -23,7 +23,7 @@
       <TProfileStats :profile="profile" />
     </div>
 
-    <div v-if="isAdmin()" class="flex gap-2 p-4 bg-orange-100">
+    <div v-if="isAdmin()" class="flex gap-2 p-4 bg-orange-100 items-center">
       <TDropdown>
         <TPopupEdit
           v-if="isAdmin()"
@@ -42,16 +42,16 @@
           @click="remove(profile.id)"
         />
       </TDropdown>
+      <div class="text-xs">place_id: {{ profile.cityPlaceId }}</div>
     </div>
 
     <TCalendar :city="profile" :view="view" class="w-full border-t" />
 
     <WTeaser
-      :allow-guests="false"
       :title="$t('teaser.feed.title')"
       :description="$t('teaser.feed.description')"
       :button="$t('teaser.feed.btn')"
-      :url="`/explore/${profile.username}/tips`"
+      :url="localePath(`/explore/${profile.username}/tips`)"
       class="w-full mt-4"
     />
 

@@ -88,7 +88,7 @@ export default {
       default: () => ({}),
     },
   },
-  setup(props) {
+  setup(props, { root }) {
     const groupTypes = [
       {
         label: 'Whatsapp',
@@ -127,7 +127,7 @@ export default {
         value: 'twitter',
       },
     ]
-    const radius = ref(10)
+    const radius = ref(root.$route.query.radius || 50)
     const groupType = ref('')
     const query = ref('')
     const profileType = ref('')
@@ -157,7 +157,7 @@ export default {
     })
     const filterQuery = computed(() => {
       if (uid.value) {
-        return `visibility:Public OR visibility:Members`
+        return ``
       } else {
         return 'visibility:Public'
       }
