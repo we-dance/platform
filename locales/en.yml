@@ -662,19 +662,6 @@ calendar:
   share:
     text: Text
     embed: Embed
-nav:
-  search: Search
-  events: Events
-  festivals: Festivals
-  partner: Find Partner
-  dance: Dance Styles
-  contribute: Contribute
-  addEvent: Event
-  addReview: Recommend
-  chat: Chat
-  bookmarks: Bookmarks
-  myProfile: My Profile
-  settings: Settings
 mainfaqs:
   _head:
     title: FAQ | Your Questions Answered | WeDance
@@ -833,3 +820,16 @@ teaser:
     title: Looking for more events?
     description: Instead of searching through multiple chats, directly ask our local dance community on the website. Get personalized recommendations for events in any city from local dancers.
     btn: Ask Locals
+nav:
+  search: Search
+  events: Events
+  festivals: Festivals
+  partner: Find Partner
+  dance: Dance Styles
+  contribute: Contribute
+  addEvent: Event
+  addReview: Recommend
+  chat: Chat
+  bookmarks: Bookmarks
+  myProfile: My Profile
+  settings: Settings

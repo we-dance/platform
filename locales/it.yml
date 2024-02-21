@@ -27,16 +27,6 @@ post:
   delete: Delete
   edit: Edit
   dashboard: Dashboard
-nav:
-  travel: Travel
-  chooseCity: Choose City
-  feed: Commento
-  calendar: Calendar
-  community: Community
-  chat: Conversazione
-  dance: Dances
-  myProfile: My Profile
-  settings: Impostazioni
 form:
   clear: Clear
   delete: Delete
@@ -599,7 +589,7 @@ explore:
     parties: Feste
     classes: Lezioni
     groups: Gruppi
-    tips: Chiedi ai Locali
+    tips: Guida Locale
   parties:
     title: Feste di Ballo {style} a {city} | Calendario Danza | WeDance
     description: Esplora una varietà di eventi di ballo {style} a {city}. Dalle serate {referenceStyle} ai workshop di bachata, trova la tua prossima avventura di ballo qui.
@@ -632,3 +622,16 @@ teaser:
     title: Cerchi altri eventi?
     description: Invece di cercare in più chat, chiedi direttamente alla nostra comunità di ballo locale sul sito. Ottieni consigli personalizzati per eventi in qualsiasi città dai ballerini locali.
     btn: Chiedi ai Locali
+nav:
+  search: Cerca
+  events: Eventi
+  festivals: Festival
+  partner: Trova Partner
+  dance: Stili di Ballo
+  contribute: Contribuisci
+  addEvent: Aggiungi Evento
+  addReview: Raccomanda
+  chat: Chat
+  bookmarks: Segnalibri
+  myProfile: Il Mio Profilo
+  settings: Impostazioni
