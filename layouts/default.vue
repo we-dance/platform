@@ -53,7 +53,7 @@
         <MainNavigation
           :uid="uid"
           :username="username"
-          class="hidden md:block w-48 shrink-0"
+          class="hidden md:block w-52 shrink-0"
         />
         <nuxt class="min-w-0 w-full" />
       </div>
