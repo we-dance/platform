@@ -69,7 +69,7 @@ export default {
       }
 
       await searchProfiles('', {
-        filters: ``,
+        filters: `lastLoginAt > 0`,
         facets: ['style', 'locality', 'country'],
         hitsPerPage: 0,
         maxValuesPerFacet: 1000,

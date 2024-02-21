@@ -56,7 +56,7 @@ icons:
 features:
   calendar:
     title: Veranstaltungskalender
-    description: Find dance workshops, courses, socials and parties. We fill event calendar all together as a community. Everyone can share.
+    description: Find dance workshops, courses, socials and partys. We fill event calendar all together as a community. Everyone can share.
     action: Events entdecken
   dancePartners:
     title: Tanzpartner*innen
@@ -570,10 +570,10 @@ explore:
     tips: Locals fragen
     addEvent: Neues Event
   parties:
-    title: Tanzparties {style} in {city} | Tanzkalender | WeDance
+    title: Tanzpartys {style} in {city} | Tanzkalender | WeDance
     description: Entdecke eine Vielzahl von {style} Tanzveranstaltungen in {city}. Von {referenceStyle}-Nächten bis zu Bachata-Workshops, finde hier dein nächstes Tanzabenteuer.
-    header: "{style} Parties in {city}"
-    subheader: Entdecke die lebhafte {style} Tanzszene in {city}. Stöbere durch eine ausgewählte Liste von Tanzparties und filtere nach deinen Lieblingsstilen wie Salsa, Bachata, Kizomba und mehr.
+    header: "{style} Partys in {city}"
+    subheader: Entdecke die lebhafte {style} Tanzszene in {city}. Stöbere durch eine ausgewählte Liste von Tanzpartys und filtere nach deinen Lieblingsstilen wie Salsa, Bachata, Kizomba und mehr.
   classes:
     title: Tanzkurse {style} in {city} | Tanzkalender | WeDance
     description: Entdecke eine Vielzahl von {style} Tanzveranstaltungen in {city}. Von {referenceStyle}-Nächten bis zu Bachata-Workshops, finde hier dein nächstes Tanzabenteuer.
@@ -627,7 +627,7 @@ teaser:
     btn: Kostenlos beitreten
   feed:
     title: Auf der Suche nach mehr Events?
-    description: Statt in mehreren Chats zu suchen, frage direkt unsere lokale Tanzgemeinschaft auf der Website. Erhalte personalisierte Empfehlungen für Veranstaltungen in jeder Stadt von lokalen Tänzern.
+    description: Statt in mehreren Chats zu suchen, frag direkt unsere lokale Tanzcommunity auf der Webseite. Hol dir persönliche Empfehlungen für Events in jeder Stadt von lokalen Tänzern.
     btn: Locals fragen
 home:
   title: WeDance - Reisen. Treffen. Tanzen.

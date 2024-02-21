@@ -1,6 +1,6 @@
 common:
-  yes: 'Yes'
-  no: 'No'
+  yes: "Yes"
+  no: "No"
   female: Female
   male: Male
   other: Other
@@ -15,10 +15,10 @@ Edit: Edit
 Delete: Delete
 Copy: Copy
 Share: Share
-views: 'no views | 1 view | {count} views'
-subscribers: 'no subscribers | 1 subscriber | {count} subscribers'
-connections: 'no connections | 1 connection | {count} connections'
-guests: 'no guests | 1 guest | {count} guests'
+views: "no views | 1 view | {count} views"
+subscribers: "no subscribers | 1 subscriber | {count} subscribers"
+connections: "no connections | 1 connection | {count} connections"
+guests: "no guests | 1 guest | {count} guests"
 Subscribe: Subscribe
 Unsubscribe: Unsubscribe
 Follow: Follow
@@ -41,11 +41,11 @@ photo:
   selectLabel: Upload photo
 visibility:
   label: Visibility
-  description: '- Public: searchable in Google and can be used in social media.
+  description: "- Public: searchable in Google and can be used in social media.
 
     - Members: only visible for logged-in users.
 
-    - Unlisted: only possible to open with exact link, but not listed anywhere.'
+    - Unlisted: only possible to open with exact link, but not listed anywhere."
   public: Public
   members: Members
   unlisted: Unlisted
@@ -162,7 +162,7 @@ community:
   description: Looking for dance partner or new dance events? Filter profiles of local dancers and contact them.
 reviews:
   title: Reviews
-  count: 'No Reviews | 1 Review | {count} Reviews'
+  count: "No Reviews | 1 Review | {count} Reviews"
 profile:
   team: Team
   claim: Claim my profile
@@ -170,8 +170,8 @@ profile:
     title: Follow us
     description: We regularly post event announcements and introduce new members on our social media.
   invite:
-    header: '{count} invites left'
-    description: '{name} invites you to get a free VIP membership for faster networking, get rewards, discover dance flashmobs and VIP events'
+    header: "{count} invites left"
+    description: "{name} invites you to get a free VIP membership for faster networking, get rewards, discover dance flashmobs and VIP events"
     action: Accept Invitation
   bookme: Book me
   contactme: Contact me
@@ -199,7 +199,7 @@ profile:
   story:
     label: Description
     before: Tell your dance story. You can also use [widgets](https://wedance.vip/markdown), including images and videos
-    tips: '
+    tips: "
       Pitch yourself: Who are you? What do you offer? What do you want?
 
       Tips for effective pitch:
@@ -212,14 +212,14 @@ profile:
 
       - Storyline: It covers who you are, what you offer, and where you want to be
 
-      - Appealing: Your elevator pitch is essentially a persuasive sales pitch; the emphasis should be on what you offer'
+      - Appealing: Your elevator pitch is essentially a persuasive sales pitch; the emphasis should be on what you offer"
     placeholder: Text (markdown)
   locales: Your languages
   skills: Non-dancing skills
   days: Days
   learning:
     label: Which dance topics you are interested in?
-    description: 'For example: Musicality in Salsa, Men Styling, etc.'
+    description: "For example: Musicality in Salsa, Men Styling, etc."
   teacher: Are you teaching?
   partner: Are you looking for a dance partner?
   height: Your height (cm)
@@ -228,7 +228,7 @@ profile:
     description: Leave this field blank if you think it's irrelevant.
   partnerBio:
     label: Question
-    description: 'What is important in your partner? Put it as a question, for example: Do you love dogs?'
+    description: "What is important in your partner? Put it as a question, for example: Do you love dogs?"
   objectives: Objectives
   objective:
     placeholder: Objective
@@ -253,10 +253,10 @@ profile:
     placeholder: Style
   permission:
     label: Do you want free promo?
-    description: 'Send us link to your event on [Telegram](https://t.me/+aRIIZcXpBhJkYmUy) and we will announce it on our Telegram, Instagram and Facebook.'
+    description: "Send us link to your event on [Telegram](https://t.me/+aRIIZcXpBhJkYmUy) and we will announce it on our Telegram, Instagram and Facebook."
   jobs:
     label: I can help with
-    description: 'How can you help our community? What are you good at? For example: design, programming, marketing, social media, etc.'
+    description: "How can you help our community? What are you good at? For example: design, programming, marketing, social media, etc."
   contacts: Do you use social media?
   email:
     label: Email
@@ -317,7 +317,7 @@ myprofile:
       introduction.
     description2: Your poster is also shown in {0} among other dancers.
     community: Community
-    description3: 'Click {0} and add:'
+    description3: "Click {0} and add:"
   ambassador:
     description1:
       WeDance is represented by Ambassador in local dance communities.
@@ -326,11 +326,11 @@ myprofile:
       Involved, become volunteer!
     description2: Ambassador in {community} is
     description3:
-      'Help us build a dance network in your city, follow and interact with
-      our local social media accounts:'
+      "Help us build a dance network in your city, follow and interact with
+      our local social media accounts:"
   profile:
-    height: '{height}cm'
-    weight: '{weight}kg'
+    height: "{height}cm"
+    weight: "{weight}kg"
 TPostList:
   loadMore: Load more
 TPost:
@@ -359,7 +359,7 @@ conversation:
     submit: Send
   welcome: Start conversation with something nice.
   with: Chat with {username}
-  dateDiff: '{diff} ago'
+  dateDiff: "{diff} ago"
 cities:
   choose: Choose city
 settings:
@@ -409,7 +409,7 @@ account:
   newsletter:
     label: What kind of updated would you like to receive weekly?
     options:
-      party: 'Social/party events'
+      party: "Social/party events"
       class: Dance classes
       workshop: Workshops and bootcamps
       online: Online dance classes
@@ -589,11 +589,11 @@ event:
     description: Link to your facebook event. Leave empty if you don't have one.
   promo:
     label: Announce on social media?
-    description: 'Send us link to your event on [Telegram](https://t.me/+aRIIZcXpBhJkYmUy) and we will announce it on our Telegram, Instagram and Facebook.'
+    description: "Send us link to your event on [Telegram](https://t.me/+aRIIZcXpBhJkYmUy) and we will announce it on our Telegram, Instagram and Facebook."
   confirmation:
     label: Confirmation
     description: This message will be shown after people joined the guest list. Explain next steps to participate in the event (ticket, payments, dress-code, invite friends, etc.)
-    placeholder: 'Example: You are on the guest list. Take your big smile and see you at the event!'
+    placeholder: "Example: You are on the guest list. Take your big smile and see you at the event!"
 TInputProfile:
   changeRole: Change Role
   actions: Actions
@@ -655,15 +655,15 @@ explore:
   parties:
     title: Dance {style} Parties in {city} | Dance Calendar | WeDance
     description: Explore a variety of {style} dance events happening in {city}. From {referenceStyle} nights to bachata workshops, find your next dance adventure here.
-    header: '{style} Parties in {city}'
+    header: "{style} Parties in {city}"
     subheader: Discover the vibrant {style} dance scene in {city}. Browse through a curated list of dance parties and filter by your favorite styles like Salsa, Bachata, Kizomba, and more.
   classes:
     title: Dance {style} Classes in {city} | Dance Calendar | WeDance
     description: Explore a variety of {style} dance events happening in {city}. From {referenceStyle} nights to bachata workshops, find your next dance adventure here.
-    header: '{style} Classes in {city}'
+    header: "{style} Classes in {city}"
     subheader: Discover the vibrant {style} dance scene in {city}. Browse through a curated list of dance classes and filter by your favorite styles like Salsa, Bachata, Kizomba, and more.
   onlineclass:
-    header: 'Online Classes'
+    header: "Online Classes"
     subheader: Can't make it in person? Take your {style} moves to the next level with our online class selection.
   groups:
     title: Dance Groups in {city} | WeDance
@@ -731,7 +731,7 @@ mainfaqs:
       answer: WeDance is a platform that streamlines the dance event experience. Discover parties, classes, festivals, get insider tips, and manage your dance calendar – all in one place.
 
     - question: What cities are currently supported by WeDance?
-      answer: 'WeDance is currently active in [list of supported cities](/explore).'
+      answer: "WeDance is currently active in [list of supported cities](/explore)."
 
     - question: Is WeDance free to use?
       answer: The core features of WeDance are free to use. We may offer premium features or subscriptions in the future, providing additional benefits for power users.
@@ -744,10 +744,10 @@ mainfaqs:
 
   calendars:
     - question: How do I sync my existing calendar with WeDance?
-      answer: 'The process varies slightly depending on your calendar provider. You can find detailed instructions on [calendars settings page](/settings/calendars).'
+      answer: "The process varies slightly depending on your calendar provider. You can find detailed instructions on [calendars settings page](/settings/calendars)."
 
     - question: Can I add events directly to WeDance?
-      answer: 'Yes! You can submit your own dance events to WeDance. To ensure events are relevant to the community, please follow our [submission guidelines](/coc).'
+      answer: "Yes! You can submit your own dance events to WeDance. To ensure events are relevant to the community, please follow our [submission guidelines](/coc)."
 
     - question: If an imported event changes, will it automatically update on WeDance?
       answer: This depends on your calendar source. Some calendar providers directly update synced events; with others, you may need to make changes manually on WeDance.
@@ -785,7 +785,7 @@ mainfaqs:
     - question: How do I edit my WeDance profile?
       answer: You can edit your profile from your account settings page. This lets you update your location, dance interests, and other information.
 Helpful: Helpful
-'Not Helpful': Not helpful
+"Not Helpful": Not helpful
 Connect: Connect
 Connected: Conntected
 home:
@@ -794,7 +794,7 @@ home:
     header: Travel. Meet. **Dance.**
     subheader: Find bachata, salsa, kizomba, and more dance events near you. Expand your dance world with socials, classes, and festivals.
     action: Find your city
-    bottom: '[Our mission](/about) is to unite dancers worldwide.'
+    bottom: "[Our mission](/about) is to unite dancers worldwide."
   features:
     explore:
       title: Socials, Classes, Festivals

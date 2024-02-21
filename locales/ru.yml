@@ -1,7 +1,7 @@
 ---
 common:
-  yes: 'Да'
-  no: 'Нет'
+  yes: "Да"
+  no: "Нет"
   female: Женщина
   male: Мужчина
   other: Прочее
@@ -16,7 +16,7 @@ Edit: Изменить
 Delete: Удалить
 Copy: Копировать
 Share: Поделиться
-views: 'нет просмотров | 1 просмотр | {count} просмотров'
+views: "нет просмотров | 1 просмотр | {count} просмотров"
 Subscribe: Подписаться
 Unsubscribe: Отписаться
 Follow: Следить
@@ -38,7 +38,7 @@ photo:
   selectLabel: Загрузить фото
 visibility:
   label: Видимость
-  description: '- Публичный: можно искать в Google и может быть использован в социальных сетях. - Участники: видны только авторизованным пользователям. - Не публиковать: можно открыть только с точной ссылкой, но не указана нигде.'
+  description: "- Публичный: можно искать в Google и может быть использован в социальных сетях. - Участники: видны только авторизованным пользователям. - Не публиковать: можно открыть только с точной ссылкой, но не указана нигде."
   public: Публичный
   members: Участники
   unlisted: Не публиковать
@@ -157,8 +157,8 @@ profile:
     title: Следите за нами
     description: Мы регулярно публикуем анонсы мероприятий и представляем новых пользователей в наших социальных сетях.
   invite:
-    header: 'Осталось {count} приглашений'
-    description: '{name} приглашает тебя получить бесплатное VIP-членство для быстрого нетворкинга и поиска мероприятий'
+    header: "Осталось {count} приглашений"
+    description: "{name} приглашает тебя получить бесплатное VIP-членство для быстрого нетворкинга и поиска мероприятий"
     action: Принять приглашение
   bookme: Забронировать
   contactme: Связаться со мной
@@ -186,14 +186,14 @@ profile:
   story:
     label: Описание
     before: Расскажи свою танц-историю. Также можно использовать [виджеты](https://wedance.vip/markdown), включая фотографии и видео
-    tips: ' Pitch yourself: Who are you? What do you offer? What do you want? Tips for effective pitch: - Uncomplicated: It should be catchy and roll off the tongue - Concise: It shouldn’t take more than a minute to say or read - Unique: It reflects your skills, goals, and desires - Storyline: It covers who you are, what you offer, and where you want to be - Appealing: Your elevator pitch is essentially a persuasive sales pitch; the emphasis should be on what you offer'
+    tips: " Pitch yourself: Who are you? What do you offer? What do you want? Tips for effective pitch: - Uncomplicated: It should be catchy and roll off the tongue - Concise: It shouldn’t take more than a minute to say or read - Unique: It reflects your skills, goals, and desires - Storyline: It covers who you are, what you offer, and where you want to be - Appealing: Your elevator pitch is essentially a persuasive sales pitch; the emphasis should be on what you offer"
     placeholder: Text (markdown)
   locales: Твои языки
   skills: Не танцевальные навыки
   days: Дни
   learning:
     label: Какие танцевальные темы тебя интересуют?
-    description: 'For example: Musicality in Salsa, Men Styling, etc.'
+    description: "For example: Musicality in Salsa, Men Styling, etc."
   teacher: Вы преподаете?
   partner: Вы ищете партнера для танцев?
   height: Ваш рост (см)
@@ -202,7 +202,7 @@ profile:
     description: Leave this field blank if you think it's irrelevant.
   partnerBio:
     label: Question
-    description: 'What is important in your partner? Put it as a question, for example: Do you love dogs?'
+    description: "What is important in your partner? Put it as a question, for example: Do you love dogs?"
   objectives: Цели
   objective:
     placeholder: Objective
@@ -227,10 +227,10 @@ profile:
     placeholder: Style
   permission:
     label: Do you want free promo?
-    description: 'Send us link to your event on [Telegram](https://t.me/+aRIIZcXpBhJkYmUy) and we will announce it on our Telegram, Instagram and Facebook.'
+    description: "Send us link to your event on [Telegram](https://t.me/+aRIIZcXpBhJkYmUy) and we will announce it on our Telegram, Instagram and Facebook."
   jobs:
     label: I can help with
-    description: 'How can you help our community? What are you good at? For example: design, programming, marketing, social media, etc.'
+    description: "How can you help our community? What are you good at? For example: design, programming, marketing, social media, etc."
   contacts: Do you use social media?
   email:
     label: Электронная почта
@@ -290,14 +290,14 @@ myprofile:
     description1: This is your profile. A square below is a poster – your visual introduction.
     description2: Your poster is also shown in {0} among other dancers.
     community: Сообщество
-    description3: 'Click {0} and add:'
+    description3: "Click {0} and add:"
   ambassador:
     description1: WeDance is represented by Ambassador in local dance communities. Volunteers help Ambassador with different initiatives to unite local dancers. WeDance is created and supported by volunteers. Get Involved, become volunteer!
     description2: Ambassador in {community} is
-    description3: 'Help us build a dance network in your city, follow and interact with our local social media accounts:'
+    description3: "Help us build a dance network in your city, follow and interact with our local social media accounts:"
   profile:
-    height: '{height}cm'
-    weight: '{weight}kg'
+    height: "{height}cm"
+    weight: "{weight}kg"
 TPostList:
   loadMore: Load more
 TPost:
@@ -326,7 +326,7 @@ conversation:
     submit: Send
   welcome: Start conversation with something nice.
   with: Chat with {username}
-  dateDiff: '{diff} ago'
+  dateDiff: "{diff} ago"
 cities:
   choose: Elige una ciudad
 settings:
@@ -362,7 +362,7 @@ account:
   newsletter:
     label: What kind of updated would you like to receive weekly?
     options:
-      party: 'Social/party events'
+      party: "Social/party events"
       class: Dance classes
       workshop: Workshops and bootcamps
       online: Online dance classes
@@ -463,7 +463,7 @@ event:
   description:
     label: Announcement
     placeholder: Unique Value Proposition
-    description: 'Use [widgets](https://wedance.vip/markdown), including images and videos'
+    description: "Use [widgets](https://wedance.vip/markdown), including images and videos"
     tips: "Pitch yourself: Who are you? What do you offer? What do you want?\n\nTips for effective pitch:\n- Uncomplicated: It should be catchy and roll off the tongue\n- Concise: It shouldn’t take more than a minute to say or read\n- Unique: It reflects your skills, goals, and desires\n- Storyline: It covers who you are, what you offer, and where you want to be\n- Appealing: Your elevator pitch is essentially a persuasive sales pitch; the emphasis should be on what you offer"
   startDate: When?
   endDate: End Date
@@ -506,10 +506,10 @@ event:
     description: Facebook event
   promo:
     label: Announce on social media?
-    description: 'Send us link to your event on [Telegram](https://t.me/+aRIIZcXpBhJkYmUy) and we will announce it on our Telegram, Instagram and Facebook.'
+    description: "Send us link to your event on [Telegram](https://t.me/+aRIIZcXpBhJkYmUy) and we will announce it on our Telegram, Instagram and Facebook."
   confirmation:
     label: Confirmation email for guests
-    placeholder: 'Example: Dear guest, you are confirmed to our event.'
+    placeholder: "Example: Dear guest, you are confirmed to our event."
 TInputProfile:
   changeRole: Change Role
   actions: Actions
@@ -541,29 +541,32 @@ EventDashboard:
 explore:
   nav:
     parties: Вечеринки
-    classes: Уроки
+    classes: Занятия
     groups: Группы
     tips: Гид
   parties:
     title: Вечеринки {style} в {city} | Танцевальный Календарь | WeDance
-    description: Исследуйте разнообразие танцевальных мероприятий {style}, проходящих в {city}. От вечеров {referenceStyle} до мастер-классов по бачате, найдите свое следующее танцевальное приключение здесь.
-    header: 'Вечеринки {style} в {city}'
-    subheader: Откройте для себя яркую танцевальную сцену {style} в {city}. Просматривайте подборку танцевальных вечеринок и фильтруйте по любимым стилям, таким как Сальса, Бачата, Кизомба и другие.
+    description: Исследуй разнообразие танцевальных событий {style} в {city}. От вечеринок {referenceStyle} до мастер-классов бачаты - найди свое следующее танцевальное приключение здесь.
+    header: "Вечеринки {style} в {city}"
+    subheader: Открой для себя яркую сцену танцев {style} в {city}. Просматривай кураторский список вечеринок и фильтруй по любимым стилям, таким как Сальса, Бачата, Кизомба и другие.
   classes:
-    title: Уроки Танцев {style} в {city} | Танцевальный Календарь | WeDance
-    description: Исследуйте разнообразие танцевальных мероприятий {style}, проходящих в {city}. От вечеров {referenceStyle} до мастер-классов по бачате, найдите свое следующее танцевальное приключение здесь.
-    header: 'Уроки Танцев {style} в {city}'
-    subheader: Откройте для себя яркую танцевальную сцену {style} в {city}. Просматривайте подборку танцевальных классов и фильтруйте по любимым стилям, таким как Сальса, Бачата, Кизомба и другие.
+    title: Занятия {style} в {city} | Танцевальный Календарь | WeDance
+    description: Исследуй разнообразие танцевальных событий {style} в {city}. От вечеринок {referenceStyle} до мастер-классов бачаты - найди свое следующее танцевальное приключение здесь.
+    header: "Занятия {style} в {city}"
+    subheader: Открой для себя яркую сцену танцев {style} в {city}. Просматривай кураторский список занятий и фильтруй по любимым стилям, таким как Сальса, Бачата, Кизомба и другие.
+  onlineclass:
+    header: "Онлайн-Занятия"
+    subheader: Не можешь прийти лично? Подними свои навыки танца {style} на новый уровень с нашими онлайн-занятиями.
   groups:
     title: Танцевальные Группы в {city} | WeDance
-    description: Откройте и свяжитесь с танцевальными инфлюенсерами и группами в {city}. Найдите сообщества в WhatsApp, Telegram, Instagram, Youtube, соответствующие вашему стилю, от Сальсы до Бачаты и Кизомбы. Взаимодействуйте с инфлюенсерами и присоединяйтесь к ярким танцевальным сетям в {city}.
+    description: Находи промоутеров и группы в {city}. Находи сообщества в WhatsApp, Telegram, Instagram, Youtube, от Сальсы до Бачаты до Кизомбы.
     header: Группы в {city}
-    subheader: Откройте и свяжитесь с танцевальными инфлюенсерами и группами в {city}. Найдите сообщества в WhatsApp, Telegram, Instagram, Youtube, соответствующие вашему стилю, от Сальсы до Бачаты и Кизомбы. Взаимодействуйте с инфлюенсерами и присоединяйтесь к ярким танцевальным сетям в {city}.
+    subheader: Находи промоутеров и группы в {city}. Находи сообщества в WhatsApp, Telegram, Instagram, Youtube, от Сальсы до Бачаты до Кизомбы.
   tips:
-    title: Спросите Танцоров в {city} | WeDance
-    description: Найдите рекомендации в реальном времени и получите местные сведения непосредственно от танцоров из {city}. Выберите предпочтительный стиль танца для индивидуальных советов или задайте вопрос сообществу для персонализированных рекомендаций. Ожидайте ответы обычно в течение 48 часов.
-    header: Спросите в {city}
-    subheader: Найдите рекомендации в реальном времени и получите местные сведения непосредственно от танцоров из {city}. Выберите предпочтительный стиль танца для индивидуальных советов или задайте вопрос сообществу для персонализированных рекомендаций. Ожидайте ответы обычно в течение 48 часов.
+    title: Спроси Танцоров в {city} | WeDance
+    description: Находи рекомендации в реальном времени и получай местные сведения напрямую от танцоров из {city}. Выбери предпочитаемый танцевальный стиль для целенаправленных советов или спроси сообщество для персонализированных рекомендаций. Ответы обычно приходят в течение 48 часов.
+    header: Спроси {city}
+    subheader: Находи рекомендации в реальном времени и получай местные сведения напрямую от танцоров из {city}. Выбери предпочитаемый танцевальный стиль для целенаправленных советов или спроси сообщество для персонализированных рекомендаций. Ответы обычно приходят в течение 48 часов.
 calendar:
   title: Танцевальный Календарь
   empty: События не найдены
@@ -598,16 +601,16 @@ teaser:
     description: чтобы другие могли связаться с вами
     btn: Присоединяйтесь бесплатно
   feed:
-    title: Ищете больше мероприятий?
-    description: Вместо поиска в нескольких чатах, задайте вопрос напрямую нашему местному танцевальному сообществу на сайте. Получите персонализированные рекомендации о мероприятиях в любом городе от местных танцоров.
-    btn: Спросите у Местных
+    title: Хочешь еще событий?
+    description: Вместо того чтобы копаться в куче чатов, задай вопрос нашему местному танцевальному сообществу на сайте. Получи персонализированные рекомендации о событиях в любом городе от местных танцоров.
+    btn: Спроси У Местных
 home:
   title: WeDance - Путешествуй. Знакомься. Танцуй.
   hero:
     header: Путешествуй. Знакомься. **Танцуй.**
     subheader: Лови бачату, сальсу, кизомбу и другие тусовки танцев рядом с тобой. Расширь свой круг танцевальных мероприятий - от вечеринок до занятий и фестивалей.
     action: Выбери свой город
-    bottom: '[Наша цель](/about) - объединить танцоров со всего света.'
+    bottom: "[Наша цель](/about) - объединить танцоров со всего света."
   features:
     explore:
       title: Вечеринки, Классы, Фесты
