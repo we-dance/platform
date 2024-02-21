@@ -3,12 +3,12 @@ import firebase from 'firebase/app'
 import 'firebase/firestore'
 
 export const app = {
-  name: 'Travel. Meet. Dance.',
+  name: 'WeDance',
   description: 'Discover dance events near you',
   social: {
     twitter: 'WeDancePlatform',
   },
-  url: process.env.URL || 'https://wedance.vip',
+  url: 'https://beta.wedance.vip',
   author: 'WeDance',
   cover: '/cover/wide.png',
 }
