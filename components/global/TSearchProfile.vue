@@ -20,17 +20,13 @@
         >
           {{ profile.name || profile.username }}
         </NuxtLink>
-        <template v-if="!hideRole">
-          <div v-if="profile.role" class="text-xs">
-            {{ getLabel(eventRoleOptions, profile.role) }}
-          </div>
-          <div v-else class="text-xs">
-            <span v-if="profile.gender === 'Male'">Leader</span>
-            <span v-else-if="profile.gender === 'Female'">Follower</span>
-            <span v-else>Unknown</span>
-          </div>
-        </template>
-        <TExpand>
+        <TExpand
+          :expanded="
+            !profile.bio ||
+              !profile.partnerBio ||
+              profile.bio.length + profile.partnerBio.length < 100
+          "
+        >
           <div v-show="profile.bio" class="text-gray-700 text-xs">
             <span class="font-bold">About me:</span> {{ profile.bio }}
           </div>
