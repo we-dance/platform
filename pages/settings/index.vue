@@ -5,7 +5,7 @@
       <THeader :title="$t('settings.title')" />
 
       <div class="p-4 space-y-4">
-        <div class="rounded bg-white shadow border p-4 bg-white">
+        <div class="rounded bg-white shadow border p-4">
           <div class="flex items-center">
             <div>
               <NuxtLink
@@ -35,7 +35,7 @@
               class="space-y-4"
               @save="saveAccount"
             />
-            <TButton :to="localePath('/settings?tab=password')" class="mt-4">{{
+            <TButton :to="localePath('/nopassword')" class="mt-4">{{
               $t('settings.account.changepassword')
             }}</TButton>
             <div class="bg-red-200 mt-4 -mb-4 -mx-4 p-4">
@@ -73,30 +73,8 @@
               </TPopup>
             </div>
           </div>
-          <div v-if="currentTab === 'password'" class="border-t mt-4 pt-4">
-            <TField v-model="password" v-bind="passwordField" />
-            <div class="flex justify-end mt-4">
-              <TButton @click="changePassword">{{ $t('form.save') }}</TButton>
-            </div>
-          </div>
-          <TPopup
-            v-if="passwordError"
-            :title="$t('settings.passwordError')"
-            @close="passwordError = ''"
-          >
-            <div class="py-4 max-w-md">{{ passwordError.message }}</div>
-            <div class="flex justify-end mb-4">
-              <TButton
-                v-if="passwordError.code === 'auth/requires-recent-login'"
-                type="primary"
-                :to="localePath('/signout?target=/signin')"
-                class="float-right mt-4"
-                >{{ $t('auth.signout') }}</TButton
-              >
-            </div>
-          </TPopup>
         </div>
-        <div class="rounded bg-white shadow border p-4 bg-white">
+        <div class="rounded bg-white shadow border p-4">
           <div class="flex items-center">
             <div>
               <NuxtLink
@@ -129,7 +107,7 @@
             @save="saveProfile"
           />
         </div>
-        <div class="rounded bg-white shadow border p-4 bg-white">
+        <div class="rounded bg-white shadow border p-4">
           <div class="flex items-center">
             <div>
               <NuxtLink :to="localePath('/settings/calendars')">
@@ -160,7 +138,6 @@ import { ref } from '@nuxtjs/composition-api'
 import { useAuth } from '~/use/auth'
 import { useProfiles } from '~/use/profiles'
 import { useAccounts } from '~/use/accounts'
-import { useRouter } from '~/use/router'
 import { db, track } from '~/plugins/firebase'
 import { useCities } from '~/use/cities'
 
@@ -181,7 +158,6 @@ export default {
       updateAccount,
       updateProfile,
       loading,
-      updatePassword,
       updateEmail,
       deleteAccount,
     } = useAuth()
@@ -191,23 +167,9 @@ export default {
     const { accountFields: allAccountFields } = useAccounts()
     const password = ref('')
     const passwordError = ref(false)
-    const { router } = useRouter()
 
     const accountFields = allAccountFields.filter((f) => f.name !== 'password')
     const passwordField = allAccountFields.find((f) => f.name === 'password')
-
-    const changePassword = async () => {
-      try {
-        await updatePassword(password.value)
-        router.push({
-          query: {
-            tab: 'account',
-          },
-        })
-      } catch (e) {
-        passwordError.value = e
-      }
-    }
 
     return {
       switchCity,
@@ -224,7 +186,6 @@ export default {
       profileFields,
       contactFields,
       password,
-      changePassword,
       passwordField,
       deleteAccount,
     }

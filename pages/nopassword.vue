@@ -65,7 +65,6 @@
 </template>
 
 <script>
-import ls from 'local-storage'
 import { track } from '~/plugins/firebase'
 import { useAuth } from '~/use/auth'
 
@@ -99,36 +98,7 @@ export default {
       profile,
     }
   },
-  watch: {
-    loading: {
-      handler(val) {
-        if (!val && this.profile) {
-          this.redirect()
-        }
-      },
-    },
-  },
-  mounted() {
-    const target = this.$route.query.target
-
-    if (target) {
-      ls('target', target)
-    }
-
-    if (this.uid) {
-      this.redirect()
-    }
-  },
   methods: {
-    redirect() {
-      let target = ls('target')
-
-      if (!target) {
-        target = '/'
-      }
-
-      this.$router.push(target)
-    },
     async submit(e) {
       e.preventDefault()
 
@@ -136,11 +106,9 @@ export default {
         return
       }
 
-      track('login', {
-        method: 'NoPassword',
-      })
+      track('reset-password')
 
-      if (await this.sendPasswordResetEmail(this.email)) {
+      if (await this.sendPasswordResetEmail(this.email.trim())) {
         this.emailSent = true
       }
     },
