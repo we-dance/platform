@@ -24,6 +24,10 @@ export default {
       type: Object,
       default: () => ({}),
     },
+    lowerCase: {
+      type: Boolean,
+      default: false,
+    },
   },
   computed: {
     internalValue: {
@@ -31,7 +35,13 @@ export default {
         return this.value
       },
       set(val) {
-        this.$emit('input', val.toLowerCase())
+        let newVal = val
+
+        if (this.lowerCase) {
+          newVal = (newVal || '').toLowerCase()
+        }
+
+        this.$emit('input', newVal)
       },
     },
   },
