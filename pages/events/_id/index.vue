@@ -497,6 +497,8 @@
             />
           </div>
         </div>
+
+        <t-breadcrumbs />
       </div>
 
       <div v-if="$route.query.view === 'comments'">
@@ -663,8 +665,10 @@ import {
 import { addressPart } from '~/use/google'
 import { trackView } from '~/use/tracking'
 import { useStyles } from '~/use/styles'
+import TBreadcrumbs from '~/components/TBreadcrumbs.vue'
 
 export default {
+  components: { TBreadcrumbs },
   name: 'EventView',
   layout: 'full',
   async asyncData(ctx) {
