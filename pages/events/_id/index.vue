@@ -20,7 +20,7 @@
           <div>·</div>
           <div>
             {{
-              getStyles(doc.styles, 0, false, 3)
+              getStyles(doc.styles)
                 .map((s) => s.name)
                 .join(' · ')
             }}
