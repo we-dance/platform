@@ -2,6 +2,7 @@
   <t-rich-select
     v-model="internalValue"
     clearable
+    hide-search-box
     :placeholder="placeholder"
     :fetch-options="findStyles"
   />
@@ -19,6 +20,14 @@ export default {
     const { profile } = useAuth()
 
     const findStyles = (q) => {
+      if (props.styles) {
+        return {
+          results: getStylesDropdown(props.styles).filter((i) =>
+            search(i.label, q)
+          ),
+        }
+      }
+
       if (props.mineOnly) {
         return {
           results: getStylesDropdown(profile.value?.styles).filter((i) =>
@@ -63,6 +72,10 @@ export default {
     placeholder: {
       type: String,
       default: '',
+    },
+    styles: {
+      type: Object,
+      default: null,
     },
   },
   data: () => ({

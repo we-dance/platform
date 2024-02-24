@@ -26,7 +26,7 @@ export const useAccounts = () => {
     {
       name: 'phone',
       label: t('account.phone'),
-      register: true,
+      register: false,
       required: true,
       event: true,
     },

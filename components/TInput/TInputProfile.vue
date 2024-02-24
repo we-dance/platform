@@ -121,7 +121,7 @@
   </div>
 </template>
 <script>
-import { computed, ref, watch } from '@nuxtjs/composition-api'
+import { computed, onMounted, ref, watch } from '@nuxtjs/composition-api'
 import { useAlgolia } from '~/use/algolia'
 import { useEvents } from '~/use/events'
 import { useDoc } from '~/use/doc'
@@ -154,7 +154,7 @@ export default {
     const { eventRoleOptions } = useEvents()
     const { create: createProfile } = useDoc('profiles')
 
-    if (typeof props.value === 'string') {
+    if (typeof props.value === 'string' && props.value) {
       emit('input', { username: props.value })
     }
 

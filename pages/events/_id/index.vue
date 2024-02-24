@@ -291,6 +291,12 @@
             current: !$route.query.view,
           },
           {
+            name: 'Program',
+            to: `/events/${doc.id}?view=program#tabs`,
+            current: $route.query.view === 'program',
+            hidden: doc.eventType !== 'Festival',
+          },
+          {
             name: 'Guests',
             to: `/events/${doc.id}?view=guests#tabs`,
             current: $route.query.view === 'guests',
@@ -389,14 +395,27 @@
           <img :src="doc.venue.map" alt="Venue Map" class="mt-4" />
         </div>
 
-        <TAgenda
-          v-if="doc.program && doc.program.length"
-          :events="doc.program"
-          class="w-full space-y-2 p-4"
-        />
+        <div v-if="can('edit', 'events', doc)" class="p-4 border-t">
+          <h3 class="text-xs uppercase font-bold px-2 py-4 text-gray-500">
+            {{ $t('event.artists') }}
+          </h3>
+
+          <TInputArray
+            v-model="data.artists"
+            :children="{ component: 'TInputProfile' }"
+          />
+
+          <div class="flex justify-end mt-4">
+            <TButton
+              type="primary"
+              label="Save"
+              @click="save('artists', data.artists)"
+            />
+          </div>
+        </div>
 
         <div
-          v-if="doc.artists && doc.artists.length"
+          v-else-if="doc.artists && doc.artists.length"
           class="space-y-2 p-4 border-t"
         >
           <h3 class="text-xs uppercase font-bold px-2 pt-4 text-gray-500">
@@ -498,6 +517,14 @@
           </div>
         </div>
       </div>
+
+      <TAgendaEditor
+        v-if="$route.query.view === 'program'"
+        v-model="data.agenda"
+        :editor="can('edit', 'events', doc)"
+        :parent="doc"
+        @save="save('agenda', data.agenda)"
+      />
 
       <div v-if="$route.query.view === 'comments'">
         <div v-if="!uid" class="flex justify-center p-4">
@@ -673,6 +700,7 @@ export default {
   data: () => ({
     comment: '',
     announcementPopupVisible: false,
+    data: {},
   }),
   computed: {
     guestCount() {
@@ -697,6 +725,8 @@ export default {
     item() {
       if (this.item && this.item.place) {
         this.doc = this.item
+        this.data = this.doc
+
         trackView('posts', this.item.id, this.item.viewsCount || 0)
       }
     },
@@ -710,7 +740,16 @@ export default {
     const { accountFields } = useAccounts()
     const { params, router } = useRouter()
     const { getProfile, getFullProfile } = useProfiles()
-    const { doc, sync, exists, loading, softUpdate, remove } = useDoc('posts')
+    const {
+      doc,
+      sync,
+      exists,
+      loading,
+      softUpdate,
+      update,
+      remove,
+      create,
+    } = useDoc('posts')
     const { find: findProfile } = useDoc('profiles')
     const { map } = useReactions()
     if (params.id) {
@@ -727,6 +766,23 @@ export default {
     const guests = ref({})
     const creator = ref({})
     const org = ref({})
+
+    async function save(field, value) {
+      if (field === 'agenda') {
+        for (const itemIndex in value.items) {
+          const item = value.items[itemIndex]
+
+          if (!item.id) {
+            const subEvent = await create(item)
+            value.items[itemIndex].id = subEvent.id
+          } else {
+            await update(item.id, item)
+          }
+        }
+      }
+
+      await update(doc.value.id, { [field]: value })
+    }
 
     async function getCachedProfile(username) {
       if (!profileCache[username]) {
@@ -804,6 +860,7 @@ export default {
     }
 
     return {
+      save,
       formatDate,
       deleteEvent,
       creator,

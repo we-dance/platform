@@ -8,7 +8,12 @@
     />
 
     <div id="events">
-      <TEventText2 v-for="event in events" :key="event.id" :item="event" />
+      <TEventText2
+        v-for="event in events"
+        :key="event.id"
+        :item="event"
+        show-date
+      />
     </div>
   </div>
 </template>
@@ -18,6 +23,7 @@ import { onMounted, ref } from '@nuxtjs/composition-api'
 import { until } from '@vueuse/core'
 import { useAuth } from '~/use/auth'
 import { db } from '~/plugins/firebase'
+import { sortBy } from '~/utils'
 
 export default {
   setup() {
@@ -27,7 +33,7 @@ export default {
     onMounted(async () => {
       await until(profile).not.toBeNull()
 
-      const result = []
+      let result = []
       for (const eventId of profile.value.bookmarks) {
         const doc = await db
           .collection('posts')
@@ -40,6 +46,7 @@ export default {
         })
       }
 
+      result = result.sort(sortBy('startDate'))
       events.value = result
     })
 

@@ -15,7 +15,7 @@
 export default {
   props: {
     value: {
-      type: [Array, String],
+      type: [Array, String, Object],
       default: () => [],
     },
     item: {
@@ -32,6 +32,10 @@ export default {
   }),
   watch: {
     value(val) {
+      if (typeof val === 'object') {
+        val = Object.values(val)
+      }
+
       const extra = [...val, {}]
 
       if (JSON.stringify(extra) === JSON.stringify(this.internalValue)) {

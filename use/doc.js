@@ -123,7 +123,6 @@ export const useDoc = (name) => {
     const result = await collection.doc(id).update(changes)
 
     state.saving = false
-    state.doc = { ...state.doc, ...data }
 
     return result
   }
@@ -171,11 +170,9 @@ export const useDoc = (name) => {
     const doc = await collection.add(docData)
 
     docData.id = doc.id
-    state.id = doc.id
     state.saving = false
-    state.doc = docData
 
-    return doc
+    return docData
   }
 
   const isCreator = computed(

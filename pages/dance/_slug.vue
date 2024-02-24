@@ -82,13 +82,15 @@
           </div>
         </dl>
 
-        <div v-if="page.description" class="mt-4 typo">
-          {{ page.description }}
-        </div>
+        <TPreview
+          v-if="page.description"
+          :content="page.description"
+          class="mt-4"
+        />
 
         <div v-if="page.history" class="mt-4 bg-gray-100 p-4 rounded">
           <h3 class="uppercase text-xs font-bold">History</h3>
-          <div v-if="page.history" class="typo">{{ page.history }}</div>
+          <TPreview v-if="page.history" :content="page.history" />
           <a
             v-if="page.source"
             target="_blank"

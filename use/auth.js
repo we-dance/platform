@@ -29,6 +29,10 @@ export const useAuth = () => {
   const { router, route } = useRouter()
 
   const isAdmin = (forceCheck = false) => {
+    if (route.query.as === 'guest') {
+      return false
+    }
+
     const permission = !!state.uid && !!state.account && !!state.account.admin
 
     if (forceCheck) {
@@ -138,6 +142,10 @@ export const useAuth = () => {
   }
 
   function can(action, collection, object) {
+    if (route.query.as === 'guest') {
+      return false
+    }
+
     if (!object || !object.createdBy) {
       return true
     }

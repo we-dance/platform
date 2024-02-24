@@ -255,7 +255,7 @@ export const useProfiles = () => {
     {
       name: 'place',
       label: t('profile.place.label'),
-      register: true,
+      register: false,
       poster: true,
       component: 'TInputPlace',
       before: t('profile.place.before'),

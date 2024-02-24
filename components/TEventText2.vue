@@ -33,6 +33,7 @@
           </template>
           <template v-if="item.venue"> · {{ item.venue.name }}</template>
           <template v-if="item.location">{{ item.location }}</template>
+          <template v-if="item.room"> · {{ item.room }}</template>
         </div>
       </div>
       <div
@@ -106,6 +107,10 @@ export default {
       default: false,
     },
     showDate: {
+      type: Boolean,
+      default: false,
+    },
+    showRoom: {
       type: Boolean,
       default: false,
     },

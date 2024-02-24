@@ -676,7 +676,10 @@ export const getEventMeta = (event) => {
         event?.org?.instagram,
       ].filter((n) => !!n),
     },
-    performer: event.artists?.map((artist) => ({
+  }
+
+  if (event.artists?.length) {
+    schema.performer = event.artists?.map((artist) => ({
       '@type': 'Person',
       image: artist?.photo,
       name: artist?.name,
@@ -687,7 +690,7 @@ export const getEventMeta = (event) => {
         artist?.facebook,
         artist?.instagram,
       ].filter((n) => !!n),
-    })),
+    }))
   }
 
   return {
