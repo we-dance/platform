@@ -401,7 +401,7 @@
           </h3>
 
           <TInputArray
-            v-model="data.artists"
+            v-model="artists"
             :children="{ component: 'TInputProfile' }"
           />
 
@@ -409,7 +409,7 @@
             <TButton
               type="primary"
               label="Save"
-              @click="save('artists', data.artists)"
+              @click="saveArtists(artists)"
             />
           </div>
         </div>
@@ -481,37 +481,12 @@
               class="rounded-full"
               :label="$t('eventView.dropdown.share')"
             />
-          </div>
-        </div>
 
-        <div class="border-t">
-          <div class="m-4 text-xs text-right gap-8">
-            <span
-              >Created by
-              <nuxt-link
-                class="underline text-primary"
-                :to="localePath(`/${creator.username}`)"
-                >{{ creator.name }}</nuxt-link
-              ></span
-            >
-            <span>at {{ getYmdHms(doc.createdAt, $i18n.locale) }}</span>
-          </div>
-          <div class="m-4 text-xs text-right gap-8">
-            <span>Updated at {{ getYmdHms(doc.updatedAt, $i18n.locale) }}</span>
-          </div>
-
-          <div v-if="doc.facebook" class="m-4 text-right text-xs gap-8">
-            <a :href="doc.facebook" class="text-gray-700 hover:underline"
-              >Facebook Event</a
-            >
-          </div>
-
-          <div class="m-4 text-right gap-8">
             <TCardActions
               :id="doc.id"
               collection="events"
               :item="doc"
-              type="link"
+              type="simple"
               icon=""
             />
           </div>
@@ -520,14 +495,14 @@
 
       <TAgendaEditor
         v-if="$route.query.view === 'program'"
-        v-model="data.agenda"
+        v-model="agenda"
         :editor="can('edit', 'events', doc)"
         :parent="doc"
-        @save="save('agenda', data.agenda)"
+        @save="saveAgenda(agenda)"
       />
 
-      <div v-if="$route.query.view === 'comments'">
-        <div v-if="!uid" class="flex justify-center p-4">
+      <div v-if="$route.query.view === 'comments'" class="p-4">
+        <div v-if="!uid" class="flex justify-center">
           <TButton
             type="link"
             allow-guests
@@ -536,64 +511,99 @@
           >
         </div>
 
-        <TCommentsInline v-else :item="doc" autoload class="px-4" />
+        <TCommentsInline v-else :item="doc" autoload />
+
+        <div class="mt-8">
+          <TAvatar photo name :uid="doc.updatedBy">
+            <span>•</span>
+            <div>{{ dateDiff(doc.updatedAt) }}</div>
+          </TAvatar>
+          <div class="mt-1 text-xs text-gray-700">Updated event</div>
+        </div>
+
+        <div class="mt-8">
+          <TAvatar photo name :uid="doc.createdBy">
+            <span>•</span>
+            <div>{{ dateDiff(doc.createdAt) }}</div>
+          </TAvatar>
+          <div v-if="doc.source" class="mt-1 text-xs text-gray-700">
+            Imported from <strong class="font-bold">{{ doc.source }}</strong
+            ><template v-if="doc.provider"
+              >, provided by
+              <strong class="font-bold">{{ doc.provider }}</strong></template
+            >.
+            <span v-if="doc.facebook"
+              >See
+              <a
+                :href="doc.facebook"
+                class="text-primary underline hover:no-underline"
+                >Facebook Event</a
+              >.</span
+            >
+          </div>
+          <div v-else class="mt-1 text-xs text-gray-700">
+            Created event
+          </div>
+        </div>
       </div>
 
-      <div
-        v-if="$route.query.view === 'guests' && doc.star && doc.star.usernames"
-        class="space-y-2 p-4"
-      >
+      <div v-if="$route.query.view === 'guests'" class="space-y-2 p-4">
         <h3 class="text-xl font-bold">{{ $t('event.guests') }}</h3>
-        <div
-          v-if="guests.followersCount || guests.leadersCount"
-          class="text-xs pt-0"
-        >
-          <span>{{
-            $tc('followersCount', guests.followersCount, {
-              count: guests.followersCount,
-            })
-          }}</span>
-          <span>·</span>
-          <span>{{
-            $tc('leadersCount', guests.leadersCount, {
-              count: guests.leadersCount,
-            })
-          }}</span>
-          <span>·</span>
-          <span v-if="can('edit', 'events', doc) && doc.checkin">
-            Present: {{ doc.checkin.count || 0 }}
-          </span>
-        </div>
-        <div v-if="!uid" class="flex justify-center p-4">
-          <TButton
-            type="link"
-            allow-guests
-            :to="localePath(`/signin?target=${$route.path}`)"
-            >{{ $t('event.guestsHidden') }}</TButton
-          >
-        </div>
-        <div v-else>
+        <div v-if="doc.star && doc.star.usernames">
           <div
-            v-for="username in doc.star.usernames"
-            :key="`guest-${username}`"
+            v-if="guests.followersCount || guests.leadersCount"
+            class="text-xs pt-0"
           >
-            <WProfile :username="username">
-              <div v-if="can('edit', 'events', doc)" slot="actions">
-                <TReaction
-                  :username="username"
-                  type="primary"
-                  toggled-class="bg-green-500 hover:bg-green-800"
-                  icon="PlusIcon"
-                  toggled-icon="CheckIcon"
-                  field="checkin"
-                  class="rounded-full"
-                  hide-count
-                  :item="doc"
-                />
-              </div>
-            </WProfile>
+            <span>{{
+              $tc('followersCount', guests.followersCount, {
+                count: guests.followersCount,
+              })
+            }}</span>
+            <span>·</span>
+            <span>{{
+              $tc('leadersCount', guests.leadersCount, {
+                count: guests.leadersCount,
+              })
+            }}</span>
+            <span>·</span>
+            <span v-if="can('edit', 'events', doc) && doc.checkin">
+              Present: {{ doc.checkin.count || 0 }}
+            </span>
           </div>
-          <div v-if="!doc.star.count">There are no other guests yet.</div>
+          <div v-if="!uid" class="flex justify-center p-4">
+            <TButton
+              type="link"
+              allow-guests
+              :to="localePath(`/signin?target=${$route.path}`)"
+              >{{ $t('event.guestsHidden') }}</TButton
+            >
+          </div>
+          <div v-else>
+            <div
+              v-for="username in doc.star.usernames"
+              :key="`guest-${username}`"
+            >
+              <WProfile :username="username">
+                <div v-if="can('edit', 'events', doc)" slot="actions">
+                  <TReaction
+                    :username="username"
+                    type="primary"
+                    toggled-class="bg-green-500 hover:bg-green-800"
+                    icon="PlusIcon"
+                    toggled-icon="CheckIcon"
+                    field="checkin"
+                    class="rounded-full"
+                    hide-count
+                    :item="doc"
+                  />
+                </div>
+              </WProfile>
+            </div>
+            <div v-if="!doc.star.count">There are no other guests yet.</div>
+          </div>
+        </div>
+        <div v-else class="text-xs text-center">
+          There are no guests yet
         </div>
       </div>
 
@@ -700,7 +710,8 @@ export default {
   data: () => ({
     comment: '',
     announcementPopupVisible: false,
-    data: {},
+    artists: [],
+    agenda: {},
   }),
   computed: {
     guestCount() {
@@ -725,7 +736,8 @@ export default {
     item() {
       if (this.item && this.item.place) {
         this.doc = this.item
-        this.data = this.doc
+        this.agenda = this.doc.agenda
+        this.artists = this.doc.artists
 
         trackView('posts', this.item.id, this.item.viewsCount || 0)
       }
@@ -767,21 +779,27 @@ export default {
     const creator = ref({})
     const org = ref({})
 
-    async function save(field, value) {
-      if (field === 'agenda') {
-        for (const itemIndex in value.items) {
-          const item = value.items[itemIndex]
+    async function saveAgenda(agenda) {
+      for (const itemIndex in agenda.items) {
+        const item = agenda.items[itemIndex]
 
-          if (!item.id) {
-            const subEvent = await create(item)
-            value.items[itemIndex].id = subEvent.id
-          } else {
-            await update(item.id, item)
-          }
+        if (!item.id) {
+          const subEvent = await create(item)
+          agenda.items[itemIndex].id = subEvent.id
+        } else {
+          await update(item.id, item)
         }
       }
 
-      await update(doc.value.id, { [field]: value })
+      await update(doc.value.id, { agenda })
+    }
+
+    async function saveArtists(artists) {
+      artists = (artists || []).filter((item) => item)
+
+      const artistsList = artists.map((a) => a.username).filter((item) => item)
+
+      await update(doc.value.id, { artists, artistsList })
     }
 
     async function getCachedProfile(username) {
@@ -860,7 +878,8 @@ export default {
     }
 
     return {
-      save,
+      saveAgenda,
+      saveArtists,
       formatDate,
       deleteEvent,
       creator,

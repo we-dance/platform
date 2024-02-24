@@ -135,12 +135,6 @@ export default {
     async saveItem(data) {
       data = pickBy(data, (v) => v !== undefined)
 
-      data.artists = (data.artists || []).filter((item) => item)
-
-      data.artistsList = data.artists
-        .map((a) => a.username)
-        .filter((item) => item)
-
       if (data.id) {
         track('update_event')
         await this.update(data.id, data)
