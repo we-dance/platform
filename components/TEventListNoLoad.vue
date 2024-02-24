@@ -32,7 +32,7 @@
         />
       </div>
     </TPopup>
-    <div class="flex justify-start items-center px-4">
+    <div v-if="!hideNav" class="flex justify-start items-center px-4">
       <TInputButtons v-model="tab" :options="tabs" />
       <div class="flex-grow"></div>
       <TButton type="nav" icon="share" @click="showPopup = true" />
@@ -72,6 +72,10 @@ import { useI18n } from '~/use/i18n'
 export default {
   name: 'TEventListNoLoad',
   props: {
+    hideNav: {
+      type: Boolean,
+      default: false,
+    },
     isEmbed: {
       type: Boolean,
       default: false,

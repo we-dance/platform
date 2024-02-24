@@ -23,13 +23,23 @@ const state = Vue.observable({
   marketing: null,
   error: null,
   showAuthPopup: false,
+  guest: false,
 })
 
 export const useAuth = () => {
   const { router, route } = useRouter()
 
+  function toggleGuest() {
+    state.guest = !state.guest
+    if (state.guest) {
+      alert(
+        'You are now browsing as a guest. Reload page to become editor again.'
+      )
+    }
+  }
+
   const isAdmin = (forceCheck = false) => {
-    if (route.query.as === 'guest') {
+    if (state.guest) {
       return false
     }
 
@@ -142,7 +152,7 @@ export const useAuth = () => {
   }
 
   function can(action, collection, object) {
-    if (route.query.as === 'guest') {
+    if (state.guest) {
       return false
     }
 
@@ -530,5 +540,6 @@ export const useAuth = () => {
     createUserWithEmailAndPassword,
     deleteAccount,
     sendPasswordResetEmail,
+    toggleGuest,
   }
 }

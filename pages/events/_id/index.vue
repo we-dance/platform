@@ -87,30 +87,39 @@
     </div>
 
     <div
-      class="sticky top-0 z-40 flex flex-wrap justify-center items-center gap-2 bg-white p-4 shadow"
+      class="top-0 z-40 flex flex-wrap justify-center items-center gap-2 bg-white p-4 shadow"
+      :class="can('edit', 'events', doc) ? '' : 'sticky'"
     >
-      <TReaction
+      <TButton
+        v-if="can('edit', 'events', doc)"
         type="primary"
-        toggled-class="bg-green-500 hover:bg-green-800"
-        :label="$t('event.attend')"
-        :toggled-label="$t('event.attending')"
-        icon="PlusIcon"
-        toggled-icon="CheckIcon"
-        field="star"
-        class="rounded-full"
-        hide-count
-        :item="doc"
+        label="Preview as guest"
+        @click="toggleGuest"
       />
-      <TEventBookmark
-        :event-id="doc.id"
-        show-label
-        type="secondary"
-        label="Bookmark"
-        toggled-label="Bookmarked"
-        size="4"
-      />
+      <template v-else>
+        <TReaction
+          type="primary"
+          toggled-class="bg-green-500 hover:bg-green-800"
+          :label="$t('event.attend')"
+          :toggled-label="$t('event.attending')"
+          icon="PlusIcon"
+          toggled-icon="CheckIcon"
+          field="star"
+          class="rounded-full"
+          hide-count
+          :item="doc"
+        />
+        <TEventBookmark
+          :event-id="doc.id"
+          show-label
+          type="secondary"
+          label="Bookmark"
+          toggled-label="Bookmarked"
+          size="4"
+        />
+      </template>
     </div>
-    <div v-if="isGoing" class="border-b bg-white p-4">
+    <div v-if="isGoing" class="border-b border-t bg-white p-4">
       <TPreview v-if="doc.confirmation" :content="doc.confirmation" />
 
       <div class="flex flex-col md:flex-row justify-center items-center gap-2">
@@ -143,7 +152,7 @@
     <div class="grid grid-cols-1">
       <div class="md:border-l">
         <div
-          v-if="$route.query.as !== 'guest' && can('edit', 'events', doc)"
+          v-if="can('edit', 'events', doc)"
           class="space-y-2 p-4 border-b bg-orange-100"
         >
           <h3 class="text-xs font-bold uppercase">Moderator Tools</h3>
@@ -175,12 +184,6 @@
               icon="delete"
               label="Delete"
               @click="deleteEvent(doc.id)"
-            />
-
-            <TButton
-              type="secondary"
-              :to="localePath(`/events/${doc.id}?as=guest`)"
-              label="Preview as guest"
             />
           </div>
           <div v-if="doc.promotion !== 'completed'" class="text-sm">
@@ -445,17 +448,17 @@
             :fallback="doc.org"
             hide-role
           />
-        </div>
 
-        <div v-if="doc.venueProfile" class="border-b">
-          <h3 class="text-xs uppercase font-bold px-2 pt-4 text-gray-500">
-            Venue
-          </h3>
-          <WProfile
-            :username="doc.venueProfile.username"
-            :fallback="doc.venueProfile"
-            hide-role
-          />
+          <div v-if="doc.venueProfile">
+            <h3 class="text-xs uppercase font-bold px-2 pt-4 text-gray-500">
+              Venue
+            </h3>
+            <WProfile
+              :username="doc.venueProfile.username"
+              :fallback="doc.venueProfile"
+              hide-role
+            />
+          </div>
         </div>
 
         <div class="space-y-2 p-4 border-t">
@@ -747,7 +750,7 @@ export default {
     return getEventMeta(this.doc)
   },
   setup() {
-    const { uid, can, account, username, isAdmin } = useAuth()
+    const { uid, can, account, username, isAdmin, toggleGuest } = useAuth()
     const { getEventIcon, getEventTypeLabel } = useEvents()
     const { accountFields } = useAccounts()
     const { params, router } = useRouter()
@@ -878,6 +881,7 @@ export default {
     }
 
     return {
+      toggleGuest,
       saveAgenda,
       saveArtists,
       formatDate,

@@ -95,12 +95,12 @@
         :place="currentCity"
       />
       <TStories
-        v-if="!$route.query.view"
+        v-if="$route.query.view === 'stories'"
         :created-by="profile.id"
         class="w-full"
       />
       <TEventListNoLoad
-        v-if="$route.query.view === 'events'"
+        v-if="!$route.query.view"
         :community="profile.username"
         :username="profile.username"
         :docs="events"
@@ -167,14 +167,14 @@ export default {
 
     const tabs = computed(() => [
       {
-        name: 'Stories',
+        name: 'Events',
         to: `/${props.profile.username}`,
         current: !view.value,
       },
       {
-        name: 'Events',
-        to: `/${props.profile.username}?view=events#tabs`,
-        current: view.value === 'events',
+        name: 'Stories',
+        to: `/${props.profile.username}?view=stories#tabs`,
+        current: view.value === 'stories',
       },
       {
         name: 'Reviews',
