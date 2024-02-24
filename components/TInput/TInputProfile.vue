@@ -121,7 +121,7 @@
   </div>
 </template>
 <script>
-import { computed, onMounted, ref, watch } from '@nuxtjs/composition-api'
+import { computed, ref, watch } from '@nuxtjs/composition-api'
 import { useAlgolia } from '~/use/algolia'
 import { useEvents } from '~/use/events'
 import { useDoc } from '~/use/doc'

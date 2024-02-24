@@ -116,10 +116,7 @@
                         })
                     "
                   >
-                    <template
-                      slot="label"
-                      slot-scope="{ className, option, query }"
-                    >
+                    <template slot="label" slot-scope="{ className, option }">
                       <div class="flex">
                         <span class="flex-shrink-0">
                           <img
