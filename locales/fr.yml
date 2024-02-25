@@ -541,10 +541,25 @@ EventDashboard:
   notPaid: Didn't Pay
 explore:
   nav:
+    festivals: Festivals
+    online: En Ligne
+    experts: Demande aux Experts
     parties: Soirées
     classes: Cours
     groups: Groupes
     tips: Guide Local
+  dance:
+    title: Liste des Styles de Danse | WeDance
+    description: Découvre l'histoire, la culture et les styles de danse du monde entier. Parcours une liste sélectionnée de styles de danse.
+    keywords: styles de danse, genres de danse, histoire de la danse, culture de la danse
+    header: Styles de Danse
+    subheader: Découvre l'histoire, la culture et les styles de danse du monde entier. Parcours une liste sélectionnée de styles de danse.
+  global:
+    title: 'Festivals de Danse {style} dans le Monde Entier | Calendrier de Danse | WeDance'
+    description: 'Calendrier de Danse {style} pour les Voyageurs. Planifie tes vacances et week-ends pour danser la Salsa, la Bachata, le Kizomba, le Zouk et 130 autres danses autour du monde.'
+    keywords: 'festivals de danse {style}, congrès de danse {style}, vacances de danse {style}, week-ends de danse {style}, voyages de danse {style}, voyage de danse {style}'
+    header: 'Festivals {style} dans le Monde Entier'
+    subheader: 'Calendrier de Danse {style} pour les Voyageurs. Planifie tes vacances et week-ends pour danser la Salsa, la Bachata, le Kizomba, le Zouk et 130 autres danses autour du monde.'
   parties:
     title: Soirées de danse {style} à {city} | Calendrier de danse | WeDance
     description: Découvre une variété d'événements de danse {style} à {city}. Des soirées {referenceStyle} aux ateliers de bachata, trouve ta prochaine aventure de danse ici.
@@ -556,7 +571,10 @@ explore:
     header: 'Cours {style} à {city}'
     subheader: Découvre la scène de danse {style} dynamique à {city}. Parcours une liste sélectionnée de cours de danse et filtre par tes styles préférés comme la Salsa, la Bachata, la Kizomba, et plus.
   onlineclass:
-    header: 'Cours en ligne'
+    title: 'Cours de Danse {style} en Ligne | Calendrier de Danse | WeDance'
+    description: Tu ne peux pas être là en personne ? Améliore tes pas de danse {style} avec notre sélection de cours en ligne.
+    keywords: 'cours de danse {style} en ligne, cours de danse en ligne, ateliers de danse en ligne, bootcamps de danse en ligne, leçons de danse en ligne'
+    header: 'Cours {style} en Ligne'
     subheader: Tu ne peux pas être là en personne ? Améliore tes pas de danse {style} avec notre sélection de cours en ligne.
   groups:
     title: Groupes de danse à {city} | WeDance

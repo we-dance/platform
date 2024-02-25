@@ -586,10 +586,25 @@ home:
     Suona incredibile, vero? Esplora WeDance oggi!"
 explore:
   nav:
+    festivals: Festival
+    online: Online
+    experts: Chiedi agli Esperti
     parties: Feste
     classes: Lezioni
     groups: Gruppi
     tips: Guida Locale
+  dance:
+    title: Elenco degli Stili di Ballo | WeDance
+    description: Scopri la storia, la cultura e gli stili di ballo di tutto il mondo. Sfoglia una lista curata di stili di ballo.
+    keywords: stili di ballo, generi di ballo, storia del ballo, cultura del ballo
+    header: Stili di Ballo
+    subheader: Scopri la storia, la cultura e gli stili di ballo di tutto il mondo. Sfoglia una lista curata di stili di ballo.
+  global:
+    title: 'Festival di Ballo {style} in Tutto il Mondo | Calendario Danza | WeDance'
+    description: 'Calendario di Ballo {style} per Viaggiatori. Pianifica le tue vacanze e i tuoi weekend per ballare Salsa, Bachata, Kizomba, Zouk e altri 130 balli in tutto il mondo.'
+    keywords: 'festival di ballo {style}, congressi di ballo {style}, vacanze di ballo {style}, weekend di ballo {style}, viaggi di ballo {style}, viaggi di ballo {style}'
+    header: 'Festival {style} in Tutto il Mondo'
+    subheader: 'Calendario di Ballo {style} per Viaggiatori. Pianifica le tue vacanze e i tuoi weekend per ballare Salsa, Bachata, Kizomba, Zouk e altri 130 balli in tutto il mondo.'
   parties:
     title: Feste di Ballo {style} a {city} | Calendario Danza | WeDance
     description: Esplora una varietà di eventi di ballo {style} a {city}. Dalle serate {referenceStyle} ai workshop di bachata, trova la tua prossima avventura di ballo qui.
@@ -601,7 +616,10 @@ explore:
     header: 'Lezioni di {style} a {city}'
     subheader: Scopri la scena di ballo {style} vibrante a {city}. Sfoglia una lista curata di lezioni di ballo e filtra per i tuoi stili preferiti come Salsa, Bachata, Kizomba e altro.
   onlineclass:
-    header: 'Lezioni Online'
+    title: 'Lezioni di Ballo {style} Online | Calendario Danza | WeDance'
+    description: Non riesci a partecipare di persona? Porta i tuoi movimenti {style} al livello successivo con la nostra selezione di lezioni online.
+    keywords: 'lezioni di ballo {style} online, corsi di ballo online, workshop di ballo online, bootcamp di ballo online, lezioni di ballo online'
+    header: 'Lezioni Online di Ballo {style}'
     subheader: Non riesci a partecipare di persona? Porta i tuoi movimenti {style} al livello successivo con la nostra selezione di lezioni online.
   groups:
     title: Gruppi di Ballo a {city} | WeDance

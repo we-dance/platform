@@ -226,15 +226,64 @@ export default {
     }
   },
   head() {
+    const city = this.city.name.replace(',', '')
+
+    const title = this.$t(`explore.groups.title`, { city })
+    const description = this.$t(`explore.groups.description`, { city })
+    const keywords = this.$t(`explore.groups.keywords`, { city })
+
+    const schema = {
+      '@context': 'https://schema.org',
+      '@type': 'WebPage',
+      name: title,
+      description,
+      url: `https://wedance.vip/explore/${profile.username}`,
+      isPartOf: {
+        '@type': 'WebSite',
+        name: 'WeDance',
+        url: 'https://wedance.vip',
+      },
+    }
+
     return {
-      title: this.$t('explore.groups.title', { city: this.city.name }),
+      title,
       meta: [
         {
           hid: 'description',
           name: 'description',
-          content: this.$t('explore.groups.description', {
-            city: this.city.name,
-          }),
+          content: description,
+        },
+        {
+          hid: 'keywords',
+          name: 'keywords',
+          content: keywords,
+        },
+        {
+          hid: 'og:title',
+          property: 'og:title',
+          content: title,
+        },
+        {
+          hid: 'og:type',
+          property: 'og:type',
+          content: 'website',
+        },
+        {
+          hid: 'og:description',
+          property: 'og:description',
+          content: description,
+        },
+        {
+          hid: 'og:image',
+          property: 'og:image',
+          content: this.city.photo,
+        },
+      ],
+      script: [
+        {
+          hid: 'schema',
+          type: 'application/ld+json',
+          json: schema,
         },
       ],
     }

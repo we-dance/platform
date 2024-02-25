@@ -65,5 +65,69 @@ export default {
       profile,
     }
   },
+  head() {
+    const profile = this.profile
+    const style = this.$route.query.style || ''
+
+    const title = this.$t(`explore.onlineclass.title`, { style })
+    const description = this.$t(`explore.onlineclass.description`, { style })
+    const keywords = this.$t(`explore.onlineclass.keywords`, { style })
+
+    const schema = {
+      '@context': 'https://schema.org',
+      '@type': 'WebPage',
+      name: title,
+      description,
+      url: `https://wedance.vip/explore/global/classes`,
+      isPartOf: {
+        '@type': 'WebSite',
+        name: 'WeDance',
+        url: 'https://wedance.vip',
+      },
+    }
+
+    return {
+      title,
+      meta: [
+        {
+          hid: 'description',
+          name: 'description',
+          content: description,
+        },
+        {
+          hid: 'keywords',
+          name: 'keywords',
+          content: keywords,
+        },
+        {
+          hid: 'og:title',
+          property: 'og:title',
+          content: title,
+        },
+        {
+          hid: 'og:type',
+          property: 'og:type',
+          content: 'website',
+        },
+        {
+          hid: 'og:description',
+          property: 'og:description',
+          content: description,
+        },
+        {
+          hid: 'og:image',
+          property: 'og:image',
+          content: profile.photo,
+        },
+      ],
+      script: [
+        {
+          hid: 'schema',
+          type: 'application/ld+json',
+          json: schema,
+        },
+      ],
+    }
+  },
 }
 </script>

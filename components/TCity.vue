@@ -95,7 +95,7 @@ export default {
       style,
       referenceStyle: style || 'Salsa',
     })
-    const keywords = `Where can I dance ${style} in ${cityName}, ${cityName} ${style} Dance Events, ${style} Dance Classes in ${cityName}, ${cityName} ${style} Dance Workshops, ${cityName} ${style} Dance Parties, ${cityName} ${style} Dance Calendar, ${style} Dance Studios ${cityName}, ${style} ${cityName} Dance Community, Popular ${style} Dance Styles ${cityName}`
+    const keywords = this.$t(`explore.${view}.keywords`, { city, style })
 
     const schema = {
       '@context': 'https://schema.org',

@@ -4,12 +4,11 @@
 
     <div class="p-4 border-b">
       <h1 class="text-2xl font-bold">
-        Dance Styles
+        {{ $t('explore.dance.header') }}
       </h1>
 
       <div class="text-sm">
-        Discover history, culture, and dance styles from around the world.
-        Browse through a curated list of dance styles.
+        {{ $t('explore.dance.subheader') }}
       </div>
     </div>
 
@@ -98,6 +97,62 @@ export default {
 
       this.$emit('input', newValue)
     },
+  },
+  head() {
+    const title = this.$t(`explore.dance.title`)
+    const description = this.$t(`explore.dance.description`)
+    const keywords = this.$t(`explore.dance.keywords`)
+
+    const schema = {
+      '@context': 'https://schema.org',
+      '@type': 'WebPage',
+      name: title,
+      description,
+      url: `https://wedance.vip/explore/global/classes`,
+      isPartOf: {
+        '@type': 'WebSite',
+        name: 'WeDance',
+        url: 'https://wedance.vip',
+      },
+    }
+
+    return {
+      title,
+      meta: [
+        {
+          hid: 'description',
+          name: 'description',
+          content: description,
+        },
+        {
+          hid: 'keywords',
+          name: 'keywords',
+          content: keywords,
+        },
+        {
+          hid: 'og:title',
+          property: 'og:title',
+          content: title,
+        },
+        {
+          hid: 'og:type',
+          property: 'og:type',
+          content: 'website',
+        },
+        {
+          hid: 'og:description',
+          property: 'og:description',
+          content: description,
+        },
+      ],
+      script: [
+        {
+          hid: 'schema',
+          type: 'application/ld+json',
+          json: schema,
+        },
+      ],
+    }
   },
 }
 </script>

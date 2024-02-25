@@ -535,10 +535,25 @@ EventDashboard:
   notPaid: Didn't Pay
 explore:
   nav:
+    festivals: Festivales
+    online: Online
+    experts: Preguntar a Expertos
     parties: Fiestas
     classes: Clases
     groups: Grupos
     tips: Guía Local
+  dance:
+    title: Lista de Estilos de Baile | WeDance
+    description: Descubre la historia, cultura y estilos de baile de todo el mundo. Navega a través de una lista curada de estilos de baile.
+    keywords: estilos de baile, géneros de baile, historia del baile, cultura del baile
+    header: Estilos de Baile
+    subheader: Descubre la historia, cultura y estilos de baile de todo el mundo. Navega a través de una lista curada de estilos de baile.
+  global:
+    title: 'Festivales de Baile {style} en Todo el Mundo | Calendario de Baile | WeDance'
+    description: 'Calendario de Baile {style} para Viajeros. Planea tus vacaciones y fines de semana para bailar Salsa, Bachata, Kizomba, Zouk y otros 130 bailes en diferentes partes del mundo.'
+    keywords: 'festivales de baile {style}, congresos de baile {style}, vacaciones de baile {style}, fines de semana de baile {style}, viajes de baile {style}, viajar para bailar {style}'
+    header: 'Festivales de {style} en Todo el Mundo'
+    subheader: 'Calendario de Baile {style} para Viajeros. Planea tus vacaciones y fines de semana para bailar Salsa, Bachata, Kizomba, Zouk y otros 130 bailes en diferentes partes del mundo.'
   parties:
     title: Fiestas de Baile {style} en {city} | Calendario de Baile | WeDance
     description: Explora una variedad de eventos de baile {style} que ocurren en {city}. Desde noches de {referenceStyle} hasta talleres de bachata, encuentra tu próxima aventura de baile aquí.
@@ -549,6 +564,12 @@ explore:
     description: Explora una variedad de eventos de baile {style} que ocurren en {city}. Desde noches de {referenceStyle} hasta talleres de bachata, encuentra tu próxima aventura de baile aquí.
     header: 'Clases {style} en {city}'
     subheader: Descubre la vibrante escena de baile {style} en {city}. Navega a través de una lista curada de clases de baile y filtra por tus estilos favoritos como Salsa, Bachata, Kizomba y más.
+  onlineclass:
+    title: 'Clases de Baile {style} Online | Calendario de Baile | WeDance'
+    description: ¿No puedes asistir en persona? Lleva tus movimientos de {style} al siguiente nivel con nuestra selección de clases online.
+    keywords: 'clases de baile {style} online, cursos de baile online, talleres de baile online, bootcamps de baile online, lecciones de baile online'
+    header: 'Clases Online de Baile {style}'
+    subheader: ¿No puedes asistir en persona? Lleva tus movimientos de {style} al siguiente nivel con nuestra selección de clases online.
   groups:
     title: Grupos de Baile en {city} | WeDance
     description: Descubre y conecta con influencers y grupos de baile en {city}. Encuentra comunidades en WhatsApp, Telegram, Instagram, Youtube adaptadas a tu estilo, desde Salsa hasta Bachata y Kizomba. Interactúa con influencers y únete a vibrantes redes de baile en {city}.
@@ -580,7 +601,7 @@ nav:
   events: Eventos
   festivals: Festivales
   partner: Encontrar Pareja
-  wiki: Wiki
+  dance: Estilos de Baile
   contribute: Contribuir
   addEvent: Evento
   addReview: Consejo
@@ -621,7 +642,7 @@ home:
     countries: países
     profiles: perfiles
     events: eventos
-  founder: "**El Problema**
+  founder: '**El Problema**
 
 
     Soy un fanático del baile, siempre conectado con la escena local a través de innumerables grupos de WhatsApp. Los nuevos bailarines a menudo me preguntan sobre las próximas fiestas, y se volvió abrumador llevar un registro de todo.
@@ -640,4 +661,4 @@ home:
     - **¿Amigos curiosos sobre tus planes de baile?** Solo envíales tu perfil de WeDance y déjalos elegir sus eventos favoritos para unirse a ti.
 
 
-    ¿Suena increíble, verdad? ¡Explora WeDance hoy!"
+    ¿Suena increíble, verdad? ¡Explora WeDance hoy!'

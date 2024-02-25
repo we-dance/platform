@@ -2,11 +2,10 @@
   <div>
     <div class="p-4">
       <h1 class="text-2xl font-bold">
-        Dance Festivals Worldwide
+        {{ $t('explore.global.header', { style: $route.query.style }) }}
       </h1>
       <div class="text-sm">
-        Dance Calendar for Travelers. Plan your holidays and weekends to dance
-        Salsa, Bachata, Kizomba, Zouk and 130 other dances around the world.
+        {{ $t('explore.global.subheader', { style: $route.query.style }) }}
       </div>
       <TProfileStats :profile="profile" />
     </div>
@@ -83,8 +82,6 @@
 </template>
 
 <script>
-import { getProfileMeta } from '~/utils'
-
 export default {
   props: {
     profile: {
@@ -93,7 +90,68 @@ export default {
     },
   },
   head() {
-    return getProfileMeta(this.profile)
+    const profile = this.profile
+    const style = this.$route.query.style || ''
+
+    const title = this.$t(`explore.global.title`, { style })
+    const description = this.$t(`explore.global.description`, { style })
+    const keywords = this.$t(`explore.global.keywords`, { style })
+
+    const schema = {
+      '@context': 'https://schema.org',
+      '@type': 'WebPage',
+      name: title,
+      description,
+      url: `https://wedance.vip/explore/global`,
+      isPartOf: {
+        '@type': 'WebSite',
+        name: 'WeDance',
+        url: 'https://wedance.vip',
+      },
+    }
+
+    return {
+      title,
+      meta: [
+        {
+          hid: 'description',
+          name: 'description',
+          content: description,
+        },
+        {
+          hid: 'keywords',
+          name: 'keywords',
+          content: keywords,
+        },
+        {
+          hid: 'og:title',
+          property: 'og:title',
+          content: title,
+        },
+        {
+          hid: 'og:type',
+          property: 'og:type',
+          content: 'website',
+        },
+        {
+          hid: 'og:description',
+          property: 'og:description',
+          content: description,
+        },
+        {
+          hid: 'og:image',
+          property: 'og:image',
+          content: profile.photo,
+        },
+      ],
+      script: [
+        {
+          hid: 'schema',
+          type: 'application/ld+json',
+          json: schema,
+        },
+      ],
+    }
   },
 }
 </script>
