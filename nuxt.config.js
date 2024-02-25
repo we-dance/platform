@@ -239,6 +239,7 @@ export default {
       '/demo/**',
       '/admin/**',
     ],
+
     routes: async () => {
       const db = sitemapApp.firestore()
 
@@ -281,11 +282,35 @@ export default {
         'desc'
       )
 
-      for (const city of cities) {
+      for (const profile of cities) {
+        let city = profile.username
+
+        if (city === 'Travel') {
+          city = 'global'
+        }
+
         routes.push({
-          url: `/explore/${city.username}`,
+          url: `/explore/${city}`,
           changefreq: 'daily',
           priority: 1,
+        })
+
+        routes.push({
+          url: `/explore/${city}/classes`,
+          changefreq: 'daily',
+          priority: 0.7,
+        })
+
+        routes.push({
+          url: `/explore/${city}/groups`,
+          changefreq: 'daily',
+          priority: 0.7,
+        })
+
+        routes.push({
+          url: `/explore/${city}/tips`,
+          changefreq: 'daily',
+          priority: 0.7,
         })
 
         for (const style of [
@@ -296,7 +321,7 @@ export default {
           'Afrobeats',
         ]) {
           routes.push({
-            url: `/explore/${city.username}?style=${style}`,
+            url: `/explore/${city}?style=${style}`,
             changefreq: 'daily',
             priority: 0.7,
           })
