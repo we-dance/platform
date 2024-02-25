@@ -110,6 +110,23 @@ export default {
       },
     }
 
+    const breadcrumbs = [
+      { name: 'Home', url: 'https://wedance.vip/' },
+      { name: 'Explore', url: 'https://wedance.vip/explore/' },
+      { name: city, url: `https://wedance.vip/explore/${profile.username}` },
+    ]
+
+    const breadcrumbSchema = {
+      '@context': 'https://schema.org',
+      '@type': 'BreadcrumbList',
+      itemListElement: breadcrumbs.map((crumb, index) => ({
+        '@type': 'ListItem',
+        position: index + 1,
+        name: crumb.name,
+        item: crumb.url,
+      })),
+    }
+
     return {
       title,
       meta: [
@@ -149,6 +166,11 @@ export default {
           hid: 'schema',
           type: 'application/ld+json',
           json: schema,
+        },
+        {
+          hid: 'breadcrumbs',
+          type: 'application/ld+json',
+          json: breadcrumbSchema,
         },
       ],
     }

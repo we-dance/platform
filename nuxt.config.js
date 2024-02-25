@@ -31,17 +31,17 @@ if (!firebase.apps.some((app) => app.name === 'sitemap')) {
 }
 
 const locales = [
-  { code: 'en', name: 'English', file: 'en.yml' },
-  { code: 'es', name: 'Español', file: 'es.yml' },
-  { code: 'de', name: 'Deutsch', file: 'de.yml' },
-  { code: 'fr', name: 'Français', file: 'fr.yml' },
-  { code: 'it', name: 'Italiano', file: 'it.yml' },
-  { code: 'pl', name: 'Polski', file: 'pl.yml' },
-  { code: 'pt', name: 'Português', file: 'pt.yml' },
-  { code: 'ro', name: 'Română', file: 'ro.yml' },
-  { code: 'tr', name: 'Türkçe', file: 'tr.yml' },
-  { code: 'ru', name: 'Русский', file: 'ru.yml' },
-  { code: 'sr', name: 'Српски', file: 'sr.yml' },
+  { code: 'en', iso: 'en-US', name: 'English', file: 'en.yml' },
+  { code: 'es', iso: 'es-ES', name: 'Español', file: 'es.yml' },
+  { code: 'de', iso: 'de-DE', name: 'Deutsch', file: 'de.yml' },
+  { code: 'fr', iso: 'fr-FR', name: 'Français', file: 'fr.yml' },
+  { code: 'it', iso: 'it-IT', name: 'Italiano', file: 'it.yml' },
+  { code: 'pl', iso: 'pl-PL', name: 'Polski', file: 'pl.yml' },
+  { code: 'pt', iso: 'pt-PT', name: 'Português', file: 'pt.yml' }, // Portugal
+  { code: 'ro', iso: 'ro-RO', name: 'Română', file: 'ro.yml' },
+  { code: 'tr', iso: 'tr-TR', name: 'Türkçe', file: 'tr.yml' },
+  { code: 'ru', iso: 'ru-RU', name: 'Русский', file: 'ru.yml' },
+  { code: 'sr', iso: 'sr-RS', name: 'Српски', file: 'sr.yml' }, // Serbia
 ]
 
 if (process.env.DEBUG_I18N) {
@@ -308,6 +308,7 @@ export default {
     i18n: true,
   },
   i18n: {
+    seo: true,
     locales,
     defaultLocale: 'en',
     strategy: 'prefix_except_default',

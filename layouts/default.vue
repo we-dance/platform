@@ -181,11 +181,7 @@ export default {
     },
   },
   head() {
-    return {
-      htmlAttrs: {
-        lang: this.$i18n.locale,
-      },
-    }
+    return this.$nuxtI18nSeo()
   },
   setup() {
     const {
