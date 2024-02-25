@@ -777,6 +777,9 @@ explore:
     classes: Classes
     groups: Groups
     tips: Ask Locals
+  blog:
+    header: Dance Blog
+    subheader: Explore more about your favorite dance styles
   dance:
     title: List of Dance Styles | WeDance
     description: Discover history, culture, and dance styles from around the world. Browse through a curated list of dance styles.

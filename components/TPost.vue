@@ -16,6 +16,13 @@
             <span>•</span>
             <div>
               <NuxtLink
+                v-if="item.type === 'post'"
+                :to="localePath(`/posts/${item.id}`)"
+                class="hover:underline"
+                >{{ dateDiff(item.createdAt) }}</NuxtLink
+              >
+              <NuxtLink
+                v-else
                 :to="localePath(`/stories/${item.id}`)"
                 class="hover:underline"
                 >{{ dateDiff(item.createdAt) }}</NuxtLink
@@ -50,7 +57,14 @@
         class="-mr-4"
       >
         <TButton
-          v-if="can('edit', 'posts', item) && item.type !== 'event'"
+          v-if="can('edit', 'posts', item) && item.type === 'post'"
+          type="context"
+          icon="edit"
+          :to="localePath(`/posts/${item.id}/edit`)"
+          :label="$t('post.edit')"
+        />
+        <TButton
+          v-else-if="can('edit', 'posts', item) && item.type !== 'event'"
           type="context"
           icon="edit"
           :to="localePath(`/stories/${item.id}/edit`)"
@@ -142,10 +156,9 @@
         />
 
         <TCardPoll v-else-if="item.type === 'poll'" :node="item" />
-
-        <TCardLink v-else-if="item.url" :url="item.url" :show="show" />
       </div>
     </div>
+    <t-link-preview v-if="item.url" :url="item.url" class="m-4 mt-0" />
     <t-link-preview v-if="item.link" :url="item.link" class="m-4 mt-0" />
     <t-venue-preview v-if="item.venue" :venue="item.venue" class="m-4 mt-0" />
     <div class="flex flex-wrap gap-2 px-4 items-center">
@@ -168,7 +181,13 @@
         :label="repliesCount ? `${repliesCount} replies` : 'Reply'"
       />
       <TButton
-        v-if="item.title && !expanded"
+        v-if="item.type === 'post'"
+        :to="localePath(`/posts/${item.id}`)"
+        type="primary"
+        label="Read more"
+      />
+      <TButton
+        v-else-if="item.title && !expanded"
         :to="localePath(`/stories/${item.id}`)"
         type="primary"
         label="Read more"

@@ -1,9 +1,12 @@
 <template>
   <div class="flex items-center space-x-1">
     <div v-if="photo">
-      <NuxtLink :to="localePath(`/${profile.username}`)">
+      <component
+        :is="profile.username ? 'NuxtLink' : 'div'"
+        :to="localePath(`/${profile.username}`)"
+      >
         <TProfilePhoto :uid="uid" :size="size" />
-      </NuxtLink>
+      </component>
     </div>
     <div v-if="name">
       <NuxtLink

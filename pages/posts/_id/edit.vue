@@ -54,7 +54,7 @@ export default {
   },
   methods: {
     cancelItem() {
-      this.$router.push(`/events`)
+      this.$router.go(-1)
     },
     async saveItem(data) {
       if (data.id) {

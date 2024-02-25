@@ -6,7 +6,7 @@
         <TPost :item="item" />
       </div>
       <div class="mt-4 p-4 flex justify-center items-center">
-        <TButton @click="loadMore">{{ $t('TPostList.loadMore') }}</TButton>
+        <TButton @click="load">{{ $t('TPostList.loadMore') }}</TButton>
       </div>
     </div>
     <div v-else>
@@ -54,6 +54,7 @@ export default {
   setup(props, { root }) {
     const loading = ref(true)
     const stories = ref([])
+    const lastVisible = ref(null)
     const radius = ref(root.$route.query.radius || 50)
     const { search } = useAlgolia('profiles')
 
@@ -61,7 +62,7 @@ export default {
       console.log('loadMore')
     }
 
-    onMounted(async () => {
+    async function load() {
       const firestore = firebase.firestore()
       let collection = firestore.collection('stories')
 
@@ -94,6 +95,10 @@ export default {
         collection = collection.where('place', '==', '')
       }
 
+      if (lastVisible.value) {
+        collection = collection.startAfter(lastVisible.value)
+      }
+
       collection.orderBy('createdAt', 'desc').onSnapshot((storiesRef) => {
         let result = storiesRef.docs.map((doc) => ({
           ...doc.data(),
@@ -104,17 +109,21 @@ export default {
           result = result.filter((item) => item.style === props.filterDance)
         }
 
-        stories.value = result
+        stories.value = [...stories.value, ...result]
 
         loading.value = false
+
+        lastVisible.value = storiesRef.docs[storiesRef.docs.length - 1]
       })
 
       loading.value = false
-    })
+    }
+
+    onMounted(load)
 
     return {
       stories,
-      loadMore,
+      load,
       loading,
     }
   },
