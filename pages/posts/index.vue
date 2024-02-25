@@ -56,7 +56,7 @@ export default {
       collection = collection
         .where('type', '==', 'post')
         .orderBy('createdAt', 'desc')
-        .limit(10)
+        .limit(3)
 
       if (lastVisible.value) {
         collection = collection.startAfter(lastVisible.value)
