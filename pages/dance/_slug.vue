@@ -1,118 +1,168 @@
 <template>
   <div>
-    <div class="typo p-4 border-b">
-      <h1>{{ page.name }}</h1>
-      <p v-if="page.synonyms" class="italic">
+    <THeader show-logo class="md:hidden" />
+
+    <div class="p-4 border-b">
+      <h1 class="text-2xl font-bold">
+        {{ page.name }}
+      </h1>
+
+      <div v-if="page.synonyms" class="text-sm">
         Also known as {{ page.synonyms }}
-      </p>
-      <div class="flex space-x-2">
-        <a
-          href="https://docs.google.com/spreadsheets/d/1oCLW_c_Jr021AT6_gGngtFB94P_5ftSCJGp-XqdvRaM/edit#gid=0"
-          target="_blank"
-          >Edit this page</a
-        >
-        <span>•</span>
-        <NuxtLink :to="localePath('/dance')" class="block"
-          >List of all dance styles</NuxtLink
-        >
-      </div>
-
-      <div class="mt-4">
-        <span class="font-bold">Family</span>
-        <span class="leading-loose">
-          <NuxtLink :to="localePath(`/dance/${page.family}`)">{{
-            page.family
-          }}</NuxtLink></span
-        >
-      </div>
-
-      <div>
-        <span class="font-bold">Related</span>
-        <span v-for="style in related" :key="style.name" class="p-1">
-          <NuxtLink :to="localePath(`/dance/${style.id}`)">{{
-            style.name
-          }}</NuxtLink
-          >{{ ' ' }}
-        </span>
-      </div>
-
-      <table class="mt-4 min-w-full divide-y divide-gray-200">
-        <tbody class="bg-white divide-y divide-gray-200">
-          <tr>
-            <th
-              class="bg-gray-100 px-3 py-2 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
-            >
-              Region
-            </th>
-            <td class="px-3 py-2 whitespace-nowrap text-sm text-gray-500">
-              {{ page.region }}
-            </td>
-          </tr>
-
-          <tr>
-            <th
-              class="bg-gray-100 px-3 py-2 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
-            >
-              Origins
-            </th>
-            <td class="px-3 py-2 whitespace-nowrap text-sm text-gray-500">
-              {{ page.origins }}
-            </td>
-          </tr>
-
-          <tr>
-            <th
-              class="bg-gray-100 px-3 py-2 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
-            >
-              Parent
-            </th>
-            <td class="px-3 py-2 whitespace-nowrap text-sm text-gray-500">
-              {{ page.parent }}
-            </td>
-          </tr>
-
-          <tr>
-            <th
-              class="bg-gray-100 px-3 py-2 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
-            >
-              Type
-            </th>
-            <td class="px-3 py-2 whitespace-nowrap text-sm text-gray-500">
-              {{ page.type }}
-            </td>
-          </tr>
-
-          <tr>
-            <th
-              class="bg-gray-100 px-3 py-2 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
-            >
-              Year
-            </th>
-            <td class="px-3 py-2 whitespace-nowrap text-sm text-gray-500">
-              {{ page.year }}
-            </td>
-          </tr>
-        </tbody>
-      </table>
-
-      <div v-if="page.description" class="mt-4">
-        {{ page.description }}
-      </div>
-
-      <div v-if="page.history" class="mt-4">
-        <h2>History</h2>
-        <div v-if="page.history">{{ page.history }}</div>
-      </div>
-
-      <div class="mt-4 flex justify-end">
-        <a target="_blank" :href="page.source">Source</a>
       </div>
     </div>
-    <TPostList :filter="{ [`styles.${page.name}.selected`]: true }" />
+
+    <TExpand>
+      <div class="p-4 border-b">
+        <dl class="grid grid-cols-3 gap-1 mt-4 min-w-full">
+          <div class="col-span-2 border rounded px-3 py-2">
+            <dt
+              class="text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
+            >
+              Music
+            </dt>
+            <dd class="text-sm text-gray-900">
+              {{ page.music }}
+            </dd>
+          </div>
+
+          <div class="border rounded px-3 py-2">
+            <dt
+              class="text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
+            >
+              Type
+            </dt>
+            <dd class="text-sm text-gray-900">
+              {{ page.type }}
+            </dd>
+          </div>
+
+          <div class="border rounded px-3 py-2">
+            <dt
+              class="text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
+            >
+              Region
+            </dt>
+            <dd class="text-sm text-gray-900">
+              {{ page.region }}
+            </dd>
+          </div>
+
+          <div class="border rounded px-3 py-2">
+            <dt
+              class="text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
+            >
+              Origins
+            </dt>
+            <dd class="text-sm text-gray-900">
+              {{ page.origins }}
+            </dd>
+          </div>
+
+          <div class="border rounded px-3 py-2">
+            <dt
+              class="text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
+            >
+              Parent
+            </dt>
+            <dd class="text-sm text-gray-900">
+              {{ page.parent }}
+            </dd>
+          </div>
+
+          <div class="border rounded px-3 py-2">
+            <dt
+              class="text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
+            >
+              Year
+            </dt>
+            <dd class="text-sm text-gray-900">
+              {{ page.year }}
+            </dd>
+          </div>
+        </dl>
+
+        <TPreview
+          v-if="page.description"
+          :content="page.description"
+          class="mt-4"
+        />
+
+        <div v-if="page.history" class="mt-4 bg-gray-100 p-4 rounded">
+          <h3 class="uppercase text-xs font-bold">History</h3>
+          <TPreview v-if="page.history" :content="page.history" />
+          <a
+            v-if="page.source"
+            target="_blank"
+            :href="page.source"
+            class="text-xs underline text-right"
+            >Source</a
+          >
+        </div>
+
+        <div class="text-xs mt-4">
+          <div>
+            <span class="font-bold">Family</span>
+            <span class="leading-loose">
+              <NuxtLink :to="localePath(`/dance/${page.family}`)">{{
+                page.family
+              }}</NuxtLink></span
+            >
+          </div>
+
+          <div>
+            <span class="font-bold">Related</span>
+            <span v-for="style in related" :key="style.name" class="p-1">
+              <NuxtLink :to="localePath(`/dance/${style.id}`)">{{
+                style.name
+              }}</NuxtLink
+              >{{ ' ' }}
+            </span>
+          </div>
+        </div>
+      </div>
+    </TExpand>
+
+    <div class="border-b border-t p-4">
+      <form class="flex flex-col gap-4 w-full" @submit.prevent="saveItem">
+        <div
+          v-if="!showForm"
+          class="flex flex-col md:flex-row gap-2 justify-end"
+        >
+          <TButton
+            :to="`/reviews/add?type=link&style=${page.id}&city=`"
+            label="Add a recommendation"
+          />
+          <TButton
+            type="primary"
+            label="Ask a question"
+            @click="showForm = true"
+          />
+        </div>
+        <TField
+          v-if="showForm"
+          v-model="item.description"
+          required
+          label-position="top"
+          component="TInputTextarea"
+          :placeholder="`Ask about ${page.name}`"
+        />
+        <div v-if="showForm" class="flex justify-end gap-2">
+          <TButton xtype="submit" variant="primary">Post</TButton>
+        </div>
+      </form>
+    </div>
+
+    <TStories :dance="page.id" />
   </div>
 </template>
 
 <script>
+import firebase from 'firebase/app'
+import 'firebase/firestore'
+import { ref } from '@nuxtjs/composition-api'
+import { useAuth } from '~/use/auth'
+
 export default {
   name: 'DancePage',
   async asyncData({ $content, params, error }) {
@@ -126,9 +176,11 @@ export default {
       page = await $content(`styles/${slug}`).fetch()
 
       if (page.family) {
-        related = await $content(`styles`)
-          .where({ family: page.family })
-          .fetch()
+        related = (
+          await $content(`styles`)
+            .where({ family: page.family })
+            .fetch()
+        ).filter((style) => style.id !== page.id)
       }
 
       pageFound = true
@@ -143,6 +195,26 @@ export default {
       related,
     }
   },
+  methods: {
+    async saveItem() {
+      let data = this.item
+      this.item = {}
+
+      data = {
+        ...data,
+        place: '',
+        dances: [this.page.id],
+        createdAt: +new Date(),
+        createdBy: this.uid,
+        username: this.profile.username,
+        type: 'ask-for-recommendations',
+      }
+
+      const firestore = firebase.firestore()
+      await firestore.collection('stories').add(data)
+    },
+  },
+
   head() {
     if (this.page) {
       const page = this.page
@@ -173,6 +245,18 @@ export default {
           },
         ],
       }
+    }
+  },
+  setup() {
+    const { uid, profile } = useAuth()
+    const item = ref({})
+    const showForm = ref(false)
+
+    return {
+      showForm,
+      item,
+      profile,
+      uid,
     }
   },
 }

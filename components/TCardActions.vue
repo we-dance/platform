@@ -2,7 +2,7 @@
   <div>
     <TButton
       :type="type"
-      icon="fire"
+      :icon="icon"
       :label="$t('post.report')"
       @click="isReportShown = true"
     />
@@ -68,6 +68,10 @@ export default {
     type: {
       type: String,
       default: 'base',
+    },
+    icon: {
+      type: String,
+      default: 'fire',
     },
   },
   data: () => ({

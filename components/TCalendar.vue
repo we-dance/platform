@@ -1,32 +1,47 @@
 <template>
-  <div v-if="response && response.facets && response.nbHits">
-    <div class="mb-4 gap-2 flex flex-wrap p-4 items-center">
+  <div>
+    <div class="p-4 gap-2 flex flex-nowrap items-center border-b">
       <t-rich-select
         v-model="filters['style']"
-        placeholder="Style"
+        :placeholder="$t('calendar.filters.style')"
         :options="facets['style']"
         clearable
         hide-search-box
       />
 
       <t-rich-select
-        v-model="filters['type']"
-        placeholder="Format"
-        :options="facets['type']"
+        v-if="facets['country'].length > 1"
+        v-model="filters['country']"
+        placeholder="Country"
+        :options="facets['country']"
         clearable
         hide-search-box
       />
 
-      <DatePicker
-        v-model="fromDate"
-        :lang="{ formatLocale: { firstDayOfWeek: 1 } }"
-        value-type="timestamp"
-        class="w-32 py-4"
-        placeholder="Date"
-        format="D MMM YY"
-        :clearable="false"
+      <t-rich-select
+        v-if="facets['locality'].length > 1"
+        v-model="filters['locality']"
+        placeholder="City"
+        :options="facets['locality']"
+        clearable
+        hide-search-box
       />
-      <TButton type="nav" icon="share" @click="showPopup = true" />
+
+      <t-rich-select
+        v-if="view === 'classes' || view === 'online'"
+        v-model="level"
+        :placeholder="$t('calendar.filters.level')"
+        :options="levels"
+        clearable
+        hide-search-box
+      />
+
+      <TButton
+        :to="localePath('/events/-/import')"
+        icon="plus"
+        :label="$t('calendar.addEvent')"
+        type="primary"
+      />
     </div>
 
     <TPopup v-if="showPopup" title="Share" @close="showPopup = false">
@@ -46,6 +61,11 @@
       </div>
     </TPopup>
 
+    <TFindPartnerTeaser
+      v-if="featureFindPartner && (view === 'classes' || view === 'online')"
+      class="p-4"
+    />
+
     <div>
       <div v-for="(items, date) in itemsByDate" :key="date">
         <h2 class="font-bold text-xl p-4 border-b">
@@ -56,7 +76,6 @@
           v-for="item in items"
           :id="item.id"
           :key="item.id"
-          class="hover:opacity-75"
           :name="item.name"
           :cover="item.cover"
           :venue="item.venue"
@@ -69,56 +88,32 @@
       </div>
     </div>
 
-    <div v-if="!response.nbHits" class="p-4 flex justify-center items-center">
+    <div
+      v-if="!loading && !response.nbHits"
+      class="p-4 flex justify-center items-center"
+    >
       <div>
-        <h2 class="text-lg font-semibold">No Events Found</h2>
-
-        <div class="mt-4 p-4 typo bg-orange-50">
-          <p>
-            It seems there are no events listed for your selected dates. But
-            don't worry, you've got options:
-          </p>
-
-          <ul>
-            <li>
-              <strong>Expand Your Search:</strong> Try adjusting your date range
-              or filters to explore other events.
-            </li>
-            <li>
-              <strong>Import an Event:</strong> Found something interesting
-              elsewhere? Easily
-              <router-link to="/events/-/import"
-                >import events from Facebook</router-link
-              >
-              or other platforms to share with the community.
-            </li>
-            <li>
-              <strong>Create and Share:</strong> Can’t find what you’re looking
-              for? You can manually
-              <router-link to="/events/-/edit"
-                >add details of events</router-link
-              >
-              you know about or host your own event on our platform.
-            </li>
-            <li>
-              <strong>Stay in the Loop:</strong> Subcribe to get updates on new
-              events in your areas of interest.
-            </li>
-          </ul>
-          <p class="mt-4">
-            Help grow our community by sharing events you’re excited about!
-            Thank you for being a part of WeDance.
-          </p>
-        </div>
+        <h2 class="text-center text-xs">No Events Found</h2>
       </div>
     </div>
 
     <div v-if="response.nbPages > 1" class="my-4 flex justify-center">
       <TButton label="Load More" type="primary" @click="loadMore" />
     </div>
-  </div>
-  <div v-else>
-    <slot />
+
+    <div class="p-4 gap-2 flex items-center border-b">
+      <div class="text-xs">After</div>
+      <DatePicker
+        v-model="fromDate"
+        :lang="{ formatLocale: { firstDayOfWeek: 1 } }"
+        value-type="timestamp"
+        class="w-32 py-4"
+        placeholder="Date"
+        format="D MMM YY"
+        :clearable="false"
+      />
+      <TButton label="Share" icon="share" @click="showPopup = true" />
+    </div>
   </div>
 </template>
 
@@ -136,27 +131,34 @@ import {
 import { useAlgolia } from '~/use/algolia'
 import { useStyles } from '~/use/styles'
 import { useAuth } from '~/use/auth'
-import { useCities } from '~/use/cities'
-import { useApp } from '~/use/app'
 
 export default {
   name: 'TCalendar',
   props: {
-    profile: {
+    city: {
       type: Object,
       default: null,
     },
+    view: {
+      type: String,
+      default: 'parties',
+    },
   },
-  setup(props) {
-    const radius = ref(50)
+  setup(props, { root }) {
+    const level = ref('')
+    const levels = [
+      { value: 'Beginner', label: 'Beginner' },
+      { value: 'Intermediate', label: 'Intermediate' },
+      { value: 'Advanced', label: 'Advanced' },
+    ]
+
+    const radius = ref(root.$route.query.radius || 50)
     const query = ref('')
     const sorting = ref('Upcoming')
     const profileType = ref('')
     const currentPage = ref(1)
     const filters = ref({})
-    const { uid } = useAuth()
-    const { city, currentCity, cityName } = useCities()
-    const { getCity } = useApp()
+    const { uid, featureFindPartner } = useAuth()
     let today = new Date(Date.now())
     today.setHours(6, 0, 0, 0)
     today = +today
@@ -168,18 +170,23 @@ export default {
       return +oneWeekLater
     })
 
-    if (!currentCity.value) {
+    if (!props.city) {
       return
     }
-    const { search, response, loadMore } = useAlgolia('events')
+
+    const { search, response, loadMore, loading } = useAlgolia('events')
     const facets = computed(() => ({
       type: getFacetOptions('type'),
       style: getFacetOptions('style'),
+      country: getFacetOptions('country'),
+      locality: getFacetOptions('locality'),
       venue: getFacetOptions('venue'),
       organizer: getFacetOptions('organizer'),
     }))
     function load() {
-      filters.value = {}
+      filters.value = {
+        style: root.$route.query.style || '',
+      }
       query.value = ''
     }
     onMounted(load)
@@ -189,21 +196,48 @@ export default {
         .map((field) => `${field}:${filters.value[field]}`)
         .join(',')
     })
-    watch([currentPage, facetFilters, radius, city, fromDate], () => {
-      if (!city.value?.location) {
-        return
+    const filter = computed(() => {
+      if (props.view === 'parties') {
+        return '(type:Party OR type:Other OR type:Show OR type:Concert OR type:Festival OR type:Congress)'
       }
+      if (props.view === 'classes') {
+        return '(type:Course OR type:Workshop OR type:Festival OR type:Congress)'
+      }
+      if (props.view === 'online') {
+        return '(online:Yes)'
+      }
+      if (props.view === 'festivals') {
+        return '(type:Festival OR type:Congress)'
+      }
+    })
+
+    watch(
+      () => filters.value.style,
+      (newStyle) => {
+        if (newStyle) {
+          // root.$router.replace({ query: { style: newStyle } }, { silent: true })
+          history.pushState({}, null, root.$route.path + `?style=${newStyle}`)
+        }
+      }
+    )
+
+    watch([currentPage, facetFilters, radius, fromDate], () => {
       const searchParams = {
-        filters: `startDate>${fromDate.value}`,
+        filters: `startDate>${fromDate.value} AND ${filter.value}`,
         facets: Object.keys(facets.value),
         facetFilters: facetFilters.value,
         page: currentPage.value - 1,
-        aroundLatLng: radius.value
-          ? `${city.value.location.latitude}, ${city.value.location.longitude}`
-          : '',
-        aroundRadius: radius.value * 1000 || 1,
         hitsPerPage: 10,
       }
+
+      if (props.city?.location) {
+        searchParams.aroundLatLng = radius.value
+          ? `${props.city.location.latitude}, ${props.city.location.longitude}`
+          : ''
+
+        searchParams.aroundRadius = radius.value * 1000 || 1000
+      }
+
       search('', searchParams)
     })
     const { getStyleName } = useStyles()
@@ -239,19 +273,21 @@ export default {
       response.value.hits.forEach((item) => {
         const date = getYmd(item.startDate)
         result[date] = result[date] || []
-        result[date].push(item)
+        const event = {
+          ...item,
+          venue: [item.locality, item.country].filter((v) => v).join(', '),
+        }
+        result[date].push(event)
       })
 
       return result
     })
 
     const itemsAsText = computed(() => {
-      let result = `**Dance Calendar in ${props.profile.name}**\n\n`
+      let result = `**Dance Calendar in ${props.city.name}**\n\n`
       result += `We help everyone to dance everywhere and all dancers to help each other\n\n`
-      result += `🗓️ **Dance Calendar**\n`
-      result += `${props.profile.telegram}\n\n`
       result += `➕ **Add your event**\n`
-      result += `wedance.vip/${props.profile.username}\n\n`
+      result += `wedance.vip/${props.city.username}\n\n`
       result += `🗓 **DANCE CALENDAR** 🗓 \n\n`
       _.forEach(itemsByDate.value, (items, date) => {
         result += String(`**${getDay(date)} ${getDate(date)}**\n`).toUpperCase()
@@ -275,6 +311,9 @@ export default {
     const showPopup = ref(false)
 
     return {
+      featureFindPartner,
+      level,
+      levels,
       itemsAsText,
       copyToClipboard,
       showPopup,
@@ -282,7 +321,6 @@ export default {
       untilDate,
       sorting,
       uid,
-      getFacetOptions,
       facets,
       getExcerpt,
       search,
@@ -293,15 +331,13 @@ export default {
       profileType,
       facetFilters,
       getFieldLabel,
-      radius,
       load,
-      getCity,
-      cityName,
       getDateObect,
       itemsByDate,
       getDay,
       getDate,
       loadMore,
+      loading,
     }
   },
 }

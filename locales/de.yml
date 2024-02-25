@@ -27,21 +27,6 @@ post:
   delete: Löschen
   edit: Bearbeiten
   dashboard: Übersicht
-home:
-  cta:
-    header: Reisen. Treffen. Tanzen.
-    description: Entdecke Tänzer*innen und Tanzevents in deiner Nähe
-    action: Finde deine Stadt
-nav:
-  travel: Reisen
-  chooseCity: Stadt auswählen
-  feed: Feed
-  calendar: Kalender
-  community: Community
-  chat: Chat
-  dance: Tanzstile
-  myProfile: Mein Profil
-  settings: Einstellungen
 form:
   clear: Löschen
   delete: Löschen
@@ -71,7 +56,7 @@ icons:
 features:
   calendar:
     title: Veranstaltungskalender
-    description: Find dance workshops, courses, socials and parties. We fill event calendar all together as a community. Everyone can share.
+    description: Find dance workshops, courses, socials and partys. We fill event calendar all together as a community. Everyone can share.
     action: Events entdecken
   dancePartners:
     title: Tanzpartner*innen
@@ -166,14 +151,6 @@ filter:
 community:
   title: Dance Community
   description: Looking for dance partner or new dance events? Filter profiles of local dancers and contact them.
-calendar:
-  title: Dance Calendar
-  empty: No events found
-  upcoming: Upcoming
-  past: Past
-  share:
-    text: Text
-    embed: Embed
 profile:
   claim: Claim my profile
   follow:
@@ -421,32 +398,6 @@ nopassword:
 contacts:
   email: Email
   website: Webseite
-teaser:
-  partner:
-    title: Benötigst Du einen Partner?
-    description: Tänzer weltweit erstellen ihre Profile, um Tanzpartner zu finden
-    btn: Siehe Community
-  events:
-    title: Wo kann man tanzen?
-    description: Alle Tanzkurse, Partys und Festivals an einem Ort
-    btn: Siehe Ereignisse
-  profile:
-    title: Veröffentliche Dein Profil
-    description: damit andere Dich kontaktieren können
-    btn: Kostenlos beitreten
-  allevents:
-    title: Private Veranstaltungen
-    description: Werde Mitglied der WeDance Community, um mehr zu sehen
-    btn: Jetzt beitreten
-  chat:
-    title: Looking for more events?
-    description: 'Wir haben in jeder Stadt einen Telegram-Tanzchat. Treten Sie Ihrem Stadt-Chat bei, um reisenden Tänzern zu helfen, und laden Sie Ihre Tanzfreunde ein. Lass uns zusammen WeDance aufbauen!'
-    btnChatExists: Ask Locals
-    btnChatMissing: Ask Travelers
-  involve:
-    title: Wir brauchen Deine Hilfe
-    description: Wir sind eine gemeinnützige internationale Tanzgemeinschaft. Wir möchten, dass Sie in jede Stadt in jedem Land gehen und Tanzveranstaltungen und Tänzer finden. Alles beginnt mit der örtlichen Gemeinde.
-    btn: Mach mit
 share:
   title: Teilen
   copy: Link kopieren
@@ -611,3 +562,133 @@ faqs:
       answer: Sie können Ihren Kalender jederzeit im Bereich "Integrationen" in Ihren Einstellungen trennen. Sobald getrennt, werden keine weiteren Veranstaltungen von diesem Kalender importiert.
     - question: Ist meine persönliche Information sicher, wenn ich meinen Kalender verbinde?
       answer: Ja, Ihre Privatsphäre und Sicherheit sind uns sehr wichtig. Wir verwenden den Kalenderzugriff nur, um Veranstaltungen zu importieren und speichern keine persönlichen Informationen aus Ihrem Kalender.
+explore:
+  nav:
+    festivals: Festivals
+    online: Online
+    experts: Frag Experten
+    parties: Partys
+    classes: Kurse
+    groups: Gruppen
+    tips: Locals fragen
+    addEvent: Neues Event
+  dance:
+    title: Liste der Tanzstile | WeDance
+    description: Entdecke Geschichte, Kultur und Tanzstile aus aller Welt. Durchstöbere eine ausgewählte Liste von Tanzstilen.
+    keywords: Tanzstile, Tanzgenres, Tanzgeschichte, Tanzkultur
+    header: Tanzstile
+    subheader: Entdecke Geschichte, Kultur und Tanzstile aus aller Welt. Durchstöbere eine ausgewählte Liste von Tanzstilen.
+  global:
+    title: '{style} Tanzfestivals Weltweit | Tanzkalender | WeDance'
+    description: '{style} Tanzkalender für Reisende. Plane deine Urlaube und Wochenenden, um Salsa, Bachata, Kizomba, Zouk und 130 andere Tänze rund um die Welt zu tanzen.'
+    keywords: '{style} Tanzfestivals, {style} Tanzkongresse, {style} Tanzurlaube, {style} Tanzwochenenden, {style} Tanzreisen, {style} Tanzurlaub'
+    header: '{style} Festivals Weltweit'
+    subheader: '{style} Tanzkalender für Reisende. Plane deine Urlaube und Wochenenden, um Salsa, Bachata, Kizomba, Zouk und 130 andere Tänze rund um die Welt zu tanzen.'
+  parties:
+    title: Tanzpartys {style} in {city} | Tanzkalender | WeDance
+    description: Entdecke eine Vielzahl von {style} Tanzveranstaltungen in {city}. Von {referenceStyle}-Nächten bis zu Bachata-Workshops, finde hier dein nächstes Tanzabenteuer.
+    header: '{style} Partys in {city}'
+    subheader: Entdecke die lebhafte {style} Tanzszene in {city}. Stöbere durch eine ausgewählte Liste von Tanzpartys und filtere nach deinen Lieblingsstilen wie Salsa, Bachata, Kizomba und mehr.
+  classes:
+    title: Tanzkurse {style} in {city} | Tanzkalender | WeDance
+    description: Entdecke eine Vielzahl von {style} Tanzveranstaltungen in {city}. Von {referenceStyle}-Nächten bis zu Bachata-Workshops, finde hier dein nächstes Tanzabenteuer.
+    header: '{style} Kurse in {city}'
+    subheader: Entdecke die lebhafte {style}-Tanzszene in {city}. Stöbere durch eine ausgewählte Liste von Tanzkursen und filtere nach deinen Lieblingsstilen wie Salsa, Bachata, Kizomba und mehr.
+  onlineclass:
+    title: '{style} Online-Tanzkurse | Tanzkalender | WeDance'
+    description: Kannst du nicht persönlich dabei sein? Bring deine {style}-Moves auf das nächste Level mit unserer Auswahl an Online-Kursen.
+    keywords: '{style} Online-Tanzkurse, Online-Tanzkurse, Online-Workshops, Online-Tanz-Bootcamps, Online-Tanzstunden'
+    header: '{style} Online-Kurse'
+    subheader: Kannst du nicht persönlich dabei sein? Bring deine {style}-Moves auf das nächste Level mit unserer Auswahl an Online-Kursen.
+  groups:
+    title: Tanzgruppen in {city} | WeDance
+    description: Entdecke und vernetze dich mit Tanz-Influencern und Gruppen in {city}. Finde WhatsApp, Telegram, Instagram, Youtube-Communities, die zu deinem Stil passen, von Salsa bis Bachata bis Kizomba. Vernetze dich mit Influencern und tritt lebhaften Tanznetzwerken in {city} bei.
+    header: Gruppen in {city}
+    subheader: Entdecke und vernetze dich mit Tanz-Influencern und Gruppen in {city}. Finde WhatsApp, Telegram, Instagram, Youtube-Communities, die zu deinem Stil passen, von Salsa bis Bachata bis Kizomba. Vernetze dich mit Influencern und tritt lebhaften Tanznetzwerken in {city} bei.
+  tips:
+    title: Frag Tänzer in {city} | WeDance
+    description: Finde Echtzeit-Empfehlungen und erhalte lokale Einblicke direkt von Tänzern aus {city}. Wähle deinen bevorzugten Tanzstil für maßgeschneiderte Tipps oder frage die Community nach persönlichen Empfehlungen. Typischerweise erhältst du Antworten innerhalb von 48 Stunden.
+    header: Frag {city}
+    subheader: Finde Echtzeit-Empfehlungen und erhalte lokale Einblicke direkt von Tänzern aus {city}. Wähle deinen bevorzugten Tanzstil für maßgeschneiderte Tipps oder frage die Community nach persönlichen Empfehlungen. Typischerweise erhältst du Antworten innerhalb von 48 Stunden.
+calendar:
+  title: Tanzkalender
+  empty: Keine Veranstaltungen gefunden
+  upcoming: Bevorstehend
+  past: Vergangen
+  addEvent: Hinzufügen
+  filters:
+    style: Tanzstil
+    level: Niveau
+  levels:
+    Beginner: Anfänger
+    Intermediate: Intermediate
+    Advanced: Fortgeschritten
+  share:
+    text: Text
+    embed: Einbetten
+nav:
+  search: Suche
+  events: Events
+  festivals: Festivals
+  partner: Partner finden
+  dance: Tanzstile
+  contribute: Mitmachen
+  addEvent: Event
+  addReview: Tipp
+  chat: Chat
+  myProfile: Mein Profil
+  settings: Einstellungen
+teaser:
+  profile:
+    title: Veröffentliche dein Profil
+    description: damit andere dich kontaktieren können
+    btn: Kostenlos beitreten
+  feed:
+    title: Auf der Suche nach mehr Events?
+    description: Statt in mehreren Chats zu suchen, frag direkt unsere lokale Tanzcommunity auf der Webseite. Hol dir persönliche Empfehlungen für Events in jeder Stadt von lokalen Tänzern.
+    btn: Locals fragen
+home:
+  title: WeDance - Reisen. Treffen. Tanzen.
+  hero:
+    header: Reisen. Treffen. **Tanzen.**
+    subheader: Finde Bachata, Salsa, Kizomba und weitere Tanzveranstaltungen in deiner Nähe. Erweitere deine Tanzwelt mit Socials, Kursen und Festivals.
+    action: Finde deine Stadt
+    bottom: '[Unsere Mission](/about) ist es, Tänzer weltweit zu vereinen.'
+  features:
+    explore:
+      title: Socials, Kurse, Festivals
+      description: Sag chaotischen Chats Lebewohl!
+      action: Veranstaltungen erkunden
+    travel:
+      title: Empfehlungen
+      description: Erhalte Insider-Tipps zu den besten Socials in jeder Stadt.
+      action: Frag die Einheimischen
+    partner:
+      title: Tanzpartner
+      description: Finde Tanzpartner für deinen Tanzstil und lass dich von ihnen finden.
+      action: Partner finden
+  numbers:
+    title: WeDance in Zahlen
+    countries: Länder
+    profiles: Profile
+    events: Veranstaltungen
+  founder: '**Das Problem**
+
+
+    Ich bin ein Tanzfanatiker, immer in die lokale Szene eingebunden durch unzählige WhatsApp-Gruppen. Neue Tänzer fragen mich oft nach anstehenden Partys, und es wurde überwältigend, alles im Blick zu behalten.
+
+
+    **Die Lösung**
+
+
+    Deshalb habe ich WeDance geschaffen! Es ist die Anlaufstelle für Tanzveranstaltungen in deiner Stadt. Kein Jonglieren mehr mit Chats oder hektische Suche nach Informationen.
+
+
+    **Vorteile für Tänzer**
+
+    - **Neu in der Stadt?** Finde sofort die heißesten Partys.
+
+    - **Freunde neugierig auf deine Tanzpläne?** Schick ihnen einfach dein WeDance-Profil und lass sie ihre Lieblingsveranstaltungen auswählen, um sich dir anzuschließen.
+
+
+    Klingt fantastisch, oder? Erkunde WeDance heute!'

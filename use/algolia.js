@@ -2,6 +2,7 @@ import algoliasearch from 'algoliasearch/lite'
 import { ref } from 'vue-demi'
 
 export function useAlgolia(indexName) {
+  const loading = ref(true)
   const response = ref({})
   const page = ref(0)
   const cachedOptions = ref({})
@@ -12,7 +13,9 @@ export function useAlgolia(indexName) {
 
   async function search(query, options) {
     cachedOptions.value = options
+    loading.value = false
     response.value = await index.search(query, options)
+    return response.value
   }
 
   async function loadMore() {
@@ -28,5 +31,6 @@ export function useAlgolia(indexName) {
     response,
     search,
     loadMore,
+    loading,
   }
 }

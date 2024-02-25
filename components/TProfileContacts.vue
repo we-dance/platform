@@ -1,9 +1,16 @@
 <template>
   <TDropdown :label="title" :type="type" icon="">
     <TButton
+      v-if="profile.id === profile.createdBy"
+      :to="localePath(`/chat/${profile.username}`)"
+      label="Message"
+      type="context"
+    />
+    <TButton
       v-if="profile.website"
       allow-guests
       :href="profile.website"
+      icon="c_website"
       label="website"
       type="context"
     />
@@ -11,13 +18,8 @@
       v-if="profile.email"
       allow-guests
       :href="`mailto:${profile.email}`"
+      icon="email"
       label="email"
-      type="context"
-    />
-    <TButton
-      v-if="profile.id === profile.createdBy"
-      :to="localePath(`/chat/${profile.username}`)"
-      label="chat"
       type="context"
     />
     <TButton
@@ -55,6 +57,7 @@ export default {
   data: () => ({
     shortFields: ['instagram', 'facebook'],
     longFields: [
+      'linkedin',
       'couchsurfing',
       'airbnb',
       'blablacar',

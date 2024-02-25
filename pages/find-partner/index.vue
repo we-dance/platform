@@ -1,7 +1,10 @@
 <template>
   <div>
+    <h1 class="text-xl font-extrabold p-4 text-center border-b">
+      Find Matches
+    </h1>
     <div
-      class="sticky bg-white p-4 border-b z-50 top-0 shadow flex justify-between items-center"
+      class="sticky bg-white p-4 border-b z-40 top-0 shadow flex justify-between items-center"
     >
       <h1 v-if="!selectedCount()">
         Select up to 5 profiles
@@ -15,7 +18,7 @@
 
     <div v-if="!response.nbHits" class="p-4 flex justify-center items-center">
       <div>
-        There are no profiles yet. Ask locals.
+        There are no profiles yet. Wait for someone to join and try again later.
       </div>
     </div>
 
@@ -34,25 +37,24 @@
       </div>
     </div>
 
-    <t-pagination
-      v-if="response.nbPages > 1 && !$route.query.search"
-      v-model="currentPage"
-      :total-items="response.nbHits"
-      :per-page="response.hitsPerPage"
-      class="my-4"
-    />
+    <div
+      v-if="response.nbPages > 1 && response.page < response.nbPages"
+      class="my-4 flex justify-center"
+    >
+      <TButton label="Load More" type="primary" @click="loadMore" />
+    </div>
   </div>
 </template>
 
 <script>
 import Vue from 'vue'
-import { computed, onMounted, ref, watch } from 'vue-demi'
+import { until } from '@vueuse/core'
+import { computed, onMounted, ref } from 'vue-demi'
 import { getExcerpt } from '~/utils'
 import { useAlgolia } from '~/use/algolia'
 import { useProfiles } from '~/use/profiles'
 import { useAuth } from '~/use/auth'
-import { useCities } from '~/use/cities'
-import { useApp } from '~/use/app'
+import { db } from '~/plugins/firebase'
 
 export default {
   name: 'FindPartnerList',
@@ -64,8 +66,6 @@ export default {
     const currentPage = ref(1)
     const filters = ref({})
     const { uid, profile } = useAuth()
-    const { city, currentCity, cityName } = useCities()
-    const { getCity } = useApp()
     const { radiusOptions } = useProfiles()
 
     function isSelected(id) {
@@ -89,17 +89,7 @@ export default {
       }
     }
 
-    if (!currentCity.value) {
-      return
-    }
-
-    const { search, response } = useAlgolia('profiles')
-
-    function load() {
-      filters.value = {}
-      query.value = ''
-    }
-    onMounted(load)
+    const { search, response, loadMore } = useAlgolia('profiles')
 
     const filterQuery = computed(() => {
       if (!profile.value?.searchStyle) {
@@ -111,21 +101,24 @@ export default {
       }`
     })
 
-    watch([filterQuery, currentPage, radius, city], () => {
-      if (!city.value?.location) {
-        return
-      }
-      if (!filterQuery.value) {
-        return
-      }
+    onMounted(async () => {
+      await until(profile).not.toBeNull()
+
+      const placeId = profile.value.place
+      const cityRef = await db
+        .collection('profiles')
+        .where('cityPlaceId', '==', placeId)
+        .get()
+      const city = cityRef.docs[0].data()
+
       search('', {
         filters: filterQuery.value,
         page: 0,
         aroundLatLng: radius.value
-          ? `${city.value.location.latitude}, ${city.value.location.longitude}`
+          ? `${city.location.latitude}, ${city.location.longitude}`
           : '',
         aroundRadius: radius.value * 1000 || 1,
-        hitsPerPage: 100,
+        hitsPerPage: 5,
       })
     })
 
@@ -140,13 +133,11 @@ export default {
       currentPage,
       profileType,
       radius,
-      load,
-      getCity,
-      cityName,
       selected,
       select,
       isSelected,
       selectedCount,
+      loadMore,
     }
   },
 }

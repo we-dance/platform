@@ -1,30 +1,29 @@
 <template>
   <div>
-    <THeader>
-      <TButton
-        v-if="profile.type === 'City'"
-        slot="left"
-        allow-guests
-        :to="localePath('/cities')"
-        icon="place"
-        :label="profile.name"
-      />
-      <div
-        v-else
-        slot="left"
-        class="flex flex-no-wrap items-center ml-8 md:ml-0"
-      >
-        <div class="ml-1 font-lato text-lg font-bold">
-          {{ profile.username }}
-        </div>
-      </div>
+    <TCityHeader :profile="profile" :view="view" />
 
-      <TButton
-        allow-guests
-        type="nav"
-        icon="search"
-        :to="localePath('/search')"
-      />
+    <div class="p-4">
+      <h1 class="text-2xl font-bold">
+        {{
+          $t(`explore.${view}.header`, {
+            city: profile.name,
+            style: $route.query.style,
+          })
+        }}
+      </h1>
+
+      <div class="text-sm">
+        {{
+          $t(`explore.${view}.subheader`, {
+            city: profile.name,
+            style: $route.query.style,
+          })
+        }}
+      </div>
+      <TProfileStats :profile="profile" />
+    </div>
+
+    <div v-if="isAdmin()" class="flex gap-2 p-4 bg-orange-100 items-center">
       <TDropdown>
         <TPopupEdit
           v-if="isAdmin()"
@@ -35,23 +34,6 @@
           singular="profile"
           :item="profile"
         />
-        <TCardActions
-          :id="profile.id"
-          collection="profiles"
-          :item="profile"
-          type="context"
-        />
-        <TButtonShare
-          :id="profile.id"
-          collection="profiles"
-          :place="profile.place"
-          :file="profile.socialCover"
-          :file-name="profile.username"
-          :url="`https://wedance.vip/${profile.username}`"
-          :text="profile.name"
-          type="context"
-          :label="$t('share.title')"
-        />
         <TButton
           v-if="isAdmin()"
           type="context"
@@ -60,309 +42,34 @@
           @click="remove(profile.id)"
         />
       </TDropdown>
-    </THeader>
-
-    <div class="p-2 border-b text-center">
-      <a
-        href="https://bit.ly/49cYPoB"
-        target="_blank"
-        class="underline text-primary hover:no-underline"
-        >Become a Dance Promoter – Get Discounts!</a
-      >
+      <div class="text-xs">place_id: {{ profile.cityPlaceId }}</div>
     </div>
 
-    <div class="grid grid-cols-4 gap-4 p-4">
-      <div v-if="profile.photo">
-        <img
-          :src="profile.photo"
-          :alt="profile.username"
-          class="w-full rounded-full"
-        />
-      </div>
-
-      <div :class="profile.photo ? 'col-span-3' : 'col-span-4'">
-        <h1 class="leading-tight font-bold">{{ profile.name }}</h1>
-        <TExpand class="mb-4">
-          <TPreview :content="profile.bio" />
-          <div v-if="!profile.bio" class="typo">
-            <p>Welcome to {{ profile.name }} on WeDance!</p>
-            <p>Hello, dancers and enthusiasts! 🕺💃</p>
-
-            <p>
-              We're excited to announce that WeDance has now arrived in
-              {{ profile.name }}! As we're just stepping into this vibrant city,
-              our dance event calendar might look a little empty - but not for
-              long, with your help.
-            </p>
-
-            <h3>Be a Part of Our Growing Community:</h3>
-
-            <ul>
-              <li>
-                <strong>Add Events:</strong> Know about a salsa night, a tango
-                workshop, or a swing dance party? Add it to our platform and let
-                others join in the fun.
-              </li>
-              <li>
-                <strong>Share Local Insights:</strong> Help us map out the dance
-                scene. Share information about dance organizers, popular venues,
-                or active WhatsApp groups. Your knowledge is invaluable!
-              </li>
-              <li>
-                <strong>Connect and Grow:</strong> We're more than just a
-                platform; we're a community of dancers helping each other. By
-                sharing and participating, you're not just finding events,
-                you're helping fellow dancers experience the joy of dance in
-                {{ profile.name }}.
-              </li>
-            </ul>
-            <p class="mt-4">
-              Together, we can make {{ profile.name }} a thriving hub for dance
-              lovers. Whether you're a local or just passing through, let's
-              create a space where every dancer can find their rhythm. Thank you
-              for joining us on this journey.
-            </p>
-            <p>Let's dance the night away!</p>
-            <p>
-              With excitement,<br />
-              WeDance Team
-            </p>
-          </div>
-        </TExpand>
-
-        <div class="text-xs text-gray-500">
-          {{ $tc('views', profile.viewsCount, { count: profile.viewsCount }) }}
-          ·
-          {{
-            $tc('subscribers', subscribersCount, {
-              count: subscribersCount,
-            })
-          }}
-        </div>
-
-        <div v-if="profile.type === 'City'" class="flex space-x-2 mt-4">
-          <TButton
-            :to="localePath('/events/-/import')"
-            type="primary"
-            icon="plus"
-            label="Add Event"
-          />
-          <TReaction
-            :label="$t('Subscribe')"
-            :toggled-label="$t('Unsubscribe')"
-            field="watch"
-            icon="BellIcon"
-            hide-count
-            :item="profile"
-            collection="profiles"
-          />
-        </div>
-      </div>
-    </div>
-
-    <div v-if="$route.query.beta" class="p-4">
-      <div class="rounded-md overflow-hidden shadow">
-        <div class="bg-orange-100 flex justify-center">
-          <TIcon name="find-partner" />
-        </div>
-        <div class="p-4 flex flex-col items-center">
-          <div class="text-sm text-center pb-4">
-            Explore dancers in your city and connect with them to find your next
-            dance partner.
-          </div>
-          <TButton
-            to="/find-partner/start"
-            type="primary"
-            label="Find Dance Partner"
-          />
-        </div>
-      </div>
-    </div>
-
-    <div class="border-t bg-orange-50">
-      <div class="text-xs pt-2 pr-2 text-right text-primary">SPONSORED</div>
-      <NuxtLink
-        v-if="promo && promo.id"
-        :to="localePath(`/events/${promo.id}`)"
-        class="hover:opacity-75"
-      >
-        <TEventText3 :item="promo" />
-      </NuxtLink>
-    </div>
-
-    <TCollapse title="Events" expanded>
-      <TCalendar :profile="profile" class="mt-4 w-full border-t pt-4 pb-8" />
-    </TCollapse>
-
-    <TCollapse title="News">
-      <TPostList order-by="createdAt" :filter="{ place: profile.place }" />
-    </TCollapse>
-
-    <TCollapse title="Organisers">
-      <TCommunity type="Organiser" class="pt-4 border-t" hide-role />
-    </TCollapse>
-
-    <TCollapse title="Venues">
-      <TCommunity type="Venue" class="pt-4 border-t" hide-role />
-    </TCollapse>
-
-    <TCollapse title="Artists">
-      <TCommunity type="Artist" class="pt-4 border-t" hide-role />
-    </TCollapse>
-
-    <TCollapse title="Dancers">
-      <TCommunity type="Dancer" class="pt-4 border-t" />
-    </TCollapse>
+    <TCalendar :city="profile" :view="view" class="w-full border-t" />
 
     <WTeaser
-      v-if="!uid && profile.type !== 'City' && profile.place"
-      :title="$t('profile.invite.header', { count: invitesLeft })"
-      :description="$t('profile.invite.description', { name: profile.name })"
-      :button="$t('profile.invite.action')"
-      :url="localePath(`/signin?invitedBy=${profile.username}`)"
-      class="my-0"
-    />
-
-    <div
-      v-if="
-        profile.reviews &&
-          profile.type !== 'City' &&
-          profile.username !== 'Travel'
-      "
-    >
-      <h3 class="text-xl font-bold p-4 border-t">{{ $t('reviews.title') }}</h3>
-      <TReviewList :reviews="profile.reviews" class="p-4" />
-    </div>
-
-    <WTeaser
-      v-if="profile.type === 'City' && profile.website"
-      :allow-guests="false"
-      :title="$t('teaser.chat.title')"
-      :description="$t('teaser.chat.description')"
-      :button="$t('teaser.chat.btnChatExists')"
-      :href="profile.website"
+      :title="$t('teaser.feed.title')"
+      :description="$t('teaser.feed.description')"
+      :button="$t('teaser.feed.btn')"
+      :url="localePath(`/explore/${profile.username}/tips`)"
       class="w-full mt-4"
     />
 
-    <WTeaser
-      v-if="profile.type === 'City' && !profile.website"
-      :allow-guests="false"
-      :title="$t('teaser.chat.title')"
-      :description="$t('teaser.chat.description')"
-      :button="$t('teaser.chat.btnChatMissing')"
-      :href="internationalChatLink"
-      class="w-full mt-4"
+    <TFollowOnSocialMedia
+      v-if="profile.instagram"
+      :profile="profile"
+      class="py-4"
     />
 
-    <div
-      v-if="profile.id !== profile.createdBy && profile.type !== 'City'"
-      class="py-4 flex justify-center"
-    >
-      <TButton
-        type="simple"
-        :label="$t('profile.claim')"
-        :href="`mailto:support@wedance.vip?subject=Claim ${profile.username}`"
-      />
-    </div>
-
-    <TPostList
-      v-if="profile.type !== 'City'"
-      :filter="{ username: profile.username }"
-      class="mt-4 w-full border-t"
-    />
-
-    <div
-      v-if="profile.type === 'City' && profile.instagram"
-      class="bg-gray-100 py-4 flex justify-center"
-    >
-      <div class="max-w-md py-4 space-y-1">
-        <div class="flex justify-center"></div>
-        <h3 class="text-2xl font-extrabold text-center">
-          {{ $t('profile.follow.title') }}
-        </h3>
-        <p class="text-center">
-          {{ $t('profile.follow.description') }}
-        </p>
-        <div class="p-4 flex flex-wrap gap-2 items-center justify-center">
-          <TButton
-            v-if="profile.youtube"
-            allow-guests
-            icon="youtube"
-            type="round"
-            icon-size="6"
-            :href="profile.youtube"
-          />
-          <TButton
-            v-if="profile.instagram"
-            allow-guests
-            icon="instagram"
-            type="round"
-            icon-size="6"
-            :href="profile.instagram"
-          />
-          <TButton
-            v-if="profile.telegram"
-            allow-guests
-            icon="telegram"
-            type="round"
-            icon-size="6"
-            :href="profile.telegram"
-          />
-          <TButton
-            v-if="profile.twitter"
-            allow-guests
-            icon="twitter"
-            type="round"
-            icon-size="6"
-            :href="profile.twitter"
-          />
-          <TButton
-            v-if="profile.tiktok"
-            allow-guests
-            icon="tiktok"
-            type="round"
-            icon-size="6"
-            :href="profile.tiktok"
-          />
-          <TButton
-            v-if="profile.facebook"
-            allow-guests
-            icon="facebook"
-            type="round"
-            icon-size="6"
-            :href="profile.facebook"
-          />
-        </div>
-      </div>
-    </div>
-
-    <div>
-      <h3 class="text-2xl font-extrabold text-center p-4">
-        Dance Events Near Me
-      </h3>
-      <ul>
-        <li
-          v-for="style in ['Salsa', 'Bachata', 'Kizomba', 'Zouk', 'Afrobeats']"
-          :key="style"
-          class="p-4 border-t w-full"
-        >
-          <nuxt-link :to="localePath(`/${profile.username}?style=${style}`)"
-            >{{ style }} in {{ profile.name }}</nuxt-link
-          >
-        </li>
-      </ul>
-    </div>
+    <TSeoLinks :profile="profile" class="p-4" />
   </div>
 </template>
 
 <script>
-import { computed, onMounted } from 'vue-demi'
-import { useApp } from '~/use/app'
 import { useAuth } from '~/use/auth'
-import { useProfiles } from '~/use/profiles'
-import { getExcerpt, getCityMeta, getDateObect } from '~/utils'
 import { useDoc } from '~/use/doc'
-import { useCities } from '~/use/cities'
+import { useProfiles } from '~/use/profiles'
+import { getExcerpt, getDateObect } from '~/utils'
 
 export default {
   props: {
@@ -370,44 +77,118 @@ export default {
       type: Object,
       default: () => ({}),
     },
+    view: {
+      type: String,
+      default: 'parties',
+    },
   },
   head() {
-    return getCityMeta(this.profile, [], this.$route.query.style)
+    const profile = this.profile
+    const style = this.$route.query.style || ''
+    const cityName = profile.name.replace(',', '')
+    const city = cityName
+    const view = this.view
+
+    const title = this.$t(`explore.${view}.title`, { city, style })
+    const description = this.$t(`explore.${view}.description`, {
+      city,
+      style,
+      referenceStyle: style || 'Salsa',
+    })
+    const keywords = this.$t(`explore.${view}.keywords`, { city, style })
+
+    const schema = {
+      '@context': 'https://schema.org',
+      '@type': 'WebPage',
+      name: title,
+      description,
+      url: `https://wedance.vip/explore/${profile.username}`,
+      isPartOf: {
+        '@type': 'WebSite',
+        name: 'WeDance',
+        url: 'https://wedance.vip',
+      },
+    }
+
+    const breadcrumbs = [
+      { name: 'Home', url: 'https://wedance.vip/' },
+      { name: 'Explore', url: 'https://wedance.vip/explore/' },
+      { name: city, url: `https://wedance.vip/explore/${profile.username}` },
+    ]
+
+    const breadcrumbSchema = {
+      '@context': 'https://schema.org',
+      '@type': 'BreadcrumbList',
+      itemListElement: breadcrumbs.map((crumb, index) => ({
+        '@type': 'ListItem',
+        position: index + 1,
+        name: crumb.name,
+        item: crumb.url,
+      })),
+    }
+
+    return {
+      title,
+      meta: [
+        {
+          hid: 'description',
+          name: 'description',
+          content: description,
+        },
+        {
+          hid: 'keywords',
+          name: 'keywords',
+          content: keywords,
+        },
+        {
+          hid: 'og:title',
+          property: 'og:title',
+          content: title,
+        },
+        {
+          hid: 'og:type',
+          property: 'og:type',
+          content: 'website',
+        },
+        {
+          hid: 'og:description',
+          property: 'og:description',
+          content: description,
+        },
+        {
+          hid: 'og:image',
+          property: 'og:image',
+          content: profile.photo,
+        },
+      ],
+      script: [
+        {
+          hid: 'schema',
+          type: 'application/ld+json',
+          json: schema,
+        },
+        {
+          hid: 'breadcrumbs',
+          type: 'application/ld+json',
+          json: breadcrumbSchema,
+        },
+      ],
+    }
   },
-  setup(props) {
-    const internationalChatLink = 'https://t.me/+Vxw15sDG-dWpqHDj'
+  setup() {
     const { uid, isAdmin, can } = useAuth()
     const { profileFields } = useProfiles()
-    const { getCity } = useApp()
-    const { remove } = useDoc('profiles')
-    const { load, doc: promo } = useDoc('posts')
-    const invitesLeft = 5
-    const { switchCity } = useCities()
-    const community = computed(() => getCity(props.profile?.place))
-
-    const subscribersCount = computed(() => {
-      return props.profile?.watch?.usernames?.length || 0
-    })
-
-    onMounted(async () => {
-      await switchCity(props.profile.place)
-      load('yEfJWBnepn0u6gOVmUor')
-    })
+    const { remove, softUpdate } = useDoc('profiles')
 
     return {
       getDateObect,
-      promo,
-      internationalChatLink,
-      uid,
-      can,
       getExcerpt,
-      profileFields,
-      getCity,
+      uid,
       isAdmin,
-      community,
-      invitesLeft,
-      subscribersCount,
+      can,
+      profileFields,
       remove,
+      softUpdate,
     }
   },
 }

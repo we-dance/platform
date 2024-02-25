@@ -1,7 +1,7 @@
 <template>
   <div>
     <THeader>
-      <t-input v-model="query" placeholder="Search city" />
+      <t-input v-model="query" placeholder="Search city" auto-focus />
     </THeader>
 
     <div v-if="!query">
@@ -9,17 +9,13 @@
         v-for="city in recommendations"
         :key="city.username"
         class="border-b block p-4 cursor-pointer hover:bg-red-100"
-        :to="localePath(`/${city.username}`)"
+        :to="localePath(`/explore/${city.username}`)"
       >
         <div class="text-lg">
           {{ city.name }}
         </div>
         <div class="flex space-x-2 items-center">
           <div class="text-xs">{{ city.viewsCount }} views</div>
-          <div
-            v-if="city.website"
-            class="rounded-full w-2 h-2 bg-green-500"
-          ></div>
         </div>
       </router-link>
     </div>
@@ -47,9 +43,9 @@ import { getPlacePredictions } from '~/use/google'
 import { useAuth } from '~/use/auth'
 
 export default {
-  setup() {
+  setup(props, { root }) {
     const { switchCity, city } = useCities()
-    const { router, route } = useRouter()
+    const { router } = useRouter()
     const { updateProfile } = useAuth()
 
     const docs = ref([])
@@ -57,11 +53,14 @@ export default {
     async function changeCity(placeId) {
       await switchCity(placeId)
       await updateProfile({ current: placeId })
-      const target = route.query.target || `/${city.value.username}`
-      router.push(target)
+      router.push(`/explore/${city.value.username}`)
     }
 
-    const query = ref('')
+    const query = ref(root.$route.query.q || '')
+
+    watch(query, (q) => {
+      history.pushState({}, null, root.$route.path + `?q=${q}`)
+    })
 
     const recommendations = computed(() => {
       const results = uniqBy(

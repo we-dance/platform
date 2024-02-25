@@ -3,7 +3,7 @@
     <TInputAddress v-model="internalValue" />
 
     <div v-if="venue" class="p-4">
-      <div v-if="rooms">
+      <div v-if="rooms && !hideAreas">
         <TField
           v-model="room"
           component="TRichSelect"
@@ -14,6 +14,7 @@
       </div>
 
       <TPopupEdit
+        v-if="!hideAreas"
         label="Edit Map and Areas"
         type="link"
         collection="venues"
@@ -55,6 +56,10 @@ export default {
     placeholder: {
       type: String,
       default: 'Search place or address',
+    },
+    hideAreas: {
+      type: Boolean,
+      default: false,
     },
   },
   data: () => ({

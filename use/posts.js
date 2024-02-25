@@ -70,11 +70,6 @@ export const usePosts = () => {
       description: t('postFields.description.description'),
     },
     {
-      name: 'url',
-      hideLabel: true,
-      placeholder: t('postFields.url.placeholder'),
-    },
-    {
       name: 'cover',
       component: 'TInputPhoto',
       width: 500,

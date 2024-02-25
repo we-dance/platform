@@ -2,7 +2,25 @@
   <div class="flex flex-col" style="height: 100vh">
     <div class="p-4 flex space-x-4">
       <div>{{ events.length }} events</div>
-      <TInputButtons v-model="onlyLast" :options="onlyLastOptions" />
+      <t-rich-select
+        v-model="orderBy"
+        placeholder="Sort"
+        :options="[
+          {
+            label: 'Created At',
+            value: 'createdAt',
+          },
+          {
+            label: 'Start Date',
+            value: 'startDate',
+          },
+          {
+            label: 'Views Count',
+            value: 'viewsCount',
+          },
+        ]"
+        hide-search-box
+      />
     </div>
     <ag-grid-vue
       class="ag-theme-alpine mt-4"
@@ -33,11 +51,7 @@ export default {
   setup() {
     const { getCity } = useApp()
 
-    const onlyLast = ref(true)
-    const onlyLastOptions = [
-      { value: false, label: 'All' },
-      { value: true, label: 'Last 100' },
-    ]
+    const orderBy = ref('createdAt')
 
     const columns = computed(() => [
       { field: 'id' },
@@ -46,14 +60,17 @@ export default {
         cellRenderer: (params) =>
           `<a target="blank" href="/events/${
             params.data.id
-          }" class="underline text-primary">${params.data.name || ''}</a>`,
+          }" class="underline text-primary">${params.data.name ||
+            params.data.title ||
+            ''}</a>`,
         resizable: true,
       },
       {
         field: 'organiser',
+        valueGetter: (params) => params.data.org?.username || '',
       },
       {
-        field: 'views',
+        field: 'viewsCount',
       },
       {
         field: 'cover',
@@ -65,7 +82,7 @@ export default {
         resizable: true,
       },
       {
-        field: 'community',
+        field: 'city',
         valueGetter: (params) =>
           params.data.place ? getCity(params.data.place) : 'International',
       },
@@ -91,11 +108,6 @@ export default {
       {
         field: 'type',
       },
-      {
-        field: 'promo',
-        valueGetter: (params) => params.data.promo,
-      },
-      { field: 'visibility' },
     ])
 
     const api = ref(null)
@@ -109,12 +121,10 @@ export default {
 
     const load = () => {
       let collection = firestore
-        .collection('events')
-        .orderBy('createdAt', 'desc')
+        .collection('posts')
+        .orderBy(orderBy.value, 'desc')
 
-      if (onlyLast.value) {
-        collection = collection.limit(100)
-      }
+      collection = collection.limit(100)
 
       collection.get().then((snapshot) => {
         events.value = snapshot.docs.map((doc) => ({
@@ -124,7 +134,7 @@ export default {
       })
     }
 
-    watch(onlyLast, load)
+    watch(orderBy, load)
 
     onMounted(load)
 
@@ -132,8 +142,7 @@ export default {
       events,
       columns,
       onGridReady,
-      onlyLast,
-      onlyLastOptions,
+      orderBy,
     }
   },
 }

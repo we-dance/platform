@@ -34,7 +34,7 @@
       type="text"
       :placeholder="placeholder"
       autocomplete="off"
-      class="w-full px-3 py-2 bg-gray-50 text-sm rounded border focus:outline-none focus:shadow-outline border-gray-300"
+      class="w-full px-3 py-2 bg-white text-sm rounded border focus:outline-none focus:shadow-outline border-gray-300"
     />
     <div v-if="!autocomplete" class="text-gray-500">Loading...</div>
   </div>

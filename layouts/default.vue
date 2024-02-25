@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="border-t-2 border-primary">
     <TBanner
       v-if="false"
       v-model="bannerV3Beta"
@@ -12,7 +12,7 @@
     />
 
     <div
-      class="font-sans leading-normal tracking-normal antialiased min-h-screen flex flex-col mx-auto max-w-2xl border-r"
+      class="font-sans leading-normal tracking-normal antialiased min-h-screen mx-auto max-w-2xl border-r"
     >
       <TPopup
         v-if="showAuthPopup"
@@ -35,13 +35,13 @@
 
       <div
         v-if="isMenuOpen"
-        class="fixed w-full h-full top-0 left-0 bg-black opacity-50 z-20"
+        class="fixed w-full h-full top-0 left-0 bg-black opacity-50 z-50"
         @click="isMenuOpen = false"
       />
       <transition name="slide">
         <div
           v-if="isMenuOpen"
-          class="bg-white fixed left-0 w-56 bottom-0 top-0 z-30 shadow-lg md:hidden"
+          class="bg-white fixed left-0 w-56 bottom-0 top-0 z-50 shadow-lg md:hidden"
         >
           <MainNavigation :uid="uid" :username="username" />
         </div>
@@ -49,13 +49,13 @@
 
       <THamburger v-model="isMenuOpen" class="absolute mt-2 md:hidden" />
 
-      <div class="flex-grow flex">
+      <div class="flex">
         <MainNavigation
           :uid="uid"
           :username="username"
-          class="hidden md:block flex-initial w-64"
+          class="hidden md:block w-52 shrink-0"
         />
-        <nuxt class="flex-grow w-full" />
+        <nuxt class="min-w-0 w-full" />
       </div>
     </div>
   </div>
@@ -181,11 +181,7 @@ export default {
     },
   },
   head() {
-    return {
-      htmlAttrs: {
-        lang: this.$i18n.locale,
-      },
-    }
+    return this.$nuxtI18nSeo()
   },
   setup() {
     const {

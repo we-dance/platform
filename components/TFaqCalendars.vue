@@ -3,7 +3,7 @@
     <div>
       <div class="mx-auto max-w-4xl divide-y divide-gray-900/10">
         <h2 class="text-lg font-bold leading-10 tracking-tight text-gray-900">
-          FAQ
+          {{ title }}
         </h2>
         <dl class="space-y-2 divide-y divide-gray-900/10">
           <div v-for="faq in faqs" :key="faq.question" class="pt-2 px-2">
@@ -49,6 +49,10 @@ import { ref } from '@nuxtjs/composition-api'
 
 export default {
   props: {
+    title: {
+      type: String,
+      default: 'FAQs',
+    },
     faqs: {
       type: Array,
       default: () => [],

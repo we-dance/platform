@@ -1,28 +1,15 @@
 <template>
-  <div>
-    <TInput
-      v-model="computedValue"
-      trim="[^a-z0-9._\-]+"
-      v-bind="$attrs"
-      @input="save"
-    />
-    <div v-if="error" class="p-4 text-red-500">{{ error }}</div>
-  </div>
+  <TInput
+    v-model="internalValue"
+    trim="[^a-z0-9._\-]+"
+    maxlength="30"
+    v-bind="$attrs"
+  />
 </template>
 
 <script>
-import { useDoc } from '~/use/doc'
-
 export default {
   name: 'TInputUsername',
-  setup() {
-    const { find, id } = useDoc('profiles')
-
-    return {
-      find,
-      id,
-    }
-  },
   inheritAttrs: false,
   props: {
     value: {
@@ -37,38 +24,25 @@ export default {
       type: Object,
       default: () => ({}),
     },
-  },
-  data: () => ({
-    computedValue: '',
-    error: '',
-  }),
-  watch: {
-    value(val) {
-      if (val) {
-        this.computedValue = this.value
-      }
+    lowerCase: {
+      type: Boolean,
+      default: false,
     },
   },
-  mounted() {
-    this.computedValue = this.value
-  },
-  methods: {
-    async save(newName) {
-      this.error = ''
+  computed: {
+    internalValue: {
+      get() {
+        return this.value
+      },
+      set(val) {
+        let newVal = val
 
-      if (newName === this.value) {
-        return
-      }
+        if (this.lowerCase) {
+          newVal = (newVal || '').toLowerCase()
+        }
 
-      await this.find('username', newName)
-
-      if (this.id && this.id !== this.item.id) {
-        this.error = 'This name is already taken'
-        this.$emit('input', this.value)
-        return
-      }
-
-      this.$emit('input', newName)
+        this.$emit('input', newVal)
+      },
     },
   },
 }

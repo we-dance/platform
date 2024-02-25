@@ -4,6 +4,8 @@
       v-if="value && value.username"
       :username="value.username"
       :fallback="value"
+      hide-role
+      hide-buttons
     >
       <template v-slot:right>
         <TDropdown v-slot="{ closeMenu }">
@@ -152,7 +154,7 @@ export default {
     const { eventRoleOptions } = useEvents()
     const { create: createProfile } = useDoc('profiles')
 
-    if (typeof props.value === 'string') {
+    if (typeof props.value === 'string' && props.value) {
       emit('input', { username: props.value })
     }
 

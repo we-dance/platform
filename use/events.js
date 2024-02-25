@@ -45,7 +45,7 @@ export async function getEventsWithGuest(username) {
   const result = await firebase
     .firestore()
     .collection('posts')
-    .where(`star.list.${username}`, '==', true)
+    .where(`star.usernames`, 'array-contains', username)
     .get()
 
   return result.docs.map((doc) => ({
@@ -130,11 +130,13 @@ export const useEvents = () => {
       label: t('events.typelist.party'),
       value: 'Party',
       icon: '🎵',
+      festival: true,
     },
     {
       label: t('events.typelist.workshop'),
       value: 'Workshop',
       icon: '🎓',
+      festival: true,
     },
     {
       label: t('events.typelist.course'),
@@ -155,11 +157,13 @@ export const useEvents = () => {
       label: t('events.typelist.concert'),
       value: 'Concert',
       icon: '🎵',
+      festival: true,
     },
     {
       label: t('events.typelist.show'),
       value: 'Show',
       icon: '🎵',
+      festival: true,
     },
     {
       label: t('events.typelist.other'),
@@ -311,6 +315,13 @@ export const useEvents = () => {
       simple: true,
     },
     {
+      name: 'venueProfile',
+      component: 'TInputProfile',
+      label: t('event.venueProfile.label'),
+      before: t('event.venueProfile.description'),
+      labelPosition: 'top',
+    },
+    {
       name: 'venue',
       label: t('event.venue'),
       labelPosition: 'top',
@@ -324,6 +335,14 @@ export const useEvents = () => {
       labelPosition: 'top',
       component: 'TInputPlace',
       clearable: true,
+    },
+    {
+      name: 'online',
+      label: 'Is it available online?',
+      component: 'TInputButtons',
+      options: ['Yes', 'No'],
+      before: 'Streaming via Zoom, Google Meet, Instagram Live, etc.?',
+      labelPosition: 'top',
     },
     {
       name: 'price',
@@ -350,51 +369,6 @@ export const useEvents = () => {
       label: t('event.org.label'),
       description: t('event.org.description'),
       labelPosition: 'top',
-    },
-    {
-      name: 'artists',
-      component: 'TInputArray',
-      children: {
-        component: 'TInputProfile',
-      },
-      label: t('event.artists'),
-      labelPosition: 'top',
-    },
-    {
-      name: 'program',
-      component: 'TInputArray',
-      children: {
-        component: 'TInputEvent',
-      },
-      labelPosition: 'top',
-    },
-    {
-      name: 'gallery',
-      labelPosition: 'top',
-      placeholder: t('event.gallery.placeholder'),
-      label: t('event.gallery.label'),
-      description: t('event.gallery.description'),
-    },
-    {
-      name: 'playlist',
-      labelPosition: 'top',
-      placeholder: t('event.playlist.placeholder'),
-      label: t('event.playlist.label'),
-      description: t('event.playlist.description'),
-    },
-    {
-      name: 'paypal',
-      labelPosition: 'top',
-      placeholder: t('event.paypal.placeholder'),
-      label: t('event.paypal.label'),
-      description: t('event.paypal.description'),
-    },
-    {
-      name: 'review',
-      labelPosition: 'top',
-      placeholder: t('event.review.placeholder'),
-      label: t('event.review.label'),
-      description: t('event.review.description'),
     },
     {
       name: 'facebook',

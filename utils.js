@@ -470,13 +470,20 @@ export const getListOfStyles = (styles, extra) => {
   ]
 }
 
-export const getCityMeta = (profile, events = null, style = '') => {
+export const getCityMeta = (
+  profile,
+  events = null,
+  style = '',
+  view = 'parties'
+) => {
   if (!profile) {
     return {}
   }
 
   const cityName = profile.name.replace(',', '')
-  const title = `${cityName} ${style} Dance Calendar`
+  const title = `Dance ${style}${
+    view === 'parties' ? ' Parties' : ' Classes'
+  } in ${cityName} | Dance Calendar | WeDance`
   const description = `Explore a variety of ${style} dance events happening in ${cityName}. From ${style ||
     'salsa'} nights to bachata workshops, find your next dance adventure here.`
   const keywords = `Where can I dance ${style} in ${cityName}, ${cityName} ${style} Dance Events, ${style} Dance Classes in ${cityName}, ${cityName} ${style} Dance Workshops, ${cityName} ${style} Dance Parties, ${cityName} ${style} Dance Calendar, ${style} Dance Studios ${cityName}, ${style} ${cityName} Dance Community, Popular ${style} Dance Styles ${cityName}`
@@ -487,60 +494,7 @@ export const getCityMeta = (profile, events = null, style = '') => {
     name: title,
     description,
     image: profile.photo,
-    url: `https://wedance.vip/${profile.username}`,
-    numberOfItems: events.length,
-    itemListElement: events.map((event, index) => ({
-      '@type': 'ListItem',
-      position: index + 1,
-      item: {
-        '@type': 'DanceEvent',
-        name: event.name,
-        description: event.description,
-        image: event.socialCover || event.cover,
-        startDate: event.startDate
-          ? getDateObect(event.startDate).toISOString()
-          : '',
-        endDate: event.endDate ? getDateObect(event.endDate).toISOString() : '',
-        url: `https://wedance.vip/events/${event.id}`,
-        eventStatus: 'https://schema.org/EventScheduled',
-        eventAttendanceMode: 'https://schema.org/OfflineEventAttendanceMode',
-        location: {
-          '@type': 'Place',
-          address: {
-            '@type': 'PostalAddress',
-            contactType: 'Venue Manager',
-            addressLocality: addressPart(event?.venue, 'locality'),
-            addressRegion: addressPart(
-              event?.venue,
-              'administrative_area_level_1'
-            ),
-            streetAddress:
-              addressPart(event?.venue, 'route') +
-              ' ' +
-              addressPart(event?.venue, 'street_number'),
-            postalCode: addressPart(event?.venue, 'postal_code'),
-          },
-          name: event.venue?.name,
-          url: event.venue?.url,
-        },
-        offers: {
-          '@type': 'Offer',
-          price: event.price,
-        },
-        organizer: {
-          '@type': 'Person',
-          image: event?.org?.photo,
-          name: event?.org?.name,
-          description: event?.org?.bio,
-          sameAs: [
-            `https://wedance.vip/${event?.org?.username}`,
-            event?.org?.website,
-            event?.org?.facebook,
-            event?.org?.instagram,
-          ].filter((n) => !!n),
-        },
-      },
-    })),
+    url: `https://wedance.vip/explore/${profile.username}`,
   }
 
   return {
@@ -722,7 +676,10 @@ export const getEventMeta = (event) => {
         event?.org?.instagram,
       ].filter((n) => !!n),
     },
-    performer: event.artists?.map((artist) => ({
+  }
+
+  if (event.artists?.length) {
+    schema.performer = event.artists?.map((artist) => ({
       '@type': 'Person',
       image: artist?.photo,
       name: artist?.name,
@@ -733,7 +690,7 @@ export const getEventMeta = (event) => {
         artist?.facebook,
         artist?.instagram,
       ].filter((n) => !!n),
-    })),
+    }))
   }
 
   return {

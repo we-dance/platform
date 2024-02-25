@@ -27,21 +27,6 @@ post:
   delete: Usuń
   edit: Edycja
   dashboard: Dashboard
-home:
-  cta:
-    header: Mniej gadki. Więcej tańca.
-    description: Odkryj tancerzy i wydarzenia taneczne w pobliżu
-    action: Znajdź swoje miasto
-nav:
-  travel: Travel
-  chooseCity: Wybierz miasto
-  feed: Komentarz
-  calendar: Kalendarz
-  community: Społeczność
-  chat: Rozmowa
-  dance: Style tańca
-  myProfile: Mój profil
-  settings: Ustawienia
 form:
   clear: Clear
   delete: Usuń
@@ -414,32 +399,6 @@ nopassword:
 contacts:
   email: E-mail
   website: Stronie internetowej
-teaser:
-  partner:
-    title: Potrzebujesz partnera?
-    description: Tancerze na całym świecie tworzą swoje profile, aby znaleźć partnerów do tańca
-    btn: Zobacz Społeczność
-  events:
-    title: Gdzie tańczyć?
-    description: Wszystkie kursy tańca, imprezy i festiwale w jednym miejscu
-    btn: Zobacz wydarzenia
-  profile:
-    title: Opublikuj swój profil
-    description: aby inni mogli się z Tobą skontaktować
-    btn: Dołącz za darmo
-  allevents:
-    title: Imprezy prywatne
-    description: Zostań członkiem społeczności WeDance, aby zobaczyć więcej
-    btn: Dołącz teraz
-  chat:
-    title: Looking for more events?
-    description: 'Prowadzimy rozmowy taneczne w każdym mieście'
-    btnChatExists: Ask Locals
-    btnChatMissing: Ask Travelers
-  involve:
-    title: Potrzebujemy Twojej pomocy
-    description: Jesteśmy międzynarodową społecznością taneczną non-profit. Chcemy, abyś udał się do dowolnego miasta w dowolnym kraju i znalazł imprezy taneczne i tancerzy. Wszystko zaczyna się od lokalnej społeczności.
-    btn: Zaangażować się
 share:
   title: Dzielić
   copy: Skopiuj link
@@ -580,3 +539,121 @@ EventDashboard:
   subscribed: Subscribed
   paid: Paid
   notPaid: Didn't Pay
+home:
+  title: WeDance - Podróżuj. Spotkaj się. Tańcz.
+  hero:
+    header: Podróżuj. Spotkaj się. **Tańcz.**
+    subheader: Znajdź bachatę, salsę, kizombę i więcej tanecznych wydarzeń w pobliżu. Rozszerz swój taneczny świat o socjale, zajęcia i festiwale.
+    action: Znajdź swoje miasto
+    bottom: '[Nasza misja](/about) to łączenie tancerzy na całym świecie.'
+  features:
+    explore:
+      title: Socjale, Zajęcia, Festiwale
+      description: Powiedz nie chaotycznym rozmowom!
+      action: Odkryj Wydarzenia
+    travel:
+      title: Rekomendacje
+      description: Zdobądź wskazówki od insiderów o najlepszych socjalach w każdym mieście.
+      action: Zapytaj Lokalnych
+    partner:
+      title: Partnerzy do Tańca
+      description: Znajdź partnerów do swojego stylu tańca i pozwól, by oni znaleźli ciebie.
+      action: Znajdź Partnera
+  numbers:
+    title: WeDance w Liczbach
+    countries: kraje
+    profiles: profile
+    events: wydarzenia
+  founder: '**Problem**
+
+
+    Jestem fanatykiem tańca, zawsze w kontakcie z lokalną sceną poprzez niezliczone grupy WhatsApp. Nowi tancerze często pytają mnie o nadchodzące imprezy, a śledzenie wszystkiego staje się przytłaczające.
+
+
+    **Rozwiązanie**
+
+
+    Dlatego stworzyłem WeDance! To jedno miejsce dla wydarzeń tanecznych w twoim mieście. Koniec z żonglowaniem rozmowami czy szukaniem informacji na ostatnią chwilę.
+
+
+    **Korzyści dla Tancerzy**
+
+    - **Jesteś nowy w mieście?** Znajdź najlepsze imprezy od razu.
+
+    - **Przyjaciele ciekawi twoich planów tanecznych?** Po prostu wyślij im swój profil WeDance i pozwól im wybrać ulubione wydarzenia, aby dołączyć do ciebie.
+
+
+    Brzmi świetnie, prawda? Odkryj WeDance już dziś!'
+explore:
+  nav:
+    festivals: Festiwale
+    online: Online
+    experts: Zapytaj Ekspertów
+    parties: Imprezy
+    classes: Zajęcia
+    groups: Grupy
+    tips: Zapytaj Lokalnych
+  dance:
+    title: Lista Stylów Tańca | WeDance
+    description: Odkryj historię, kulturę i style tańca z całego świata. Przeglądaj starannie wyselekcjonowaną listę stylów tańca.
+    keywords: style tańca, gatunki tańca, historia tańca, kultura tańca
+    header: Style Tańca
+    subheader: Odkryj historię, kulturę i style tańca z całego świata. Przeglądaj starannie wyselekcjonowaną listę stylów tańca.
+  global:
+    title: '{style} Festiwale Taneczne na Świecie | Kalendarz Tańca | WeDance'
+    description: '{style} Kalendarz Tańca dla Podróżujących. Planuj swoje wakacje i weekendy, aby tańczyć Salsę, Bachatę, Kizombę, Zouk i 130 innych tańców na całym świecie.'
+    keywords: '{style} festiwale taneczne, {style} kongresy tańca, {style} wakacje taneczne, {style} weekendy taneczne, {style} wycieczki taneczne, {style} podróże taneczne'
+    header: '{style} Festiwale na Świecie'
+    subheader: '{style} Kalendarz Tańca dla Podróżujących. Planuj swoje wakacje i weekendy, aby tańczyć Salsę, Bachatę, Kizombę, Zouk i 130 innych tańców na całym świecie.'
+  parties:
+    title: Imprezy {style} w {city} | Kalendarz Tańca | WeDance
+    description: Odkryj różnorodne wydarzenia taneczne {style} odbywające się w {city}. Od nocy {referenceStyle} po warsztaty bachaty, znajdź swoją następną taneczną przygodę tutaj.
+    keywords: 'Gdzie mogę tańczyć {style} w {city}, imprezy taneczne {style} {city}, socjale {style} {city}, noce {style} {city}, wydarzenia taneczne {style} {city}, spotkania taneczne {style} {city}'
+    header: '{style} Imprezy w {city}'
+    subheader: Odkryj tętniącą życiem scenę tańca {style} w {city}. Przeglądaj starannie wyselekcjonowaną listę imprez tanecznych i filtruj według swoich ulubionych stylów, takich jak Salsa, Bachata, Kizomba i więcej.
+  classes:
+    title: Zajęcia {style} w {city} | Kalendarz Tańca | WeDance
+    description: Odkryj różnorodne wydarzenia taneczne {style} odbywające się w {city}. Od nocy {referenceStyle} po warsztaty bachaty, znajdź swoją następną taneczną przygodę tutaj.
+    keywords: 'zajęcia {style} {city}, kursy {style} {city}, warsztaty {style} {city}, bootcampy {style} {city}, lekcje {style} {city}'
+    header: 'Zajęcia {style} w {city}'
+    subheader: Odkryj tętniącą życiem scenę tańca {style} w {city}. Przeglądaj starannie wyselekcjonowaną listę zajęć tanecznych i filtruj według swoich ulubionych stylów, takich jak Salsa, Bachata, Kizomba i więcej.
+  onlineclass:
+    title: 'Zajęcia {style} Online | Kalendarz Tańca | WeDance'
+    description: Nie możesz dotrzeć osobiście? Podnieś swoje umiejętności {style} na wyższy poziom dzięki naszej ofercie zajęć online.
+    keywords: '{style} zajęcia taneczne online, kursy online, warsztaty online, bootcampy online, lekcje online'
+    header: 'Zajęcia {style} Online'
+    subheader: Nie możesz dotrzeć osobiście? Podnieś swoje umiejętności {style} na wyższy poziom dzięki naszej ofercie zajęć online.
+  groups:
+    title: Grupy Taneczne w {city} | WeDance
+    description: Odkryj i połącz się z influencerami i grupami tanecznymi w {city}. Znajdź społeczności WhatsApp, Telegram, Instagram, Youtube dostosowane do twojego stylu, od Salsy po Bachatę po Kizombę. Zaangażuj się z influencerami i dołącz do tętniących życiem sieci tanecznych w {city}.
+    keywords: grupy taneczne {city}, influencerzy tańca {city}, społeczności taneczne {city}, sieci taneczne {city}, kolektywy taneczne {city}
+    header: Grupy w {city}
+    subheader: Odkryj i połącz się z influencerami i grupami tanecznymi w {city}. Znajdź społeczności WhatsApp, Telegram, Instagram, Youtube dostosowane do twojego stylu, od Salsy po Bachatę po Kizombę. Zaangażuj się z influencerami i dołącz do tętniących życiem sieci tanecznych w {city}.
+  tips:
+    title: Zapytaj Tancerzy w {city} | WeDance
+    description: Znajdź rekomendacje w czasie rzeczywistym i uzyskaj lokalne wskazówki bezpośrednio od tancerzy z {city}. Wybierz swój ulubiony styl tańca dla spersonalizowanych porad lub zapytaj społeczność o spersonalizowane rekomendacje. Oczekuj odpowiedzi zazwyczaj w ciągu 48 godzin.
+    keywords: porady taneczne {city}, rekomendacje taneczne {city}, wskazówki taneczne {city}, porady taneczne {city}, sugestie taneczne {city}
+    header: Zapytaj {city}
+    subheader: Znajdź rekomendacje w czasie rzeczywistym i uzyskaj lokalne wskazówki bezpośrednio od tancerzy z {city}. Wybierz swój ulubiony styl tańca dla spersonalizowanych porad lub zapytaj społeczność o spersonalizowane rekomendacje. Oczekuj odpowiedzi zazwyczaj w ciągu 48 godzin.
+teaser:
+  profile:
+    title: Opublikuj swój profil
+    description: aby inni mogli się z tobą skontaktować
+    btn: Dołącz za darmo
+  feed:
+    title: Szukasz więcej wydarzeń?
+    description: Zamiast szukać w wielu rozmowach, zapytaj bezpośrednio naszą lokalną społeczność taneczną na stronie. Uzyskaj spersonalizowane rekomendacje wydarzeń w dowolnym mieście od lokalnych tancerzy.
+    btn: Zapytaj Lokalnych
+nav:
+  search: Szukaj
+  events: Wydarzenia
+  festivals: Festiwale
+  partner: Znajdź Partnera
+  dance: Style Tańca
+  contribute: Przyczyniaj się
+  addEvent: Dodaj Wydarzenie
+  addReview: Poleć
+  chat: Czat
+  bookmarks: Zakładki
+  myProfile: Mój Profil
+  settings: Ustawienia

@@ -27,21 +27,6 @@ post:
   delete: Borrar
   edit: Editar
   dashboard: Panel de control
-home:
-  cta:
-    header: Menos chat. Más danza.
-    description: Descubre bailarines y eventos de baile cerca de ti
-    action: Encuentra tu ciudad
-nav:
-  travel: Viaje
-  chooseCity: Elegir ciudad
-  feed: Comentario
-  calendar: Calendario
-  community: Comunidad
-  chat: Conversaciones
-  dance: Bailes
-  myProfile: Mi perfil
-  settings: Configuraciones
 form:
   clear: Limpiar
   delete: Borrar
@@ -166,14 +151,6 @@ filter:
 community:
   title: Dance Community
   description: Looking for dance partner or new dance events? Filter profiles of local dancers and contact them.
-calendar:
-  title: Dance Calendar
-  empty: No events found
-  upcoming: Upcoming
-  past: Past
-  share:
-    text: Text
-    embed: Embed
 profile:
   claim: Claim my profile
   follow:
@@ -414,32 +391,6 @@ nopassword:
 contacts:
   email: Email
   website: Sitio web
-teaser:
-  partner:
-    title: '¿Necesitas un socio?'
-    description: Bailarines de todo el mundo crean sus perfiles para encontrar parejas de baile
-    btn: Ver comunidad
-  events:
-    title: Donde bailar
-    description: Todos los cursos de baile, fiestas y festivales en un solo lugar
-    btn: Ver eventos
-  profile:
-    title: Publica tu perfil
-    description: para que otros puedan contactarte
-    btn: Únete gratis
-  allevents:
-    title: Eventos privados
-    description: Hágase miembro de WeDance Community para ver más
-    btn: Únete ahora
-  chat:
-    title: Looking for more events?
-    description: 'Tenemos un chat de baile de Telegram en cada ciudad. Únase al chat de su ciudad para ayudar a los bailarines que viajan, invite a sus amigos de baile. ¡Construyamos WeDance juntos!'
-    btnChatExists: Ask Locals
-    btnChatMissing: Ask Travelers
-  involve:
-    title: Necesitamos tu ayuda
-    description: Somos una comunidad internacional de danza sin fines de lucro. Queremos que vayas a cualquier ciudad de cualquier país y encuentres eventos de danza y bailarines. Todo comienza con la comunidad local.
-    btn: Involucrarse
 share:
   title: Compartir
   copy: Copiar link
@@ -582,3 +533,132 @@ EventDashboard:
   subscribed: Subscribed
   paid: Paid
   notPaid: Didn't Pay
+explore:
+  nav:
+    festivals: Festivales
+    online: Online
+    experts: Preguntar a Expertos
+    parties: Fiestas
+    classes: Clases
+    groups: Grupos
+    tips: Guía Local
+  dance:
+    title: Lista de Estilos de Baile | WeDance
+    description: Descubre la historia, cultura y estilos de baile de todo el mundo. Navega a través de una lista curada de estilos de baile.
+    keywords: estilos de baile, géneros de baile, historia del baile, cultura del baile
+    header: Estilos de Baile
+    subheader: Descubre la historia, cultura y estilos de baile de todo el mundo. Navega a través de una lista curada de estilos de baile.
+  global:
+    title: 'Festivales de Baile {style} en Todo el Mundo | Calendario de Baile | WeDance'
+    description: 'Calendario de Baile {style} para Viajeros. Planea tus vacaciones y fines de semana para bailar Salsa, Bachata, Kizomba, Zouk y otros 130 bailes en diferentes partes del mundo.'
+    keywords: 'festivales de baile {style}, congresos de baile {style}, vacaciones de baile {style}, fines de semana de baile {style}, viajes de baile {style}, viajar para bailar {style}'
+    header: 'Festivales de {style} en Todo el Mundo'
+    subheader: 'Calendario de Baile {style} para Viajeros. Planea tus vacaciones y fines de semana para bailar Salsa, Bachata, Kizomba, Zouk y otros 130 bailes en diferentes partes del mundo.'
+  parties:
+    title: Fiestas de Baile {style} en {city} | Calendario de Baile | WeDance
+    description: Explora una variedad de eventos de baile {style} que ocurren en {city}. Desde noches de {referenceStyle} hasta talleres de bachata, encuentra tu próxima aventura de baile aquí.
+    header: 'Fiestas {style} en {city}'
+    subheader: Descubre la vibrante escena de baile {style} en {city}. Navega a través de una lista curada de fiestas de baile y filtra por tus estilos favoritos como Salsa, Bachata, Kizomba y más.
+  classes:
+    title: Clases de Baile {style} en {city} | Calendario de Baile | WeDance
+    description: Explora una variedad de eventos de baile {style} que ocurren en {city}. Desde noches de {referenceStyle} hasta talleres de bachata, encuentra tu próxima aventura de baile aquí.
+    header: 'Clases {style} en {city}'
+    subheader: Descubre la vibrante escena de baile {style} en {city}. Navega a través de una lista curada de clases de baile y filtra por tus estilos favoritos como Salsa, Bachata, Kizomba y más.
+  onlineclass:
+    title: 'Clases de Baile {style} Online | Calendario de Baile | WeDance'
+    description: ¿No puedes asistir en persona? Lleva tus movimientos de {style} al siguiente nivel con nuestra selección de clases online.
+    keywords: 'clases de baile {style} online, cursos de baile online, talleres de baile online, bootcamps de baile online, lecciones de baile online'
+    header: 'Clases Online de Baile {style}'
+    subheader: ¿No puedes asistir en persona? Lleva tus movimientos de {style} al siguiente nivel con nuestra selección de clases online.
+  groups:
+    title: Grupos de Baile en {city} | WeDance
+    description: Descubre y conecta con influencers y grupos de baile en {city}. Encuentra comunidades en WhatsApp, Telegram, Instagram, Youtube adaptadas a tu estilo, desde Salsa hasta Bachata y Kizomba. Interactúa con influencers y únete a vibrantes redes de baile en {city}.
+    header: Grupos en {city}
+    subheader: Descubre y conecta con influencers y grupos de baile en {city}. Encuentra comunidades en WhatsApp, Telegram, Instagram, Youtube adaptadas a tu estilo, desde Salsa hasta Bachata y Kizomba. Interactúa con influencers y únete a vibrantes redes de baile en {city}.
+  tips:
+    title: Pregunta a Bailarines en {city} | WeDance
+    description: Encuentra recomendaciones en tiempo real y obtén perspectivas locales directamente de bailarines de {city}. Elige tu estilo de baile preferido para consejos a medida, o pregunta a la comunidad por recomendaciones personalizadas. Espera respuestas típicamente en menos de 48 horas.
+    header: Pregunta en {city}
+    subheader: Encuentra recomendaciones en tiempo real y obtén perspectivas locales directamente de bailarines de {city}. Elige tu estilo de baile preferido para consejos a medida, o pregunta a la comunidad por recomendaciones personalizadas. Espera respuestas típicamente en menos de 48 horas.
+calendar:
+  title: Calendario de Baile
+  empty: No se encontraron eventos
+  upcoming: Próximos
+  past: Pasados
+  addEvent: Añadir
+  filters:
+    style: Estilo de Baile
+    level: Nivel
+  levels:
+    Beginner: Principiante
+    Intermediate: Intermedio
+    Advanced: Avanzado
+  share:
+    text: Texto
+    embed: Incrustar
+nav:
+  search: Buscar
+  events: Eventos
+  festivals: Festivales
+  partner: Encontrar Pareja
+  dance: Estilos de Baile
+  contribute: Contribuir
+  addEvent: Evento
+  addReview: Consejo
+  chat: Chat
+  myProfile: Mi Perfil
+  settings: Ajustes
+teaser:
+  profile:
+    title: Publica tu perfil
+    description: para que otros puedan contactarte
+    btn: Únete gratis
+  feed:
+    title: ¿Buscas más eventos?
+    description: En lugar de buscar en múltiples chats, pregunta directamente a nuestra comunidad local de baile en el sitio web. Obtén recomendaciones personalizadas para eventos en cualquier ciudad de bailarines locales.
+    btn: Pregunta a Locales
+home:
+  title: WeDance - Viajar. Conocer. Bailar.
+  hero:
+    header: Viajar. Conocer. **Bailar.**
+    subheader: Encuentra eventos de bachata, salsa, kizomba y más cerca de ti. Amplía tu mundo de baile con sociales, clases y festivales.
+    action: Encuentra tu ciudad
+    bottom: '[Nuestra misión](/about) es unir a bailarines de todo el mundo.'
+  features:
+    explore:
+      title: Sociales, Clases, Festivales
+      description: ¡Di adiós a los chats caóticos!
+      action: Explorar Eventos
+    travel:
+      title: Recomendaciones
+      description: Obtén consejos de expertos sobre los mejores sociales en cualquier ciudad.
+      action: Preguntar a Locales
+    partner:
+      title: Parejas de Baile
+      description: Encuentra parejas de baile para tu estilo y permite que ellos te encuentren.
+      action: Buscar Pareja
+  numbers:
+    title: WeDance en Números
+    countries: países
+    profiles: perfiles
+    events: eventos
+  founder: '**El Problema**
+
+
+    Soy un fanático del baile, siempre conectado con la escena local a través de innumerables grupos de WhatsApp. Los nuevos bailarines a menudo me preguntan sobre las próximas fiestas, y se volvió abrumador llevar un registro de todo.
+
+
+    **La Solución**
+
+
+    ¡Por eso creé WeDance! Es la solución integral para eventos de baile en tu ciudad. No más malabares con chats o búsqueda frenética de información.
+
+
+    **Beneficios para Bailarines**
+
+    - **¿Nuevo en la ciudad?** Encuentra las fiestas más populares al instante.
+
+    - **¿Amigos curiosos sobre tus planes de baile?** Solo envíales tu perfil de WeDance y déjalos elegir sus eventos favoritos para unirse a ti.
+
+
+    ¿Suena increíble, verdad? ¡Explora WeDance hoy!'

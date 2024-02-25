@@ -1,14 +1,21 @@
 <template>
   <div>
-    <div class="bg-gray-200 p-2 pl-12 md:pl-2">
+    <THeader>
       <TInput
         v-model="query"
         auto-focus
         placeholder="Search profiles and events"
-        class="rounded-full"
         @input="search"
       />
+    </THeader>
+
+    <div class="text-xs p-4 border-b">
+      Searching a city?
+      <NuxtLink class="underline hover:no-underline font-bold" to="/explore"
+        >Choose City</NuxtLink
+      >
     </div>
+
     <NuxtLink
       v-for="item in response.hits"
       :key="item.id"
@@ -25,7 +32,12 @@
         </div>
       </div>
     </NuxtLink>
-    <div class="font-bold p-4 border-b">Upcoming Events</div>
+    <div
+      v-if="responseEvents.hits && responseEvents.hits.length"
+      class="font-bold p-4 border-b"
+    >
+      Upcoming Events
+    </div>
     <TEventText4
       v-for="item in responseEvents.hits"
       :id="item.id"
@@ -45,13 +57,18 @@
 </template>
 
 <script>
-import { ref } from 'vue-demi'
+import { ref, watch } from 'vue-demi'
 import { useAlgolia } from '~/use/algolia'
 import { getDateObect } from '~/utils'
 
 export default {
-  setup() {
-    const query = ref('')
+  setup(props, { root }) {
+    const query = ref(root.$route.query.q || '')
+
+    watch(query, (q) => {
+      history.pushState({}, null, root.$route.path + `?q=${q}`)
+    })
+
     const { search: searchProfiles, response } = useAlgolia('profiles')
     const { search: searchEvents, response: responseEvents } = useAlgolia(
       'events'
@@ -63,6 +80,10 @@ export default {
     const fromDate = ref(today)
 
     async function search() {
+      if (!query.value) {
+        return
+      }
+
       await searchProfiles(query.value)
 
       const searchParams = {
@@ -72,9 +93,6 @@ export default {
     }
 
     return { query, search, response, responseEvents, getDateObect }
-  },
-  mounted() {
-    this.search()
   },
 }
 </script>

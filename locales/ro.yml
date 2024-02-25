@@ -27,21 +27,6 @@ post:
   delete: Delete
   edit: Edit
   dashboard: Dashboard
-home:
-  cta:
-    header: Less chats. More dance.
-    description: Discover dancers and dance events near you
-    action: Find your city
-nav:
-  travel: Travel
-  chooseCity: Choose City
-  feed: Comentariu
-  calendar: Calendar
-  community: Community
-  chat: Conversaţie
-  dance: Dances
-  myProfile: My Profile
-  settings: Setări
 form:
   clear: Clear
   delete: Delete
@@ -414,32 +399,6 @@ nopassword:
 contacts:
   email: E-mail
   website: Site-ul web
-teaser:
-  partner:
-    title: Ai nevoie de un partener?
-    description: Dansatorii din întreaga lume își creează profilurile pentru a găsi parteneri de dans
-    btn: A se vedea Comunitatea
-  events:
-    title: Unde să dansezi?
-    description: Toate cursurile de dans, petreceri și festivaluri într-un singur loc
-    btn: Vezi Evenimente
-  profile:
-    title: Publică-ți profilul
-    description: pentru ca alții să vă poată contacta
-    btn: Înscrie-te gratis
-  allevents:
-    title: Evenimente private
-    description: Deveniți membru al comunității WeDance pentru a vedea mai multe
-    btn: Alătură-te acum
-  chat:
-    title: Looking for more events?
-    description: 'Avem discuții de dans în fiecare oraș'
-    btnChatExists: Ask Locals
-    btnChatMissing: Ask Travelers
-  involve:
-    title: Noi avem nevoie de ajutorul tau
-    description: Suntem o comunitate internațională de dans non-profit. Vrem să mergeți în orice oraș din orice țară și să găsiți evenimente de dans și dansatori. Totul începe cu comunitatea locală.
-    btn: A se implica
 share:
   title: Acțiune
   copy: Copiază legătură
@@ -580,3 +539,121 @@ EventDashboard:
   subscribed: Subscribed
   paid: Paid
   notPaid: Didn't Pay
+home:
+  title: WeDance - Călătorii. Întâlniri. Dans.
+  hero:
+    header: Călătorii. Întâlniri. **Dans.**
+    subheader: Găsește petreceri de bachata, salsa, kizomba și altele aproape de tine. Extinde-ți lumea dansului cu seri sociale, cursuri și festivaluri.
+    action: Găsește-ți orașul
+    bottom: '[Misiunea noastră](/about) este să unim dansatori din întreaga lume'
+  features:
+    explore:
+      title: Seri sociale, Cursuri, Festivaluri
+      description: La revedere grupurilor de chat haotice!
+      action: Explorează Evenimente
+    travel:
+      title: Recomandări
+      description: Pontul perfect pentru cele mai tari petreceri din orice oraș.
+      action: Întreabă localnicii
+    partner:
+      title: Parteneri de Dans
+      description: Găsește parteneri care dansează stilul tău și lasă-i să te găsească.
+      action: Caută Partener
+  numbers:
+    title: WeDance în Cifre
+    countries: țări
+    profiles: profile
+    events: evenimente
+  founder: '**Problema**
+
+
+    Sunt nebun după dans, mereu în priză cu scena locală prin nenumărate grupuri de WhatsApp. Dansatorii noi mă întreabă unde să petreacă, și a început să mă copleșească.
+
+
+    **Soluția**
+
+
+    Așa că am creat WeDance! E locul unde găsești toate evenimentele din orașul tău. Gata cu grupurile de chat încurcate sau alergatul după informații.
+
+
+    **Beneficii pentru Dansatori**
+
+    - **Nou în zonă?** Găsește party-uri demențiale într-o clipă.
+
+    - **Prietenii vor să vadă ce planuri de dans ai?** Trimite-le profilul tău de WeDance și lasă-i să își aleagă petrecerile preferate.
+
+
+    Tare, nu? Explorează WeDance chiar azi!'
+explore:
+  nav:
+    festivals: Festivaluri
+    online: Online
+    experts: Întreabă Experții
+    parties: Petreceri
+    classes: Cursuri
+    groups: Grupuri
+    tips: Întreabă Localnicii
+  dance:
+    title: Lista de Stiluri de Dans | WeDance
+    description: Descoperă istoria, cultura și stiluri de dans din toată lumea. Explorează o listă curată de stiluri.
+    keywords: stiluri de dans, genuri de dans, istorie dans, cultură dans
+    header: Stiluri de Dans
+    subheader: Descoperă istoria, cultura și stiluri de dans din toată lumea. Explorează o listă curată de stiluri.
+  global:
+    title: '{style} Festivaluri de Dans în Toată Lumea | Calendar | WeDance'
+    description: '{style} Calendar de Dans pentru Călători. Plănuiește-ți vacanțele și weekendurile pentru a dansa Salsa, Bachata, Kizomba, Zouk și peste 130 de alte dansuri în toată lumea.'
+    keywords: '{style} festivaluri de dans, {style} congrese de dans, {style} vacanțe de dans, {style} weekenduri de dans, {style} călătorii cu dans, {style} dans și călătorii'
+    header: '{style} Festivaluri în Toată Lumea'
+    subheader: '{style} Calendar de Dans pentru Călători. Plănuiește-ți vacanțele și weekendurile pentru a dansa Salsa, Bachata, Kizomba, Zouk și peste 130 de alte dansuri în toată lumea.'
+  parties:
+    title: Petreceri de {style} în {city} | Calendar de Dans | WeDance
+    description: Explorează o varietate de evenimente de {style} care au loc în {city}. De la seri cu {referenceStyle} până la ateliere de bachata, găsește-ți următoarea aventură de dans aici.
+    keywords: 'Unde pot dansa {style} în {city}, {style} petreceri {city}, {style} seri sociale {city}, {style} seri nocturne {city}, {style} evenimente de dans {city}, {style} întâlniri de dans {city}'
+    header: '{style} Petreceri în {city}'
+    subheader: Descoperă scena vibrantă de {style} în {city}. Navighează printr-o listă curată de petreceri de dans și filtrează după stilurile tale favorite precum Salsa, Bachata, Kizomba și multe altele.
+  classes:
+    title: Cursuri de {style} în {city} | Calendar | WeDance
+    description: Explorează o diversitate de {style} evenimente din {city}. De la seri de {referenceStyle} la workshopuri de bachata, aici îți găsești următoarea escapadă în dans.
+    keywords: '{style} cursuri de dans {city}, {style} ore de dans{city}, {style} workshopuri de dans {city}, {style} sesiuni intensive de dans {city}, {style} lecții de dans {city}'
+    header: '{style} Cursuri în {city}'
+    subheader: Descoperă scena vibrantă de {style} în {city}. Navighează printr-o listă curată de cursuri de dans și filtrează după stilurile tale favorite precum Salsa, Bachata, Kizomba și multe altele.
+  onlineclass:
+    title: '{style} Cursuri Online  | Calendar | WeDance'
+    description: Nu poți să ajungi în persoană? Du-ți mișcările de {style} la următorul nivel cu selecția noastră de cursuri online.
+    keywords: '{style} cursuri de dans online, cursuri online, workshopuri de dans online, bootcamps de dans online, lecții de dans online'
+    header: '{style} Cursuri Online'
+    subheader: Nu poți să ajungi în persoană? Du-ți mișcările de {style} la următorul nivel cu selecția noastră de cursuri online.
+  groups:
+    title: Grupuri de Dans în {city} | WeDance
+    description: Descoperă și conectează-te cu influenceri de dans și grupuri din {city}. Găsește comunități de WhatsApp, Telegram, Instagram, YouTube specializate pe stilul tău, de la Salsa la Bachata la Kizomba. Interacționează cu influenceri și alătură-te unei rețele vibrante de dans în {city}
+    keywords: grupuri de dans {city}, influenceri de dans {city}, comunități de dans {city}, rețele de dans {city}, colective de dans {city}.
+    header: Grupuri în {city}
+    subheader: Descoperă și conectează-te cu influenceri de dans și grupuri din {city}. Găsește comunități de WhatsApp, Telegram, Instagram, YouTube specializate pe stilul tău, de la Salsa la Bachata la Kizomba. Interacționează cu influenceri și alătură-te unei rețele vibrante de dans în {city}
+  tips:
+    title: Întreabă Dansatorii din {city} | WeDance
+    description: Găsește recomandări în timp real și informații direct de la dansatorii din {city}. Alege stilul de dans favorit ca să primești sfaturi personalizate, sau cere recomandări personalizate întregii comunități. Vei primi răspunsuri de obicei în 48 de ore.
+    keywords: sfaturi de dans {city}, recomandări de dans {city}, impresii dans {city}, consultanță de dans {city}, sugestii de dans {city}
+    header: Întreabă în {city}
+    subheader: Găsește recomandări în timp real și informații direct de la dansatorii din {city}. Alege stilul de dans favorit ca să primești sfaturi personalizate, sau cere recomandări personalizate întregii comunități. Vei primi răspunsuri de obicei în 48 de ore.
+teaser:
+  profile:
+    title: Publică-ți profilul
+    description: așa încât ceilalți să te poată contacta
+    btn: Alătură-te gratis
+  feed:
+    title: Cauți mai multe evenimente?
+    description: În loc să cauți în zeci de chat-uri, poți întreba direct comunitatea noastră locală de dans pe site. Primești recomandări personalizate pentru evenimente din orice oraș, direct de la dansatori locali.
+    btn: Întreabă Localnicii
+nav:
+  search: Caută
+  events: Evenimente
+  festivals: Festivaluri
+  partner: Caută Partener
+  dance: Stiluri de Dans
+  contribute: Contribuie
+  addEvent: Eveniment
+  addReview: Recomandă
+  chat: Chat
+  bookmarks: Semne de Carte
+  myProfile: Profilul Meu
+  settings: Setări

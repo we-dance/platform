@@ -23,12 +23,27 @@ const state = Vue.observable({
   marketing: null,
   error: null,
   showAuthPopup: false,
+  guest: false,
+  featureFindPartner: false,
 })
 
 export const useAuth = () => {
   const { router, route } = useRouter()
 
+  function toggleGuest() {
+    state.guest = !state.guest
+    if (state.guest) {
+      alert(
+        'You are now browsing as a guest. Reload page to become editor again.'
+      )
+    }
+  }
+
   const isAdmin = (forceCheck = false) => {
+    if (state.guest) {
+      return false
+    }
+
     const permission = !!state.uid && !!state.account && !!state.account.admin
 
     if (forceCheck) {
@@ -138,6 +153,10 @@ export const useAuth = () => {
   }
 
   function can(action, collection, object) {
+    if (state.guest) {
+      return false
+    }
+
     if (!object || !object.createdBy) {
       return true
     }
@@ -407,8 +426,20 @@ export const useAuth = () => {
 
     try {
       await firebase.auth().sendSignInLinkToEmail(email, actionCodeSettings)
+      return true
     } catch (e) {
       state.error = e
+      return false
+    }
+  }
+
+  async function sendPasswordResetEmail(email) {
+    try {
+      await firebase.auth().sendPasswordResetEmail(email)
+      return true
+    } catch (e) {
+      state.error = e
+      return false
     }
   }
 
@@ -509,5 +540,7 @@ export const useAuth = () => {
     updateEmail,
     createUserWithEmailAndPassword,
     deleteAccount,
+    sendPasswordResetEmail,
+    toggleGuest,
   }
 }

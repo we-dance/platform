@@ -24,11 +24,13 @@
 
 <script>
 import ls from 'local-storage'
+import { until } from '@vueuse/core'
+import { onMounted, ref } from '@nuxtjs/composition-api'
 import { useAuth } from '~/use/auth'
 import { useDoc } from '~/use/doc'
 import { useRouter } from '~/use/router'
 import { usePosts } from '~/use/posts'
-import { track } from '~/plugins/firebase'
+import { db, track } from '~/plugins/firebase'
 
 export default {
   name: 'PostEdit',
@@ -52,12 +54,16 @@ export default {
   },
   methods: {
     cancelItem() {
-      this.$router.push(`/events`)
+      this.$router.go(-1)
     },
     async saveItem(data) {
       if (data.id) {
         track('update_post')
         await this.update(data.id, data)
+        await db
+          .collection('stories')
+          .doc(data.id)
+          .set(data)
       } else {
         track('create_post')
         await this.create(data)
@@ -70,16 +76,22 @@ export default {
     const { can, profile, isAdmin } = useAuth()
     const { params } = useRouter()
     const { postFields } = usePosts()
+    const loading = ref(true)
 
     const collection = 'posts'
 
-    const { doc: item, id, load, update, remove, create, loading } = useDoc(
-      collection
-    )
+    const { doc: item, id, load, update, remove, create } = useDoc(collection)
 
-    if (params.id !== '-') {
-      load(params.id)
-    }
+    onMounted(async () => {
+      await until(profile).not.toBeNull()
+
+      if (params.id !== '-') {
+        load(params.id)
+        await until(item).not.toBeNull()
+      }
+
+      loading.value = false
+    })
 
     return {
       loading,

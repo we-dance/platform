@@ -27,21 +27,6 @@ post:
   delete: Delete
   edit: Edit
   dashboard: Dashboard
-home:
-  cta:
-    header: Less chats. More dance.
-    description: Discover dancers and dance events near you
-    action: Find your city
-nav:
-  travel: Travel
-  chooseCity: Choose City
-  feed: Commento
-  calendar: Calendar
-  community: Community
-  chat: Conversazione
-  dance: Dances
-  myProfile: My Profile
-  settings: Impostazioni
 form:
   clear: Clear
   delete: Delete
@@ -414,32 +399,6 @@ nopassword:
 contacts:
   email: E-mail
   website: Sito web
-teaser:
-  partner:
-    title: Hai bisogno di un partner?
-    description: Ballerini in tutto il mondo creano i loro profili per trovare partner di ballo
-    btn: Vedi Community
-  events:
-    title: Dove ballare?
-    description: Tutti i corsi di ballo, feste e festival in un unico luogo
-    btn: Vedi eventi
-  profile:
-    title: Pubblica il tuo profilo
-    description: in modo che altri possano contattarti
-    btn: Entra gratuitamente
-  allevents:
-    title: Eventi privati
-    description: Diventa un membro della comunità WeDance per vedere di più
-    btn: Iscriviti adesso
-  chat:
-    title: Looking for more events?
-    description: 'Abbiamo chat di ballo in ogni città'
-    btnChatExists: Ask Locals
-    btnChatMissing: Ask Travelers
-  involve:
-    title: Abbiamo bisogno del tuo aiuto
-    description: Siamo una comunità di danza internazionale senza scopo di lucro. Vogliamo che tu trovi eventi di danza e ballerini in qualsiasi città di qualsiasi paese Tutto inizia con la comunità locale.
-    btn: Mettersi in gioco
 share:
   title: Condividere
   copy: Copia link
@@ -580,3 +539,117 @@ EventDashboard:
   subscribed: Subscribed
   paid: Paid
   notPaid: Didn't Pay
+home:
+  title: WeDance - Viaggia. Incontra. Balla.
+  hero:
+    header: Viaggia. Incontra. **Balla.**
+    subheader: Trova eventi di bachata, salsa, kizomba e altro vicino a te. Espandi il tuo mondo di ballo con social, lezioni e festival.
+    action: Trova la tua città
+    bottom: '[La nostra missione](/about) è unire ballerini di tutto il mondo.'
+  features:
+    explore:
+      title: Social, Lezioni, Festival
+      description: Dì addio a chat caotiche!
+      action: Esplora Eventi
+    travel:
+      title: Consigli
+      description: Scopri i migliori social in qualsiasi città dai consigli degli addetti ai lavori.
+      action: Chiedi ai Locali
+    partner:
+      title: Partner di Ballo
+      description: Trova partner di ballo per il tuo stile e lascia che ti trovino.
+      action: Trova Partner
+  numbers:
+    title: WeDance in Numeri
+    countries: paesi
+    profiles: profili
+    events: eventi
+  founder: "**Il Problema**
+
+
+    Sono un fanatico del ballo, sempre connesso alla scena locale attraverso innumerevoli gruppi WhatsApp. I nuovi ballerini mi chiedono spesso delle feste in arrivo, ed è difficile tenere traccia di tutto.
+
+
+    **La Soluzione**
+
+
+    Ecco perché ho creato WeDance! È la soluzione unica per gli eventi di ballo nella tua città. Basta jonglare con chat o cercare informazioni all'ultimo minuto.
+
+
+    **Vantaggi per i Ballerini**
+
+    - **Sei nuovo in città?** Trova subito le feste più hot.
+
+    - **Amici curiosi dei tuoi piani di ballo?** Manda loro il tuo profilo WeDance e lascia che scelgano i loro eventi preferiti per unirsi a te.
+
+
+    Suona incredibile, vero? Esplora WeDance oggi!"
+explore:
+  nav:
+    festivals: Festival
+    online: Online
+    experts: Chiedi agli Esperti
+    parties: Feste
+    classes: Lezioni
+    groups: Gruppi
+    tips: Guida Locale
+  dance:
+    title: Elenco degli Stili di Ballo | WeDance
+    description: Scopri la storia, la cultura e gli stili di ballo di tutto il mondo. Sfoglia una lista curata di stili di ballo.
+    keywords: stili di ballo, generi di ballo, storia del ballo, cultura del ballo
+    header: Stili di Ballo
+    subheader: Scopri la storia, la cultura e gli stili di ballo di tutto il mondo. Sfoglia una lista curata di stili di ballo.
+  global:
+    title: 'Festival di Ballo {style} in Tutto il Mondo | Calendario Danza | WeDance'
+    description: 'Calendario di Ballo {style} per Viaggiatori. Pianifica le tue vacanze e i tuoi weekend per ballare Salsa, Bachata, Kizomba, Zouk e altri 130 balli in tutto il mondo.'
+    keywords: 'festival di ballo {style}, congressi di ballo {style}, vacanze di ballo {style}, weekend di ballo {style}, viaggi di ballo {style}, viaggi di ballo {style}'
+    header: 'Festival {style} in Tutto il Mondo'
+    subheader: 'Calendario di Ballo {style} per Viaggiatori. Pianifica le tue vacanze e i tuoi weekend per ballare Salsa, Bachata, Kizomba, Zouk e altri 130 balli in tutto il mondo.'
+  parties:
+    title: Feste di Ballo {style} a {city} | Calendario Danza | WeDance
+    description: Esplora una varietà di eventi di ballo {style} a {city}. Dalle serate {referenceStyle} ai workshop di bachata, trova la tua prossima avventura di ballo qui.
+    header: 'Feste di {style} a {city}'
+    subheader: Scopri la scena di ballo {style} vibrante a {city}. Sfoglia una lista curata di feste di ballo e filtra per i tuoi stili preferiti come Salsa, Bachata, Kizomba e altro.
+  classes:
+    title: Lezioni di Ballo {style} a {city} | Calendario Danza | WeDance
+    description: Esplora una varietà di eventi di ballo {style} a {city}. Dalle serate {referenceStyle} ai workshop di bachata, trova la tua prossima avventura di ballo qui.
+    header: 'Lezioni di {style} a {city}'
+    subheader: Scopri la scena di ballo {style} vibrante a {city}. Sfoglia una lista curata di lezioni di ballo e filtra per i tuoi stili preferiti come Salsa, Bachata, Kizomba e altro.
+  onlineclass:
+    title: 'Lezioni di Ballo {style} Online | Calendario Danza | WeDance'
+    description: Non riesci a partecipare di persona? Porta i tuoi movimenti {style} al livello successivo con la nostra selezione di lezioni online.
+    keywords: 'lezioni di ballo {style} online, corsi di ballo online, workshop di ballo online, bootcamp di ballo online, lezioni di ballo online'
+    header: 'Lezioni Online di Ballo {style}'
+    subheader: Non riesci a partecipare di persona? Porta i tuoi movimenti {style} al livello successivo con la nostra selezione di lezioni online.
+  groups:
+    title: Gruppi di Ballo a {city} | WeDance
+    description: Scopri e connettiti con influencer e gruppi di ballo a {city}. Trova comunità su WhatsApp, Telegram, Instagram, Youtube adatte al tuo stile, dalla Salsa alla Bachata alla Kizomba. Interagisci con gli influencer e unisciti a reti di ballo vivaci a {city}.
+    header: Gruppi a {city}
+    subheader: Scopri e connettiti con influencer e gruppi di ballo a {city}. Trova comunità su WhatsApp, Telegram, Instagram, Youtube adatte al tuo stile, dalla Salsa alla Bachata alla Kizomba. Interagisci con gli influencer e unisciti a reti di ballo vivaci a {city}.
+  tips:
+    title: Chiedi ai Ballerini a {city} | WeDance
+    description: Trova consigli in tempo reale e ottieni punti di vista locali direttamente dai ballerini di {city}. Scegli il tuo stile di ballo preferito per consigli su misura, o chiedi alla comunità per raccomandazioni personalizzate. Aspettati risposte tipicamente entro 48 ore.
+    header: Chiedi a {city}
+    subheader: Trova consigli in tempo reale e ottieni punti di vista locali direttamente dai ballerini di {city}. Scegli il tuo stile di ballo preferito per consigli su misura, o chiedi alla comunità per raccomandazioni personalizzate. Aspettati risposte tipicamente entro 48 ore.
+teaser:
+  profile:
+    title: Pubblica il tuo profilo
+    description: così che altri possano contattarti
+    btn: Unisciti gratis
+  feed:
+    title: Cerchi altri eventi?
+    description: Invece di cercare in più chat, chiedi direttamente alla nostra comunità di ballo locale sul sito. Ottieni consigli personalizzati per eventi in qualsiasi città dai ballerini locali.
+    btn: Chiedi ai Locali
+nav:
+  search: Cerca
+  events: Eventi
+  festivals: Festival
+  partner: Trova Partner
+  dance: Stili di Ballo
+  contribute: Contribuisci
+  addEvent: Aggiungi Evento
+  addReview: Raccomanda
+  chat: Chat
+  bookmarks: Segnalibri
+  myProfile: Il Mio Profilo
+  settings: Impostazioni

@@ -1,15 +1,17 @@
 <template>
   <div>
-    <div class="typo p-4">
-      <h1>Dance Styles</h1>
-      <div>
-        <a
-          href="https://docs.google.com/spreadsheets/d/1oCLW_c_Jr021AT6_gGngtFB94P_5ftSCJGp-XqdvRaM/edit#gid=0"
-          target="_blank"
-          >Edit this page</a
-        >
+    <THeader show-logo class="md:hidden" />
+
+    <div class="p-4 border-b">
+      <h1 class="text-2xl font-bold">
+        {{ $t('explore.dance.header') }}
+      </h1>
+
+      <div class="text-sm">
+        {{ $t('explore.dance.subheader') }}
       </div>
     </div>
+
     <div class="text-center">
       <div v-for="category in categories" :key="category" class="mb-4">
         <h4 class="font-bold text-lg">{{ category }}</h4>
@@ -95,6 +97,62 @@ export default {
 
       this.$emit('input', newValue)
     },
+  },
+  head() {
+    const title = this.$t(`explore.dance.title`)
+    const description = this.$t(`explore.dance.description`)
+    const keywords = this.$t(`explore.dance.keywords`)
+
+    const schema = {
+      '@context': 'https://schema.org',
+      '@type': 'WebPage',
+      name: title,
+      description,
+      url: `https://wedance.vip/explore/global/classes`,
+      isPartOf: {
+        '@type': 'WebSite',
+        name: 'WeDance',
+        url: 'https://wedance.vip',
+      },
+    }
+
+    return {
+      title,
+      meta: [
+        {
+          hid: 'description',
+          name: 'description',
+          content: description,
+        },
+        {
+          hid: 'keywords',
+          name: 'keywords',
+          content: keywords,
+        },
+        {
+          hid: 'og:title',
+          property: 'og:title',
+          content: title,
+        },
+        {
+          hid: 'og:type',
+          property: 'og:type',
+          content: 'website',
+        },
+        {
+          hid: 'og:description',
+          property: 'og:description',
+          content: description,
+        },
+      ],
+      script: [
+        {
+          hid: 'schema',
+          type: 'application/ld+json',
+          json: schema,
+        },
+      ],
+    }
   },
 }
 </script>

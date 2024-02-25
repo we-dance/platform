@@ -2,53 +2,101 @@
   <nav
     class="p-4 flex flex-col space-y-2 text-dark h-screen overflow-y-scroll sticky top-0 border-r"
   >
-    <TButton allow-guests :to="localePath('/')" class="mb-8" type="void">
+    <TButton allow-guests :to="localePath('/')" type="void">
       <TIcon name="logo-horizontal-dark" />
     </TButton>
+
+    <div class="flex justify-start">
+      <TLanguageSwitcher />
+    </div>
+
     <TButton
       allow-guests
-      :to="localePath('/Travel')"
-      icon="directions"
+      :to="localePath('/search')"
+      icon="search"
+      :label="$t('nav.search')"
+      type="nav"
+    />
+
+    <TButton
+      allow-guests
+      :to="
+        currentCity
+          ? localePath(`/explore/${city.username}`)
+          : localePath('/explore')
+      "
+      :label="$t('nav.events')"
+      icon="calendar"
+      type="nav"
+    />
+    <TButton
+      allow-guests
+      :to="localePath('/explore/global')"
+      icon="calendar"
       :label="$t('nav.festivals')"
       type="nav"
     />
+
     <TButton
-      v-if="currentCity"
+      v-if="featureFindPartner"
       allow-guests
-      :to="localePath(`/${city.username}`)"
-      icon="calendar"
-      :label="$t('nav.calendar')"
+      :to="localePath('/find-partner/start')"
+      icon="people"
+      :label="$t('nav.partner')"
       type="nav"
     />
-    <TButton
-      v-if="!currentCity"
-      allow-guests
-      :to="localePath('/cities')"
-      icon="place"
-      :label="$t('nav.chooseCity')"
-      type="nav"
-    />
-    <TButton
-      allow-guests
-      :to="localePath('/feed')"
-      icon="news"
-      :label="$t('nav.feed')"
-      type="nav"
-    />
+
     <TButton
       allow-guests
       :to="localePath('/dance')"
       icon="help"
-      label="Dance Wiki"
+      :label="$t('nav.dance')"
       type="nav"
     />
+
+    <TButton
+      allow-guests
+      :to="localePath('/posts')"
+      icon="news"
+      label="Blog"
+      type="nav"
+    />
+
+    <div class="border-b pt-2 text-xs font-bold uppercase">
+      {{ $t('nav.contribute') }}
+    </div>
+    <TButton
+      :to="localePath('/events/-/import')"
+      icon="plus"
+      :label="$t('nav.addEvent')"
+      type="nav"
+    />
+
+    <TButton
+      :to="localePath('/reviews/add')"
+      :label="$t('nav.addReview')"
+      type="nav"
+    >
+      <StarIcon class="w-4 h-4" />
+    </TButton>
+
     <template v-if="uid">
+      <div class="border-b pt-2 text-xs font-bold uppercase">
+        {{ $t('nav.myProfile') }}
+      </div>
       <TButton
         :to="localePath('/chat')"
         icon="chat"
         :label="$t('nav.chat')"
         type="nav"
       />
+      <TButton
+        :to="localePath('/bookmarks')"
+        :label="$t('nav.bookmarks')"
+        type="nav"
+      >
+        <BookmarkIcon class="w-4 h-4" />
+      </TButton>
       <TButton :to="localePath(`/${username}`)" type="nav">
         <TProfilePhoto size="xs" :uid="uid" class="mr-1" />
         <span>{{ $t('nav.myProfile') }}</span>
@@ -65,10 +113,6 @@
       />
     </template>
     <template v-else>
-      <div class="text-xs mt-4">
-        <h4 class="font-bold">{{ $t('home.cta.header') }}</h4>
-        <div>{{ $t('home.cta.description') }}</div>
-      </div>
       <TButton
         allow-guests
         :to="localePath('/signin')"
@@ -80,11 +124,22 @@
 
     <div class="h-8"></div>
 
+    <div v-if="isAdmin(true)" class="border-b pt-2 text-xs font-bold uppercase">
+      Administration
+    </div>
     <TButton
       v-if="isAdmin(true)"
       :label="`Admin ${isAdmin() ? 'ON' : 'OFF'}`"
       type="nav"
       @click="toggleAdmin()"
+    />
+
+    <TButton
+      v-if="isAdmin()"
+      to="/admin/nfc"
+      type="nav"
+      class="text-gray-700"
+      label="NFC"
     />
 
     <TButton
@@ -129,13 +184,18 @@
 
 <script>
 import ls from 'local-storage'
+import { BookmarkIcon, StarIcon } from '@vue-hero-icons/outline'
 import { useAuth } from '~/use/auth'
 import { useCities } from '~/use/cities'
 import { useRouter } from '~/use/router'
 
 export default {
+  components: {
+    BookmarkIcon,
+    StarIcon,
+  },
   setup() {
-    const { isAdmin, isEditor } = useAuth()
+    const { isAdmin, isEditor, featureFindPartner } = useAuth()
     const { city, currentCity } = useCities()
     const { router } = useRouter()
 
@@ -145,7 +205,14 @@ export default {
       router.go()
     }
 
-    return { isAdmin, isEditor, city, currentCity, toggleAdmin }
+    return {
+      isAdmin,
+      isEditor,
+      city,
+      currentCity,
+      toggleAdmin,
+      featureFindPartner,
+    }
   },
   props: {
     uid: {
@@ -161,7 +228,7 @@ export default {
 </script>
 
 <style>
-nav .nuxt-link-active {
+nav .nuxt-link-exact-active {
   @apply text-primary border-primary;
 }
 </style>

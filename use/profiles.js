@@ -3,36 +3,18 @@ import { useApp } from '~/use/app'
 import { useAccounts } from '~/use/accounts'
 import { useCommon } from '~/use/common'
 import { useDoc } from '~/use/doc'
+import { db } from '~/plugins/firebase'
 
 export const useProfiles = () => {
   const { t } = useI18n()
   const { accountFields } = useAccounts()
-  const { yesNoOptions, visibilityOptions, genderList, days } = useCommon()
+  const { genderList } = useCommon()
 
   const { read, loading } = useApp()
   const { load } = useDoc('profiles')
 
   const getFullProfile = (uid) => load(uid) || {}
   const getProfile = (uid) => read('profiles', uid) || {}
-
-  const meetingPlaces = [
-    {
-      label: t('profile.meetingPlaces.myPlace'),
-      value: 'myPlace',
-    },
-    {
-      label: t('profile.meetingPlaces.yourPlace'),
-      value: 'yourPlace',
-    },
-    {
-      label: t('profile.meetingPlaces.private'),
-      value: 'private',
-    },
-    {
-      label: t('profile.meetingPlaces.public'),
-      value: 'public',
-    },
-  ]
 
   const typeList = [
     {
@@ -99,6 +81,11 @@ export const useProfiles = () => {
       placeholder: 'https://www.couchsurfing.com/people/username',
     },
     {
+      name: 'linkedin',
+      label: 'LinkedIn',
+      placeholder: 'https://linkedin.com/in/username',
+    },
+    {
       name: 'airbnb',
       label: 'Airbnb',
       placeholder: 'https://www.airbnb.com/users/show/00000000',
@@ -163,18 +150,44 @@ export const useProfiles = () => {
 
   const profileFields = [
     {
+      name: 'username',
+      label: t('profile.username.label'),
+      register: true,
+      poster: true,
+      required: true,
+      component: 'TInputUsername',
+      before: t('profile.username.before'),
+      async validate(value, item) {
+        if (!value) {
+          return true
+        }
+
+        const profileRef = (
+          await db
+            .collection('profiles')
+            .where('username', '==', value)
+            .get()
+        ).docs[0]
+
+        if (profileRef?.exists && profileRef?.id !== item?.id) {
+          return false
+        }
+
+        return true
+      },
+      validationError: 'This username is already taken',
+    },
+    {
       name: 'photo',
       label: t('profile.photo'),
       poster: true,
       component: 'TInputPhoto',
     },
     {
-      name: 'styles',
-      label: t('profile.styles.label'),
-      labelPosition: 'top',
-      poster: true,
-      component: 'TInputStylesSelect2',
-      tips: t('profile.styles.tips'),
+      name: 'name',
+      label: t('profile.name.label'),
+      placeholder: t('profile.name.placeholder'),
+      before: t('profile.name.before'),
     },
     {
       name: 'gender',
@@ -187,74 +200,18 @@ export const useProfiles = () => {
     {
       name: 'type',
       label: t('profile.type'),
-      component: 'TRadioGroup',
+      component: 'TRichSelect',
       hideSearchBox: true,
       poster: true,
       options: typeList,
     },
     {
-      name: 'username',
-      label: t('profile.username.label'),
-      register: true,
+      name: 'styles',
+      label: t('profile.styles.label'),
+      labelPosition: 'top',
       poster: true,
-      required: true,
-      component: 'TInputUsername',
-      before: t('profile.username.before'),
-    },
-    {
-      name: 'current',
-      label: t('profile.current.label'),
-      register: true,
-      poster: true,
-      component: 'TInputPlace',
-      before: t('profile.current.before'),
-    },
-    {
-      name: 'place',
-      label: t('profile.place.label'),
-      register: true,
-      poster: true,
-      component: 'TInputPlace',
-      before: t('profile.place.before'),
-    },
-    {
-      name: 'hometown',
-      label: t('profile.hometown.label'),
-      component: 'TInputPlace',
-      before: t('profile.hometown.before'),
-    },
-    {
-      name: 'visibility',
-      label: t('visibility.label'),
-      poster: true,
-      component: 'TInputButtons',
-      options: visibilityOptions,
-      description: t('visibility.description'),
-    },
-    {
-      name: 'permission',
-      label: t('profile.permission.label'),
-      poster: true,
-      component: 'TInputButtons',
-      options: yesNoOptions,
-      description: t('profile.permission.description'),
-    },
-    {
-      name: 'name',
-      label: t('profile.name.label'),
-      placeholder: t('profile.name.placeholder'),
-      before: t('profile.name.before'),
-    },
-    {
-      name: 'locales',
-      label: t('profile.locales'),
-      component: 'TInputLanguages',
-    },
-    {
-      name: 'objectives',
-      label: t('profile.objectives'),
-      component: 'TInputMulti',
-      options: objectivesList,
+      component: 'TInputStylesSelect2',
+      tips: t('profile.styles.tips'),
     },
     {
       name: 'bio',
@@ -272,64 +229,47 @@ export const useProfiles = () => {
       labelPosition: 'top',
       placeholder: t('profile.story.placeholder'),
       before: t('profile.story.before'),
-      tips: t('profile.story.tips'),
     },
     {
       name: 'learning',
       label: t('profile.learning.label'),
       component: 'TInputTextarea',
+      labelPosition: 'top',
       description: t('profile.learning.description'),
     },
     {
       name: 'jobs',
       label: t('profile.jobs.label'),
       component: 'TInputTextarea',
+      labelPosition: 'top',
       description: t('profile.jobs.description'),
     },
     {
-      name: 'partner',
-      label: t('profile.partner'),
-      component: 'TInputButtons',
-      options: yesNoOptions,
+      name: 'current',
+      label: t('profile.current.label'),
+      register: false,
+      poster: true,
+      component: 'TInputPlace',
+      before: t('profile.current.before'),
     },
     {
-      name: 'birthday',
-      label: t('profile.birthday.label'),
-      when: (p) => p.partner === 'Yes',
-      type: 'date',
-      description: t('profile.birthday.description'),
+      name: 'place',
+      label: t('profile.place.label'),
+      register: false,
+      poster: true,
+      component: 'TInputPlace',
+      before: t('profile.place.before'),
     },
     {
-      name: 'height',
-      label: t('profile.height'),
-      when: (p) => p.partner === 'Yes',
+      name: 'hometown',
+      label: t('profile.hometown.label'),
+      component: 'TInputPlace',
+      before: t('profile.hometown.before'),
     },
     {
-      name: 'weight',
-      label: t('profile.weight.label'),
-      when: (p) => p.partner === 'Yes',
-      description: t('profile.weight.description'),
-    },
-    {
-      name: 'partnerBio',
-      label: t('profile.partnerBio.label'),
-      when: (p) => p.partner === 'Yes',
-      component: 'TInputTextarea',
-      description: t('profile.partnerBio.description'),
-    },
-    {
-      name: 'meetingPlace',
-      label: t('profile.meetingPlace'),
-      when: (p) => p.partner === 'Yes',
-      component: 'TInputMulti',
-      options: meetingPlaces,
-    },
-    {
-      name: 'days',
-      label: t('profile.days'),
-      when: (p) => p.partner === 'Yes',
-      component: 'TInputMulti',
-      options: days,
+      name: 'locales',
+      label: t('profile.locales'),
+      component: 'TInputLanguages',
     },
     ...contactFields,
     {
@@ -339,15 +279,6 @@ export const useProfiles = () => {
         component: 'TInputProfile',
       },
       label: t('profile.team'),
-      labelPosition: 'top',
-    },
-    {
-      name: 'reviews',
-      component: 'TInputArray',
-      children: {
-        component: 'TInputReview',
-      },
-      label: t('reviews.title'),
       labelPosition: 'top',
     },
   ]

@@ -10,9 +10,6 @@
         @input="(val) => onFieldChange(field, val)"
       />
     </div>
-    <div v-if="error" class="text-red-500 py-4 text-right">
-      {{ error.message }}
-    </div>
     <slot name="bottom" />
     <div
       class="flex justify-end space-x-2 bg-white py-4 border-t z-10 items-center bottom-0 sticky"
@@ -33,6 +30,7 @@
 </template>
 
 <script>
+import Vue from 'vue'
 import { camelcase } from '~/utils'
 
 export default {
@@ -121,34 +119,45 @@ export default {
 
       return camelcase(field.name)
     },
-    validate() {
-      // check if all required fields are filled
+    async validate() {
       this.errors = {}
       this.error = false
 
-      for (const field in this.fields) {
-        if (
-          this.fields[field].required &&
-          !this.value[this.fields[field].name]
-        ) {
-          this.errors[this.fields[field].name] = this.$t('form.required')
+      for (const fieldIndex in this.fields) {
+        const field = this.fields[fieldIndex]
+
+        if (field.required && !this.value[field.name]) {
+          Vue.set(this.errors, field.name, this.$t('form.required'))
           this.error = true
         }
+
+        if (field.validate) {
+          const valid = await field.validate(this.value[field.name], this.value)
+
+          if (!valid) {
+            Vue.set(this.errors, field.name, field.validationError)
+            this.error = true
+          }
+        }
+      }
+
+      if (this.error) {
+        this.$toast.error('There are errors in the form')
       }
 
       return !this.error
     },
-    copy() {
-      if (!this.validate()) {
+    async copy() {
+      if (!(await this.validate())) {
         return
       }
 
       this.$emit('copy', this.value)
     },
-    save() {
+    async save() {
       this.error = false
 
-      if (!this.validate()) {
+      if (!(await this.validate())) {
         return
       }
 

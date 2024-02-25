@@ -64,6 +64,10 @@ export default {
         if (typeof this.item.endDate === 'string') {
           this.item.endDate = +new Date(this.item.endDate)
         }
+
+        if (!this.item.type) {
+          this.item.type = 'event'
+        }
       }
     },
   },
@@ -134,12 +138,6 @@ export default {
     },
     async saveItem(data) {
       data = pickBy(data, (v) => v !== undefined)
-
-      data.artists = (data.artists || []).filter((item) => item)
-
-      data.artistsList = data.artists
-        .map((a) => a.username)
-        .filter((item) => item)
 
       if (data.id) {
         track('update_event')

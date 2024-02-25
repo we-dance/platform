@@ -4,11 +4,11 @@ import 'firebase/firestore'
 
 export const app = {
   name: 'WeDance',
-  description: 'We bring dancers together',
+  description: 'Discover dance events near you',
   social: {
     twitter: 'WeDancePlatform',
   },
-  url: 'https://wedance.vip/',
+  url: 'https://beta.wedance.vip',
   author: 'WeDance',
   cover: '/cover/wide.png',
 }
@@ -31,17 +31,17 @@ if (!firebase.apps.some((app) => app.name === 'sitemap')) {
 }
 
 const locales = [
-  { code: 'en', name: 'English', file: 'en.yml' },
-  { code: 'es', name: 'Español', file: 'es.yml' },
-  { code: 'de', name: 'Deutsch', file: 'de.yml' },
-  { code: 'fr', name: 'Français', file: 'fr.yml' },
-  { code: 'it', name: 'Italiano', file: 'it.yml' },
-  { code: 'pl', name: 'Polski', file: 'pl.yml' },
-  { code: 'pt', name: 'Português', file: 'pt.yml' },
-  { code: 'ro', name: 'Română', file: 'ro.yml' },
-  { code: 'tr', name: 'Türkçe', file: 'tr.yml' },
-  { code: 'ru', name: 'Русский', file: 'ru.yml' },
-  { code: 'sr', name: 'Српски', file: 'sr.yml' },
+  { code: 'en', iso: 'en-US', name: 'English', file: 'en.yml' },
+  { code: 'es', iso: 'es-ES', name: 'Español', file: 'es.yml' },
+  { code: 'de', iso: 'de-DE', name: 'Deutsch', file: 'de.yml' },
+  { code: 'fr', iso: 'fr-FR', name: 'Français', file: 'fr.yml' },
+  { code: 'it', iso: 'it-IT', name: 'Italiano', file: 'it.yml' },
+  { code: 'pl', iso: 'pl-PL', name: 'Polski', file: 'pl.yml' },
+  { code: 'pt', iso: 'pt-PT', name: 'Português', file: 'pt.yml' }, // Portugal
+  { code: 'ro', iso: 'ro-RO', name: 'Română', file: 'ro.yml' },
+  { code: 'tr', iso: 'tr-TR', name: 'Türkçe', file: 'tr.yml' },
+  { code: 'ru', iso: 'ru-RU', name: 'Русский', file: 'ru.yml' },
+  { code: 'sr', iso: 'sr-RS', name: 'Српски', file: 'sr.yml' }, // Serbia
 ]
 
 if (process.env.DEBUG_I18N) {
@@ -53,17 +53,6 @@ export default {
   ssr: false,
   generate: {
     fallback: true,
-  },
-  router: {
-    extendRoutes(routes, resolve) {
-      routes.push({
-        name: 'Calendar',
-        path: '/events/:city/:dance?',
-        component: resolve(__dirname, 'pages/events/index'),
-      })
-
-      return routes
-    },
   },
   /*
    ** Customize the progress-bar color
@@ -235,7 +224,6 @@ export default {
   sitemap: {
     hostname: app.url,
     exclude: [
-      '/events',
       '/chat',
       '/search',
       '/community',
@@ -256,7 +244,7 @@ export default {
 
       const routes = [
         {
-          url: `/feed`,
+          url: `/`,
           changefreq: 'daily',
           priority: 1,
         },
@@ -295,7 +283,7 @@ export default {
 
       for (const city of cities) {
         routes.push({
-          url: `/${city.username}`,
+          url: `/explore/${city.username}`,
           changefreq: 'daily',
           priority: 1,
         })
@@ -308,7 +296,7 @@ export default {
           'Afrobeats',
         ]) {
           routes.push({
-            url: `/${city.username}?style=${style}`,
+            url: `/explore/${city.username}?style=${style}`,
             changefreq: 'daily',
             priority: 0.7,
           })
@@ -320,6 +308,7 @@ export default {
     i18n: true,
   },
   i18n: {
+    seo: true,
     locales,
     defaultLocale: 'en',
     strategy: 'prefix_except_default',

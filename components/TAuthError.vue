@@ -19,9 +19,6 @@
         >support@wedance.vip</a
       >.
     </div>
-    <TButton allow-guests class="mt-4" type="secondary" @click="tryAgain">
-      Try Again
-    </TButton>
   </div>
 </template>
 
