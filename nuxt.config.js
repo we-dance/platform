@@ -283,7 +283,7 @@ export default {
 
       for (const city of cities) {
         routes.push({
-          url: `/${city.username}`,
+          url: `/explore/${city.username}`,
           changefreq: 'daily',
           priority: 1,
         })
@@ -296,7 +296,7 @@ export default {
           'Afrobeats',
         ]) {
           routes.push({
-            url: `/${city.username}?style=${style}`,
+            url: `/explore/${city.username}?style=${style}`,
             changefreq: 'daily',
             priority: 0.7,
           })
