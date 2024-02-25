@@ -58,10 +58,6 @@ export default {
     const radius = ref(root.$route.query.radius || 50)
     const { search } = useAlgolia('profiles')
 
-    function loadMore() {
-      console.log('loadMore')
-    }
-
     async function load() {
       const firestore = firebase.firestore()
       let collection = firestore.collection('stories')
