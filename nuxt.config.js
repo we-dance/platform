@@ -8,7 +8,7 @@ export const app = {
   social: {
     twitter: 'WeDancePlatform',
   },
-  url: 'https://beta.wedance.vip',
+  url: 'https://wedance.vip',
   author: 'WeDance',
   cover: '/cover/wide.png',
 }
