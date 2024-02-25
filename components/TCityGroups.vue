@@ -237,7 +237,7 @@ export default {
       '@type': 'WebPage',
       name: title,
       description,
-      url: `https://wedance.vip/explore/${profile.username}`,
+      url: `https://wedance.vip/explore/${this.city.username}/groups`,
       isPartOf: {
         '@type': 'WebSite',
         name: 'WeDance',
