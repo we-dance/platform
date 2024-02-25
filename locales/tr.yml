@@ -18,6 +18,7 @@ Copy: Kopyala
 Share: Paylaş
 views: 'görüntüleme yok | 1 görüntüleme | {count} görüntüleme'
 subscribers: 'no subscribers | 1 subscriber | {count} subscribers'
+connections: 'no connections | 1 connection | {count} connections'
 guests: 'no guests | 1 guest | {count} guests'
 Subscribe: Abone ol
 Unsubscribe: Abonelikten çık
@@ -29,22 +30,6 @@ post:
   delete: Sil
   edit: Düzenle
   dashboard: Kontrol Paneli
-home:
-  cta:
-    header: Travel. Meet. Dance.
-    description: Yakınınızdaki dansçıları ve dans etkinliklerini keşfedin
-    action: Şehrini bul
-nav:
-  travel: Seyahat
-  festivals: Festivals
-  chooseCity: Şehir seçiniz
-  feed: Yorum
-  calendar: Takvim
-  community: Topluluk
-  chat: Konuşma
-  dance: Danslar
-  myProfile: Profilim
-  settings: Ayarlar
 form:
   required: This field is required
   clear: Temizle
@@ -172,14 +157,6 @@ filter:
 community:
   title: Dans Topluluğu
   description: Dans partneri veya yeni dans etkinlikleri mi arıyorsunuz? Yerel dansçıların profillerini filtreleyin ve onlarla iletişime geçin.
-calendar:
-  title: Dans Takvimi
-  empty: Etkinlik bulunamadı
-  upcoming: Yaklaşan
-  past: Geçmiş
-  share:
-    text: Metin
-    embed: Yerleştir
 reviews:
   title: Reviews
   count: 'No Reviews | 1 Review | {count} Reviews'
@@ -205,8 +182,8 @@ profile:
     before: Anonim kalmak istiyorsanız ilk adınızı kullanın.
     placeholder: (Gerekli)
   bio:
-    label: Teaser
-    before: Fotoğrafınızın üstünde kısa tanıtım
+    label: Bio
+    before: Short introduction
   birthday:
     label: Doğum günü
     description: Sadece yaşınızı göstereceğiz
@@ -217,10 +194,9 @@ profile:
   joined: Katıldı
   languages: Diller
   story:
-    label: Açıklama
-    before: Dans hikayenizi anlatın. Resimler ve videolar dahil olmak üzere [widgets] (https://wedance.vip/markdown) da kullanabilirsiniz
-    tips: ' Kendinizi tanıtın: Siz kimsiniz? Ne teklif ediyorsunuz? Ne istiyorsunuz? Etkili bir sunum için ipuçları: - Karmaşık olmayan: Akılda kalıcı olmalı ve dilden dökülmeli - Kısa ve öz: Söylemesi veya okuması bir dakikadan fazla sürmemelidir - Benzersiz: Becerilerinizi, hedeflerinizi ve arzularınızı yansıtır - Hikaye: Kim olduğunuzu, ne sunduğunuzu ve nerede olmak istediğinizi kapsar - Çekici: Asansör konuşmanız esasen ikna edici bir satış konuşmasıdır; vurgu sunduğunuz şey üzerinde olmalıdır'
-    placeholder: Metin (markdown)
+    label: About me
+    before: Tell us your story
+    placeholder: Metin
   locales: Senin dillerin
   skills: Baska beceriler
   days: Günler
@@ -443,38 +419,6 @@ nopassword:
 contacts:
   email: E-posta adresi
   website: İnternet sitesi
-teaser:
-  partner:
-    title: Bir dans arkadasına mı ihtiyacın var?
-    description: Dünyanın her yerinden dansçılar, dans partneri bulmak için profillerini oluşturur
-    btn: Topluluğu Gör
-  events:
-    title: Nerede dans edilir?
-    description: Tüm dans kursları, partiler ve festivaller tek bir yerde
-    btn: Olayları Gör
-  profile:
-    title: Profilini yayınla
-    description: böylece diğerleri seninle iletişim kurabilir
-    btn: Ücretsiz katıl
-  allevents:
-    title: Özel etkinlikler
-    description: Daha fazlasını görmek için WeDance Topluluğu'nun bir üyesi ol
-    btn: Şimdi Katıl
-  chat:
-    title: Daha fazla etkinlik mi arıyorsunuz?
-    description:
-      - '"We have a Telegram dance chat in every city. Join your city chat'
-      - to help traveling dancers, invite your dance friends. Let's build WeDance
-      - together! "
-    btnChatExists: Yerel Halka Sor
-    btnChatMissing: Gezginlere Sor
-  involve:
-    title: Yardımına ihtiyacımız var
-    description:
-      - We are non-profit international dance community. We want you go to
-      - any city in any country and find dance events and dancers. It all starts
-      - with the local community.
-    btn: Katıl
 share:
   title: Paylaş
   copy: Bağlantıyı kopyala
@@ -602,6 +546,9 @@ event:
   org:
     label: Organizatör
     description: Who can answer questions about the event (is it still happening, how to find entrance, etc.)
+  venueProfile:
+    label: Mekan
+    description: Where is it happening?
   online:
     label: Online mı?
     description: Zoom, Google Meet, Instagram Live vb. aracılığıyla yayın mı yapıyorsunuz.?
@@ -689,3 +636,197 @@ faqs:
     - 
       question: Is my personal information secure when I connect my calendar?
       answer: Yes, your privacy and security are paramount to us. We only use calendar access to import events and do not store any personal information from your calendar.
+calendar:
+  title: Dans Takvimi
+  empty: Etkinlik bulunamadı
+  upcoming: Yaklaşan
+  past: Geçmiş
+  addEvent: Add
+  filters:
+    style: Dans
+    level: Level
+  levels:
+    Beginner: Beginner
+    Intermediate: Intermediate
+    Advanced: Advanced
+  share:
+    text: Metin
+    embed: Yerleştir
+mainfaqs:
+  _head:
+    title: FAQ | Your Questions Answered | WeDance
+    description: Find answers to the most common questions about WeDance
+    keywords: WeDance FAQ, WeDance, dance FAQ, dance styles, dance community
+    header: Frequently Asked Questions
+    subheader: Find answers to the most common questions about WeDance
+  _titles:
+    general: General Questions
+    calendars: Calendar Features
+    askLocals: '"Ask Locals" Feature'
+    stylesAndFilters: Styles and Filters
+    account: Account & Profile Questions
+  general:
+    - 
+      question: What is WeDance?
+      answer: WeDance is a platform that streamlines the dance event experience. Discover parties, classes, festivals, get insider tips, and manage your dance calendar – all in one place.
+    - 
+      question: What cities are currently supported by WeDance?
+      answer: 'WeDance is currently active in [list of supported cities](/explore).'
+    - 
+      question: Is WeDance free to use?
+      answer: The core features of WeDance are free to use. We may offer premium features or subscriptions in the future, providing additional benefits for power users.
+    - 
+      question: How does WeDance make sure events are accurate and up-to-date?
+      answer: We use a combination of automated checks and community participation to maintain accurate event listings. Event organizers can submit events directly, and our users can flag outdated or incorrect information.
+    - 
+      question: Do I need an account to browse events on WeDance?
+      answer: No, you can browse events on WeDance without an account. However, creating an account gives you access to additional features like calendar syncing, personalized recommendations, and the ability to ask questions within the community.
+  calendars:
+    - 
+      question: How do I sync my existing calendar with WeDance?
+      answer: 'The process varies slightly depending on your calendar provider. You can find detailed instructions on [calendars settings page](/settings/calendars).'
+    - 
+      question: Can I add events directly to WeDance?
+      answer: 'Yes! You can submit your own dance events to WeDance. To ensure events are relevant to the community, please follow our [submission guidelines](/coc).'
+    - 
+      question: If an imported event changes, will it automatically update on WeDance?
+      answer: This depends on your calendar source. Some calendar providers directly update synced events; with others, you may need to make changes manually on WeDance.
+    - 
+      question: How far in advance can I see events on WeDance?
+      answer: While there's no specific time limit, WeDance focuses on upcoming events for the best user experience.
+  askLocals:
+    - 
+      question: What kind of questions can I ask the community?
+      answer: Feel free to ask for dance-related recommendations, tips, and guidance! Examples include finding the best socials, workshops for your experience level, or insight into the local dance scene.
+    - 
+      question: Who are the "Locals" answering questions?
+      answer: '"Locals" are experienced dancers living in the city you''re asking about.  They  have firsthand knowledge of the dance community and are passionate about sharing information.'
+    - 
+      question: How long does it typically take to get a response?
+      answer: We aim for responses within 48 hours, though response times can vary depending on the question's complexity.
+  stylesAndFilters:
+    - 
+      question: Which dance styles are supported by WeDance?
+      answer: We support a wide variety of dance styles, including [list of supported styles](/dance). We're always expanding our list, so let us know if your favorite style isn't included!
+    - 
+      question: Can I filter events by experience level (e.g., beginner, intermediate)?
+      answer: Yes! Our filters help you find events that match your skill level.
+    - 
+      question: Can I search for events based on specific keywords?
+      answer: Absolutely! Use our search feature and use keywords like event type, dance style, or location to narrow your results.
+  account:
+    - 
+      question: What benefits does creating an account provide?
+      answer: An account lets you sync your calendar, receive personalized recommendations, ask the "Locals" questions, save your favorite events, and more!
+    - 
+      question: Can I connect with other dancers or organizers through WeDance?
+      answer: Yes, WeDance is building features to help you connect with other members of the dance community. Stay tuned for exciting updates!
+    - 
+      question: How do I edit my WeDance profile?
+      answer: You can edit your profile from your account settings page. This lets you update your location, dance interests, and other information.
+Helpful: Helpful
+'Not Helpful': Not helpful
+Connect: Connect
+Connected: Conntected
+home:
+  title: WeDance - Travel. Meet. Dance.
+  hero:
+    header: Travel. Meet. **Dance.**
+    subheader: Find bachata, salsa, kizomba, and more dance events near you. Expand your dance world with socials, classes, and festivals.
+    action: Find your city
+    bottom: '[Our mission](/about) is to unite dancers worldwide.'
+  features:
+    explore:
+      title: Socials, Classes, Festivals
+      description: Say goodbye to chaotic chats!
+      action: Explore Events
+    travel:
+      title: Recommendations
+      description: Get insider tips on the best socials in any city.
+      action: Ask Locals
+    partner:
+      title: Dance Partners
+      description: Find dance partners for your dance style and let them find you.
+      action: Find Partner
+  numbers:
+    title: WeDance in Numbers
+    countries: countries
+    profiles: profiles
+    events: etkinlikler
+  founder: "**The Problem** I'm a dance fanatic, always plugged into the local scene through countless WhatsApp groups. New dancers often ask me about upcoming parties, and it got overwhelming to keep track of everything. **The Solution** That's why I created WeDance! It's the one-stop-shop for dance events in your city. No more juggling chats or scrambling for information. **Benefits for Dancers** - **New in town?** Find the hottest parties instantly. - **Friends curious about your dance plans?** Just send them your WeDance profile and let them pick their favorite events to join you. Sounds amazing, right? Explore WeDance today!"
+explore:
+  nav:
+    festivals: Festivals
+    online: Çevrimiçi
+    experts: Ask Experts
+    parties: Parties
+    classes: Classes
+    groups: Groups
+    tips: Ask Locals
+  blog:
+    header: Dance Blog
+    subheader: Explore more about your favorite dance styles
+  dance:
+    title: List of Dance Styles | WeDance
+    description: Discover history, culture, and dance styles from around the world. Browse through a curated list of dance styles.
+    keywords: dance styles, dance genres, dance history, dance culture
+    header: Dans Stilleri
+    subheader: Discover history, culture, and dance styles from around the world. Browse through a curated list of dance styles.
+  global:
+    title: '{style} Dance Festivals Worldwide | Dance Calendar | WeDance'
+    description: '{style} Dance Calendar for Travelers. Plan your holidays and weekends to dance Salsa, Bachata, Kizomba, Zouk and 130 other dances around the world.'
+    keywords: '{style} dance festivals, {style} dance congresses, {style} dance holidays, {style} dance weekends, {style} dance trips, {style} dance travel'
+    header: '{style} Festivals Worldwide'
+    subheader: '{style} Dance Calendar for Travelers. Plan your holidays and weekends to dance Salsa, Bachata, Kizomba, Zouk and 130 other dances around the world.'
+  parties:
+    title: Dance {style} Parties in {city} | Dance Calendar | WeDance
+    description: Explore a variety of {style} dance events happening in {city}. From {referenceStyle} nights to bachata workshops, find your next dance adventure here.
+    keywords: 'Where can I dance {style} in {city}, {style} dance parties {city}, {style} dance socials {city}, {style} dance nights {city}, {style} dance events {city}, {style} dance meetups {city}'
+    header: '{style} Parties in {city}'
+    subheader: Discover the vibrant {style} dance scene in {city}. Browse through a curated list of dance parties and filter by your favorite styles like Salsa, Bachata, Kizomba, and more.
+  classes:
+    title: Dance {style} Classes in {city} | Dance Calendar | WeDance
+    description: Explore a variety of {style} dance events happening in {city}. From {referenceStyle} nights to bachata workshops, find your next dance adventure here.
+    keywords: '{style} dance classes {city}, {style} dance courses {city}, {style} dance workshops {city}, {style} dance bootcamps {city}, {style} dance lessons {city}'
+    header: '{style} Classes in {city}'
+    subheader: Discover the vibrant {style} dance scene in {city}. Browse through a curated list of dance classes and filter by your favorite styles like Salsa, Bachata, Kizomba, and more.
+  onlineclass:
+    title: '{style} Online Dance Classes | Dance Calendar | WeDance'
+    description: Can't make it in person? Take your {style} moves to the next level with our online class selection.
+    keywords: '{style} online dance classes, online dance courses, online dance workshops, online dance bootcamps, online dance lessons'
+    header: '{style} Online Classes'
+    subheader: Can't make it in person? Take your {style} moves to the next level with our online class selection.
+  groups:
+    title: Dance Groups in {city} | WeDance
+    description: Discover and connect with dance influencers and groups in {city}. Find WhatsApp, Telegram, Instagram, Youtube communities tailored to your style, from Salsa to Bachata to Kizomba. Engage with influencers and join vibrant dance networks in {city}.
+    keywords: dance groups {city}, dance influencers {city}, dance communities {city}, dance networks {city}, dance collectives {city}
+    header: Groups in {city}
+    subheader: Discover and connect with dance influencers and groups in {city}. Find WhatsApp, Telegram, Instagram, Youtube communities tailored to your style, from Salsa to Bachata to Kizomba. Engage with influencers and join vibrant dance networks in {city}.
+  tips:
+    title: Ask Dancers in {city} | WeDance
+    description: Find real-time recommendations and get local insights directly from dancers from {city}. Choose your preferred dance style for tailored tips, or ask the community for personalized recommendations. Expect responses typically within 48 hours.
+    keywords: dance tips {city}, dance recommendations {city}, dance insights {city}, dance advice {city}, dance suggestions {city}
+    header: Ask {city}
+    subheader: Find real-time recommendations and get local insights directly from dancers from {city}. Choose your preferred dance style for tailored tips, or ask the community for personalized recommendations. Expect responses typically within 48 hours.
+teaser:
+  profile:
+    title: Profilini yayınla
+    description: böylece diğerleri seninle iletişim kurabilir
+    btn: Ücretsiz katıl
+  feed:
+    title: Looking for more events?
+    description: Instead of searching through multiple chats, directly ask our local dance community on the website. Get personalized recommendations for events in any city from local dancers.
+    btn: Ask Locals
+nav:
+  search: Search
+  events: Events
+  festivals: Festivals
+  partner: Find Partner
+  dance: Dans Stilleri
+  contribute: Contribute
+  addEvent: Etkinlik
+  addReview: Recommend
+  chat: Konuşma
+  bookmarks: Bookmarks
+  myProfile: Profilim
+  settings: Ayarlar
