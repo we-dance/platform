@@ -1,7 +1,7 @@
 ---
 common:
-  yes: "Yes"
-  no: "No"
+  yes: 'Yes'
+  no: 'No'
   female: Female
   male: Male
   other: Other
@@ -16,7 +16,7 @@ Edit: Edit
 Delete: Delete
 Copy: Copy
 Share: Condividere
-views: "no views | 1 view | {count} views"
+views: 'no views | 1 view | {count} views'
 Subscribe: Subscribe
 Unsubscribe: Unsubscribe
 Follow: Follow
@@ -38,7 +38,7 @@ photo:
   selectLabel: Upload photo
 visibility:
   label: Visibility
-  description: "- Public: searchable in Google and can be used in social media. - Members: only visible for logged-in users. - Unlisted: only possible to open with exact link, but not listed anywhere."
+  description: '- Public: searchable in Google and can be used in social media. - Members: only visible for logged-in users. - Unlisted: only possible to open with exact link, but not listed anywhere.'
   public: Public
   members: Members
   unlisted: Unlisted
@@ -165,8 +165,8 @@ profile:
     title: Follow us
     description: We regularly post event announcements and introduce new members on our social media.
   invite:
-    header: "{count} invites left"
-    description: "{name} invites you to get a free VIP membership for faster networking, get rewards, discover dance flashmobs and VIP events"
+    header: '{count} invites left'
+    description: '{name} invites you to get a free VIP membership for faster networking, get rewards, discover dance flashmobs and VIP events'
     action: Accept Invitation
   bookme: Book me
   contactme: Contact me
@@ -194,14 +194,14 @@ profile:
   story:
     label: Description
     before: Tell your dance story. You can also use [widgets](https://wedance.vip/markdown), including images and videos
-    tips: " Pitch yourself: Who are you? What do you offer? What do you want? Tips for effective pitch: - Uncomplicated: It should be catchy and roll off the tongue - Concise: It shouldn’t take more than a minute to say or read - Unique: It reflects your skills, goals, and desires - Storyline: It covers who you are, what you offer, and where you want to be - Appealing: Your elevator pitch is essentially a persuasive sales pitch; the emphasis should be on what you offer"
+    tips: ' Pitch yourself: Who are you? What do you offer? What do you want? Tips for effective pitch: - Uncomplicated: It should be catchy and roll off the tongue - Concise: It shouldn’t take more than a minute to say or read - Unique: It reflects your skills, goals, and desires - Storyline: It covers who you are, what you offer, and where you want to be - Appealing: Your elevator pitch is essentially a persuasive sales pitch; the emphasis should be on what you offer'
     placeholder: Text (markdown)
   locales: Your languages
   skills: Abilità non danzanti
   days: Giorni
   learning:
     label: Which dance topics you are interested in?
-    description: "For example: Musicality in Salsa, Men Styling, etc."
+    description: 'For example: Musicality in Salsa, Men Styling, etc.'
   teacher: Stai insegnando?
   partner: Cerchi un compagno di ballo?
   height: Altezza (cm)
@@ -210,7 +210,7 @@ profile:
     description: Leave this field blank if you think it's irrelevant.
   partnerBio:
     label: Question
-    description: "What is important in your partner? Put it as a question, for example: Do you love dogs?"
+    description: 'What is important in your partner? Put it as a question, for example: Do you love dogs?'
   objectives: Obiettivi
   objective:
     placeholder: Objective
@@ -235,10 +235,10 @@ profile:
     placeholder: Style
   permission:
     label: Do you want free promo?
-    description: "Send us link to your event on [Telegram](https://t.me/+aRIIZcXpBhJkYmUy) and we will announce it on our Telegram, Instagram and Facebook."
+    description: 'Send us link to your event on [Telegram](https://t.me/+aRIIZcXpBhJkYmUy) and we will announce it on our Telegram, Instagram and Facebook.'
   jobs:
     label: I can help with
-    description: "How can you help our community? What are you good at? For example: design, programming, marketing, social media, etc."
+    description: 'How can you help our community? What are you good at? For example: design, programming, marketing, social media, etc.'
   contacts: Do you use social media?
   email:
     label: E-mail
@@ -298,14 +298,14 @@ myprofile:
     description1: This is your profile. A square below is a poster – your visual introduction.
     description2: Your poster is also shown in {0} among other dancers.
     community: Community
-    description3: "Click {0} and add:"
+    description3: 'Click {0} and add:'
   ambassador:
     description1: WeDance is represented by Ambassador in local dance communities. Volunteers help Ambassador with different initiatives to unite local dancers. WeDance is created and supported by volunteers. Get Involved, become volunteer!
     description2: Ambassador in {community} is
-    description3: "Help us build a dance network in your city, follow and interact with our local social media accounts:"
+    description3: 'Help us build a dance network in your city, follow and interact with our local social media accounts:'
   profile:
-    height: "{height}cm"
-    weight: "{weight}kg"
+    height: '{height}cm'
+    weight: '{weight}kg'
 TPostList:
   loadMore: Load more
 TPost:
@@ -334,7 +334,7 @@ conversation:
     submit: Send
   welcome: Start conversation with something nice.
   with: Chat with {username}
-  dateDiff: "{diff} ago"
+  dateDiff: '{diff} ago'
 cities:
   choose: Scegli una città
 settings:
@@ -370,7 +370,7 @@ account:
   newsletter:
     label: What kind of updated would you like to receive weekly?
     options:
-      party: "Social/party events"
+      party: 'Social/party events'
       class: Dance classes
       workshop: Workshops and bootcamps
       online: Online dance classes
@@ -464,7 +464,7 @@ event:
   description:
     label: Announcement
     placeholder: Unique Value Proposition
-    description: "Use [widgets](https://wedance.vip/markdown), including images and videos"
+    description: 'Use [widgets](https://wedance.vip/markdown), including images and videos'
     tips: "Pitch yourself: Who are you? What do you offer? What do you want?\n\nTips for effective pitch:\n- Uncomplicated: It should be catchy and roll off the tongue\n- Concise: It shouldn’t take more than a minute to say or read\n- Unique: It reflects your skills, goals, and desires\n- Storyline: It covers who you are, what you offer, and where you want to be\n- Appealing: Your elevator pitch is essentially a persuasive sales pitch; the emphasis should be on what you offer"
   startDate: When?
   endDate: End Date
@@ -507,10 +507,10 @@ event:
     description: Facebook event
   promo:
     label: Announce on social media?
-    description: "Send us link to your event on [Telegram](https://t.me/+aRIIZcXpBhJkYmUy) and we will announce it on our Telegram, Instagram and Facebook."
+    description: 'Send us link to your event on [Telegram](https://t.me/+aRIIZcXpBhJkYmUy) and we will announce it on our Telegram, Instagram and Facebook.'
   confirmation:
     label: Confirmation email for guests
-    placeholder: "Example: Dear guest, you are confirmed to our event."
+    placeholder: 'Example: Dear guest, you are confirmed to our event.'
 TInputProfile:
   changeRole: Change Role
   actions: Actions
@@ -545,7 +545,7 @@ home:
     header: Viaggia. Incontra. **Balla.**
     subheader: Trova eventi di bachata, salsa, kizomba e altro vicino a te. Espandi il tuo mondo di ballo con social, lezioni e festival.
     action: Trova la tua città
-    bottom: "[La nostra missione](/about) è unire ballerini di tutto il mondo."
+    bottom: '[La nostra missione](/about) è unire ballerini di tutto il mondo.'
   features:
     explore:
       title: Social, Lezioni, Festival
@@ -593,15 +593,15 @@ explore:
   parties:
     title: Feste di Ballo {style} a {city} | Calendario Danza | WeDance
     description: Esplora una varietà di eventi di ballo {style} a {city}. Dalle serate {referenceStyle} ai workshop di bachata, trova la tua prossima avventura di ballo qui.
-    header: "Feste di {style} a {city}"
+    header: 'Feste di {style} a {city}'
     subheader: Scopri la scena di ballo {style} vibrante a {city}. Sfoglia una lista curata di feste di ballo e filtra per i tuoi stili preferiti come Salsa, Bachata, Kizomba e altro.
   classes:
     title: Lezioni di Ballo {style} a {city} | Calendario Danza | WeDance
     description: Esplora una varietà di eventi di ballo {style} a {city}. Dalle serate {referenceStyle} ai workshop di bachata, trova la tua prossima avventura di ballo qui.
-    header: "Lezioni di {style} a {city}"
+    header: 'Lezioni di {style} a {city}'
     subheader: Scopri la scena di ballo {style} vibrante a {city}. Sfoglia una lista curata di lezioni di ballo e filtra per i tuoi stili preferiti come Salsa, Bachata, Kizomba e altro.
   onlineclass:
-    header: "Lezioni Online"
+    header: 'Lezioni Online'
     subheader: Non riesci a partecipare di persona? Porta i tuoi movimenti {style} al livello successivo con la nostra selezione di lezioni online.
   groups:
     title: Gruppi di Ballo a {city} | WeDance
@@ -610,9 +610,9 @@ explore:
     subheader: Scopri e connettiti con influencer e gruppi di ballo a {city}. Trova comunità su WhatsApp, Telegram, Instagram, Youtube adatte al tuo stile, dalla Salsa alla Bachata alla Kizomba. Interagisci con gli influencer e unisciti a reti di ballo vivaci a {city}.
   tips:
     title: Chiedi ai Ballerini a {city} | WeDance
-    description: Trova consigli in tempo reale e ottieni intuizioni locali direttamente dai ballerini di {city}. Scegli il tuo stile di ballo preferito per consigli su misura, o chiedi alla comunità per raccomandazioni personalizzate. Aspettati risposte tipicamente entro 48 ore.
+    description: Trova consigli in tempo reale e ottieni punti di vista locali direttamente dai ballerini di {city}. Scegli il tuo stile di ballo preferito per consigli su misura, o chiedi alla comunità per raccomandazioni personalizzate. Aspettati risposte tipicamente entro 48 ore.
     header: Chiedi a {city}
-    subheader: Trova consigli in tempo reale e ottieni intuizioni locali direttamente dai ballerini di {city}. Scegli il tuo stile di ballo preferito per consigli su misura, o chiedi alla comunità per raccomandazioni personalizzate. Aspettati risposte tipicamente entro 48 ore.
+    subheader: Trova consigli in tempo reale e ottieni punti di vista locali direttamente dai ballerini di {city}. Scegli il tuo stile di ballo preferito per consigli su misura, o chiedi alla comunità per raccomandazioni personalizzate. Aspettati risposte tipicamente entro 48 ore.
 teaser:
   profile:
     title: Pubblica il tuo profilo

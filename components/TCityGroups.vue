@@ -15,6 +15,7 @@
       <div class="space-y-2 p-4">
         <div v-if="response.facets" class="gap-2 flex flex-wrap items-center">
           <t-rich-select
+            v-if="false"
             v-model="groupType"
             placeholder="Platform"
             :options="groupTypes"
