@@ -361,6 +361,7 @@ export default {
       newItem.org = {
         username: newItem.artist || this.parent.org.username,
       }
+      newItem.type = 'event'
       newItem.eventType = item.eventType || 'Workshop'
       newItem.styles = {
         [item.style]: {

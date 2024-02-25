@@ -64,6 +64,10 @@ export default {
         if (typeof this.item.endDate === 'string') {
           this.item.endDate = +new Date(this.item.endDate)
         }
+
+        if (!this.item.type) {
+          this.item.type = 'event'
+        }
       }
     },
   },
