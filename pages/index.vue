@@ -30,6 +30,7 @@
           :cta-link="localePath('/explore')"
         />
         <LandingFeature
+          v-if="featureFindPartner"
           image="/img/dance-partners.svg"
           :title="$t('home.features.partner.title')"
           :description="$t('home.features.partner.description')"
@@ -45,6 +46,8 @@
 </template>
 
 <script>
+import { useAuth } from '~/use/auth'
+
 export default {
   head() {
     return {
@@ -57,6 +60,11 @@ export default {
         },
       ],
     }
+  },
+  setup() {
+    const { featureFindPartner } = useAuth()
+
+    return { featureFindPartner }
   },
 }
 </script>

@@ -24,6 +24,7 @@ const state = Vue.observable({
   error: null,
   showAuthPopup: false,
   guest: false,
+  featureFindPartner: false,
 })
 
 export const useAuth = () => {

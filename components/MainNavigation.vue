@@ -38,6 +38,7 @@
     />
 
     <TButton
+      v-if="featureFindPartner"
       allow-guests
       :to="localePath('/find-partner/start')"
       icon="people"
@@ -186,7 +187,7 @@ export default {
     StarIcon,
   },
   setup() {
-    const { isAdmin, isEditor } = useAuth()
+    const { isAdmin, isEditor, featureFindPartner } = useAuth()
     const { city, currentCity } = useCities()
     const { router } = useRouter()
 
@@ -196,7 +197,14 @@ export default {
       router.go()
     }
 
-    return { isAdmin, isEditor, city, currentCity, toggleAdmin }
+    return {
+      isAdmin,
+      isEditor,
+      city,
+      currentCity,
+      toggleAdmin,
+      featureFindPartner,
+    }
   },
   props: {
     uid: {

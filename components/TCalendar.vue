@@ -62,7 +62,7 @@
     </TPopup>
 
     <TFindPartnerTeaser
-      v-if="view === 'classes' || view === 'online'"
+      v-if="featureFindPartner && (view === 'classes' || view === 'online')"
       class="p-4"
     />
 
@@ -158,7 +158,7 @@ export default {
     const profileType = ref('')
     const currentPage = ref(1)
     const filters = ref({})
-    const { uid } = useAuth()
+    const { uid, featureFindPartner } = useAuth()
     let today = new Date(Date.now())
     today.setHours(6, 0, 0, 0)
     today = +today
@@ -311,6 +311,7 @@ export default {
     const showPopup = ref(false)
 
     return {
+      featureFindPartner,
       level,
       levels,
       itemsAsText,
