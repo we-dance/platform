@@ -128,7 +128,7 @@ export function eventToAlgolia(event: any) {
   let result = {
     objectID: event.id,
     id: event.id,
-    organizer: event.org.username,
+    organizer: event.org?.username || '',
     name: event.name,
     cover: event.cover,
     description: event.description,
@@ -168,13 +168,43 @@ export function eventToAlgolia(event: any) {
 }
 
 export async function indexEvents() {
-  const now = +new Date()
-  const eventDocs = (
+  const since = new Date()
+  since.setHours(0, 0, 0, 0)
+
+  // const now = +new Date()
+  // const futureEvents = (
+  //   await firestore
+  //     .collection('posts')
+  //     .where('startDate', '>', now)
+  //     .get()
+  // ).docs
+
+  const recentlyCreated = (
     await firestore
       .collection('posts')
-      .where('startDate', '>', now)
+      .where('createdAt', '>', +since)
       .get()
   ).docs
+
+  const recentlyUpdated = (
+    await firestore
+      .collection('posts')
+      .where('updatedAt', '>', +since)
+      .get()
+  ).docs
+
+  let eventDocs = [...recentlyCreated, ...recentlyUpdated]
+  // get unique events
+  eventDocs = eventDocs.filter(
+    (event, index, self) =>
+      index === self.findIndex((e) => e.data().name === event.data().name)
+  )
+
+  console.log({
+    count: eventDocs.length,
+    since,
+    names: eventDocs.map((e: any) => e.data().name).join(', '),
+  })
 
   const objects = []
 
@@ -194,9 +224,40 @@ export async function indexEvents() {
 }
 
 export async function indexProfiles() {
+  const since = new Date()
+  since.setHours(0, 0, 0, 0)
+
+  const recentlyCreated = (
+    await firestore
+      .collection('profiles')
+      .where('createdAt', '>', +since)
+      .get()
+  ).docs
+
+  const recentlyUpdated = (
+    await firestore
+      .collection('profiles')
+      .where('updatedAt', '>', +since)
+      .get()
+  ).docs
+
+  let profileDocs = [...recentlyCreated, ...recentlyUpdated]
+
+  // get unique profiles
+  profileDocs = profileDocs.filter(
+    (profile, index, self) =>
+      index ===
+      self.findIndex((p) => p.data().username === profile.data().username)
+  )
+
+  console.log({
+    count: profileDocs.length,
+    since,
+    usernames: profileDocs.map((p: any) => p.data().username).join(', '),
+  })
+
   const index = initIndex('profiles')
 
-  const profileDocs = (await firestore.collection('profiles').get()).docs
   const objects = []
   const removed = []
 
