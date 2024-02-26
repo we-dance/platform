@@ -182,9 +182,24 @@ export default {
               replies: firebase.firestore.FieldValue.arrayUnion(newStory.id),
             })
         }
+
+        // set a place for recommended receiver
+        if (data.place && data.receiver?.username) {
+          const receiverSnaps = await firestore
+            .collection('profiles')
+            .where('username', '==', data.receiver.username)
+            .get()
+
+          const receiverSnap = receiverSnaps.docs[0]
+
+          await receiverSnap.ref.update({
+            place: data.place,
+            type: 'Organiser',
+          })
+        }
       }
 
-      this.$router.push(`/${this.profile.username}`)
+      this.$router.push(`/${this.profile.username}?view=stories#tabs`)
     },
   },
   setup(props, { root }) {
