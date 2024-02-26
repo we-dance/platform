@@ -115,11 +115,13 @@ export default {
         .onSnapshot(async (snapshot) => {
           const data = snapshot.data()
 
-          // go over messages and load linked stories
-          for (const messageIndex in data.messages) {
-            const message = data.messages[messageIndex]
-            if (message.text.includes('https://wedance.vip/stories/')) {
-              data.messages[messageIndex].post = await getLinked(message.text)
+          if (data?.messages) {
+            // go over messages and load linked stories
+            for (const messageIndex in data.messages) {
+              const message = data.messages[messageIndex]
+              if (message.text.includes('https://wedance.vip/stories/')) {
+                data.messages[messageIndex].post = await getLinked(message.text)
+              }
             }
           }
 
