@@ -24,6 +24,7 @@
           </div>
 
           <TPreview class="text-sm leading-tight" :content="item.text" />
+          <TPost v-if="item.post" :item="item.post" />
         </div>
       </div>
       <div class="text-xs p-4 text-center">
@@ -86,6 +87,23 @@ export default {
     const chat = ref({})
     let unsubscribe = null
 
+    async function getLinked(message) {
+      const link = message.match(
+        /https:\/\/wedance.vip\/stories\/[a-zA-Z0-9]+/g
+      )
+
+      if (!link) {
+        return null
+      }
+
+      const story = await db
+        .collection('stories')
+        .doc(link[0].split('/').pop())
+        .get()
+
+      return { ...story.data(), id: story.id }
+    }
+
     onMounted(async () => {
       await find('username', params.slug)
 
@@ -94,8 +112,18 @@ export default {
       unsubscribe = db
         .collection('chats')
         .doc(chatId.value)
-        .onSnapshot((snapshot) => {
-          chat.value = snapshot.data()
+        .onSnapshot(async (snapshot) => {
+          const data = snapshot.data()
+
+          // go over messages and load linked stories
+          for (const messageIndex in data.messages) {
+            const message = data.messages[messageIndex]
+            if (message.text.includes('https://wedance.vip/stories/')) {
+              data.messages[messageIndex].post = await getLinked(message.text)
+            }
+          }
+
+          chat.value = data
         })
 
       setTimeout(markAsRead, 2000)
