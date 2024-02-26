@@ -152,11 +152,11 @@ export default {
 
       data = {
         ...data,
-        dances: Object.keys(data.style || {}),
+        dances: [data.style],
         receiver: data.receiver?.username ? data.receiver : '',
         link: data.link || '',
         venue: data.venue || '',
-        question: this.question || '',
+        question: this.question || data.question || '',
         createdBy: this.uid,
         username: this.profile.username,
         type: 'review',

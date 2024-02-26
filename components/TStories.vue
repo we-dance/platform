@@ -91,29 +91,28 @@ export default {
         collection = collection.where('place', '==', '')
       }
 
+      collection = collection.orderBy('createdAt', 'desc')
+
       if (lastVisible.value) {
         collection = collection.startAfter(lastVisible.value)
       }
 
-      collection
-        .orderBy('createdAt', 'desc')
-        .limit(3)
-        .onSnapshot((storiesRef) => {
-          let result = storiesRef.docs.map((doc) => ({
-            ...doc.data(),
-            id: doc.id,
-          }))
+      collection.limit(3).onSnapshot((storiesRef) => {
+        let result = storiesRef.docs.map((doc) => ({
+          ...doc.data(),
+          id: doc.id,
+        }))
 
-          if (props.filterDance) {
-            result = result.filter((item) => item.style === props.filterDance)
-          }
+        if (props.filterDance) {
+          result = result.filter((item) => item.style === props.filterDance)
+        }
 
-          stories.value = [...stories.value, ...result]
+        stories.value = [...stories.value, ...result]
 
-          loading.value = false
+        loading.value = false
 
-          lastVisible.value = storiesRef.docs[storiesRef.docs.length - 1]
-        })
+        lastVisible.value = storiesRef.docs[storiesRef.docs.length - 1]
+      })
 
       loading.value = false
     }
