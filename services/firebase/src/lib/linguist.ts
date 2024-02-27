@@ -1,6 +1,6 @@
 import { getStyles } from './dance_styles'
 
-export function slugify(str: string) {
+export function slugify(str: string, limit = 0) {
   str = str.replace(/^\s+|\s+$/g, '')
 
   // Make the string lowercase
@@ -22,6 +22,10 @@ export function slugify(str: string) {
     .replace(/\s+/g, '.')
     // Collapse dots
     .replace(/\.+/g, '.')
+
+  if (limit) {
+    str = str.substr(0, limit)
+  }
 
   return str
 }

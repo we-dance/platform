@@ -30,9 +30,13 @@ async function getOrg(host: any, place: any) {
     return ''
   }
 
-  const orgResults = await initIndex('profiles').search(orgUrl)
-  if (orgResults.hits.length) {
-    const p = orgResults.hits[0] as any
+  // find in firebase
+  const docSnaps = await firestore
+    .collection('profiles')
+    .where('facebook', '==', orgUrl)
+    .get()
+  if (docSnaps.docs.length > 0) {
+    const p: any = { ...docSnaps.docs[0]?.data(), id: docSnaps.docs[0]?.id }
 
     org = {
       id: p.id,
@@ -52,6 +56,10 @@ async function getOrg(host: any, place: any) {
       username = username.split('/')[1].replace('-', '')
     }
 
+    if (username.length > 20) {
+      username = slugify(host?.name, 20)
+    }
+
     const now = +new Date()
     const orgPhoto = await getUploadedImage(host?.photo?.imageUri)
 
@@ -63,7 +71,7 @@ async function getOrg(host: any, place: any) {
       name: host?.name,
       facebook: orgUrl,
       photo: orgPhoto,
-      username: slugify(host?.name),
+      username,
       type: 'Organiser',
       owned: false,
       owner: '',
@@ -73,6 +81,16 @@ async function getOrg(host: any, place: any) {
 
     if (place) {
       org.place = place
+    }
+
+    // check if username alredy exists
+    const usernameExists = await firestore
+      .collection('profiles')
+      .where('username', '==', username)
+      .get()
+
+    if (usernameExists.docs.length > 0) {
+      throw new Error(`Username already exists ${username}`)
     }
 
     await firestore.collection('profiles').add(org)
