@@ -99,19 +99,26 @@ export async function syncCalendar(calendarRef: DocumentSnapshot) {
       facebookId = vevent.uid?.split('@')[0].replace('e', '') || ''
     }
 
+    let isNew = false
     if (!calendar?.events?.find((e: any) => e.providerItemId === vevent.uid)) {
+      isNew = true
       newCount++
     }
 
     const urls = getUrlsFromText(vevent.description || '')
     const facebookUrlsList = urls.filter((u) => isFacebookEvent(u))
-    const facebookUrl = urls.find((u) => isFacebookEvent(u))
+
+    let facebookUrl = vevent.url
+    if (!facebookUrl?.includes('facebook.com/events/')) {
+      facebookUrl = urls.find((u) => isFacebookEvent(u))
+    }
 
     if (facebookUrl && !facebookId) {
       facebookId = getUrlContentId(facebookUrl)
     }
 
     const event: any = {
+      isNew,
       facebookId,
       facebookUrlsList,
       facebookUrlsCount: facebookUrlsList.length,
@@ -127,7 +134,7 @@ export async function syncCalendar(calendarRef: DocumentSnapshot) {
       providerUpdatedAt: vevent.lastmodified ? +vevent.lastmodified : '',
       startDate: vevent.start ? +vevent.start : '',
       endDate: vevent.end ? +vevent.end : '',
-      facebook: vevent.url || facebookUrl || '',
+      facebook: facebookUrl || '',
       location: vevent.location || '',
       styles,
       eventType,

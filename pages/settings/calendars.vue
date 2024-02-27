@@ -18,7 +18,7 @@
           <div class="flex justify-between gap-4">
             <div>
               <h2 class="font-bold">
-                <router-link :to="`?id=${calendar.id}`">{{
+                <router-link :to="`?id=${calendar.id}`" class="underline">{{
                   calendar.name || '(noname)'
                 }}</router-link>
               </h2>

@@ -58,6 +58,11 @@
           target="_blank"
           >View Event</router-link
         >
+        <span
+          v-if="item.isNew"
+          class="p-1 rounded text-xs bg-green-500 text-white"
+          >New</span
+        >
       </div>
     </div>
     <div>
