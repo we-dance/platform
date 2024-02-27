@@ -173,6 +173,7 @@ export default {
               [uid.value]: true,
               [receiverUid.value]: true,
             },
+            users: [uid.value, receiverUid.value],
             lastSeen: {
               [uid.value]: timeSent,
               [receiverUid.value]: 0,

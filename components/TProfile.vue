@@ -31,7 +31,7 @@
           collection="profiles"
         />
         <TButton
-          v-if="uid !== profile.id"
+          v-if="uid !== profile.id && profile.id === profile.createdBy"
           label="Message"
           :to="`/chat/${profile.username}`"
         />
