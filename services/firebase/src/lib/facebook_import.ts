@@ -1,5 +1,4 @@
 import { scrapeFbEvent } from 'facebook-event-scraper'
-import { initIndex } from './algolia'
 import { firestore } from '../firebase'
 import { getCityId, getPlace } from './google_maps'
 import { getUploadedImage } from './cloudinary'
@@ -94,6 +93,13 @@ async function getOrg(host: any, place: any) {
     }
 
     await firestore.collection('profiles').add(org)
+    console.log(
+      'org profile created',
+      org.name,
+      org.username,
+      org.facebook,
+      org.place
+    )
   }
 
   return org
