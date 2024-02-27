@@ -1,5 +1,4 @@
 import axios from 'axios'
-import _ = require('lodash')
 import * as YAML from 'yaml'
 import * as fs from 'fs'
 
@@ -32,6 +31,7 @@ import { generateStyles } from './lib/dance_styles'
 import { scrapeFbEvent } from 'facebook-event-scraper'
 import { getUploadedImage } from './lib/cloudinary'
 import { syncCalendar } from './lib/ical_import'
+import _ = require('lodash')
 
 function getDomain(url: string): string {
   let hostname
@@ -591,7 +591,14 @@ yargs(hideBin(process.argv))
 
       const event = await getFacebookEvent(url)
 
-      console.log(event)
+      const debug: any = _.pick(event, [
+        'name',
+        'startDate',
+        'facebook',
+        'facebookId',
+      ])
+      debug.startDate = new Date(debug.startDate)
+      console.log(debug)
     }
   )
   .command(

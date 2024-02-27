@@ -1,4 +1,4 @@
-import { scrapeFbEvent } from 'facebook-event-scraper'
+import { scrapeFbEventFromFbid } from 'facebook-event-scraper'
 import { firestore } from '../firebase'
 import { getCityId, getPlace } from './google_maps'
 import { getUploadedImage } from './cloudinary'
@@ -93,22 +93,42 @@ async function getOrg(host: any, place: any) {
     }
 
     await firestore.collection('profiles').add(org)
-    console.log(
-      'org profile created',
-      org.name,
-      org.username,
-      org.facebook,
-      org.place
-    )
   }
 
   return org
 }
 
+export function getParameterByName(name: string, url: string) {
+  name = name.replace(/[\[\]]/g, '\\$&')
+  const regex = new RegExp('[?&]' + name + '(=([^&#]*)|&|#|$)')
+  const results = regex.exec(url)
+  if (!results) return null
+  if (!results[2]) return ''
+  return decodeURIComponent(results[2].replace(/\+/g, ' '))
+}
+
+export function getFacebookEventId(url: string) {
+  const eventTimeId = getParameterByName('event_time_id', url)
+
+  if (eventTimeId) {
+    return eventTimeId
+  }
+
+  const id = url
+    .split('?')?.[0]
+    .split('/')
+    .filter((x) => x)
+    .pop()
+
+  return id || ''
+}
+
 export async function getFacebookEvent(url: string) {
   let event
+  const facebookId = getFacebookEventId(url)
+
   try {
-    event = await scrapeFbEvent(url)
+    event = await scrapeFbEventFromFbid(facebookId)
   } catch (e) {
     return {
       type: 'import_error',
