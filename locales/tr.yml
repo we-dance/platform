@@ -187,9 +187,8 @@ profile:
   birthday:
     label: Doğum günü
     description: Sadece yaşınızı göstereceğiz
-  gender:
-    label: Cinsiyet
-    placeholder: Cinsiyet
+  pronounce:
+    label: Pronounce
   style: Dans stillerin
   joined: Katıldı
   languages: Diller
@@ -830,3 +829,7 @@ nav:
   bookmarks: Bookmarks
   myProfile: Profilim
   settings: Ayarlar
+pronounce:
+  she: She / Her
+  he: He / Him
+  they: They / Them
