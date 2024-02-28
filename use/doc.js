@@ -161,8 +161,8 @@ export const useDoc = (name) => {
     const docData = {
       createdAt: +new Date(),
       updatedAt: +new Date(),
-      createdBy: uid.value,
-      updatedBy: uid.value,
+      createdBy: uid.value || '',
+      updatedBy: uid.value || '',
       username: username?.value || '',
       ...data,
     }

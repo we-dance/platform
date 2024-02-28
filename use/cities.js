@@ -7,6 +7,7 @@ import { getLocality } from '~/use/google'
 
 const state = Vue.observable({
   currentCity: ls('city'),
+  isCreating: false,
 })
 
 export const useCities = () => {
@@ -20,7 +21,9 @@ export const useCities = () => {
     return city.value?.name
   })
 
-  find('cityPlaceId', currentCity.value)
+  if (currentCity.value) {
+    find('cityPlaceId', currentCity.value)
+  }
 
   watch(currentCity, (currentCity) => {
     ls('city', currentCity || '')
@@ -33,9 +36,18 @@ export const useCities = () => {
   })
 
   async function ensureCity(placeId) {
+    if (!placeId) {
+      return
+    }
+
     await find('cityPlaceId', placeId)
 
     if (!exists.value) {
+      if (state.isCreating) {
+        return
+      }
+
+      state.isCreating = true
       const location = await getLocality({ placeId })
 
       const cityProfile = {
@@ -48,9 +60,10 @@ export const useCities = () => {
       }
 
       await create(cityProfile)
+      state.isCreating = false
     }
 
-    if (!city.value.location?.latitude) {
+    if (cityId.value && !city.value.location?.latitude) {
       const location = await getLocality({ placeId })
       await softUpdate(cityId.value, {
         location,
