@@ -191,10 +191,11 @@ export const useProfiles = () => {
     },
     {
       name: 'gender',
-      label: t('profile.gender.label'),
+      label: t('profile.pronounce.label'),
       component: 'TInputButtons',
       hideSearchBox: true,
       poster: true,
+      register: true,
       options: genderList,
     },
     {
@@ -255,7 +256,7 @@ export const useProfiles = () => {
     {
       name: 'place',
       label: t('profile.place.label'),
-      register: false,
+      register: true,
       poster: true,
       component: 'TInputPlace',
       before: t('profile.place.before'),
@@ -327,7 +328,7 @@ export const useProfiles = () => {
       hideSearchBox: true,
       clearable: true,
       hideLabel: true,
-      placeholder: t('profile.gender.placeholder'),
+      placeholder: t('profile.pronounce.label'),
     },
   ]
 
