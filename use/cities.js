@@ -50,9 +50,10 @@ export const useCities = () => {
       state.isCreating = true
       const location = await getLocality({ placeId })
 
+      const name = location.locality || location.establishment
       const cityProfile = {
-        username: slugify(location.country + '-' + location.locality),
-        name: location.locality + ', ' + location.country,
+        username: slugify(location.country + '-' + name),
+        name: name + ', ' + location.country,
         type: 'City',
         place: placeId,
         cityPlaceId: placeId,

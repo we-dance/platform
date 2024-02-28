@@ -32,6 +32,7 @@ export const getAddress = (places) => {
 
   const result = {}
 
+  result.establishment = addressPart(place, 'establishment')
   result.locality = addressPart(place, 'locality')
   result.country = addressPart(place, 'country')
   result.region = addressPart(place, 'administrative_area_level_1')
