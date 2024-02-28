@@ -3,6 +3,7 @@
     :type="type"
     :class="clicked ? toggledClass : ''"
     :title="label"
+    :target-action="{ field, id: item.id, collection }"
     @click="toggle"
   >
     <component :is="clicked ? toggledIcon || icon : icon" class="w-4 h-4" />
@@ -16,6 +17,7 @@
   </TButton>
 </template>
 <script>
+import ls from 'local-storage'
 import firebase from 'firebase/app'
 import 'firebase/firestore'
 import {
@@ -89,6 +91,35 @@ export default {
       default: '',
     },
   },
+  mounted() {
+    if (!this.currentUsername) {
+      return
+    }
+
+    const action = ls('action')
+
+    if (!action?.id) {
+      return
+    }
+
+    if (action.id !== this.item.id) {
+      return
+    }
+
+    if (action.collection !== this.collection) {
+      return
+    }
+
+    if (action.field !== this.field) {
+      return
+    }
+
+    ls.remove('action')
+
+    if (!this.clicked) {
+      this.toggle()
+    }
+  },
   setup(props) {
     const { username: currentUsername } = useAuth()
 
@@ -144,7 +175,7 @@ export default {
       softUpdate(props.item.id, change)
     }
 
-    return { toggle, clicked, count, names }
+    return { toggle, clicked, count, names, currentUsername }
   },
 }
 </script>

@@ -23,6 +23,7 @@ const state = Vue.observable({
   marketing: null,
   error: null,
   showAuthPopup: false,
+  authTargetQuery: null,
   guest: false,
   featureFindPartner: false,
 })
@@ -177,6 +178,7 @@ export const useAuth = () => {
   async function setUser(user) {
     if (user) {
       state.uid = user.uid
+      state.showAuthPopup = false
       ls('uid', user.uid)
     } else {
       state.loading = false
@@ -267,6 +269,7 @@ export const useAuth = () => {
     }
 
     state.account = doc.data()
+    state.showAuthPopup = false
     state.loading = false
 
     return true
@@ -542,5 +545,6 @@ export const useAuth = () => {
     deleteAccount,
     sendPasswordResetEmail,
     toggleGuest,
+    loadProfile,
   }
 }

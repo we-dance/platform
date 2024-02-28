@@ -4,7 +4,10 @@
     type="button"
     :title="$t('TButton.title', { action: title })"
     :class="classes"
-    @click="showAuthPopup = title"
+    @click="
+      authTargetQuery = targetAction
+      showAuthPopup = title
+    "
   >
     <slot>
       <TIcon v-if="icon" :size="iconSize" :name="icon" />
@@ -104,6 +107,10 @@ export default {
       type: String,
       default: '',
     },
+    targetAction: {
+      type: Object,
+      default: null,
+    },
   },
   computed: {
     classes() {
@@ -146,9 +153,9 @@ export default {
     },
   },
   setup() {
-    const { uid, showAuthPopup } = useAuth()
+    const { uid, showAuthPopup, authTargetQuery } = useAuth()
 
-    return { uid, showAuthPopup }
+    return { uid, showAuthPopup, authTargetQuery }
   },
 }
 </script>

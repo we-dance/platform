@@ -60,6 +60,7 @@
 </template>
 
 <script>
+import { ref } from '@nuxtjs/composition-api'
 import ls from 'local-storage'
 import { track } from '~/plugins/firebase'
 import { useAuth } from '~/use/auth'
@@ -80,10 +81,15 @@ export default {
       signInWithGoogle,
       signUserIn,
       signOut,
+      profileLoaded,
       error,
     } = useAuth()
 
+    const isRedirecting = ref(false)
+
     return {
+      profileLoaded,
+      isRedirecting,
       uid,
       loading,
       signingIn,
@@ -95,26 +101,55 @@ export default {
     }
   },
   watch: {
-    loading: {
-      handler(val) {
-        if (!val && this.profile) {
-          this.redirect()
-        }
-      },
-    },
+    loading: 'redirect',
+    profileLoaded: 'redirect',
   },
   mounted() {
-    if (this.uid) {
-      this.redirect()
+    if (this.$route.query.invitedBy) {
+      ls('invitedBy', this.$route.query.invitedBy)
     }
+
+    if (this.$route.query.target) {
+      const target = this.$route.query.target
+
+      ls('target', target)
+    }
+
+    this.redirect()
   },
   methods: {
     redirect() {
+      if (this.isRedirecting) {
+        return
+      }
+
+      this.isRedirecting = true
+
+      if (this.loading) {
+        this.isRedirecting = false
+        return
+      }
+
+      if (this.profileLoaded && !this.profile?.username) {
+        this.$router.push('/onboarding')
+        return
+      }
+
+      if (!this.uid) {
+        this.isRedirecting = false
+        return
+      }
+
+      if (!this.profileLoaded) {
+        this.isRedirecting = false
+        return
+      }
+
       let target = ls('target')
       ls.remove('target')
 
       if (!target) {
-        const page = this.profile?.username || 'onboarding'
+        const page = this.profile?.username
         target = '/' + page
       }
 

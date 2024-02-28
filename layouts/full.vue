@@ -24,24 +24,7 @@
     <div
       class="font-sans leading-normal tracking-normal antialiased min-h-screen flex flex-col mx-auto max-w-xl bg-white rounded shadow"
     >
-      <TPopup
-        v-if="showAuthPopup"
-        :title="$t('popup.auth.title')"
-        @close="showAuthPopup = false"
-      >
-        <div class="my-4 w-64 flex flex-col justify-center text-center">
-          <div class="p-4">
-            {{ $t('popup.auth.body', { action: showAuthPopup }) }}
-          </div>
-          <TButton
-            allow-guests
-            class="mt-2"
-            type="primary"
-            :to="localePath(`/signin?target=${$route.path}`)"
-            >{{ $t('popup.auth.signin') }}</TButton
-          >
-        </div>
-      </TPopup>
+      <TAuthPopup />
 
       <div
         v-if="isMenuOpen"
@@ -196,7 +179,6 @@ export default {
       profile,
       username,
       isAdmin,
-      showAuthPopup,
       profileLoaded,
       updateProfile,
       loading,
@@ -227,7 +209,6 @@ export default {
       isAdmin,
       getCity,
       city,
-      showAuthPopup,
       loading,
       profileLoaded,
     }

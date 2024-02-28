@@ -87,6 +87,16 @@
     </div>
 
     <div
+      v-if="doc.specialOffer"
+      class="flex w-full items-center justify-start border-b py-2 px-4 leading-tight"
+    >
+      <TIcon name="fire" class="mr-4 h-4 w-4 text-primary" />
+      <div class="flex w-full justify-between text-primary">
+        <div>{{ doc.specialOffer }}</div>
+      </div>
+    </div>
+
+    <div
       class="top-0 z-40 flex flex-wrap justify-center items-center gap-2 bg-white p-4 shadow"
       :class="can('edit', 'events', doc) ? '' : 'sticky'"
     >
@@ -242,16 +252,6 @@
               })
             "
           />
-        </div>
-
-        <div
-          v-if="doc.specialOffer"
-          class="flex w-full items-center justify-start border-b py-2 px-4 leading-tight"
-        >
-          <TIcon name="fire" class="mr-4 h-4 w-4 text-primary" />
-          <div class="flex w-full justify-between text-primary">
-            <div>{{ doc.specialOffer }}</div>
-          </div>
         </div>
       </div>
     </div>
