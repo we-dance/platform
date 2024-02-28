@@ -31,15 +31,15 @@ export const useCommon = () => {
 
   const genderList = [
     {
-      label: t('common.female'),
+      label: t('pronounce.she'),
       value: 'Female',
     },
     {
-      label: t('common.male'),
+      label: t('pronounce.he'),
       value: 'Male',
     },
     {
-      label: t('common.other'),
+      label: t('pronounce.they'),
       value: 'Other',
     },
   ]

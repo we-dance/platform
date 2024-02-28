@@ -190,9 +190,8 @@ profile:
   birthday:
     label: Birthday
     description: We will show only your age
-  gender:
-    label: Gender
-    placeholder: Gender
+  pronounce:
+    label: Pronounce
   style: Dance styles
   joined: Joined
   languages: Languages
@@ -844,3 +843,7 @@ nav:
   bookmarks: Bookmarks
   myProfile: My Profile
   settings: Settings
+pronounce:
+  she: She / Her
+  he: He / Him
+  they: They / Them
