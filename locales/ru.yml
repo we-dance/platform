@@ -187,9 +187,8 @@ profile:
   birthday:
     label: Дата рождения
     description: Мы покажем только твой возраст
-  gender:
-    label: Пол
-    placeholder: Пол
+  pronounce:
+    label: Pronounce
   style: Танц-стили
   joined: Участник с
   languages: Языки
@@ -830,3 +829,7 @@ nav:
   bookmarks: Bookmarks
   myProfile: Мой Профиль
   settings: Настройки
+pronounce:
+  she: She / Her
+  he: He / Him
+  they: They / Them
