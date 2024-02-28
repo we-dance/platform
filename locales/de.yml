@@ -187,9 +187,8 @@ profile:
   birthday:
     label: Birthday
     description: We will show only your age
-  gender:
-    label: Gender
-    placeholder: Gender
+  pronounce:
+    label: Pronounce
   style: Tanzstile
   joined: Joined
   languages: Languages
@@ -830,3 +829,7 @@ nav:
   bookmarks: Bookmarks
   myProfile: Mein Profil
   settings: Einstellungen
+pronounce:
+  she: She / Her
+  he: He / Him
+  they: They / Them
