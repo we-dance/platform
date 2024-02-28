@@ -187,9 +187,8 @@ profile:
   birthday:
     label: Cumpleaños
     description: Sólo mostraremos tu edad
-  gender:
-    label: Género
-    placeholder: Género
+  pronounce:
+    label: Pronounce
   style: Estilos de baile
   joined: Unido
   languages: Idiomas
@@ -830,3 +829,7 @@ nav:
   bookmarks: Bookmarks
   myProfile: Mi perfil
   settings: Configuraciones
+pronounce:
+  she: She / Her
+  he: He / Him
+  they: They / Them
