@@ -7,7 +7,7 @@ export function useAlgolia(indexName) {
   const page = ref(0)
   const cachedOptions = ref({})
 
-  const client = algoliasearch('3C1F1UNN43', 'e5e4a63d86dbe186525fefa28c21fca5')
+  const client = algoliasearch('JKZMWHRKW6', '43a0f4341904979e375977fc73bbb1dd')
 
   const index = client.initIndex(indexName)
 

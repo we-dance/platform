@@ -131,7 +131,7 @@ export function eventToAlgolia(event: any) {
     organizer: event.org?.username || '',
     name: event.name,
     cover: event.cover,
-    description: event.description,
+    description: event.description ? event.description.substring(0, 500) : '',
     place: event.place,
     price: event.price,
     styles: event.styles,
@@ -167,43 +167,47 @@ export function eventToAlgolia(event: any) {
   return result
 }
 
-export async function indexEvents() {
+export async function indexEvents(onlyNew: boolean = false) {
   const since = new Date()
   since.setHours(0, 0, 0, 0)
 
-  // const now = +new Date()
-  // const futureEvents = (
-  //   await firestore
-  //     .collection('posts')
-  //     .where('startDate', '>', now)
-  //     .get()
-  // ).docs
+  let eventDocs: any[] = []
 
-  const recentlyCreated = (
-    await firestore
-      .collection('posts')
-      .where('createdAt', '>', +since)
-      .get()
-  ).docs
+  if (onlyNew) {
+    const recentlyCreated = (
+      await firestore
+        .collection('posts')
+        .where('createdAt', '>', +since)
+        .get()
+    ).docs
 
-  const recentlyUpdated = (
-    await firestore
-      .collection('posts')
-      .where('updatedAt', '>', +since)
-      .get()
-  ).docs
+    const recentlyUpdated = (
+      await firestore
+        .collection('posts')
+        .where('updatedAt', '>', +since)
+        .get()
+    ).docs
 
-  let eventDocs = [...recentlyCreated, ...recentlyUpdated]
-  // get unique events
-  eventDocs = eventDocs.filter(
-    (event, index, self) =>
-      index === self.findIndex((e) => e.data().name === event.data().name)
-  )
+    eventDocs = [...recentlyCreated, ...recentlyUpdated]
+    // get unique events
+    eventDocs = eventDocs.filter(
+      (event, index, self) =>
+        index === self.findIndex((e) => e.data().name === event.data().name)
+    )
+  } else {
+    const now = +new Date()
+    const futureEvents = (
+      await firestore
+        .collection('posts')
+        .where('startDate', '>', now)
+        .get()
+    ).docs
+
+    eventDocs = futureEvents
+  }
 
   console.log({
     count: eventDocs.length,
-    since,
-    names: eventDocs.map((e: any) => e.data().name).join(', '),
   })
 
   const objects = []
@@ -213,7 +217,7 @@ export async function indexEvents() {
     const event = {
       id: doc.id,
       ...doc.data(),
-    } as any
+    }
 
     objects.push(eventToAlgolia(event))
   }
@@ -223,25 +227,57 @@ export async function indexEvents() {
   console.log(`Indexed ${objects.length} events`)
 }
 
-export async function indexProfiles() {
-  const since = new Date()
-  since.setHours(0, 0, 0, 0)
+export async function indexInit() {
+  const profilesIndex = initIndex('profiles')
+  await profilesIndex.setSettings({
+    attributesForFaceting: [
+      'style',
+      'locality',
+      'country',
+      'type',
+      'gender',
+      'objectives',
+    ],
+  })
 
-  const recentlyCreated = (
-    await firestore
-      .collection('profiles')
-      .where('createdAt', '>', +since)
-      .get()
-  ).docs
+  const eventsIndex = initIndex('events')
+  await eventsIndex.setSettings({
+    attributesForFaceting: [
+      'type',
+      'style',
+      'country',
+      'locality',
+      'venue',
+      'organizer',
+      'online',
+    ],
+  })
+}
 
-  const recentlyUpdated = (
-    await firestore
-      .collection('profiles')
-      .where('updatedAt', '>', +since)
-      .get()
-  ).docs
+export async function indexProfiles(onlyNew: boolean = false) {
+  let profileDocs: any[] = []
 
-  let profileDocs = [...recentlyCreated, ...recentlyUpdated]
+  if (onlyNew) {
+    const since = new Date()
+    since.setHours(0, 0, 0, 0)
+    const recentlyCreated = (
+      await firestore
+        .collection('profiles')
+        .where('createdAt', '>', +since)
+        .get()
+    ).docs
+
+    const recentlyUpdated = (
+      await firestore
+        .collection('profiles')
+        .where('updatedAt', '>', +since)
+        .get()
+    ).docs
+
+    profileDocs = [...recentlyCreated, ...recentlyUpdated]
+  } else {
+    profileDocs = (await firestore.collection('profiles').get()).docs
+  }
 
   // get unique profiles
   profileDocs = profileDocs.filter(
@@ -252,8 +288,6 @@ export async function indexProfiles() {
 
   console.log({
     count: profileDocs.length,
-    since,
-    usernames: profileDocs.map((p: any) => p.data().username).join(', '),
   })
 
   const index = initIndex('profiles')
@@ -270,7 +304,7 @@ export async function indexProfiles() {
     const profile = {
       id: doc.id,
       ...doc.data(),
-    } as any
+    }
 
     if (!profile.username) {
       await index.deleteObject(profile.id)
@@ -281,9 +315,7 @@ export async function indexProfiles() {
 
     const algoliaProfile = await profileToAlgolia(profile)
     objects.push(algoliaProfile)
-    console.log(
-      `Added ${count} of ${profileDocs.length} profiles: ${algoliaProfile.username} in <${algoliaProfile.locality}, ${algoliaProfile.country}> (${algoliaProfile.place})`
-    )
+
     if (!algoliaProfile.locality) {
       errors.push({
         username: algoliaProfile.username,

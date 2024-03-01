@@ -5,6 +5,7 @@ import * as fs from 'fs'
 import {
   eventToAlgolia,
   indexEvents,
+  indexInit,
   indexProfiles,
   initIndex,
   profileToAlgolia,
@@ -887,6 +888,14 @@ yargs(hideBin(process.argv))
           path: `var/${argv.username}.png`,
         }
       )
+    }
+  )
+  .command(
+    'algolia:init',
+    'Init indexes in algolia',
+    () => undefined,
+    async (argv: any) => {
+      await indexInit()
     }
   )
   .command(
