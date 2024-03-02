@@ -1,5 +1,5 @@
 <template>
-  <div ref="target" class="px-4">
+  <div class="px-4">
     <h2 class="text-center text-xl font-bold">
       {{ $t('home.numbers.title') }}
     </h2>
@@ -33,66 +33,21 @@
 </template>
 
 <script>
-import { useElementVisibility } from '@vueuse/core'
-import { ref, watch } from '@nuxtjs/composition-api'
-import { useAlgolia } from '~/use/algolia'
-import { useAuth } from '~/use/auth'
+import { ref } from '@nuxtjs/composition-api'
 
 export default {
   name: 'Index',
   layout: 'default',
   setup() {
-    const target = ref(null)
-    const targetIsVisible = useElementVisibility(target)
+    const numbers = ref({})
 
-    const { uid, username } = useAuth()
-
-    const { response: responseProfiles, search: searchProfiles } = useAlgolia(
-      'profiles'
-    )
-
-    const { response: responseEvents, search: searchEvents } = useAlgolia(
-      'events'
-    )
-
-    const numbers = ref(null)
-
-    watch(targetIsVisible, (isVisible) => {
-      if (isVisible) {
-        load()
-      }
-    })
-
-    async function load() {
-      if (numbers.value) {
-        return
-      }
-
-      await searchProfiles('', {
-        filters: `lastLoginAt > 0`,
-        facets: ['style', 'locality', 'country'],
-        hitsPerPage: 0,
-        maxValuesPerFacet: 1000,
-        analytics: false,
-      })
-
-      await searchEvents('', {
-        filters: ``,
-        facets: ['style', 'locality', 'country'],
-        hitsPerPage: 0,
-        maxValuesPerFacet: 1000,
-        analytics: false,
-      })
-
-      numbers.value = {
-        profiles: responseProfiles.value.nbHits,
-        events: responseEvents.value.nbHits,
-        cities: Object.keys(responseProfiles.value.facets.locality).length,
-        countries: Object.keys(responseProfiles.value.facets.country).length,
-      }
+    numbers.value = {
+      profiles: 2680,
+      events: 452,
+      countries: 54,
     }
 
-    return { target, uid, username, numbers }
+    return { numbers }
   },
 }
 </script>
