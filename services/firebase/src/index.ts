@@ -219,6 +219,7 @@ export const onProfileChange = functions.firestore
 
     if (wasDeleted || becameUnlisted) {
       await removeObject('profiles', profileId)
+      return
     }
 
     if (!profile || !profile.username) {
@@ -237,7 +238,10 @@ export const onProfileChange = functions.firestore
 
     const index = initIndex('profiles')
 
-    if (profile.visibility !== 'Unlisted') {
+    if (
+      profile.visibility !== 'Unlisted' &&
+      wasChanged(oldProfile, profile, ['updatedAt'])
+    ) {
       await index.saveObject(
         await profileToAlgolia({
           ...profile,
