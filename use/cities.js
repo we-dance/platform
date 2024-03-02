@@ -1,12 +1,12 @@
 import Vue from 'vue'
 import { watch, toRefs, computed } from '@nuxtjs/composition-api'
-import ls from 'local-storage'
 import { useDoc } from '~/use/doc'
 import { slugify } from '~/utils'
 import { getLocality } from '~/use/google'
+import { useAuth } from '~/use/auth'
 
 const state = Vue.observable({
-  currentCity: ls('city'),
+  currentCity: null,
   isCreating: false,
 })
 
@@ -14,26 +14,32 @@ export const useCities = () => {
   const { doc: city, id: cityId, exists, find, create, softUpdate } = useDoc(
     'profiles'
   )
-
-  const currentCity = computed(() => state.currentCity || ls('city'))
+  const { uid, updateProfile, profile } = useAuth()
 
   const cityName = computed(() => {
     return city.value?.name
   })
 
-  if (currentCity.value) {
-    find('cityPlaceId', currentCity.value)
+  if (state.currentCity) {
+    find('cityPlaceId', state.currentCity)
   }
 
-  watch(currentCity, (currentCity) => {
-    ls('city', currentCity || '')
-
-    if (currentCity) {
-      find('cityPlaceId', currentCity)
-    } else {
-      city.value = {}
+  watch(profile, (profile) => {
+    if (profile?.current) {
+      state.currentCity = profile.current
     }
   })
+
+  watch(
+    () => state.currentCity,
+    (currentCity) => {
+      if (currentCity) {
+        find('cityPlaceId', currentCity)
+      } else {
+        city.value = {}
+      }
+    }
+  )
 
   async function ensureCity(placeId) {
     if (!placeId) {
@@ -74,7 +80,22 @@ export const useCities = () => {
 
   async function switchCity(placeId) {
     await ensureCity(placeId)
+
     state.currentCity = placeId
+
+    if (!uid.value) {
+      return
+    }
+
+    const changes = {
+      current: placeId,
+    }
+
+    if (!profile.value?.place) {
+      changes.place = placeId
+    }
+
+    await updateProfile(changes)
   }
 
   return {

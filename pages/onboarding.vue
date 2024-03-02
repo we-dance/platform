@@ -125,12 +125,6 @@ export default {
   watch: {
     loadedProfile: 'load',
   },
-
-  mounted() {
-    const city = ls('city')
-
-    this.profile.place = city
-  },
   methods: {
     skipPhoto() {
       this.skip.photo = true

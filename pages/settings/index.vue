@@ -139,7 +139,6 @@ import { useAuth } from '~/use/auth'
 import { useProfiles } from '~/use/profiles'
 import { useAccounts } from '~/use/accounts'
 import { db, track } from '~/plugins/firebase'
-import { useCities } from '~/use/cities'
 
 export default {
   name: 'PageSettings',
@@ -163,7 +162,6 @@ export default {
     } = useAuth()
 
     const { profileFields, contactFields } = useProfiles()
-    const { switchCity } = useCities()
     const { accountFields: allAccountFields } = useAccounts()
     const password = ref('')
     const passwordError = ref(false)
@@ -172,7 +170,6 @@ export default {
     const passwordField = allAccountFields.find((f) => f.name === 'password')
 
     return {
-      switchCity,
       passwordError,
       accountFields,
       loading,
@@ -250,8 +247,6 @@ export default {
         this.$toast.error('Teaser can be maximum 140 symbols.')
         return
       }
-
-      await this.switchCity(data.current)
 
       track('save_profile')
 

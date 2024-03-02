@@ -5,11 +5,11 @@
     </THeader>
 
     <div v-if="!query">
-      <router-link
+      <div
         v-for="city in recommendations"
         :key="city.username"
         class="border-b block p-4 cursor-pointer hover:bg-red-100"
-        :to="localePath(`/explore/${city.username}`)"
+        @click="goTo(city)"
       >
         <div class="text-lg">
           {{ city.name }}
@@ -17,9 +17,10 @@
         <div class="flex space-x-2 items-center">
           <div class="text-xs">{{ city.viewsCount }} views</div>
         </div>
-      </router-link>
+      </div>
     </div>
     <div v-if="query">
+      <router-link :to="localePath('/')"></router-link>
       <div v-for="city in results" :key="city.value" class="border-b flex">
         <div
           class="flex-grow text-lg p-4 cursor-pointer hover:bg-red-100"
@@ -40,20 +41,22 @@ import { computed, onMounted, ref, watch } from 'vue-demi'
 import { useCities } from '~/use/cities'
 import { useRouter } from '~/use/router'
 import { getPlacePredictions } from '~/use/google'
-import { useAuth } from '~/use/auth'
-
 export default {
   setup(props, { root }) {
     const { switchCity, city } = useCities()
     const { router } = useRouter()
-    const { updateProfile } = useAuth()
+    const localePath = (val) => val
 
     const docs = ref([])
 
     async function changeCity(placeId) {
       await switchCity(placeId)
-      await updateProfile({ current: placeId })
-      router.push(`/explore/${city.value.username}`)
+      router.push(localePath(`/explore/${city.value.username}`))
+    }
+
+    async function goTo(city) {
+      await switchCity(city.cityPlaceId)
+      router.push(localePath(`/explore/${city.username}`))
     }
 
     const query = ref(root.$route.query.q || '')
@@ -120,6 +123,7 @@ export default {
     })
 
     return {
+      goTo,
       changeCity,
       query,
       results,

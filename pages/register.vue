@@ -91,8 +91,6 @@ export default {
       ls('target', this.$route.query.target)
     }
 
-    this.$set(this.data, 'place', ls('city'))
-
     if (this.uid) {
       this.redirect()
     }

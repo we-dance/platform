@@ -294,7 +294,6 @@ export const useAuth = () => {
         createdAt: +new Date(),
         locales: getLanguages(),
         timezone: new Date().toString().match(/([A-Z]+[+-][0-9]+)/)[1],
-        place: ls('city'),
         invitedBy: ls('invitedBy'),
         username: ls('username'),
         visibility: 'Members',
@@ -313,10 +312,6 @@ export const useAuth = () => {
     } else {
       state.profile = doc.data()
       state.username = state.profile.username
-
-      if (!ls('city')) {
-        ls('city', state.profile.place)
-      }
     }
 
     state.loading = false
@@ -454,7 +449,6 @@ export const useAuth = () => {
   ) {
     try {
       ls('username', username)
-      ls('city', place)
       await firebase.auth().createUserWithEmailAndPassword(email, password)
     } catch (e) {
       state.error = e

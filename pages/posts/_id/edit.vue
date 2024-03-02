@@ -23,7 +23,6 @@
 </template>
 
 <script>
-import ls from 'local-storage'
 import { until } from '@vueuse/core'
 import { onMounted, ref } from '@nuxtjs/composition-api'
 import { useAuth } from '~/use/auth'
@@ -44,13 +43,6 @@ export default {
         }
       }
     },
-  },
-  mounted() {
-    const city = ls('city')
-
-    this.item = this.item || {
-      community: city,
-    }
   },
   methods: {
     cancelItem() {
