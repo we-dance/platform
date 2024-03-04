@@ -237,6 +237,7 @@ export async function indexInit() {
       'type',
       'gender',
       'objectives',
+      'partner',
     ],
   })
 
