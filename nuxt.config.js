@@ -53,6 +53,7 @@ export default {
   ssr: false,
   generate: {
     fallback: true,
+    exclude: [/^\/admin/],
   },
   /*
    ** Customize the progress-bar color
