@@ -20,6 +20,7 @@ import { wrap } from './sentry'
 import { announceEventIG2, importInstagramProfile } from './lib/instagram'
 import { getFacebookEvent } from './lib/facebook_import'
 import { syncCalendar } from './lib/ical_import'
+import { getSchemaEvent } from './lib/schema_import'
 
 require('dotenv').config()
 
@@ -335,10 +336,19 @@ export const eventChanged = functions.firestore
     }
 
     if (event.type === 'import_event') {
-      const eventData = await getFacebookEvent(event.facebook)
+      let eventData: any = {}
 
-      if (event.facebookId) {
-        eventData.facebookId = event.facebookId
+      if (!event.sourceUrl) {
+        return
+      }
+
+      if (event.sourceUrl.includes('facebook.com/events')) {
+        eventData = await getFacebookEvent(event.sourceUrl)
+        if (event.facebookId) {
+          eventData.facebookId = event.facebookId
+        }
+      } else {
+        eventData = await getSchemaEvent(event.sourceUrl)
       }
 
       if (event.startDate) {

@@ -469,9 +469,9 @@ sort:
   yours: Yours
 import:
   event:
-    facebook:
-      label: Add event from Facebook
-      description: You can also [sync all your events](/settings/calendars) from Facebook.
+    sourceUrl:
+      label: Add existing event
+      description: Link to Facebook, Eventbrite, go&dance, and other SEO-optimized websites to easily import events. For more convenience, [sync your events](/settings/calendars) directly from platforms like Facebook and Google Calendar.
     add: Create new event
 event:
   attend: Join Guest List

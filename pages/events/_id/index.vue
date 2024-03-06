@@ -274,7 +274,7 @@
       v-else-if="doc.type === 'import_event'"
       class="flex justify-center items-center h-64"
     >
-      <div class="text-sm">Importing event from Facebook...</div>
+      <div class="text-sm">Importing event...</div>
     </div>
     <div v-else>
       <TPopup

@@ -45,6 +45,7 @@
     "puppeteer": "^7.0.0",
     "telegraf": "^4.8.6",
     "uuid": "^9.0.1",
+    "web-auto-extractor": "^1.0.17",
     "yaml": "^2.3.4",
     "yargs": "^17.3.1"
   },

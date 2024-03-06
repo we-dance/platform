@@ -126,11 +126,11 @@ export default {
 
     const eventFields = [
       {
-        name: 'facebook',
+        name: 'sourceUrl',
         labelPosition: 'top',
-        description: t('import.event.facebook.description'),
-        label: t('import.event.facebook.label'),
-        placeholder: 'https://www.facebook.com/events/...',
+        description: t('import.event.sourceUrl.description'),
+        label: t('import.event.sourceUrl.label'),
+        placeholder: 'https://',
       },
     ]
 

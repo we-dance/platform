@@ -135,6 +135,7 @@ export async function syncCalendar(calendarRef: DocumentSnapshot) {
       startDate: vevent.start ? +vevent.start : '',
       endDate: vevent.end ? +vevent.end : '',
       facebook: facebookUrl || '',
+      sourceUrl: facebookUrl || vevent.url || '',
       location: vevent.location || '',
       styles,
       eventType,

@@ -33,6 +33,7 @@ import { scrapeFbEvent } from 'facebook-event-scraper'
 import { getUploadedImage } from './lib/cloudinary'
 import { syncCalendar } from './lib/ical_import'
 import _ = require('lodash')
+import { getSchemaEvent } from './lib/schema_import'
 
 function getDomain(url: string): string {
   let hostname
@@ -600,6 +601,20 @@ yargs(hideBin(process.argv))
       ])
       debug.startDate = new Date(debug.startDate)
       console.log(debug)
+    }
+  )
+  .command(
+    'schema <url>',
+    'Import event from schema ld+json',
+    () => undefined,
+    async (argv: any) => {
+      const url = argv.url
+
+      const event = await getSchemaEvent(url)
+
+      // const debug: any = _.pick(event, ['name', 'startDate'])
+
+      console.log(event)
     }
   )
   .command(
