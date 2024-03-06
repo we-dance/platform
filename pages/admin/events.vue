@@ -91,6 +91,12 @@ export default {
         valueGetter: (params) => (params.data.link ? 'Yes' : 'No'),
       },
       {
+        field: 'source',
+      },
+      {
+        field: 'provider',
+      },
+      {
         field: 'createdAt',
         valueGetter: (params) => getDateTime(params.data.createdAt),
       },
