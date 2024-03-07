@@ -1,6 +1,9 @@
 <template>
-  <div :class="classes">
-    <nuxt-content v-if="page" :document="page" />
+  <div>
+    <template v-if="page">
+      <THeader show-logo class="md:hidden" />
+      <nuxt-content :document="page" :class="classes" />
+    </template>
     <TFestivals v-else-if="profile.username === 'Travel'" :profile="profile" />
     <TCity v-else-if="profile.type === 'City'" :profile="profile" />
     <TProfile v-else :profile="profile" />
