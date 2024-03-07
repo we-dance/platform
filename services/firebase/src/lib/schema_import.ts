@@ -1,15 +1,32 @@
 const WAE = require('web-auto-extractor').default
+const TurndownService = require('turndown')
+import { decode } from 'html-entities'
 import axios from 'axios'
 import { getCityId, getPlace } from './google_maps'
 import { getUploadedImage } from './cloudinary'
-import { getSuggestedStyles, getSuggestedType } from './linguist'
+import {
+  getSuggestedStyles,
+  getSuggestedType,
+  getUrlsFromText,
+  isFacebookEvent,
+} from './linguist'
 
 async function getEvent(url: string) {
   const response = await axios.get(url)
   const data = response.data
+  const facebookUrlsList = getUrlsFromText(data)
+    .filter((url) => isFacebookEvent(url))
+    .filter((v, i, a) => a.indexOf(v) === i)
+
   const parsed = WAE().parse(data)
 
   const result = []
+
+  if (parsed.jsonld.Event) {
+    for (const event of parsed.jsonld.Event) {
+      result.push(event)
+    }
+  }
 
   if (parsed.jsonld.SocialEvent) {
     for (const event of parsed.jsonld.SocialEvent) {
@@ -23,11 +40,28 @@ async function getEvent(url: string) {
     }
   }
 
-  return result[0]
+  const event = result[0]
+  event.facebookUrlsCount = facebookUrlsList.length
+  event.facebookUrlsList = facebookUrlsList
+  event.schemaEventsCount = result.length
+  event.facebook = facebookUrlsList.length > 0 ? facebookUrlsList[0] : ''
+
+  return event
 }
 
 export async function getSchemaEvent(url: string) {
   const event = await getEvent(url)
+  if (!event) {
+    return {
+      type: 'import_error',
+      errorCode: 'no_event',
+      error: 'No event found',
+    }
+  }
+
+  event.name = decode(event.name)
+  const turndownService = new TurndownService()
+  event.description = turndownService.turndown(decode(event.description))
 
   const venueName = event.location?.name || ''
   const venueAddress = event.location?.address?.streetAddress || ''
@@ -69,7 +103,7 @@ export async function getSchemaEvent(url: string) {
   const hash = +new Date(event.startDate) + '+' + venue?.place_id
   const eventPhoto = await getUploadedImage(event.image || '')
 
-  const offer = event.offers.find((offer: any) => offer.price) || null
+  const offer = event.offers?.find((offer: any) => offer.price) || null
 
   return {
     name: event.name,
@@ -99,5 +133,9 @@ export async function getSchemaEvent(url: string) {
     },
     hash,
     source: 'schema',
+    facebookUrlsCount: event.facebookUrlsCount,
+    facebookUrlsList: event.facebookUrlsList,
+    schemaEventsCount: event.schemaEventsCount,
+    facebook: event.facebook,
   }
 }
