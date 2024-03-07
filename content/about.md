@@ -4,51 +4,60 @@ title: About WeDance
 
 # About WeDance
 
-WeDance is a closed social network for dancers and non-profit international dance community.
+Welcome to WeDance, the ultimate hub for dancers and dance enthusiasts! We're not just a social network; we're a vibrant, international dance community dedicated to uniting dance lovers across the globe. Whether you're a seasoned pro or just have a passion for dance, WeDance is your go-to platform for everything dance-related.
 
-**Our mission** is to unite dancers worldwide, so that you can go to any city and find dance events and dancers. It all starts with the local community and volunteers.
+#### 🌟 Our Mission: Connect & Dance Everywhere!
 
-**Our platform** is closed social network [wedance.vip](https://wedance.vip/) is where every dancer can create a profile, recommend dance events and get advice. It is like Facebook, but we are not selling data. It is like Couchsurfing, but focusing on needs of dancers. We provide contact book of dancers in every city. Later we'll be focusing on maintaining a global dance calendar all together.
+Imagine landing in any city and instantly connecting with local dancers, finding exciting dance events, and feeling the pulse of the local dance scene. That's what WeDance is all about! We believe in the power of dance to bring people together, transcending borders and cultures.
 
-**Our community** is gathering in local city chats on Telegram. Our chats are something like train station, where different dance groups come together to help each other. It starts slowly, but even having one dance contact in your city will make a difference for a traveling dancer!
+#### 💃 Our Platform: More Than Just Social Networking
 
-We have social media accounts like Instagram, Facebook, Telegram in every city and help dancers to connect and help organisers to promote their events.
+WeDance is your dance passport! Create a profile, discover and recommend dance events, and get insider tips from fellow dancers. Think of it as a unique blend of Facebook's connectivity and Couchsurfing's community spirit, but tailor-made for dancers. Plus, we value your privacy - no data selling here!
 
-We run different initiatives to spread dancing worldwide: we do podcasts and YouTube interviews with dance instructors, DJs and dancers to provide a platform where ideas can be heard and discussions started.
+#### 📚 Your Dance Contact Book
 
-Our strategy think globally, act locally. It all starts with the local community.
+Need a dance buddy in a new city? Our platform offers a comprehensive contact book of dancers worldwide. Plan your next dance adventure with ease and confidence.
 
-We are dancers, we set an example for society, which neither religion, nor goverment, nor science can do.
+#### 🎉 Global Dance Calendar: Stay in the Groove
 
-We are building a society where each person is a brother or a sister, a friend and is ready to help. Here you can get help and help others, we love everyone who is with us. It's difficult to get inside, but when you get inside, you get warmth and care. We have a strict security guards, we create a safe place where it is cozy, warm and comfortable. Where you can know what is happening and when, with whom you can meet to dance, to go to the festival.
+Coming soon: A comprehensive global dance calendar curated by our community. Whether it's a salsa night in Havana or a contemporary dance workshop in Paris, you'll be the first to know.
 
-We do not like violence, bullying, humiliation, advertising, pornography and spam. We are creative, delicate, fragile natures. We have limits, and in this regard, everything is very strict. Reputation is above all, do not poop into the well from which you drink tomorrow. Respect your brothers and sisters, them and their culture and history. Look for a common language and reconciliation, ways to achieve a win-win situation. We have a boomerang principle (have you watched the Pay forward movie?) - help without remorse and it will return, we are not looking for self-interest.
+#### 📣 Stay Connected: Follow Us Everywhere
 
-We inspire, it's easy with us. It’s free and [open souce](https://github.com/we-dance/platform).
+Join us across various social media platforms like Instagram and Facebook. We keep the dance community buzzing with updates, event promotions, and endless inspiration.
 
-## Our Values
+#### 🎤 Voices of Dance: Amplifying the Dance Conversation
 
-- **Harmony**
-  Creating harmony and meaningful interactions among dancers
-- **Sustainability**
-  Creating sustainable and long-term value
-- **Transparency**
-  Make information accessible to everyone
+We're committed to spreading the love for dance through engaging podcasts, insightful YouTube interviews, and discussions with dance professionals. It's about creating a space for ideas, innovation, and shared stories in the dance world.
 
-## Our Principles
+#### 🌐 Our Mantra: Local Heart, Global Beat
 
-- **Effectiveness**. Devote time only to what brings you closer toward achieving your objectives.
-- **Consent**. Raise, seek out and resolve objections to decisions and actions.
-- **Empiricism**. Test all assumptions through experimentation and continuous revision.
-- **Continuous Improvement**. Change incrementally to accommodate steady empirical learning.
-- **Equivalence**. Involve people in making and evolving decisions that affect them.
-- **Transparency**. Make all information accessible to everyone in an organization, unless there is a reason for confidentiality.
-- **Accountability**. Respond when something is needed, do what you agreed to do, and take ownership for the course of the organisation.
+We believe in the power of local communities to ignite global change. Our focus is to cultivate local dance scenes while connecting them to a worldwide network of dance lovers.
 
-Principles are based on [Sociocracy 3.0 – social technology for growing agile and resilient organizations](https://sociocracy30.org/the-details/principles/).
+#### 🤝 Our Community: A Dance Family
+
+WeDance is more than a network; it's a family. We strive to create an environment that's safe, supportive, and welcoming. We celebrate diversity, encourage collaboration, and foster a culture of mutual help and respect.
+
+#### ✨ Dance with Integrity: Our Ethical Compass
+
+Our community is a no-go zone for negativity. We promote creativity, positivity, and respect for all. Expect a community that values reputation, encourages constructive interactions, and stands firm against any form of disrespect or harm.
+
+#### 🌟 Be Inspired and Inspire Others
+
+Joining WeDance is not just joining a platform; it's embracing a dance lifestyle. It's free, open-source, and bursting with positive energy.
+
+#### 🌱 Our Values: The Heartbeat of Our Community
+
+- **Harmony**: Nurturing meaningful connections among dancers.
+- **Sustainability**: Creating lasting value in the dance world.
+- **Transparency**: Ensuring open and accessible information for all.
+
+#### 🔄 Our Principles: Dancing with Purpose
+
+Inspired by Sociocracy 3.0, our guiding principles include effectiveness, consent, empiricism, continuous improvement, equivalence, transparency, and accountability. These principles help us build a resilient, agile dance community, focused on continuous growth and inclusivity.
 
 <w-teaser
 title="Join Our Team"
-description="We build a community, where everyone enters with mindset “I can help”, so whenever you need help you can count on it. We are one big family worldwide. We help each other."
+description="Become part of a community where helping is second nature. At WeDance, you're not just a member; you're a vital part of a worldwide dance family. Ready to make a difference?"
 button="Get Involved"
 url="/get-involved"></w-teaser>
