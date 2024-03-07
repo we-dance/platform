@@ -10,7 +10,7 @@ export const app = {
   },
   url: 'https://wedance.vip',
   author: 'WeDance',
-  cover: '/cover/wide.png',
+  cover: '/cover/cover.png',
 }
 
 if (!process.env.FIREBASE_CONFIG) {
