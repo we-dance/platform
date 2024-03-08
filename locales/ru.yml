@@ -161,7 +161,8 @@ reviews:
   title: Reviews
   count: 'No Reviews | 1 Review | {count} Reviews'
 profile:
-  team: Team
+  teammembers:
+    label: Team Members
   claim: Забрать мой профиль
   follow:
     title: Следите за нами
