@@ -166,10 +166,23 @@ export const useAuth = () => {
       return true
     }
 
+    const add = !!state.uid
+    let edit = object.createdBy === state.uid
+
+    if (
+      collection === 'profiles' &&
+      object.team?.length &&
+      object.team.find((member) => member.id === state.uid)
+    ) {
+      edit = true
+    }
+
+    const remove = object.createdBy === state.uid
+
     const actions = {
-      add: !!state.uid,
-      edit: object.createdBy === state.uid,
-      remove: object.createdBy === state.uid,
+      add,
+      edit,
+      remove,
     }
 
     return actions[action]

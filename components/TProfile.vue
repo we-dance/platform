@@ -43,7 +43,7 @@
         />
         <TDropdown>
           <TPopupEdit
-            v-if="isAdmin()"
+            v-if="can('edit', profile)"
             type="context"
             :fields="profileFields"
             :label="$t('Edit')"
