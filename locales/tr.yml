@@ -161,7 +161,8 @@ reviews:
   title: Reviews
   count: 'No Reviews | 1 Review | {count} Reviews'
 profile:
-  team: Team
+  teammembers:
+    label: Team Members
   claim: Profilimi talep edin
   follow:
     title: Bizi takip edin
