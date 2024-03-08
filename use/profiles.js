@@ -279,7 +279,7 @@ export const useProfiles = () => {
       children: {
         component: 'TInputProfile',
       },
-      label: t('profile.team'),
+      label: t('profile.teammembers.label'),
       labelPosition: 'top',
     },
   ]

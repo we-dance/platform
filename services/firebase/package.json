@@ -37,7 +37,7 @@
     "html-entities": "^2.5.2",
     "https-proxy-agent": "^5.0.0",
     "ical": "^0.8.0",
-    "instagram-private-api": "^1.45.3",
+    "instagram-private-api": "^1.46.1",
     "lodash": "^4.17.21",
     "mailgun-js": "^0.22.0",
     "markdown-it": "^10.0.0",

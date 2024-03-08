@@ -2332,10 +2332,10 @@ inherits@2, inherits@2.0.4, inherits@^2.0.1, inherits@^2.0.3, inherits@^2.0.4, i
   resolved "https://registry.yarnpkg.com/inherits/-/inherits-2.0.4.tgz#0fa2c64f932917c3433a0ded55363aae37416b7c"
   integrity sha512-k/vGaX4/Yla3WzyMCvTQOXYeIHvqOKtnqBduzTHpzpQZzAskKMhZ2K+EnBiSM9zGSoIFeMpXKxa4dYeZIQqewQ==
 
-instagram-private-api@^1.45.3:
-  version "1.45.3"
-  resolved "https://registry.yarnpkg.com/instagram-private-api/-/instagram-private-api-1.45.3.tgz#c5273b278c967645fae4b16cb4aac58a45f88567"
-  integrity sha512-IybVclR0Ahh01rn/4r9sxRn4vkfbfMXAXFVljsGk51mfL/EyyP6Yn+aWIxbG/JboArR1POJzaFI5bQOR99R3xA==
+instagram-private-api@^1.46.1:
+  version "1.46.1"
+  resolved "https://registry.yarnpkg.com/instagram-private-api/-/instagram-private-api-1.46.1.tgz#13aaa90dbc948ec636a9b7f7dd81d5dbcfdf408f"
+  integrity sha512-fq0q6UfhpikKZ5Kw8HNwS6YpsNghE9I/uc8AM9Do9nsQ+3H1u0jLz+0t/FcGkGTjZz5VGvU8s2VbWj9wxchwYg==
   dependencies:
     "@lifeomic/attempt" "^3.0.0"
     "@types/chance" "^1.0.2"

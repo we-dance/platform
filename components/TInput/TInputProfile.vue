@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="relative">
     <WProfile
       v-if="value && value.username"
       :username="value.username"
@@ -43,7 +43,7 @@
       @input="search"
     />
     <div
-      v-if="query"
+      v-show="query"
       class="divide-y border rounded shadow absolute bg-white z-50"
     >
       <div

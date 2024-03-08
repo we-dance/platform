@@ -5,17 +5,17 @@
     style="z-index: 100"
   >
     <div
-      class="fixed w-full h-full top-0 left-0 bg-black opacity-50 z-40"
+      class="fixed w-full h-full top-0 left-0 bg-black opacity-50 z-30"
       @click="$emit('close')"
     ></div>
     <transition appear name="slide-up">
       <div
-        class="bg-white px-4 rounded w-full md:w-auto z-50 overflow-y-scroll mt-4 flex justify-center items-center max-h-screen"
+        class="bg-white px-4 rounded w-full md:w-auto z-40 overflow-y-scroll mt-4 flex justify-center items-center max-h-screen"
       >
         <div class="w-full">
           <div
             v-if="title"
-            class="flex bg-white justify-between border-b pt-4 pb-2 sticky top-0 z-50"
+            class="flex bg-white justify-between border-b pt-4 pb-2 sticky top-0 z-40"
           >
             <div class="font-bold">{{ title }}</div>
             <button

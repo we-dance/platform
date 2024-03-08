@@ -2,6 +2,26 @@
   <div>
     <TPreview v-if="profile.story" :content="profile.story" class="p-4" />
 
+    <div
+      v-if="profile.team && profile.team.length"
+      class="space-y-2 p-4 border-t"
+    >
+      <h3 class="text-xs uppercase font-bold px-2 pt-4 text-gray-500">
+        {{ $t('profile.teammembers.label') }}
+      </h3>
+      <div
+        v-for="(member, memberIndex) in profile.team"
+        :key="`artist-${memberIndex}`"
+      >
+        <WProfile
+          v-if="member"
+          :username="member.username"
+          :fallback="member"
+          hide-role
+        />
+      </div>
+    </div>
+
     <div class="space-y-4 p-4 bg-gray-100">
       <dl v-if="profile.current">
         <dt class="font-bold mr-1">{{ $t('profile.current.label') }}:</dt>
