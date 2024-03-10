@@ -1,15 +1,15 @@
 <template>
   <div>
     <div class="text-xs flex flex-col gap-2">
-      <a
-        href="https://github.com/we-dance/platform/releases"
-        target="_blank"
-        class="hover:underline"
-        >v{{ version }}</a
-      >
       <NuxtLink class="hover:underline" :to="localePath('/about')">{{
         $t('footer.about')
       }}</NuxtLink>
+      <NuxtLink class="hover:underline" :to="localePath('/organize')"
+        >For Organizers</NuxtLink
+      >
+      <NuxtLink class="hover:underline" :to="localePath('/promoter')"
+        >For Promoters</NuxtLink
+      >
       <NuxtLink class="hover:underline" :to="localePath('/get-involved')">
         {{ $t('footer.getInvolved') }}
       </NuxtLink>
@@ -33,6 +33,12 @@
       >
       <NuxtLink class="hover:underline" :to="localePath('/reviews')"
         >Reviews</NuxtLink
+      >
+      <a
+        href="https://github.com/we-dance/platform/releases"
+        target="_blank"
+        class="hover:underline"
+        >v{{ version }}</a
       >
     </div>
     <div class="mt-4 text-xs">

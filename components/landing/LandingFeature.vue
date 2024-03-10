@@ -14,7 +14,7 @@
       <div class="text-center">
         {{ description }}
       </div>
-      <div>
+      <div v-if="ctaLabel">
         <TButton :to="ctaLink" type="primary">{{ ctaLabel }}</TButton>
       </div>
     </div>

@@ -5,9 +5,15 @@
       <LandingHero
         :header="$t('home.hero.header')"
         :subheader="$t('home.hero.subheader')"
-        :cta-label="$t('home.hero.action')"
-        :cta-link="localePath('/explore')"
       >
+        <TButton
+          allow-guests
+          :label="$t('home.hero.action')"
+          :to="localePath('/explore')"
+          type="void"
+          class="mt-8 w-full text-gray-900 bg-white hover:bg-gray-100 font-semibold py-2 px-4 border border-gray-200 rounded-full shadow"
+          ><TIcon name="place" class="w-4 h-4 text-primary"
+        /></TButton>
         <TPreview
           :content="$t('home.hero.bottom')"
           no-typo

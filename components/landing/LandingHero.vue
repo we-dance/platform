@@ -10,18 +10,16 @@
             {{ subheader }}
           </div>
 
-          <div class="max-w-lg mx-auto">
-            <TButton
-              allow-guests
-              :label="ctaLabel"
-              :to="ctaLink"
-              type="void"
-              class="mt-8 w-full text-gray-900 bg-white hover:bg-gray-100 font-semibold py-2 px-4 border border-gray-200 rounded-full shadow"
-              ><TIcon name="place" class="w-4 h-4 text-primary"
-            /></TButton>
+          <div class="max-w-lg mx-auto mt-4">
+            <slot>
+              <TButton
+                allow-guests
+                type="primary"
+                :label="ctaLabel"
+                :to="ctaLink"
+              />
+            </slot>
           </div>
-
-          <slot />
         </div>
       </div>
     </div>
