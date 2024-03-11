@@ -592,7 +592,7 @@ home:
     header: Voyage. Rencontre. **Danse.**
     subheader: Trouve des événements de bachata, salsa, kizomba, et plus près de chez toi. Élargis ton monde de la danse avec des soirées, cours, et festivals.
     action: Trouve ta ville
-    bottom: "[Notre mission](/about) est d'unir les danseurs du monde entier."
+    bottom: 'Tu peux aussi [organiser des événements](/organize) ou [promouvoir et gagner](/promoter)'
   features:
     explore:
       title: Soirées, Cours, Festivals

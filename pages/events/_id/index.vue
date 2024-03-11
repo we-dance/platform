@@ -278,9 +278,18 @@
     </div>
     <div
       v-else-if="doc.type === 'import_event'"
-      class="flex justify-center items-center h-64"
+      class="flex flex-col justify-center items-center h-64"
     >
-      <div class="text-sm">Importing event...</div>
+      <div class="text-2xl font-extrabold">Please wait...</div>
+      <div v-if="doc.sourceUrl" class="mt-1 text-xs text-gray-700">
+        Importing event from
+        <a
+          :href="doc.sourceUrl"
+          target="_blank"
+          class="text-primary underline hover:no-underline"
+          >{{ doc.sourceUrl }}</a
+        >
+      </div>
     </div>
     <div v-else>
       <TPopup
@@ -522,7 +531,7 @@
 
         <TCommentsInline v-else :item="doc" autoload />
 
-        <div class="mt-8">
+        <div v-if="doc.updatedBy" class="mt-8">
           <TAvatar photo name :uid="doc.updatedBy">
             <span>•</span>
             <div>{{ dateDiff(doc.updatedAt) }}</div>
@@ -541,17 +550,14 @@
               >, provided by
               <strong class="font-bold">{{ doc.provider }}</strong></template
             ><template v-if="doc.sourceUrl"
-              >, original:
-              <strong class="font-bold">{{ doc.sourceUrl }}</strong></template
-            >.
-            <span v-if="doc.facebook"
-              >See
+              >, see
               <a
-                :href="doc.facebook"
+                :href="doc.sourceUrl"
+                target="_blank"
                 class="text-primary underline hover:no-underline"
-                >Facebook Event</a
-              >.</span
-            >
+                >source</a
+              ></template
+            >.
           </div>
           <div v-else class="mt-1 text-xs text-gray-700">
             Created event
