@@ -729,7 +729,7 @@ home:
     header: Travel. Meet. **Dance.**
     subheader: Find bachata, salsa, kizomba, and more dance events near you. Expand your dance world with socials, classes, and festivals.
     action: Find your city
-    bottom: '[Our mission](/about) is to unite dancers worldwide.'
+    bottom: 'You can also [organize events](/organize) or [promote and earn](/promoter)'
   features:
     explore:
       title: Socials, Classes, Festivals
@@ -767,7 +767,7 @@ home:
     - **Friends curious about your dance plans?** Just send them your WeDance profile and let them pick their favorite events to join you.
 
 
-    Sounds amazing, right? Explore WeDance today!"
+    Sounds amazing, right? Read [about WeDance](/about) and [get involved](/get-involved)!"
 explore:
   nav:
     festivals: Festivals
