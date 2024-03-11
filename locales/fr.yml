@@ -761,7 +761,7 @@ explore:
     experts: Ask Experts
     parties: Parties
     classes: Classes
-    groups: Groups
+    profiles: Membres
     tips: Ask Locals
   blog:
     header: Dance Blog
@@ -797,10 +797,10 @@ explore:
     header: '{style} Online Classes'
     subheader: Can't make it in person? Take your {style} moves to the next level with our online class selection.
   groups:
-    title: Dance Groups in {city} | WeDance
+    title: Members in {city} | WeDance
     description: Discover and connect with dance influencers and groups in {city}. Find WhatsApp, Telegram, Instagram, Youtube communities tailored to your style, from Salsa to Bachata to Kizomba. Engage with influencers and join vibrant dance networks in {city}.
     keywords: dance groups {city}, dance influencers {city}, dance communities {city}, dance networks {city}, dance collectives {city}
-    header: Groups in {city}
+    header: Members in {city}
     subheader: Discover and connect with dance influencers and groups in {city}. Find WhatsApp, Telegram, Instagram, Youtube communities tailored to your style, from Salsa to Bachata to Kizomba. Engage with influencers and join vibrant dance networks in {city}.
   tips:
     title: Ask Dancers in {city} | WeDance
