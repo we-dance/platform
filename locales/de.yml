@@ -166,7 +166,7 @@ profile:
   claim: Claim my profile
   follow:
     title: Follow us
-    description: We regularly post event announcements and introduce new members on our social media.
+    description: Join us on social media for the latest event news
   invite:
     header: '{count} invites left'
     description: '{name} invites you to get a free VIP membership for faster networking, get rewards, discover dance flashmobs and VIP events'
@@ -814,8 +814,8 @@ teaser:
     description: damit andere Dich kontaktieren können
     btn: Kostenlos beitreten
   feed:
-    title: Looking for more events?
-    description: Instead of searching through multiple chats, directly ask our local dance community on the website. Get personalized recommendations for events in any city from local dancers.
+    title: Need More?
+    description: Skip the search—ask local dancers for event tips in any city!
     btn: Ask Locals
 nav:
   search: Search
@@ -834,3 +834,6 @@ pronounce:
   she: She / Her
   he: He / Him
   they: They / Them
+landing:
+  follow:
+    description: Join us on social media for the latest news
