@@ -141,7 +141,6 @@ import {
 import { useAlgolia } from '~/use/algolia'
 import { useStyles } from '~/use/styles'
 import { useAuth } from '~/use/auth'
-import city from '~/pages/demo/city.vue'
 
 export default {
   name: 'TCalendar',
