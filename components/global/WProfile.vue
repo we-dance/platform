@@ -1,9 +1,6 @@
 <template>
-  <div
-    v-if="!fallback"
-    class="border rounded p-4 text-red-500 flex justify-between"
-  >
-    <div>Profile {{ username }} not found</div>
+  <div v-if="!fallback">
+    <div>@{{ username }}</div>
     <slot />
   </div>
   <div v-else class="py-2 border-t  border-gray-200 h-full">

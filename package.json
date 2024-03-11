@@ -52,6 +52,7 @@
     "markdown-it-container": "^2.0.0",
     "markdown-it-link-attributes": "^3.0.0",
     "markdown-it-mentions": "^1.0.0",
+    "markdown-it-regexp": "^0.4.0",
     "moment-timezone": "^0.5.34",
     "nuxt": "^2.15.8",
     "nuxt-i18n": "^6.10.1",

@@ -1,6 +1,6 @@
 <template>
   <div v-if="!profile">
-    <div>{{ username }}</div>
+    <div>@{{ username }}</div>
   </div>
   <div v-else>
     <div class="flex-col gap-2 flex justify-center items-center px-2">
