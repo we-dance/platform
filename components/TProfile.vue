@@ -141,6 +141,7 @@ import {
   getEventsOrganisedBy,
   getEventsWithArtist,
   getEventsWithGuest,
+  getEventsWithVenue,
 } from '~/use/events'
 import { useCities } from '~/use/cities'
 
@@ -195,6 +196,12 @@ export default {
       result = [
         ...result,
         ...(await getEventsOrganisedBy(props.profile?.username)),
+      ]
+      result = [
+        ...result,
+        ...(await getEventsWithVenue(props.profile?.username)).filter(
+          (item) => !result.find((existing) => existing.id === item.id)
+        ),
       ]
       result = [
         ...result,

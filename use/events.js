@@ -13,6 +13,20 @@ const updateEndDate = (newItem, oldItem) => {
   newItem.endDate = toDatetimeLocal(addMinutes(parseISO(newItem.startDate), 60))
 }
 
+export async function getEventsWithVenue(username) {
+  const result = await firebase
+    .firestore()
+    .collection('posts')
+    .where('venueProfile.username', '==', username)
+    .get()
+
+  return result.docs.map((doc) => ({
+    ...doc.data(),
+    id: doc.id,
+    role: 'Venue',
+  }))
+}
+
 export async function getEventsOrganisedBy(username) {
   const result = await firebase
     .firestore()
