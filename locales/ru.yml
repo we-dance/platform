@@ -166,7 +166,7 @@ profile:
   claim: Забрать мой профиль
   follow:
     title: Следите за нами
-    description: Мы регулярно публикуем анонсы мероприятий и представляем новых пользователей в наших социальных сетях.
+    description: Join us on social media for the latest event news
   invite:
     header: 'Осталось {count} приглашений'
     description: '{name} приглашает тебя получить бесплатное VIP-членство для быстрого нетворкинга и поиска мероприятий'
@@ -814,8 +814,8 @@ teaser:
     description: чтобы другие могли связаться с вами
     btn: Присоединись бесплатно
   feed:
-    title: Looking for more events?
-    description: Instead of searching through multiple chats, directly ask our local dance community on the website. Get personalized recommendations for events in any city from local dancers.
+    title: Need More?
+    description: Skip the search—ask local dancers for event tips in any city!
     btn: Ask Locals
 nav:
   search: Search
@@ -834,3 +834,6 @@ pronounce:
   she: She / Her
   he: He / Him
   they: They / Them
+landing:
+  follow:
+    description: Join us on social media for the latest news
