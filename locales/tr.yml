@@ -166,7 +166,7 @@ profile:
   claim: Profilimi talep edin
   follow:
     title: Bizi takip edin
-    description: Sosyal medyamızda düzenli olarak etkinlik duyuruları yayınlıyor ve yeni üyelerimizi tanıtıyoruz.
+    description: Join us on social media for the latest event news
   invite:
     header: '{count} davetiye kaldı'
     description: '{name} sizi daha hızlı ağ kurmak, ödüller kazanmak, dans flashmob''larını ve VIP etkinlikleri keşfetmek için ücretsiz VIP üyelik almaya davet ediyor'
@@ -814,8 +814,8 @@ teaser:
     description: böylece diğerleri seninle iletişim kurabilir
     btn: Ücretsiz katıl
   feed:
-    title: Looking for more events?
-    description: Instead of searching through multiple chats, directly ask our local dance community on the website. Get personalized recommendations for events in any city from local dancers.
+    title: Need More?
+    description: Skip the search—ask local dancers for event tips in any city!
     btn: Ask Locals
 nav:
   search: Search
@@ -834,3 +834,6 @@ pronounce:
   she: She / Her
   he: He / Him
   they: They / Them
+landing:
+  follow:
+    description: Join us on social media for the latest news
