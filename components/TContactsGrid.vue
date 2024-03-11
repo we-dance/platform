@@ -60,14 +60,16 @@ export default {
   },
   data: () => ({
     fields: [
+      'youtube',
+      'spotify',
+      'tiktok',
       'linkedin',
       'whatsapp',
-      'telegram',
-      'twitter',
-      'youtube',
       'instagram',
-      'tiktok',
+      'threads',
+      'twitter',
       'facebook',
+      'telegram',
       'couchsurfing',
       'airbnb',
       'blablacar',
@@ -80,3 +82,9 @@ export default {
   },
 }
 </script>
+
+<style scoped>
+a:hover {
+  @apply text-primary;
+}
+</style>

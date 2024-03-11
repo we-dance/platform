@@ -137,6 +137,16 @@ export const useProfiles = () => {
       placeholder: 'https://www.youtube.com/c/username',
     },
     {
+      name: 'spotify',
+      label: 'Spotify',
+      placeholder: 'https://open.spotify.com/...',
+    },
+    {
+      name: 'threads',
+      label: 'Threads',
+      placeholder: 'https://threads.net/@username',
+    },
+    {
       name: 'email',
       label: 'Email',
       placeholder: 'name@example.com',

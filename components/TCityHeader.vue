@@ -35,7 +35,7 @@
             current: view === 'classes',
           },
           {
-            name: $t('explore.nav.groups'),
+            name: $t('explore.nav.profiles'),
             to: localePath(`/explore/${slug}/groups`),
             current: view === 'groups',
             hidden: global,

@@ -29,6 +29,9 @@ export default {
         telegram: 'https://t.me/WeDancePlatform',
         twitter: 'https://twitter.com/WeDancePlatform',
         facebook: 'https://www.facebook.com/WeDance-109777921433083',
+        spotify:
+          'https://open.spotify.com/show/7pSbE0qiPpnJ1v0GmnSSkn?si=351061249dd14cb3',
+        threads: 'https://threads.net/@WeDancePlatform',
       }),
     },
   },
