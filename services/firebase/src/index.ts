@@ -21,6 +21,7 @@ import { announceEventIG2, importInstagramProfile } from './lib/instagram'
 import { getFacebookEvent } from './lib/facebook_import'
 import { syncCalendar } from './lib/ical_import'
 import { getSchemaEvent } from './lib/schema_import'
+import { isFacebookEvent } from './lib/linguist'
 
 require('dotenv').config()
 
@@ -33,21 +34,21 @@ Sentry.init({
 const app = express()
 app.use(cors({ origin: true }))
 
+async function getRedirectedUrl(url: string) {
+  if (!url) {
+    return ''
+  }
+
+  const response = await axios.get(url)
+  return response.request.res.responseUrl
+}
+
 app.get('/redirect', async (req, res) => {
   const { url } = req.query
 
-  if (!url) {
-    res.json({
-      success: false,
-    })
-    return
-  }
-
-  const response = await axios.get(url as string)
-
   res.json({
     success: true,
-    url: response.request.res.responseUrl,
+    url: await getRedirectedUrl(url as string),
   })
 
   return
@@ -342,8 +343,13 @@ export const eventChanged = functions.firestore
         return
       }
 
-      if (event.sourceUrl.includes('facebook.com/events')) {
-        eventData = await getFacebookEvent(event.sourceUrl)
+      if (isFacebookEvent(event.sourceUrl)) {
+        let facebookUrl = event.sourceUrl
+        if (!facebookUrl.includes('facebook.com/events/')) {
+          facebookUrl = await getRedirectedUrl(facebookUrl)
+        }
+
+        eventData = await getFacebookEvent(facebookUrl)
         if (event.facebookId) {
           eventData.facebookId = event.facebookId
         }

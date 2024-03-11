@@ -132,7 +132,16 @@ export async function getFacebookEvent(url: string) {
   } catch (e) {
     return {
       type: 'import_error',
+      errorCode: 'no_event',
       error: (e as Error).message,
+    }
+  }
+
+  if (!event.name || !event.startTimestamp) {
+    return {
+      type: 'import_error',
+      errorCode: 'no_event',
+      error: 'Event not found',
     }
   }
 

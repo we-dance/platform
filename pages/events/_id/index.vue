@@ -2,162 +2,168 @@
   <div>
     <THeader show-logo class="md:hidden" />
 
-    <div class="p-4 flex gap-2 border-b">
-      <div class="text-center pt-2">
-        <div class="text-xl font-bold leading-none text-primary">
-          {{ formatDate(doc.startDate, 'd') }}
-        </div>
-        <div class="w-12 text-sm">
-          {{ formatDate(doc.startDate, 'MMM') }}
-        </div>
-        <div class="w-12 text-xs">
-          {{ formatDate(doc.startDate, 'yyyy') }}
-        </div>
-      </div>
-      <div>
-        <div class="flex gap-1 text-xs uppercase">
-          <div class="text-primary">{{ getEventTypeLabel(doc.eventType) }}</div>
-          <div>·</div>
-          <div>
-            {{
-              getStyles(doc.styles)
-                .map((s) => s.name)
-                .join(' · ')
-            }}
+    <template v-if="doc.type === 'event'">
+      <div class="p-4 flex gap-2 border-b">
+        <div class="text-center pt-2">
+          <div class="text-xl font-bold leading-none text-primary">
+            {{ formatDate(doc.startDate, 'd') }}
+          </div>
+          <div class="w-12 text-sm">
+            {{ formatDate(doc.startDate, 'MMM') }}
+          </div>
+          <div class="w-12 text-xs">
+            {{ formatDate(doc.startDate, 'yyyy') }}
           </div>
         </div>
-        <h1 class="text-2xl font-bold leading-none">{{ doc.name }}</h1>
-        <div class="mt-1 flex gap-1 text-xs">
-          <div>
-            {{ formatDate(doc.startDate, 'iii') }}
-          </div>
-          <div>
-            {{ formatDate(doc.startDate, 'HH:mm') }}
-            <span v-if="doc.endDate">
-              &mdash; {{ formatDate(doc.endDate, 'HH:mm') }}</span
-            >
-          </div>
-          <div>·</div>
-          <div>
-            {{ $tc('guests', guestCount, { count: guestCount }) }}
-          </div>
-          <div>·</div>
-          <div>
-            {{ $tc('views', doc.viewsCount, { count: doc.viewsCount }) }}
-          </div>
-        </div>
-      </div>
-    </div>
-    <a
-      v-if="doc.venue"
-      :href="doc.venue.url"
-      target="_blank"
-      class="block border-b py-2 px-4 hover:bg-gray-200"
-    >
-      <div class="flex items-center justify-start leading-tight">
-        <TIcon name="place" class="mr-4 h-4 w-4" />
         <div>
-          <h4 class="font-bold">
-            {{ doc.venue.name
-            }}<span v-if="doc.venue.room"> • {{ doc.venue.room }}</span>
-          </h4>
-          <div class="text-gray-700">
-            {{ doc.venue.formatted_address }}
+          <div class="flex gap-1 text-xs uppercase">
+            <div class="text-primary">
+              {{ getEventTypeLabel(doc.eventType) }}
+            </div>
+            <div>·</div>
+            <div>
+              {{
+                getStyles(doc.styles)
+                  .map((s) => s.name)
+                  .join(' · ')
+              }}
+            </div>
+          </div>
+          <h1 class="text-2xl font-bold leading-none">{{ doc.name }}</h1>
+          <div class="mt-1 flex gap-1 text-xs">
+            <div>
+              {{ formatDate(doc.startDate, 'iii') }}
+            </div>
+            <div>
+              {{ formatDate(doc.startDate, 'HH:mm') }}
+              <span v-if="doc.endDate">
+                &mdash; {{ formatDate(doc.endDate, 'HH:mm') }}</span
+              >
+            </div>
+            <div>·</div>
+            <div>
+              {{ $tc('guests', guestCount, { count: guestCount }) }}
+            </div>
+            <div>·</div>
+            <div>
+              {{ $tc('views', doc.viewsCount, { count: doc.viewsCount }) }}
+            </div>
           </div>
         </div>
       </div>
-    </a>
+      <a
+        v-if="doc.venue"
+        :href="doc.venue.url"
+        target="_blank"
+        class="block border-b py-2 px-4 hover:bg-gray-200"
+      >
+        <div class="flex items-center justify-start leading-tight">
+          <TIcon name="place" class="mr-4 h-4 w-4" />
+          <div>
+            <h4 class="font-bold">
+              {{ doc.venue.name
+              }}<span v-if="doc.venue.room"> • {{ doc.venue.room }}</span>
+            </h4>
+            <div class="text-gray-700">
+              {{ doc.venue.formatted_address }}
+            </div>
+          </div>
+        </div>
+      </a>
 
-    <div
-      v-if="doc.online === 'Yes'"
-      class="flex w-full items-center justify-start border-b py-2 px-4 leading-tight"
-    >
-      <TIcon name="youtube" class="mr-4 h-4 w-4" />
-      <div>{{ $t('eventView.online') }}</div>
-    </div>
-
-    <div
-      v-if="doc.price"
-      class="flex w-full items-center justify-start border-b py-2 px-4 leading-tight"
-    >
-      <TIcon name="ticket" class="mr-4 h-4 w-4" />
-      <div class="flex w-full justify-between">
-        <div>{{ doc.price }}</div>
+      <div
+        v-if="doc.online === 'Yes'"
+        class="flex w-full items-center justify-start border-b py-2 px-4 leading-tight"
+      >
+        <TIcon name="youtube" class="mr-4 h-4 w-4" />
+        <div>{{ $t('eventView.online') }}</div>
       </div>
-    </div>
 
-    <div
-      v-if="doc.specialOffer"
-      class="flex w-full items-center justify-start border-b py-2 px-4 leading-tight"
-    >
-      <TIcon name="fire" class="mr-4 h-4 w-4 text-primary" />
-      <div class="flex w-full justify-between text-primary">
-        <div>{{ doc.specialOffer }}</div>
+      <div
+        v-if="doc.price"
+        class="flex w-full items-center justify-start border-b py-2 px-4 leading-tight"
+      >
+        <TIcon name="ticket" class="mr-4 h-4 w-4" />
+        <div class="flex w-full justify-between">
+          <div>{{ doc.price }}</div>
+        </div>
       </div>
-    </div>
 
-    <div
-      class="top-0 z-40 flex flex-wrap justify-center items-center gap-2 bg-white p-4 shadow"
-      :class="can('edit', 'events', doc) ? '' : 'sticky'"
-    >
-      <TButton
-        v-if="can('edit', 'events', doc)"
-        type="primary"
-        label="Preview as guest"
-        @click="toggleGuest"
-      />
-      <template v-else>
-        <TReaction
+      <div
+        v-if="doc.specialOffer"
+        class="flex w-full items-center justify-start border-b py-2 px-4 leading-tight"
+      >
+        <TIcon name="fire" class="mr-4 h-4 w-4 text-primary" />
+        <div class="flex w-full justify-between text-primary">
+          <div>{{ doc.specialOffer }}</div>
+        </div>
+      </div>
+
+      <div
+        class="top-0 z-40 flex flex-wrap justify-center items-center gap-2 bg-white p-4 shadow"
+        :class="can('edit', 'events', doc) ? '' : 'sticky'"
+      >
+        <TButton
+          v-if="can('edit', 'events', doc)"
           type="primary"
-          toggled-class="bg-green-500 hover:bg-green-800"
-          :label="$t('event.attend')"
-          :toggled-label="$t('event.attending')"
-          icon="PlusIcon"
-          toggled-icon="CheckIcon"
-          field="star"
-          class="rounded-full"
-          hide-count
-          :item="doc"
+          label="Preview as guest"
+          @click="toggleGuest"
         />
-        <TEventBookmark
-          :event-id="doc.id"
-          show-label
-          type="secondary"
-          label="Bookmark"
-          toggled-label="Bookmarked"
-          size="4"
-        />
-      </template>
-    </div>
-    <div v-if="isGoing" class="border-b border-t bg-white p-4">
-      <TPreview v-if="doc.confirmation" :content="doc.confirmation" />
-
-      <div class="flex flex-col md:flex-row justify-center items-center gap-2">
-        <template v-if="doc.link">
-          <TButton
-            v-if="doc.link.includes('https://www.tickettailor.com/')"
-            icon="ticket"
+        <template v-else>
+          <TReaction
             type="primary"
-            :label="$t('event.getTicket')"
-            @click="ticketTailorPopup = true"
+            toggled-class="bg-green-500 hover:bg-green-800"
+            :label="$t('event.attend')"
+            :toggled-label="$t('event.attending')"
+            icon="PlusIcon"
+            toggled-icon="CheckIcon"
+            field="star"
+            class="rounded-full"
+            hide-count
+            :item="doc"
           />
-          <TButton
-            v-else
-            type="primary"
-            icon="ticket"
-            :href="doc.link"
-            target="_blank"
-            :label="$t('event.getTicket')"
+          <TEventBookmark
+            :event-id="doc.id"
+            show-label
+            type="secondary"
+            label="Bookmark"
+            toggled-label="Bookmarked"
+            size="4"
           />
         </template>
-        <TButton
-          v-if="doc.paypal"
-          icon="favorite"
-          :href="doc.paypal"
-          :label="$t('event.paypal.action')"
-        />
       </div>
-    </div>
+      <div v-if="isGoing" class="border-b border-t bg-white p-4">
+        <TPreview v-if="doc.confirmation" :content="doc.confirmation" />
+
+        <div
+          class="flex flex-col md:flex-row justify-center items-center gap-2"
+        >
+          <template v-if="doc.link">
+            <TButton
+              v-if="doc.link.includes('https://www.tickettailor.com/')"
+              icon="ticket"
+              type="primary"
+              :label="$t('event.getTicket')"
+              @click="ticketTailorPopup = true"
+            />
+            <TButton
+              v-else
+              type="primary"
+              icon="ticket"
+              :href="doc.link"
+              target="_blank"
+              :label="$t('event.getTicket')"
+            />
+          </template>
+          <TButton
+            v-if="doc.paypal"
+            icon="favorite"
+            :href="doc.paypal"
+            :label="$t('event.paypal.action')"
+          />
+        </div>
+      </div>
+    </template>
 
     <div class="grid grid-cols-1">
       <div class="md:border-l">
@@ -534,6 +540,9 @@
             ><template v-if="doc.provider"
               >, provided by
               <strong class="font-bold">{{ doc.provider }}</strong></template
+            ><template v-if="doc.sourceUrl"
+              >, original:
+              <strong class="font-bold">{{ doc.sourceUrl }}</strong></template
             >.
             <span v-if="doc.facebook"
               >See
