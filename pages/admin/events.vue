@@ -39,7 +39,7 @@ import { computed, onMounted, ref, watch } from 'vue-demi'
 import 'ag-grid-community/dist/styles/ag-grid.css'
 import 'ag-grid-community/dist/styles/ag-theme-alpine.css'
 import { AgGridVue } from 'ag-grid-vue'
-import { getDateTime } from '~/utils'
+import { getDateTime, sortBy } from '~/utils'
 import { useApp } from '~/use/app'
 
 export default {
@@ -54,16 +54,36 @@ export default {
     const orderBy = ref('createdAt')
 
     const columns = computed(() => [
-      { field: 'id' },
+      {
+        field: 'id',
+        cellRenderer: (params) =>
+          `<a target="blank" href="/events/${params.data.id}" class="underline text-primary">${params.data.id}</a>`,
+        resizable: true,
+      },
+      {
+        field: 'type',
+      },
+      {
+        field: 'username',
+      },
       {
         field: 'name',
-        cellRenderer: (params) =>
-          `<a target="blank" href="/events/${
-            params.data.id
-          }" class="underline text-primary">${params.data.name ||
-            params.data.title ||
-            ''}</a>`,
+        cellRenderer: (params) => params.data.name || params.data.title || '',
         resizable: true,
+      },
+      {
+        field: 'hash',
+        resizable: true,
+      },
+      {
+        field: 'sourceUrl',
+        resizable: true,
+      },
+      {
+        field: 'source',
+      },
+      {
+        field: 'provider',
       },
       {
         field: 'organiser',
@@ -91,12 +111,6 @@ export default {
         valueGetter: (params) => (params.data.link ? 'Yes' : 'No'),
       },
       {
-        field: 'source',
-      },
-      {
-        field: 'provider',
-      },
-      {
         field: 'createdAt',
         valueGetter: (params) => getDateTime(params.data.createdAt),
       },
@@ -110,9 +124,6 @@ export default {
       },
       {
         field: 'price',
-      },
-      {
-        field: 'type',
       },
     ])
 
@@ -133,10 +144,11 @@ export default {
       collection = collection.limit(100)
 
       collection.get().then((snapshot) => {
-        events.value = snapshot.docs.map((doc) => ({
+        const docs = snapshot.docs.map((doc) => ({
           ...doc.data(),
           id: doc.id,
         }))
+        events.value = docs.sort(sortBy('-' + orderBy.value))
       })
     }
 
