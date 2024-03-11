@@ -2,7 +2,7 @@
   <div class="flex justify-center">
     <div class="grid grid-cols-3 md:flex border-l border-t">
       <TButton
-        v-if="profile.website"
+        v-if="!hideWebsite && profile.website"
         allow-guests
         :href="profile.website"
         type="void"
@@ -37,6 +37,10 @@
 <script>
 export default {
   props: {
+    hideWebsite: {
+      type: Boolean,
+      default: false,
+    },
     title: {
       type: String,
       default: '',

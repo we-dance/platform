@@ -46,7 +46,11 @@
       </div>
       <LandingNumbers class="mt-8" />
       <LandingWhyWeDance class="mt-8" />
-      <LandingFollowUs />
+      <FollowUs
+        :title="$t('profile.follow.title')"
+        :description="$t('landing.follow.description')"
+        class="p-4"
+      />
     </main>
   </div>
 </template>

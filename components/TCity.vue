@@ -52,13 +52,26 @@
       :description="$t('teaser.feed.description')"
       :button="$t('teaser.feed.btn')"
       :url="localePath(`/explore/${profile.username}/tips`)"
-      class="w-full mt-4"
+      class="w-full"
+      background="bg-orange-100"
     />
 
-    <TFollowOnSocialMedia
-      v-if="profile.instagram"
+    <WTeaser
+      title="Ambassadors Wanted"
+      :description="
+        `We are looking for ambassadors in ${profile.name}. Get in touch!`
+      "
+      button="Get Involved"
+      :url="localePath(`/get-involved`)"
+      class="w-full"
+      background="bg-red-100"
+    />
+
+    <FollowUs
       :profile="profile"
-      class="py-4"
+      :title="$t('profile.follow.title')"
+      :description="$t('profile.follow.description')"
+      class="p-4"
     />
 
     <TSeoLinks :profile="profile" class="p-4" />

@@ -93,7 +93,17 @@
       class="p-4 flex justify-center items-center"
     >
       <div>
-        <h2 class="text-center text-xs">No Events Found</h2>
+        <div class="text-center max-w-xs mx-auto text-gray-800">
+          <div>Oops, no events yet.</div>
+          <div>
+            <router-link
+              :to="localePath(`/explore/${city.username}/tips`)"
+              class="text-primary underline hover:no-underline"
+              >Ask locals</router-link
+            >
+            — get tips in 48 hours!
+          </div>
+        </div>
       </div>
     </div>
 
@@ -131,6 +141,7 @@ import {
 import { useAlgolia } from '~/use/algolia'
 import { useStyles } from '~/use/styles'
 import { useAuth } from '~/use/auth'
+import city from '~/pages/demo/city.vue'
 
 export default {
   name: 'TCalendar',

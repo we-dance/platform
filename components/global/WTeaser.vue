@@ -1,5 +1,5 @@
 <template>
-  <div class="border bg-gray-100 text-center p-4 my-4">
+  <div class="text-center p-4" :class="background">
     <div>
       <h4 class="font-bold text-xl my-0">{{ title }}</h4>
       <p class="text-sm">{{ description }}</p>
@@ -10,7 +10,7 @@
         :allow-guests="allowGuests"
         :title="button"
         class="my-2"
-        type="base"
+        type="primary"
         :to="url"
         :href="href"
         v-on="$listeners"
@@ -46,6 +46,10 @@ export default {
     href: {
       type: String,
       default: '',
+    },
+    background: {
+      type: String,
+      default: 'bg-gray-100',
     },
   },
 }
