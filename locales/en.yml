@@ -746,7 +746,8 @@ home:
   numbers:
     title: WeDance in Numbers
     countries: countries
-    profiles: profiles
+    cities: cities
+    profiles: members
     events: events
   founder: "**The Problem**
 

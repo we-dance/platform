@@ -6,9 +6,11 @@
     <div class="mt-4 grid grid-cols-3 gap-4 max-w-4xl mx-auto">
       <div class="p-4 space-y-1 bg-light rounded shadow">
         <h3 class="text-2xl font-extrabold text-center">
-          {{ numbers ? numbers.countries : '...' }}
+          {{ numbers ? numbers.cities : '...' }}
         </h3>
         <p class="text-center text-xs">
+          {{ $t('home.numbers.cities') }} in
+          {{ numbers ? numbers.countries : '...' }}
           {{ $t('home.numbers.countries') }}
         </p>
       </div>

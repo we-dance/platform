@@ -44,7 +44,7 @@
           :cta-link="localePath('/find-partner/start')"
         />
       </div>
-      <LandingNumbers class="mt-8" />
+      <LandingNumbersLive class="mt-8" />
       <LandingWhyWeDance class="mt-8" />
       <FollowUs
         :title="$t('profile.follow.title')"
