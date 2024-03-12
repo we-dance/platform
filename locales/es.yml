@@ -751,7 +751,8 @@ home:
   numbers:
     title: WeDance in Numbers
     countries: countries
-    profiles: profiles
+    cities: ciudades
+    profiles: members
     events: eventos
   founder: "**The Problem** I'm a dance fanatic, always plugged into the local scene through countless WhatsApp groups. New dancers often ask me about upcoming parties, and it got overwhelming to keep track of everything. **The Solution** That's why I created WeDance! It's the one-stop-shop for dance events in your city. No more juggling chats or scrambling for information. **Benefits for Dancers** - **New in town?** Find the hottest parties instantly. - **Friends curious about your dance plans?** Just send them your WeDance profile and let them pick their favorite events to join you. Sounds amazing, right? Read [about WeDance](/about) and [get involved](/get-involved)!"
 explore:
