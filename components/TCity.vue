@@ -75,6 +75,8 @@
     />
 
     <TSeoLinks :profile="profile" class="p-4" />
+
+    <RandomMemes />
   </div>
 </template>
 
