@@ -26,6 +26,8 @@
       view="online"
       class="w-full border-t"
     />
+
+    <AdsOnline />
   </div>
 </template>
 
