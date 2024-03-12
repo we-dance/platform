@@ -30,7 +30,7 @@
             <div class="text-sm text-gray-700 has-links">
               Your event will be prominently featured on major search engines
               like Google, Bing, and Yandex. We are getting in the
-              <storng class="font-bold">top 10</storng>, see for yourself:
+              <strong class="font-bold">top 10</strong>, see for yourself:
               <a href="https://www.google.com/search?q=salsa+parties+munich"
                 >salsa parties munich</a
               >,
@@ -40,7 +40,7 @@
               <a href="https://www.google.com/search?q=bachata+parties+augsburg"
                 >bachata parties augsburg</a
               >. In 2023 we had
-              <storng class="font-bold">14k unique visitors</storng>.
+              <strong class="font-bold">14k unique visitors</strong>.
             </div>
           </div>
         </div>
@@ -53,7 +53,7 @@
             <div class="text-sm text-gray-700 has-links">
               Free publicity on our city-based social media networks. For
               example in Munich we have
-              <storng class="font-bold">5k+ followers</storng> on
+              <strong class="font-bold">5k+ followers</strong> on
               <a href="https://intagram.com/WeDanceMunich">Instagram</a>,
               <a href="https://t.me/WeDanceMunich">Telegram</a>,
               <a href="https://www.facebook.com/WeDanceMunich/">Facebook</a>. We
@@ -214,6 +214,7 @@
         </div>
       </section>
     </div>
+    <HubspotChat />
   </div>
 </template>
 

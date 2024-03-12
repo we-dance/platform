@@ -113,6 +113,7 @@
         </div>
       </section>
     </div>
+    <HubspotChat />
   </div>
 </template>
 
