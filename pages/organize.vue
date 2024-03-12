@@ -29,8 +29,8 @@
             </div>
             <div class="text-sm text-gray-700 has-links">
               Your event will be prominently featured on major search engines
-              like Google, Bing, and Yandex. We are getting in the top 10, see
-              for yourself:
+              like Google, Bing, and Yandex. We are getting in the
+              <storng class="font-bold">top 10</storng>, see for yourself:
               <a href="https://www.google.com/search?q=salsa+parties+munich"
                 >salsa parties munich</a
               >,
@@ -39,7 +39,8 @@
               >,
               <a href="https://www.google.com/search?q=bachata+parties+augsburg"
                 >bachata parties augsburg</a
-              >.
+              >. In 2023 we had
+              <storng class="font-bold">14k unique visitors</storng>.
             </div>
           </div>
         </div>
@@ -51,19 +52,14 @@
             <div class="text-lg font-bold">Social Media Reach</div>
             <div class="text-sm text-gray-700 has-links">
               Free publicity on our city-based social media networks. For
-              example in Munich we have 5k+ followers on
+              example in Munich we have
+              <storng class="font-bold">5k+ followers</storng> on
               <a href="https://intagram.com/WeDanceMunich">Instagram</a>,
               <a href="https://t.me/WeDanceMunich">Telegram</a>,
               <a href="https://www.facebook.com/WeDanceMunich/">Facebook</a>. We
               are <router-link to="/get-involved">expanding</router-link> to
               other cities.
             </div>
-          </div>
-        </div>
-        <div>
-          <img src="/img/google-search-stats.png" alt="Google Search Stats" />
-          <div class="pt-1 text-center text-xs text-gray-500">
-            Google Search Stats
           </div>
         </div>
       </section>
