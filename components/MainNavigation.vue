@@ -66,7 +66,16 @@
       {{ $t('nav.contribute') }}
     </div>
     <TButton
+      v-if="uid"
       :to="localePath('/events/-/import')"
+      icon="plus"
+      :label="$t('nav.addEvent')"
+      type="nav"
+    />
+    <TButton
+      v-else
+      allow-guests
+      :to="localePath('/organize')"
       icon="plus"
       :label="$t('nav.addEvent')"
       type="nav"
