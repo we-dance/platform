@@ -150,6 +150,9 @@ export default {
         const _hsq = (window._hsq = window._hsq || [])
         _hsq.push(['setPath', this.$route.path])
         _hsq.push(['trackPageView'])
+        if (window.HubSpotConversations) {
+          window.HubSpotConversations.widget.refresh()
+        }
 
         const screen = {
           app_name: features.pwa ? 'pwa' : 'web',
