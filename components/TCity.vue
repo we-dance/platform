@@ -51,7 +51,7 @@
         `Looking for dance teachers who want to participate in a project promoting democracy through dance`
       "
       button="Participate"
-      href="https://www.instagram.com/dancing4democracy_2024"
+      href="https://bit.ly/48VGUSa"
       class="w-full"
       background="bg-red-100"
     />
