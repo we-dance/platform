@@ -791,10 +791,6 @@ export default {
     const item = computed(() => {
       let result = {}
 
-      if (doc.value.parentId) {
-        load(doc.value.parentId)
-      }
-
       result = { ...parentDoc.value, ...map(doc.value) }
       result.locality = addressPart(result.venue, 'locality')
 

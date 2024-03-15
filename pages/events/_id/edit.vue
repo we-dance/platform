@@ -161,10 +161,9 @@ export default {
 
       if (result?.recurrence?.dates?.length) {
         for (const date of result.recurrence?.dates) {
-          const child = await this.create({
-            parentId: result.id,
-            startDate: date,
-          })
+          const childData = { ...data, startDate: date, seriesId: result.id }
+
+          const child = await this.create(childData)
 
           children.push(child.id)
         }
