@@ -152,7 +152,7 @@ export default {
 
       data = {
         ...data,
-        dances: [data.style],
+        dances: [data.style || ''],
         receiver: data.receiver?.username ? data.receiver : '',
         link: data.link || '',
         venue: data.venue || '',
