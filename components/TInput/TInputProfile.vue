@@ -35,11 +35,13 @@
       </template>
       <div></div>
     </WProfile>
-    <TInput
+    <TField
       v-else
       v-model="query"
       :placeholder="placeholder"
       autocomplete="off"
+      description="Or paste link to Instagram or Facebook profile"
+      label-position="top"
       @input="search"
     />
     <div
@@ -62,7 +64,6 @@
               <div>
                 {{
                   item.instagram
-                    .replace(/https:\/\/(www\.)?instagram\.com\//, '')
                     .replace(/\?igshid=[^&]*$/, '')
                     .replace(/\/$/, '')
                 }}
@@ -71,52 +72,48 @@
             <div v-if="item.facebook" class="space-x-1 flex">
               <TIcon name="facebook" size="4" />
               <div>
-                {{
-                  item.facebook
-                    .replace(/https:\/\/(www\.)?facebook\.com\//, '')
-                    .replace(/\/$/, '')
-                }}
+                {{ item.facebook.replace(/\/$/, '') }}
               </div>
             </div>
           </div>
         </div>
       </div>
-      <template v-if="inviteUsername">
-        <div
-          class="flex px-4 py-2 hover:bg-blue-100 items-center cursor-pointer space-x-1 text-sm text-gray-700"
-          @click="
-            create({
-              username: inviteUsername,
-              instagram: `https://instagram.com/` + inviteUsername,
-            })
-          "
-        >
-          <div>
-            {{ $t('TInputProfile.import') }}
-          </div>
-          <TIcon name="instagram" size="4" />
-          <div>
-            {{ inviteUsername }}
-          </div>
+      <div
+        v-if="igUsername"
+        class="flex px-4 py-2 hover:bg-blue-100 items-center cursor-pointer space-x-1 text-sm text-gray-700"
+        @click="
+          create({
+            username: igUsername,
+            instagram: 'https://instagram.com/' + igUsername,
+          })
+        "
+      >
+        <div>
+          {{ $t('TInputProfile.import') }}
         </div>
-        <div
-          class="flex px-4 py-2 hover:bg-blue-100 items-center cursor-pointer space-x-1 text-sm text-gray-700"
-          @click="
-            create({
-              username: inviteUsername,
-              facebook: `https://facebook.com/` + inviteUsername,
-            })
-          "
-        >
-          <div>
-            {{ $t('TInputProfile.import') }}
-          </div>
-          <TIcon name="facebook" size="4" />
-          <div>
-            {{ inviteUsername }}
-          </div>
+        <TIcon name="instagram" size="4" />
+        <div>
+          {{ igUsername }}
         </div>
-      </template>
+      </div>
+      <div
+        v-if="fbUsername"
+        class="flex px-4 py-2 hover:bg-blue-100 items-center cursor-pointer space-x-1 text-sm text-gray-700"
+        @click="
+          create({
+            username: fbUsername,
+            facebook: 'https://facebook.com/' + fbUsername,
+          })
+        "
+      >
+        <div>
+          {{ $t('TInputProfile.import') }}
+        </div>
+        <TIcon name="facebook" size="4" />
+        <div>
+          {{ fbUsername }}
+        </div>
+      </div>
     </div>
   </div>
 </template>
@@ -168,29 +165,6 @@ export default {
       if (!value) {
         return
       }
-
-      if (value.includes('@')) {
-        query.value = value.replace('@', '')
-        return
-      }
-
-      if (
-        value.includes('facebook.com') ||
-        value.includes('instagram.com') ||
-        value.includes('wedance.vip')
-      ) {
-        const username = value
-          .replace('https://', '')
-          .replace('http://', '')
-          .replace('www.', '')
-          .replace('instagram.com/', '')
-          .replace('facebook.com/', '')
-          .replace('wedance.vip/', '')
-          .replace(/(\?.*)/g, '')
-          .replace('/', '')
-
-        query.value = username
-      }
     })
 
     const suggestions = computed(() => {
@@ -215,26 +189,57 @@ export default {
         })
     })
 
-    const inviteUsername = computed(() => {
-      let username = query.value
-        .toLowerCase()
-        .replaceAll(' ', '')
-        .replaceAll('@', '')
-
-      if (username.includes('://')) {
-        username = false
+    const igUsername = computed(() => {
+      if (!query.value.includes('instagram.com')) {
+        return false
       }
 
+      const username = query.value
+        .replace('https://', '')
+        .replace('http://', '')
+        .replace('www.', '')
+        .replace('instagram.com/', '')
+        .replace(/(\?.*)/g, '')
+        .replace('/', '')
+
       if (
-        suggestions.value?.some((p) => p.username === username) ||
-        suggestions.value?.some((p) => p.instagram === username) ||
-        suggestions.value?.some((p) => p.facebook === username)
+        suggestions.value?.some((p) =>
+          p.instagram?.endsWith('instagram.com/' + username)
+        )
       ) {
-        username = false
+        return false
       }
 
       if (props.excludeUsernames.some((v) => v === username)) {
-        username = false
+        return false
+      }
+
+      return username
+    })
+
+    const fbUsername = computed(() => {
+      if (!query.value.includes('facebook.com')) {
+        return false
+      }
+
+      const username = query.value
+        .replace('https://', '')
+        .replace('http://', '')
+        .replace('www.', '')
+        .replace('facebook.com/', '')
+        .replace(/(\?.*)/g, '')
+        .replace('/', '')
+
+      if (
+        suggestions.value?.some((p) =>
+          p.facebook?.endsWith('facebook.com/' + username)
+        )
+      ) {
+        return false
+      }
+
+      if (props.excludeUsernames.some((v) => v === username)) {
+        return false
       }
 
       return username
@@ -262,7 +267,8 @@ export default {
       search,
       eventRoleOptions,
       create,
-      inviteUsername,
+      igUsername,
+      fbUsername,
     }
   },
 }

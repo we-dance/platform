@@ -440,8 +440,8 @@
             {{ $t('event.artists') }}
           </h3>
           <div
-            v-for="(profile, profileIndex) in doc.artists"
-            :key="`artist-${profileIndex}`"
+            v-for="profile in doc.artists"
+            :key="`artist-${profile.username}`"
           >
             <WProfile
               v-if="profile"

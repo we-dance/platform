@@ -3,7 +3,7 @@
     <component
       :is="children.component"
       v-for="(child, index) in internalValue"
-      :key="`${children.component}-${index}`"
+      :key="`${children.component}-${child.username || index}`"
       v-model="internalValue[index]"
       v-bind="children"
       :item="item"
