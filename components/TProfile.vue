@@ -212,12 +212,16 @@ export default {
         ...result,
         ...(await getEventsOrganisedBy(props.profile?.username)),
       ]
-      result = [
-        ...result,
-        ...(await getEventsWithVenue(props.profile?.username)).filter(
-          (item) => !result.find((existing) => existing.id === item.id)
-        ),
-      ]
+      if (props.profile?.address?.place_id) {
+        result = [
+          ...result,
+          ...(
+            await getEventsWithVenue(props.profile?.address?.place_id)
+          ).filter(
+            (item) => !result.find((existing) => existing.id === item.id)
+          ),
+        ]
+      }
       result = [
         ...result,
         ...(await getEventsWithArtist(props.profile?.username)).filter(

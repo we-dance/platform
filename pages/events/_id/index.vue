@@ -464,13 +464,13 @@
             hide-role
           />
 
-          <div v-if="doc.venueProfile">
+          <div v-if="venueProfile">
             <h3 class="text-xs uppercase font-bold px-2 pt-4 text-gray-500">
               Venue
             </h3>
             <WProfile
-              :username="doc.venueProfile.username"
-              :fallback="doc.venueProfile"
+              :username="venueProfile.username"
+              :fallback="venueProfile"
               hide-role
             />
           </div>
@@ -718,6 +718,7 @@ import {
 import { addressPart } from '~/use/google'
 import { trackView } from '~/use/tracking'
 import { useStyles } from '~/use/styles'
+import { db } from '~/plugins/firebase'
 
 export default {
   name: 'EventView',
@@ -730,6 +731,7 @@ export default {
     announcementPopupVisible: false,
     artists: [],
     agenda: {},
+    venueProfile: null,
   }),
   computed: {
     guestCount() {
@@ -756,9 +758,27 @@ export default {
         this.doc = this.item
         this.agenda = this.doc.agenda
         this.artists = this.doc.artists
+        this.loadVenue()
 
         trackView('posts', this.item.id, this.item.viewsCount || 0)
       }
+    },
+  },
+  methods: {
+    async loadVenue() {
+      if (!this.doc?.venue?.place_id) {
+        this.venueProfile = null
+        return
+      }
+
+      const docs = (
+        await db
+          .collection('profiles')
+          .where('address.place_id', '==', this.doc.venue.place_id)
+          .get()
+      ).docs
+
+      this.venueProfile = docs.length ? docs[0].data() : null
     },
   },
   head() {
