@@ -1,8 +1,24 @@
 <template>
   <div>
-    <TInputAddress v-model="internalValue" />
+    <WProfile
+      v-if="venue && venue.username"
+      :username="venue.username"
+      hide-role
+      hide-buttons
+    >
+      <template v-slot:right>
+        <TButton
+          allow-guests
+          type="nav"
+          icon="close"
+          @click="internalValue = ''"
+        />
+      </template>
+      <div></div>
+    </WProfile>
+    <TInputAddress v-else v-model="internalValue" />
 
-    <div v-if="venue" class="p-4">
+    <div v-if="venue && venue.rooms" class="p-4">
       <div v-if="rooms && !hideAreas">
         <TField
           v-model="room"
@@ -12,18 +28,6 @@
         />
         <img v-if="venue.map" :src="venue.map" alt="Map" class="mt-4" />
       </div>
-
-      <TPopupEdit
-        v-if="!hideAreas"
-        label="Edit Map and Areas"
-        type="link"
-        collection="venues"
-        title="Edit Venue"
-        :fields="venueFields"
-        :item="venue"
-        class="mt-4"
-        @save="load"
-      />
     </div>
   </div>
 </template>
@@ -45,8 +49,6 @@ export default {
   components: {
     TField: () =>
       import(/* webpackChunkName: "TField" */ '~/components/TField'),
-    TPopupEdit: () =>
-      import(/* webpackChunkName: "TPopupEdit" */ '~/components/TPopupEdit'),
   },
   props: {
     value: {
@@ -91,6 +93,7 @@ export default {
         }
 
         const newVal = JSON.parse(JSON.stringify(val))
+
         this.$emit('input', newVal)
       },
     },
@@ -117,24 +120,60 @@ export default {
       }
 
       const firestore = firebase.firestore()
-      const collection = firestore.collection('venues')
+      const collection = firestore.collection('profiles')
 
-      let doc = await collection.doc(this.value.place_id).get()
+      async function loadBy(field, value) {
+        const docs = (await collection.where(field, '==', value).get()).docs
 
-      if (!doc.exists) {
-        await collection.doc(this.value.place_id).set({
-          name: this.value.name,
-          id: this.value.place_id,
-          rooms: '',
-          map: '',
-          address: this.value,
-          createdAt: Date.now(),
-        })
-
-        doc = await collection.doc(this.value.place_id).get()
+        return docs.length ? docs[0].data() : null
       }
 
-      this.venue = doc.data()
+      let doc = await loadBy('address.place_id', this.value.place_id)
+
+      const website = this.value.website || ''
+
+      if (!doc) {
+        doc = await loadBy('website', website)
+
+        if (doc) {
+          collection.doc(doc.id).update({
+            phone: this.value.international_phone_number || '',
+            address: this.value,
+            updateAt: Date.now(),
+          })
+
+          doc = await loadBy('address.place_id', this.value.place_id)
+        }
+      }
+
+      if (!doc) {
+        let username = website.replace(/https?:\/\//, '').replace('/', '')
+
+        if (!username) {
+          username = this.value.name
+            .toLowerCase()
+            .replace(/[^a-z0-9]/g, '')
+            .substring(0, 20)
+        }
+
+        await collection.add({
+          name: this.value.name,
+          username,
+          website: website || this.value.url || '',
+          phone: this.value.international_phone_number || '',
+          rooms: '',
+          map: '',
+          gender: 'Other',
+          address: this.value,
+          type: 'Venue',
+          createdAt: Date.now(),
+          updateAt: Date.now(),
+        })
+
+        doc = await loadBy('address.place_id', this.value.place_id)
+      }
+
+      this.venue = doc
     },
   },
 }

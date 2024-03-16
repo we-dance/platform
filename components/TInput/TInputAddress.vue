@@ -52,7 +52,7 @@ export default {
     },
     placeholder: {
       type: String,
-      default: 'Search place or address',
+      default: 'Search name of the place',
     },
   },
   data: () => ({
@@ -84,7 +84,7 @@ export default {
     this.autocomplete.addListener('place_changed', () => {
       const place = this.autocomplete.getPlace()
 
-      this.$emit('input', place)
+      this.$emit('input', JSON.parse(JSON.stringify(place)))
     })
   },
 }

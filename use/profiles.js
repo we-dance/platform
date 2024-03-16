@@ -137,14 +137,14 @@ export const useProfiles = () => {
       placeholder: 'https://www.youtube.com/c/username',
     },
     {
-      name: 'spotify',
-      label: 'Spotify',
-      placeholder: 'https://open.spotify.com/...',
-    },
-    {
       name: 'threads',
       label: 'Threads',
       placeholder: 'https://threads.net/@username',
+    },
+    {
+      name: 'phone',
+      label: 'Phone',
+      placeholder: '+49 000 00000000',
     },
     {
       name: 'email',
@@ -283,6 +283,13 @@ export const useProfiles = () => {
       component: 'TInputLanguages',
     },
     ...contactFields,
+    {
+      name: 'address',
+      label: 'Address',
+      labelPosition: 'top',
+      component: 'TInputAddress',
+      simple: true,
+    },
     {
       name: 'team',
       component: 'TInputArray',

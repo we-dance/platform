@@ -16,6 +16,21 @@
       <h1 class="leading-none mb-2 px-4 text-center font-bold text-3xl mt-2">
         {{ profile.name || profile.username }}
       </h1>
+      <a
+        v-if="profile.address"
+        :href="profile.address.url"
+        target="_blank"
+        class="block py-2 px-4 hover:underline"
+      >
+        <div class="flex items-center justify-start leading-tight">
+          <TIcon name="place" class="h-4 w-4" />
+          <div>
+            <div class="text-gray-700">
+              {{ profile.address.formatted_address }}
+            </div>
+          </div>
+        </div>
+      </a>
       <TProfileStats :profile="profile" />
       <TPreview class="text-sm text-center px-4" :content="profile.bio" />
       <div class="flex space-x-2 justify-center my-2 px-4">
