@@ -452,17 +452,24 @@
           </div>
         </div>
 
-        <div v-if="doc.org" class="space-y-2 p-4 border-t">
+        <div class="space-y-2 p-4 border-t">
           <h3 class="text-xl font-bold">Have questions?</h3>
 
-          <h3 class="text-xs uppercase font-bold px-2 pt-4 text-gray-500">
-            Organiser
-          </h3>
-          <WProfile
-            :username="doc.org.username"
-            :fallback="doc.org"
-            hide-role
-          />
+          <div
+            v-if="
+              doc.org &&
+                (!venueProfile || doc.org.username !== venueProfile.username)
+            "
+          >
+            <h3 class="text-xs uppercase font-bold px-2 pt-4 text-gray-500">
+              Organiser
+            </h3>
+            <WProfile
+              :username="doc.org.username"
+              :fallback="doc.org"
+              hide-role
+            />
+          </div>
 
           <div v-if="venueProfile">
             <h3 class="text-xs uppercase font-bold px-2 pt-4 text-gray-500">
