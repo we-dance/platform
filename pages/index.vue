@@ -21,6 +21,18 @@
         />
       </LandingHero>
       <div class="px-4 mt-4 grid grid-cols-1 gap-4">
+        <div class="flex justify-center">
+          <a
+            href="https://www.producthunt.com/posts/wedance?utm_source=badge-featured&utm_medium=badge&utm_souce=badge-wedance"
+            target="_blank"
+            ><img
+              src="https://api.producthunt.com/widgets/embed-image/v1/featured.svg?post_id=445120&theme=light"
+              alt="WeDance - Travel&#0046;&#0032;Meet&#0046;&#0032;Dance&#0032;–&#0032;Your&#0032;Global&#0032;Dance&#0032;Event&#0032;Hub&#0033; | Product Hunt"
+              style="width: 250px; height: 54px;"
+              width="250"
+              height="54"
+          /></a>
+        </div>
         <LandingFeature
           image="/img/event-calendar.svg"
           :title="$t('home.features.explore.title')"
