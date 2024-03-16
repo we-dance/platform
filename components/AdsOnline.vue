@@ -4,10 +4,12 @@
       {{ title || 'Classes You May Like' }}
     </h3>
     <div class="p-4">
-      <a
-        href="https://www.alexrivaslessons.com/salsa-en-el-piano-101/nlh7a"
-        target="_blank"
-      >
+      <a href="https://bit.ly/3PpViuT" target="_blank">
+        <img src="/img/messina.png" alt="Messina Dance Casino Fundamentals" />
+      </a>
+    </div>
+    <div class="p-4">
+      <a href="https://bit.ly/3IGRAt4" target="_blank">
         <img
           src="https://d31ezp3r8jwmks.cloudfront.net/smdmk0e2k9a790igqz2vz0u54uy0"
           alt="Salsa en el Piano 101"
