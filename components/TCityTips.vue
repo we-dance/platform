@@ -9,7 +9,7 @@
       </div>
     </div>
 
-    <TQuestionForm :place="place" />
+    <TQuestionForm v-model="item" :place="place" />
 
     <TStories
       :key="item.style"
@@ -26,6 +26,14 @@
         label="Add Recommendation"
       />
     </div>
+
+    <div class="p-4 border-t border-b">
+      <h1 class="text-2xl font-bold">Questions from other cities</h1>
+      <div class="text-sm">
+        Share your insights and connect with dancers seeking guidance!
+      </div>
+    </div>
+    <TStories type="ask-for-recommendations" />
   </div>
 </template>
 
@@ -49,6 +57,14 @@ export default {
       type: Boolean,
       default: false,
     },
+  },
+  data() {
+    return {
+      item: {
+        style: '',
+        description: '',
+      },
+    }
   },
   head() {
     return {

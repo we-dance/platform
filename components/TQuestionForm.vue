@@ -41,9 +41,21 @@ import { useAuth } from '~/use/auth'
 export default {
   name: 'TQuestionForm',
   props: {
+    value: {
+      type: Object,
+      default: () => ({}),
+    },
     place: {
       type: String,
       default: '',
+    },
+  },
+  watch: {
+    item: {
+      handler() {
+        this.$emit('input', this.item)
+      },
+      deep: true,
     },
   },
   methods: {

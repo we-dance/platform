@@ -478,6 +478,43 @@ export const eventCreated = functions.firestore
     await notifySlackAboutEvents(lines.join('\n'))
   })
 
+export const reviewAdded = functions.firestore
+  .document('stories/{storyId}')
+  .onCreate(async (snapshot, context) => {
+    const storyId = context.params.storyId
+    const story = snapshot.data() as any
+
+    const recipients: RecipientList = {}
+
+    recipients[storyId] = {
+      name: 'Alex Razbakov',
+      email: 'razbakov.aleksey@gmail.com',
+    }
+
+    const content = `${story.description}
+
+    https://wedance.vip/stories/${storyId}
+    `
+
+    let type = story.type || 'story'
+    if (type === 'ask-for-recommendations') {
+      type = 'question'
+    }
+
+    const subject = `${type} from ${story.username}`
+
+    const email = {
+      from: 'WeDance Reviews <reviews@wedance.vip>',
+      recipients,
+      subject,
+      content,
+      type,
+      id: storyId,
+    }
+
+    await sendEmail(email)
+  })
+
 export const eventConfirmation = functions.firestore
   .document('participants/{rsvpId}')
   .onWrite(async (snapshot, context) => {
