@@ -72,6 +72,7 @@
             :item="profile"
             type="context"
           />
+          <TShowAccount v-if="isAdmin()" :id="profile.id" type="context" />
           <TButtonShare
             :id="profile.id"
             collection="profiles"
