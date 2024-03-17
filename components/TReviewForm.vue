@@ -150,10 +150,18 @@ export default {
         return
       }
 
+      let receiver = ''
+      const username = data.receiver?.username || data.venue?.username || ''
+      if (username) {
+        receiver = {
+          username,
+        }
+      }
+
       data = {
         ...data,
         dances: [data.style || ''],
-        receiver: data.receiver?.username ? data.receiver : '',
+        receiver,
         link: data.link || '',
         venue: data.venue || '',
         question: this.question || data.question || '',

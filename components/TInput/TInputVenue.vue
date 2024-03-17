@@ -109,6 +109,12 @@ export default {
   },
   watch: {
     value: 'load',
+    'venue.username'(username) {
+      const newVal = this.value
+      newVal.username = username
+
+      this.$emit('input', newVal)
+    },
   },
   async mounted() {
     await this.load()
