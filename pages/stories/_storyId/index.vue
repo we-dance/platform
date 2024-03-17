@@ -19,8 +19,8 @@
           <TAvatar photo name :uid="story.createdBy" />
           asking
           <span v-if="story.style"
-            >for <strong class="font-bold">{{ story.style }}</strong></span
-          >
+            >for <TDanceLink :dance="story.style" class="fond-bold"
+          /></span>
           <span v-if="story.place">in <TCityLink :place="story.place"/></span>
         </div>
       </div>
