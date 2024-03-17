@@ -252,6 +252,24 @@ export default {
         },
       ]
 
+      const questionsRef = await db
+        .collection('stories')
+        .where('type', '==', 'ask-for-recommendations')
+        .get()
+
+      const questions = questionsRef.docs.map((doc) => ({
+        ...doc.data(),
+        id: doc.id,
+      }))
+
+      for (const question of questions) {
+        routes.push({
+          url: `/stories/${question.id}`,
+          changefreq: 'weekly',
+          priority: 0.9,
+        })
+      }
+
       const eventsRef = await db
         .collection('posts')
         .where('startDate', '>=', +new Date())

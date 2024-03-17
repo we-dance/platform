@@ -50,6 +50,10 @@ export default {
       type: Boolean,
       default: false,
     },
+    type: {
+      type: String,
+      default: '',
+    },
   },
   setup(props, { root }) {
     const loading = ref(true)
@@ -68,6 +72,10 @@ export default {
 
       if (props.createdBy) {
         collection = collection.where('createdBy', '==', props.createdBy)
+      }
+
+      if (props.type) {
+        collection = collection.where('type', '==', props.type)
       }
 
       if (props.place) {

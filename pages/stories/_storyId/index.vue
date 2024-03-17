@@ -48,11 +48,53 @@
 <script>
 import { onMounted, ref } from '@nuxtjs/composition-api'
 import { db } from '~/plugins/firebase'
-import { dateDiff } from '~/utils'
+import { dateDiff, getDateObect } from '~/utils'
 
 export default {
   name: 'ViewStory',
   layout: 'full',
+  head() {
+    if (this.story.type !== 'ask-for-recommendations') {
+      return {
+        title: this.story.description,
+        meta: [
+          {
+            hid: 'description',
+            name: 'description',
+            content: this.story.description,
+          },
+        ],
+      }
+    }
+
+    const answers = this.replies.map((reply) => ({
+      '@type': 'Answer',
+      text: reply.description,
+      datePublished: getDateObect(reply.createdAt).toISOString(),
+      upvoteCount: 1337,
+    }))
+
+    return {
+      script: [
+        {
+          type: 'application/ld+json',
+          json: {
+            '@context': 'https://schema.org',
+            '@type': 'QAPage',
+            mainEntity: {
+              '@type': 'Question',
+              name: this.story.description,
+              text: this.story.description,
+              dateCreated: getDateObect(this.story.createdAt).toISOString(),
+              answerCount: answers.length,
+              acceptedAnswer: answers.length > 0 ? answers[0] : null,
+              suggestedAnswer: answers.length > 1 ? answers.slice(1) : null,
+            },
+          },
+        },
+      ],
+    }
+  },
   setup(props, { root }) {
     const story = ref({})
     const replies = ref([])

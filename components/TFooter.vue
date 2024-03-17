@@ -29,10 +29,13 @@
         $t('footer.faq')
       }}</NuxtLink>
       <NuxtLink class="hover:underline" :to="localePath('/nfc')"
-        >NFC cards</NuxtLink
+        >WeDance Card</NuxtLink
       >
       <NuxtLink class="hover:underline" :to="localePath('/reviews')"
-        >Reviews</NuxtLink
+        >Local Tips</NuxtLink
+      >
+      <NuxtLink class="hover:underline" :to="localePath('/where-can-i-dance')"
+        >Where can I dance?</NuxtLink
       >
       <a
         href="https://github.com/we-dance/platform/releases"
