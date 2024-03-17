@@ -15,6 +15,7 @@
       @close="isReportShown = false"
     >
       <div class="p-4">
+        <pre>ID: {{ id }}</pre>
         <pre>{{ account }}</pre>
       </div>
     </TPopup>
