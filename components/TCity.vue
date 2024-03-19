@@ -165,7 +165,7 @@ export default {
     if (style) {
       breadcrumbs.push({
         name: style,
-        url: `https://wedance.vip/explore/${profile.username}?style=${style}`,
+        url: 'https://wedance.vip' + this.$route.fullPath,
       })
     }
 
