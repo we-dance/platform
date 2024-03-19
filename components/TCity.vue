@@ -138,7 +138,6 @@ export default {
 
     const breadcrumbs = [
       { name: 'Home', url: 'https://wedance.vip/' },
-      { name: 'Explore', url: 'https://wedance.vip/explore/' },
       { name: city, url: `https://wedance.vip/explore/${profile.username}` },
     ]
 
