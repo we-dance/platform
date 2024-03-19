@@ -141,6 +141,34 @@ export default {
       { name: city, url: `https://wedance.vip/explore/${profile.username}` },
     ]
 
+    if (view === 'classes') {
+      breadcrumbs.push({
+        name: 'Classes',
+        url: `https://wedance.vip/explore/${profile.username}/classes`,
+      })
+    }
+
+    if (view === 'groups') {
+      breadcrumbs.push({
+        name: 'Members',
+        url: `https://wedance.vip/explore/${profile.username}/groups`,
+      })
+    }
+
+    if (view === 'tips') {
+      breadcrumbs.push({
+        name: 'Ask Locals',
+        url: `https://wedance.vip/explore/${profile.username}/tips`,
+      })
+    }
+
+    if (style) {
+      breadcrumbs.push({
+        name: style,
+        url: `https://wedance.vip/explore/${profile.username}?style=${style}`,
+      })
+    }
+
     const breadcrumbSchema = {
       '@context': 'https://schema.org',
       '@type': 'BreadcrumbList',
