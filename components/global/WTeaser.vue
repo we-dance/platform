@@ -9,7 +9,7 @@
         v-if="button"
         :allow-guests="allowGuests"
         :title="button"
-        class="my-2"
+        class="my-2 no-underline"
         type="primary"
         :to="url"
         :href="href"

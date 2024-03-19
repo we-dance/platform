@@ -1,12 +1,12 @@
 ---
-title: WeDanceFoundation
+title: WeDance Foundation
 ---
 
-# WeDanceFoundation
+# WeDance Foundation
 
 Non-government organisation to support and spread dancing around the world by enabling collaboration and development and bringing experts from different fields to create and support dance infrastructure. Inspired by [Apache Foundation](https://youtu.be/JUt2nb0mgwg).
 
-[**Join Foundation**](https://github.com/we-dance/foundation)
+[**Join Foundation**](https://github.com/we-dance)
 
 ## Projects
 

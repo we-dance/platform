@@ -250,6 +250,36 @@ export default {
           changefreq: 'daily',
           priority: 1,
         },
+        {
+          url: '/about',
+          changefreq: 'monthly',
+          priority: 0.5,
+        },
+        {
+          url: '/get-involved',
+          changefreq: 'monthly',
+          priority: 0.5,
+        },
+        {
+          url: '/foundation',
+          changefreq: 'monthly',
+          priority: 0.5,
+        },
+        {
+          url: '/platform',
+          changefreq: 'monthly',
+          priority: 0.5,
+        },
+        {
+          url: '/wedance-community',
+          changefreq: 'monthly',
+          priority: 0.5,
+        },
+        {
+          url: '/partners',
+          changefreq: 'monthly',
+          priority: 0.5,
+        },
       ]
 
       const questionsRef = await db

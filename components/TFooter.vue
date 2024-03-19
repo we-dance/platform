@@ -10,6 +10,9 @@
       <NuxtLink class="hover:underline" :to="localePath('/promoter')"
         >For Promoters</NuxtLink
       >
+      <NuxtLink class="hover:underline" :to="localePath('/partners')"
+        >Partners</NuxtLink
+      >
       <NuxtLink class="hover:underline" :to="localePath('/get-involved')">
         {{ $t('footer.getInvolved') }}
       </NuxtLink>
