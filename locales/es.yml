@@ -555,7 +555,7 @@ explore:
     header: 'Festivales de {style} en Todo el Mundo'
     subheader: 'Calendario de Baile {style} para Viajeros. Planea tus vacaciones y fines de semana para bailar Salsa, Bachata, Kizomba, Zouk y otros 130 bailes en diferentes partes del mundo.'
   parties:
-    title: Fiestas de Baile {style} en {city} | Calendario de Baile | WeDance
+    title: Fiestas de Baile {style} en {city} Hoy | Calendario de Baile | WeDance
     description: Explora una variedad de eventos de baile {style} que ocurren en {city}. Desde noches de {referenceStyle} hasta talleres de bachata, encuentra tu próxima aventura de baile aquí.
     header: 'Fiestas {style} en {city}'
     subheader: Descubre la vibrante escena de baile {style} en {city}. Navega a través de una lista curada de fiestas de baile y filtra por tus estilos favoritos como Salsa, Bachata, Kizomba y más.

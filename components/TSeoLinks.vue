@@ -4,20 +4,10 @@
       Dance Events Near Me
     </h3>
     <ul class="text-xs text-center">
-      <li
-        v-for="style in [
-          'Salsa',
-          'Bachata',
-          'Kizomba',
-          'BrazilianZouk',
-          'Afrobeats',
-        ]"
-        :key="style"
-        class="inline-block p-1"
-      >
+      <li v-for="style in styles" :key="style.value" class="inline-block p-1">
         <nuxt-link
-          :to="localePath(`/explore/${profile.username}?style=${style}`)"
-          >{{ style }} in {{ profile.name }}</nuxt-link
+          :to="localePath(`/explore/${profile.username}?style=${style.value}`)"
+          >{{ style.label }} in {{ profile.name }}</nuxt-link
         >
       </li>
     </ul>
@@ -31,5 +21,29 @@ export default {
       default: () => ({}),
     },
   },
+  data: () => ({
+    styles: [
+      {
+        value: 'Salsa',
+        label: 'Salsa',
+      },
+      {
+        value: 'Bachata',
+        label: 'Bachata',
+      },
+      {
+        value: 'Kizomba',
+        label: 'Kizomba',
+      },
+      {
+        value: 'BrazilianZouk',
+        label: 'Zouk',
+      },
+      {
+        value: 'Afrobeats',
+        label: 'Afrobeats',
+      },
+    ],
+  }),
 }
 </script>

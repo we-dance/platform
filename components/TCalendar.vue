@@ -69,6 +69,10 @@
     <div>
       <div v-for="(items, date) in itemsByDate" :key="date">
         <h2 class="font-bold text-xl p-4 border-b">
+          <span v-if="todayYmd === date" class="text-primary">Today · </span>
+          <span v-if="tomorrowYmd === date" class="text-primary"
+            >Tomorrow ·
+          </span>
           <span class="text-primary">{{ getDay(date, $i18n.locale) }}</span> ·
           {{ getDate(date, $i18n.locale) }}
         </h2>
@@ -173,6 +177,8 @@ export default {
     today.setHours(6, 0, 0, 0)
     today = +today
     const fromDate = ref(today)
+    const todayYmd = getYmd(today)
+    const tomorrowYmd = getYmd(today + 24 * 60 * 60 * 1000)
 
     const untilDate = computed(() => {
       const oneWeekLater = new Date(fromDate.value)
@@ -321,6 +327,8 @@ export default {
     const showPopup = ref(false)
 
     return {
+      todayYmd,
+      tomorrowYmd,
       featureFindPartner,
       level,
       levels,

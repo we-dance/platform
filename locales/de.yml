@@ -585,7 +585,7 @@ explore:
     header: '{style} Festivals Weltweit'
     subheader: '{style} Tanzkalender für Reisende. Plane deine Urlaube und Wochenenden, um Salsa, Bachata, Kizomba, Zouk und 130 andere Tänze rund um die Welt zu tanzen.'
   parties:
-    title: Tanzpartys {style} in {city} | Tanzkalender | WeDance
+    title: '{style} Party in {city} Heute | Tanzkalender | WeDance'
     description: Entdecke eine Vielzahl von {style} Tanzveranstaltungen in {city}. Von {referenceStyle}-Nächten bis zu Bachata-Workshops, finde hier dein nächstes Tanzabenteuer.
     header: '{style} Partys in {city}'
     subheader: Entdecke die lebhafte {style} Tanzszene in {city}. Stöbere durch eine ausgewählte Liste von Tanzpartys und filtere nach deinen Lieblingsstilen wie Salsa, Bachata, Kizomba und mehr.
