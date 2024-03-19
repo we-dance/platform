@@ -780,7 +780,7 @@ explore:
     header: '{style} Festivals Worldwide'
     subheader: '{style} Dance Calendar for Travelers. Plan your holidays and weekends to dance Salsa, Bachata, Kizomba, Zouk and 130 other dances around the world.'
   parties:
-    title: Dance {style} Parties in {city} | Dance Calendar | WeDance
+    title: '{style} Dance Party in {city} Today | Dance Calendar | WeDance'
     description: Explore a variety of {style} dance events happening in {city}. From {referenceStyle} nights to bachata workshops, find your next dance adventure here.
     keywords: 'Where can I dance {style} in {city}, {style} dance parties {city}, {style} dance socials {city}, {style} dance nights {city}, {style} dance events {city}, {style} dance meetups {city}'
     header: '{style} Parties in {city}'
