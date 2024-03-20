@@ -619,6 +619,7 @@
             </div>
             <div v-if="!doc.star.count">There are no other guests yet.</div>
           </div>
+          <pre v-if="isAdmin()">{{ doc.star.history }}</pre>
         </div>
         <div v-else class="text-xs text-center">
           There are no guests yet

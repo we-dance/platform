@@ -124,13 +124,24 @@ export default {
   computed: {
     platforms() {
       const text = this.text
-      const url = this.url
 
       const result = {
-        Telegram: `https://t.me/share/url?url=${url}&text=${text}`,
-        Whatsapp: `whatsapp://send?text=${text} ${url}`,
-        Facebook: `https://www.facebook.com/share.php?display=page&u=${url}&t=${text}`,
-        Twitter: `https://twitter.com/intent/tweet?text=${text} ${url}`,
+        Telegram: `https://t.me/share/url?url=${this.getReferralLink(
+          'telegram',
+          true
+        )}&text=${text}`,
+        Whatsapp: `whatsapp://send?text=${text} ${this.getReferralLink(
+          'whatsapp',
+          true
+        )}`,
+        Facebook: `https://www.facebook.com/share.php?display=page&u=${this.getReferralLink(
+          'facebook',
+          true
+        )}&t=${text}`,
+        Twitter: `https://twitter.com/intent/tweet?text=${text} ${this.getReferralLink(
+          'twitter',
+          true
+        )}`,
       }
 
       if (this.doc?.instagram?.messageUrl) {
@@ -148,6 +159,15 @@ export default {
     this.downloadUrl = this.file
   },
   methods: {
+    getReferralLink(utm, encode = false) {
+      const link = `${this.url}?r=${this.uid}&utm_source=${utm}&utm_medium=share`
+
+      if (encode) {
+        return encodeURIComponent(link)
+      }
+
+      return link
+    },
     shareTo(platform) {
       if (!this.platforms[platform]) {
         return
@@ -179,7 +199,7 @@ export default {
         content_id: this.id,
       })
 
-      await navigator.clipboard.writeText(this.url)
+      await navigator.clipboard.writeText(this.getReferralLink('link'))
       this.sharing = false
       this.$toast.success('Link copied to clipboard')
     },
