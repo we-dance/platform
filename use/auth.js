@@ -79,6 +79,10 @@ export const useAuth = () => {
     }
   }
 
+  if (!ls('invitedBy')) {
+    ls('invitedBy', router?.currentRoute?.query?.r || '')
+  }
+
   const username = computed(() => state.profile?.username)
 
   const isAccountConfirmed = () =>

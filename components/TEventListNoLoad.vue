@@ -47,7 +47,11 @@
           {{ getDate(date, $i18n.locale) }}
         </h2>
         <div v-for="item in items" :key="item.id">
-          <TEventText2 :item="item" :is-embed="isEmbed" />
+          <TEventText2
+            :item="item"
+            :is-embed="isEmbed"
+            :invited-by="invitedBy"
+          />
         </div>
       </div>
       <div></div>
@@ -72,6 +76,10 @@ import { useI18n } from '~/use/i18n'
 export default {
   name: 'TEventListNoLoad',
   props: {
+    invitedBy: {
+      type: String,
+      default: '',
+    },
     hideNav: {
       type: Boolean,
       default: false,

@@ -18,7 +18,7 @@
         class="font-bold text-sm leading-none hover:underline hover:text-primary"
       >
         <NuxtLink
-          :to="item.id ? localePath(`/events/${item.id}`) : '#'"
+          :to="item.id ? localePath(`/events/${item.id}?r=${invitedBy}`) : '#'"
           :target="isEmbed ? '_blank' : '_self'"
         >
           {{ item.name }}
@@ -98,6 +98,10 @@ export default {
     }
   },
   props: {
+    invitedBy: {
+      type: String,
+      default: '',
+    },
     item: {
       type: Object,
       default: () => ({}),

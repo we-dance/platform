@@ -120,6 +120,7 @@
         :community="profile.username"
         :username="profile.username"
         :docs="events"
+        :invited-by="profile.id"
         class="w-full border-b border-t pt-4"
       />
       <TReviewList
