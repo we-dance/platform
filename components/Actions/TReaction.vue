@@ -121,7 +121,7 @@ export default {
     }
   },
   setup(props) {
-    const { username: currentUsername } = useAuth()
+    const { username: currentUsername, uid } = useAuth()
 
     const username = computed(() => {
       return props.username || currentUsername.value
@@ -162,6 +162,13 @@ export default {
           [`${props.field}.usernames`]: firebase.firestore.FieldValue.arrayUnion(
             username.value
           ),
+          [`${props.field}.history`]: firebase.firestore.FieldValue.arrayUnion({
+            username: username.value,
+            date: +new Date(),
+            invitedBy: ls('invitedBy') || '',
+            uid: uid.value || '',
+            action: 'joined',
+          }),
         }
       } else {
         change = {
@@ -169,6 +176,13 @@ export default {
           [`${props.field}.usernames`]: firebase.firestore.FieldValue.arrayRemove(
             username.value
           ),
+          [`${props.field}.history`]: firebase.firestore.FieldValue.arrayUnion({
+            username: username.value,
+            date: +new Date(),
+            invitedBy: ls('invitedBy') || '',
+            uid: uid.value || '',
+            action: 'left',
+          }),
         }
       }
 

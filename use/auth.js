@@ -117,6 +117,7 @@ export const useAuth = () => {
 
   function setMarketing() {
     state.marketing = ls('marketing')
+    ls('invitedBy', router?.currentRoute?.query?.r || '')
 
     const width =
       window.innerWidth ||
@@ -133,6 +134,7 @@ export const useAuth = () => {
       timezone: new Date().toString().match(/([A-Z]+[+-][0-9]+)/)[1],
       referrer: getReferrer(),
       ref: router?.currentRoute?.query?.ref || '',
+      invitedBy: router?.currentRoute?.query?.r || '',
       from: router?.currentRoute?.query?.from || '',
       promo: router?.currentRoute?.query?.promo || '',
       fbclid: router?.currentRoute?.query?.fbclid || '',
@@ -217,6 +219,7 @@ export const useAuth = () => {
         photo: user.photoURL ?? '',
         timezone: new Date().toString().match(/([A-Z]+[+-][0-9]+)/)[1],
         zone: Intl.DateTimeFormat().resolvedOptions().timeZone,
+        invitedBy: ls('invitedBy') || '',
       }
 
       await firestore
