@@ -516,6 +516,8 @@
             />
           </div>
         </div>
+
+        <AdEventView />
       </div>
 
       <TAgendaEditor

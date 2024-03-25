@@ -45,17 +45,6 @@
       <div class="text-xs">place_id: {{ profile.cityPlaceId }}</div>
     </div>
 
-    <WTeaser
-      title="Dance Teachers Wanted"
-      :description="
-        `Looking for dance teachers who want to participate in a project promoting democracy through dance`
-      "
-      button="Participate"
-      href="https://bit.ly/48VGUSa"
-      class="w-full"
-      background="bg-red-100"
-    />
-
     <TCalendar :city="profile" :view="view" class="w-full border-t" />
 
     <WTeaser
