@@ -35,6 +35,9 @@ Our partners are the pulse of the global dance scene. Here are some of the incre
 - [Sensual Bachata by DJ Obi in Munich](https://bachata-sensual.party/)
 - [SaBaKi - Salsa, Bachata und Kizomba Events und Gruppen in deiner Stadt](https://sabaki.dance/)
 - [Dancing Queens - Dein Tanzonlineshop](https://www.dancingqueensshoes.com/)
+- [Salsea Dance Academy - Salsa, Salsa Cubana, Bachata, Urban](https://salsea.de/)
+- [SALSA CLUB MUNICH - Salsa und Bachata in München by HAKAN](https://salsaclub-munich.de/)
+- [Anna Milite - Bachata - München](https://www.annamilite.com/)
 
 ## Become a Partner
 
