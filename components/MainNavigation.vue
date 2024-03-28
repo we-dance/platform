@@ -46,22 +46,6 @@
       type="nav"
     />
 
-    <TButton
-      allow-guests
-      :to="localePath('/dance')"
-      icon="help"
-      :label="$t('nav.dance')"
-      type="nav"
-    />
-
-    <TButton
-      allow-guests
-      :to="localePath('/posts')"
-      icon="news"
-      label="Blog"
-      type="nav"
-    />
-
     <div class="border-b pt-2 text-xs font-bold uppercase">
       {{ $t('nav.contribute') }}
     </div>

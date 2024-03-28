@@ -13,6 +13,12 @@
       <NuxtLink class="hover:underline" :to="localePath('/partners')"
         >Partners</NuxtLink
       >
+      <NuxtLink class="hover:underline" :to="localePath('/dance')">
+        {{ $t('nav.dance') }}
+      </NuxtLink>
+      <NuxtLink class="hover:underline" :to="localePath('/posts')"
+        >Blog</NuxtLink
+      >
       <NuxtLink class="hover:underline" :to="localePath('/get-involved')">
         {{ $t('footer.getInvolved') }}
       </NuxtLink>
