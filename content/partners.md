@@ -17,6 +17,7 @@ We believe in building a vibrant, interconnected global dance community. This be
 - [Salsa Bachata in Karlsruhe](https://socialdance.vip/)
 - [Sensual Bachata by DJ Obi in Munich](https://bachata-sensual.party/)
 - [SaBaKi - Salsa, Bachata und Kizomba Events und Gruppen in deiner Stadt](https://sabaki.dance/)
+- [Dancing Queens - Dein Tanzonlineshop](https://www.dancingqueensshoes.com/)
 
 ## Why Partnerships Are Vital
 
