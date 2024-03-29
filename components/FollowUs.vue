@@ -6,7 +6,7 @@
     <p class="text-center">
       {{ description }}
     </p>
-    <TContactsGrid :profile="profile" hide-website class="mt-4" />
+    <TContactsGrid :profile="socialMedia" hide-website class="mt-4" />
   </div>
 </template>
 
@@ -23,16 +23,22 @@ export default {
     },
     profile: {
       type: Object,
-      default: () => ({
-        youtube: 'https://www.youtube.com/channel/UC1pdWS3nCLrd8LnQyNNSNUw',
-        instagram: 'https://instagram.com/WeDancePlatform',
-        telegram: 'https://t.me/WeDancePlatform',
-        twitter: 'https://twitter.com/WeDancePlatform',
-        facebook: 'https://www.facebook.com/WeDance-109777921433083',
+      default: () => ({}),
+    },
+  },
+  computed: {
+    socialMedia() {
+      const travel = {
+        instagram: 'https://www.instagram.com/wedancetravel/',
+        telegram: 'https://www.instagram.com/wedancetravel/',
+        threads: 'https://threads.net/@WeDancePlatform',
+        youtube: 'https://www.youtube.com/@wedancestory',
         spotify:
           'https://open.spotify.com/show/7pSbE0qiPpnJ1v0GmnSSkn?si=351061249dd14cb3',
-        threads: 'https://threads.net/@WeDancePlatform',
-      }),
+        twitter: 'https://twitter.com/WeDancePlatform',
+      }
+
+      return { ...travel, ...this.profile }
     },
   },
 }

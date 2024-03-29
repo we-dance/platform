@@ -61,6 +61,7 @@
       <FollowUs
         :title="$t('profile.follow.title')"
         :description="$t('landing.follow.description')"
+        :profile="socialMedia"
         class="p-4"
       />
     </main>
@@ -86,7 +87,18 @@ export default {
   setup() {
     const { featureFindPartner } = useAuth()
 
-    return { featureFindPartner }
+    const socialMedia = {
+      youtube: 'https://www.youtube.com/@wedancestory',
+      instagram: 'https://instagram.com/WeDancePlatform',
+      telegram: 'https://t.me/WeDancePlatform',
+      twitter: 'https://twitter.com/WeDancePlatform',
+      facebook: 'https://www.facebook.com/WeDance-109777921433083',
+      spotify:
+        'https://open.spotify.com/show/7pSbE0qiPpnJ1v0GmnSSkn?si=351061249dd14cb3',
+      threads: 'https://threads.net/@WeDancePlatform',
+    }
+
+    return { featureFindPartner, socialMedia }
   },
 }
 </script>
