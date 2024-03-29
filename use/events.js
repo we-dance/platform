@@ -4,8 +4,8 @@ import 'firebase/firestore'
 import { useCities } from '~/use/cities'
 import { useI18n } from '~/use/i18n'
 import { getYmd, toDatetimeLocal } from '~/utils'
-import { useCommon } from './common'
-import { useAuth } from './auth'
+import { useCommon } from '~/use/common'
+import { useAuth } from '~/use/auth'
 
 const updateEndDate = (newItem, oldItem) => {
   if (oldItem?.endDate) {
