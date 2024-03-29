@@ -45,6 +45,15 @@
       <div class="text-xs">place_id: {{ profile.cityPlaceId }}</div>
     </div>
 
+    <WTeaser
+      title="Dance Lottery"
+      description="Full Pass for Pa Ti Festival, Berlin, 18-21 July"
+      button="Win Ticket"
+      href="https://bit.ly/3PIcn3g"
+      class="w-full"
+      background="bg-red-100"
+    />
+
     <TCalendar :city="profile" :view="view" class="w-full border-t" />
 
     <WTeaser
