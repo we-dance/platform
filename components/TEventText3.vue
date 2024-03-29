@@ -16,23 +16,13 @@
       <div class="font-bold text-sm hover:underline hover:text-primary">
         {{ item.name }}
       </div>
-      <div class="text-sm">
-        {{ formatDate(item.startDate, 'iii') }} ·
-        {{ formatDate(item.startDate, 'HH:mm') }} ·
-        {{ item.eventType }}
-      </div>
       <div>
         <div class="text-xs text-gray-700">
-          {{ item.org.username }}
-          <template v-if="item.online === 'Yes'">
-            · Online
-          </template>
+          {{ item.price }}
           <template v-if="item.venue">
-            <template v-if="currentCity === item.place">
-              · {{ item.venue.name }}
-            </template>
-            <template v-else>
-              · {{ addressPart(item.venue, 'locality') }}
+            <template
+              >· {{ addressPart(item.venue, 'locality') }} ·
+              {{ addressPart(item.venue, 'country') }}
             </template>
           </template>
         </div>

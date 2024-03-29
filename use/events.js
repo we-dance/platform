@@ -4,6 +4,8 @@ import 'firebase/firestore'
 import { useCities } from '~/use/cities'
 import { useI18n } from '~/use/i18n'
 import { getYmd, toDatetimeLocal } from '~/utils'
+import { useCommon } from './common'
+import { useAuth } from './auth'
 
 const updateEndDate = (newItem, oldItem) => {
   if (oldItem?.endDate) {
@@ -111,6 +113,8 @@ export async function getFestivals() {
 export const useEvents = () => {
   const { t } = useI18n()
   const { currentCity } = useCities()
+  const { yesNoOptions } = useCommon()
+  const { isAdmin } = useAuth()
 
   const eventRoleOptions = [
     {
@@ -254,6 +258,14 @@ export const useEvents = () => {
       labelPosition: 'top',
       component: 'TInputSelect',
       options: eventTypeList,
+    },
+    {
+      when: () => isAdmin(),
+      name: 'hotDeal',
+      label: 'Hot Deal?',
+      labelPosition: 'top',
+      component: 'TInputButtons',
+      options: yesNoOptions,
     },
     {
       name: 'styles',

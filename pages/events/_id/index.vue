@@ -98,6 +98,13 @@
           <div>{{ doc.specialOffer }}</div>
         </div>
       </div>
+      <div
+        class="flex w-full items-center justify-start border-b py-2 px-4 leading-tight"
+      >
+        <div class="flex w-full justify-between">
+          <div>Join Guest List to find tickets and access special offer</div>
+        </div>
+      </div>
 
       <div
         class="top-0 z-40 flex flex-wrap justify-center items-center gap-2 bg-white p-4 shadow"

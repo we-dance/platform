@@ -10,11 +10,9 @@
       <TProfileStats :profile="profile" />
     </div>
 
-    <TCalendar
-      :city="profile"
-      view="festivals"
-      class="mt-4 w-full border-t pt-4 pb-8"
-    />
+    <HotDeals />
+
+    <TCalendar :city="profile" view="festivals" class="mt-4 w-full pb-8" />
 
     <div v-if="profile.instagram" class="bg-gray-100 py-4 flex justify-center">
       <div class="max-w-md py-4 space-y-1">
