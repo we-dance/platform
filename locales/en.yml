@@ -736,7 +736,7 @@ home:
       description: Say goodbye to chaotic chats!
       action: Explore Events
     travel:
-      title: Recommendations
+      title: Where can I dance?
       description: Get insider tips on the best socials in any city.
       action: Ask Locals
     partner:
