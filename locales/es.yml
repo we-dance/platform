@@ -630,7 +630,7 @@ home:
       description: ¡Di adiós a los chats caóticos!
       action: Explorar Eventos
     travel:
-      title: Recomendaciones
+      title: ¿Dónde puedo bailar?
       description: Obtén consejos de expertos sobre los mejores sociales en cualquier ciudad.
       action: Preguntar a Locales
     partner:
