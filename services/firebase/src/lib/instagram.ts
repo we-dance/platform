@@ -3,6 +3,7 @@ import axios from 'axios'
 import { DocumentSnapshot } from 'firebase-functions/v1/firestore'
 import { admin, firestore as db } from '../firebase'
 import { getDocs } from './migrations'
+import { initIndex } from './algolia'
 const pngToJpeg = require('png-to-jpeg')
 
 require('dotenv').config()
@@ -22,8 +23,28 @@ function getMention(link: string) {
 }
 
 export async function announceEventIG2(event: any) {
+  const location = event?.venue?.geometry?.location
+
+  if (!location) {
+    throw new Error(`Location is missing for ${event.name} - ${event.id}`)
+  }
+
+  const profilesIndex = initIndex('profiles')
+  const searchParams = {
+    filters: `type:City`,
+    aroundLatLng: `${location.lat}, ${location.lng}`,
+    aroundRadius: 50000,
+    hitsPerPage: 5,
+  }
+  const results = await profilesIndex.search('', searchParams)
+  const hit: any = results.hits.find((h: any) => !!h.instagram)
+
+  if (!hit) {
+    throw new Error(`No instagram found near "${event.place}"`)
+  }
+
   const cities = await getDocs(
-    db.collection('cities').where('location.place_id', '==', event.place)
+    db.collection('cities').where('location.place_id', '==', hit.place)
   )
 
   if (!cities.length) {
