@@ -47,9 +47,9 @@
 
     <WTeaser
       title="Dance Lottery"
-      description="Full Pass for Pa Ti Festival, Berlin, 18-21 July"
+      description="Fusion All Stars Timba Special with Yoyo Flow & Laura del Vecchio, Munich, 13-14 April"
       button="Win Ticket"
-      href="https://bit.ly/3PIcn3g"
+      href="https://bit.ly/4aZoIIX"
       class="w-full"
       background="bg-red-100"
     />
