@@ -84,8 +84,27 @@
         class="flex w-full items-center justify-start border-b py-2 px-4 leading-tight"
       >
         <TIcon name="ticket" class="mr-4 h-4 w-4" />
-        <div class="flex w-full justify-between">
+        <div class="flex w-full justify-between items-center">
           <div>{{ doc.price }}</div>
+          <div>
+            <template v-if="doc.link">
+              <TButton
+                v-if="doc.link.includes('https://www.tickettailor.com/')"
+                type="link"
+                class="text-xs text-primary hover:no-underline"
+                :label="$t('event.getTicket')"
+                @click="ticketTailorPopup = true"
+              />
+              <TButton
+                v-else
+                type="link"
+                :href="doc.link"
+                target="_blank"
+                class="text-xs text-primary hover:no-underline"
+                :label="$t('event.getTicket')"
+              />
+            </template>
+          </div>
         </div>
       </div>
 
@@ -102,7 +121,7 @@
         class="flex w-full items-center justify-start border-b py-2 px-4 leading-tight"
       >
         <div class="flex w-full justify-between">
-          <div>Join Guest List to find tickets and access special offer</div>
+          <div>Join Guest List to access special offer</div>
         </div>
       </div>
 
@@ -110,34 +129,26 @@
         class="top-0 z-40 flex flex-wrap justify-center items-center gap-2 bg-white p-4 shadow"
         :class="can('edit', 'events', doc) ? '' : 'sticky'"
       >
-        <TButton
-          v-if="can('edit', 'events', doc)"
+        <TReaction
           type="primary"
-          label="Preview as guest"
-          @click="toggleGuest"
+          toggled-class="bg-green-500 hover:bg-green-800"
+          :label="$t('event.attend')"
+          :toggled-label="$t('event.attending')"
+          icon="PlusIcon"
+          toggled-icon="CheckIcon"
+          field="star"
+          class="rounded-full"
+          hide-count
+          :item="doc"
         />
-        <template v-else>
-          <TReaction
-            type="primary"
-            toggled-class="bg-green-500 hover:bg-green-800"
-            :label="$t('event.attend')"
-            :toggled-label="$t('event.attending')"
-            icon="PlusIcon"
-            toggled-icon="CheckIcon"
-            field="star"
-            class="rounded-full"
-            hide-count
-            :item="doc"
-          />
-          <TEventBookmark
-            :event-id="doc.id"
-            show-label
-            type="secondary"
-            label="Bookmark"
-            toggled-label="Bookmarked"
-            size="4"
-          />
-        </template>
+        <TEventBookmark
+          :event-id="doc.id"
+          show-label
+          type="secondary"
+          label="Bookmark"
+          toggled-label="Bookmarked"
+          size="4"
+        />
       </div>
       <div v-if="isGoing" class="border-b border-t bg-white p-4">
         <TPreview v-if="doc.confirmation" :content="doc.confirmation" />
@@ -145,23 +156,6 @@
         <div
           class="flex flex-col md:flex-row justify-center items-center gap-2"
         >
-          <template v-if="doc.link">
-            <TButton
-              v-if="doc.link.includes('https://www.tickettailor.com/')"
-              icon="ticket"
-              type="primary"
-              :label="$t('event.getTicket')"
-              @click="ticketTailorPopup = true"
-            />
-            <TButton
-              v-else
-              type="primary"
-              icon="ticket"
-              :href="doc.link"
-              target="_blank"
-              :label="$t('event.getTicket')"
-            />
-          </template>
           <TButton
             v-if="doc.paypal"
             icon="favorite"
@@ -180,6 +174,12 @@
         >
           <h3 class="text-xs font-bold uppercase">Moderator Tools</h3>
           <div class="flex flex-wrap gap-2">
+            <TButton
+              type="primary"
+              label="Preview as guest"
+              @click="toggleGuest"
+            />
+
             <TButton
               type="secondary"
               icon="people"

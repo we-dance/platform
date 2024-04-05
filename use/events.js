@@ -279,6 +279,7 @@ export const useEvents = () => {
       labelPosition: 'top',
       placeholder: t('event.name.placeholder'),
       label: t('event.name.label'),
+      required: true,
     },
     {
       name: 'venue',
@@ -286,6 +287,7 @@ export const useEvents = () => {
       labelPosition: 'top',
       component: 'TInputVenue',
       simple: true,
+      required: true,
     },
     {
       name: 'startDate',
@@ -303,6 +305,7 @@ export const useEvents = () => {
       'value-type': 'timestamp',
       label: 'Start date',
       simple: true,
+      required: true,
       onChange: updateEndDate,
     },
     {
@@ -336,12 +339,35 @@ export const useEvents = () => {
       placeholder: t('event.link.placeholder'),
       description: t('event.link.description'),
       label: t('event.link.label'),
+      validate(value, item) {
+        if (!value) {
+          return true
+        }
+
+        try {
+          const url = new URL(value)
+          return true
+        } catch (err) {
+          return false
+        }
+      },
+      validationError: 'Please enter a valid URL',
     },
     {
       name: 'price',
       labelPosition: 'top',
       label: t('event.price.label'),
       description: t('event.price.description'),
+      validate(value) {
+        if (!value) {
+          return true
+        }
+
+        if (isNaN(value)) {
+          return true
+        }
+      },
+      validationError: 'Please add currency',
     },
     {
       name: 'specialOffer',

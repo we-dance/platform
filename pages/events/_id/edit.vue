@@ -83,11 +83,13 @@ export default {
         claimed: 'No',
         eventType: 'Party',
         duration: 60,
-        price: '0 EUR',
+        price: '',
         styles: {},
         cover: '',
         artists: [],
-        org: {},
+        org: {
+          username: this.profile?.username,
+        },
         username: this.profile?.username,
         watch: {
           count: 1,

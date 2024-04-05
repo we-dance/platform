@@ -29,11 +29,14 @@
           v-bind="$attrs"
           :item="item"
           :value.sync="computedValue"
+          :class="{ 'border-red-500': error }"
           v-on="$attrs.listeners"
           @input="(val) => $emit('input', set(val))"
         />
       </slot>
-      <div v-if="error" class="text-red-500 text-sm mt-2">{{ error }}</div>
+      <div v-if="error" class="field-error text-red-500 text-sm mt-2">
+        {{ error }}
+      </div>
       <TPreview
         v-if="description"
         :content="description"

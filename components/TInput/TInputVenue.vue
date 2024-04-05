@@ -110,7 +110,12 @@ export default {
   watch: {
     value: 'load',
     'venue.username'(username) {
-      const newVal = this.value
+      if (!username) {
+        this.$emit('input', '')
+        return
+      }
+
+      const newVal = this.value || {}
       newVal.username = username
 
       this.$emit('input', newVal)
@@ -138,7 +143,7 @@ export default {
 
       const website = this.value.website || ''
 
-      if (!doc) {
+      if (!doc && website) {
         doc = await loadBy('website', website)
 
         if (doc) {
@@ -153,7 +158,7 @@ export default {
       }
 
       if (!doc) {
-        let username = website.replace(/https?:\/\//, '').replace('/', '')
+        let username = website.split('/')[2]
 
         if (!username) {
           username = this.value.name

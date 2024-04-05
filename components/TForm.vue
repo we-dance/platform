@@ -156,8 +156,15 @@ export default {
     },
     async save() {
       this.error = false
+      const isValid = await this.validate()
 
-      if (!(await this.validate())) {
+      if (!isValid) {
+        const el = document.querySelector('.field-error')?.parentElement
+          ?.parentElement
+        if (el) {
+          el.scrollIntoView({ behavior: 'smooth' })
+        }
+
         return
       }
 
@@ -165,6 +172,8 @@ export default {
     },
     onFieldChange(field, value) {
       const val = { ...this.value }
+
+      Vue.delete(this.errors, field.name)
 
       if (value) {
         this.$set(val, field.name, value)
