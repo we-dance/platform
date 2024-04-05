@@ -345,7 +345,8 @@ export const useEvents = () => {
         }
 
         try {
-          const url = new URL(value)
+          // eslint-disable-next-line no-new
+          new URL(value)
           return true
         } catch (err) {
           return false

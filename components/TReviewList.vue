@@ -49,16 +49,20 @@ export default {
 
     const firestore = firebase.firestore()
 
-    const reviewsRef = await firestore
-      .collection('stories')
-      .where('receiver.username', '==', this.profile.username)
-      .orderBy('createdAt', 'desc')
-      .get()
+    let newReviews = []
 
-    const newReviews = reviewsRef.docs.map((doc) => ({
-      ...doc.data(),
-      id: doc.id,
-    }))
+    if (this.profile.username) {
+      const reviewsRef = await firestore
+        .collection('stories')
+        .where('receiver.username', '==', this.profile.username)
+        .orderBy('createdAt', 'desc')
+        .get()
+
+      newReviews = reviewsRef.docs.map((doc) => ({
+        ...doc.data(),
+        id: doc.id,
+      }))
+    }
 
     this.reviews = [...oldReviews, ...newReviews].sort(sortBy('-createdAt'))
   },
