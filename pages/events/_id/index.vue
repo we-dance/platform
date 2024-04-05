@@ -383,7 +383,7 @@
       </div>
 
       <TReviewList
-        v-if="org && org.username && $route.query.view === 'reviews'"
+        v-if="$route.query.view === 'reviews'"
         :profile="org"
         class="px-4"
       />
@@ -395,25 +395,32 @@
         <h3 class="text-xs uppercase font-bold px-2 pt-4 text-gray-500">
           {{ $t('event.artists') }}
         </h3>
-        <div v-if="can('edit', 'events', doc)" class="p-4 border-t">
-          <TInputArray
-            v-model="artists"
-            :children="{ component: 'TInputProfile' }"
-          />
-
-          <div class="flex justify-end mt-4">
-            <TButton
-              type="primary"
-              label="Save"
-              @click="saveArtists(artists)"
+        <TButton
+          v-if="can('edit', 'events', doc)"
+          type="primary"
+          label="Edit Artists"
+          @click="editingArtists = true"
+        />
+        <TPopup
+          v-if="editingArtists"
+          title="Edit Artists"
+          @close="editingArtists = false"
+        >
+          <div class="max-w-md max-h-[80vh] py-4 overflow-y-scroll">
+            <TInputArray
+              v-model="artists"
+              :children="{ component: 'TInputProfile' }"
             />
+            <div class="flex justify-end mt-4">
+              <TButton
+                type="primary"
+                label="Save"
+                @click="saveArtists(artists)"
+              />
+            </div>
           </div>
-        </div>
-        <div v-else-if="doc.artists && doc.artists.length" class="p-4 border-t">
-          <h3 class="text-xs uppercase font-bold px-2 py-4 text-gray-500">
-            {{ $t('event.artists') }}
-          </h3>
-
+        </TPopup>
+        <div v-else-if="doc.artists && doc.artists.length">
           <div
             v-for="profile in doc.artists"
             :key="`artist-${profile.username}`"
@@ -898,6 +905,7 @@ export default {
     const creator = ref({})
     const org = ref({})
     const reviews = ref([])
+    const editingArtists = ref(false)
 
     async function saveAgenda(agenda) {
       for (const itemIndex in agenda.items) {
@@ -920,6 +928,8 @@ export default {
       const artistsList = artists.map((a) => a.username).filter((item) => item)
 
       await update(doc.value.id, { artists, artistsList })
+
+      editingArtists.value = false
     }
 
     async function getCachedProfile(username) {
@@ -1011,6 +1021,7 @@ export default {
     }
 
     return {
+      editingArtists,
       reviews,
       toggleGuest,
       saveAgenda,
