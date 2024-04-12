@@ -310,6 +310,7 @@ export const useAuth = () => {
 
     if (!doc.exists) {
       const profile = {
+        id: state.uid,
         createdBy: state.uid,
         createdAt: +new Date(),
         locales: getLanguages(),
@@ -331,6 +332,7 @@ export const useAuth = () => {
       state.profile = profile
     } else {
       state.profile = doc.data()
+      state.profile.id = doc.id
       state.username = state.profile.username
     }
 

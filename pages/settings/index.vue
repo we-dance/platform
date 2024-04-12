@@ -243,11 +243,6 @@ export default {
       this.$router.push(this.localePath(`/${this.profile.username}`))
     },
     async saveProfile(data) {
-      if (data.bio?.length > 140) {
-        this.$toast.error('Teaser can be maximum 140 symbols.')
-        return
-      }
-
       track('save_profile')
 
       await this.updateProfile(data)
