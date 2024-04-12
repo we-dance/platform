@@ -232,7 +232,7 @@ export const useProfiles = () => {
       labelPosition: 'top',
       before: t('profile.bio.before'),
       max: 140,
-      async validate(value) {
+      validate(value) {
         if (!value) {
           return true
         }
