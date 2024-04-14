@@ -226,6 +226,10 @@ profile:
     label: Yaşayan
     before: Daimi ikametgahınız nedir?
     placeholder: Şehir
+  living:
+    label: Şehir
+    before: Where do you live?
+    placeholder: Şehir
   hometown:
     label: Yapıldığı yer
     before: Nerede doğdun ve büyüdün?
