@@ -229,6 +229,10 @@ profile:
     label: Living in
     before: What's your permanent residence?
     placeholder: City
+  living:
+    label: City
+    before: Where do you live?
+    placeholder: City
   hometown:
     label: Made in
     before: Where were you born and raised?

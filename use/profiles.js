@@ -206,6 +206,7 @@ export const useProfiles = () => {
       hideSearchBox: true,
       poster: true,
       register: true,
+      required: true,
       options: genderList,
     },
     {
@@ -277,11 +278,11 @@ export const useProfiles = () => {
     },
     {
       name: 'place',
-      label: t('profile.place.label'),
+      label: t('profile.living.label'),
       register: true,
       poster: true,
       component: 'TInputPlace',
-      before: t('profile.place.before'),
+      before: t('profile.living.before'),
     },
     {
       name: 'hometown',

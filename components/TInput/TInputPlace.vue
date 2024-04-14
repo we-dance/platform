@@ -1,6 +1,7 @@
 <template>
   <t-rich-select
     v-model="internalValue"
+    :minimum-input-length="1"
     :fetch-options="fetchOptions"
     :placeholder="isLocating ? 'Locating...' : placeholder"
     v-bind="$attrs"
@@ -22,7 +23,7 @@ export default {
     },
     placeholder: {
       type: String,
-      default: 'City',
+      default: 'Search city',
     },
     autoDetect: {
       type: Boolean,
@@ -67,10 +68,12 @@ export default {
       if (!q) {
         await find('cityPlaceId', props.value)
 
-        results.push({
-          label: city.value.name,
-          value: props.value,
-        })
+        if (city.value?.name) {
+          results.push({
+            label: city.value.name,
+            value: city.value.cityPlaceId,
+          })
+        }
 
         return {
           results,
