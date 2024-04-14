@@ -226,6 +226,10 @@ profile:
     label: Viviendo en
     before: '¿Cuál es tu residencia permanente?'
     placeholder: Ciudad
+  living:
+    label: City
+    before: Where do you live?
+    placeholder: City
   hometown:
     label: Hecho en
     before: '¿Dónde naciste y levantó?'
