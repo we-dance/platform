@@ -497,7 +497,6 @@
             </div>
             <div v-if="!doc.star.count">There are no other guests yet.</div>
           </div>
-          <pre v-if="isAdmin()">{{ doc.star.history }}</pre>
         </div>
         <div v-else class="text-xs text-center">
           There are no guests yet
@@ -667,12 +666,32 @@
         </div>
 
         <div class="border-t mt-4 p-4 flex flex-col gap-4">
+          <template v-if="isAdmin()">
+            <div
+              v-for="item in history"
+              :key="item.date + item.username"
+              class="text-xs"
+            >
+              <TAvatar photo name :uid="item.uid">
+                <span>•</span>
+                <div>{{ dateDiff(item.date) }}</div>
+                <template v-if="item.invitedBy">
+                  <span>•</span>
+                  <TAvatar photo name :uid="item.invitedBy" />
+                </template>
+              </TAvatar>
+              <div class="mt-1 text-xs text-gray-700">
+                {{ item.action }} the event
+              </div>
+            </div>
+          </template>
+
           <div v-if="doc.updatedBy" class="text-xs">
             <TAvatar photo name :uid="doc.updatedBy">
               <span>•</span>
               <div>{{ dateDiff(doc.updatedAt) }}</div>
             </TAvatar>
-            <div class="mt-1 text-xs text-gray-700">Updated event</div>
+            <div class="mt-1 text-xs text-gray-700">updated the event</div>
           </div>
 
           <div class="text-xs">
@@ -681,7 +700,8 @@
               <div>{{ dateDiff(doc.createdAt) }}</div>
             </TAvatar>
             <div v-if="doc.source" class="mt-1 text-xs text-gray-700">
-              Imported from <strong class="font-bold">{{ doc.source }}</strong
+              imported the event from
+              <strong class="font-bold">{{ doc.source }}</strong
               ><template v-if="doc.provider"
                 >, provided by
                 <strong class="font-bold">{{ doc.provider }}</strong></template
@@ -696,7 +716,7 @@
               >.
             </div>
             <div v-else class="mt-1 text-xs text-gray-700">
-              Created event
+              created the event
             </div>
           </div>
         </div>
@@ -791,6 +811,7 @@ import {
   loadDoc,
   getEventMeta,
   formatDate,
+  sortBy,
 } from '~/utils'
 import { addressPart } from '~/use/google'
 import { trackView } from '~/use/tracking'
@@ -811,6 +832,14 @@ export default {
     venueProfile: null,
   }),
   computed: {
+    history() {
+      const result = this.doc?.star?.history
+      if (!result) {
+        return []
+      }
+
+      return result.sort(sortBy('-date'))
+    },
     reviewsAvg() {
       if (!this.reviewsCount) {
         return 0
