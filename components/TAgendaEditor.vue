@@ -258,20 +258,26 @@ export default {
     },
   },
   mounted() {
-    if (!this.value?.days?.length) {
-      this.initDays()
-    }
+    this.initDays()
   },
   methods: {
     initDays() {
       const startDate = new Date(this.parent.startDate)
       const endDate = new Date(this.parent.endDate)
-      const days = []
+      endDate.setHours(23, 59, 59, 999)
+      const days = this.value?.days || []
 
       let date = startDate
       while (+date <= +endDate) {
+        const currentDate = date.toISOString().split('T')[0]
+
+        if (days.find((day) => day.date === currentDate)) {
+          date = new Date(date.setDate(date.getDate() + 1))
+          continue
+        }
+
         days.push({
-          date: date.toISOString().split('T')[0],
+          date: currentDate,
           name: date.toDateString().split(' ')[0],
           rooms: [],
           times: [],
