@@ -664,8 +664,10 @@
           </div>
 
           <TCommentsInline v-else :item="doc" autoload />
+        </div>
 
-          <div v-if="doc.updatedBy" class="mt-8">
+        <div class="border-t mt-4 p-4 flex flex-col gap-4">
+          <div v-if="doc.updatedBy" class="text-xs">
             <TAvatar photo name :uid="doc.updatedBy">
               <span>•</span>
               <div>{{ dateDiff(doc.updatedAt) }}</div>
@@ -673,7 +675,7 @@
             <div class="mt-1 text-xs text-gray-700">Updated event</div>
           </div>
 
-          <div class="mt-8">
+          <div class="text-xs">
             <TAvatar photo name :uid="doc.createdBy">
               <span>•</span>
               <div>{{ dateDiff(doc.createdAt) }}</div>
