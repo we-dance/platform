@@ -107,7 +107,14 @@
           </div>
         </div>
       </div>
-
+      <WTeaser
+        v-if="doc.lottery"
+        title="Dance Lottery"
+        button="Win Ticket"
+        :href="doc.lottery"
+        class="w-full"
+        background="bg-red-100"
+      />
       <div
         v-if="doc.specialOffer"
         class="flex w-full items-center justify-start border-b py-2 px-4 leading-tight"

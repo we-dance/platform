@@ -42,17 +42,9 @@
           @click="remove(profile.id)"
         />
       </TDropdown>
-      <div class="text-xs">place_id: {{ profile.cityPlaceId }}</div>
     </div>
 
-    <WTeaser
-      title="Dance Lottery"
-      description="Ticket for Papucho and Manana Club, Munich, 17 May"
-      button="Win Ticket"
-      href="https://bit.ly/3Ur5gz5"
-      class="w-full"
-      background="bg-red-100"
-    />
+    <Lottery />
 
     <TCalendar :city="profile" :view="view" class="w-full border-t" />
 

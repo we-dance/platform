@@ -268,6 +268,20 @@ export const useEvents = () => {
       options: yesNoOptions,
     },
     {
+      when: () => isAdmin(),
+      name: 'hasLottery',
+      label: 'Has Lottery?',
+      labelPosition: 'top',
+      component: 'TInputButtons',
+      options: yesNoOptions,
+    },
+    {
+      when: () => isAdmin(),
+      name: 'lottery',
+      label: 'Lottery',
+      labelPosition: 'top',
+    },
+    {
       name: 'styles',
       labelPosition: 'top',
       label: t('event.styles.label'),
