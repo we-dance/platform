@@ -47,9 +47,9 @@
 
     <WTeaser
       title="Dance Lottery"
-      description="Full Pass for Pa Ti Festival, Berlin, 18-21 July"
+      description="Ticket for Papucho and Manana Club, Munich, 17 May"
       button="Win Ticket"
-      href="https://bit.ly/3PIcn3g"
+      href="https://bit.ly/3Ur5gz5"
       class="w-full"
       background="bg-red-100"
     />
