@@ -1,20 +1,29 @@
 <template>
-  <div v-if="deals.length > 0" class="bg-orange-50">
-    <div class="p-4 pb-0">
-      <span class="rounded bg-primary text-white text-xs px-1">
-        Win Ticket
-      </span>
+  <div>
+    <div v-if="deals.length > 0" class="bg-orange-50">
+      <div class="p-4 pb-0">
+        <span class="rounded bg-primary text-white text-xs px-1">
+          Win Ticket
+        </span>
+      </div>
+      <NuxtLink
+        v-for="deal in deals"
+        :key="deal.id"
+        :to="localePath(`/events/${deal.id}`)"
+        class="hover:opacity-75"
+      >
+        <TEventText3 :item="deal" class="border-orange-100" />
+      </NuxtLink>
     </div>
-    <NuxtLink
-      v-for="deal in deals"
-      :key="deal.id"
-      :to="localePath(`/events/${deal.id}`)"
-      class="hover:opacity-75"
-    >
-      <TEventText3 :item="deal" class="border-orange-100" />
-    </NuxtLink>
+    <div class="text-right p-4">
+      <TButton
+        type="link"
+        :to="localePath('/explore/global')"
+        class="text-xs text-primary hover:no-underline"
+        label="Discover Hot Deals"
+      />
+    </div>
   </div>
-  <div v-else></div>
 </template>
 
 <script>
