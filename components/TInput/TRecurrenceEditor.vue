@@ -20,8 +20,7 @@
 
 <script>
 import { RRule } from 'rrule'
-import { getDateObect } from '~/utils'
-import { getDate } from '~/utils'
+import { getDateObect, getDate } from '~/utils'
 
 export default {
   name: 'TRecurrenceEditor',
