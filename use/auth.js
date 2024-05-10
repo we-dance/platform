@@ -320,6 +320,8 @@ export const useAuth = () => {
         visibility: 'Members',
         type: 'Dancer',
         name: ls('username'),
+        gender: ls('gender'),
+        place: ls('place'),
       }
 
       await firestore
@@ -328,6 +330,8 @@ export const useAuth = () => {
         .set(profile)
 
       ls.remove('username')
+      ls.remove('gender')
+      ls.remove('place')
 
       state.profile = profile
     } else {
@@ -467,10 +471,13 @@ export const useAuth = () => {
     email,
     password,
     username,
-    place
+    place,
+    gender
   ) {
     try {
       ls('username', username)
+      ls('place', place)
+      ls('gender', gender)
       await firebase.auth().createUserWithEmailAndPassword(email, password)
     } catch (e) {
       state.error = e

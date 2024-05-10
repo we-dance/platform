@@ -97,9 +97,17 @@ export default {
   },
   methods: {
     redirect() {
-      this.$router.push(`/${this.profile.username}`)
+      let target = ls('target')
+      ls.remove('target')
+
+      if (!target) {
+        const page = this.profile?.username
+        target = '/' + page
+      }
+
+      this.$router.push(target)
     },
-    async submit({ email, username, password, place }) {
+    async submit({ email, username, password, place, gender }) {
       if (
         !email ||
         !email.trim() ||
@@ -123,7 +131,8 @@ export default {
         email,
         password,
         username,
-        place
+        place,
+        gender
       )
     },
   },
