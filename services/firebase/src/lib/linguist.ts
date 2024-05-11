@@ -91,7 +91,7 @@ export function isFacebookEvent(url?: string): boolean {
     return false
   }
 
-  return ['facebook.com/events/', 'fb.me/e/', 'fb.com/events'].some((word) =>
+  return ['facebook.com/events/', 'fb.me/e/', 'fb.com/events', 'facebook.com/share/'].some((word) =>
     url.includes(word)
   )
 }
