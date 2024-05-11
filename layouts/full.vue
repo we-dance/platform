@@ -1,5 +1,5 @@
 <template>
-  <div class="bg-gray-200 pb-4 border-t-2 border-primary">
+  <div class="bg-gray-200 min-h-screen pb-4 border-t-2 border-primary">
     <nav class="hidden md:flex p-4 gap-2 justify-start">
       <router-link :to="city.username ? `/explore/${city.username}` : '/'">
         <TIcon name="logo-horizontal-dark" />
@@ -22,7 +22,7 @@
       <TQrCodeButton label="Share" />
     </nav>
     <div
-      class="font-sans leading-normal tracking-normal antialiased min-h-screen flex flex-col mx-auto max-w-xl bg-white rounded shadow"
+      class="font-sans leading-normal tracking-normal antialiased flex flex-col mx-auto max-w-xl bg-white rounded shadow"
     >
       <TAuthPopup />
 

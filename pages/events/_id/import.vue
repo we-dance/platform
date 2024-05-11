@@ -131,6 +131,14 @@ export default {
         description: t('import.event.sourceUrl.description'),
         label: t('import.event.sourceUrl.label'),
         placeholder: 'https://',
+        validate: (value) => {
+          if (!value) {
+            return false
+          }
+
+          return value.match(/^https?:\/\/\S+$/)
+        },
+        validationError: 'Invalid URL',
       },
     ]
 

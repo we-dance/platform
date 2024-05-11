@@ -233,18 +233,6 @@ export const useProfiles = () => {
       labelPosition: 'top',
       before: t('profile.bio.before'),
       max: 140,
-      validate(value) {
-        if (!value) {
-          return true
-        }
-
-        if (value?.length > 140) {
-          return false
-        }
-
-        return true
-      },
-      validationError: 'Can be maximum 140 symbols',
     },
     {
       name: 'story',

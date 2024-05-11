@@ -2,6 +2,11 @@
   <div>
     <THeader show-logo class="md:hidden" />
 
+    <TEventImportStatus
+      v-if="doc.type === 'import_error' || doc.type === 'import_event'"
+      :doc="doc"
+    />
+
     <template v-if="doc.type === 'event'">
       <div class="p-4 flex gap-2 border-b">
         <div class="text-center pt-2">
@@ -171,167 +176,110 @@
           />
         </div>
       </div>
-    </template>
 
-    <div class="grid grid-cols-1">
-      <div class="md:border-l">
-        <div
-          v-if="can('edit', 'events', doc)"
-          class="space-y-2 p-4 border-b bg-orange-100"
-        >
-          <h3 class="text-xs font-bold uppercase">Moderator Tools</h3>
-          <div class="flex flex-wrap gap-2">
-            <TButton
-              type="primary"
-              label="Preview as guest"
-              @click="toggleGuest"
-            />
+      <div class="grid grid-cols-1">
+        <div class="md:border-l">
+          <div
+            v-if="can('edit', 'events', doc)"
+            class="space-y-2 p-4 border-b bg-orange-100"
+          >
+            <h3 class="text-xs font-bold uppercase">Moderator Tools</h3>
+            <div class="flex flex-wrap gap-2">
+              <TButton
+                type="primary"
+                label="Preview as guest"
+                @click="toggleGuest"
+              />
 
-            <TButton
-              type="secondary"
-              icon="people"
-              :to="localePath(`/events/${doc.id}/dashboard`)"
-              :label="$t('eventView.dropdown.dashboard')"
-            />
+              <TButton
+                type="secondary"
+                icon="people"
+                :to="localePath(`/events/${doc.id}/dashboard`)"
+                :label="$t('eventView.dropdown.dashboard')"
+              />
 
-            <TButton
-              type="secondary"
-              icon="edit"
-              :to="localePath(`/events/${doc.id}/edit`)"
-              :label="$t('eventView.dropdown.edit')"
-            />
+              <TButton
+                type="secondary"
+                icon="edit"
+                :to="localePath(`/events/${doc.id}/edit`)"
+                :label="$t('eventView.dropdown.edit')"
+              />
 
-            <TButton
-              type="secondary"
-              icon="copy"
-              :to="localePath(`/events/${doc.id}/copy`)"
-              :label="$t('eventView.dropdown.copy')"
-            />
+              <TButton
+                type="secondary"
+                icon="copy"
+                :to="localePath(`/events/${doc.id}/copy`)"
+                :label="$t('eventView.dropdown.copy')"
+              />
 
-            <TButton
-              v-if="can('edit', 'events', doc)"
-              type="secondary"
-              icon="delete"
-              label="Delete"
-              @click="deleteEvent(doc.id)"
-            />
-          </div>
-          <div v-if="doc.promotion !== 'completed'" class="text-sm">
-            As soon as event is published, you can promote it for free on
-            WeDance Instagram by clicking Promote.
-            <div v-if="doc.promotion === 'failed'">
-              <div class="text-red-500">
-                Promotion failed: {{ doc.promotionError }}
-              </div>
-              <div>
-                Please
-                <a
-                  class="underline text-primary"
-                  href="mailto:support@wedance.vip"
-                  >contact support</a
-                >
-                to resolve the issue.
+              <TButton
+                v-if="can('edit', 'events', doc)"
+                type="secondary"
+                icon="delete"
+                label="Delete"
+                @click="deleteEvent(doc.id)"
+              />
+            </div>
+            <div v-if="doc.promotion !== 'completed'" class="text-sm">
+              As soon as event is published, you can promote it for free on
+              WeDance Instagram by clicking Promote.
+              <div v-if="doc.promotion === 'failed'">
+                <div class="text-red-500">
+                  Promotion failed: {{ doc.promotionError }}
+                </div>
+                <div>
+                  Please
+                  <a
+                    class="underline text-primary"
+                    href="mailto:support@wedance.vip"
+                    >contact support</a
+                  >
+                  to resolve the issue.
+                </div>
               </div>
             </div>
-          </div>
 
-          <TButton
-            v-if="!doc.socialCover"
-            label="Publishing..."
-            class="rounded-full"
-          />
-          <TButton
-            v-else-if="doc.promotion === 'requested'"
-            label="Promoting..."
-            class="rounded-full"
-          />
-          <div v-else-if="doc.promotion === 'completed'" class="text-sm">
-            Event announcement is published on
-            <a class="underline text-primary" :href="doc.instagram.messageUrl"
-              >Instagram</a
-            >
+            <TButton
+              v-if="!doc.socialCover"
+              label="Publishing..."
+              class="rounded-full"
+            />
+            <TButton
+              v-else-if="doc.promotion === 'requested'"
+              label="Promoting..."
+              class="rounded-full"
+            />
+            <div v-else-if="doc.promotion === 'completed'" class="text-sm">
+              Event announcement is published on
+              <a class="underline text-primary" :href="doc.instagram.messageUrl"
+                >Instagram</a
+              >
+            </div>
+            <TButton
+              v-else
+              icon="trending"
+              label="Promote"
+              class="rounded-full"
+              @click="
+                softUpdate(doc.id, {
+                  promotion: 'requested',
+                })
+              "
+            />
+            <TButton
+              v-if="isAdmin() && doc.promotion === 'completed'"
+              label="Reset"
+              class="rounded-full"
+              @click="
+                softUpdate(doc.id, {
+                  promotion: '',
+                })
+              "
+            />
           </div>
-          <TButton
-            v-else
-            icon="trending"
-            label="Promote"
-            class="rounded-full"
-            @click="
-              softUpdate(doc.id, {
-                promotion: 'requested',
-              })
-            "
-          />
-          <TButton
-            v-if="isAdmin() && doc.promotion === 'completed'"
-            label="Reset"
-            class="rounded-full"
-            @click="
-              softUpdate(doc.id, {
-                promotion: '',
-              })
-            "
-          />
         </div>
       </div>
-    </div>
 
-    <div
-      v-if="doc.type === 'import_error'"
-      class="flex flex-col justify-center items-center h-64 p-4 text-center"
-    >
-      <div class="text-sm text-red-500">{{ doc.error }}</div>
-      <TButton
-        v-if="isAdmin()"
-        type="primary"
-        label="Retry"
-        class="mt-4"
-        @click="
-          softUpdate(doc.id, {
-            type: 'import_event',
-            errorCode: '',
-            error: '',
-          })
-        "
-      />
-      <TButton
-        v-if="can('edit', 'events', doc)"
-        type="primary"
-        icon="delete"
-        label="Delete Event"
-        class="mt-4"
-        @click="deleteEvent(doc.id)"
-      />
-    </div>
-    <div
-      v-else-if="doc.type === 'import_event'"
-      class="flex flex-col justify-center items-center h-64"
-    >
-      <div class="text-2xl font-extrabold">Please wait...</div>
-      <div v-if="doc.sourceUrl" class="mt-1 text-xs text-gray-700">
-        Importing event from
-        <a
-          :href="doc.sourceUrl"
-          target="_blank"
-          class="text-primary underline hover:no-underline"
-          >{{ doc.sourceUrl }}</a
-        >
-      </div>
-      <TButton
-        v-if="isAdmin()"
-        type="primary"
-        label="Stop"
-        class="mt-4"
-        @click="
-          softUpdate(doc.id, {
-            type: 'import_error',
-            errorCode: 'stopped',
-            error: 'Import stopped by admin',
-          })
-        "
-      />
-    </div>
-    <div v-else>
       <TPopup
         v-if="ticketTailorPopup"
         title="Buy Ticket"
@@ -727,31 +675,7 @@
             <div class="mt-1 text-xs text-gray-700">updated the event</div>
           </div>
 
-          <div class="text-xs">
-            <TAvatar photo name :uid="doc.createdBy">
-              <span>•</span>
-              <div>{{ dateDiff(doc.createdAt) }}</div>
-            </TAvatar>
-            <div v-if="doc.source" class="mt-1 text-xs text-gray-700">
-              imported the event from
-              <strong class="font-bold">{{ doc.source }}</strong
-              ><template v-if="doc.provider"
-                >, provided by
-                <strong class="font-bold">{{ doc.provider }}</strong></template
-              ><template v-if="doc.sourceUrl"
-                >, see
-                <a
-                  :href="doc.sourceUrl"
-                  target="_blank"
-                  class="text-primary underline hover:no-underline"
-                  >source</a
-                ></template
-              >.
-            </div>
-            <div v-else class="mt-1 text-xs text-gray-700">
-              created the event
-            </div>
-          </div>
+          <TEventCreator :doc="doc" />
         </div>
       </div>
 
@@ -818,7 +742,7 @@
           </div>
         </div>
       </TPopup>
-    </div>
+    </template>
   </div>
 </template>
 
