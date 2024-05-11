@@ -617,14 +617,14 @@ faqs:
       question: How can I find my Facebook Calendar URL?
       answer: Open on your laptop https://www.facebook.com/events/calendar. Right-click on "Add to Calendar" and select "Copy link address" to get your Facebook Calendar URL.
     - 
-      question: Will all my events be imported?
-      answer: Only upcoming events that align with specific criteria will be imported to WeDance. To ensure relevance to our dance-focused community, imported events must include a public Facebook event link in their description and contain keywords that match various dance styles. This selective approach ensures that our platform remains dedicated to dance-related events, offering our users access to the most relevant and engaging dance activities available.
-    - 
       question: Which calendars are supported?
       answer: We support calendars that use the iCal format. This includes most popular calendar services like Google Calendar, Apple Calendar, Facebook Events, Teamup, and others. If your calendar supports iCal, you can sync it with WeDance.
     - 
       question: How often are the calendars synchronized?
-      answer: Calendars are synchronized daily. This ensures that any new events or updates to existing events are reflected on WeDance in a timely manner. However, there might be a slight delay between the event update in your calendar and the update appearing on WeDance.
+      answer: Calendars are synchronized daily at 16:00 Berlin time.
+    - 
+      question: Will all my events be imported?
+      answer: Only upcoming events that align with specific criteria will be imported to WeDance. To ensure relevance to our dance-focused community, imported events must include a public Facebook event link in their description and contain keywords that match various dance styles. This selective approach ensures that our platform remains dedicated to dance-related events, offering our users access to the most relevant and engaging dance activities available.
     - 
       question: Can I modify imported events?
       answer: Yes, you can modify the details of the imported events on WeDance. However, changes made to events on WeDance won't be reflected back in your original calendar. It's important to ensure that the most accurate and up-to-date information is maintained in both places.
