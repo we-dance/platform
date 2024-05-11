@@ -12,7 +12,13 @@ import {
 } from './linguist'
 
 async function getEvent(url: string) {
-  const response = await axios.get(url)
+  let response
+  try {
+    response = await axios.get(url)
+  } catch (error) {
+    return null
+  }
+
   const data = response.data
   const facebookUrlsList = getUrlsFromText(data)
     .filter((url) => isFacebookEvent(url))
