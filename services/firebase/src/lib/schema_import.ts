@@ -20,27 +20,35 @@ async function getEvent(url: string) {
 
   const parsed = WAE().parse(data)
 
-  const result = []
+  const result: any[] = []
 
-  if (parsed.jsonld.Event) {
-    for (const event of parsed.jsonld.Event) {
-      result.push(event)
-    }
-  }
+  const eventTypes = [
+    'Event',
+    'SocialEvent',
+    'Festival',
+    'DanceEvent',
+    'MusicEvent',
+  ]
 
-  if (parsed.jsonld.SocialEvent) {
-    for (const event of parsed.jsonld.SocialEvent) {
-      result.push(event)
+  eventTypes.forEach((eventType) => {
+    if (parsed.jsonld[eventType]) {
+      for (const event of parsed.jsonld[eventType]) {
+        result.push(event)
+      }
     }
-  }
 
-  if (parsed.microdata.Event) {
-    for (const event of parsed.microdata.Event) {
-      result.push(event)
+    if (parsed.microdata[eventType]) {
+      for (const event of parsed.jsonld[eventType]) {
+        result.push(event)
+      }
     }
-  }
+  })
 
   const event = result[0]
+  if (!event) {
+    return null
+  }
+
   event.facebookUrlsCount = facebookUrlsList.length
   event.facebookUrlsList = facebookUrlsList
   event.schemaEventsCount = result.length

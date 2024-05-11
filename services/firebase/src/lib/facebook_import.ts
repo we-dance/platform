@@ -90,7 +90,24 @@ async function getOrg(host: any, place: any) {
       .get()
 
     if (usernameExists.docs.length > 0) {
-      throw new Error(`Username already exists ${username}`)
+      const p: any = {
+        ...usernameExists.docs[0]?.data(),
+        id: usernameExists.docs[0]?.id,
+      }
+
+      org = {
+        id: p.id,
+        username: p.username,
+        name: p.name || p.username || '',
+        photo: p.photo || '',
+        bio: p.bio || '',
+        instagram: p.instagram || '',
+        facebook: p.facebook || '',
+        tiktok: p.tiktok || '',
+        youtube: p.youtube || '',
+      }
+
+      return org
     }
 
     await firestore.collection('profiles').add(org)

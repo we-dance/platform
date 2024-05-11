@@ -282,6 +282,19 @@
     >
       <div class="text-sm text-red-500">{{ doc.error }}</div>
       <TButton
+        v-if="isAdmin()"
+        type="primary"
+        label="Retry"
+        class="mt-4"
+        @click="
+          softUpdate(doc.id, {
+            type: 'import_event',
+            errorCode: '',
+            error: '',
+          })
+        "
+      />
+      <TButton
         v-if="can('edit', 'events', doc)"
         type="primary"
         icon="delete"
@@ -304,6 +317,19 @@
           >{{ doc.sourceUrl }}</a
         >
       </div>
+      <TButton
+        v-if="isAdmin()"
+        type="primary"
+        label="Stop"
+        class="mt-4"
+        @click="
+          softUpdate(doc.id, {
+            type: 'import_error',
+            errorCode: 'stopped',
+            error: 'Import stopped by admin',
+          })
+        "
+      />
     </div>
     <div v-else>
       <TPopup
