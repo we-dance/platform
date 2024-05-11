@@ -710,6 +710,36 @@ export const matchNotification = functions.firestore
     await sendEmail(data)
   })
 
+export const syncCalendars = functions.pubsub
+  .schedule('0 16 * * *')
+  .timeZone('Europe/Berlin')
+  .onRun(() => {
+    return firestore
+      .collection('calendars')
+      .get()
+      .then((snapshot) => {
+        const promises: any[] = []
+        snapshot.forEach((doc) => {
+          promises.push(
+            firestore
+              .collection('calendars')
+              .doc(doc.id)
+              .update({
+                lastSyncedAt: admin.firestore.FieldValue.serverTimestamp(),
+                state: 'queued',
+              })
+          )
+        })
+        return Promise.all(promises)
+      })
+      .then(() => {
+        console.log('Calendars sync initiated successfully')
+      })
+      .catch((error) => {
+        console.error('Error syncing calendars:', error)
+      })
+  })
+
 // export const taskRunner = functions
 //   .runWith({ memory: '2GB' })
 //   .pubsub.schedule('* * * * *')
