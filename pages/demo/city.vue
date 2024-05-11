@@ -1,15 +1,16 @@
 <template>
   <div class="space-y-4 my-4 p-4">
     <div>
-      <TInputVenue v-model="data" clearable />
+      <TInputPlace v-model="data" />
     </div>
+    <pre>{{ result }}</pre>
   </div>
 </template>
 
 <script>
 export default {
   data: () => ({
-    data: '',
+    data: 'ChIJ2V-Mo_l1nkcRfZixfUq4DAE',
   }),
   computed: {
     result() {

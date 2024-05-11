@@ -1,7 +1,6 @@
 <template>
   <t-rich-select
     v-model="internalValue"
-    :minimum-input-length="1"
     :fetch-options="fetchOptions"
     :placeholder="isLocating ? 'Locating...' : placeholder"
     v-bind="$attrs"
@@ -9,7 +8,7 @@
 </template>
 
 <script>
-import { computed, ref } from '@nuxtjs/composition-api'
+import { computed, onMounted, ref } from '@nuxtjs/composition-api'
 import { getPlacePredictions } from '~/use/google'
 import { useCities } from '~/use/cities'
 import { useDoc } from '~/use/doc'
@@ -73,10 +72,6 @@ export default {
             label: city.value.name,
             value: city.value.cityPlaceId,
           })
-        }
-
-        return {
-          results,
         }
       }
 
