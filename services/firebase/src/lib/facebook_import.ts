@@ -3,6 +3,7 @@ import { firestore } from '../firebase'
 import { getCityId, getPlace } from './google_maps'
 import { getUploadedImage } from './cloudinary'
 import { getSuggestedStyles, getSuggestedType, slugify } from './linguist'
+import axios from 'axios'
 
 function getDate(timestamp: any) {
   if (!timestamp) {
@@ -107,7 +108,12 @@ export function getParameterByName(name: string, url: string) {
   return decodeURIComponent(results[2].replace(/\+/g, ' '))
 }
 
-export function getFacebookEventId(url: string) {
+export async function getFacebookEventId(url: string) {
+  if (url.includes('facebook.com/share')) {
+    const response = await axios.get(url)
+    url = response.request.res.responseUrl
+  }
+
   const eventTimeId = getParameterByName('event_time_id', url)
 
   if (eventTimeId) {
@@ -125,7 +131,7 @@ export function getFacebookEventId(url: string) {
 
 export async function getFacebookEvent(url: string) {
   let event
-  const facebookId = getFacebookEventId(url)
+  const facebookId = await getFacebookEventId(url)
 
   try {
     event = await scrapeFbEventFromFbid(facebookId)
