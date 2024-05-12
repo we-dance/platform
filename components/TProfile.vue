@@ -100,7 +100,7 @@
           />
         </TDropdown>
       </div>
-      <TContactsGrid :profile="profile" class="my-4" />
+      <TContactsGrid :profile="profile" class="my-4 justify-center" />
     </div>
 
     <TwTabs id="tabs" :tabs="tabs" />

@@ -1,5 +1,5 @@
 <template>
-  <div class="flex justify-center">
+  <div class="flex">
     <div class="grid grid-cols-3 md:flex border-l border-t">
       <TButton
         v-if="!hideWebsite && profile.website"

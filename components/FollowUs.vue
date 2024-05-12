@@ -6,7 +6,11 @@
     <p class="text-center">
       {{ description }}
     </p>
-    <TContactsGrid :profile="socialMedia" hide-website class="mt-4" />
+    <TContactsGrid
+      :profile="socialMedia"
+      hide-website
+      class="mt-4 justify-center"
+    />
   </div>
 </template>
 

@@ -29,25 +29,11 @@
           {{ getExcerpt(profile.bio) }}
         </div>
         <TProfileStats :profile="profile" />
-        <div v-if="!hideButtons" class="flex space-x-2 mt-4">
-          <slot name="actions">
-            <TReaction
-              :label="$t('Connect')"
-              :toggled-label="$t('Connected')"
-              toggled-class="bg-green-500"
-              field="watch"
-              type="primary"
-              hide-count
-              :item="profile"
-              collection="profiles"
-            />
-            <TProfileContacts
-              :profile="profile"
-              title="Contact"
-              type="simple"
-            />
-          </slot>
-        </div>
+        <TContactsGrid
+          v-if="!hideButtons"
+          :profile="profile"
+          class="my-4 justify-start"
+        />
       </div>
       <slot name="right" />
     </div>
