@@ -8,7 +8,7 @@
 </template>
 
 <script>
-import { computed, onMounted, ref } from '@nuxtjs/composition-api'
+import { computed, ref } from '@nuxtjs/composition-api'
 import { getPlacePredictions } from '~/use/google'
 import { useCities } from '~/use/cities'
 import { useDoc } from '~/use/doc'
