@@ -16,6 +16,7 @@
     "*.{css,vue}": "stylelint"
   },
   "dependencies": {
+    "@mux/mux-player": "^2.6.0",
     "@nuxt/content": "^1.9.0",
     "@nuxt/markdown": "^0.0.21",
     "@nuxt/vue-app": "^2.15.8",
