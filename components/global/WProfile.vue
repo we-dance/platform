@@ -29,11 +29,11 @@
           {{ getExcerpt(profile.bio) }}
         </div>
         <TProfileStats :profile="profile" />
-        <TContactsGrid
-          v-if="!hideButtons"
-          :profile="profile"
-          class="my-4 justify-start"
-        />
+        <div v-if="!hideButtons" class="flex space-x-2 mt-4">
+          <slot name="actions">
+            <TContactsGrid :profile="profile" />
+          </slot>
+        </div>
       </div>
       <slot name="right" />
     </div>
