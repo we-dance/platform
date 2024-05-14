@@ -9,6 +9,21 @@
         metadata-viewer-user-id="user-id-vue3007"
         accent-color="#F1023D"
       />
+
+      <TCollapseItem class="border-b" :title="statusLine">
+        <div class="mx-4 border rounded divide-y overflow-hidden">
+          <TPlayControls
+            v-for="(chapter, index) in chapters"
+            :key="chapter.id"
+            :title="`${index + 1}. ${chapter.title}`"
+            :current="current"
+            :video-id="chapter.id"
+            :duration="chapter.duration"
+            :locked="chapter.locked"
+            @click.native="switchVideo(chapter.id)"
+          />
+        </div>
+      </TCollapseItem>
     </div>
 
     <div class="p-4 flex gap-2 border-b">
@@ -29,10 +44,6 @@
           </div>
           <div>·</div>
           <div>
-            10 chapters
-          </div>
-          <div>·</div>
-          <div>
             2 students
           </div>
           <div>·</div>
@@ -43,13 +54,14 @@
       </div>
     </div>
 
-    <div class="p-4 text-sm">
-      <p>
-        Elevate your dance skills with video course on Lady Styling in Son
+    <WTeaser
+      description="Elevate your dance skills with video course on Lady Styling in Son
         Cubano led by amazing Yarima Rodríguez! Discover the art of movement and
-        sensuality. Perfect for dancers ready to transform their style.
-      </p>
-    </div>
+        sensuality. Perfect for dancers ready to transform their style."
+      button="Enroll"
+      class="w-full"
+      background="bg-red-100"
+    />
 
     <section class="p-4 border-t border-primary">
       <div class="space-y-2">
@@ -157,15 +169,14 @@
       </div>
     </section>
 
-    <section class="p-4 border-t border-primary">
-      <h3 class="uppercase text-xs text-primary font-extrabold py-4">
-        Enroll Now!
-      </h3>
-      <div class="text-sm text-gray-700 has-links">
-        Step into the world of Son Cubano and transform your dance technique.
-        Register today to start learning immediately and at your own pace!
-      </div>
-    </section>
+    <WTeaser
+      title="Enroll Now"
+      description="Step into the world of Son Cubano and transform your dance technique.
+        Register today to start learning immediately and at your own pace!"
+      button="Enroll"
+      class="w-full"
+      background="bg-red-100"
+    />
   </div>
 </template>
 
@@ -178,6 +189,83 @@ export default {
   layout: 'full',
   components: {
     HeartIcon,
+  },
+  data: () => ({
+    current: '1',
+    chapters: [
+      {
+        id: '1',
+        title: 'Intro',
+        duration: '1:12',
+      },
+      {
+        id: '2',
+        title: 'Warm-up (part 1)',
+      },
+      {
+        id: '3',
+        title: 'Warm-up (part 2)',
+        locked: true,
+      },
+      {
+        id: '4',
+        title: 'Phrase (segment 1)',
+        locked: true,
+      },
+      {
+        id: '5',
+        title: 'Phrase (segment 2)',
+        locked: true,
+      },
+      {
+        id: '6',
+        title: 'Phrase (segment 3)',
+        locked: true,
+      },
+      {
+        id: '7',
+        title: 'Phrase (segment 4)',
+        locked: true,
+      },
+      {
+        id: '8',
+        title: 'Continued Phrase (without music)',
+        locked: true,
+      },
+      {
+        id: '9',
+        title: 'Details of the arms',
+        locked: true,
+      },
+      {
+        id: '10',
+        title: 'Details of the legs',
+        locked: true,
+      },
+      {
+        id: '11',
+        title: 'Stretching',
+        locked: true,
+      },
+    ],
+  }),
+  computed: {
+    activeChapter() {
+      return this.chapters.find((chapter) => chapter.id === this.current)
+    },
+    statusLine() {
+      const activeChapterIndex =
+        this.chapters.findIndex((chapter) => chapter.id === this.current) + 1
+
+      const totalChapters = this.chapters.length
+
+      return `Chapter ${activeChapterIndex} of ${totalChapters}: ${this.activeChapter.title}`
+    },
+  },
+  methods: {
+    switchVideo(videoId) {
+      this.current = videoId
+    },
   },
 }
 </script>
