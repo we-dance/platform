@@ -21,6 +21,7 @@ subscribers: 'no subscribers | 1 subscriber | {count} subscribers'
 connections: 'no connections | 1 connection | {count} connections'
 guests: 'no guests | 1 guest | {count} guests'
 Subscribe: Abonnieren
+Subscribed: Subscribed
 Unsubscribe: Abo beenden
 Follow: Folgen
 Unfollow: Entfolgen
