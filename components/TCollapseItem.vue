@@ -6,11 +6,21 @@
     >
       <span class="text-sm font-semibold">{{ title }}</span>
       <span class="ml-6 flex items-center justify-center">
-        <TIcon v-if="!open" name="plus" class="h-6 w-6" aria-hidden="true" />
-        <TIcon v-else name="minus" class="h-6 w-6" aria-hidden="true" />
+        <TIcon
+          v-if="!open"
+          name="plus"
+          class="h-6 w-6 flex justify-center items-center"
+          aria-hidden="true"
+        />
+        <TIcon
+          v-else
+          name="minus"
+          class="h-6 w-6 flex justify-center items-center"
+          aria-hidden="true"
+        />
       </span>
     </dt>
-    <dd v-show="open" class="mt-2 pb-2">
+    <dd v-show="open">
       <slot>
         <TPreview :content="description" class="text-gray-600 text-sm" />
       </slot>

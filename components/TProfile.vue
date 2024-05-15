@@ -36,8 +36,8 @@
       <div class="flex space-x-2 justify-center my-2 px-4">
         <TReaction
           v-if="uid !== profile.id"
-          :label="$t('Connect')"
-          :toggled-label="$t('Connected')"
+          :label="$t('Subscribe')"
+          :toggled-label="$t('Subscribed')"
           toggled-class="bg-green-500"
           field="watch"
           type="primary"
@@ -115,6 +115,40 @@
         :created-by="profile.id"
         class="w-full"
       />
+      <div v-if="profile.username == 'zensual.art'" class="pb-4 px-4">
+        <div class="max-w-sm mx-auto">
+          <div class="p-4 pb-0 -mb-3">
+            <span class="rounded bg-primary text-white text-xs px-1">
+              Online Classes
+            </span>
+          </div>
+          <NuxtLink
+            to="/demo/zensual.art"
+            class="flex border-b p-4 leading-none gap-2 rounded-lg shadow bg-orange-100 border-orange-200"
+          >
+            <div class="w-full">
+              <div class="font-bold text-sm hover:underline hover:text-primary">
+                Ecstasy of Sensuality
+              </div>
+              <div>
+                <div class="text-xs text-gray-700">
+                  Lady Styling · Salsa Cubana · Son
+                </div>
+              </div>
+              <div class="text-primary text-xs">
+                €10/month
+              </div>
+            </div>
+            <div>
+              <img
+                class="w-20 rounded"
+                src="https://firebasestorage.googleapis.com/v0/b/wedance-4abe3.appspot.com/o/media%2FtvR012ArEpQhCJdPHh6G7sLuqoO2%2Fc3bfb7be-1dfb-4e71-b486-30754d0ddfa2?alt=media&token=f45dcae4-b2f4-4ea1-9bee-db41c89654f0"
+                alt="Ecstasy of Sensuality Cover"
+              />
+            </div>
+          </NuxtLink>
+        </div>
+      </div>
       <TEventListNoLoad
         v-if="!$route.query.view"
         :community="profile.username"

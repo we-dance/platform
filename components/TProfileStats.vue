@@ -10,7 +10,7 @@
     <div>·</div>
     <div>
       {{
-        $tc('connections', subscribersCount, {
+        $tc('subscribers', subscribersCount, {
           count: subscribersCount,
         })
       }}

@@ -10,8 +10,8 @@
         accent-color="#F1023D"
       />
 
-      <TCollapseItem class="border-b" :title="statusLine">
-        <div class="mx-4 border rounded divide-y overflow-hidden">
+      <TCollapseItem class="border-b mt-[-5px]" :title="statusLine">
+        <div class="border divide-y overflow-hidden">
           <TPlayControls
             v-for="(chapter, index) in chapters"
             :key="chapter.id"
@@ -26,9 +26,15 @@
       </TCollapseItem>
     </div>
 
-    <div class="p-4 flex gap-2 border-b">
-      <div>
-        <div class="flex gap-1 text-xs uppercase">
+    <WTeaserBig
+      header="Ecstasy of Sensuality"
+      description="Elegance, majesty, expression. Amazing cuban dancer Yarima Rodríguez shares her secrets for mastering Lady Styling in Son Cubano, helping you enhance your dance technique and unleash your inner grace."
+      button="Enroll"
+      button-after="Starting at €10/month for all classes and sessions"
+      class="p-4"
+    >
+      <template slot="preheader">
+        <div class="flex justify-center gap-1 text-xs uppercase">
           <div class="text-primary">
             Online
           </div>
@@ -37,8 +43,9 @@
             Lady Styling · Salsa Cubana · Son
           </div>
         </div>
-        <h1 class="text-2xl font-bold leading-none">Ecstasy of Sensuality</h1>
-        <div class="mt-1 flex gap-1 text-xs">
+      </template>
+      <template slot="subheader">
+        <div class="flex justify-center gap-1 text-xs my-2">
           <div>
             2 hours
           </div>
@@ -51,17 +58,8 @@
             10 views
           </div>
         </div>
-      </div>
-    </div>
-
-    <WTeaser
-      description="Elevate your dance skills with video course on Lady Styling in Son
-        Cubano led by amazing Yarima Rodríguez! Discover the art of movement and
-        sensuality. Perfect for dancers ready to transform their style."
-      button="Enroll"
-      class="w-full"
-      background="bg-red-100"
-    />
+      </template>
+    </WTeaserBig>
 
     <section class="p-4 border-t border-primary">
       <div class="space-y-2">
@@ -169,13 +167,12 @@
       </div>
     </section>
 
-    <WTeaser
-      title="Enroll Now"
-      description="Step into the world of Son Cubano and transform your dance technique.
-        Register today to start learning immediately and at your own pace!"
+    <WTeaserBig
+      header="Enroll Now"
+      description="Step into the world of Son Cubano and transform your dance technique. Register today to start learning immediately and at your own pace!"
       button="Enroll"
-      class="w-full"
-      background="bg-red-100"
+      button-after="Starting at €10/month for all classes and sessions"
+      class="p-4 border-t"
     />
   </div>
 </template>
