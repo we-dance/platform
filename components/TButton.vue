@@ -99,6 +99,10 @@ export default {
       type: String,
       default: '',
     },
+    padding: {
+      type: String,
+      default: 'px-4 py-2',
+    },
     label: {
       type: [String, Number, Boolean],
       default: false,
@@ -115,7 +119,8 @@ export default {
   computed: {
     classes() {
       const xbase =
-        'flex justify-start items-center py-2 px-4 font-medium space-x-2 cursor-pointer outline-none focus:outline-none focus:ring-2 focus:ring-offset-2'
+        'flex justify-start items-center font-medium space-x-2 cursor-pointer outline-none focus:outline-none focus:ring-2 focus:ring-offset-2 ' +
+        this.padding
 
       const xrounded =
         xbase + ' text-sm leading-4 justify-center shadow rounded-full'
