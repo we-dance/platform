@@ -27,7 +27,7 @@
     </div>
 
     <WTeaserBig
-      header="Ecstasy of Sensuality"
+      header="Salsa Lady Styling"
       description="Elegance, majesty, expression. Amazing cuban dancer Yarima Rodríguez shares her secrets for mastering Lady Styling in Son Cubano, helping you enhance your dance technique and unleash your inner grace."
       button="Enroll"
       button-after="Starting at €10/month for all classes and sessions"
@@ -40,7 +40,7 @@
           </div>
           <div>·</div>
           <div>
-            Lady Styling · Salsa Cubana · Son
+            Salsa Cubana · Son
           </div>
         </div>
       </template>

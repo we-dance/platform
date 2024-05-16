@@ -128,11 +128,11 @@
           >
             <div class="w-full">
               <div class="font-bold text-sm hover:underline hover:text-primary">
-                Ecstasy of Sensuality
+                Salsa Lady Styling
               </div>
               <div>
                 <div class="text-xs text-gray-700">
-                  Lady Styling · Salsa Cubana · Son
+                  Salsa Cubana · Son
                 </div>
               </div>
               <div class="text-primary text-xs">
