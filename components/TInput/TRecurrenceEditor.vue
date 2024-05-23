@@ -2,10 +2,18 @@
   <div>
     <TInputButtons v-model="freq" :options="['never', 'weekly']" />
     <div v-if="freq === 'weekly'">
-      <div class="font-bold">Repeat on</div>
-      <TInputMulti v-model="days" :options="daysOptions" />
       <div class="font-bold">Until</div>
       <DatePicker v-model="untilDate" />
+      <div class="flex flex-wrap gap-2 py-2 text-xs items-center">
+        <div>{{ dates.length }} times</div>
+        <div
+          v-for="date in dates"
+          :key="+date"
+          class="rounded-full bg-gray-100 px-2 py-1"
+        >
+          {{ getDate(date, $i18n.locale) }}
+        </div>
+      </div>
     </div>
   </div>
 </template>
@@ -13,6 +21,7 @@
 <script>
 import { RRule } from 'rrule'
 import { getDateObect } from '~/utils'
+import { getDate } from '~/utils'
 
 export default {
   name: 'TRecurrenceEditor',
@@ -27,19 +36,13 @@ export default {
       default: () => ({}),
     },
   },
+  setup() {
+    return { getDate }
+  },
   data: () => ({
     freq: 'never',
     days: {},
     untilDate: '',
-    daysOptions: [
-      { label: 'Monday', value: 'MO' },
-      { label: 'Tuesday', value: 'TU' },
-      { label: 'Wednesday', value: 'WE' },
-      { label: 'Thursday', value: 'TH' },
-      { label: 'Friday', value: 'FR' },
-      { label: 'Saturday', value: 'SA' },
-      { label: 'Sunday', value: 'SU' },
-    ],
   }),
   computed: {
     ruleOptions() {
@@ -49,7 +52,6 @@ export default {
 
       const options = {
         freq: RRule.WEEKLY,
-        byweekday: Object.keys(this.days),
         dtstart: new Date(this.item.startDate),
         until: new Date(this.untilDate),
       }
