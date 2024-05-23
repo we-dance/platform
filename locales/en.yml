@@ -803,13 +803,13 @@ explore:
     description: Explore a variety of {style} dance events happening in {city}. From {referenceStyle} nights to bachata workshops, find your next dance adventure here.
     keywords: 'Where can I dance {style} in {city}, {style} dance parties {city}, {style} dance socials {city}, {style} dance nights {city}, {style} dance events {city}, {style} dance meetups {city}'
     header: '{style} Parties in {city}'
-    subheader: Discover the vibrant {style} dance scene in {city}. Browse through a curated list of dance parties and filter by your favorite styles like Salsa, Bachata, Kizomba, and more.
+    subheader: Discover {style} in {city}, and get notified of new events before they sell out.
   classes:
     title: Dance {style} Classes in {city} | Dance Calendar | WeDance
     description: Explore a variety of {style} dance events happening in {city}. From {referenceStyle} nights to bachata workshops, find your next dance adventure here.
     keywords: '{style} dance classes {city}, {style} dance courses {city}, {style} dance workshops {city}, {style} dance bootcamps {city}, {style} dance lessons {city}'
     header: '{style} Classes in {city}'
-    subheader: Discover the vibrant {style} dance scene in {city}. Browse through a curated list of dance classes and filter by your favorite styles like Salsa, Bachata, Kizomba, and more.
+    subheader: Discover {style} classes in {city}, and get notified of new events before they sell out.
   onlineclass:
     title: '{style} Online Dance Classes | Dance Calendar | WeDance'
     description: Can't make it in person? Take your {style} moves to the next level with our online class selection.
