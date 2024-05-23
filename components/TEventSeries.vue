@@ -49,7 +49,7 @@
               type="secondary"
               icon="edit"
               :to="localePath(`/events/${doc.id}/edit`)"
-              :label="$t('eventView.dropdown.edit')"
+              label="Edit Series"
             />
 
             <TButton

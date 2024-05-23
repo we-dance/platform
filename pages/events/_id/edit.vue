@@ -145,9 +145,7 @@ export default {
       data.artists = (data.artists || []).filter((item) => item)
       data.duration = (data.endDate - data.startDate) / 60 / 1000
 
-      if (data?.recurrence?.freq === 'weekly') {
-        data.type = 'series'
-      }
+      data.type = data?.recurrence?.freq === 'weekly' ? 'series' : 'event'
 
       data.artistsList = data.artists
         .map((a) => a.username)
@@ -219,6 +217,7 @@ export default {
           ...this.item,
           id: existing?.id || '',
           startDate: +startDate,
+          hash: +startDate + '+' + this.item.venue.place_id,
           endDate: +endDate,
           type: 'event',
           seriesId,
