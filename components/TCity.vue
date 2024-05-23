@@ -6,7 +6,7 @@
       <h1 class="text-2xl font-bold">
         {{
           $t(`explore.${view}.header`, {
-            city: profile.name,
+            city: shortName,
             style: $route.query.style,
           })
         }}
@@ -15,12 +15,24 @@
       <div class="text-sm">
         {{
           $t(`explore.${view}.subheader`, {
-            city: profile.name,
-            style: $route.query.style,
+            city: shortName,
+            style: $route.query.style || 'dance',
           })
         }}
       </div>
-      <TProfileStats :profile="profile" />
+      <div class="flex gap-2 justify-between items-center py-2">
+        <TProfileStats :profile="profile" />
+        <TReaction
+          :label="$t('Subscribe')"
+          :toggled-label="$t('Subscribed')"
+          toggled-class="bg-green-500"
+          field="watch"
+          type="primary"
+          hide-count
+          :item="profile"
+          collection="profiles"
+        />
+      </div>
     </div>
 
     <div v-if="isAdmin()" class="flex gap-2 p-4 bg-orange-100 items-center">
@@ -82,6 +94,7 @@
 </template>
 
 <script>
+import { computed } from '@nuxtjs/composition-api'
 import { useAuth } from '~/use/auth'
 import { useDoc } from '~/use/doc'
 import { useProfiles } from '~/use/profiles'
@@ -218,16 +231,19 @@ export default {
       ],
     }
   },
-  setup() {
+  setup(props) {
     const { uid, isAdmin, can } = useAuth()
     const { profileFields } = useProfiles()
     const { remove, softUpdate } = useDoc('profiles')
+
+    const shortName = computed(() => props.profile?.name?.split(',')[0])
 
     return {
       getDateObect,
       getExcerpt,
       uid,
       isAdmin,
+      shortName,
       can,
       profileFields,
       remove,
