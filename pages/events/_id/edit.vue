@@ -35,6 +35,7 @@ import { useDoc } from '~/use/doc'
 import { useRouter } from '~/use/router'
 import { useEvents } from '~/use/events'
 import { track } from '~/plugins/firebase'
+import { getYmd } from '~/utils'
 
 export default {
   name: 'EventEdit',
@@ -163,26 +164,31 @@ export default {
       }
 
       const children = []
+      const series = this.getChildren(result.id)
 
-      if (result?.recurrence?.dates?.length) {
-        for (const date of result.recurrence?.dates) {
-          const startDate = date
-          const endDate = new Date(+startDate + result.duration * 60 * 1000)
-          const childData = {
-            ...data,
-            startDate: +startDate,
-            endDate: +endDate,
-            type: 'event',
-            seriesId: result.id,
-          }
+      for (const episode of series.filter((i) => i.action === 'create')) {
+        delete episode.action
 
-          const child = await this.create(childData)
-          children.push({
-            id: child.id,
-            startDate: child.startDate,
-            endDate: child.endDate,
-          })
-        }
+        const child = await this.create(episode)
+        children.push({
+          id: child.id,
+          startDate: child.startDate,
+          endDate: child.endDate,
+        })
+      }
+
+      for (const episode of series.filter((i) => i.action === 'delete')) {
+        await this.remove(episode.id)
+      }
+
+      for (const episode of series.filter((i) => i.action === 'update')) {
+        delete episode.action
+        const child = await this.update(episode.id, episode)
+        children.push({
+          id: child.id,
+          startDate: child.startDate,
+          endDate: child.endDate,
+        })
       }
 
       if (children.length) {
@@ -190,6 +196,47 @@ export default {
       }
 
       this.view(result.id)
+    },
+    getChildren(seriesId) {
+      const children = []
+      const unassigned = this.item.children || []
+
+      for (const date of this.item.recurrence?.dates) {
+        const startDate = date
+        const endDate = new Date(+startDate + this.item.duration * 60 * 1000)
+
+        const existing = unassigned.find(
+          (item) => getYmd(item.startDate) === getYmd(startDate)
+        )
+
+        if (existing) {
+          unassigned.splice(unassigned.indexOf(existing), 1)
+        }
+
+        const action = existing ? 'update' : 'create'
+
+        const childData = {
+          ...this.item,
+          id: existing?.id || '',
+          startDate: +startDate,
+          endDate: +endDate,
+          type: 'event',
+          seriesId,
+          action,
+        }
+
+        children.push(childData)
+      }
+
+      // remove deleted children
+      for (const child of unassigned) {
+        children.push({
+          ...child,
+          action: 'delete',
+        })
+      }
+
+      return children
     },
     view(id) {
       if (!id) {
@@ -208,7 +255,9 @@ export default {
 
     const duplicates = ref([])
 
-    const { doc: item, load, update, create, loading } = useDoc(collection)
+    const { doc: item, load, update, create, remove, loading } = useDoc(
+      collection
+    )
 
     if (params.id !== '-') {
       load(params.id)
@@ -222,6 +271,7 @@ export default {
       collection,
       update,
       create,
+      remove,
       profile,
       isAdmin,
       uid,
