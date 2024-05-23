@@ -7,6 +7,12 @@
       :doc="doc"
     />
 
+    <TEventSeries
+      v-if="doc.type === 'series'"
+      :doc="doc"
+      :children="doc.children"
+    />
+
     <template v-if="doc.type === 'event'">
       <div class="p-4 flex gap-2 border-b">
         <div class="text-center pt-2">
@@ -186,23 +192,18 @@
             <h3 class="text-xs font-bold uppercase">Moderator Tools</h3>
             <div class="flex flex-wrap gap-2">
               <TButton
-                type="primary"
-                label="Preview as guest"
-                @click="toggleGuest"
-              />
-
-              <TButton
-                type="secondary"
-                icon="people"
-                :to="localePath(`/events/${doc.id}/dashboard`)"
-                :label="$t('eventView.dropdown.dashboard')"
-              />
-
-              <TButton
                 type="secondary"
                 icon="edit"
                 :to="localePath(`/events/${doc.id}/edit`)"
                 :label="$t('eventView.dropdown.edit')"
+              />
+
+              <TButton
+                v-if="doc.seriesId"
+                type="secondary"
+                icon="edit"
+                :to="localePath(`/events/${doc.seriesId}/edit`)"
+                label="Edit Series"
               />
 
               <TButton
@@ -217,7 +218,7 @@
                 type="secondary"
                 icon="delete"
                 label="Delete"
-                @click="deleteEvent(doc.id)"
+                @click="deleteEvent()"
               />
             </div>
             <div v-if="doc.promotion !== 'completed'" class="text-sm">
@@ -773,7 +774,7 @@ import {
 import { addressPart } from '~/use/google'
 import { trackView } from '~/use/tracking'
 import { useStyles } from '~/use/styles'
-import { db } from '~/plugins/firebase'
+import { track, db } from '~/plugins/firebase'
 
 export default {
   name: 'EventView',
@@ -1003,8 +1004,18 @@ export default {
       reservationPopup.value = false
     }
 
-    async function deleteEvent(id) {
-      await remove(id)
+    async function deleteEvent() {
+      if (!doc.value) {
+        return
+      }
+
+      if (!confirm(`Are you sure you want to delete this event?`)) {
+        return
+      }
+
+      track('delete_event')
+
+      await remove(doc.value.id)
       router.push(`/${username.value}`)
     }
 

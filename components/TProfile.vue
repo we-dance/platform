@@ -271,6 +271,8 @@ export default {
         ),
       ]
 
+      result = result.filter((item) => item.type === 'event')
+
       events.value = result
       loaded.value = true
     })

@@ -144,6 +144,10 @@ export default {
       data.artists = (data.artists || []).filter((item) => item)
       data.duration = (data.endDate - data.startDate) / 60 / 1000
 
+      if (data?.recurrence?.freq === 'weekly') {
+        data.type = 'series'
+      }
+
       data.artistsList = data.artists
         .map((a) => a.username)
         .filter((item) => item)
@@ -168,6 +172,7 @@ export default {
             ...data,
             startDate: +startDate,
             endDate: +endDate,
+            type: 'event',
             seriesId: result.id,
           }
 
@@ -186,11 +191,6 @@ export default {
 
       this.view(result.id)
     },
-    async removeItem(id) {
-      track('delete_event')
-      await this.remove(id)
-      this.view()
-    },
     view(id) {
       if (!id) {
         this.$router.push(this.localePath(`/${this.profile?.username}`))
@@ -208,9 +208,7 @@ export default {
 
     const duplicates = ref([])
 
-    const { doc: item, load, update, remove, create, loading } = useDoc(
-      collection
-    )
+    const { doc: item, load, update, create, loading } = useDoc(collection)
 
     if (params.id !== '-') {
       load(params.id)
@@ -223,7 +221,6 @@ export default {
       can,
       collection,
       update,
-      remove,
       create,
       profile,
       isAdmin,
