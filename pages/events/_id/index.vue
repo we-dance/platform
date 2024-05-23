@@ -831,7 +831,7 @@ export default {
   },
   watch: {
     item() {
-      if (this.item && this.item.place) {
+      if (this.item) {
         this.doc = this.item
         this.agenda = this.doc.agenda
         this.artists = this.doc.artists

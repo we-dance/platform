@@ -22,7 +22,7 @@
       <div v-if="rooms && !hideAreas">
         <TField
           v-model="room"
-          component="TRichSelect"
+          component="TInputSelect"
           :options="rooms"
           label="Area/Room"
         />

@@ -26,6 +26,7 @@
 </template>
 
 <script>
+import Vue from 'vue'
 import { pickBy } from 'lodash'
 import firebase from 'firebase/app'
 import 'firebase/firestore'
@@ -89,9 +90,9 @@ export default {
         cover: '',
         artists: [],
         org: {
-          username: this.profile?.username,
+          username: this.profile?.username || '',
         },
-        username: this.profile?.username,
+        username: this.profile?.username || '',
         watch: {
           count: 1,
           list: {
@@ -101,8 +102,20 @@ export default {
         program: [],
       }
     }
+    if (this.$route.query.venue) {
+      this.setVenue(this.$route.query.venue)
+    }
   },
   methods: {
+    async setVenue(venue) {
+      const doc = await this.findVenue('username', venue)
+      if (!doc) {
+        return
+      }
+
+      doc.place_id = doc.address.place_id
+      Vue.set(this.item, 'venue', doc)
+    },
     updateHash() {
       if (!this.item.startDate || !this.item.venue?.place_id) {
         return
@@ -197,7 +210,11 @@ export default {
     },
     getChildren(seriesId) {
       const children = []
-      const unassigned = this.item.children || []
+      const unassigned = this.item?.children || []
+
+      if (!this.item.recurrence?.dates) {
+        return []
+      }
 
       for (const date of this.item.recurrence?.dates) {
         const startDate = date
@@ -254,6 +271,8 @@ export default {
 
     const duplicates = ref([])
 
+    const { doc: docVenue, find: findVenue } = useDoc('profiles')
+
     const { doc: item, load, update, create, remove, loading } = useDoc(
       collection
     )
@@ -263,6 +282,8 @@ export default {
     }
 
     return {
+      docVenue,
+      findVenue,
       duplicates,
       loading,
       item,

@@ -4,6 +4,7 @@ import { useAccounts } from '~/use/accounts'
 import { useCommon } from '~/use/common'
 import { useDoc } from '~/use/doc'
 import { db } from '~/plugins/firebase'
+import { when } from '@vueuse/core'
 
 export const useProfiles = () => {
   const { t } = useI18n()
@@ -218,6 +219,29 @@ export const useProfiles = () => {
       options: typeList,
     },
     {
+      when: (item) => item.type === 'Venue',
+      name: 'address',
+      label: 'Address',
+      labelPosition: 'top',
+      component: 'TInputAddress',
+      simple: true,
+    },
+    {
+      when: (item) => item.type === 'Venue',
+      name: 'rooms',
+      label: 'Areas/Rooms',
+      component: 'TInputTextarea',
+      description: 'One area per line',
+    },
+    {
+      when: (item) => item.type === 'Venue',
+      name: 'map',
+      component: 'TInputPhoto',
+      label: 'Venue map',
+      width: 1280,
+      height: 720,
+    },
+    {
       name: 'styles',
       label: t('profile.styles.label'),
       labelPosition: 'top',
@@ -284,13 +308,6 @@ export const useProfiles = () => {
       component: 'TInputLanguages',
     },
     ...contactFields,
-    {
-      name: 'address',
-      label: 'Address',
-      labelPosition: 'top',
-      component: 'TInputAddress',
-      simple: true,
-    },
     {
       name: 'team',
       component: 'TInputArray',
