@@ -4,7 +4,6 @@ import { useAccounts } from '~/use/accounts'
 import { useCommon } from '~/use/common'
 import { useDoc } from '~/use/doc'
 import { db } from '~/plugins/firebase'
-import { when } from '@vueuse/core'
 
 export const useProfiles = () => {
   const { t } = useI18n()
