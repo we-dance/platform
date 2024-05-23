@@ -142,6 +142,7 @@ export default {
       data = pickBy(data, (v) => v !== undefined)
 
       data.artists = (data.artists || []).filter((item) => item)
+      data.duration = (data.endDate - data.startDate) / 60 / 1000
 
       data.artistsList = data.artists
         .map((a) => a.username)
@@ -157,25 +158,31 @@ export default {
         result = await this.create(data)
       }
 
-      console.log('saveItem', result)
-
       const children = []
 
       if (result?.recurrence?.dates?.length) {
         for (const date of result.recurrence?.dates) {
-          const childData = { ...data, startDate: date, seriesId: result.id }
+          const startDate = date
+          const endDate = new Date(+startDate + result.duration * 60 * 1000)
+          const childData = {
+            ...data,
+            startDate: +startDate,
+            endDate: +endDate,
+            seriesId: result.id,
+          }
 
           const child = await this.create(childData)
-
-          children.push(child.id)
+          children.push({
+            id: child.id,
+            startDate: child.startDate,
+            endDate: child.endDate,
+          })
         }
       }
 
       if (children.length) {
-        await this.update(result.id, { ...data, children })
+        await this.update(result.id, { children })
       }
-
-      console.log('children', children)
 
       this.view(result.id)
     },
