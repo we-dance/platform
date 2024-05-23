@@ -120,11 +120,11 @@ export const useDoc = (name) => {
       updatedBy: uid.value,
     }
 
-    const result = await collection.doc(id).update(changes)
+    await collection.doc(id).update(changes)
 
     state.saving = false
 
-    return result
+    return changes
   }
 
   async function set(id, data) {

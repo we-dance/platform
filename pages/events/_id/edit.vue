@@ -141,15 +141,43 @@ export default {
     async saveItem(data) {
       data = pickBy(data, (v) => v !== undefined)
 
+      data.artists = (data.artists || []).filter((item) => item)
+
+      data.artistsList = data.artists
+        .map((a) => a.username)
+        .filter((item) => item)
+
+      let result
+
       if (data.id) {
         track('update_event')
-        await this.update(data.id, data)
-        this.view(data.id)
+        result = await this.update(data.id, data)
       } else {
         track('create_event')
-        const result = await this.create(data)
-        this.view(result.id)
+        result = await this.create(data)
       }
+
+      console.log('saveItem', result)
+
+      const children = []
+
+      if (result?.recurrence?.dates?.length) {
+        for (const date of result.recurrence?.dates) {
+          const childData = { ...data, startDate: date, seriesId: result.id }
+
+          const child = await this.create(childData)
+
+          children.push(child.id)
+        }
+      }
+
+      if (children.length) {
+        await this.update(result.id, { ...data, children })
+      }
+
+      console.log('children', children)
+
+      this.view(result.id)
     },
     async removeItem(id) {
       track('delete_event')
