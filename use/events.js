@@ -346,28 +346,6 @@ export const useEvents = () => {
       labelPosition: 'top',
     },
     {
-      name: 'venueProfile',
-      component: 'TInputProfile',
-      label: t('event.venueProfile.label'),
-      before: t('event.venueProfile.description'),
-      labelPosition: 'top',
-    },
-    {
-      name: 'venue',
-      label: t('event.venue'),
-      labelPosition: 'top',
-      component: 'TInputVenue',
-      simple: true,
-    },
-    {
-      name: 'place',
-      label: t('event.place.label'),
-      description: t('event.place.description'),
-      labelPosition: 'top',
-      component: 'TInputPlace',
-      clearable: true,
-    },
-    {
       name: 'online',
       label: 'Is it available online?',
       component: 'TInputButtons',
