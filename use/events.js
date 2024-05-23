@@ -1,18 +1,28 @@
-import { addMinutes, parseISO } from 'date-fns'
+import { addMinutes } from 'date-fns'
 import firebase from 'firebase/app'
 import 'firebase/firestore'
 import { useCities } from '~/use/cities'
 import { useI18n } from '~/use/i18n'
-import { getYmd, toDatetimeLocal } from '~/utils'
+import { getYmd } from '~/utils'
 import { useCommon } from '~/use/common'
 import { useAuth } from '~/use/auth'
 
 const updateEndDate = (newItem, oldItem) => {
-  if (oldItem?.endDate) {
+  if (!newItem.startDate) {
     return
   }
 
-  newItem.endDate = toDatetimeLocal(addMinutes(parseISO(newItem.startDate), 60))
+  const endDate = new Date(newItem.startDate + newItem.duration * 60 * 1000)
+
+  newItem.endDate = +endDate
+}
+
+const updateDuration = (newItem, oldItem) => {
+  if (!newItem.startDate || !newItem.endDate) {
+    return
+  }
+
+  newItem.duration = (newItem.endDate - newItem.startDate) / 60000
 }
 
 export async function getEventsWithVenue(placeId) {
@@ -317,6 +327,7 @@ export const useEvents = () => {
       labelPosition: 'top',
       label: 'End date',
       simple: true,
+      onChange: updateDuration,
     },
     {
       name: 'recurrence',

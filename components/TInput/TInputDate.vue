@@ -53,7 +53,8 @@ export default {
       }
 
       this.timestamp = this.value
-      const date = new Date(this.value)
+      const timezoneOffset = new Date().getTimezoneOffset() * 60000
+      const date = new Date(this.value - timezoneOffset)
 
       if (isNaN(date)) {
         return
