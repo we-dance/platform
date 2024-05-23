@@ -1,4 +1,3 @@
-import { addMinutes } from 'date-fns'
 import firebase from 'firebase/app'
 import 'firebase/firestore'
 import { useCities } from '~/use/cities'
