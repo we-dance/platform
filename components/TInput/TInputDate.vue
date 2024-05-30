@@ -79,8 +79,16 @@ export default {
         this.time = '19:00'
       }
 
-      const timeZone = new Date().toString().split(' ')[5]
-      const val = `${this.date} ${this.time} ${timeZone}`
+      const getTimeZoneOffset = () => {
+        const offset = new Date().getTimezoneOffset()
+        const sign = offset <= 0 ? '+' : '-'
+        const hours = String(Math.abs(offset / 60)).padStart(2, '0')
+        const minutes = String(Math.abs(offset % 60)).padStart(2, '0')
+        return `${sign}${hours}:${minutes}`
+      }
+
+      const timeZoneOffset = getTimeZoneOffset()
+      const val = `${this.date}T${this.time}${timeZoneOffset}`
 
       const date = new Date(val)
       this.timestamp = +date
