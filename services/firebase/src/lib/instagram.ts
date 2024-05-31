@@ -34,7 +34,7 @@ export async function announceEventIG2(event: any) {
     filters: `type:City`,
     aroundLatLng: `${location.lat}, ${location.lng}`,
     aroundRadius: 50000,
-    hitsPerPage: 5,
+    hitsPerPage: 100,
   }
   const results = await profilesIndex.search('', searchParams)
   const hit: any = results.hits.find((h: any) => !!h.instagram)
