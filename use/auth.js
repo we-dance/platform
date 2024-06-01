@@ -57,7 +57,7 @@ export const useAuth = () => {
   const isEditor = () =>
     !!state.uid && !!state.account && !!state.account.editor
 
-  if (!state.initialized) {
+  if (!state.initialized && process.client) {
     getRedirectResult().then(() => {
       firebase.auth().onAuthStateChanged(setUser)
 
@@ -68,14 +68,12 @@ export const useAuth = () => {
 
     state.initialized = true
 
-    if (window) {
-      setMarketing()
+    setMarketing()
 
-      const uid = ls('uid')
+    const uid = ls('uid')
 
-      if (uid) {
-        state.uid = uid
-      }
+    if (uid) {
+      state.uid = uid
     }
   }
 

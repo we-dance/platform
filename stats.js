@@ -29,7 +29,7 @@ class Stats {
 
 const appStats = new Stats()
 
-if (window) {
+if (process.client) {
   window.stats = appStats
 }
 

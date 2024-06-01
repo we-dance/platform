@@ -48,12 +48,180 @@ if (process.env.DEBUG_I18N) {
   locales.push({ code: 'debug', name: 'DEBUG', file: 'debug.yml' })
 }
 
+let routesCache = []
+
+const exclude = [
+  '/chat',
+  '/search',
+  '/community',
+  '/lists',
+  '/lists',
+  '/bookmarks',
+  '/nopassword',
+  '/onboarding',
+  '/register',
+  '/settings',
+  '/signin',
+  '/signin-email',
+  '/signout',
+  '/demo',
+  '/admin',
+]
+
+function mapExcludePaths(paths) {
+  return paths.map((path) => {
+    return new RegExp(`${path}`)
+  })
+}
+
+async function getRoutes() {
+  if (routesCache.length) {
+    return routesCache
+  }
+
+  const db = sitemapApp.firestore()
+
+  const routes = [
+    {
+      url: `/`,
+      changefreq: 'daily',
+      priority: 1,
+    },
+    {
+      url: '/about',
+      changefreq: 'monthly',
+      priority: 0.5,
+    },
+    {
+      url: '/get-involved',
+      changefreq: 'monthly',
+      priority: 0.5,
+    },
+    {
+      url: '/foundation',
+      changefreq: 'monthly',
+      priority: 0.5,
+    },
+    {
+      url: '/platform',
+      changefreq: 'monthly',
+      priority: 0.5,
+    },
+    {
+      url: '/wedance-community',
+      changefreq: 'monthly',
+      priority: 0.5,
+    },
+    {
+      url: '/partners',
+      changefreq: 'monthly',
+      priority: 0.5,
+    },
+  ]
+
+  const questionsRef = await db
+    .collection('stories')
+    .where('type', '==', 'ask-for-recommendations')
+    .get()
+
+  const questions = questionsRef.docs.map((doc) => ({
+    ...doc.data(),
+    id: doc.id,
+  }))
+
+  for (const question of questions) {
+    routes.push({
+      url: `/stories/${question.id}`,
+      changefreq: 'weekly',
+      priority: 0.9,
+    })
+  }
+
+  const eventsRef = await db
+    .collection('posts')
+    .where('startDate', '>=', +new Date())
+    .get()
+
+  const events = eventsRef.docs.map((doc) => ({
+    ...doc.data(),
+    id: doc.id,
+  }))
+
+  for (const event of events) {
+    routes.push({
+      url: `/events/${event.id}`,
+      changefreq: 'weekly',
+      priority: 0.8,
+    })
+  }
+
+  const citiesRef = await db
+    .collection('profiles')
+    .where('type', '==', 'City')
+    .get()
+
+  const cities = orderBy(
+    citiesRef.docs
+      .map((doc) => doc.data())
+      .filter((c) => c.username && c.viewsCount),
+    'viewsCount',
+    'desc'
+  )
+
+  for (const profile of cities) {
+    let city = profile.username
+
+    if (city === 'Travel') {
+      city = 'global'
+    }
+
+    routes.push({
+      url: `/explore/${city}`,
+      changefreq: 'daily',
+      priority: 1,
+    })
+
+    routes.push({
+      url: `/explore/${city}/classes`,
+      changefreq: 'daily',
+      priority: 0.7,
+    })
+
+    routes.push({
+      url: `/explore/${city}/groups`,
+      changefreq: 'daily',
+      priority: 0.7,
+    })
+
+    routes.push({
+      url: `/explore/${city}/tips`,
+      changefreq: 'daily',
+      priority: 0.7,
+    })
+
+    for (const style of ['Salsa', 'Bachata', 'Kizomba', 'Zouk', 'Afrobeats']) {
+      routes.push({
+        url: `/explore/${city}?style=${style}`,
+        changefreq: 'daily',
+        priority: 0.7,
+      })
+    }
+  }
+
+  routesCache = routes
+
+  return routes
+}
+
 export default {
   target: 'static',
   ssr: false,
   generate: {
     fallback: true,
-    exclude: [/^\/admin/],
+    exclude: mapExcludePaths(exclude),
+    // routes() {
+    //   return getRoutes().then((routes) => routes.map((route) => route.url))
+    // },
   },
   /*
    ** Customize the progress-bar color
@@ -158,6 +326,7 @@ export default {
    ** Build configuration
    */
   build: {
+    transpile: ['date-fns'],
     postcss: {
       plugins: {
         tailwindcss: {},
@@ -224,160 +393,9 @@ export default {
   ],
   sitemap: {
     hostname: app.url,
-    exclude: [
-      '/chat',
-      '/search',
-      '/community',
-      '/lists',
-      '/lists',
-      '/nopassword',
-      '/onboarding',
-      '/register',
-      '/settings',
-      '/signin',
-      '/signin-email',
-      '/signout',
-      '/demo/**',
-      '/admin/**',
-    ],
-
+    exclude,
     routes: async () => {
-      const db = sitemapApp.firestore()
-
-      const routes = [
-        {
-          url: `/`,
-          changefreq: 'daily',
-          priority: 1,
-        },
-        {
-          url: '/about',
-          changefreq: 'monthly',
-          priority: 0.5,
-        },
-        {
-          url: '/get-involved',
-          changefreq: 'monthly',
-          priority: 0.5,
-        },
-        {
-          url: '/foundation',
-          changefreq: 'monthly',
-          priority: 0.5,
-        },
-        {
-          url: '/platform',
-          changefreq: 'monthly',
-          priority: 0.5,
-        },
-        {
-          url: '/wedance-community',
-          changefreq: 'monthly',
-          priority: 0.5,
-        },
-        {
-          url: '/partners',
-          changefreq: 'monthly',
-          priority: 0.5,
-        },
-      ]
-
-      const questionsRef = await db
-        .collection('stories')
-        .where('type', '==', 'ask-for-recommendations')
-        .get()
-
-      const questions = questionsRef.docs.map((doc) => ({
-        ...doc.data(),
-        id: doc.id,
-      }))
-
-      for (const question of questions) {
-        routes.push({
-          url: `/stories/${question.id}`,
-          changefreq: 'weekly',
-          priority: 0.9,
-        })
-      }
-
-      const eventsRef = await db
-        .collection('posts')
-        .where('startDate', '>=', +new Date())
-        .get()
-
-      const events = eventsRef.docs.map((doc) => ({
-        ...doc.data(),
-        id: doc.id,
-      }))
-
-      for (const event of events) {
-        routes.push({
-          url: `/events/${event.id}`,
-          changefreq: 'weekly',
-          priority: 0.8,
-        })
-      }
-
-      const citiesRef = await db
-        .collection('profiles')
-        .where('type', '==', 'City')
-        .get()
-
-      const cities = orderBy(
-        citiesRef.docs
-          .map((doc) => doc.data())
-          .filter((c) => c.username && c.viewsCount),
-        'viewsCount',
-        'desc'
-      )
-
-      for (const profile of cities) {
-        let city = profile.username
-
-        if (city === 'Travel') {
-          city = 'global'
-        }
-
-        routes.push({
-          url: `/explore/${city}`,
-          changefreq: 'daily',
-          priority: 1,
-        })
-
-        routes.push({
-          url: `/explore/${city}/classes`,
-          changefreq: 'daily',
-          priority: 0.7,
-        })
-
-        routes.push({
-          url: `/explore/${city}/groups`,
-          changefreq: 'daily',
-          priority: 0.7,
-        })
-
-        routes.push({
-          url: `/explore/${city}/tips`,
-          changefreq: 'daily',
-          priority: 0.7,
-        })
-
-        for (const style of [
-          'Salsa',
-          'Bachata',
-          'Kizomba',
-          'Zouk',
-          'Afrobeats',
-        ]) {
-          routes.push({
-            url: `/explore/${city}?style=${style}`,
-            changefreq: 'daily',
-            priority: 0.7,
-          })
-        }
-      }
-
-      return routes
+      return await getRoutes()
     },
     i18n: true,
   },

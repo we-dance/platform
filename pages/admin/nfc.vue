@@ -98,6 +98,8 @@ export default {
     }
 
     async function copyToClipboard(id) {
+      if (process.server) return
+
       const baseUrl = window.location.origin
       await navigator.clipboard.writeText(`${baseUrl}/nfc/${id}`)
       root.$toast.success('Card link copied to clipboard')

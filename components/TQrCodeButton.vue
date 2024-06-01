@@ -29,6 +29,8 @@ export default {
   },
   computed: {
     value() {
+      if (process.server) return ''
+
       return window.location.href
     },
   },

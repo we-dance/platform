@@ -101,6 +101,8 @@ export default {
       this.isSearchShown = true
     },
     onProfileLoad() {
+      if (process.server) return
+
       const name = this.account?.name || this.profile?.name || ''
       const names = name.split(' ')
 

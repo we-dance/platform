@@ -175,6 +175,7 @@ export default {
         aroundRadius: radius.value * 1000 || 1,
         hitsPerPage: uid.value ? 10 : 4,
       })
+      if (process.server) return
       window.scrollTo(0, 0)
     })
     const { getStyleName } = useStyles()

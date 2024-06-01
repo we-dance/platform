@@ -42,6 +42,8 @@ export default {
       this.show = false
     },
     show() {
+      if (process.server) return
+
       this.isTop =
         this.$refs.btn.getBoundingClientRect().top < window.innerHeight / 2
 

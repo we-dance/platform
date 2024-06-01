@@ -272,6 +272,8 @@ export default {
     async requestBrowserLocation() {
       this.loading = true
 
+      if (process.server) return
+
       window.navigator.geolocation.getCurrentPosition(
         await this.updateLocationFromBrowser,
         () => {

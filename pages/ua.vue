@@ -3,7 +3,9 @@
 </template>
 
 <script>
-const ua = navigator.userAgent || navigator.vendor || window.opera
+const ua = process.client
+  ? navigator.userAgent || navigator.vendor || window.opera
+  : 'server'
 
 export default {
   computed: {

@@ -20,12 +20,12 @@ let analytics
 // eslint-disable-next-line import/no-mutable-exports
 let googleApiKey
 
-if (!firebase.apps.length) {
+if (!firebase.apps.some((app) => app.name === '[DEFAULT]')) {
   const config = process.env.firebase.config
   googleApiKey = config.apiKey
   firebase.initializeApp(config)
 
-  if (process.env.firebase.analytics) {
+  if (process.client && process.env.firebase.analytics) {
     analytics = firebase.analytics()
 
     track = analytics.logEvent
