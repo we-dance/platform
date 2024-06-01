@@ -1,7 +1,5 @@
 <template>
   <div>
-    <THeader show-logo class="md:hidden" />
-
     <TPost :item="doc" show-all expanded>
       <TStyles
         v-if="doc.styles && Object.keys(doc.styles).length"

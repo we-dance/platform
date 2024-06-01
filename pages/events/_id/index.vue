@@ -1,7 +1,5 @@
 <template>
   <div>
-    <THeader show-logo class="md:hidden" />
-
     <TEventImportStatus
       v-if="doc.type === 'import_error' || doc.type === 'import_event'"
       :doc="doc"

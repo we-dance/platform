@@ -1,7 +1,5 @@
 <template>
   <div>
-    <THeader show-logo class="md:hidden" />
-
     <div class="rounded overflow-hidden">
       <mux-player
         playback-id="exizM1SgPwP6Fw81egITz9sF1irYxvRL1nNsXr9bbiM"

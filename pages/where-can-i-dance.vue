@@ -1,7 +1,5 @@
 <template>
   <div>
-    <THeader show-logo class="md:hidden" />
-
     <div class="p-4 border-b">
       <h1 class="text-2xl font-bold">Where can I dance?</h1>
       <div class="text-sm">

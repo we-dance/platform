@@ -1,6 +1,5 @@
 <template>
   <div>
-    <THeader show-logo class="md:hidden" />
     <div class="flex justify-center pt-4">
       <TIcon name="undraw_super_woman" />
     </div>

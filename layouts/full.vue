@@ -1,6 +1,22 @@
 <template>
   <div class="bg-gray-200 min-h-screen pb-4 border-t-2 border-primary">
-    <nav class="hidden md:flex p-4 gap-2 justify-start">
+    <nav class="flex p-2 gap-2 justify-start items-center">
+      <div
+        v-if="isMenuOpen"
+        class="fixed w-full h-full top-0 left-0 bg-black opacity-50 z-50"
+        @click="isMenuOpen = false"
+      />
+      <transition name="slide">
+        <div
+          v-if="isMenuOpen"
+          class="bg-white fixed left-0 w-56 bottom-0 top-0 z-50 shadow-lg"
+        >
+          <MainNavigation :uid="uid" :username="username" />
+        </div>
+      </transition>
+
+      <THamburger v-model="isMenuOpen" />
+
       <router-link :to="city.username ? `/explore/${city.username}` : '/'">
         <TIcon name="logo-horizontal-dark" />
       </router-link>
@@ -11,6 +27,7 @@
         type="primary"
         :to="localePath(`/${username}`)"
         :label="$t('nav.myProfile')"
+        class="hidden sm:block"
       />
       <TButton
         v-else
@@ -25,22 +42,6 @@
       class="font-sans leading-normal tracking-normal antialiased flex flex-col mx-auto max-w-xl bg-white rounded shadow"
     >
       <TAuthPopup />
-
-      <div
-        v-if="isMenuOpen"
-        class="fixed w-full h-full top-0 left-0 bg-black opacity-50 z-50"
-        @click="isMenuOpen = false"
-      />
-      <transition name="slide">
-        <div
-          v-if="isMenuOpen"
-          class="bg-white fixed left-0 w-56 bottom-0 top-0 z-50 shadow-lg md:hidden"
-        >
-          <MainNavigation :uid="uid" :username="username" />
-        </div>
-      </transition>
-
-      <THamburger v-model="isMenuOpen" class="absolute mt-2 md:hidden" />
 
       <div>
         <nuxt class="w-full" />

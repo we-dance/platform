@@ -1,6 +1,5 @@
 <template>
   <div class="font-noto bg-white min-h-screen">
-    <THeader show-logo class="md:hidden" />
     <main>
       <LandingHero
         :header="$t('home.hero.header')"

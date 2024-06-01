@@ -1,7 +1,6 @@
 <template>
   <div>
     <template v-if="page">
-      <THeader show-logo class="md:hidden" />
       <nuxt-content :document="page" :class="classes" />
     </template>
     <TFestivals v-else-if="profile.username === 'Travel'" :profile="profile" />

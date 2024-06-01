@@ -1,7 +1,5 @@
 <template>
   <div>
-    <THeader show-logo class="md:hidden" />
-
     <TLoader v-if="loading" />
     <TPost
       v-else-if="story.type !== 'ask-for-recommendations'"

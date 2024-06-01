@@ -1,7 +1,5 @@
 <template>
   <div>
-    <THeader show-logo class="md:hidden" />
-
     <div class="flex flex-col items-center">
       <div class="bg-primary h-32 w-full"></div>
       <div class="w-32 -mt-16">

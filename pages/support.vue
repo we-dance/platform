@@ -1,6 +1,5 @@
 <template>
   <div>
-    <THeader show-logo class="md:hidden" />
     <div class="p-4">
       <h1 class="text-3xl font-extrabold text-center">
         Support
