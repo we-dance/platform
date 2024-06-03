@@ -1,3 +1,4 @@
+import loader from './google-loader'
 import axios from 'axios'
 import { getBrowserLocation } from '~/use/geo'
 
@@ -47,9 +48,6 @@ export const getAddress = (places) => {
 }
 
 export const getGoogle = async () => {
-  if (process.server) return
-
-  const loader = await import('google-maps')
   const google = await loader.load()
 
   return google
@@ -103,9 +101,6 @@ export const getPlacePredictions = async (input, types = ['(cities)']) => {
     return []
   }
 
-  if (process.server) return
-
-  const loader = await import('google-maps')
   const google = await loader.load()
   const autocomplete = new google.maps.places.AutocompleteService()
 
