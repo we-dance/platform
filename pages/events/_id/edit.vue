@@ -160,6 +160,34 @@ export default {
 
       data.type = data?.recurrence?.freq === 'weekly' ? 'series' : 'event'
 
+      if (data.type === 'series') {
+        if (data.seriesId) {
+          delete data.seriesId
+        }
+
+        data.socialCover = ''
+        data.commentsCount = 0
+        data.downVotes = 0
+        data.upVotes = 0
+        data.viewsCount = 0
+        data.votes = 0
+        data.watch = {
+          count: 0,
+          list: {},
+        }
+        data.star = {
+          count: 0,
+          list: {},
+        }
+        data.checkin = {
+          count: 0,
+          list: {},
+        }
+        data.telegram = {}
+        data.instagram = {}
+        data.promotion = ''
+      }
+
       data.artistsList = data.artists
         .map((a) => a.username)
         .filter((item) => item)
@@ -239,6 +267,11 @@ export default {
           type: 'event',
           seriesId,
           action,
+          recurrence: {
+            freq: 'never',
+            days: {},
+            untilDate: '',
+          },
         }
 
         children.push(childData)
