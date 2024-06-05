@@ -223,7 +223,7 @@ export default {
         return '(online:Yes)'
       }
       if (props.view === 'festivals') {
-        return '(type:Festival OR type:Congress)'
+        return '(type:Festival OR type:Congress OR type:Weekender)'
       }
     })
 

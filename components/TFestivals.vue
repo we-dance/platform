@@ -7,7 +7,26 @@
       <div class="text-sm">
         {{ $t('explore.global.subheader', { style: $route.query.style }) }}
       </div>
-      <TProfileStats :profile="profile" />
+      <div class="flex gap-2 justify-between items-center py-2">
+        <TProfileStats :profile="profile" />
+        <TProfileModeration :profile="profile" />
+        <TReaction
+          :label="$t('Subscribe')"
+          :toggled-label="$t('Subscribed')"
+          toggled-class="bg-green-500"
+          field="watch"
+          type="primary"
+          hide-count
+          :item="profile"
+          collection="profiles"
+        />
+      </div>
+      <TContactsGrid
+        :profile="profile"
+        hide-website
+        class="mt-4 justify-center"
+        title="Follow us for new events, dance videos, and community updates."
+      />
     </div>
 
     <HotDeals />

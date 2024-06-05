@@ -4,12 +4,41 @@
 
     <div class="p-4">
       <h1 class="text-2xl font-bold">
-        {{ $t('explore.groups.header', { city: city.name }) }}
+        {{ $t('explore.overview.header', { city: city.name }) }}
       </h1>
       <div class="text-sm">
-        {{ $t('explore.groups.subheader', { city: city.name }) }}
+        {{
+          $t('explore.overview.subheader', {
+            city: city.name,
+            style: $route.query.style || 'dance',
+          })
+        }}
       </div>
+      <div class="flex gap-2 justify-between items-center py-2">
+        <TProfileStats :profile="city" />
+        <TProfileModeration :profile="city" />
+        <TReaction
+          :label="$t('Subscribe')"
+          :toggled-label="$t('Subscribed')"
+          toggled-class="bg-green-500"
+          field="watch"
+          type="primary"
+          hide-count
+          :item="city"
+          collection="profiles"
+        />
+      </div>
+      <TContactsGrid
+        :profile="city"
+        hide-website
+        class="mt-4 justify-center"
+        title="Follow us for new events, dance videos, and community updates."
+      />
     </div>
+
+    <TExpand v-if="city.story" class="border-t p-4 mb-4">
+      <TPreview v-if="city.story" :content="city.story" />
+    </TExpand>
 
     <div class="border-t border-b">
       <div class="space-y-2 p-4">
@@ -64,6 +93,33 @@
         class="mt-4"
       />
     </div>
+
+    <WTeaser
+      title="Contribute"
+      description="Help us grow the dance community by adding your favorite places, artists, and events."
+      button="Add Recommendation"
+      :url="localePath(`/reviews/add?city=${city.cityPlaceId}`)"
+      class="w-full"
+      background="bg-green-100"
+    />
+
+    <WTeaser
+      :title="$t('teaser.feed.title')"
+      :description="$t('teaser.feed.description')"
+      :button="$t('teaser.feed.btn')"
+      :url="localePath(`/explore/${city.username}/tips`)"
+      class="w-full"
+      background="bg-orange-100"
+    />
+
+    <WTeaser
+      title="Promote & Earn"
+      description="If you're a dancer, influencer, or just love sharing your passion for dance, this is your chance to shine and earn."
+      button="Read More"
+      :url="localePath('/promoter')"
+      class="w-full"
+      background="bg-red-100"
+    />
   </div>
 </template>
 
@@ -234,16 +290,16 @@ export default {
   head() {
     const city = this.city.name.replace(',', '')
 
-    const title = this.$t(`explore.groups.title`, { city })
-    const description = this.$t(`explore.groups.description`, { city })
-    const keywords = this.$t(`explore.groups.keywords`, { city })
+    const title = this.$t(`explore.overview.title`, { city })
+    const description = this.$t(`explore.overview.description`, { city })
+    const keywords = this.$t(`explore.overview.keywords`, { city })
 
     const schema = {
       '@context': 'https://schema.org',
       '@type': 'WebPage',
       name: title,
       description,
-      url: `https://wedance.vip/explore/${this.city.username}/groups`,
+      url: `https://wedance.vip/explore/${this.city.username}`,
       isPartOf: {
         '@type': 'WebSite',
         name: 'WeDance',

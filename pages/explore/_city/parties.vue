@@ -1,8 +1,6 @@
 <template>
   <div>
-    <TCityHeader :profile="profile" view="festivals" global />
-
-    <TFestivals :profile="profile" />
+    <TCity :key="$route.fullPath" :profile="profile" view="parties" />
   </div>
 </template>
 
@@ -11,14 +9,21 @@ import { db } from '~/plugins/firebase'
 import { trackView } from '~/use/tracking'
 
 export default {
-  name: 'ExploreFestivals',
-  async asyncData({ params, error }) {
+  name: 'ExploreParties',
+  async asyncData({ params, error, redirect }) {
+    const city = params.city
+
+    if (city === 'Travel') {
+      redirect('/explore/global')
+      return
+    }
+
     let profile = null
     let profileFound = false
 
     const collection = await db
       .collection('profiles')
-      .where('username', '==', 'Travel')
+      .where('username', '==', city)
       .get()
 
     if (collection.docs.length > 0) {

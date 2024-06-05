@@ -171,6 +171,11 @@ export const useEvents = () => {
       icon: '🎓',
     },
     {
+      label: t('events.typelist.weekender'),
+      value: 'Weekender',
+      icon: '✈️',
+    },
+    {
       label: t('events.typelist.festival'),
       value: 'Festival',
       icon: '✈️',

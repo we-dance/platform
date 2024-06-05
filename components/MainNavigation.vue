@@ -25,8 +25,8 @@
           ? localePath(`/explore/${city.username}`)
           : localePath('/explore')
       "
-      :label="$t('nav.events')"
-      icon="calendar"
+      :label="$t('nav.explore')"
+      icon="place"
       type="nav"
     />
     <TButton

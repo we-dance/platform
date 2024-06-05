@@ -35,57 +35,9 @@
       </div>
     </div>
 
-    <div v-if="isAdmin()" class="flex gap-2 p-4 bg-orange-100 items-center">
-      <TDropdown>
-        <TPopupEdit
-          v-if="isAdmin()"
-          type="context"
-          :fields="profileFields"
-          :label="$t('Edit')"
-          collection="profiles"
-          singular="profile"
-          :item="profile"
-        />
-        <TButton
-          v-if="isAdmin()"
-          type="context"
-          icon="delete"
-          :label="$t('Delete')"
-          @click="remove(profile.id)"
-        />
-      </TDropdown>
-    </div>
-
     <Lottery />
 
     <TCalendar :city="profile" :view="view" class="w-full border-t" />
-
-    <WTeaser
-      :title="$t('teaser.feed.title')"
-      :description="$t('teaser.feed.description')"
-      :button="$t('teaser.feed.btn')"
-      :url="localePath(`/explore/${profile.username}/tips`)"
-      class="w-full"
-      background="bg-orange-100"
-    />
-
-    <WTeaser
-      title="Ambassadors Wanted"
-      :description="
-        `We are looking for ambassadors in ${profile.name}. Get in touch!`
-      "
-      button="Get Involved"
-      :url="localePath(`/get-involved`)"
-      class="w-full"
-      background="bg-red-100"
-    />
-
-    <FollowUs
-      :profile="profile"
-      :title="$t('profile.follow.title')"
-      :description="$t('profile.follow.description')"
-      class="p-4"
-    />
 
     <TSeoLinks :profile="profile" class="p-4" />
 

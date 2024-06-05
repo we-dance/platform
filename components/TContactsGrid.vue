@@ -1,6 +1,6 @@
 <template>
-  <div class="flex">
-    <div class="grid grid-cols-3 md:flex border-l border-t">
+  <div class="flex gap-4">
+    <div class="grid grid-cols-3 md:flex border-l border-t flex-shrink-0">
       <TButton
         v-if="!hideWebsite && profile.website"
         allow-guests
@@ -31,6 +31,7 @@
         <TIcon :name="field" size="6" />
       </TButton>
     </div>
+    <div v-if="title && filledFields.length" class="text-xs">{{ title }}</div>
   </div>
 </template>
 

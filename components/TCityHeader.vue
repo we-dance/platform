@@ -23,22 +23,27 @@
       <TwTabs
         :tabs="[
           {
-            name: global
-              ? $t('explore.nav.festivals')
-              : $t('explore.nav.parties'),
+            name: 'Overview',
             to: localePath(`/explore/${slug}`),
-            current: view === 'parties' || view === 'festivals',
+            current: view === 'groups',
+            hidden: global,
+          },
+          {
+            name: $t('explore.nav.parties'),
+            to: localePath(`/explore/${slug}/parties`),
+            current: view === 'parties',
+            hidden: global,
+          },
+          {
+            name: $t('explore.nav.festivals'),
+            to: localePath(`/explore/${slug}`),
+            current: view === 'festivals',
+            hidden: !global,
           },
           {
             name: global ? $t('explore.nav.online') : $t('explore.nav.classes'),
             to: localePath(`/explore/${slug}/classes`),
             current: view === 'classes',
-          },
-          {
-            name: $t('explore.nav.profiles'),
-            to: localePath(`/explore/${slug}/groups`),
-            current: view === 'groups',
-            hidden: global,
           },
           {
             name: global ? $t('explore.nav.experts') : $t('explore.nav.tips'),
