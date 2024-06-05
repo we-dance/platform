@@ -94,6 +94,8 @@ export async function profileToAlgolia(profile: any) {
     place: profile.place,
     reviews,
     reviewsCount,
+    viewsCount: profile.viewsCount,
+    subscribersCount: profile?.watch?.usernames?.length || 0,
     reviewsAvg,
     country,
     locality,
@@ -308,7 +310,7 @@ export async function indexInit() {
 }
 
 export async function indexProfiles() {
-  const onlyNew = true
+  const onlyNew = false
   let profileDocs: any[] = []
 
   if (onlyNew) {
