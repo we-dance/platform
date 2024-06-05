@@ -380,6 +380,10 @@ export const eventChanged = functions.firestore
         await index.deleteObject(oldEvent.id)
       }
 
+      if (event?.type !== 'event' && event.id) {
+        await index.deleteObject(event.id)
+      }
+
       if (event?.type === 'event') {
         await index.saveObject(
           eventToAlgolia({

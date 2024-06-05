@@ -15,11 +15,27 @@ export async function removeObject(indexName: string, objectID: string) {
   await index.deleteObject(objectID)
 }
 
+function addressPart(result: any, type: any) {
+  if (!result || !result.address_components) {
+    return ''
+  }
+
+  const part = result.address_components.find((o: any) =>
+    o.types.includes(type)
+  )
+  if (!part) {
+    return ''
+  }
+
+  return part.long_name
+}
+
 export async function profileToAlgolia(profile: any) {
+  let hasAddress = !!profile.address?.place_id
   let hasPlace = !!profile.place
   let cityProfile: any = {}
 
-  if (hasPlace) {
+  if (!hasAddress && hasPlace) {
     const cityProfileDocs = (
       await firestore
         .collection('profiles')
@@ -37,6 +53,32 @@ export async function profileToAlgolia(profile: any) {
     }
   }
 
+  const reviewsRef = await firestore
+    .collection('stories')
+    .where('receiver.username', '==', profile.username)
+    .get()
+
+  const reviews = reviewsRef.docs.map((doc) => doc.data())
+  const reviewsCount = reviews.length
+
+  let reviewsAvg = 0
+  if (reviewsCount > 0) {
+    reviewsAvg =
+      reviews.map((r) => Number(r.stars)).reduce((p, c) => p + c, 0) /
+      reviewsCount
+  }
+
+  let country = ''
+  let locality = ''
+
+  if (hasAddress) {
+    country = addressPart(profile.address, 'country')
+    locality = addressPart(profile.address, 'locality')
+  } else if (hasPlace) {
+    country = cityProfile.location.country
+    locality = cityProfile.location.locality
+  }
+
   const result: any = {
     objectID: profile.id,
     id: profile.id,
@@ -50,8 +92,11 @@ export async function profileToAlgolia(profile: any) {
     bio: profile.bio,
     locales: profile.locales ? Object.keys(profile.locales) : [],
     place: profile.place,
-    country: hasPlace ? cityProfile.location.country : '',
-    locality: hasPlace ? cityProfile.location.locality : '',
+    reviews,
+    reviewsCount,
+    reviewsAvg,
+    country,
+    locality,
     styles: profile.styles,
     style: profile.styles ? Object.keys(profile.styles) : [],
     searchStyle: profile.searchStyle,
@@ -65,6 +110,8 @@ export async function profileToAlgolia(profile: any) {
     objectives: profile.objectives ? Object.keys(profile.objectives) : [],
     gender: profile.gender,
     type: profile.type,
+    venueType: profile.venueType || '',
+    amenities: profile.amenities || [],
     visibility: profile.visibility,
     permission: profile.permission,
     lastLoginAt: profile.lastLoginAt,
@@ -73,7 +120,12 @@ export async function profileToAlgolia(profile: any) {
     _tags: profile.styles ? Object.keys(profile.styles) : [],
   }
 
-  if (hasPlace) {
+  if (hasAddress) {
+    result._geoloc = {
+      lat: profile.address.geometry.location.lat,
+      lng: profile.address.geometry.location.lng,
+    }
+  } else if (hasPlace) {
     result._geoloc = {
       lat: cityProfile.location.latitude,
       lng: cityProfile.location.longitude,
@@ -255,7 +307,8 @@ export async function indexInit() {
   })
 }
 
-export async function indexProfiles(onlyNew: boolean = false) {
+export async function indexProfiles() {
+  const onlyNew = true
   let profileDocs: any[] = []
 
   if (onlyNew) {

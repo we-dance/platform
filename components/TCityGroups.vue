@@ -44,7 +44,7 @@
       <div class="space-y-2 p-4">
         <TInputButtons v-model="filters['type']" :options="tabs" />
 
-        <div v-if="response.facets" class="gap-2 flex flex-wrap items-center">
+        <div v-if="response.facets" class="gap-2 flex items-center">
           <t-rich-select
             v-if="false"
             v-model="groupType"
@@ -55,11 +55,31 @@
           />
 
           <t-rich-select
+            v-if="filters['type'] === 'Venue'"
+            v-model="filters['venueType']"
+            placeholder="Type"
+            :options="facets['venueType']"
+            clearable
+            hide-search-box
+            class="flex-grow"
+          />
+
+          <t-rich-select
+            v-if="filters['type'] === 'Venue'"
+            v-model="filters['amenities']"
+            placeholder="Amenities"
+            :options="facets['amenities']"
+            clearable
+            class="flex-grow"
+          />
+
+          <t-rich-select
             v-model="filters['style']"
             :placeholder="$t(`profile.style`)"
             :options="facets['style']"
             clearable
             hide-search-box
+            class="flex-grow"
           />
         </div>
       </div>
@@ -189,13 +209,22 @@ export default {
     const filters = ref({})
     const { uid } = useAuth()
     const { getCity } = useApp()
-    const { objectivesList, typeList, radiusOptions } = useProfiles()
+    const {
+      objectivesList,
+      typeList,
+      radiusOptions,
+      venueTypes,
+      amenitiesOptions,
+    } = useProfiles()
     const { search, response, loadMore } = useAlgolia('profiles')
+
     const facets = computed(() => ({
       type: getFacetOptions('type'),
       gender: getFacetOptions('gender'),
       objectives: getFacetOptions('objectives'),
       style: getFacetOptions('style'),
+      venueType: getFacetOptions('venueType'),
+      amenities: getFacetOptions('amenities'),
     }))
     function load() {
       filters.value = {
@@ -246,6 +275,10 @@ export default {
         return ''
       }
       switch (field) {
+        case 'venueType':
+          return venueTypes.find((o) => o.value === value).label
+        case 'amenities':
+          return amenitiesOptions.find((o) => o.value === value).label
         case 'objectives':
           return objectivesList.find((o) => o.value === value).label
         case 'style':
