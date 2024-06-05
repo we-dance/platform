@@ -87,7 +87,7 @@ export default {
   setup(props, { root }) {
     const tabs = [
       { label: 'Places', value: 'Venue' },
-      { label: 'Groups', value: 'Organiser' },
+      { label: 'Hosts', value: 'Organiser' },
       { label: 'Artists', value: 'Artist' },
       { label: 'Dancers', value: 'Dancer' },
     ]
