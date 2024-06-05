@@ -75,7 +75,7 @@
         />
       </div>
 
-      <div v-if="response.nbPages > 1" class="my-4 flex justify-center">
+      <div v-if="!uid || response.nbPages > 1" class="my-4 flex justify-center">
         <TButton label="Load More" type="primary" @click="loadMore" />
       </div>
 
