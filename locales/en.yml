@@ -97,6 +97,7 @@ events:
     party: Party
     workshop: Workshop
     course: Course
+    weekender: Weekender
     festival: Festival
     congress: Congress
     concert: Concert
@@ -803,7 +804,7 @@ explore:
     description: Explore a variety of {style} dance events happening in {city}. From {referenceStyle} nights to bachata workshops, find your next dance adventure here.
     keywords: 'Where can I dance {style} in {city}, {style} dance parties {city}, {style} dance socials {city}, {style} dance nights {city}, {style} dance events {city}, {style} dance meetups {city}'
     header: '{style} Parties in {city}'
-    subheader: Discover {style} in {city}, and get notified of new events before they sell out.
+    subheader: Discover {style} parties in {city}, and get notified of new events before they sell out.
   classes:
     title: Dance {style} Classes in {city} | Dance Calendar | WeDance
     description: Explore a variety of {style} dance events happening in {city}. From {referenceStyle} nights to bachata workshops, find your next dance adventure here.
@@ -816,12 +817,12 @@ explore:
     keywords: '{style} online dance classes, online dance courses, online dance workshops, online dance bootcamps, online dance lessons'
     header: '{style} Online Classes'
     subheader: Can't make it in person? Take your {style} moves to the next level with our online class selection.
-  groups:
-    title: Members in {city} | WeDance
-    description: Discover and connect with dance influencers and groups in {city}. Find WhatsApp, Telegram, Instagram, Youtube communities tailored to your style, from Salsa to Bachata to Kizomba. Engage with influencers and join vibrant dance networks in {city}.
+  overview:
+    title: Dance in {city} | WeDance
+    description: Discover {style} in {city}, and get notified of new events before they sell out.
     keywords: dance groups {city}, dance influencers {city}, dance communities {city}, dance networks {city}, dance collectives {city}
-    header: Members in {city}
-    subheader: Discover and connect with dance influencers and groups in {city}. Find WhatsApp, Telegram, Instagram, Youtube communities tailored to your style, from Salsa to Bachata to Kizomba. Engage with influencers and join vibrant dance networks in {city}.
+    header: Dance in {city}
+    subheader: Discover {style} in {city}, and get notified of new events before they sell out.
   tips:
     title: Ask Dancers in {city} | WeDance
     description: Find real-time recommendations and get local insights directly from dancers from {city}. Choose your preferred dance style for tailored tips, or ask the community for personalized recommendations. Expect responses typically within 48 hours.
@@ -839,6 +840,7 @@ teaser:
     btn: Ask Locals
 nav:
   search: Search
+  explore: Explore
   events: Events
   festivals: Festivals
   partner: Find Partner
