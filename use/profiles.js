@@ -280,7 +280,7 @@ export const useProfiles = () => {
     {
       label: 'Permanently Closed',
       value: 'Closed',
-    }
+    },
     {
       label: 'Other',
       value: 'Other',
