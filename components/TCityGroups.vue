@@ -48,6 +48,7 @@
           :username="item.username"
           :fallback="item"
           hide-role
+          show-amenities
         />
       </div>
       <div v-else>

@@ -15,20 +15,26 @@
         >
           {{ profile.name || profile.username }}
         </NuxtLink>
+        <div v-if="profile.role" class="text-xs">
+          {{ getLabel(eventRoleOptions, profile.role) }}
+        </div>
         <template v-if="!hideRole">
-          <div v-if="profile.role" class="text-xs">
-            {{ getLabel(eventRoleOptions, profile.role) }}
-          </div>
-          <div v-else class="text-xs">
+          <div class="text-xs">
             <span v-if="profile.gender === 'Male'">Leader</span>
             <span v-else-if="profile.gender === 'Female'">Follower</span>
             <span v-else>Unknown</span>
           </div>
         </template>
-        <div v-show="profile.bio" class="text-gray-700 text-xs">
+        <TProfileStats :profile="profile" class="pb-1" />
+        <div v-show="profile.bio" class="text-xs">
           {{ getExcerpt(profile.bio) }}
         </div>
-        <TProfileStats :profile="profile" />
+
+        <TVenueAmenities
+          v-if="showAmenities && profile.amenities"
+          :amenities="profile.amenities"
+          class="text-xs"
+        />
         <div v-if="!hideButtons" class="flex space-x-2 mt-4">
           <slot name="actions">
             <TContactsGrid :profile="profile" />
@@ -106,6 +112,10 @@ export default {
       default: false,
     },
     hideButtons: {
+      type: Boolean,
+      default: false,
+    },
+    showAmenities: {
       type: Boolean,
       default: false,
     },

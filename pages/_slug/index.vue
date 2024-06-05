@@ -35,23 +35,40 @@ export default {
     } catch (e) {}
 
     if (!pageFound) {
-      const collection = await db
-        .collection('profiles')
-        .where('username', '==', slug)
-        .get()
+      if (slug.includes('id@')) {
+        const id = slug.split('@')[1]
+        const collection = await db
+          .collection('profiles')
+          .doc(id)
+          .get()
 
-      if (collection.docs.length > 0) {
-        const doc = collection.docs[0]
+        if (collection.exists) {
+          profile = collection.data()
+          profile.id = collection.id
 
-        profile = doc.data()
-        profile.id = doc.id
+          trackView('profiles', profile.id, profile.viewsCount || 0)
 
-        trackView('profiles', profile.id, profile.viewsCount || 0)
+          profileFound = true
+        }
+      } else {
+        const collection = await db
+          .collection('profiles')
+          .where('username', '==', slug)
+          .get()
 
-        profileFound = true
+        if (collection.docs.length > 0) {
+          const doc = collection.docs[0]
 
-        if (profile.type === 'City') {
-          redirect(`/explore/${profile.username}`)
+          profile = doc.data()
+          profile.id = doc.id
+
+          trackView('profiles', profile.id, profile.viewsCount || 0)
+
+          profileFound = true
+
+          if (profile.type === 'City') {
+            redirect(`/explore/${profile.username}`)
+          }
         }
       }
     }

@@ -16,6 +16,273 @@ export const useProfiles = () => {
   const getFullProfile = (uid) => load(uid) || {}
   const getProfile = (uid) => read('profiles', uid) || {}
 
+  const amenitiesOptions = [
+    {
+      label: 'Wi-Fi',
+      value: 'WiFi',
+    },
+    {
+      label: 'Air Conditioning',
+      value: 'AirConditioning',
+    },
+    {
+      label: 'Heating',
+      value: 'Heating',
+    },
+    {
+      label: 'Restrooms',
+      value: 'Restrooms',
+    },
+    {
+      label: 'Parking',
+      value: 'Parking',
+    },
+    {
+      label: 'Wheelchair Accessibility',
+      value: 'WheelchairAccessibility',
+    },
+    {
+      label: 'Security',
+      value: 'Security',
+    },
+    {
+      label: 'Coat Check',
+      value: 'CoatCheck',
+    },
+    {
+      label: 'Lockers',
+      value: 'Lockers',
+    },
+    {
+      label: 'Dance Floor',
+      value: 'DanceFloor',
+    },
+    {
+      label: 'Mirrors',
+      value: 'Mirrors',
+    },
+    {
+      label: 'Sound System',
+      value: 'SoundSystem',
+    },
+    {
+      label: 'DJ Booth',
+      value: 'DJBooth',
+    },
+    {
+      label: 'Stage',
+      value: 'Stage',
+    },
+    {
+      label: 'Lighting',
+      value: 'Lighting',
+    },
+    {
+      label: 'Dance Poles',
+      value: 'DancePoles',
+    },
+    {
+      label: 'Ballet Barres',
+      value: 'BalletBarres',
+    },
+    {
+      label: 'Changing Rooms',
+      value: 'ChangingRooms',
+    },
+    {
+      label: 'Shoe Storage',
+      value: 'ShoeStorage',
+    },
+    {
+      label: 'Bar',
+      value: 'Bar',
+    },
+    {
+      label: 'Café',
+      value: 'Cafe',
+    },
+    {
+      label: 'Restaurant',
+      value: 'Restaurant',
+    },
+    {
+      label: 'Food Trucks',
+      value: 'FoodTrucks',
+    },
+    {
+      label: 'Catering Services',
+      value: 'CateringServices',
+    },
+    {
+      label: 'Vending Machines',
+      value: 'VendingMachines',
+    },
+    {
+      label: 'Option to Bring Own Drink',
+      value: 'BringOwnDrink',
+    },
+    {
+      label: 'Lounge Areas',
+      value: 'LoungeAreas',
+    },
+    {
+      label: 'Tables and Chairs',
+      value: 'TablesChairs',
+    },
+    {
+      label: 'Outdoor Seating',
+      value: 'OutdoorSeating',
+    },
+    {
+      label: 'VIP Areas',
+      value: 'VIPAreas',
+    },
+    {
+      label: 'Balconies',
+      value: 'Balconies',
+    },
+    {
+      label: 'Projector and Screen',
+      value: 'ProjectorScreen',
+    },
+    {
+      label: 'Microphones',
+      value: 'Microphones',
+    },
+    {
+      label: 'Speakers',
+      value: 'Speakers',
+    },
+    {
+      label: 'Mixing Board',
+      value: 'MixingBoard',
+    },
+    {
+      label: 'Charging Stations',
+      value: 'ChargingStations',
+    },
+    {
+      label: 'Video Recording Equipment',
+      value: 'VideoRecording',
+    },
+    {
+      label: 'Live Streaming Capabilities',
+      value: 'LiveStreaming',
+    },
+    {
+      label: 'Event Planning Services',
+      value: 'EventPlanning',
+    },
+    {
+      label: 'Ticketing Services',
+      value: 'TicketingServices',
+    },
+    {
+      label: 'Promotion and Marketing Services',
+      value: 'PromotionMarketing',
+    },
+    {
+      label: 'Event Staff',
+      value: 'EventStaff',
+    },
+    {
+      label: 'Decoration Services',
+      value: 'DecorationServices',
+    },
+    {
+      label: 'Games/Arcade Machines',
+      value: 'ArcadeMachines',
+    },
+    {
+      label: 'Photobooth',
+      value: 'Photobooth',
+    },
+    {
+      label: 'Outdoor Games Area',
+      value: 'OutdoorGamesArea',
+    },
+    {
+      label: 'Transportation Services (Shuttle Bus, Taxi Partnerships)',
+      value: 'Shuttle',
+    },
+    {
+      label: 'Merchandise Sales Area',
+      value: 'MerchandiseSales',
+    },
+    {
+      label: 'ATM',
+      value: 'ATM',
+    },
+    {
+      label: 'Accessibility to Public Transport',
+      value: 'PublicTransport',
+    },
+    {
+      label: 'Outdoor Spaces (Gardens, Patios)',
+      value: 'OutdoorSpaces',
+    },
+    {
+      label: 'Scenic Views',
+      value: 'ScenicViews',
+    },
+    {
+      label: 'Open Air Areas',
+      value: 'OpenAirAreas',
+    },
+  ]
+
+  const venueTypes = [
+    {
+      label: 'Dance Studio',
+      value: 'DanceStudio',
+    },
+    {
+      label: 'Hotel',
+      value: 'Hotel',
+    },
+
+    {
+      label: 'Bar/Club',
+      value: 'Club',
+    },
+    {
+      label: 'Restaurant',
+      value: 'Restaurant',
+    },
+    {
+      label: 'Café',
+      value: 'Cafe',
+    },
+    {
+      label: 'Theatre',
+      value: 'Theatre',
+    },
+    {
+      label: 'Cultural Center',
+      value: 'CulturalCenter',
+    },
+    {
+      label: 'Community Center',
+      value: 'CommunityCenter',
+    },
+    {
+      label: 'Sports Hall/Gym',
+      value: 'SportsHall',
+    },
+    {
+      label: 'Event Space',
+      value: 'EventSpace',
+    },
+    {
+      label: 'Open Air',
+      value: 'OpenAir',
+    },
+    {
+      label: 'Other',
+      value: 'Other',
+    },
+  ]
+
   const typeList = [
     {
       label: t('profile.typeList.organiser'),
@@ -219,6 +486,22 @@ export const useProfiles = () => {
     },
     {
       when: (item) => item.type === 'Venue',
+      name: 'venueType',
+      label: 'Venut Type',
+      component: 'TRichSelect',
+      options: venueTypes,
+    },
+    {
+      when: (item) => item.type === 'Venue',
+      name: 'amenities',
+      label: 'Amenities',
+      component: 'TRichSelect',
+      options: amenitiesOptions,
+      multiple: true,
+      closeOnSelect: false,
+    },
+    {
+      when: (item) => item.type === 'Venue',
       name: 'address',
       label: 'Address',
       labelPosition: 'top',
@@ -413,6 +696,8 @@ export const useProfiles = () => {
   ]
 
   return {
+    venueTypes,
+    amenitiesOptions,
     getProfile,
     getFullProfile,
     profileFields,

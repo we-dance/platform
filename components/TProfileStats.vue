@@ -1,5 +1,13 @@
 <template>
   <div class="flex flex-wrap text-xs text-gray-500 space-x-1">
+    <template v-if="profile.type">
+      <TProfileType :type="profile.type" />
+      <div>·</div>
+    </template>
+    <template v-if="profile.venueType">
+      <TVenueType :type="profile.venueType" />
+      <div>·</div>
+    </template>
     <template v-if="profile.reviews && profile.reviews.length">
       <TReviewCount :profile="profile" />
       <div>·</div>

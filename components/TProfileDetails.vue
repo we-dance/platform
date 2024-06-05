@@ -2,6 +2,13 @@
   <div>
     <TPreview v-if="profile.story" :content="profile.story" class="p-4" />
 
+    <div v-if="profile.amenities" class="space-y-2 p-4 border-t">
+      <h3 class="text-xs uppercase font-bold text-gray-500">
+        Amenities
+      </h3>
+      <TVenueAmenities :amenities="profile.amenities" />
+    </div>
+
     <div
       v-if="profile.team && profile.team.length"
       class="space-y-2 p-4 border-t"
@@ -27,33 +34,9 @@
         <dt class="font-bold mr-1">{{ $t('profile.current.label') }}:</dt>
         <dd><TCityLink :place="profile.current" /></dd>
       </dl>
-      <dl v-if="!profile.place && profile.import">
-        <dt class="font-bold mr-1">{{ $t('profile.place.label') }}:</dt>
-        <dd>
-          <TPopupEdit
-            :fields="profileFields.filter((f) => f.name === 'place')"
-            label="Add city"
-            collection="profiles"
-            singular="profile"
-            :item="profile"
-          />
-        </dd>
-      </dl>
       <dl v-if="profile.place">
         <dt class="font-bold mr-1">{{ $t('profile.place.label') }}:</dt>
         <dd><TCityLink :place="profile.place" /></dd>
-      </dl>
-      <dl v-if="!profile.hometown && profile.import">
-        <dt class="font-bold mr-1">{{ $t('profile.hometown.label') }}:</dt>
-        <dd>
-          <TPopupEdit
-            :fields="profileFields.filter((f) => f.name === 'hometown')"
-            label="Add city"
-            collection="profiles"
-            singular="profile"
-            :item="profile"
-          />
-        </dd>
       </dl>
       <dl v-if="profile.hometown">
         <dt class="font-bold mr-1">{{ $t('profile.hometown.label') }}:</dt>

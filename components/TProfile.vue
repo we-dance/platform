@@ -11,9 +11,12 @@
         />
         <TIcon v-else name="undraw_profile_pic" class="w-full rounded-full" />
       </div>
-      <h1 class="leading-none mb-2 px-4 text-center font-bold text-3xl mt-2">
-        {{ profile.name || profile.username }}
-      </h1>
+      <div class="mt-2 mb-2 px-4 text-center">
+        <TVenueType :type="profile.venueType" class="text-xs uppercase" />
+        <h1 class="leading-none text-center font-bold text-3xl">
+          {{ profile.name || profile.username }}
+        </h1>
+      </div>
       <a
         v-if="profile.address"
         :href="profile.address.url"

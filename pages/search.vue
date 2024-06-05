@@ -19,7 +19,11 @@
     <NuxtLink
       v-for="item in response.hits"
       :key="item.id"
-      :to="localePath(`/${item.username}`)"
+      :to="
+        item.username.includes('/')
+          ? localePath(`/id@${item.id}`)
+          : localePath(`/${item.username}`)
+      "
       class="border-b p-4 flex items-center hover:bg-blue-200"
     >
       <div class="w-12 flex-shrink-0">
