@@ -30,7 +30,7 @@ function addressPart(result: any, type: any) {
   return part.long_name
 }
 
-export async function profileToAlgolia(profile: any) {
+export async function profileToAlgolia(profile: any, reviews: any[] = []) {
   let hasAddress = !!profile.address?.place_id
   let hasPlace = !!profile.place
   let cityProfile: any = {}
@@ -53,12 +53,17 @@ export async function profileToAlgolia(profile: any) {
     }
   }
 
-  const reviewsRef = await firestore
-    .collection('stories')
-    .where('receiver.username', '==', profile.username)
-    .get()
+  if (reviews.length === 0) {
+    const reviewsRef = await firestore
+      .collection('stories')
+      .where('receiver.username', '==', profile.username)
+      .get()
 
-  const reviews = reviewsRef.docs.map((doc) => doc.data())
+    reviews = reviewsRef.docs.map((doc) => doc.data())
+  } else {
+    reviews = reviews.filter((r) => r?.receiver?.username === profile.username)
+  }
+
   const reviewsCount = reviews.length
 
   let reviewsAvg = 0
@@ -342,21 +347,24 @@ export async function indexProfiles() {
       self.findIndex((p) => p.data().username === profile.data().username)
   )
 
-  console.log({
-    count: profileDocs.length,
-  })
+  const reviewsRef = await firestore.collection('stories').get()
+  const reviews = reviewsRef.docs.map((doc) => doc.data())
 
   const index = initIndex('profiles')
 
   const objects = []
   const removed = []
+  const profilesCount = profileDocs.length
+  const reviewsCount = reviews.length
 
-  console.log(`Indexing ${profileDocs.length} profiles`)
+  console.log(`Found ${reviewsCount} reviews`)
+  console.log(`Indexing ${profilesCount} profiles`)
   let count = 0
   const errors = []
 
   for (const doc of profileDocs) {
     count++
+    console.log(`Indexing profile ${count} of ${profilesCount}`)
     const profile = {
       id: doc.id,
       ...doc.data(),
@@ -369,7 +377,7 @@ export async function indexProfiles() {
       continue
     }
 
-    const algoliaProfile = await profileToAlgolia(profile)
+    const algoliaProfile = await profileToAlgolia(profile, reviews)
     objects.push(algoliaProfile)
 
     if (!algoliaProfile.locality) {
@@ -380,6 +388,7 @@ export async function indexProfiles() {
     }
   }
 
+  console.log(`Saving ${objects.length} profiles`)
   await index.saveObjects(objects)
 
   console.log(`Indexed ${objects.length} profiles`)
