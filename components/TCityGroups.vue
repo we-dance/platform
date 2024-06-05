@@ -74,11 +74,6 @@
           show-amenities
         />
       </div>
-      <div v-else>
-        <div class="text-xs text-center p-4">
-          There are no members yet.
-        </div>
-      </div>
 
       <div v-if="response.nbPages > 1" class="my-4 flex justify-center">
         <TButton label="Load More" type="primary" @click="loadMore" />
@@ -217,11 +212,7 @@ export default {
         .join(',')
     })
     const filterQuery = computed(() => {
-      if (uid.value) {
-        return ``
-      } else {
-        return 'visibility:Public'
-      }
+      return ``
     })
     watch([currentPage, facetFilters, radius], () => {
       search('', {
@@ -233,7 +224,7 @@ export default {
           ? `${props.city.location.latitude}, ${props.city.location.longitude}`
           : '',
         aroundRadius: radius.value * 1000 || 1,
-        hitsPerPage: uid.value ? 10 : 4,
+        hitsPerPage: uid.value ? 10 : 3,
       })
       if (process.server) return
       window.scrollTo(0, 0)
