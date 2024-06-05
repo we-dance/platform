@@ -13,20 +13,14 @@
 
     <div class="border-t border-b">
       <div class="space-y-2 p-4">
+        <TInputButtons v-model="filters['type']" :options="tabs" />
+
         <div v-if="response.facets" class="gap-2 flex flex-wrap items-center">
           <t-rich-select
             v-if="false"
             v-model="groupType"
             placeholder="Platform"
             :options="groupTypes"
-            clearable
-            hide-search-box
-          />
-
-          <t-rich-select
-            v-model="filters['type']"
-            placeholder="Role"
-            :options="facets['type']"
             clearable
             hide-search-box
           />
@@ -91,6 +85,13 @@ export default {
     },
   },
   setup(props, { root }) {
+    const tabs = [
+      { label: 'Places', value: 'Venue' },
+      { label: 'Groups', value: 'Organiser' },
+      { label: 'Artists', value: 'Artist' },
+      { label: 'Dancers', value: 'Dancer' },
+    ]
+
     const groupTypes = [
       {
         label: 'Whatsapp',
@@ -146,7 +147,9 @@ export default {
       style: getFacetOptions('style'),
     }))
     function load() {
-      filters.value = {}
+      filters.value = {
+        type: 'Venue',
+      }
       query.value = ''
     }
     onMounted(load)
@@ -205,6 +208,7 @@ export default {
       }
     }
     return {
+      tabs,
       groupType,
       groupTypes,
       radiusOptions,
