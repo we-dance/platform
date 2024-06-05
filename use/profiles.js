@@ -278,6 +278,10 @@ export const useProfiles = () => {
       value: 'OpenAir',
     },
     {
+      label: 'Permanently Closed',
+      value: 'Closed',
+    }
+    {
       label: 'Other',
       value: 'Other',
     },
