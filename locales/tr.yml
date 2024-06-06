@@ -242,7 +242,7 @@ profile:
     placeholder: Stil
   permission:
     label: Ücretsiz promosyon ister misin?
-    description: 'Etkinliğinizin linkini [Telegram](https://t.me/+aRIIZcXpBhJkYmUy) adresinden bize gönderin, biz de Telegram, Instagram ve Facebook hesaplarımızdan duyuralım.'
+    description: ''
   jobs:
     label: Şu konularda yardımcı olabilirim
     description: 'Toplumumuza nasıl yardımcı olabilirsiniz? Hangi konuda iyisiniz? Örneğin: tasarım, programlama, pazarlama, sosyal medya vb.'
@@ -576,7 +576,7 @@ event:
     description: Link to your facebook event. Leave empty if you don't have one.
   promo:
     label: Sosyal medyada duyurmak mı?
-    description: 'Etkinliğinizin linkini [Telegram](https://t.me/+aRIIZcXpBhJkYmUy) adresinden bize gönderin, biz de Telegram, Instagram ve Facebook hesaplarımızdan duyuralım.'
+    description: ''
   confirmation:
     label: Confirmation
     description: This message will be shown after people joined the guest list. Explain next steps to participate in the event (ticket, payments, dress-code, invite friends, etc.)
