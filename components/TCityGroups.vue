@@ -227,9 +227,7 @@ export default {
       amenities: getFacetOptions('amenities'),
     }))
     function load() {
-      filters.value = {
-        type: 'Venue',
-      }
+      filters.value = {}
       query.value = ''
     }
     onMounted(load)
@@ -241,6 +239,10 @@ export default {
         .join(',')
     })
     const filterQuery = computed(() => {
+      if (!filters.value?.type) {
+        return `type:Venue OR type:Organiser OR type:Artist`
+      }
+
       return ``
     })
     watch([currentPage, facetFilters, radius], () => {
@@ -288,6 +290,7 @@ export default {
       }
     }
     return {
+      filterQuery,
       tabs,
       groupType,
       groupTypes,
