@@ -28,7 +28,7 @@ export default {
       }
 
       return (
-        this.reviews.map((r) => Number(r.stars)).reduce((p, c) => p + c, 0) /
+        this.reviews.map((r) => Number(r.stars) || 5).reduce((p, c) => p + c, 0) /
         this.reviewsCount
       )
     },

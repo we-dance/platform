@@ -69,7 +69,7 @@ export async function profileToAlgolia(profile: any, reviews: any[] = []) {
   let reviewsAvg = 0
   if (reviewsCount > 0) {
     reviewsAvg =
-      reviews.map((r) => Number(r.stars)).reduce((p, c) => p + c, 0) /
+      reviews.map((r) => Number(r.stars) || 5).reduce((p, c) => p + c, 0) /
       reviewsCount
   }
 
