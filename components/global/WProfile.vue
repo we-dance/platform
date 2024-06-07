@@ -33,7 +33,8 @@
         <TVenueAmenities
           v-if="showAmenities && profile.amenities"
           :amenities="profile.amenities"
-          class="text-xs"
+          wrapper-class="text-xs flex flex-wrap gap-1 mt-2"
+          item-class="rounded-full bg-orange-100 px-1 block"
         />
         <div v-if="!hideButtons" class="mt-4">
           <div class="flex gap-2">

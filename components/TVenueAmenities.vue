@@ -1,6 +1,10 @@
 <template>
-  <ul class="ml-4">
-    <li v-for="amenity in amenitiesList" :key="amenity.value" class="list-disc">
+  <ul :class="wrapperClass">
+    <li
+      v-for="amenity in amenitiesList"
+      :key="amenity.value"
+      :class="itemClass"
+    >
       {{ amenity.label }}
     </li>
   </ul>
@@ -15,6 +19,14 @@ export default {
     amenities: {
       type: Array,
       required: true,
+    },
+    wrapperClass: {
+      type: String,
+      default: 'ml-4',
+    },
+    itemClass: {
+      type: String,
+      default: 'list-disc',
     },
   },
   setup(props) {
