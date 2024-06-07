@@ -245,7 +245,7 @@ profile:
     placeholder: Style
   permission:
     label: Do you want free promo?
-    description: 'Send us link to your event on [Telegram](https://t.me/+aRIIZcXpBhJkYmUy) and we will announce it on our Telegram, Instagram and Facebook.'
+    description: ''
   jobs:
     label: I can help with
     description: 'How can you help our community? What are you good at? For example: design, programming, marketing, social media, etc.'
@@ -581,7 +581,7 @@ event:
     description: Link to your facebook event. Leave empty if you don't have one.
   promo:
     label: Announce on social media?
-    description: 'Send us link to your event on [Telegram](https://t.me/+aRIIZcXpBhJkYmUy) and we will announce it on our Telegram, Instagram and Facebook.'
+    description: ''
   confirmation:
     label: Confirmation
     description: This message will be shown after people joined the guest list. Explain next steps to participate in the event (ticket, payments, dress-code, invite friends, etc.)
