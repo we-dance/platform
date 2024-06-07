@@ -1,6 +1,6 @@
 <template>
   <div>
-    <TCityHeader :profile="city" view="groups" />
+    <TCityHeader :profile="city" view="groups" :global="global" />
 
     <div class="p-4">
       <h1 class="text-2xl font-bold">
@@ -46,12 +46,31 @@
 
         <div v-if="response.facets" class="gap-2 flex items-center">
           <t-rich-select
-            v-if="false"
-            v-model="groupType"
-            placeholder="Platform"
-            :options="groupTypes"
+            v-if="global"
+            v-model="filters['platforms']"
+            placeholder="Platforms"
+            :options="facets['platforms']"
             clearable
             hide-search-box
+            class="flex-grow"
+          />
+          <t-rich-select
+            v-if="global"
+            v-model="filters['country']"
+            placeholder="Country"
+            :options="facets['country']"
+            clearable
+            hide-search-box
+            class="flex-grow"
+          />
+          <t-rich-select
+            v-if="global"
+            v-model="filters['locality']"
+            placeholder="Locality"
+            :options="facets['locality']"
+            clearable
+            hide-search-box
+            class="flex-grow"
           />
 
           <t-rich-select
@@ -114,7 +133,7 @@
         :title="$t('home.features.travel.title')"
         :description="$t('home.features.travel.description')"
         :button="$t('home.features.travel.action')"
-        :url="localePath(`/explore/${city.username}/tips`)"
+        :url="localePath(`/explore/${slug}/tips`)"
       />
       <LandingFeature
         image="/img/interviews.svg"
@@ -153,12 +172,21 @@ export default {
       type: Object,
       default: () => ({}),
     },
+    global: {
+      type: Boolean,
+      default: false,
+    },
+  },
+  computed: {
+    slug() {
+      return this.global ? 'global' : this.city.username
+    },
   },
   setup(props, { root }) {
     const tabs = [
+      { label: 'Artists', value: 'Artist' },
       { label: 'Places', value: 'Venue' },
       { label: 'Hosts', value: 'Organiser' },
-      { label: 'Artists', value: 'Artist' },
       { label: 'Dancers', value: 'Dancer' },
     ]
 
@@ -224,9 +252,12 @@ export default {
       style: getFacetOptions('style'),
       venueType: getFacetOptions('venueType'),
       amenities: getFacetOptions('amenities'),
+      platforms: getFacetOptions('platforms'),
+      country: getFacetOptions('country'),
+      locality: getFacetOptions('locality'),
     }))
     function load() {
-      filters.value = {}
+      filters.value = props.global ? { type: 'Artist' } : {}
       query.value = ''
     }
     onMounted(load)
@@ -245,18 +276,21 @@ export default {
       return ``
     })
     watch([currentPage, facetFilters, radius], () => {
-      search('', {
+      const searcParams = {
         filters: `${filterQuery.value}`,
         facets: Object.keys(facets.value),
         facetFilters: facetFilters.value,
         page: currentPage.value - 1,
-        aroundLatLng: radius.value
-          ? `${props.city.location.latitude}, ${props.city.location.longitude}`
-          : '',
-        aroundRadius: radius.value * 1000 || 1,
         hitsPerPage: uid.value ? 10 : 3,
-      })
-      if (process.server) return
+      }
+      if (!props.global) {
+        searcParams.aroundLatLng = radius.value
+          ? `${props.city.location.latitude}, ${props.city.location.longitude}`
+          : ''
+        searcParams.aroundRadius = radius.value * 1000 || 50000
+      }
+      search('', searcParams)
+
       window.scrollTo(0, 0)
     })
     const { getStyleName } = useStyles()

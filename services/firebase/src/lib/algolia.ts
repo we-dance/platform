@@ -34,30 +34,6 @@ export async function profileToAlgolia(profile: any, reviews: any[] = []) {
   let hasAddress = !!profile.address?.place_id
   let hasPlace = !!profile.place
   let cityProfile: any = {}
-  let platforms: string[] = []
-  const fields = [
-    'website',
-    'email',
-    'youtube',
-    'spotify',
-    'tiktok',
-    'linkedin',
-    'whatsapp',
-    'instagram',
-    'threads',
-    'twitter',
-    'facebook',
-    'telegram',
-    'couchsurfing',
-    'airbnb',
-    'blablacar',
-  ]
-
-  for (const field of fields) {
-    if (profile[field]) {
-      platforms.push(field)
-    }
-  }
 
   if (!hasAddress && hasPlace) {
     const cityProfileDocs = (
@@ -111,11 +87,8 @@ export async function profileToAlgolia(profile: any, reviews: any[] = []) {
   const result: any = {
     objectID: profile.id,
     id: profile.id,
-    platforms,
     username: profile.username,
     name: profile.name,
-    instagram: profile.instagram,
-    facebook: profile.facebook,
     photo: profile.photo,
     height: profile.height,
     weight: profile.weight,
@@ -151,6 +124,35 @@ export async function profileToAlgolia(profile: any, reviews: any[] = []) {
     daysUsed: profile.daysUsed,
     _tags: profile.styles ? Object.keys(profile.styles) : [],
   }
+
+  let platforms: string[] = []
+  const fields = [
+    'website',
+    'email',
+    'youtube',
+    'spotify',
+    'tiktok',
+    'linkedin',
+    'whatsapp',
+    'instagram',
+    'threads',
+    'twitter',
+    'facebook',
+    'telegram',
+    'couchsurfing',
+    'airbnb',
+    'blablacar',
+    'vk',
+  ]
+
+  for (const field of fields) {
+    if (profile[field]) {
+      platforms.push(field)
+    }
+
+    result[field] = profile[field] || ''
+  }
+  result.platforms = platforms
 
   if (hasAddress) {
     result._geoloc = {

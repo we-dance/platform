@@ -70,6 +70,7 @@ export default {
       'threads',
       'twitter',
       'facebook',
+      'vk',
       'telegram',
       'couchsurfing',
       'airbnb',

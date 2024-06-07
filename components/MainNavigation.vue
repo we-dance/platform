@@ -6,9 +6,34 @@
       <TIcon name="logo-horizontal-dark" />
     </TButton>
 
-    <div class="flex justify-start">
-      <TLanguageSwitcher />
-    </div>
+    <TButton
+      allow-guests
+      :to="localePath('/')"
+      icon="trending"
+      :label="$t('nav.global')"
+      type="nav"
+    />
+
+    <TButton
+      allow-guests
+      :to="
+        currentCity
+          ? localePath(`/explore/${city.username}`)
+          : localePath('/explore')
+      "
+      :label="$t('nav.local')"
+      icon="place"
+      type="nav"
+    />
+
+    <TButton
+      v-if="featureFindPartner"
+      allow-guests
+      :to="localePath('/find-partner/start')"
+      icon="people"
+      :label="$t('nav.partner')"
+      type="nav"
+    />
 
     <TButton
       allow-guests
@@ -20,29 +45,8 @@
 
     <TButton
       allow-guests
-      :to="
-        currentCity
-          ? localePath(`/explore/${city.username}`)
-          : localePath('/explore')
-      "
-      :label="$t('nav.explore')"
-      icon="place"
-      type="nav"
-    />
-    <TButton
-      allow-guests
-      :to="localePath('/explore/global')"
-      icon="calendar"
-      :label="$t('nav.festivals')"
-      type="nav"
-    />
-
-    <TButton
-      v-if="featureFindPartner"
-      allow-guests
-      :to="localePath('/find-partner/start')"
-      icon="people"
-      :label="$t('nav.partner')"
+      :to="localePath('/about')"
+      :label="$t('nav.about')"
       type="nav"
     />
 
@@ -114,6 +118,10 @@
         class="bg-primary border-none text-white hover:bg-dark"
       />
     </template>
+
+    <div class="flex justify-start">
+      <TLanguageSwitcher />
+    </div>
 
     <div class="h-8"></div>
 

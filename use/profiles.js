@@ -383,6 +383,11 @@ export const useProfiles = () => {
       placeholder: 'https://www.facebook.com/username',
     },
     {
+      name: 'vk',
+      label: 'VK',
+      placeholder: 'https://vk.com/username',
+    },
+    {
       name: 'whatsapp',
       label: 'Whatsapp',
       placeholder: 'https://wa.me/0000000000000',

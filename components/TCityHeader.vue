@@ -24,6 +24,12 @@
         :tabs="[
           {
             name: 'Overview',
+            to: localePath(`/`),
+            current: view === 'groups',
+            hidden: !global,
+          },
+          {
+            name: 'Overview',
             to: localePath(`/explore/${slug}`),
             current: view === 'groups',
             hidden: global,
