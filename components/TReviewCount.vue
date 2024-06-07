@@ -1,7 +1,7 @@
 <template>
   <router-link
     v-if="reviewsCount"
-    :to="`/${profile.username}?view=reviews`"
+    :to="`/${username}?view=reviews`"
     class="flex"
   >
     <TIcon class="h-4 w-4" name="star" />
@@ -11,16 +11,31 @@
 </template>
 
 <script>
+import firebase from 'firebase/app'
+import 'firebase/firestore'
+import { sortBy } from '~/utils'
+
 export default {
   props: {
-    profile: {
-      type: Object,
-      default: () => ({}),
+    username: {
+      type: String,
+      default: '',
+    },
+  },
+  data: () => ({
+    reviews: [],
+  }),
+  async mounted() {
+    await this.load()
+  },
+  watch: {
+    username() {
+      this.load()
     },
   },
   computed: {
-    reviews() {
-      return this.profile.reviews || []
+    reviewsCount() {
+      return this.reviews.length || 0
     },
     reviewsAvg() {
       if (!this.reviewsCount) {
@@ -33,8 +48,30 @@ export default {
           .reduce((p, c) => p + c, 0) / this.reviewsCount
       )
     },
-    reviewsCount() {
-      return this.reviews.length || 0
+  },
+  methods: {
+    async load() {
+      if (!this.username) {
+        return
+      }
+
+      const firestore = firebase.firestore()
+
+      let newReviews = []
+
+      if (this.username) {
+        const reviewsRef = await firestore
+          .collection('stories')
+          .where('receiver.username', '==', this.username)
+          .get()
+
+        newReviews = reviewsRef.docs.map((doc) => ({
+          ...doc.data(),
+          id: doc.id,
+        }))
+      }
+
+      this.reviews = newReviews.sort(sortBy('-createdAt'))
     },
   },
 }

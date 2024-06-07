@@ -91,6 +91,7 @@
           :username="item.username"
           :fallback="item"
           hide-role
+          no-load
           show-amenities
         />
       </div>

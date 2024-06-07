@@ -63,10 +63,12 @@ export default {
     const { id, doc: loadedProfile, find, sync } = useDoc('profiles')
     const { eventRoleOptions } = useEvents()
 
-    if (props.fallback?.id) {
-      sync(props.fallback.id)
-    } else {
-      find('username', props.username)
+    if (!props.noLoad) {
+      if (props.fallback?.id) {
+        sync(props.fallback.id)
+      } else {
+        find('username', props.username)
+      }
     }
 
     const profile = computed(() => {
@@ -116,6 +118,10 @@ export default {
       default: false,
     },
     showAmenities: {
+      type: Boolean,
+      default: false,
+    },
+    noLoad: {
       type: Boolean,
       default: false,
     },

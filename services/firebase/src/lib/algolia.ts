@@ -34,6 +34,30 @@ export async function profileToAlgolia(profile: any, reviews: any[] = []) {
   let hasAddress = !!profile.address?.place_id
   let hasPlace = !!profile.place
   let cityProfile: any = {}
+  let platforms: string[] = []
+  const fields = [
+    'website',
+    'email',
+    'youtube',
+    'spotify',
+    'tiktok',
+    'linkedin',
+    'whatsapp',
+    'instagram',
+    'threads',
+    'twitter',
+    'facebook',
+    'telegram',
+    'couchsurfing',
+    'airbnb',
+    'blablacar',
+  ]
+
+  for (const field of fields) {
+    if (profile[field]) {
+      platforms.push(field)
+    }
+  }
 
   if (!hasAddress && hasPlace) {
     const cityProfileDocs = (
@@ -87,6 +111,7 @@ export async function profileToAlgolia(profile: any, reviews: any[] = []) {
   const result: any = {
     objectID: profile.id,
     id: profile.id,
+    platforms,
     username: profile.username,
     name: profile.name,
     instagram: profile.instagram,
@@ -315,12 +340,14 @@ export async function indexInit() {
 }
 
 export async function indexProfiles() {
-  const onlyNew = false
+  const onlyNew = true
   let profileDocs: any[] = []
 
   if (onlyNew) {
     const since = new Date()
     since.setHours(0, 0, 0, 0)
+    since.setDate(since.getDate() - 1)
+
     const recentlyCreated = (
       await firestore
         .collection('profiles')
@@ -364,7 +391,7 @@ export async function indexProfiles() {
 
   for (const doc of profileDocs) {
     count++
-    console.log(`Indexing profile ${count} of ${profilesCount}`)
+
     const profile = {
       id: doc.id,
       ...doc.data(),
@@ -378,6 +405,11 @@ export async function indexProfiles() {
     }
 
     const algoliaProfile = await profileToAlgolia(profile, reviews)
+    console.log(
+      `Indexing profile ${count} of ${profilesCount} | ${
+        algoliaProfile.username
+      }: ${algoliaProfile.platforms.join(', ')}`
+    )
     objects.push(algoliaProfile)
 
     if (!algoliaProfile.locality) {

@@ -8,10 +8,8 @@
       <TVenueType :type="profile.venueType" />
       <div>·</div>
     </template>
-    <template v-if="profile.reviews && profile.reviews.length">
-      <TReviewCount :profile="profile" />
-      <div>·</div>
-    </template>
+    <TReviewCount :username="profile.username" />
+    <div>·</div>
     <div>
       {{ $tc('views', profile.viewsCount, { count: profile.viewsCount }) }}
     </div>
@@ -35,9 +33,6 @@ export default {
     },
   },
   computed: {
-    reviewsCount() {
-      return this.profile.reviewsCount
-    },
     subscribersCount() {
       return this.profile?.watch?.usernames?.length || 0
     },

@@ -38,15 +38,6 @@ export default {
     }
   },
   async mounted() {
-    let oldReviews = this.profile.reviews || []
-    oldReviews = oldReviews.map((review) => ({
-      ...review,
-      createdAt: +new Date(review.createdAt),
-      createdBy: review.author.id,
-      username: review.author.username,
-      type: 'review',
-    }))
-
     const firestore = firebase.firestore()
 
     let newReviews = []
@@ -55,7 +46,6 @@ export default {
       const reviewsRef = await firestore
         .collection('stories')
         .where('receiver.username', '==', this.profile.username)
-        .orderBy('createdAt', 'desc')
         .get()
 
       newReviews = reviewsRef.docs.map((doc) => ({
@@ -64,7 +54,7 @@ export default {
       }))
     }
 
-    this.reviews = [...oldReviews, ...newReviews].sort(sortBy('-createdAt'))
+    this.reviews = newReviews.sort(sortBy('-createdAt'))
   },
 }
 </script>
