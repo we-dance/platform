@@ -129,7 +129,7 @@
         button="Add Recommendation"
         :url="localePath(`/reviews/add?city=${city.cityPlaceId}`)"
         alternative="Donate"
-        alternative-url="/donate"
+        alternative-url="https://wedance.vip/donate"
         bottom="Every donation helps us improve the platform and grow the dance community."
       />
     </div>

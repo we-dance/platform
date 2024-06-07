@@ -16,7 +16,7 @@
       </div>
       <div v-if="button" class="flex gap-4">
         <TButton :to="url" type="primary">{{ button }}</TButton>
-        <TButton v-if="alternative" :to="alternativeUrl" type="secondary">
+        <TButton v-if="alternative" :href="alternativeUrl" type="secondary">
           {{ alternative }}
         </TButton>
       </div>
