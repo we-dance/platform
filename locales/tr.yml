@@ -765,7 +765,7 @@ explore:
   nav:
     festivals: Festivals
     online: Çevrimiçi
-    experts: Ask Experts
+    experts: Q&A
     parties: Parties
     classes: Classes
     profiles: Üyeler
@@ -825,10 +825,13 @@ teaser:
     description: Skip the search—ask local dancers for event tips in any city!
     btn: Ask Locals
 nav:
+  about: About
   search: Search
   explore: Explore
   events: Events
   festivals: Festivals
+  global: Global
+  local: Local
   partner: Find Partner
   dance: Dans Stilleri
   contribute: Contribute
