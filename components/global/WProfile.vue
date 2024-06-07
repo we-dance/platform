@@ -35,10 +35,31 @@
           :amenities="profile.amenities"
           class="text-xs"
         />
-        <div v-if="!hideButtons" class="flex space-x-2 mt-4">
-          <slot name="actions">
-            <TContactsGrid :profile="profile" />
-          </slot>
+        <div v-if="!hideButtons" class="mt-4">
+          <div class="flex gap-2">
+            <TReaction
+              :label="$t('Subscribe')"
+              :toggled-label="$t('Subscribed')"
+              toggled-class="bg-green-500"
+              field="watch"
+              type="primary"
+              hide-count
+              :item="profile"
+              collection="profiles"
+            />
+            <TButton
+              type="secondary"
+              icon="star"
+              :to="`/reviews/add?receiver=${profile.username}`"
+              label="Rate"
+            />
+          </div>
+
+          <div class="flex space-x-2 mt-4 items-center">
+            <slot name="actions">
+              <TContactsGrid :profile="profile" />
+            </slot>
+          </div>
         </div>
       </div>
       <slot name="right" />

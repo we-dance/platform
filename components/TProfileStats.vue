@@ -8,8 +8,6 @@
       <TVenueType :type="profile.venueType" />
       <div>·</div>
     </template>
-    <TReviewCount :username="profile.username" />
-    <div>·</div>
     <div>
       {{ $tc('views', profile.viewsCount, { count: profile.viewsCount }) }}
     </div>
@@ -21,6 +19,7 @@
         })
       }}
     </div>
+    <TReviewCount :profile="profile" />
   </div>
 </template>
 

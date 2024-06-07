@@ -1,7 +1,7 @@
 <template>
   <router-link
-    v-if="reviewsCount"
-    :to="`/${username}?view=reviews`"
+    v-if="profile.username && reviewsCount"
+    :to="`/${profile.username}?view=reviews`"
     class="flex"
   >
     <TIcon class="h-4 w-4" name="star" />
@@ -17,9 +17,9 @@ import { sortBy } from '~/utils'
 
 export default {
   props: {
-    username: {
-      type: String,
-      default: '',
+    profile: {
+      type: Object,
+      default: () => ({}),
     },
   },
   data: () => ({
@@ -27,9 +27,13 @@ export default {
   }),
   computed: {
     reviewsCount() {
-      return this.reviews.length || 0
+      return this.profile.reviewsCount || this.reviews.length || 0
     },
     reviewsAvg() {
+      if (this.profile?.reviewsAvg) {
+        return this.profile.reviewsAvg
+      }
+
       if (!this.reviewsCount) {
         return 0
       }
@@ -42,7 +46,7 @@ export default {
     },
   },
   watch: {
-    username() {
+    'profile.username'() {
       this.load()
     },
   },
@@ -51,7 +55,7 @@ export default {
   },
   methods: {
     async load() {
-      if (!this.username) {
+      if (!this.profile?.username) {
         return
       }
 
@@ -62,7 +66,7 @@ export default {
       if (this.username) {
         const reviewsRef = await firestore
           .collection('stories')
-          .where('receiver.username', '==', this.username)
+          .where('receiver.username', '==', this.profile.username)
           .get()
 
         newReviews = reviewsRef.docs.map((doc) => ({
