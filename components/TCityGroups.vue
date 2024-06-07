@@ -116,18 +116,21 @@
         :url="localePath(`/explore/${city.username}/tips`)"
       />
       <LandingFeature
+        image="/img/interviews.svg"
+        title="Promote & Earn"
+        description="If you're a dancer, influencer, or just love sharing your passion for dance, this is your chance to shine and earn."
+        button="Learn More"
+        :url="localePath('/promoter')"
+      />
+      <LandingFeature
         image="/img/volunteer.svg"
         title="Contribute"
         description="Help us grow the dance community by adding your favorite places, artists, and events."
         button="Add Recommendation"
         :url="localePath(`/reviews/add?city=${city.cityPlaceId}`)"
-      />
-      <LandingFeature
-        image="/img/interviews.svg"
-        title="Promote & Earn"
-        description="If you're a dancer, influencer, or just love sharing your passion for dance, this is your chance to shine and earn."
-        button="Read More"
-        :url="localePath('/promoter')"
+        alternative="Donate"
+        alternative-url="/donate"
+        bottom="Every donation helps us improve the platform and grow the dance community."
       />
     </div>
   </div>

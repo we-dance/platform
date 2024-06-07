@@ -14,9 +14,15 @@
       <div class="text-center">
         {{ description }}
       </div>
-      <div v-if="button">
+      <div v-if="button" class="flex gap-4">
         <TButton :to="url" type="primary">{{ button }}</TButton>
+        <TButton v-if="alternative" :to="alternativeUrl" type="secondary">
+          {{ alternative }}
+        </TButton>
       </div>
+    </div>
+    <div v-if="bottom" class="mt-4 text-xs text-center">
+      {{ bottom }}
     </div>
   </div>
 </template>
@@ -41,6 +47,18 @@ export default {
       default: '',
     },
     url: {
+      type: String,
+      default: '',
+    },
+    bottom: {
+      type: String,
+      default: '',
+    },
+    alternative: {
+      type: String,
+      default: '',
+    },
+    alternativeUrl: {
       type: String,
       default: '',
     },
