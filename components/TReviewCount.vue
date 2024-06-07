@@ -25,14 +25,6 @@ export default {
   data: () => ({
     reviews: [],
   }),
-  async mounted() {
-    await this.load()
-  },
-  watch: {
-    username() {
-      this.load()
-    },
-  },
   computed: {
     reviewsCount() {
       return this.reviews.length || 0
@@ -48,6 +40,14 @@ export default {
           .reduce((p, c) => p + c, 0) / this.reviewsCount
       )
     },
+  },
+  watch: {
+    username() {
+      this.load()
+    },
+  },
+  async mounted() {
+    await this.load()
   },
   methods: {
     async load() {
