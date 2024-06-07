@@ -11,7 +11,7 @@
 
     <div class="text-xs p-4 border-b">
       Searching a city?
-      <NuxtLink class="underline hover:no-underline font-bold" to="/explore"
+      <NuxtLink class="underline hover:no-underline font-bold" :to="`/explore?q=${query}`"
         >Choose City</NuxtLink
       >
     </div>
