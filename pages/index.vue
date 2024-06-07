@@ -36,23 +36,23 @@
           image="/img/dance-travel.svg"
           :title="$t('home.features.travel.title')"
           :description="$t('home.features.travel.description')"
-          :cta-label="$t('home.features.travel.action')"
-          :cta-link="localePath('/where-can-i-dance')"
+          :button="$t('home.features.travel.action')"
+          :url="localePath('/where-can-i-dance')"
         />
         <LandingFeature
           image="/img/event-calendar.svg"
           :title="$t('home.features.explore.title')"
           :description="$t('home.features.explore.description')"
-          :cta-label="$t('home.features.explore.action')"
-          :cta-link="localePath('/explore/global')"
+          :button="$t('home.features.explore.action')"
+          :url="localePath('/explore/global')"
         />
         <LandingFeature
           v-if="featureFindPartner"
           image="/img/dance-partners.svg"
           :title="$t('home.features.partner.title')"
           :description="$t('home.features.partner.description')"
-          :cta-label="$t('home.features.partner.action')"
-          :cta-link="localePath('/find-partner/start')"
+          :button="$t('home.features.partner.action')"
+          :url="localePath('/find-partner/start')"
         />
       </div>
       <LandingNumbersLive class="mt-8" />

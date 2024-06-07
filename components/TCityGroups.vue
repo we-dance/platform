@@ -98,43 +98,38 @@
       <div v-if="!uid || response.nbPages > 1" class="my-4 flex justify-center">
         <TButton label="Load More" type="primary" @click="loadMore" />
       </div>
+    </div>
 
-      <WTeaser
+    <div class="px-4 my-4 grid grid-cols-1 gap-4">
+      <LandingFeature
         v-if="!uid"
         :title="$t('teaser.profile.title')"
         :description="$t('teaser.profile.description')"
         :button="$t('teaser.profile.btn')"
-        url="/signin"
-        class="mt-4"
+        :url="localePath('/signin')"
+      />
+      <LandingFeature
+        image="/img/dance-travel.svg"
+        :title="$t('home.features.travel.title')"
+        :description="$t('home.features.travel.description')"
+        :button="$t('home.features.travel.action')"
+        :url="localePath(`/explore/${city.username}/tips`)"
+      />
+      <LandingFeature
+        image="/img/volunteer.svg"
+        title="Contribute"
+        description="Help us grow the dance community by adding your favorite places, artists, and events."
+        button="Add Recommendation"
+        :url="localePath(`/reviews/add?city=${city.cityPlaceId}`)"
+      />
+      <LandingFeature
+        image="/img/interviews.svg"
+        title="Promote & Earn"
+        description="If you're a dancer, influencer, or just love sharing your passion for dance, this is your chance to shine and earn."
+        button="Read More"
+        :url="localePath('/promoter')"
       />
     </div>
-
-    <WTeaser
-      title="Contribute"
-      description="Help us grow the dance community by adding your favorite places, artists, and events."
-      button="Add Recommendation"
-      :url="localePath(`/reviews/add?city=${city.cityPlaceId}`)"
-      class="w-full"
-      background="bg-green-100"
-    />
-
-    <WTeaser
-      :title="$t('teaser.feed.title')"
-      :description="$t('teaser.feed.description')"
-      :button="$t('teaser.feed.btn')"
-      :url="localePath(`/explore/${city.username}/tips`)"
-      class="w-full"
-      background="bg-orange-100"
-    />
-
-    <WTeaser
-      title="Promote & Earn"
-      description="If you're a dancer, influencer, or just love sharing your passion for dance, this is your chance to shine and earn."
-      button="Read More"
-      :url="localePath('/promoter')"
-      class="w-full"
-      background="bg-red-100"
-    />
   </div>
 </template>
 

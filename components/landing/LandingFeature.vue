@@ -1,6 +1,6 @@
 <template>
   <div class="p-4 bg-light rounded shadow">
-    <div class="flex justify-center ">
+    <div v-if="image" class="flex justify-center ">
       <div
         class="flex items-center justify-center w-20 h-20 bg-white rounded-full"
       >
@@ -14,8 +14,8 @@
       <div class="text-center">
         {{ description }}
       </div>
-      <div v-if="ctaLabel">
-        <TButton :to="ctaLink" type="primary">{{ ctaLabel }}</TButton>
+      <div v-if="button">
+        <TButton :to="url" type="primary">{{ button }}</TButton>
       </div>
     </div>
   </div>
@@ -36,11 +36,11 @@ export default {
       type: String,
       default: '',
     },
-    ctaLabel: {
+    button: {
       type: String,
       default: '',
     },
-    ctaLink: {
+    url: {
       type: String,
       default: '',
     },
