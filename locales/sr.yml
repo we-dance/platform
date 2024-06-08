@@ -179,7 +179,16 @@ profile:
     label: Username
     before: Use only letters, numbers, underscores and periods.
   community: Плешем у
-  type: Тип
+  type:
+    label: Type
+    tips: |
+      Select the option that best represents your main role or contribution in the dance community:
+        -	**Venue**: You own or manage a place where dance events are held.
+        -	**Artist**: You offer skills such as teaching, DJing, or performing.
+        -	**Organiser**: You organize dance events or activities.
+        -	**Dancer**: You primarily participate in dance as an enthusiast or hobbyist.
+
+      Choose the type that aligns with your primary business or purpose on WeDance.
   name:
     label: Name
     before: If you want to remain anonym use your first name.
@@ -223,7 +232,23 @@ profile:
   title: Community
   styles:
     label: Dance
-    tips: Mark up to 4 favorite dances that will be highlighted in your poster
+    tips: |
+      **Select Dance Styles:** Start by choosing the dance styles you participate in, regardless of your proficiency level. This step is crucial for accurately representing your dance interests and abilities.
+
+      Selecting your dance styles is essential because it:
+      - **Showcases Your Range:** Highlights all the styles you are involved in, from beginner to professional levels.
+      - **Connects You with Others:** Enables better matching with dance partners, instructors, and events.
+      - **Personalizes Your Profile:** Provides a clear and detailed picture of your dance background and preferences.
+
+      **Select Level:** After selecting your styles, you can specify your proficiency level:
+      - **Beginner:** You are just starting to learn the dance style.
+      - **Intermediate:** You have a good understanding and can perform with some confidence.
+      - **Advanced:** You are highly skilled and can dance complex routines with ease.
+      - **Professional:** You have expert-level proficiency, often teaching or performing professionally.
+
+      Choose the level that accurately reflects your experience and skills for each dance style.
+
+      **Highlight Styles:** Click the heart icon to highlight the dance styles you are most passionate about or want to showcase.
   place:
     label: Living in
     before: What's your permanent residence?
