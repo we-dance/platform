@@ -501,9 +501,11 @@ import:
       description: Link to Facebook, Eventbrite, go&dance, and other SEO-optimized websites to easily import events. For more convenience, [sync your events](/settings/calendars) directly from platforms like Facebook and Google Calendar.
     add: Create new event
 event:
-  attend: Join Guest List
-  attendCallToAction: Join guest list to find tickets
-  attending: On the Guest List
+  save: Speichern
+  saved: Saved
+  attend: Attend
+  attendCallToAction: Add this event to your profile calendar and receive notifications by clicking “Attend” to join the guest list or “Save” to track without joining.
+  attending: Attending
   getTicket: Get Ticket
   share: Teilen
   guests: Guests
