@@ -33,7 +33,11 @@ export default {
   },
   computed: {
     subscribersCount() {
-      return this.profile?.watch?.usernames?.length || 0
+      return (
+        this.profile?.subscribersCount ||
+        this.profile?.watch?.usernames?.length ||
+        0
+      )
     },
   },
 }
