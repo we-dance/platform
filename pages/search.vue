@@ -22,7 +22,7 @@
       v-for="item in response.hits"
       :key="item.id"
       :to="
-        item.username.includes('/')
+        $route.query.debug || item.username.includes('/')
           ? localePath(`/id@${item.id}`)
           : localePath(`/${item.username}`)
       "

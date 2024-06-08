@@ -22,7 +22,7 @@ export const useStyles = () => {
   const levels = [
     {
       value: 'Interested',
-      label: 'Interested',
+      label: 'Select Level',
       weight: 0,
     },
     {
@@ -39,6 +39,11 @@ export const useStyles = () => {
       value: 'Advanced',
       label: 'Advanced',
       weight: 3,
+    },
+    {
+      value: 'Professional',
+      label: 'Professional',
+      weight: 4,
     },
   ]
 

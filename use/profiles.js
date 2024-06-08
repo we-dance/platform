@@ -487,11 +487,12 @@ export const useProfiles = () => {
     },
     {
       name: 'type',
-      label: t('profile.type'),
+      label: t('profile.type.label'),
       component: 'TRichSelect',
       hideSearchBox: true,
       poster: true,
       options: typeList,
+      tips: t('profile.type.tips'),
     },
     {
       when: (item) => item.type === 'Venue',
