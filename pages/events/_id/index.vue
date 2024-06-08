@@ -12,6 +12,9 @@
     />
 
     <template v-if="doc.type === 'event'">
+      <div v-if="doc.cover" class="relative overflow-hidden rounded-t-md">
+        <img :src="doc.cover" :alt="doc.name" class="w-full" />
+      </div>
       <div class="p-4 flex gap-2 border-b">
         <div class="text-center pt-2">
           <div class="text-xl font-bold leading-none text-primary">
@@ -134,6 +137,40 @@
         </div>
       </div>
 
+      <div id="tabs" class="grid grid-cols-3 gap-4 max-w-4xl mx-auto p-4">
+        <a href="#reviews" class="p-4 space-y-1 bg-light rounded shadow">
+          <h3 class="text-2xl font-extrabold text-center">
+            {{ reviewsAvg ? reviewsAvg : '' }}★
+          </h3>
+          <p v-if="reviewsCount" class="text-center text-xs">
+            {{ reviewsCount }} reviews
+          </p>
+          <p v-else class="text-center text-xs">Recommend</p>
+        </a>
+        <a
+          v-if="
+            can('edit', 'events', doc) || (doc.artists && doc.artists.length)
+          "
+          href="#artists"
+          class="p-4 space-y-1 bg-light rounded shadow"
+        >
+          <h3 class="text-2xl font-extrabold text-center">
+            {{ doc.artists ? doc.artists.length || '?' : '?' }}
+          </h3>
+          <p class="text-center text-xs">
+            Artists
+          </p>
+        </a>
+        <a href="#guests" class="p-4 space-y-1 bg-light rounded shadow">
+          <h3 class="text-2xl font-extrabold text-center">
+            {{ doc.star && doc.star.usernames ? doc.star.usernames.length : 0 }}
+          </h3>
+          <p class="text-center text-xs">
+            Guests
+          </p>
+        </a>
+      </div>
+
       <div class="flex w-full justify-between text-xs text-center p-4 pb-0">
         <div>{{ $t('event.attendCallToAction') }}</div>
       </div>
@@ -162,6 +199,36 @@
           :toggled-label="$t('event.saved')"
           size="4"
         />
+        <TDropdown>
+          <TButton
+            type="context"
+            :href="calendarLink"
+            label="Add to Google Calendar"
+            class="text-xs"
+          />
+
+          <TButtonShare
+            :id="doc.id"
+            collection="events"
+            :doc="doc"
+            :place="doc.place"
+            :file="doc.socialCover"
+            :file-name="doc.name"
+            :url="`https://wedance.vip/events/${item.id}`"
+            :text="doc.name"
+            type="context"
+            icon=""
+            :label="$t('eventView.dropdown.share')"
+          />
+
+          <TCardActions
+            :id="doc.id"
+            collection="events"
+            :item="doc"
+            type="context"
+            icon=""
+          />
+        </TDropdown>
       </div>
       <div v-if="isGoing" class="border-b border-t bg-white p-4">
         <TPreview v-if="doc.confirmation" :content="doc.confirmation" />
@@ -177,6 +244,14 @@
           />
         </div>
       </div>
+
+      <TPopup
+        v-if="ticketTailorPopup"
+        title="Buy Ticket"
+        @close="ticketTailorPopup = false"
+      >
+        <WTicketTailor :href="doc.link" />
+      </TPopup>
 
       <div class="grid grid-cols-1">
         <div class="md:border-l">
@@ -276,209 +351,253 @@
         </div>
       </div>
 
-      <TPopup
-        v-if="ticketTailorPopup"
-        title="Buy Ticket"
-        @close="ticketTailorPopup = false"
+      <section
+        id="organiser"
+        v-if="
+          doc.org &&
+            (!venueProfile || doc.org.username !== venueProfile.username)
+        "
+        class="p-4 border-t border-primary"
       >
-        <WTicketTailor :href="doc.link" />
-      </TPopup>
-
-      <div>
-        <div v-if="doc.cover" class="relative overflow-hidden">
-          <img :src="doc.cover" :alt="doc.name" class="w-full" />
+        <div class="space-y-2">
+          <h3 class="uppercase text-xs text-primary font-extrabold">
+            Organiser
+          </h3>
+          <WProfile
+            :username="doc.org.username"
+            :fallback="doc.org"
+            hide-role
+            class="border-none"
+          />
         </div>
+      </section>
 
-        <TPreview :content="doc.description" class="p-4" />
-      </div>
-
-      <div id="tabs" class="grid grid-cols-3 gap-4 max-w-4xl mx-auto p-4">
-        <router-link
-          :to="`/events/${doc.id}?view=reviews#tabs`"
-          class="p-4 space-y-1 bg-light rounded shadow"
-          :class="{
-            'border-b-4 border-primary': $route.query.view === 'reviews',
-          }"
-        >
-          <h3 class="text-2xl font-extrabold text-center">
-            {{ reviewsAvg ? reviewsAvg : '' }}★
-          </h3>
-          <p v-if="reviewsCount" class="text-center text-xs">
-            {{ reviewsCount }} reviews
-          </p>
-          <p v-else class="text-center text-xs">Recommend</p>
-        </router-link>
-        <router-link
-          v-if="
-            can('edit', 'events', doc) || (doc.artists && doc.artists.length)
-          "
-          :to="`/events/${doc.id}?view=artists#tabs`"
-          class="p-4 space-y-1 bg-light rounded shadow"
-          :class="{
-            'border-b-4 border-primary': $route.query.view === 'artists',
-          }"
-        >
-          <h3 class="text-2xl font-extrabold text-center">
-            {{ doc.artists ? doc.artists.length || '?' : '?' }}
-          </h3>
-          <p class="text-center text-xs">
-            Artists
-          </p>
-        </router-link>
-        <router-link
-          v-if="
-            doc.eventType === 'Festival' &&
-              (can('edit', 'events', doc) || (agenda && agenda.items))
-          "
-          :to="`/events/${doc.id}?view=program#tabs`"
-          class="p-4 space-y-1 bg-light rounded shadow"
-          :class="{
-            'border-b-4 border-primary': $route.query.view === 'program',
-          }"
-        >
-          <h3 class="text-2xl font-extrabold text-center">
-            {{ agenda && agenda.items ? agenda.items.length : '?' }}
-          </h3>
-          <p class="text-center text-xs">
-            Experiences
-          </p>
-        </router-link>
-        <router-link
-          :to="`/events/${doc.id}?view=guests#tabs`"
-          class="p-4 space-y-1 bg-light rounded shadow"
-          :class="{
-            'border-b-4 border-primary': $route.query.view === 'guests',
-          }"
-        >
-          <h3 class="text-2xl font-extrabold text-center">
-            {{ doc.star && doc.star.usernames ? doc.star.usernames.length : 0 }}
-          </h3>
-          <p class="text-center text-xs">
-            Guests
-          </p>
-        </router-link>
-      </div>
-
-      <TReviewList
-        v-if="$route.query.view === 'reviews'"
-        :profile="org"
-        class="px-4"
-      />
-
-      <div
-        v-if="$route.query.view === 'artists'"
-        class="space-y-2 p-4 border-t border-b"
+      <section
+        id="venue"
+        v-if="venueProfile"
+        class="p-4 border-t border-primary"
       >
-        <h3 class="text-xs uppercase font-bold px-2 pt-4 text-gray-500">
-          {{ $t('event.artists') }}
-        </h3>
-        <TButton
-          v-if="can('edit', 'events', doc)"
-          type="primary"
-          label="Edit Artists"
-          @click="editingArtists = true"
-        />
-        <TPopup
-          v-if="editingArtists"
-          title="Edit Artists"
-          @close="editingArtists = false"
-        >
-          <div class="max-w-md max-h-[80vh] py-4 overflow-y-scroll">
-            <TInputArray
-              v-model="artists"
-              :children="{ component: 'TInputProfile' }"
-            />
-            <div class="flex justify-end mt-4">
-              <TButton
-                type="primary"
-                label="Save"
-                @click="saveArtists(artists)"
+        <div class="space-y-2">
+          <h3 class="uppercase text-xs text-primary font-extrabold">
+            Venue
+          </h3>
+          <WProfile
+            :username="venueProfile.username"
+            :fallback="venueProfile"
+            hide-role
+            class="border-none"
+          />
+
+          <div>
+            <div v-if="doc.venue && doc.venue.map" class="bg-gray-100 p-4">
+              <div class="mb-4 text-sm font-bold leading-none text-gray-700">
+                {{ $t('eventView.venueMap') }}
+              </div>
+              <img :src="doc.venue.map" alt="Venue Map" class="mt-4" />
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section
+        id="about"
+        v-if="doc.description"
+        class="p-4 border-t border-primary"
+      >
+        <div class="space-y-2">
+          <h3 class="uppercase text-xs text-primary font-extrabold">
+            About
+          </h3>
+          <TPreview :content="doc.description" />
+        </div>
+      </section>
+
+      <section id="artists" class="p-4 border-t border-primary">
+        <div class="space-y-2">
+          <h3 class="uppercase text-xs text-primary font-extrabold">
+            {{ $t('event.artists') }}
+          </h3>
+          <TButton
+            v-if="can('edit', 'events', doc)"
+            type="primary"
+            label="Edit Artists"
+            @click="editingArtists = true"
+          />
+          <TPopup
+            v-if="editingArtists"
+            title="Edit Artists"
+            @close="editingArtists = false"
+          >
+            <div class="max-w-md max-h-[80vh] py-4 overflow-y-scroll">
+              <TInputArray
+                v-model="artists"
+                :children="{ component: 'TInputProfile' }"
+              />
+              <div class="flex justify-end mt-4">
+                <TButton
+                  type="primary"
+                  label="Save"
+                  @click="saveArtists(artists)"
+                />
+              </div>
+            </div>
+          </TPopup>
+          <div v-else-if="doc.artists && doc.artists.length">
+            <div
+              v-for="profile in doc.artists"
+              :key="`artist-${profile.username}`"
+            >
+              <WProfile
+                v-if="profile"
+                :username="profile.username"
+                :fallback="profile"
+                hide-role
               />
             </div>
           </div>
-        </TPopup>
-        <div v-else-if="doc.artists && doc.artists.length">
-          <div
-            v-for="profile in doc.artists"
-            :key="`artist-${profile.username}`"
-          >
-            <WProfile
-              v-if="profile"
-              :username="profile.username"
-              :fallback="profile"
-              hide-role
-            />
+        </div>
+      </section>
+
+      <section
+        id="program"
+        v-if="(agenda && agenda.items) || can('edit', 'events', doc)"
+        class="p-4 border-t border-primary"
+      >
+        <div class="space-y-2">
+          <h3 class="uppercase text-xs text-primary font-extrabold">
+            Program
+          </h3>
+          <TAgendaEditor
+            v-model="agenda"
+            :editor="can('edit', 'events', doc)"
+            :parent="doc"
+            @save="saveAgenda(agenda)"
+          />
+        </div>
+      </section>
+
+      <section
+        id="guests"
+        v-if="doc.description"
+        class="p-4 border-t border-primary"
+      >
+        <div class="space-y-2">
+          <h3 class="uppercase text-xs text-primary font-extrabold">
+            {{ $t('event.guests') }}
+          </h3>
+
+          <div v-if="doc.star && doc.star.usernames">
+            <div
+              v-if="guests.followersCount || guests.leadersCount"
+              class="text-xs pt-0"
+            >
+              <span>{{
+                $tc('followersCount', guests.followersCount, {
+                  count: guests.followersCount,
+                })
+              }}</span>
+              <span>·</span>
+              <span>{{
+                $tc('leadersCount', guests.leadersCount, {
+                  count: guests.leadersCount,
+                })
+              }}</span>
+              <span>·</span>
+              <span v-if="can('edit', 'events', doc) && doc.checkin">
+                Present: {{ doc.checkin.count || 0 }}
+              </span>
+            </div>
+            <div v-if="!uid" class="flex justify-center p-4">
+              <TButton
+                type="link"
+                allow-guests
+                :to="localePath(`/signin?target=${$route.path}`)"
+                >{{ $t('event.guestsHidden') }}</TButton
+              >
+            </div>
+            <div v-else>
+              <div
+                v-for="username in doc.star.usernames"
+                :key="`guest-${username}`"
+              >
+                <WProfile :username="username">
+                  <div v-if="can('edit', 'events', doc)" slot="actions">
+                    <TReaction
+                      :username="username"
+                      type="primary"
+                      toggled-class="bg-green-500 hover:bg-green-800"
+                      icon="PlusIcon"
+                      toggled-icon="CheckIcon"
+                      field="checkin"
+                      class="rounded-full"
+                      hide-count
+                      :item="doc"
+                    />
+                  </div>
+                </WProfile>
+              </div>
+              <div v-if="!doc.star.count">There are no other guests yet.</div>
+            </div>
+          </div>
+          <div v-else class="text-xs text-center">
+            There are no guests yet
           </div>
         </div>
-      </div>
+      </section>
 
-      <TAgendaEditor
-        v-if="$route.query.view === 'program'"
-        v-model="agenda"
-        :editor="can('edit', 'events', doc)"
-        :parent="doc"
-        @save="saveAgenda(agenda)"
-      />
+      <AdEventView />
 
-      <div v-if="$route.query.view === 'guests'" class="space-y-2 p-4">
-        <h3 class="text-xl font-bold">{{ $t('event.guests') }}</h3>
-        <div v-if="doc.star && doc.star.usernames">
-          <div
-            v-if="guests.followersCount || guests.leadersCount"
-            class="text-xs pt-0"
-          >
-            <span>{{
-              $tc('followersCount', guests.followersCount, {
-                count: guests.followersCount,
-              })
-            }}</span>
-            <span>·</span>
-            <span>{{
-              $tc('leadersCount', guests.leadersCount, {
-                count: guests.leadersCount,
-              })
-            }}</span>
-            <span>·</span>
-            <span v-if="can('edit', 'events', doc) && doc.checkin">
-              Present: {{ doc.checkin.count || 0 }}
-            </span>
-          </div>
-          <div v-if="!uid" class="flex justify-center p-4">
+      <section class="p-4 border-t border-primary">
+        <div class="space-y-2">
+          <h3 class="uppercase text-xs text-primary font-extrabold">
+            Updates
+          </h3>
+          <div v-if="!uid" class="flex justify-center">
             <TButton
               type="link"
               allow-guests
               :to="localePath(`/signin?target=${$route.path}`)"
-              >{{ $t('event.guestsHidden') }}</TButton
+              >{{ $t('event.commentsHidden') }}</TButton
             >
           </div>
-          <div v-else>
-            <div
-              v-for="username in doc.star.usernames"
-              :key="`guest-${username}`"
-            >
-              <WProfile :username="username">
-                <div v-if="can('edit', 'events', doc)" slot="actions">
-                  <TReaction
-                    :username="username"
-                    type="primary"
-                    toggled-class="bg-green-500 hover:bg-green-800"
-                    icon="PlusIcon"
-                    toggled-icon="CheckIcon"
-                    field="checkin"
-                    class="rounded-full"
-                    hide-count
-                    :item="doc"
-                  />
-                </div>
-              </WProfile>
+
+          <TCommentsInline v-else :item="doc" autoload />
+        </div>
+      </section>
+
+      <div class="border-t mt-4 p-4 flex flex-col gap-4">
+        <template v-if="isAdmin()">
+          <div
+            v-for="item in history"
+            :key="item.date + item.username"
+            class="text-xs"
+          >
+            <TAvatar photo name :uid="item.uid">
+              <span>•</span>
+              <div>{{ dateDiff(item.date) }}</div>
+              <template v-if="item.invitedBy">
+                <span>•</span>
+                <TAvatar photo name :uid="item.invitedBy" />
+              </template>
+            </TAvatar>
+            <div class="mt-1 text-xs text-gray-700">
+              {{ item.action }} the event
             </div>
-            <div v-if="!doc.star.count">There are no other guests yet.</div>
           </div>
+        </template>
+
+        <div v-if="doc.updatedBy" class="text-xs">
+          <TAvatar photo name :uid="doc.updatedBy">
+            <span>•</span>
+            <div>{{ dateDiff(doc.updatedAt) }}</div>
+          </TAvatar>
+          <div class="mt-1 text-xs text-gray-700">updated the event</div>
         </div>
-        <div v-else class="text-xs text-center">
-          There are no guests yet
-        </div>
+
+        <TEventCreator :doc="doc" />
       </div>
+
+      <TReviewList id="reviews" :reviews="reviews" class="px-4" />
 
       <TPopup
         v-if="announcementPopupVisible"
@@ -551,129 +670,6 @@
           </template>
         </div>
       </TPopup>
-
-      <div>
-        <div v-if="doc.venue && doc.venue.map" class="bg-gray-100 p-4">
-          <div class="mb-4 text-sm font-bold leading-none text-gray-700">
-            {{ $t('eventView.venueMap') }}
-          </div>
-          <img :src="doc.venue.map" alt="Venue Map" class="mt-4" />
-        </div>
-
-        <div class="space-y-2 p-4 border-t">
-          <h3 class="text-xl font-bold">Have questions?</h3>
-
-          <div
-            v-if="
-              doc.org &&
-                (!venueProfile || doc.org.username !== venueProfile.username)
-            "
-          >
-            <h3 class="text-xs uppercase font-bold px-2 pt-4 text-gray-500">
-              Organiser
-            </h3>
-            <WProfile
-              :username="doc.org.username"
-              :fallback="doc.org"
-              hide-role
-            />
-          </div>
-
-          <div v-if="venueProfile">
-            <h3 class="text-xs uppercase font-bold px-2 pt-4 text-gray-500">
-              Venue
-            </h3>
-            <WProfile
-              :username="venueProfile.username"
-              :fallback="venueProfile"
-              hide-role
-            />
-          </div>
-        </div>
-
-        <div class="space-y-2 p-4 border-t">
-          <h3 class="text-xl font-bold">Still not sure?</h3>
-          <div class="flex flex-wrap gap-2">
-            <TButton
-              type="secondary"
-              :href="calendarLink"
-              label="Add to Google Calendar"
-              class="text-xs"
-            />
-
-            <TButtonShare
-              :id="doc.id"
-              collection="events"
-              :doc="doc"
-              :place="doc.place"
-              :file="doc.socialCover"
-              :file-name="doc.name"
-              :url="`https://wedance.vip/events/${item.id}`"
-              :text="doc.name"
-              type="simple"
-              class="rounded-full"
-              :label="$t('eventView.dropdown.share')"
-            />
-
-            <TCardActions
-              :id="doc.id"
-              collection="events"
-              :item="doc"
-              type="simple"
-              icon=""
-            />
-          </div>
-        </div>
-
-        <AdEventView />
-
-        <div class="p-4 border-t">
-          <h3 class="text-xl font-bold">Updates</h3>
-
-          <div v-if="!uid" class="flex justify-center">
-            <TButton
-              type="link"
-              allow-guests
-              :to="localePath(`/signin?target=${$route.path}`)"
-              >{{ $t('event.commentsHidden') }}</TButton
-            >
-          </div>
-
-          <TCommentsInline v-else :item="doc" autoload />
-        </div>
-
-        <div class="border-t mt-4 p-4 flex flex-col gap-4">
-          <template v-if="isAdmin()">
-            <div
-              v-for="item in history"
-              :key="item.date + item.username"
-              class="text-xs"
-            >
-              <TAvatar photo name :uid="item.uid">
-                <span>•</span>
-                <div>{{ dateDiff(item.date) }}</div>
-                <template v-if="item.invitedBy">
-                  <span>•</span>
-                  <TAvatar photo name :uid="item.invitedBy" />
-                </template>
-              </TAvatar>
-              <div class="mt-1 text-xs text-gray-700">
-                {{ item.action }} the event
-              </div>
-            </div>
-          </template>
-
-          <div v-if="doc.updatedBy" class="text-xs">
-            <TAvatar photo name :uid="doc.updatedBy">
-              <span>•</span>
-              <div>{{ dateDiff(doc.updatedAt) }}</div>
-            </TAvatar>
-            <div class="mt-1 text-xs text-gray-700">updated the event</div>
-          </div>
-
-          <TEventCreator :doc="doc" />
-        </div>
-      </div>
 
       <TPopup v-if="ticketPopup" title="Ticket" @close="ticketPopup = false">
         <div class="mx-auto max-h-screen max-w-md overflow-y-scroll py-4">
@@ -770,6 +766,7 @@ import { addressPart } from '~/use/google'
 import { trackView } from '~/use/tracking'
 import { useStyles } from '~/use/styles'
 import { track, db } from '~/plugins/firebase'
+import TReviewList from '~/components/TReviewList.vue'
 
 export default {
   name: 'EventView',

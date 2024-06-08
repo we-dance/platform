@@ -31,13 +31,22 @@ export default {
       type: Object,
       default: () => ({}),
     },
+    reviews: {
+      type: Array,
+      default: () => [],
+    },
   },
   data() {
     return {
-      reviews: [],
+      items: [],
     }
   },
   async mounted() {
+    if (this.reviews.length) {
+      this.items = this.reviews
+      return
+    }
+
     const firestore = firebase.firestore()
 
     let newReviews = []
@@ -54,7 +63,7 @@ export default {
       }))
     }
 
-    this.reviews = newReviews.sort(sortBy('-createdAt'))
+    this.items = newReviews.sort(sortBy('-createdAt'))
   },
 }
 </script>
