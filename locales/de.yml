@@ -443,8 +443,12 @@ sort:
   archived: Archived
   yours: Deine
 event:
-  attend: Gästeliste beitreten
-  attending: Auf der Gästeliste
+  save: Speichern
+  saved: Gespeichert
+  attend: Teilnehmen
+  attendCallToAction: Fügen Sie dieses Event Ihrem Profilkalender hinzu und erhalten Sie Benachrichtigungen, indem Sie auf „Teilnehmen“ klicken, um der Gästeliste beizutreten, oder auf „Speichern“, um es ohne Teilnahme zu verfolgen.
+  attending: Teilnahme
+  getTicket: Ticket erhalten
   artists: Artists
   organiser: Organiser
   category:

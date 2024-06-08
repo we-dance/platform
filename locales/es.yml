@@ -436,8 +436,12 @@ sort:
   archived: Archived
   yours: Yours
 event:
-  attend: Unirse a la lista
-  attending: En la lista
+  save: Guardar
+  saved: Guardado
+  attend: Asistir
+  attendCallToAction: Añade este evento a tu calendario de perfil y recibe notificaciones haciendo clic en “Asistir” para unirte a la lista de invitados o en “Guardar” para seguirlo sin unirte.
+  attending: Asistiendo
+  getTicket: Obtener entrada
   artists: Artists
   organiser: Organiser
   category:
