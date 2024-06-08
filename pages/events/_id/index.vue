@@ -597,7 +597,12 @@
         <TEventCreator :doc="doc" />
       </div>
 
-      <TReviewList id="reviews" :reviews="reviews" class="px-4" />
+      <TReviewList
+        id="reviews"
+        :profile="doc.org"
+        :reviews="reviews"
+        class="px-4"
+      />
 
       <TPopup
         v-if="announcementPopupVisible"
