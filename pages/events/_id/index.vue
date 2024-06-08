@@ -352,11 +352,11 @@
       </div>
 
       <section
-        id="organiser"
         v-if="
           doc.org &&
             (!venueProfile || doc.org.username !== venueProfile.username)
         "
+        id="organiser"
         class="p-4 border-t border-primary"
       >
         <div class="space-y-2">
@@ -373,8 +373,8 @@
       </section>
 
       <section
-        id="venue"
         v-if="venueProfile"
+        id="venue"
         class="p-4 border-t border-primary"
       >
         <div class="space-y-2">
@@ -400,8 +400,8 @@
       </section>
 
       <section
-        id="about"
         v-if="doc.description"
+        id="about"
         class="p-4 border-t border-primary"
       >
         <div class="space-y-2">
@@ -459,8 +459,8 @@
       </section>
 
       <section
-        id="program"
         v-if="(agenda && agenda.items) || can('edit', 'events', doc)"
+        id="program"
         class="p-4 border-t border-primary"
       >
         <div class="space-y-2">
@@ -477,8 +477,8 @@
       </section>
 
       <section
-        id="guests"
         v-if="doc.description"
+        id="guests"
         class="p-4 border-t border-primary"
       >
         <div class="space-y-2">
@@ -771,7 +771,6 @@ import { addressPart } from '~/use/google'
 import { trackView } from '~/use/tracking'
 import { useStyles } from '~/use/styles'
 import { track, db } from '~/plugins/firebase'
-import TReviewList from '~/components/TReviewList.vue'
 
 export default {
   name: 'EventView',

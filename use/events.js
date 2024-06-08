@@ -38,6 +38,30 @@ export async function getEventsWithVenue(placeId) {
   }))
 }
 
+export async function getEventsSavedBy(profile) {
+  const result = []
+
+  if (!profile?.bookmarks) {
+    return result
+  }
+
+  for (const eventId of profile.bookmarks) {
+    const doc = await firebase
+      .firestore()
+      .collection('posts')
+      .doc(eventId)
+      .get()
+
+    result.push({
+      ...doc.data(),
+      id: doc.id,
+      role: 'Interested',
+    })
+  }
+
+  return result
+}
+
 export async function getEventsOrganisedBy(username) {
   const result = await firebase
     .firestore()
