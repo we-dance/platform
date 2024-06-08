@@ -15,7 +15,7 @@
       <div v-if="doc.cover" class="relative overflow-hidden rounded-t-md">
         <img :src="doc.cover" :alt="doc.name" class="w-full" />
       </div>
-      <div class="p-4 flex gap-2 border-b">
+      <div class="p-4 flex gap-2 border-b border-t">
         <div class="text-center pt-2">
           <div class="text-xl font-bold leading-none text-primary">
             {{ formatDate(doc.startDate, 'd') }}
