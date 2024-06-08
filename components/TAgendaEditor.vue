@@ -264,6 +264,7 @@ export default {
     initDays() {
       const startDate = new Date(this.parent.startDate)
       const endDate = new Date(this.parent.endDate)
+      startDate.setHours(0, 0, 0, 0)
       endDate.setHours(23, 59, 59, 999)
       const days = this.value?.days || []
 
