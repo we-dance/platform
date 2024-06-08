@@ -133,12 +133,9 @@
           <div>{{ doc.specialOffer }}</div>
         </div>
       </div>
-      <div
-        class="flex w-full items-center justify-start border-b py-2 px-4 leading-tight"
-      >
-        <div class="flex w-full justify-between">
-          <div>Join Guest List to access special offer</div>
-        </div>
+
+      <div class="flex w-full justify-between text-xs text-center p-4 pb-0">
+        <div>{{ $t('event.attendCallToAction') }}</div>
       </div>
 
       <div
@@ -150,7 +147,7 @@
           toggled-class="bg-green-500 hover:bg-green-800"
           :label="$t('event.attend')"
           :toggled-label="$t('event.attending')"
-          icon="PlusIcon"
+          icon="CheckIcon"
           toggled-icon="CheckIcon"
           field="star"
           class="rounded-full"
@@ -161,8 +158,8 @@
           :event-id="doc.id"
           show-label
           type="secondary"
-          label="Bookmark"
-          toggled-label="Bookmarked"
+          :label="$t('event.save')"
+          :toggled-label="$t('event.saved')"
           size="4"
         />
       </div>
