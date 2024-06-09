@@ -1,6 +1,5 @@
 <template>
   <div>
-    <THeader show-logo class="md:hidden" />
     <div class="bg-orange-100 flex justify-center pt-4">
       <TIcon name="find-partner" />
     </div>

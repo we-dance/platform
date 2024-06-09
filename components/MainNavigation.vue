@@ -8,6 +8,13 @@
 
     <TButton
       allow-guests
+      :to="localePath('/start')"
+      label="Start Here"
+      type="nav"
+    />
+
+    <TButton
+      allow-guests
       :to="localePath('/')"
       icon="trending"
       :label="$t('nav.global')"
@@ -40,13 +47,6 @@
       :to="localePath('/search')"
       icon="search"
       :label="$t('nav.search')"
-      type="nav"
-    />
-
-    <TButton
-      allow-guests
-      :to="localePath('/about')"
-      :label="$t('nav.about')"
       type="nav"
     />
 

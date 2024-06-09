@@ -1,6 +1,5 @@
 <template>
   <div>
-    <THeader show-logo class="md:hidden" />
     <div class="p-4">
       <h1 class="text-4xl font-extrabold text-center">
         Share your social media instantly

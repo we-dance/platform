@@ -1,7 +1,5 @@
 <template>
   <div>
-    <THeader show-logo class="md:hidden" />
-
     <div class="flex gap-2 p-4">
       <TButton
         allow-guests

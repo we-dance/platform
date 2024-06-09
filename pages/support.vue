@@ -1,41 +1,69 @@
 <template>
   <div>
-    <div class="p-4">
-      <h1 class="text-3xl font-extrabold text-center">
-        Support
-      </h1>
-      <div class="text-center text-lg text-gray-700">
-        Have a question about WeDance or an issue? Get in touch and we’ll help
-        you out.
-      </div>
-    </div>
+    <div class="px-4 my-4 grid grid-cols-1 gap-4">
+      <LandingFeature
+        title="Feedback & Support"
+        description="Share your experiences, report bugs, or ask for help. Engage with our community, discuss new features, and influence future updates."
+        button="Join Telegram Chat"
+        href="https://t.me/+TFzrNPwFrsT0uPF0"
+        alternative="Email Us"
+        alternative-url="mailto:support@wedance.vip"
+      />
 
-    <w-teaser
-      title="Customer Care"
-      description="If you need help with something related to your account (can't login, wrong email, etc.) please email us and we will do everything we can to take care of you."
-      button="Contact Us"
-      href="mailto:support@wedance.vip"
-      background="bg-red-100"
-    ></w-teaser>
-
-    <div class="mt-4 flex gap-4">
-      <w-teaser
-        title="Bugs"
-        description="If you find a bug that you'd like to report for us to fix, please open an issue on GitHub."
-        button="Report bug"
-        href="https://github.com/we-dance/platform/issues/new?assignees=razbakov&labels=bug&template=bug.yml&title=%5BBug%5D%3A+"
-        background="bg-white"
-      ></w-teaser>
-
-      <w-teaser
-        title="Features"
-        description="If you have a feature you'd like us to consider adding, please share your idea as a discussion on GitHub."
-        button="Discuss Ideas"
-        href="https://github.com/we-dance/platform/discussions"
-        background="bg-white"
-      ></w-teaser>
+      <TFaqCalendars
+        v-for="section of Object.keys($t('mainfaqs._titles'))"
+        :key="section"
+        class="my-4"
+        :title="$t(`mainfaqs._titles.${section}`)"
+        :faqs="$t(`mainfaqs.${section}`)"
+      />
     </div>
 
     <HubspotChat />
   </div>
 </template>
+
+<script>
+export default {
+  head() {
+    const faqQuestions = Object.entries(this.$t('mainfaqs'))
+      .filter(([key]) => !key.startsWith('_'))
+      .flatMap(([section, questions]) =>
+        questions.map((question) => ({
+          '@type': 'Question',
+          name: question.question,
+          acceptedAnswer: {
+            '@type': 'Answer',
+            text: question.answer,
+          },
+        }))
+      )
+
+    return {
+      title: this.$t('mainfaqs._head.title'),
+      meta: [
+        {
+          hid: 'description',
+          name: 'description',
+          content: this.$t('mainfaqs._head.description'),
+        },
+        {
+          hid: 'keywords',
+          name: 'keywords',
+          content: this.$t('mainfaqs._head.keywords'),
+        },
+      ],
+      script: [
+        {
+          type: 'application/ld+json',
+          json: {
+            '@context': 'https://schema.org',
+            '@type': 'FAQPage',
+            mainEntity: faqQuestions,
+          },
+        },
+      ],
+    }
+  },
+}
+</script>

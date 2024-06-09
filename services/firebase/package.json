@@ -26,6 +26,7 @@
     "@types/markdown-it": "0.0.9",
     "algoliasearch": "^4.8.6",
     "axios": "^1.6.3",
+    "cheerio": "^1.0.0-rc.12",
     "cloudinary": "^1.41.3",
     "cors": "^2.8.5",
     "dotenv": "^8.2.0",

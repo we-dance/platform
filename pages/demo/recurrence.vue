@@ -1,7 +1,5 @@
 <template>
   <div>
-    <THeader show-logo class="md:hidden" />
-
     <div class="p-4">
       <TField
         v-model="item.startDate"

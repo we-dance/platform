@@ -1,9 +1,9 @@
 <template>
   <TLoader v-if="loading" />
   <div v-else class="flex flex-col h-full">
-    <THeader
-      :title="$t('conversation.userName', { username: receiver.username })"
-    />
+    <div class="border-b p-4">
+      {{ $t('conversation.userName', { username: receiver.username }) }}
+    </div>
     <div v-if="!chat || !chat.createdAt" class="p-16 text-xs text-center">
       {{ $t('conversation.empty') }}
     </div>

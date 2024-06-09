@@ -1,13 +1,11 @@
 <template>
   <div>
-    <THeader>
-      <TInput
-        v-model="query"
-        auto-focus
-        placeholder="Search profiles and events"
-        @input="search"
-      />
-    </THeader>
+    <TInput
+      v-model="query"
+      auto-focus
+      placeholder="Search profiles and events"
+      @input="search"
+    />
 
     <div class="text-xs p-4 border-b">
       Searching a city?

@@ -1,8 +1,6 @@
 <template>
   <div>
-    <THeader>
-      <t-input v-model="query" placeholder="Search city" auto-focus />
-    </THeader>
+    <t-input v-model="query" placeholder="Search city" auto-focus />
 
     <div v-if="!query">
       <div

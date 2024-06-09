@@ -30,7 +30,16 @@
         </div>
       </transition>
 
-      <THamburger v-model="isMenuOpen" class="absolute mt-2 md:hidden" />
+      <header
+        class="md:hidden flex p-2 gap-2 justify-start items-center border-b"
+      >
+        <THamburger v-model="isMenuOpen" class="mt-2 " />
+        <router-link to="/">
+          <TIcon name="logo-horizontal-dark" />
+        </router-link>
+        <div class="flex-grow"></div>
+        <TQrCodeButton label="Share" />
+      </header>
 
       <div class="flex">
         <MainNavigation
