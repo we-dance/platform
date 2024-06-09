@@ -8,11 +8,11 @@
         label="Write a review"
       />
     </div>
-    <div v-if="!reviews.length" class="p-4 text-center text-xs text-gray-700">
+    <div v-if="!items.length" class="p-4 text-center text-xs text-gray-700">
       No reviews
     </div>
     <TPost
-      v-for="(review, index) in reviews"
+      v-for="(review, index) in items"
       :key="index"
       :item="review"
       hide-receiver
