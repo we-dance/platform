@@ -1,14 +1,12 @@
 <template>
   <div class="border-t-2 border-primary">
     <TBanner
-      v-if="false"
-      v-model="bannerV3Beta"
-      desktop="Are you ready for WeDance v3?"
-      mobile="Are you ready for WeDance v3?"
-      action="Request Beta"
-      :link="
-        `https://j4ripfl7ia1.typeform.com/to/Flh9wptJ#username=${profile.username}`
-      "
+      v-if="uid"
+      v-model="bannerNews"
+      desktop="WeDance News & Updates"
+      mobile="WeDance News & Updates"
+      action="Follow on Telegram"
+      link="https://t.me/WeDancePlatform"
     />
 
     <div
@@ -199,16 +197,16 @@ export default {
       ls('bannerNps', val)
     })
 
-    const bannerV3Beta = ref(ls('bannerV3Beta'))
+    const bannerNews = ref(ls('bannerNews'))
 
-    watch(bannerV3Beta, (val) => {
-      updateProfile({ bannerV3Beta: val })
-      ls('bannerV3Beta', val)
+    watch(bannerNews, (val) => {
+      updateProfile({ bannerNews: val })
+      ls('bannerNews', val)
     })
 
     return {
       bannerNps,
-      bannerV3Beta,
+      bannerNews,
       username,
       account,
       profile,
