@@ -351,6 +351,29 @@
         </div>
       </div>
 
+      <section class="p-4 border-t border-primary">
+        <div class="space-y-2">
+          <div class="flex justify-between">
+            <h3 class="uppercase text-xs text-primary font-extrabold">
+              Updates
+            </h3>
+            <TButton
+              :label="
+                can('edit', 'events', doc) ? 'Post an update' : 'Ask a question'
+              "
+              @click="addComment = true"
+            />
+          </div>
+
+          <TCommentsInline
+            :item="doc"
+            autoload
+            :hide-form="!addComment"
+            placeholder="Share an update or ask a question"
+          />
+        </div>
+      </section>
+
       <section
         v-if="
           doc.org &&
@@ -545,64 +568,70 @@
         </div>
       </section>
 
-      <AdEventView />
-
-      <section class="p-4 border-t border-primary">
+      <section id="reviews" class="p-4 border-t border-primary">
         <div class="space-y-2">
           <h3 class="uppercase text-xs text-primary font-extrabold">
-            Updates
+            Sponsored
           </h3>
-          <div v-if="!uid" class="flex justify-center">
-            <TButton
-              type="link"
-              allow-guests
-              :to="localePath(`/signin?target=${$route.path}`)"
-              >{{ $t('event.commentsHidden') }}</TButton
-            >
-          </div>
-
-          <TCommentsInline v-else :item="doc" autoload />
+          <AdEventView />
         </div>
       </section>
 
-      <div class="border-t mt-4 p-4 flex flex-col gap-4">
-        <template v-if="isAdmin()">
-          <div
-            v-for="item in history"
-            :key="item.date + item.username"
-            class="text-xs"
-          >
-            <TAvatar photo name :uid="item.uid">
-              <span>•</span>
-              <div>{{ dateDiff(item.date) }}</div>
-              <template v-if="item.invitedBy">
-                <span>•</span>
-                <TAvatar photo name :uid="item.invitedBy" />
-              </template>
-            </TAvatar>
-            <div class="mt-1 text-xs text-gray-700">
-              {{ item.action }} the event
-            </div>
-          </div>
-        </template>
-
-        <div v-if="doc.updatedBy" class="text-xs">
-          <TAvatar photo name :uid="doc.updatedBy">
-            <span>•</span>
-            <div>{{ dateDiff(doc.updatedAt) }}</div>
-          </TAvatar>
-          <div class="mt-1 text-xs text-gray-700">updated the event</div>
-        </div>
-
-        <TEventCreator :doc="doc" />
-      </div>
-
-      <TReviewList
+      <section
+        v-if="doc.org && doc.org.username"
         id="reviews"
-        :profile="doc.org"
-        :reviews="reviews"
-        class="px-4"
-      />
+        class="p-4 border-t border-primary"
+      >
+        <div class="space-y-2">
+          <h3 class="uppercase text-xs text-primary font-extrabold">
+            Reviews
+          </h3>
+          <TReviewList :profile="doc.org" :reviews="reviews" />
+        </div>
+      </section>
+
+      <section
+        v-if="doc.org && doc.org.username"
+        id="reviews"
+        class="p-4 border-t border-primary"
+      >
+        <div class="space-y-2">
+          <h3 class="uppercase text-xs text-primary font-extrabold">
+            Source
+          </h3>
+          <div class="flex flex-col gap-4">
+            <template v-if="isAdmin()">
+              <div
+                v-for="item in history"
+                :key="item.date + item.username"
+                class="text-xs"
+              >
+                <TAvatar photo name :uid="item.uid">
+                  <span>•</span>
+                  <div>{{ dateDiff(item.date) }}</div>
+                  <template v-if="item.invitedBy">
+                    <span>•</span>
+                    <TAvatar photo name :uid="item.invitedBy" />
+                  </template>
+                </TAvatar>
+                <div class="mt-1 text-xs text-gray-700">
+                  {{ item.action }} the event
+                </div>
+              </div>
+            </template>
+
+            <div v-if="doc.updatedBy" class="text-xs">
+              <TAvatar photo name :uid="doc.updatedBy">
+                <span>•</span>
+                <div>{{ dateDiff(doc.updatedAt) }}</div>
+              </TAvatar>
+              <div class="mt-1 text-xs text-gray-700">updated the event</div>
+            </div>
+
+            <TEventCreator :doc="doc" />
+          </div>
+        </div>
+      </section>
 
       <TPopup
         v-if="announcementPopupVisible"
@@ -784,6 +813,7 @@ export default {
     artists: [],
     agenda: {},
     venueProfile: null,
+    addComment: false,
   }),
   computed: {
     history() {

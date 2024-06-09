@@ -1,10 +1,6 @@
 <template>
   <div id="comment" class="mt-8 text-xs">
-    <TListComments class="mt-4" :post-id="postId">
-      <template v-slot:empty>
-        <div class="text-center my-8">{{ $t('comments.empty') }}</div>
-      </template>
-    </TListComments>
+    <TListComments class="mt-4" :post-id="postId" />
   </div>
 </template>
 

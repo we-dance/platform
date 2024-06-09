@@ -8,28 +8,14 @@
     >
       {{ item.commentsCount || 0 }} comments
     </button>
-    <div v-if="showComments">
-      <div class="px-4 py-2 flex justify-center items-center">
-        <TReaction
-          label="Subscribe to comments"
-          toggled-label="Unsubscribe"
-          field="watch"
-          icon="BellIcon"
-          :item="item"
-        />
-      </div>
+    <div v-if="!hideForm && showComments">
       <textarea
         v-model="newReply"
         rows="1"
-        placeholder="Add to the discussion"
+        :placeholder="placeholder"
         class="w-full border p-2 text-xs text-gray-900"
       ></textarea>
-      <TButton
-        title="Post comment"
-        label="Post comment"
-        type="xs"
-        @click="sendReply"
-      />
+      <TButton :title="button" :label="button" type="xs" @click="sendReply" />
     </div>
     <TItemComments v-if="showComments" :post-id="item.id" />
   </div>
@@ -51,6 +37,18 @@ export default {
       type: Boolean,
       default: false,
     },
+    hideForm: {
+      type: Boolean,
+      default: false,
+    },
+    placeholder: {
+      type: String,
+      default: 'Write a comment',
+    },
+    button: {
+      type: String,
+      default: 'Submit',
+    },
   },
   setup(props) {
     const { username } = useAuth()
@@ -71,17 +69,15 @@ export default {
 
       newReply.value = ''
 
-      const commentDocRef = await create({
+      const commentDoc = await create({
         postId: props.item.id,
         commentId: '',
         body,
       })
 
-      const commentsLast = await (await commentDocRef.get()).data()
-
       softUpdate(props.item.id, {
         commentsCount: props.item.commentsCount + 1,
-        commentsLast,
+        commentDoc,
         [`watch.count`]: isWatching ? watchCount : watchCount + 1,
         [`watch.list.${username.value}`]: true,
       })
