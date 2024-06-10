@@ -27,7 +27,11 @@ export default {
   }),
   computed: {
     reviewsCount() {
-      return this.profile.reviewsCount || this.reviews.length || 0
+      if (this.profile?.reviewsCount) {
+        return this.profile.reviewsCount
+      }
+
+      return this.reviews.length || 0
     },
     reviewsAvg() {
       if (this.profile?.reviewsAvg) {
@@ -63,7 +67,7 @@ export default {
 
       let newReviews = []
 
-      if (this.username) {
+      if (this.profile.username) {
         const reviewsRef = await firestore
           .collection('stories')
           .where('receiver.username', '==', this.profile.username)
