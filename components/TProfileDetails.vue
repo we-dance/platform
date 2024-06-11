@@ -1,6 +1,12 @@
 <template>
   <div>
-    <TPreview v-if="profile.story" :content="profile.story" class="p-4" />
+    <TOffersEditor :profile="profile" />
+
+    <TPreview
+      v-if="profile.story"
+      :content="profile.story"
+      class="p-4 border-t"
+    />
 
     <div v-if="profile.amenities" class="space-y-2 p-4 border-t">
       <h3 class="text-xs uppercase font-bold text-gray-500">

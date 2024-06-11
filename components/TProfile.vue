@@ -48,7 +48,7 @@
         />
         <TButton
           v-if="profile.type == 'Venue'"
-          label="Book a Spot"
+          label="Book Venue"
           :to="`/events/-/edit?venue=${profile.username}`"
         />
         <TButton
@@ -112,10 +112,6 @@
     <TwTabs id="tabs" :tabs="tabs" />
 
     <div class="min-h-screen">
-      <TMyActions
-        v-if="!$route.query.view && uid == profile.id"
-        :place="currentCity"
-      />
       <TStories
         v-if="$route.query.view === 'stories'"
         :created-by="profile.id"
@@ -156,7 +152,7 @@
         </div>
       </div>
       <TEventListNoLoad
-        v-if="!$route.query.view"
+        v-if="$route.query.view === 'events'"
         :community="profile.username"
         :username="profile.username"
         :docs="events"
@@ -168,10 +164,7 @@
         :profile="profile"
         class="px-4"
       />
-      <TProfileDetails
-        v-if="$route.query.view === 'about'"
-        :profile="profile"
-      />
+      <TProfileDetails v-if="!$route.query.view" :profile="profile" />
     </div>
 
     <div
@@ -226,9 +219,14 @@ export default {
 
     const tabs = computed(() => [
       {
-        name: 'Events',
-        to: `/${props.profile.username}`,
+        name: 'About',
+        to: `/${props.profile.username}#tabs`,
         current: !view.value,
+      },
+      {
+        name: 'Events',
+        to: `/${props.profile.username}?view=events#tabs`,
+        current: view.value === 'events',
       },
       {
         name: 'Stories',
@@ -240,11 +238,6 @@ export default {
         to: `/${props.profile.username}?view=reviews#tabs`,
         current: view.value === 'reviews',
         hidden: props.profile.type === 'Dancer',
-      },
-      {
-        name: 'About',
-        to: `/${props.profile.username}?view=about#tabs`,
-        current: view.value === 'about',
       },
     ])
 
