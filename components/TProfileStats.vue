@@ -33,7 +33,7 @@
             {{ $t('No subscribers') }}
           </div>
         </div>
-        <div v-else v-for="username in profile.watch.usernames" :key="username">
+        <div v-for="username in profile.watch.usernames" v-else :key="username">
           <WProfile :username="username" hide-buttons class="w-64" />
         </div>
       </div>
