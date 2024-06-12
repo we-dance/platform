@@ -1,6 +1,18 @@
 <template>
   <div>
-    <TOffersEditor :profile="profile" />
+    <div
+      v-if="profile.offers && profile.offers.length"
+      class="max-w-md mx-auto flex flex-col gap-4 p-4"
+    >
+      <LandingFeature
+        v-for="value in profile.offers"
+        :key="value.title"
+        :title="value.title"
+        :description="value.description"
+        :button="value.primaryButton"
+        :url="value.primaryUrl"
+      />
+    </div>
 
     <TPreview
       v-if="profile.story"
@@ -102,6 +114,7 @@
 import { getDateTimeYear, getLabels } from '~/utils'
 import { useProfiles } from '~/use/profiles'
 import languages from '~/assets/languages'
+import { useAuth } from '~/use/auth'
 
 export default {
   props: {
@@ -111,6 +124,7 @@ export default {
     },
   },
   setup() {
+    const { can } = useAuth()
     const {
       objectivesList,
       profilePosterFields,
@@ -126,6 +140,7 @@ export default {
       profileFields,
       getDateTimeYear,
       getLabels,
+      can,
     }
   },
 }

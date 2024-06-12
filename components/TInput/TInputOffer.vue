@@ -1,5 +1,5 @@
 <template>
-  <div class="relative">
+  <div class="relative mb-4">
     <TForm
       v-if="isEditing"
       v-model="internalValue"
@@ -12,15 +12,21 @@
       "
     />
     <div v-else-if="value.title">
-      <div>{{ value }}</div>
-      <TButton label="Edit" @click="isEditing = true" />
+      <LandingFeature
+        :title="value.title"
+        :description="value.description"
+        :button="value.primaryButton"
+        :url="value.primaryUrl"
+      />
+      <div class="mt-4 flex gap-4">
+        <TButton label="Edit" @click="isEditing = true" />
+        <TButton label="Delete" @click="$emit('input', '')" />
+      </div>
     </div>
     <TButton v-else label="Add Offer" @click="isEditing = true" />
   </div>
 </template>
 <script>
-import { ref } from 'vue'
-
 export default {
   name: 'TInputOffer',
   inheritAttrs: false,
@@ -48,7 +54,11 @@ export default {
         component: 'TInputTextarea',
       },
       {
-        name: 'primaryAction',
+        name: 'primaryButton',
+        labelPosition: 'top',
+      },
+      {
+        name: 'primaryUrl',
         labelPosition: 'top',
       },
     ]
