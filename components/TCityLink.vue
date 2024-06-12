@@ -1,5 +1,11 @@
 <template>
-  <span v-if="!city">{{ place }}</span>
+  <a
+    v-if="!city"
+    target="_blank"
+    :href="`https://www.google.com/maps/place/?q=place_id:${place}`"
+    class="underline hover:no-underline"
+    >{{ place }}</a
+  >
   <router-link
     v-else
     class="underline hover:no-underline"
