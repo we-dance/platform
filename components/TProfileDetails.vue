@@ -1,6 +1,24 @@
 <template>
   <div>
-    <TPreview v-if="profile.story" :content="profile.story" class="p-4" />
+    <div
+      v-if="profile.offers && profile.offers.length"
+      class="max-w-md mx-auto flex flex-col gap-4 p-4"
+    >
+      <LandingFeature
+        v-for="value in profile.offers"
+        :key="value.title"
+        :title="value.title"
+        :description="value.description"
+        :button="value.primaryButton"
+        :url="value.primaryUrl"
+      />
+    </div>
+
+    <TPreview
+      v-if="profile.story"
+      :content="profile.story"
+      class="p-4 border-t"
+    />
 
     <div v-if="profile.amenities" class="space-y-2 p-4 border-t">
       <h3 class="text-xs uppercase font-bold text-gray-500">
@@ -96,6 +114,7 @@
 import { getDateTimeYear, getLabels } from '~/utils'
 import { useProfiles } from '~/use/profiles'
 import languages from '~/assets/languages'
+import { useAuth } from '~/use/auth'
 
 export default {
   props: {
@@ -105,6 +124,7 @@ export default {
     },
   },
   setup() {
+    const { can } = useAuth()
     const {
       objectivesList,
       profilePosterFields,
@@ -120,6 +140,7 @@ export default {
       profileFields,
       getDateTimeYear,
       getLabels,
+      can,
     }
   },
 }

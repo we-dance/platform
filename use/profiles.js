@@ -609,6 +609,14 @@ export const useProfiles = () => {
       label: t('profile.teammembers.label'),
       labelPosition: 'top',
     },
+    {
+      name: 'offers',
+      component: 'TInputArray',
+      labelPosition: 'top',
+      children: {
+        component: 'TInputOffer',
+      },
+    },
   ]
 
   const profilePosterFields = profileFields.filter((f) => f.poster)
