@@ -1,16 +1,20 @@
 <svg viewBox="0 0 150 150" fill="none" xmlns="http://www.w3.org/2000/svg">
-<g clip-path="url(#clip0_4_4)">
-<g clip-path="url(#clip1_4_4)">
-<path d="M62.625 149.25C27 142.875 0 112.125 0 75C0 33.75 33.75 0 75 0C116.25 0 150 33.75 150 75C150 112.125 123 142.875 87.375 149.25L83.25 145.875H66.75L62.625 149.25Z" class="fill-current"/>
-<path d="M104.25 96L107.625 75H87.75V60.375C87.75 54.375 90 49.875 99 49.875H108.75V30.75C103.5 30 97.5 29.25 92.25 29.25C75 29.25 63 39.75 63 58.5V75H44.25V96H63V148.875C67.125 149.625 71.25 150 75.375 150C79.5 150 83.625 149.625 87.75 148.875V96H104.25Z" fill="white"/>
-</g>
-</g>
-<defs>
-<clipPath id="clip0_4_4">
-<rect width="150" height="150" fill="white"/>
-</clipPath>
-<clipPath id="clip1_4_4">
-<rect width="150" height="150" fill="white"/>
-</clipPath>
-</defs>
+  <g clip-path="url(#clip0_4_4)">
+    <g clip-path="url(#clip1_4_4)">
+      <path
+        d="M62.625 149.25C27 142.875 0 112.125 0 75C0 33.75 33.75 0 75 0C116.25 0 150 33.75 150 75C150 112.125 123 142.875 87.375 149.25L83.25 145.875H66.75L62.625 149.25Z"
+        class="fill-current" />
+      <path
+        d="M104.25 96L107.625 75H87.75V60.375C87.75 54.375 90 49.875 99 49.875H108.75V30.75C103.5 30 97.5 29.25 92.25 29.25C75 29.25 63 39.75 63 58.5V75H44.25V96H63V148.875C67.125 149.625 71.25 150 75.375 150C79.5 150 83.625 149.625 87.75 148.875V96H104.25Z"
+        fill="white" />
+    </g>
+  </g>
+  <defs>
+    <clipPath id="clip0_4_4">
+      <rect width="150" height="150" fill="white" />
+    </clipPath>
+    <clipPath id="clip1_4_4">
+      <rect width="150" height="150" fill="white" />
+    </clipPath>
+  </defs>
 </svg>
