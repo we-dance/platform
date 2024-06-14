@@ -341,11 +341,10 @@ export async function indexInit() {
   })
 }
 
-export async function indexProfiles() {
-  const onlyNew = true
+export async function indexProfiles(params: any = {}) {
   let profileDocs: any[] = []
 
-  if (onlyNew) {
+  if (params.onlyNew) {
     const since = new Date()
     since.setHours(0, 0, 0, 0)
     since.setDate(since.getDate() - 1)
@@ -365,8 +364,19 @@ export async function indexProfiles() {
     ).docs
 
     profileDocs = [...recentlyCreated, ...recentlyUpdated]
-  } else {
+  }
+
+  if (params.all) {
     profileDocs = (await firestore.collection('profiles').get()).docs
+  }
+
+  if (params.usernames) {
+    profileDocs = (
+      await firestore
+        .collection('profiles')
+        .where('username', 'in', params.usernames)
+        .get()
+    ).docs
   }
 
   // get unique profiles

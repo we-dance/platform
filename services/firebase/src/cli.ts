@@ -927,7 +927,11 @@ yargs(hideBin(process.argv))
     'Send profiles to algolia',
     () => undefined,
     async (argv: any) => {
-      await indexProfiles()
+      await indexProfiles({
+        onlyNew: false,
+        all: false,
+        usernames: ['moscowdance88'],
+      })
     }
   )
   .command(
