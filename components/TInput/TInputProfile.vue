@@ -118,7 +118,7 @@
   </div>
 </template>
 <script>
-import { computed, ref } from '@nuxtjs/composition-api'
+import { computed, ref, useContext } from '@nuxtjs/composition-api'
 import { useAlgolia } from '~/use/algolia'
 import { useEvents } from '~/use/events'
 import { useDoc } from '~/use/doc'
@@ -144,6 +144,7 @@ export default {
     },
   },
   setup(props, { emit }) {
+    const { $track } = useContext()
     const { profile } = useAuth()
     const { search, response } = useAlgolia('profiles')
     const query = ref('')
@@ -248,6 +249,10 @@ export default {
         visibility: 'Public',
         place: profile.value?.place,
         ...data,
+      })
+
+      $track('profile_imported', {
+        source: data.instagram ? 'instagram' : 'facebook',
       })
 
       add(data)

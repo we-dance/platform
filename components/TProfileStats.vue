@@ -13,7 +13,7 @@
         {{ $tc('views', profile.viewsCount, { count: profile.viewsCount }) }}
       </div>
       <div>·</div>
-      <button @click="showSubscribers = true">
+      <button @click="openSubscribersPopup()">
         {{
           $tc('subscribers', subscribersCount, {
             count: subscribersCount,
@@ -33,9 +33,11 @@
             {{ $t('No subscribers') }}
           </div>
         </div>
-        <div v-for="username in profile.watch.usernames" v-else :key="username">
-          <WProfile :username="username" hide-buttons class="w-64" />
-        </div>
+        <template v-else>
+          <div v-for="username in profile.watch.usernames" :key="username">
+            <WProfile :username="username" hide-buttons class="w-64" />
+          </div>
+        </template>
       </div>
     </TPopup>
   </div>
@@ -59,6 +61,12 @@ export default {
         this.profile?.watch?.usernames?.length ||
         0
       )
+    },
+  },
+  methods: {
+    openSubscribersPopup() {
+      this.$track('subscribers_popup')
+      this.showSubscribers = true
     },
   },
 }

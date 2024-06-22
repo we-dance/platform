@@ -172,6 +172,7 @@ export default {
 
       const firestore = firebase.firestore()
       if (this.id) {
+        this.$track('review_updated')
         data.updatedAt = +new Date()
 
         await firestore
@@ -179,6 +180,7 @@ export default {
           .doc(this.id)
           .update(data)
       } else {
+        this.$track('review_created')
         data.createdAt = +new Date()
 
         const newStory = await firestore.collection('stories').add(data)

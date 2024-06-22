@@ -4,6 +4,7 @@
       <TButton
         v-if="!hideWebsite && profile.website"
         :href="profile.website"
+        :track="{ event: 'contact', action: 'website' }"
         type="void"
         class="cursor-pointer border-r border-b p-1"
       >
@@ -12,6 +13,7 @@
       <TButton
         v-if="profile.email"
         :href="`mailto:${profile.email}`"
+        :track="{ event: 'contact', action: 'email' }"
         type="void"
         class="cursor-pointer border-r border-b p-1"
       >
@@ -22,6 +24,7 @@
         :key="field"
         :href="profile[field]"
         :icon="field"
+        :track="{ event: 'contact', action: field }"
         type="void"
         class="cursor-pointer border-r border-b p-1"
       >

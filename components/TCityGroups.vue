@@ -127,6 +127,7 @@
         :description="$t('teaser.profile.description')"
         :button="$t('teaser.profile.btn')"
         :url="localePath('/signin')"
+        button-action="publish_profile"
       />
       <LandingFeature
         image="/img/dance-travel.svg"
@@ -134,6 +135,7 @@
         :description="$t('home.features.travel.description')"
         :button="$t('home.features.travel.action')"
         :url="localePath(`/explore/${slug}/tips`)"
+        button-action="ask_locals"
       />
       <LandingFeature
         image="/img/interviews.svg"
@@ -141,6 +143,7 @@
         description="If you're a dancer, influencer, or just love sharing your passion for dance, this is your chance to shine and earn."
         button="Learn More"
         :url="localePath('/promoter')"
+        button-action="promote_earn"
       />
       <LandingFeature
         image="/img/volunteer.svg"
@@ -151,6 +154,8 @@
         alternative="Donate"
         alternative-url="https://wedance.vip/donate"
         bottom="Every donation helps us improve the platform and grow the dance community."
+        button-action="add_recommendation"
+        alternative-action="donate"
       />
     </div>
   </div>
@@ -180,6 +185,11 @@ export default {
   computed: {
     slug() {
       return this.global ? 'global' : this.city.username
+    },
+  },
+  watch: {
+    'filters.type'(type) {
+      this.$track('city_filter', { type })
     },
   },
   setup(props, { root }) {

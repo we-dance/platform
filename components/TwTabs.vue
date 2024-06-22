@@ -15,7 +15,7 @@
         'group relative min-w-0 flex-1 overflow-hidden bg-white py-4 px-4 text-center text-sm font-medium hover:bg-gray-50 focus:z-10',
       ]"
       :aria-current="tab.current ? 'page' : undefined"
-      @click="() => $emit('input', tab.value)"
+      @click.native="() => onClick(tab)"
     >
       <span>{{ tab.name }}</span>
       <span
@@ -40,10 +40,23 @@ export default {
       type: Array,
       default: () => [],
     },
+    track: {
+      type: String,
+      default: '',
+    },
   },
   computed: {
     visibleTabs() {
       return this.tabs.filter((tab) => !tab.hidden)
+    },
+  },
+  methods: {
+    onClick(tab) {
+      if (this.track) {
+        this.$track(this.track + '_' + tab.value)
+      }
+
+      this.$emit('input', tab.value)
     },
   },
 }

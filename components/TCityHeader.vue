@@ -19,40 +19,47 @@
 
     <div class="overflow-x-auto ">
       <TwTabs
+        :track="global ? 'global' : 'city'"
         :tabs="[
           {
             name: 'Overview',
             to: localePath(`/`),
             current: view === 'groups',
             hidden: !global,
+            value: 'overview',
           },
           {
             name: 'Overview',
             to: localePath(`/explore/${slug}`),
             current: view === 'groups',
             hidden: global,
+            value: 'overview',
           },
           {
             name: $t('explore.nav.parties'),
             to: localePath(`/explore/${slug}/parties`),
             current: view === 'parties',
             hidden: global,
+            value: 'parties',
           },
           {
             name: $t('explore.nav.festivals'),
             to: localePath(`/explore/${slug}`),
             current: view === 'festivals',
             hidden: !global,
+            value: 'festivals',
           },
           {
             name: global ? $t('explore.nav.online') : $t('explore.nav.classes'),
             to: localePath(`/explore/${slug}/classes`),
             current: view === 'classes',
+            value: 'classes',
           },
           {
             name: global ? $t('explore.nav.experts') : $t('explore.nav.tips'),
             to: localePath(`/explore/${slug}/tips`),
             current: view === 'tips',
+            value: 'tips',
           },
         ]"
         class="border-b"
@@ -62,7 +69,7 @@
 </template>
 
 <script>
-import { ref, watch } from '@nuxtjs/composition-api'
+import { ref, useContext, watch } from '@nuxtjs/composition-api'
 
 export default {
   name: 'TCityHeader',
@@ -86,9 +93,13 @@ export default {
     },
   },
   setup(props, { root }) {
+    const { $track } = useContext()
     const radius = ref(root.$route.query.radius || 50)
 
     watch(radius, (value) => {
+      $track('radius_change', {
+        radius: value,
+      })
       root.$router.push({
         query: { radius: value },
       })

@@ -109,7 +109,7 @@
       <TContactsGrid :profile="profile" class="my-4 justify-center" />
     </div>
 
-    <TwTabs id="tabs" :tabs="tabs" />
+    <TwTabs id="tabs" track="profile" :tabs="tabs" />
 
     <div class="min-h-screen">
       <TStories
@@ -222,22 +222,26 @@ export default {
         name: 'About',
         to: `/${props.profile.username}#tabs`,
         current: !view.value,
+        value: 'about',
       },
       {
         name: 'Events',
         to: `/${props.profile.username}?view=events#tabs`,
         current: view.value === 'events',
+        value: 'events',
       },
       {
         name: 'Stories',
         to: `/${props.profile.username}?view=stories#tabs`,
         current: view.value === 'stories',
+        value: 'stories',
       },
       {
         name: 'Reviews',
         to: `/${props.profile.username}?view=reviews#tabs`,
         current: view.value === 'reviews',
         hidden: props.profile.type === 'Dancer',
+        value: 'reviews',
       },
     ])
 

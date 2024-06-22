@@ -4,10 +4,7 @@
     type="button"
     :title="$t('TButton.title', { action: title })"
     :class="classes"
-    @click="
-      authTargetQuery = targetAction
-      showAuthPopup = title
-    "
+    @click="openAuthPopup()"
   >
     <slot>
       <TIcon v-if="icon" :size="iconSize" :name="icon" />
@@ -22,6 +19,7 @@
     :class="classes"
     :title="title"
     v-on="$listeners"
+    @click="triggerTrack()"
   >
     <slot>
       <TIcon v-if="icon" :size="iconSize" :name="icon" />
@@ -34,6 +32,7 @@
     :class="classes"
     :to="to"
     v-on="$listeners"
+    @click.native="triggerTrack()"
   >
     <slot>
       <TIcon v-if="icon" :size="iconSize" :name="icon" />
@@ -46,6 +45,7 @@
     :title="title"
     :class="classes"
     v-on="$listeners"
+    @click="triggerTrack()"
   >
     <slot>
       <TIcon v-if="icon" :size="iconSize" :name="icon" />
@@ -63,6 +63,10 @@ export default {
     TIcon,
   },
   props: {
+    track: {
+      type: Object,
+      default: null,
+    },
     allowGuests: {
       type: Boolean,
       default: false,
@@ -117,6 +121,15 @@ export default {
     },
   },
   computed: {
+    tracking() {
+      return {
+        ...this.track,
+        title: this.title,
+        label: this.label,
+        href: this.href,
+        to: this.to,
+      }
+    },
     classes() {
       const xbase =
         'flex justify-start items-center font-medium space-x-2 cursor-pointer outline-none focus:outline-none focus:ring-2 focus:ring-offset-2 ' +
@@ -155,6 +168,24 @@ export default {
       }
 
       return map[this.variant || this.type]
+    },
+  },
+  methods: {
+    openAuthPopup() {
+      if (this.track) {
+        this.$track('intent', this.tracking)
+      }
+
+      this.authTargetQuery = this.targetAction
+      this.showAuthPopup = this.title
+    },
+    triggerTrack() {
+      if (this.track && this.tracking.event) {
+        const event = this.tracking.event
+        const data = this.tracking
+        delete data.event
+        this.$track(event, data)
+      }
     },
   },
   setup() {

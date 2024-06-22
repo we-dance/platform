@@ -88,6 +88,7 @@
           :event-type="item.type"
           :styles="item.styles"
           :organiser="item.organizer"
+          :item="item"
         />
       </div>
     </div>

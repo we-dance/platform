@@ -38,6 +38,7 @@
           :description="$t('home.features.travel.description')"
           :button="$t('home.features.travel.action')"
           :url="localePath('/where-can-i-dance')"
+          button-action="where-can-i-dance"
         />
         <LandingFeature
           image="/img/event-calendar.svg"
@@ -45,6 +46,7 @@
           :description="$t('home.features.explore.description')"
           :button="$t('home.features.explore.action')"
           :url="localePath('/explore/global')"
+          button-action="explore-global"
         />
         <LandingFeature
           v-if="featureFindPartner"
@@ -53,6 +55,7 @@
           :description="$t('home.features.partner.description')"
           :button="$t('home.features.partner.action')"
           :url="localePath('/find-partner/start')"
+          button-action="find-partner"
         />
       </div>
       <LandingNumbersLive class="mt-8" />

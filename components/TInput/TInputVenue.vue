@@ -181,6 +181,8 @@ export default {
           updateAt: Date.now(),
         })
 
+        this.$track('venue_created')
+
         doc = await loadBy('address.place_id', this.value.place_id)
       }
 

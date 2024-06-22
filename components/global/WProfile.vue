@@ -53,6 +53,7 @@
               icon="star"
               :to="`/reviews/add?receiver=${profile.username}`"
               label="Rate"
+              :track="{ event: 'rate' }"
             />
           </div>
 

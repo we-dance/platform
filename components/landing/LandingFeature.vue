@@ -15,8 +15,18 @@
         {{ description }}
       </div>
       <div v-if="button" class="flex gap-4">
-        <TButton :to="url" type="primary">{{ button }}</TButton>
-        <TButton v-if="alternative" :href="alternativeUrl" type="secondary">
+        <TButton
+          :to="url"
+          :track="{ event: 'cta_primary', action: buttonAction }"
+          type="primary"
+          >{{ button }}</TButton
+        >
+        <TButton
+          v-if="alternative"
+          :track="{ event: 'cta_secondary', action: alternativeAction }"
+          :href="alternativeUrl"
+          type="secondary"
+        >
           {{ alternative }}
         </TButton>
       </div>
@@ -46,6 +56,10 @@ export default {
       type: String,
       default: '',
     },
+    buttonAction: {
+      type: String,
+      default: '',
+    },
     url: {
       type: String,
       default: '',
@@ -55,6 +69,10 @@ export default {
       default: '',
     },
     alternative: {
+      type: String,
+      default: '',
+    },
+    alternativeAction: {
       type: String,
       default: '',
     },

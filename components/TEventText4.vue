@@ -15,7 +15,7 @@
       <div class="font-bold text-sm leading-none">
         <div>{{ formatDate(startDate, 'HH:mm') }}</div>
       </div>
-      <TEventBookmark :event-id="id" class="mt-2" />
+      <TEventBookmark :event-id="id" :event="item" class="mt-2" />
     </div>
     <div class="w-full">
       <div class="font-bold text-sm leading-none">

@@ -193,6 +193,7 @@
         />
         <TEventBookmark
           :event-id="doc.id"
+          :event="doc"
           show-label
           type="secondary"
           :label="$t('event.save')"

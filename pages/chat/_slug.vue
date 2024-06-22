@@ -66,6 +66,7 @@
 </template>
 
 <script>
+import { useContext } from '@nuxtjs/composition-api'
 import firebase from 'firebase/app'
 import { onMounted, onUnmounted, ref } from 'vue-demi'
 import { dateDiff } from '~/utils'
@@ -78,6 +79,7 @@ export default {
   name: 'ChatDialogue',
   middleware: ['auth'],
   setup() {
+    const { $track } = useContext()
     const { params } = useRouter()
     const { uid } = useAuth()
     const { doc: receiver, id: receiverUid, find, loading } = useDoc('profiles')
@@ -106,6 +108,8 @@ export default {
 
     onMounted(async () => {
       await find('username', params.slug)
+
+      $track('chat_open')
 
       chatId.value = getChatId()
 
@@ -192,6 +196,8 @@ export default {
             messages: firebase.firestore.FieldValue.arrayUnion(message),
           })
       }
+
+      $track('chat_send')
     }
 
     function getChatId() {

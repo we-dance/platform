@@ -11,7 +11,7 @@
       <div v-else class="font-bold text-sm leading-none">
         {{ formatDate(item.startDate, 'HH:mm') }}
       </div>
-      <TEventBookmark :event-id="item.id" class="mt-2" />
+      <TEventBookmark :event-id="item.id" :event="item" class="mt-2" />
     </div>
     <div class="w-full">
       <div

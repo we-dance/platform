@@ -31,8 +31,10 @@ import {
   CheckIcon,
 } from '@vue-hero-icons/outline'
 import { computed } from 'vue-demi'
+import { useContext } from '@nuxtjs/composition-api'
 import { useAuth } from '~/use/auth'
 import { useDoc } from '~/use/doc'
+import { addressPart } from '~/use/google'
 
 export default {
   components: {
@@ -121,6 +123,7 @@ export default {
     }
   },
   setup(props) {
+    const { $track } = useContext()
     const { username: currentUsername, uid } = useAuth()
 
     const username = computed(() => {
@@ -184,6 +187,30 @@ export default {
             action: 'left',
           }),
         }
+      }
+
+      if (props.field === 'watch') {
+        const action = !clicked.value ? 'subscribe' : 'unsubscribe'
+
+        $track(action, {
+          type: props.item.type,
+          username: props.item.username,
+        })
+      }
+
+      if (props.field === 'star') {
+        const action = !clicked.value ? 'attend' : 'unattend'
+
+        $track(action, {
+          eventType: props.item.eventType,
+          organizer: props.item.org?.username || '',
+          startDate: props.item.startDate,
+          id: props.item.id,
+          name: props.item.name,
+          price: props.item.price,
+          locality: addressPart(props.item.venue, 'locality'),
+          country: addressPart(props.item.venue, 'country'),
+        })
       }
 
       softUpdate(props.item.id, change)

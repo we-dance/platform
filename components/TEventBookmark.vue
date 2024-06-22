@@ -15,10 +15,11 @@
 </template>
 
 <script>
-import { computed } from '@nuxtjs/composition-api'
+import { computed, useContext } from '@nuxtjs/composition-api'
 import { BookmarkIcon } from '@vue-hero-icons/outline'
 import { useAuth } from '~/use/auth'
 import { db, firebase } from '~/plugins/firebase'
+import { addressPart } from '~/use/google'
 
 export default {
   name: 'TEventBookmark',
@@ -30,6 +31,10 @@ export default {
     eventId: {
       type: String,
       default: '',
+    },
+    event: {
+      type: Object,
+      default: () => ({}),
     },
     label: {
       type: String,
@@ -53,6 +58,7 @@ export default {
     },
   },
   setup(props) {
+    const { $track } = useContext()
     const { profile, updateProfile } = useAuth()
 
     const isBookmarked = computed(() => {
@@ -64,6 +70,28 @@ export default {
     })
 
     async function toggleBookmark() {
+      const action = !isBookmarked.value ? 'bookmark' : 'unbookmark'
+      let data = {
+        id: props.eventId,
+      }
+
+      if (props.event) {
+        data = {
+          ...data,
+          eventType: props.event.eventType || props.event.type,
+          organizer: props.event.org?.username || props.event.organizer,
+          startDate: props.event.startDate,
+          name: props.event.name,
+          price: props.event.price,
+          locality:
+            props.event.locality || addressPart(props.event.venue, 'locality'),
+          country:
+            props.event.country || addressPart(props.event.venue, 'country'),
+        }
+      }
+
+      $track(action, data)
+
       if (isBookmarked.value) {
         await updateProfile({
           bookmarks: profile.value.bookmarks.filter(
