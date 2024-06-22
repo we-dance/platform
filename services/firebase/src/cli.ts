@@ -35,6 +35,7 @@ import { getUploadedImage } from './lib/cloudinary'
 import { syncCalendar } from './lib/ical_import'
 import _ = require('lodash')
 import { getSchemaEvent } from './lib/schema_import'
+import posthog from './lib/posthog'
 
 function getDomain(url: string): string {
   let hostname
@@ -1135,6 +1136,14 @@ yargs(hideBin(process.argv))
       }
 
       console.log(domains)
+    }
+  )
+  .command(
+    'posthog <path>',
+    'Get analytics',
+    () => undefined,
+    async (argv: any) => {
+      await posthog(argv.path)
     }
   )
   .help('h')
