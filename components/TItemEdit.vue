@@ -30,7 +30,6 @@
 
 <script>
 import { computed } from '@nuxtjs/composition-api'
-import { track } from '~/plugins/firebase'
 import { useAuth } from '~/use/auth'
 import { useDoc } from '~/use/doc'
 import { useRouter } from '~/use/router'
@@ -111,12 +110,12 @@ export default {
     async saveItem(data) {
       if (data.id) {
         if (this.singular) {
-          track(`update_${this.singular}`)
+          this.$track(`update_${this.singular}`)
         }
         await this.update(data.id, data)
       } else {
         if (this.singular) {
-          track(`create_${this.singular}`)
+          this.$track(`create_${this.singular}`)
         }
         await this.create(data)
       }
@@ -127,7 +126,7 @@ export default {
     },
     async removeItem(id) {
       if (this.singular) {
-        track(`delete_${this.singular}`)
+        this.$track(`delete_${this.singular}`)
       }
       await this.remove(id)
       this.cancelItem()

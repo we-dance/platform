@@ -173,7 +173,7 @@ export default {
         return
       }
 
-      track('share', {
+      this.$track('share', {
         method: platform,
         content_type: this.collection,
         content_id: this.id,
@@ -186,14 +186,14 @@ export default {
       await this.share()
     },
     download() {
-      track('share', {
+      this.$track('share', {
         method: 'Download',
         content_type: this.collection,
         content_id: this.id,
       })
     },
     async copyToClipboard() {
-      track('share', {
+      this.$track('share', {
         method: 'Link',
         content_type: this.collection,
         content_id: this.id,
@@ -208,7 +208,7 @@ export default {
         return
       }
 
-      track('create_poster', {
+      this.$track('create_poster', {
         collection: this.collection,
       })
 
@@ -240,7 +240,7 @@ export default {
       this.$nuxt.$loading.finish()
     },
     share() {
-      track('popup_share')
+      this.$track('popup_share')
       this.sharing = true
 
       if (navigator.share && navigator.canShare) {
@@ -263,7 +263,7 @@ export default {
         return false
       }
 
-      track('share', {
+      this.$track('share', {
         method: 'Native',
         content_type: this.collection,
         content_id: this.id,

@@ -19,8 +19,6 @@ if (!process.env.FIREBASE_CONFIG) {
 
 const firebaseEnv = {
   config: JSON.parse(process.env.FIREBASE_CONFIG),
-  analytics: process.env.FIREBASE_ANALYTICS,
-  analyticsDebug: process.env.FIREBASE_ANALYTICS_DEBUG,
 }
 
 let sitemapApp

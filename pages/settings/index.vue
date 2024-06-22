@@ -220,7 +220,7 @@ export default {
       }
 
       try {
-        track('delete_account')
+        this.$track('delete_account')
 
         await db.collection('suspended').add({
           reason: this.deleteReason,
@@ -243,7 +243,7 @@ export default {
       this.$router.push(this.localePath(`/${this.profile.username}`))
     },
     async saveProfile(data) {
-      track('save_profile')
+      this.$track('save_profile')
 
       await this.updateProfile(data)
 
@@ -253,7 +253,7 @@ export default {
       try {
         await this.updateEmail(data.email)
 
-        track('save_account')
+        this.$track('save_account')
 
         await this.updateAccount(data)
         this.$router.push(this.localePath('/settings'))

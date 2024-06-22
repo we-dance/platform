@@ -37,7 +37,6 @@
 <script>
 import ls from 'local-storage'
 import { ref } from 'vue-demi'
-import { track } from '~/plugins/firebase'
 import { useAuth } from '~/use/auth'
 
 export default {
@@ -92,14 +91,14 @@ export default {
   },
   methods: {
     async signFacebook() {
-      track('login', {
+      this.$track('login', {
         method: 'Facebook',
       })
 
       await this.signInWithFacebook()
     },
     async signGoogle() {
-      track('login', {
+      this.$track('login', {
         method: 'Google',
       })
 

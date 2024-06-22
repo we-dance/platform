@@ -7,11 +7,8 @@ if (!process.env.firebase.config?.apiKey) {
   throw new Error('Missing Firebase Configuration')
 }
 
-// eslint-disable-next-line import/no-mutable-exports
-let track = function(...params) {
-  if (process.env.firebase.analyticsDebug) {
-    console.log('[track]', ...params)
-  }
+const track = function(...params) {
+  console.log('[old track]', ...params)
 }
 
 // eslint-disable-next-line import/no-mutable-exports
@@ -27,8 +24,6 @@ if (!firebase.apps.some((app) => app.name === '[DEFAULT]')) {
 
   if (process.client && process.env.firebase.analytics) {
     analytics = firebase.analytics()
-
-    track = analytics.logEvent
   }
 }
 

@@ -50,14 +50,14 @@ export default {
     },
     async saveItem(data) {
       if (data.id) {
-        track('update_post')
+        this.$track('update_post')
         await this.update(data.id, data)
         await db
           .collection('stories')
           .doc(data.id)
           .set(data)
       } else {
-        track('create_post')
+        this.$track('create_post')
         await this.create(data)
       }
 

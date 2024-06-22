@@ -65,7 +65,6 @@
 </template>
 
 <script>
-import { track } from '~/plugins/firebase'
 import { useAuth } from '~/use/auth'
 
 export default {
@@ -106,7 +105,7 @@ export default {
         return
       }
 
-      track('reset-password')
+      this.$track('reset-password')
 
       if (await this.sendPasswordResetEmail(this.email.trim())) {
         this.emailSent = true

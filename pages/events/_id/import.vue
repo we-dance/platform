@@ -42,7 +42,6 @@ import 'firebase/firestore'
 import { useAuth } from '~/use/auth'
 import { useDoc } from '~/use/doc'
 import { useI18n } from '~/use/i18n'
-import { track } from '~/plugins/firebase'
 
 export default {
   name: 'EventImport',
@@ -109,7 +108,7 @@ export default {
     async saveItem(data) {
       data = pickBy(data, (v) => v !== undefined)
 
-      track('import_event')
+      this.$track('import_event')
       const result = await this.create(data)
       this.view(result.id)
     },

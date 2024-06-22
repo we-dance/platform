@@ -22,7 +22,6 @@ import { useAuth } from '~/use/auth'
 import { useDoc } from '~/use/doc'
 import { useRouter } from '~/use/router'
 import { useEvents } from '~/use/events'
-import { track } from '~/plugins/firebase'
 
 export default {
   name: 'CopyEdit',
@@ -78,7 +77,7 @@ export default {
       data.instagram = {}
       data.promotion = ''
 
-      track('copy_event')
+      this.$track('copy_event')
       const result = await this.create(data)
       this.view(result.id)
     },

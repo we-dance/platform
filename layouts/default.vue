@@ -58,7 +58,7 @@ import { ref, watch } from '@nuxtjs/composition-api'
 import { version } from '../package.json'
 import { useAuth } from '~/use/auth'
 import { useApp } from '~/use/app'
-import { analytics, track } from '~/plugins/firebase'
+import { analytics } from '~/plugins/firebase'
 
 export default {
   name: 'DefaultLayout',
@@ -170,8 +170,8 @@ export default {
           app_version: version,
         }
 
-        track('page_view')
-        track('screen_view', screen)
+        this.$track('page_view')
+        this.$track('screen_view', screen)
       }, 500)
     },
   },

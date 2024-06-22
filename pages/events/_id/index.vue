@@ -1039,7 +1039,7 @@ export default {
         return
       }
 
-      track('delete_event')
+      this.$track('delete_event')
 
       await remove(doc.value.id)
       router.push(`/${username.value}`)

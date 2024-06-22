@@ -82,7 +82,6 @@
 </template>
 
 <script>
-import { track } from '~/plugins/firebase'
 import { useAuth } from '~/use/auth'
 import { useDoc } from '~/use/doc'
 import { useEvents } from '~/use/events'
@@ -137,7 +136,7 @@ export default {
         }
       }
 
-      track('delete_event')
+      this.$track('delete_event_series', { count })
 
       await remove(props.doc.id)
       router.push(`/${username.value}`)

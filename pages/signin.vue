@@ -62,7 +62,6 @@
 <script>
 import { ref } from '@nuxtjs/composition-api'
 import ls from 'local-storage'
-import { track } from '~/plugins/firebase'
 import { useAuth } from '~/use/auth'
 
 export default {
@@ -162,7 +161,7 @@ export default {
         return
       }
 
-      track('login', {
+      this.$track('login', {
         method: 'Password',
       })
 

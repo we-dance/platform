@@ -35,7 +35,6 @@ import { useAuth } from '~/use/auth'
 import { useDoc } from '~/use/doc'
 import { useRouter } from '~/use/router'
 import { useEvents } from '~/use/events'
-import { track } from '~/plugins/firebase'
 import { getYmd } from '~/utils'
 
 export default {
@@ -147,7 +146,7 @@ export default {
         return
       }
 
-      track('copy_event')
+      this.$track('copy_event')
       const doc = await this.create(data)
 
       this.$router.push(this.localePath(`/events/${doc.id}`))
@@ -195,10 +194,10 @@ export default {
       let result
 
       if (data.id) {
-        track('update_event')
+        this.$track('update_event')
         result = await this.update(data.id, data)
       } else {
-        track('create_event')
+        this.$track('create_event')
         result = await this.create(data)
       }
 
