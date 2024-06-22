@@ -29,7 +29,7 @@ import { useAuth } from '~/use/auth'
 import { useDoc } from '~/use/doc'
 import { useRouter } from '~/use/router'
 import { usePosts } from '~/use/posts'
-import { db, track } from '~/plugins/firebase'
+import { db } from '~/plugins/firebase'
 
 export default {
   name: 'PostEdit',

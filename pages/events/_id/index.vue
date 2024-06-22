@@ -799,7 +799,7 @@ import {
 import { addressPart } from '~/use/google'
 import { trackView } from '~/use/tracking'
 import { useStyles } from '~/use/styles'
-import { track, db } from '~/plugins/firebase'
+import { db } from '~/plugins/firebase'
 
 export default {
   name: 'EventView',

@@ -56,7 +56,7 @@ import axios from 'axios'
 import { openURL } from '~/utils'
 import { useCities } from '~/use/cities'
 import { useAuth } from '~/use/auth'
-import { db, track } from '~/plugins/firebase'
+import { db } from '~/plugins/firebase'
 
 export default {
   setup() {
