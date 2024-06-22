@@ -367,6 +367,8 @@ export default {
   env: {
     app,
     firebase: firebaseEnv,
+    analyticsEnabled: Number(process.env.ANALYTICS_ENABLED),
+    analyticsDebug: Number(process.env.ANALYTICS_DEBUG),
   },
   sentry: {
     dsn: process.env.SENTRY_DSN,

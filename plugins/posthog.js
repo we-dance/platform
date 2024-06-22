@@ -3,10 +3,17 @@ import 'firebase/analytics'
 import posthog from 'posthog-js'
 
 export default function({ app: { router } }, inject) {
-  if (process.env.ANALYTICS_ENABLED) {
+  if (process.env.analyticsEnabled) {
     posthog.init('phc_vL8Ex5Ph5yi1aoEALtthrjI0yC3w9vdyo05Acbdstqg', {
       api_host: 'https://us.i.posthog.com',
       capture_pageview: false,
+    })
+  }
+
+  if (process.env.analyticsDebug) {
+    console.log({
+      analyticsEnabled: process.env.analyticsEnabled,
+      analyticsDebug: process.env.analyticsDebug,
     })
   }
 
@@ -15,14 +22,11 @@ export default function({ app: { router } }, inject) {
       return
     }
 
-    if (process.env.ANALYTICS_DEBUG) {
+    if (process.env.analyticsDebug) {
       console.log('[track]', ...params)
     }
 
-    if (!process.env.ANALYTICS_ENABLED) {
-      if (process.env.ANALYTICS_DEBUG) {
-        console.log('[track:disabled]')
-      }
+    if (!process.env.analyticsEnabled) {
       return
     }
 
