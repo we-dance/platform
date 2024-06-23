@@ -35,7 +35,7 @@ export default function({ app: { router } }, inject) {
 
     if (params[0] === 'page_view') {
     } else if (params[0] === 'screen_view') {
-      posthog.capture('$pageview', params)
+      posthog.capture('$pageview', params[1])
     } else {
       posthog.capture(...params)
     }
