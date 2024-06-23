@@ -7,24 +7,34 @@
         :options="facets['style']"
         clearable
         hide-search-box
+        @input="
+          (style) =>
+            $track('calendar_filter', { style, view, city: city.username })
+        "
       />
 
       <t-rich-select
-        v-if="facets['country'].length > 1"
         v-model="filters['country']"
         placeholder="Country"
         :options="facets['country']"
         clearable
         hide-search-box
+        @input="
+          (country) =>
+            $track('calendar_filter', { country, view, city: city.username })
+        "
       />
 
       <t-rich-select
-        v-if="facets['locality'].length > 1"
         v-model="filters['locality']"
         placeholder="City"
         :options="facets['locality']"
         clearable
         hide-search-box
+        @input="
+          (locality) =>
+            $track('calendar_filter', { locality, view, city: city.username })
+        "
       />
 
       <t-rich-select
@@ -34,13 +44,10 @@
         :options="levels"
         clearable
         hide-search-box
-      />
-
-      <TButton
-        :to="localePath('/events/-/import')"
-        icon="plus"
-        :label="$t('calendar.addEvent')"
-        type="primary"
+        @input="
+          (level) =>
+            $track('calendar_filter', { level, view, city: city.username })
+        "
       />
     </div>
 
@@ -56,7 +63,10 @@
           type="primary"
           icon="copy"
           label="Copy"
-          @click="copyToClipboard(itemsAsText)"
+          @click="
+            copyToClipboard(itemsAsText)
+            $track('calendar_copy', { view, city: city.username })
+          "
         />
       </div>
     </TPopup>
@@ -104,6 +114,9 @@
             <router-link
               :to="localePath(`/explore/${city.username}/tips`)"
               class="text-primary underline hover:no-underline"
+              @click.native="
+                $track('calendar_ask_locals', { view, city: city.username })
+              "
               >Ask locals</router-link
             >
             — get tips in 48 hours!
@@ -113,7 +126,14 @@
     </div>
 
     <div v-if="response.nbPages > 1" class="my-4 flex justify-center">
-      <TButton label="Load More" type="primary" @click="loadMore" />
+      <TButton
+        label="Load More"
+        type="primary"
+        @click="
+          loadMore()
+          $track('calendar_load_more', { view, city: city.username })
+        "
+      />
     </div>
 
     <div class="p-4 gap-2 flex items-center border-b">
@@ -126,8 +146,16 @@
         placeholder="Date"
         format="D MMM YY"
         :clearable="false"
+        @input="$track('calendar_date', { view, city: city.username })"
       />
-      <TButton label="Share" icon="share" @click="showPopup = true" />
+      <TButton
+        label="Share"
+        icon="share"
+        @click="
+          showPopup = true
+          $track('calendar_share', { view, city: city.username })
+        "
+      />
     </div>
   </div>
 </template>

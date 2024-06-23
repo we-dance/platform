@@ -68,6 +68,7 @@
         :href="doc.venue.url"
         target="_blank"
         class="block border-b py-2 px-4 hover:bg-gray-200"
+        @click="$track('event_open_map')"
       >
         <div class="flex items-center justify-start leading-tight">
           <TIcon name="place" class="mr-4 h-4 w-4" />
@@ -138,7 +139,11 @@
       </div>
 
       <div id="tabs" class="grid grid-cols-3 gap-4 max-w-4xl mx-auto p-4">
-        <a href="#reviews" class="p-4 space-y-1 bg-light rounded shadow">
+        <a
+          href="#reviews"
+          class="p-4 space-y-1 bg-light rounded shadow"
+          @click="$track('event_see_reviews')"
+        >
           <h3 class="text-2xl font-extrabold text-center">
             {{ reviewsAvg ? reviewsAvg : '' }}★
           </h3>
@@ -153,6 +158,7 @@
           "
           href="#artists"
           class="p-4 space-y-1 bg-light rounded shadow"
+          @click="$track('event_see_artists')"
         >
           <h3 class="text-2xl font-extrabold text-center">
             {{ doc.artists ? doc.artists.length || '?' : '?' }}
@@ -161,7 +167,11 @@
             Artists
           </p>
         </a>
-        <a href="#guests" class="p-4 space-y-1 bg-light rounded shadow">
+        <a
+          href="#guests"
+          class="p-4 space-y-1 bg-light rounded shadow"
+          @click="$track('event_see_guests')"
+        >
           <h3 class="text-2xl font-extrabold text-center">
             {{ doc.star && doc.star.usernames ? doc.star.usernames.length : 0 }}
           </h3>
@@ -206,6 +216,7 @@
             :href="calendarLink"
             label="Add to Google Calendar"
             class="text-xs"
+            @click="$track('event_add_to_calendar')"
           />
 
           <TButtonShare
@@ -220,6 +231,7 @@
             type="context"
             icon=""
             :label="$t('eventView.dropdown.share')"
+            @click="$track('event_share')"
           />
 
           <TCardActions
@@ -228,6 +240,7 @@
             :item="doc"
             type="context"
             icon=""
+            @click="$track('event_report')"
           />
         </TDropdown>
       </div>
@@ -336,6 +349,7 @@
                 softUpdate(doc.id, {
                   promotion: 'requested',
                 })
+                $track('event_promote')
               "
             />
             <TButton
@@ -362,7 +376,12 @@
               :label="
                 can('edit', 'events', doc) ? 'Post an update' : 'Ask a question'
               "
-              @click="addComment = true"
+              @click="
+                addComment = true
+                can('edit', 'events', doc)
+                  ? $track('event_post_update')
+                  : $track('event_ask_question')
+              "
             />
           </div>
 
@@ -574,7 +593,7 @@
           <h3 class="uppercase text-xs text-primary font-extrabold">
             Sponsored
           </h3>
-          <AdEventView />
+          <AdEventView track="event_click_ad" />
         </div>
       </section>
 

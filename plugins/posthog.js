@@ -11,7 +11,7 @@ export default function({ app: { router } }, inject) {
   }
 
   if (process.env.analyticsDebug) {
-    console.log({
+    console.log('[track]', {
       analyticsEnabled: process.env.analyticsEnabled,
       analyticsDebug: process.env.analyticsDebug,
     })
@@ -34,7 +34,8 @@ export default function({ app: { router } }, inject) {
     analytics.logEvent(...params)
 
     if (params[0] === 'page_view') {
-      posthog.capture('$pageview')
+    } else if (params[0] === 'screen_view') {
+      posthog.capture('$pageview', ...params)
     } else {
       posthog.capture(...params)
     }

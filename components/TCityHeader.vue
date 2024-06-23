@@ -7,6 +7,7 @@
         icon="place"
         :label="profile.name"
         class="border-b flex-grow"
+        @click.native="$track('city_explore', { label: profile.name })"
       />
       <select v-if="!global" v-model="radius">
         <option value="5">+5 km</option>

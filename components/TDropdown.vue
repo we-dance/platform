@@ -7,6 +7,7 @@
         :type="type"
         :label="label"
         :title="title"
+        @click="$track('dropdown_open')"
       />
     </template>
     <template v-slot:menu="{ closeMenu }">

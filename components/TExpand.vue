@@ -12,7 +12,10 @@
           ? ''
           : 'absolute inset-0 pt-16 text-center bg-gradient-to-b from-transparent to-white'
       "
-      @click="expandedValue = !expandedValue"
+      @click="
+        expandedValue = !expandedValue
+        $track('expand')
+      "
     />
   </div>
 </template>

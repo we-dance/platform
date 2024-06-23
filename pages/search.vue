@@ -12,6 +12,7 @@
       <NuxtLink
         class="underline hover:no-underline font-bold"
         :to="`/explore?q=${query}`"
+        @click.native="$track('search_city', { label: query })"
         >Choose City</NuxtLink
       >
     </div>
@@ -25,6 +26,13 @@
           : localePath(`/${item.username}`)
       "
       class="border-b p-4 flex items-center hover:bg-blue-200"
+      @click.native="
+        $track('search_profile', {
+          name: item.name,
+          username: item.username,
+          query,
+        })
+      "
     >
       <div class="w-12 flex-shrink-0">
         <TProfilePhoto2 size="sm" :src="item.photo" />
@@ -56,6 +64,7 @@
       :styles="item.styles"
       :organiser="item.organizer"
       show-date
+      @click.native="$track('search_event', { name: item.name, query })"
     />
   </div>
 </template>

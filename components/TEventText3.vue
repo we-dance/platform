@@ -4,7 +4,7 @@
     :target="isEmbed ? '_blank' : '_self'"
     class="flex border-b p-4 leading-none gap-2"
   >
-    <div class="text-center">
+    <div ref="target" class="text-center">
       <div class="text-xl font-bold leading-none">
         {{ formatDate(item.startDate, 'd') }}
       </div>
@@ -38,20 +38,32 @@
 </template>
 
 <script>
+import { ref, watch } from '@nuxtjs/composition-api'
 import { formatDate } from '~/utils'
 import { useApp } from '~/use/app'
 import { useEvents } from '~/use/events'
 import { useCities } from '~/use/cities'
 import { addressPart } from '~/use/google'
+import { useElementVisibility } from '@vueuse/core'
 
 export default {
   name: 'TEventText',
-  setup() {
+  setup(props, { emit }) {
     const { getCity } = useApp()
     const { currentCity } = useCities()
     const { getEventIcon } = useEvents()
+    const target = ref(null)
+    const targetIsVisible = useElementVisibility(target)
+
+    watch(targetIsVisible, (isVisible) => {
+      if (isVisible) {
+        emit('visible', isVisible)
+      }
+    })
 
     return {
+      target,
+      targetIsVisible,
       formatDate,
       getCity,
       currentCity,

@@ -11,8 +11,17 @@
         :key="deal.id"
         :to="localePath(`/events/${deal.id}`)"
         class="hover:opacity-75"
+        @click.native="
+          $track('win_ticket_click', { name: deal.name, id: deal.id })
+        "
       >
-        <TEventText3 :item="deal" class="border-orange-100" />
+        <TEventText3
+          :item="deal"
+          class="border-orange-100"
+          @visible="
+            $track('win_ticket_impression', { name: deal.name, id: deal.id })
+          "
+        />
       </NuxtLink>
     </div>
     <div class="text-right p-4">

@@ -2,7 +2,12 @@
   <nav
     class="p-4 flex flex-col space-y-2 text-dark h-screen overflow-y-scroll sticky top-0 border-r"
   >
-    <TButton allow-guests :to="localePath('/')" type="void">
+    <TButton
+      allow-guests
+      :to="localePath('/')"
+      type="void"
+      :track="{ event: 'main_menu', action: 'logo' }"
+    >
       <TIcon name="logo-horizontal-dark" />
     </TButton>
 
@@ -11,6 +16,7 @@
       :to="localePath('/start')"
       label="Start Here"
       type="nav"
+      :track="{ event: 'main_menu', action: 'start' }"
     />
 
     <TButton
@@ -19,6 +25,7 @@
       icon="trending"
       :label="$t('nav.global')"
       type="nav"
+      :track="{ event: 'main_menu', action: 'global' }"
     />
 
     <TButton
@@ -31,6 +38,7 @@
       :label="$t('nav.local')"
       icon="place"
       type="nav"
+      :track="{ event: 'main_menu', action: currentCity ? 'local' : 'explore' }"
     />
 
     <TButton
@@ -40,6 +48,7 @@
       icon="people"
       :label="$t('nav.partner')"
       type="nav"
+      :track="{ event: 'main_menu', action: 'find_partner' }"
     />
 
     <TButton
@@ -48,6 +57,7 @@
       icon="search"
       :label="$t('nav.search')"
       type="nav"
+      :track="{ event: 'main_menu', action: 'search' }"
     />
 
     <div class="border-b pt-2 text-xs font-bold uppercase">
@@ -59,6 +69,7 @@
       icon="plus"
       :label="$t('nav.addEvent')"
       type="nav"
+      :track="{ event: 'main_menu', action: 'add_event' }"
     />
     <TButton
       v-else
@@ -67,12 +78,14 @@
       icon="plus"
       :label="$t('nav.addEvent')"
       type="nav"
+      :track="{ event: 'main_menu', action: 'organize' }"
     />
 
     <TButton
       :to="localePath('/reviews/add')"
       :label="$t('nav.addReview')"
       type="nav"
+      :track="{ event: 'main_menu', action: 'add_review' }"
     >
       <StarIcon class="w-4 h-4" />
     </TButton>
@@ -86,8 +99,13 @@
         icon="chat"
         :label="$t('nav.chat')"
         type="nav"
+        :track="{ event: 'main_menu', action: 'chat' }"
       />
-      <TButton :to="localePath(`/${username}`)" type="nav">
+      <TButton
+        :to="localePath(`/${username}`)"
+        type="nav"
+        :track="{ event: 'main_menu', action: 'my_profile' }"
+      >
         <TProfilePhoto size="xs" :uid="uid" class="mr-1" />
         <span>{{ $t('nav.myProfile') }}</span>
       </TButton>
@@ -95,11 +113,13 @@
         :to="localePath('/settings')"
         type="nav"
         :label="$t('nav.settings')"
+        :track="{ event: 'main_menu', action: 'settings' }"
       />
       <TButton
         :to="localePath('/signout')"
         type="nav"
         :label="$t('auth.signout')"
+        :track="{ event: 'main_menu', action: 'sign_out' }"
       />
     </template>
     <template v-else>
@@ -109,6 +129,7 @@
         type="nav"
         :label="$t('auth.signin')"
         class="bg-primary border-none text-white hover:bg-dark"
+        :track="{ event: 'main_menu', action: 'sign_in' }"
       />
     </template>
 

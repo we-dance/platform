@@ -1,6 +1,14 @@
 <template>
   <div>
-    <TButton allow-guests :label="label" type="nav" @click="showPopup = true">
+    <TButton
+      allow-guests
+      :label="label"
+      type="nav"
+      @click="
+        showPopup = true
+        $track('share_qr')
+      "
+    >
       <QrcodeIcon class="w-6 h-6" />
     </TButton>
     <TPopup v-if="showPopup" title="Scan QR code" @close="showPopup = false">

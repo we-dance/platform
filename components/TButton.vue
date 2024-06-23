@@ -19,7 +19,7 @@
     :class="classes"
     :title="title"
     v-on="$listeners"
-    @click="triggerTrack()"
+    @click="capture()"
   >
     <slot>
       <TIcon v-if="icon" :size="iconSize" :name="icon" />
@@ -32,7 +32,7 @@
     :class="classes"
     :to="to"
     v-on="$listeners"
-    @click.native="triggerTrack()"
+    @click.native="capture()"
   >
     <slot>
       <TIcon v-if="icon" :size="iconSize" :name="icon" />
@@ -45,7 +45,7 @@
     :title="title"
     :class="classes"
     v-on="$listeners"
-    @click="triggerTrack()"
+    @click="capture()"
   >
     <slot>
       <TIcon v-if="icon" :size="iconSize" :name="icon" />
@@ -179,7 +179,7 @@ export default {
       this.authTargetQuery = this.targetAction
       this.showAuthPopup = this.title
     },
-    triggerTrack() {
+    capture() {
       if (this.track && this.tracking.event) {
         const event = this.tracking.event
         const data = this.tracking

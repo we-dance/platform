@@ -7,7 +7,10 @@
         v-for="city in recommendations"
         :key="city.username"
         class="border-b block p-4 cursor-pointer hover:bg-red-100"
-        @click="goTo(city)"
+        @click="
+          goTo(city)
+          $track('explore_recommended', { label: city.name })
+        "
       >
         <div class="text-lg">
           {{ city.name }}
@@ -22,7 +25,10 @@
       <div v-for="city in results" :key="city.value" class="border-b flex">
         <div
           class="flex-grow text-lg p-4 cursor-pointer hover:bg-red-100"
-          @click="changeCity(city.value)"
+          @click="
+            changeCity(city.value)
+            $track('explore_result', { label: city.label, query })
+          "
         >
           {{ city.label }}
         </div>

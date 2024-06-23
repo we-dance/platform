@@ -42,7 +42,11 @@
 
     <div class="border-t border-b">
       <div class="space-y-2 p-4">
-        <TInputButtons v-model="filters['type']" :options="tabs" />
+        <TInputButtons
+          v-model="filters['type']"
+          :options="tabs"
+          @input="(type) => type && $track('city_filter', { type })"
+        />
 
         <div v-if="response.facets" class="gap-2 flex items-center">
           <t-rich-select
@@ -53,6 +57,9 @@
             clearable
             hide-search-box
             class="flex-grow"
+            @input="
+              (platform) => platform && $track('city_filter', { platform })
+            "
           />
           <t-rich-select
             v-if="global"
@@ -62,6 +69,7 @@
             clearable
             hide-search-box
             class="flex-grow"
+            @input="(country) => country && $track('city_filter', { country })"
           />
           <t-rich-select
             v-if="global"
@@ -71,6 +79,9 @@
             clearable
             hide-search-box
             class="flex-grow"
+            @input="
+              (locality) => locality && $track('city_filter', { locality })
+            "
           />
 
           <t-rich-select
@@ -81,6 +92,9 @@
             clearable
             hide-search-box
             class="flex-grow"
+            @input="
+              (venueType) => venueType && $track('city_filter', { venueType })
+            "
           />
 
           <t-rich-select
@@ -90,6 +104,9 @@
             :options="facets['amenities']"
             clearable
             class="flex-grow"
+            @input="
+              (amenities) => amenities && $track('city_filter', { amenities })
+            "
           />
 
           <t-rich-select
@@ -99,6 +116,7 @@
             clearable
             hide-search-box
             class="flex-grow"
+            @input="(style) => style && $track('city_filter', { style })"
           />
         </div>
       </div>
@@ -116,7 +134,14 @@
       </div>
 
       <div v-if="!uid || response.nbPages > 1" class="my-4 flex justify-center">
-        <TButton label="Load More" type="primary" @click="loadMore" />
+        <TButton
+          label="Load More"
+          type="primary"
+          @click="
+            loadMore()
+            $track('city_load_more')
+          "
+        />
       </div>
     </div>
 
@@ -185,11 +210,6 @@ export default {
   computed: {
     slug() {
       return this.global ? 'global' : this.city.username
-    },
-  },
-  watch: {
-    'filters.type'(type) {
-      this.$track('city_filter', { type })
     },
   },
   setup(props, { root }) {
@@ -267,7 +287,7 @@ export default {
       locality: getFacetOptions('locality'),
     }))
     function load() {
-      filters.value = props.global ? { type: 'Artist' } : {}
+      filters.value = {}
       query.value = ''
     }
     onMounted(load)
