@@ -16,6 +16,7 @@
       </div>
       <div v-if="button" class="flex gap-4">
         <TButton
+          allow-guests
           :to="url"
           :track="{ event: 'cta_primary', action: buttonAction }"
           type="primary"
@@ -23,6 +24,7 @@
         >
         <TButton
           v-if="alternative"
+          allow-guests
           :track="{ event: 'cta_secondary', action: alternativeAction }"
           :href="alternativeUrl"
           type="secondary"
