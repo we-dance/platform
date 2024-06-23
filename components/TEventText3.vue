@@ -39,12 +39,12 @@
 
 <script>
 import { ref, watch } from '@nuxtjs/composition-api'
+import { useElementVisibility } from '@vueuse/core'
 import { formatDate } from '~/utils'
 import { useApp } from '~/use/app'
 import { useEvents } from '~/use/events'
 import { useCities } from '~/use/cities'
 import { addressPart } from '~/use/google'
-import { useElementVisibility } from '@vueuse/core'
 
 export default {
   name: 'TEventText',
