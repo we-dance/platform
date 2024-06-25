@@ -135,30 +135,13 @@
 </template>
 
 <script>
-import {
-  ShareIcon,
-  SearchCircleIcon,
-  SpeakerphoneIcon,
-  BookmarkIcon,
-  HeartIcon,
-  StarIcon,
-  GiftIcon,
-  LinkIcon,
-  UserGroupIcon,
-} from '@vue-hero-icons/outline'
+import { SearchCircleIcon, GiftIcon } from '@vue-hero-icons/outline'
 
 export default {
   layout: 'full',
   components: {
-    ShareIcon,
     SearchCircleIcon,
-    SpeakerphoneIcon,
-    BookmarkIcon,
-    HeartIcon,
-    StarIcon,
     GiftIcon,
-    LinkIcon,
-    UserGroupIcon,
   },
 }
 </script>
