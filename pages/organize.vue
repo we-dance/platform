@@ -11,8 +11,9 @@
         Add an event in seconds by importing from Facebook, Google Calendar,
         Teamup, Apple Calendar, or manually.
       </div>
-      <div class="flex justify-center py-4">
+      <div class="flex flex-col sm:flex-row justify-center py-4 gap-4">
         <TButton type="primary" to="/events/-/import">Add Your Event</TButton>
+        <TButton type="tertiery" to="/grow">Grow Your Business</TButton>
       </div>
       <section class="mt-16 border-t border-primary">
         <h3 class="uppercase text-xs text-primary font-extrabold py-4">
