@@ -72,6 +72,12 @@
       >
       <NuxtLink
         class="hover:underline"
+        :to="localePath('/impressum')"
+        @click.native="$track('footer', { action: 'impressum' })"
+        >{{ $t('footer.impressum') }}</NuxtLink
+      >
+      <NuxtLink
+        class="hover:underline"
         :to="localePath('/terms')"
         @click.native="$track('footer', { action: 'terms' })"
         >{{ $t('footer.terms') }}</NuxtLink

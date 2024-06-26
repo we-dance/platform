@@ -404,9 +404,10 @@ share:
 footer:
   about: Über uns
   getInvolved: Mach mit
-  support: Unterstützung
-  privacy: Privatsphäre
-  terms: Bedingungen
+  support: Support
+  privacy: Datenschutzerklärung
+  terms: AGB
+  impressum: Impressum
   coc: Verhaltenskodex
   faq: FAQ
   copyright: All rights reserved.
