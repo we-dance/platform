@@ -418,6 +418,8 @@ account:
   name: Ad Soyad
   phone: Telefon
   zone: Saat dilimi
+  emailConsent: I agree to receive emails from WeDance. I can unsubscribe from non-essential emails at any time.
+  emailConsentError: Please agree to receive emails to proceed.
   newsletter:
     label: Haftalık olarak ne tür güncellemeler almak istersin?
     options:
