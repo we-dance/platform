@@ -418,6 +418,8 @@ account:
   name: Полное имя
   phone: Телефон
   zone: Timezone
+  emailConsent: I agree to receive emails from WeDance. I can unsubscribe from non-essential emails at any time.
+  emailConsentError: Please agree to receive emails to proceed.
   newsletter:
     label: What kind of updated would you like to receive weekly?
     options:
