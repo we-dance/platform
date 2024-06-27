@@ -6,8 +6,6 @@
 </template>
 
 <script>
-import { sanitize } from '~/utils'
-
 export default {
   name: 'TInput',
   props: {
