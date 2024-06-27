@@ -476,7 +476,10 @@ export const useAuth = () => {
       ls('username', username)
       ls('place', place)
       ls('gender', gender)
-      await firebase.auth().createUserWithEmailAndPassword(email, password)
+      const firebaseUser = await firebase
+        .auth()
+        .createUserWithEmailAndPassword(email, password)
+      firebaseUser.sendEmailVerification()
     } catch (e) {
       state.error = e
     }

@@ -22,6 +22,7 @@ import { getFacebookEvent } from './lib/facebook_import'
 import { syncCalendar } from './lib/ical_import'
 import { getSchemaEvent } from './lib/schema_import'
 import { isFacebookEvent } from './lib/linguist'
+import { uniq } from 'lodash'
 
 require('dotenv').config()
 
@@ -610,12 +611,10 @@ export const commentNotification = functions.firestore
         .get()
     ).data()
 
-    if (!post.watch) {
-      return
-    }
-
-    const watchList = post.watch.list
-    const watchUsernames = Object.keys(watchList)
+    const watchUsernames = uniq([
+      ...Object.keys(post?.watch?.list),
+      post?.star.usernames,
+    ])
 
     const recipients: RecipientList = {}
 
@@ -626,32 +625,36 @@ export const commentNotification = functions.firestore
         continue
       }
 
-      if (comment.createdBy === account.id) {
-        continue
-      }
-
       recipients[account.id] = {
         name: username,
         email: account.email,
       }
     }
 
-    const content = `
-**${comment.username} replied:**
+    let content = ''
+
+    if (post.type === 'event') {
+      content = `
+**${comment.username} wrote:**
 
 ${comment.body}
 
-**on post ${post.title || ''}**
-
-${post.description}
-
-[View comment](https://wedance.vip/posts/${post.id}#comment-${commentId})
+[View event](https://wedance.vip/events/${post.id}#comments)
 `
+    } else {
+      content = `
+**${comment.username} wrote:**
+
+${comment.body}
+
+[View post](https://wedance.vip/posts/${post.id}#comment-${commentId})
+`
+    }
 
     const email = {
       from: 'WeDance <noreply@wedance.vip>',
       recipients,
-      subject: 'New comment on post you are watching',
+      subject: post.name || post.title || 'New comment',
       content,
       type: 'commentNotification',
       id: commentId,

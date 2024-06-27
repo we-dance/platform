@@ -29,9 +29,11 @@
           v-bind="$attrs"
           :item="item"
           :value.sync="computedValue"
+          :label="label"
+          :name="name"
           :class="{ 'border-red-500': error }"
           v-on="$attrs.listeners"
-          @input="(val) => $emit('input', set(val))"
+          @input="onInput"
         />
       </slot>
       <div v-if="error" class="field-error text-red-500 text-sm mt-2">
@@ -59,7 +61,7 @@ export default {
   inheritAttrs: false,
   props: {
     value: {
-      type: [String, Object, Array, Number, Date],
+      type: [String, Object, Array, Number, Date, Boolean],
       default: '',
     },
     item: {
@@ -67,6 +69,10 @@ export default {
       default: () => ({}),
     },
     label: {
+      type: String,
+      default: '',
+    },
+    name: {
       type: String,
       default: '',
     },
@@ -154,11 +160,16 @@ export default {
     },
   },
   mounted() {
-    this.elementId = camelize(this.label)
+    this.elementId = this.name || camelize(this.label)
 
     if (!this.value && this.default) {
       this.$emit('input', this.default)
     }
+  },
+  methods: {
+    onInput(val) {
+      this.$emit('input', this.set(val))
+    },
   },
 }
 </script>

@@ -4,11 +4,24 @@ import {
   TRichSelect,
   TRadioGroup,
   TCheckboxGroup,
+  TCheckbox,
   TInput,
   TPagination,
 } from 'vue-tailwind/dist/components'
 
 const settings = {
+  VtCheckbox: {
+    component: TCheckbox,
+    props: {
+      classes: {
+        label: '',
+        input:
+          'h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600',
+        inputWrapper: '',
+        wrapper: '',
+      },
+    },
+  },
   TPagination: {
     component: TPagination,
     props: {

@@ -43,6 +43,17 @@ export const useAccounts = () => {
       component: 'TRichSelect',
       options: moment.tz.names(),
     },
+    {
+      name: 'emailConsent',
+      label: t('account.emailConsent'),
+      component: 'TCheckbox',
+      register: true,
+      hideLabel: true,
+      validate(value) {
+        return value
+      },
+      validationError: t('account.emailConsentError'),
+    },
   ]
 
   return {

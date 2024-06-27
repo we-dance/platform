@@ -366,6 +366,7 @@ account:
   name: Vollständiger Name
   phone: Telefon
   zone: Timezone
+  emailConsent: Ich stimme zu, wesentliche E-Mails von WeDance zu erhalten, einschließlich Veranstaltungsaktualisierungen und Benachrichtigungen. Ich kann mich jederzeit von nicht wesentlichen E-Mails abmelden.
   newsletter:
     label: What kind of updated would you like to receive weekly?
     options:

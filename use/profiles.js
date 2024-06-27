@@ -623,8 +623,8 @@ export const useProfiles = () => {
   const profileDetailFields = profileFields.filter((f) => !f.poster)
 
   const registerFields = [
-    ...accountFields.filter((f) => f.register),
     ...profileFields.filter((f) => f.register),
+    ...accountFields.filter((f) => f.register),
   ]
 
   const profileFilters = [
