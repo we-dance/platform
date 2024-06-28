@@ -510,6 +510,8 @@ event:
   attendCallToAction: Add this event to your profile calendar and receive notifications by clicking “Attend” to join the guest list or “Save” to track without joining.
   attending: Attending
   getTicket: Get Ticket
+  limitRoles: Limited to {followers} followers and {leaders} leaders
+  limitTotal: Limited to {total} attendees
   share: Acțiune
   guests: Guests
   guestsHidden: Sign in to view guest list
@@ -611,6 +613,9 @@ event:
     label: Confirmation
     description: This message will be shown after people joined the guest list. Explain next steps to participate in the event (ticket, payments, dress-code, invite friends, etc.)
     placeholder: 'Example: You are on the guest list. Take your big smile and see you at the event!'
+  limit:
+    label: Limit
+    description: How many people can join the event? Leave it blank if you don't have a limit. "3/4" means 3 followers and 4 leaders. "10" means 10 people in total.
 TInputProfile:
   changeRole: Change Role
   actions: Actions
