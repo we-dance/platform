@@ -181,6 +181,20 @@ export const useAuth = () => {
       edit = true
     }
 
+    if (collection === 'events') {
+      if (object.artistsList?.includes(state.username)) {
+        edit = true
+      }
+
+      if (object.org?.id === state.uid) {
+        edit = true
+      }
+
+      if (object.venue?.username === state.username) {
+        edit = true
+      }
+    }
+
     const remove = object.createdBy === state.uid
 
     const actions = {
