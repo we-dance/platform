@@ -93,7 +93,7 @@
       </div>
 
       <div
-        v-if="doc.price"
+        v-if="doc.price || doc.link"
         class="flex w-full items-center justify-start border-b py-2 px-4 leading-tight"
       >
         <TIcon name="ticket" class="mr-4 h-4 w-4" />
@@ -117,6 +117,20 @@
                 :label="$t('event.getTicket')"
               />
             </template>
+          </div>
+        </div>
+      </div>
+      <div
+        v-if="doc.limit"
+        class="flex w-full items-center justify-start border-b py-2 px-4 leading-tight"
+      >
+        <UserGroupIcon class="mr-4 w-4 text-black" />
+        <div class="flex w-full justify-between items-center">
+          <div v-if="eventLimit.roleBased">
+            {{ $t('event.limitRoles', eventLimit) }}
+          </div>
+          <div v-else>
+            {{ $t('event.limitTotal', eventLimit) }}
           </div>
         </div>
       </div>
@@ -793,6 +807,7 @@
 </template>
 
 <script>
+import { UserGroupIcon } from '@vue-hero-icons/outline'
 import googleCalendarEventUrl from 'generate-google-calendar-url'
 import { computed, ref, watch } from '@nuxtjs/composition-api'
 import { useAuth } from '~/use/auth'
@@ -824,6 +839,9 @@ import { db } from '~/plugins/firebase'
 export default {
   name: 'EventView',
   layout: 'full',
+  components: {
+    UserGroupIcon,
+  },
   async asyncData(ctx) {
     return await loadDoc(ctx, 'posts')
   },
@@ -836,6 +854,31 @@ export default {
     addComment: false,
   }),
   computed: {
+    eventLimit() {
+      if (!this.doc.limit) {
+        return ''
+      }
+
+      let total = 0
+      let followers = 0
+      let leaders = 0
+      let roleBased = false
+
+      if (this.doc.limit.includes('/')) {
+        ;[followers, leaders] = this.doc.limit.split('/')
+        total = Number(followers) + Number(leaders)
+        roleBased = true
+      } else {
+        total = Number(this.doc.limit)
+      }
+
+      return {
+        total,
+        followers,
+        leaders,
+        roleBased,
+      }
+    },
     history() {
       const result = this.doc?.star?.history
       if (!result) {

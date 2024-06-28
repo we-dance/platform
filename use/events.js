@@ -409,6 +409,12 @@ export const useEvents = () => {
       validationError: 'Please add currency',
     },
     {
+      name: 'limit',
+      label: t('event.limit.label'),
+      description: t('event.limit.description'),
+      labelPosition: 'top',
+    },
+    {
       name: 'specialOffer',
       labelPosition: 'top',
       label: 'Special Offer',
