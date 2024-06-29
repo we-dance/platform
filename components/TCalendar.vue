@@ -243,10 +243,10 @@ export default {
     })
     const filter = computed(() => {
       if (props.view === 'parties') {
-        return '(type:Party OR type:Other OR type:Show OR type:Concert OR type:Festival OR type:Congress)'
+        return '(type:Party OR type:Other OR type:Show OR type:Concert OR type:Festival OR type:Congress OR type:Weekender)'
       }
       if (props.view === 'classes') {
-        return '(type:Course OR type:Workshop OR type:Festival OR type:Congress)'
+        return '(type:Course OR type:Workshop OR type:Festival OR type:Congress OR type:Weekender)'
       }
       if (props.view === 'online') {
         return '(online:Yes)'
