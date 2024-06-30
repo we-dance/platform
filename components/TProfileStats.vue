@@ -27,7 +27,7 @@
       :title="`${profile.username} subscribers`"
       @close="showSubscribers = false"
     >
-      <div class="py-6 overflow-y-scroll">
+      <div class="max-w-md mx-auto py-4 max-h-screen overflow-y-scroll">
         <div v-if="!profile.watch || profile.watch.usernames.length === 0">
           <div class="text-center text-gray-500">
             {{ $t('No subscribers') }}
