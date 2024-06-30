@@ -1,6 +1,6 @@
 <template>
-  <div class="flex flex-col" style="height: 100vh">
-    <div class="p-4 flex space-x-4">
+  <div>
+    <div class="p-4 flex space-x-4 border-b">
       <div>{{ events.length }} events</div>
       <t-rich-select
         v-model="orderBy"
@@ -22,119 +22,29 @@
         hide-search-box
       />
     </div>
-    <ag-grid-vue
-      class="ag-theme-alpine mt-4"
-      style="width: 100%; height: 100%"
-      :column-defs="columns"
-      :row-data="events"
-      @grid-ready="onGridReady"
-    />
+    <div>
+      <div v-for="item in events" :key="item.id" class="w-full border-b">
+        <TEventText2 :item="item" show-date>
+          <TEventCreator :doc="item" class="pt-4" />
+        </TEventText2>
+      </div>
+    </div>
   </div>
 </template>
 
 <script>
 import firebase from 'firebase/app'
 import 'firebase/firestore'
-import { computed, onMounted, ref, watch } from 'vue-demi'
-import 'ag-grid-community/dist/styles/ag-grid.css'
-import 'ag-grid-community/dist/styles/ag-theme-alpine.css'
-import { AgGridVue } from 'ag-grid-vue'
-import { getDateTime, sortBy } from '~/utils'
-import { useApp } from '~/use/app'
+import { onMounted, ref, watch } from 'vue-demi'
 
 export default {
-  layout: 'empty',
   middleware: ['auth'],
-  components: {
-    AgGridVue,
-  },
   setup() {
-    const { getCity } = useApp()
-
     const orderBy = ref('createdAt')
 
-    const columns = computed(() => [
-      {
-        field: 'id',
-        cellRenderer: (params) =>
-          `<a target="blank" href="/events/${params.data.id}" class="underline text-primary">${params.data.id}</a>`,
-        resizable: true,
-      },
-      {
-        field: 'type',
-      },
-      {
-        field: 'username',
-      },
-      {
-        field: 'name',
-        cellRenderer: (params) => params.data.name || params.data.title || '',
-        resizable: true,
-      },
-      {
-        field: 'hash',
-        resizable: true,
-      },
-      {
-        field: 'sourceUrl',
-        resizable: true,
-      },
-      {
-        field: 'source',
-      },
-      {
-        field: 'provider',
-      },
-      {
-        field: 'organiser',
-        valueGetter: (params) => params.data.org?.username || '',
-      },
-      {
-        field: 'viewsCount',
-      },
-      {
-        field: 'cover',
-        valueGetter: (params) => (params.data.cover ? 'Yes' : 'No'),
-      },
-      {
-        field: 'address',
-        valueGetter: (params) => params.data.venue?.formatted_address || '',
-        resizable: true,
-      },
-      {
-        field: 'city',
-        valueGetter: (params) =>
-          params.data.place ? getCity(params.data.place) : 'International',
-      },
-      {
-        field: 'link',
-        valueGetter: (params) => (params.data.link ? 'Yes' : 'No'),
-      },
-      {
-        field: 'createdAt',
-        valueGetter: (params) => getDateTime(params.data.createdAt),
-      },
-      {
-        field: 'startDate',
-        valueGetter: (params) => getDateTime(params.data.startDate),
-      },
-      {
-        field: 'endDate',
-        valueGetter: (params) => getDateTime(params.data.endDate),
-      },
-      {
-        field: 'price',
-      },
-    ])
-
-    const api = ref(null)
     const events = ref([])
 
     const firestore = firebase.firestore()
-
-    const onGridReady = (params) => {
-      api.value = params.api
-    }
 
     const load = () => {
       let collection = firestore
@@ -144,11 +54,13 @@ export default {
       collection = collection.limit(100)
 
       collection.get().then((snapshot) => {
-        const docs = snapshot.docs.map((doc) => ({
-          ...doc.data(),
-          id: doc.id,
-        }))
-        events.value = docs.sort(sortBy('-' + orderBy.value))
+        const docs = snapshot.docs
+          .map((doc) => ({
+            ...doc.data(),
+            id: doc.id,
+          }))
+          .filter((i) => !i.createdAt.toDate)
+        events.value = docs
       })
     }
 
@@ -158,8 +70,6 @@ export default {
 
     return {
       events,
-      columns,
-      onGridReady,
       orderBy,
     }
   },

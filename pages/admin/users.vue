@@ -1,6 +1,6 @@
 <template>
-  <div class="flex flex-col" style="height: 100vh">
-    <div class="p-4 flex space-x-4">
+  <div>
+    <div class="p-4 flex space-x-4 border-b">
       <div>{{ profiles.length }} profiles</div>
       <t-rich-select
         v-model="orderBy"
@@ -23,93 +23,60 @@
       />
     </div>
 
-    <ag-grid-vue
-      class="ag-theme-alpine mt-4"
-      style="width: 100%; height: 100%"
-      :column-defs="columns"
-      :row-data="profiles"
-      @grid-ready="onGridReady"
-    />
+    <div>
+      <NuxtLink
+        v-for="item in profiles"
+        :key="item.id"
+        :to="localePath(`/id@${item.id}`)"
+        class="border-b p-4 flex items-center hover:bg-blue-200"
+      >
+        <div class="w-12 flex-shrink-0">
+          <TProfilePhoto2 size="sm" :src="item.photo" />
+        </div>
+        <div class="flex-grow">
+          <div class="block leading-tight font-semibold">{{ item.name }}</div>
+          <div class="block text-xs leading-tight">
+            {{ item.type }} • @{{ item.username }} •
+            {{ item.owned ? 'Owned' : 'Not Owned' }} •
+            <TCityLink :place="item.current" />
+          </div>
+          <div class="block text-xs leading-tight">
+            {{ getYmdHms(item.createdAt) }} •
+            {{ getYmdHms(item.lastLoginAt) || 'never' }} •
+            {{ item.daysUsed || 0 }} days
+          </div>
+        </div>
+      </NuxtLink>
+    </div>
   </div>
 </template>
 
 <script>
 import firebase from 'firebase/app'
 import 'firebase/firestore'
-import { computed, onMounted, ref, watch } from 'vue-demi'
-import 'ag-grid-community/dist/styles/ag-grid.css'
-import 'ag-grid-community/dist/styles/ag-theme-alpine.css'
-import { AgGridVue } from 'ag-grid-vue'
-import { getDateTime } from '~/utils'
+import { onMounted, ref, watch } from 'vue-demi'
+import { getYmdHms } from '~/utils'
 
 export default {
-  layout: 'empty',
   middleware: ['auth'],
-  components: {
-    AgGridVue,
-  },
   setup() {
-    const columns = computed(() => [
-      { field: 'id', resizable: true },
-      {
-        field: 'username',
-        cellRenderer: (params) =>
-          `<a target="blank" href="/${
-            params.data.username
-          }" class="underline text-primary">${params.data.username || ''}</a>`,
-      },
-      { field: 'type', resizable: true },
-      { field: 'jobs', resizable: true },
-      {
-        field: 'owned',
-        valueGetter: (params) =>
-          params.data.id === params.data.createdBy ? 'Yes' : 'No',
-      },
-      {
-        field: 'photo',
-        valueGetter: (params) => (params.data.photo ? 'Yes' : 'No'),
-      },
-      {
-        field: 'registrationDate',
-        valueGetter: (params) => getDateTime(params.data.createdAt),
-      },
-      {
-        field: 'lastLoginAt',
-        valueGetter: (params) => getDateTime(params.data.lastLoginAt),
-      },
-      { field: 'daysUsed' },
-      {
-        field: 'languages',
-        valueGetter: (params) =>
-          params.data.locales
-            ? Object.keys(params.data.locales).join(', ')
-            : '',
-      },
-      { field: 'instagram', resizable: true },
-      { field: 'telegram', resizable: true },
-    ])
-
     const orderBy = ref('createdAt')
-    const api = ref(null)
     const profiles = ref([])
 
     const firestore = firebase.firestore()
-
-    const onGridReady = (params) => {
-      api.value = params.api
-    }
 
     const load = () => {
       let collection = firestore
         .collection('profiles')
         .orderBy(orderBy.value, 'desc')
 
-      collection = collection.limit(100)
+      collection = collection.limit(10)
 
       collection.get().then((snapshot) => {
         profiles.value = snapshot.docs.map((doc) => ({
           ...doc.data(),
           id: doc.id,
+          owned: doc.data().createdBy === doc.id,
         }))
       })
     }
@@ -119,9 +86,8 @@ export default {
 
     return {
       profiles,
-      columns,
-      onGridReady,
       orderBy,
+      getYmdHms,
     }
   },
 }

@@ -21,7 +21,7 @@
           :to="item.id ? localePath(`/events/${item.id}?r=${invitedBy}`) : '#'"
           :target="isEmbed ? '_blank' : '_self'"
         >
-          {{ item.name }}
+          {{ item.name || item.id }}
         </NuxtLink>
       </div>
       <div>
@@ -54,6 +54,7 @@
         {{ $tc('views', item.viewsCount, { count: item.viewsCount }) }} ·
         {{ item.price }}
       </div>
+      <slot />
     </div>
     <div>
       <NuxtLink
