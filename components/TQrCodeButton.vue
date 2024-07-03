@@ -54,15 +54,13 @@ import { ref } from '@nuxtjs/composition-api'
 import QrcodeVue from 'qrcode.vue'
 import { QrcodeIcon } from '@vue-hero-icons/outline'
 import { useAuth } from '~/use/auth'
+import { openURL } from '~/utils'
 
 export default {
   components: {
     QrcodeIcon,
     QrcodeVue,
   },
-  data: () => ({
-    nativeShareSupported: false,
-  }),
   props: {
     label: {
       type: String,
@@ -73,6 +71,9 @@ export default {
       default: '',
     },
   },
+  data: () => ({
+    nativeShareSupported: false,
+  }),
   computed: {
     url() {
       if (process.server) return ''
