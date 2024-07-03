@@ -83,16 +83,6 @@
           :item="item"
           type="context"
         />
-        <TButtonShare
-          :id="item.id"
-          collection="posts"
-          :file="item.socialCover"
-          :file-name="item.id"
-          :url="`https://wedance.vip/stories/${item.id}`"
-          :text="item.description"
-          type="context"
-          :label="$t('share.title')"
-        />
       </TDropdown>
     </div>
     <div v-if="item.type === 'review'">

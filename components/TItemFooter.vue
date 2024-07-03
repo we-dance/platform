@@ -5,17 +5,6 @@
     <TButtonFav :collection="collection" :item="item" />
     <div class="flex space-x-2">
       <TCardActions :id="item.id" :collection="collection" :item="item" />
-      <TButtonShare
-        :id="item.id"
-        :collection="collection"
-        :place="item.place"
-        :file="item.socialCover"
-        :file-name="title"
-        :url="`https://wedance.vip/events/${item.id}`"
-        :text="title"
-        type="base"
-        label="Share"
-      />
     </div>
   </div>
 </template>

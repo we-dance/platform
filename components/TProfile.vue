@@ -79,17 +79,6 @@
             type="context"
           />
           <TShowAccount v-if="isAdmin()" :id="profile.id" type="context" />
-          <TButtonShare
-            :id="profile.id"
-            collection="profiles"
-            :place="profile.place"
-            :file="profile.socialCover"
-            :file-name="profile.username"
-            :url="`https://wedance.vip/${profile.username}`"
-            :text="profile.name"
-            type="context"
-            :label="$t('share.title')"
-          />
           <TButton
             v-if="isAdmin()"
             type="context"

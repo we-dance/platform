@@ -233,21 +233,6 @@
             @click="$track('event_add_to_calendar')"
           />
 
-          <TButtonShare
-            :id="doc.id"
-            collection="events"
-            :doc="doc"
-            :place="doc.place"
-            :file="doc.socialCover"
-            :file-name="doc.name"
-            :url="`https://wedance.vip/events/${item.id}`"
-            :text="doc.name"
-            type="context"
-            icon=""
-            :label="$t('eventView.dropdown.share')"
-            @click="$track('event_share')"
-          />
-
           <TCardActions
             :id="doc.id"
             collection="events"
