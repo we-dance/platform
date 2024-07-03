@@ -41,7 +41,7 @@
             icon-size="6"
             type="void"
             class="cursor-pointer"
-            @click="shareTo(platform.name)"
+            @click="shareTo(platform)"
           />
         </div>
       </div>
@@ -154,15 +154,15 @@ export default {
       this.$toast.success('Link copied to clipboard')
     },
     shareTo(platform) {
-      if (!this.platforms[platform]) {
+      if (!platform) {
         return
       }
 
       this.$track('share', {
-        method: platform,
+        method: platform.name,
       })
 
-      openURL(this.platforms[platform])
+      openURL(platform.url)
     },
     async nativeShare() {
       this.$track('share', {
@@ -172,7 +172,7 @@ export default {
       try {
         await navigator.share({
           title: this.text,
-          url: this.url,
+          url: this.getReferralLink('native'),
         })
       } catch (e) {}
     },
