@@ -35,6 +35,7 @@
         type="primary"
         :to="localePath('/signin')"
         :label="$t('auth.signin')"
+        class="hidden sm:block"
       />
       <TQrCodeButton label="Share" />
     </nav>
