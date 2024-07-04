@@ -2,6 +2,14 @@
   <div>
     <template v-if="page">
       <nuxt-content :document="page" :class="classes" />
+      <LandingFeature
+        v-if="page.cta"
+        :title="page.cta.title"
+        :description="page.cta.description"
+        :button="page.cta.button"
+        :url="page.cta.url"
+        :button-action="page.cta.action"
+      />
     </template>
     <TFestivals v-else-if="profile.username === 'Travel'" :profile="profile" />
     <TCity v-else-if="profile.type === 'City'" :profile="profile" />

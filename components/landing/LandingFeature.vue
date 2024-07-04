@@ -20,6 +20,7 @@
           :to="url"
           :track="{ event: 'cta_primary', action: buttonAction }"
           type="primary"
+          class="no-underline"
           >{{ button }}</TButton
         >
         <TButton
