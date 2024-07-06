@@ -54,7 +54,7 @@
               Free publicity on our city-based social media networks. For
               example in Munich we have
               <strong class="font-bold">5k+ followers</strong> on
-              <a href="https://intagram.com/WeDanceMunich">Instagram</a>,
+              <a href="https://instagram.com/WeDanceMunich">Instagram</a>,
               <a href="https://t.me/WeDanceMunich">Telegram</a>,
               <a href="https://www.facebook.com/WeDanceMunich/">Facebook</a>. We
               are <router-link to="/get-involved">expanding</router-link> to
