@@ -305,8 +305,7 @@
               />
             </div>
             <div v-if="doc.promotion !== 'completed'" class="text-sm">
-              As soon as event is published, you can promote it for free on
-              WeDance Instagram by clicking Promote.
+              Promote event for free on WeDance Instagram.
               <div v-if="doc.promotion === 'failed'">
                 <div class="text-red-500">
                   Promotion failed: {{ doc.promotionError }}
@@ -323,11 +322,6 @@
               </div>
             </div>
 
-            <TButton
-              v-if="!doc.socialCover"
-              label="Publishing..."
-              class="rounded-full"
-            />
             <TButton
               v-else-if="doc.promotion === 'requested'"
               label="Promoting..."
