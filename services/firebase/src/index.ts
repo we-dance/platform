@@ -13,7 +13,6 @@ import {
   profileToAlgolia,
   removeObject,
 } from './lib/algolia'
-import { generateSocialCover, updateEventPoster } from './lib/migrations'
 import { firestore as db, admin, firestore } from './firebase'
 import { notifySlackAboutEvents, notifySlackAboutUsers } from './lib/slack'
 import { wrap } from './sentry'
@@ -252,17 +251,6 @@ export const onProfileChange = functions.firestore
         })
       )
     }
-
-    const canBoost =
-      profile.permission === 'Yes' &&
-      profile.photo &&
-      profile.styles &&
-      profile.bio &&
-      profile.type
-
-    if (canBoost && oldProfile?.photo !== profile.photo) {
-      await generateSocialCover(profile)
-    }
   })
 
 export const accountCreated = functions.firestore
@@ -393,15 +381,6 @@ export const eventChanged = functions.firestore
           })
         )
       }
-    }
-
-    if (
-      wasChanged(oldEvent, event, ['cover']) &&
-      event?.type === 'event' &&
-      !event?.socialCover
-    ) {
-      await updateEventPoster(event)
-      return
     }
 
     if (

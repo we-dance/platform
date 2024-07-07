@@ -78,7 +78,7 @@ export async function announceEventIG2(event: any) {
 
   const mentions = mentionsList.join(' ')
 
-  const photo = event.socialCover
+  const photo = event.cover
 
   let caption = ''
 
@@ -177,7 +177,7 @@ export async function announceEventIG(event: any) {
 
   const mentions = mentionsList.join(' ')
 
-  const photo = event.socialCover
+  const photo = event.cover
 
   let caption = ''
 
