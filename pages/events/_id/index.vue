@@ -323,7 +323,7 @@
             </div>
 
             <TButton
-              v-else-if="doc.promotion === 'requested'"
+              v-if="doc.promotion === 'requested'"
               label="Promoting..."
               class="rounded-full"
             />
