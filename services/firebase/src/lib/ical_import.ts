@@ -61,8 +61,7 @@ export async function syncCalendar(calendarRef: DocumentSnapshot) {
   const now = +new Date()
 
   if (res?.status !== 200 || !name) {
-    const state = 'failed'
-    await calendarRef.ref.update({ state, lastSyncedAt: now, url })
+    await calendarRef.ref.update({ state: 'failed', lastSyncedAt: now, url })
     return
   }
 

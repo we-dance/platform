@@ -21,7 +21,7 @@ async function getEvent(url: string) {
 
   const data = response.data
   const facebookUrlsList = getUrlsFromText(data)
-    .filter((url) => isFacebookEvent(url))
+    .filter((u) => isFacebookEvent(u))
     .filter((v, i, a) => a.indexOf(v) === i)
 
   const parsed = WAE().parse(data)
@@ -38,14 +38,14 @@ async function getEvent(url: string) {
 
   eventTypes.forEach((eventType) => {
     if (parsed.jsonld[eventType]) {
-      for (const event of parsed.jsonld[eventType]) {
-        result.push(event)
+      for (const e of parsed.jsonld[eventType]) {
+        result.push(e)
       }
     }
 
     if (parsed.microdata[eventType]) {
-      for (const event of parsed.jsonld[eventType]) {
-        result.push(event)
+      for (const e of parsed.jsonld[eventType]) {
+        result.push(e)
       }
     }
   })
@@ -117,7 +117,7 @@ export async function getSchemaEvent(url: string) {
   const hash = +new Date(event.startDate) + '+' + venue?.place_id
   const eventPhoto = await getUploadedImage(event.image || '')
 
-  const offer = event.offers?.find((offer: any) => offer.price) || null
+  const offer = event.offers?.find((o: any) => o.price) || null
 
   return {
     name: event.name,

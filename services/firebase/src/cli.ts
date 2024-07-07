@@ -1,7 +1,6 @@
 import axios from 'axios'
 import * as YAML from 'yaml'
 import * as fs from 'fs'
-import * as cheerio from 'cheerio'
 
 import {
   eventToAlgolia,
@@ -66,23 +65,6 @@ yargs(hideBin(process.argv))
         .get()
 
       await syncCalendar(calendarRef)
-    }
-  )
-  .command(
-    'fetch <url>',
-    'Fetch url',
-    () => undefined,
-    async (argv: any) => {
-      const response = await axios.get(argv.url)
-      const $ = cheerio.load(response.data)
-
-      const title = $('h3:eq(1)').text()
-      const image = $('img:eq(2)')
-        .map((i, el) => $(el).attr('src'))
-        .get()
-        .find((url) => url.includes('whatsapp.net'))
-
-      console.log({ title, image })
     }
   )
   .command(

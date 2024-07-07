@@ -117,8 +117,8 @@ async function getOrg(host: any, place: any) {
 }
 
 export function getParameterByName(name: string, url: string) {
-  name = name.replace(/[\[\]]/g, '\\$&')
-  const regex = new RegExp('[?&]' + name + '(=([^&#]*)|&|#|$)')
+  const $name = name.replace(/[\[\]]/g, '\\$&')
+  const regex = new RegExp('[?&]' + $name + '(=([^&#]*)|&|#|$)')
   const results = regex.exec(url)
   if (!results) return null
   if (!results[2]) return ''
@@ -126,18 +126,19 @@ export function getParameterByName(name: string, url: string) {
 }
 
 export async function getFacebookEventId(url: string) {
-  if (url.includes('facebook.com/share')) {
-    const response = await axios.get(url)
-    url = response.request.res.responseUrl
+  let $url = url
+  if ($url.includes('facebook.com/share')) {
+    const response = await axios.get($url)
+    $url = response.request.res.responseUrl
   }
 
-  const eventTimeId = getParameterByName('event_time_id', url)
+  const eventTimeId = getParameterByName('event_time_id', $url)
 
   if (eventTimeId) {
     return eventTimeId
   }
 
-  const id = url
+  const id = $url
     .split('?')?.[0]
     .split('/')
     .filter((x) => x)

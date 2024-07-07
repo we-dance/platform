@@ -31,7 +31,7 @@ function addressPart(result: any, type: any) {
 }
 
 export async function profileToAlgolia(profile: any, reviews: any[] = []) {
-  let hasAddress = !!profile.address?.place_id
+  const hasAddress = !!profile.address?.place_id
   let hasPlace = !!profile.place
   let cityProfile: any = {}
 
@@ -53,24 +53,28 @@ export async function profileToAlgolia(profile: any, reviews: any[] = []) {
     }
   }
 
+  let loadedReviews = []
   if (reviews.length === 0) {
     const reviewsRef = await firestore
       .collection('stories')
       .where('receiver.username', '==', profile.username)
       .get()
 
-    reviews = reviewsRef.docs.map((doc) => doc.data())
+    loadedReviews = reviewsRef.docs.map((doc) => doc.data())
   } else {
-    reviews = reviews.filter((r) => r?.receiver?.username === profile.username)
+    loadedReviews = reviews.filter(
+      (r) => r?.receiver?.username === profile.username
+    )
   }
 
-  const reviewsCount = reviews.length
+  const reviewsCount = loadedReviews.length
 
   let reviewsAvg = 0
   if (reviewsCount > 0) {
     reviewsAvg =
-      reviews.map((r) => Number(r.stars) || 5).reduce((p, c) => p + c, 0) /
-      reviewsCount
+      loadedReviews
+        .map((r) => Number(r.stars) || 5)
+        .reduce((p, c) => p + c, 0) / reviewsCount
   }
 
   let country = ''
@@ -125,7 +129,7 @@ export async function profileToAlgolia(profile: any, reviews: any[] = []) {
     _tags: profile.styles ? Object.keys(profile.styles) : [],
   }
 
-  let platforms: string[] = []
+  const platforms: string[] = []
   const fields = [
     'website',
     'email',
@@ -277,8 +281,8 @@ export async function indexEvents(onlyNew: boolean = false) {
     eventDocs = [...recentlyCreated, ...recentlyUpdated]
     // get unique events
     eventDocs = eventDocs.filter(
-      (event, index, self) =>
-        index === self.findIndex((e) => e.data().name === event.data().name)
+      (event, i, self) =>
+        i === self.findIndex((e) => e.data().name === event.data().name)
     )
   } else {
     const now = +new Date()
@@ -381,9 +385,8 @@ export async function indexProfiles(params: any = {}) {
 
   // get unique profiles
   profileDocs = profileDocs.filter(
-    (profile, index, self) =>
-      index ===
-      self.findIndex((p) => p.data().username === profile.data().username)
+    (profile, i, self) =>
+      i === self.findIndex((p) => p.data().username === profile.data().username)
   )
 
   const reviewsRef = await firestore.collection('stories').get()

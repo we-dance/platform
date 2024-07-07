@@ -1,10 +1,11 @@
 import { getStyles } from './dance_styles'
 
 export function slugify(str: string, limit = 0) {
-  str = str.replace(/^\s+|\s+$/g, '')
+  let $str = str
+  $str = $str.replace(/^\s+|\s+$/g, '')
 
   // Make the string lowercase
-  str = str.toLowerCase()
+  $str = $str.toLowerCase()
 
   // Remove accents, swap ñ for n, etc
   const from =
@@ -12,11 +13,11 @@ export function slugify(str: string, limit = 0) {
   const to =
     'AAAAAACCCDEEEEEEEEIIIINNOOOOOORRSTUUUUUYYZaaaaaacccdeeeeeeeeiiiinnooooooorrstuuuuuyyzbBDdBAa......'
   for (let i = 0, l = from.length; i < l; i++) {
-    str = str.replace(new RegExp(from.charAt(i), 'g'), to.charAt(i))
+    $str = $str.replace(new RegExp(from.charAt(i), 'g'), to.charAt(i))
   }
 
   // Remove invalid chars
-  str = str
+  $str = $str
     .replace(/[^a-z0-9 -]/g, '')
     // Collapse whitespace and replace by .
     .replace(/\s+/g, '.')
@@ -24,10 +25,10 @@ export function slugify(str: string, limit = 0) {
     .replace(/\.+/g, '.')
 
   if (limit) {
-    str = str.substr(0, limit)
+    $str = $str.substr(0, limit)
   }
 
-  return str
+  return $str
 }
 
 export function getSuggestedType(description: string) {
@@ -91,9 +92,12 @@ export function isFacebookEvent(url?: string): boolean {
     return false
   }
 
-  return ['facebook.com/events/', 'fb.me/e/', 'fb.com/events', 'facebook.com/share/'].some((word) =>
-    url.includes(word)
-  )
+  return [
+    'facebook.com/events/',
+    'fb.me/e/',
+    'fb.com/events',
+    'facebook.com/share/',
+  ].some((word) => url.includes(word))
 }
 
 export function getUrlContentId(url?: string): string {
