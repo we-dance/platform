@@ -65,7 +65,8 @@ export default {
       }
 
       const watchCount = props.item.watch?.count || 0
-      const isWatching = !!props.item.watch?.list[username.value]
+      const isWatching =
+        props.item.watch?.list && !!props.item.watch?.list[username.value]
 
       newReply.value = ''
 
