@@ -101,7 +101,7 @@ export async function announceEventIG2(event: any) {
   const response = await axios.get(photo, { responseType: 'arraybuffer' })
   const buffer = Buffer.from(response.data, 'utf-8')
 
-  const file = await pngToJpeg({ quality: 90 })(buffer)
+  // const file = await pngToJpeg({ quality: 90 })(buffer)
 
   const ig = new IgApiClient()
   ig.state.generateDevice(igUsername)
@@ -129,7 +129,7 @@ export async function announceEventIG2(event: any) {
 
   const publishResult = await ig.publish.photo({
     // read the file into a Buffer
-    file,
+    file: buffer,
     // optional, default ''
     caption,
     // optional
