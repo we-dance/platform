@@ -1,3 +1,5 @@
+Rules (draft v1)
+
 ### Eligibility
 
 - **Participants:** Open to dancers of all ages and skill levels.
@@ -21,12 +23,7 @@
 ### Public Votes
 
 - **Why:** Public votes measure the popularity and audience engagement of each performance. This encourages participants to share their videos widely and engage their communities.
-- **When:** Voting is open to the public from 1 August to 31 August.
-- **How:** Each registered voter can cast 5 votes per day, with a maximum of 3 votes for any single video.
-- **Mid-Results:** Mid-results will be available daily.
-- **Curated Lists:** Videos will be organized by dance style, and voters can select the style they want to vote on each day.
-  - Ensure a mix of videos from different styles is shown to voters each day to maintain interest and fairness.
-- **Anti-Cheating Measures:** Email verification will be used to prevent multiple accounts. IP tracking will be implemented to monitor for suspicious voting patterns.
+- **How:** Each registered voter can cast 5 votes per dance style, with a maximum of 3 votes for any single video.
 
 ### Code of Conduct (CoC)
 
