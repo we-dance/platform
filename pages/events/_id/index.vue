@@ -513,7 +513,6 @@
       </section>
 
       <section
-        v-if="doc.description"
         id="guests"
         class="p-4 border-t border-primary"
       >
