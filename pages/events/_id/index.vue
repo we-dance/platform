@@ -512,10 +512,7 @@
         </div>
       </section>
 
-      <section
-        id="guests"
-        class="p-4 border-t border-primary"
-      >
+      <section id="guests" class="p-4 border-t border-primary">
         <div class="space-y-2">
           <h3 class="uppercase text-xs text-primary font-extrabold">
             {{ $t('event.guests') }}
