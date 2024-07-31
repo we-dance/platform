@@ -2,8 +2,9 @@ Rules (draft v2, last updated on 9 Jul 2024, 14:52)
 
 ### 1. Eligibility
 
-- **Participants:** Open to dancers of all ages and skill levels.
 - **Location:** From any location.
+- **Dance Style:** You can choose any style, that you dance for at least 5 years.
+- **Level:** You never gave class or performed at festivals.
 
 ### 2. Registration
 
@@ -14,7 +15,7 @@ Rules (draft v2, last updated on 9 Jul 2024, 14:52)
 - **Content:** Must feature a dance performance; all dance styles are welcome.
 - **Format:** Videos must be recorded in horizontal (landscape) orientation.
 - **Editing:** No cuts or post-production editing; the focus is on showcasing dance skills, not video editing skills.
-- **Duration:** 1 to 3 minutes.
+- **Duration:** Duration of the song.
 - **Quality:** Ensure high video and audio quality, preferably in HD (720p) or higher. The video should have clear audio and stable camera work.
 - **Originality:** Must be an original performance specifically for the competition.
 - **Music:** Use royalty-free music or tracks for which you have proper permissions.
@@ -23,7 +24,6 @@ Rules (draft v2, last updated on 9 Jul 2024, 14:52)
 ### 4. Submission
 
 - Upload videos to YouTube and share the link via the WeDance submission form.
-- Videos must include a timestamp or unique identifier to verify they were created for this competition.
 
 ### 5. Public Votes
 

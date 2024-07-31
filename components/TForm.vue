@@ -12,6 +12,7 @@
     </div>
     <slot name="bottom" />
     <div
+      v-if="showRemove || showCancel || showCopy || !hideSubmit"
       class="flex justify-end space-x-2 bg-white py-4 border-t z-10 items-center bottom-0 sticky"
     >
       <TButton v-if="showRemove" :label="$t('form.delete')" @click="remove" />

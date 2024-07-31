@@ -2,7 +2,6 @@
   <t-rich-select
     v-model="internalValue"
     clearable
-    hide-search-box
     :placeholder="placeholder"
     :fetch-options="findStyles"
   />
