@@ -4,10 +4,8 @@
 
     <div class="flex pl-2 gap-2 items-center">
       <div class="text-xs py-1">
-        {{ getDateTime(application.videoUploadedAt) }}
-      </div>
-      <div class="py-1">
-        <TAvatar photo name size="xs" :uid="application.uid" class="text-xs" />
+        {{ getDateTime(application.videoUploadedAt) }} •
+        {{ application.category }} • {{ application.style }}
       </div>
       <div class="flex-grow"></div>
       <TDropdown v-if="isAdmin()">

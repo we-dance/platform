@@ -33,7 +33,7 @@ export default {
   setup(props, { root }) {
     const application = ref({})
     const formRef = ref(null)
-    const { uid } = useAuth()
+    const { uid, profile } = useAuth()
 
     const fields = ref([
       {
@@ -61,6 +61,7 @@ export default {
         options: [
           { value: 'couple', label: 'Couple' },
           { value: 'solo', label: 'Solo' },
+          { value: 'group', label: 'Group' },
         ],
         required: true,
       },
@@ -98,6 +99,9 @@ export default {
         .set({
           ...application.value,
           uid: uid.value,
+          username: profile.username,
+          name: profile.name,
+          photo: profile.photo,
           createdAt: +new Date(),
         })
     }
