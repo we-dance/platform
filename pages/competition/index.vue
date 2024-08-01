@@ -49,8 +49,11 @@
         <ul class="list-disc">
           <li>You can be from any city</li>
           <li>
-            You can choose any style that you have been dancing for at least
-            three years
+            You can choose
+            <router-link class="underline text-primary" to="/dance/"
+              >any style</router-link
+            >
+            that you have been dancing for at least three years
           </li>
         </ul>
       </div>
