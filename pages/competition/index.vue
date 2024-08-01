@@ -26,7 +26,7 @@
       </h2>
       <TPreview
         class="text-center"
-        content="@MontunoClub @la.kossa @kizztalkdanceacademy @the_social_dancer @marta @dancegodscompany.official @bachazouk_munich @Ernest @bavarian_bachata_congress"
+        content="@MontunoClub @lakossa @kizztalkdanceacademy @the_social_dancer @marta @dancegodscompany.official @bachazouk_munich @Ernest @bavarian_bachata_congress"
       />
     </div>
     <div class="p-4">
