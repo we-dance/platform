@@ -11,7 +11,13 @@
         Showcase your dance to win €300
       </div>
       <div class="text-center text-gray-700">
-        and special prizes for participants in Munich
+        and
+        <router-link
+          class="underline text-primary"
+          to="/competition/rules#6-prizes"
+          >special prizes</router-link
+        >
+        for participants in Munich
       </div>
     </div>
     <div class="p-4">
@@ -42,8 +48,10 @@
       <div class="p-4">
         <ul class="list-disc">
           <li>You can be from any city</li>
-          <li>You can choose any style, that you dance for at least 5 years</li>
-          <li>You never gave class or performed at festivals</li>
+          <li>
+            You can choose any style that you have been dancing for at least
+            three years
+          </li>
         </ul>
       </div>
     </div>
@@ -70,7 +78,9 @@
           <div class="text-lg font-bold">Record Your Video</div>
           <div class="text-sm text-gray-700">
             Follow
-            <router-link class="underline text-primary" to="/competition/rules"
+            <router-link
+              class="underline text-primary"
+              to="/competition/rules#3-video-requirements"
               >the guidelines</router-link
             >
             to record your dance performance video.
@@ -104,6 +114,7 @@ import {
 } from '@vue-hero-icons/outline'
 
 export default {
+  layout: 'full',
   components: {
     VideoCameraIcon,
     UserCircleIcon,
