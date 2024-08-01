@@ -77,6 +77,7 @@ export default {
     function vote(diff) {
       const count = votes.value + diff
       const newTotal = props.userVotes + diff
+      const leftTotal = 5 - newTotal
 
       if (props.application.uid === uid.value) {
         root.$toast.error('You cannot vote for your own video')
@@ -101,6 +102,8 @@ export default {
         .update({
           [`votes.${uid.value}`]: count,
         })
+
+      root.$toast.success(`Vote submitted. You have ${leftTotal} votes left.`)
 
       root.$track({
         event: 'competition',
