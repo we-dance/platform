@@ -6,7 +6,9 @@
       </h1>
       <div class="text-gray-700">
         Each voter has 5 votes and can give a maximum of 3 votes to a single
-        video. Voting is open until August 28th.
+        video. You can see only your votes. You can change your votes until the
+        end of the voting period. Voting period is until August 28th. Results
+        will be announced on September 1st.
       </div>
     </div>
     <TLoader v-if="loading" />

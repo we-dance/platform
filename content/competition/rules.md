@@ -1,6 +1,6 @@
 # WeDance Competition Rules
 
-published on 1 Aug 2024, 11:29
+published on 1 Aug 2024, 12:17
 
 ### 1. Eligibility
 
@@ -25,14 +25,18 @@ published on 1 Aug 2024, 11:29
 ### 4. Submission
 
 - Upload videos to YouTube and share the link via the WeDance submission form.
+- Submission period is 1-14 August 2024.
 
 ### 5. Public Votes
 
+- Voting period is 15-28 August 2024.
 - **Why:** Public votes measure the popularity and audience engagement of each performance. This encourages participants to share their videos widely and engage their communities.
-- **How:** Each registered voter can cast 5 votes per dance style, with a maximum of 3 votes for any single video.
+- **How:** Each registered voter can cast 5 votes, with a maximum of 3 votes for any single video.
+- Voter can change their votes until the end of the voting period.
 
 ### 6. Prizes
 
+- Winners will be announced on 1 September 2024.
 - **Global Winner Prize:** €300 for the overall winner.
 - **Special Prizes for Participants in Munich:**
 
