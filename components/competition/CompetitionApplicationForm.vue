@@ -100,9 +100,6 @@ export default {
         .set({
           ...application.value,
           uid: uid.value,
-          username: profile.username,
-          name: profile.name,
-          photo: profile.photo,
           createdAt: +new Date(),
         })
 

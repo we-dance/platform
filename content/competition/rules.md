@@ -40,7 +40,7 @@ published on 1 Aug 2024, 12:17
 - **Global Winner Prize:** €300 for the overall winner.
 - **Special Prizes for Participants in Munich:**
 
-  - **Any (group):** Show Performance Coaching for Group 1.5 hour for 4-8 ppl (€200) from [@martapihelgas](https://www.instagram.com/martapihelgas)
+  - **Any dance style (group):** Show Performance Coaching for Group 1.5 hour for 4-8 ppl (€200) from [@martapihelgas](https://www.instagram.com/martapihelgas)
   - **Salsa, Bachata, Kizomba, Zouk, HipHop, Jazz (solo):** Private Class 1 hour (€100) from [@martapihelgas](https://www.instagram.com/martapihelgas)
   - **Afro Beats (solo):** 50% discount for Intensive Workshops for 9 months (€85 + €69/month) from [@la.kossa.afrodanceacademy](https://www.instagram.com/la.kossa.afrodanceacademy)
   - **Afro House (solo):** 50% discount for Intensive Workshops for 9 months (€85 + €69/month) from [@la.kossa.afrodanceacademy](https://www.instagram.com/la.kossa.afrodanceacademy)

@@ -124,9 +124,7 @@ export default {
       this.errors = {}
       this.error = false
 
-      for (const fieldIndex in this.fields) {
-        const field = this.fields[fieldIndex]
-
+      for (const field of this.visibleFields) {
         if (field.required && !this.value[field.name]) {
           Vue.set(this.errors, field.name, this.$t('form.required'))
           this.error = true
