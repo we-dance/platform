@@ -15,7 +15,7 @@
         v-for="application in applications"
         :key="application.id"
         :application="application"
-        :total-votes="totalVotes"
+        :user-votes="userVotes"
       />
     </div>
   </div>
@@ -33,7 +33,7 @@ export default {
     const loading = ref(true)
     const { uid } = useAuth()
 
-    const totalVotes = computed(() =>
+    const userVotes = computed(() =>
       applications.value.reduce((acc, application) => {
         return (
           acc + (application?.votes ? application.votes[uid.value] || 0 : 0)
@@ -55,7 +55,7 @@ export default {
     return {
       applications,
       loading,
-      totalVotes,
+      userVotes,
     }
   },
 }

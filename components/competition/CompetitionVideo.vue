@@ -4,6 +4,7 @@
 
     <div class="flex pl-2 gap-2 items-center">
       <div class="text-xs py-1">
+        <span v-if="isAdmin()">{{ totalVotes }} •</span>
         {{ getDateTime(application.videoUploadedAt) }} •
         {{ application.category }} • {{ application.style }}
       </div>
@@ -53,7 +54,7 @@ export default {
       type: Object,
       default: () => ({}),
     },
-    totalVotes: {
+    userVotes: {
       type: Number,
       default: 0,
     },
@@ -65,9 +66,17 @@ export default {
       props.application.votes ? props.application.votes[uid.value] || 0 : 0
     )
 
+    const totalVotes = computed(() =>
+      props.application.votes
+        ? Object.values(props.application.votes || {}).reduce((acc, vote) => {
+            return acc + vote
+          }, 0)
+        : 0
+    )
+
     function vote(diff) {
       const count = votes.value + diff
-      const newTotal = props.totalVotes + diff
+      const newTotal = props.userVotes + diff
 
       if (props.application.uid === uid.value) {
         root.$toast.error('You cannot vote for your own video')
@@ -100,7 +109,7 @@ export default {
         .delete()
     }
 
-    return { getDateTime, vote, votes, remove, isAdmin }
+    return { getDateTime, totalVotes, vote, votes, remove, isAdmin }
   },
 }
 </script>
