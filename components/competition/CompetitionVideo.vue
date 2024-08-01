@@ -6,7 +6,7 @@
       <div class="text-xs py-1">
         <span v-if="isAdmin()">{{ totalVotes }} •</span>
         {{ getDateTime(application.videoUploadedAt) }} •
-        {{ application.category }} • {{ application.style }}
+        {{ application.style }} ({{ application.category }})
       </div>
       <div class="flex-grow"></div>
       <TDropdown v-if="isAdmin()">
