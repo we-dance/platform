@@ -2,8 +2,8 @@
   <div v-if="value"></div>
   <div v-else class="bg-light">
     <div
-      class="mx-auto max-w-2xl text-sm py-3 px-3 sm:px-6 lg:px-8"
       ref="target"
+      class="mx-auto max-w-2xl text-sm py-3 px-3 sm:px-6 lg:px-8"
     >
       <div class="flex items-center justify-between flex-wrap">
         <div class="w-0 flex-1 flex items-center">
