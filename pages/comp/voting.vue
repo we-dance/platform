@@ -23,6 +23,7 @@
 
 <script>
 import { ref, onMounted, computed } from '@nuxtjs/composition-api'
+import { sortBy } from 'lodash'
 import { db } from '~/plugins/firebase'
 import { useAuth } from '~/use/auth'
 
@@ -46,7 +47,7 @@ export default {
         snapshot.forEach((doc) => {
           docs.push({ id: doc.id, ...doc.data() })
         })
-        applications.value = docs
+        applications.value = sortBy(docs, 'videoUploadedAt')
         loading.value = false
       })
     })

@@ -2,11 +2,23 @@
   <div class="border rounded shadow">
     <WYoutube :url="application.video" />
 
-    <div class="flex items-center">
-      <div class="px-2 py-1">
+    <div class="flex pl-2 gap-2 items-center">
+      <div class="text-xs py-1">
+        {{ getDateTime(application.videoUploadedAt) }}
+      </div>
+      <div class="py-1">
         <TAvatar photo name size="xs" :uid="application.uid" class="text-xs" />
       </div>
       <div class="flex-grow"></div>
+      <TDropdown v-if="isAdmin()">
+        <TShowAccount :id="application.id" type="context" />
+        <TButton
+          type="context"
+          icon="delete"
+          :label="$t('Delete')"
+          @click="remove(application.id)"
+        />
+      </TDropdown>
       <div class="flex items-center">
         <button class="bg-gray-100 p-2" @click="vote(-1)">
           <MinusIcon class="w-4" />
@@ -21,15 +33,6 @@
           <PlusIcon class="w-4" />
         </button>
       </div>
-      <TDropdown v-if="isAdmin()">
-        <TShowAccount :id="application.id" type="context" />
-        <TButton
-          type="context"
-          icon="delete"
-          :label="$t('Delete')"
-          @click="remove(application.id)"
-        />
-      </TDropdown>
     </div>
   </div>
 </template>
@@ -39,6 +42,7 @@ import { ThumbUpIcon, PlusIcon, MinusIcon } from '@vue-hero-icons/outline'
 import { computed } from '@nuxtjs/composition-api'
 import { useAuth } from '~/use/auth'
 import { db } from '~/plugins/firebase'
+import { getDateTime } from '~/utils'
 
 export default {
   components: {
@@ -98,7 +102,7 @@ export default {
         .delete()
     }
 
-    return { vote, votes, remove, isAdmin }
+    return { getDateTime, vote, votes, remove, isAdmin }
   },
 }
 </script>
