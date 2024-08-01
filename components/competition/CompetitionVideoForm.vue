@@ -59,7 +59,7 @@ export default {
     ])
 
     async function submit() {
-      if (!formRef.value.validate()) {
+      if (!(await formRef.value.validate())) {
         return
       }
 
