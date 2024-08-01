@@ -100,7 +100,12 @@
         </div>
       </div>
       <div class="flex justify-center py-4">
-        <TButton type="primary" to="/comp/submit">Get Started</TButton>
+        <TButton
+          type="primary"
+          to="/competition/submit"
+          :track="{ event: 'competition', action: 'start' }"
+          >Get Started</TButton
+        >
       </div>
     </div>
   </div>

@@ -28,6 +28,7 @@ import { db } from '~/plugins/firebase'
 import { useAuth } from '~/use/auth'
 
 export default {
+  layout: 'full',
   setup() {
     const applications = ref([])
     const loading = ref(true)

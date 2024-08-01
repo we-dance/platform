@@ -44,7 +44,7 @@ export default {
       default: () => ({}),
     },
   },
-  setup() {
+  setup(props, { root }) {
     const application = ref({})
     const formRef = ref(null)
     const { uid } = useAuth()
@@ -60,6 +60,7 @@ export default {
 
     async function submit() {
       if (!(await formRef.value.validate())) {
+        root.$track('competition_video_submit_error')
         return
       }
 
@@ -70,6 +71,8 @@ export default {
           ...application.value,
           videoUploadedAt: +new Date(),
         })
+
+      root.$track('competition_video_submit')
     }
 
     return {

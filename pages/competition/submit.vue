@@ -10,6 +10,14 @@
       :value="application"
     />
     <CompetitionSubmitted v-else />
+    <div class="p-4 text-xs text-center">
+      If you have any problems please
+      <a
+        class="text-primary underline hover:no-underline"
+        href="mailto:support@wedance.vip"
+        >contact support</a
+      >.
+    </div>
   </div>
 </template>
 
@@ -19,6 +27,7 @@ import { db } from '~/plugins/firebase'
 import { useAuth } from '~/use/auth'
 
 export default {
+  layout: 'full',
   setup(props, { root }) {
     const application = ref({})
     const loading = ref(true)
@@ -40,6 +49,7 @@ export default {
 
     return {
       application,
+      loading,
     }
   },
 }

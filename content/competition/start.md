@@ -10,23 +10,8 @@ The WeDance Video Dance Competition aims to showcase the best dance talent in ou
 - The global winner’s video will be highlighted on the homepage of WeDance.
 - The winner in each city will be featured on the city page until the next competition. Additionally, each dance style will have its own dedicated winner.
 
-### Gold Sponsors
-
-- [Become a Sponsor](/competition/partners)
-
-### Silver Sponsors
-
-- [Become a Sponsor](/competition/partners)
-
-### Bronze Sponsors
-
-- [Become a Sponsor](/competition/partners)
-
-### Partners
-
-- [Become a Partner](/competition/partners)
-
 ### Get Involved
 
 - [Join Whatsapp Group](https://chat.whatsapp.com/IPCKKI520OUFxY5t7BbJ7s) - we will announce the official start of the competition, share the rules, and provide important updates and reminders.
+- [Become a Partner](/competition/partners)
 - For any questions or assistance, please contact [support](/support).

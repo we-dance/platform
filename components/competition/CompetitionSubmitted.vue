@@ -13,7 +13,9 @@
         video link and encourage others to vote for you when the time comes.
       </div>
       <div class="flex justify-center py-4">
-        <TButton type="primary" to="/comp">Return to Competition</TButton>
+        <TButton type="primary" to="/competition/"
+          >Return to Competition</TButton
+        >
       </div>
     </div>
   </div>

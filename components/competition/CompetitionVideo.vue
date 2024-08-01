@@ -19,18 +19,18 @@
         />
       </TDropdown>
       <div class="flex items-center">
-        <button class="bg-gray-100 p-2" @click="vote(-1)">
+        <TButton type="void" class="bg-gray-100 p-2" @click="vote(-1)">
           <MinusIcon class="w-4" />
-        </button>
+        </TButton>
 
         <div class="flex flex-nowrap bg-gray-200 p-2">
           <ThumbUpIcon class="w-4" />
           <span class="text-sm">{{ votes }}</span>
         </div>
 
-        <button class="bg-gray-100 p-2" @click="vote(1)">
+        <TButton type="void" class="bg-gray-100 p-2" @click="vote(1)">
           <PlusIcon class="w-4" />
-        </button>
+        </TButton>
       </div>
     </div>
   </div>
@@ -101,6 +101,12 @@ export default {
         .update({
           [`votes.${uid.value}`]: count,
         })
+
+      root.$track({
+        event: 'competition',
+        action: 'vote',
+        label: diff > 0 ? 'up' : 'down',
+      })
     }
 
     function remove(id) {
@@ -109,7 +115,7 @@ export default {
         .delete()
     }
 
-    return { getDateTime, totalVotes, vote, votes, remove, isAdmin }
+    return { uid, getDateTime, totalVotes, vote, votes, remove, isAdmin }
   },
 }
 </script>

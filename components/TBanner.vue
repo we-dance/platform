@@ -1,7 +1,10 @@
 <template>
   <div v-if="value"></div>
   <div v-else class="bg-light">
-    <div class="mx-auto max-w-2xl text-sm py-3 px-3 sm:px-6 lg:px-8">
+    <div
+      class="mx-auto max-w-2xl text-sm py-3 px-3 sm:px-6 lg:px-8"
+      ref="target"
+    >
       <div class="flex items-center justify-between flex-wrap">
         <div class="w-0 flex-1 flex items-center">
           <span class="flex p-2 rounded-lg bg-light">
@@ -40,14 +43,20 @@
             allow-guests
             type="primary"
             :label="action"
-            @click="$emit('input', 'yes')"
+            @click="
+              $track('banner_yes', { banner: name })
+              $emit('input', 'yes')
+            "
           />
         </div>
         <div class="order-2 flex-shrink-0 sm:order-3 sm:ml-3">
           <button
             type="button"
             class="-mr-1 flex p-2 rounded-md sm:-mr-2"
-            @click="$emit('input', 'no')"
+            @click="
+              $track('banner_no', { banner: name })
+              $emit('input', 'no')
+            "
           >
             <span class="sr-only">Dismiss</span>
             <!-- Heroicon name: outline/x -->
@@ -74,8 +83,15 @@
 </template>
 
 <script>
+import { ref, watch } from '@nuxtjs/composition-api'
+import { useElementVisibility } from '@vueuse/core'
+
 export default {
   props: {
+    name: {
+      type: String,
+      default: '',
+    },
     value: {
       type: String,
       default: '',
@@ -100,6 +116,22 @@ export default {
       type: String,
       default: '',
     },
+  },
+  setup(props, { root, emit }) {
+    const target = ref(null)
+    const targetIsVisible = useElementVisibility(target)
+
+    watch(targetIsVisible, (isVisible) => {
+      if (isVisible) {
+        emit('visible', isVisible)
+        root.$track('banner_shown', { name: props.name })
+      }
+    })
+
+    return {
+      target,
+      targetIsVisible,
+    }
   },
 }
 </script>

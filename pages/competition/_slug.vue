@@ -8,6 +8,11 @@
           current: slug === 'index',
         },
         {
+          name: 'Rules',
+          to: localePath('/competition/rules'),
+          current: slug === 'rules',
+        },
+        {
           name: 'Partners',
           to: localePath('/competition/partners'),
           current: slug === 'partners',

@@ -90,6 +90,7 @@ export default {
 
     async function submit() {
       if (!(await formRef.value.validate())) {
+        root.$track('competition_application_error')
         return
       }
 
@@ -104,6 +105,8 @@ export default {
           photo: profile.photo,
           createdAt: +new Date(),
         })
+
+      root.$track('competition_application')
     }
 
     return {

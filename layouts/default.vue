@@ -1,12 +1,12 @@
 <template>
   <div class="border-t-2 border-primary">
     <TBanner
-      v-if="uid"
-      v-model="bannerNews"
-      desktop="WeDance News & Updates"
-      mobile="WeDance News & Updates"
-      action="Follow on Telegram"
-      link="https://t.me/WeDancePlatform"
+      v-model="bannerCompetition"
+      name="competition"
+      desktop="Join WeDance Competition and Win 300€!"
+      mobile="Win 300€"
+      action="Learn More"
+      to="/competition"
     />
 
     <div
@@ -198,15 +198,21 @@ export default {
     })
 
     const bannerNews = ref(ls('bannerNews'))
-
     watch(bannerNews, (val) => {
       updateProfile({ bannerNews: val })
       ls('bannerNews', val)
     })
 
+    const bannerCompetition = ref(ls('competition'))
+    watch(bannerCompetition, (val) => {
+      updateProfile({ bannerNews: val })
+      ls('competition', val)
+    })
+
     return {
       bannerNps,
       bannerNews,
+      bannerCompetition,
       username,
       account,
       profile,
