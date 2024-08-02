@@ -43,7 +43,7 @@
             allow-guests
             type="primary"
             :label="action"
-            @click="
+            @click.native="
               $track('banner_yes', { banner: name })
               $emit('input', 'yes')
             "

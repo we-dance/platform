@@ -205,7 +205,7 @@ export default {
 
     const bannerCompetition = ref(ls('competition'))
     watch(bannerCompetition, (val) => {
-      updateProfile({ bannerNews: val })
+      updateProfile({ bannerCompetition: val })
       ls('competition', val)
     })
 
