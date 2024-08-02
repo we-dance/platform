@@ -33,7 +33,7 @@ export default {
   setup(props, { root }) {
     const application = ref({})
     const formRef = ref(null)
-    const { uid, profile } = useAuth()
+    const { uid } = useAuth()
 
     const fields = ref([
       {
