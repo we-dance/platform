@@ -139,21 +139,27 @@ export async function syncCalendar(calendarRef: DocumentSnapshot) {
       styles,
       eventType,
       approved,
-      type: 'import_event',
+      type: facebookId ? 'import_event' : 'event',
       username: calendar.username,
       createdBy: calendar.userId,
     }
 
-    if (approved && facebookId) {
-      const existingEvents = await firestore
-        .collection('posts')
-        .where('facebookId', '==', facebookId)
-        .get()
-      if (!existingEvents.docs.length) {
+    if (isNew && approved) {
+      if (facebookId) {
+        const existingEvents = await firestore
+          .collection('posts')
+          .where('facebookId', '==', facebookId)
+          .get()
+
+        if (!existingEvents.docs.length) {
+          const newDocRef = await firestore.collection('posts').add(event)
+          event.eventId = newDocRef.id
+        } else {
+          event.eventId = existingEvents.docs[0].id
+        }
+      } else {
         const newDocRef = await firestore.collection('posts').add(event)
         event.eventId = newDocRef.id
-      } else {
-        event.eventId = existingEvents.docs[0].id
       }
     }
 
