@@ -661,7 +661,7 @@ faqs:
       answer: Calendars are synchronized daily at 16:00 Berlin time.
     - 
       question: Will all my events be imported?
-      answer: Only upcoming events that align with specific criteria will be imported to WeDance. To ensure relevance to our dance-focused community, imported events must include a public Facebook event link in their description and contain keywords that match various dance styles. This selective approach ensures that our platform remains dedicated to dance-related events, offering our users access to the most relevant and engaging dance activities available.
+      answer: Only upcoming events that align with specific criteria will be imported to WeDance. To ensure relevance to our dance-focused community, imported events must include a public Facebook event link in their description and contain [keywords](/dance/keywords) that match various dance styles. This selective approach ensures that our platform remains dedicated to dance-related events, offering our users access to the most relevant and engaging dance activities available.
     - 
       question: Can I modify imported events?
       answer: Yes, you can modify the details of the imported events on WeDance. However, changes made to events on WeDance won't be reflected back in your original calendar. It's important to ensure that the most accurate and up-to-date information is maintained in both places.
