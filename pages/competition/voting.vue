@@ -47,8 +47,11 @@ export default {
     onMounted(() => {
       db.collection('competition').onSnapshot((snapshot) => {
         const docs = []
-        snapshot.forEach((doc) => {
-          docs.push({ id: doc.id, ...doc.data() })
+        snapshot.forEach((docRef) => {
+          const doc = { id: docRef.id, ...docRef.data() }
+          if (doc.video) {
+            docs.push(doc)
+          }
         })
         applications.value = sortBy(docs, 'videoUploadedAt')
         loading.value = false

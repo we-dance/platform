@@ -1,24 +1,87 @@
 <template>
   <div class="border rounded shadow">
-    <WYoutube :url="application.video" />
+    <WYoutube v-if="isYoutube" :url="application.video" />
+    <WInstagram v-if="isInstagram" :url="application.video" />
 
-    <div class="flex pl-2 gap-2 items-center">
-      <div class="text-xs py-1">
-        <span v-if="isAdmin()">{{ totalVotes }} •</span>
-        {{ getDateTime(application.videoUploadedAt) }} •
-        {{ application.style }} ({{ application.category }})
+    <div class="flex pl-2 items-center">
+      <div class="text-xs py-1 border-top border-gray-100 border-r">
+        <dl class="divide-y divide-gray-100">
+          <div class="px-4 py-2 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
+            <dt class="text-sm font-medium leading-6 text-gray-900">
+              Participant:
+            </dt>
+            <dd>
+              <WProfileAvatar photo name size="xs" :uid="application.uid" />
+            </dd>
+          </div>
+          <div
+            v-if="application.partner"
+            class="px-4 py-2 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0"
+          >
+            <dt class="text-sm font-medium leading-6 text-gray-900">
+              Partner:
+            </dt>
+            <dd>
+              <WProfileAvatar
+                photo
+                name
+                size="xs"
+                :username="application.partner.username"
+              />
+            </dd>
+          </div>
+          <div class="px-4 py-2 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
+            <dt class="text-sm font-medium leading-6 text-gray-900">City:</dt>
+            <dd><TCityLink :place="application.city" /></dd>
+          </div>
+          <div
+            v-if="isAdmin()"
+            class="px-4 py-2 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0"
+          >
+            <dt class="text-sm font-medium leading-6 text-gray-900">
+              Total votes:
+            </dt>
+            <dd>
+              <span>{{ totalVotes }}</span>
+            </dd>
+          </div>
+          <div class="px-4 py-2 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
+            <dt class="text-sm font-medium leading-6 text-gray-900">
+              Category:
+            </dt>
+            <dd>
+              <span>{{ application.style }} ({{ application.category }})</span>
+            </dd>
+          </div>
+          <div class="px-4 py-2 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
+            <dt class="text-sm font-medium leading-6 text-gray-900">
+              Uploaded date:
+            </dt>
+            <dd>
+              <span> {{ getDateTime(application.videoUploadedAt) }}</span>
+            </dd>
+          </div>
+          <div
+            v-if="isAdmin()"
+            class="px-4 py-2 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0"
+          >
+            <dt class="text-sm font-medium leading-6 text-gray-900">Admin:</dt>
+            <dd>
+              <TDropdown v-if="isAdmin()">
+                <TShowAccount :id="application.id" type="context" />
+                <TButton
+                  type="context"
+                  icon="delete"
+                  :label="$t('Delete')"
+                  @click="remove(application.id)"
+                />
+              </TDropdown>
+            </dd>
+          </div>
+        </dl>
       </div>
-      <div class="flex-grow"></div>
-      <TDropdown v-if="isAdmin()">
-        <TShowAccount :id="application.id" type="context" />
-        <TButton
-          type="context"
-          icon="delete"
-          :label="$t('Delete')"
-          @click="remove(application.id)"
-        />
-      </TDropdown>
-      <div class="flex items-center">
+
+      <div class="p-2 flex items-center justify-center">
         <TButton type="void" class="bg-gray-100 p-2" @click="vote(-1)">
           <MinusIcon class="w-4" />
         </TButton>
@@ -42,6 +105,7 @@ import { computed } from '@nuxtjs/composition-api'
 import { useAuth } from '~/use/auth'
 import { db } from '~/plugins/firebase'
 import { getDateTime } from '~/utils'
+import TCityLink from '../TCityLink.vue'
 
 export default {
   components: {
@@ -72,6 +136,16 @@ export default {
             return acc + vote
           }, 0)
         : 0
+    )
+
+    const isYoutube = computed(
+      () =>
+        props.application?.video && props.application.video.includes('youtu')
+    )
+    const isInstagram = computed(
+      () =>
+        props.application?.video &&
+        props.application.video.includes('instagram')
     )
 
     function vote(diff) {
@@ -118,7 +192,17 @@ export default {
         .delete()
     }
 
-    return { uid, getDateTime, totalVotes, vote, votes, remove, isAdmin }
+    return {
+      uid,
+      getDateTime,
+      totalVotes,
+      vote,
+      votes,
+      remove,
+      isAdmin,
+      isYoutube,
+      isInstagram,
+    }
   },
 }
 </script>

@@ -934,11 +934,8 @@ export const getUrlFromText = (text) => {
 }
 
 export const getYoutubeId = (url) => {
-  const regExp = /^.*((youtu.be\/)|(v\/)|(\/u\/\w\/)|(embed\/)|(watch\?))\??v?=?([^#&?]*).*/
-  const match = url.match(regExp)
-  const videoId = match && match[7].length === 11 ? match[7] : ''
-
-  return videoId
+  url = url.split(/(vi\/|v=|\/v\/|youtu\.be\/|\/embed\/)/)
+  return url[2] !== undefined ? url[2].split(/[^0-9a-z_\-]/i)[0] : url[0]
 }
 
 export function sum(a, b) {
