@@ -9,11 +9,9 @@
         description="
 
 - **Content:** Must feature a dance performance; all dance styles are welcome. Only the participants should be visible in the video—no other people dancing or appearing in the background.
-- **Format:** Videos must be recorded in horizontal (landscape) orientation.
 - **Editing:** No cuts or post-production editing; the focus is on showcasing dance skills, not video editing skills.
 - **Duration:** Duration of the song.
 - **Quality:** Ensure high video and audio quality, preferably in HD (720p) or higher. The video should have clear audio and stable camera work.
-- **Originality:** Must be an original performance specifically for the competition.
 - **Music:** Use royalty-free music or tracks for which you have proper permissions.
 - **Content Guidelines:** Ensure no copyrighted materials (visual or audio) are used without permission, and avoid any inappropriate or offensive content.
       "
