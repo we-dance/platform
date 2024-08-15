@@ -66,7 +66,15 @@
             class="px-4 py-2 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0"
           >
             <dt class="text-sm font-medium leading-6 text-gray-900">Admin:</dt>
-            <dd>
+            <dd class="flex gap-4 items-center">
+              <NuxtLink
+                class="text-primary underline"
+                target="_blank"
+                :to="
+                  `/competition/text?style=${application.style}&category=${application.category}`
+                "
+                >description</NuxtLink
+              >
               <TDropdown v-if="isAdmin()">
                 <TShowAccount :id="application.id" type="context" />
                 <TButton
