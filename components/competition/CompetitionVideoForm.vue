@@ -4,9 +4,10 @@
       Upload Video
     </h1>
     <div class="p-4">
-      <TPreview
-        content="
-**Record Your Video:**
+      <TCollapseItem
+        title="1. Record Your Video"
+        description="
+
 - **Content:** Must feature a dance performance; all dance styles are welcome. Only the participants should be visible in the video—no other people dancing or appearing in the background.
 - **Format:** Videos must be recorded in horizontal (landscape) orientation.
 - **Editing:** No cuts or post-production editing; the focus is on showcasing dance skills, not video editing skills.
@@ -15,44 +16,21 @@
 - **Originality:** Must be an original performance specifically for the competition.
 - **Music:** Use royalty-free music or tracks for which you have proper permissions.
 - **Content Guidelines:** Ensure no copyrighted materials (visual or audio) are used without permission, and avoid any inappropriate or offensive content.
-        "
-      />
-
-      <p class="font-bold">
-        Important: Include This Description in Your YouTube or Instagram Video:
-      </p>
-      <pre class="bg-gray-100 text-wrap rounded p-2">
-WeDance Global Video Dance Competition 2024.
-
-I’m excited to be part of the competition! This is my submission in the {{
-          value.style
-        }} Dance {{
-          value.category
-        }} category. Help support my entry by liking, sharing, and voting. Let’s celebrate the diversity and creativity of dance worldwide! 💃🕺
-
-Dancers:
-💃 [Your Name] [@yourusername]
-🕺 [Your Partner’s Name] [@partnerusername]
-
-Videography:
-🎥 [Videographer’s Name] [@videographerusername]
-
-Song:
-Original Version by: [Original Artist Name]
-Remix by: [Remixer’s Name]
-YouTube/Song Link
-
-Disclaimer:
-This video is strictly for the promotional purpose of showcasing {{
-          value.style
-        }} Dance. We do NOT own the rights to this music; it is used only to highlight the creativity of the artists and dancers involved.
-NO COPYRIGHT INFRINGEMENT INTENDED.
-
-#WeDanceCompetition #{{
-          value.style
-        }}Dance #DanceChallenge  #DanceVideo #WeDance
-</pre
-      >
+      "
+      ></TCollapseItem>
+      <TCollapseItem title="2. Upload Video to Youtube or Instagram">
+        <div class="p-4">
+          Upload video and include
+          <NuxtLink
+            class="text-primary underline"
+            target="_blank"
+            :to="
+              `/competition/text?style=${value.style}&category=${value.category}`
+            "
+            >this description</NuxtLink
+          >.
+        </div>
+      </TCollapseItem>
 
       <TForm
         ref="formRef"
