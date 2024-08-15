@@ -35,32 +35,15 @@
       </h2>
       <div class="p-4">
         <ul class="list-disc">
-          <li class="font-bold">Submission: 1-14 August 2024</li>
+          <li>Submission: 1-28 August 2024</li>
           <li>Voting: 15-28 August 2024</li>
           <li>Results: 1 September 2024</li>
         </ul>
       </div>
     </div>
-    <div class="p-4">
+    <div class="p-4 rounded bg-gray-100">
       <h2 class="text-3xl font-extrabold text-center mt-4 mb-2">
-        Who can participate?
-      </h2>
-      <div class="p-4">
-        <ul class="list-disc">
-          <li>You can be from any city</li>
-          <li>
-            You can choose
-            <router-link class="underline text-primary" to="/dance/"
-              >any style</router-link
-            >
-            that you have been dancing for at least three years
-          </li>
-        </ul>
-      </div>
-    </div>
-    <div class="p-4">
-      <h2 class="text-3xl font-extrabold text-center mt-4 mb-2">
-        How to participate?
+        Want to participate?
       </h2>
       <div class="flex gap-4 items-start mb-4">
         <div>
@@ -69,7 +52,11 @@
         <div>
           <div class="text-lg font-bold">Enter the Contest</div>
           <div class="text-sm text-gray-700">
-            Select your city, couple or solo, and your dance style.
+            You can be from any city. You can choose
+            <router-link class="underline text-primary" to="/dance/"
+              >any style</router-link
+            >
+            that you have been dancing for at least three years
           </div>
         </div>
       </div>
@@ -97,8 +84,8 @@
         <div>
           <div class="text-lg font-bold">Submit Your Entry</div>
           <div class="text-sm text-gray-700">
-            Upload your video to Youtube and submit the link to WeDance until 14
-            August 2024.
+            Upload your video to Youtube or Instagram and submit the link to
+            WeDance until 28 August 2024.
           </div>
         </div>
       </div>
@@ -107,10 +94,11 @@
           type="primary"
           to="/competition/submit"
           :track="{ event: 'competition', action: 'start' }"
-          >Get Started</TButton
+          >Enter the Contest</TButton
         >
       </div>
     </div>
+    <CompetitionVoting />
   </div>
 </template>
 

@@ -1,6 +1,6 @@
 # WeDance Competition Rules
 
-published on 1 Aug 2024, 12:17
+last updated on 15 Aug 2024, 14:10
 
 ### 1. Eligibility
 
@@ -9,11 +9,11 @@ published on 1 Aug 2024, 12:17
 
 ### 2. Registration
 
-- Participants must have a profile on WeDance with: city, photo and dance styles.
+- Participants must have a profile on WeDance with: city, photo, instagram and dance styles.
 
 ### 3. Video Requirements
 
-- **Content:** Must feature a dance performance; all dance styles are welcome.
+- **Content:** Must feature a dance performance; all dance styles are welcome. Only the participants should be visible in the video—no other people dancing or appearing in the background.
 - **Format:** Videos must be recorded in horizontal (landscape) orientation.
 - **Editing:** No cuts or post-production editing; the focus is on showcasing dance skills, not video editing skills.
 - **Duration:** Duration of the song.
@@ -24,8 +24,9 @@ published on 1 Aug 2024, 12:17
 
 ### 4. Submission
 
-- Upload videos to YouTube and share the link via the WeDance submission form.
-- Submission period is 1-14 August 2024.
+- Upload video to YouTube or Instagram.
+- Submit the link via the WeDance submission form.
+- Submission period is 1-28 August 2024.
 
 ### 5. Public Votes
 

@@ -7,7 +7,7 @@
       <TPreview
         content="
 **Record Your Video:**
-- **Content:** Must feature a dance performance; all dance styles are welcome.
+- **Content:** Must feature a dance performance; all dance styles are welcome. Only the participants should be visible in the video—no other people dancing or appearing in the background.
 - **Format:** Videos must be recorded in horizontal (landscape) orientation.
 - **Editing:** No cuts or post-production editing; the focus is on showcasing dance skills, not video editing skills.
 - **Duration:** Duration of the song.
@@ -18,11 +18,47 @@
         "
       />
 
+      <p class="font-bold">
+        Important: Include This Description in Your YouTube or Instagram Video:
+      </p>
+      <pre class="bg-gray-100 text-wrap rounded p-2">
+WeDance Global Video Dance Competition 2024.
+
+I’m excited to be part of the competition! This is my submission in the {{
+          value.style
+        }} Dance {{
+          value.category
+        }} category. Help support my entry by liking, sharing, and voting. Let’s celebrate the diversity and creativity of dance worldwide! 💃🕺
+
+Dancers:
+💃 [Your Name] [@yourusername]
+🕺 [Your Partner’s Name] [@partnerusername]
+
+Videography:
+🎥 [Videographer’s Name] [@videographerusername]
+
+Song:
+Original Version by: [Original Artist Name]
+Remix by: [Remixer’s Name]
+YouTube/Song Link
+
+Disclaimer:
+This video is strictly for the promotional purpose of showcasing {{
+          value.style
+        }} Dance. We do NOT own the rights to this music; it is used only to highlight the creativity of the artists and dancers involved.
+NO COPYRIGHT INFRINGEMENT INTENDED.
+
+#WeDanceCompetition #{{
+          value.style
+        }}Dance #DanceChallenge  #DanceVideo #WeDance
+</pre
+      >
+
       <TForm
         ref="formRef"
         v-model="application"
         :fields="fields"
-        class="space-y-4"
+        class="space-y-4 p-4"
         hide-submit
       />
     </div>
@@ -52,7 +88,7 @@ export default {
     const fields = ref([
       {
         name: 'video',
-        label: 'Link to YouTube video',
+        label: 'Link to YouTube or Instagram video',
         required: true,
         labelPosition: 'top',
       },

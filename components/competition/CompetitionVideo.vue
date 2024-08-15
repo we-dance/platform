@@ -105,7 +105,6 @@ import { computed } from '@nuxtjs/composition-api'
 import { useAuth } from '~/use/auth'
 import { db } from '~/plugins/firebase'
 import { getDateTime } from '~/utils'
-import TCityLink from '../TCityLink.vue'
 
 export default {
   components: {

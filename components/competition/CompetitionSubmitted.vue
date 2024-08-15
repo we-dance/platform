@@ -8,9 +8,8 @@
       </h1>
       <div class="text-center text-xl text-gray-700 mb-4">
         Your video has been successfully uploaded and submitted for the
-        competition. The voting period begins on August 15th. You will receive a
-        notification once voting opens. In the meantime, prepare to share your
-        video link and encourage others to vote for you when the time comes.
+        competition. Share the link to competition and encourage others to vote
+        for you.
       </div>
       <div class="flex justify-center py-4">
         <TButton type="primary" to="/competition/"
