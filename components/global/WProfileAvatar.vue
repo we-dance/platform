@@ -22,9 +22,10 @@
         class="hover:underline font-bold"
         :to="localePath(`/${profile.username}`)"
       >
-        {{ profile.name || profile.username }}
+        {{ profile.username }}
       </NuxtLink>
     </div>
+    <slot />
   </div>
 </template>
 

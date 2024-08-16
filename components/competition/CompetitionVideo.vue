@@ -42,7 +42,20 @@
               Total votes:
             </dt>
             <dd>
-              <span>{{ totalVotes }}</span>
+              <div>{{ totalVotes }}</div>
+              <div>
+                <div v-for="(votes, voter) in application.votes" :key="voter">
+                  <WProfileAvatar
+                    v-if="votes > 0"
+                    photo
+                    name
+                    size="xs"
+                    :uid="voter"
+                  >
+                    <span class="text-xs">{{ votes }}</span>
+                  </WProfileAvatar>
+                </div>
+              </div>
             </dd>
           </div>
           <div class="px-4 py-2 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
