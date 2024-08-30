@@ -7,7 +7,7 @@
       <span class="text-sm font-semibold">{{ title }}</span>
       <span class="ml-6 flex items-center justify-center">
         <TIcon
-          v-if="!open"
+          v-if="!isOpen"
           name="plus"
           class="h-6 w-6 flex justify-center items-center"
           aria-hidden="true"
@@ -20,7 +20,7 @@
         />
       </span>
     </dt>
-    <dd v-show="open">
+    <dd v-show="isOpen">
       <slot>
         <TPreview :content="description" class="text-gray-600 text-sm" />
       </slot>
@@ -39,15 +39,19 @@ export default {
       type: String,
       default: '',
     },
+    open: {
+      type: Boolean,
+      default: false,
+    },
   },
   data() {
     return {
-      open: false,
+      isOpen: this.open,
     }
   },
   methods: {
     toggle(title) {
-      this.open = !this.open
+      this.isOpen = !this.isOpen
     },
   },
 }

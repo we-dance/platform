@@ -1,14 +1,90 @@
 <template>
   <div>
+    <TPopup
+      v-if="unlocking"
+      title="Unlock All Videos"
+      @close="unlocking = false"
+    >
+      <div class="p-4 max-w-sm">
+        <div class="text-sm text-gray-700">
+          Get unlimited access to all our dance tutorials with a premium
+          membership. Perfect your moves, learn at your pace, and elevate your
+          dancing!
+        </div>
+        <div class="flex justify-center gap-4 mt-4">
+          <TButton
+            label="Subscribe Now for €10/month"
+            variant="primary"
+            @click.native="unlocking = false"
+          />
+        </div>
+      </div>
+    </TPopup>
+
     <div class="rounded overflow-hidden">
+      <WTeaserBig
+        header="Salsa Lady Styling"
+        description="Elegance, majesty, expression. Amazing cuban dancer Yarima Rodríguez shares her secrets for mastering Lady Styling in Son Cubano, helping you enhance your dance technique and unleash your inner grace."
+        class="p-4"
+      >
+        <template slot="preheader">
+          <div class="flex justify-center gap-1 text-xs uppercase">
+            <div class="text-primary">
+              Online
+            </div>
+            <div>·</div>
+            <div>
+              Salsa Cubana · Son
+            </div>
+          </div>
+        </template>
+        <template slot="subheader">
+          <div class="flex justify-center gap-1 text-xs my-2">
+            <div>
+              2 hours
+            </div>
+            <div>·</div>
+            <div>
+              10 views
+            </div>
+          </div>
+          <div
+            v-if="!premium"
+            class="flex flex-col justify-center items-center"
+          >
+            <TButton
+              class="my-2 no-underline"
+              padding="px-32 py-2"
+              variant="primary"
+              @click="unlockAll()"
+              >Unlock All Videos</TButton
+            >
+            <div class="text-xs">
+              €10/month • Unsuscribe anytime
+            </div>
+          </div>
+          <div v-if="premium" class="flex flex-col justify-center items-center">
+            <TButton
+              class="my-2 no-underline"
+              variant="secondary"
+              to="/settings"
+              >Manage Subscription</TButton
+            >
+          </div>
+        </template>
+      </WTeaserBig>
+
       <mux-player
-        playback-id="exizM1SgPwP6Fw81egITz9sF1irYxvRL1nNsXr9bbiM"
-        metadata-video-title="Placeholder (optional)"
+        :autoplay="false"
+        ref="player"
+        :playback-id="activeChapter.id"
+        :metadata-video-title="activeChapter.title"
+        :title="activeChapter.title"
         metadata-viewer-user-id="user-id-vue3007"
         accent-color="#F1023D"
       />
 
-      <TCollapseItem class="border-b mt-[-5px]" :title="statusLine">
+      <TCollapseItem open class="border-b mt-[-5px]" :title="statusLine">
         <div class="border divide-y overflow-hidden">
           <TPlayControls
             v-for="(chapter, index) in chapters"
@@ -23,41 +99,6 @@
         </div>
       </TCollapseItem>
     </div>
-
-    <WTeaserBig
-      header="Salsa Lady Styling"
-      description="Elegance, majesty, expression. Amazing cuban dancer Yarima Rodríguez shares her secrets for mastering Lady Styling in Son Cubano, helping you enhance your dance technique and unleash your inner grace."
-      button="Enroll"
-      button-after="Starting at €10/month for all classes and sessions"
-      class="p-4"
-    >
-      <template slot="preheader">
-        <div class="flex justify-center gap-1 text-xs uppercase">
-          <div class="text-primary">
-            Online
-          </div>
-          <div>·</div>
-          <div>
-            Salsa Cubana · Son
-          </div>
-        </div>
-      </template>
-      <template slot="subheader">
-        <div class="flex justify-center gap-1 text-xs my-2">
-          <div>
-            2 hours
-          </div>
-          <div>·</div>
-          <div>
-            2 students
-          </div>
-          <div>·</div>
-          <div>
-            10 views
-          </div>
-        </div>
-      </template>
-    </WTeaserBig>
 
     <section class="p-4 border-t border-primary">
       <div class="space-y-2">
@@ -152,7 +193,7 @@
       </div>
     </section>
 
-    <section class="p-4 border-t border-primary">
+    <section v-if="!premium" class="p-4 border-t border-primary">
       <h3 class="uppercase text-xs text-primary font-extrabold py-4">
         Who Should Enroll?
       </h3>
@@ -166,9 +207,10 @@
     </section>
 
     <WTeaserBig
-      header="Enroll Now"
+      v-if="!premium"
+      header="Upgrade to Premium"
       description="Step into the world of Son Cubano and transform your dance technique. Register today to start learning immediately and at your own pace!"
-      button="Enroll"
+      button="Unlock All Videos"
       button-after="Starting at €10/month for all classes and sessions"
       class="p-4 border-t"
     />
@@ -186,65 +228,88 @@ export default {
     HeartIcon,
   },
   data: () => ({
-    current: '1',
-    chapters: [
+    unlocking: false,
+    premium: true,
+    current: 'sMFZnbe01Tf9Idx01roKDhfkRX1CrgCEL2A702vA00uqUNI',
+    chaptersData: [
       {
-        id: '1',
+        id: 'sMFZnbe01Tf9Idx01roKDhfkRX1CrgCEL2A702vA00uqUNI',
         title: 'Intro',
-        duration: '1:12',
+        duration: '2:10',
       },
       {
-        id: '2',
+        id: 'sDfd00Ix01fTI1SOUr4KSDlxBa7Y9Znnj01G8beV01o1Oww',
+        title: 'Real-Time Phrase',
+        duration: '0:56',
+      },
+      {
+        id: 'qtayNhaSo1ZK3f9tV4ptW6qytQJvcfjgPARgOwTdC7A',
         title: 'Warm-up (part 1)',
+        duration: '7:04',
       },
       {
-        id: '3',
+        id: 'KlVsP028ljS8mCfKAYuZAZaL02svlWvps9wxqNfM6009c4',
         title: 'Warm-up (part 2)',
+        duration: '4:37',
         locked: true,
       },
       {
-        id: '4',
+        id: 'bXTEloChop02wryBH01llZmFSRAissSaalytIJ7BsV01sw',
         title: 'Phrase (segment 1)',
+        duration: '8:24',
         locked: true,
       },
       {
-        id: '5',
+        id: 'fClgWWmDfettXAYVyvAKFshhg22BbyeQW01s1zcissX00',
         title: 'Phrase (segment 2)',
+        duration: '7:43',
         locked: true,
       },
       {
-        id: '6',
+        id: 'iB02CO2O54L1Ey017MYfSuqAFj35p8AURFRr01CIyAmZvA',
         title: 'Phrase (segment 3)',
+        duration: '7:34',
         locked: true,
       },
       {
-        id: '7',
+        id: 'CS8o1PCs2xFoXFTZ77PuOHRYU8g00f8rXtFCJaerHCpQ',
         title: 'Phrase (segment 4)',
+        duration: '9:23',
         locked: true,
       },
       {
-        id: '8',
+        id: '8D8uVRdXY52021wWuntp8545bPjAwjv00016P2fsvh6jDg',
         title: 'Continued Phrase (without music)',
+        duration: '1:35',
         locked: true,
       },
       {
-        id: '9',
+        id: 'cuPptg0000eW13qx84pv02m00IgntaKVQf8aaoKXzyolbFg',
         title: 'Details of the arms',
+        duration: '4:23',
         locked: true,
       },
       {
-        id: '10',
+        id: 'bn4U1NWEOhNCUeY3lZNUnjFkaY00ueW00qmd6P1UzFmOM',
         title: 'Details of the legs',
+        duration: '1:31',
         locked: true,
       },
       {
-        id: '11',
+        id: 'NA00aQiMyfYAs18A3ppGCogK3Q9hO0029HhYqgd3Ehe4Q',
         title: 'Stretching',
+        duration: '16:02',
         locked: true,
       },
     ],
   }),
   computed: {
+    chapters() {
+      return this.chaptersData.map((chapter) => ({
+        ...chapter,
+        locked: this.premium ? false : chapter.locked,
+      }))
+    },
     activeChapter() {
       return this.chapters.find((chapter) => chapter.id === this.current)
     },
@@ -259,7 +324,16 @@ export default {
   },
   methods: {
     switchVideo(videoId) {
+      if (this.chapters.find((chapter) => chapter.id === videoId).locked) {
+        this.unlockAll()
+        return
+      }
+
       this.current = videoId
+    },
+    unlockAll() {
+      this.$refs.player.pause()
+      this.unlocking = true
     },
   },
 }
