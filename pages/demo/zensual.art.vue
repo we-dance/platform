@@ -15,7 +15,7 @@
           <TButton
             label="Subscribe Now for €10/month"
             variant="primary"
-            @click.native="unlocking = false"
+            to="https://buy.stripe.com/dR6bKLcCqfkPedO5kk"
           />
         </div>
       </div>
@@ -229,7 +229,7 @@ export default {
   },
   data: () => ({
     unlocking: false,
-    premium: true,
+    premium: false,
     current: 'sMFZnbe01Tf9Idx01roKDhfkRX1CrgCEL2A702vA00uqUNI',
     chaptersData: [
       {
