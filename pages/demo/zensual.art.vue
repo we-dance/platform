@@ -75,8 +75,8 @@
       </WTeaserBig>
 
       <mux-player
-        :autoplay="false"
         ref="player"
+        :autoplay="false"
         :playback-id="activeChapter.id"
         :metadata-video-title="activeChapter.title"
         :title="activeChapter.title"
