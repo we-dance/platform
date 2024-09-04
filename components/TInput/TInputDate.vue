@@ -82,7 +82,7 @@ export default {
       const getTimeZoneOffset = () => {
         const offset = new Date().getTimezoneOffset()
         const sign = offset <= 0 ? '+' : '-'
-        const hours = String(Math.abs(offset / 60)).padStart(2, '0')
+        const hours = String(Math.abs(Math.round(offset / 60))).padStart(2, '0')
         const minutes = String(Math.abs(offset % 60)).padStart(2, '0')
         return `${sign}${hours}:${minutes}`
       }
