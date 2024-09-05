@@ -217,7 +217,6 @@
 <script>
 import '@mux/mux-player'
 import { HeartIcon } from '@vue-hero-icons/outline'
-import router from '~/plugins/router'
 
 export default {
   name: 'MuxDemo',

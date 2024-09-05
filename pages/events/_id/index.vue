@@ -64,7 +64,7 @@
         </div>
       </div>
       <a
-        v-if="doc.venue"
+        v-if="doc.online != 'Yes' && doc.venue"
         :href="doc.venue.url"
         target="_blank"
         class="block border-b py-2 px-4 hover:bg-gray-200"
@@ -390,6 +390,19 @@
       </section>
 
       <section
+        v-if="doc.description"
+        id="about"
+        class="p-4 border-t border-primary"
+      >
+        <div class="space-y-2">
+          <h3 class="uppercase text-xs text-primary font-extrabold">
+            About
+          </h3>
+          <TPreview :content="doc.description" />
+        </div>
+      </section>
+
+      <section
         v-if="
           doc.org &&
             (!venueProfile || doc.org.username !== venueProfile.username)
@@ -411,7 +424,7 @@
       </section>
 
       <section
-        v-if="venueProfile"
+        v-if="doc.online != 'Yes' && venueProfile"
         id="venue"
         class="p-4 border-t border-primary"
       >
@@ -434,19 +447,6 @@
               <img :src="doc.venue.map" alt="Venue Map" class="mt-4" />
             </div>
           </div>
-        </div>
-      </section>
-
-      <section
-        v-if="doc.description"
-        id="about"
-        class="p-4 border-t border-primary"
-      >
-        <div class="space-y-2">
-          <h3 class="uppercase text-xs text-primary font-extrabold">
-            About
-          </h3>
-          <TPreview :content="doc.description" />
         </div>
       </section>
 
@@ -784,10 +784,10 @@
 </template>
 
 <script>
-import { openURL } from '~/utils'
 import { UserGroupIcon } from '@vue-hero-icons/outline'
 import googleCalendarEventUrl from 'generate-google-calendar-url'
 import { computed, ref, watch } from '@nuxtjs/composition-api'
+import { openURL } from '~/utils'
 import { useAuth } from '~/use/auth'
 import { useDoc } from '~/use/doc'
 import { useRouter } from '~/use/router'
