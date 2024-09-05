@@ -15,7 +15,7 @@
           <TButton
             label="Subscribe Now for €20/month"
             variant="primary"
-            to="https://buy.stripe.com/dR6bKLcCqfkPedO5kk"
+            href="https://buy.stripe.com/dR6bKLcCqfkPedO5kk"
           />
         </div>
       </div>
@@ -56,18 +56,16 @@
               class="my-2 no-underline"
               variant="primary"
               @click="unlockAll()"
-              >Unlock All Videos</TButton
+              >Subscribe</TButton
             >
             <div class="text-xs">
               €20/month • Unsuscribe anytime
             </div>
           </div>
           <div v-if="premium" class="flex flex-col justify-center items-center">
-            <TButton
-              class="my-2 no-underline"
-              variant="secondary"
-              to="/settings"
-              >Manage Subscription</TButton
+            You have Premium Account.
+            <router-link to="/settings" class="underline text-primary"
+              >Manage Subscription</router-link
             >
           </div>
         </template>
@@ -208,8 +206,8 @@
     <WTeaserBig
       v-if="!premium"
       header="Upgrade to Premium"
-      description="Step into the world of Son Cubano and transform your dance technique. Register today to start learning immediately and at your own pace!"
-      button="Unlock All Videos"
+      description="Step into the world of Son Cubano and transform your dance technique. Subscribe today to start learning immediately and at your own pace!"
+      button="Subscribe"
       button-after="Starting at €20/month for all classes and sessions"
       class="p-4 border-t"
     />
@@ -219,6 +217,7 @@
 <script>
 import '@mux/mux-player'
 import { HeartIcon } from '@vue-hero-icons/outline'
+import router from '~/plugins/router'
 
 export default {
   name: 'MuxDemo',

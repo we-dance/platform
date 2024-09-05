@@ -127,7 +127,7 @@
                 </div>
               </div>
               <div class="text-primary text-xs">
-                €10/month
+                €20/month
               </div>
             </div>
             <div>
