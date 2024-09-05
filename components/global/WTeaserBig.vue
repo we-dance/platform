@@ -12,7 +12,6 @@
         :allow-guests="allowGuests"
         :title="button"
         class="my-2 no-underline"
-        padding="px-32 py-2"
         variant="primary"
         :to="url"
         :href="href"

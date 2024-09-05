@@ -13,7 +13,7 @@
         </div>
         <div class="flex justify-center gap-4 mt-4">
           <TButton
-            label="Subscribe Now for €10/month"
+            label="Subscribe Now for €20/month"
             variant="primary"
             to="https://buy.stripe.com/dR6bKLcCqfkPedO5kk"
           />
@@ -54,13 +54,12 @@
           >
             <TButton
               class="my-2 no-underline"
-              padding="px-32 py-2"
               variant="primary"
               @click="unlockAll()"
               >Unlock All Videos</TButton
             >
             <div class="text-xs">
-              €10/month • Unsuscribe anytime
+              €20/month • Unsuscribe anytime
             </div>
           </div>
           <div v-if="premium" class="flex flex-col justify-center items-center">
@@ -76,7 +75,7 @@
 
       <mux-player
         ref="player"
-        :autoplay="false"
+        :autoplay="true"
         :playback-id="activeChapter.id"
         :metadata-video-title="activeChapter.title"
         :title="activeChapter.title"
@@ -211,7 +210,7 @@
       header="Upgrade to Premium"
       description="Step into the world of Son Cubano and transform your dance technique. Register today to start learning immediately and at your own pace!"
       button="Unlock All Videos"
-      button-after="Starting at €10/month for all classes and sessions"
+      button-after="Starting at €20/month for all classes and sessions"
       class="p-4 border-t"
     />
   </div>
