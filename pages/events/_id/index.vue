@@ -103,6 +103,7 @@
             <template v-if="doc.link">
               <TButton
                 v-if="doc.link.includes('https://www.tickettailor.com/')"
+                allow-guests
                 type="link"
                 class="text-xs text-primary hover:no-underline"
                 :label="$t('event.getTicket')"
@@ -214,6 +215,7 @@
           class="rounded-full"
           hide-count
           :item="doc"
+          @joined="attend()"
         />
         <TEventBookmark
           :event-id="doc.id"
@@ -782,6 +784,7 @@
 </template>
 
 <script>
+import { openURL } from '~/utils'
 import { UserGroupIcon } from '@vue-hero-icons/outline'
 import googleCalendarEventUrl from 'generate-google-calendar-url'
 import { computed, ref, watch } from '@nuxtjs/composition-api'
@@ -906,6 +909,13 @@ export default {
     },
   },
   methods: {
+    attend() {
+      if (this.doc.link.includes('https://www.tickettailor.com/')) {
+        this.ticketTailorPopup = true
+      } else {
+        openURL(this.doc.link)
+      }
+    },
     async loadVenue() {
       if (!this.doc?.venue?.place_id) {
         this.venueProfile = null

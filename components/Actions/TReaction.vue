@@ -122,7 +122,7 @@ export default {
       this.toggle()
     }
   },
-  setup(props) {
+  setup(props, { emit }) {
     const { $track } = useContext()
     const { username: currentUsername, uid } = useAuth()
 
@@ -173,6 +173,7 @@ export default {
             action: 'joined',
           }),
         }
+        emit('joined')
       } else {
         change = {
           [`${props.field}.count`]: count.value - 1,
@@ -187,6 +188,7 @@ export default {
             action: 'left',
           }),
         }
+        emit('left')
       }
 
       if (props.field === 'watch') {
