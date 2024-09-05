@@ -787,7 +787,6 @@
 import { UserGroupIcon } from '@vue-hero-icons/outline'
 import googleCalendarEventUrl from 'generate-google-calendar-url'
 import { computed, ref, watch } from '@nuxtjs/composition-api'
-import { openURL } from '~/utils'
 import { useAuth } from '~/use/auth'
 import { useDoc } from '~/use/doc'
 import { useRouter } from '~/use/router'
@@ -808,6 +807,7 @@ import {
   getEventMeta,
   formatDate,
   sortBy,
+  openURL,
 } from '~/utils'
 import { addressPart } from '~/use/google'
 import { trackView } from '~/use/tracking'
