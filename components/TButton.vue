@@ -189,7 +189,6 @@ export default {
         delete data.event
         this.$track(event, data)
       }
-      this.$emit('click')
     },
   },
   setup() {
