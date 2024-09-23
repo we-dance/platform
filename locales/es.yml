@@ -442,6 +442,7 @@ event:
   attendCallToAction: Añade este evento a tu calendario de perfil y recibe notificaciones haciendo clic en “Asistir” para unirte a la lista de invitados o en “Guardar” para seguirlo sin unirte.
   attending: Asistiendo
   getTicket: Obtener entrada
+  buyTicket: Compra Entrada
   artists: Artists
   organiser: Organiser
   category:

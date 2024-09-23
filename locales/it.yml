@@ -112,7 +112,7 @@ eventView:
     edit: Edit
     share: Condividere
     copy: Copy
-  online: Online Event
+  online: Evento online
   reservation:
     guest: Register for event
     cancel: Cancel reservation
@@ -444,6 +444,7 @@ sort:
   archived: Archived
   yours: Yours
 event:
+  buyTicket: Compra Biglietto
   artists: Artists
   organiser: Organiser
   category:

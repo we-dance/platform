@@ -99,26 +99,7 @@
         <TIcon name="ticket" class="mr-4 h-4 w-4" />
         <div class="flex w-full justify-between items-center">
           <div>{{ doc.price }}</div>
-          <div>
-            <template v-if="doc.link">
-              <TButton
-                v-if="doc.link.includes('https://www.tickettailor.com/')"
-                allow-guests
-                type="link"
-                class="text-xs text-primary hover:no-underline"
-                :label="$t('event.getTicket')"
-                @click="ticketTailorPopup = true"
-              />
-              <TButton
-                v-else
-                type="link"
-                :href="doc.link"
-                target="_blank"
-                class="text-xs text-primary hover:no-underline"
-                :label="$t('event.getTicket')"
-              />
-            </template>
-          </div>
+          <div></div>
         </div>
       </div>
       <div
@@ -153,58 +134,19 @@
         </div>
       </div>
 
-      <div id="tabs" class="grid grid-cols-3 gap-4 max-w-4xl mx-auto p-4">
-        <a
-          href="#reviews"
-          class="p-4 space-y-1 bg-light rounded shadow"
-          @click="$track('event_see_reviews')"
-        >
-          <h3 class="text-2xl font-extrabold text-center">
-            {{ reviewsAvg ? reviewsAvg : '' }}★
-          </h3>
-          <p v-if="reviewsCount" class="text-center text-xs">
-            {{ reviewsCount }} reviews
-          </p>
-          <p v-else class="text-center text-xs">Recommend</p>
-        </a>
-        <a
-          v-if="
-            can('edit', 'events', doc) || (doc.artists && doc.artists.length)
-          "
-          href="#artists"
-          class="p-4 space-y-1 bg-light rounded shadow"
-          @click="$track('event_see_artists')"
-        >
-          <h3 class="text-2xl font-extrabold text-center">
-            {{ doc.artists ? doc.artists.length || '?' : '?' }}
-          </h3>
-          <p class="text-center text-xs">
-            Artists
-          </p>
-        </a>
-        <a
-          href="#guests"
-          class="p-4 space-y-1 bg-light rounded shadow"
-          @click="$track('event_see_guests')"
-        >
-          <h3 class="text-2xl font-extrabold text-center">
-            {{ doc.star && doc.star.usernames ? doc.star.usernames.length : 0 }}
-          </h3>
-          <p class="text-center text-xs">
-            Guests
-          </p>
-        </a>
-      </div>
-
-      <div class="flex w-full justify-between text-xs text-center p-4 pb-0">
-        <div>{{ $t('event.attendCallToAction') }}</div>
-      </div>
-
       <div
         class="top-0 z-40 flex flex-wrap justify-center items-center gap-2 bg-white p-4 shadow"
         :class="can('edit', 'events', doc) ? '' : 'sticky'"
       >
+        <TButton
+          allow-guests
+          v-if="doc.link"
+          type="primary"
+          @click="buyTicket()"
+          >{{ $t('event.buyTicket') }}</TButton
+        >
         <TReaction
+          v-else
           type="primary"
           toggled-class="bg-green-500 hover:bg-green-800"
           :label="$t('event.attend')"
@@ -259,14 +201,6 @@
           />
         </div>
       </div>
-
-      <TPopup
-        v-if="ticketTailorPopup"
-        title="Buy Ticket"
-        @close="ticketTailorPopup = false"
-      >
-        <WTicketTailor :href="doc.link" />
-      </TPopup>
 
       <div class="grid grid-cols-1">
         <div class="md:border-l">
@@ -909,12 +843,18 @@ export default {
     },
   },
   methods: {
-    attend() {
-      if (this.doc.link.includes('https://www.tickettailor.com/')) {
-        this.ticketTailorPopup = true
-      } else {
-        openURL(this.doc.link)
+    buyTicket() {
+      this.$track('buy_ticket')
+
+      if (!this.doc.link) {
+        return
       }
+
+      openURL(this.doc.link)
+    },
+    attend() {
+      this.$track('attend')
+      this.buyTicket()
     },
     async loadVenue() {
       if (!this.doc?.venue?.place_id) {
