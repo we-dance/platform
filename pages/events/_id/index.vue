@@ -718,6 +718,7 @@
 </template>
 
 <script>
+import ls from 'local-storage'
 import { UserGroupIcon } from '@vue-hero-icons/outline'
 import googleCalendarEventUrl from 'generate-google-calendar-url'
 import { computed, ref, watch } from '@nuxtjs/composition-api'
@@ -850,7 +851,14 @@ export default {
         return
       }
 
-      openURL(this.doc.link)
+      let url = this.doc.link
+      const session = ls('session')
+      url = url.replace(
+        '{{ref}}',
+        session.ref || this.$route.query.ref || 'direct'
+      )
+
+      openURL(url)
     },
     attend() {
       this.$track('attend')
