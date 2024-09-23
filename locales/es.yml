@@ -510,6 +510,7 @@ event:
   attendCallToAction: Add this event to your profile calendar and receive notifications by clicking “Attend” to join the guest list or “Save” to track without joining.
   attending: Attending
   getTicket: Get Ticket
+  buyTicket: Buy Ticket
   limitRoles: Limited to {followers} followers and {leaders} leaders
   limitTotal: Limited to {total} attendees
   share: Compartir
