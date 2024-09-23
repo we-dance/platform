@@ -139,8 +139,8 @@
         :class="can('edit', 'events', doc) ? '' : 'sticky'"
       >
         <TButton
-          allow-guests
           v-if="doc.link"
+          allow-guests
           type="primary"
           @click="buyTicket()"
           >{{ $t('event.buyTicket') }}</TButton
