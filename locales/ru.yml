@@ -603,7 +603,7 @@ event:
   link:
     label: Link to get tickets
     placeholder: https://www.tickettailor.com/events/event-example
-    description: Provide a valid link, starting with https:// where to buy ticket or register. Try [TicketTailor](https://www.tickettailor.com/?ref=wedance), Eventbrite, Google Form or TiTo. Leave it blank if you don't have one.
+    description: Provide a valid link, starting with https:// where to buy ticket or register. Try [TicketTailor](https://get.tickettailor.com/nlvk1iuqtis3), Eventbrite, Google Form or TiTo. Leave it blank if you don't have one.
   facebook:
     label: Facebook event
     description: Link to your facebook event. Leave empty if you don't have one.
