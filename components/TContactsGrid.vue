@@ -3,7 +3,7 @@
     <div class="grid grid-cols-3 md:flex border-l border-t flex-shrink-0">
       <TButton
         v-if="!hideWebsite && profile.website"
-        :href="profile.website"
+        :to="profile.website"
         allow-guests
         :track="{ event: 'contact', action: 'website' }"
         type="void"
@@ -13,7 +13,7 @@
       </TButton>
       <TButton
         v-if="profile.email"
-        :href="`mailto:${profile.email}`"
+        :to="`mailto:${profile.email}`"
         allow-guests
         :track="{ event: 'contact', action: 'email' }"
         type="void"
@@ -25,7 +25,7 @@
         v-for="field in filledFields"
         :key="field"
         allow-guests
-        :href="profile[field]"
+        :to="profile[field]"
         :icon="field"
         :track="{ event: 'contact', action: field }"
         type="void"

@@ -12,7 +12,7 @@
         dance, this is your chance to shine and earn.
       </div>
       <div class="flex justify-center py-4">
-        <TButton type="primary" href="https://forms.gle/ynbu291s5w75rVQt7"
+        <TButton type="primary" to="https://forms.gle/ynbu291s5w75rVQt7"
           >Join as Promoter</TButton
         >
       </div>
@@ -106,7 +106,7 @@
           and influence. Let's dance, promote, and prosper together!
         </div>
         <div class="flex justify-center py-4">
-          <TButton type="primary" href="https://forms.gle/ynbu291s5w75rVQt7"
+          <TButton type="primary" to="https://forms.gle/ynbu291s5w75rVQt7"
             >Join as Promoter</TButton
           >
         </div>

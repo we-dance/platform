@@ -17,7 +17,7 @@
         allow-guests
         type="nav"
         download
-        :href="downloadUrl"
+        :to="downloadUrl"
         @click="download"
       >
         Download Poster

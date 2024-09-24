@@ -38,8 +38,7 @@
           class="order-3 mt-2 flex-shrink-0 w-full sm:order-2 sm:mt-0 sm:w-auto"
         >
           <TButton
-            :href="link"
-            :to="to"
+            :to="link || to"
             allow-guests
             type="primary"
             :label="action"

@@ -27,7 +27,7 @@
           v-if="alternative"
           allow-guests
           :track="{ event: 'cta_secondary', action: alternativeAction }"
-          :href="alternativeUrl"
+          :to="alternativeUrl"
           type="secondary"
         >
           {{ alternative }}

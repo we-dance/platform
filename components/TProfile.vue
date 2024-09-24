@@ -163,7 +163,7 @@
       <TButton
         type="simple"
         :label="$t('profile.claim')"
-        :href="`mailto:support@wedance.vip?subject=Claim ${profile.username}`"
+        :to="`mailto:support@wedance.vip?subject=Claim ${profile.username}`"
       />
     </div>
   </div>

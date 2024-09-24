@@ -87,10 +87,6 @@ export default {
       type: [String, Object],
       default: '',
     },
-    href: {
-      type: String,
-      default: '',
-    },
     type: {
       type: String,
       default: 'simple',
@@ -121,6 +117,21 @@ export default {
     },
   },
   computed: {
+    href() {
+      if (!this.to) {
+        return ''
+      }
+      if (this.to.includes('https://')) {
+        return this.to
+      }
+      if (this.to.includes('mailto:')) {
+        return this.to
+      }
+      if (this.to.includes('tel:')) {
+        return this.to
+      }
+      return ''
+    },
     tracking() {
       return {
         ...this.track,

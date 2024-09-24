@@ -9,7 +9,7 @@
     </div>
     <div class="flex justify-between px-4 mb-4 items-center">
       <div>{{ getDateTime(item.startTime) }}</div>
-      <TButton :href="item.url">Open</TButton>
+      <TButton :to="item.url">Open</TButton>
     </div>
   </div>
 </template>

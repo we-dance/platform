@@ -688,7 +688,7 @@
               <h2 class="mb-4 font-bold">
                 {{ $t('eventView.reservationPopup.finish.title') }}
               </h2>
-              <TButton class="mt-4 mr-4" type="danger" :href="item.link">{{
+              <TButton class="mt-4 mr-4" type="danger" :to="item.link">{{
                 $t('eventView.reservationPopup.finish.btn')
               }}</TButton>
             </template>

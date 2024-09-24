@@ -15,7 +15,7 @@
           icon="youtube"
           type="round"
           icon-size="6"
-          :href="profile.youtube"
+          :to="profile.youtube"
         />
         <TButton
           v-if="profile.instagram"
@@ -23,7 +23,7 @@
           icon="instagram"
           type="round"
           icon-size="6"
-          :href="profile.instagram"
+          :to="profile.instagram"
         />
         <TButton
           v-if="profile.telegram"
@@ -31,7 +31,7 @@
           icon="telegram"
           type="round"
           icon-size="6"
-          :href="profile.telegram"
+          :to="profile.telegram"
         />
         <TButton
           v-if="profile.twitter"
@@ -39,7 +39,7 @@
           icon="twitter"
           type="round"
           icon-size="6"
-          :href="profile.twitter"
+          :to="profile.twitter"
         />
         <TButton
           v-if="profile.tiktok"
@@ -47,7 +47,7 @@
           icon="tiktok"
           type="round"
           icon-size="6"
-          :href="profile.tiktok"
+          :to="profile.tiktok"
         />
         <TButton
           v-if="profile.facebook"
@@ -55,7 +55,7 @@
           icon="facebook"
           type="round"
           icon-size="6"
-          :href="profile.facebook"
+          :to="profile.facebook"
         />
       </div>
     </div>
