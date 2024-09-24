@@ -35,6 +35,7 @@ import { syncCalendar } from './lib/ical_import'
 import _ = require('lodash')
 import { getSchemaEvent } from './lib/schema_import'
 import posthog from './lib/posthog'
+import tickettailor from './lib/tickettailor'
 
 function getDomain(url: string): string {
   let hostname
@@ -1126,6 +1127,14 @@ yargs(hideBin(process.argv))
     () => undefined,
     async (argv: any) => {
       await posthog(argv.path)
+    }
+  )
+  .command(
+    'tt',
+    'Ticket Tailor',
+    () => undefined,
+    async () => {
+      await tickettailor()
     }
   )
   .help('h')

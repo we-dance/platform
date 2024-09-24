@@ -5,7 +5,7 @@
         <a :href="href" target="_blank">Click here to buy tickets</a
         ><br /><small
           ><a
-            href="https://www.tickettailor.com?rf=wdg_105946"
+            href="https://get.tickettailor.com/nlvk1iuqtis3"
             class="tt-widget-powered"
             >Sell tickets online with Ticket Tailor</a
           ></small
