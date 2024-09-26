@@ -451,7 +451,7 @@ export const useEvents = () => {
       width: 500,
       height: 250,
       circle: false,
-      when: (i) => i.coverSize == 'horizontal',
+      when: (i) => i.coverSize === 'horizontal',
     },
     {
       name: 'coverSize',
