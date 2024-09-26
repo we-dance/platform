@@ -95,11 +95,15 @@ export default {
     },
     width: {
       type: Number,
-      default: 300,
+      default: 500,
     },
     height: {
       type: Number,
-      default: 300,
+      default: 500,
+    },
+    autoSizing: {
+      type: Boolean,
+      default: false,
     },
     circle: {
       type: Boolean,

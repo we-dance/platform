@@ -49,8 +49,18 @@
             <div>
               {{ formatDate(doc.startDate, 'HH:mm') }}
               <span v-if="doc.endDate">
-                &mdash; {{ formatDate(doc.endDate, 'HH:mm') }}</span
+                &mdash;
+                <span
+                  v-if="
+                    formatDate(doc.startDate, 'iii') !=
+                      formatDate(doc.endDate, 'iii')
+                  "
+                >
+                  {{ formatDate(doc.endDate, 'iii') }}</span
+                >
+                {{ formatDate(doc.endDate, 'HH:mm') }}</span
               >
+              {{ formatDate(doc.startDate, '(z)') }}
             </div>
             <div>·</div>
             <div>

@@ -569,7 +569,7 @@ event:
   venue: Venue
   cover:
     label: Cover
-    description: Instagram post size (1024x1024px). Better use photo from the last event, show the atmosphere. Images with white background don't look good on our flyers. We will add details of your event on top of this cover to create a flyer. You can see examples of our flyers on Instagram WeDanceMunich.
+    description: Better use photo from the last event, show the atmosphere. Images with white background don't look good on our flyers. We will add details of your event on top of this cover to create a flyer. You can see examples of our flyers on Instagram WeDanceMunich.
   type: Event Format
   duration:
     label: How long?
