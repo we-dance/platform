@@ -2,6 +2,7 @@
   <TPopup
     v-if="showAuthPopup"
     :title="$t('popup.auth.title')"
+    style="z-index: 200"
     @close="showAuthPopup = false"
   >
     <div class="my-4 w-64 flex flex-col justify-center text-center">

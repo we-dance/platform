@@ -1,7 +1,7 @@
 <template>
   <div>
     <div class="flex flex-wrap text-xs text-gray-500 space-x-1">
-      <template v-if="profile.type">
+      <template v-if="!hideType && profile.type">
         <TProfileType :type="profile.type" />
         <div>·</div>
       </template>
@@ -9,10 +9,12 @@
         <TVenueType :type="profile.venueType" />
         <div>·</div>
       </template>
-      <div>
-        {{ $tc('views', profile.viewsCount, { count: profile.viewsCount }) }}
-      </div>
-      <div>·</div>
+      <template v-if="!hideViews">
+        <div>
+          {{ $tc('views', profile.viewsCount, { count: profile.viewsCount }) }}
+        </div>
+        <div>·</div>
+      </template>
       <button @click="openSubscribersPopup()">
         {{
           $tc('subscribers', subscribersCount, {
@@ -49,6 +51,14 @@ export default {
     profile: {
       type: Object,
       default: () => ({}),
+    },
+    hideType: {
+      type: Boolean,
+      default: false,
+    },
+    hideViews: {
+      type: Boolean,
+      default: false,
     },
   },
   data: () => ({

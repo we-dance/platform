@@ -15,7 +15,7 @@
         >
           {{ profile.name || profile.username }}
         </NuxtLink>
-        <div v-if="profile.role" class="text-xs">
+        <div v-if="!hideType && profile.role" class="text-xs">
           {{ getLabel(eventRoleOptions, profile.role) }}
         </div>
         <template v-if="!hideRole">
@@ -25,8 +25,13 @@
             <span v-else>Unknown</span>
           </div>
         </template>
-        <TProfileStats :profile="profile" class="pb-1" />
-        <div v-show="profile.bio" class="text-xs">
+        <TProfileStats
+          :profile="profile"
+          :hide-type="hideType"
+          :hide-views="hideViews"
+          class="pb-1"
+        />
+        <div v-show="!hideBio && profile.bio" class="text-xs">
           {{ getExcerpt(profile.bio) }}
         </div>
 
@@ -46,6 +51,7 @@
               type="primary"
               hide-count
               :item="profile"
+              title="subscribe"
               collection="profiles"
             />
             <TButton
@@ -53,6 +59,7 @@
               icon="star"
               :to="`/reviews/add?receiver=${profile.username}`"
               label="Rate"
+              title="rate"
               :track="{ event: 'rate' }"
             />
           </div>
@@ -64,7 +71,21 @@
           </div>
         </div>
       </div>
-      <slot name="right" />
+      <slot name="right">
+        <div>
+          <TReaction
+            v-if="subscribeRight"
+            field="watch"
+            type="secondary"
+            hide-count
+            title="subscribe"
+            icon="BellIcon"
+            toggled-icon="CheckIcon"
+            :item="profile"
+            collection="profiles"
+          />
+        </div>
+      </slot>
     </div>
     <slot />
     <TPreview
@@ -137,6 +158,22 @@ export default {
       default: false,
     },
     hideButtons: {
+      type: Boolean,
+      default: false,
+    },
+    hideType: {
+      type: Boolean,
+      default: false,
+    },
+    hideViews: {
+      type: Boolean,
+      default: false,
+    },
+    hideBio: {
+      type: Boolean,
+      default: false,
+    },
+    subscribeRight: {
       type: Boolean,
       default: false,
     },

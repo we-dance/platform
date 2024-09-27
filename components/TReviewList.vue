@@ -5,6 +5,7 @@
         :to="`/reviews/add?receiver=${profile.username}`"
         variant="primary"
         class="mb-4"
+        title="write a review"
         label="Write a review"
       />
     </div>

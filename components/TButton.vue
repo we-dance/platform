@@ -143,7 +143,7 @@ export default {
     },
     classes() {
       const xbase =
-        'flex justify-start items-center font-medium space-x-2 cursor-pointer outline-none focus:outline-none focus:ring-2 focus:ring-offset-2 ' +
+        'flex justify-start items-center font-medium gap-1 cursor-pointer outline-none focus:outline-none focus:ring-2 focus:ring-offset-2 ' +
         this.padding
 
       const xrounded =

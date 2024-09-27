@@ -59,7 +59,19 @@
     </TPopup>
 
     <template v-if="doc.type === 'event'">
-      <w-youtube v-if="doc.video" :url="doc.video" class="md:rounded-t-md" />
+      <WProfile
+        v-if="doc.org"
+        :username="doc.org.username"
+        :fallback="doc.org"
+        hide-role
+        hide-bio
+        hide-type
+        subscribe-right
+        hide-buttons
+        hide-views
+        class="border-none md:rounded-t-md"
+      />
+      <w-youtube v-if="doc.video" :url="doc.video" />
       <div
         v-else-if="doc.cover"
         class="relative overflow-hidden md:rounded-t-md"
@@ -368,6 +380,7 @@
               :label="
                 can('edit', 'events', doc) ? 'Post an update' : 'Ask a question'
               "
+              title="ask a question"
               @click="
                 addComment = true
                 can('edit', 'events', doc)
@@ -396,27 +409,6 @@
             About
           </h3>
           <TPreview :content="doc.description" />
-        </div>
-      </section>
-
-      <section
-        v-if="
-          doc.org &&
-            (!venueProfile || doc.org.username !== venueProfile.username)
-        "
-        id="organiser"
-        class="p-4 border-t border-primary"
-      >
-        <div class="space-y-2">
-          <h3 class="uppercase text-xs text-primary font-extrabold">
-            Organiser
-          </h3>
-          <WProfile
-            :username="doc.org.username"
-            :fallback="doc.org"
-            hide-role
-            class="border-none"
-          />
         </div>
       </section>
 
@@ -909,9 +901,14 @@ export default {
   },
   methods: {
     buyTicket() {
-      this.$track('buy_ticket_popup')
+      const enablePopup = this.$route.query.popup
 
-      this.subscribePopup = true
+      if (enablePopup) {
+        this.$track('buy_ticket_popup')
+        this.subscribePopup = true
+      } else {
+        this.buyTicketLink()
+      }
     },
     buyTicketLink() {
       if (!this.doc.link) {

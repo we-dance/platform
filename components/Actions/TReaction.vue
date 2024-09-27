@@ -1,17 +1,15 @@
 <template>
   <TButton
     :type="type"
+    class="flex gap-1"
     :class="clicked ? toggledClass : ''"
-    :title="label"
+    :title="title || label"
     :target-action="{ field, id: item.id, collection }"
     @click="toggle"
   >
     <component :is="clicked ? toggledIcon || icon : icon" class="w-4 h-4" />
-    <div class="ml-1">{{ clicked ? toggledLabel || label : label }}</div>
-    <div
-      v-if="!hideCount"
-      class="ml-1 text-xs rounded-full bg-gray-200 px-1 block"
-    >
+    <div>{{ clicked ? toggledLabel || label : label }}</div>
+    <div v-if="!hideCount" class="text-xs rounded-full bg-gray-200 px-1 block">
       {{ count }}
     </div>
   </TButton>
@@ -49,6 +47,10 @@ export default {
   },
   props: {
     label: {
+      type: String,
+      default: '',
+    },
+    title: {
       type: String,
       default: '',
     },

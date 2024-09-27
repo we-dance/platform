@@ -2,6 +2,7 @@
   <TButton
     :type="type"
     :label="isBookmarked ? toggledLabel : label"
+    :title="label"
     v-bind="$attrs"
     @click="toggleBookmark"
   >
