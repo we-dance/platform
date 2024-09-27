@@ -11,6 +11,53 @@
       :children="doc.children"
     />
 
+    <TPopup
+      v-if="subscribePopup"
+      title="Get Subscriber Rewards"
+      @close="subscribePopup = false"
+    >
+      <div class="w-64 space-y-4 py-4">
+        <div class="space-y-2">
+          <div class="flex items-start">
+            <TIcon name="ticket" class="h-6 w-6 text-black mr-2 mt-1" />
+            <div>
+              <h3 class="font-semibold text-base">Discounts</h3>
+              <p class="text-sm text-gray-600">
+                Get special discounts on future events
+              </p>
+            </div>
+          </div>
+          <div class="flex items-start">
+            <TIcon name="bell" class="h-6 w-6 text-black mr-2 mt-1" />
+            <div>
+              <h3 class="font-semibold text-base">Stay Updated</h3>
+              <p class="text-sm text-gray-600">
+                Receive notifications about upcoming events
+              </p>
+            </div>
+          </div>
+          <div class="flex items-start">
+            <TIcon name="group" class="h-6 w-6 text-black mr-2 mt-1" />
+            <div>
+              <h3 class="font-semibold text-base">Connect with Friends</h3>
+              <p class="text-sm text-gray-600">
+                See which of your friends are attending and make plans together
+              </p>
+            </div>
+          </div>
+        </div>
+        <div class="space-y-2">
+          <TButton label="Subscribe" type="primary" class="w-full" />
+          <TButton
+            allow-guests
+            label="Buy ticket as guest"
+            class="w-full"
+            @click="buyTicketLink()"
+          />
+        </div>
+      </div>
+    </TPopup>
+
     <template v-if="doc.type === 'event'">
       <w-youtube v-if="doc.video" :url="doc.video" class="md:rounded-t-md" />
       <div
@@ -781,6 +828,7 @@ export default {
     agenda: {},
     venueProfile: null,
     addComment: false,
+    subscribePopup: false,
   }),
   computed: {
     eventLimit() {
@@ -861,11 +909,16 @@ export default {
   },
   methods: {
     buyTicket() {
-      this.$track('buy_ticket')
+      this.$track('buy_ticket_popup')
 
+      this.subscribePopup = true
+    },
+    buyTicketLink() {
       if (!this.doc.link) {
         return
       }
+
+      this.$track('buy_ticket_link')
 
       let url = this.doc.link
       const session = ls('session')
