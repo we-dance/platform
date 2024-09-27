@@ -50,7 +50,9 @@
         }}
       </div>
       <div v-if="item.viewsCount" class="text-xs text-gray-700">
-        {{ $tc('guests', guestCount, { count: guestCount }) }} ·
+        <template v-if="!item.link"
+          >{{ $tc('guests', guestCount, { count: guestCount }) }} ·</template
+        >
         {{ $tc('views', item.viewsCount, { count: item.viewsCount }) }} ·
         {{ item.price }}
       </div>

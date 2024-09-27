@@ -62,10 +62,12 @@
               >
               {{ formatDate(doc.startDate, '(z)') }}
             </div>
-            <div>·</div>
-            <div>
-              {{ $tc('guests', guestCount, { count: guestCount }) }}
-            </div>
+            <template v-if="!doc.link">
+              <div>·</div>
+              <div>
+                {{ $tc('guests', guestCount, { count: guestCount }) }}
+              </div>
+            </template>
             <div>·</div>
             <div>
               {{ $tc('views', doc.viewsCount, { count: doc.viewsCount }) }}
