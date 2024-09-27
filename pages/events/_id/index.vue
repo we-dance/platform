@@ -12,7 +12,11 @@
     />
 
     <template v-if="doc.type === 'event'">
-      <div v-if="doc.cover" class="relative overflow-hidden rounded-t-md">
+      <w-youtube v-if="doc.video" :url="doc.video" class="md:rounded-t-md" />
+      <div
+        v-else-if="doc.cover"
+        class="relative overflow-hidden md:rounded-t-md"
+      >
         <img :src="doc.cover" :alt="doc.name" class="w-full" />
       </div>
       <div class="p-4 flex gap-2 border-b border-t">

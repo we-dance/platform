@@ -430,6 +430,27 @@ export const useEvents = () => {
       max: 280,
     },
     {
+      name: 'video',
+      labelPosition: 'top',
+      placeholder: 'Youtube Link',
+      description: '',
+      label: 'Video Cover',
+      validate(value, item) {
+        if (!value) {
+          return true
+        }
+
+        try {
+          // eslint-disable-next-line no-new
+          new URL(value)
+          return true
+        } catch (err) {
+          return false
+        }
+      },
+      validationError: 'Please enter a valid URL',
+    },
+    {
       name: 'cover',
       label: t('event.cover.label'),
       description: '1024x1024',
