@@ -99,7 +99,11 @@ export async function syncCalendar(calendarRef: DocumentSnapshot) {
     }
 
     let isNew = false
-    if (!calendar?.events?.find((e: any) => e.providerItemId === vevent.uid)) {
+    const existingEvent = calendar?.events?.find(
+      (e: any) => e.providerItemId === vevent.uid
+    )
+
+    if (!existingEvent) {
       isNew = true
       newCount++
     }
@@ -161,6 +165,8 @@ export async function syncCalendar(calendarRef: DocumentSnapshot) {
         const newDocRef = await firestore.collection('posts').add(event)
         event.eventId = newDocRef.id
       }
+    } else {
+      event.eventId = existingEvent?.eventId || ''
     }
 
     events.push(event)
@@ -169,16 +175,33 @@ export async function syncCalendar(calendarRef: DocumentSnapshot) {
   const upcomingCount = events.length
   const state = 'processed'
 
-  await calendarRef.ref.update({
+  const filteredEvents = events.map((event) => {
+    return {
+      providerItemId: event.providerItemId,
+      name: event.name,
+      description: event.approved ? '' : event.description,
+      startDate: event.startDate,
+      endDate: event.endDate,
+      approved: event.approved,
+      type: event.type,
+      eventId: event.eventId,
+      facebookId: event.facebookId,
+      sourceUrl: event.sourceUrl,
+    }
+  })
+
+  const data = {
     name,
     state,
     lastSyncedAt: now,
-    events,
+    events: filteredEvents,
     upcomingCount,
     approvedCount,
     newCount,
     pastCount,
     totalCount,
     url,
-  })
+  }
+
+  await calendarRef.ref.update(data)
 }
