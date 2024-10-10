@@ -28,6 +28,8 @@ export const getAddress = (places) => {
     return {}
   }
 
+  console.log('places', places)
+
   const place = places.find((p) => p.types.includes('locality')) || places[0]
 
   const result = {}
@@ -85,13 +87,6 @@ export const getLocality = async ({ placeId }) => {
   }
 
   let results = await getGeoCode({ placeId })
-
-  if (!results.find((p) => p.types.includes('locality')).length) {
-    const address = getAddress(results)
-    results = await getGeoCode({
-      address: `${address.locality}, ${address.country}`,
-    })
-  }
 
   return getAddress(results)
 }
