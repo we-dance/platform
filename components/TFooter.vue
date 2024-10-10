@@ -34,9 +34,15 @@
       </NuxtLink>
       <NuxtLink
         class="hover:underline"
-        :to="localePath('/posts')"
+        :to="localePath('/blog')"
         @click.native="$track('footer', { action: 'blog' })"
         >Blog</NuxtLink
+      >
+      <NuxtLink
+        class="hover:underline"
+        :to="localePath('/posts')"
+        @click.native="$track('footer', { action: 'posts' })"
+        >Posts</NuxtLink
       >
       <NuxtLink
         class="hover:underline"

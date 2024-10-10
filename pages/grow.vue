@@ -14,7 +14,7 @@
       <div class="flex flex-col sm:flex-row justify-center py-4 gap-4">
         <TButton
           type="primary"
-          href="https://calendly.com/razbakov/grow-your-dance-school/"
+          to="https://calendly.com/razbakov/grow-your-dance-school/"
           >Schedule Free Call</TButton
         >
         <TButton type="tertiery" to="/organize">Boost Your Event</TButton>
@@ -59,74 +59,6 @@
               school's online presence.
             </li>
           </ul>
-        </div>
-      </section>
-      <section class="mt-16 border-t border-primary">
-        <h3 class="uppercase text-xs text-primary font-extrabold py-4">
-          Personalized SEO Consultation
-        </h3>
-        <div class="flex gap-4 items-start mb-4">
-          <div>
-            <SearchCircleIcon class="mt-1 text-primary w-6" />
-          </div>
-          <div>
-            <div class="text-lg font-bold">
-              Unlock SEO Secrets
-            </div>
-            <div class="text-sm text-gray-700 typo">
-              <p>
-                Improve your search engine ranking with one-on-one
-                consultations. Our experts analyze your current strategy and
-                provide actionable insights to boost your online presence.
-              </p>
-              <p>
-                Want to see the magic in action? Experience a detailed,
-                user-friendly audit by our Custom Chat-GPT service
-                <a
-                  target="_blank"
-                  href="https://chatgpt.com/g/g-G5npqOMZ7-dance-website-auditor"
-                  >Dance Website Auditor</a
-                >.
-              </p>
-            </div>
-          </div>
-        </div>
-      </section>
-      <section class="mt-16 border-t border-primary">
-        <h3 class="uppercase text-xs text-primary font-extrabold py-4">
-          Exclusive Video Content
-        </h3>
-        <div class="flex gap-4 items-start mb-4">
-          <div>
-            <GiftIcon class="mt-1 text-primary w-6" />
-          </div>
-          <div>
-            <div class="text-lg font-bold">Engaging and Educational Videos</div>
-            <div class="text-sm text-gray-700 typo">
-              Subscribe to our
-              <a
-                target="_blank"
-                href="https://www.youtube.com/channel/UC2mobjHVt1AxUDTTh9f3iMg"
-                >YouTube channel</a
-              >
-              for essential strategies, practical advice, and reviews of top
-              marketing tools. Learn key techniques to dominate online search
-              and enhance your marketing efforts.
-            </div>
-          </div>
-        </div>
-      </section>
-      <section class="mt-16">
-        <div class="text-center text-lg text-gray-700">
-          Ready to elevate your dance school? Join our community of successful
-          dance school owners. Get started with a consultation today.
-        </div>
-        <div class="flex justify-center py-4">
-          <TButton
-            type="primary"
-            to="https://calendly.com/razbakov/grow-your-dance-school/"
-            >Schedule Free Call</TButton
-          >
         </div>
       </section>
     </div>
