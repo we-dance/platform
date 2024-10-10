@@ -86,7 +86,7 @@ export const getLocality = async ({ placeId }) => {
     return {}
   }
 
-  let results = await getGeoCode({ placeId })
+  const results = await getGeoCode({ placeId })
 
   return getAddress(results)
 }

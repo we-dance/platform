@@ -38,6 +38,9 @@ export default {
       pages,
     }
   },
+  methods: {
+    getDateTimeYear,
+  },
   head() {
     return {
       title: 'Blog',
@@ -65,9 +68,6 @@ export default {
         },
       ],
     }
-  },
-  methods: {
-    getDateTimeYear,
   },
 }
 </script>

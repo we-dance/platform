@@ -67,14 +67,8 @@
 </template>
 
 <script>
-import { SearchCircleIcon, GiftIcon } from '@vue-hero-icons/outline'
-
 export default {
   layout: 'full',
-  components: {
-    SearchCircleIcon,
-    GiftIcon,
-  },
 }
 </script>
 

@@ -54,6 +54,9 @@ export default {
       page,
     }
   },
+  methods: {
+    getDateTimeYear,
+  },
   head() {
     const page = this.page
 
@@ -83,9 +86,6 @@ export default {
         },
       ],
     }
-  },
-  methods: {
-    getDateTimeYear,
   },
 }
 </script>
