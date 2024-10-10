@@ -36,6 +36,7 @@ import _ = require('lodash')
 import { getSchemaEvent } from './lib/schema_import'
 import posthog from './lib/posthog'
 import tickettailor from './lib/tickettailor'
+import { goandance } from './lib/goandance'
 
 function getDomain(url: string): string {
   let hostname
@@ -1135,6 +1136,14 @@ yargs(hideBin(process.argv))
     () => undefined,
     async () => {
       await tickettailor()
+    }
+  )
+  .command(
+    'goandance',
+    'Import events from goandance.com',
+    () => undefined,
+    async () => {
+      await goandance()
     }
   )
   .help('h')
