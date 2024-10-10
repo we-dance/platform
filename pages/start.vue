@@ -37,7 +37,7 @@
           :title="$t('home.features.travel.title')"
           :description="$t('home.features.travel.description')"
           :button="$t('home.features.travel.action')"
-          :url="localePath('/where-can-i-dance')"
+          :url="localePath('/')"
           button-action="where-can-i-dance"
         />
         <LandingFeature

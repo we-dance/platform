@@ -24,7 +24,7 @@
         :tabs="[
           {
             name: 'Overview',
-            to: localePath(`/`),
+            to: localePath(`/explore/global`),
             current: view === 'groups',
             hidden: !global,
             value: 'overview',
@@ -45,7 +45,7 @@
           },
           {
             name: $t('explore.nav.festivals'),
-            to: localePath(`/explore/${slug}`),
+            to: localePath(`/explore/${slug}/festivals`),
             current: view === 'festivals',
             hidden: !global,
             value: 'festivals',

@@ -21,7 +21,7 @@
 
     <TButton
       allow-guests
-      :to="localePath('/')"
+      :to="localePath('/explore/global')"
       icon="trending"
       :label="$t('nav.global')"
       type="nav"

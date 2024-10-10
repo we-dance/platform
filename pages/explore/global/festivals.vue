@@ -1,5 +1,9 @@
 <template>
-  <TCityGroups :city="profile" global />
+  <div>
+    <TCityHeader :profile="profile" view="festivals" global />
+
+    <TFestivals :profile="profile" />
+  </div>
 </template>
 
 <script>
