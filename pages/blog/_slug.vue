@@ -1,9 +1,15 @@
 <template>
-  <div class="p-4">
+  <div>
+    <img
+      v-if="page.image"
+      :src="page.image"
+      :alt="page.title"
+      class="w-full rounded-t"
+    />
     <div>
-      <h1 class="text-center text-3xl font-bold">{{ page.title }}</h1>
+      <h1 class="text-center text-3xl font-bold mx-4 mt-4">{{ page.title }}</h1>
       <div class="flex justify-end">
-        <div class="gap-2 my-2 bg-gray-100 p-2 rounded-lg text-sm">
+        <div class="gap-2 my-2 mr-4 p-2 rounded-lg text-sm italic">
           <p v-if="page.author">
             Written by
             <NuxtLink
@@ -17,7 +23,7 @@
         </div>
       </div>
     </div>
-    <nuxt-content :document="page" class="typo" />
+    <nuxt-content :document="page" class="typo mx-4" />
     <LandingFeature
       v-if="page.cta"
       :title="page.cta.title"
