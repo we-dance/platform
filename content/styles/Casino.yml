@@ -1,12 +1,22 @@
 id: Casino
-name: Casino (Salsa Cubana)
+name: Casino
 video: https://www.youtube.com/watch?v=R7E9cNydevg
-synonyms: Casino, Son Casino, Cuban Salsa
+synonyms: Cuban Salsa, Salsa Cubana
 regexp: timba, salsa cubana, cuban salsa
 popular: true
 popularity: 2
-description: ''
-history: The Cuban danzón of the 1890s was refashioned into the Cuban son of the 1920s by the incorporation of more Afro-Cuban dance elements—such as hip isolation, the tornillo (a man’s pivot on a single foot as he fully flexes the support leg)—and the discarding the descanso. The mambo was made popular by the Cuban musician Pérez Prado and developed in the 1940s as a marriage between son and swing. The cha-cha-chá replaced the mambo in the 1950s as a spin-off from the son characterized by the rhythmic pattern marked by the feet and counted “1, 2, 3, 4-and-1.” In the 1980s the son casino burst onto Havana dance floors and took over beach parking lots. Casino was faster in pace and was characterized by multiple turning figures. It is clearly related to New York salsa, though sources vary on which dance was a response to the other. Casino rueda developed from casino and placed couples in a circle; typically, the dance’s choreographies moved the women counterclockwise and the men clockwise as they switched partners.
+description: Lively and rhythmic dance style originating from Cuba. It's typically danced in pairs but can also be performed in groups, known as "Rueda de Casino," where couples form a circle and execute synchronized moves based on a leader's calls. The style is fluid and playful, incorporating intricate partner work, dynamic footwork, and a strong connection to Afro-Cuban music and traditions.
+history: >
+  In the 1890s, Cuban danzón evolved into Cuban son in the 1920s by incorporating Afro-Cuban dance elements like hip isolation and the tornillo—a pivot on one foot with a bent leg—while dropping the descanso.
+
+
+  The mambo, popularized by Cuban musician Pérez Prado in the 1940s, emerged as a blend of son and swing. In the 1950s, the cha-cha-chá replaced the mambo, characterized by its rhythmic "1, 2, 3, 4-and-1" pattern marked by the feet.
+
+
+  By the 1980s, son casino took over Havana’s dance floors with its faster pace and intricate turning figures. It shares similarities with New York salsa, though it’s unclear which inspired the other.
+
+
+  Casino rueda later developed from casino, placing couples in a circle. In this style, women typically moved counterclockwise, men clockwise, and partners were swapped in synchronized choreographies.
 origins: Cuba
 adjectives: ''
 type: Social dance
@@ -24,3 +34,60 @@ group: ''
 related: ''
 music: Timba, Songo, Changüí, Son, Mambo, Cha-cha-chá
 timing: ''
+videos:
+  - artists:
+      - username: 'alocubanolisandra'
+        name: 'Lisandra Garcia'
+        role: 'Follower'
+    url: 'https://www.youtube.com/watch?v=R7E9cNydevg'
+
+  - artists:
+      - username: 'maykel_fonts'
+        name: 'Maykel Fonts'
+        role: 'Leader'
+      - username: 'indiramora_cueto_'
+        name: 'Indira Mora Cueto'
+        role: 'Follower'
+    url: 'https://www.youtube.com/watch?v=6ZTgUsJt5z8'
+    event:
+      name: 'Croatian Summer Salsa Festival'
+      year: 2023
+    location:
+      city: 'Rovinj'
+      country: 'Croatia'
+    videographer:
+      username: 'SocialDanceTV'
+      name: 'Social Dance TV'
+
+  - url: 'https://www.youtube.com/watch?v=UCABDb16JcM'
+    artists:
+      - username: 'seofernandez_official'
+        name: 'Seo Fernandez'
+        role: 'Leader'
+      - username: 'enerismulgado'
+        name: 'Eneris Mulgado Veitia'
+        role: 'Follower'
+    event:
+      name: 'Festival de Cuba'
+      year: 2023
+    location:
+      city: 'Stuttgart'
+      country: 'Germany'
+    videographer:
+      username: 'Cuban-Salsa-Hiro'
+      name: 'Cuban Salsa HIRO'
+
+  - url: 'https://www.youtube.com/watch?v=j3sJ0D-1lnA'
+    artists:
+      - username: 'osbanis_deakocan'
+        name: 'Osbanis'
+        role: 'Leader'
+      - username: 'anneta_deakocan'
+        name: 'Anneta'
+        role: 'Follower'
+
+  - url: 'https://www.youtube.com/watch?v=O_r4WGC4GEw'
+    artists:
+      - username: 'wilmerymariaofficial'
+        name: 'Wilmer y Maria'
+        role: 'Couple'
