@@ -18,7 +18,7 @@ async function getFacebookEvents(): Promise<string[]> {
         
         for (const event of events) {
             const facebookUrl = event.querySelector('a.outbound.festivals.quicklink.event')?.getAttribute('href')
-            if (!facebookUrl) {
+            if (!facebookUrl?.includes('facebook.com/events/')) {
                 continue
             }
             const url = event.querySelector('a.inbound.festivals.link.url.summary')?.getAttribute('href')
