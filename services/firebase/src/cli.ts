@@ -38,6 +38,7 @@ import posthog from './lib/posthog'
 import tickettailor from './lib/tickettailor'
 import { goandance } from './lib/goandance'
 import { latindancecalendar } from './lib/latindancecalendar'
+import { duplicates } from './lib/duplicates'
 
 function getDomain(url: string): string {
   let hostname
@@ -1153,6 +1154,15 @@ yargs(hideBin(process.argv))
     () => undefined,
     async () => {
       await latindancecalendar()
+    }
+  )
+
+  .command(
+    'duplicates',
+    'Find duplicate events',
+    () => undefined,
+    async () => {
+      await duplicates()
     }
   )
   .help('h')
