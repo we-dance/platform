@@ -37,6 +37,7 @@ import { getSchemaEvent } from './lib/schema_import'
 import posthog from './lib/posthog'
 import tickettailor from './lib/tickettailor'
 import { goandance } from './lib/goandance'
+import { latindancecalendar } from './lib/latindancecalendar'
 
 function getDomain(url: string): string {
   let hostname
@@ -1144,6 +1145,14 @@ yargs(hideBin(process.argv))
     () => undefined,
     async () => {
       await goandance()
+    }
+  )
+  .command(
+    'lat',
+    'Import events from latindancecalendar.com',
+    () => undefined,
+    async () => {
+      await latindancecalendar()
     }
   )
   .help('h')
