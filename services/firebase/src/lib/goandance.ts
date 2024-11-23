@@ -1,4 +1,3 @@
-// @ts-nocheck
 import { getPage } from './browser'
 import { parse, isAfter, addYears, differenceInMonths } from 'date-fns'
 import { es } from 'date-fns/locale'
@@ -13,7 +12,7 @@ require('dotenv').config()
 
 const email = String(process.env.GOANDANCE_EMAIL)
 const pass = String(process.env.GOANDANCE_PASSWORD)
-const cachePath = '/Users/razbakov/WeDance/goandance'
+const cachePath = String(process.env.GOANDANCE_CACHE)
 let _page: any = null
 
 const turndownService = new TurndownService()
@@ -41,7 +40,7 @@ export async function goandance() {
   }))
 
   const filteredEvents = events.filter(
-    (event) => !existingEvents.find((e) => e.providerItemId === event.id)
+    (event) => !existingEvents.find((e: any) => e.providerItemId === event.id)
   )
 
   console.log(
@@ -623,7 +622,7 @@ async function getOrg(organizer: any, place: any) {
   return org
 }
 
-function setCache(name, result) {
+function setCache(name: string, result: any) {
   try {
     const fs = require('fs')
     const path = require('path')
@@ -636,7 +635,7 @@ function setCache(name, result) {
   }
 }
 
-function getCache(name) {
+function getCache(name: string) {
   try {
     const fs = require('fs')
     const path = require('path')
