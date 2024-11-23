@@ -39,6 +39,7 @@ import tickettailor from './lib/tickettailor'
 import { goandance } from './lib/goandance'
 import { latindancecalendar } from './lib/latindancecalendar'
 import { duplicates } from './lib/duplicates'
+import { restoreEvent } from './lib/restore'
 
 function getDomain(url: string): string {
   let hostname
@@ -1130,6 +1131,14 @@ yargs(hideBin(process.argv))
     () => undefined,
     async (argv: any) => {
       await posthog(argv.path)
+    }
+  )
+  .command(
+    'restore <eventId>',
+    'Restore event from backup',
+    () => undefined,
+    async (argv: any) => {
+      await restoreEvent(argv.eventId)
     }
   )
   .command(
