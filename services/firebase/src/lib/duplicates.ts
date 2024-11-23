@@ -1,5 +1,6 @@
 import 'dotenv/config'
 import { readFiles } from '../utils/filesystem'
+import { firestore } from '../firebase'
 
 function levenshteinDistance(str1: string, str2: string): number {
   const m = str1.length
@@ -68,14 +69,40 @@ export async function duplicates() {
 
   for (const [hash, events] of duplicates) {
     const similarity = getSimilarity(events[0].name, events[1].name)
-    // if (similarity < 0.5 || similarity === 1) {
-    if (similarity < 1) {
+    if (similarity > 0.52) {
+      // if (similarity < 0.52 || similarity === 1) {
+      // if (similarity < 1) {
       continue
     }
 
     console.log('\nHash:', hash, similarity)
 
-    for (const event of events) {
+    let sortedEvents = events
+      .sort((a, b) => {
+        // Sort goandance events first
+        if (a.provider === 'goandance' && b.provider !== 'goandance') return -1
+        if (b.provider === 'goandance' && a.provider !== 'goandance') return 1
+
+        // Sort events without "promo" in name first
+        if (
+          !a.name.toLowerCase().includes('promo') &&
+          b.name.toLowerCase().includes('promo')
+        )
+          return -1
+        if (
+          !b.name.toLowerCase().includes('promo') &&
+          a.name.toLowerCase().includes('promo')
+        )
+          return 1
+
+        // Then sort by createdAt date
+        return a.createdAt - b.createdAt
+      })
+      .map((e: any) => ({ ...e, delete: true }))
+
+    sortedEvents[0].delete = false
+
+    for (const event of sortedEvents) {
       const startDate = new Date(event.startDate).toLocaleDateString('en-US', {
         year: 'numeric',
         month: 'short',
@@ -83,7 +110,31 @@ export async function duplicates() {
         hour: 'numeric',
         minute: 'numeric',
       })
-      console.log('-', event.id, '|', event.name, '|', startDate)
+      const createdAt = new Date(event.createdAt).toLocaleDateString('en-US', {
+        year: 'numeric',
+        month: 'short',
+        day: 'numeric',
+        hour: 'numeric',
+        minute: 'numeric',
+      })
+      console.log(
+        event.delete ? '[x]' : '[ ]',
+        event.id,
+        '|',
+        event.name,
+        '|',
+        startDate,
+        '|',
+        createdAt,
+        '|',
+        event.provider
+      )
+      if (event.delete && false) {
+        await firestore
+          .collection('posts')
+          .doc(event.id)
+          .delete()
+      }
     }
   }
 
