@@ -52,15 +52,13 @@
             v-if="!premium"
             class="flex flex-col justify-center items-center"
           >
+            €20
             <TButton
               class="my-2 no-underline"
               variant="primary"
               @click="unlockAll()"
-              >Subscribe</TButton
+              >Buy Now</TButton
             >
-            <div class="text-xs">
-              €20/month • Unsuscribe anytime
-            </div>
           </div>
           <div v-if="premium" class="flex flex-col justify-center items-center">
             You have Premium Account.
@@ -217,10 +215,14 @@
 <script>
 import '@mux/mux-player'
 import { HeartIcon } from '@vue-hero-icons/outline'
+import { loadDoc } from '~/utils'
 
 export default {
-  name: 'MuxDemo',
+  name: 'CourseView',
   layout: 'full',
+  async asyncData(ctx) {
+    return await loadDoc(ctx, 'courses')
+  },
   components: {
     HeartIcon,
   },
