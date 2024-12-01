@@ -119,6 +119,10 @@ export const getYmd = (val, locale) => {
   return formatDate(val, 'yyyy-MM-dd', locale)
 }
 
+export const getShortDate = (val, locale) => {
+  return formatDate(val, 'dd.MM', locale)
+}
+
 export const getDate = (val, locale) => {
   return formatDate(val, 'd MMM', locale)
 }
