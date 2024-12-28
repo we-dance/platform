@@ -10,116 +10,116 @@
       </div>
     </div>
 
-    <TExpand>
-      <div class="p-4 border-b">
-        <dl class="grid grid-cols-3 gap-1 mt-4 min-w-full">
-          <div class="col-span-2 border rounded px-3 py-2">
-            <dt
-              class="text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
-            >
-              Music
-            </dt>
-            <dd class="text-sm text-gray-900">
-              {{ page.music }}
-            </dd>
-          </div>
+    <WYoutube v-if="page.video" :url="page.video" />
 
-          <div class="border rounded px-3 py-2">
-            <dt
-              class="text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
-            >
-              Type
-            </dt>
-            <dd class="text-sm text-gray-900">
-              {{ page.type }}
-            </dd>
-          </div>
+    <div class="p-4 border-b">
+      <dl class="grid grid-cols-3 gap-1 mt-4 min-w-full">
+        <div class="col-span-2 border rounded px-3 py-2">
+          <dt
+            class="text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
+          >
+            Music
+          </dt>
+          <dd class="text-sm text-gray-900">
+            {{ page.music }}
+          </dd>
+        </div>
 
-          <div class="border rounded px-3 py-2">
-            <dt
-              class="text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
-            >
-              Region
-            </dt>
-            <dd class="text-sm text-gray-900">
-              {{ page.region }}
-            </dd>
-          </div>
+        <div class="border rounded px-3 py-2">
+          <dt
+            class="text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
+          >
+            Type
+          </dt>
+          <dd class="text-sm text-gray-900">
+            {{ page.type }}
+          </dd>
+        </div>
 
-          <div class="border rounded px-3 py-2">
-            <dt
-              class="text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
-            >
-              Origins
-            </dt>
-            <dd class="text-sm text-gray-900">
-              {{ page.origins }}
-            </dd>
-          </div>
+        <div class="border rounded px-3 py-2">
+          <dt
+            class="text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
+          >
+            Region
+          </dt>
+          <dd class="text-sm text-gray-900">
+            {{ page.region }}
+          </dd>
+        </div>
 
-          <div class="border rounded px-3 py-2">
-            <dt
-              class="text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
-            >
-              Parent
-            </dt>
-            <dd class="text-sm text-gray-900">
-              {{ page.parent }}
-            </dd>
-          </div>
+        <div class="border rounded px-3 py-2">
+          <dt
+            class="text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
+          >
+            Origins
+          </dt>
+          <dd class="text-sm text-gray-900">
+            {{ page.origins }}
+          </dd>
+        </div>
 
-          <div class="border rounded px-3 py-2">
-            <dt
-              class="text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
-            >
-              Year
-            </dt>
-            <dd class="text-sm text-gray-900">
-              {{ page.year }}
-            </dd>
-          </div>
-        </dl>
+        <div class="border rounded px-3 py-2">
+          <dt
+            class="text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
+          >
+            Parent
+          </dt>
+          <dd class="text-sm text-gray-900">
+            {{ page.parent }}
+          </dd>
+        </div>
 
-        <TPreview
-          v-if="page.description"
-          :content="page.description"
-          class="mt-4"
-        />
+        <div class="border rounded px-3 py-2">
+          <dt
+            class="text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
+          >
+            Year
+          </dt>
+          <dd class="text-sm text-gray-900">
+            {{ page.year }}
+          </dd>
+        </div>
+      </dl>
 
-        <div v-if="page.history" class="mt-4 bg-gray-100 p-4 rounded">
-          <h3 class="uppercase text-xs font-bold">History</h3>
-          <TPreview v-if="page.history" :content="page.history" />
-          <a
-            v-if="page.source"
-            target="_blank"
-            :href="page.source"
-            class="text-xs underline text-right"
-            >Source</a
+      <TPreview
+        v-if="page.description"
+        :content="page.description"
+        class="mt-4"
+      />
+
+      <div v-if="page.history" class="mt-4 bg-gray-100 p-4 rounded">
+        <h3 class="uppercase text-xs font-bold">History</h3>
+        <TPreview v-if="page.history" :content="page.history" />
+        <a
+          v-if="page.source"
+          target="_blank"
+          :href="page.source"
+          class="text-xs underline text-right"
+          >Source</a
+        >
+      </div>
+
+      <div class="text-xs mt-4">
+        <div>
+          <span class="font-bold">Family</span>
+          <span class="leading-loose">
+            <NuxtLink :to="localePath(`/dance/${page.family}`)">{{
+              page.family
+            }}</NuxtLink></span
           >
         </div>
 
-        <div class="text-xs mt-4">
-          <div>
-            <span class="font-bold">Family</span>
-            <span class="leading-loose">
-              <NuxtLink :to="localePath(`/dance/${page.family}`)">{{
-                page.family
-              }}</NuxtLink></span
-            >
-          </div>
-
-          <div>
-            <span class="font-bold">Related</span>
-            <span v-for="style in related" :key="style.name" class="p-1">
-              <NuxtLink :to="localePath(`/dance/${style.id}`)">{{
-                style.name
-              }}</NuxtLink
-              >{{ ' ' }}
-            </span>
-          </div>
+        <div>
+          <span class="font-bold">Related</span>
+          <span v-for="style in related" :key="style.name" class="p-1">
+            <NuxtLink :to="localePath(`/dance/${style.id}`)">{{
+              style.name
+            }}</NuxtLink
+            >{{ ' ' }}
+          </span>
         </div>
       </div>
-    </TExpand>
+    </div>
 
     <div class="border-b border-t p-4">
       <form class="flex flex-col gap-4 w-full" @submit.prevent="saveItem">
