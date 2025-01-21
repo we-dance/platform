@@ -40,12 +40,6 @@
       >
       <NuxtLink
         class="hover:underline"
-        :to="localePath('/posts')"
-        @click.native="$track('footer', { action: 'posts' })"
-        >Posts</NuxtLink
-      >
-      <NuxtLink
-        class="hover:underline"
         :to="localePath('/get-involved')"
         @click.native="$track('footer', { action: 'get-involved' })"
       >

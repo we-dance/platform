@@ -13,19 +13,11 @@
 
     <TButton
       allow-guests
-      :to="localePath('/start')"
-      label="Start Here"
+      :to="localePath('/posts')"
+      icon="news"
+      label="Feed"
       type="nav"
-      :track="{ event: 'main_menu', action: 'start' }"
-    />
-
-    <TButton
-      allow-guests
-      :to="localePath('/explore/global')"
-      icon="trending"
-      :label="$t('nav.global')"
-      type="nav"
-      :track="{ event: 'main_menu', action: 'global' }"
+      :track="{ event: 'main_menu', action: 'feed' }"
     />
 
     <TButton

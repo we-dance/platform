@@ -23,38 +23,38 @@
         :track="global ? 'global' : 'city'"
         :tabs="[
           {
-            name: 'Overview',
-            to: localePath(`/explore/global`),
-            current: view === 'groups',
-            hidden: !global,
-            value: 'overview',
-          },
-          {
-            name: 'Overview',
-            to: localePath(`/explore/${slug}`),
-            current: view === 'groups',
-            hidden: global,
-            value: 'overview',
-          },
-          {
-            name: $t('explore.nav.parties'),
-            to: localePath(`/explore/${slug}/parties`),
-            current: view === 'parties',
-            hidden: global,
-            value: 'parties',
-          },
-          {
             name: $t('explore.nav.festivals'),
-            to: localePath(`/explore/${slug}/festivals`),
+            to: localePath(`/`),
             current: view === 'festivals',
             hidden: !global,
             value: 'festivals',
+          },
+          {
+            name: $t('explore.nav.parties'),
+            to: localePath(`/explore/${slug}/`),
+            current: view === 'parties',
+            hidden: global,
+            value: 'parties',
           },
           {
             name: global ? $t('explore.nav.online') : $t('explore.nav.classes'),
             to: localePath(`/explore/${slug}/classes`),
             current: view === 'classes',
             value: 'classes',
+          },
+          {
+            name: 'Groups',
+            to: localePath(`/explore/global/groups`),
+            current: view === 'groups',
+            hidden: !global,
+            value: 'groups',
+          },
+          {
+            name: 'Groups',
+            to: localePath(`/explore/${slug}/groups`),
+            current: view === 'groups',
+            hidden: global,
+            value: 'groups',
           },
           {
             name: global ? $t('explore.nav.experts') : $t('explore.nav.tips'),
