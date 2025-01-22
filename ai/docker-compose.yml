@@ -1,5 +1,5 @@
 services:
-  ai-secretary:
+  wedance-bot:
     build: .
     volumes:
       - ../:/usr/src/app/
@@ -7,8 +7,8 @@ services:
       - .env
     restart: unless-stopped
     networks:
-      - secretary-ai-network
-  ai-secretary-dev:
+      - wedance-bot-network
+  wedance-bot-dev:
     build:
       context: .
       dockerfile: Dockerfile.dev
@@ -17,8 +17,8 @@ services:
     env_file:
       - .env
     networks:
-      - secretary-ai-network
+      - wedance-bot-network
     command: npm run dev
 networks:
-  secretary-ai-network:
+  wedance-bot-network:
     driver: bridge

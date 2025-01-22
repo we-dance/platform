@@ -7,7 +7,8 @@
     "bot": "ts-node --compilerOptions '{\"target\":\"es2018\"}' scripts/bot.ts",
     "ask": "ts-node scripts/ask.ts",
     "dev": "nodemon --config nodemon.json scripts/bot.ts",
-    "dev:ask": "nodemon --config nodemon.json scripts/ask.ts"
+    "dev:ask": "nodemon --config nodemon.json scripts/ask.ts",
+    "cli": "ts-node scripts/cli.ts"
   },
   "keywords": [],
   "author": "",
@@ -20,6 +21,7 @@
     "@types/node": "^20.10.6",
     "@types/node-fetch": "^2.6.11",
     "@types/yaml": "^1.9.7",
+    "algoliasearch": "^4.8.6",
     "dotenv": "^16.3.1",
     "glob": "^10.3.10",
     "googleapis": "^105.0.0",
