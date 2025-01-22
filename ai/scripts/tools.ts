@@ -23,6 +23,66 @@ export interface Tool {
 }
 
 export const tools: { [key: string]: Tool } = {
+  search_profiles: {
+    name: 'search_profiles',
+    progress: (input: { city: string }) =>
+      `Searching profiles in ${input.city}...`,
+    description:
+      'Search for dance profiles in a specific city. Returns dancers, teachers, and organizers.',
+    input_schema: {
+      type: 'object',
+      properties: {
+        city: {
+          type: 'string',
+          description: 'City name to search profiles in',
+        },
+      },
+      required: ['city'],
+    },
+    execute: async ({ city }: { city: string }) => {
+      try {
+        // First find the city profile to get coordinates
+        const { hits: cityProfiles } = await profilesIndex.search(city, {
+          filters: 'type:City',
+          hitsPerPage: 1,
+        })
+
+        const searchParams: any = {
+          query: '',
+          facets: ['type', 'styles', 'roles', 'languages'],
+          hitsPerPage: 20,
+          page: 0,
+        }
+
+        const cityProfile = cityProfiles[0] as CityProfile
+        if (cityProfile?._geoloc) {
+          const { lat, lng } = cityProfile._geoloc
+          searchParams.aroundLatLng = `${lat}, ${lng}`
+          searchParams.aroundRadius = 50000
+        }
+
+        const { hits } = await profilesIndex.search('', searchParams)
+
+        if (!hits.length) {
+          return 'No profiles found in this city.'
+        }
+
+        return hits
+          .map((profile: any) => {
+            const styles = Object.keys(profile?.styles || {}).join(', ')
+            const roles = Object.keys(profile?.roles || {}).join(', ')
+            return `${profile.name} - ${profile.type}\n${
+              styles ? `Styles: ${styles}\n` : ''
+            }${roles ? `Roles: ${roles}\n` : ''}https://wedance.vip/${
+              profile.username
+            }\n---`
+          })
+          .join('\n')
+      } catch (error) {
+        return `Error searching profiles: ${(error as Error).message}`
+      }
+    },
+  },
   search_events: {
     name: 'search_events',
     progress: (input: { city: string }) =>
