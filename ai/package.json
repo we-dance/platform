@@ -1,0 +1,37 @@
+{
+  "name": "wedance-secretary-ai",
+  "version": "1.0.0",
+  "description": "WeDance Secretary AI",
+  "main": "index.js",
+  "scripts": {
+    "bot": "ts-node --compilerOptions '{\"target\":\"es2018\"}' scripts/bot.ts",
+    "ask": "ts-node scripts/ask.ts",
+    "dev": "nodemon --config nodemon.json scripts/bot.ts",
+    "dev:ask": "nodemon --config nodemon.json scripts/ask.ts"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@anthropic-ai/sdk": "^0.33.1",
+    "@doist/todoist-api-typescript": "^2.1.2",
+    "@google-cloud/local-auth": "^2.1.0",
+    "@types/glob": "^8.1.0",
+    "@types/node": "^20.10.6",
+    "@types/node-fetch": "^2.6.11",
+    "@types/yaml": "^1.9.7",
+    "dotenv": "^16.3.1",
+    "glob": "^10.3.10",
+    "googleapis": "^105.0.0",
+    "node-fetch": "^2.7.0",
+    "openai": "^4.24.1",
+    "telegraf": "^4.15.3",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.3.3",
+    "yaml": "^2.7.0"
+  },
+  "devDependencies": {
+    "@types/dotenv": "^8.2.0",
+    "nodemon": "^3.1.9"
+  }
+}

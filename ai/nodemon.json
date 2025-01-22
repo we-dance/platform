@@ -1,0 +1,6 @@
+{
+  "watch": ["scripts/", "/usr/src/app/.cursorrules"],
+  "ext": ".ts,.js,.json,.env",
+  "ignore": ["node_modules/", "logs/"],
+  "exec": "ts-node"
+}

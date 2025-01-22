@@ -1,0 +1,16 @@
+FROM node:20-slim
+
+WORKDIR /usr/src/app/ai
+
+# Install dependencies first (better layer caching)
+COPY package*.json ./
+RUN npm install
+
+# Copy nodemon config
+COPY nodemon.json ./
+
+# Copy source code
+COPY . .
+
+# Keep container running
+CMD ["npm", "run", "dev"] 
