@@ -102,7 +102,7 @@ bot.command('start', async (ctx: Context) => {
   logger.log(chatId, 'user', '/start')
 
   const text =
-    '👋 Welcome to WeDanceBot, your personal guide to finding dance events, classes, and communities near you. 🕺💃'
+    '👋 Welcome to WeDanceBot, your personal guide to finding dance events, classes, and communities near you. 🕺💃\n\nWhich city are you interested in?'
 
   await ctx.reply(text, {
     parse_mode: 'HTML',
