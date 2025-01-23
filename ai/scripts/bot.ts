@@ -101,7 +101,8 @@ bot.command('start', async (ctx: Context) => {
 
   logger.log(chatId, 'user', '/start')
 
-  const text = 'Hi! I am your dance assistant. How can I help you today?'
+  const text =
+    '👋 Welcome to WeDanceBot, your personal guide to finding dance events, classes, and communities near you. 🕺💃'
 
   await ctx.reply(text, {
     parse_mode: 'HTML',
