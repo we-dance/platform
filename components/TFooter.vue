@@ -60,7 +60,7 @@
       >
       <NuxtLink
         class="hover:underline"
-        :to="localePath('/')"
+        :to="localePath('/where-can-i-dance')"
         @click.native="$track('footer', { action: 'where-can-i-dance' })"
         >Where can I dance?</NuxtLink
       >
