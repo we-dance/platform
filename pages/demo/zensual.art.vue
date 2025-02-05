@@ -13,7 +13,7 @@
         </div>
         <div class="flex justify-center gap-4 mt-4">
           <TButton
-            label="Subscribe Now for €20/month"
+            label="Subscribe Now for €60/month"
             variant="primary"
             href="https://buy.stripe.com/dR6bKLcCqfkPedO5kk"
           />
@@ -208,7 +208,7 @@
       header="Upgrade to Premium"
       description="Step into the world of Son Cubano and transform your dance technique. Subscribe today to start learning immediately and at your own pace!"
       button="Subscribe"
-      button-after="Starting at €20/month for all classes and sessions"
+      button-after="Starting at €60/month for all classes and sessions"
       class="p-4 border-t"
     />
   </div>
